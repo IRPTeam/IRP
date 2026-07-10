@@ -114,16 +114,8 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Depo tranfser fişi [Number] [Date]</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Перемещение товаров [Number] [Date]</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Inventory transfer [Number] [Date]</v8:content>
+							<v8:content>9AB1FD97-2D4B-DF7C-C329-94199714330E[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -160,16 +152,8 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Şirket:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Организация:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:content>9D334BA6-E6B5-DC7A-ABF4-4B3986998064</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -199,16 +183,8 @@
 					<f>11</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>#</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>#</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>5F5930C9-E201-D90F-F6DA-A9113F3799EB</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -218,16 +194,8 @@
 					<f>12</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Malzeme</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Номенклатура</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>F9ABC33C-C48F-D0C9-944E-EF0C511AF475</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -237,16 +205,8 @@
 					<f>13</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Varyant</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Характеристика</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>7416C03B-98A4-A72F-F496-6CF1CCC53168</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -256,16 +216,8 @@
 					<f>14</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Quantity</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Количество</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>79A46F96-6E9E-0894-4E9A-AD8A6E9AD349</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -275,16 +227,8 @@
 					<f>14</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Unit</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Unit</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>CF4EEB45-93F2-C8E8-8906-6817BC248579</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -343,16 +287,8 @@
 					<f>18</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Sorumlu:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Ответственный:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>16FA1847-1FA1-4B29-906B-B9BC54299037</v8:content>
 						</v8:item>
 					</tl>
 				</c>

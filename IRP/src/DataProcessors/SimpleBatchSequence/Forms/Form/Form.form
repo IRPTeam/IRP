@@ -449,28 +449,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sınırlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Границы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Boundaries</value>
+    <value>F55CC11D-CDB5-FE73-31CC-C923DAB7A4B6</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Sayfa sınırları</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Границы страницы</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Page boundaries</value>
+    <value>2D44740A-70AB-3ACF-FAB2-28749EA486AA</value>
    </toolTip>
    <extendedTooltip>
     <name>PageBoundariesExtendedTooltip</name>
@@ -744,28 +728,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kayıtlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проводки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Records</value>
+    <value>E1EAC0AC-2ABC-FCBD-D986-684BC1288606</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Sayfa kayıtları</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Записи страницы</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Page records</value>
+    <value>E8A459C4-E3C6-93FD-D016-67EF4E20598C</value>
    </toolTip>
    <extendedTooltip>
     <name>PageRecordsExtendedTooltip</name>
@@ -789,28 +757,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Верх</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>7961E28B-F8D0-D87A-AD57-77AF018822E8</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа Верх</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group top</value>
+   <value>26D190B9-916B-96F0-0ED2-2B5E490C55DF</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -859,16 +811,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List</value>
+   <value>C7EFA8CF-1BD6-0495-5CAE-EB422097FAC9</value>
   </title>
   <id>2</id>
   <valueType>
@@ -930,16 +874,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Son belge noktası görünümü</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Представление последней точки документа</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Last document point presentation</value>
+       <value>B82641C1-8AC8-ED0E-E34E-E0DD6E7C5A44</value>
       </content>
      </localValue>
     </title>
@@ -950,16 +886,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Mevcut belge noktası görünümü</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Представление текущей точки документа</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Current document point presentation</value>
+       <value>D972CDF0-F502-6A46-6D7D-D2E4B47356EE</value>
       </content>
      </localValue>
     </title>
@@ -970,16 +898,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Gerçek parti</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Текущая партия</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is actual batch</value>
+       <value>A28F7085-C455-0DD7-754C-C80136EFCC1E</value>
       </content>
      </localValue>
     </title>
@@ -990,16 +910,8 @@ FROM
  <attributes>
   <name>Records</name>
   <title>
-   <key>tr</key>
-   <value>Kayıtlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проводки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Records</value>
+   <value>776C3EDE-148F-858E-E078-8558ACD9D0CB</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1039,16 +951,8 @@ FROM
  <formCommands>
   <name>RestoreSelected</name>
   <title>
-   <key>tr</key>
-   <value>Seçilenleri geri yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вернуть выбранное</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Restore selected</value>
+   <value>C7BF870A-D25D-A91E-E31E-E51E2B57EB93</value>
   </title>
   <id>1</id>
   <use>
@@ -1064,16 +968,8 @@ FROM
  <formCommands>
   <name>RestoreAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümünü geri yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вернуть все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Restore all</value>
+   <value>5E130384-DDCF-1540-0CC1-1333CA614754</value>
   </title>
   <id>2</id>
   <use>

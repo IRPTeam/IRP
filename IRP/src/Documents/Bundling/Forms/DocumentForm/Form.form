@@ -13,16 +13,8 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>99</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu tanım birleşmiş resim</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Сворачиваемая группа формы</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <value>B0F4D82F-4492-E8D1-1D49-9EA421DB003B____</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -62,16 +54,8 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>102</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>C883C9BC-4781-32FA-AA32-2E45D96F22DC</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -173,16 +157,8 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>110</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>1B3DF472-2ECE-F264-4531-187BFC5DD023</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1287,16 +1263,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzeme listesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Товары</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item list</value>
+    <value>84BC2386-6940-B7D2-28B6-6A1A9C311A37</value>
    </title>
    <extendedTooltip>
     <name>GroupItemListExtendedTooltip</name>
@@ -1516,16 +1484,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Numaratör grubu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа нумерации</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of numerator</value>
+     <value>E528CA73-4B51-52A7-75D3-35EE639C91CB</value>
     </title>
     <extendedTooltip>
      <name>GroupNumeratorExtendedTooltip</name>
@@ -1633,16 +1593,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>9E3C2575-EB1D-EE1B-BB35-5A480A8F0C2E</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -1666,16 +1618,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>98A063F5-6207-72D3-3CD7-78AE263DDE74</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -1858,16 +1802,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup malzemeler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>8793AF62-8273-EACD-DE88-82F6CA75B677</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1886,16 +1822,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>A084680A-6C15-61E1-1C38-8667B71677DF</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1913,16 +1841,8 @@
   <name>SearchByBarcode</name>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Ürün barkod okut veya gir</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Отсканировать или ввести штрихкод товара</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Scan or enter the product's barcode</value>
+   <value>5871E066-EFFD-A8A7-723A-A5F741912742</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1942,16 +1862,8 @@
  <formCommands>
   <name>OpenPickupItems</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Подбор товара</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pickup</value>
+   <value>C8D994AF-2292-7FFE-E8CA-AC7DA3F72F4C</value>
   </title>
   <id>2</id>
   <use>
@@ -1971,16 +1883,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtar göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать ключ строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>66253888-27D0-71FE-ED12-2CA096B36631</value>
   </title>
   <id>3</id>
   <use>
@@ -1999,29 +1903,13 @@
  <formCommands>
   <name>OpenScanForm</name>
   <title>
-   <key>tr</key>
-   <value>Okutma formu aç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Открыть форму сканирования</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Open scan form</value>
+   <value>EB3977F6-24EE-AA37-71B9-9D4972D9E7F6</value>
   </title>
   <id>4</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tarama formu</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Форма сканирования</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Scan form</value>
+   <value>AC1C977A-A7A2-07F7-7ADB-B21788BFCAF7</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2041,16 +1929,8 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать скрытые таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show hidden tables</value>
+   <value>42F680BE-9129-8195-5559-970E33C074DA</value>
   </title>
   <id>5</id>
   <use>
@@ -2069,29 +1949,13 @@
  <formCommands>
   <name>EditQuantityInBaseUnit</name>
   <title>
-   <key>tr</key>
-   <value>Temel birimde miktarı düzenle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменить количество в осн. ед. изм.</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit quantity in base unit</value>
+   <value>46BFAD31-9C96-97B9-9D02-27FF903DFDC5</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Temel birimde miktarı düzenle</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Изменить количество в осн. ед. изм.</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Edit quantity in base unit</value>
+   <value>38BCE925-ABE1-22C0-0BB9-9BED2C21D168</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2110,29 +1974,13 @@
  <formCommands>
   <name>SetNewNumber</name>
   <title>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set new number</value>
+   <value>7C4A5E48-D051-1AD0-06A3-39EF2A4A1E8A</value>
   </title>
   <id>7</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Set new number</value>
+   <value>7E5EA57D-1D98-AF72-2FAF-F33835E7EFD7</value>
   </toolTip>
   <use>
    <common>true</common>

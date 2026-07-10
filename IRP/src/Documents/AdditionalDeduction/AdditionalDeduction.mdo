@@ -9,16 +9,8 @@
  </producedTypes>
  <name>AdditionalDeduction</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek kesinti</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Дополнительный вычет</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Additional deduction</value>
+  <value>1A13D792-5B45-77F4-4519-9CCE7D7A7612</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.AdditionalDeduction.StandardAttribute.Number</inputByString>
@@ -59,28 +51,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Ek kesinti</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Дополнительное удержание</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Additional deduction</value>
+  <value>D41702A9-840F-8526-6017-7BBCFFB15C41</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Maaş kesintileri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Дополнительные удержания</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Additional deductions</value>
+  <value>85390656-2BCB-CAD3-3115-57F9052962A7</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -98,16 +74,8 @@
  <attributes uuid="534e9d90-d191-4580-b55b-5c3de6fc9e9b">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>7A857BB3-5D94-AD3F-F0E5-5780CA14029F</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -132,16 +100,8 @@
  <attributes uuid="709f8596-e1df-4515-b2ad-9d8873a77e2f">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>4C97E08D-FDD9-B399-9D82-2D4C4FFF56F9</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -156,16 +116,8 @@
  <forms uuid="d448079f-ad0c-4bcd-8f70-251d11959f7d">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>6A58E316-65E0-C147-7B10-03A3D0C72A5E</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -173,16 +125,8 @@
  <forms uuid="30d0ec0f-2a58-4f33-9a0c-69b58ee35703">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>9CDED927-7F7A-B910-0A3C-CBB3F9BB38DF</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -190,16 +134,8 @@
  <forms uuid="28cc5660-09d3-47f7-902c-9af833b3bd23">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>14512C80-7472-8BF5-5E05-5C9C9A26EC7C</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -211,30 +147,14 @@
   </producedTypes>
   <name>DeductionList</name>
   <synonym>
-   <key>tr</key>
-   <value>Kesinti listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Список удержаний</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deduction list</value>
+   <value>7532BDA4-339B-D1B7-7E45-564A7C24D953</value>
   </synonym>
   <attributes uuid="a90321b7-13e7-42d5-9f86-965e2d830a23">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>33F3552A-C469-66C5-599D-D2712988A0B6</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -247,16 +167,8 @@
   <attributes uuid="43bcd4b8-1d2b-4039-b74c-a33abacac705">
    <name>Employee</name>
    <synonym>
-    <key>tr</key>
-    <value>Personel</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Сотрудник</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Employee</value>
+    <value>D92956E9-FE9F-5075-56E0-0647398CA309</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>
@@ -276,16 +188,8 @@
   <attributes uuid="32b8f8a5-bfc6-4e9b-8a61-4e85af7423b9">
    <name>Position</name>
    <synonym>
-    <key>tr</key>
-    <value>Pozisyon</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Должность</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Position</value>
+    <value>70A2418A-6746-1EC7-7476-69188ADD4306</value>
    </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
@@ -299,16 +203,8 @@
   <attributes uuid="e1d7946d-fe5e-4753-8ccf-b3dc0fabfe6f">
    <name>DeductionType</name>
    <synonym>
-    <key>tr</key>
-    <value>İndirim türü</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Тип удержания</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Deduction type</value>
+    <value>E5312AED-C280-B2DA-A13F-FE6060BB855E</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -328,16 +224,8 @@
   <attributes uuid="143ef3d3-ec91-4e5f-86b1-111a38ec42f7">
    <name>ExpenseType</name>
    <synonym>
-    <key>tr</key>
-    <value>Gider tipi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Статья затрат</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Expense type</value>
+    <value>FD5E1877-2596-1F52-2ED0-00FEAD9452C5</value>
    </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -350,16 +238,8 @@
   <attributes uuid="0c66a5b7-5754-4fac-a987-26e79ad48f0e">
    <name>ProfitLossCenter</name>
    <synonym>
-    <key>tr</key>
-    <value>Kar/Zarar merkezi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Центр прибылей/убытков</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Profit loss center</value>
+    <value>CBC94710-E611-8DBD-D2B0-0C443439610D</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -372,16 +252,8 @@
   <attributes uuid="b83a54c4-e207-47e7-8a7d-c3ff0e648ab7">
    <name>Amount</name>
    <synonym>
-    <key>tr</key>
-    <value>Tutar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Сумма</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Amount</value>
+    <value>1AD05ED7-CB7E-C877-748F-FBAD27D0CDEF</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -401,30 +273,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>32E1F6D8-F842-0A5C-C425-5F6014B2F436</value>
   </synonym>
   <attributes uuid="e9b1e39c-7422-4a5e-8766-87a48433d341">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>470E96FB-1C2A-7183-3020-0496044F19D8</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -436,16 +292,8 @@
   <attributes uuid="afadf2d1-79a6-4116-aadf-e758beac81dc">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>99ED329A-142F-47DB-B100-069DC5546A2A</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -466,30 +314,14 @@
   </producedTypes>
   <name>Currencies</name>
   <synonym>
-   <key>tr</key>
-   <value>Dövizler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currencies</value>
+   <value>4B0D4A37-2A02-38E9-9C1A-A036C9B36472</value>
   </synonym>
   <attributes uuid="b55554ef-6bc2-4b61-94b2-578e7e548400">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>21173E4E-C17B-BE95-5728-85FC2DABF060</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -502,16 +334,8 @@
   <attributes uuid="0e39eb9b-7f45-473b-b254-675e97b28f45">
    <name>CurrencyFrom</name>
    <synonym>
-    <key>tr</key>
-    <value>Dövizden</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>С валюты</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency from</value>
+    <value>FCB7AC49-5904-DFDF-F262-2F2B9353B059</value>
    </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
@@ -524,16 +348,8 @@
   <attributes uuid="d785184e-5b0d-49fa-92da-833327021012">
    <name>Rate</name>
    <synonym>
-    <key>tr</key>
-    <value>Oran</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ставка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Rate</value>
+    <value>6173C820-6FC3-F3FE-E973-3A9485080CF4</value>
    </synonym>
    <type>
     <types>DefinedType.typeCurrencyRate</types>
@@ -546,16 +362,8 @@
   <attributes uuid="e84500aa-39cd-4ee8-9a41-dba2f9086f20">
    <name>ReverseRate</name>
    <synonym>
-    <key>tr</key>
-    <value>Ters kur</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Обратный курс</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Reverse rate</value>
+    <value>BBD58447-E827-3EB4-40FD-D3FD6BF0FD0C</value>
    </synonym>
    <type>
     <types>DefinedType.typeCurrencyRate</types>
@@ -568,16 +376,8 @@
   <attributes uuid="3448a564-5c4d-4bd5-9c54-e6063b2e47ef">
    <name>ShowReverseRate</name>
    <synonym>
-    <key>tr</key>
-    <value>Ters kur göster</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Показать обратный курс</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Show reverse rate</value>
+    <value>E908327B-A06C-8ADF-F2A1-16FDDC8ACCFF</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -590,16 +390,8 @@
   <attributes uuid="203cb062-2017-4388-81b3-e2a82400fccf">
    <name>Multiplicity</name>
    <synonym>
-    <key>tr</key>
-    <value>Çarpan</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Кратность</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Multiplicity</value>
+    <value>4445F96A-2BED-7BCA-AE20-01BF92820E8B</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -615,16 +407,8 @@
   <attributes uuid="65258d5b-e2b1-4a60-9cb9-0d59618fe9ec">
    <name>MovementType</name>
    <synonym>
-    <key>tr</key>
-    <value>Hareket tipi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид движения</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Movement type</value>
+    <value>C58D4436-5267-ECA2-23F0-049FC970312B</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -637,16 +421,8 @@
   <attributes uuid="8e5c4681-22c7-4e84-a652-1105b30f3a77">
    <name>Amount</name>
    <synonym>
-    <key>tr</key>
-    <value>Tutar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Сумма</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Amount</value>
+    <value>F1DE3CAB-ACB7-AAE3-3233-39DDA1AA52F8</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -659,16 +435,8 @@
   <attributes uuid="79976cb6-feb6-4d82-9d37-c372d6d1428f">
    <name>IsFixed</name>
    <synonym>
-    <key>tr</key>
-    <value>Sabittir</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Фиксированный</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Is fixed</value>
+    <value>54A3DC1C-65CE-8AF9-9BB7-7BE36320BC8B</value>
    </synonym>
    <type>
     <types>Boolean</types>

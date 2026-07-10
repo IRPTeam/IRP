@@ -818,16 +818,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ana</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основное</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Main</value>
+    <value>F72A888C-D4E5-2B4E-E737-7A31731146EB</value>
    </title>
    <extendedTooltip>
     <name>GroupMainExtendedTooltip</name>
@@ -887,16 +879,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings</value>
+    <value>6ED71FEB-8EF2-2640-0771-1D12E82C0AEF</value>
    </title>
    <extendedTooltip>
     <name>GroupSettingsExtendedTooltip</name>
@@ -920,16 +904,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group pages</value>
+   <value>5B1BBEFF-1036-3B45-5B7C-CC6758B4DA76</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1069,16 +1045,8 @@
  <attributes>
   <name>ItemList</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Товары</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item list</value>
+   <value>C50D5908-8539-1D2D-D519-9C2979CD4654</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1093,16 +1061,8 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item</value>
+    <value>30CCDE8F-2061-9EF7-7564-462CB58A21D2</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1118,16 +1078,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>8CB88D24-A39D-CC0C-C9D1-1F64D4A71B01</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1143,16 +1095,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>2E689F23-8701-7E0D-D263-3C68A28B85D4</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1172,16 +1116,8 @@
   <columns>
    <name>Barcode</name>
    <title>
-    <key>tr</key>
-    <value>Barkod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Штрихкод</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Barcode</value>
+    <value>1C88289E-4287-C59C-C1F9-9FAE5F5001A7</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1197,16 +1133,8 @@
   <columns>
    <name>Template</name>
    <title>
-    <key>tr</key>
-    <value>Şablon</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаблон</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Template</value>
+    <value>022AA72C-0FFB-12AF-FFBF-F4C1540B9090</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1222,16 +1150,8 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цена</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Price</value>
+    <value>41A18539-1A27-4417-7ECD-D8EB05C625B0</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1247,16 +1167,8 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ед. изм.</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unit</value>
+    <value>967C31B8-D52A-029D-D3EF-FAD102BB028A</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1272,16 +1184,8 @@
   <columns>
    <name>TemplateHash</name>
    <title>
-    <key>tr</key>
-    <value>Şablon hash</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Hash шаблона</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Template hash</value>
+    <value>C25FC7C9-E559-75F6-61B2-265A4AAF92DB</value>
    </title>
    <id>25</id>
    <valueType>
@@ -1300,16 +1204,8 @@
   <columns>
    <name>Print</name>
    <title>
-    <key>tr</key>
-    <value>Yazdır</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Печать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Print</value>
+    <value>5303E3B3-8CA7-7B34-4A72-2F69113A0A09</value>
    </title>
    <id>29</id>
    <valueType>
@@ -1325,16 +1221,8 @@
   <columns>
    <name>BarcodeType</name>
    <title>
-    <key>tr</key>
-    <value>Barkod tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип штрихкода</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Barcode type</value>
+    <value>19C3E241-5ACC-C8C5-57E9-912049B22507</value>
    </title>
    <id>30</id>
    <valueType>
@@ -1353,16 +1241,8 @@
   <columns>
    <name>PriceType</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип цен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Price type</value>
+    <value>5F162ABF-5446-B53E-E618-86C7FAFC73B0</value>
    </title>
    <id>36</id>
    <valueType>
@@ -1379,16 +1259,8 @@
  <attributes>
   <name>Object</name>
   <title>
-   <key>tr</key>
-   <value>Obje</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Объект</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Object</value>
+   <value>B965B965-ED1D-6B5C-C139-93EB4CA91D1C</value>
   </title>
   <id>12</id>
   <valueType>
@@ -1405,16 +1277,8 @@
  <attributes>
   <name>PriceType</name>
   <title>
-   <key>tr</key>
-   <value>Fiyat tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип цен</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Price type</value>
+   <value>A12614BB-9142-96CA-AA09-9AC69020B219</value>
   </title>
   <id>22</id>
   <valueType>
@@ -1430,16 +1294,8 @@
  <attributes>
   <name>SplitTemplatesByPages</name>
   <title>
-   <key>tr</key>
-   <value>Şablonları sayfalara dağıt</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Распределить шаблоны по страницам</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Split templates by pages</value>
+   <value>95C98040-B3C4-7CA9-9FBF-FE9A63B26646</value>
   </title>
   <id>24</id>
   <valueType>
@@ -1455,16 +1311,8 @@
  <attributes>
   <name>LabelTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Etiket şablonu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Шаблон этикетки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Label template</value>
+   <value>2D1860FB-3C8D-3D54-458A-A5DE228B2C2F</value>
   </title>
   <id>28</id>
   <valueType>
@@ -1480,16 +1328,8 @@
  <attributes>
   <name>BarcodeType</name>
   <title>
-   <key>tr</key>
-   <value>Barkod tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип штрихкода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Barcode type</value>
+   <value>885C0BB9-23F3-BD77-7878-88030F1D451E</value>
   </title>
   <id>31</id>
   <valueType>
@@ -1508,16 +1348,8 @@
  <attributes>
   <name>BarcodeFontSize</name>
   <title>
-   <key>tr</key>
-   <value>Barkod yazı tipi boyutu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Размер шрифта штрихкода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Barcode font size</value>
+   <value>81FAC3FC-1C7F-A529-98BC-C18936EA8470</value>
   </title>
   <id>34</id>
   <valueType>
@@ -1537,16 +1369,8 @@
  <formCommands>
   <name>SaveSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save settings</value>
+   <value>25E5A737-5473-4418-8EBE-EF05EDE009A9</value>
   </title>
   <id>3</id>
   <use>
@@ -1565,16 +1389,8 @@
  <formCommands>
   <name>LoadSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load settings</value>
+   <value>BCAD4C9E-9F0D-E94C-C832-28041746EB6C</value>
   </title>
   <id>4</id>
   <use>
@@ -1593,16 +1409,8 @@
  <formCommands>
   <name>Fill</name>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill</value>
+   <value>EDB4974C-E933-70F2-263A-ACC28CE18BA3</value>
   </title>
   <id>5</id>
   <use>
@@ -1618,16 +1426,8 @@
  <formCommands>
   <name>Print</name>
   <title>
-   <key>tr</key>
-   <value>Yazdır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Печать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Print</value>
+   <value>56E097E4-DF6A-F24C-C03C-CC0852FCBDDA</value>
   </title>
   <id>6</id>
   <use>
@@ -1643,29 +1443,13 @@
  <formCommands>
   <name>CheckPrintForSelectedRows</name>
   <title>
-   <key>tr</key>
-   <value>Seçili satırlar için yazdırı kontrol ediniz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проверить печать для выбранных строк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check print for selected rows</value>
+   <value>4C1E439D-E21F-706F-F4D9-941B746AF687</value>
   </title>
   <id>9</id>
   <toolTip>
-   <key>tr</key>
-   <value>Seçili satırlar için yazdırı kontrol ediniz</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Проверить печать для выбранных строк</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Check print for selected rows</value>
+   <value>F4174B70-6C60-FAE2-2729-9B34086460AF</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1684,29 +1468,13 @@
  <formCommands>
   <name>UncheckPrintForSelectedRows</name>
   <title>
-   <key>tr</key>
-   <value>Seçili satırlar için yazdırı işaret kaldırma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Снять флажок печати для выбранных строк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck print for selected rows</value>
+   <value>64C5FA06-5DAC-7E19-9623-39ADB4203872</value>
   </title>
   <id>10</id>
   <toolTip>
-   <key>tr</key>
-   <value>Seçili satırlar için yazdırı işaret kaldırma</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Снять флажок печати для выбранных строк</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Uncheck print for selected rows</value>
+   <value>50D9F3C8-C680-00F0-06FC-C2FBD47810DD</value>
   </toolTip>
   <use>
    <common>true</common>

@@ -394,16 +394,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Rol</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Роль</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Role</value>
+    <value>B99A4E1D-C656-C8C7-7E2E-E63295464D08</value>
    </title>
    <extendedTooltip>
     <name>PageRoleExtendedTooltip</name>
@@ -430,16 +422,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana sayfaklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основные страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main pages</value>
+   <value>7463D6B0-24CE-6D43-3F4C-CCC0528F506B</value>
   </title>
   <extendedTooltip>
    <name>MainPagesExtendedTooltip</name>
@@ -502,16 +486,8 @@
    <columns>
     <name>Use</name>
     <title>
-     <key>tr</key>
-     <value>Kullan</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Применить</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Use</value>
+     <value>93C44B70-0E0A-643F-FF4F-F6F31DDFB441</value>
     </title>
     <id>2</id>
     <valueType>
@@ -529,16 +505,8 @@
  <attributes>
   <name>Roles</name>
   <title>
-   <key>tr</key>
-   <value>Roller</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Роли доступа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Roles</value>
+   <value>4257F87E-609C-0A06-6CA3-38259DA67D3D</value>
   </title>
   <id>3</id>
   <valueType>
@@ -553,16 +521,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использовать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>7EC43A6F-567A-C893-37D2-2C77313AEBC2</value>
    </title>
    <id>4</id>
    <valueType>
@@ -578,16 +538,8 @@
   <columns>
    <name>Role</name>
    <title>
-    <key>tr</key>
-    <value>Rol</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Роль доступа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Role</value>
+    <value>3F8CAC17-8ED5-71B8-873C-C793F32C0470</value>
    </title>
    <id>5</id>
    <valueType>
@@ -606,16 +558,8 @@
   <columns>
    <name>Configuration</name>
    <title>
-    <key>tr</key>
-    <value>Kongigürasyon</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Конфигурация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Configuration</value>
+    <value>4BFFBB48-C95F-A865-5C99-995669221E63</value>
    </title>
    <id>6</id>
    <valueType>
@@ -634,16 +578,8 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Представление</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>A32EE857-A41F-7829-9942-28DF05DD3259</value>
    </title>
    <id>7</id>
    <valueType>
@@ -663,16 +599,8 @@
  <formCommands>
   <name>UpdateRoles</name>
   <title>
-   <key>tr</key>
-   <value>Rolleri güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить роли доступа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update roles</value>
+   <value>348F22A3-1611-8DB9-99C0-09BE15C65ACD</value>
   </title>
   <id>1</id>
   <use>

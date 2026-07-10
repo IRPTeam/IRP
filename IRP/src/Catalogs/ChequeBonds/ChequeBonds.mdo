@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ChequeBonds</name>
  <synonym>
-  <key>tr</key>
-  <value>Çek/Senetler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Банковские чеки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Cheque bonds</value>
+  <value>6749A2D7-86DF-2004-4EE2-22A8733AB326</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.ChequeBonds.StandardAttribute.Description</inputByString>
@@ -86,16 +78,8 @@
   <dataHistory>Use</dataHistory>
   <name>Description</name>
   <synonym>
-   <key>tr</key>
-   <value>Çek/Senet no</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер банковского чека</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cheque No</value>
+   <value>BEBBA3CD-D2A0-00D1-15CC-C2B718C7BFE4</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
@@ -147,16 +131,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Çek/Senet</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Банковский чек</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Cheque bond</value>
+  <value>9DA6A08D-62EF-4770-0F11-18E19BAF9349</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -175,16 +151,8 @@
  <attributes uuid="cf4f9df3-155e-49f3-9296-7c93d062e86a">
   <name>Type</name>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Type</value>
+   <value>C19746DA-7D66-EFA2-2C7D-DBED1B90847A</value>
   </synonym>
   <type>
    <types>EnumRef.ChequeBondTypes</types>
@@ -199,16 +167,8 @@
  <attributes uuid="413ea888-931b-4422-b8d0-c762a34824e6">
   <name>DueDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Срок исполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Due date</value>
+   <value>E8DA16C8-9B5A-41CC-C0E3-3CFA544E2510</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -226,16 +186,8 @@
  <attributes uuid="ee5f9b78-1b70-463b-92b4-1a05b3b46399">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>CB3860BA-9E56-F1A2-2104-4C79CFAEDE1E</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -250,16 +202,8 @@
  <attributes uuid="9c6125af-96e4-4451-b6db-fe79baa87995">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>481A41D5-9670-B588-89CE-E39E7C4140D5</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -274,16 +218,8 @@
  <attributes uuid="f8b5172d-e742-4edc-9f98-60111db2a016">
   <name>ChequeSerialNo</name>
   <synonym>
-   <key>tr</key>
-   <value>Çek/Senet seri no</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серийный номер чека</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cheque serial No</value>
+   <value>A6F10F7E-BD0E-DF7F-F87D-D5D4F443216C</value>
   </synonym>
   <type>
    <types>String</types>
@@ -293,9 +229,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -306,30 +240,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>9E35D74C-A32C-8024-45D9-9190D0635C2F</value>
   </synonym>
   <attributes uuid="1b2d910c-9b36-4097-9a64-8a8072bc7ab6">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>338E6B69-919F-EAD0-081C-CEBD1F33C1B2</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -342,16 +260,8 @@
   <attributes uuid="8faa1d96-9565-425c-974d-04aadc7af946">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>6C7A1467-6D2C-03E8-8913-3BA83F9029F8</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -369,16 +279,8 @@
  <forms uuid="2a3fbb87-1236-466f-b508-59e984ca5a22">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>799A0731-21A7-45A5-5811-13F6D1FC150F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -386,16 +288,8 @@
  <forms uuid="51a8f060-edd2-417e-8fb7-2cccd339aa6a">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>4CC2EA59-1933-5F53-37A3-3EF25E3623BD</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -403,16 +297,8 @@
  <forms uuid="7fe3b5a4-eadf-4fef-991a-9daf56ea0dc9">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>804DC812-E007-B12D-D0FF-F787E8BC2394</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -420,16 +306,8 @@
  <forms uuid="44ed11b3-cfb6-4d15-8594-b6cac0bd6b3f">
   <name>PickUpForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма подбора банковских чеков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Pickup form</value>
+   <value>3381220F-6EE5-D63B-B503-35947A265280</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

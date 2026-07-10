@@ -7,47 +7,23 @@
  </producedTypes>
  <name>PrintTemplateTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Çıktı şablon tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы шаблонов для печати</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Print template types</value>
+  <value>F0FA725D-D379-36F5-5060-06F7E02A39DE</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="89ce3a78-64f2-48a9-8d93-a1a54023bfba">
   <name>Label</name>
   <synonym>
-   <key>tr</key>
-   <value>Etiket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Этикетка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Label</value>
+   <value>BBFD6E47-2458-6927-793A-A54954E734C9</value>
   </synonym>
  </enumValues>
  <enumValues uuid="e795e9e5-9484-4f34-aeb6-84fa9a88a54d">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>00A0324E-5783-5363-3D54-45B45D4B8641</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

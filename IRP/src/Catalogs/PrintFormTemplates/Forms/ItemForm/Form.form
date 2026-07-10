@@ -12,16 +12,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup açıklamaları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа описание</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group descriptions</value>
+    <value>8E7C8C6E-B581-89D1-1595-597C2C041F16</value>
    </title>
    <extendedTooltip>
     <name>GroupDescriptionsExtendedTooltip</name>
@@ -126,16 +118,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup açıklamaları başlığı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа наименований шапки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group descriptions header</value>
+   <value>A609A1DD-830E-43B3-3D16-6AC73F699E91</value>
   </title>
   <extendedTooltip>
    <name>GroupDescriptionsHeaderExtendedTooltip</name>
@@ -259,16 +243,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup şablonu türleri</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа типов шаблона</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group template types</value>
+     <value>3EADFE5B-47A9-1C88-8FCD-D23F9F9A7519</value>
     </title>
     <extendedTooltip>
      <name>GroupTemplateTypesExtendedTooltip</name>
@@ -380,16 +356,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup komutu TXT</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа команд TXT</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group command TXT</value>
+       <value>0A62A666-3E65-FDF9-94DC-C3BB7273E59D</value>
       </title>
       <extendedTooltip>
        <name>GroupCommandTXTExtendedTooltip</name>
@@ -453,16 +421,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>TXT</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>TXT</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>TXT</value>
+      <value>33A16F77-58E8-D917-75AF-FD3B6E924848</value>
      </title>
      <extendedTooltip>
       <name>PageTXTExtendedTooltip</name>
@@ -567,16 +527,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup komutu MXL</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа команд MXL</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group command MXL</value>
+       <value>C1FC0730-73A0-7AF9-9A42-2F43B9D806F7</value>
       </title>
       <extendedTooltip>
        <name>GroupCommandMXLExtendedTooltip</name>
@@ -648,16 +600,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>MXL</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>MXL</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>MXL</value>
+      <value>812DC8E0-0BF6-5B1D-DF58-86F4B8C31EA9</value>
      </title>
      <extendedTooltip>
       <name>PageMXLExtendedTooltip</name>
@@ -681,16 +625,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Şablon sayfaları</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Страницы шаблона</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Template pages</value>
+     <value>96DFC71F-1D4C-DD48-8B9A-A5B7CEBAFE2B</value>
     </title>
     <extendedTooltip>
      <name>TemplatePagesExtendedTooltip</name>
@@ -713,16 +649,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Şablon</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаблон</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Template</value>
+    <value>7060689C-6E47-5465-5F43-3B1214ABA281</value>
    </title>
    <extendedTooltip>
     <name>PageTemplateExtendedTooltip</name>
@@ -1139,16 +1067,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Tablolar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Таблицы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Tables</value>
+    <value>8ED0E4F9-C2CF-E8BE-E39D-D0CACEBB71EC</value>
    </title>
    <extendedTooltip>
     <name>PageTablesExtendedTooltip</name>
@@ -1463,16 +1383,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Tablolar</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Таблицы</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Tables</value>
+       <value>65B12362-EE63-367F-F4AC-CB0728CB537E</value>
       </title>
       <extendedTooltip>
        <name>ParametersTablesGroupExtendedTooltip</name>
@@ -1714,16 +1626,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Parametreler bağlam menüsü tablo grubu</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа параметров контекста меню таблицы</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Parameters context menu table group</value>
+       <value>E162F72B-377A-8FAC-CBD0-0AD4FCD87506</value>
       </title>
       <extendedTooltip>
        <name>ParametersContextMenuTableGroupExtendedTooltip</name>
@@ -1786,16 +1690,8 @@
     <name>ParameterPreview</name>
     <id>45</id>
     <title>
-     <key>tr</key>
-     <value>Parametre önizlemesi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Параметры просмотра</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Parameter preview</value>
+     <value>6E789CF6-8D50-1921-1985-56B781D8B65A</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1842,16 +1738,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Parametreler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Параметры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Parameters</value>
+    <value>8F4E7F8B-49D3-0A28-89F7-7CAA74CAB249</value>
    </title>
    <extendedTooltip>
     <name>PageParametersExtendedTooltip</name>
@@ -2045,16 +1933,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Nesneler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Объекты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Objects</value>
+    <value>8C2AB9E8-5174-5961-183B-BD4E708295B1</value>
    </title>
    <extendedTooltip>
     <name>PageObjectsExtendedTooltip</name>
@@ -2081,16 +1961,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>89DA73DC-537D-A29F-F1A9-9D43EE966CB2</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -2150,16 +2022,8 @@
  <attributes>
   <name>TemplateTXT</name>
   <title>
-   <key>tr</key>
-   <value>Şablon TXT</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Шаблон TXT</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Template TXT</value>
+   <value>0902FB29-E9DB-76B0-03AF-FBA76CB458B3</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2176,16 +2040,8 @@
  <attributes>
   <name>EditingMode</name>
   <title>
-   <key>tr</key>
-   <value>Düzeltme modu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Режим редактирования</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Editing mode</value>
+   <value>FED5A9B0-922D-9261-1A19-999DCB22D936</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2201,16 +2057,8 @@
  <attributes>
   <name>ObjectsList</name>
   <title>
-   <key>tr</key>
-   <value>Nesne listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список объектов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Objects list</value>
+   <value>1B11DAD1-67EB-F7F3-37D1-1506DB41986C</value>
   </title>
   <id>6</id>
   <valueType>
@@ -2231,16 +2079,8 @@
  <attributes>
   <name>TemplateMXL</name>
   <title>
-   <key>tr</key>
-   <value>Şablon MXL</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>MXL шаблон</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Template MXL</value>
+   <value>735613D7-F53C-2BC7-7F03-30B7D87DA32D</value>
   </title>
   <id>8</id>
   <valueType>
@@ -2257,16 +2097,8 @@
  <formCommands>
   <name>EditTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Düzenlemeye başla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Начать редактирование</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Start editing</value>
+   <value>801436AE-838A-1326-6B96-6F808EF8FAE2</value>
   </title>
   <id>1</id>
   <use>
@@ -2286,16 +2118,8 @@
  <formCommands>
   <name>SaveTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>3858D4F1-7195-9274-485A-AE75A648F945</value>
   </title>
   <id>2</id>
   <use>
@@ -2315,29 +2139,13 @@
  <formCommands>
   <name>OpenExpressionParameter</name>
   <title>
-   <key>tr</key>
-   <value>Açık ifade</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Открыть выражение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Open expression</value>
+   <value>07910A8C-4A94-4BB6-6424-4F19CDBA9F3B</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>tr</key>
-   <value>Açık ifade</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Открыть выражение</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Open expression</value>
+   <value>5F16FF5E-4209-F564-4DA9-948B90982122</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2356,16 +2164,8 @@
  <formCommands>
   <name>LoadFromFile</name>
   <title>
-   <key>tr</key>
-   <value>Dosyadan yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить из файла</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load from file</value>
+   <value>CBCFE9D3-55F6-38F8-8EA4-44C651368C6D</value>
   </title>
   <id>4</id>
   <use>
@@ -2385,29 +2185,13 @@
  <formCommands>
   <name>OpenExpressionTable</name>
   <title>
-   <key>tr</key>
-   <value>Açık ifade</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Открыть выражение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Open expression</value>
+   <value>FE10B1E5-BED0-7C15-516C-C2F066A25834</value>
   </title>
   <id>5</id>
   <toolTip>
-   <key>tr</key>
-   <value>Açık ifade</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Открыть выражение</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Open expression</value>
+   <value>0D53B3E2-9F0A-0144-4EE7-721C2DA7340B</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2426,16 +2210,8 @@
  <formCommands>
   <name>RefreshParameters</name>
   <title>
-   <key>tr</key>
-   <value>Yenile</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Refresh</value>
+   <value>EDDFB170-B5D2-990A-A2FE-E06B95C165C3</value>
   </title>
   <id>6</id>
   <use>
@@ -2455,16 +2231,8 @@
  <formCommands>
   <name>DeleteNotUsed</name>
   <title>
-   <key>tr</key>
-   <value>Kullanılmayanları sil</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Удалить не используемые</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Delete not used</value>
+   <value>98F7396E-58BD-2643-39C3-356549D3994F</value>
   </title>
   <id>7</id>
   <use>
@@ -2484,16 +2252,8 @@
  <formCommands>
   <name>AddToTable</name>
   <title>
-   <key>tr</key>
-   <value>Tabloya ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Добавить в таблицу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Add to table</value>
+   <value>A4DE9013-01E5-64BF-F4FE-EF772FF96D6F</value>
   </title>
   <id>8</id>
   <use>
@@ -2513,16 +2273,8 @@
  <formCommands>
   <name>MoveToTable</name>
   <title>
-   <key>tr</key>
-   <value>Tabloya aktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Переместить в таблицу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Move to table</value>
+   <value>C914D5E5-AE26-3970-081D-DBEF05EE2DB7</value>
   </title>
   <id>9</id>
   <use>
@@ -2542,16 +2294,8 @@
  <formCommands>
   <name>RemoveFromTable</name>
   <title>
-   <key>tr</key>
-   <value>Tablodan kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Удалиить из таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Remove from table</value>
+   <value>4B26787E-0042-0713-3466-658C10FE8949</value>
   </title>
   <id>10</id>
   <use>

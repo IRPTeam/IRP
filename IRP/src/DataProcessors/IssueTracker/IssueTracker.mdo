@@ -6,32 +6,16 @@
  </producedTypes>
  <name>IssueTracker</name>
  <synonym>
-  <key>tr</key>
-  <value>Talep takip</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Трекер проблем</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Issue tracker</value>
+  <value>4D86DAEF-98E5-6C73-34C4-454D164B4142</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.IssueTracker.Form.Form</defaultForm>
  <forms uuid="f0d4103e-00fc-4db7-bb14-d8b49ae4deae">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>D43409A2-D25B-DB50-0049-902E2F1A31F1</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -39,16 +23,8 @@
  <forms uuid="e178412b-e1f7-4eb5-b25a-a9e002d35575">
   <name>CheckInForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Konum bildirim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма регистрации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Check in form</value>
+   <value>0A4FFA26-EBF8-3506-6C93-378877B5A932</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

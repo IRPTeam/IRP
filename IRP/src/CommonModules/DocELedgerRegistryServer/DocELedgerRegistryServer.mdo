@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fb0ca75c-e8ce-4a44-9c52-ee0633aa5eff">
  <name>DocELedgerRegistryServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Doc e ledger registry server</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Реестр документов eLedger сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc e ledger registry server</value>
+  <value>A75B5FEA-CF4C-37CE-EA07-732646486223</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

@@ -13,16 +13,8 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>310</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа декораций рисунок свернутой шапки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <value>1F08BBAC-E9AC-410E-E51B-B7070FE938CB____</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -62,16 +54,8 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>313</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>D9819ADC-9D6D-841D-DD1F-FA2EB2CBD684</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -173,16 +157,8 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>321</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>21154FB9-94D8-479B-B771-13840765DE68</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -634,16 +610,8 @@
      <name>Branch</name>
      <id>883</id>
      <title>
-      <key>tr</key>
-      <value>Şubeden</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Подразделение</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>From branch</value>
+      <value>859DDD18-F973-6AF9-95DA-AF29F6C98E76</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -807,16 +775,8 @@
         <radioButtonsType>Tumbler</radioButtonsType>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Pozisyona göre</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>По должности</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>By position</value>
+          <value>3FB1CD45-F5B6-D1D6-6258-8264888137A7</value>
          </presentation>
          <value xsi:type="core:StringValue">
           <value>ByPosition</value>
@@ -824,16 +784,8 @@
         </choiceList>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Kişisel</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>Личный</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>Personal</value>
+          <value>7639EA2A-B242-933F-F658-8461AF83FA15</value>
          </presentation>
          <value xsi:type="core:StringValue">
           <value>Personal</value>
@@ -895,16 +847,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Pozisyona göre maaştan</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Из зарплаты по должности</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>From salary by position</value>
+         <value>B841E235-6599-EFD8-8DC3-3D0F430852EC</value>
         </title>
         <extendedTooltip>
          <name>GroupFromSalaryByPositionExtendedTooltip</name>
@@ -973,16 +917,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Kişisel maaştan</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Из личной зарплаты</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>From personal salary</value>
+         <value>076291DF-9616-7BB8-82BC-CA97D69688AE</value>
         </title>
         <extendedTooltip>
          <name>GroupFromPerosnalSalaryExtendedTooltip</name>
@@ -1006,16 +942,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Maaş miktarından</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Из суммы зарплаты</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>From salary amount</value>
+        <value>8E061F09-2ECC-1166-639A-AA969F2DE80B</value>
        </title>
        <extendedTooltip>
         <name>GroupFromSalaryAmountExtendedTooltip</name>
@@ -1038,16 +966,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Maaş tipinden</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Тип зарплаты</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>From salary type</value>
+       <value>CAE17006-6D15-3495-595C-C81E2BE64C3D</value>
       </title>
       <extendedTooltip>
        <name>GroupFromSalaryTypeExtendedTooltip</name>
@@ -1075,16 +995,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Maaş formu</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Текущая зарплата</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Form salary</value>
+      <value>9DA01E56-AA87-B420-07CD-DD203A1BC3BD</value>
      </title>
      <extendedTooltip>
       <name>GroupFromSalaryValueExtendedTooltip</name>
@@ -1113,16 +1025,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Gönderen</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Текущие условия работы</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>From</value>
+     <value>CB7EBD1E-F82B-40B2-2607-78E5AFF6D848</value>
     </title>
     <extendedTooltip>
      <name>GroupFromExtendedTooltip</name>
@@ -1428,16 +1332,8 @@
         <radioButtonsType>Tumbler</radioButtonsType>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Pozisyona göre</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>По должности</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>By position</value>
+          <value>E9B2ABE5-62B8-B66D-DA4E-E7F1639468ED</value>
          </presentation>
          <value xsi:type="core:StringValue">
           <value>ByPosition</value>
@@ -1445,16 +1341,8 @@
         </choiceList>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Kişisel</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>Личное</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>Personal</value>
+          <value>4D63EDCD-0211-09FE-EAEC-C7A505C49B03</value>
          </presentation>
          <value xsi:type="core:StringValue">
           <value>Personal</value>
@@ -1516,16 +1404,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Pozisyona göre maaş</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>В зарплату по должности</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>To salary by position</value>
+         <value>55EEC9C8-5B66-BBB0-01E7-728C5C7C517C</value>
         </title>
         <extendedTooltip>
          <name>GroupToSalaryByPositionExtendedTooltip</name>
@@ -1593,16 +1473,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Kişisel maaşa</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>В личную зарплату</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>To personal salary</value>
+         <value>479921E6-790F-6473-3C97-7A002E88D250</value>
         </title>
         <extendedTooltip>
          <name>GroupToPerosnalSalaryExtendedTooltip</name>
@@ -1626,16 +1498,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Maaş miktarına</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>В сумму зарплаты</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>To salary amount</value>
+        <value>114DC2E5-BB7D-0230-044E-EB2D17B39C8A</value>
        </title>
        <extendedTooltip>
         <name>GroupToSalaryAmountExtendedTooltip</name>
@@ -1658,16 +1522,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Maaş tipine</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>В тип зарплаты</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>To salary type</value>
+       <value>BBEC5C18-7960-0489-9564-4ABF393D371B</value>
       </title>
       <extendedTooltip>
        <name>GroupToSalaryTypeExtendedTooltip</name>
@@ -1695,16 +1551,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Maaşa</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Измененная зарплата</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>To salary</value>
+      <value>C2A30DBB-3240-4FEA-AF30-06B94AB2E025</value>
      </title>
      <extendedTooltip>
       <name>GroupToSalaryValueExtendedTooltip</name>
@@ -1733,16 +1581,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Alıcı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Новые условия работы</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>To</value>
+     <value>6363414A-0E04-BC36-64FB-B2E05B731FF8</value>
     </title>
     <extendedTooltip>
      <name>GroupToExtendedTooltip</name>
@@ -1772,16 +1612,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Çalışan transferi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Кадровое перемещение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Employee transfer</value>
+    <value>CDF9E0AE-6B1C-23E3-3757-707C7FC68192</value>
    </title>
    <extendedTooltip>
     <name>GroupEmployeeTransferExtendedTooltip</name>
@@ -1808,16 +1640,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ek özellikler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительные реквизиты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Additional attributes</value>
+    <value>AF8E59AD-3B34-24BA-A99C-C1C153A4BEFF</value>
    </title>
    <extendedTooltip>
     <name>GroupAddAttributesExtendedTooltip</name>
@@ -1931,16 +1755,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ek olarak</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Дополнительно</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>More</value>
+     <value>DF83E308-C6D3-1C49-9958-8C3DE56D5C81</value>
     </title>
     <extendedTooltip>
      <name>GroupMoreExtendedTooltip</name>
@@ -2010,16 +1826,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>7A0785AF-D7B7-DEDF-FB1A-A3242E1E9A35</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -2043,16 +1851,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>EB6BA70B-91E5-97D0-0C70-07D9F3416892</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -2226,16 +2026,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>BAF9C705-1FED-A24C-CBEB-B81F64FB19B5</value>
   </title>
   <id>7</id>
   <valueType>
@@ -2252,16 +2044,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>C2861822-EB9A-3194-41E0-0ABC8EB4842E</value>
   </title>
   <id>10</id>
   <valueType>
@@ -2280,16 +2064,8 @@
  <attributes>
   <name>FromSalaryType</name>
   <title>
-   <key>tr</key>
-   <value>Maaş tipinden</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип зарплаты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>From salary type</value>
+   <value>9BB48B99-60DD-1E1D-DDEA-A38850C62EC9</value>
   </title>
   <id>11</id>
   <valueType>
@@ -2306,16 +2082,8 @@
  <attributes>
   <name>ToSalaryType</name>
   <title>
-   <key>tr</key>
-   <value>Maaş tipine</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип зарплаты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>To salary type</value>
+   <value>F70B093C-5FF2-30F4-4A28-8B54A390358B</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2332,16 +2100,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать row key</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>5FA494FD-4A17-97A9-9DB6-6D23C2A1CD58</value>
   </title>
   <id>9</id>
   <use>
@@ -2360,16 +2120,8 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать скрытые таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show hidden tables</value>
+   <value>57AB9DDB-1326-B47A-AEFE-E61E4C226E4F</value>
   </title>
   <id>15</id>
   <use>
@@ -2388,16 +2140,8 @@
  <formCommands>
   <name>FillAsFrom</name>
   <title>
-   <key>tr</key>
-   <value>Şu tarihten doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить как с</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill as from</value>
+   <value>B2D1EF9C-F1B9-94DB-BB7A-AAEAE95FC867</value>
   </title>
   <id>16</id>
   <use>

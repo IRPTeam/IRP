@@ -215,16 +215,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Description</value>
+   <value>A0785ED2-619B-5210-0C51-1343DF0707AC</value>
   </title>
   <extendedTooltip>
    <name>GroupDescriptionExtendedTooltip</name>
@@ -348,16 +340,8 @@
  <attributes>
   <name>SpreadsheetDocument</name>
   <title>
-   <key>tr</key>
-   <value>Tablo evrakı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Табличный документ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Spreadsheet document</value>
+   <value>AC260452-37E9-F379-99A6-63F4ECCBDAAB</value>
   </title>
   <id>1</id>
   <valueType>
@@ -374,16 +358,8 @@
  <attributes>
   <name>Columns</name>
   <title>
-   <key>tr</key>
-   <value>Sütunlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Столбцы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Columns</value>
+   <value>7AB6BA2D-E298-37EA-ABE8-833A6BB717DB</value>
   </title>
   <id>2</id>
   <valueType>
@@ -400,16 +376,8 @@
  <attributes>
   <name>Languages</name>
   <title>
-   <key>tr</key>
-   <value>Diller</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Языки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Languages</value>
+   <value>ACCBCE6E-2F89-EC01-1EED-D93288BDE600</value>
   </title>
   <id>3</id>
   <valueType>
@@ -428,16 +396,8 @@
  <formCommands>
   <name>Load</name>
   <title>
-   <key>tr</key>
-   <value>Yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load</value>
+   <value>56626B7E-F1F4-F7DC-CE77-7A1CFB050B05</value>
   </title>
   <id>1</id>
   <use>

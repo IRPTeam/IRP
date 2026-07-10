@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Para tranfseri oluştur</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Создание перемещение денег</value>
- </title>
- <title>
   <key>en</key>
-  <value>Creating a Money Transfer</value>
+  <value>F145ACAE-B8A7-28FA-A368-88E4E12FE74D</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>GroupCompany</name>
@@ -103,16 +95,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Şirket grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа компаний</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of company</value>
+   <value>D5B1EF68-757C-43C7-73C6-6F3D517F9FE2</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -314,16 +298,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Gönderen</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Отправитель</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Sender</value>
+    <value>C308D3CB-7E58-9261-1768-879F2536A445</value>
    </title>
    <extendedTooltip>
     <name>GroupSenderExtendedTooltip</name>
@@ -526,16 +502,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Alıcı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Получатель</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Receiver</value>
+    <value>68FF23A3-773B-50F3-3F06-6639F9087099</value>
    </title>
    <extendedTooltip>
     <name>GroupReceiverExtendedTooltip</name>
@@ -565,16 +533,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Gönderen ve alıcı grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа отправитель и получатель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of Sender and Receiver</value>
+   <value>EC2B8465-3555-3B2F-FDC4-42F5C37726D2</value>
   </title>
   <extendedTooltip>
    <name>GroupSenderReceiverExtendedTooltip</name>
@@ -688,16 +648,8 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Организация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company</value>
+   <value>06D0E551-D422-606B-B809-977CE71D8BC7</value>
   </title>
   <id>1</id>
   <valueType>
@@ -713,16 +665,8 @@
  <attributes>
   <name>Branch</name>
   <title>
-   <key>tr</key>
-   <value>Şube</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Branch</value>
+   <value>E750DE90-513F-4CBF-FECA-A534253D83D1</value>
   </title>
   <id>2</id>
   <valueType>
@@ -738,16 +682,8 @@
  <attributes>
   <name>Sender</name>
   <title>
-   <key>tr</key>
-   <value>Gönderen</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отправитель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Sender</value>
+   <value>E728DC47-E254-9724-4F05-500E0D19E850</value>
   </title>
   <id>4</id>
   <valueType>
@@ -763,16 +699,8 @@
  <attributes>
   <name>Receiver</name>
   <title>
-   <key>tr</key>
-   <value>Alıcı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Получатель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Receiver</value>
+   <value>A61D537B-E510-12B5-5DC4-4B1596EC3B27</value>
   </title>
   <id>5</id>
   <valueType>
@@ -788,16 +716,8 @@
  <attributes>
   <name>SendFinancialMovementType</name>
   <title>
-   <key>tr</key>
-   <value>Finans hareket tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Статья ДДС</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Financial movement type</value>
+   <value>0DA5F49D-FD1F-CDA8-8350-06C458488F70</value>
   </title>
   <id>6</id>
   <valueType>
@@ -813,16 +733,8 @@
  <attributes>
   <name>ReceiveFinancialMovementType</name>
   <title>
-   <key>tr</key>
-   <value>Finans hareket tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Статья ДДС</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Financial movement type</value>
+   <value>37B010E8-ED4A-BD20-087C-C90BA7DBD7D5</value>
   </title>
   <id>7</id>
   <valueType>
@@ -838,16 +750,8 @@
  <attributes>
   <name>Currency</name>
   <title>
-   <key>tr</key>
-   <value>Döviz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Валюты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Currency</value>
+   <value>3C2A6CF8-1D75-89DC-CE6F-F27A1A4A22DE</value>
   </title>
   <id>8</id>
   <valueType>
@@ -863,16 +767,8 @@
  <attributes>
   <name>TotalAtPOS</name>
   <title>
-   <key>tr</key>
-   <value>Banka POS'unda toplam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Итого по платежному терминалу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Total at POS</value>
+   <value>F05246FB-1037-92F1-1ABA-A45759625EE7</value>
   </title>
   <id>9</id>
   <valueType>
@@ -888,16 +784,8 @@
  <attributes>
   <name>SendAmount</name>
   <title>
-   <key>tr</key>
-   <value>Gönderilen tutar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сумма отправки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Send amount</value>
+   <value>7172C19A-7140-DB93-3CC3-3BB142782D80</value>
   </title>
   <id>10</id>
   <valueType>
@@ -913,16 +801,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>887C4FB2-F8B6-C6A6-60E5-5FF838CEA0E0</value>
   </title>
   <id>11</id>
   <valueType>
@@ -939,16 +819,8 @@
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполненные данные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filling data</value>
+   <value>B367E1BC-D424-D267-7291-1805B1E33953</value>
   </title>
   <id>12</id>
   <valueType/>
@@ -962,16 +834,8 @@
  <attributes>
   <name>AutoCreateMoneyTransfer</name>
   <title>
-   <key>tr</key>
-   <value>Para transferi otomatik oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Автоматическое создание перемещения денег</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Auto create money transfer</value>
+   <value>F721B4A2-EF34-C3A8-8A2E-EB4F1819452E</value>
   </title>
   <id>13</id>
   <valueType>
@@ -987,16 +851,8 @@
  <formCommands>
   <name>CreateMoneyTransfer</name>
   <title>
-   <key>tr</key>
-   <value>Para transfer oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Создать перемещение денег</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Create money transfer</value>
+   <value>17069580-580C-83AE-E0E9-9CB560730F3B</value>
   </title>
   <id>1</id>
   <use>

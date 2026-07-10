@@ -7,62 +7,30 @@
  </producedTypes>
  <name>PayrollTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Maaş türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы заработной платы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Payroll types</value>
+  <value>3C320018-45D1-5BFE-E27D-DE9FC54D5E19</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="cf1ad9c3-dfbd-4d72-bfe4-01866cbe8acf">
   <name>Accrual</name>
   <synonym>
-   <key>tr</key>
-   <value>Tahakkuk</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Начисление</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Accrual</value>
+   <value>6E472E84-FB72-D5BF-F7E0-0D948B7156D5</value>
   </synonym>
  </enumValues>
  <enumValues uuid="fd46c290-1097-4a65-bc8e-1ace19f33252">
   <name>Deduction</name>
   <synonym>
-   <key>tr</key>
-   <value>Kesinti</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Удержания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deduction</value>
+   <value>27694E9A-9977-437F-F4CE-E8B466CBAE55</value>
   </synonym>
  </enumValues>
  <enumValues uuid="bce661b5-d0cb-46b0-911d-892bf411a1cc">
   <name>CashAdvanceDeductions</name>
   <synonym>
-   <key>tr</key>
-   <value>Nakit ilerleme kesintileri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отчисления аванса наличными</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cash advance deductions</value>
+   <value>9AFAFA4B-791D-F0FB-B193-3B914B30D86C</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

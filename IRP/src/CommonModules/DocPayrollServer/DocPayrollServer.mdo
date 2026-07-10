@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cdfb134a-e557-4b87-b869-22f3d3e55f97">
  <name>DocPayrollServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Maaş ödeme sunucusu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ начисление зарплаты сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc payroll server</value>
+  <value>F5C48A7B-54F7-E8EC-C316-6AC65E9602B1</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

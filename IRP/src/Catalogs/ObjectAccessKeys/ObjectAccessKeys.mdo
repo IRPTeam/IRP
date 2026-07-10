@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ObjectAccessKeys</name>
  <synonym>
-  <key>tr</key>
-  <value>Nesne erişim anahtarları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Ключи доступа объекта</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Object access keys</value>
+  <value>467E94C7-D4EA-4A00-08F0-01833E61AA6C</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.ObjectAccessKeys.StandardAttribute.Code</inputByString>
@@ -27,28 +19,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Nesne erişim anahtarı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Ключи доступа объекта</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Object access key</value>
+  <value>C97301EB-3E17-998B-B5DE-E28080718731</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Nesne erişim anahtarları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Ключи доступа объекта</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Object access keys</value>
+  <value>A922FC29-E7DE-784F-F9F6-652A3EF1C3DD</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -66,30 +42,14 @@
   </producedTypes>
   <name>FilterDataList</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri listesini filtrele</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Список данных отбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Filter data list</value>
+   <value>973693EF-7038-AFA5-541D-D5338A9389CF</value>
   </synonym>
   <attributes uuid="7998b236-a965-4beb-9d6c-f8d0f53a5453">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>8E30BC50-09F7-22E3-3740-0B20487247EA</value>
    </synonym>
    <type>
     <types>String</types>
@@ -105,16 +65,8 @@
   <attributes uuid="d562323b-c574-4332-b72b-5291514718b8">
    <name>ValueRef1</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer ref1</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение Ссылка1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value ref1</value>
+    <value>7F66AE15-A52D-E19A-A3AC-CA908ADD72AC</value>
    </synonym>
    <type>
     <types>AnyRef</types>
@@ -127,16 +79,8 @@
   <attributes uuid="ae0e6a93-ed2d-40ba-b35f-00ae7ded1c1c">
    <name>ValueRef2</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer ref2</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение Ссылка2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value ref2</value>
+    <value>BBF056EA-00A0-2B33-3228-82FE2F6E70A2</value>
    </synonym>
    <type>
     <types>AnyRef</types>
@@ -149,16 +93,8 @@
   <attributes uuid="51a70dc0-472c-4067-8cff-9207e75ef6e8">
    <name>ValueRef3</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer ref3</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение Ссылка3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value ref3</value>
+    <value>65ED399D-9744-CB7D-DA9E-E5C4462F8669</value>
    </synonym>
    <type>
     <types>AnyRef</types>
@@ -171,16 +107,8 @@
   <attributes uuid="d817fc47-9961-467b-91fa-e2604fbfbe55">
    <name>ValueRef4</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer ref4</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение Ссылка4</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value ref4</value>
+    <value>0842AA93-6704-3B34-4191-1B1E5136F3D3</value>
    </synonym>
    <type>
     <types>AnyRef</types>
@@ -193,16 +121,8 @@
   <attributes uuid="fa4f00a5-6c80-48e4-862e-1cb882988ceb">
    <name>ValueRef5</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer ref5</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение Ссылка5</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value ref5</value>
+    <value>3338886F-299C-A463-3B42-23AF046ADDAD</value>
    </synonym>
    <type>
     <types>AnyRef</types>

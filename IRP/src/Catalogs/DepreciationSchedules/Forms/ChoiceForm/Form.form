@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>9BD241AE-F220-9C0E-EAE7-777C3CDBCD24</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -378,16 +370,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açıklama</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>D58A999F-E596-8AE1-145F-F1278C84B916</value>
       </content>
      </localValue>
     </title>

@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9060S_AccountingMappingChartsOfAccounts</name>
  <synonym>
-  <key>tr</key>
-  <value>T9060 Muhasebe mappingi (hesap planı)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9060 Бухгалтерские соответствия (план счетов)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9060 Accounting mapping (charts of accounts)</value>
+  <value>11411A6B-9122-BD3B-B0C3-36A555E8A9BB_________</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="a6435def-4794-4bc6-9c55-746c3c8f5d37">
   <name>LedgerTypeVariant</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вариант типа учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type variant</value>
+   <value>44FF07D5-132C-897C-CBD9-9F1EF70DCD24</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -53,16 +37,8 @@
  <resources uuid="180f17bb-5e17-446c-bf35-b711069e8739">
   <name>ExtraDimensionTypesName</name>
   <synonym>
-   <key>tr</key>
-   <value>Kırılım tip ismi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Наименование типа субконо</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Extra dimension types name</value>
+   <value>0410EC31-727A-BA53-3E33-316F458A4102</value>
   </synonym>
   <type>
    <types>String</types>
@@ -79,16 +55,8 @@
  <dimensions uuid="623ff0b3-b019-4e94-a8c6-7e4baaa9ea42">
   <name>IntegrationSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Интеграционные настройки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Integration settings</value>
+   <value>430C711F-714C-ECE1-178B-B4177AD4F4D8</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -104,16 +72,8 @@
  <dimensions uuid="778f5315-a49b-4758-863a-d7f87693488e">
   <name>ExternalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Dış isim</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Внешнее имя</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>External name</value>
+   <value>74362E7F-5295-D86B-B0B5-56C9EB310169</value>
   </synonym>
   <type>
    <types>String</types>
@@ -132,16 +92,8 @@
  <forms uuid="5703d564-4e35-494b-bd8b-a413dec973b8">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>D37B2C1D-05E6-3C9B-B3EB-BADBC225F5D3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -149,16 +101,8 @@
  <forms uuid="b0f5c79f-e250-4825-b019-9e1ea60ea7a0">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>B9ACDC44-A526-2086-6FF5-5AFB4A0B8189</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

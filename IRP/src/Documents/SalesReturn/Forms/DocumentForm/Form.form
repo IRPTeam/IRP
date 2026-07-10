@@ -1,6 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
+  <name>GroupHeadStorno</name>
+  <id>801</id>
+  <items xsi:type="form:Decoration">
+   <name>DecorationDocStorno</name>
+   <id>803</id>
+   <title>
+    <key>en</key>
+    <value>BDAFE599-CB85-0581-1CAE-ECC4E33DB501</value>
+   </title>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>DecorationDocStornoExtendedTooltip</name>
+    <id>805</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>DecorationDocStornoContextMenu</name>
+    <id>804</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <font xsi:type="core:FontRef">
+    <font>System.DefaultGUIFont</font>
+    <bold>true</bold>
+    <italic>false</italic>
+    <underline>false</underline>
+    <strikeout>false</strikeout>
+   </font>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>DocStorno</name>
+   <id>806</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>DocStorno</segments>
+   </dataPath>
+   <titleLocation>None</titleLocation>
+   <extendedTooltip>
+    <name>DocStornoExtendedTooltip</name>
+    <id>808</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>DocStornoContextMenu</name>
+    <id>807</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>LabelField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:LabelFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <hyperlink>true</hyperlink>
+   </extInfo>
+  </items>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <title>
+   <key>en</key>
+   <value>98A35F26-7C11-BEA1-14D8-8D8393559320</value>
+  </title>
+  <horizontalStretch>true</horizontalStretch>
+  <extendedTooltip>
+   <name>GroupHeadStornoExtendedTooltip</name>
+   <id>802</id>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>AlwaysHorizontal</group>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <backColor xsi:type="core:ColorRef">
+    <color>Web.Pink</color>
+   </backColor>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormGroup">
   <name>GroupTitle</name>
   <id>115</id>
   <items xsi:type="form:FormGroup">
@@ -13,16 +127,8 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>127</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu tanım birleşmiş resim</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Сворачиваемая группа формы</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <value>10D2031B-B9EE-A251-14C8-8BD317377417____</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -62,16 +168,8 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>130</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>7C5EF0F5-BE40-3447-7939-9B67C475B8BB</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -173,16 +271,8 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>138</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>4F9BF1DF-BED7-E6D7-7E20-000E2DD03CF0</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -2918,16 +3008,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Bağlı evraklar</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Документы связанные по строкам</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Linked documents</value>
+       <value>44ACC208-7106-5AEA-A1B5-5F9C24BFC169</value>
       </title>
       <extendedTooltip>
        <name>LinkedDocumentsExtendedTooltip</name>
@@ -3103,16 +3185,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzeme listesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Товары</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item list</value>
+    <value>EC3099C1-31DD-20B9-9405-52686030412A</value>
    </title>
    <extendedTooltip>
     <name>GroupItemListExtendedTooltip</name>
@@ -3417,16 +3491,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kampanyalar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Скидки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Special offers</value>
+    <value>190D2F8D-646F-8C4B-B5FF-FD6F32CDB61D</value>
    </title>
    <extendedTooltip>
     <name>GroupSpecialOffersExtendedTooltip</name>
@@ -3683,16 +3749,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Numaratör grubu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа нумерации</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of numerator</value>
+     <value>C3F18B73-405E-C200-09C9-92F8F45EAA1D</value>
     </title>
     <extendedTooltip>
      <name>GroupNumeratorExtendedTooltip</name>
@@ -3844,16 +3902,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>F36E2410-D8CD-FBA0-0713-35B0264762BB</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -4203,16 +4253,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Envanter menşei</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Источник происхождения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source of origin</value>
+    <value>535B5B43-A186-B51D-D306-6480A2EE5DED</value>
    </title>
    <extendedTooltip>
     <name>GroupSourceOfOriginExtendedTooltip</name>
@@ -4800,16 +4842,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Satır ID Bilgisi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Row ID Инфо</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Row ID Info</value>
+    <value>5838B604-908F-FDDD-D515-5CE79EA25331</value>
    </title>
    <extendedTooltip>
     <name>GroupRowIDInfoExtendedTooltip</name>
@@ -4833,16 +4867,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>E5526207-DA63-D4FF-FD98-82B941D0805B</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -4873,16 +4899,8 @@
      <name>ItemListTotalOffersAmount</name>
      <id>406</id>
      <title>
-      <key>tr</key>
-      <value>Iskonto</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Скидки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Offers</value>
+      <value>5A85F431-0BE7-B48F-FFD0-0D3543274F2A</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -4954,16 +4972,8 @@
      <name>ItemListTotalManualOffersAmount</name>
      <id>798</id>
      <title>
-      <key>tr</key>
-      <value>Manuel iskontolar</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Ручные скидки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Manual offers</value>
+      <value>6ACF5A0B-FA29-AF63-3650-057F73B8E0C7</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -5010,16 +5020,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup manuel iskonto toplam tutarı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа итого сумма ручных скидок</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group total manual offers amount</value>
+     <value>F82D3571-7301-B393-3E52-241262E8984D</value>
     </title>
     <extendedTooltip>
      <name>GroupTotalManualOffersAmountExtendedTooltip</name>
@@ -5047,16 +5049,8 @@
      <name>ItemListTotalNetAmount</name>
      <id>179</id>
      <title>
-      <key>tr</key>
-      <value>Net tutar</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Сумма без налогов</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Net amount</value>
+      <value>990C9078-3A7E-F472-297B-BBAB0FE5FF9F</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -5128,16 +5122,8 @@
      <name>ItemListTotalTaxAmount</name>
      <id>158</id>
      <title>
-      <key>tr</key>
-      <value>Vergi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Налог</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Tax</value>
+      <value>D0F6BFE9-BE85-16FF-F6B1-119F4F100A11</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -5209,16 +5195,8 @@
      <name>ItemListTotalTotalAmount</name>
      <id>166</id>
      <title>
-      <key>tr</key>
-      <value>Toplam tutar</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Итого</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Total amount</value>
+      <value>D783C153-D288-2F89-9016-630886D5A909</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -5502,16 +5480,8 @@
    <columns>
     <name>Info</name>
     <title>
-     <key>tr</key>
-     <value>Bilgi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Основной</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Info</value>
+     <value>C06C93A6-34F8-F0B6-668D-D56A5B797EE8</value>
     </title>
     <id>7</id>
     <valueType>
@@ -5528,16 +5498,8 @@
    <columns>
     <name>SerialLotNumbersPresentation</name>
     <title>
-     <key>tr</key>
-     <value>Seri lot numaralar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Серии номенклатуры</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Serial lot numbers</value>
+     <value>A342076C-2389-C7B9-98B9-9A09689503B9</value>
     </title>
     <id>26</id>
     <valueType>
@@ -5554,16 +5516,8 @@
    <columns>
     <name>SerialLotNumberIsFilling</name>
     <title>
-     <key>tr</key>
-     <value>Seri lot numaralar dolduruluyor</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Номер серии заполнен</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Serial lot number is filling</value>
+     <value>E65C8854-5FAA-50C7-7E73-35DE4856EB62</value>
     </title>
     <id>28</id>
     <valueType>
@@ -5579,16 +5533,8 @@
    <columns>
     <name>LockedRow</name>
     <title>
-     <key>tr</key>
-     <value>Kilitli satır</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Заблокированная строка</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Locked row</value>
+     <value>41C5103F-B94F-4E2D-DDEC-C3788767D871</value>
     </title>
     <id>168</id>
     <valueType>
@@ -5604,16 +5550,8 @@
    <columns>
     <name>IsExternalLinked</name>
     <title>
-     <key>tr</key>
-     <value>Dışarıdan bağlı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Связан внешне</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Is external linked</value>
+     <value>6A63CA14-D1A1-EFAA-A3E0-0BDD12C8D425</value>
     </title>
     <id>172</id>
     <valueType>
@@ -5629,16 +5567,8 @@
    <columns>
     <name>IsInternalLinked</name>
     <title>
-     <key>tr</key>
-     <value>İçerden bağlı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Связан внутренне</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Is internal linked</value>
+     <value>A59195F1-2395-13DF-F387-764A6C3FBE61</value>
     </title>
     <id>173</id>
     <valueType>
@@ -5654,16 +5584,8 @@
    <columns>
     <name>ExternalLinks</name>
     <title>
-     <key>tr</key>
-     <value>Dış bağlantılar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Внешние связки строк</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>External links</value>
+     <value>4FECD841-4893-0E44-4436-6C6B6DE0A957</value>
     </title>
     <id>174</id>
     <valueType>
@@ -5680,16 +5602,8 @@
    <columns>
     <name>InternalLinks</name>
     <title>
-     <key>tr</key>
-     <value>İç bağlantılar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Внутренние связки строк</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Internal links</value>
+     <value>98DC3252-3EE1-829A-A113-3790B9C70CAE</value>
     </title>
     <id>175</id>
     <valueType>
@@ -5706,16 +5620,8 @@
    <columns>
     <name>SourceOfOriginsPresentation</name>
     <title>
-     <key>tr</key>
-     <value>Envanter menşeileri</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Источники происхождения</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Source of origins</value>
+     <value>80C2E93C-F9C1-B440-0520-0F2C4E697E57</value>
     </title>
     <id>179</id>
     <valueType>
@@ -5732,16 +5638,8 @@
    <columns>
     <name>IsUnlockItemKey</name>
     <title>
-     <key>tr</key>
-     <value>Varyant kilidi açık</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Фиксация с характеристики снята</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Is unlock item key</value>
+     <value>545438FE-7BE0-8173-3334-41947D157309</value>
     </title>
     <id>182</id>
     <valueType>
@@ -5757,16 +5655,8 @@
    <columns>
     <name>IsUnlockStore</name>
     <title>
-     <key>tr</key>
-     <value>Depo kilidi açık</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Фиксация с склада снята</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Is unlock store</value>
+     <value>C15FE9AD-6467-30F8-8957-7ACA3E35E0D6</value>
     </title>
     <id>183</id>
     <valueType>
@@ -5789,16 +5679,8 @@
  <attributes>
   <name>Store</name>
   <title>
-   <key>tr</key>
-   <value>Depo</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Склад</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Store</value>
+   <value>BAFC471A-3D7B-9CC3-378F-FBF34380B554</value>
   </title>
   <id>3</id>
   <valueType>
@@ -5814,16 +5696,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>79EB82C6-C9B4-6015-50D9-94EF8D71485F</value>
   </title>
   <id>5</id>
   <valueType>
@@ -5840,16 +5714,8 @@
  <attributes>
   <name>TaxAndOffersCalculated</name>
   <title>
-   <key>tr</key>
-   <value>Vergi ve ıskonto hesaplandı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Налоги и скидки рассчитаны</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Tax and offers calculated</value>
+   <value>F256314C-B3E4-8053-3E0A-AC7EA55E118A</value>
   </title>
   <id>6</id>
   <valueType>
@@ -5865,16 +5731,8 @@
  <attributes>
   <name>CurrentPartner</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli cari hesap</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущий партнер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current partner</value>
+   <value>47777FAA-0223-7BD9-9A74-4932CF527A3D</value>
   </title>
   <id>8</id>
   <valueType>
@@ -5890,16 +5748,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup malzemeler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>25A13F51-C60C-CD7F-F476-62D8AC58C620</value>
   </title>
   <id>9</id>
   <valueType>
@@ -5918,16 +5768,8 @@
  <attributes>
   <name>StoreBeforeChange</name>
   <title>
-   <key>tr</key>
-   <value>Depo</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Склад</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Store</value>
+   <value>CB77F1C0-FEEC-02E5-5C5A-AE87F75E2F6D</value>
   </title>
   <id>10</id>
   <valueType>
@@ -5943,16 +5785,8 @@
  <attributes>
   <name>CurrentStore</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli depo</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущий склад</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current store</value>
+   <value>A3EF0297-5122-C6B8-8CD0-06783A7E4EEF</value>
   </title>
   <id>11</id>
   <valueType>
@@ -5968,16 +5802,8 @@
  <attributes>
   <name>CurrentPriceType</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli fiyat tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущий вид цены</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current price type</value>
+   <value>B05DB98D-0512-256E-E432-22110D87E662</value>
   </title>
   <id>12</id>
   <valueType>
@@ -5993,16 +5819,8 @@
  <attributes>
   <name>CurrentAgreement</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli sözleşme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущее соглашение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current agreement</value>
+   <value>97BAF1EF-53C0-93DA-A8BC-C42ED6AF8C86</value>
   </title>
   <id>16</id>
   <valueType>
@@ -6018,16 +5836,8 @@
  <attributes>
   <name>CurrentDate</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli tarhi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущая дата</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current date</value>
+   <value>B4D26891-2E73-DE2C-C98F-FA89281A8FC4</value>
   </title>
   <id>17</id>
   <valueType>
@@ -6044,16 +5854,8 @@
  <attributes>
   <name>SpecialOffersCache</name>
   <title>
-   <key>tr</key>
-   <value>Kampanyalar cache</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скидки кеш</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Special offers cache</value>
+   <value>8E27E31F-9846-2813-3649-9D73DD6A9A92</value>
   </title>
   <id>166</id>
   <valueType>
@@ -6068,16 +5870,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>790C1DFB-E406-F98A-ADE4-4BA8DD3FC541</value>
    </title>
    <id>32</id>
    <valueType>
@@ -6093,16 +5887,8 @@
   <columns>
    <name>Offer</name>
    <title>
-    <key>tr</key>
-    <value>Iskonto</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Скидка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Offer</value>
+    <value>D8113E13-1951-73FE-E02C-C040A3C4FCAF</value>
    </title>
    <id>33</id>
    <valueType>
@@ -6118,16 +5904,8 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>052239B2-6C92-8260-0225-5BC4EAC09D8D</value>
    </title>
    <id>34</id>
    <valueType>
@@ -6143,16 +5921,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>AF3A7287-601F-2798-8F0B-B024D0AA9E38</value>
    </title>
    <id>35</id>
    <valueType>
@@ -6169,16 +5939,8 @@
  <attributes>
   <name>ExternalLinkedDocs</name>
   <title>
-   <key>tr</key>
-   <value>Dışarında bağlı evraklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Внешние связки строк документов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>External linked docs</value>
+   <value>33C59438-0890-95B3-3BAA-A71E213425A1</value>
   </title>
   <id>176</id>
   <valueType>
@@ -6197,16 +5959,8 @@
  <attributes>
   <name>InternalLinkedDocs</name>
   <title>
-   <key>tr</key>
-   <value>İçerden bağlı evraklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Документы, связанные с внутренними ссылками</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Internal linked docs</value>
+   <value>760E4A81-E677-1B8D-DAE1-12207BF669EA</value>
   </title>
   <id>177</id>
   <valueType>
@@ -6225,16 +5979,8 @@
  <attributes>
   <name>LockedFields</name>
   <title>
-   <key>tr</key>
-   <value>Kilitli alanlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заблокированные поля</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Locked fields</value>
+   <value>13C7FAE0-BC80-3874-423F-FB39AAC72277</value>
   </title>
   <id>178</id>
   <valueType>
@@ -6253,16 +5999,8 @@
  <attributes>
   <name>AccountingExtDimensions</name>
   <title>
-   <key>tr</key>
-   <value>Muhasebe kırılımları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Бухгалтерские субконто</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Accounting ext dimensions</value>
+   <value>52295372-69CE-D9F4-4007-797BA634E754</value>
   </title>
   <id>180</id>
   <valueType>
@@ -6278,16 +6016,8 @@
  <attributes>
   <name>AccountingRowAnalytics</name>
   <title>
-   <key>tr</key>
-   <value>Muhasebe satır analitikleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Аналитика строки бух. проводки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Accounting row analytics</value>
+   <value>2C114627-002F-B933-3FDB-BD448F86F4D0</value>
   </title>
   <id>181</id>
   <valueType>
@@ -6300,20 +6030,29 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>DocStorno</name>
+  <title>
+   <key>en</key>
+   <value>7F3D495A-60AC-5787-7C30-0099AFDA03BD</value>
+  </title>
+  <id>184</id>
+  <valueType>
+   <types>DocumentRef.Storno</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>SearchByBarcode</name>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Ürün barkod okut veya gir</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Отсканировать или ввести штрихкод товара</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Scan or enter the product's barcode</value>
+   <value>3B24E9BA-2FFE-1B69-936D-DC1098DE9630</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6333,16 +6072,8 @@
  <formCommands>
   <name>OpenPickupItems</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Подбор товара</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pickup</value>
+   <value>15AD60B1-1960-ECE2-296A-AC6CE2DF42CF</value>
   </title>
   <id>2</id>
   <use>
@@ -6362,16 +6093,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtar göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать ключ строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>19A16351-FC25-DC56-6A81-12342218C883</value>
   </title>
   <id>3</id>
   <use>
@@ -6390,29 +6113,13 @@
  <formCommands>
   <name>LinkUnlinkBasisDocuments</name>
   <title>
-   <key>tr</key>
-   <value>Bağlı olmayan kaynak evrakı ile bağlantı kur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Связать/отменить связку документов основания</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Link unlink basis documents</value>
+   <value>693E7672-B90A-8D9E-E4D4-49C0DF352AA4</value>
   </title>
   <id>4</id>
   <toolTip>
-   <key>tr</key>
-   <value>Satır bağlantısını kur/çöz</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Залинковать/разлинковать строки</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Link/Unlink document rows</value>
+   <value>95AD5A51-994D-0B45-5733-30FEF334D042</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6431,29 +6138,13 @@
  <formCommands>
   <name>AddBasisDocuments</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak evrak ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить документы основания</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Add basis documents</value>
+   <value>22F5F49F-0E28-EB99-99A6-65D06CA578B4</value>
   </title>
   <id>5</id>
   <toolTip>
-   <key>tr</key>
-   <value>Bağlı evraktan satırları ekle</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Добавить строки из залинкованных документов</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Add rows from linked documents</value>
+   <value>1C4590D2-5F62-E473-3158-8D28826EC06C</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6472,29 +6163,13 @@
  <formCommands>
   <name>OpenScanForm</name>
   <title>
-   <key>tr</key>
-   <value>Okutma formu aç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Открыть форму сканирования</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Open scan form</value>
+   <value>A09D00C3-F981-C456-6423-30123B25BC16</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tarama formu</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Форма сканирования</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Scan form</value>
+   <value>26696662-746C-D0FA-AB51-192B17C1DD16</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6514,16 +6189,8 @@
  <formCommands>
   <name>UnlockLinkedRows</name>
   <title>
-   <key>tr</key>
-   <value>Bağlı satırların kilidi kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разблокировать связанные строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unlock linked rows</value>
+   <value>DABFF08C-D53F-FDD6-653A-A27B9B5FA070</value>
   </title>
   <id>7</id>
   <use>
@@ -6542,29 +6209,13 @@
  <formCommands>
   <name>EditCurrencies</name>
   <title>
-   <key>tr</key>
-   <value>Dövizleri düzelt</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Редактирование валют</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit currencies</value>
+   <value>A19BCFBE-5F5F-4999-9E4D-DBAD790446AA</value>
   </title>
   <id>8</id>
   <toolTip>
-   <key>tr</key>
-   <value>Evrak için döviz kurları değiştir</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Изменить курс валют для документа</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Edit exchange rates for document</value>
+   <value>7FC5D335-D77A-567B-B260-08BB123070D0</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6582,16 +6233,8 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать скрытые таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show hidden tables</value>
+   <value>FD374B74-35D1-FE35-5B61-1194B87F2149</value>
   </title>
   <id>9</id>
   <use>
@@ -6610,16 +6253,8 @@
  <formCommands>
   <name>SetSpecialOffers</name>
   <title>
-   <key>tr</key>
-   <value>% Iskonto</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>% Скидки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>% Offers</value>
+   <value>1E561CE2-127A-4BB2-22F8-87F2A030D037</value>
   </title>
   <id>10</id>
   <use>
@@ -6637,16 +6272,8 @@
  <formCommands>
   <name>SetSpecialOffersAtRow</name>
   <title>
-   <key>tr</key>
-   <value>% Iskonto</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>% Скидки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>% Discount</value>
+   <value>14A314D9-1E60-E276-67F0-053FA82E992E</value>
   </title>
   <id>11</id>
   <use>
@@ -6663,16 +6290,8 @@
  <formCommands>
   <name>LinkedDocuments_GoodsReceipts</name>
   <title>
-   <key>tr</key>
-   <value>Satın alma irsaliyeleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Приходные товарные накладные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Goods receipts</value>
+   <value>718173CF-D468-9DE3-3F4A-AAE793E3DF41</value>
   </title>
   <id>12</id>
   <use>
@@ -6688,29 +6307,13 @@
  <formCommands>
   <name>EditQuantityInBaseUnit</name>
   <title>
-   <key>tr</key>
-   <value>Temel birimde miktarı düzenle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменить количество в осн. ед. изм.</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit quantity in base unit</value>
+   <value>0980A5B8-88E4-0AEE-EA77-7BD62C53D0E5</value>
   </title>
   <id>13</id>
   <toolTip>
-   <key>tr</key>
-   <value>Temel birimde miktarı düzenle</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Изменить количество в осн. ед. изм.</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Edit quantity in base unit</value>
+   <value>72A2686D-D665-1AF8-8B8E-E8281ABB82CD</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6729,29 +6332,13 @@
  <formCommands>
   <name>EditAccounting</name>
   <title>
-   <key>tr</key>
-   <value>Muhasebe değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменить бух. проводки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit accounting</value>
+   <value>1B3188E9-6789-441F-FABE-E958F88A8820</value>
   </title>
   <id>14</id>
   <toolTip>
-   <key>tr</key>
-   <value>Muhasebe kayıtları değiştir</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Изменить бухгалтерские проводки</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Edit accounting entries</value>
+   <value>C507D454-A0B8-F5F4-4F3B-B725F828B6A0</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6771,29 +6358,13 @@
  <formCommands>
   <name>SetNewNumber</name>
   <title>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set new number</value>
+   <value>A2F92C16-4269-6A55-587C-C8D25EEDF019</value>
   </title>
   <id>15</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Set new number</value>
+   <value>E3781FC3-71FA-1490-07F6-609B1F009ACA</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6813,16 +6384,8 @@
  <formCommands>
   <name>SetManualOffers</name>
   <title>
-   <key>tr</key>
-   <value>% Manuel iskonto</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>% Ручной скидки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>% Manual offers</value>
+   <value>4043A89E-47E6-F693-3B94-4D0946A09224</value>
   </title>
   <id>16</id>
   <use>

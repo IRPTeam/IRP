@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R7030_ProductionPlanning</name>
  <synonym>
-  <key>tr</key>
-  <value>R7030 Üretim planlama</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R7030 Планирование производства</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R7030 Production planning</value>
+  <value>5D0DA70B-E147-1F62-295F-F906BA51A9F9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R7030_ProductionPlanning.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="7fad9709-e71e-4528-ba55-976b474989b8">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>CB8AFC4C-BEA6-6598-82AB-BD5E589B60C6</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

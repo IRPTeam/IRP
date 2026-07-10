@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeArTransactionBasises</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip Alımlar işlem kaynağı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип основание операции взаиморасчета с покупателем</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type AR transaction basises</value>
+  <value>CFE70C6C-6E94-EF4D-D462-25AC45B0E1C7</value>
  </synonym>
  <type>
   <types>DocumentRef.SalesReportFromTradeAgent</types>

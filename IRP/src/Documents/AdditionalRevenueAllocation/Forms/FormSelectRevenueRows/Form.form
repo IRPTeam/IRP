@@ -184,16 +184,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Представление</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>094EB7D4-3B9C-C2B3-3DB4-4CB1A2FF1AEA</value>
    </title>
    <extendedTooltip>
     <name>RevenueRowsTreeGroupPresentationExtendedTooltip</name>
@@ -634,16 +626,8 @@
  <attributes>
   <name>RevenueRowsTree</name>
   <title>
-   <key>tr</key>
-   <value>Ek gelir satırlar ağacı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дерево доп. доходов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Revenue rows tree</value>
+   <value>43EA84CB-31E8-7481-1DF7-710AAE373506</value>
   </title>
   <id>1</id>
   <valueType>
@@ -658,16 +642,8 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document</value>
+    <value>71C0D1C3-85AE-545D-DFD6-6F0995A3227D</value>
    </title>
    <id>2</id>
    <valueType>
@@ -683,16 +659,8 @@
   <columns>
    <name>RowID</name>
    <title>
-    <key>tr</key>
-    <value>Satır ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID Строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Row ID</value>
+    <value>37EB0751-0958-33A6-6DCA-AF166885A7CF</value>
    </title>
    <id>3</id>
    <valueType>
@@ -708,16 +676,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>F805AFFF-1AA3-13E1-10AD-DA7245B9BD2E</value>
    </title>
    <id>4</id>
    <valueType>
@@ -733,16 +693,8 @@
   <columns>
    <name>Currency</name>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>F699CDD5-1E1A-B5D9-9498-80DE504E9EFF</value>
    </title>
    <id>5</id>
    <valueType>
@@ -758,16 +710,8 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>51478921-2336-A31C-CD7F-F2971DAD0907</value>
    </title>
    <id>6</id>
    <valueType>
@@ -783,16 +727,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использовать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>2BE618E2-E8BF-1177-7FBC-CCA9FCAB7091</value>
    </title>
    <id>7</id>
    <valueType>
@@ -808,16 +744,8 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Уровень</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Level</value>
+    <value>6CFDBE5B-D0D8-F55E-E104-46F841E7EA15</value>
    </title>
    <id>8</id>
    <valueType>
@@ -836,16 +764,8 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Иконка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Icon</value>
+    <value>D5AB267F-0062-C8E7-7F14-40B10BF1ED69</value>
    </title>
    <id>9</id>
    <valueType>
@@ -864,16 +784,8 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Представление</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>8482D562-B747-3E84-43FA-A024BEE6D0DC</value>
    </title>
    <id>10</id>
    <valueType>
@@ -890,16 +802,8 @@
   <columns>
    <name>TaxAmount</name>
    <title>
-    <key>tr</key>
-    <value>Vergi tutarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма налогов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Tax amount</value>
+    <value>D323B852-36B2-B492-2FE2-2F07C6920AEB</value>
    </title>
    <id>11</id>
    <valueType>
@@ -915,16 +819,8 @@
   <columns>
    <name>RevenueType</name>
    <title>
-    <key>tr</key>
-    <value>Gelir tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статья доходов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Revenue type</value>
+    <value>C2D86724-D833-2761-1F75-52C7C775796A</value>
    </title>
    <id>12</id>
    <valueType>
@@ -940,16 +836,8 @@
   <columns>
    <name>ProfitLossCenter</name>
    <title>
-    <key>tr</key>
-    <value>Kar/Zarar merkezi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Центр прибылей/убытков</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Profit loss center</value>
+    <value>252B68AF-B504-7CE3-3F7D-D09048FECFEB</value>
    </title>
    <id>13</id>
    <valueType>
@@ -966,16 +854,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>A68D8CDD-2217-807D-D62C-C8EC7B8C3803</value>
   </title>
   <id>1</id>
   <use>
@@ -991,16 +871,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>CAE08829-45F4-B7CB-B20E-E758DC4F8CF7</value>
   </title>
   <id>2</id>
   <use>
@@ -1016,16 +888,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать row key</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>7C165AB4-C641-D41E-ECE7-73F7961538DB</value>
   </title>
   <id>3</id>
   <use>

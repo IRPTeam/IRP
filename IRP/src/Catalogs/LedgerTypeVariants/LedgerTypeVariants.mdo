@@ -9,16 +9,8 @@
  </producedTypes>
  <name>LedgerTypeVariants</name>
  <synonym>
-  <key>tr</key>
-  <value>Defter tip seçenekleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Варианты типа учета</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Ledger type variants</value>
+  <value>BC698289-A6F4-30FD-D9B0-0C4901F1822B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.LedgerTypeVariants.StandardAttribute.Code</inputByString>
@@ -59,16 +51,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Defter tip seçeneği</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Вариант типа учета</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Ledger type variant</value>
+  <value>A68B26EC-D7C0-3B7D-DA83-3B7FFB9412F5</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -86,16 +70,8 @@
  <attributes uuid="48c0a253-3e2c-4d5d-a8da-99b7f543498b">
   <name>AccountChartsCodeMask</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesap planları kod maskesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Маска кода схемы счетов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Account charts code mask</value>
+   <value>7FF16582-079D-FDB2-2A55-5797CD667047</value>
   </synonym>
   <type>
    <types>String</types>
@@ -116,30 +92,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>70238AD4-5E81-BEB0-0D4A-AD7300693EE4</value>
   </synonym>
   <attributes uuid="56da6a60-7caa-4ee3-af95-4d224a20a93c">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>00A928C4-63D8-8EA0-0380-05AE9C146AE1</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -152,16 +112,8 @@
   <attributes uuid="28321429-c41c-46db-b544-60789f411520">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>9604B230-839B-B807-7D33-3434CE2DFD02</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -179,16 +131,8 @@
  <forms uuid="f5fe639f-468d-44e9-bf31-85adc60f82bb">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>71F06193-85D6-2359-90E6-6265D6D2970A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -196,16 +140,8 @@
  <forms uuid="bea52eaf-362d-4463-adf8-299b47bb637e">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>6CF23668-AB16-E30A-A459-9DF4C2BEE382</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -213,16 +149,8 @@
  <forms uuid="43b08e37-175d-4e27-8999-e3d45a8aa633">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>AA266639-73EE-699C-C8D8-8FE89611123B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

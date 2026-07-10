@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>9751EA56-16AB-E0F4-4304-41BBE13431D1</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>

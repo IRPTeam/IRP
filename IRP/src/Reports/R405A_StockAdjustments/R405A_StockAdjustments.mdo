@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R405A_StockAdjustments</name>
  <synonym>
-  <key>tr</key>
-  <value>R405A Stok eşitlemeleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R405A Списания и оприходования товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R405A Stock adjustments</value>
+  <value>F3FD93E6-81DD-8E74-4D15-5C90C66CCFB3</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R405A_StockAdjustments.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="584dd398-909d-45d9-96f7-f1159493200f">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>93FB4467-948D-C837-79BC-C4BEF2E0FF44</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="347eb4e7-a0fe-4ccc-98be-a7a89aa1b7cf">
  <name>Report_R6020A_InventoryCost</name>
  <synonym>
-  <key>tr</key>
-  <value>R6020A Stok maliyeti</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R6020A_СтоимостьИнвентаря</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R6020A_InventoryCost</value>
+  <value>838CFEEC-B783-7CF9-97B7-7C750F48D419</value>
  </synonym>
 </mdclass:Role>

@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>3FDAF650-9017-79CA-AA5A-A85CF0EF6A4C</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -538,16 +530,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>MF mevcut</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Есть БО</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is have JE</value>
+       <value>5AD07D06-CD37-7FBB-BDE0-0587E7BA59E9</value>
       </content>
      </localValue>
     </title>

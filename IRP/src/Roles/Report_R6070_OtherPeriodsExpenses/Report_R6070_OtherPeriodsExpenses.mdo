@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="98ddb24e-a4c2-4cb1-a1b0-20816f104f15">
  <name>Report_R6070_OtherPeriodsExpenses</name>
  <synonym>
-  <key>tr</key>
-  <value>R6070 Diğer dönemlere ait giderler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R6070_РасходыДругихПериодов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R6070_OtherPeriodsExpenses</value>
+  <value>75E85941-8984-2639-99E1-157E05209683</value>
  </synonym>
 </mdclass:Role>

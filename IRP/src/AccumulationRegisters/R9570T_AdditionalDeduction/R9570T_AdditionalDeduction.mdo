@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R9570T_AdditionalDeduction</name>
  <synonym>
-  <key>tr</key>
-  <value>R9570 Ek kesinti</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R9570 Дополнительные удержания</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R9570 Additional deduction</value>
+  <value>664FCF87-19B6-6321-1A4A-AD994E20DB6E</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="6f389c64-a698-4e2d-b535-04510e3ddf09">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>F1FB33E6-3A4A-A7A0-04A9-9CA434CDED31</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +33,8 @@
  <dimensions uuid="5ce067cc-8927-4d54-b707-25d21c71d832">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>BF39E421-DBAF-2226-6EF1-1F9CFBE17AEB</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -71,16 +47,8 @@
  <dimensions uuid="79d1c26e-77c2-44b2-bdce-944a600a152f">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>9C6ED5BA-DE5E-4DCC-C0F1-1EBB7110167C</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -93,16 +61,8 @@
  <dimensions uuid="dcabf127-e9a8-4969-9271-49953ab86df4">
   <name>Employee</name>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee</value>
+   <value>9DE828E7-6B47-5BE1-1351-1D0112C33037</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -115,16 +75,8 @@
  <dimensions uuid="66f4c0ac-dc7d-4360-a0e7-1bacc32873ef">
   <name>Position</name>
   <synonym>
-   <key>tr</key>
-   <value>Pozisyon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Должность</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Position</value>
+   <value>3495BB83-95F9-D445-501E-ECBBB454FBA1</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -137,16 +89,8 @@
  <dimensions uuid="e3e3e091-efeb-4177-b7e4-2bff1a9449bc">
   <name>DeductionType</name>
   <synonym>
-   <key>tr</key>
-   <value>İndirim türü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип удержания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deduction type</value>
+   <value>590E1C24-01BA-EC54-4B46-60253CDF392A</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -159,16 +103,8 @@
  <dimensions uuid="414a0d1b-0323-4e2f-b22b-8ac01f507631">
   <name>ExpenseType</name>
   <synonym>
-   <key>tr</key>
-   <value>Gider tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Статьи затрат</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Expense type</value>
+   <value>3DE3F635-9805-E5F1-1E51-14520892BEAB</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -181,16 +117,8 @@
  <dimensions uuid="e4123d36-299c-4b3a-a67f-bc088561aa4e">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Центр прибылей/убытков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Profit loss center</value>
+   <value>B756A357-521C-83B8-894D-D33D2AFDC617</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

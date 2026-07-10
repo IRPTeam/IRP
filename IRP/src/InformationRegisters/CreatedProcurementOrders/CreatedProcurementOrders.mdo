@@ -11,57 +11,25 @@
  </producedTypes>
  <name>CreatedProcurementOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>Oluşturulan tedarik siparişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Созданные заказы обеспечения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Created procurement orders</value>
+  <value>8A9501D8-C002-7151-17A2-2CB19AD52587</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Oluşturulan tedarik siparişi</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Созданный заказ обеспечения</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Created procurement order</value>
+  <value>AC69783A-619C-6601-1CA2-2A365649A936</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Oluşturulan tedarik siparişleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Созданные заказы обеспечения</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Created procurement orders</value>
+  <value>7E0EAA90-5A5B-64D7-7C82-2F87D4B463A9</value>
  </listPresentation>
  <dimensions uuid="2839d916-f331-4c01-bce0-f77301d97ab9">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>66E3B9CF-287A-2DA2-2B76-608D59E46376</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>

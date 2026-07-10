@@ -489,16 +489,8 @@
  <attributes>
   <name>SourceOfOrigins</name>
   <title>
-   <key>tr</key>
-   <value>Envanter menşeileri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Источники происхождения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Source of origins</value>
+   <value>C2195804-5A9D-6406-6BFA-A15E84CBCCA2</value>
   </title>
   <id>1</id>
   <valueType>
@@ -513,16 +505,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>3290E261-0DC6-0692-2A53-3C07A7FE5ACA</value>
    </title>
    <id>2</id>
    <valueType>
@@ -538,16 +522,8 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>AD53FFEE-FD55-D028-825E-EEA981A36877</value>
    </title>
    <id>3</id>
    <valueType>
@@ -563,16 +539,8 @@
   <columns>
    <name>SourceOfOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Envanter menşei</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Источник происхождения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source of origin</value>
+    <value>D464F03F-FF8A-9108-872D-D02631C2B174</value>
    </title>
    <id>4</id>
    <valueType>
@@ -588,16 +556,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>34B4381C-775B-AB12-2750-0D7D3562E13A</value>
    </title>
    <id>5</id>
    <valueType>
@@ -614,16 +574,8 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>B4BF3F1A-3224-2BE1-1956-698F87894C3B</value>
   </title>
   <id>6</id>
   <valueType>
@@ -639,16 +591,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>F17C724A-DAD0-0F3B-B6DD-D08F4335A51A</value>
   </title>
   <id>7</id>
   <valueType>
@@ -664,16 +608,8 @@
  <attributes>
   <name>RowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Row key</value>
+   <value>0331202D-9758-9428-85AC-C8B0C8E593F3</value>
   </title>
   <id>8</id>
   <valueType>
@@ -689,16 +625,8 @@
  <attributes>
   <name>ItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item type</value>
+   <value>E6FED989-0154-133D-D546-6338903BA2DA</value>
   </title>
   <id>9</id>
   <valueType>
@@ -714,16 +642,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>32D24CF4-AFF1-9C8E-EAD5-5EE1A2CCE674</value>
   </title>
   <id>1</id>
   <use>
@@ -739,16 +659,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>DC022BE7-9E3B-E216-6F6E-EF694CACA895</value>
   </title>
   <id>2</id>
   <use>
@@ -764,16 +676,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать row key</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>863F70B2-EEEE-4D9D-DC24-4DCB4A773F5E</value>
   </title>
   <id>4</id>
   <use>

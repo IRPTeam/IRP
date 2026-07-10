@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9520S_TimeSheetInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>T9520 Zaman çizelgesi bilgisi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9520 Информация по зарплатным табелям</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9520 Time sheet info</value>
+  <value>5CDE3AB0-7708-5A66-68D7-7CE13CD8B9A0</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -29,16 +21,8 @@
  <resources uuid="7548e7b3-3238-4dd0-9154-1b02e93486c5">
   <name>CountDaysHours</name>
   <synonym>
-   <key>tr</key>
-   <value>Günler saatler say</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Подсчет дней часов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Count days hours</value>
+   <value>A906DE65-9A89-C55A-A9A3-3BC4CEFAB16B</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -55,16 +39,8 @@
  <resources uuid="967d2d80-b52f-4bd7-9e3a-4f02caec5106">
   <name>ActuallyDaysHours</name>
   <synonym>
-   <key>tr</key>
-   <value>Gerçek günler saatler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Фактические дни часы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Actually days hours</value>
+   <value>FEF25F03-CEEC-7E3B-BAF4-4ADF9360BF00</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -81,16 +57,8 @@
  <resources uuid="ce20da66-e798-416b-8882-fb98f7f5cabb">
   <name>IsVacation</name>
   <synonym>
-   <key>tr</key>
-   <value>Tatilde mi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отпуск</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is vacation</value>
+   <value>D0B42E4C-F5E4-73A9-928D-D3DC179071E2</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -104,16 +72,8 @@
  <resources uuid="432baeef-d88a-40ba-b1e7-853cd95dce9d">
   <name>IsSickLeave</name>
   <synonym>
-   <key>tr</key>
-   <value>Raporlu izin</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Больничный</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is sick leave</value>
+   <value>CFB845FE-1111-F510-0427-70F420B8B1AF</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -127,16 +87,8 @@
  <dimensions uuid="b5ce9181-ef7f-4ba3-a8ec-aa6e7ad11ad5">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>438ECE08-109C-7264-40E7-79E84B963CA1</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -151,16 +103,8 @@
  <dimensions uuid="67eefcf9-46f0-4d6b-94a8-068e078baa6a">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>465CC23E-5A6E-DE9F-F703-31A0CF223D53</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -175,16 +119,8 @@
  <dimensions uuid="d2399293-fe74-41a6-aacb-6940b533a900">
   <name>Date</name>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Date</value>
+   <value>37EAD0C9-718C-3BBF-F8DC-C7501D807E2C</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -202,16 +138,8 @@
  <dimensions uuid="7861ab30-76d0-41b7-8b53-ffb1b8c822ed">
   <name>Employee</name>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee</value>
+   <value>CC6F0EAC-FE93-27F9-99BE-EBFA334903AE</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -226,16 +154,8 @@
  <dimensions uuid="e1c24f8f-e979-4ac4-872c-5e6cfcf0839a">
   <name>Position</name>
   <synonym>
-   <key>tr</key>
-   <value>Pozisyon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Должность</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Position</value>
+   <value>0AA5B0EC-7B8F-6DC6-6D85-56883D4FF130</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -250,16 +170,8 @@
  <dimensions uuid="f4e4bdd3-6f3e-4c4d-8810-f6c5cd05daaa">
   <name>EmployeeSchedule</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan programı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Штатное расписание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee schedule</value>
+   <value>AE8D836B-4994-4F38-8E00-0DA767B6BBAF</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>
@@ -273,16 +185,8 @@
  <dimensions uuid="406fb9c4-9419-4d32-ae61-2ce43bf858d9">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Центр прибылей/убытков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Profit loss center</value>
+   <value>516B9878-0C38-1C29-96C8-846DEA312519</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

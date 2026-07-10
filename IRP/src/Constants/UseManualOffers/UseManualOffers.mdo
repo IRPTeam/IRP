@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseManualOffers</name>
  <synonym>
-  <key>tr</key>
-  <value>Manuel indirimleri kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать ручные скидки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use manual offers</value>
+  <value>D08AFECF-DC36-3040-0058-86F0C7F98E8E</value>
  </synonym>
  <type>
   <types>Boolean</types>

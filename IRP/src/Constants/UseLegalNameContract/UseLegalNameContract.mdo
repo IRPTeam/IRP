@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseLegalNameContract</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - fatura hesap kontratı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать договоры контрагентов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use legal name contract</value>
+  <value>E910E3C8-CC4E-2004-4C22-28A02574D3C9</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="95e1dea9-ce13-4aa5-8df6-a67fb0588ec5">
  <name>Author</name>
  <synonym>
-  <key>tr</key>
-  <value>Kayıt oluşturan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Автор</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Author</value>
+  <value>D635C745-69D2-99F2-2984-4D6AC465AE23</value>
  </synonym>
  <type>
   <types>CatalogRef.Users</types>
@@ -138,6 +130,10 @@
  </content>
  <content>
   <metadata>Document.ChequeBondTransaction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Storno</metadata>
   <use>Use</use>
  </content>
  <content>

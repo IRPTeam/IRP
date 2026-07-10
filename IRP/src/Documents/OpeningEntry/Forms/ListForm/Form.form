@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>DAA06A50-6DB8-FC7D-DA9B-B0E1CDBA99F2</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -523,16 +515,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Depo</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Склад</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Store</value>
+       <value>814FFA8C-49CE-7A10-0B9C-C67973173993</value>
       </content>
      </localValue>
     </title>

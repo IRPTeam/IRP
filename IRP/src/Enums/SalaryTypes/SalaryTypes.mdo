@@ -7,47 +7,23 @@
  </producedTypes>
  <name>SalaryTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Maaş tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы зарплат</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Salary types</value>
+  <value>C2D084CF-E844-7F48-8ADB-BCA509E4D7BE</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="4a6dd8e8-b616-4957-a6b5-7e315a90bcb5">
   <name>ByPosition</name>
   <synonym>
-   <key>tr</key>
-   <value>Pozisyona göre</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По должности</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>By position</value>
+   <value>A8404CFE-3199-8E9E-E646-6DA8E95BA326</value>
   </synonym>
  </enumValues>
  <enumValues uuid="200801bc-b11c-407e-b7c1-96b8efd86202">
   <name>Personal</name>
   <synonym>
-   <key>tr</key>
-   <value>Kişisel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Личный</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Personal</value>
+   <value>B751182E-AA19-4942-296A-A6F62F001E7A</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

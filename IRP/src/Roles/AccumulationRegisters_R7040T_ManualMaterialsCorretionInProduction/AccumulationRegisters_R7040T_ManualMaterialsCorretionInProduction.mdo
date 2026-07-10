@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4279b2f3-bf7f-4531-91ae-f045382a5bc8">
  <name>AccumulationRegisters_R7040T_ManualMaterialsCorretionInProduction</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R7040T ÜretimdeManuelMalzemeDüzeltme</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R7040T РучнаяКоррекцияМатериаловВПроизводстве</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R7040T ManualMaterialsCorretionInProduction</value>
+  <value>C0B8B919-294E-9CDA-AA8F-F3EC2768C1C3_____________________________</value>
  </synonym>
 </mdclass:Role>

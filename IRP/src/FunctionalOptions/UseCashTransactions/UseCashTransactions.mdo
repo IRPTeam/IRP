@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5de1d5eb-3321-4630-9c11-4796dcd44406">
  <name>UseCashTransactions</name>
  <synonym>
-  <key>tr</key>
-  <value>Nakit işlemleri kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать кассовые операции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use cash transactions</value>
+  <value>D1343114-3862-18A0-002A-A3B1AF4C145D</value>
  </synonym>
  <location>Constant.UseCashTransactions</location>
  <privilegedGetMode>true</privilegedGetMode>

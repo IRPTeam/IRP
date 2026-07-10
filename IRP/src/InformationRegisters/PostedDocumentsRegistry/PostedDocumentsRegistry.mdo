@@ -11,16 +11,8 @@
  </producedTypes>
  <name>PostedDocumentsRegistry</name>
  <synonym>
-  <key>tr</key>
-  <value>Kaydedilmiş evrak sicili</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Реестр проведенных документов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Posted documents registry</value>
+  <value>00DADCB6-086A-ADDF-FCDA-A2D229A6A6F5</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <attributes uuid="39c077ed-c0b2-40d8-8f37-8234d10edf27">
   <name>Date</name>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Date</value>
+   <value>60D11921-8DB0-AEBF-F349-94B08DBA73CE</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -54,16 +38,8 @@
  <attributes uuid="86151c23-cadb-4c21-9904-e0dbed6882a7">
   <name>Number</name>
   <synonym>
-   <key>tr</key>
-   <value>Numara</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Number</value>
+   <value>22781A9E-17DA-F050-0585-5EC6076F8670</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -80,16 +56,8 @@
  <attributes uuid="e4d8b6a2-2394-4310-89e9-bc5b48940a17">
   <name>CreateDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Oluşturulma tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата создания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Create date</value>
+   <value>8EA86CEB-CEC8-9ABC-C074-441E16CFFE1E</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -104,16 +72,8 @@
  <attributes uuid="3dbd6a08-77a6-40fd-a759-ee399725e5b3">
   <name>ModifyDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Değiştirme tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата изменения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Modify date</value>
+   <value>30D5D423-DE9B-CDAC-C213-3C9CBD6145EE</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -128,16 +88,8 @@
  <attributes uuid="83d81de5-6a39-4ef0-be13-6f4c45dcbd49">
   <name>Author</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt oluşturan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Автор</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Author</value>
+   <value>DFF014B4-634E-9DB9-96DD-D45B35BEC133</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -151,16 +103,8 @@
  <attributes uuid="2323784d-a747-4dfb-b614-b6d10593c859">
   <name>Editor</name>
   <synonym>
-   <key>tr</key>
-   <value>Editör</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Редактор</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Editor</value>
+   <value>BB3EB62E-E758-F7A0-0606-6980D7181094</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -174,16 +118,8 @@
  <attributes uuid="08719ebb-baf5-4bd7-ba3e-337f2210a7e0">
   <name>ManualMovementsEdit</name>
   <synonym>
-   <key>tr</key>
-   <value>Manuel harketleri değişitirme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ручное редактирование движений</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Manual movements edit</value>
+   <value>8BB640FF-8555-F54A-A012-23C0902CB55E</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -197,16 +133,8 @@
  <dimensions uuid="f0e583ea-06fe-4d86-9a19-03665c79d917">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>AF140E0A-0EB8-B0EF-F78A-A5793E8B6DBD</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -221,16 +149,8 @@
  <forms uuid="a0f52905-bd9d-4eeb-9dcc-f58c11172215">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>8A55EE11-D1F5-377B-B09B-B3ADA663E449</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -238,16 +158,8 @@
  <forms uuid="9969142d-25c9-4877-b84b-9d50201a2fc9">
   <name>ChoiceDocumentType</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak tipi seç</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Выбрать тип документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice document type</value>
+   <value>0269F39C-9DEE-EEF6-61C4-4A5A46392311</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

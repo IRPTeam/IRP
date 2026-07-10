@@ -363,16 +363,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Gecikmiş Dönemler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Просроченные периоды</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Overdue periods</value>
+    <value>A2830A5A-5D43-1E07-7819-9439043D584D</value>
    </title>
    <extendedTooltip>
     <name>GroupOverduePeriodsExtendedTooltip</name>
@@ -683,16 +675,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Gelecek Dönemler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Будущие периоды</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Future periods</value>
+    <value>0A0D8DE9-9718-AD08-8850-022C44A5B84B</value>
    </title>
    <extendedTooltip>
     <name>GroupFuturePeriodsExtendedTooltip</name>
@@ -716,16 +700,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>4D09A693-315E-F9CF-FF15-586B7AD42C4C</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>

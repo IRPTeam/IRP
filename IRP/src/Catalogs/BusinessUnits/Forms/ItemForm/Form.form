@@ -227,16 +227,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Tipler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Типы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Types</value>
+   <value>FB462655-80B9-3084-498C-C3833DF5656B</value>
   </title>
   <extendedTooltip>
    <name>GroupBusinessUnitsTypesExtendedTooltip</name>
@@ -348,16 +340,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup konsolide perakende satışlarını kullanıyor</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа использования консолидированных розничных продаж</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group use consolidated retail sales</value>
+   <value>ED35EAB3-58DE-A230-0565-59A0AF00BEDD</value>
   </title>
   <extendedTooltip>
    <name>GroupUseConsolidatedRetailSalesExtendedTooltip</name>

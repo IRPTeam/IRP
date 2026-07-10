@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R5010B_ReconciliationStatement</name>
  <synonym>
-  <key>tr</key>
-  <value>R5010 Cari hesap mutabakat</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R5010 Взаиморасчеты по контрагентам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R5010 Reconciliation statement</value>
+  <value>51371C91-EFD2-A5DF-FE1D-DB5EB3316C5D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="04c966e9-a2fa-4705-90c4-66d7dfc7f22d">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>1D8A77EC-B95C-22F1-1FDC-CD24DFE0AB6B</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="934bcf53-4129-48c0-aa45-856409dc5702">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>5693D3C6-EC0C-79D0-0866-6BC106279E65</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="8ff785cd-2537-4b5a-a983-1f93442c1bfe">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>82215100-3B5B-0259-9259-9B4F25561A81</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="f18f5703-786f-4013-9628-7e61cc7cd5d8">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>CE80E3DC-65E6-296E-E005-507114864C40</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="b83a2039-1410-4797-becc-b82dbaefb3e8">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>DE821A16-8849-BFAC-C580-08764D337F91</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="83568593-4b55-49a4-889c-cef1db39bc55">
   <name>LegalNameContract</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesap kontratı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Договор контрагента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name contract</value>
+   <value>B767C65D-0ACF-EA9F-F03A-AA8FAFBCE29B</value>
   </synonym>
   <type>
    <types>CatalogRef.LegalNameContracts</types>

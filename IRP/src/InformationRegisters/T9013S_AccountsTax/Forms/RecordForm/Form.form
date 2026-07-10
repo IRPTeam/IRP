@@ -446,16 +446,8 @@
  <attributes>
   <name>RecordType</name>
   <title>
-   <key>tr</key>
-   <value>Kayıt tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип записи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Record type</value>
+   <value>A57F624E-9B87-E08F-F916-618C9139F92E</value>
   </title>
   <id>2</id>
   <valueType>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>Extensions</name>
  <synonym>
-  <key>tr</key>
-  <value>Uzantılar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Расширения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Extensions</value>
+  <value>E38FA1D7-36F7-36EF-F5B5-5849B2233622</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Extensions.StandardAttribute.Description</inputByString>
@@ -104,16 +96,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Uzantı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Расширение</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Extension</value>
+  <value>D499EE0D-2F83-32F1-1F81-1E428509A77E</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -131,16 +115,8 @@
  <attributes uuid="2978f167-c7d0-48a6-9ceb-937d3dbfd055">
   <name>FileData</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya verisi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Данные о файле</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>File data</value>
+   <value>2EE8A48B-69A5-93F7-7031-1AAD93AFE0FC</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -154,16 +130,8 @@
  <forms uuid="efce5045-b2ce-4278-adfa-bc2ef3eae50c">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>4C5F17FF-E143-BADC-C7FC-CD608437DCCA</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -171,16 +139,8 @@
  <forms uuid="ccfb64e5-8563-46c0-ac7e-7bb15ca6795c">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>048EA3B5-E734-FEDF-FE27-7EDCB9FDCA25</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -188,16 +148,8 @@
  <commands uuid="3da73594-4ca9-43a3-bb6b-920a6567ac9d">
   <name>SetupExtentionsInCurrentArea</name>
   <synonym>
-   <key>tr</key>
-   <value>Mevcut alanda kurulum uzantısı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Установить расширение в текущую рабочую область</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Setup extension in current area</value>
+   <value>5B894933-C0B7-81FE-E782-2905652F7552</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>

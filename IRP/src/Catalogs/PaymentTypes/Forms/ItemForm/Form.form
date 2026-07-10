@@ -16,16 +16,8 @@
    </dataPath>
    <titleLocation>None</titleLocation>
    <toolTip>
-    <key>tr</key>
-    <value>HTML ön izleme için simge</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Картинка для превью в HTML поле</value>
-   </toolTip>
-   <toolTip>
     <key>en</key>
-    <value>Icon for HTML preview</value>
+    <value>8F2E4903-9E85-86B0-0096-64FEE477160C</value>
    </toolTip>
    <extendedTooltip>
     <name>IconExtendedTooltip</name>
@@ -56,16 +48,8 @@
     <height>3</height>
     <hyperlink>true</hyperlink>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Eklemek için tıklayın</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
-     <key>ru</key>
-     <value>Нажмите, чтобы добавить картинку</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
      <key>en</key>
-     <value>Click to add</value>
+     <value>CC7FEF7D-83B7-BE11-1D5D-D4E6F7F5A81F</value>
     </nonselectedPictureText>
     <border xsi:type="core:BorderDef">
      <style>Single</style>
@@ -275,16 +259,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sağ)</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группировка по правому краю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group right</value>
+    <value>ED6DA5E8-034B-802C-CB3D-D006CA6CA6E0</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -311,16 +287,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup 1</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа 1</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group1</value>
+   <value>0FF81A9C-83D0-886F-F5D1-1224E097476C</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -383,16 +351,8 @@
  <attributes>
   <name>Icon</name>
   <title>
-   <key>tr</key>
-   <value>Simge</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Иконка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Icon</value>
+   <value>011526B4-F983-8AE0-051C-CC566AECAC2B</value>
   </title>
   <id>2</id>
   <valueType>

@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R6070_OtherPeriodsExpenses</name>
  <synonym>
-  <key>tr</key>
-  <value>R6070 Diğer dönemlere ait giderler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R6070 Расходы других периодов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R6070 Other periods expenses</value>
+  <value>A1D63969-B085-5642-239D-D03B5FEDB8B5</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R6070_OtherPeriodsExpenses.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="e8f587bc-3d1e-43d6-abcf-bf860f56454a">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>FA7711BE-F856-DE36-62E0-07E61F317BF8</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

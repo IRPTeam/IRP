@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R6020A_InventoryCost</name>
  <synonym>
-  <key>tr</key>
-  <value>R6020A Stok maliyeti</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R6020A Стоимость товаров организации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R6020A Inventory cost</value>
+  <value>50536FE1-44BF-7B12-2086-6C9D9D5C83E0</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R6020A_InventoryCost.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="76b6f605-1d16-4f13-b8c8-adf02d9a58d6">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>1E4BAB59-E10F-69B0-06C1-16D2A25ADFAF</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

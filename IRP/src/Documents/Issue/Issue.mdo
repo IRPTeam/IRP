@@ -9,16 +9,8 @@
  </producedTypes>
  <name>Issue</name>
  <synonym>
-  <key>tr</key>
-  <value>Talep</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Выпуск</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Issue</value>
+  <value>C3CD1B74-8584-2700-05F8-84EC77A1BFA4</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.Issue.StandardAttribute.Number</inputByString>
@@ -59,28 +51,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Talep</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Выпуск</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Issue</value>
+  <value>A14A07D3-719A-DCFF-FAB5-5CE6A4C54590</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Talepler</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Проблемы</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Issues</value>
+  <value>56FD89A9-B53D-8B8C-CC8D-D2E745BD2DE1</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -96,16 +72,8 @@
  <attributes uuid="e7b07be4-1a83-4983-9cf3-c14f385f9e86">
   <name>Country</name>
   <synonym>
-   <key>tr</key>
-   <value>Ülke</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Страна</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Country</value>
+   <value>C7CACF14-4CFB-48AE-E7EF-F4BCE3C2CE9A</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -119,16 +87,8 @@
  <attributes uuid="47b0f03b-88eb-442f-b984-f6136613d551">
   <name>City</name>
   <synonym>
-   <key>tr</key>
-   <value>İl</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Город</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>City</value>
+   <value>D7E3EE92-E11E-E4AD-D369-9E9F703A106D</value>
   </synonym>
   <type>
    <types>CatalogRef.Cities</types>
@@ -146,16 +106,8 @@
  <attributes uuid="b858048d-769f-48bd-a9dc-a2ba073492bc">
   <name>Location</name>
   <synonym>
-   <key>tr</key>
-   <value>Lokasyon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Местоположение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Location</value>
+   <value>A8FC4C3E-E136-6DC3-3C0A-A35A3E263C3C</value>
   </synonym>
   <type>
    <types>CatalogRef.ObjectLocations</types>
@@ -173,16 +125,8 @@
  <attributes uuid="5628952d-0ab4-4da8-98cc-c683bbe3205b">
   <name>IssueType</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип проблемы       </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Issue type</value>
+   <value>0763A01A-271E-70CC-C663-36B349B26BF0</value>
   </synonym>
   <type>
    <types>CatalogRef.IssueTypes</types>
@@ -196,16 +140,8 @@
  <attributes uuid="1f2236c4-cd5d-470b-a87e-29db5431f6df">
   <name>IssueDetails</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep detayları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Детали проблемы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Issue details</value>
+   <value>20D36604-CCF7-B73F-F796-6E2D55973167</value>
   </synonym>
   <type>
    <types>String</types>
@@ -220,16 +156,8 @@
  <attributes uuid="b5784ed3-752c-49bf-8bfa-d95958e1505f">
   <name>Latitude</name>
   <synonym>
-   <key>tr</key>
-   <value>Enlem</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Широта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Latitude</value>
+   <value>ABC28C48-1C2F-5B99-9A92-2E779CB5D502</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -245,16 +173,8 @@
  <attributes uuid="9c56c75d-9a9e-4547-bfd8-ae52cbe99cf8">
   <name>Longitude</name>
   <synonym>
-   <key>tr</key>
-   <value>Boylam</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Долгота</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Longitude</value>
+   <value>AE0B6568-A360-D195-52D6-652C81D38D36</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -270,16 +190,8 @@
  <attributes uuid="f2698619-8dc5-40cf-8add-d8f1df8a55bb">
   <name>DueDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Срок исполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Due date</value>
+   <value>26EABD54-C2DD-FFE1-1B7E-E99E8FA8AFCB</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -294,16 +206,8 @@
  <attributes uuid="ef24b95a-68af-411f-b6b1-eb69e3a43fb7">
   <name>Project</name>
   <synonym>
-   <key>tr</key>
-   <value>Proje</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Проект</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Project</value>
+   <value>1D545232-D7BE-24DD-DB13-320C96EA7F25</value>
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>
@@ -317,16 +221,8 @@
  <forms uuid="fe05c159-bafa-4ca5-886c-0577fec5da68">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>9B3E6257-073D-5692-299F-F84E099D4EF2</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -334,16 +230,8 @@
  <forms uuid="99fff842-911a-4190-85ef-84542bfed5e0">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>725B0FC2-D774-524B-B8BE-E2FF47FB7F51</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -351,16 +239,8 @@
  <forms uuid="444d2754-2b38-481a-8b1b-82b78340d88f">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>B91C4EE8-31F1-273A-A7B1-18EE3546FD8F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -372,30 +252,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>116C1556-8E77-9C46-664C-CDE90ACBCB81</value>
   </synonym>
   <attributes uuid="07fe8645-46e8-4ae4-a864-04f5ca330f09">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>12EC0B5F-433B-1562-2DCC-C0579C0BA701</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -407,16 +271,8 @@
   <attributes uuid="e7f7c93e-531e-429b-9bda-62771f6e5ad7">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>9093B769-8D63-94C5-5872-27EF6545D6F1</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -433,16 +289,8 @@
  <commands uuid="5f1da082-8971-4d6b-9b6c-804c929a000d">
   <name>CreateIssues</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep oluştur</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Описать проблемы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Create Issues</value>
+   <value>A20BD4EF-9CFB-FB5C-C05C-CE69988C7479</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>

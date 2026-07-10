@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R2012B_SalesOrdersInvoiceClosing</name>
  <synonym>
-  <key>tr</key>
-  <value>R2012 Satış sipariş fatura kapama</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2012 Закрытие заказов реализациями товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2012 Invoice closing of sales orders</value>
+  <value>31C535D7-F0E7-252F-FF76-69BE5F76F372_</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="e2262525-06cd-47d0-9f5b-1515f07b4ad6">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>990CC920-1E80-E046-6DF5-59A646F1A53F</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <resources uuid="fe0f1da0-e2b6-420b-a210-364b51cdd6c8">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>58E32BBD-0186-6050-0143-3F7F2BC5EFB7</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -69,16 +45,8 @@
  <resources uuid="a61d60b2-2ab2-4de5-9876-ab7d75c5ecf4">
   <name>NetAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Net tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма без налогов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Net amount</value>
+   <value>7B56AF22-C702-D10B-B899-99CD2A6035CF</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -90,16 +58,8 @@
  <dimensions uuid="8faf624e-e15c-4ae1-b3e3-9c2f583d1957">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>C8562B47-D0DC-1F3F-F9C7-7A1EA5CA3ED7</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -112,16 +72,8 @@
  <dimensions uuid="697f167a-a416-4265-90d2-5bf4715a4705">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>55FB180D-BF03-566F-FBCF-FDDA89504548</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -134,16 +86,8 @@
  <dimensions uuid="cce2ddda-87bf-442f-9184-949c805ce857">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>5931F4D5-17B2-21DA-A70E-E7EE8BE04F7E</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesReturnOrder</types>
@@ -157,16 +101,8 @@
  <dimensions uuid="b122c07e-6985-467e-a06a-2fb41cafa1ae">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>5218768B-A684-A73E-E121-105EAABAFA91</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -179,16 +115,8 @@
  <dimensions uuid="1613a468-876e-4b35-8740-297e9e98c45b">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>B131D194-44DA-603A-A673-3A2892D0EE75</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -201,16 +129,8 @@
  <dimensions uuid="7df6dd75-3a90-4618-9e4f-b536c875f962">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row key</value>
+   <value>A623838D-C9FE-A773-3BFB-B0FE864EA9CF</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>

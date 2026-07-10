@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e78c5f17-4211-40e5-9dd7-258bf6140324">
  <name>Branch</name>
  <synonym>
-  <key>tr</key>
-  <value>Şube</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Структурное подразделение</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Branch</value>
+  <value>687366A4-4442-B1F8-806D-DFC14121C118</value>
  </synonym>
  <type>
   <types>CatalogRef.BusinessUnits</types>

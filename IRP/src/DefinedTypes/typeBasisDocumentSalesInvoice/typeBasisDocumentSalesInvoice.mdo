@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeBasisDocumentSalesInvoice</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip satış fatura kaynak evrakı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип основание документа реализации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type basis document sales invoice</value>
+  <value>22410DEB-B224-51C9-94FF-F0B31503005A</value>
  </synonym>
  <type>
   <types>DocumentRef.SalesOrder</types>

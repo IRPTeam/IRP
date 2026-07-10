@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseShipmentConfirmationAndGoodsReceipts</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Sevk/alım irsaliyeler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать приходные/расходные накладные на товары</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use shipment confirmation and goods receipts</value>
+  <value>EF5556F6-DB7F-19C1-1F59-9F1F4E12374B________</value>
  </synonym>
  <type>
   <types>Boolean</types>

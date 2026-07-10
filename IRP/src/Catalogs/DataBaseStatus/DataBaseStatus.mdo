@@ -9,16 +9,8 @@
  </producedTypes>
  <name>DataBaseStatus</name>
  <synonym>
-  <key>tr</key>
-  <value>Veritabanı statüsü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Статусы базы данных</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Data base status</value>
+  <value>AD751120-80FE-3D7C-C8FE-E69F23A8E536</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -85,16 +77,8 @@
   <dataHistory>Use</dataHistory>
   <name>Description</name>
   <synonym>
-   <key>tr</key>
-   <value>Bağlantı satırı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Строка подключения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Connection string</value>
+   <value>F0997DF0-0AF0-9338-8BB6-6EE06F33A936</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
@@ -114,16 +98,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Veritabanı statüsü</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Статус базы данных</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Data base statu</value>
+  <value>4FCFE3CA-A747-CD9C-C230-09E599A316FF</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -140,16 +116,8 @@
  <attributes uuid="64bcd2ce-0942-4a11-9d24-9edc503dc945">
   <name>isProduction</name>
   <synonym>
-   <key>tr</key>
-   <value>PROD sunucu </value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Рабочий сервер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>is Product server</value>
+   <value>6B6316B2-8A32-3577-7D43-37D1424A0458</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -163,16 +131,8 @@
  <attributes uuid="7c354584-d9d3-4574-bc69-c5925390822d">
   <name>SelectedStyle</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçilen stil</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Выбранный стиль</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Selected style</value>
+   <value>62D9EE87-9E41-BC7A-A518-81D37855A947</value>
   </synonym>
   <type>
    <types>String</types>
@@ -183,9 +143,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -196,30 +154,14 @@
   </producedTypes>
   <name>ConnectionSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Bağlantı ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Строка соединения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Connection settings</value>
+   <value>13B8B924-44DB-D5F9-92EE-E0217E243178</value>
   </synonym>
   <attributes uuid="3ede5c23-dbbe-45da-8f17-25a55dee08b8">
    <name>Computer</name>
    <synonym>
-    <key>tr</key>
-    <value>Bilgisayar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Компьютер</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Computer</value>
+    <value>72E9317E-831A-E47F-F6C8-87DAA66741D3</value>
    </synonym>
    <type>
     <types>String</types>
@@ -235,16 +177,8 @@
   <attributes uuid="85b2f438-b8d5-418f-bca9-c4a990821c6b">
    <name>ConnectionString</name>
    <synonym>
-    <key>tr</key>
-    <value>Bağlantı satırı</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Строка подключения</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Connection string</value>
+    <value>A6FF03A0-6E7E-21FB-BBEB-B3744449486B</value>
    </synonym>
    <type>
     <types>String</types>
@@ -261,16 +195,8 @@
  <forms uuid="e2a4e669-cf71-4f0a-89ee-451ce69a6b0c">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>C95A5A0D-45E2-CB33-33F4-40C2347CA727</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -278,16 +204,8 @@
  <forms uuid="fedfc9ba-0ed2-466b-b759-7402d1928674">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>EA1D863B-64A8-C20C-C476-6EDA12C53981</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -295,16 +213,8 @@
  <forms uuid="0cebef85-3698-4aac-bc6a-21acac59219e">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>B23C15D2-78B8-651E-E857-7DE39E5EA791</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

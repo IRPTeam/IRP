@@ -23,16 +23,8 @@
 			<field>BalancedAccount</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Hesap (dengeli)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Корр. счет</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Account (balanced)</v8:content>
+					<v8:content>A3932941-A232-AA5B-BF11-1A9C50407E51</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -49,16 +41,8 @@
 			<field>ExtDimension1</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek boyut.1</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто 1</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra dim.1</v8:content>
+					<v8:content>B235C95D-25A0-7A6B-BB17-7121FBE54D6D</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -70,16 +54,8 @@
 			<field>ExtDimension2</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ekstra ölç.2</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто 2</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra dim.2</v8:content>
+					<v8:content>CF9BAE1D-0AA5-5635-5EF6-62205785346D</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -91,16 +67,8 @@
 			<field>ExtDimension3</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ekstra boyut.3</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто 3</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra dim.3</v8:content>
+					<v8:content>77163789-514F-4289-922D-D7CFD29093E6</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -112,16 +80,8 @@
 			<field>BalancedExtDimension1</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek boyut.1 (dengeli)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Корр. субконто 1</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra dim.1 (balanced)</v8:content>
+					<v8:content>6C17F2FB-971D-E58A-ACD8-88FDBA70BDE1</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -133,16 +93,8 @@
 			<field>BalancedExtDimension2</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ekstra ölç.2 (dengeli)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Корр. субконто 2</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra dim.2 (balanced)</v8:content>
+					<v8:content>10E5826D-7A2D-ECC6-6EFD-D6A1247EDF69</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -154,16 +106,8 @@
 			<field>BalancedExtDimension3</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ekstra boyut3 (dengeli)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Корр. субконто 3</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra dim3 (balanced)</v8:content>
+					<v8:content>4B0C9819-7A1B-C592-26DE-EFAF68012A5B</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -175,16 +119,8 @@
 			<field>AmountTurnoverDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Cr'den (Tut.)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Из Кт (Сум.)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>From Cr (Amt.)</v8:content>
+					<v8:content>5AF73A23-4DFB-0D45-5A2A-A522397231C8</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -192,16 +128,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>BD2FD71B-DAE4-E975-539E-EE0B5A531A99</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -216,16 +144,8 @@
 			<field>AmountTurnoverCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Borç Tarafına (Tutar)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>В Дт (Сум.)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>To Dr (Amt.)</v8:content>
+					<v8:content>B02E063A-78C2-0B32-2A2D-D36850354E71</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -233,16 +153,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>BD2FD71B-DAE4-E975-539E-EE0B5A531A99</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -257,16 +169,8 @@
 			<field>QuantityTurnoverDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Cr'den (Mik.)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Из Кт (Колво.)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>From Cr (Qty.)</v8:content>
+					<v8:content>BC96FD2F-B54B-BEB5-5B48-8DFEE989A8FA</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -274,16 +178,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>BD2FD71B-DAE4-E975-539E-EE0B5A531A99</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -298,16 +194,8 @@
 			<field>QuantityTurnoverCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dr'ye (Mik.)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>В Дт (Колво.)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>To Dr (Qty.)</v8:content>
+					<v8:content>98438E29-8EFB-11F7-7249-99D726CB8470</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -315,16 +203,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>BD2FD71B-DAE4-E975-539E-EE0B5A531A99</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -339,16 +219,8 @@
 			<field>CurrencyAmountTurnoverDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Cr'den (Döv.)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Из Кт (Вал.)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>From Cr (Curr.)</v8:content>
+					<v8:content>A4DAA3CE-1123-B8E5-5070-0D120F8A19C2</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -356,16 +228,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>BD2FD71B-DAE4-E975-539E-EE0B5A531A99</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -380,16 +244,8 @@
 			<field>CurrencyAmountTurnoverCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dr'ye (Döv.)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>В Дт (Вал.)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>To Dr (Curr.)</v8:content>
+					<v8:content>55AA8F69-52F1-22BF-F156-68D75908910D</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -397,16 +253,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>BD2FD71B-DAE4-E975-539E-EE0B5A531A99</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -459,16 +307,8 @@
 			<dataPath>Indicators</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Göstergeler</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Идентификаторы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indicators</v8:content>
+					<v8:content>7C0ECB7A-7D59-0FF3-30F8-860D261D3C08</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -500,16 +340,8 @@ FROM
 		<expression>"Amt."</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>GöstergesiTut</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Идентификатор Сумма</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Indicator Amt</v8:content>
+				<v8:content>5070305D-C357-7B89-92C4-4AC8DD89018D</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -518,16 +350,8 @@ FROM
 		<expression>"Curr."</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Gösterge Curr</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Идентификатор Вал</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Indicator Curr</v8:content>
+				<v8:content>1D1A28A5-D18D-9789-9064-46C44FC963CE</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -536,16 +360,8 @@ FROM
 		<expression>"Qty."</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Gösterge Mik.</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Идентификатор Колво</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Indicator Qty</v8:content>
+				<v8:content>69507906-014B-9279-9BC3-3B0C6F378B30</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -589,16 +405,8 @@ FROM
 		<name>BeginPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Başlangıç tarihi</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin period</v8:content>
+				<v8:content>F826D545-11FD-6008-8B42-2C93550214A3</v8:content>
 			</v8:item>
 		</title>
 		<value xsi:nil="true"/>
@@ -610,16 +418,8 @@ FROM
 		<name>EndPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Son tarih</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Конец периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End period</v8:content>
+				<v8:content>357975E9-AC50-372B-BA24-4B4E50A3CDF8</v8:content>
 			</v8:item>
 		</title>
 		<value xsi:nil="true"/>
@@ -631,16 +431,8 @@ FROM
 		<name>Period</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>D251A20E-4751-0151-1DF0-042C1E711E20</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -657,16 +449,8 @@ FROM
 		<dcsset:name>AccountAnalisys</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Hesap analizi</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Анализ счета</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Account analysis</v8:content>
+				<v8:content>5ACD5351-D259-4F14-4F47-77F74B44E01E</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">

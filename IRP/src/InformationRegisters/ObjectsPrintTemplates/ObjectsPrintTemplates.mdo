@@ -11,16 +11,8 @@
  </producedTypes>
  <name>ObjectsPrintTemplates</name>
  <synonym>
-  <key>tr</key>
-  <value>Obje yazdırma şablonları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Печатные шаблоны объектов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Objects print templates</value>
+  <value>CFCC9F7D-ABF4-1FD2-2EB7-747C84EE7719</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -61,16 +53,8 @@
  <dimensions uuid="e1a33bb5-2a40-4cb6-8ea0-24a1d7136b65">
   <name>Object</name>
   <synonym>
-   <key>tr</key>
-   <value>Obje</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Объект</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Object</value>
+   <value>38578BA4-10F0-A17B-B95F-F47A6B1CE3EA</value>
   </synonym>
   <type>
    <types>CatalogRef.ConfigurationMetadata</types>
@@ -86,16 +70,8 @@
  <dimensions uuid="233e96fb-3a12-44b0-8929-dcf70e747574">
   <name>PrintTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon yazdır</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон печати</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Print template</value>
+   <value>EA8A5FC7-84DE-48AA-AFD3-38FE14687EB7</value>
   </synonym>
   <type>
    <types>CatalogRef.PrintFormTemplates</types>

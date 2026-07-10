@@ -7,47 +7,23 @@
  </producedTypes>
  <name>DepreciationMethods</name>
  <synonym>
-  <key>tr</key>
-  <value>Amortisman yöntemleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Вид амортизации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Depreciation methods</value>
+  <value>011510DE-1FEC-8535-5BC9-990629751CF6</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="953b18d4-ab13-450b-bfd0-3772a793468f">
   <name>StraightLine</name>
   <synonym>
-   <key>tr</key>
-   <value>Doğrusal amortisman</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Линейный способ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Straight line</value>
+   <value>0751C289-F8F0-847E-E65D-D57BF963EE07</value>
   </synonym>
  </enumValues>
  <enumValues uuid="efe77869-0448-4eea-a8eb-afecc651e615">
   <name>DecliningBalance</name>
   <synonym>
-   <key>tr</key>
-   <value>Azalan bakiye</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Способ уменьшаемого остатка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Declining balance</value>
+   <value>40096D66-C5E5-87F2-2374-45CACDB4F025</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

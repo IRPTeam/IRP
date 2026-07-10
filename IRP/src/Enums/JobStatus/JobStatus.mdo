@@ -7,107 +7,51 @@
  </producedTypes>
  <name>JobStatus</name>
  <synonym>
-  <key>tr</key>
-  <value>Görev statüsü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Статус задания</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Job status</value>
+  <value>9BEB757B-EF84-A406-6E6C-CD4BDE6577CD</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="0b47550c-96af-411e-af14-7c491b035d56">
   <name>Completed</name>
   <synonym>
-   <key>tr</key>
-   <value>Tamamlandı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Завершен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Completed</value>
+   <value>9FF867BE-1496-682A-A186-692FACC83EE2</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7741b97c-2c54-433b-a403-b8c22518957d">
   <name>Wait</name>
   <synonym>
-   <key>tr</key>
-   <value>Devam ediyor</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ожидание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Wait</value>
+   <value>2A2BDF1E-FF4C-C2BB-BEB1-10918E3FDE07</value>
   </synonym>
  </enumValues>
  <enumValues uuid="ccf5e52d-7fb5-41c2-b9b7-329e82ad62d2">
   <name>Failed</name>
   <synonym>
-   <key>tr</key>
-   <value>Başarısız</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Не успешен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Failed</value>
+   <value>B19F111D-C060-4C95-5AF3-3656645FF995</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b0d590b0-d9a9-40a0-a697-e3533008ab31">
   <name>Active</name>
   <synonym>
-   <key>tr</key>
-   <value>Aktif</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Активный</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Active</value>
+   <value>662B0047-6648-C427-7A3E-ED0FAA92C732</value>
   </synonym>
  </enumValues>
  <enumValues uuid="bd23f04d-3bde-4117-ab5a-23c96316803c">
   <name>Canceled</name>
   <synonym>
-   <key>tr</key>
-   <value>İptal edildi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отменен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Canceled</value>
+   <value>298767E9-7851-ED7E-E994-4911A235F824</value>
   </synonym>
  </enumValues>
  <enumValues uuid="d8150dd1-afc8-4975-9545-e4bc74bc52b9">
   <name>Pause</name>
   <synonym>
-   <key>tr</key>
-   <value>Duraklat</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Пауза</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Pause</value>
+   <value>38B45EA8-2E2C-97F5-53FC-CA7BE6E993D0</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f453ee9a-924f-42ba-837e-742d20cd168a">
  <name>AccumulationRegisters_R4036B_IncomingStocksRequested</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R4036B İstenenGelenStoklar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R4036B ЗапрошенныеНаСкладТовары</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R4036B IncomingStocksRequested</value>
+  <value>4FF56783-A3A8-F1DA-A76D-DF85CE73038F________________</value>
  </synonym>
 </mdclass:Role>

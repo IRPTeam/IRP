@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>18BE9976-442C-1823-32EC-CA268D1E0084</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>BEAEEE25-D04B-8A5C-C19E-E4E22CBA8512</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -146,16 +130,8 @@
    <name>Login</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Login</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Логин</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Login</value>
+    <value>D8C4ABF4-CB3C-9269-992A-A5407B27A78A</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -198,16 +174,8 @@
    <name>Partner</name>
    <id>22</id>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Партнер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Partner</value>
+    <value>D7238538-C23B-1BC4-4B84-46926BA02590</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -493,16 +461,8 @@ FROM
  <formCommands>
   <name>Settings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings</value>
+   <value>1ED0A6A5-A2B9-7778-8036-6B7409DBF64E</value>
   </title>
   <id>1</id>
   <use>

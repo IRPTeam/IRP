@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R1001_Purchases</name>
  <synonym>
-  <key>tr</key>
-  <value>R1001 Alımlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1001 Закупки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1001 Purchases</value>
+  <value>AE453049-04C7-7339-9527-7F8B3E07D2CE</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R1001_Purchases.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="79c4c6a1-fda8-430a-9f79-cf32c01b8110">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>397E88B2-7A24-3B91-19DD-D606B9A0D57A</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

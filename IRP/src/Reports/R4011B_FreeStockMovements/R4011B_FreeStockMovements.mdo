@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R4011B_FreeStockMovements</name>
  <synonym>
-  <key>tr</key>
-  <value>R4011B Serbest stok hareketleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4011B Движения свободных остатков</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4011B Free stock movements</value>
+  <value>61E957EE-28AF-E505-589F-F243C326DAD4</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R4011B_FreeStockMovements.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="a78081bb-f8ca-4277-b548-249ad6beac18">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>57D3CA82-92AF-B711-1FE3-3BB27580EC7F</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

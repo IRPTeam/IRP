@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3b8aeb3c-c48c-4c20-8165-1b64e74591ab">
  <name>Report_D0010_ItemsInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>D0010 Malzeme bilgisi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет D0010_ИнформацияОТоварах</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report D0010_ItemsInfo</value>
+  <value>895B5971-9FCC-DA83-39CC-C703CBE60FBD</value>
  </synonym>
 </mdclass:Role>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ef6c559a-8feb-4eb7-8b07-39dadc07fd75">
  <name>AccumulationRegisters_R7010T_DetailingSupplies</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R7010T DetaylandırmaMalzemeleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R7010T ДетализацияМатериалов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R7010T DetailingSupplies</value>
+  <value>360510F7-BB42-C9CC-CCFF-F8D7BE31EF27__________</value>
  </synonym>
 </mdclass:Role>

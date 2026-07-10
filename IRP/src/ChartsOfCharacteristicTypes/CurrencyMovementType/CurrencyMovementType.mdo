@@ -10,16 +10,8 @@
  </producedTypes>
  <name>CurrencyMovementType</name>
  <synonym>
-  <key>tr</key>
-  <value>Çoklu döviz kırılım tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Виды мультивалютной аналитики</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Multi currency movement types</value>
+  <value>55F0205C-719F-389E-E9DE-E5D9DF24EFD9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -27,16 +19,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Çoklu döviz kırılım tipi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Вид мультивалютной аналитики</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Multi currency movement type</value>
+  <value>18F9A067-A393-9EBC-C1BE-EBDF95CC706D</value>
  </objectPresentation>
  <type>
   <types>EnumRef.CurrencyType</types>
@@ -73,16 +57,8 @@
  <attributes uuid="2453fec5-f677-41ba-8d7d-9bdf098b77cb">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>9DEECACB-E97D-236B-BB7D-DE4D6CDD74E2</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -96,16 +72,8 @@
  <attributes uuid="e188cb7e-0517-4894-a057-b43e40e73af5">
   <name>Source</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Источник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source</value>
+   <value>BC8B02B8-CDBF-B2A6-6855-53CAA9B771DA</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -119,16 +87,8 @@
  <attributes uuid="81a3d6c4-9880-40fa-8a43-7e60020911ca">
   <name>Type</name>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Type</value>
+   <value>B7F5E8C3-4F1C-065F-F1A4-488CC3E4DB2C</value>
   </synonym>
   <type>
    <types>EnumRef.CurrencyType</types>
@@ -142,16 +102,8 @@
  <attributes uuid="0dafc4d4-3d79-49fc-af68-46b640d671eb">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложенный расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deferred calculation</value>
+   <value>612817FE-0431-8C2D-D8CF-FA596FC26836</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -165,16 +117,8 @@
  <attributes uuid="7f80af2b-4a94-4ebb-9cf1-e6713bc73d2c">
   <name>NotPostIfRateNotSet</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz kuru eksikse kaydetmeyi engele</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Не проводить если курсы не указаны</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Not post if rate not set</value>
+   <value>84584190-F24E-38AD-DB3D-DEADE9DD9222</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -188,16 +132,8 @@
  <attributes uuid="9b184c89-cc6f-463e-9950-1efb0fd90eb1">
   <name>EverydayRates</name>
   <synonym>
-   <key>tr</key>
-   <value>Günlük döviz kurları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ежедневные курсы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Everyday rates</value>
+   <value>CA495E40-397B-2D6C-CA43-38D1A846E8F6</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -211,16 +147,8 @@
  <forms uuid="fc4a2c0c-74f9-47c7-a27a-f6df6c80b215">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>A42271A9-4E65-3C87-7906-6286FEE85DA4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -228,16 +156,8 @@
  <forms uuid="ee5c669a-75d5-43ca-a1ca-3ef35e661ab6">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>EB53E737-170B-AC46-62C4-48BDB721A650</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -245,16 +165,8 @@
  <forms uuid="e3efb700-2e6a-4912-88a2-f2b2f9a1acad">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>536107F9-0685-88F4-41C0-03AAC8D2F83B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

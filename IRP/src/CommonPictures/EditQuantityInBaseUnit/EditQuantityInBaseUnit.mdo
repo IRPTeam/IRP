@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="acfab2e7-24b5-4d2b-bce2-e5df14304ff5">
  <name>EditQuantityInBaseUnit</name>
  <synonym>
-  <key>tr</key>
-  <value>Temel birimde miktarı düzenle</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Изменить количество в осн. ед. изм.</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Edit quantity in base unit</value>
+  <value>EA270FB7-E864-EB0C-CF85-5B50285607BB</value>
  </synonym>
 </mdclass:CommonPicture>

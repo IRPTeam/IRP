@@ -216,16 +216,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Item tipi ve görünümü</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>вид номенклатуры и представление</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>item type and presentation</value>
+      <value>D7172267-4AD5-AAC4-47DA-AF42B136434F</value>
      </title>
      <extendedTooltip>
       <name>GroupItemTypeAndPresentationExtendedTooltip</name>
@@ -543,16 +535,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ek alanlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Реквизиты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Attributes</value>
+    <value>A38F1458-9800-FB6F-F5DA-A89309A9ECD0</value>
    </title>
    <extendedTooltip>
     <name>GroupAttributesItemKeysExtendedTooltip</name>
@@ -896,16 +880,8 @@
       <name>AttributesSetCondition</name>
       <id>60</id>
       <title>
-       <key>tr</key>
-       <value>Koşul belirle</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Установить условие</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Set condition</value>
+       <value>12F59820-D9A3-5074-49D8-8E09118DAE18</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1037,16 +1013,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Mevcut değerleri kopyala</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Скопировать текущие значения</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Copy current values</value>
+       <value>A3F7F23C-B062-4115-50F4-40E8AF4075AE</value>
       </title>
       <extendedTooltip>
        <name>AttributesGroup_CopyCurrentValuesExtendedTooltip</name>
@@ -1184,16 +1152,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ek alanlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Реквизиты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Attributes</value>
+    <value>3F4ECDC4-7045-BAF7-76B0-05FE161F10CD</value>
    </title>
    <extendedTooltip>
     <name>GroupAttributesExtendedTooltip</name>
@@ -1420,16 +1380,8 @@
       <name>PropertiesSetConditionProperty</name>
       <id>65</id>
       <title>
-       <key>tr</key>
-       <value>Koşul belirle</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Установить условие</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Set condition</value>
+       <value>014244F0-B68A-3207-7078-85D21A71D905</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1574,16 +1526,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ek özellikler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Свойства</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Properties</value>
+    <value>6D3B3DCF-E282-7499-9EE2-20B6021231E9</value>
    </title>
    <extendedTooltip>
     <name>GroupPropertiesExtendedTooltip</name>
@@ -2068,16 +2012,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Mevcut değerleri kopyala</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Скопировать текущие значения</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Copy current values</value>
+       <value>1DA69347-6D8F-AD11-1E3A-AA2E1C880658</value>
       </title>
       <extendedTooltip>
        <name>ExtensionAttributesGroup_CopyCurrentValuesExtendedTooltip</name>
@@ -2215,16 +2151,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Uzantı ek alanlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Реквизиты расширения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Extension attributes</value>
+    <value>0780C9D4-9475-9C97-7020-08503B7668C7</value>
    </title>
    <extendedTooltip>
     <name>GroupExtensionAttributesExtendedTooltip</name>
@@ -2248,16 +2176,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>65E8F3BA-14AA-9D0A-A88A-A3025E4A3E6A</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -2320,16 +2240,8 @@
    <columns>
     <name>ConditionData</name>
     <title>
-     <key>tr</key>
-     <value>Koşul verisi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Данные условия</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Condition data</value>
+     <value>F328876F-037D-F515-5754-43CA69C90801</value>
     </title>
     <id>9</id>
     <valueType>
@@ -2346,16 +2258,8 @@
    <columns>
     <name>Unprocessed</name>
     <title>
-     <key>tr</key>
-     <value>İşlenmemiş</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Необработанный</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Unprocessed</value>
+     <value>A6078504-6E9C-A17B-BFD7-73AAE167C94D</value>
     </title>
     <id>11</id>
     <valueType>
@@ -2376,16 +2280,8 @@
    <columns>
     <name>ConditionData</name>
     <title>
-     <key>tr</key>
-     <value>Koşul verisi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Данные условия</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Condition data</value>
+     <value>DF91992D-EC35-70AC-C13B-BF8C2AF81169</value>
     </title>
     <id>14</id>
     <valueType>
@@ -2402,16 +2298,8 @@
    <columns>
     <name>Unprocessed</name>
     <title>
-     <key>tr</key>
-     <value>İşlenmemiş</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Необработанный</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Unprocessed</value>
+     <value>74F160F4-6BAD-624A-A373-34491BEC63CE</value>
     </title>
     <id>15</id>
     <valueType>
@@ -2432,16 +2320,8 @@
    <columns>
     <name>ConditionData</name>
     <title>
-     <key>tr</key>
-     <value>Koşul verisi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Данные условия</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Condition data</value>
+     <value>EE77C537-3436-A36E-E35B-BB2FD5D95355</value>
     </title>
     <id>12</id>
     <valueType>
@@ -2458,16 +2338,8 @@
    <columns>
     <name>Unprocessed</name>
     <title>
-     <key>tr</key>
-     <value>İşlenmemiş</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Необработанный</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Unprocessed</value>
+     <value>B60E5415-CDE4-BA26-6690-0551FE00DA02</value>
     </title>
     <id>13</id>
     <valueType>
@@ -2485,16 +2357,8 @@
  <attributes>
   <name>AttributesTree</name>
   <title>
-   <key>tr</key>
-   <value>Ek alan ağacı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дерево реквизитов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attributes tree</value>
+   <value>29451CA6-2B8D-BCCA-A2F3-3F8639E87D07</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2509,16 +2373,8 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Картинка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picture</value>
+    <value>BEB96885-97EF-D8B9-9E08-86C30862CEE4</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2537,16 +2393,8 @@
   <columns>
    <name>Attribute</name>
    <title>
-    <key>tr</key>
-    <value>Alan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Реквизит</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Attribute</value>
+    <value>CE88EFCB-7963-7521-1133-38D8AC383DF3</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2562,16 +2410,8 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Представление</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>961BBAC5-24C1-AFC9-9CF1-10B3B3AECD5C</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2588,16 +2428,8 @@
   <columns>
    <name>ItemType</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item type</value>
+    <value>34C0E9D2-FB04-9DCE-E874-4CA25C923BF1</value>
    </title>
    <id>8</id>
    <valueType>
@@ -2614,16 +2446,8 @@
  <attributes>
   <name>CopiedAttribute</name>
   <title>
-   <key>tr</key>
-   <value>Kopyalanmış alan</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопированный реквизит</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copied attribute</value>
+   <value>CDB6183E-AE81-1B6C-CEC8-8A55AD8ACA42</value>
   </title>
   <id>10</id>
   <valueType>
@@ -2639,16 +2463,8 @@
  <formCommands>
   <name>SetConditionAttribute</name>
   <title>
-   <key>tr</key>
-   <value>Koşul özelliği ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить условие применения реквизита</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set condition attribute</value>
+   <value>F6FEC557-5973-028F-FA41-1C4A36FCE3E5</value>
   </title>
   <id>1</id>
   <use>
@@ -2664,16 +2480,8 @@
  <formCommands>
   <name>SetConditionProperty</name>
   <title>
-   <key>tr</key>
-   <value>Koşul ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить условие применения свойства</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set condition property</value>
+   <value>4A86B99A-457D-4930-0C36-66C1D3AD0D69</value>
   </title>
   <id>2</id>
   <use>
@@ -2689,16 +2497,8 @@
  <formCommands>
   <name>EditItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Редактировать вид номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit item type</value>
+   <value>37067F74-5027-2CC9-93B9-9BDAE3885E1C</value>
   </title>
   <id>3</id>
   <use>
@@ -2714,16 +2514,8 @@
  <formCommands>
   <name>DeleteItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Удалить вид номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Delete item type</value>
+   <value>C9E03052-9345-D595-5392-27D659282327</value>
   </title>
   <id>5</id>
   <use>
@@ -2743,16 +2535,8 @@
  <formCommands>
   <name>FillExtensionAttributesList</name>
   <title>
-   <key>tr</key>
-   <value>Ek alanlar listesi doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить список реквизитов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill attributes list</value>
+   <value>6075AC09-89B8-E9E9-9D27-70CB6623F9C4</value>
   </title>
   <id>7</id>
   <use>
@@ -2768,16 +2552,8 @@
  <formCommands>
   <name>SetConditionExtensionAttribute</name>
   <title>
-   <key>tr</key>
-   <value>Koşul belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить условие</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set condition</value>
+   <value>2CC450B7-7208-3295-5696-6DD9FCB7DD62</value>
   </title>
   <id>8</id>
   <use>
@@ -2793,16 +2569,8 @@
  <formCommands>
   <name>CopyCondition</name>
   <title>
-   <key>tr</key>
-   <value>"Şart" kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопировать "Условие"</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy "Condition"</value>
+   <value>2DF78A91-2E2B-1871-148F-F71B505A0970</value>
   </title>
   <id>9</id>
   <use>
@@ -2822,16 +2590,8 @@
  <formCommands>
   <name>CopyAttributeShow</name>
   <title>
-   <key>tr</key>
-   <value>"Göster" özelliğini kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопировать реквизит "Показывать"</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy attribute "Show"</value>
+   <value>4821CE71-5DE3-7143-3450-08D3F9DDA7FC</value>
   </title>
   <id>10</id>
   <use>
@@ -2851,16 +2611,8 @@
  <formCommands>
   <name>CopyAttributeShowInHTML</name>
   <title>
-   <key>tr</key>
-   <value>"HTML'de Göster" özelliği kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопировать реквизит "Показывать в HTML"</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy attribute "Show in HTML"</value>
+   <value>31CFFC76-8531-62AB-B45A-A8420D668278</value>
   </title>
   <id>11</id>
   <use>
@@ -2880,16 +2632,8 @@
  <formCommands>
   <name>CopyAttributeRequired</name>
   <title>
-   <key>tr</key>
-   <value>"Gerekli" özelliğini kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопировать реквизит "Обязательный к заполнению"</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy attribute "Required"</value>
+   <value>C2C7FB50-66D3-CE97-7DCD-DA5406407690</value>
   </title>
   <id>12</id>
   <use>
@@ -2909,16 +2653,8 @@
  <formCommands>
   <name>CopyInterfaceGroup</name>
   <title>
-   <key>tr</key>
-   <value>"Arayüz grubu" kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопировать "Интерфейсная группа"</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy "Interface group"</value>
+   <value>703B8CCB-430F-CBC7-7703-3A6F4B7F23E0</value>
   </title>
   <id>13</id>
   <use>

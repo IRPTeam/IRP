@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeBatchDocuments</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip parti evrakları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип партионные документы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type batch documents</value>
+  <value>14CF0B43-BBCA-5EDA-A59A-A0B734141402</value>
  </synonym>
  <type>
   <types>DocumentRef.PurchaseInvoice</types>

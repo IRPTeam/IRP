@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5cbcf743-473a-4c4a-a71e-3d34d3a1bc0d">
  <name>Description_hash</name>
  <synonym>
-  <key>tr</key>
-  <value>Hash</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>HASH</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>HASH</value>
+  <value>8A58074D-03C8-9AC3-3CC0-0760DC124B3A</value>
  </synonym>
  <type>
   <types>DefinedType.typeDescription</types>

@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="11786f11-fcdb-4efa-98ce-42ae6d44ead9">
  <name>UseInventory</name>
  <synonym>
-  <key>tr</key>
-  <value>Envanteri kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать складские операции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use inventory</value>
+  <value>B12D9140-C952-D10C-CC41-1FE3C37784E8</value>
  </synonym>
  <location>Constant.UseInventory</location>
  <privilegedGetMode>true</privilegedGetMode>

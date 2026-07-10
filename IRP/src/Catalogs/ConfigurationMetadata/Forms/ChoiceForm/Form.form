@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>A78E659A-AE71-95A3-363C-CDC4F8A363B8</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -329,16 +321,8 @@
  <formCommands>
   <name>RefillMetadata</name>
   <title>
-   <key>tr</key>
-   <value>Üstveri yeniden doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Перезаполнить метаданные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Refill metadata</value>
+   <value>3F6B42F7-F635-523D-D5FB-BF7356DF6CD2</value>
   </title>
   <id>1</id>
   <use>

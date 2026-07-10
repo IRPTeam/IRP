@@ -241,16 +241,8 @@
  <attributes>
   <name>IntegrationTable</name>
   <title>
-   <key>tr</key>
-   <value>Entegrasyon tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица интеграций</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Integration table</value>
+   <value>9B50E6B4-96FE-6F72-2610-0F2C72825B61</value>
   </title>
   <id>1</id>
   <valueType>
@@ -265,16 +257,8 @@
   <columns>
    <name>IntegrationSettings</name>
    <title>
-    <key>tr</key>
-    <value>Entegrasyon ayarları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройка интеграции</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Integration settings</value>
+    <value>980267E3-D148-AC1F-F2FE-EE099B02D82F</value>
    </title>
    <id>2</id>
    <valueType>
@@ -291,16 +275,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>3D273B12-6B59-12EA-AF7F-F4C8CCF5D302</value>
   </title>
   <id>1</id>
   <use>
@@ -316,16 +292,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>C88FF20C-9C32-1B5E-E3C9-989E5BF56235</value>
   </title>
   <id>2</id>
   <use>

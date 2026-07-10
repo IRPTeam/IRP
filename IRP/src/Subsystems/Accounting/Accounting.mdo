@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="81330a23-58ad-40db-86fe-5a09bcc96e5f">
  <name>Accounting</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Бухгалтерия</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Accounting</value>
+  <value>A9BC3E91-95A4-52EC-C3FD-DD38EA05079E</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

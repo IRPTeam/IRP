@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7d87c75f-cc1b-4f3d-bc89-6ccf1d54f465">
  <name>Integration</name>
  <synonym>
-  <key>tr</key>
-  <value>Entegrasyon</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Интеграция</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Integration</value>
+  <value>B9A8248A-315E-DDE6-6DB7-7E76779A287E</value>
  </synonym>
 </mdclass:CommonPicture>

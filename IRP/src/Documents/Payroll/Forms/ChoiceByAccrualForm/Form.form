@@ -343,16 +343,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List</value>
+   <value>55D79054-FB0E-356A-A556-6CFC853E36FF</value>
   </title>
   <id>1</id>
   <valueType>
@@ -458,16 +450,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tutar</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Сумма</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Amount</value>
+       <value>0D3A6279-9AF9-59CB-B1BF-FDC832FD29DA</value>
       </content>
      </localValue>
     </title>
@@ -491,16 +475,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sınır</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Граница</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Boundary</value>
+       <value>D619BDD4-4BFD-D291-1633-31AC8D25B25E</value>
       </content>
      </localValue>
     </title>
@@ -517,16 +493,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Period</value>
+       <value>C4F9FAF4-40FE-6E7C-C93D-DD07938CBFC8</value>
       </content>
      </localValue>
     </title>
@@ -542,16 +510,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şirket</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Организация</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Company</value>
+       <value>428CD070-D0C5-15AF-F2C7-720A7FCDAD01</value>
       </content>
      </localValue>
     </title>
@@ -567,16 +527,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Döviz</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Валюты</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Currency</value>
+       <value>3AA26251-A06B-AC88-82AC-C95F21937FFA</value>
       </content>
      </localValue>
     </title>
@@ -592,16 +544,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şube</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Структурное подразделение</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Branch</value>
+       <value>40C47BD7-17B5-0A35-581B-B90C8107E34A</value>
       </content>
      </localValue>
     </title>
@@ -617,16 +561,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Çalışan dizisi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Массив сотрудников</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Array of employee</value>
+       <value>1F3D4AED-B8FB-B0FB-B026-6DCB280F7593</value>
       </content>
      </localValue>
     </title>
@@ -639,16 +575,8 @@ FROM
  <formCommands>
   <name>Select</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Select</value>
+   <value>E1CDC9C7-0682-EB07-72C5-54EC49FBA1B9</value>
   </title>
   <id>1</id>
   <use>

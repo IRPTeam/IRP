@@ -2,16 +2,8 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2b645394-3da8-4de2-bd9e-4a36ffdf6e07">
  <name>EditManualOffers</name>
  <synonym>
-  <key>tr</key>
-  <value>Manuel indirimleri düzenle</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Редактирование ручных скидок</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Edit manual offers</value>
+  <value>B12EC6A5-EF5B-7825-53B7-7E7653B62013</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

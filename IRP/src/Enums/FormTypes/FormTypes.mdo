@@ -7,62 +7,30 @@
  </producedTypes>
  <name>FormTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Form tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы форм</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Form types</value>
+  <value>1CFE9733-B5AC-54EE-EC6D-D3A586D16178</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="5dc54e60-3025-4c6d-9ed5-bd009404dce6">
   <name>ObjectForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Nesne formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма объекта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Object form</value>
+   <value>C9744248-5920-B0E6-6BB8-867C3FDF2F1E</value>
   </synonym>
  </enumValues>
  <enumValues uuid="ddbf1c25-5127-40d8-851b-456ae7fe8186">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>862C1683-FAB1-DFD2-20C0-034642D777A2</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4a79a2a6-6549-46de-9d65-cbbb728abfe9">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>CD5F4945-7A15-A21D-D02A-A55AF7AF28A9</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

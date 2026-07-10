@@ -145,16 +145,8 @@
   <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Personel</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Сотрудник</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Employee</value>
+     <value>FAE9C5CF-13A6-DA56-69CE-ED2A1F6B5C45</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxPayers.EnumValue.Employee</value>
@@ -162,16 +154,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Şirket</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Организация</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Company</value>
+     <value>398E195F-DB38-F9E3-3BD6-6F322EE4499C</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxPayers.EnumValue.Company</value>
@@ -219,16 +203,8 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Oran</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Ставка</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Rate</value>
+     <value>E8D9AF06-EFF1-DC3F-F03B-B51F59EBFBD7</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxType.EnumValue.Rate</value>
@@ -236,16 +212,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Tutar</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Сумма</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Amount</value>
+     <value>F45EFEFF-9FA5-66DD-DC62-2EBD3FD7EF5F</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxType.EnumValue.Amount</value>
@@ -470,16 +438,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Vergi oranları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Налоговые ставки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Tax rates</value>
+    <value>54D33C07-1F11-A66F-F567-756945BE7759</value>
    </title>
    <extendedTooltip>
     <name>GroupTaxRatesExtendedTooltip</name>
@@ -781,16 +741,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Evrak kullanmak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документы применения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use documents</value>
+    <value>ED152502-C4A3-11DC-C7E3-325375EB7D23</value>
    </title>
    <extendedTooltip>
     <name>GroupUseDocumentsExtendedTooltip</name>
@@ -814,16 +766,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>440471F4-60DD-D96F-F410-046A1E1B91FC</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -886,16 +830,8 @@
    <columns>
     <name>TransactionTypes</name>
     <title>
-     <key>tr</key>
-     <value>İşlem türleri</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Тип транзакции</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Transaction types</value>
+     <value>F3A5F141-5A4F-BA9F-F0A0-0BEE423B17B4</value>
     </title>
     <id>3</id>
     <valueType>
@@ -914,16 +850,8 @@
  <formCommands>
   <name>SetTransactionTypes</name>
   <title>
-   <key>tr</key>
-   <value>İşlem türlerini ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить тип транзакции</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set transaction types</value>
+   <value>2AB3BB63-CCE7-7ABB-BDB8-8054EE0DC9EC</value>
   </title>
   <id>2</id>
   <use>

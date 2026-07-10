@@ -102,16 +102,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Filtreler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отборы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filters</value>
+   <value>9D42052D-A25F-AF53-3BB2-2BEB2A8EF9C6</value>
   </title>
   <extendedTooltip>
    <name>GroupFiltersExtendedTooltip</name>
@@ -142,16 +134,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>39B21911-D776-8038-858C-C538F3465886</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -729,16 +713,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Filtre ilk tarih</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отбор дата начала</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Filter start date</value>
+       <value>DAC24ED8-6347-6D62-2A9F-F0648E6A4462</value>
       </content>
      </localValue>
     </title>
@@ -753,16 +729,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Filtre evrak tipi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отбор фильтра докуменитов</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Filter document type</value>
+       <value>77046B5F-7C78-C2C6-6DB2-224DC822D45B</value>
       </content>
      </localValue>
     </title>
@@ -777,16 +745,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Bitiş tarihi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Дата окончания больничного</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>End date</value>
+       <value>B824116B-DC0B-EABF-F0A7-7CD8699DE422</value>
       </content>
      </localValue>
     </title>
@@ -802,16 +762,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Evrak tip dizisi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Массив типов документов</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Array of document types</value>
+       <value>ECA00E9D-F58B-954D-D476-6206E765C1FD</value>
       </content>
      </localValue>
     </title>
@@ -823,16 +775,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Başlangıç tarihi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Начало периода</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Start date</value>
+       <value>E90F9DAE-C0F9-641C-C411-1B957275515C</value>
       </content>
      </localValue>
     </title>
@@ -848,16 +792,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Filtre son tarih</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отбор дата окончания</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Filter end date</value>
+       <value>2D9ACA98-0F44-AD51-1C69-9AC17A38C984</value>
       </content>
      </localValue>
     </title>
@@ -872,16 +808,8 @@ WHERE
  <attributes>
   <name>DocumentType</name>
   <title>
-   <key>tr</key>
-   <value>Evrak tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип документа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document type</value>
+   <value>B4F3F390-D2A1-E092-2678-8E6637798DB9</value>
   </title>
   <id>2</id>
   <valueType>
@@ -905,16 +833,8 @@ WHERE
  <attributes>
   <name>Period</name>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Период</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Period</value>
+   <value>8958B655-D374-8166-6FA2-2FB1AA1274B0</value>
   </title>
   <id>3</id>
   <valueType>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5b7c166e-07fd-4953-9d7e-b9eed6dfba05">
  <name>Document_MoneyTransfer</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Para transferi"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Перевод денег"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Money transfer"</value>
+  <value>91425D78-89FC-B690-0DC2-24962577DDF4</value>
  </synonym>
 </mdclass:Role>

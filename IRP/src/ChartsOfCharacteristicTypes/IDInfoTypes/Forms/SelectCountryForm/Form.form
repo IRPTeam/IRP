@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Ülke seç</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Страны</value>
- </title>
- <title>
   <key>en</key>
-  <value>Select country</value>
+  <value>91A2A541-F57D-33A2-243E-E557B992A629</value>
  </title>
  <items xsi:type="form:Table">
   <name>CountryTable</name>
@@ -200,16 +192,8 @@
  <attributes>
   <name>CountryTable</name>
   <title>
-   <key>tr</key>
-   <value>Ülke tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица стран</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Country table</value>
+   <value>0794EC1E-14B2-AD4C-C70B-B03ED000CF8C</value>
   </title>
   <id>1</id>
   <valueType>
@@ -224,16 +208,8 @@
   <columns>
    <name>Country</name>
    <title>
-    <key>tr</key>
-    <value>Ülke</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Страна</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Country</value>
+    <value>0114D5C6-C1B7-390D-D83E-E89E918BB9D9</value>
    </title>
    <id>2</id>
    <valueType>
@@ -249,16 +225,8 @@
   <columns>
    <name>ExternalDataProc</name>
    <title>
-    <key>tr</key>
-    <value>Eklentiler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внешние обработки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Plugins</value>
+    <value>DE5CDD61-B577-DAA3-3763-32B226C32BDA</value>
    </title>
    <id>3</id>
    <valueType>
@@ -274,16 +242,8 @@
   <columns>
    <name>Settings</name>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings</value>
+    <value>1EFB6227-0753-167D-D654-4F33860B00E2</value>
    </title>
    <id>4</id>
    <valueType>

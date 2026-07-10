@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>BDE897B7-75F7-09B4-4BD2-27BE2473616B</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>ACA8CC57-174F-2B8A-A838-85514F83FEC5</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

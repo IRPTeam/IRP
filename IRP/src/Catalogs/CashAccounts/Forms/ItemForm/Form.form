@@ -39,16 +39,8 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Banka</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Банковский счет</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Bank</value>
+     <value>ACFF3128-53B0-B4C8-8E08-801B7FC49F9C</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.CashAccountTypes.EnumValue.Bank</value>
@@ -56,16 +48,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Kasa</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Касса</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Cash</value>
+     <value>237ABFF9-DCE2-2CBE-E8EB-B71EFBAE50D5</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.CashAccountTypes.EnumValue.Cash</value>
@@ -73,16 +57,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Transit</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Транзитный</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Transit</value>
+     <value>D695E007-373A-9F48-8137-7D59730A4174</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.CashAccountTypes.EnumValue.Transit</value>
@@ -90,16 +66,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>POS</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Платежный терминал</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>POS</value>
+     <value>EDED3341-358F-84A7-7DC6-6D6A0DA4E07E</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.CashAccountTypes.EnumValue.POS</value>
@@ -107,16 +75,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Kasa POS</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Касса ККМ</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>POS cash account</value>
+     <value>598D2E09-DCD0-3B3B-BF36-6CDA41DB6A93</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.CashAccountTypes.EnumValue.POSCashAccount</value>
@@ -772,16 +732,8 @@
    <name>CurrencyType</name>
    <id>20</id>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>D98CC600-F860-23FC-CFC1-1C2B1DF1A98C</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -820,16 +772,8 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Düzeltildi</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Фиксированная</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Fixed</value>
+      <value>14E4EA0C-12D3-4955-53E0-05236C276F51</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>Fixed</value>
@@ -837,16 +781,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Çoklu</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Мульти</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Multi</value>
+      <value>61718BE7-BF03-1968-8C77-79CCEF8E9A04</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>Multi</value>
@@ -1016,16 +952,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройка интеграции</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Integration setting</value>
+   <value>BE2C2577-B872-88D8-8794-4C8660B60878</value>
   </title>
   <extendedTooltip>
    <name>GroupIntegrationSettingsExtendedTooltip</name>
@@ -1095,16 +1023,8 @@
  <attributes>
   <name>CurrencyType</name>
   <title>
-   <key>tr</key>
-   <value>Döviz tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид валюты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Currency type</value>
+   <value>3E7294AB-096D-DCE0-07CA-AFEDA1A2E05E</value>
   </title>
   <id>2</id>
   <valueType>

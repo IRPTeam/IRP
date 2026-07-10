@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b17a102d-a5ae-4ae5-8f71-bf016349d008">
  <name>Document_ShipmentPlaningOrder</name>
  <synonym>
-  <key>tr</key>
-  <value>Document "Sevk planlama siparişi"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Задание на отгрузку товара"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Shipment planing order"</value>
+  <value>A9EC02EB-AC35-1904-42E2-29FA4AAD06D7</value>
  </synonym>
 </mdclass:Role>

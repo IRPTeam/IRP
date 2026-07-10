@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4400a0aa-bc07-49bd-b328-8c9d2f709300">
  <name>AccumulationRegisters_R2031B_ShipmentInvoicing</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R2031B SevkiyatFaturalandırma</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R2031B ОтгрузкаСчетов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R2031B ShipmentInvoicing</value>
+  <value>257CEAFD-7BA6-D893-3A53-3AFE6756B4EC__________</value>
  </synonym>
 </mdclass:Role>

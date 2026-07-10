@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseProfitLossCenter</name>
  <synonym>
-  <key>tr</key>
-  <value>Kar zarar merkezini kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Центры прибылей и убытков</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use profit loss center</value>
+  <value>376A313B-BE48-5CF2-2BB1-1C0B58177E3C</value>
  </synonym>
  <type>
   <types>Boolean</types>

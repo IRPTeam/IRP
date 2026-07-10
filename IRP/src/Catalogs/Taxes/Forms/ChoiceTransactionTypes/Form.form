@@ -278,16 +278,8 @@
  <attributes>
   <name>TransactionTypes</name>
   <title>
-   <key>tr</key>
-   <value>İşlem türleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип транзакции</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Transaction types</value>
+   <value>F3E47017-5C4F-7A06-6699-9965C5127468</value>
   </title>
   <id>1</id>
   <valueType>
@@ -302,16 +294,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>42A4FA0F-58D4-97D9-9A35-5C7FEB140A4F</value>
    </title>
    <id>2</id>
    <valueType>
@@ -327,16 +311,8 @@
   <columns>
    <name>TransactionType</name>
    <title>
-    <key>tr</key>
-    <value>İşlem tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид операции</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Transaction type</value>
+    <value>68915EEC-A733-807E-E0A5-5173056EC4E5</value>
    </title>
    <id>3</id>
    <valueType>
@@ -353,16 +329,8 @@
  <attributes>
   <name>DocumentName</name>
   <title>
-   <key>tr</key>
-   <value>Evrak ismi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование документа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document name</value>
+   <value>355FF07F-ADF2-457E-E16E-E61916074AE6</value>
   </title>
   <id>4</id>
   <valueType>
@@ -379,16 +347,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>18C962F4-E63A-1CE5-52DE-EA158E092427</value>
   </title>
   <id>1</id>
   <use>
@@ -404,16 +364,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>C44B52C7-06C7-B7B2-2663-3F5936AD7EC1</value>
   </title>
   <id>2</id>
   <use>

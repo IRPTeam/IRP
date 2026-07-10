@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="738d210d-e406-4db7-8d8f-85ebe5b73f0f">
  <name>Other</name>
  <synonym>
-  <key>tr</key>
-  <value>Diğer</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Прочее</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Other</value>
+  <value>E2898BC7-B55B-18D3-32F4-4F38ACDD34BC</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
@@ -20,5 +12,6 @@
  <content>Catalog.Currencies</content>
  <content>Catalog.PrintFormTemplates</content>
  <content>Catalog.PrintInfo</content>
+ <content>Document.Storno</content>
  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseObjectTransformation</name>
  <synonym>
-  <key>tr</key>
-  <value>Nesne dönüşümünü kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использование преобразования объектов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use object transformation</value>
+  <value>ABEEE7DF-9960-4A20-0C6D-DFA3A885E341</value>
  </synonym>
  <type>
   <types>Boolean</types>

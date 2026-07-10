@@ -11,16 +11,8 @@
 			<field>File</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dosya</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Файл</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>File</v8:content>
+					<v8:content>535C99C5-663A-E45A-A68F-F9CA93CC10BD</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -36,16 +28,8 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Malzeme</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Номенклатура</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>0A852544-81DA-C721-1E57-732804939EAB</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -54,16 +38,8 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Varyant</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Характеристика</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>6252C4B0-B9F0-204F-F714-4E7951E7B0A6</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -72,16 +48,8 @@
 			<field>Barcode</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Barkod</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Штрихкод</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Barcode</v8:content>
+					<v8:content>7455AE8B-BC2D-DF09-9516-6FEF9BA98B3C</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -90,16 +58,8 @@
 			<field>SerialLotNumber</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ürün seri/lot numarası</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Серия номенклатуры</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item serial/lot number</v8:content>
+					<v8:content>AE9C600F-6618-90F6-6346-6C05B58A2D42</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -108,16 +68,8 @@
 			<field>Unit</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Birim</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Ед. изм.</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Unit</v8:content>
+					<v8:content>E14CD619-3EAD-995D-D987-7DE09EAFF328</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -190,16 +142,8 @@ FROM
 		<name>CharLF</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Char LF</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Символ переноса строки</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Char LF</v8:content>
+				<v8:content>9ADB22AC-4B81-7215-5726-6666C6D43145</v8:content>
 			</v8:item>
 		</title>
 		<value xsi:type="xs:string"/>

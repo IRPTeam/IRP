@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R3021A_CashInTransit</name>
  <synonym>
-  <key>tr</key>
-  <value>R3021A Yoldaki nakit</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R3021A Деньги в пути</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R3021A Cash in transit</value>
+  <value>026386F1-0E39-30C0-018C-C7566916309C</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R3021A_CashInTransit.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="e0f42c6e-fe27-4ffe-856e-ea66ae49020a">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>9A3AAFC9-95B2-309B-B128-85FECBF3B6DB</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

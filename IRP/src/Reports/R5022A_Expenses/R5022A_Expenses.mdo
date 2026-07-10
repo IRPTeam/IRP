@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R5022A_Expenses</name>
  <synonym>
-  <key>tr</key>
-  <value>R5022A Giderler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R5022A Отчет по затратам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R5022A Expenses</value>
+  <value>FBE28BA0-6804-03E6-6061-17485A8BD012</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R5022A_Expenses.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="b7bc6a71-67a5-4673-bf5e-d9e94218f429">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>402AA699-C4AD-0350-0700-016E69516A5A</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

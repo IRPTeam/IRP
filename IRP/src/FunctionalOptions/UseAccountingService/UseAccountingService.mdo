@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ac642ca5-714e-4010-aaf3-d904f27cf354">
  <name>UseAccountingService</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - muhasebe servisi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать сервисы бухгалтерии</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use accounting service</value>
+  <value>10D66067-E021-D7BB-BA97-729829FFCEE6</value>
  </synonym>
  <location>Constant.UseAccountingService</location>
  <privilegedGetMode>true</privilegedGetMode>

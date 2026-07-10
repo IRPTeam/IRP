@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="296a53fb-9def-44f1-b253-0f698e83f08d">
  <name>UseSalary</name>
  <synonym>
-  <key>tr</key>
-  <value>Maaşı kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать - Расчет зарплаты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use salary</value>
+  <value>7045BEBB-31BE-64B3-36A8-8CCECE34D040</value>
  </synonym>
  <location>Constant.UseSalary</location>
  <privilegedGetMode>true</privilegedGetMode>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fe1d6677-f4b4-4ac7-b70f-789924287f7f">
  <name>AccumulationRegisters_T1040T_AccountingAmounts</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları T1040T MuhasebeTutarları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления T1040T УчетныеСуммы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters T1040T AccountingAmounts</value>
+  <value>81FA4C15-A7EB-0502-259F-FC355A632EDD__________</value>
  </synonym>
 </mdclass:Role>

@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UsePlannedReceiptReservation</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Planlanan stok giriş rezervi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать резерв запланированного прихода товара</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use planned receipt reservation</value>
+  <value>DA36FB46-AF72-9FE0-031D-DF8F2F942A7C</value>
  </synonym>
  <type>
   <types>Boolean</types>

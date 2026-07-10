@@ -38,16 +38,8 @@
     <name>LoadingImage</name>
     <id>32</id>
     <title>
-     <key>tr</key>
-     <value>Yükleme...</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Загрузка..</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Loading...</value>
+     <value>4706CE6C-4904-C84A-A0FA-A1423390B9D8</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -85,16 +77,8 @@
     <name>DecorationLoading</name>
     <id>35</id>
     <title>
-     <key>tr</key>
-     <value>Yükleme...</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Загрузка..</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Loading...</value>
+     <value>0104D53A-9446-51CD-DC04-421B52CDD6F1</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -129,16 +113,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup yükleme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа загрузка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group loading</value>
+    <value>AFB24334-C879-3BBD-DF7C-C319073D5384</value>
    </title>
    <groupVerticalAlign>Center</groupVerticalAlign>
    <extendedTooltip>
@@ -171,16 +147,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ana araç çubuğu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основная панель инструментов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Command bar main</value>
+    <value>4B76FC0B-BB07-01B7-7C48-8E4A2C585C06</value>
    </title>
    <extendedTooltip>
     <name>CommandBarMainExtendedTooltip</name>
@@ -204,16 +172,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Верх</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>9CC1B01E-1F98-FE99-94AE-EE99B567377C</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -581,16 +541,8 @@
  <attributes>
   <name>CurrencyList</name>
   <title>
-   <key>tr</key>
-   <value>Döviz listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список валют</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Currency list</value>
+   <value>68CC1E6E-FCAB-53AE-E890-091EF9A8FDB3</value>
   </title>
   <id>1</id>
   <valueType>
@@ -605,16 +557,8 @@
   <columns>
    <name>Code</name>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Code</value>
+    <value>84D68BBE-AE93-27E2-20D2-28C355223ABB</value>
    </title>
    <id>2</id>
    <valueType>
@@ -631,16 +575,8 @@
   <columns>
    <name>NumericCode</name>
    <title>
-    <key>tr</key>
-    <value>Sayısal kod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цифровой код</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Numeric code</value>
+    <value>E25C1C6D-0221-5017-77C3-302C20ADF095</value>
    </title>
    <id>3</id>
    <valueType>
@@ -659,16 +595,8 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Описание</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>70CF43B4-E00F-E15F-FB71-15D945248C0E</value>
    </title>
    <id>4</id>
    <valueType>
@@ -685,16 +613,8 @@
   <columns>
    <name>Symbol</name>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Символ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Symbol</value>
+    <value>093A050F-9A29-8D99-9344-4C5F9F9825DD</value>
    </title>
    <id>6</id>
    <valueType>
@@ -711,16 +631,8 @@
   <columns>
    <name>Exists</name>
    <title>
-    <key>tr</key>
-    <value>Mevcut</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Существует</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Exists</value>
+    <value>7FEC3E27-4671-0298-8127-72BD77C06723</value>
    </title>
    <id>7</id>
    <valueType>
@@ -736,16 +648,8 @@
   <columns>
    <name>Data</name>
    <title>
-    <key>tr</key>
-    <value>Veri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Данные</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Data</value>
+    <value>3132A252-BA5B-2A0B-B349-90A64C6B1275</value>
    </title>
    <id>8</id>
    <valueType>
@@ -763,16 +667,8 @@
  <formCommands>
   <name>CreateSelected</name>
   <title>
-   <key>tr</key>
-   <value>Seçileni oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Создать выбранные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Create selected</value>
+   <value>45D03685-2B84-332B-BF57-75D16C845DDC</value>
   </title>
   <id>1</id>
   <use>

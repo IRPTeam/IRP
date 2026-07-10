@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="63d9054a-128c-430f-8d42-6df6bf830a1d">
  <name>AccumulationRegisters_R1010T_PurchaseOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R1010T SatınalmaSiparişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R1010T ЗаказыНаПокупку</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R1010T PurchaseOrders</value>
+  <value>3205BDCA-73D7-9048-8735-5A1E584CA6FF_______</value>
  </synonym>
 </mdclass:Role>

@@ -7,137 +7,65 @@
  </producedTypes>
  <name>DebtTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Borç tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы долгов       </value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Debt types</value>
+  <value>9DEF46BC-722D-CED2-2A61-140411B8C191</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="9ee98991-8ba6-4dbd-afb7-7d09fc4866a9">
   <name>AdvanceVendor</name>
   <synonym>
-   <key>tr</key>
-   <value>Avans (Tedarikçi)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Аванс (Поставщик) </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Advance (Vendor)</value>
+   <value>5B4737B1-AE9D-9498-889A-A0D0B2B53FEF</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4cd055db-62c0-463c-80e6-823172d9a399">
   <name>TransactionVendor</name>
   <synonym>
-   <key>tr</key>
-   <value>Hareketler (Tedarikçi)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Транзакция (Поставщик)</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction (Vendor)</value>
+   <value>BAA0D546-4FEA-DB6F-F245-55ABEE4235F7</value>
   </synonym>
  </enumValues>
  <enumValues uuid="08dcab73-6a5c-438c-ab26-8e2287c4a288">
   <name>AdvanceCustomer</name>
   <synonym>
-   <key>tr</key>
-   <value>Avans (Müşteri)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Аванс (Клиент)     </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Advance (Customer)</value>
+   <value>8D877E57-6051-6120-0152-25957A6C3F96</value>
   </synonym>
  </enumValues>
  <enumValues uuid="49188b34-50d3-4121-b8b8-245f4aaab29c">
   <name>TransactionCustomer</name>
   <synonym>
-   <key>tr</key>
-   <value>Hareketler (Müşteriler)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Транзакция (Клиент)  </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction (Customer)</value>
+   <value>33A800D4-AF91-605F-F06E-EB4EA767384A</value>
   </synonym>
  </enumValues>
  <enumValues uuid="1b82ec7b-9667-4f44-84c1-04e4614e7ded">
   <name>OtherPartnerPayable</name>
   <synonym>
-   <key>tr</key>
-   <value>Diğer cari hesap (ödenecek)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Прочий партнер (долг организации)</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Other partner (payable)</value>
+   <value>EDB790E3-39C4-18AF-FB71-10A43F82772F</value>
   </synonym>
  </enumValues>
  <enumValues uuid="e3aaa14e-335a-419c-86e0-05de150d440e">
   <name>OtherPartnerReceivable</name>
   <synonym>
-   <key>tr</key>
-   <value>Diğer cari hesap (alacak)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Прочий партнер (долг партнера)</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Other partner (receivable)</value>
+   <value>6D0DF0EB-9C6B-2A25-56C3-3CBF59BEE872</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7483a393-cca8-4409-9298-2106c6645c19">
   <name>EmployeePayable</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan (ödenecek)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудники (долг организации)</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee (payable)</value>
+   <value>1CFC1E5B-51EC-A830-01D7-7B340D3AEE6B</value>
   </synonym>
  </enumValues>
  <enumValues uuid="efa3a887-1dfe-43e5-b5ba-fcc03d05a598">
   <name>EmployeeReceivable</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan (alacak)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудники (долг сотрудника)</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee (receivable)</value>
+   <value>C3A4D894-346D-1FFB-BC8C-CBC03E1E63D1</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

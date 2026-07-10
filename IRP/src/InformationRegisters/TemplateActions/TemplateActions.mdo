@@ -11,57 +11,25 @@
  </producedTypes>
  <name>TemplateActions</name>
  <synonym>
-  <key>tr</key>
-  <value>Şablon işlemleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Действия шаблона</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Template actions</value>
+  <value>06ABFABF-3FD4-6861-10F3-398FAFFEF44A</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Şablon işlemi</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Действие шаблон</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Template action</value>
+  <value>25D9E63F-E415-117E-EF59-99629D1C92EF</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Şablon işlemleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Действия шаблона</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Template actions</value>
+  <value>B59F238F-49A6-BE45-5528-8DC78364E388</value>
  </listPresentation>
  <attributes uuid="b710f50b-fac5-4ac8-a47a-f826589cb557">
   <name>AttributeType</name>
   <synonym>
-   <key>tr</key>
-   <value>Alan tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип реквизита</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Attribute type</value>
+   <value>784E354D-84CD-7677-7F7B-B2AA9689076D</value>
   </synonym>
   <type>
    <types>String</types>
@@ -73,23 +41,13 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </attributes>
  <attributes uuid="aec5d541-f036-4676-a08b-50b3f4754df0">
   <name>Name</name>
   <synonym>
-   <key>tr</key>
-   <value>Ad</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Имя</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Name</value>
+   <value>09678CD2-B47A-C675-5BF8-800308D8A779</value>
   </synonym>
   <type>
    <types>String</types>
@@ -101,23 +59,13 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </attributes>
  <attributes uuid="aa99cc09-1883-49e4-bcbb-e7d404cebcde">
   <name>Path</name>
   <synonym>
-   <key>tr</key>
-   <value>Path</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Путь</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Path</value>
+   <value>F3E490B2-9DB5-51DA-AA70-06E1229A2C30</value>
   </synonym>
   <type>
    <types>String</types>
@@ -129,23 +77,13 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </attributes>
  <attributes uuid="f2b6cab0-54d0-4896-8f0e-d737e41689bb">
   <name>CheckRegExp</name>
   <synonym>
-   <key>tr</key>
-   <value>RegExp kontrol</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Проверить RegExp</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Check reg exp</value>
+   <value>33DAB59C-FB23-5B76-6443-3ABAA1DC4F8D</value>
   </synonym>
   <type>
    <types>String</types>
@@ -155,23 +93,13 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </attributes>
  <attributes uuid="55677483-9587-44fb-a7a2-903cbed41a94">
   <name>Value</name>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Value</value>
+   <value>5D03F152-966A-B274-4B83-34ABABF85462</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -187,23 +115,13 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </attributes>
  <attributes uuid="08780f4b-b0ef-4b8c-8e7f-aa63fc7044f7">
   <name>Action</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Действие</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Action</value>
+   <value>D043DE24-4246-4013-30D3-3BC311CDCC3D</value>
   </synonym>
   <type>
    <types>CatalogRef.ExternalFunctions</types>
@@ -217,16 +135,8 @@
  <dimensions uuid="051ffc83-7209-4058-82c5-2ca8b40d81ec">
   <name>FillingTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon doldurma</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заполнение шаблона</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Filling template</value>
+   <value>52187274-A6A6-2CE2-2585-5AA096897483</value>
   </synonym>
   <type>
    <types>CatalogRef.FillingTemplates</types>
@@ -245,16 +155,8 @@
  <dimensions uuid="699e3dd1-f16d-41ea-8efe-4fd32eb3ab84">
   <name>Priority</name>
   <synonym>
-   <key>tr</key>
-   <value>Önem</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Приоритет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Priority</value>
+   <value>47DD8768-11E2-A71F-F9AA-AB50BAAC9752</value>
   </synonym>
   <type>
    <types>Number</types>

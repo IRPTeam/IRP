@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9540S_EmployeeVacations</name>
  <synonym>
-  <key>tr</key>
-  <value>T9540 Çalışan tatilleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9540 Отпуска сотрудников</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9540 Employee vacations</value>
+  <value>34D92C83-44B9-DAC3-3BFB-B0A876232B72</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -29,16 +21,8 @@
  <dimensions uuid="52a2e95f-dd8f-442e-9bbd-ea0501a2bbbf">
   <name>Date</name>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Date</value>
+   <value>5DFD1AEA-22E6-0740-033C-CF65F4C7643F</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -56,16 +40,8 @@
  <dimensions uuid="20a75bd3-d6f9-40c2-ba51-7820d8cb3b04">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>1C85A1BA-6638-89E5-5681-1450E4487A5B</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -80,16 +56,8 @@
  <dimensions uuid="33e441c4-15ea-41b5-a544-243d2a53aa90">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>A8714321-05F3-C701-17D5-511B54938309</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -104,16 +72,8 @@
  <dimensions uuid="da3eb95e-b639-48bd-a2f0-30d5a338ab98">
   <name>Employee</name>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee</value>
+   <value>FD2ECC0C-A72D-0F27-7AA2-20AA3B5706AB</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

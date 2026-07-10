@@ -285,16 +285,8 @@
  <attributes>
   <name>MetadataTree</name>
   <title>
-   <key>tr</key>
-   <value>Üstveri ağacı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дерево метаданных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Metadata tree</value>
+   <value>976BB6D2-20CC-88F7-7789-973F037B5187</value>
   </title>
   <id>2</id>
   <valueType>
@@ -309,16 +301,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Применить</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>ADECC14D-DE2C-2BC0-0179-9B6DE96A7808</value>
    </title>
    <id>4</id>
    <valueType>
@@ -334,16 +318,8 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>8543B454-8AF5-7A25-5E5A-AAAECB1CC21F</value>
    </title>
    <id>5</id>
    <valueType>
@@ -361,16 +337,8 @@
  <formCommands>
   <name>SaveSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save settings</value>
+   <value>2455CE2B-9A60-BE6D-DB90-08129CBB3453</value>
   </title>
   <id>1</id>
   <use>
@@ -390,16 +358,8 @@
  <formCommands>
   <name>UpdateDataHistory</name>
   <title>
-   <key>tr</key>
-   <value>Veri tarihçesini güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить историю данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update data history</value>
+   <value>71FEB80D-4E32-DA76-6003-30FB36B874A4</value>
   </title>
   <id>2</id>
   <use>

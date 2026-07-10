@@ -11,58 +11,26 @@
  </producedTypes>
  <name>Taxes</name>
  <synonym>
-  <key>tr</key>
-  <value>Şirket vergileri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Налоги организации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Company taxes</value>
+  <value>65E4963D-0A63-D5E3-3661-10EF55D262BE</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultRecordForm>InformationRegister.Taxes.Form.RecordForm</defaultRecordForm>
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Şirket vergisi</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Налог организации</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Company tax</value>
+  <value>0A7C63FA-8A28-AE97-7AAF-FBAEBC24DB95</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Şirket vergileri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Налоги организации</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Company taxes</value>
+  <value>E357F394-6D40-7390-0B38-8236D7E208F6</value>
  </listPresentation>
  <resources uuid="f51ef633-7048-483b-a625-da52e21085f4">
   <name>Use</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Применить</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use</value>
+   <value>A52A369F-9955-10E2-2589-9D84616826C1</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -76,16 +44,8 @@
  <resources uuid="a25d893c-31bd-463f-95c2-1b23da47ba5e">
   <name>Priority</name>
   <synonym>
-   <key>tr</key>
-   <value>Önem</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Приоритет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Priority</value>
+   <value>0C640277-5999-579E-E3E7-7E0525B7F33E</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -102,16 +62,8 @@
  <resources uuid="2fd43b13-548f-4fde-80f0-4dbd45bc4d33">
   <name>IncludeToLandedCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Maliyete dahil et</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Включать в расчет себестоимости</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Include to landed cost</value>
+   <value>B76D266C-56FD-B32A-A44D-D61ADA31EAE7</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -125,16 +77,8 @@
  <dimensions uuid="ea15a6c3-3598-4685-abe5-9fa75df0f291">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>AB7CDCEA-BAA2-C216-6549-93EB8CD9AD42</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -151,16 +95,8 @@
  <dimensions uuid="f39ae6cd-8867-474d-92a3-44eb78d9f27e">
   <name>Tax</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налог</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax</value>
+   <value>4EA3C62B-FE34-EB5F-FF9D-D2EDA789314E</value>
   </synonym>
   <type>
    <types>CatalogRef.Taxes</types>
@@ -175,16 +111,8 @@
  <forms uuid="e106da62-9cde-470d-880e-10c2c65b3b42">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>97682E34-872E-2BD1-1837-723084A3F498</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

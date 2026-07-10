@@ -139,16 +139,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group of Recipients</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Групп получатели</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of Recipients</value>
+   <value>872217FE-BA50-7A36-69CB-B7652BF91FC7</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -401,16 +393,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Başlık</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заголовок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Header</value>
+   <value>12098C4C-9834-62D9-93B8-858DA2A94D46</value>
   </title>
   <extendedTooltip>
    <name>HeaderExtendedTooltip</name>
@@ -482,16 +466,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Group edit HTML</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа изменить HTML</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group edit HTML</value>
+        <value>33C3A057-AD59-4569-9323-3DD11BDBF8E2</value>
        </title>
        <extendedTooltip>
         <name>GroupEditHTMLExtendedTooltip</name>
@@ -511,16 +487,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Commands of letter text</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Команды или буквенный текст</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Commands of letter text</value>
+       <value>762CB599-E5E8-FAF9-9519-9D4D3C7F3792</value>
       </title>
       <extendedTooltip>
        <name>TextLetterCommandsExtendedTooltip</name>
@@ -585,16 +553,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Page doc HTML</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Страница HTML документа</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Page doc HTML</value>
+      <value>F4A4E59B-1703-2747-7180-09C27E17D521</value>
      </title>
      <extendedTooltip>
       <name>PageDocHTMLExtendedTooltip</name>
@@ -688,16 +648,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Page text HTML</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Страница HTML текства</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Page text HTML</value>
+      <value>31D28C71-215B-E313-35AF-FCA2AC44D954</value>
      </title>
      <extendedTooltip>
       <name>PageTextHTMLExtendedTooltip</name>
@@ -721,16 +673,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Group of mail pages</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа страницы почты</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of mail pages</value>
+     <value>F23FF558-8C61-DBDA-A935-524E863184F7</value>
     </title>
     <extendedTooltip>
      <name>GroupOfMailPagesExtendedTooltip</name>
@@ -753,16 +697,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Mail</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Почта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Mail</value>
+    <value>9A19717A-FB3B-82CF-FE6A-ADADF9643C98</value>
    </title>
    <extendedTooltip>
     <name>PageMailExtendedTooltip</name>
@@ -1056,16 +992,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Dosyalar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Прикрепленные файлы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Attachments</value>
+    <value>D9E30DD8-BF90-CD47-7D21-1CB704809BD2</value>
    </title>
    <extendedTooltip>
     <name>PageAttachmentsExtendedTooltip</name>
@@ -1181,16 +1109,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Group of number and date</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа номер и дата</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of number and date</value>
+     <value>8993B519-B977-6B35-5E87-7BA4960C51BA</value>
     </title>
     <extendedTooltip>
      <name>GroupNumberDateExtendedTooltip</name>
@@ -1327,16 +1247,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Numaratör grubu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа нумерации</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of numerator</value>
+     <value>46C447EA-8D8D-1027-7F2D-D15650B49B8A</value>
     </title>
     <extendedTooltip>
      <name>GroupNumeratorExtendedTooltip</name>
@@ -1442,16 +1354,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Group of author</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа автор</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of author</value>
+     <value>4BEE82A5-D9A7-A844-4F07-7DD31DA80065</value>
     </title>
     <extendedTooltip>
      <name>GroupAuthorExtendedTooltip</name>
@@ -1557,16 +1461,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Group of editor</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа редактор</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of editor</value>
+     <value>44912935-88F9-A240-087C-CEDB5D1A9CB9</value>
     </title>
     <extendedTooltip>
      <name>GroupEditorExtendedTooltip</name>
@@ -1597,16 +1493,8 @@
     </for>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Прочее</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>9E4AC29B-C96D-6F8B-B296-6B03E7DA5631</value>
    </title>
    <extendedTooltip>
     <name>PageOtherExtendedTooltip</name>
@@ -1630,16 +1518,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group of pages</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of pages</value>
+   <value>0F214A94-6490-9EE4-4799-95068CF32A46</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <verticalStretch>true</verticalStretch>
@@ -1740,16 +1620,8 @@
  <attributes>
   <name>TextLetter</name>
   <title>
-   <key>tr</key>
-   <value>Text letter</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текст письма</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Text letter</value>
+   <value>67FB8287-5B7D-454A-A7F2-22FC67A0D245</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1765,16 +1637,8 @@
  <attributes>
   <name>Recipients</name>
   <title>
-   <key>tr</key>
-   <value>Send to</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Получатель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Send to</value>
+   <value>BC3AD411-C94D-5386-63C5-5ABA8F486FAA</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1798,16 +1662,8 @@
  <attributes>
   <name>CopyRecipients</name>
   <title>
-   <key>tr</key>
-   <value>CC</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Копия</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>CC</value>
+   <value>AA0621FE-1CE6-4923-381C-CD0531DC534D</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1831,16 +1687,8 @@
  <attributes>
   <name>BlindCopyRecipients</name>
   <title>
-   <key>tr</key>
-   <value>BCC</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скрытая копия</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>BCC</value>
+   <value>E72E84BB-2982-DB45-50BE-E04472EA9DB5</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1864,16 +1712,8 @@
  <attributes>
   <name>AttachmentsHTML</name>
   <title>
-   <key>tr</key>
-   <value>Attachments HTML</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Прикрепленный HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attachments HTML</value>
+   <value>CA05B6E4-BBBB-C29A-A46B-B63A414A5B5D</value>
   </title>
   <id>6</id>
   <valueType/>
@@ -1887,16 +1727,8 @@
  <attributes>
   <name>TextHTML</name>
   <title>
-   <key>tr</key>
-   <value>Text HTML</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текст HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Text HTML</value>
+   <value>D904223F-3A96-6275-5529-9B71072599B7</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1913,16 +1745,8 @@
  <formCommands>
   <name>AddCopyRecipients</name>
   <title>
-   <key>tr</key>
-   <value>CC</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Копия</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>CC</value>
+   <value>A711292A-714F-7321-1B85-5987D22BDE7A</value>
   </title>
   <id>1</id>
   <use>
@@ -1942,16 +1766,8 @@
  <formCommands>
   <name>AddBlindCopyRecipients</name>
   <title>
-   <key>tr</key>
-   <value>BCC</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скрытая копия</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>BCC</value>
+   <value>3B7ED404-40B1-193D-DF0B-B46EFA2F1163</value>
   </title>
   <id>2</id>
   <use>
@@ -1971,16 +1787,8 @@
  <formCommands>
   <name>OpenFile</name>
   <title>
-   <key>tr</key>
-   <value>Dosya nasıl açılır?</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Открыть файл</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Open file</value>
+   <value>05FAC189-AD3C-EDCF-FA0D-D4FC611C84E5</value>
   </title>
   <id>3</id>
   <use>
@@ -1999,16 +1807,8 @@
  <formCommands>
   <name>EditHTML</name>
   <title>
-   <key>tr</key>
-   <value>Edit HTML</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменить HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit HTML</value>
+   <value>B0C825CF-A6BC-C9FC-CA5B-BD6152291818</value>
   </title>
   <id>4</id>
   <use>
@@ -2028,16 +1828,8 @@
  <formCommands>
   <name>SaveHTML</name>
   <title>
-   <key>tr</key>
-   <value>Save HTML</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save HTML</value>
+   <value>4BE2929D-D7A2-9631-1F98-8996BC4BFE1B</value>
   </title>
   <id>5</id>
   <use>
@@ -2057,29 +1849,13 @@
  <formCommands>
   <name>SetNewNumber</name>
   <title>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set new number</value>
+   <value>9FE5A475-61EB-5B8D-DBBA-AD019E2C7B6D</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Set new number</value>
+   <value>FC6FF64C-C7C9-EE94-44BC-C704AC1C1B31</value>
   </toolTip>
   <use>
    <common>true</common>

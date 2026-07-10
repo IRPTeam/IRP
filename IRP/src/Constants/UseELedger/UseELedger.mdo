@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseELedger</name>
  <synonym>
-  <key>tr</key>
-  <value>e-Defter kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать eLedger</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use eLedger</value>
+  <value>417668DB-C349-6124-45D3-3854851418F2</value>
  </synonym>
  <type>
   <types>Boolean</types>

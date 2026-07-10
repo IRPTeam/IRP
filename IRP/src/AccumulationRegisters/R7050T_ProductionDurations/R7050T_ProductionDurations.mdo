@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R7050T_ProductionDurations</name>
  <synonym>
-  <key>tr</key>
-  <value>R7050 Üretim süreleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R7050 Производственное время</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R7050 Production durations</value>
+  <value>5258A69A-98AB-AA20-06E2-2D5ED5F42488</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="01eeb54a-f2ba-4169-bbc6-984bd666758a">
   <name>Duration</name>
   <synonym>
-   <key>tr</key>
-   <value>Süre</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Время</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Duration</value>
+   <value>C3C22069-2FCF-680A-A7C9-92B6A496DE9B</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -53,16 +37,8 @@
  <dimensions uuid="06a2f8d3-5f36-4388-803e-52801fd2e5dd">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>F6BB9813-02E7-9AAD-DF39-952E96AB3BF4</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -75,16 +51,8 @@
  <dimensions uuid="9f4e795d-2db0-4a53-ae73-21e8de34cd0f">
   <name>BusinessUnit</name>
   <synonym>
-   <key>tr</key>
-   <value>Departman</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Business unit</value>
+   <value>F500CB80-2A09-ECFF-F8C1-1FCDB5872D9B</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -103,16 +71,8 @@
  <dimensions uuid="ab79af13-8d0a-4151-b564-07684486fad7">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>422A303C-5432-D26E-ED94-4E6BC9A8CE10</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

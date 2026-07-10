@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UsePartnerItems</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Cari hesap malzemeleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать номенклатуру партнеров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use partner items</value>
+  <value>092FDE12-6341-0880-04CB-B5BC8FE9CD99</value>
  </synonym>
  <type>
   <types>Boolean</types>

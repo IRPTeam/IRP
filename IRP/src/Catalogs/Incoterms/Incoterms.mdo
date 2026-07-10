@@ -9,16 +9,8 @@
  </producedTypes>
  <name>Incoterms</name>
  <synonym>
-  <key>tr</key>
-  <value>Incoterms</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Инкотермс</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Incoterms</value>
+  <value>7872BCA8-DA42-3473-394D-D7A1C6653233</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Incoterms.StandardAttribute.Code</inputByString>
@@ -27,28 +19,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Incoterm</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Инкотермс</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Incoterm</value>
+  <value>CE664248-FB73-D5FB-B9FC-C411F9342213</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Incoterms</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Инкотермс</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Incoterms</value>
+  <value>48E35007-B654-212B-B07E-EB30FEE7F15A</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -70,30 +46,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>49970CC3-F3F4-BFB4-43EB-B25EF2DFD0DF</value>
   </synonym>
   <attributes uuid="06a511fd-1de0-49c0-8658-2796c0f2c69e">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>62585FBA-B98D-5144-4994-4F6D220605E6</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -106,16 +66,8 @@
   <attributes uuid="f32a87b2-d621-412a-a2b0-3d282725b84d">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>987A0D83-D87E-EAFB-B25C-C0F000F6EC9F</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -132,16 +84,8 @@
   <attributes uuid="b266b5d1-afe8-4678-b51f-7ccd8560ab8e">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Текстовая строка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Search literal</value>
+    <value>20F7F88D-E22F-CC60-00F9-93638112C67C</value>
    </synonym>
    <type>
     <types>String</types>
@@ -158,16 +102,8 @@
  <forms uuid="460cfbfc-efd3-4ae8-b145-bd3b3874c694">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>6B00102A-2857-992B-B7BE-EF78AC34B790</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -175,16 +111,8 @@
  <forms uuid="972b45ee-306a-491c-9a8c-1771781ff1e9">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>66426A82-3FF4-1963-3131-15A4A7341508</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -192,16 +120,8 @@
  <forms uuid="0050e2fb-32d7-4ab5-9003-0e69e8ec4a6a">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>5B26773C-005F-8081-105B-B03E8C835740</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

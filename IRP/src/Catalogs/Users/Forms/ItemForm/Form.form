@@ -53,16 +53,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup listede göster</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа показать в списке</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group show in list</value>
+      <value>9734A966-6912-5D2E-E70C-CEC2618B6FFA</value>
      </title>
      <extendedTooltip>
       <name>GroupShowInListExtendedTooltip</name>
@@ -132,16 +124,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup bir sonraki girişte şifreyi sıfırla</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа Поменять пароль при следующем входе</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group change password on next login</value>
+      <value>D10F77E1-2F96-78F5-53BB-B72DAABAB0AB</value>
      </title>
      <extendedTooltip>
       <name>GroupChangePasswordOnNextLoginExtendedTooltip</name>
@@ -211,16 +195,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Devre dışı</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Не активен</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Disable</value>
+      <value>62DA9905-E2CD-3044-402F-FC90E27B6ED2</value>
      </title>
      <extendedTooltip>
       <name>GroupDisableExtendedTooltip</name>
@@ -250,16 +226,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Kullanıcı ayarlar grubu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа пользовательских настроек</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of user options</value>
+     <value>44BCCAA1-0BD3-93F2-2E4A-A73922A6C079</value>
     </title>
     <extendedTooltip>
      <name>GroupUserOptionsExtendedTooltip</name>
@@ -323,16 +291,8 @@
     <name>Description</name>
     <id>1</id>
     <title>
-     <key>tr</key>
-     <value>Login</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Логин</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Login</value>
+     <value>A8C3E12C-84D0-75F3-3AEA-A843FDC5690B</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -596,16 +556,8 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Otomatik</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Авто</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Auto</value>
+       <value>D500426E-64D4-9DCF-F224-47ABBBFCFCC0</value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Auto</value>
@@ -613,16 +565,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Küçük yazılar</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Компактный</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Compact</value>
+       <value>629C749F-F473-38F0-0135-5D1BF467B3E5</value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Compact</value>
@@ -630,16 +574,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Normal</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Нормальный</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Normal</value>
+       <value>5A146B6C-9161-A863-3B22-28D4870D381C</value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Normal</value>
@@ -651,16 +587,8 @@
     <name>LocalizationCode</name>
     <id>10</id>
     <title>
-     <key>tr</key>
-     <value>Veri görüntüleme dili</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Язык представления данных</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Data localization</value>
+     <value>F45243A2-0DC5-FC3E-E93D-D43ABE00D994</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -704,16 +632,8 @@
     <name>InterfaceLocalizationCode</name>
     <id>27</id>
     <title>
-     <key>tr</key>
-     <value>Arayüz görüntüleme dili</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Язык интерфейса</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Interface localization</value>
+     <value>ED33054A-0791-8234-4D1D-D27CAC83435F</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -882,16 +802,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Varsayılan ayarlar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Настройки по умолчанию</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Default settings</value>
+     <value>2E018B06-88CC-DA5D-D811-13F811534DE3</value>
     </title>
     <extendedTooltip>
      <name>GroupDefaultSettingsExtendedTooltip</name>
@@ -920,16 +832,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings</value>
+    <value>831D5A6F-B8BB-1548-86CC-C7F43976B8E1</value>
    </title>
    <extendedTooltip>
     <name>GroupSettingsExtendedTooltip</name>
@@ -1158,16 +1062,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Roller</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Роли доступа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Roles</value>
+    <value>296F5138-F399-3011-186C-C6F8E1DFB308</value>
    </title>
    <extendedTooltip>
     <name>GroupRolesExtendedTooltip</name>
@@ -1191,16 +1087,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа основная</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main</value>
+   <value>E770414A-925D-DBAB-B886-684FAD3829E2</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -1310,16 +1198,8 @@
  <attributes>
   <name>Password</name>
   <title>
-   <key>tr</key>
-   <value>Parola</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пароль</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Password</value>
+   <value>149D1EAA-70EA-0110-0A46-6E074B0ACEBE</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1336,16 +1216,8 @@
  <attributes>
   <name>RoleList</name>
   <title>
-   <key>tr</key>
-   <value>Rol listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список ролей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Role list</value>
+   <value>3FCD87C7-22B4-1169-9192-2680428D50E5</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1364,16 +1236,8 @@
  <formCommands>
   <name>SetPassword</name>
   <title>
-   <key>tr</key>
-   <value>Parola tanımla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить пароль</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set password</value>
+   <value>92DC0A1B-A716-F162-28D2-2E92E5EE3D05</value>
   </title>
   <id>1</id>
   <use>
@@ -1393,16 +1257,8 @@
  <formCommands>
   <name>Settings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings</value>
+   <value>E9B8F62D-1728-AF61-157B-B27AA468CCDF</value>
   </title>
   <id>2</id>
   <use>

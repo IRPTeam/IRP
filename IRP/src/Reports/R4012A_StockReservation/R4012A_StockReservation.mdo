@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R4012A_StockReservation</name>
  <synonym>
-  <key>tr</key>
-  <value>R4012A Stok rezervasyonu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4012A Резервы товаров на складах</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4012A Stock reservation</value>
+  <value>21C8ACD6-270D-6557-7717-76A27A87445C</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R4012A_StockReservation.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="54948984-ece9-455a-8c7d-555d3312cd74">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>F02B08DF-CCF5-C1DE-EFE2-24D132505DAD</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

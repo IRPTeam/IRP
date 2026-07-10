@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R3010B_CashOnHand</name>
  <synonym>
-  <key>tr</key>
-  <value>R3010 Finansal bakiye</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R3010 Остатки денежных средств</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R3010 Cash on hand</value>
+  <value>640984BC-C50D-CB3B-B6DF-F81197170010</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="82502afd-1ac4-4556-988c-22c8bc94db16">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>1785F0FE-80F2-5FAE-E3C0-0FA7F74E545B</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <attributes uuid="fa0e70b2-26b2-4ec2-b24a-ed5f1d6ec227">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложенный расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deferred calculation</value>
+   <value>2C3A8FD6-9C0D-62DE-E201-1E972B129396</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -69,16 +45,8 @@
  <dimensions uuid="30f4f4dc-7256-4c58-99db-548fce3e9e14">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>B6547359-09AA-B9D0-0DAA-AEF24FF4B0F7</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -91,16 +59,8 @@
  <dimensions uuid="ac43293f-0c33-4a06-82f0-f3b90a0ada54">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>17EDAC24-5A0B-9DB1-11AB-B29809C0F5A9</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -113,16 +73,8 @@
  <dimensions uuid="1633447e-e350-423a-bf37-095c73d16212">
   <name>Account</name>
   <synonym>
-   <key>tr</key>
-   <value>Kasa/Banka</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Касса/Банковский счет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Account</value>
+   <value>C4A08B06-6EDD-82D6-665C-CEEF7E78FEB9</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -135,16 +87,8 @@
  <dimensions uuid="40fc94ca-6744-497e-a644-200a0ede0348">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>72DE0550-ADCE-C0C9-9353-3563DB519664</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -157,16 +101,8 @@
  <dimensions uuid="56f7a34b-15d0-40a2-9200-e998b080d2c2">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction currency</value>
+   <value>E854EC86-C78B-8DC4-4386-69C43B4B92BA</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -179,16 +115,8 @@
  <dimensions uuid="8ced5a33-a190-40ba-b0f0-38ddeaf2649e">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>84939820-8B11-023F-F21E-E081CAEC0AFB</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>

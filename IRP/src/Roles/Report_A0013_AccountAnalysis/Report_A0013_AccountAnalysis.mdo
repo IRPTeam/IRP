@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="05f5b327-8742-441b-80cd-0a7cdf516c48">
  <name>Report_A0013_AccountAnalysis</name>
  <synonym>
-  <key>tr</key>
-  <value>A0013 Hesap analizi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет A0013_АнализСчета</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report A0013_AccountAnalysis</value>
+  <value>C34BD23E-DCE8-CCDD-D26A-A5B2C13BB9A0</value>
  </synonym>
 </mdclass:Role>

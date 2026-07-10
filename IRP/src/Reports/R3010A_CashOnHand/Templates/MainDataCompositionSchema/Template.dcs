@@ -11,16 +11,8 @@
 			<field>Company</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şirket</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Организация</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Company</v8:content>
+					<v8:content>99B4DE2E-97DA-8C82-275D-DB7FF83B8B15</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -47,16 +39,8 @@
 			<field>Branch</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şube</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Структурное подразделение</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Branch</v8:content>
+					<v8:content>441F38A3-2E97-4868-839B-BAFA8A538837</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -68,16 +52,8 @@
 			<field>CurrencyMovementType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Çoklu döviz hareket tipi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Вид мультивалютной аналитики</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Multi currency movement type</v8:content>
+					<v8:content>539DE434-DAB9-7510-0F58-89B2934C263D</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -89,16 +65,8 @@
 			<field>Currency</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валюта</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency</v8:content>
+					<v8:content>F8F4FCDB-7A44-C1AF-FCEE-EC4DA97D04A8</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -110,16 +78,8 @@
 			<field>RecordDocument</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Kayıt Belgesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Записать документ</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Record document</v8:content>
+					<v8:content>D5B17140-DDA2-709E-E3E4-48908A00C3FE</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -132,16 +92,8 @@
 			<field>SecondPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Periyot, saniye</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Период, второй</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, second</v8:content>
+					<v8:content>992177DA-CA69-CF9A-A5AB-B72545570C27</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -154,16 +106,8 @@
 			<field>isTransacitonCurrency</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İşlem Para Birimi mi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валюта транзакции</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Is transaciton currency</v8:content>
+					<v8:content>83225808-73C1-57F1-15E8-838B39921378</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -172,16 +116,8 @@
 			<field>Account</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Hesap</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Банковский счет</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Account</v8:content>
+					<v8:content>352F48EA-BEE3-04A9-9317-771C13761913</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -193,16 +129,8 @@
 			<field>TransactionCurrency</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İşlem para birimi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валюта транзакции</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transaction currency</v8:content>
+					<v8:content>DA4BDC15-78C6-268F-F587-79528DEF51A9</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -214,16 +142,8 @@
 			<field>Receipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gelen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Приход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Receipt</v8:content>
+					<v8:content>7D0CD04B-E17C-E53C-C0DD-D2D60CAAD907</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -231,16 +151,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>50727FA7-A939-3B4D-DFFE-E02B532092B9</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -255,16 +167,8 @@
 			<field>ClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Kapanış bakiyesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Конечный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Closing balance</v8:content>
+					<v8:content>373A0C7D-A28A-30D3-376C-C777B3B5B0D3</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -277,16 +181,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>50727FA7-A939-3B4D-DFFE-E02B532092B9</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -305,16 +201,8 @@
 			<field>OpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Açılış bakiyesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Начальный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Opening balance</v8:content>
+					<v8:content>BF543565-5C2B-6284-4B81-1D4ED2D14488</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -327,16 +215,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>50727FA7-A939-3B4D-DFFE-E02B532092B9</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -355,16 +235,8 @@
 			<field>Expense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Çıkan</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Расход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Expense</v8:content>
+					<v8:content>9196F443-22A6-255E-EF74-4FF954DF1501</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -372,16 +244,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>50727FA7-A939-3B4D-DFFE-E02B532092B9</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -396,16 +260,8 @@
 			<field>Turnover</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ciro</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Оборот</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Turnover</v8:content>
+					<v8:content>F9154FBB-F1AB-E2A9-947D-D4FC69ECBFBA</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -413,16 +269,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>50727FA7-A939-3B4D-DFFE-E02B532092B9</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -475,16 +323,8 @@ FROM
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem başı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>C9E8A5B1-CF33-70ED-D3AA-A60C4F1E32D9</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -501,16 +341,8 @@ FROM
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem sonu</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Конец периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>6EBCADAA-3BC7-C60C-C3F0-01F002308941</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -527,16 +359,8 @@ FROM
 		<name>ReportPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Rapor dönemi</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период отчета</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Report period</v8:content>
+				<v8:content>0720D9CC-DF49-2876-6F37-709CB7A22C61</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -553,16 +377,8 @@ FROM
 		<dcsset:name>A01</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>A01. Varsayılan</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>A01. По умолчанию</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>A01. Default</v8:content>
+				<v8:content>5C3EE39F-746C-712A-A91B-B5AA670E736F</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
@@ -691,16 +507,8 @@ FROM
 		<dcsset:name>C01</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>C01. Para Birimi</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>C01. Валюта</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>C01. Currency</v8:content>
+				<v8:content>D270A86E-DC14-640C-C4E1-1ABA5EA2BA2B</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">

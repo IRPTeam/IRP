@@ -19,16 +19,8 @@
 			<field>Company</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şirket</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Организация</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Company</v8:content>
+					<v8:content>9E662571-3D64-A432-20E5-5FE326E213E6</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -58,16 +50,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>792DE59E-8BC3-FD6A-A40C-C3AFD1702DEC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -90,16 +74,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>792DE59E-8BC3-FD6A-A40C-C3AFD1702DEC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -118,16 +94,8 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Varyant</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Характеристика</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>31A03E6D-CD6E-B5C4-4F05-5C72E9B3CC47</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -139,16 +107,8 @@
 			<field>Order</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sipariş</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Заказ</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Order</v8:content>
+					<v8:content>85C67D58-C199-5B85-5B1C-C6A5A62B9F7B</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -160,16 +120,8 @@
 			<field>QuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sipariş edilen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>В заказе</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ordered</v8:content>
+					<v8:content>D66FD7BA-A0C2-D806-62C6-666BDE70AFBF</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -177,16 +129,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>792DE59E-8BC3-FD6A-A40C-C3AFD1702DEC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -201,16 +145,8 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Malzeme</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Номенклатура</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>4882E5FF-4CAC-4846-60EE-E8BF58E865D1</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -227,16 +163,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>792DE59E-8BC3-FD6A-A40C-C3AFD1702DEC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -263,16 +191,8 @@
 			<field>OrderLegalName</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura hesabı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Контрагент</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Legal name</v8:content>
+					<v8:content>6E6A921F-E88A-780E-E1CF-F89EB8490D22</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -284,16 +204,8 @@
 			<field>OrderPartner</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Cari hesap</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Партнер</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Partner</v8:content>
+					<v8:content>A5D01995-5D35-9E88-8472-25F45FA59763</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -305,16 +217,8 @@
 			<field>Closed</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Kapalı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Заказ закрыт</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Closed</v8:content>
+					<v8:content>74F81DDC-BBE0-242D-D608-8F00BE666E21</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -323,16 +227,8 @@
 			<field>Branch</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şube</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Структурное подразделение</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Branch</v8:content>
+					<v8:content>59EF5320-6076-EF0E-EE6B-BC8528382567</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -392,16 +288,8 @@ FROM
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem başı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>89762106-CE1C-0C08-81BF-FEEA760DB4BE</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -417,16 +305,8 @@ FROM
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem sonu</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Конец периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>DEED7E8D-F44C-2C3C-CBE5-5DC4D4B539A0</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

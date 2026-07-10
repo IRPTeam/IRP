@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="61348a08-a74d-4725-8901-bccdae3d3b3b">
  <name>NumberingRulesServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Numaratör kuralları server</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Правила нумерации сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Numbering rules server</value>
+  <value>E0FF901C-C957-813C-C59E-EBF752B90864</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

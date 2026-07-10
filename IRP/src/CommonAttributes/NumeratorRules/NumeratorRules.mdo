@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f0ef77e7-e621-4ecc-b3ed-581ab2615f05">
  <name>NumeratorRules</name>
  <synonym>
-  <key>tr</key>
-  <value>Numaratör</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Нумаратор</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Numerator</value>
+  <value>ECE557B7-17BC-273E-E195-5B6CC857CF9B</value>
  </synonym>
  <type>
   <types>CatalogRef.NumeratorGroups</types>

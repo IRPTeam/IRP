@@ -11,16 +11,8 @@
  </producedTypes>
  <name>TaskExecutors</name>
  <synonym>
-  <key>tr</key>
-  <value>Görev sorumluları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Исполнители задач</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Task executors</value>
+  <value>3982F802-A840-EF12-2D09-9286F26168B3</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,16 +20,8 @@
  <dimensions uuid="db31a8ac-20bc-4dae-b370-85a9ec79b042">
   <name>Executor</name>
   <synonym>
-   <key>tr</key>
-   <value>Sorumlu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Исполнитель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Executor</value>
+   <value>2DD3CA6D-C553-A177-7399-9D9DFB6D43D8</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -53,16 +37,8 @@
  <dimensions uuid="6ea1b639-3753-4f3a-89a8-81a49560d10e">
   <name>UserGroup</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı grubu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа пользователей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User group</value>
+   <value>6B824D42-69D2-5807-7A9D-D1BC0174B6DF</value>
   </synonym>
   <type>
    <types>CatalogRef.UserGroups</types>
@@ -77,16 +53,8 @@
  <dimensions uuid="9b08ce50-966b-41d7-822d-4d2cc5519753">
   <name>Position</name>
   <synonym>
-   <key>tr</key>
-   <value>Pozisyon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Должность</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Position</value>
+   <value>A056785D-D86D-85C1-17DE-EDA3C371255D</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -101,16 +69,8 @@
  <dimensions uuid="cfa80f9b-5706-44f8-9124-96d20252de6e">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>9EB48279-3B9B-2CB7-7BDF-F5A763FA0DE8</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -125,16 +85,8 @@
  <dimensions uuid="1b432461-0126-4ac7-bead-47e21d1c40d1">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Центр прибылей/убытков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Profit loss center</value>
+   <value>F5651E4A-ECEE-77FB-B25A-AE2D3209F857</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

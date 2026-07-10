@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R2050T_RetailSales</name>
  <synonym>
-  <key>tr</key>
-  <value>R2050 Perakende satışlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2050 Розничные продажи</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2050 Retail sales</value>
+  <value>9B7DDB7B-A12F-189C-C1FE-EE3E6093100D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="ec0cc161-7030-4da7-8027-a697dcf2208f">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>38607E67-8A2F-A427-7E19-98E31D5E0020</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +33,8 @@
  <resources uuid="8cb0eebe-0920-445c-9483-780cfda641d6">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>0DE81011-E493-7B15-5E85-5BEF560913EC</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +46,8 @@
  <resources uuid="96068a3c-9e73-49cc-9457-6c501d89bff9">
   <name>NetAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Net tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма без налогов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Net amount</value>
+   <value>69C5E998-47CF-737D-D0AC-C6EB2ECDF231</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -91,16 +59,8 @@
  <resources uuid="865a2ed1-a5d4-4743-b6ad-020a87048167">
   <name>OffersAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Iskonto tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма скидки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Offers amount</value>
+   <value>C9043995-CB69-B5A3-310F-FEB4E743982F</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -112,16 +72,8 @@
  <dimensions uuid="3d0d4c25-3c4c-4e8f-8888-929aa660cf13">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>187B856F-F547-A9E7-7D80-0062A787BAA6</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -134,16 +86,8 @@
  <dimensions uuid="65b32945-c3aa-4947-8328-8cc9a76b785f">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>E261FD7F-A93F-593A-A3DC-C19B01724AE2</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -156,16 +100,8 @@
  <dimensions uuid="9a88f43a-42f4-423b-b447-32b80211fd19">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>DC75C85D-DF35-9EAC-C764-4E1D85A90856</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -178,16 +114,8 @@
  <dimensions uuid="388bd086-38c2-4122-98b5-4386e7eddc4d">
   <name>SalesPerson</name>
   <synonym>
-   <key>tr</key>
-   <value>Satış elemanı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Продавец</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Sales person</value>
+   <value>1D574E52-F346-14B1-1970-054B978DD539</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -206,16 +134,8 @@
  <dimensions uuid="955df867-20b9-4eb7-a510-be4e2533a072">
   <name>RetailSalesReceipt</name>
   <synonym>
-   <key>tr</key>
-   <value>Perakende satış fişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Розничные чеки - Продажа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Retail sales receipt</value>
+   <value>47617C06-91D2-5B8A-A99A-A1EF38FEC221</value>
   </synonym>
   <type>
    <types>DocumentRef.RetailReturnReceipt</types>
@@ -229,16 +149,8 @@
  <dimensions uuid="d267727c-72d9-4de0-8f77-ca6d0b25c227">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>279B76FF-6F2F-E045-57C3-3A4894725EB2</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -251,16 +163,8 @@
  <dimensions uuid="5b5710fb-25f1-451d-8af4-0420dc41b07f">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>E302A839-572E-FB5F-FAD5-54884E3B5EEB</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -273,16 +177,8 @@
  <dimensions uuid="2d5b32bf-fa4a-400d-a652-3ab222e95f16">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row key</value>
+   <value>F25D5A18-3C3B-EDF9-9188-8324E25CF577</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>

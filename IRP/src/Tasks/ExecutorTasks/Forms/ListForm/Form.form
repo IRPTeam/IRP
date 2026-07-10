@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>D16C5FA8-CCB2-4EC3-30D2-2FD8648D620B</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -741,16 +733,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açıklama</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>0C87C706-8B9D-C3E6-65CA-ACA91BEA44A9</value>
       </content>
      </localValue>
     </title>
@@ -788,16 +772,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Gerçekleştirileni göster</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Показать выполненные</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Show executed</value>
+       <value>485FE223-1D28-DCD5-538C-C1FFF16F026B</value>
       </content>
      </localValue>
     </title>
@@ -812,16 +788,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Geçerli kullanıcı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Текущий пользователь</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Current user</value>
+       <value>92D43BF8-4AF1-E981-1F60-09BCDAD68300</value>
       </content>
      </localValue>
     </title>
@@ -836,16 +804,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tüm görevleri göster</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Показать все задачи</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Show all tasks</value>
+       <value>794A5BC5-4308-06A1-1994-437F762E7EB3</value>
       </content>
      </localValue>
     </title>
@@ -860,16 +820,8 @@ WHERE
  <formCommands>
   <name>ShowAllTasks</name>
   <title>
-   <key>tr</key>
-   <value>Tüm görevleri göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать все задачи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show all tasks</value>
+   <value>819EE022-2DDF-4954-4DEC-C2BFC976F3AE</value>
   </title>
   <id>1</id>
   <use>
@@ -885,16 +837,8 @@ WHERE
  <formCommands>
   <name>ShowExecuted</name>
   <title>
-   <key>tr</key>
-   <value>Gerçekleştirileni göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать выполненные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show executed</value>
+   <value>017E1374-CA57-0FA9-90D4-4958637CD707</value>
   </title>
   <id>2</id>
   <use>

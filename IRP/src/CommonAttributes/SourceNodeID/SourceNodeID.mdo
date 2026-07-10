@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a3699ccd-697e-4bb0-a8d5-76a0331ccb14">
  <name>SourceNodeID</name>
  <synonym>
-  <key>tr</key>
-  <value>Kaynak düğüm ID</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>ID узла источника</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Source node ID</value>
+  <value>C403EE3F-594E-AA7C-C771-13C5908C66A7</value>
  </synonym>
  <type>
   <types>String</types>
@@ -117,6 +109,10 @@
  </content>
  <content>
   <metadata>Document.ChequeBondTransaction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Storno</metadata>
   <use>Use</use>
  </content>
  <content>

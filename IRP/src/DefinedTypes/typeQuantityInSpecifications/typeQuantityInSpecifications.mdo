@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeQuantityInSpecifications</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip ürün reçetesindeki miktar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Количество в спецификации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type quantity in specifications</value>
+  <value>4D972B86-1F4B-2AF6-6834-47FA8D6A2E1A</value>
  </synonym>
  <type>
   <types>Number</types>

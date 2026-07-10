@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UsePurchase</name>
  <synonym>
-  <key>tr</key>
-  <value>Satın alma modülü kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Закупки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use purchase</value>
+  <value>3EF8C76B-E0BD-0415-5E8B-B13D4587B33C</value>
  </synonym>
  <type>
   <types>Boolean</types>

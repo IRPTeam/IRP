@@ -6,16 +6,8 @@
  </producedTypes>
  <name>RelatedDocuments</name>
  <synonym>
-  <key>tr</key>
-  <value>Bağlı evrakları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Связанные документы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Related documents</value>
+  <value>F71D9D33-DFE0-DD91-10AD-DAD3FA9BB84F</value>
  </synonym>
  <type>
   <types>DocumentRef</types>
@@ -136,19 +128,12 @@
  <content>Document.SalesInvoice.TabularSection.ShipmentPlaningOrders.Attribute.ShipmentPlaningOrder</content>
  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ShipmentPlaningOrder</content>
  <content>Document.DebitCreditNote.Attribute.BasisDocument</content>
+ <content>Document.Storno.Attribute.Basis</content>
  <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
   <name>RelatedDocuments</name>
   <synonym>
-   <key>tr</key>
-   <value>Bağlı evrakları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Связанные документы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Related documents</value>
+   <value>BBE094DB-F241-2341-16C6-6C7987445517</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>
@@ -160,6 +145,7 @@
    <types>DocumentRef.AdditionalRevenueAllocation</types>
    <types>DocumentRef.CashPayment</types>
    <types>DocumentRef.AdditionalDeduction</types>
+   <types>DocumentRef.Storno</types>
    <types>DocumentRef.AdditionalCostAllocation</types>
    <types>DocumentRef.EmployeeSickLeave</types>
    <types>DocumentRef.PurchaseInvoice</types>

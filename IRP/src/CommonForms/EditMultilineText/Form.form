@@ -114,16 +114,8 @@
  <attributes>
   <name>Text</name>
   <title>
-   <key>tr</key>
-   <value>Metin</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текст</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Text</value>
+   <value>D0B59C65-308B-DBDE-E65D-D152D2D069D2</value>
   </title>
   <id>1</id>
   <valueType>
@@ -139,16 +131,8 @@
  <attributes>
   <name>ItemName</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tanımı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование элемента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item name</value>
+   <value>EA546901-D961-D6E9-989C-CAD4D26F3B21</value>
   </title>
   <id>2</id>
   <valueType>
@@ -165,16 +149,8 @@
  <attributes>
   <name>TableName</name>
   <title>
-   <key>tr</key>
-   <value>Tablo ismi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Table name</value>
+   <value>CB9E2EE8-19B9-D614-457A-A4524B715445</value>
   </title>
   <id>3</id>
   <valueType>
@@ -191,16 +167,8 @@
  <attributes>
   <name>TableIndex</name>
   <title>
-   <key>tr</key>
-   <value>Tablo dizini</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Индекс таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Table index</value>
+   <value>D1F5C6F9-6CC8-7754-4C6B-B4C73F809751</value>
   </title>
   <id>4</id>
   <valueType>
@@ -219,16 +187,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>82E39283-8C43-7929-9F20-02B800F0E47A</value>
   </title>
   <id>1</id>
   <use>
@@ -244,16 +204,8 @@
  <formCommands>
   <name>VoiceNarrator</name>
   <title>
-   <key>tr</key>
-   <value>Ses anlatıcı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Голосовая запись</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Voice narrator</value>
+   <value>FA8C159D-0F7F-6C76-602B-BF63418360E0</value>
   </title>
   <id>2</id>
   <use>

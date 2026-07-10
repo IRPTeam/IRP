@@ -1,6 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
+  <name>GroupHeadStorno</name>
+  <id>1458</id>
+  <items xsi:type="form:Decoration">
+   <name>DecorationDocStorno</name>
+   <id>1460</id>
+   <title>
+    <key>en</key>
+    <value>0F438219-5B93-D4B2-2D02-23A3CA4D6F77</value>
+   </title>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>DecorationDocStornoExtendedTooltip</name>
+    <id>1462</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>DecorationDocStornoContextMenu</name>
+    <id>1461</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <font xsi:type="core:FontRef">
+    <font>System.DefaultGUIFont</font>
+    <bold>true</bold>
+    <italic>false</italic>
+    <underline>false</underline>
+    <strikeout>false</strikeout>
+   </font>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>DocStorno</name>
+   <id>1463</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>DocStorno</segments>
+   </dataPath>
+   <titleLocation>None</titleLocation>
+   <extendedTooltip>
+    <name>DocStornoExtendedTooltip</name>
+    <id>1465</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>DocStornoContextMenu</name>
+    <id>1464</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>LabelField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:LabelFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <hyperlink>true</hyperlink>
+   </extInfo>
+  </items>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <title>
+   <key>en</key>
+   <value>45DC4920-07C1-D981-1429-917BA85499A5</value>
+  </title>
+  <horizontalStretch>true</horizontalStretch>
+  <extendedTooltip>
+   <name>GroupHeadStornoExtendedTooltip</name>
+   <id>1459</id>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>AlwaysHorizontal</group>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <backColor xsi:type="core:ColorRef">
+    <color>Web.Pink</color>
+   </backColor>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormGroup">
   <name>GroupTitle</name>
   <id>298</id>
   <items xsi:type="form:FormGroup">
@@ -13,16 +127,8 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>310</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа декораций рисунок свернутой шапки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <value>B4540FCF-D9FB-AA94-480F-F61A79C48E07____</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -62,16 +168,8 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>313</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>7418BAA2-B0AB-2C51-1B75-540A18A15F67</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -173,16 +271,8 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>321</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>F20FF664-4195-309A-A8A5-555662D1C7ED</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -942,16 +1032,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Zaman çizelgesini doldur</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Заполнить табель</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Fill time sheet</value>
+        <value>C9CE0A0A-AEDA-8809-9026-6EB6114C5000</value>
        </title>
        <extendedTooltip>
         <name>WorkersGroupFillExtendedTooltip</name>
@@ -1100,16 +1182,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Zaman çizelgesi sol</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Зарплатный табель лево</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Time sheet left</value>
+     <value>761BFE2A-5444-6E97-75E9-9990EC4EAB16</value>
     </title>
     <extendedTooltip>
      <name>GroupTimeSheetLeftExtendedTooltip</name>
@@ -1174,16 +1248,8 @@
       <radioButtonsType>Tumbler</radioButtonsType>
       <choiceList>
        <presentation>
-        <key>tr</key>
-        <value>Takvim</value>
-       </presentation>
-       <presentation>
-        <key>ru</key>
-        <value>Календарь</value>
-       </presentation>
-       <presentation>
         <key>en</key>
-        <value>Calendar</value>
+        <value>A52150A8-0EB0-C082-2A8B-BAAB819C650A</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>Calendar</value>
@@ -1191,16 +1257,8 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>tr</key>
-        <value>Tablo</value>
-       </presentation>
-       <presentation>
-        <key>ru</key>
-        <value>Таблица</value>
-       </presentation>
-       <presentation>
         <key>en</key>
-        <value>Table</value>
+        <value>ED74F8E1-5960-4A1E-EBAE-E6A205ECDBAE</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>Table</value>
@@ -1823,16 +1881,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Zaman çizelgesi sayfa tablosu</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Таблица табеля учета рабочего времени</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Time sheet page table</value>
+       <value>2E924A45-B518-D8F7-73B5-555ECB8D4CCA</value>
       </title>
       <extendedTooltip>
        <name>GroupTimeSheetPageTableExtendedTooltip</name>
@@ -1916,16 +1966,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Zaman çizelgesi sayfa takvimi</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Календарь табеля учета рабочего времени</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Time sheet page calendar</value>
+       <value>92D8BE40-7580-1EC9-9764-41F2670A1D33</value>
       </title>
       <extendedTooltip>
        <name>GroupTimeSheetPageCalendarExtendedTooltip</name>
@@ -1949,16 +1991,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Zaman çizelgesi sayfaları</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Страницы табеля учета рабочего времени</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Time sheet pages</value>
+      <value>246A7C5B-0147-219D-D4F7-77B18BB4E5F5</value>
      </title>
      <extendedTooltip>
       <name>GroupTimeSheetPagesExtendedTooltip</name>
@@ -2031,16 +2065,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup8</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа8</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group8</value>
+        <value>8668D1BE-E2DF-F6F4-48A1-14CBC9EE801C</value>
        </title>
        <extendedTooltip>
         <name>Group8ExtendedTooltip</name>
@@ -2115,16 +2141,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup4</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа 4</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group4</value>
+        <value>2135DD70-A1AF-7823-3A81-1915E3A47786</value>
        </title>
        <extendedTooltip>
         <name>Group4ExtendedTooltip</name>
@@ -2199,16 +2217,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup 2</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа 2</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group2</value>
+        <value>FFC41245-CD0A-8E23-3951-11EE65056E63</value>
        </title>
        <extendedTooltip>
         <name>Group2ExtendedTooltip</name>
@@ -2239,16 +2249,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup6</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа6</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group6</value>
+       <value>4D6E5402-58C8-6B1F-F8A9-93808A18DFB1</value>
       </title>
       <extendedTooltip>
        <name>Group6ExtendedTooltip</name>
@@ -2323,16 +2325,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup3</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа3</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group3</value>
+        <value>A769AF47-1871-0981-1D37-7531CA71C15D</value>
        </title>
        <extendedTooltip>
         <name>Group3ExtendedTooltip</name>
@@ -2407,16 +2401,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup 1</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа 1</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group1</value>
+        <value>7739E775-B511-3FA8-88DE-E99CCC640B84</value>
        </title>
        <extendedTooltip>
         <name>Group1ExtendedTooltip</name>
@@ -2491,16 +2477,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup5</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа5</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group5</value>
+        <value>CF0B0B6A-9885-B334-41A5-5B6B758FB42C</value>
        </title>
        <extendedTooltip>
         <name>Group5ExtendedTooltip</name>
@@ -2531,16 +2509,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup7</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа7</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group7</value>
+       <value>2500C483-B58F-DED6-652D-DE4178F05F48</value>
       </title>
       <extendedTooltip>
        <name>Group7ExtendedTooltip</name>
@@ -2568,16 +2538,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>GrupToplamları</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Итоги по группам</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>GroupTotals</value>
+      <value>C1AB16F1-5407-C8E3-35A2-2711F583C539</value>
      </title>
      <extendedTooltip>
       <name>GroupTotalsExtendedTooltip</name>
@@ -2605,16 +2567,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Zaman çizelgesi hakkı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Зарплатный табель право</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Time sheet right</value>
+     <value>F6B0FB6B-38C9-9F23-330A-AD91D7A2D91B</value>
     </title>
     <extendedTooltip>
      <name>GroupTimeSheetRightExtendedTooltip</name>
@@ -2642,16 +2596,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Zaman çizelgesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Зарплатный табель</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Time sheet</value>
+    <value>3D0F790F-A0B3-54CA-A0C7-75C916C3C385</value>
    </title>
    <extendedTooltip>
     <name>GroupTimeSheetExtendedTooltip</name>
@@ -2678,16 +2624,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ek özellikler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительные реквизиты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Additional attributes</value>
+    <value>E1BF6887-C107-7206-6689-925F2B25282A</value>
    </title>
    <extendedTooltip>
     <name>GroupAddAttributesExtendedTooltip</name>
@@ -2910,16 +2848,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Numaratör grubu</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа нумерации</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group of numerator</value>
+      <value>8E2A58D4-1B7D-C96C-C151-196B1AA926CB</value>
      </title>
      <extendedTooltip>
       <name>GroupNumeratorExtendedTooltip</name>
@@ -2947,16 +2877,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ek olarak</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Дополнительно</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>More</value>
+     <value>2887B7A4-DCDF-DB41-1C8A-A5F54D12D9AE</value>
     </title>
     <extendedTooltip>
      <name>GroupMoreExtendedTooltip</name>
@@ -3066,16 +2988,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>A20B377A-18CF-F7FE-E2C7-79E40095AF45</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -3099,16 +3013,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>894DD97F-49FA-E796-69D3-3639F2BD1A28</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -3285,16 +3191,8 @@
    <columns>
     <name>Visible</name>
     <title>
-     <key>tr</key>
-     <value>Görünür</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Видимость</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Visible</value>
+     <value>6E4ECBF3-489A-E381-1810-098B220E145E</value>
     </title>
     <id>16</id>
     <valueType>
@@ -3310,16 +3208,8 @@
    <columns>
     <name>Icon</name>
     <title>
-     <key>tr</key>
-     <value>Simge</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Иконка</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Icon</value>
+     <value>7B8C0630-9F3B-54DD-D655-52B7807280E8</value>
     </title>
     <id>19</id>
     <valueType>
@@ -3340,16 +3230,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>56FE38CB-61EE-5AA3-3D6B-BA84A3D73E0B</value>
   </title>
   <id>7</id>
   <valueType>
@@ -3366,16 +3248,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>6D0C953D-D4EF-0C49-9D38-8B9E13694D3D</value>
   </title>
   <id>10</id>
   <valueType>
@@ -3394,16 +3268,8 @@
  <attributes>
   <name>Workers</name>
   <title>
-   <key>tr</key>
-   <value>Personel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Работники</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Workers</value>
+   <value>1891D0CB-5CE2-04F5-51DF-F65FA4731FFB</value>
   </title>
   <id>11</id>
   <valueType>
@@ -3418,16 +3284,8 @@
   <columns>
    <name>Employee</name>
    <title>
-    <key>tr</key>
-    <value>Personel</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сотрудник</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Employee</value>
+    <value>B5308B3A-D9B5-C47B-BD0D-D06222D74741</value>
    </title>
    <id>12</id>
    <valueType>
@@ -3443,16 +3301,8 @@
   <columns>
    <name>BeginDate</name>
    <title>
-    <key>tr</key>
-    <value>Başlangıç tarihi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата начала</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Begin date</value>
+    <value>7D489F92-4577-01CA-A44A-A1A2EA3C6C0D</value>
    </title>
    <id>13</id>
    <valueType>
@@ -3471,16 +3321,8 @@
   <columns>
    <name>EndDate</name>
    <title>
-    <key>tr</key>
-    <value>Bitiş tarihi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата окончания</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>End date</value>
+    <value>3F606FF4-D767-33B4-45AB-BC63BF27C6BF</value>
    </title>
    <id>14</id>
    <valueType>
@@ -3499,16 +3341,8 @@
   <columns>
    <name>Position</name>
    <title>
-    <key>tr</key>
-    <value>Pozisyon</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Должность</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Position</value>
+    <value>3644824A-D32A-6E2B-BC69-981909E29CE6</value>
    </title>
    <id>15</id>
    <valueType>
@@ -3524,16 +3358,8 @@
   <columns>
    <name>ProfitLossCenter</name>
    <title>
-    <key>tr</key>
-    <value>Kar/Zarar merkezi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Центр прибылей/убытков</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Profit loss center</value>
+    <value>840E96EB-27FD-91A0-08EC-CB4384896CB4</value>
    </title>
    <id>17</id>
    <valueType>
@@ -3549,16 +3375,8 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Иконка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Icon</value>
+    <value>68890120-B82F-55F1-1EA7-7AC57BC7C8EE</value>
    </title>
    <id>18</id>
    <valueType>
@@ -3577,16 +3395,8 @@
   <columns>
    <name>EmployeeSchedule</name>
    <title>
-    <key>tr</key>
-    <value>Program</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Расписание</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Schedule</value>
+    <value>83051893-0484-52F3-3A97-74AF5501F9D2</value>
    </title>
    <id>20</id>
    <valueType>
@@ -3603,16 +3413,8 @@
  <attributes>
   <name>ListMode</name>
   <title>
-   <key>tr</key>
-   <value>Liste modu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Режим списка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List mode</value>
+   <value>1A470D08-4B11-3864-45F2-2D165B2E643A</value>
   </title>
   <id>21</id>
   <valueType>
@@ -3629,16 +3431,8 @@
  <attributes>
   <name>Calendar</name>
   <title>
-   <key>tr</key>
-   <value>Takvim</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Календарь</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Calendar</value>
+   <value>A055A8F3-C6D8-28E7-7895-5FA8AABB3DE0</value>
   </title>
   <id>22</id>
   <valueType>
@@ -3657,16 +3451,8 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Период</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Period</value>
+   <value>1C31AFD0-7A35-0986-6C07-76E4FA596197</value>
   </title>
   <id>23</id>
   <valueType>
@@ -3682,16 +3468,8 @@
  <attributes>
   <name>TotalDays</name>
   <title>
-   <key>tr</key>
-   <value>Toplam günler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Всего дней</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Total days</value>
+   <value>BCDAEB68-69EC-132E-ECE6-68C81C853686</value>
   </title>
   <id>24</id>
   <valueType>
@@ -3710,16 +3488,8 @@
  <attributes>
   <name>TotalWeekend</name>
   <title>
-   <key>tr</key>
-   <value>Toplam hafta sonu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Всего выходных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Total weekend</value>
+   <value>B4BEBA30-66B2-8451-1047-7F7E8D7C5A5B</value>
   </title>
   <id>25</id>
   <valueType>
@@ -3738,16 +3508,8 @@
  <attributes>
   <name>TotalVacation</name>
   <title>
-   <key>tr</key>
-   <value>Toplam tatil</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Всего отпусков</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Total vacation</value>
+   <value>11361F67-A54E-FF65-52EE-E5A0EC56C56F</value>
   </title>
   <id>26</id>
   <valueType>
@@ -3766,16 +3528,8 @@
  <attributes>
   <name>TotalSickLeave</name>
   <title>
-   <key>tr</key>
-   <value>Toplam hasta izni</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Всего больничных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Total sick leave</value>
+   <value>E2580293-2418-51B2-2657-7A6DF50E5F1E</value>
   </title>
   <id>27</id>
   <valueType>
@@ -3794,16 +3548,8 @@
  <attributes>
   <name>TotalNotWorkingDays</name>
   <title>
-   <key>tr</key>
-   <value>Toplam çalışılmayan günler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Всего нерабочих дней</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Total not working days</value>
+   <value>A6EDF66D-F2C1-9B47-7238-8961D642BC44</value>
   </title>
   <id>28</id>
   <valueType>
@@ -3822,16 +3568,8 @@
  <attributes>
   <name>TotalWorkingDays</name>
   <title>
-   <key>tr</key>
-   <value>Toplam çalışma günleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Всего рабочих дней</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Total working days</value>
+   <value>595F7D1A-D5D7-81C4-4FA1-187E606384FA</value>
   </title>
   <id>29</id>
   <valueType>
@@ -3847,19 +3585,28 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>DocStorno</name>
+  <title>
+   <key>en</key>
+   <value>3AEF17CF-EDDE-DFC1-1472-2079DDFC5479</value>
+  </title>
+  <id>30</id>
+  <valueType>
+   <types>DocumentRef.Storno</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать row key</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>97ED3B83-D55F-AD18-8708-8B11C1DA8564</value>
   </title>
   <id>9</id>
   <use>
@@ -3878,16 +3625,8 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать скрытые таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show hidden tables</value>
+   <value>2A52DC4F-9BE2-C39D-D032-227FCF2F240F</value>
   </title>
   <id>15</id>
   <use>
@@ -3906,16 +3645,8 @@
  <formCommands>
   <name>FillAll</name>
   <title>
-   <key>tr</key>
-   <value>Hepsini doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill all</value>
+   <value>46C8A96D-2E06-296A-A1F0-0C8DCF64D018</value>
   </title>
   <id>16</id>
   <use>
@@ -3932,16 +3663,8 @@
  <formCommands>
   <name>RefillByCurrentEmployee</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut çalışan tarafından doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить по текущему сотруднику</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Refill by current employee</value>
+   <value>726B3331-720A-3195-5226-61086EAEE074</value>
   </title>
   <id>17</id>
   <use>
@@ -3957,29 +3680,13 @@
  <formCommands>
   <name>SetNewNumber</name>
   <title>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set new number</value>
+   <value>D085CE44-10F3-8DF9-9120-04E7C488F4EB</value>
   </title>
   <id>18</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Set new number</value>
+   <value>6A581401-5FD0-B3C0-0A71-19924CD9BD69</value>
   </toolTip>
   <use>
    <common>true</common>

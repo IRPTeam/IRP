@@ -9,16 +9,8 @@
  </producedTypes>
  <name>SimpleBatch</name>
  <synonym>
-  <key>tr</key>
-  <value>Temel parti</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Простая партия</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Simple batch</value>
+  <value>BEE37075-05EB-52B9-9BF3-3CB0A770709F</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.SimpleBatch.StandardAttribute.Code</inputByString>
@@ -28,16 +20,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Parti v2</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Партия v2</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Batch v2</value>
+  <value>D630C57C-530B-670D-D4E5-5F8DC8E2F177</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>

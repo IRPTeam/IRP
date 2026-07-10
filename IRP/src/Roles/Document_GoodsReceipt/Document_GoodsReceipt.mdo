@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6a0e0fc8-bce1-401f-a0bc-3cd454b1ff4f">
  <name>Document_GoodsReceipt</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Mal kabulü"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Поступление товаров"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Goods receipt"</value>
+  <value>E137BD46-2CF1-6800-07D3-38448C34D457</value>
  </synonym>
 </mdclass:Role>

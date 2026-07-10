@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R4014B_SerialLotNumber</name>
  <synonym>
-  <key>tr</key>
-  <value>R4014 Seri lot numaralar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4014 Серии номенклатуры</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4014 Serial lot numbers</value>
+  <value>BDD7D6B0-9708-1B76-60AC-C1388CE7F59F</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="8b155978-1fcd-4891-a1f4-88e6cb9e1109">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>BC2801C2-D963-6557-7041-1A19A3656D30</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="1672bfe4-ac03-42a4-afcc-e595e95c933e">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>D11BB822-94DA-46D5-5849-986A5CFEE4EB</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="1c59f54d-b98f-472a-b1e2-e915b392ce47">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>FFE6E8C6-0375-31A5-54CE-E9A884CC35A5</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="fdaa2703-e8fe-44ba-876c-69543186330c">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>E07B2A07-7830-D946-6F39-9BFD25DC8AC1</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="549d9b75-543e-41a0-81dc-a2b5a3f18112">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>742B5119-7C36-8E23-3330-03B4C1C9F4F2</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="8250fefd-083d-495f-8499-fb1568a15f58">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>35DDEF20-9425-7313-381A-AC683EFEA7F5</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>

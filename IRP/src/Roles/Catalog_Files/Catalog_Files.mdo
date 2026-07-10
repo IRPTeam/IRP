@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cb017e1b-a3d1-4297-8ea3-dfbfa2b12f43">
  <name>Catalog_Files</name>
  <synonym>
-  <key>tr</key>
-  <value>Dosyalar kart listesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Справочник файлов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Catalog files</value>
+  <value>32DA83B1-BC5B-E1AC-CBF5-546C498B7320</value>
  </synonym>
 </mdclass:Role>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>CalculationDeservedVacations</name>
  <synonym>
-  <key>tr</key>
-  <value>İzin hakediş hesaplama</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Расчет заслуженных отпусков</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Calculation deserved vacations</value>
+  <value>84B5DBB8-B09E-8959-9B61-185610BBE009</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.CalculationDeservedVacations.StandardAttribute.Number</inputByString>
@@ -27,28 +19,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>İzin hakediş hesaplama</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Расчет заслуженных отпусков</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Calculation deserved vacations</value>
+  <value>082A23B1-3BF6-A45D-D9D0-008F12CBA823</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>İzin hakediş hesaplama</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Расчет заслуженных отпусков</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Calculation deserved vacations</value>
+  <value>27906055-34C3-1767-7A2C-C8872AC72BA4</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -66,16 +42,8 @@
  <attributes uuid="cb53aaa1-8a04-47c3-b563-21d12a903f6e">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>E0FD2089-7C7F-A981-1DD0-01D84A537CB7</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -95,16 +63,8 @@
  <attributes uuid="c5334661-d13b-40bf-84c3-8953e68bd5a8">
   <name>BeginDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата начала</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Begin date</value>
+   <value>8A162C90-B4CF-70FB-B5DD-DB8965928CD9</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -122,16 +82,8 @@
  <attributes uuid="c48477a3-1c48-42bb-8d9a-4b8a2d316516">
   <name>EndDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата окончания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>End date</value>
+   <value>C7923C48-1596-F002-2E5C-C6F08FAC122D</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -149,16 +101,8 @@
  <forms uuid="c14df75b-b1fa-4df2-965d-3a526d48f3c2">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>DE88299E-5957-E37C-C4FF-FAF2C157D9D3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -166,16 +110,8 @@
  <forms uuid="e6cba52c-2fcc-4568-b5e1-d981f6e5ff52">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>094FD5D4-CC30-1B9F-F3B6-65E55AF3F472</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -183,16 +119,8 @@
  <forms uuid="cb571914-037e-4e31-81f1-8afb53ac2307">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>25C6ECD7-3BA6-D44A-A77F-F450C64D77A3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

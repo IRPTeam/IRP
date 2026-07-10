@@ -22,16 +22,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Tüm nesnelere erişim</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Доступ ко всем объектам</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Access to all objects</v8:content>
+						<v8:content>E13CC566-C458-C3BB-B52D-D8A5FAD4ECC0</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

@@ -237,16 +237,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup kullanım</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа использование</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group using</value>
+      <value>0DF00150-1E1F-1E67-754F-F94855D760C1</value>
      </title>
      <extendedTooltip>
       <name>GroupUsingExtendedTooltip</name>
@@ -274,16 +266,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup ayarlar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа настройки</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group options</value>
+     <value>2F3D3390-C790-1CF4-4A4B-BB78B8960BAA</value>
     </title>
     <extendedTooltip>
      <name>GroupOptionsExtendedTooltip</name>
@@ -311,16 +295,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ana</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основные</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Main</value>
+    <value>69A07349-D09D-CACD-D06D-DE94F95FF333</value>
    </title>
    <extendedTooltip>
     <name>GroupMainExtendedTooltip</name>
@@ -590,16 +566,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>C70F5EF5-6466-0568-82D2-2297561954B9</value>
    </title>
    <extendedTooltip>
     <name>GroupCompanyPrefixesExtendedTooltip</name>
@@ -869,16 +837,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Şube</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Структурное подразделение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Branch</value>
+    <value>6975B952-5325-6E87-7E62-28093A484469</value>
    </title>
    <extendedTooltip>
     <name>GroupBranchPrefixesExtendedTooltip</name>
@@ -1149,16 +1109,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kart listesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Справочник</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Catalog</value>
+    <value>62B70D55-4AF9-B183-39A1-14E88A258CEF</value>
    </title>
    <extendedTooltip>
     <name>GroupCatalogPrefixesExtendedTooltip</name>
@@ -1513,16 +1465,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document</value>
+    <value>4ED64F15-90C7-9EED-D9B6-6002D8E991FB</value>
    </title>
    <extendedTooltip>
     <name>GroupDocumentPrefixesExtendedTooltip</name>
@@ -1546,16 +1490,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>92C5CFB8-22BE-7527-76E9-9D56F3055E19</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -1615,16 +1551,8 @@
  <attributes>
   <name>FormData</name>
   <title>
-   <key>tr</key>
-   <value>Tarih formatı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Данные формы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Form data</value>
+   <value>7EB68920-15CC-0878-83DD-DEB4D01A1D72</value>
   </title>
   <id>4</id>
   <valueType/>

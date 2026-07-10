@@ -11,44 +11,20 @@
  </producedTypes>
  <name>SecureDataStorage</name>
  <synonym>
-  <key>tr</key>
-  <value>Güvenli depo</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Безопасное хранилище данных</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Secure data storage</value>
+  <value>5F4B21F9-0FB9-89D6-6170-06215BBB13F2</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Güvenli veri depolama</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Безопасное хранилище данных</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Secure data storage</value>
+  <value>C0F3E318-0C53-B848-8596-6121BEE0B6C6</value>
  </recordPresentation>
  <resources uuid="f056bd39-d1bc-4c36-9916-977dd69e278f">
   <name>Data</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Данные</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Data</value>
+   <value>FFD21C86-E12E-734E-ED86-6D638D5F38D4</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -62,16 +38,8 @@
  <dimensions uuid="14c2319c-4731-4710-ade0-23122a6f8a3e">
   <name>Owner</name>
   <synonym>
-   <key>tr</key>
-   <value>Sahip</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Владелец</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Owner</value>
+   <value>C8FC1B58-D538-B9DB-BA3F-F731DAEE41BE</value>
   </synonym>
   <type>
    <types>String</types>

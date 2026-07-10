@@ -6,32 +6,16 @@
  </producedTypes>
  <name>A0014_AccountingPLReport</name>
  <synonym>
-  <key>tr</key>
-  <value>Kâr/Zarar Raporu (P&amp;L)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>P&amp;L Report</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>P&amp;L Report</value>
+  <value>5A4505CD-178C-F518-8877-73AC34766309</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>Report.A0014_AccountingPLReport.Form.ReportForm</defaultForm>
  <forms uuid="468aa8b8-3f03-4104-b64a-2726c6de0eb3">
   <name>ReportForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Rapor formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма отчета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Report form</value>
+   <value>EDF5B8BA-312A-8B05-538A-AA2150242BA9</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -39,16 +23,8 @@
  <templates uuid="a51ad0ac-2920-43f8-8137-7f47621cc4cc">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Template</value>
+   <value>7EB33F3C-54B7-B39B-BA8C-CE58EBF56AF0</value>
   </synonym>
  </templates>
 </mdclass:Report>

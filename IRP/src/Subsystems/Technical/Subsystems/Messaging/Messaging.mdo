@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8f6513e1-0659-4fb4-80d9-e8bac3e26424">
  <name>Messaging</name>
  <synonym>
-  <key>tr</key>
-  <value>Messaging</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Уведомления</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Messaging</value>
+  <value>DBC36E70-59E5-F5DF-F38A-A0DF67D92925</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <content>Document.OutgoingMessage</content>

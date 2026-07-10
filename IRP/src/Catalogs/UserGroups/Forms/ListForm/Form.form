@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>E28798F1-87F9-3B5F-F49D-D7D3CFF783A8</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>04D38452-9DB0-CF66-649C-C5C44A0208E9</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -393,16 +377,8 @@ FROM
  <formCommands>
   <name>Settings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings</value>
+   <value>6D608985-4055-C991-1A01-11C23429E08A</value>
   </title>
   <id>1</id>
   <use>

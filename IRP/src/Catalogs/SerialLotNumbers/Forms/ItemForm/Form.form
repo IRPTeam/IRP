@@ -7,16 +7,8 @@
    <name>OwnerSelect</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Sahip seç</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Выбрать владельца</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Select owner</value>
+    <value>F0B44903-147F-2FE2-2F78-851399BB43F7</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -54,16 +46,8 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Manuel</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Вручную</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Manual</value>
+      <value>27AFDEF2-38EF-C1A9-9BDE-EB9D130EE897</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>Manual</value>
@@ -75,16 +59,8 @@
    <name>CreateBarcodeWithSerialLotNumber</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Barkod oluştur</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Создать штрихкод</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Create barcode</value>
+    <value>E8855254-C811-CF12-2900-001D31EFA327</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -125,16 +101,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Верх</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Top</value>
+   <value>CC661C0B-F314-DF8D-D4C4-488A97407137</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -403,16 +371,8 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Kendi çekimiz</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Собственные</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Own</value>
+      <value>781CC0F3-868D-BB7A-AAD7-7DF6FEDA774A</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>Own</value>
@@ -420,16 +380,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Üst öğeden al</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Унаследованная</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Inherit</value>
+      <value>43C43267-F99A-E8BD-DAB2-21A0F3153EF5</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>Inherit</value>
@@ -891,16 +843,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Komiten bilgisi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Информация комитента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Consignor info</value>
+   <value>A1210325-DEEA-C6B1-149D-D9C462751E0F</value>
   </title>
   <extendedTooltip>
    <name>GroupConsignorInfoExtendedTooltip</name>
@@ -917,16 +861,8 @@
    <group>Vertical</group>
    <behavior>Collapsible</behavior>
    <collapsedRepresentationTitle>
-    <key>tr</key>
-    <value>Gönderenler bilgisi</value>
-   </collapsedRepresentationTitle>
-   <collapsedRepresentationTitle>
-    <key>ru</key>
-    <value>Информация о кометенте</value>
-   </collapsedRepresentationTitle>
-   <collapsedRepresentationTitle>
     <key>en</key>
-    <value>Consignors info</value>
+    <value>7291D457-5032-3C76-6539-9C1ACD3FC0BB</value>
    </collapsedRepresentationTitle>
    <collapsed>true</collapsed>
    <representation>WeakSeparation</representation>
@@ -1150,28 +1086,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>İlişkili seri lotlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Связанные серийные номера</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Related serial lot numbers</value>
+   <value>48EF822A-B55C-1986-61B8-8FBC75645F30</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Grup ilişkili seri lotlar</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа связанные серийние номера</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group related serial lot numbers</value>
+   <value>45956D75-BD97-E8B5-5630-0EF0FEFDA0D1</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupRelatedSerialLotNumbersExtendedTooltip</name>
@@ -1188,16 +1108,8 @@
    <group>HorizontalIfPossible</group>
    <behavior>Collapsible</behavior>
    <collapsedRepresentationTitle>
-    <key>tr</key>
-    <value>İlişkili seri lotlar</value>
-   </collapsedRepresentationTitle>
-   <collapsedRepresentationTitle>
-    <key>ru</key>
-    <value>Связанные серийные номера</value>
-   </collapsedRepresentationTitle>
-   <collapsedRepresentationTitle>
     <key>en</key>
-    <value>Related serial lot numbers</value>
+    <value>C69F9275-03E4-2190-0F7D-D723C517EEE6</value>
    </collapsedRepresentationTitle>
    <showLeftMargin>true</showLeftMargin>
    <united>true</united>
@@ -1213,16 +1125,8 @@
    <name>EachSerialLotNumberIsUnique</name>
    <id>30</id>
    <title>
-    <key>tr</key>
-    <value>Eşsiz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Уникальный</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unique</value>
+    <value>F95347D4-253A-FE00-0F8D-D738E24C73E3</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1400,16 +1304,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup footer</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа подвал</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group bottom</value>
+   <value>5662C1FB-AF11-E3DF-F9D0-06135179751B</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -1477,16 +1373,8 @@
  <attributes>
   <name>OwnerSelect</name>
   <title>
-   <key>tr</key>
-   <value>Sahip seçme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать владельца</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Owner select</value>
+   <value>0906D9B2-6B6B-2B44-4311-1A1F7765FCA7</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1503,16 +1391,8 @@
  <attributes>
   <name>ItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item type</value>
+   <value>AA596731-914F-1304-4B36-6172BDC64AA9</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1528,16 +1408,8 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>D54C694D-82DD-68E5-5CE2-2E7059CA679C</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1553,16 +1425,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>A0D992CE-3CD6-87C6-65CE-E847F8EA20EC</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1578,16 +1442,8 @@
  <attributes>
   <name>Barcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Штрихкод</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Barcode</value>
+   <value>1D64DFA8-8192-5E67-74AB-BAC15B80D0E3</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1604,16 +1460,8 @@
  <attributes>
   <name>CreateBarcodeWithSerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numarasını ve barkodunu oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Создавать штрихкода с серийными номерами</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Create barcode with serial lot number</value>
+   <value>026207D1-6165-101B-BB49-9D57A92E6EC1_</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1629,16 +1477,8 @@
  <attributes>
   <name>InheritConsignorsInfo</name>
   <title>
-   <key>tr</key>
-   <value>Gönderen bilgilerini devral</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наследовать информацию комитента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Inherit consignors info</value>
+   <value>699776E1-1CA7-0082-2BD8-8F6E85AAB945</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1653,16 +1493,8 @@
   <columns>
    <name>Company</name>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>19380CEB-4708-4E30-0301-17F06BF9F734</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1678,16 +1510,8 @@
   <columns>
    <name>Consignor</name>
    <title>
-    <key>tr</key>
-    <value>Konsiyeye veren</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Комитент</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Consignor</value>
+    <value>115A7A59-68F2-E5C0-0390-0E4F4FD6ED15</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1704,16 +1528,8 @@
  <attributes>
   <name>ConsignorInfoMode</name>
   <title>
-   <key>tr</key>
-   <value>Komisyoncu bilgi modu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Режим информации комитента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Consignor info mode</value>
+   <value>A8506078-6209-C4B5-5733-352CA5E917F2</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1730,16 +1546,8 @@
  <attributes>
   <name>UseConsignorInfo</name>
   <title>
-   <key>tr</key>
-   <value>Gönderen bilgisini kullan</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Это комиссионный товар</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Use consignor info</value>
+   <value>4B4D2BB5-9EA6-EFAF-FE6B-B7C5D9C28A9A</value>
   </title>
   <id>10</id>
   <valueType>

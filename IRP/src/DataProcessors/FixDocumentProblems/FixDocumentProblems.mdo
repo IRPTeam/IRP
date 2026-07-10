@@ -6,32 +6,16 @@
  </producedTypes>
  <name>FixDocumentProblems</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge sorunlarını düzelt</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Исправить проблемы документов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Fix document problems</value>
+  <value>0FB293EA-139A-BAA0-0A8A-AAD756EF6D02</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.FixDocumentProblems.Form.Form</defaultForm>
  <forms uuid="f3078997-4eff-466c-98bf-d2f3b0ad823f">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>B7174028-29B1-BF01-1ED7-72A952573BF0</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

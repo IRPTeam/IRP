@@ -43,16 +43,8 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tümü</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Все</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>All</value>
+      <value>20087C4B-75FB-0995-583B-BBF567665C2A</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>all</value>
@@ -60,16 +52,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tek</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Единичный</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Single</value>
+      <value>47B545AF-1BAC-8046-695F-F0EEE7734E75</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>single</value>
@@ -77,16 +61,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Ürün reçetesi</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Спецификация товара</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Specification</value>
+      <value>98337E39-8331-94D0-0C1D-DF970AAEF071</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>specification</value>
@@ -143,16 +119,8 @@
     <typeDomainEnabled>true</typeDomainEnabled>
     <textEdit>true</textEdit>
     <inputHint>
-     <key>tr</key>
-     <value>Ara (Ctrl+F)</value>
-    </inputHint>
-    <inputHint>
-     <key>ru</key>
-     <value>Поиск (Ctrl+F)</value>
-    </inputHint>
-    <inputHint>
      <key>en</key>
-     <value>Search (Ctrl+F)</value>
+     <value>E465282C-E60F-4372-2591-105273BB973E</value>
     </inputHint>
    </extInfo>
   </items>
@@ -189,16 +157,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>B899FE04-7025-3202-2BA9-9572F956796E</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -599,6 +559,7 @@
    <name>CreateNewItemKey</name>
    <id>21</id>
    <visible>true</visible>
+   <enabled>false</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
@@ -709,16 +670,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Varyant</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Характеристика</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item key</value>
+       <value>467C0CDD-0BB4-856D-D26A-A6E759AEC4A8</value>
       </content>
      </localValue>
     </title>
@@ -728,16 +681,8 @@ FROM
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>0E9C1FA3-3B85-4B9E-E2B8-886972918945</value>
   </title>
   <id>2</id>
   <valueType>
@@ -753,16 +698,8 @@ FROM
  <attributes>
   <name>SelectedFilters</name>
   <title>
-   <key>tr</key>
-   <value>Seçilen filtreler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбранные фильтры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Selected filters</value>
+   <value>F28781F4-329A-1043-319F-F6685454C7B6</value>
   </title>
   <id>3</id>
   <valueType>
@@ -777,16 +714,8 @@ FROM
   <columns>
    <name>Attribute</name>
    <title>
-    <key>tr</key>
-    <value>Alan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Реквизит</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Attribute</value>
+    <value>43040935-258E-8D86-6399-97A40BE9F63A</value>
    </title>
    <id>4</id>
    <valueType>
@@ -802,16 +731,8 @@ FROM
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>2DD4121A-3045-27FE-E8F9-9E28593A9048</value>
    </title>
    <id>5</id>
    <valueType>
@@ -827,16 +748,8 @@ FROM
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>13CCDE19-F40F-4B91-132D-D8AF175A5DBF</value>
    </title>
    <id>6</id>
    <valueType>
@@ -854,16 +767,8 @@ FROM
  <attributes>
   <name>IsSpecificationFilter</name>
   <title>
-   <key>tr</key>
-   <value>Bu reçete filtresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Спецификация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Is specification filter</value>
+   <value>BAA8274C-F2E7-2F01-129F-FAC8F2C210E7</value>
   </title>
   <id>7</id>
   <valueType>
@@ -882,16 +787,8 @@ FROM
  <attributes>
   <name>SearchString</name>
   <title>
-   <key>tr</key>
-   <value>Arama satırı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Строка поиска</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Search string</value>
+   <value>9748970A-D740-F589-9FE1-12CA93BB1DF7</value>
   </title>
   <id>8</id>
   <valueType>
@@ -908,16 +805,8 @@ FROM
  <formCommands>
   <name>CreateNewItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Yeni oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Создать новый</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Create new</value>
+   <value>AEA4A4C7-7175-E9F5-5F63-346A0815E2B7</value>
   </title>
   <id>1</id>
   <use>

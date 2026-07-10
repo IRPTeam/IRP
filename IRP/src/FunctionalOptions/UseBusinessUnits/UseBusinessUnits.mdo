@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="03821fa7-6d48-4075-add1-545757e4019e">
  <name>UseBusinessUnits</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Departmanlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать подразделения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use business units</value>
+  <value>40813AC2-A4D6-DBB5-5E47-701B0DE88F5D</value>
  </synonym>
  <location>Constant.UseBusinessUnits</location>
  <privilegedGetMode>true</privilegedGetMode>

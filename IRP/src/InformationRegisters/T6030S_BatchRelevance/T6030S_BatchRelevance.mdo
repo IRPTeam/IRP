@@ -11,45 +11,21 @@
  </producedTypes>
  <name>T6030S_BatchRelevance</name>
  <synonym>
-  <key>tr</key>
-  <value>T6030 Parti geçerlilik belirtisi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T6030 Актуальность партии</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T6030 Batch relevance</value>
+  <value>6BFD9BCE-7C96-17F3-3176-66AAC03AB5E9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>T6030 Parti geçerlilik belirtisi</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>T6030 Актуальность партии</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>T6030 Batch relevance</value>
+  <value>61432EBD-40F9-DF77-7729-9B96657E4BE7</value>
  </recordPresentation>
  <resources uuid="974bef54-d052-4006-94ba-329eefb85e24">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>05A04CC8-A331-2C0C-CF9D-D9C5A187F56D</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesReportFromTradeAgent</types>
@@ -89,16 +65,8 @@
  <resources uuid="c7a4f133-4d2b-4b54-b938-4bed64b67eca">
   <name>IsRelevance</name>
   <synonym>
-   <key>tr</key>
-   <value>Geçerli</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Актуальный</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is relevance</value>
+   <value>8454FF67-8541-4B50-0720-0768F4173AB8</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -112,16 +80,8 @@
  <dimensions uuid="95cbd5b1-fd19-44d6-8a99-f8a5c4d3dc17">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>D4165842-55AD-F649-9DA3-39FDD6B3374A</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -136,16 +96,8 @@
  <dimensions uuid="4fc510a2-3bf2-4368-9943-24eb032a0e36">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>EF2D82A5-432E-0D37-77EE-E764417CA392</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -160,16 +112,8 @@
  <dimensions uuid="956bb2ef-7738-4ca2-ae78-5d019907a866">
   <name>Date</name>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Date</value>
+   <value>DF831FAB-C206-1021-1B02-2238ADB1E3D2</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -185,16 +129,8 @@
  <dimensions uuid="00991006-1e1e-46cc-bdfc-200560936a0f">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>A99B26A4-AD1B-D89F-F92D-D742D0A04EC9</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

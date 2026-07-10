@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeAddPropertyOwners</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip ek özellik sahipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип владелец дополнительных свойств</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type add property owners</value>
+  <value>258E3AA1-211E-66E0-03CD-DD869886AD1E</value>
  </synonym>
  <type>
   <types>CatalogRef.LockDataModificationReasons</types>
@@ -37,6 +29,7 @@
   <types>DocumentRef.ExternalAccountingOperation</types>
   <types>DocumentRef.CashPayment</types>
   <types>DocumentRef.AdditionalDeduction</types>
+  <types>DocumentRef.Storno</types>
   <types>CatalogRef.SpecialOfferRules</types>
   <types>CatalogRef.AccountingOperations</types>
   <types>DocumentRef.AdditionalCostAllocation</types>

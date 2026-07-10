@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ExternalFunctions</name>
  <synonym>
-  <key>tr</key>
-  <value>Dış fonksiyonlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Внешние функции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>External functions</value>
+  <value>949DC87C-1343-2B35-561F-F3F1DBBBBCEB</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.ExternalFunctions.StandardAttribute.Description</inputByString>
@@ -27,28 +19,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Dış fonksiyon</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Внешняя функция</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>External function</value>
+  <value>7FD9DEF2-2753-0270-082D-DF93A3B1714C</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Dış fonksiyonlar</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Внешние функции</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>External functions</value>
+  <value>E494BC60-75A7-073A-A9CD-D3A1CEC98482</value>
  </listPresentation>
  <dataHistory>Use</dataHistory>
  <hierarchical>true</hierarchical>
@@ -66,16 +42,8 @@
  <attributes uuid="fa2198be-48e9-4917-b3a1-72a363b63e55">
   <name>ExternalFunctionType</name>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Type</value>
+   <value>367ACCC8-8165-60AE-EC12-2827FC9EB64C</value>
   </synonym>
   <type>
    <types>EnumRef.ExternalFunctionType</types>
@@ -91,16 +59,8 @@
  <attributes uuid="b89ca813-78b7-4d49-9d34-e38d88f58381">
   <name>Enable</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalıştır</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Включить</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Enable</value>
+   <value>B2251995-A5EF-5613-377B-B3974B976CE1</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -114,16 +74,8 @@
  <attributes uuid="28f09bd7-bfdd-447d-9d0e-9bbd8c93ec18">
   <name>ExternalCode</name>
   <synonym>
-   <key>tr</key>
-   <value>Dış kod</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Внешний код</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>External code</value>
+   <value>FDE41B52-869E-08FF-F21B-BE5E32861CCB</value>
   </synonym>
   <type>
    <types>String</types>
@@ -138,16 +90,8 @@
  <attributes uuid="c7bf7b7a-a6bc-4e89-a637-c169eb88e12d">
   <name>UseForSetDescription</name>
   <synonym>
-   <key>tr</key>
-   <value>Tanım oluşturmak için kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Динамическое представление</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use for set description</value>
+   <value>64AA77E9-9F8E-91CA-A35F-F470611E13B4</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -161,16 +105,8 @@
  <attributes uuid="588b7e31-7bb9-4822-8c0c-869fb9c570d9">
   <name>SafeModeIsOn</name>
   <synonym>
-   <key>tr</key>
-   <value>Güvenli mod</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Безопасный режим</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Safe mode</value>
+   <value>B414743B-804C-0298-81B6-6FD7C8A2CFAF</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -187,16 +123,8 @@
  <attributes uuid="ecb16935-388e-425b-beb3-befdafec74e5">
   <name>RegExp</name>
   <synonym>
-   <key>tr</key>
-   <value>RegExp</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Регулярные выражения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Reg exp</value>
+   <value>F1D87E2B-3F70-97F2-2DA3-363F3746BD9D</value>
   </synonym>
   <type>
    <types>String</types>
@@ -211,16 +139,8 @@
  <attributes uuid="eebf46fa-6260-4da5-a77f-91bf55fbe3e4">
   <name>isSchedulerSet</name>
   <synonym>
-   <key>tr</key>
-   <value>Zamanlayıcı kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать планировщик</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use scheduler</value>
+   <value>D20FBAAC-D92C-1032-2864-4035C84E93CB</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -234,16 +154,8 @@
  <attributes uuid="89a60c17-6912-487b-8ad2-a6aca158c503">
   <name>JobSchedule</name>
   <synonym>
-   <key>tr</key>
-   <value>Görev zamanlayıcı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расписание задания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Job schedule</value>
+   <value>7B952F04-1E1A-F2F2-22CE-E8A780976EBE</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -257,16 +169,8 @@
  <attributes uuid="54f72cef-35c8-4bfa-ab44-dcd5887735f8">
   <name>DifficultLevel</name>
   <synonym>
-   <key>tr</key>
-   <value>Zorluk seviyesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Уровень сложности</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Difficult level</value>
+   <value>AB7E0062-E273-DB86-6DA0-037C50771366</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -287,16 +191,8 @@
  <attributes uuid="74acdebf-b881-44d5-8282-3794cc659f28">
   <name>ResultType</name>
   <synonym>
-   <key>tr</key>
-   <value>Sonuç tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип результата</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Result type</value>
+   <value>77A2A8A1-20E0-FCCD-D058-8CEF9430EFAC</value>
   </synonym>
   <type>
    <types>String</types>
@@ -313,16 +209,8 @@
  <attributes uuid="9cf09496-ab32-4028-a1f5-7c5e596dde84">
   <name>User</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Пользователь</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User</value>
+   <value>3C3B6E2B-ECD8-27AC-C379-9930937549EB</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -340,30 +228,14 @@
   </producedTypes>
   <name>Parameters</name>
   <synonym>
-   <key>tr</key>
-   <value>Parametreler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Параметры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Parameters</value>
+   <value>4339B60B-2575-ED4A-AB82-2EF865684A3A</value>
   </synonym>
   <attributes uuid="985ab572-a12e-4acd-a488-6a585c596cc5">
    <name>Name</name>
    <synonym>
-    <key>tr</key>
-    <value>Ad</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Имя</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Name</value>
+    <value>6041590F-B40C-C187-7A1D-D1AAE3B891E3</value>
    </synonym>
    <type>
     <types>String</types>
@@ -380,16 +252,8 @@
   <attributes uuid="087e804a-82be-42ed-8353-5f2200342b4a">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>C29D1688-B9C7-5A17-7235-543D9BD763F8</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -419,30 +283,14 @@
   </producedTypes>
   <name>TestRexExpStrings</name>
   <synonym>
-   <key>tr</key>
-   <value>RexExp satırları test et</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тестировать RefExp строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Test rex exp strings</value>
+   <value>1CBFC1E6-E3C8-8A5B-BC6D-D9ABDD2BF3E3</value>
   </synonym>
   <attributes uuid="ea8ac1ce-d8b8-4241-9520-7d3f89bc4487">
    <name>Row</name>
    <synonym>
-    <key>tr</key>
-    <value>Satır</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Строка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Row</value>
+    <value>961F83D0-AE44-66C1-14AF-FCBB9953E65D</value>
    </synonym>
    <type>
     <types>String</types>
@@ -461,30 +309,14 @@
   </producedTypes>
   <name>ResultMatches</name>
   <synonym>
-   <key>tr</key>
-   <value>Sonuç seçenekleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Результат совпадений</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Result matches</value>
+   <value>43B51C9A-8E19-4A72-2051-1F1B7CC8258E</value>
   </synonym>
   <attributes uuid="75ff7e46-711b-4925-a975-1d906464e50e">
    <name>Result</name>
    <synonym>
-    <key>tr</key>
-    <value>Sonuç</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Результат</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Result</value>
+    <value>05B88FBA-6A0C-756E-E637-7B0A8BB1A9C7</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -511,16 +343,8 @@
   <attributes uuid="8b140890-f63c-4a8f-9473-316e3f8be9ac">
    <name>RegExp</name>
    <synonym>
-    <key>tr</key>
-    <value>RegExp</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Регулярные выражения</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Reg exp</value>
+    <value>A8A0D764-9F33-7381-1126-6FAE2C8963ED</value>
    </synonym>
    <type>
     <types>String</types>
@@ -537,16 +361,8 @@
  <forms uuid="56cbceda-ba36-442e-ab3d-68f25ba61af1">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>8B7B2EB8-D931-7FF8-85D3-30181B53270E</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -554,16 +370,8 @@
  <forms uuid="a8f8a55d-c387-4d5e-a841-a9a96d1d9435">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>1468CEE1-B63C-0954-44B9-9F2304246A9A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -571,32 +379,16 @@
  <templates uuid="ba6f83fa-1386-45eb-b272-927c49fc3686">
   <name>RegExpAnalyse</name>
   <synonym>
-   <key>tr</key>
-   <value>RegExp analiz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>RegExp анализ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Reg exp analyse</value>
+   <value>A22FA86E-2549-409D-D2D0-02243F408856</value>
   </synonym>
   <templateType>TextDocument</templateType>
  </templates>
  <commands uuid="0bc3f199-b30f-48d8-aa6a-16b299bf954b">
   <name>PauseJob</name>
   <synonym>
-   <key>tr</key>
-   <value>Duraklat</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Пауза</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Pause</value>
+   <value>80709E53-C359-5F24-44CC-CDE93E1897A8</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>
@@ -612,16 +404,8 @@
  <commands uuid="b66f95f4-a979-4fb8-a84f-71cbb18a255f">
   <name>ContinueJob</name>
   <synonym>
-   <key>tr</key>
-   <value>Devam et</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Продолжить</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Continue</value>
+   <value>060B1F34-4FE7-D157-70B8-88B42D711B90</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>
@@ -637,16 +421,8 @@
  <commands uuid="b7ae1118-fd50-4c95-a924-f568fdcec808">
   <name>StopJob</name>
   <synonym>
-   <key>tr</key>
-   <value>Durdur</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Остановить</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Stop</value>
+   <value>5E17F3A9-B6B8-8B28-80BF-FE3713856913</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>

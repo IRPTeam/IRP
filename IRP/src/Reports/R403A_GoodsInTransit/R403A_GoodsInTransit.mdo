@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R403A_GoodsInTransit</name>
  <synonym>
-  <key>tr</key>
-  <value>R403A Yoldaki mallar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R403A Товары в пути</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R403A Goods in transit</value>
+  <value>F25BF349-C656-6B13-339A-AB08041C6B1D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R403A_GoodsInTransit.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="8e0b7ab3-5632-4457-9bfe-5f581a0046d3">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>DC4F9932-0548-C266-6F60-07054078676D</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

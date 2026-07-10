@@ -7,62 +7,30 @@
  </producedTypes>
  <name>TaxesOperationTransactionType</name>
  <synonym>
-  <key>tr</key>
-  <value>Vergiler işlemler hareket tipi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип операции с налогами</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Taxes operation transaction type</value>
+  <value>1EBD55EC-BBD9-562F-F562-285E36A8B2CC</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="cfc8a0d7-a37c-406c-b70e-228a3c487d05">
   <name>TaxOffset</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налоговый вычет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax оffset</value>
+   <value>29FC77F2-E84E-4799-911E-E9D8E9676935</value>
   </synonym>
  </enumValues>
  <enumValues uuid="96610545-66bf-487d-80f9-1dc4de7b4c32">
   <name>TaxOffsetAndPayment</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi hesaplama ve ödeme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налоговый вычет и платеж</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax offset and payment</value>
+   <value>F816EBBC-46FA-BE1B-B18C-C9B0BD95F366</value>
   </synonym>
  </enumValues>
  <enumValues uuid="fe81af84-a5eb-4cd3-aa3c-d8e0c28f1e3e">
   <name>TaxPayment</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi ödeme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налоговый платеж</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax Payment</value>
+   <value>257A961C-A36D-754D-DE2C-C319E1997F57</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -7,62 +7,30 @@
  </producedTypes>
  <name>ControlCodeStringType</name>
  <synonym>
-  <key>tr</key>
-  <value>Kontrol kodu satır tipi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип маркировки товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Control code string type</value>
+  <value>80E8A592-E7BE-55ED-D178-8D8F7771877C</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="063b015e-0fc6-455b-9c42-79d254c0a3c1">
   <name>None</name>
   <synonym>
-   <key>tr</key>
-   <value>Yok</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Нет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>None</value>
+   <value>3ABE9B77-695B-CC7F-F500-017D6BD5FA20</value>
   </synonym>
  </enumValues>
  <enumValues uuid="8525a5c2-b25b-4857-bace-43818a6d9983">
   <name>MarkingCode</name>
   <synonym>
-   <key>tr</key>
-   <value>Etiketleme kodu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Честный знак</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Marking code</value>
+   <value>50EF090F-FC01-201D-DDCE-EBDF9444B266</value>
   </synonym>
  </enumValues>
  <enumValues uuid="80890c5b-7c4a-4a00-8831-6d8202bde2b5">
   <name>GoodCodeData</name>
   <synonym>
-   <key>tr</key>
-   <value>Eşsiz QR verisi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>КиЗ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Good code data</value>
+   <value>D6B26A62-3D71-A723-3667-7E79610A816F</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

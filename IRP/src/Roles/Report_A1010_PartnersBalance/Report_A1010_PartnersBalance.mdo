@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3a30ce33-3fbe-4eb3-b761-4ccfcda60b6e">
  <name>Report_A1010_PartnersBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>A1010_Cari Hesaplar Bakiyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет A1010_БалансПартнеров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report A1010_PartnersBalance</value>
+  <value>8284235B-C1CA-9F1B-B077-709C9FD69E18</value>
  </synonym>
 </mdclass:Role>

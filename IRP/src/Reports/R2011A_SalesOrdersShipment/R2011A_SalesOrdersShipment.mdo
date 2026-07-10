@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R2011A_SalesOrdersShipment</name>
  <synonym>
-  <key>tr</key>
-  <value>R2011A Satış siparişlerin sevkiyatı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2011A Отгрузка заказов покупателей</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2011A Sales orders shipment</value>
+  <value>43F10155-60F2-6C9F-F360-0A8D22115E38</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R2011A_SalesOrdersShipment.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="3d7f34d4-aa00-42ea-8063-e3a62c2c70ed">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>9F09E19F-4E75-14D9-9DF6-6E0BCDCD3123</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

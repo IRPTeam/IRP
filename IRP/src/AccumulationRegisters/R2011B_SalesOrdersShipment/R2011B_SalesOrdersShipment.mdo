@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R2011B_SalesOrdersShipment</name>
  <synonym>
-  <key>tr</key>
-  <value>R2011 Satış sipariş tedariği</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2011 Отгрузка товаров по заказам покупателей</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2011 Shipment of sales orders</value>
+  <value>45974E38-1980-081C-C493-3D0268A63097</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="920543cc-f880-4116-b704-bf2ac44fcbc6">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>16AB3828-29A3-4766-65AB-B7D9E657356E</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="4b27077e-9dfd-4c79-8c7e-cf07c50f6d1f">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>625B978A-1DF3-F25A-AAE1-1470576CCFAC</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="804da9a2-534c-4507-80db-b17eef09a82d">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>214E2703-8B7A-4D77-7591-1390574FC0D5</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="adf8daec-5fe7-4714-ac3a-56541b528487">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>6F53CBF5-B495-B68F-F37B-BD1280287537</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesOrder</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="7ca22f26-5f1d-4be8-905a-f78906bfd4fe">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>B96CDB7B-F5AF-5D0C-CE60-0EB03780F7B1</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="d85fa2ac-438d-4f18-be1b-c63792668b90">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row key</value>
+   <value>E00D747C-4F0F-99E4-4931-15D506699560</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>

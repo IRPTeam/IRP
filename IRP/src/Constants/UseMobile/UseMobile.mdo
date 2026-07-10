@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseMobile</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Mobil fonksiyonu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать мобильный функционал</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use mobile</value>
+  <value>9DB39CD4-4C80-8813-3321-193F55DCF72C</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -7,16 +7,8 @@
    <name>DecorationClosingOrder</name>
    <id>280</id>
    <title>
-    <key>tr</key>
-    <value>Planlama dönemi kapanmıştı:</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Данные период планирования закрыт:</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>This planning period is closed by:</value>
+    <value>051ED3F3-2F8E-C12B-B169-9AA37A0A26EE</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -96,16 +88,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup başlık</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа заголовок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group head</value>
+   <value>DD5E7B68-5C28-2551-19ED-DAA8FE0E6DC8</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -143,16 +127,8 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>53</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа декораций рисунок свернутой шапки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <value>89F872B1-E8EF-8FDB-B2E4-4658AF12CC21____</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -192,16 +168,8 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>56</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>C7F33128-918A-77DA-A6F9-98BDE6881C15</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -303,16 +271,8 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>64</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>AF44C89A-7E7E-240A-A3AF-F489862B7CD7</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -750,16 +710,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup planlama dönemleri</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа планирования периода</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group planning periods</value>
+      <value>4F0D85CD-0D89-602E-E086-63FDB28A8D57</value>
      </title>
      <extendedTooltip>
       <name>GroupPlanningPeriodsExtendedTooltip</name>
@@ -1433,16 +1385,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Üretim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Производство</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Production</value>
+    <value>84152126-BEF7-34DF-F112-24AFAD719F0C</value>
    </title>
    <extendedTooltip>
     <name>GrouProductionExtendedTooltip</name>
@@ -2319,16 +2263,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzemeler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сырье</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Materials</value>
+    <value>AC1A9046-6801-E72B-B012-20C5B9A131A7</value>
    </title>
    <extendedTooltip>
     <name>GroupMaterialsExtendedTooltip</name>
@@ -2556,16 +2492,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Numaratör grubu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа нумерации</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of numerator</value>
+     <value>77B1B6A8-A94E-DD4A-A3AD-D1021DDC4B21</value>
     </title>
     <extendedTooltip>
      <name>GroupNumeratorExtendedTooltip</name>
@@ -2747,16 +2675,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>B995C5EA-8CEE-7CA3-3D97-75A0D41538CC</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -2780,16 +2700,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>42035042-C715-FB66-6757-716936A2CB32</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -2884,16 +2796,8 @@
    <columns>
     <name>Picture</name>
     <title>
-     <key>tr</key>
-     <value>Resim</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Картинка</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Picture</value>
+     <value>6FD08D3A-C55C-8F8D-D0A2-28167DCE86A2</value>
     </title>
     <id>5</id>
     <valueType>
@@ -2914,16 +2818,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>BDB63557-2B9A-77DE-E6E1-1B61D67EB411</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2942,16 +2838,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>0911F819-F702-9871-13B8-8FA31C09C519</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2968,16 +2856,8 @@
  <attributes>
   <name>ProductionPlanningClosing</name>
   <title>
-   <key>tr</key>
-   <value>Üretim planlama kapanışı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Закрытие планирования производства</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Production planning closing</value>
+   <value>8CCD92E4-1337-8F22-215D-D6FDFE85B8F6</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2993,16 +2873,8 @@
  <formCommands>
   <name>UpdateByBillOfMaterials</name>
   <title>
-   <key>tr</key>
-   <value>Reçeteye göre güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить по спецификации</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update by bill of materials</value>
+   <value>17FB9CAD-5030-F7D1-1C07-7A6D61D329E3</value>
   </title>
   <id>1</id>
   <use>
@@ -3023,16 +2895,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать row key</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>7458B2BF-6466-C4A8-8B4F-FC7CAA6F9008</value>
   </title>
   <id>2</id>
   <use>
@@ -3051,29 +2915,13 @@
  <formCommands>
   <name>SetNewNumber</name>
   <title>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set new number</value>
+   <value>078EE17D-6179-8F60-0A7A-A5515CF46664</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Set new number</value>
+   <value>9EFE8FD9-632A-BA88-8B07-77101B463FFC</value>
   </toolTip>
   <use>
    <common>true</common>

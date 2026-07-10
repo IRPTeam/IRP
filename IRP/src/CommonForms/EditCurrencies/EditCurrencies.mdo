@@ -2,16 +2,8 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5c6d6f7c-54e4-4aba-8ec7-dbd66b93509d">
  <name>EditCurrencies</name>
  <synonym>
-  <key>tr</key>
-  <value>Dövizleri düzelt</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Редактирование валют</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Edit currencies</value>
+  <value>D6B49196-5B56-99F0-05CC-C5E77422303A</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

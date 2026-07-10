@@ -73,16 +73,8 @@
   <name>DecorationProblem</name>
   <id>24</id>
   <title>
-   <key>tr</key>
-   <value>İşlem iptal edildi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Транзакция отменена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Transaction was canceled</value>
+   <value>E59EF3A2-2022-CF4F-FAF2-2E9B6B23BF92</value>
   </title>
   <enabled>true</enabled>
   <userVisible>
@@ -337,16 +329,8 @@
  <attributes>
   <name>Amount</name>
   <title>
-   <key>tr</key>
-   <value>Tutar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сумма</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Amount</value>
+   <value>643C167D-09B4-2CC4-4835-5954E22F9CAF</value>
   </title>
   <id>1</id>
   <valueType>
@@ -362,16 +346,8 @@
  <attributes>
   <name>RRNCode</name>
   <title>
-   <key>tr</key>
-   <value>RRNCode</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>RNN Код</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>RRNCode</value>
+   <value>C09836B8-4CBA-26DF-F62C-CE2490954534</value>
   </title>
   <id>2</id>
   <valueType>
@@ -388,16 +364,8 @@
  <attributes>
   <name>Hardware</name>
   <title>
-   <key>tr</key>
-   <value>Donanım</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Оборудование</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Hardware</value>
+   <value>35C9BF8D-1178-A054-4486-6EAC226413A2</value>
   </title>
   <id>3</id>
   <valueType>
@@ -413,16 +381,8 @@
  <attributes>
   <name>isReturn</name>
   <title>
-   <key>tr</key>
-   <value>Bu iade</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Это возврат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Is return</value>
+   <value>5F138633-1739-CD1A-A512-2B2A27257F6E</value>
   </title>
   <id>4</id>
   <valueType>
@@ -438,16 +398,8 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>836B8951-AABD-60BA-AD83-3BD5B0E82556</value>
   </title>
   <id>5</id>
   <valueType>
@@ -463,16 +415,8 @@
  <attributes>
   <name>Interactive</name>
   <title>
-   <key>tr</key>
-   <value>Etkileşimli</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Интерактивно</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Interactive</value>
+   <value>248DA98C-0764-9220-0B31-1A9AB796F9E8</value>
   </title>
   <id>6</id>
   <valueType>
@@ -488,16 +432,8 @@
  <formCommands>
   <name>Payment_CancelPaymentByPaymentCard</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>8DEAADAE-DA29-B62F-FD8B-B6E01F36EC74</value>
   </title>
   <id>1</id>
   <use>
@@ -517,16 +453,8 @@
  <formCommands>
   <name>Payment_EmergencyReversal</name>
   <title>
-   <key>tr</key>
-   <value>Ters</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сторно</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Revers</value>
+   <value>2C50D699-3D11-86B4-421B-BC7A56270D4B</value>
   </title>
   <id>2</id>
   <use>
@@ -546,16 +474,8 @@
  <formCommands>
   <name>Payment_PayByPaymentCard</name>
   <title>
-   <key>tr</key>
-   <value>Öde</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Оплатить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pay</value>
+   <value>4B88A16D-180B-8402-2BF7-758B56F591C1</value>
   </title>
   <id>3</id>
   <use>
@@ -575,16 +495,8 @@
  <formCommands>
   <name>Payment_ReturnPaymentByPaymentCard</name>
   <title>
-   <key>tr</key>
-   <value>İade</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Возврат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Return</value>
+   <value>887BBE3C-F9BA-5647-7208-811E30E174D8</value>
   </title>
   <id>4</id>
   <use>

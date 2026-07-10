@@ -98,16 +98,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Tanımlanmamış</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Неопределено</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Undefined</v8:content>
+						<v8:content>8682BB44-402A-D70D-D327-75F50615E29D</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -135,16 +127,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Boş satır</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Пустая строка</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Empty string</v8:content>
+						<v8:content>007E48A2-8605-3A19-9C43-3C77CBDCA91C</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -172,16 +156,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>0</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>0</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>0</v8:content>
+						<v8:content>03094348-97F5-C5BE-E512-2F41726ABA85</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -212,16 +188,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Boş tarih</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Пустая дата</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Empty date</v8:content>
+						<v8:content>CDEB0270-B075-D880-0D71-166045FF32AD</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -249,16 +217,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Yok</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Нет</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>None</v8:content>
+						<v8:content>FFE72C18-27CC-B4A3-3A66-6A7A23016C05</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -305,16 +265,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Yok</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Нет</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>None</v8:content>
+						<v8:content>DCE9B1B4-721F-F6EF-FE74-461B58DA7CDB</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -351,16 +303,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Yok</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Нет</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>None</v8:content>
+						<v8:content>D774AACE-2CAF-77B8-8B27-7AED5868B2FE</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>Batches</name>
  <synonym>
-  <key>tr</key>
-  <value>Partiler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Партии товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Batches</value>
+  <value>94E83310-ECE3-286D-DD4F-FC1B30F0663B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Batches.StandardAttribute.Code</inputByString>
@@ -27,16 +19,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Parti</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Партия</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Batch</value>
+  <value>3EF8DF4C-443B-3B14-4783-3295AEC0B9F7</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -53,16 +37,8 @@
  <attributes uuid="e69b1270-255d-4a7b-a709-49bc3fbc5a5f">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>10D247AB-040C-69DF-F333-3C912AF1B496</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -96,16 +72,8 @@
  <attributes uuid="fc0f6502-e295-4a42-b751-5a727659e20a">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>3C6DFCB2-2D67-593B-B3B8-806F8E9E6993</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -120,16 +88,8 @@
  <attributes uuid="8a3c41ac-a289-48b0-b21d-958db893d795">
   <name>Date</name>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Date</value>
+   <value>58F93FF0-99D7-54F5-591A-A8D03B3E46E8</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -145,16 +105,8 @@
  <forms uuid="db277a23-04f9-4777-b31f-695b9946fde9">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>2CC54A31-6F88-0DD9-943A-A3734AEC4F3D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -162,16 +114,8 @@
  <forms uuid="6b425d54-d506-4bc8-96b8-dd542aa26650">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>120F1C52-4BCF-C63C-CE46-64002D372412</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -179,16 +123,8 @@
  <forms uuid="338ee97f-11e7-4f38-8812-8ab1182438bc">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>87B25FB1-78AF-B545-5E34-4FE116C47F9A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

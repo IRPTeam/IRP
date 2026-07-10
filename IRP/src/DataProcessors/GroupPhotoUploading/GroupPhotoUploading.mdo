@@ -6,32 +6,16 @@
  </producedTypes>
  <name>GroupPhotoUploading</name>
  <synonym>
-  <key>tr</key>
-  <value>Fotoğraf gruplarını yükleme</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Загрузка группы фотографий</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Uploading groups of photos</value>
+  <value>C37259FF-832F-8EBF-F3A2-2070DF1F2C5A</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.GroupPhotoUploading.Form.Form</defaultForm>
  <forms uuid="ae5f8cd1-ebdc-4a49-88ac-280762cac97e">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>320B585C-2BBD-80CF-F1BB-B8588419533E</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

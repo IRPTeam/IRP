@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="112df6ac-2724-4b0f-873c-e5cc8fe98bd7">
  <name>Document_BankPayment</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Banka ödemesi"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Банковский платеж"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Bank payment"</value>
+  <value>775C089E-356B-C210-01E8-821036E6118A</value>
  </synonym>
 </mdclass:Role>

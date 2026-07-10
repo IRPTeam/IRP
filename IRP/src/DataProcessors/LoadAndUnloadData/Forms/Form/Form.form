@@ -292,16 +292,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Seri numaralandırılmış</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Сериализовано</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Serialized</value>
+      <value>10ECB94F-3D70-37A3-3421-102F0E987721</value>
      </title>
      <extendedTooltip>
       <name>PageSerializedInfoExtendedTooltip</name>
@@ -368,16 +360,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Arşivlenmiş</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>В архиве</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Archived</value>
+      <value>890AD98E-4345-8B0E-E1D2-2CEDF7619D1E</value>
      </title>
      <extendedTooltip>
       <name>PageArchivedInfoExtendedTooltip</name>
@@ -401,16 +385,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Bilgi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Основной</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Info</value>
+     <value>0E6D13FD-F655-EFDD-D1EE-E541202A338D</value>
     </title>
     <extendedTooltip>
      <name>PagesInfoExtendedTooltip</name>
@@ -434,16 +410,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>eFatura - İhracat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Экспорт</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Export</value>
+    <value>37B16364-3C60-4AD2-2C15-53D8251E8683</value>
    </title>
    <extendedTooltip>
     <name>PageExportExtendedTooltip</name>
@@ -577,16 +545,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>İçe aktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Импорт</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Import</value>
+    <value>54439235-773E-3264-4E26-6EFA65450A79</value>
    </title>
    <extendedTooltip>
     <name>PageImportExtendedTooltip</name>
@@ -682,16 +642,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup Bul Ref</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа найденных ссылок</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group Find Ref</value>
+     <value>47D3CE11-CC19-6986-61CE-E3460230676F</value>
     </title>
     <extendedTooltip>
      <name>GroupFindRefExtendedTooltip</name>
@@ -1041,16 +993,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Referansları bul</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Найти ссылки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Find refs</value>
+    <value>0160A6DB-2C62-A080-0AA6-6517451EA3DC</value>
    </title>
    <extendedTooltip>
     <name>PageFindRefExtendedTooltip</name>
@@ -1110,16 +1054,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings</value>
+    <value>6979F3AD-8C58-D26F-FE30-0634CCAFF0BA</value>
    </title>
    <extendedTooltip>
     <name>PageSettingsExtendedTooltip</name>
@@ -1143,16 +1079,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основное</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main</value>
+   <value>DA72D5DD-816D-52E5-5390-0EFBFE597008</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -1201,16 +1129,8 @@
  <attributes>
   <name>FormItems</name>
   <title>
-   <key>tr</key>
-   <value>Form öğeleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Форма элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Form items</value>
+   <value>CAC2F6B4-E3C1-74DB-B9E9-93EB1D983F02</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1225,16 +1145,8 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>8228C957-A057-B3C1-1D01-1879074A70B6</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1251,16 +1163,8 @@
   <columns>
    <name>URL</name>
    <title>
-    <key>tr</key>
-    <value>URL</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>URL</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>URL</value>
+    <value>728925F7-80AB-3165-5EEC-CB07DFC87EF7</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1278,16 +1182,8 @@
  <attributes>
   <name>Logs</name>
   <title>
-   <key>tr</key>
-   <value>Kayıtlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Логи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Logs</value>
+   <value>2E00F8F2-7117-04CC-CF57-73F215634C4B</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1304,16 +1200,8 @@
  <attributes>
   <name>ImportDataToProductDataBaseIsGranted</name>
   <title>
-   <key>tr</key>
-   <value>Ürün veritabanına veri aktarımı verildi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разрежить импорт в рабочую базу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Import data to product data base is granted</value>
+   <value>E16F2EFB-5E97-238C-CE65-5CE699DBE693_______</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1329,16 +1217,8 @@
  <attributes>
   <name>SearchRef</name>
   <title>
-   <key>tr</key>
-   <value>Arama ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка для поиска</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Search ref</value>
+   <value>2866AA09-E22E-FE97-7357-7E9FC439D4EA</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1354,16 +1234,8 @@
  <attributes>
   <name>FoundRefList</name>
   <title>
-   <key>tr</key>
-   <value>Bulunan ref listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Найденные ссылки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Found ref list</value>
+   <value>3058F8E5-4E1C-6DE4-40C7-7655F79B2B22</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1378,16 +1250,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>9357AF50-C4A0-2995-5D96-6BB5150B0A3D</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1403,16 +1267,8 @@
   <columns>
    <name>MetadataName</name>
    <title>
-    <key>tr</key>
-    <value>Metadata adı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя метаданных</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Metadata name</value>
+    <value>42C5DC9A-6810-AAA9-9632-273B54AA90FD</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1429,16 +1285,8 @@
   <columns>
    <name>Filter</name>
    <title>
-    <key>tr</key>
-    <value>Filtre</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Отбор</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Filter</value>
+    <value>8EFB9B26-269A-8C0B-B6EB-B104A55395D4</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1456,16 +1304,8 @@
  <formCommands>
   <name>Update</name>
   <title>
-   <key>tr</key>
-   <value>Update</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update</value>
+   <value>D40E0432-6602-EB92-2B46-68DD25B40A15</value>
   </title>
   <id>1</id>
   <use>
@@ -1484,29 +1324,13 @@
  <formCommands>
   <name>Serialize</name>
   <title>
-   <key>tr</key>
-   <value>Seri numaralandır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сериализовать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serialize</value>
+   <value>A57950A1-79C1-AEED-D23E-EFF20EB184E3</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>Seçilen formdaki tüm seçili satırları serileştir</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Сериализовать все выделенные строки в выбранной форме</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Serialize all selected rows in selected form</value>
+   <value>64DA824C-8BBA-68C5-5099-94E02C24C94C________</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1521,16 +1345,8 @@
  <formCommands>
   <name>Import</name>
   <title>
-   <key>tr</key>
-   <value>İçe aktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Импорт</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Import</value>
+   <value>5AA89F09-7C22-0F5A-A085-52E13510819B</value>
   </title>
   <id>3</id>
   <use>
@@ -1546,16 +1362,8 @@
  <formCommands>
   <name>FindRef</name>
   <title>
-   <key>tr</key>
-   <value>Ref bul</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Поиск ссылок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Find ref</value>
+   <value>8387C57A-C5FB-B6B8-8082-25DF87D9C1D3</value>
   </title>
   <id>4</id>
   <use>
@@ -1571,16 +1379,8 @@
  <formCommands>
   <name>Open</name>
   <title>
-   <key>tr</key>
-   <value>Açık</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Открыт</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Open</value>
+   <value>99ADF2A5-EB46-4EE6-6A49-91C9A3B232EB</value>
   </title>
   <id>5</id>
   <use>

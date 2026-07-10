@@ -10,16 +10,8 @@
  </producedTypes>
  <name>AddAttributeAndProperty</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek özellik tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы дополнительных реквизитов и сведений</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Additional attribute types</value>
+  <value>ABFD9425-D6BD-1587-7A72-2184426F946D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -27,16 +19,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Ek özellik tipi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Тип дополнительного реквизита</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Additional attribute type</value>
+  <value>E041609A-3AA0-3EDB-BC28-8C70AAB6CA31</value>
  </objectPresentation>
  <characteristicExtValues>Catalog.AddAttributeAndPropertyValues</characteristicExtValues>
  <type>
@@ -104,16 +88,8 @@
  <attributes uuid="a46de28d-274c-4547-a6fd-6e426d8be0b0">
   <name>Icon</name>
   <synonym>
-   <key>tr</key>
-   <value>Simge</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Иконка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Icon</value>
+   <value>0399DBBD-3B30-E1C8-88AA-A5823B20BACC</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -127,16 +103,8 @@
  <attributes uuid="c6468cbb-beb3-46b0-bec6-8e7652700222">
   <name>isIconSet</name>
   <synonym>
-   <key>tr</key>
-   <value>Simge belirlendi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Иконка установлена</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is icon set</value>
+   <value>B1B7DD8F-BA03-8A45-578F-FFCAB02658D4</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -150,16 +118,8 @@
  <attributes uuid="f175a6e7-8ec5-4df2-acc4-b83ec90b6816">
   <name>isURL</name>
   <synonym>
-   <key>tr</key>
-   <value>URL mi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это URL</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is URL</value>
+   <value>D758CD6C-6F7E-FD9E-EAA9-92B6F1B644DB</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -173,16 +133,8 @@
  <attributes uuid="beca8175-48f6-4019-9c59-eeaeb03b5990">
   <name>Multiline</name>
   <synonym>
-   <key>tr</key>
-   <value>Çok satırlı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Многострочный</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multiline</value>
+   <value>7AEEFFC6-17E5-A193-3ED7-78371EF33B84</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -196,16 +148,8 @@
  <attributes uuid="3b166633-7143-48da-9d74-db0198cb03df">
   <name>Comment</name>
   <synonym>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Comment</value>
+   <value>8B1BDC99-726E-646E-E365-5417765C6958</value>
   </synonym>
   <type>
    <types>String</types>
@@ -213,25 +157,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <forms uuid="c33e15bc-2f64-4500-8ca5-c9789a8dc330">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>7978161E-EB22-92C4-4AA3-3F8FAD88C9C4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -239,16 +173,8 @@
  <forms uuid="43c074e4-cce6-4d47-88bc-d04dd235a2e1">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>288DD296-9787-CAE2-2118-84A577083CA9</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -256,16 +182,8 @@
  <forms uuid="a27f0ea2-37c3-4170-84b5-212b32322ea5">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>57602492-17C3-CB0A-AE14-498D9D94BEA6</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -273,16 +191,8 @@
  <forms uuid="3812a981-a428-45ce-9ef3-67f2529720c8">
   <name>GroupForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма группы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group form</value>
+   <value>099E9F49-B19D-9D59-987C-C90D9390A6BC</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a9d8641a-2900-4107-9b6e-e466120df36c">
  <name>AccumulationRegisters_R4011B_FreeStocks</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R4011B SerbestStoklar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R4011B СвободныеТовары</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R4011B FreeStocks</value>
+  <value>B57E40BB-30A2-EE31-151A-A006B25436B8___</value>
  </synonym>
 </mdclass:Role>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="811bcb4b-85ec-45fc-9a1f-afac3137aa4f">
  <name>Document_ChequeBondTransactionItem</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Çek bono işlem kalemi"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Транзакция чека облигации товара"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Cheque bond transaction item"</value>
+  <value>370F3E31-984A-EC92-25B1-1DF6CA0C4937___</value>
  </synonym>
 </mdclass:Role>

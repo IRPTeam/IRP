@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="00525d0d-dd3f-4b88-8b86-4b8a7254dc70">
  <name>CashOut</name>
  <synonym>
-  <key>tr</key>
-  <value>Nakit çıkışı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Изъятие</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Cash out</value>
+  <value>C64344F7-CED0-54B9-90BB-BE36483831F9</value>
  </synonym>
 </mdclass:CommonPicture>

@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f1d9b71e-45ac-4300-9dcf-a41abb400370">
  <name>UseSourceOfOrigin</name>
  <synonym>
-  <key>tr</key>
-  <value>Kaynak kökeni kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать источники происхождения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use source of origin</value>
+  <value>C787D212-8E61-993F-FD4C-CC4867E7E6E7</value>
  </synonym>
  <location>Constant.UseSourceOfOrigin</location>
  <privilegedGetMode>true</privilegedGetMode>

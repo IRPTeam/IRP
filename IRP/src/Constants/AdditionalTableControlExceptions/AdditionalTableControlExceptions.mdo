@@ -7,16 +7,8 @@
  </producedTypes>
  <name>AdditionalTableControlExceptions</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek tablo kontrol istisnaları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Таблица исключений дополнительных контролей</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Additional table control exceptions</value>
+  <value>2E0D8AFA-6FCC-87BA-A600-0AFCDF87CFD6</value>
  </synonym>
  <type>
   <types>ValueStorage</types>

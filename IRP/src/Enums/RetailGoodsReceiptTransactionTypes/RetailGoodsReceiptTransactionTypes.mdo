@@ -7,62 +7,30 @@
  </producedTypes>
  <name>RetailGoodsReceiptTransactionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Perakende mal kabul işlem türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Виды транзакций приемки розничной продажи</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Retail goods receipt transaction types</value>
+  <value>9B43722F-8EA7-BB39-9E32-2BBEAC3E69A7__</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="f748c2c1-9dc5-4519-a21e-2f7054ec55b2">
   <name>CourierDelivery</name>
   <synonym>
-   <key>tr</key>
-   <value>Kurye teslimatı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Курьер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Courier delivery</value>
+   <value>08AA6395-D960-6B25-5D6E-E67CEDF5E4B3</value>
   </synonym>
  </enumValues>
  <enumValues uuid="be987c52-cbaa-4092-8f5d-f4ac35c41c35">
   <name>Pickup</name>
   <synonym>
-   <key>tr</key>
-   <value>Seç</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Самовывоз</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Pickup</value>
+   <value>C74CD92F-A60A-7582-29D9-9DBC3CFED590</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a6a524c8-d43f-4ce8-a370-817a947e72ec">
   <name>ReturnFromCustomer</name>
   <synonym>
-   <key>tr</key>
-   <value>Satış iadesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Возврат от покупателя</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Return from customer</value>
+   <value>616E0A86-D662-ACF7-7778-8C6220BD81C7</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

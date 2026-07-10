@@ -9,28 +9,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>94906403-61D6-300B-B631-1AAD4F9D5BBD</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Sayfalar</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Страницы</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Pages</value>
+   <value>E8C943E7-DF77-6720-0458-8F3E5DEF54E5</value>
   </toolTip>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -125,16 +109,8 @@
  <attributes>
   <name>DocumentRef</name>
   <title>
-   <key>tr</key>
-   <value>Evrak ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка документа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document ref</value>
+   <value>58934AA3-7ED3-2CEB-B82C-CBBF8E97F371</value>
   </title>
   <id>11</id>
   <valueType>
@@ -150,16 +126,8 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Sakla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>68EB6337-D06A-FBC1-1E78-8AD106A84363</value>
   </title>
   <id>1</id>
   <use>
@@ -175,16 +143,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>8331E18D-07B9-4613-3AC9-9D1755110B08</value>
   </title>
   <id>3</id>
   <use>

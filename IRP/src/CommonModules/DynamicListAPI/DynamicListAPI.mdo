@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="39be43e4-1f92-4866-9d59-49549228ed07">
  <name>DynamicListAPI</name>
  <synonym>
-  <key>tr</key>
-  <value>Dinamik liste API</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>API динамических списков</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Dynamic list API</value>
+  <value>BF5A751A-D923-32A7-7770-0F2438FC430F</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

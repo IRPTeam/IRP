@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R4010A_StockBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R4010A Stok bakiyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4010A Ведомость по товарам на складах</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4010A Stock balance</value>
+  <value>DA6CC24A-221F-A443-378A-A762523D7980</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R4010A_StockBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="c1ef6f3a-4ce0-4e2a-b46b-41dfd33cb9ed">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>1EEABE4C-5F6B-7A24-40C7-747F2BE8122C</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

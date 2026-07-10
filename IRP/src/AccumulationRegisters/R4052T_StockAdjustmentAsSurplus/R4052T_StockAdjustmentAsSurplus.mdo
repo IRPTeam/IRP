@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R4052T_StockAdjustmentAsSurplus</name>
  <synonym>
-  <key>tr</key>
-  <value>R4052 Stok sayım girişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4052 Корректировки товаров организации (оприходование)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4052 Stock adjustment (Surplus)</value>
+  <value>3D71442F-0BF5-F851-13AE-E3B0ABDCF80E</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="b1626b86-5cfc-4e4d-b8a6-ff7549c41886">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>6AE07489-7E69-CF1E-E4F7-76694B9021DE</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +33,8 @@
  <dimensions uuid="9caed86f-1670-44f4-ba4b-1611af60eb7f">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>9EF6E53B-E927-E83F-F30F-F6876988F620</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -71,16 +47,8 @@
  <dimensions uuid="91464b89-51fd-46ac-a971-62b08559111b">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis</value>
+   <value>1415F446-5590-2728-8D39-9AA35D1A9305</value>
   </synonym>
   <type>
    <types>DefinedType.typeStockAdjustmentAsSurplusBasises</types>
@@ -93,16 +61,8 @@
  <dimensions uuid="3f8bcc51-4de1-4789-8ee0-c38c6a56ccd7">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>1DDA3EFB-77D6-D1EC-C1F1-19145EA630AA</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

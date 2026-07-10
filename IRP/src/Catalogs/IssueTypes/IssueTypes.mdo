@@ -9,16 +9,8 @@
  </producedTypes>
  <name>IssueTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Talep tipi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы проблем</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Issue types</value>
+  <value>161DC866-FA50-969C-CA11-10D066D9FF9D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.IssueTypes.StandardAttribute.Code</inputByString>
@@ -75,16 +67,8 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep grubu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа проблем</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Issue group</value>
+   <value>EC97BD43-E937-CCEC-C468-8158A4270ACA</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -113,16 +97,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Talep tipi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Тип проблемы       </value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Issue type</value>
+  <value>85A88F22-7D46-D387-735D-D75AA3747B9D</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
@@ -143,16 +119,8 @@
  <attributes uuid="16f2ffd8-f07e-41d4-b0af-c70c2167b051">
   <name>IssueLevel</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep seviyesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Уровень проблемы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Issue level</value>
+   <value>1F9BE604-6E44-2033-3D13-31E7AEF0FF51</value>
   </synonym>
   <type>
    <types>EnumRef.IssueLevel</types>
@@ -164,16 +132,8 @@
  <forms uuid="4c5afdb1-4d8a-4b45-b1f8-089914260307">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>EE0A0EE1-8A8A-8869-98C0-0567D9600A5E</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -181,16 +141,8 @@
  <forms uuid="12f48d28-42b5-4213-9030-73e4471cfa04">
   <name>GroupForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма группы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group form</value>
+   <value>227E916B-AAAA-2F9D-D9FB-BF48286A03F3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -198,16 +150,8 @@
  <forms uuid="11a93209-7232-46a8-b26b-918e0380fdf4">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>D24AB48F-B396-B993-33E9-966E248D8DAD</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -215,16 +159,8 @@
  <forms uuid="d6880a65-8914-4256-a557-611de3e10ee1">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>A2FE8E5D-417F-E9B2-2CC2-26CBB6D06911</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -232,16 +168,8 @@
  <forms uuid="e65437cb-b745-49b2-acd3-d1cab5536c3c">
   <name>GroupChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа форм выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group choice form</value>
+   <value>B7387CBA-A760-133E-E73E-E08B33D96B52</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

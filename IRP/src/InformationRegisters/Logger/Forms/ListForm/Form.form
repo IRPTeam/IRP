@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>A6F1EEA8-138D-7794-4393-3447E96B653A</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -441,16 +433,8 @@
   <name>Comment1</name>
   <id>34</id>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>53201168-A500-785E-E241-1E374C6618C2</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>

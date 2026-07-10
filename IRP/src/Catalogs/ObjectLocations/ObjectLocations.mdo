@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ObjectLocations</name>
  <synonym>
-  <key>tr</key>
-  <value>Lokasyonlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Местоположения объекта</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Object locations</value>
+  <value>B9413642-BF72-B011-10BB-BA8CC850015F</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.ObjectLocations.StandardAttribute.Code</inputByString>
@@ -75,16 +67,8 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>tr</key>
-   <value>Mall</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Торговый центр       </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Mall</value>
+   <value>291A92C2-C376-CB02-20FF-F1D3078D4DB1</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -145,16 +129,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Lokasyon</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Местоположение</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Location</value>
+  <value>93D6FD64-9F0E-C530-0F9B-BAFACEEED0F5</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
@@ -175,16 +151,8 @@
  <attributes uuid="89b4ed5b-313a-4696-b620-b36523058caf">
   <name>City</name>
   <synonym>
-   <key>tr</key>
-   <value>İl</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Город</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>City</value>
+   <value>F681367E-A4E7-C86E-E6C4-4F1AB2ED7C29</value>
   </synonym>
   <type>
    <types>CatalogRef.Cities</types>
@@ -200,16 +168,8 @@
  <attributes uuid="b4a86a27-1779-45bd-87f7-c7af6c3425e2">
   <name>Latitude</name>
   <synonym>
-   <key>tr</key>
-   <value>Enlem</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Широта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Latitude</value>
+   <value>11DF9A35-56F7-61FA-AB61-15BC22559400</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -225,16 +185,8 @@
  <attributes uuid="5aa6d242-3be2-4200-b119-dff45c01fc19">
   <name>Longitude</name>
   <synonym>
-   <key>tr</key>
-   <value>Boylam</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Долгота</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Longitude</value>
+   <value>F43F726B-164E-69F2-217F-F528CC29A006</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -250,16 +202,8 @@
  <attributes uuid="96ff9cf3-1d67-48bf-8db0-fd9b3c2b4d83">
   <name>DefaultPartner</name>
   <synonym>
-   <key>tr</key>
-   <value>Varsayılan cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер по умолчанию</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Default partner</value>
+   <value>18B0A6CB-1194-CB5C-CC41-16B15C357AF0</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -277,30 +221,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>A6A5E8A2-8364-FA17-7096-66FD569D4E7C</value>
   </synonym>
   <attributes uuid="c5ca4f4b-8698-4d77-9034-0499709a83d3">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>47F63188-3A67-C125-55F5-5D2C49F6D471</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -312,16 +240,8 @@
   <attributes uuid="9b3934d8-9087-41df-bf29-6e960616dc34">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>ECA417D8-9547-6810-07D6-6DAF020E1403</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -338,16 +258,8 @@
  <forms uuid="22697d99-27da-42f9-9564-f562be4287a8">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>C9E9D552-DB4F-B5B9-9F9B-B0390A912453</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -355,16 +267,8 @@
  <forms uuid="bd73b21b-8db7-4190-aebf-5bc98e4509c5">
   <name>GroupForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма группы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group form</value>
+   <value>4C47417B-A6C6-01F8-8A6D-D6B00C7F0309</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -372,16 +276,8 @@
  <forms uuid="d8ebfd4c-bedb-4d18-a02f-b980f450cc21">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>38F10C33-17B0-02C3-367D-DF0BA6ACF462</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -389,16 +285,8 @@
  <forms uuid="db44952a-7e22-4dbc-af89-10c8b1d1a503">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>EA0B566C-397A-BEE7-76BA-A83F6898187E</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -406,16 +294,8 @@
  <forms uuid="3ef5b760-1703-47d0-baf6-c47b6fb31641">
   <name>GroupChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа форм выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group choice form</value>
+   <value>DF19523E-B801-DA02-2FEA-AA706D0079F6</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

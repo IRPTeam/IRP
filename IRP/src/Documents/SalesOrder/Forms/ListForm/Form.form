@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>80D3BF3E-E64B-539A-A8D0-08D8798B66BB</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -58,16 +50,8 @@
    <name>Number</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number</value>
+    <value>2301E08F-D8AC-0996-633B-BC8B27628973</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -108,16 +92,8 @@
    <name>Date</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>5F9D944A-3576-87BE-E0B7-76B7F78ECC47</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -196,16 +172,8 @@
    <name>Status</name>
    <id>34</id>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Status</value>
+    <value>43222BC1-FFCF-E5B9-9817-7BA722D29811</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -249,16 +217,8 @@
    <name>Closed</name>
    <id>43</id>
    <title>
-    <key>tr</key>
-    <value>Tamamlandı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Завершен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Closed</value>
+    <value>D669432A-BF15-B806-6B20-0D41059281F6</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -294,16 +254,8 @@
    <name>Partner</name>
    <id>22</id>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Партнер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Partner</value>
+    <value>1AD42A1E-54F5-65FD-DC0B-BF615ED34F0E</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -342,16 +294,8 @@
    <name>DocumentAmount</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>7415EC3C-D720-9320-04C6-68656819A3A8</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -394,16 +338,8 @@
    <name>Currency</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>843269E2-CBC9-0902-25D8-8B5543D1FD48</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -486,16 +422,8 @@
    <name>Author</name>
    <id>40</id>
    <title>
-    <key>tr</key>
-    <value>Sorumlu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Автор</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Author</value>
+    <value>857D397A-C950-3BF0-0A09-9BE4B5A7826F</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -538,16 +466,8 @@
    <name>Company</name>
    <id>37</id>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>F025DAD4-7E51-C29F-F8C7-7AF2513C00E0</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -630,16 +550,8 @@
    <name>ClosingOrder</name>
    <id>46</id>
    <title>
-    <key>tr</key>
-    <value>Sipariş kapatma</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Закрытие заказа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Closing order</value>
+    <value>50892B0B-5216-C6B1-1646-60E1A97A9EAE</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -682,16 +594,8 @@
    <name>Ref</name>
    <id>28</id>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>825C9A4F-7023-B616-6B1F-FF00F9D120CC</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1016,16 +920,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kapalı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Заказ закрыт</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Closed</value>
+       <value>A0297C7A-E64D-07A7-7CFA-A21922D0A789</value>
       </content>
      </localValue>
     </title>
@@ -1036,16 +932,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sipariş kapatma</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Закрытие заказа</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Closing order</value>
+       <value>BFAADEB3-EC72-84F9-9826-6C15AF1C2B7C</value>
       </content>
      </localValue>
     </title>

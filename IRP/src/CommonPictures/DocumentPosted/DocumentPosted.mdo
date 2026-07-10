@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5a04f3b7-7be0-43c1-88b9-5b22fa4bfef9">
  <name>DocumentPosted</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge kaydedildi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ проведен</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document posted</value>
+  <value>3023D96C-5843-52A0-040B-B7089D346917</value>
  </synonym>
 </mdclass:CommonPicture>

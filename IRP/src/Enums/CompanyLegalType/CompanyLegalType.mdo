@@ -7,77 +7,37 @@
  </producedTypes>
  <name>CompanyLegalType</name>
  <synonym>
-  <key>tr</key>
-  <value>Şirket tipi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Юридический тип</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Company legal type</value>
+  <value>6D1578B7-2509-C527-7AA0-06E62B9B994B</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="495fad05-6fbb-43b3-815a-7d60d29c7870">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>9F2D6965-6FA9-03BA-AB05-594C14078320</value>
   </synonym>
  </enumValues>
  <enumValues uuid="8cca21da-031e-4ecf-a9fd-8f5630ffc98b">
   <name>Individual</name>
   <synonym>
-   <key>tr</key>
-   <value>Gerçek kişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Физическое лицо</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Individual</value>
+   <value>C03B2CE3-B966-BEF5-5176-6BCD61850B2E</value>
   </synonym>
  </enumValues>
  <enumValues uuid="e326ec9c-7517-468b-bded-0f757c32e3f8">
   <name>IndividualCompany</name>
   <synonym>
-   <key>tr</key>
-   <value>Şahıs şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Индивидуальный предприниматель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Individual company</value>
+   <value>AE328F61-7BA8-594D-DE3C-CC45DBC4E25E</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4516c1c8-6d2a-4f04-a695-05a17072ad1f">
   <name>NonResident</name>
   <synonym>
-   <key>tr</key>
-   <value>Yurt dışı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Не резидент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Non resident</value>
+   <value>A58769CD-B660-13F3-3F3D-DDC3D8052D1D</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

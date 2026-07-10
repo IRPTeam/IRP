@@ -7,16 +7,8 @@
  </producedTypes>
  <name>LastReleaseNumber</name>
  <synonym>
-  <key>tr</key>
-  <value>Son sürüm numarası</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Последний номер релиза</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Last release number</value>
+  <value>E1F7B27F-8D98-AEF9-96DE-EF342D1BFB3D</value>
  </synonym>
  <type>
   <types>String</types>

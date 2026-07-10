@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseDashboard</name>
  <synonym>
-  <key>tr</key>
-  <value>Gösterge panelini kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать панель мониторинга</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use dashboard</value>
+  <value>39DC3CFC-F9BE-E238-8268-8848A38F4BAF</value>
  </synonym>
  <type>
   <types>Boolean</types>

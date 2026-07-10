@@ -11,16 +11,8 @@
  </producedTypes>
  <name>TaxSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Vergi oranı ayarları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Настройки налоговых ставок</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Tax rate settings</value>
+  <value>983046C2-3ACA-6030-03B8-8CAEBDB7E1E1</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultRecordForm>InformationRegister.TaxSettings.Form.RecordForm</defaultRecordForm>
@@ -28,42 +20,18 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSliceLast>true</enableTotalsSliceLast>
  <recordPresentation>
-  <key>tr</key>
-  <value>Vergi oranı ayarı</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Настройка налоговой ставки</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Tax rate setting</value>
+  <value>A877840D-6E00-9209-99A1-19EA261E4965</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Vergi oranı ayarları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Настройки налоговых ставок</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Tax rate settings</value>
+  <value>884B05F4-50EB-38D4-4545-566B008E0F75</value>
  </listPresentation>
  <resources uuid="7f385d0d-f444-4b7b-ab2e-ad808d3b099a">
   <name>TaxRate</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi oranı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налоговая ставка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax rate</value>
+   <value>813815CE-23A1-5C9F-F83B-B275A0ABCBFA</value>
   </synonym>
   <type>
    <types>CatalogRef.TaxRates</types>
@@ -78,16 +46,8 @@
  <dimensions uuid="7b234a59-94c6-4227-baaa-ce160118d231">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>2164B492-02BF-14BF-FDCA-A35999492BFA</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -105,16 +65,8 @@
  <dimensions uuid="147e7a3c-302d-4e4f-ac7d-320a6ba6424f">
   <name>Tax</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налог</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax</value>
+   <value>ED7FC962-4250-995E-EAA2-2C5EDBC5CB88</value>
   </synonym>
   <type>
    <types>CatalogRef.Taxes</types>
@@ -138,16 +90,8 @@
  <dimensions uuid="a838dba8-8116-4296-af81-bb05b5c04169">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>CCAF5A4D-6287-77DC-CA57-7B95F1AED238</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -163,16 +107,8 @@
  <dimensions uuid="438e7218-34a5-4c1b-bcb8-4d5b51925339">
   <name>Item</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item</value>
+   <value>51868849-B2E7-F01D-D158-8A8B4FBB2A08</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -188,16 +124,8 @@
  <dimensions uuid="8ae12989-90c1-4752-8570-df056fb1e951">
   <name>ItemType</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item type</value>
+   <value>F40A6095-8DF8-0886-67B5-59992FC5B1BF</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemTypes</types>
@@ -213,16 +141,8 @@
  <dimensions uuid="6127f6fd-9796-47bf-a7ac-4e606a0d575d">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner term</value>
+   <value>ACD92FB7-A1A7-17D0-01E5-544541B3D3A5</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -239,16 +159,8 @@
  <dimensions uuid="3e669262-8183-44d9-9f47-3dcf195f264e">
   <name>TransactionType</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид операции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction type</value>
+   <value>741C587D-FD0A-73B3-36B3-32B4E90DB162</value>
   </synonym>
   <type>
    <types>EnumRef</types>
@@ -264,16 +176,8 @@
  <forms uuid="0ea4f4dc-5141-44dd-9058-2c31c57de7ad">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>99759033-30FF-F726-6ED8-8C3766AB1E1A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

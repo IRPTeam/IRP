@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R2040B_TaxesIncoming</name>
  <synonym>
-  <key>tr</key>
-  <value>R2040 Hesaplanan vergiler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2040 Налоги к начислению</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2040 Taxes incoming</value>
+  <value>DD105F5C-8EF1-32ED-DB6D-DF9596B2E9A9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="b3e1c316-d676-4ade-8ce5-47876cdee89d">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>429A78CC-681D-2950-094C-CF7BBBCBFFA2</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="0a9cec06-c1ab-4bc4-815e-72e50d156521">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>D160D17B-BE0E-5529-9B31-1A8DCFDDB4BC</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="ea220aca-7d3b-4eee-8fb0-201afbde6dbf">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>03D0C3E2-11EA-E82C-C094-436D3513F41C</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="1c4ef7d7-28f7-452c-a5e0-45c18e73152b">
   <name>Tax</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налог</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax</value>
+   <value>5B465D06-CA25-A4E2-2126-6C428C77F0B0</value>
   </synonym>
   <type>
    <types>CatalogRef.Taxes</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="61d10cb7-bbcf-47d3-af43-ac8d28182b37">
   <name>TaxRate</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi oranı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налоговая ставка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax rate</value>
+   <value>48A5E2C5-8842-B08D-DDB1-11002B681135</value>
   </synonym>
   <type>
    <types>CatalogRef.TaxRates</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="54123463-dac5-4bd9-b470-e759dc3e44ed">
   <name>InvoiceType</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип инвойса</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Invoice type</value>
+   <value>C95592CD-14D2-10E5-5383-317C147B960A</value>
   </synonym>
   <type>
    <types>EnumRef.InvoiceType</types>
@@ -158,16 +102,8 @@
  <dimensions uuid="29ad7142-185a-42d4-ac7f-222b398f557c">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>A4034C05-3055-6C32-229A-ADACFB4C0330</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -180,16 +116,8 @@
  <dimensions uuid="51ba235b-dd9c-4946-beae-02be8b77f332">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>E9BDFC63-6F48-DB70-04C1-1D6F35288EF2</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -202,16 +130,8 @@
  <dimensions uuid="96cfad81-7e2f-498d-bf62-0ffae72a791e">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction currency</value>
+   <value>08AF252B-58F8-92C5-5DCF-FF1544DFCB2A</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

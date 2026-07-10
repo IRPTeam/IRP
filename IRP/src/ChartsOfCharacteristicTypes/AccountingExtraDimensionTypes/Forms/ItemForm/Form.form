@@ -172,16 +172,8 @@
  <formCommands>
   <name>EditUniqueID</name>
   <title>
-   <key>tr</key>
-   <value>Benzersiz ID düzenle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Редактировать уникальный ID</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit unique ID</value>
+   <value>FB6D6FFD-3DFE-0BC5-5039-919DF0FD88CF</value>
   </title>
   <id>1</id>
   <use>

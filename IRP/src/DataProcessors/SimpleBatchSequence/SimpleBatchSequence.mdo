@@ -6,32 +6,16 @@
  </producedTypes>
  <name>SimpleBatchSequence</name>
  <synonym>
-  <key>tr</key>
-  <value>Temel parti dizisi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Простой порядок партии</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Simple batch sequence</value>
+  <value>4FB2F12D-AD6C-3737-7964-453A383F39E6</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.SimpleBatchSequence.Form.Form</defaultForm>
  <forms uuid="156a88f1-cee5-4038-a352-588d372d2553">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>61EC0B8B-D9B8-5BB0-0F74-4A8BD1723519</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

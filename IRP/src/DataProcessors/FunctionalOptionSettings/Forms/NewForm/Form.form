@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>İşlevsel seçenekler ayarları</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Настройки функциональных опций</value>
- </title>
- <title>
   <key>en</key>
-  <value>Functional option settings</value>
+  <value>69D92055-998C-0F12-2E3A-A9CA4B20A3B9</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>GroupForGroups</name>
@@ -24,16 +16,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Прочее</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>733EBBA9-0B2E-0387-7702-2934C9085292</value>
    </title>
    <horizontalStretch>true</horizontalStretch>
    <extendedTooltip>
@@ -51,16 +35,8 @@
     <group>Vertical</group>
     <behavior>Auto</behavior>
     <collapsedRepresentationTitle>
-     <key>tr</key>
-     <value>Diğer</value>
-    </collapsedRepresentationTitle>
-    <collapsedRepresentationTitle>
-     <key>ru</key>
-     <value>Прочее</value>
-    </collapsedRepresentationTitle>
-    <collapsedRepresentationTitle>
      <key>en</key>
-     <value>Other</value>
+     <value>C2958BB8-B56A-0145-5B63-3BB66CC457F6</value>
     </collapsedRepresentationTitle>
     <controlRepresentation>Picture</controlRepresentation>
     <representation>StrongSeparation</representation>
@@ -77,16 +53,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Gruplar için grup</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа для групп</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group for groups</value>
+   <value>E97AEEFC-CA5D-3612-28C6-62C560ED4E31</value>
   </title>
   <extendedTooltip>
    <name>GroupForGroupsExtendedTooltip</name>
@@ -313,16 +281,8 @@
  <attributes>
   <name>GroupsData</name>
   <title>
-   <key>tr</key>
-   <value>Grup verileri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа для данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Groups data</value>
+   <value>DD930FA4-97EE-9011-11EB-BB9533417B73</value>
   </title>
   <id>4</id>
   <valueType/>
@@ -336,16 +296,8 @@
  <attributes>
   <name>AttributeToFO</name>
   <title>
-   <key>tr</key>
-   <value>İşlevsel Seçeneğe gelen öznitelik</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Атрибут в ФО</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attribute to FO</value>
+   <value>063A56F3-F5AF-BC8B-B989-918102171747</value>
   </title>
   <id>5</id>
   <valueType/>
@@ -359,16 +311,8 @@
  <attributes>
   <name>AttributeFromFO</name>
   <title>
-   <key>tr</key>
-   <value>İşlevsel Seçenekten gelen öznitelik</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Атрибут из ФО</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attribute from FO</value>
+   <value>EBCEE4F0-A78C-A6C0-0490-09B161B15A91</value>
   </title>
   <id>6</id>
   <valueType/>
@@ -382,16 +326,8 @@
  <attributes>
   <name>AttributesTitles</name>
   <title>
-   <key>tr</key>
-   <value>Özitelik başlıkları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заголовки атрибутов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attributes titles</value>
+   <value>4B7BD30A-BA45-9E34-4FD0-0752B475E036</value>
   </title>
   <id>7</id>
   <valueType/>
@@ -405,16 +341,8 @@
  <attributes>
   <name>AttributesWithoutGroup</name>
   <title>
-   <key>tr</key>
-   <value>Grupsuz öznitelikler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Атрибуты без группы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attributes without group</value>
+   <value>530FE7BD-B6EA-4B77-7D69-9BD43CC54BAA</value>
   </title>
   <id>8</id>
   <valueType/>
@@ -428,16 +356,8 @@
  <attributes>
   <name>FOWithoutGroup</name>
   <title>
-   <key>tr</key>
-   <value>Grupsuz İşlevsel Seçenek </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ФО без группы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>FO without group</value>
+   <value>29A322D7-30E2-CF0D-DCEC-C76347775F7E</value>
   </title>
   <id>9</id>
   <valueType/>
@@ -451,16 +371,8 @@
  <attributes>
   <name>FOSubordination</name>
   <title>
-   <key>tr</key>
-   <value>İşlevsel Seçenek bağımlılığı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Подчинённость ФО</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>FO subordination</value>
+   <value>11B6DE7F-3212-C3FD-D623-34C3CAA00BB1</value>
   </title>
   <id>10</id>
   <valueType/>
@@ -474,16 +386,8 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>FF65EC1E-76F3-45AF-FA3F-FB540667D5A0</value>
   </title>
   <id>1</id>
   <use>
@@ -503,16 +407,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>32F2488C-370C-6D35-5F9D-D4CC8A161948</value>
   </title>
   <id>2</id>
   <use>
@@ -528,16 +424,8 @@
  <formCommands>
   <name>Reset</name>
   <title>
-   <key>tr</key>
-   <value>Sıfırla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сброс</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Reset</value>
+   <value>81659632-0C36-1825-532B-B74F369F6358</value>
   </title>
   <id>3</id>
   <use>
@@ -557,16 +445,8 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check all</value>
+   <value>6868BD1D-965D-95BA-AE70-03CA7E9716DE</value>
   </title>
   <id>4</id>
   <use>
@@ -586,16 +466,8 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck all</value>
+   <value>16B39590-5E5E-96C8-8433-30224AFF5549</value>
   </title>
   <id>5</id>
   <use>
@@ -615,16 +487,8 @@
  <formCommands>
   <name>SaveAndClose</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet ve Kapat</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить и закрыть</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save and Close</value>
+   <value>87D7AFAF-2154-B204-4BEC-CA9834ECA959</value>
   </title>
   <id>6</id>
   <use>
@@ -644,16 +508,8 @@
  <formCommands>
   <name>UpdateDefaults</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan değerleri güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить значения по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update defaults</value>
+   <value>9B2E1CB0-F808-C530-05EE-EFFB50C61D1F</value>
   </title>
   <id>7</id>
   <use>

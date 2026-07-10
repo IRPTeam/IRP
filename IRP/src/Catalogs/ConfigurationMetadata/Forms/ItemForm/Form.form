@@ -391,16 +391,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Информация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Info</value>
+    <value>CA3BEC44-6E66-A715-54B7-7678F5B81974</value>
    </title>
    <extendedTooltip>
     <name>PageInfoExtendedTooltip</name>
@@ -591,16 +583,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Çıktı şablonları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаблоны печати</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Print templates</value>
+    <value>AB207535-CBD4-3517-7D89-9200A875B4D2</value>
    </title>
    <extendedTooltip>
     <name>PagePrintTemplatesExtendedTooltip</name>
@@ -624,16 +608,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Veri sayfaları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Data pages</value>
+   <value>4DFEFB8C-D831-909B-B07A-AE49F292CD10</value>
   </title>
   <extendedTooltip>
    <name>DataPagesExtendedTooltip</name>
@@ -689,16 +665,8 @@
  <attributes>
   <name>PrintTemplates</name>
   <title>
-   <key>tr</key>
-   <value>Çıktı şablonları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Шаблоны печати</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Print templates</value>
+   <value>C40C277D-8188-243B-BDFF-F7F59C7BB5E7</value>
   </title>
   <id>2</id>
   <valueType>

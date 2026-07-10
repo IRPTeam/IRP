@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R4037B_PlannedReceiptReservationRequests</name>
  <synonym>
-  <key>tr</key>
-  <value>R4037 Planlanan stok giriş rezerv talepleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4037 Заявки на резервирование запланированного прихода товара</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4037 Planned receipt reservation requests</value>
+  <value>33939EC6-6113-1554-4DD2-24597039E6D7______</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="8abddd02-ed81-405a-bf2c-0159dda7db3d">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>6EEBFDEA-F470-B278-8870-0522ADC2ED2E</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="7c3e278b-d910-4e4e-936b-e8fdb84ffcc8">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>2B5CE3C9-67AF-5DEA-ACE8-8FA2E66F5D41</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="a0a2adfc-6253-4faa-974f-6fcd7a114972">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>77AA27BE-D57A-E965-5C8A-A570F0A0E794</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="eb30da72-8ff0-41de-8fa6-aedadb6df2fc">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>31BCB613-F6FD-93AD-D4CD-DECBFFBA9CFE</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesOrder</types>

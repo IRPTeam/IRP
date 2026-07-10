@@ -282,16 +282,8 @@
  <attributes>
   <name>ErrorsTable</name>
   <title>
-   <key>tr</key>
-   <value>Hata tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица ошибок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Errors table</value>
+   <value>A3A67557-6F07-F82A-A3D1-14DBA1DE474A</value>
   </title>
   <id>1</id>
   <valueType>
@@ -306,16 +298,8 @@
   <columns>
    <name>Error</name>
    <title>
-    <key>tr</key>
-    <value>Hata</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ошибка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Error</value>
+    <value>6D4C7A23-FC95-FE97-7092-258D896B13A0</value>
    </title>
    <id>2</id>
    <valueType>
@@ -332,16 +316,8 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>tr</key>
-    <value>Açıklama</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>C8CA7FB8-6334-4395-560A-A9A903DCFAD5</value>
    </title>
    <id>3</id>
    <valueType>
@@ -358,16 +334,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>C7DDDDAE-F40E-3CFB-BD28-8777670A7CFD</value>
    </title>
    <id>4</id>
    <valueType>
@@ -384,16 +352,8 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>E8E653E7-E841-506B-BA6A-A2A16648440C</value>
   </title>
   <id>1</id>
   <use>

@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>094EB721-F940-6995-5C3A-AEDDE10084DB</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -58,16 +50,8 @@
    <name>NumericCode</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Sayısal kod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цифровой код</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Numeric code</value>
+    <value>4B609715-1967-57B3-341D-D0F8EC03E9D1</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -150,16 +134,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>394C9B57-6AA9-DA18-89B1-14CC8A1E243D</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

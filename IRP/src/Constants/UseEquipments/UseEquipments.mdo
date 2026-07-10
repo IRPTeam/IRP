@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseEquipments</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Ticari donanım</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать торговое оборудование</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use equipments</value>
+  <value>CB5F5293-5A10-AEDE-E819-9330CA26F470</value>
  </synonym>
  <type>
   <types>Boolean</types>

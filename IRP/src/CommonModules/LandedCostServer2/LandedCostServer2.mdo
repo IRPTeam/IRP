@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="16ab9b24-6635-4dbc-b950-eae3ad0fb661">
  <name>LandedCostServer2</name>
  <synonym>
-  <key>tr</key>
-  <value>Landed cost server2</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Себестоимость сервер2</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Landed cost server2</value>
+  <value>BD84339E-1B5E-C9A9-9458-880AB74BC1C9</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

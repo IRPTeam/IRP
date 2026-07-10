@@ -11,45 +11,21 @@
  </producedTypes>
  <name>T1020S_Cache</name>
  <synonym>
-  <key>tr</key>
-  <value>T1020 Önbellek</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T1020 Кеш</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T1020 Cache</value>
+  <value>38E63869-1BF6-C35D-D526-6A52032F5868</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>T1020 Önbellek</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>T1020 Кеш</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>T1020 Cache</value>
+  <value>1F352B45-E199-4BFB-B4C0-0943A54552A2</value>
  </recordPresentation>
  <resources uuid="8ca74338-df4c-41ac-8114-c7d65cfd4025">
   <name>Data</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Данные</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Data</value>
+   <value>F9172087-9B0C-7B2C-C964-4A46E8638FAE</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -63,16 +39,8 @@
  <resources uuid="b4dbef10-d573-42d7-a271-33bfd463378f">
   <name>Created</name>
   <synonym>
-   <key>tr</key>
-   <value>Oluşturuldu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Создан</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Created</value>
+   <value>A921477A-BF10-4646-6199-9574553A78CE</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -87,16 +55,8 @@
  <resources uuid="dbab193c-17bd-413f-8fe8-298bafdf0113">
   <name>LastGet</name>
   <synonym>
-   <key>tr</key>
-   <value>Son alım</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Срез последних</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Last get</value>
+   <value>1DFC923E-F27F-E12B-B047-7B69D1EECA1B</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -111,16 +71,8 @@
  <resources uuid="2ab9ff98-d4b8-4fdc-b23b-080cf326d9f9">
   <name>Size</name>
   <synonym>
-   <key>tr</key>
-   <value>Boyut</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Размер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Size</value>
+   <value>8BD33BF0-5F07-551F-FDF8-8FC957B9A304</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -137,16 +89,8 @@
  <dimensions uuid="24c9f32e-a368-4112-8713-43b815359f05">
   <name>UUID</name>
   <synonym>
-   <key>tr</key>
-   <value>UUID</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>UUID</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>UUID</value>
+   <value>C7BF953A-8216-F792-2349-97A6AF694B9A</value>
   </synonym>
   <type>
    <types>String</types>
@@ -164,16 +108,8 @@
  <dimensions uuid="1776c651-72da-4cac-95ae-8052f35edb72">
   <name>User</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Пользователь</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User</value>
+   <value>9A89234A-9984-DC54-4E41-17CC1E8BBA3B</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>

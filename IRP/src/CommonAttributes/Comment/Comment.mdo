@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="1148941f-4dbe-4ef0-a934-561dd175bf90">
  <name>Comment</name>
  <synonym>
-  <key>tr</key>
-  <value>Açıklama</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Комментарий</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Comment</value>
+  <value>5A46EED5-1858-BCC7-72C9-93B46A0E9DFA</value>
  </synonym>
  <type>
   <types>String</types>
@@ -22,9 +14,7 @@
  <minValue xsi:type="core:UndefinedValue"/>
  <maxValue xsi:type="core:UndefinedValue"/>
  <dataHistory>Use</dataHistory>
- <fillValue xsi:type="core:StringValue">
-  <value/>
- </fillValue>
+ <fillValue xsi:type="core:StringValue"/>
  <content>
   <metadata>Document.StockCorrection</metadata>
   <use>Use</use>
@@ -99,6 +89,10 @@
  </content>
  <content>
   <metadata>Document.ChequeBondTransaction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Storno</metadata>
   <use>Use</use>
  </content>
  <content>

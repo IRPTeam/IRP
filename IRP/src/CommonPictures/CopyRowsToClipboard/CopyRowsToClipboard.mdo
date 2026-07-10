@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5142a2b0-f6a9-42c9-a709-b949d0616e9b">
  <name>CopyRowsToClipboard</name>
  <synonym>
-  <key>tr</key>
-  <value>Satırları panoya kopyala</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Копировать строки в буфер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Copy rows to clipboard</value>
+  <value>9723CA37-0D9D-884C-C779-9EA22976698C</value>
  </synonym>
 </mdclass:CommonPicture>

@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9062S_AccountingMappingCompanies</name>
  <synonym>
-  <key>tr</key>
-  <value>T9062 Muhasebe mappingi (şirketler)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9062 Бухгалтерские соответствия (организации)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9062 Accounting mapping (companies)</value>
+  <value>91BA9532-FDCC-FC82-2F60-0501D1D49413</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="1911c43f-c24f-42b5-afb7-5ce9ca4ff58d">
   <name>InternalRef</name>
   <synonym>
-   <key>tr</key>
-   <value>İç sınıf</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Внутренняя ссылка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Internal ref</value>
+   <value>1D316AB8-5550-2E56-64A8-8B4D0B1B9ACA</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -53,16 +37,8 @@
  <dimensions uuid="9b5ae110-d13b-45ad-b87f-273d7c55555e">
   <name>IntegrationSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Интеграционные настройки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Integration settings</value>
+   <value>6CABD467-64A6-875C-C8B8-8BF1612C683A</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -78,16 +54,8 @@
  <dimensions uuid="5cf0c452-a1bb-4f16-b1a4-7d7e5b38c441">
   <name>ExternalRef</name>
   <synonym>
-   <key>tr</key>
-   <value>Dış ref</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Внешняя ссылка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>External ref</value>
+   <value>6DCDFEE3-D9DF-3DB9-99F2-29A6FE2A5F40</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -103,16 +71,8 @@
  <forms uuid="9bd3db32-ddf5-40b4-af1b-7d89005eeae7">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>07C30AC6-D3E4-309A-AFF7-72BA92182DF3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -120,16 +80,8 @@
  <forms uuid="a3962f47-2483-4467-93d1-fe7fca624941">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>50133F1D-09A9-C790-0583-34FBC3169861</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>PartnerItems</name>
  <synonym>
-  <key>tr</key>
-  <value>Cari hesap malzemeleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Номенклатура партнера</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Partner items</value>
+  <value>2AFF38D5-E8EB-76B1-1669-974E7CF119FC</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.PartnerItems.StandardAttribute.Code</inputByString>
@@ -59,16 +51,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Cari hesap malzemesi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Номенклатура партнера</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Partner item</value>
+  <value>509469D2-1F24-6A74-461C-C13E1D94F8C2</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
@@ -88,16 +72,8 @@
  <attributes uuid="25daef82-bf2a-4716-b100-f055981013f0">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>1D294894-170E-6A41-1E76-6801EFE660A7</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -112,16 +88,8 @@
  <attributes uuid="57095b03-e6f2-4c34-9f28-ca330aae51cd">
   <name>ItemID</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme ID</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Артикул</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item ID</value>
+   <value>71F68DFE-355C-5E02-24A5-5314F9C58E36</value>
   </synonym>
   <type>
    <types>String</types>
@@ -138,16 +106,8 @@
  <attributes uuid="b06e3399-969a-4077-97bf-f9b3f7639e60">
   <name>Item</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item</value>
+   <value>34C8405B-88A5-8C82-203F-FAF854258863</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -162,16 +122,8 @@
  <attributes uuid="32fb2265-e730-4a50-9482-46bc47785fc5">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>E35BF6CB-A142-C4FF-FA6B-B764B26126CC</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -194,30 +146,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>8D223631-FC16-D486-673A-A4551117B72B</value>
   </synonym>
   <attributes uuid="baed32cd-e0a5-45fa-9aa1-2b889fddccb7">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>D473FA16-7824-3FFD-D4E4-4023BF49FD47</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -229,16 +165,8 @@
   <attributes uuid="f048081b-e7cf-4409-bd3c-0af5b8784a91">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>AED5327C-E5A2-D575-5A73-3EF0B53806C1</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -255,16 +183,8 @@
  <forms uuid="97f31b14-f6af-424b-b6a4-9c2a470ce877">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>AEE9E28B-551D-62B3-372B-BC258CA999B0</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -272,16 +192,8 @@
  <forms uuid="6267a069-e131-4b36-93c1-b78bc6469678">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>64957660-5F9C-AB7F-F0D8-85DEC0B80749</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -289,16 +201,8 @@
  <forms uuid="e58d9a48-31f6-431b-9834-79d849f09a92">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>0DF5DF87-715B-891E-E397-71193BD5DB54</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -306,16 +210,8 @@
  <forms uuid="db8611a1-be5c-472f-b0ad-a61a8a6b2b76">
   <name>GroupForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма группы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group form</value>
+   <value>123CC27B-1AE1-301B-BDB7-7B2B9839A84B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -323,16 +219,8 @@
  <forms uuid="496c3d82-11c9-4c40-8646-9678c0147c09">
   <name>GroupChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа форм выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group choice form</value>
+   <value>4E94145F-2BD5-221F-F423-3CC5C3E18BE6</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

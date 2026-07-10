@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseAccountingService</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - muhasebe servisi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать сервисы бухгалтерии</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use accounting service</value>
+  <value>00B7BB62-3DDE-0FD5-520A-AA22C1FD0033</value>
  </synonym>
  <type>
   <types>Boolean</types>

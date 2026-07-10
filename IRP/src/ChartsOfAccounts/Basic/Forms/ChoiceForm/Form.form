@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>1F865C17-CB52-1C5E-E7E1-1CE0CCF3AC00</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -626,16 +618,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tanım</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>1DCDA20D-D2A8-5910-0839-94963A85A5CB</value>
       </content>
      </localValue>
     </title>
@@ -646,16 +630,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tip</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Вид</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Type</value>
+       <value>6F881BA8-922A-FBF0-02CE-E19E357CB2DB</value>
       </content>
      </localValue>
     </title>
@@ -737,16 +713,8 @@ FROM
  <attributes>
   <name>LedgerTypeVariant</name>
   <title>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вариант типа учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ledger type variant</value>
+   <value>784CB6B5-E9AF-50B8-877B-B1FF9E5260CC</value>
   </title>
   <id>2</id>
   <valueType>

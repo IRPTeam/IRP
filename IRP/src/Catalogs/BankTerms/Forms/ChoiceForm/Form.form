@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>F6D86AC9-7C90-67C6-6650-057D0E6CCD3A</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>CDEA9C30-642C-D0B4-431D-DC417DE7BC56</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -372,16 +356,8 @@ FROM
  <attributes>
   <name>FilterPaymentType</name>
   <title>
-   <key>tr</key>
-   <value>Ödeme türü filtresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Фильтр типа платежа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filter payment type</value>
+   <value>0620981A-70A4-225E-EA33-31DCA65D9C9B</value>
   </title>
   <id>2</id>
   <valueType>
@@ -397,16 +373,8 @@ FROM
  <attributes>
   <name>FilterBranch</name>
   <title>
-   <key>tr</key>
-   <value>Filtre şube</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Фильтр подразделения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filter branch</value>
+   <value>E4B3C0B8-E9EF-8B21-1827-751E0703D370</value>
   </title>
   <id>3</id>
   <valueType>

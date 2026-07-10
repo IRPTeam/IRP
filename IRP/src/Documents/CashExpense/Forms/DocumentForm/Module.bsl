@@ -3,6 +3,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocCashExpenseRevenueServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -36,6 +37,11 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
+	EndIf;
+
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -76,6 +82,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListCurrency.ReadOnly = ValueIsFilled(Form.Currency);
 	Form.Items.EditCurrencies.Enabled       = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient

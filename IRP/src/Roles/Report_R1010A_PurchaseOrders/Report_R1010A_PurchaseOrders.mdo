@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="551656c4-f067-45fd-b78c-f4cea4274b4b">
  <name>Report_R1010A_PurchaseOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>R1010A Satınalma siparişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R1010A_ЗаказыНаПокупку</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R1010A_PurchaseOrders</value>
+  <value>87BF0D3D-94C8-9C84-4973-37C8CE793875</value>
  </synonym>
 </mdclass:Role>

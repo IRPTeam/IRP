@@ -42,16 +42,8 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>Item</value>
+    <value>15681A19-BB0E-DDDA-AB1E-E41D4134134C</value>
    </inputHint>
   </extInfo>
  </items>
@@ -106,16 +98,8 @@
     </datapath>
    </choiceParameterLinks>
    <inputHint>
-    <key>tr</key>
-    <value>Varyant</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>Item key</value>
+    <value>0E5CBC61-85B5-87AC-CA44-47C515058BD4</value>
    </inputHint>
   </extInfo>
  </items>
@@ -223,16 +207,8 @@
      </datapath>
     </choiceParameterLinks>
     <inputHint>
-     <key>tr</key>
-     <value>Birim</value>
-    </inputHint>
-    <inputHint>
-     <key>ru</key>
-     <value>Ед. изм.</value>
-    </inputHint>
-    <inputHint>
      <key>en</key>
-     <value>Unit</value>
+     <value>2D7147B0-6184-78D6-6358-893361EC4EA9</value>
     </inputHint>
    </extInfo>
   </items>
@@ -357,28 +333,12 @@
       <autoMaxHeight>true</autoMaxHeight>
       <wrap>true</wrap>
       <format>
-       <key>tr</key>
-       <value>DF=dd.MM.yyyy</value>
-      </format>
-      <format>
-       <key>ru</key>
-       <value>DF=dd.MM.yyyy</value>
-      </format>
-      <format>
        <key>en</key>
-       <value>DF=dd.MM.yyyy</value>
+       <value>8E915874-1BCF-6A7C-C277-7450DD9BCA4E</value>
       </format>
-      <editFormat>
-       <key>tr</key>
-       <value>DF=dd.MM.yyyy</value>
-      </editFormat>
-      <editFormat>
-       <key>ru</key>
-       <value>DF=dd.MM.yyyy</value>
-      </editFormat>
       <editFormat>
        <key>en</key>
-       <value>DF=dd.MM.yyyy</value>
+       <value>D6710031-D6B0-04C2-22C6-6E77E46EC85B</value>
       </editFormat>
       <chooseType>true</chooseType>
       <typeDomainEnabled>true</typeDomainEnabled>
@@ -592,28 +552,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Evraklar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Documents</value>
+    <value>72AAE109-F0E2-5B4A-A36C-C81807B93E76</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup üretim</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа производство</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group productions</value>
+    <value>4FEAF631-AFE3-5178-8820-0C3811F64AC9</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupGoodsReceiptExtendedTooltip</name>
@@ -674,16 +618,8 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
      <inputHint>
-      <key>tr</key>
-      <value>Depo</value>
-     </inputHint>
-     <inputHint>
-      <key>ru</key>
-      <value>Склад</value>
-     </inputHint>
-     <inputHint>
       <key>en</key>
-      <value>Store</value>
+      <value>F1CEF26A-D8AB-AB29-9846-6CA5F7B1D343</value>
      </inputHint>
     </extInfo>
    </items>
@@ -731,28 +667,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings</value>
+    <value>262AA585-D95D-31EE-E411-1937ABCE84B4</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup evraklar</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа документы</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group documents</value>
+    <value>0C8BD95F-F4E9-0904-4C9B-BA3483AE81B2</value>
    </toolTip>
    <extendedTooltip>
     <name>PageSettingsExtendedTooltip</name>
@@ -918,16 +838,8 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>BD66CA43-D161-1D59-9A52-231D8B8A3876</value>
   </title>
   <id>2</id>
   <valueType>
@@ -943,16 +855,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>4E08CDDF-C34F-B176-6285-599F9F417AFE</value>
   </title>
   <id>3</id>
   <valueType>
@@ -968,16 +872,8 @@
  <attributes>
   <name>Quantity</name>
   <title>
-   <key>tr</key>
-   <value>Miktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Quantity</value>
+   <value>7CB33C32-4305-0B31-1DE8-80989E6A4A1F</value>
   </title>
   <id>4</id>
   <valueType>
@@ -993,16 +889,8 @@
  <attributes>
   <name>Unit</name>
   <title>
-   <key>tr</key>
-   <value>Birim</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ед. изм.</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unit</value>
+   <value>EC7EC2A9-5BE1-F707-7069-934467916096</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1018,16 +906,8 @@
  <attributes>
   <name>GoodsInTransitIncoming</name>
   <title>
-   <key>tr</key>
-   <value>Yol stok durumu (Gelen)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Товары к получению</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Goods in transit incoming</value>
+   <value>45837BA2-0D4D-474F-F5AD-D920A0F5AEE5</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1042,16 +922,8 @@
   <columns>
    <name>Basis</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak evrak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документ основание</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Basis</value>
+    <value>C3110780-9043-164E-E5A5-55D49E0F676B</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1067,16 +939,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>32917A4C-EA15-2E5E-E08A-AAE92E0A7FF4</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1092,16 +956,8 @@
   <columns>
    <name>RowID</name>
    <title>
-    <key>tr</key>
-    <value>Satır ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID Строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Row ID</value>
+    <value>2E5209D8-F2AF-94A7-7E4F-F40C564A3841</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1117,16 +973,8 @@
   <columns>
    <name>CurrentStep</name>
    <title>
-    <key>tr</key>
-    <value>Geçerli adım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Текущий шаг</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Current step</value>
+    <value>043CD581-074F-F206-6C78-8C60DE9676D2</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1142,16 +990,8 @@
   <columns>
    <name>RowRef</name>
    <title>
-    <key>tr</key>
-    <value>Satır Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Row ref</value>
+    <value>A988478A-ABD4-2324-4446-6DA18B2BB499</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1167,16 +1007,8 @@
   <columns>
    <name>BasisKey</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ документа основания</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Basis key</value>
+    <value>635B53DE-88AC-8E03-37CA-A2847807FB02</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1192,16 +1024,8 @@
   <columns>
    <name>BasisUnit</name>
    <title>
-    <key>tr</key>
-    <value>Ana birim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Базовая единица измерения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Basis unit</value>
+    <value>D9649FC8-50AB-0255-5000-06CDE6C79E40</value>
    </title>
    <id>19</id>
    <valueType>
@@ -1217,16 +1041,8 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item</value>
+    <value>074B9AF3-4F59-8D28-8602-28019BE857C0</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1242,16 +1058,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>99F3CDF0-7900-DF25-5671-14D11F348BED</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1267,16 +1075,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>FD424302-887E-3BEE-E39F-F3C16EF3F277</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1292,16 +1092,8 @@
   <columns>
    <name>ParentBasis</name>
    <title>
-    <key>tr</key>
-    <value>Üst öğe kaynağı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Родительский документ основания</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Parent basis</value>
+    <value>3CFD0AD1-E006-63DC-CB38-865AC9063207</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1317,16 +1109,8 @@
   <columns>
    <name>QuantityInBaseUnit</name>
    <title>
-    <key>tr</key>
-    <value>Ana birim miktarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество в основной ед. изм.</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>96F21C74-C052-81EA-A881-1734B5229BD6</value>
    </title>
    <id>24</id>
    <valueType>
@@ -1342,16 +1126,8 @@
   <columns>
    <name>Store</name>
    <title>
-    <key>tr</key>
-    <value>Depo</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Склад</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Store</value>
+    <value>415F8AE6-20E9-17C3-36E4-4826B968BACB</value>
    </title>
    <id>25</id>
    <valueType>
@@ -1367,16 +1143,8 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ед. изм.</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unit</value>
+    <value>2E4B4498-4DB6-F07C-C5CE-E9C77B22A528</value>
    </title>
    <id>26</id>
    <valueType>
@@ -1393,16 +1161,8 @@
  <attributes>
   <name>DocGoodsReceipt</name>
   <title>
-   <key>tr</key>
-   <value>Evrak alım irsaliyesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Документ приходные товарные накладные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Doc goods receipt</value>
+   <value>31A17104-7664-F692-2C53-3C13E0EBD635</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1418,16 +1178,8 @@
  <attributes>
   <name>Store</name>
   <title>
-   <key>tr</key>
-   <value>Depo</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Склад</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Store</value>
+   <value>833BDECC-34DF-CC03-350E-E858FFECA8C6</value>
   </title>
   <id>14</id>
   <valueType>
@@ -1463,16 +1215,8 @@
  <formCommands>
   <name>InputBarcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod giriniz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ввести штрихкод</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Input barcode</value>
+   <value>908FC02C-371B-D2E4-4B8B-B2AB638999C5</value>
   </title>
   <id>2</id>
   <use>
@@ -1491,16 +1235,8 @@
  <formCommands>
   <name>ButtonGoodsReceipt</name>
   <title>
-   <key>tr</key>
-   <value>Alım irsaliyesi oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Создать приходный ордер на товары</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Create Goods receipt</value>
+   <value>26B92892-9DD1-7B5C-CB00-0F3EC948BC33</value>
   </title>
   <id>4</id>
   <use>

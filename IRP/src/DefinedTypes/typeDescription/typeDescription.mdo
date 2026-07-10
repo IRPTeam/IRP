@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeDescription</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip tanım</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип комментарий</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type description</value>
+  <value>DEBC7EB3-A894-10E3-3145-5B467EAD6567</value>
  </synonym>
  <type>
   <types>String</types>

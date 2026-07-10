@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="24006f88-3757-492c-9bbe-65b11987c2f8">
  <name>Iconoir_Finish</name>
  <synonym>
-  <key>tr</key>
-  <value>Bitir</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Iconoir завершить</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Iconoir finish</value>
+  <value>4DC7FB29-0E24-1EC2-2BF2-25F8263C9CC9</value>
  </synonym>
 </mdclass:CommonPicture>

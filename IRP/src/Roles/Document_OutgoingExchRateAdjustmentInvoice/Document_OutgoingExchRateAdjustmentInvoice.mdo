@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ec42155e-4b3a-4c8c-9fbf-f6beda611fe7">
  <name>Document_OutgoingExchRateAdjustmentInvoice</name>
  <synonym>
-  <key>tr</key>
-  <value>"Çıkan döviz kuru düzeltme faturası" belgesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Счет корректировки обменного курса (исходящий)"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Outgoing exch. rate adjustment invoice"</value>
+  <value>0C4EC2EC-4052-A737-7019-98703D2F221F_____________</value>
  </synonym>
 </mdclass:Role>

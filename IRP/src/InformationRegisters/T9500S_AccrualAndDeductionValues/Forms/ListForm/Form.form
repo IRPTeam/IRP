@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>ACA7779E-BD07-07A0-0A2A-A52E496C09D5</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -508,16 +500,8 @@
  <formCommands>
   <name>ShowDocument</name>
   <title>
-   <key>tr</key>
-   <value>Belgeyi göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать документ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show document</value>
+   <value>9D500424-60C7-9490-0E44-4E6889CE66EF</value>
   </title>
   <id>1</id>
   <use>

@@ -43,31 +43,15 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tüm</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Все</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>All</value>
+      <value>2FAE2EEF-66F0-E83B-B7B5-5938381DB0F2</value>
      </presentation>
      <value xsi:type="core:UndefinedValue"/>
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Kasa</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Касса</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Cash</value>
+      <value>2BE6EF69-7547-B085-5230-0DD4A49821E3</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.CashAccountTypes.EnumValue.Cash</value>
@@ -75,16 +59,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Banka</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Банковский счет</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Bank</value>
+      <value>DDBF34F5-7809-E37D-D38E-EA350D40FA95</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.CashAccountTypes.EnumValue.Bank</value>
@@ -92,16 +68,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Transit</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Транзитный</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Transit</value>
+      <value>3CA73ECC-E9E5-ECC8-85ED-DC973764B147</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.CashAccountTypes.EnumValue.Transit</value>
@@ -109,16 +77,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>POS</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Платежный терминал</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>POS</value>
+      <value>C7704A8F-7D2C-92C9-9DEF-F70520D9842F</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.CashAccountTypes.EnumValue.POS</value>
@@ -126,16 +86,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Kasa POS</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Касса ККМ</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>POS cash account</value>
+      <value>FBD3AD28-B7A5-4A1E-E3F1-1A2C924EF4AC</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.CashAccountTypes.EnumValue.POSCashAccount</value>
@@ -149,16 +101,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>A4B331F7-0226-A4F5-5DD5-531933E0F5AB</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -190,16 +134,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>72715716-7228-AAD4-464B-B3AC44CCAB61</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -279,16 +215,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>7AC6C1E1-CE13-F935-55FA-A35459D668FE</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -555,16 +483,8 @@ FROM
  <attributes>
   <name>CashAccountTypeFilter</name>
   <title>
-   <key>tr</key>
-   <value>Kasa banka tip filtresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид места хранения денежных средств</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cash account type filter</value>
+   <value>392071E8-9665-4173-3680-0592119DED84</value>
   </title>
   <id>2</id>
   <valueType>

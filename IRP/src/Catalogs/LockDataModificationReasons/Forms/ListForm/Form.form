@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>2F37A66F-087B-DE98-8607-75AD80BE4D1B</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -164,16 +156,8 @@
    <name>SetOneRuleForAllObjects</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Tek kural</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Одно правило</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>One rule</value>
+    <value>937AAC29-61EA-FB47-76DF-FEF47B791D5F</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -209,16 +193,8 @@
    <name>DisableRule</name>
    <id>28</id>
    <title>
-    <key>tr</key>
-    <value>Devre dışı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Не активен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Disable</value>
+    <value>17A2D1A8-1165-791E-E448-85DC0A8594E4</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -596,16 +572,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açıklama</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>811F9CA3-D64B-9DDA-A4AA-AA8807B47787</value>
       </content>
      </localValue>
     </title>

@@ -185,16 +185,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Başlık</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заголовок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Header</value>
+   <value>697A6C9F-DBAF-570A-ABDF-F9C67BE3AE56</value>
   </title>
   <extendedTooltip>
    <name>HeaderExtendedTooltip</name>

@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="146f6c5b-11d8-4ed9-8169-2a02f46817e1">
  <name>DocVisitorCounterServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak ziyaretçi sayacı sunucusu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ Счетчик посетителей сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc visitor counter server</value>
+  <value>D4A41AAA-794F-777C-C190-0331E169C5C3</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

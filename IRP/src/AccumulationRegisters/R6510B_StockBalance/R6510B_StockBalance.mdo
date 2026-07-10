@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R6510B_StockBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R6510 Stok envanter</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R6510 Остатки товаров на складах</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R6510 Stock balance</value>
+  <value>D49FA085-D0C9-5F68-8137-7B7FB590351B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="f71b1441-64e9-4252-92c0-04b52c771598">
   <name>ActualQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Gerçek miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Физическое количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Actual quantity</value>
+   <value>ACA55E54-DA60-E23B-B6E7-74E96782AC05</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <resources uuid="e1c6119d-dbfe-4182-9fdb-34dce91e8d77">
   <name>FreeQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Serbest miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Свободное количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Free quantity</value>
+   <value>2FDB5C71-3E24-22C7-7CAE-E80889B1FA0D</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -69,16 +45,8 @@
  <resources uuid="01b41bf5-f5f7-4038-a917-31b14f2ba093">
   <name>ReservationQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Rezerv miktarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество в резерве</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Reservation quantity</value>
+   <value>A961E5EF-4AFC-BA20-0CA8-809AF1E6E291</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -90,16 +58,8 @@
  <resources uuid="af2f7821-51c9-426f-b4c4-9776fd9a8d2b">
   <name>TransitIncomingQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Yoldan gelen miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество в пути к приходу</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transit incoming quantity</value>
+   <value>E2D644F3-22C7-2435-5954-47C7A12AB57C</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -111,16 +71,8 @@
  <resources uuid="c0078334-f219-41af-95b8-9265053a3cb5">
   <name>TransitOutgoingQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Yola çıkan miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество в пути к расходу</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transit outgoing quantity</value>
+   <value>9BADF786-A3FB-E373-32A1-1E6AFA3C8B3C</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -132,16 +84,8 @@
  <resources uuid="4e935898-10ae-49ea-a0c0-a671202686ec">
   <name>InventoryQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Envanter miktarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Инвентарное количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Inventory quantity</value>
+   <value>DD78A1DC-3B94-732B-B9C8-827540BB56F5</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -153,16 +97,8 @@
  <resources uuid="9055e9e1-8f80-4471-8a68-745c1f1c615a">
   <name>PreliminaryQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Ön miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Предварительное количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Preliminary quantity</value>
+   <value>5E14F942-055D-3A8E-E3E8-86C2CBE4D977</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -174,16 +110,8 @@
  <attributes uuid="d069b6f6-50e9-4691-b3c0-91df49e7a505">
   <name>CalculationMovementCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet hesaplama fişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расчет себестоимости товаров</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Calculation movement cost</value>
+   <value>8C293307-5AEB-5306-60FD-D7EEAC7CF6D5</value>
   </synonym>
   <type>
    <types>DocumentRef.CalculationMovementCosts</types>
@@ -195,16 +123,8 @@
  <dimensions uuid="59a988d6-9b39-4c26-89b7-6b802658a541">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагенты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>2BE1218C-C6EE-0ED3-3F5D-D53C87E922FB</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -217,16 +137,8 @@
  <dimensions uuid="15c6e8cb-d4ae-4a2a-8078-5e186124e7db">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Магазин</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>13A1859C-B533-65B7-7A90-0BBE3A7F3ECD</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -239,16 +151,8 @@
  <dimensions uuid="9e5f29cd-3178-4e34-906f-42286f927451">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>7E18826D-EA0C-EEA7-7F06-6A5DA4EC622C</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -261,16 +165,8 @@
  <dimensions uuid="1b167532-eca4-4d8d-836c-15667ee37314">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>7D5BA5E5-0140-90E4-4E4A-AAEF46F6603C</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -283,16 +179,8 @@
  <dimensions uuid="f6f95b30-5280-4e9c-a583-0b8364830ca7">
   <name>SourceOfOrigin</name>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşei</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Источник происхождения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source of origin</value>
+   <value>28BAD222-AC4E-6F9B-BF8B-BC494BB87787</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>
@@ -305,16 +193,8 @@
  <dimensions uuid="9ff85e95-7208-45b4-9af4-f56b5eb0efe9">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis</value>
+   <value>4D814778-0951-0D50-020D-D85DE5E6874E</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>

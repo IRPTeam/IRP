@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7e35cea8-2b64-4ef6-854e-80fa402b0565">
  <name>AccumulationRegisters_DELETE_R8013B_ConsignorBatchWiseBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları SİL R8013B KomitentPartiBazındaBakiye</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления УДАЛИТЬ R8013B ПартионныйБалансКомитента</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters DELETE R8013B ConsignorBatchWiseBalance</value>
+  <value>3BDD13AA-CC0F-C5F8-8311-1BFD162C189F_________________________</value>
  </synonym>
 </mdclass:Role>

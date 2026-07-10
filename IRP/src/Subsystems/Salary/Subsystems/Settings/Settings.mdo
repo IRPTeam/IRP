@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="acf9a018-d7b5-430f-b36e-cb01bdf2f1b8">
  <name>Settings</name>
  <synonym>
-  <key>tr</key>
-  <value>Ayarlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Настройки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Settings</value>
+  <value>8141C97B-7C88-123C-CAF1-10E2329A7782</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

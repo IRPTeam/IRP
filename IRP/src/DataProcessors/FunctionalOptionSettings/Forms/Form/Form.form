@@ -2,16 +2,8 @@
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:Addition">
   <title>
-   <key>tr</key>
-   <value>Ara</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Поиск</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Search</value>
+   <value>EEACC253-930A-A26E-E2FB-B89609202419</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -431,16 +423,8 @@
  <attributes>
   <name>FunctionalOptions</name>
   <title>
-   <key>tr</key>
-   <value>İşlevsel seçenekleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Функциональные опции</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Functional options</value>
+   <value>B8826ABD-DEA4-E90F-F58F-F139A9CBE943</value>
   </title>
   <id>2</id>
   <valueType>
@@ -455,16 +439,8 @@
   <columns>
    <name>OptionName</name>
    <title>
-    <key>tr</key>
-    <value>Seçenek tanımı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование свойства</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Option name</value>
+    <value>A215415F-0805-5B21-193F-F3F9D68151C4</value>
    </title>
    <id>3</id>
    <valueType>
@@ -481,16 +457,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использовать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>1E04BF8D-4756-2AC5-5353-3BA3A27C6746</value>
    </title>
    <id>4</id>
    <valueType>
@@ -506,16 +474,8 @@
   <columns>
    <name>OptionPresentation</name>
    <title>
-    <key>tr</key>
-    <value>Seçenek</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вариант</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Option</value>
+    <value>CF44E0E9-1408-71F3-346B-B47B49A6B835</value>
    </title>
    <id>5</id>
    <valueType>
@@ -533,16 +493,8 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Sakla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>0E7F6ED9-B1A6-4C0A-A9F8-8CB29135F9C4</value>
   </title>
   <id>1</id>
   <use>
@@ -558,16 +510,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>35FBF663-212A-30B7-7F33-3168EF9D0447</value>
   </title>
   <id>2</id>
   <use>
@@ -583,16 +527,8 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check all</value>
+   <value>C66B18D2-E821-11BE-E2A8-85D3FA24B583</value>
   </title>
   <id>3</id>
   <use>
@@ -612,16 +548,8 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck all</value>
+   <value>CE3975F6-DAE2-DDD9-93AF-F430CAAC7EF9</value>
   </title>
   <id>4</id>
   <use>
@@ -641,16 +569,8 @@
  <formCommands>
   <name>UpdateDefaults</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan değerleri güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить значения по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update defaults</value>
+   <value>1A8EA32E-CF5A-FEC4-4FFA-A8BF848E40BB</value>
   </title>
   <id>5</id>
   <use>
@@ -666,16 +586,8 @@
  <formCommands>
   <name>UpdateAllUserSettings</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcı ayarları güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить все пользовательские настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update all user settings</value>
+   <value>74144893-AF7F-A697-74C9-9107DBE84854</value>
   </title>
   <id>6</id>
   <use>

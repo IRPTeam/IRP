@@ -11,32 +11,16 @@
  </producedTypes>
  <name>LoggerFiles</name>
  <synonym>
-  <key>tr</key>
-  <value>Kayıt dosyaları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Файлы регистратора</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Logger files</value>
+  <value>4E3DAAD4-9D15-432A-A289-968308495488</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <resources uuid="12dc877f-de71-49dd-8d09-c8e4f83bad55">
   <name>File</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Файл</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>File</value>
+   <value>5DD2F1F9-6DAE-7B8A-AE40-0C8FBDD1E97B</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -50,16 +34,8 @@
  <resources uuid="448e5e56-350e-49f9-82c9-3155463c50b0">
   <name>FileName</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya ismi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Имя файла</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>File name</value>
+   <value>022C1483-CDD8-7704-4C6D-D5E32BEFDE23</value>
   </synonym>
   <type>
    <types>String</types>
@@ -76,16 +52,8 @@
  <resources uuid="b2242fc8-8f5b-470d-8e27-5ecf0c51aaab">
   <name>FileSize</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya boyutu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Размер файла</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>File size</value>
+   <value>60731506-03EC-6572-2CBE-EA8319ABBEC7</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -102,16 +70,8 @@
  <dimensions uuid="df6f0865-4bf8-412e-9a9f-00d8c2087c42">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis</value>
+   <value>1B9510AB-B61A-CAE4-4A04-49E33F96F851</value>
   </synonym>
   <type>
    <types>AnyRef</types>
@@ -129,16 +89,8 @@
  <dimensions uuid="5830a2ac-bf64-40d1-8ccf-9ab747e59fe1">
   <name>MessageID</name>
   <synonym>
-   <key>tr</key>
-   <value>E-posta iletisinin kimliği</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Идентификатор сообщения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Message ID</value>
+   <value>4FB5232D-6E9D-5AFB-B72D-DB61DA37001E</value>
   </synonym>
   <type>
    <types>String</types>
@@ -156,16 +108,8 @@
  <dimensions uuid="3c7e1718-cc6a-442f-b19e-e6cad2e73cee">
   <name>FileID</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya ID</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>ID файла</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>File ID</value>
+   <value>03ED20E1-EA82-F871-1D25-583C219BADB1</value>
   </synonym>
   <type>
    <types>String</types>

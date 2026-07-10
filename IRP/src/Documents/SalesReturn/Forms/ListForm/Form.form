@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>472503B4-151D-57DE-E84D-D11A565408CB</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -836,16 +828,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Depo</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Склад</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Store</value>
+       <value>185B2E9D-2997-9B44-421E-EB8139AF1D38</value>
       </content>
      </localValue>
     </title>
@@ -856,16 +840,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Statü</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Статус</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Status</value>
+       <value>D0EFA05C-1F96-2BCA-AE0F-F6E1C28DD437</value>
       </content>
      </localValue>
     </title>
@@ -956,16 +932,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>MF mevcut</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Есть БО</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is have JE</value>
+       <value>BBD9BD7A-9336-47E0-04D5-573E01D00AF1</value>
       </content>
      </localValue>
     </title>
@@ -1071,16 +1039,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Period</value>
+       <value>001A0513-36BD-B5C9-993F-F562C7F69F53</value>
       </content>
      </localValue>
     </title>

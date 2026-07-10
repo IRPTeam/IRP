@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7cdaa57b-6d33-4186-b94c-a520d139d580">
  <name>UseAccounting</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать бухгалтерию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use accounting</value>
+  <value>8B38115F-9B5B-C121-1F8D-D93DDCAC289A</value>
  </synonym>
  <location>Constant.UseAccounting</location>
  <privilegedGetMode>true</privilegedGetMode>

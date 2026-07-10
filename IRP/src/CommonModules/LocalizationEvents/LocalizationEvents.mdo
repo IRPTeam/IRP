@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a14ca22e-b7a6-479a-85fc-cf4d5400ba0e">
  <name>LocalizationEvents</name>
  <synonym>
-  <key>tr</key>
-  <value>Lokalizasyon olguları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Локализационные события</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Localization events</value>
+  <value>E53228EE-30A2-117E-ED63-36C1468F6E15</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseSales</name>
  <synonym>
-  <key>tr</key>
-  <value>Satış modülü kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Продажи</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use sales</value>
+  <value>618608B1-0864-AAA4-4DFF-FD0561957852</value>
  </synonym>
  <type>
   <types>Boolean</types>

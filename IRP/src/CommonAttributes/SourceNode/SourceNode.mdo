@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5b31f5c2-99e0-4b2f-b5ed-19b148ed9b79">
  <name>SourceNode</name>
  <synonym>
-  <key>tr</key>
-  <value>Kaynak düğüm</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Узел источник</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Source node</value>
+  <value>49298559-7C87-848C-C5FA-A9A5CA4DA7D9</value>
  </synonym>
  <type>
   <types>ExchangePlanRef.FullExchange</types>

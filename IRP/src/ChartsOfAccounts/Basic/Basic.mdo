@@ -11,16 +11,8 @@
  </producedTypes>
  <name>Basic</name>
  <synonym>
-  <key>tr</key>
-  <value>Hesap planı (basic)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Планы счетов (Основной)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Account charts (Basic)</value>
+  <value>81861363-C81A-FFFF-F189-9579E4724F3C</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>ChartOfAccounts.Basic.StandardAttribute.Code</inputByString>
@@ -114,16 +106,8 @@
  <createOnInput>DontUse</createOnInput>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Hesap planı (basic)</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>План счетов (Основной)</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Account chart (Basic)</value>
+  <value>B507D0D8-4BA7-941C-CCAA-AEDD620C7221</value>
  </objectPresentation>
  <extDimensionTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</extDimensionTypes>
  <maxExtDimensionCount>3</maxExtDimensionCount>
@@ -131,16 +115,8 @@
  <standardTabularSections>
   <name>ExtDimensionTypes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ekstra boyut türleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные типы измерений</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Extra dimension types</value>
+   <value>CB2816B1-1BCC-A9A6-64C9-9EC79BB1F9CB</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -186,16 +162,8 @@
  <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
   <name>LedgerTypeVariant</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вариант типа учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type variant</value>
+   <value>1DBBAD1A-59CA-36D6-687A-ABFCBC63D967</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -211,16 +179,8 @@
  <attributes uuid="2ad7938c-03c0-4956-9162-02d1e6897fde">
   <name>SearchCode</name>
   <synonym>
-   <key>tr</key>
-   <value>Arama kodu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Код поиска</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Search code</value>
+   <value>0F27E500-CCA9-ED69-9982-232732840B12</value>
   </synonym>
   <type>
    <types>String</types>
@@ -238,16 +198,8 @@
  <attributes uuid="9ae11d33-8fe3-4357-955f-bdd7e4d1a3a4">
   <name>NotUsedForRecords</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıtlar için kullanılmaz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Не используется для записей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Not used for records</value>
+   <value>80AD3437-63D7-5D21-1AE1-1CFAF77E584E</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -261,16 +213,8 @@
  <accountingFlags uuid="5920e61e-e449-47c2-be3c-28c212cec148">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>1B401466-3AAC-A7A6-6FF9-9832C0AA9305</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -283,16 +227,8 @@
  <accountingFlags uuid="14c93e6d-5bd9-4d82-a64e-5bc911816e37">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>465A62A9-454B-F174-481A-A73D2ED36B4D</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -305,16 +241,8 @@
  <extDimensionAccountingFlags uuid="40aefe23-4b20-4d5a-b3b8-1ebddaba5cd2">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>DAEF32DC-4DE8-EC66-6F6F-FBDC0125BDC9</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -327,16 +255,8 @@
  <extDimensionAccountingFlags uuid="d9534319-0d59-4c10-877b-222bf53d7a4f">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>E758AF7D-4BAB-2352-256D-D1009BACD36E</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -349,16 +269,8 @@
  <extDimensionAccountingFlags uuid="a618412c-8483-4c61-8a45-6972e784ae41">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>38BFF824-0174-73F5-58F0-058A6FF0F0C5</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -371,16 +283,8 @@
  <extDimensionAccountingFlags uuid="f9a2048c-7d77-457b-b418-3151dbc89e98">
   <name>ELedgerDetailed</name>
   <synonym>
-   <key>tr</key>
-   <value>e-Defter detaylı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Детальный eLedger</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>eLedger detailed</value>
+   <value>5E0C93B4-400B-207A-AEF6-679FB24D884A</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -393,16 +297,8 @@
  <forms uuid="660e1999-76d1-42b2-9c78-4a9c131ce45a">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>F54F10C0-934D-E81A-ABFF-FA250DB078A6</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -410,16 +306,8 @@
  <forms uuid="eca16ee5-76ad-4477-8113-51ffa224d6d3">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>E427A020-E462-B1A1-1861-130B5A468D74</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -427,16 +315,8 @@
  <forms uuid="058b9e45-620b-4cd6-aab5-385ceba80b3e">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>C814F824-2E33-8AF7-7669-93AA67ED32F4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -444,16 +324,8 @@
  <forms uuid="63de84ca-e180-403b-9c90-267964693080">
   <name>LoadForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesap planını yükle</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Загрузить план счетов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Load chart of accounts</value>
+   <value>55C90715-B8B0-2B38-82A7-7B283F228CD8</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -461,16 +333,8 @@
  <templates uuid="77d18a0d-bcd6-43b3-ae0b-ad4cdbfa4fed">
   <name>LoadTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon yükle</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Загрузить шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Load template</value>
+   <value>F476991A-F836-DDB3-3795-574EABE98D2E</value>
   </synonym>
  </templates>
 </mdclass:ChartOfAccounts>

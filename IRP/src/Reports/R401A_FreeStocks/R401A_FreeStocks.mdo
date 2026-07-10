@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R401A_FreeStocks</name>
  <synonym>
-  <key>tr</key>
-  <value>R401A Serbest stoklar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R401A Свободные остатки товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R401A Free stocks</value>
+  <value>15AB7677-CE9F-5B6C-C999-92AFB442493E</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R401A_FreeStocks.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="b1d0ccfd-34d1-44b3-ac23-8c6f25e6a0ae">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>17776D90-97FC-DAFF-F091-1CDC0B467DD8</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

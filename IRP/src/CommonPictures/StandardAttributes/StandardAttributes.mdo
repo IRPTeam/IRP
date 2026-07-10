@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b847934a-df66-4aee-bfbd-6f859658f137">
  <name>StandardAttributes</name>
  <synonym>
-  <key>tr</key>
-  <value>Standart öznitellikler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Стандарные реквизиты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Standard attributes</value>
+  <value>E31C07D0-0252-F1FE-E40B-BB4071E596FF</value>
  </synonym>
 </mdclass:CommonPicture>

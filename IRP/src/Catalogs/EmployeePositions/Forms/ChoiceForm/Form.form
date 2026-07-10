@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>2FEB5E23-8297-4689-9D07-735273F1F683</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>4CAF5A88-FD9C-9B16-61FC-C35728B3213A</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -373,16 +357,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tanım</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>F28C693D-42E2-2382-2ECA-A064AD96B12C</value>
       </content>
      </localValue>
     </title>
@@ -424,16 +400,8 @@ FROM
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполненные данные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filling data</value>
+   <value>79F5499F-1C3B-678B-B3C4-444F7E61C2CD</value>
   </title>
   <id>2</id>
   <valueType>

@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Ayarlar</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Настройки</value>
- </title>
- <title>
   <key>en</key>
-  <value>Settings</value>
+  <value>B85D2535-600D-A2CF-F291-119B7549B316</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>GroupRightLeft</name>
@@ -194,28 +186,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Filtreler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Отборы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Filters</value>
+    <value>E9880EF6-DF68-552D-DD2C-C02C1A1AD627</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup filtreleri</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Групповые фильтры</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group filters</value>
+    <value>BD93F1E9-4239-173C-C0DB-BA73FD56D2A4</value>
    </toolTip>
    <width>15</width>
    <extendedTooltip>
@@ -385,28 +361,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup paneller</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Панели</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Panels</value>
+    <value>E11268DF-FCC3-6D56-6FA3-3B393A7939D0</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup panelleri</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Групповые панели</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group panels</value>
+    <value>264C4C39-3B27-2AE7-7781-136F9CDB79E8</value>
    </toolTip>
    <width>15</width>
    <extendedTooltip>
@@ -437,28 +397,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup sağ sol</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа справа налево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group right left</value>
+   <value>81677F40-4BA3-3A58-8F13-393E191E2CF8</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Grup sağ sol</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа справа налево</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group right left</value>
+   <value>1A817DFC-A6C3-586D-DA32-21E3B72F4047</value>
   </toolTip>
   <width>30</width>
   <extendedTooltip>
@@ -540,16 +484,8 @@
  <attributes>
   <name>Filter_LedgerType</name>
   <title>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>88B3D445-DE74-1EE1-1278-84463C9BB3CA</value>
   </title>
   <id>2</id>
   <valueType>
@@ -566,16 +502,8 @@
  <attributes>
   <name>Filter_DocumentType</name>
   <title>
-   <key>tr</key>
-   <value>Evrak tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип документа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document type</value>
+   <value>81CF02CB-3D7E-A7EC-C909-9C9872927D55</value>
   </title>
   <id>3</id>
   <valueType>
@@ -591,16 +519,8 @@
  <attributes>
   <name>Filter_LockType</name>
   <title>
-   <key>tr</key>
-   <value>Kilit tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип блокировки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Lock type</value>
+   <value>7CE0AD6A-5D11-8C4E-EFF8-854E5B620D90</value>
   </title>
   <id>4</id>
   <valueType>
@@ -616,16 +536,8 @@
  <attributes>
   <name>Filter_FilesType</name>
   <title>
-   <key>tr</key>
-   <value>Dosya tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип файлов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Files type</value>
+   <value>F2CDD2F5-6416-D655-566B-B195ABBE1383</value>
   </title>
   <id>5</id>
   <valueType>
@@ -641,16 +553,8 @@
  <attributes>
   <name>Filter_TasksType</name>
   <title>
-   <key>tr</key>
-   <value>Görev türü</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Типы задач</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Tasks type</value>
+   <value>2D657F07-4473-CB34-44DF-FFE537307879</value>
   </title>
   <id>6</id>
   <valueType>
@@ -667,16 +571,8 @@
  <attributes>
   <name>Panel_GroupReport</name>
   <title>
-   <key>tr</key>
-   <value>Rapor</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отчет</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Report</value>
+   <value>8BB349AC-EE36-1435-5A7A-A24AFC56F39F</value>
   </title>
   <id>7</id>
   <valueType>
@@ -693,16 +589,8 @@
  <attributes>
   <name>Panel_GroupFiles</name>
   <title>
-   <key>tr</key>
-   <value>Dosyalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Файлы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Files</value>
+   <value>A8386185-5D26-D7A8-8158-8B76E52AC19A</value>
   </title>
   <id>8</id>
   <valueType>
@@ -718,16 +606,8 @@
  <attributes>
   <name>Panel_GroupChat</name>
   <title>
-   <key>tr</key>
-   <value>Sohbet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Чат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Chat</value>
+   <value>6356DE60-F6B1-85CB-BC44-44B8A09579B9</value>
   </title>
   <id>9</id>
   <valueType>
@@ -743,16 +623,8 @@
  <attributes>
   <name>Panel_GroupHistory</name>
   <title>
-   <key>tr</key>
-   <value>Geçmiş</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>История статусов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>History</value>
+   <value>CDDA21AA-D662-43F6-6942-2D83FA862809</value>
   </title>
   <id>10</id>
   <valueType>
@@ -768,29 +640,13 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>4435FD68-7C85-7F83-3DD6-61DE83B053B8</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Записать</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Save</value>
+   <value>DA95B7A7-51F8-C1EE-E870-02589D6C1FDB</value>
   </toolTip>
   <use>
    <common>true</common>

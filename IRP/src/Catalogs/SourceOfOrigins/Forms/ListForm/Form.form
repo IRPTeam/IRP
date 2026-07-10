@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>45E928D8-5976-9B48-8D0A-A03CE53749EE</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -606,16 +598,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Malzeme ref</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Ссылка номенклатура</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item ref</value>
+       <value>195A157E-4716-3A3A-AD22-20191B90FC12</value>
       </content>
      </localValue>
     </title>
@@ -627,16 +611,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Malzeme tipi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Вид номенклатуры</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item type</value>
+       <value>79A41060-97E2-A696-6DCD-DBCA3C0D0093</value>
       </content>
      </localValue>
     </title>
@@ -648,16 +624,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Bu varyant</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Это характеристика</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is item key</value>
+       <value>CD055A60-FC91-220F-FDE1-10CA10BD21FD</value>
       </content>
      </localValue>
     </title>
@@ -669,16 +637,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Varyant ref</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Ссылка характеристики</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item key ref</value>
+       <value>F42DCE6C-E976-C02E-EF9C-C2AB17EA25A8</value>
       </content>
      </localValue>
     </title>
@@ -690,16 +650,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Bu malzeme tipi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Это вид номенклатуры</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is item type</value>
+       <value>CCA00274-E5D8-0F62-296B-B4FC37CF6413</value>
       </content>
      </localValue>
     </title>
@@ -711,16 +663,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Bu malzeme</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Это номенклатура</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is item</value>
+       <value>6DB4D84C-EB6C-8D85-5D3A-A7FCC2E84D90</value>
       </content>
      </localValue>
     </title>
@@ -732,16 +676,8 @@
  <attributes>
   <name>SourceOfOriginOwner</name>
   <title>
-   <key>tr</key>
-   <value>Envanter menşei sahibi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Владелец источника происхождения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Source of origin owner</value>
+   <value>41B326AB-6F60-308B-BEE9-98B33454CF4A</value>
   </title>
   <id>2</id>
   <valueType>

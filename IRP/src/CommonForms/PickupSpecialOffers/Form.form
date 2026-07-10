@@ -107,16 +107,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Sunum</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Представление</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Presentetion</value>
+      <value>6D9F40C6-6EFC-52D4-4FB1-1C9E204070C9</value>
      </title>
      <extendedTooltip>
       <name>OffersGroupPresentationExtendedTooltip</name>
@@ -213,16 +205,8 @@
      <name>OffersTotalPercent</name>
      <id>25</id>
      <title>
-      <key>tr</key>
-      <value>%</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>%</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>%</value>
+      <value>6E0D920F-F8EA-A944-4E06-6C2A1C3B54A3</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -452,16 +436,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup kampanya ağacı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дерево групп скидок</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group offers tree</value>
+    <value>9C17F96A-A276-5704-468A-AA37687C56B4</value>
    </title>
    <extendedTooltip>
     <name>GroupOffersTreeExtendedTooltip</name>
@@ -485,16 +461,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>13696E9A-A924-5382-21E6-67AF4545E315</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -536,16 +504,8 @@
  <attributes>
   <name>Offers</name>
   <title>
-   <key>tr</key>
-   <value>Iskonto</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скидки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Offers</value>
+   <value>B60CF95D-B326-AA69-9FE7-737DBC93917B</value>
   </title>
   <id>1</id>
   <valueType>
@@ -560,16 +520,8 @@
   <columns>
    <name>Offer</name>
    <title>
-    <key>tr</key>
-    <value>Iskonto</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Скидка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Offer</value>
+    <value>B4D13A35-6CAC-171E-E7F2-245E0BD65047</value>
    </title>
    <id>2</id>
    <valueType>
@@ -586,16 +538,8 @@
   <columns>
    <name>isSelect</name>
    <title>
-    <key>tr</key>
-    <value>Seçildi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Применяется</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is select</value>
+    <value>719C87A4-1E6D-A9AB-BDE6-6C9F16FC1A7F</value>
    </title>
    <id>3</id>
    <valueType>
@@ -611,16 +555,8 @@
   <columns>
    <name>isFolder</name>
    <title>
-    <key>tr</key>
-    <value>Bu klasör</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это папка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is folder</value>
+    <value>7BB0033E-BD97-9E58-8C3E-EB41A254DC93</value>
    </title>
    <id>1</id>
    <valueType>
@@ -636,16 +572,8 @@
   <columns>
    <name>Priority</name>
    <title>
-    <key>tr</key>
-    <value>Önem</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Приоритет</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Priority</value>
+    <value>470F096F-5E2B-4622-2731-143740EF8531</value>
    </title>
    <id>4</id>
    <valueType>
@@ -664,16 +592,8 @@
   <columns>
    <name>Auto</name>
    <title>
-    <key>tr</key>
-    <value>Otomatik</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Авто</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Auto</value>
+    <value>3F4A47DB-4A61-AC88-89D7-7018376A5163</value>
    </title>
    <id>5</id>
    <valueType>
@@ -689,16 +609,8 @@
   <columns>
    <name>TotalPercent</name>
    <title>
-    <key>tr</key>
-    <value>Toplam yüzde</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Итоговый процент</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Total percent</value>
+    <value>388F580D-3830-EC81-1D20-075D22752DDF</value>
    </title>
    <id>6</id>
    <valueType>
@@ -714,16 +626,8 @@
   <columns>
    <name>TotalAmount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>771CD5EC-65C2-DA4D-DA0D-D977DD08CA88</value>
    </title>
    <id>7</id>
    <valueType>
@@ -739,16 +643,8 @@
   <columns>
    <name>Rule</name>
    <title>
-    <key>tr</key>
-    <value>Kural</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Правило</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Rule</value>
+    <value>E66E7DDC-68E7-601D-D511-158D21A48794</value>
    </title>
    <id>8</id>
    <valueType>
@@ -764,16 +660,8 @@
   <columns>
    <name>RuleStatus</name>
    <title>
-    <key>tr</key>
-    <value>Kural statüsü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус правила</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Rule status</value>
+    <value>207EEA88-A4DF-0C01-1C47-73423C42B19B</value>
    </title>
    <id>17</id>
    <valueType>
@@ -792,16 +680,8 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Специальные предложения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>D6C431A4-BA90-FFAE-E021-165397F63AE5</value>
    </title>
    <id>20</id>
    <valueType>
@@ -818,16 +698,8 @@
   <columns>
    <name>isSequential</name>
    <title>
-    <key>tr</key>
-    <value>Sıralıdır</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Последовательно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is sequential</value>
+    <value>2693BA15-7823-D76E-E44B-BA954CDBB2DE</value>
    </title>
    <id>9</id>
    <valueType>
@@ -843,16 +715,8 @@
   <columns>
    <name>ManualInputValue</name>
    <title>
-    <key>tr</key>
-    <value>Manuel girilen değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ручной выбор значения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Manual input value</value>
+    <value>41F62353-79F1-BF6D-D9AE-E953B8500B72</value>
    </title>
    <id>22</id>
    <valueType>
@@ -868,16 +732,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>FBB7C198-9A3A-7DE8-8F50-06B8AA190BF2</value>
    </title>
    <id>23</id>
    <valueType>
@@ -893,16 +749,8 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>978A81D5-7D10-DB82-2F1E-E66EE7407E21</value>
    </title>
    <id>24</id>
    <valueType>
@@ -918,16 +766,8 @@
   <columns>
    <name>TotalInGroupOffers</name>
    <title>
-    <key>tr</key>
-    <value>Grup tekliflerinde toplam</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Итог по группе скидок</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Total in group offers</value>
+    <value>2CD40CB4-47E9-7FDA-A693-3CDFBC50FED3</value>
    </title>
    <id>25</id>
    <valueType>
@@ -943,16 +783,8 @@
   <columns>
    <name>AllRuleIsOk</name>
    <title>
-    <key>tr</key>
-    <value>Tüm kural geçerli</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Все условия выполнены</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>All rule is ok</value>
+    <value>136AE989-587E-4E1F-FAC8-85D95324CE25</value>
    </title>
    <id>26</id>
    <valueType>
@@ -968,16 +800,8 @@
   <columns>
    <name>Manual</name>
    <title>
-    <key>tr</key>
-    <value>Manual</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ручная</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Manual</value>
+    <value>5A636E17-1667-A9C8-8A0F-F7FF0DC198A9</value>
    </title>
    <id>27</id>
    <valueType>
@@ -993,16 +817,8 @@
   <columns>
    <name>ReadyOffer</name>
    <title>
-    <key>tr</key>
-    <value>Hazır teklif</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Скидка рассчитана</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ready offer</value>
+    <value>0DC3E317-950F-9A99-9863-382062016A29</value>
    </title>
    <id>28</id>
    <valueType>
@@ -1018,16 +834,8 @@
   <columns>
    <name>Bonus</name>
    <title>
-    <key>tr</key>
-    <value>Bonus</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Бонус</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Bonus</value>
+    <value>6F858AD9-6235-C1F0-0EC7-79EEBBBD95D0</value>
    </title>
    <id>29</id>
    <valueType>
@@ -1043,16 +851,8 @@
   <columns>
    <name>AddInfo</name>
    <title>
-    <key>tr</key>
-    <value>Ek bilgi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительная информация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Add info</value>
+    <value>3538B15C-0375-E0A8-87B8-895472B6583B</value>
    </title>
    <id>30</id>
    <valueType>
@@ -1068,16 +868,8 @@
   <columns>
    <name>Percent</name>
    <title>
-    <key>tr</key>
-    <value>Yüzde124</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Процент</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Percent</value>
+    <value>9AEA967D-B13C-D4B9-9370-02D0135ECB1A</value>
    </title>
    <id>31</id>
    <valueType>
@@ -1097,16 +889,8 @@
   <columns>
    <name>OfferGroupType</name>
    <title>
-    <key>tr</key>
-    <value>Teklif grup türü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип группы скидок</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Offer group type</value>
+    <value>17567E5F-FD79-B34A-A9C4-467606FBF09F</value>
    </title>
    <id>32</id>
    <valueType>
@@ -1122,16 +906,8 @@
   <columns>
    <name>isRule</name>
    <title>
-    <key>tr</key>
-    <value>Kural mı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это правило</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is rule</value>
+    <value>80803E46-AE79-1D7D-DAD8-8A4CBFE3E610</value>
    </title>
    <id>33</id>
    <valueType>
@@ -1148,16 +924,8 @@
  <attributes>
   <name>Percent</name>
   <title>
-   <key>tr</key>
-   <value>Yüzde</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Процент</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Percent</value>
+   <value>2B50B94D-E3BA-515B-B5F3-361D7561B2BF</value>
   </title>
   <id>12</id>
   <valueType>
@@ -1177,16 +945,8 @@
  <attributes>
   <name>FormType</name>
   <title>
-   <key>tr</key>
-   <value>Form tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип формы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Form type</value>
+   <value>9A43CB5A-0103-CBD9-97E4-4175D7EDAC59</value>
   </title>
   <id>14</id>
   <valueType>
@@ -1203,16 +963,8 @@
  <attributes>
   <name>ItemListRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Malzemeler listesi satır anahtarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ключ строки элемента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item list row key</value>
+   <value>667943F3-8B81-EBF2-2940-0933F570AA02</value>
   </title>
   <id>16</id>
   <valueType>
@@ -1228,16 +980,8 @@
  <attributes>
   <name>SelectedOffersRow</name>
   <title>
-   <key>tr</key>
-   <value>Seçilen kapmanyalar satırı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбранные строки скидок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Selected offers row</value>
+   <value>0337833E-558C-71B2-2A46-67F82C5C1A9F</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1256,16 +1000,8 @@
  <attributes>
   <name>FormParametersInfo</name>
   <title>
-   <key>tr</key>
-   <value>Form ayarları bilgisi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Информация о параметрах формы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Form parameters info</value>
+   <value>0D51A607-F4AA-E3F4-462A-AA97CA4A4577</value>
   </title>
   <id>21</id>
   <valueType/>
@@ -1279,16 +1015,8 @@
  <attributes>
   <name>ArrayOfRowKeys</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtarları dizisi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Массив ключей строк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Array of row keys</value>
+   <value>BC0DB0E5-E79C-3E79-951B-BCDE35C645F7</value>
   </title>
   <id>34</id>
   <valueType>
@@ -1307,29 +1035,13 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>A66A0030-BA51-C521-1D06-67D2FEC1E54C</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tamam</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>ОК</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>OK</value>
+   <value>34425C06-6A81-6A2E-E317-7960FA13D7BC</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1344,16 +1056,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>BD0BD39C-BA76-9FF4-4F93-33483B23B769</value>
   </title>
   <id>4</id>
   <use>

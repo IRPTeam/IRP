@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1cb3fbd2-2bc1-4cb1-aea2-cce2db56cb5d">
  <name>Report_R5021A_Revenues</name>
  <synonym>
-  <key>tr</key>
-  <value>R5021A Gelirler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R5021A_Доходы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R5021A_Revenues</value>
+  <value>0C2B81E3-F65C-D477-7907-7DE7D6B72A7A</value>
  </synonym>
 </mdclass:Role>

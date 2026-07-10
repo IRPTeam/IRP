@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeBarcode</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip barkod</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип штрихкода</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type barcode</value>
+  <value>E954FAE9-C49D-582A-AE6F-FBFD9E9810E4</value>
  </synonym>
  <type>
   <types>String</types>

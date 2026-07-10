@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseMessaging</name>
  <synonym>
-  <key>tr</key>
-  <value>Use messaging</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать уведомления</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use messaging</value>
+  <value>1482BD0C-8DAF-E65A-A3B4-479735757BE8</value>
  </synonym>
  <type>
   <types>Boolean</types>

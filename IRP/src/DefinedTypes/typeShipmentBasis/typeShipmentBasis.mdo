@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeShipmentBasis</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip sevkiyat kaynak evrakı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип основание отгрузки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type shipment basis</value>
+  <value>FA9D31CA-DB2E-5E6A-A051-11C07A6E50B8</value>
  </synonym>
  <type>
   <types>DocumentRef.PurchaseInvoice</types>

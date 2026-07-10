@@ -9,16 +9,8 @@
  </producedTypes>
  <name>PrintFormTemplates</name>
  <synonym>
-  <key>tr</key>
-  <value>Form şablonlarını yazdır</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Печатная форма шаблонов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Print form templates</value>
+  <value>8D1C07FA-9675-125C-C71E-E66E331ECA20</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.PrintFormTemplates.StandardAttribute.Code</inputByString>
@@ -117,16 +109,8 @@
  <attributes uuid="2a0b0325-437e-40ca-a76d-bd68308232d6">
   <name>PrintFormType</name>
   <synonym>
-   <key>tr</key>
-   <value>Yazdırma formu tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип формы печати</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Print form type</value>
+   <value>3C9A882D-706A-442F-FC20-06FC2191C105</value>
   </synonym>
   <type>
    <types>EnumRef.PrintFormTypes</types>
@@ -143,16 +127,8 @@
  <attributes uuid="72e14f64-fb6d-4a0f-82bd-861aeb24f2bb">
   <name>PrintFormVariableType</name>
   <synonym>
-   <key>tr</key>
-   <value>Yazdırma formu değişken türü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Печатная форма типов переменных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Print form variable type</value>
+   <value>1D8D1F48-8379-A44A-A68B-B7F08A617B6C</value>
   </synonym>
   <type>
    <types>EnumRef.PrintFormVariableTypes</types>
@@ -169,16 +145,8 @@
  <attributes uuid="456fd220-b424-43a0-a07e-5237d6a65799">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Template</value>
+   <value>BAF5A385-41DC-9450-05DC-CB6E58A89159</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -192,16 +160,8 @@
  <attributes uuid="92384732-ecce-4aae-be49-95564888376b">
   <name>UseTables</name>
   <synonym>
-   <key>tr</key>
-   <value>Tabloları kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать таблицы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use tables</value>
+   <value>C02C84E9-7C55-1561-1FA4-40A96D1F9458</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -219,30 +179,14 @@
   </producedTypes>
   <name>Tables</name>
   <synonym>
-   <key>tr</key>
-   <value>Tablolar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Таблицы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tables</value>
+   <value>2CB83DC6-8F6B-7E77-70AE-E71BCC21800C</value>
   </synonym>
   <attributes uuid="3882bfeb-8def-4958-9d68-e61c01254095">
    <name>Name</name>
    <synonym>
-    <key>tr</key>
-    <value>Ad</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Имя</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Name</value>
+    <value>CBE6201E-B0B8-9448-8701-1123C6298C9C</value>
    </synonym>
    <type>
     <types>String</types>
@@ -257,16 +201,8 @@
   <attributes uuid="7aa8c28f-fbb0-4ebf-8348-f69deb860124">
    <name>Expression</name>
    <synonym>
-    <key>tr</key>
-    <value>İfade</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Выражение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Expression</value>
+    <value>5E14A83F-09AB-2752-2CFC-CE46BB420F9C</value>
    </synonym>
    <type>
     <types>String</types>
@@ -280,16 +216,8 @@
   <attributes uuid="69d61933-6e64-407a-baf6-3714f1e77c2d">
    <name>RepeatingArea</name>
    <synonym>
-    <key>tr</key>
-    <value>Tekrarlanan alan</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Повторяющаяся зона</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Repeating area</value>
+    <value>2227250E-4387-F67A-A811-1B326E5C0F97</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -302,16 +230,8 @@
   <attributes uuid="a0758ce6-d644-4a48-99de-3f4306f5fca0">
    <name>LineStart</name>
    <synonym>
-    <key>tr</key>
-    <value>Satır başı</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Начало строки</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Line start</value>
+    <value>DC0E60E4-20C8-7888-8656-65C203976E07</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -328,16 +248,8 @@
   <attributes uuid="39d0c30e-1e5a-440a-9082-b1701eafe396">
    <name>LineEnd</name>
    <synonym>
-    <key>tr</key>
-    <value>Satır sonu</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Конец строки</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Line end</value>
+    <value>C7BAF45B-D4DA-F62F-F976-638A607A204E</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -359,16 +271,8 @@
   </producedTypes>
   <name>Parameters</name>
   <synonym>
-   <key>tr</key>
-   <value>Parametreler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Параметры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Parameters</value>
+   <value>AF57E164-20D6-BD06-6859-93277AF00968</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -381,16 +285,8 @@
   <attributes uuid="3687f605-148d-43cf-b3c0-8850bcf01836">
    <name>Name</name>
    <synonym>
-    <key>tr</key>
-    <value>Ad</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Имя</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Name</value>
+    <value>42A51C09-70CB-2520-0D7F-FE94FF986D33</value>
    </synonym>
    <type>
     <types>String</types>
@@ -404,16 +300,8 @@
   <attributes uuid="1182fd87-d527-48ba-9946-c6ae3f427682">
    <name>Table</name>
    <synonym>
-    <key>tr</key>
-    <value>Tablo</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Таблица</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Table</value>
+    <value>17C4941B-4550-E667-7D42-2A449B18EA30</value>
    </synonym>
    <type>
     <types>String</types>
@@ -427,16 +315,8 @@
   <attributes uuid="bc61b1cc-e86c-469d-b726-d1dbb73d82b8">
    <name>Expression</name>
    <synonym>
-    <key>tr</key>
-    <value>İfade</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Выражение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Expression</value>
+    <value>8269A410-6801-85CB-BB41-16EAE4F97E24</value>
    </synonym>
    <type>
     <types>String</types>
@@ -450,16 +330,8 @@
   <attributes uuid="7a17a8c1-9881-4c4f-b84b-cceb953d6ecc">
    <name>ToDelete</name>
    <synonym>
-    <key>tr</key>
-    <value>Silmek için</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Для удаления</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>To delete</value>
+    <value>51FCB77D-BCAE-3643-3BB8-81B2BD2A7181</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -472,16 +344,8 @@
  <forms uuid="c3393446-ebf8-4c0e-aacd-ba60eab7d262">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>AC289342-9926-D367-761A-A0299FF98BCD</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -489,16 +353,8 @@
  <forms uuid="ddf178e5-cbc7-4c82-a980-5f0fc0b058f8">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>1AEEC846-F6ED-E53C-C0DB-B60D137A558F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -506,16 +362,8 @@
  <forms uuid="4545e209-61a6-4c47-a4f7-dd6c79ef9932">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>91DBA13A-EB0F-555D-D9E9-9F5D58098B6A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -523,16 +371,8 @@
  <forms uuid="5173aaef-1ef1-4a7c-a975-a7cfe208e2b3">
   <name>FormulaEditingTable</name>
   <synonym>
-   <key>tr</key>
-   <value>Formül düzenleme tablosu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Таблица изменения формулы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Formula editing table</value>
+   <value>D46CA4B9-BEC2-18E5-5084-493E44D8BDBE</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -540,16 +380,8 @@
  <forms uuid="0523a6c0-7e09-4f1c-a3af-4534d09d6cd0">
   <name>FormulaEditingParameter</name>
   <synonym>
-   <key>tr</key>
-   <value>Formül düzenleme parametresi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Параметры изменения формулы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Formula editing parameter</value>
+   <value>52DFD930-A6B7-9FAD-DD07-7BD289FA07C7</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

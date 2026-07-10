@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>1B8E2C87-10DB-597C-C7BC-C866145B4FA6</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -180,16 +172,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>D8D889BD-6D56-36E7-76CE-E2F1C0651FA0</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -516,16 +500,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tanım</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Описание</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>128ADF1A-3DB4-E3C9-9734-4FFC84C30CCE</value>
       </content>
      </localValue>
     </title>
@@ -591,16 +567,8 @@ FROM
  <formCommands>
   <name>LoadCountries</name>
   <title>
-   <key>tr</key>
-   <value>Ülkeleri yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить страны</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load countries</value>
+   <value>6F7C218C-52BE-6A90-066C-C631A959CE45</value>
   </title>
   <id>1</id>
   <use>

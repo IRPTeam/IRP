@@ -6,32 +6,16 @@
  </producedTypes>
  <name>CreateNewIssue</name>
  <synonym>
-  <key>tr</key>
-  <value>Yeni talep oluştur</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Описать новую проблему  </value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Create new issue</value>
+  <value>19D470FC-1997-E3EC-CBA3-300785999867</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.CreateNewIssue.Form.Form</defaultForm>
  <attributes uuid="d2638087-21dc-447e-8893-bfc9157840ee">
   <name>Country</name>
   <synonym>
-   <key>tr</key>
-   <value>Ülke</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Страна</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Country</value>
+   <value>3EA7B2AB-548C-C337-7DC4-4C775D6E3616</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -43,16 +27,8 @@
  <attributes uuid="0b3f0ee9-000b-4bd4-a9d2-bd6e914251d8">
   <name>City</name>
   <synonym>
-   <key>tr</key>
-   <value>İl</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Город</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>City</value>
+   <value>A8B7B36B-3D1D-E72A-ADA8-888DDA562D55</value>
   </synonym>
   <type>
    <types>CatalogRef.Cities</types>
@@ -68,16 +44,8 @@
  <attributes uuid="4d64ce96-cefb-458a-905b-97964bf1de72">
   <name>Location</name>
   <synonym>
-   <key>tr</key>
-   <value>Lokasyon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Местоположение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Location</value>
+   <value>2CE1F0BF-0F83-101B-BA41-147992133FEB</value>
   </synonym>
   <type>
    <types>CatalogRef.ObjectLocations</types>
@@ -93,16 +61,8 @@
  <attributes uuid="803b4c17-2822-474b-8a6a-cab04c984795">
   <name>IssueType</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип проблемы       </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Issue type</value>
+   <value>7AF6C6D4-CA83-F612-2DCB-BBB5BCE64A6F</value>
   </synonym>
   <type>
    <types>CatalogRef.IssueTypes</types>
@@ -114,16 +74,8 @@
  <attributes uuid="ec1e7177-96c3-4a03-abca-e3be5471a58c">
   <name>Comment</name>
   <synonym>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Comment</value>
+   <value>F58EA23D-215D-EDA8-8323-30D3DE640E16</value>
   </synonym>
   <type>
    <types>String</types>
@@ -137,16 +89,8 @@
  <attributes uuid="0f5d1358-4694-41ec-9417-512da620afa4">
   <name>DueDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Срок исполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Due date</value>
+   <value>DC3045F7-1694-18CF-F12C-C79F34A37194</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -158,16 +102,8 @@
  <attributes uuid="5046415d-f384-434b-b04c-bead7536e2ec">
   <name>Author</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt oluşturan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Автор</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Author</value>
+   <value>E05BFDB2-9DBC-0D29-9C5B-B01BE36D22E2</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -178,16 +114,8 @@
  <attributes uuid="7f976e55-a567-4f32-88d1-35299f663c8e">
   <name>Latitude</name>
   <synonym>
-   <key>tr</key>
-   <value>Enlem</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Широта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Latitude</value>
+   <value>8A49E4CA-B376-2205-5C43-3E982947FF6C</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -202,16 +130,8 @@
  <attributes uuid="45d1792d-1adb-4a62-b597-4e838d20222f">
   <name>Longitude</name>
   <synonym>
-   <key>tr</key>
-   <value>Boylam</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Долгота</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Longitude</value>
+   <value>AC005120-9765-8ABE-EEF1-1A81E6519502</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -226,16 +146,8 @@
  <forms uuid="ae6e9f5c-9341-486a-a069-3d219e0a4786">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>5F204210-125B-987C-C5B4-484D9760D332</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

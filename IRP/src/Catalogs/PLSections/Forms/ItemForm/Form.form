@@ -106,16 +106,8 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Veri seçimi</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Выборка данных</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Data selection</value>
+     <value>4732F1C8-AD92-6597-7E4A-A310C554CF0A</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.PLSectionTypes.EnumValue.DataSelection</value>
@@ -123,16 +115,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Alacak/Borç muhasebesi</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Расчет</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Calculation</value>
+     <value>B734EB59-00EB-C5DF-F9A7-70CFA06B5918</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.PLSectionTypes.EnumValue.Calculation</value>
@@ -402,16 +386,8 @@
       <typeDomainEnabled>true</typeDomainEnabled>
       <choiceList>
        <presentation>
-        <key>tr</key>
-        <value>1</value>
-       </presentation>
-       <presentation>
-        <key>ru</key>
-        <value>1</value>
-       </presentation>
-       <presentation>
         <key>en</key>
-        <value>1</value>
+        <value>D6861214-9F3D-107B-BED4-4440D9D33FFA</value>
        </presentation>
        <value xsi:type="core:NumberValue">
         <value>1</value>
@@ -419,16 +395,8 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>tr</key>
-        <value>2</value>
-       </presentation>
-       <presentation>
-        <key>ru</key>
-        <value>2</value>
-       </presentation>
-       <presentation>
         <key>en</key>
-        <value>2</value>
+        <value>91C893B4-3A94-3986-6770-0976CE357DD2</value>
        </presentation>
        <value xsi:type="core:NumberValue">
         <value>2</value>
@@ -436,16 +404,8 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>tr</key>
-        <value>3</value>
-       </presentation>
-       <presentation>
-        <key>ru</key>
-        <value>3</value>
-       </presentation>
-       <presentation>
         <key>en</key>
-        <value>3</value>
+        <value>E9F0EE59-27ED-4361-1A5A-AA2D75E4AA29</value>
        </presentation>
        <value xsi:type="core:NumberValue">
         <value>3</value>
@@ -613,16 +573,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Veri filtresi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Фильтр данных</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Data filter</value>
+    <value>E7CD176D-907F-2855-5D70-0203D5BB7CB5</value>
    </title>
    <extendedTooltip>
     <name>PageDataFilterExtendedTooltip</name>
@@ -647,16 +599,8 @@
     <name>DecorationExample</name>
     <id>69</id>
     <title>
-     <key>tr</key>
-     <value>Bölüm.&lt;Bölüm adı&gt;</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Аналитика.&lt;Section name&gt;</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Section.&lt;Section name&gt;</value>
+     <value>3AE7DD74-81CF-477D-DA7A-ACD3D3695F25</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -732,16 +676,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>İfade</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Выражение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Expression</value>
+    <value>C9ACF540-A0D3-B643-3F07-7DAA14B062CC</value>
    </title>
    <extendedTooltip>
     <name>PageExpressionExtendedTooltip</name>
@@ -765,16 +701,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>48072CE5-082F-8C93-338F-FC66B1D600FC</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>

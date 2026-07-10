@@ -6,32 +6,16 @@
  </producedTypes>
  <name>F0010_FixedAssetsTransferCost</name>
  <synonym>
-  <key>tr</key>
-  <value>Fixed assets transfer cost</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Затраты на передачу ОС</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Fixed assets transfer cost</value>
+  <value>471BA4A3-BA96-7E62-2225-558902AA49C8</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.F0010_FixedAssetsTransferCost.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="d73b7b54-6c26-4e4c-8095-9945927d3d3d">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>C34C83DB-C049-3E36-6761-18A58718217E</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

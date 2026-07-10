@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>398020F4-7C8B-FC0F-FEAF-FAE546D193B8</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -285,16 +277,8 @@
    <name>Branch</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Şubeden</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Подразделение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>From branch</value>
+    <value>ABAFCEDC-AAB8-CA4B-BF67-7D39A61C6916</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>PrintInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>Bilgi yazdır</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Информация для печати</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Print info</value>
+  <value>1808CC6C-5605-F5DB-BCC3-304A4028E845</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.PrintInfo.StandardAttribute.Code</inputByString>
@@ -28,28 +20,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Bilgi yazdır</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Информация для печати</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Print info</value>
+  <value>824B0D0B-7F6D-5415-5992-2D47AC6272F1</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Baskı Bilgileri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Печать информации</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Print informations</value>
+  <value>64D72321-8421-1EEF-F232-2E13C899843F</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -67,16 +43,8 @@
  <attributes uuid="ce48fb35-8f06-477c-a577-e71056861195">
   <name>Logo</name>
   <synonym>
-   <key>tr</key>
-   <value>Logo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Логотип</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Logo</value>
+   <value>430A6C99-CACA-92F1-1532-25BA1B17EF83</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -90,16 +58,8 @@
  <attributes uuid="3003f980-056d-4c45-afff-a11f78e116a6">
   <name>isLogoSet</name>
   <synonym>
-   <key>tr</key>
-   <value>Logo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Логотип</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Logo</value>
+   <value>3668139D-E001-4149-9AED-D869BA69ED7A</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -113,16 +73,8 @@
  <attributes uuid="6e04b6ac-7435-4115-8e90-d7a667a9e94b">
   <name>Seal</name>
   <synonym>
-   <key>tr</key>
-   <value>Mühür</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Печать</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Seal</value>
+   <value>90802959-05AE-E7A2-23B4-40297CD04830</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -136,16 +88,8 @@
  <attributes uuid="9913bedb-82c8-4c0e-b2bc-27eb8e66b8ed">
   <name>isSealSet</name>
   <synonym>
-   <key>tr</key>
-   <value>Mühür</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Печать</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Seal</value>
+   <value>80FB50DD-5FF7-FB39-9156-6C77B21C4E51</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -159,16 +103,8 @@
  <attributes uuid="6048d1b1-94d2-40aa-a9e5-8a99500d2945">
   <name>AdditionalPrintInfo</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek Baskı Bilgisi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительная печатная информация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional print info</value>
+   <value>82FF2C63-DCF8-9D5A-A1DB-B5538C539054</value>
   </synonym>
   <type>
    <types>String</types>
@@ -183,16 +119,8 @@
  <attributes uuid="322deef7-6bef-4ac3-b18f-2174b9ef9afe">
   <name>DefaultColor</name>
   <synonym>
-   <key>tr</key>
-   <value>Varsayılan Renk</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Цвет по умолчанию</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Default color</value>
+   <value>F4908796-6D9E-E2C4-43DE-E49400D53FAC</value>
   </synonym>
   <type>
    <types>String</types>
@@ -207,16 +135,8 @@
  <forms uuid="bbfd3e95-ce42-42f7-8e4f-896b350e2b72">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>6E7AFDA3-0570-7CE0-0A4E-E74A98CFBBA2</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -224,16 +144,8 @@
  <forms uuid="d8e9fb59-5cf9-4351-ad7b-3f5178a721b9">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>74556EF9-815C-EA9E-EC51-1AF72500B070</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -241,16 +153,8 @@
  <forms uuid="e05d7b49-3720-4273-afa8-50545b5b7401">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>8D246BE9-C686-24F4-4E03-30A45E81FD17</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

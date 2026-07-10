@@ -9,16 +9,8 @@
  </producedTypes>
  <name>FixedAssets</name>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymetler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Основные средства</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Fixed assets</value>
+  <value>92F7E502-6CD4-2D21-1D5A-A51D8C7182EE</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -56,28 +48,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Sabit kıymet</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Основное средство</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Fixed asset</value>
+  <value>20125597-D58A-D72F-FE2B-BB08472622D1</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Sabit kıymetler</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Основные средства</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Fixed assets</value>
+  <value>ACDC6D4C-1E78-89F0-0D67-7985A854469B</value>
  </listPresentation>
  <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
@@ -98,16 +74,8 @@
  <attributes uuid="93384d7d-d83c-4da2-bf57-5a5f7b7e78d9">
   <name>Type</name>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Type</value>
+   <value>3359FD12-325F-80AC-C188-896E2BC5634A</value>
   </synonym>
   <type>
    <types>EnumRef.FixedAssetTypes</types>
@@ -122,16 +90,8 @@
  <attributes uuid="3dc2a67b-05a4-471b-8c48-a9c4999a7b4e">
   <name>InventoryNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Envanter numarası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Инвентаризационный номер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Inventory number</value>
+   <value>FD7B3FE1-2B64-C523-3D92-23963C3CE798</value>
   </synonym>
   <type>
    <types>String</types>
@@ -148,16 +108,8 @@
  <attributes uuid="282b9254-d491-4718-8a72-ac14dca95789">
   <name>DepreciationRate</name>
   <synonym>
-   <key>tr</key>
-   <value>Amortisman oranı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Норма амортизации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Depreciation rate</value>
+   <value>9B313E2E-360D-0BFA-A86F-F68839795283</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -179,30 +131,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>D19F7BA0-5CA4-0A83-3793-3C8D65FB48D0</value>
   </synonym>
   <attributes uuid="f06682ee-4e98-46cc-9616-d4fcb2fd7d9f">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>95BE3BD0-C284-1E6E-E576-6AA2CF9E4F61</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -215,16 +151,8 @@
   <attributes uuid="f3c5f609-5a6f-4d81-a2a4-b17ae4ba7f51">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>147407AC-A8C6-1109-9359-9F3496683830</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -241,16 +169,8 @@
   <attributes uuid="1a879510-7f99-437b-9d64-e4b89a51bc54">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Текстовая строка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Search literal</value>
+    <value>98B9F0DA-32B6-65CC-C748-89A811BEB81C</value>
    </synonym>
    <type>
     <types>String</types>
@@ -271,31 +191,15 @@
   </producedTypes>
   <name>DepreciationInfo</name>
   <synonym>
-   <key>tr</key>
-   <value>Amortisman bilgisi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Параметры амортизации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Depreciation info</value>
+   <value>B7DBB837-907E-D70F-FF98-88B27F9C2987</value>
   </synonym>
   <fillChecking>ShowError</fillChecking>
   <attributes uuid="b98d98da-324a-4903-b07d-8a5af3451bc5">
    <name>LedgerType</name>
    <synonym>
-    <key>tr</key>
-    <value>Defter tipi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Тип учета</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ledger type</value>
+    <value>6F06DAAC-67B7-62CE-EBAC-C364B6D99903</value>
    </synonym>
    <type>
     <types>CatalogRef.FixedAssetsLedgerTypes</types>
@@ -309,16 +213,8 @@
   <attributes uuid="677b3c94-b0bc-4bec-a014-1383ef61b7d5">
    <name>Schedule</name>
    <synonym>
-    <key>tr</key>
-    <value>Takvim</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>График амортизации ОС</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Schedule</value>
+    <value>EDCC8027-0470-54D1-18D0-01BAFF7CF66D</value>
    </synonym>
    <type>
     <types>CatalogRef.DepreciationSchedules</types>
@@ -333,16 +229,8 @@
  <forms uuid="88e78fb8-4a9b-4d56-89a4-b9fe3ac22c59">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>B49E24FC-BF19-9642-290E-ECE2CA34F36C</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -350,16 +238,8 @@
  <forms uuid="79948f78-34a3-4103-ba49-210a6c71255e">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>5E689905-19CF-019E-EF9A-A18DE10A856D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -367,16 +247,8 @@
  <forms uuid="e252c4f2-6137-475c-8964-f40d30220782">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>829C4773-D358-A117-7B70-02FD3AD296F9</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -384,16 +256,8 @@
  <forms uuid="78d3513c-52fe-4db3-8cfd-f3756c14ed85">
   <name>GroupForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма группы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group form</value>
+   <value>069DFE66-D817-C780-0A7A-AE96631D41C5</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -401,16 +265,8 @@
  <forms uuid="60490c4b-c5d5-4b4f-bc4a-ee30968ae75b">
   <name>GroupChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа форм выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group choice form</value>
+   <value>08093D58-97B4-9CC1-1E3D-D5E918C38D56</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

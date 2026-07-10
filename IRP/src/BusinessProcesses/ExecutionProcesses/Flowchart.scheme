@@ -19,16 +19,8 @@
 				<Name>Start</Name>
 				<Title>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Başlat</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Начало</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Start</v8:content>
+						<v8:content>4E54981A-7866-1118-8F9F-F283A4F5C956</v8:content>
 					</v8:item>
 				</Title>
 				<ToolTip/>
@@ -100,16 +92,8 @@
 				<Name>Completion</Name>
 				<Title>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Tamamlama</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Выполнение</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Completion</v8:content>
+						<v8:content>2E3BA0EE-1A08-2BCC-CA33-358703FEF860</v8:content>
 					</v8:item>
 				</Title>
 				<ToolTip/>
@@ -141,16 +125,8 @@
 				<Name>CheckTasksCompleted</Name>
 				<Title>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Tamamlanan görevleri kontrol edin</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Проверить выполненные задачи</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Check completed tasks</v8:content>
+						<v8:content>EAD9E953-BBFE-21E0-0BE7-716DDFEE491E</v8:content>
 					</v8:item>
 				</Title>
 				<ToolTip/>
@@ -184,16 +160,8 @@
 				<Name>Line2</Name>
 				<Title>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Satış işlemi KDV'ye tabi değildir</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Нет</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>No</v8:content>
+						<v8:content>C68868B8-CCB5-58BF-F226-6F53B061DC6E</v8:content>
 					</v8:item>
 				</Title>
 				<ToolTip/>
@@ -239,16 +207,8 @@
 				<Name>Line3</Name>
 				<Title>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>İçe aktar</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Да</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Yes</v8:content>
+						<v8:content>18D13662-E5CD-7DD1-1952-218A92EE4A46</v8:content>
 					</v8:item>
 				</Title>
 				<ToolTip/>
@@ -301,16 +261,8 @@
 				<Name>CompleteTasks</Name>
 				<Title>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Görevleri tamamla</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Выполненные задачи</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Complete tasks</v8:content>
+						<v8:content>E28BC4FC-A379-43FB-BF3C-C9369630578E</v8:content>
 					</v8:item>
 				</Title>
 				<ToolTip/>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>Workstations</name>
  <synonym>
-  <key>tr</key>
-  <value>Çalışma yerleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Рабочие места</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Workstations</value>
+  <value>DB0C1774-78E8-5008-8894-43E5F478E18E</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Workstations.StandardAttribute.Code</inputByString>
@@ -60,16 +52,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Çalışma yeri</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Рабочее место</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Workstation</value>
+  <value>5C3969EB-193B-B22F-FBE1-129C4ABBD4CC</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -88,16 +72,8 @@
  <attributes uuid="757286e6-1359-4443-8450-2781d00eded7">
   <name>CashAccount</name>
   <synonym>
-   <key>tr</key>
-   <value>Kasa/Banka</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Касса</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cash account</value>
+   <value>1B0950E0-A1A6-26E2-2CE1-1DBCC3929EDE</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -111,16 +87,8 @@
  <attributes uuid="3fcb5091-199a-479b-864a-c80c0880e742">
   <name>PrintTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon yazdır</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон печати</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Print template</value>
+   <value>044DCBEA-14E0-D48B-B532-2E445F053376</value>
   </synonym>
   <type>
    <types>CatalogRef.PrintTemplates</types>
@@ -134,16 +102,8 @@
  <attributes uuid="94e4ab8d-4601-461f-949c-27486d382987">
   <name>UserGroup</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı grubu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа пользователей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User group</value>
+   <value>6B42717F-62EB-2833-3F20-0B835CBD3D81</value>
   </synonym>
   <type>
    <types>CatalogRef.UserGroups</types>
@@ -157,16 +117,8 @@
  <attributes uuid="f2ef3b0f-4927-4e70-b490-ecc4bcd41047">
   <name>UseCashInAndCashOut</name>
   <synonym>
-   <key>tr</key>
-   <value>Perakende kasa girişi/kasa çıkışı fişleri kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать внесения и изъятия из кассы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use Cash in and Cash out</value>
+   <value>7299974D-6F4A-9DF6-6765-517D5CDD8177</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -180,16 +132,8 @@
  <attributes uuid="4d9e8c89-0804-476d-8960-c56901ef6033">
   <name>AutoCreateMoneyTransferAtSessionClosing</name>
   <synonym>
-   <key>tr</key>
-   <value>Vardiya kapanışında kasa tranfseri otomatik olarak oluştur</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Автоматически создавать перемещение денег при закрытии смены</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Auto create money transfer at session closing</value>
+   <value>49E116F6-84E2-AC64-4FBD-DE0DC0E2FA11_________</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -203,16 +147,8 @@
  <attributes uuid="a860df6e-07d9-40cd-a5de-98c781ca81d3">
   <name>AutoCalculateDiscount</name>
   <synonym>
-   <key>tr</key>
-   <value>İndirimi otomatik hesapla</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Авто расчет скидок</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Auto calculate discount</value>
+   <value>8E06442A-BF41-766C-C98C-CD8199BA80D3</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -226,16 +162,8 @@
  <attributes uuid="2a93110f-8813-436c-81cc-d4f96eb29222">
   <name>IgnoreCodeStringControl</name>
   <synonym>
-   <key>tr</key>
-   <value>Kod dizesi kontrolünü yoksay</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Игнорировать контроль кодов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ignore code string control</value>
+   <value>EFEA01E9-EB9C-A30E-E537-76E0211E7A28</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -249,16 +177,8 @@
  <attributes uuid="e5b230eb-6f9e-40d6-aa42-461463a06ae6">
   <name>PrintBarcodeWithDocumentUUID</name>
   <synonym>
-   <key>tr</key>
-   <value>Belge UUID'si ile barkod yazdır</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Печать штрихкода с UUID документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Print barcode with document UUID</value>
+   <value>61843335-7DA3-042A-AE1A-A4A60B180FF0</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -272,16 +192,8 @@
  <attributes uuid="10569d4b-48cc-4edd-9cac-7b67f7a65376">
   <name>PostponeWithReserve</name>
   <synonym>
-   <key>tr</key>
-   <value>Rezerv ile erteleyin</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Откладывать чеки с резервированием</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Postpone with reserve</value>
+   <value>BAF61946-20FD-433D-DF91-14DDCF78B69E</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -295,16 +207,8 @@
  <attributes uuid="1a5e2075-e9dc-42f0-ba3b-5ca298431aef">
   <name>PostponeWithoutReserve</name>
   <synonym>
-   <key>tr</key>
-   <value>Rezerve etmeden erteleyin</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Откладывать чеки без резерва</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Postpone without reserve</value>
+   <value>CCF87B29-278F-ED2B-B087-72803BF48BBB</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -322,30 +226,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>9F5E9DBF-5BDF-2EF4-4ACD-D3E966FBBCA6</value>
   </synonym>
   <attributes uuid="ee7a4501-03d2-4eba-8bae-5468e72319cf">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>E9C0C51A-7E21-A273-3F4D-DB242DEC4CB3</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -358,16 +246,8 @@
   <attributes uuid="d620c266-d54a-4063-b34d-d52bf2859ffb">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>A44946D9-9F53-18F9-94A2-243D9B963412</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -389,30 +269,14 @@
   </producedTypes>
   <name>HardwareList</name>
   <synonym>
-   <key>tr</key>
-   <value>Donanım listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Список оборудования</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Hardware list</value>
+   <value>BE961714-72F2-70FA-ACE3-3E8E15A4A9B0</value>
   </synonym>
   <attributes uuid="c0d471b2-b430-4a4c-9129-4ac443c1fe75">
    <name>Enable</name>
    <synonym>
-    <key>tr</key>
-    <value>Çalıştır</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Включить</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Enable</value>
+    <value>91979824-9446-E60A-A52B-B92A1C011760</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -425,16 +289,8 @@
   <attributes uuid="e9a80a0d-c063-4f98-8b5f-a0f395724d7a">
    <name>Hardware</name>
    <synonym>
-    <key>tr</key>
-    <value>Donanım</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Оборудование</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Hardware</value>
+    <value>10647D95-2D0A-12BA-A13E-EBD4AB79A625</value>
    </synonym>
    <type>
     <types>CatalogRef.Hardware</types>
@@ -448,16 +304,8 @@
  <forms uuid="be6907cb-f1a0-4a12-bd73-1d703dca564f">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>34E1EEA8-8CB4-30F1-142F-F6E906BA2042</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -465,16 +313,8 @@
  <forms uuid="9378dd86-666f-42b8-9d6b-42607e974020">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>1BCDE5D1-0310-DC1E-E27D-D22B75451F3D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -482,16 +322,8 @@
  <forms uuid="3789fe9d-01a1-476a-9ec5-fefcf41da73b">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>174FA423-47BE-186E-E801-19EEB75345B2</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

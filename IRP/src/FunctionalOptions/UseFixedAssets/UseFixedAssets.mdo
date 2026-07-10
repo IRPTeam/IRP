@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bba64df0-feb9-459e-8164-8babbbce55e8">
  <name>UseFixedAssets</name>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymetleri kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Основеые средства</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use fixed assets</value>
+  <value>14D7DE8D-2B09-4AF0-043D-DFDFDE5F9AED</value>
  </synonym>
  <location>Constant.UseFixedAssets</location>
  <privilegedGetMode>true</privilegedGetMode>

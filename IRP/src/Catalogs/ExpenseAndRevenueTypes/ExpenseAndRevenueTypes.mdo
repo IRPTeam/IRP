@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ExpenseAndRevenueTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Gider ve gelir tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Статьи доходов и расходов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Expense and revenue types</value>
+  <value>F86A6865-4175-3EEE-E27A-AB674084AF9B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -76,16 +68,8 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>tr</key>
-   <value>Üst öğe</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Родитель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Parent</value>
+   <value>E2DABC74-1623-BC8C-C280-07F0ED2785D0</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -146,16 +130,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Gider ve gelir türü</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Статья доходов и расходов</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Expense and revenue type</value>
+  <value>E582FC7E-7112-5906-6EF2-2B6C40CC5577</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
@@ -176,16 +152,8 @@
  <attributes uuid="77e74b7d-9037-4fde-9b7e-1272cb503bc9">
   <name>IsExpense</name>
   <synonym>
-   <key>tr</key>
-   <value>Gider tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это статья затрат</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is expense</value>
+   <value>C14F45E5-2C0D-E5C6-69F4-46E5B780D77E</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -200,16 +168,8 @@
  <attributes uuid="b6b22093-33ea-4a8b-8004-474ebddcaa73">
   <name>IsRevenue</name>
   <synonym>
-   <key>tr</key>
-   <value>Gelir tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это статья доходов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is revenue</value>
+   <value>E8689732-8955-B85D-DE37-774550E691F5</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -224,16 +184,8 @@
  <attributes uuid="6f12f709-2908-4334-98f8-6b2d0257c0dc">
   <name>IsFinancialMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Finans hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это статья ДДС</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is financial movement type</value>
+   <value>D4DA00F5-B74B-945A-A066-67B5E1489899</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -248,16 +200,8 @@
  <attributes uuid="150b98fa-3304-4d04-a48a-2e796b195054">
   <name>ExpenseType</name>
   <synonym>
-   <key>tr</key>
-   <value>Gider tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Статьи затрат</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Expense type</value>
+   <value>663A55EF-5F70-C601-16BD-D5717A425237</value>
   </synonym>
   <type>
    <types>EnumRef.ExpenseTypes</types>
@@ -275,30 +219,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>5464A4C8-4620-9AA2-280F-F7416C329521</value>
   </synonym>
   <attributes uuid="8be41110-2d11-47c9-97f6-3b183be5a56b">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>102CCBB5-D824-4884-4536-6C7F4E2D9188</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -311,16 +239,8 @@
   <attributes uuid="9ab0d71e-c10f-443e-b7d3-04b8e94c04c4">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>D091B9D7-1F0B-65A1-1544-40F047260105</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -338,16 +258,8 @@
  <forms uuid="40b038de-71f9-4410-8247-b962e131b497">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>06165EFF-37F8-A71C-C77E-ED8EFE3334FC</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -355,16 +267,8 @@
  <forms uuid="3aef72b9-a6c0-41e9-b8b3-fd42b72dfee5">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>3C34D7D9-9520-A29E-EC0E-E1F95FB36ED1</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -372,16 +276,8 @@
  <forms uuid="2fa4d0d1-dcb5-4887-87dd-96f14ec6e2b7">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>B1C89482-5717-FD78-8CEA-A079ACE3FFB4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -389,16 +285,8 @@
  <forms uuid="ee94edd0-a019-4292-b1a9-c7e3b29c19b9">
   <name>GroupForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма группы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group form</value>
+   <value>E32EEA87-17CF-17EA-A06C-CAE30DE0B4D7</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -406,16 +294,8 @@
  <forms uuid="29cd88ac-547d-4f9d-bf5c-0fed387eaca4">
   <name>GroupChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа форм выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group choice form</value>
+   <value>549A5FDC-8456-F383-3544-47BE1B598C14</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

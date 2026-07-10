@@ -294,16 +294,8 @@
  <attributes>
   <name>Ref</name>
   <title>
-   <key>tr</key>
-   <value>Ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ref</value>
+   <value>FC692403-6DF1-85D0-0462-25B835DBB2BF</value>
   </title>
   <id>1</id>
   <valueType>
@@ -319,16 +311,8 @@
  <attributes>
   <name>IDInfo</name>
   <title>
-   <key>tr</key>
-   <value>İletişim bilgi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Контактная информация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Contact info</value>
+   <value>B29475EF-7DF5-C68B-BD4F-F77295D13A13</value>
   </title>
   <id>2</id>
   <valueType>
@@ -343,16 +327,8 @@
   <columns>
    <name>IDInfoType</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>92700E3D-9818-CBCE-EEC3-3FCE8ED860F7</value>
    </title>
    <id>3</id>
    <valueType>
@@ -368,16 +344,8 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>4532AAB5-F648-D61F-F613-32CBD7B0D5E8</value>
    </title>
    <id>4</id>
    <valueType>
@@ -393,16 +361,8 @@
   <columns>
    <name>TypeDef</name>
    <title>
-    <key>tr</key>
-    <value>Tip açıklama</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип наименования</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type def</value>
+    <value>1ED4CE8F-852E-C02A-A56C-C51F7C405DB4</value>
    </title>
    <id>5</id>
    <valueType>
@@ -418,16 +378,8 @@
   <columns>
    <name>Country</name>
    <title>
-    <key>tr</key>
-    <value>Ülke</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Страна</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Country</value>
+    <value>57315EE8-EB10-2045-5258-84CE4A2C8A74</value>
    </title>
    <id>6</id>
    <valueType>
@@ -444,16 +396,8 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>DE8B4EBD-B179-DD29-9B2F-FAE68A6B2095</value>
   </title>
   <id>1</id>
   <use>
@@ -473,16 +417,8 @@
  <formCommands>
   <name>SaveAndClose</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet ve kapat</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать и закрыть</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save and close</value>
+   <value>68EF71B4-4417-8666-669A-A43E96FBA0CE</value>
   </title>
   <id>2</id>
   <use>

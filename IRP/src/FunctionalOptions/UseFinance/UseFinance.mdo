@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f5a02642-66a7-4991-89c8-1e60d3b27594">
  <name>UseFinance</name>
  <synonym>
-  <key>tr</key>
-  <value>Finans modülü kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Казначейство</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use finance</value>
+  <value>BDEEFBD8-CB54-CA0F-F2EC-CCC6AB634A4A</value>
  </synonym>
  <location>Constant.UseFinance</location>
  <privilegedGetMode>true</privilegedGetMode>

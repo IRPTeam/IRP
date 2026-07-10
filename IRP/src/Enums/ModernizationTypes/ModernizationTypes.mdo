@@ -7,47 +7,23 @@
  </producedTypes>
  <name>ModernizationTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Modernizasyon türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Вид модернизации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Modernization types</value>
+  <value>80D9FB44-72E0-1964-45DD-DA316795BB65</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="555e1377-9381-4f6b-b11e-e6afa0c08aef">
   <name>Mount</name>
   <synonym>
-   <key>tr</key>
-   <value>Monte</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сборка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Mount</value>
+   <value>01C3FA8D-AB0D-BA30-0746-620CBCBD3DC0</value>
   </synonym>
  </enumValues>
  <enumValues uuid="70e2ca7d-a3bb-4a6f-baf9-53d86f057785">
   <name>Unmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Sök</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Разборка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Unmount</value>
+   <value>F1F5F365-8FCC-928B-BB31-1A61A3F7F9A1</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

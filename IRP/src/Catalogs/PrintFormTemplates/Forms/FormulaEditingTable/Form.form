@@ -116,16 +116,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Test</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test</value>
+   <value>2AB72078-4FA0-686F-FDD4-4BA0A8423367</value>
   </title>
   <extendedTooltip>
    <name>GroupTestExtendedTooltip</name>
@@ -253,16 +245,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ekleme komutları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа команд вставить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group insert commands</value>
+   <value>01306798-D816-1C8E-E275-55A496025170</value>
   </title>
   <extendedTooltip>
    <name>GroupInsertCommandsExtendedTooltip</name>
@@ -355,16 +339,8 @@
  <attributes>
   <name>FormulaText</name>
   <title>
-   <key>tr</key>
-   <value>Formül metni</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текст формулы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Formula text</value>
+   <value>09077471-7FE4-3980-09FF-F884CF252039</value>
   </title>
   <id>1</id>
   <valueType>
@@ -381,16 +357,8 @@
  <attributes>
   <name>Source</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Источник</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Source</value>
+   <value>D07DF072-9D69-2645-5062-2FA8FE692245</value>
   </title>
   <id>2</id>
   <valueType>
@@ -406,16 +374,8 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>953E4D56-35AC-3C16-602F-FD0618D2B6DB</value>
   </title>
   <id>3</id>
   <valueType>
@@ -432,16 +392,8 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>68760B6E-A7EF-F337-7949-98D590987673</value>
   </title>
   <id>1</id>
   <use>
@@ -461,16 +413,8 @@
  <formCommands>
   <name>Test</name>
   <title>
-   <key>tr</key>
-   <value>Test</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test</value>
+   <value>81FA1687-C5EB-4763-32B0-002DA28C22D8</value>
   </title>
   <id>2</id>
   <use>
@@ -490,29 +434,13 @@
  <formCommands>
   <name>InsertResult</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>E8AD9007-3881-98CA-A8C3-351A6FA63CB1</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>tr</key>
-   <value>Hesaplama sonucu için değişken</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Переменная для расчитываемого результата</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>variable for the calculation result</value>
+   <value>615B5CA0-3B2C-9F0C-CE19-93F5D686B619</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -527,29 +455,13 @@
  <formCommands>
   <name>InsertSource</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Источник</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Source</value>
+   <value>49F9FC71-1E19-825F-F649-9985DF635546</value>
   </title>
   <id>4</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yazdırılan nesne referansı</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Ссылка на объект печати</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>reference to the printed object</value>
+   <value>A4318878-3975-7E1E-ECE8-89A5052FAE76</value>
   </toolTip>
   <use>
    <common>true</common>

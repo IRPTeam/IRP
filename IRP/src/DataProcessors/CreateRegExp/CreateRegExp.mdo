@@ -6,16 +6,8 @@
  </producedTypes>
  <name>CreateRegExp</name>
  <synonym>
-  <key>tr</key>
-  <value>RegExp oluştur</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Анализ RegExp</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Create RegExp</value>
+  <value>1BA64BCF-6167-CAB3-3241-10D37C981498</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.CreateRegExp.Form.Form</defaultForm>
@@ -26,30 +18,14 @@
   </producedTypes>
   <name>RowParts</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır parçası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Части строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row parts</value>
+   <value>7ADF20B5-3B51-D40E-E1F9-992A3555C49B</value>
   </synonym>
   <attributes uuid="c74d06bd-ee73-42ed-a9f7-d65288628973">
    <name>ExpressionType</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer tipi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид представления</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Expression type</value>
+    <value>949DC132-08FA-2AE3-31A6-6BE4AF540080</value>
    </synonym>
    <type>
     <types>String</types>
@@ -57,23 +33,13 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="f7920710-b0c0-4365-8f09-61c9fcd5cb83">
    <name>ID</name>
    <synonym>
-    <key>tr</key>
-    <value>ID</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>ID</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>ID</value>
+    <value>06676B28-7B4A-53AF-FB88-86D718F9FD58</value>
    </synonym>
    <type>
     <types>String</types>
@@ -81,23 +47,13 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="ff89796b-f68b-42d9-9b7e-a1d5a343f1ba">
    <name>RowPart</name>
    <synonym>
-    <key>tr</key>
-    <value>Satır parçası</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Часть строки</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Row part</value>
+    <value>E5749B82-948C-911E-E576-67829B09D794</value>
    </synonym>
    <type>
     <types>String</types>
@@ -105,23 +61,13 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="2a15a267-9d17-4be3-8d85-26089e44aa7b">
    <name>RegExp</name>
    <synonym>
-    <key>tr</key>
-    <value>RegExp</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Регулярные выражения</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Reg exp</value>
+    <value>D469C2D4-D479-8DF2-22A0-0053D98406F5</value>
    </synonym>
    <type>
     <types>String</types>
@@ -129,23 +75,13 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="eccbda08-6a77-49bd-997e-122c89f32e3e">
    <name>isWhitespace</name>
    <synonym>
-    <key>tr</key>
-    <value>Tüm karakterler</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Это белый список</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Is whitespace</value>
+    <value>9E902E73-BD06-B4C6-62C9-913C1EFE6ABA</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -157,16 +93,8 @@
   <attributes uuid="702adb42-ed27-47e9-b8be-c3a40107c7d3">
    <name>ExternalFunction</name>
    <synonym>
-    <key>tr</key>
-    <value>Dış fonksiyon</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Внешняя функция</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>External function</value>
+    <value>CF9DCC2F-BA6E-468E-EF69-956011250ED5</value>
    </synonym>
    <type>
     <types>CatalogRef.ExternalFunctions</types>
@@ -179,16 +107,8 @@
  <forms uuid="5e274039-734d-4653-8f72-75e59019cd44">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>BF2A5649-A0D1-B1A9-910A-AE5A5B9614EF</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

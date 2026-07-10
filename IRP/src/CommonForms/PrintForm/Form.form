@@ -10,16 +10,8 @@
     <name>FormHide</name>
     <id>116</id>
     <title>
-     <key>tr</key>
-     <value>&lt;</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>&lt;</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>&lt;</value>
+     <value>019C137E-6DCD-F5C4-4734-44B45D7679FD</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -50,16 +42,8 @@
     <name>FormShow</name>
     <id>118</id>
     <title>
-     <key>tr</key>
-     <value>&gt;</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>&gt;</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>&gt;</value>
+     <value>A3D57442-6482-797F-F531-19439E17CD5D</value>
     </title>
     <enabled>true</enabled>
     <userVisible>
@@ -235,16 +219,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Araç çubuğu üst</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Панель управления верх</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Command bar top</value>
+    <value>DF0238CA-D64D-C574-4573-312FD0F19A83</value>
    </title>
    <horizontalStretch>false</horizontalStretch>
    <extendedTooltip>
@@ -269,16 +245,8 @@
     <name>LayoutLang</name>
     <id>184</id>
     <title>
-     <key>tr</key>
-     <value>Maket</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Макет</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Layout</value>
+     <value>1F10C54E-E6FD-88D3-393E-E2F270D8C6E2</value>
     </title>
     <enabled>true</enabled>
     <userVisible>
@@ -330,16 +298,8 @@
     <name>DataLang</name>
     <id>198</id>
     <title>
-     <key>tr</key>
-     <value>Veri</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Данные</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Data</value>
+     <value>D111B4E2-D75F-D4D2-2072-28479BE35215</value>
     </title>
     <enabled>true</enabled>
     <userVisible>
@@ -393,16 +353,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Model</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Модель</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Model</value>
+    <value>2E8FAB7E-B3C3-3847-7D33-336CBB4B1A25</value>
    </title>
    <extendedTooltip>
     <name>ModelExtendedTooltip</name>
@@ -429,28 +381,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup buton üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа кнопки верх</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group button top</value>
+   <value>EA6EBB3F-2DA4-201C-CC1B-B18916DC38BC</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Grup buton üst</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа кнопки верх</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group button top</value>
+   <value>37544600-D5BA-8C9E-EADF-F7FC48655101</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupButtonTopExtendedTooltip</name>
@@ -648,16 +584,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup yazı tipi düzeltme sonucu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа результат форматирования шрифта</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group result font formatting</value>
+     <value>C6D51617-18E6-CBF8-8F96-60D6064B4874</value>
     </title>
     <extendedTooltip>
      <name>GroupResultFontFormattingExtendedTooltip</name>
@@ -925,16 +853,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup kenar sonucu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа результат границы</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group result borders</value>
+     <value>454EE6C5-D93B-D6F8-8378-80042DD779C4</value>
     </title>
     <extendedTooltip>
      <name>GroupResultBordersExtendedTooltip</name>
@@ -1067,16 +987,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup hızalama sonucu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа результат выравнивания</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group result align</value>
+     <value>C626C447-9DF4-ED2C-CBE2-23C460BE669D</value>
     </title>
     <extendedTooltip>
      <name>GroupResultAlignExtendedTooltip</name>
@@ -1185,28 +1097,12 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Undo/Redo result</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Результат назад вперед</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Result un re do</value>
+      <value>10C8630A-1469-BC69-9F64-4EF16A1122DB</value>
      </title>
-     <toolTip>
-      <key>tr</key>
-      <value>Undo/Redo result</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Результат назад вперед</value>
-     </toolTip>
      <toolTip>
       <key>en</key>
-      <value>Result un re do</value>
+      <value>06EF6344-3B12-4586-6236-6ABB4AA12F57</value>
      </toolTip>
      <extendedTooltip>
       <name>ResultUnReDoExtendedTooltip</name>
@@ -1228,16 +1124,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup diğer sonuç</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа результат другой</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group result other</value>
+     <value>DE79453E-E634-21BC-CA83-34EA40DBCDE0</value>
     </title>
     <extendedTooltip>
      <name>GroupResultOtherExtendedTooltip</name>
@@ -1257,16 +1145,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup araç çubuk sonucu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа результат панель свойств</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group result command bar</value>
+    <value>17B86BEE-0671-BCCD-DF93-3D66F3620074</value>
    </title>
    <extendedTooltip>
     <name>GroupResultCommandBarExtendedTooltip</name>
@@ -1457,16 +1337,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Yazdır</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Печать</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Print</value>
+      <value>D929462F-4216-CE2D-DA10-0FEDC35020FA</value>
      </title>
      <extendedTooltip>
       <name>PrintFormConfigLangExtendedTooltip</name>
@@ -1741,16 +1613,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup config</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа конфигурация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>GroupConfig</value>
+    <value>BBFA9F99-D9A1-DDD4-4E29-9B2A491668B8</value>
    </title>
    <extendedTooltip>
     <name>GroupConfigExtendedTooltip</name>
@@ -1834,16 +1698,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup sonuç</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа результат</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>GroupResult</value>
+    <value>8E9FFC7E-1BDC-A289-9EBB-B8D14E21EA23</value>
    </title>
    <extendedTooltip>
     <name>GroupResultExtendedTooltip</name>
@@ -1870,16 +1726,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup 1</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа 1</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group1</value>
+   <value>F2F52363-C226-D6C7-71E9-9FD8A3C0F208</value>
   </title>
   <extendedTooltip>
    <name>GroupGeneralExtendedTooltip</name>
@@ -1929,16 +1777,8 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>20A037E2-270E-62BA-AE38-8D6A8582DC67</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1955,16 +1795,8 @@
  <attributes>
   <name>PrintFormConfig</name>
   <title>
-   <key>tr</key>
-   <value>Çıktı form yapısı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Печатать из конфигурации</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Print form config</value>
+   <value>162D2955-9552-6377-7883-32D9388826CB</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1979,16 +1811,8 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Obje</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Объект</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Object</value>
+    <value>36AD9349-ECFC-DAA6-6F6B-B0478DBA73E7</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2007,16 +1831,8 @@
   <columns>
    <name>CountCopy</name>
    <title>
-    <key>tr</key>
-    <value>Kopya sayısı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество копий</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Count copy</value>
+    <value>36D2D5BA-C6A8-B7A8-89BF-F2BBDEC11B92</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2035,16 +1851,8 @@
   <columns>
    <name>Print</name>
    <title>
-    <key>tr</key>
-    <value>Yazdır</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Печать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Print</value>
+    <value>DCF31F28-AA36-09A5-5CC4-43C38F11B99A</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2060,16 +1868,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>AF7D242C-56E8-21D5-5858-8826DD97B912</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2085,16 +1885,8 @@
   <columns>
    <name>NameTemplate</name>
    <title>
-    <key>tr</key>
-    <value>Maket ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя макета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name template</value>
+    <value>D29ACF88-AE6E-77C4-4099-95BB3F4A7D61</value>
    </title>
    <id>7</id>
    <valueType>
@@ -2113,16 +1905,8 @@
   <columns>
    <name>SpreadsheetDoc</name>
    <title>
-    <key>tr</key>
-    <value>Tablo evrakı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Табличный документ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Spreadsheet document</value>
+    <value>CECA8F21-441A-4D94-4A6F-FD7BB3B72334</value>
    </title>
    <id>8</id>
    <valueType/>
@@ -2136,16 +1920,8 @@
   <columns>
    <name>BuilderLayout</name>
    <title>
-    <key>tr</key>
-    <value>Oluşturucu maketi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Макет построителя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Builder layout</value>
+    <value>C5FF8EF5-39C4-BD01-1267-7F535EE87280</value>
    </title>
    <id>9</id>
    <valueType>
@@ -2161,16 +1937,8 @@
   <columns>
    <name>Template</name>
    <title>
-    <key>tr</key>
-    <value>Şablon</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаблон</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Template</value>
+    <value>DE5028CA-63EB-0F51-101E-E32E8363379B</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2187,16 +1955,8 @@
   <columns>
    <name>LayoutLang</name>
    <title>
-    <key>tr</key>
-    <value>MD</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ЯМ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>LL</value>
+    <value>F71F03CB-5E46-8BEC-CA8D-DFAE7E792006</value>
    </title>
    <id>12</id>
    <valueType>
@@ -2215,16 +1975,8 @@
   <columns>
    <name>DataLang</name>
    <title>
-    <key>tr</key>
-    <value>VD</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ЯД</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>DL</value>
+    <value>5550BC7E-DE16-5E0F-F322-21B7D91BF9FC</value>
    </title>
    <id>15</id>
    <valueType>
@@ -2244,16 +1996,8 @@
  <attributes>
   <name>LayoutLang</name>
   <title>
-   <key>tr</key>
-   <value>Maket dili</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Язык макета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Layout lang</value>
+   <value>0F6CC126-7F53-7C85-5BDB-BCAD6B513A19</value>
   </title>
   <id>11</id>
   <valueType>
@@ -2270,16 +2014,8 @@
  <attributes>
   <name>DataLang</name>
   <title>
-   <key>tr</key>
-   <value>Veri dili</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Язык данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Data lang</value>
+   <value>71351B8A-E543-284A-A173-3FC24C35068B</value>
   </title>
   <id>13</id>
   <valueType>
@@ -2296,16 +2032,8 @@
  <attributes>
   <name>IdResult</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç ID</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ID результата</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Id result</value>
+   <value>868AF3C1-DAE9-DB99-92E1-13B269DCAC18</value>
   </title>
   <id>16</id>
   <valueType>
@@ -2324,16 +2052,8 @@
  <formCommands>
   <name>EditResult</name>
   <title>
-   <key>tr</key>
-   <value>Değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Редактирование</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit</value>
+   <value>61042A58-CAEC-B1F0-09BA-A6C666AB7A55</value>
   </title>
   <id>1</id>
   <use>
@@ -2353,16 +2073,8 @@
  <formCommands>
   <name>Hide</name>
   <title>
-   <key>tr</key>
-   <value>Sakla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скрыть</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Hide</value>
+   <value>44C67679-D737-0FEA-A636-6BA6268678A2</value>
   </title>
   <id>3</id>
   <use>
@@ -2378,16 +2090,8 @@
  <formCommands>
   <name>Show</name>
   <title>
-   <key>tr</key>
-   <value>Göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отображать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show</value>
+   <value>F1543AA9-A4D3-2E78-8A4D-D54DDE94DC89</value>
   </title>
   <id>4</id>
   <use>
@@ -2403,16 +2107,8 @@
  <formCommands>
   <name>Print</name>
   <title>
-   <key>tr</key>
-   <value>Yazdır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Печать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Print</value>
+   <value>A9A927DD-A4A1-4E4B-B9BF-F0F5EC2BEE05</value>
   </title>
   <id>5</id>
   <use>
@@ -2432,29 +2128,13 @@
  <formCommands>
   <name>ChangeLang</name>
   <title>
-   <key>tr</key>
-   <value>Dil değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменить язык</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Change lang</value>
+   <value>CED2BD21-FE30-1D7B-B007-770B097431E0</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Maket veya veri dili değiştir</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Изменить язык макета или представления данных</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Change layout or data lang</value>
+   <value>CE03CE0E-F2C0-E7F3-3390-0831D30A13DD</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2473,29 +2153,13 @@
  <formCommands>
   <name>SendByMessage</name>
   <title>
-   <key>tr</key>
-   <value>Send by message</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отправлено сообщением</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Send by message</value>
+   <value>87FE07DA-D4B7-9818-834A-AB15911BC5DD</value>
   </title>
   <id>7</id>
   <toolTip>
-   <key>tr</key>
-   <value>Send by message</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Отправлено сообщением</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Send by message</value>
+   <value>8DDB07ED-E78B-EB08-88DE-E813272A0AA8</value>
   </toolTip>
   <use>
    <common>true</common>

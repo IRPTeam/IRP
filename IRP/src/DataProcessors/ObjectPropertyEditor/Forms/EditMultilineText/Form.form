@@ -110,16 +110,8 @@
  <attributes>
   <name>Text</name>
   <title>
-   <key>tr</key>
-   <value>Metin</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текст</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Text</value>
+   <value>FCEAA26E-09BD-6843-3BBC-CEF01819F47C</value>
   </title>
   <id>1</id>
   <valueType>
@@ -135,16 +127,8 @@
  <attributes>
   <name>ItemName</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tanımı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item name</value>
+   <value>5113DB22-3B14-2979-9D4B-B7578B63734C</value>
   </title>
   <id>2</id>
   <valueType>
@@ -161,16 +145,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>4C228566-886A-B686-6404-47C32DD20CA2</value>
   </title>
   <id>1</id>
   <use>
@@ -186,16 +162,8 @@
  <formCommands>
   <name>VoiceNarrator</name>
   <title>
-   <key>tr</key>
-   <value>Ses anlatıcı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Голосовая запись</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Voice narrator</value>
+   <value>B94AA7AE-2121-670D-DFE8-8B722D309A5D</value>
   </title>
   <id>2</id>
   <use>

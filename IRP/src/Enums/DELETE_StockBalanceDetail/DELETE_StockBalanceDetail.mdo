@@ -7,47 +7,23 @@
  </producedTypes>
  <name>DELETE_StockBalanceDetail</name>
  <synonym>
-  <key>tr</key>
-  <value>DELETE Stok bakiyesi ayrıntısını</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>УДАЛИТЬ Учитывать по складскому учету</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>DELETE stock balance detail</value>
+  <value>1C8F5658-F12E-77E0-0621-1D88A6099767</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="7dabf78d-9f60-4ca2-91b0-17701ed69054">
   <name>ByItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant bazlı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По характеристикам</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>By item key</value>
+   <value>AD15826B-3CD4-FEAB-BEA1-1B334AD3CDFC</value>
   </synonym>
  </enumValues>
  <enumValues uuid="5658e438-f93c-4c17-9a94-03204dae7cfc">
   <name>BySerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numara bazlı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По сериям номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>By serial lot number</value>
+   <value>9DCE3D5E-C4C2-C673-3BFA-AF3D70F2AAC3</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

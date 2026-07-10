@@ -7,62 +7,30 @@
  </producedTypes>
  <name>TaskTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Görev türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы задач</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Task types</value>
+  <value>B4B82F41-10D9-D9B5-52A9-90A0262DE85F</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="99e73db8-05df-4a87-8637-e67d41e9432d">
   <name>Execution</name>
   <synonym>
-   <key>tr</key>
-   <value>Gerçekleştirme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Исполнение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Execution</value>
+   <value>000E2066-4F18-4A74-4059-97FB56D51204</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b7aeb004-19e0-46da-94d4-60b9d2ba7ff6">
   <name>Verification</name>
   <synonym>
-   <key>tr</key>
-   <value>Doğrulama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Проверка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Verification</value>
+   <value>E5D0C6FE-3EAC-7B55-5B4A-A6CF2995C933</value>
   </synonym>
  </enumValues>
  <enumValues uuid="5c9b9f3e-2db3-479c-aef3-904ae5b0883a">
   <name>Confirmation</name>
   <synonym>
-   <key>tr</key>
-   <value>Onay</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Подтверждение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Confirmation</value>
+   <value>A19C054F-FFA7-AC1C-CFED-D79EA6FE359C</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

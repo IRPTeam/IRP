@@ -195,16 +195,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Filtrelemek için ayarla</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Установить в фильтр</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Set to filter</value>
+     <value>DA8EC7AD-3D24-0FD4-4B41-1664E81E71CA</value>
     </title>
     <extendedTooltip>
      <name>GroupSetToFilterExtendedTooltip</name>
@@ -230,16 +222,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Buton grubu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа кнопок</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group of buttoms</value>
+    <value>856425FA-8E5B-5102-2ECE-ED0EA003E7E4</value>
    </title>
    <horizontalStretch>true</horizontalStretch>
    <extendedTooltip>
@@ -343,16 +327,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Başlık grup</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа шапки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Header group</value>
+   <value>419416A6-78BE-E7DD-D38B-BA3625FFE162</value>
   </title>
   <extendedTooltip>
    <name>HeaderGroupExtendedTooltip</name>
@@ -402,16 +378,8 @@
     </dataPath>
     <titleLocation>None</titleLocation>
     <toolTip>
-     <key>tr</key>
-     <value>İşaretli nesneler grup işlemleri tarafından işlenecek</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Помеченные объекты будут обработаны</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>Marked objects will be processed by group operations</value>
+     <value>2FA93B87-51EB-5CDE-E352-2D1F75D32F46________________</value>
     </toolTip>
     <extendedTooltip>
      <name>PropertiesTableMarkedExtendedTooltip</name>
@@ -533,16 +501,8 @@
     </dataPath>
     <titleLocation>None</titleLocation>
     <toolTip>
-     <key>tr</key>
-     <value>İşaretlenen nesneler veritabanına yazılacak</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Помеченные объекты будут записаны в базу данных</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>Marked objects will be written to the database</value>
+     <value>586CAAD3-D24E-FACC-C08B-B15EAB2C9B6D__________</value>
     </toolTip>
     <extendedTooltip>
      <name>PropertiesTableisModifiedExtendedTooltip</name>
@@ -576,16 +536,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Özellikler tablosu sol grup</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Таблица настроек левая группа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Properties table left group</value>
+    <value>F5A8C9EC-DA81-001F-F016-6A786442680E</value>
    </title>
    <extendedTooltip>
     <name>PropertiesTableLeftGroupExtendedTooltip</name>
@@ -612,16 +564,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Alanlar için özellikler tablo grubu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа свойств таблицы для полей</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Properties table group for fields</value>
+    <value>AE83DFDC-0CF1-A053-30AA-A623E80258CC</value>
    </title>
    <extendedTooltip>
     <name>PropertiesFieldsExtendedTooltip</name>
@@ -819,16 +763,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Komutları işaretleme</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Пометка команд</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Marking commands</value>
+     <value>96F477B4-9966-CAF2-29B3-39ECD1F4F559</value>
     </title>
     <extendedTooltip>
      <name>PropertiesTableMarkingExtendedTooltip</name>
@@ -901,16 +837,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Komutları değiştirme</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Изменить команды</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Modifing commands</value>
+     <value>8B37A1B5-B4FF-D026-628F-F9AC952ED000</value>
     </title>
     <extendedTooltip>
      <name>PropertiesTableModifingExtendedTooltip</name>
@@ -958,16 +886,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Komutları kopyalama</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Копирование команд</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Copying commands</value>
+     <value>A54F8B85-078A-0D3E-E79B-B62F18ABA90B</value>
     </title>
     <extendedTooltip>
      <name>PropertiesTableCopyingExtendedTooltip</name>
@@ -1040,16 +960,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Silinen komutlar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Удаление команд</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Deleting commands</value>
+     <value>10F9E59C-AAE1-218A-A9D4-4841E791994E</value>
     </title>
     <extendedTooltip>
      <name>PropertiesTableDeletingExtendedTooltip</name>
@@ -1119,16 +1031,8 @@
  <attributes>
   <name>PropertiesTable</name>
   <title>
-   <key>tr</key>
-   <value>Özellikler tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица свойств</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Properties table</value>
+   <value>9F0A3422-7003-C737-7F74-4B1D2C47B942</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1143,16 +1047,8 @@
   <columns>
    <name>Object</name>
    <title>
-    <key>tr</key>
-    <value>Obje</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Объект</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Object</value>
+    <value>02E81BB9-7BE1-DE20-0BA5-5C9B5D77705E</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1168,16 +1064,8 @@
   <columns>
    <name>isModified</name>
    <title>
-    <key>tr</key>
-    <value>Değiştirildi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Изменен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is modified</value>
+    <value>3137B525-F857-C740-0985-50E18ACA70E9</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1193,16 +1081,8 @@
   <columns>
    <name>Constraint</name>
    <title>
-    <key>tr</key>
-    <value>Kısıtlamalar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ограничения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Constraint</value>
+    <value>F529F7F3-8478-BEB8-86FD-D8C25403DF9C</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1218,16 +1098,8 @@
   <columns>
    <name>Marked</name>
    <title>
-    <key>tr</key>
-    <value>İşaretlendi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Помечен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Marked</value>
+    <value>3F85CB3F-63C0-67B2-2CE3-3DF9D564FE55</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1243,16 +1115,8 @@
   <columns>
    <name>LineNumber</name>
    <title>
-    <key>tr</key>
-    <value>#</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>#</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>#</value>
+    <value>446FD2DF-78D5-7CD4-4CE7-74224F283272</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1273,16 +1137,8 @@
  <attributes>
   <name>ObjectType</name>
   <title>
-   <key>tr</key>
-   <value>Obje tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип объекта</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Object type</value>
+   <value>CAB5F0AE-6261-B07B-B4B6-6B168D74A66B</value>
   </title>
   <id>5</id>
   <valueType/>
@@ -1296,16 +1152,8 @@
  <attributes>
   <name>ObjectTable</name>
   <title>
-   <key>tr</key>
-   <value>Tablo</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Table</value>
+   <value>78F42DDE-E78F-65B9-9C77-72F9956D4FFC</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1322,16 +1170,8 @@
  <attributes>
   <name>FormDataCash</name>
   <title>
-   <key>tr</key>
-   <value>Form veri cache</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Кеш данных формы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Form data cash</value>
+   <value>D218350E-BC7B-A2A2-2C16-6D187D89DE10</value>
   </title>
   <id>7</id>
   <valueType/>
@@ -1345,16 +1185,8 @@
  <attributes>
   <name>DataSettingsComposer</name>
   <title>
-   <key>tr</key>
-   <value>Veri inşa edilme şeması</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Компоновщик настроек данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Data settings composer</value>
+   <value>52BDFFE0-D0D0-3E29-943F-FE044B671ACA</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1370,16 +1202,8 @@
  <attributes>
   <name>isTableMode</name>
   <title>
-   <key>tr</key>
-   <value>Tablo modu mu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Это режим таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Is table mode</value>
+   <value>7ED1EF1E-6298-BC57-7EEE-E45F6E540F28</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1395,16 +1219,8 @@
  <formCommands>
   <name>Refresh</name>
   <title>
-   <key>tr</key>
-   <value>Yenile</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Refresh</value>
+   <value>6A777D36-19CE-B45C-CA4D-DD822D7D926E</value>
   </title>
   <id>2</id>
   <use>
@@ -1424,16 +1240,8 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>D6C5E5C4-FEBF-C7D8-87C6-64E348D975B1</value>
   </title>
   <id>3</id>
   <use>
@@ -1453,16 +1261,8 @@
  <formCommands>
   <name>SetValueToEmptyCells</name>
   <title>
-   <key>tr</key>
-   <value>Boş satırlara değeri belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить значение в пустые ячейки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set value to empty cells</value>
+   <value>7B3C9A2A-623D-E66D-DCD0-0DA3AC3342C0</value>
   </title>
   <id>5</id>
   <use>
@@ -1482,16 +1282,8 @@
  <formCommands>
   <name>MarkOnAll</name>
   <title>
-   <key>tr</key>
-   <value>Tüm satırları işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пометить все строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Mark all rows</value>
+   <value>558A324E-A3F0-489D-D632-275076C845AF</value>
   </title>
   <id>8</id>
   <use>
@@ -1511,16 +1303,8 @@
  <formCommands>
   <name>MarkOffAll</name>
   <title>
-   <key>tr</key>
-   <value>Tüm satırlardan işareti kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Убрать пометку у всех строк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unmark all rows</value>
+   <value>BAB6F6A1-8F78-D331-1A0F-F7C7AFAEC5D7</value>
   </title>
   <id>9</id>
   <use>
@@ -1540,16 +1324,8 @@
  <formCommands>
   <name>DeleteMarkedValue</name>
   <title>
-   <key>tr</key>
-   <value>İşeretlenen satırlarda değeri temizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Удалить значение в помеченных строках</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Delete value in marked rows</value>
+   <value>0674D7EA-AEA8-8031-1FD7-7DC825D7447D</value>
   </title>
   <id>10</id>
   <use>
@@ -1569,16 +1345,8 @@
  <formCommands>
   <name>SetValueForMarkedRows</name>
   <title>
-   <key>tr</key>
-   <value>İşaretlenen satırlarda değeri belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить значение у помеченных строк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set value for marked rows</value>
+   <value>0C358A61-B090-8E39-96CC-CD0E9654D457</value>
   </title>
   <id>11</id>
   <use>
@@ -1598,16 +1366,8 @@
  <formCommands>
   <name>CopyThisRowValueToMarkedRows</name>
   <title>
-   <key>tr</key>
-   <value>Bu satır değeri tüm işaretlenen satırlara kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопировать значение в помеченные строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy this row value to marked rows</value>
+   <value>E2DDAB5B-B17E-9879-90A8-8500BF6B2CF3</value>
   </title>
   <id>14</id>
   <use>
@@ -1627,16 +1387,8 @@
  <formCommands>
   <name>MarkSelectedRows</name>
   <title>
-   <key>tr</key>
-   <value>Seçilen satıları işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пометить выбранные строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Mark selected rows</value>
+   <value>7C8FCF7C-2792-B3BE-EDA5-591E844A666C</value>
   </title>
   <id>15</id>
   <use>
@@ -1656,16 +1408,8 @@
  <formCommands>
   <name>FieldSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings</value>
+   <value>CBC70573-FABE-256B-B2E5-587297878538</value>
   </title>
   <id>16</id>
   <use>
@@ -1685,16 +1429,8 @@
  <formCommands>
   <name>RunACodeForMarkedRows</name>
   <title>
-   <key>tr</key>
-   <value>İşaretlenmiş satırlar için bir kod çalıştır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отработать код для выбранных строк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Run a code for marked rows</value>
+   <value>557D825E-55A4-E775-5DCF-F21CAE6D25AB</value>
   </title>
   <id>17</id>
   <use>
@@ -1713,16 +1449,8 @@
  <formCommands>
   <name>FilterFromQuery</name>
   <title>
-   <key>tr</key>
-   <value>Sorgudan filtre ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить фильтр из запроса</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set filter from query</value>
+   <value>4A673770-9F72-4D18-8ACF-FD4ECBC8ACFF</value>
   </title>
   <id>18</id>
   <use>
@@ -1741,16 +1469,8 @@
  <formCommands>
   <name>FilterFromClipboard</name>
   <title>
-   <key>tr</key>
-   <value>Panodan filtre ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить фильтр из буфера обмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set filter from clipboard</value>
+   <value>2D71FC9B-33B0-3C2B-B469-9C67B50E6E80</value>
   </title>
   <id>19</id>
   <use>

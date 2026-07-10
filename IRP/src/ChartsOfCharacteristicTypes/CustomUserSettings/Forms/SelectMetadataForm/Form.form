@@ -144,16 +144,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Üstveri objeler tablo grubu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа таблиц объектов метаданных</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Metadata objects table group</value>
+    <value>6079AD18-DB81-9FE2-26DE-EC51E2A82D05</value>
    </title>
    <extendedTooltip>
     <name>MetadataObjectsTableGroupExtendedTooltip</name>
@@ -364,16 +356,8 @@
  <attributes>
   <name>MetadataObjectsTable</name>
   <title>
-   <key>tr</key>
-   <value>Üstveri obje tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица объектов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Metadata objects table</value>
+   <value>44006B99-E1FA-C9AD-DA60-0484F9655E4E</value>
   </title>
   <id>1</id>
   <valueType>
@@ -388,16 +372,8 @@
   <columns>
    <name>Synonym</name>
    <title>
-    <key>tr</key>
-    <value>Eşanlamlı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Синоним</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Synonym</value>
+    <value>DE88C7CD-6CF3-CA52-23B0-0C4FA0D898A4</value>
    </title>
    <id>2</id>
    <valueType>
@@ -414,16 +390,8 @@
   <columns>
    <name>FullName</name>
    <title>
-    <key>tr</key>
-    <value>Tam isim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Полное наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Full name</value>
+    <value>E7F62A0B-78DE-D68F-FA2E-EE0C761CEB6F</value>
    </title>
    <id>3</id>
    <valueType>
@@ -440,16 +408,8 @@
   <columns>
    <name>PictureIndex</name>
    <title>
-    <key>tr</key>
-    <value>Resim indeksi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Индекс картинки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picture index</value>
+    <value>CE2922AA-32FC-EE43-3878-8A6468F961D7</value>
    </title>
    <id>4</id>
    <valueType>
@@ -468,16 +428,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использовать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>EB3FF44C-029B-E45F-F113-34F90686D2E6</value>
    </title>
    <id>5</id>
    <valueType>
@@ -494,16 +446,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>278E33F3-01DC-76AA-AB5B-B2EC2313D50B</value>
   </title>
   <id>1</id>
   <use>
@@ -519,16 +463,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>054EB374-A090-0F97-7FB9-98484C42AE95</value>
   </title>
   <id>2</id>
   <use>

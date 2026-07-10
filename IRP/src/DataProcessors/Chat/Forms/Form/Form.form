@@ -76,16 +76,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Верх</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>22412B8F-1519-0C20-0E8B-BA7EEC81B72F</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -264,16 +256,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup mesajı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа сообщения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group message</value>
+    <value>44ED8F21-E99D-645D-DFA8-84E1E691A068</value>
    </title>
    <extendedTooltip>
     <name>GroupMessageExtendedTooltip</name>
@@ -356,16 +340,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup footer</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа подвал</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group bottom</value>
+   <value>E8352C9D-6FCB-67A7-7982-29E43C767B2A</value>
   </title>
   <height>1</height>
   <extendedTooltip>
@@ -430,16 +406,8 @@
  <attributes>
   <name>Basis</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Документ основания</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Basis</value>
+   <value>F4D247C9-8393-FEF1-1BA4-4794E8CF6E0C</value>
   </title>
   <id>3</id>
   <valueType>
@@ -455,16 +423,8 @@
  <attributes>
   <name>NewMessage</name>
   <title>
-   <key>tr</key>
-   <value>Yeni mesaj</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Новой сообщение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>New message</value>
+   <value>B732314C-E19B-412B-B1C8-8406766D9142</value>
   </title>
   <id>4</id>
   <valueType>
@@ -481,16 +441,8 @@
  <attributes>
   <name>Chat</name>
   <title>
-   <key>tr</key>
-   <value>Sohbet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Чат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Chat</value>
+   <value>69A197D1-E398-1B52-2CD0-00E09CBF4498</value>
   </title>
   <id>9</id>
   <valueType>
@@ -507,16 +459,8 @@
  <attributes>
   <name>AttachedFiles</name>
   <title>
-   <key>tr</key>
-   <value>Dış dosyalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Прикрепленные файлы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attached files</value>
+   <value>D98CFC0A-232B-8B74-42AF-FC6E8FB8A8A2</value>
   </title>
   <id>10</id>
   <valueType>
@@ -535,16 +479,8 @@
  <formCommands>
   <name>SendMessage</name>
   <title>
-   <key>tr</key>
-   <value>Gönder</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отправить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Send</value>
+   <value>D179F4F8-B544-51FA-A277-75F96DB93FCF</value>
   </title>
   <id>1</id>
   <use>
@@ -561,16 +497,8 @@
  <formCommands>
   <name>Update</name>
   <title>
-   <key>tr</key>
-   <value>Güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update</value>
+   <value>254E7E1E-7650-5247-7718-8343F460924E</value>
   </title>
   <id>2</id>
   <use>
@@ -590,16 +518,8 @@
  <formCommands>
   <name>AttachFiles</name>
   <title>
-   <key>tr</key>
-   <value>Dosya ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Прикрепить файл</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attach files</value>
+   <value>E14CC6B9-4BC2-5235-5B7E-E58A256E2ABB</value>
   </title>
   <id>3</id>
   <use>

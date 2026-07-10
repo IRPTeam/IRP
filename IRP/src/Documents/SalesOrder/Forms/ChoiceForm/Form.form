@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>0D19A33B-AD41-DB6A-A834-4BBBC3E4E659</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -58,16 +50,8 @@
    <name>Number</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number</value>
+    <value>D3A5ED4D-20BB-F6DC-C333-36F6686D4B50</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -108,16 +92,8 @@
    <name>Date</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>A07C9CBA-1DCB-A629-959D-DBE08DB54B58</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -196,16 +172,8 @@
    <name>Status</name>
    <id>28</id>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Status</value>
+    <value>A6D85E28-DE83-70E2-27FF-FC84C8D4AC6C</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -248,16 +216,8 @@
    <name>Partner</name>
    <id>22</id>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Партнер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Partner</value>
+    <value>9F966BD6-9B84-545D-D47E-E82C7812B87A</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -340,16 +300,8 @@
    <name>Currency</name>
    <id>34</id>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>6011E006-94B5-D13B-BD9E-EDB9A15D9EA1</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -432,16 +384,8 @@
    <name>Company</name>
    <id>37</id>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>A7676CA4-E38A-10C3-338E-EEC6B9CB48FE</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>DELETE_TransactionsKeys</name>
  <synonym>
-  <key>tr</key>
-  <value>DELETE transactions keys</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>УДАЛИТЬ ключи транзакций</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>DELETE transactions keys</value>
+  <value>48194727-FF2C-4199-96EC-CF08EA54E6E4</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.DELETE_TransactionsKeys.StandardAttribute.Code</inputByString>
@@ -28,16 +20,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Cari hesap hareketler anahtarı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Ключ транзакций партнеров</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Transactions key</value>
+  <value>CEDC9F94-84D6-7450-00ED-DC839EE5692A</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -52,16 +36,8 @@
  <attributes uuid="bb87504b-4ffe-434b-bf30-e6eadf893b2f">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>9127E5FE-E3DE-4AC9-9C34-44FBA57221FA</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -76,16 +52,8 @@
  <attributes uuid="22500b51-fb4f-48ca-8b25-4d9766452324">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>E107CEEE-84AC-B139-991A-AA01C6F8F2E9</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -100,16 +68,8 @@
  <attributes uuid="efc0346f-1e02-4b7f-896f-efe735be4075">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>27AC8A92-A02F-B9E2-27CA-A0523D214E6B</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -124,16 +84,8 @@
  <attributes uuid="5cae115f-2b99-40ba-8a75-c90a5a1a5efe">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>FCCDD430-9928-4057-7825-52CB472F8640</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -148,16 +100,8 @@
  <attributes uuid="c3dbaed3-e834-446f-9b56-ab011a30dc63">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>FC3D63E6-118E-CA1A-AC1E-EBCB9A26242F</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -172,16 +116,8 @@
  <attributes uuid="b7f47bd9-ebbb-473f-95be-8b106c7c79f1">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Agreement</value>
+   <value>B0B8AE48-E075-197F-F99C-C65A3CA94316</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -196,16 +132,8 @@
  <attributes uuid="ee3ffbeb-7bba-41d6-9a0c-be05a2e47344">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Порядок</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>BA5F1B6F-0A20-BBB2-28DF-F65FE89FB80E</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>
@@ -221,16 +149,8 @@
  <attributes uuid="7b015668-e463-479b-bb59-d28f5fca3a88">
   <name>IsVendorTransaction</name>
   <synonym>
-   <key>tr</key>
-   <value>Bu tedarikçi hareketi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это транзакция поставщика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is vendor transaction</value>
+   <value>895A49A9-EA87-0EE9-9893-39F6E0DE1B2C</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -245,16 +165,8 @@
  <attributes uuid="5ac60904-320a-4fb7-bcd8-0915999efba6">
   <name>IsCustomerTransaction</name>
   <synonym>
-   <key>tr</key>
-   <value>Bu müşteri hareketi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это транзакция покупателя</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is customer transaction</value>
+   <value>65BA4E70-C11E-C798-8874-43903F91BBB8</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -269,16 +181,8 @@
  <attributes uuid="c9293dd7-757d-4f90-b7c4-c7c96c196a15">
   <name>TransactionBasis</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap hareket ana evrakı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основание транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction basis</value>
+   <value>86548EC4-4040-F37E-ED1F-F570D8388E72</value>
   </synonym>
   <type>
    <types>DefinedType.typeApArTransactionBasises</types>
@@ -293,16 +197,8 @@
  <attributes uuid="4b480a94-9acd-49df-b729-2b21ccd25272">
   <name>Project</name>
   <synonym>
-   <key>tr</key>
-   <value>Proje</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Проект</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Project</value>
+   <value>F7B5247B-5211-19DF-FBD6-69E2F65F23DC</value>
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>
@@ -316,16 +212,8 @@
  <forms uuid="489a959d-b71f-491d-b3c0-232acca6f703">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>908DEC99-4A5F-3356-62CD-D1503E77D573</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

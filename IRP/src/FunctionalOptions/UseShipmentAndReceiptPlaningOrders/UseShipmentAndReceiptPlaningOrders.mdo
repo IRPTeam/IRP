@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fae9094f-9a5a-40a7-b689-b52f94c929c9">
  <name>UseShipmentAndReceiptPlaningOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>Sevk ve alım planlama siparişlerini kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать задания на отгрузку и получения товара</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use shipment and receipt planing orders</value>
+  <value>A0E2A41C-39B8-D5EC-C431-10BA51F2AB58___</value>
  </synonym>
  <location>Constant.UseShipmentAndReceiptPlaningOrders</location>
  <privilegedGetMode>true</privilegedGetMode>

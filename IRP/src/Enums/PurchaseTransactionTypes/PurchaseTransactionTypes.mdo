@@ -7,92 +7,44 @@
  </producedTypes>
  <name>PurchaseTransactionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Alım işlem tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Виды операций закупок</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Purchase transaction types</value>
+  <value>7AD8FA8A-5FC1-B301-1FFB-BAE67CC07346</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="79252a78-c81a-41f3-ba14-d9dc4b8e0309">
   <name>Purchase</name>
   <synonym>
-   <key>tr</key>
-   <value>Alımlar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Закупки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Purchase</value>
+   <value>B2B416AD-263F-B7EF-F853-3E43EE87E0AE</value>
   </synonym>
  </enumValues>
  <enumValues uuid="f75b49f9-ed39-442b-b7b8-6818820c8cbf">
   <name>ReceiptFromConsignor</name>
   <synonym>
-   <key>tr</key>
-   <value>Konsinyeye verenden gelen</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Приход товара от комитента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Receipt from consignor</value>
+   <value>5BEEE0F8-4DCC-6F0D-DA7B-B40FCC29741C</value>
   </synonym>
  </enumValues>
  <enumValues uuid="00219312-ff8b-4ec4-b42b-02fdf2df92dd">
   <name>CurrencyRevaluationCustomer</name>
   <synonym>
-   <key>tr</key>
-   <value>Para birimi yeniden değerleme Müşteri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Переоценка валюты клиента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency revaluation customer</value>
+   <value>41051964-076F-B1F2-2D9B-B82A5343F4F7</value>
   </synonym>
  </enumValues>
  <enumValues uuid="5291daaa-90f6-4aaf-9fab-c929c1787749">
   <name>CurrencyRevaluationVendor</name>
   <synonym>
-   <key>tr</key>
-   <value>Para birimi yeniden değerleme Tedarikçi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Переоценка валюты поставщика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency revaluation vendor</value>
+   <value>4013E7C0-0D41-9721-1E4B-BC6CEB754347</value>
   </synonym>
  </enumValues>
  <enumValues uuid="c04fdb0d-cb42-424d-ad49-e99f0973c3e3">
   <name>PurchaisePreliminaryStock</name>
   <synonym>
-   <key>tr</key>
-   <value>Ön stok satın al</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Закупка предварительного запаса</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Purchaise preliminary stock</value>
+   <value>84CCF1AF-395E-6F22-2DD7-7FDA0DF26EFE</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

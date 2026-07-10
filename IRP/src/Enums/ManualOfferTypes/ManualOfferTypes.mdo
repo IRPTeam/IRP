@@ -7,47 +7,23 @@
  </producedTypes>
  <name>ManualOfferTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Manuel inidirm türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы ручных скидок</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Manual offer types</value>
+  <value>78869162-E5BA-B592-2471-1F4E4926A1AE</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="1b6bf3af-cc7e-4bd0-8f8f-d3c2835919e2">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>9EA8B0FC-9FE0-7DA2-2DB7-7D6C9EE9B65A</value>
   </synonym>
  </enumValues>
  <enumValues uuid="f1dbe00b-0277-4e80-9644-cb31a8032941">
   <name>Percent</name>
   <synonym>
-   <key>tr</key>
-   <value>Yüzde124</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Процент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Percent</value>
+   <value>71C4D39B-3FEE-87E2-2F39-9A32C4E919D0</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

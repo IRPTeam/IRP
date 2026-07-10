@@ -11,44 +11,20 @@
  </producedTypes>
  <name>RetailWorkers</name>
  <synonym>
-  <key>tr</key>
-  <value>Perakende çalışanları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Розничные сотрудники</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Retail workers</value>
+  <value>E549F88B-35C7-E701-1F90-058C8E640973</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Perakende çalışanları</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Розничные сотрудники</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Retail workers</value>
+  <value>063FA523-DBEF-74CC-C135-5384C1B8511F</value>
  </recordPresentation>
  <dimensions uuid="321bdc86-9ea1-43df-a7c6-dee15456fa0e">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Магазин</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>D74C95F7-A91F-2D98-87A5-563391616209</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -66,16 +42,8 @@
  <dimensions uuid="c693dde5-ac16-4825-979f-eae5f739a44b">
   <name>Worker</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Worker</value>
+   <value>AEF9EEBC-D617-D0D6-6A8B-BC693C7C871B</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

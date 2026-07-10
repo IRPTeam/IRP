@@ -7,16 +7,8 @@
  </producedTypes>
  <name>EquipmentAPIModule</name>
  <synonym>
-  <key>tr</key>
-  <value>Ekipman APIModule</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Общий API оборудование</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Equipment APIModule</value>
+  <value>EC538837-EEB9-AB5C-CE2B-BB5F9142E996</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>QuickChoice</choiceMode>
@@ -24,31 +16,15 @@
  <enumValues uuid="adee1199-8ec8-4751-aa8f-b0acd0bc5154">
   <name>FiscalPrinter_CommonAPI</name>
   <synonym>
-   <key>tr</key>
-   <value>Fiskal yazıcı Ortak API</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Общий API фискальный принтер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Fiscal printer Common API</value>
+   <value>34C36369-DFD1-B57D-D410-04DD4AB478EC</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7da43a3c-38c2-40b6-bcac-9a906f5b4774">
   <name>Acquiring_CommonAPI</name>
   <synonym>
-   <key>tr</key>
-   <value>Edinme Ortak API</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Общий API эквайринг</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Acquiring Common API</value>
+   <value>439980F1-E68D-E3C7-7311-1F763BCD8340</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

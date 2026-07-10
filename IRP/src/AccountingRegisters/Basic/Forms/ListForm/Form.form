@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>6BDEDEF0-4940-595B-BEB5-59514B055A58</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -265,16 +257,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Dönem</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Период</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Period</value>
+     <value>01914D1B-5CC7-2E85-5027-73F73064DDD4</value>
     </title>
     <extendedTooltip>
      <name>GroupPeriodExtendedTooltip</name>
@@ -369,16 +353,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kayıt yapan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Регистратор</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Registrator</value>
+    <value>7C91B36A-FA9D-AFA2-2232-27C843E1022E</value>
    </title>
    <extendedTooltip>
     <name>ListGroupRegistratorExtendedTooltip</name>
@@ -436,16 +412,8 @@
    <name>AccountDr</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Borç</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дебет</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Debit</value>
+    <value>2F231823-97C6-C410-0103-3BAB93466848</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -488,16 +456,8 @@
     <name>ExtDimensionDr1</name>
     <id>63</id>
     <title>
-     <key>tr</key>
-     <value>Borç kırılım</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Субконто Дт</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Ext. Dim. Debit</value>
+     <value>10D7FCF8-DEC4-F438-84CB-B6F5E943B7A2</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -616,16 +576,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kırılımlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Субконто Дт</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Dr ext dimensions</value>
+    <value>B9175F24-5F90-AC5E-E5D0-0653E67DBC71</value>
    </title>
    <extendedTooltip>
     <name>ListGroupDrExtDimensionsExtendedTooltip</name>
@@ -650,16 +602,8 @@
     <name>CurrencyDr</name>
     <id>82</id>
     <title>
-     <key>tr</key>
-     <value>Döviz (Borç)</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Валюта Дт</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Debit currency</value>
+     <value>17574E57-A570-9EDB-B5DA-AC1E88D57F6B</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -702,16 +646,8 @@
     <name>CurrencyAmountDr</name>
     <id>85</id>
     <title>
-     <key>tr</key>
-     <value>Borç tutarı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Сумма Дт</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Debit amount</value>
+     <value>21FD2A1F-9B93-63CF-F706-6F1B5504ABF3</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -754,16 +690,8 @@
     <name>QuantityDr</name>
     <id>88</id>
     <title>
-     <key>tr</key>
-     <value>Miktar (Borç)</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Количество Дт</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Debit quntity</value>
+     <value>777E4195-AC67-C535-519E-EC6F65AE81E2</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -808,16 +736,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Borç döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта Дт</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Dr currency</value>
+    <value>DDC99E1C-B6C6-9D83-3901-1E4107E91E47</value>
    </title>
    <extendedTooltip>
     <name>ListGroupDrCurrencyExtendedTooltip</name>
@@ -839,16 +759,8 @@
    <name>AccountCr</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Alacak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Кредит</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Credit</value>
+    <value>263ABD1C-839C-19AC-CC66-6AA0036B85CC</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -890,16 +802,8 @@
     <name>ExtDimensionCr1</name>
     <id>71</id>
     <title>
-     <key>tr</key>
-     <value>Alacak kırılım</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Субконто Кт</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Ext. Dim. Credit</value>
+     <value>81E71E9D-A6C1-08DF-FF0F-F365E6CDF011</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1014,16 +918,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Alacak kırılımlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Субконто Кт</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Cr ext dimensions</value>
+    <value>3E0036BC-2ED8-9171-1C58-83143CFF9CD7</value>
    </title>
    <extendedTooltip>
     <name>ListGroupCrExtDimensionsExtendedTooltip</name>
@@ -1048,16 +944,8 @@
     <name>CurrencyCr</name>
     <id>93</id>
     <title>
-     <key>tr</key>
-     <value>Alacak dövizi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Валюта Кт</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Credit currency</value>
+     <value>0B55319F-B6BE-9C42-2344-47602D2958AE</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1100,16 +988,8 @@
     <name>CurrencyAmountCr</name>
     <id>99</id>
     <title>
-     <key>tr</key>
-     <value>Alacak tutar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Сумма Кт</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Credit amount</value>
+     <value>F8283972-4494-C0DD-D4AA-AE6D93E09BB0</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1152,16 +1032,8 @@
     <name>QuantityCr</name>
     <id>96</id>
     <title>
-     <key>tr</key>
-     <value>Alacak miktar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Количество Кт</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Credit quantity</value>
+     <value>0D13C372-91BC-E093-3E85-5D212374CB73</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1206,16 +1078,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Alacak dövizi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта Кт</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Cr currency</value>
+    <value>445B7000-CA64-AB20-0BA9-97BE12629D11</value>
    </title>
    <extendedTooltip>
     <name>ListGroupCrCurrencyExtendedTooltip</name>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>LockDataModificationReasons</name>
  <synonym>
-  <key>tr</key>
-  <value>Veri kilitleme düzeltme sebepleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Причина запрета изменения данных</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Lock data modification reasons</value>
+  <value>FB50C97E-B3D4-2091-1BE6-6951152C94DB</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.LockDataModificationReasons.StandardAttribute.Code</inputByString>
@@ -59,16 +51,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Veri kilitleme düzeltme sebebi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Причина запрета изменения данных</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Lock data modification reason</value>
+  <value>748BB64D-CDB0-99A3-3160-02C387FCD7A7</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -85,16 +69,8 @@
  <attributes uuid="d5b1ceec-853d-4b08-9bae-c5a99ae9c00f">
   <name>ForAllUsers</name>
   <synonym>
-   <key>tr</key>
-   <value>Tüm kullanıcılar için</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Для всех пользователей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>For all users</value>
+   <value>84D5A4AF-4E16-2F9B-BE3F-FE6CBDF3E829</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -108,16 +84,8 @@
  <attributes uuid="26f6f0bf-296c-44d9-a6b6-f3d81fce8192">
   <name>DisableRule</name>
   <synonym>
-   <key>tr</key>
-   <value>Kuralı devre dışı bırak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отключить правило</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Disable rule</value>
+   <value>E86B6846-F83C-3D92-2210-0ACFDACAA89C</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -131,16 +99,8 @@
  <attributes uuid="36266722-a6ee-416e-9651-a8239f36c0dd">
   <name>SetOneRuleForAllObjects</name>
   <synonym>
-   <key>tr</key>
-   <value>Tek kuralı tüm objelere uygula</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Установить одно правило для всех объектов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Set one rule for all objects</value>
+   <value>0F6AA9E4-5270-ED5B-B948-865CF7BD9948</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -154,16 +114,8 @@
  <attributes uuid="065a5729-8aa5-4ee7-b716-aa00aa7e82f5">
   <name>Attribute</name>
   <synonym>
-   <key>tr</key>
-   <value>Alan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Реквизит</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Attribute</value>
+   <value>32457000-B916-EED1-16BF-FAB9926C7B46</value>
   </synonym>
   <type>
    <types>String</types>
@@ -173,25 +125,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="ef54bd3b-c114-4e8b-92e7-0ec42696310b">
   <name>ComparisonType</name>
   <synonym>
-   <key>tr</key>
-   <value>Kıyalama türü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип сравнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Comparison type</value>
+   <value>F822F97A-8993-808A-AD7D-D9306EF5BE67</value>
   </synonym>
   <type>
    <types>String</types>
@@ -201,25 +143,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="305b12f7-e4c8-49c5-a377-6677a41578f1">
   <name>Value</name>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Value</value>
+   <value>3FFEEF57-80A0-BC5D-D1BB-B13F427CFE9A</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -238,25 +170,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="04aa2f2f-d9dd-4ed5-be2a-06f64f6b3edb">
   <name>SetValueAsCode</name>
   <synonym>
-   <key>tr</key>
-   <value>Değer kod olarak belirle</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Установить значение как код</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Set value as code</value>
+   <value>150C6F7D-DE36-638A-ABF6-652E78276ED9</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -270,16 +192,8 @@
  <attributes uuid="dd295b40-ea5d-4d9d-9f0b-fec5567c56f0">
   <name>AdvancedMode</name>
   <synonym>
-   <key>tr</key>
-   <value>Geniş mod</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расширеные настройки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Advanced mode</value>
+   <value>4465711F-76A0-9E94-4A34-4F01F77A2C34</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -293,16 +207,8 @@
  <attributes uuid="c813a022-5ac4-46ac-88a0-8f42df928bac">
   <name>DCS</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>СКД</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>DCS</value>
+   <value>46819141-3F3D-2013-3A43-3CDB518B6EBF</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -316,16 +222,8 @@
  <attributes uuid="38ab1ebc-6a15-4a61-bd1d-dc8a7272fffd">
   <name>QueryFilter</name>
   <synonym>
-   <key>tr</key>
-   <value>Sorgu filtresi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отбор запроса</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Query filter</value>
+   <value>AEDB9F86-B152-AE39-9BC1-1168B2DEF8F2</value>
   </synonym>
   <type>
    <types>String</types>
@@ -340,16 +238,8 @@
  <attributes uuid="9cd8a48f-20b8-404c-ac78-d53f1f73dd36">
   <name>isInitDCS</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri anşa edilme şeması başlatma</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это иниц. СКД</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is init DCS</value>
+   <value>1AA87BAA-5708-5CB4-4F7F-F8E797EA0767</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -363,16 +253,8 @@
  <attributes uuid="27032870-08fa-4f1e-8666-add400cbe1d7">
   <name>PreviewText</name>
   <synonym>
-   <key>tr</key>
-   <value>Metin önizleme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Просмотр текста</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Preview text</value>
+   <value>0BC9845D-0D35-CE8C-C270-0C6063A01371</value>
   </synonym>
   <type>
    <types>String</types>
@@ -387,16 +269,8 @@
  <attributes uuid="b70638ee-e962-4f1b-8b88-eb6df5417503">
   <name>CheckIsObjectLockedOnOpen</name>
   <synonym>
-   <key>tr</key>
-   <value>Nesne kilitlenmiş olup olmadığını form açıldığında kontrol et</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Проверять блокировку объектов при открытии</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Check is object locked on open</value>
+   <value>CE5FC147-B6FE-B3F4-428D-D5EE35D12116</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -414,30 +288,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>3A2780F2-CC2F-DF81-15AC-C8CD00319CF5</value>
   </synonym>
   <attributes uuid="9eb6198b-018e-4a8b-9fcf-8d0f29967c3c">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>6C458F7D-6B67-806F-F3CB-BA40B08B8ED4</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -450,16 +308,8 @@
   <attributes uuid="7726a691-743a-42fa-bf2d-ffa3e65927da">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>62AB8E62-EF97-D467-7E66-6BA6DA142BCF</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -481,30 +331,14 @@
   </producedTypes>
   <name>RuleList</name>
   <synonym>
-   <key>tr</key>
-   <value>Kural listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Список правил</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Rule list</value>
+   <value>5FC55E2C-870D-37F1-16D1-1D66E620D20B</value>
   </synonym>
   <attributes uuid="2547974f-1475-4dc5-b946-b5bdd8632a52">
    <name>Type</name>
    <synonym>
-    <key>tr</key>
-    <value>Tip</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Type</value>
+    <value>904DB842-6A71-7E3C-C218-805D6A7A59B6</value>
    </synonym>
    <type>
     <types>String</types>
@@ -522,16 +356,8 @@
   <attributes uuid="8b3662c0-dc7a-43e5-af51-f735718e5b8d">
    <name>Attribute</name>
    <synonym>
-    <key>tr</key>
-    <value>Alan</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Реквизит</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Attribute</value>
+    <value>B30439A8-AD9B-F655-5760-07254217DAFB</value>
    </synonym>
    <type>
     <types>String</types>
@@ -547,16 +373,8 @@
   <attributes uuid="d8a32383-9b5a-4ee9-ba39-ead895e53df9">
    <name>ComparisonType</name>
    <synonym>
-    <key>tr</key>
-    <value>Kıyalama türü</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Тип сравнения</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Comparison type</value>
+    <value>D59126BD-8A15-6F4E-EBF3-35DE29909182</value>
    </synonym>
    <type>
     <types>String</types>
@@ -572,16 +390,8 @@
   <attributes uuid="dcc199d9-f512-4c9b-b974-1e59697888f9">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>F8190881-4C9C-B2AE-EB7C-CB4BB68F5EF9</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -606,16 +416,8 @@
   <attributes uuid="352bbdf7-897a-4398-97ed-232b2e4ba789">
    <name>DisableRule</name>
    <synonym>
-    <key>tr</key>
-    <value>Kuralı devre dışı bırak</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Отключить правило</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Disable rule</value>
+    <value>65F65A09-7437-7410-085B-B916A27BDB0D</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -628,16 +430,8 @@
   <attributes uuid="91ea82e6-9c33-4ce0-901d-b171c75f902e">
    <name>TableName</name>
    <synonym>
-    <key>tr</key>
-    <value>Tablo ismi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Наименование таблицы</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Table name</value>
+    <value>07E42209-A3CA-8578-818B-B32176031A97</value>
    </synonym>
    <type>
     <types>String</types>
@@ -653,16 +447,8 @@
   <attributes uuid="7e1ad979-57c2-4ace-800e-53e37f1e794b">
    <name>SetValueAsCode</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer kod olarak belirle</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Установить значение как код</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Set value as code</value>
+    <value>FD6C411C-8C1A-15FD-DABE-E3FB701E499A</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -680,30 +466,14 @@
   </producedTypes>
   <name>UserList</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Список пользователей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User list</value>
+   <value>8A715866-2682-1465-5987-7AA1BAB729BD</value>
   </synonym>
   <attributes uuid="5c93578e-dae3-4203-b08e-d54db19806c0">
    <name>User</name>
    <synonym>
-    <key>tr</key>
-    <value>Kullanıcı</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Пользователь</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>User</value>
+    <value>C76CCD8F-177B-DF5D-DE6B-BCE063F78E96</value>
    </synonym>
    <type>
     <types>CatalogRef.Users</types>
@@ -722,30 +492,14 @@
   </producedTypes>
   <name>AccessGroupList</name>
   <synonym>
-   <key>tr</key>
-   <value>Erişim grup listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Список группы доступа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Access group list</value>
+   <value>404FC105-916C-5280-024A-A68224A5B8B4</value>
   </synonym>
   <attributes uuid="7b2ed0d3-6f41-4cb1-9055-b1171cc1f027">
    <name>AccessGroup</name>
    <synonym>
-    <key>tr</key>
-    <value>Erişim grubu</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Группа доступа</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Access group</value>
+    <value>AFB73925-5718-8E97-7E7F-F4E9534CE934</value>
    </synonym>
    <type>
     <types>CatalogRef.AccessGroups</types>
@@ -764,30 +518,14 @@
   </producedTypes>
   <name>ResponsibleUsers</name>
   <synonym>
-   <key>tr</key>
-   <value>Sorumlu kullanıcılar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ответственные пользователи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Responsible users</value>
+   <value>7333C6C9-AC2C-F72C-CEE2-2552BB3830A7</value>
   </synonym>
   <attributes uuid="78da9692-71ba-4de5-9341-33e5dd4b0cf1">
    <name>User</name>
    <synonym>
-    <key>tr</key>
-    <value>Kullanıcı</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Пользователь</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>User</value>
+    <value>D8D95825-C3E9-8B61-19AD-D6E079F9C9DA</value>
    </synonym>
    <type>
     <types>CatalogRef.Users</types>
@@ -801,16 +539,8 @@
  <forms uuid="13f935b3-bff3-4144-a391-f5baf8875768">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>A1116702-5897-B261-1B9F-FC9FE9A7802F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -818,16 +548,8 @@
  <forms uuid="f8eacb63-f562-4b80-a42f-2369c8ee2bbe">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>DA476374-A6EE-5157-791E-E235BEF563DF</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -835,16 +557,8 @@
  <forms uuid="f96e7e6a-693e-42fc-9878-9e6a806e7071">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>C24347CF-DE1F-20C2-244A-A15269EFE188</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -852,16 +566,8 @@
  <templates uuid="f399c550-d07e-48de-8691-bf3b699d06c0">
   <name>DCS</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>СКД</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>DCS</value>
+   <value>00830029-159E-C6C3-393F-FABCBD442A4E</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

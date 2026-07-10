@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R9541T_VacationUsage</name>
  <synonym>
-  <key>tr</key>
-  <value>R9541T İzin kullanımı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R9541T Использование отпуска</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R9541T Vacation usage</value>
+  <value>AC791EC6-9ABA-8E76-6A33-3504851A896E</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="806f5017-0daa-445d-807c-ac64250c2270">
   <name>Days</name>
   <synonym>
-   <key>tr</key>
-   <value>Günler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дни</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Days</value>
+   <value>53310653-F6D0-E63B-BED2-2769D04E66AB</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -51,16 +35,8 @@
  <dimensions uuid="c81d3f0f-471c-4faa-9eda-8a267c6c3be2">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>4D08BEDC-C565-47EF-F010-06F7F6BE96DE</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -73,16 +49,8 @@
  <dimensions uuid="00a5d9d2-fb51-49cf-8b61-1090de3fac36">
   <name>Employee</name>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee</value>
+   <value>80B620FB-C23C-590E-E96B-B672046E4E1E</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

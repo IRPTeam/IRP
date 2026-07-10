@@ -236,16 +236,8 @@
  <attributes>
   <name>DocResult</name>
   <title>
-   <key>tr</key>
-   <value>Belge sonucu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Doc result</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Doc result</value>
+   <value>67DEFCF2-29B7-2556-68AF-F167582C0462</value>
   </title>
   <id>2</id>
   <valueType>
@@ -262,16 +254,8 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Организация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company</value>
+   <value>201D22B4-2595-4DB2-2E49-93D1C8DF73AA</value>
   </title>
   <id>3</id>
   <valueType>
@@ -287,16 +271,8 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Период</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Period</value>
+   <value>4B7D1C2D-07AA-5872-20BF-FBDC2552284C</value>
   </title>
   <id>5</id>
   <valueType>
@@ -312,16 +288,8 @@
  <attributes>
   <name>LedgerType</name>
   <title>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>1A199705-7B2C-7DDB-B823-346873BE24DE</value>
   </title>
   <id>7</id>
   <valueType>
@@ -337,16 +305,8 @@
  <formCommands>
   <name>Generate</name>
   <title>
-   <key>tr</key>
-   <value>Oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сформировать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Generate</value>
+   <value>F1DD8EA2-750A-B9AA-A034-4A7DC6236A5D</value>
   </title>
   <id>1</id>
   <use>

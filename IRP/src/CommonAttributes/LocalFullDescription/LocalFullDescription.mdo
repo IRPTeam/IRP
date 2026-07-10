@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5bf394b4-0c8c-45f7-8ce0-225680923c35">
  <name>LocalFullDescription</name>
  <synonym>
-  <key>tr</key>
-  <value>Yerel tam tanım</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Полное местное наименование</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Local full description</value>
+  <value>A16A577C-BE02-4DF5-5EED-DBEA9AA6E97F</value>
  </synonym>
  <type>
   <types>String</types>

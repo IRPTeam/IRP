@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseWorkOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - İş emirleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать заказ наряды</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use work orders</value>
+  <value>3E500887-1623-CACD-DF1C-C7FBDA1C0CA0</value>
  </synonym>
  <type>
   <types>Boolean</types>

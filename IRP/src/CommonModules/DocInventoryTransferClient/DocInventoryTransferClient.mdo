@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1e97919c-05e6-4af2-a0a1-e1e9af4f9f0b">
  <name>DocInventoryTransferClient</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak depo transfer fişi client</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ перемещение товаров клиент</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc inventory transfer client</value>
+  <value>6E903977-96C9-42AE-E256-64FBDEEFF498</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

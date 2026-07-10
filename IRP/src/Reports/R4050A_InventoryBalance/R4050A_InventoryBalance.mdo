@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R4050A_InventoryBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R4050A Stok bakiyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4050A Ведомость по товарам организации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4050A Inventory balance</value>
+  <value>7CA3B58A-F650-3D15-58E4-4E6CD957CF90</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R4050A_InventoryBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="68d62dff-523e-4634-b735-ada043600e42">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>28302DA0-CA75-C1AA-AD36-6372858FDC8A</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

@@ -87,16 +87,8 @@
 					<f>4</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Hesap Borç </v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Счет Дт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Account Dr</v8:content>
+							<v8:content>E2D8E320-E4C7-E116-6CAA-A9C1C87D7B31</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -106,16 +98,8 @@
 					<f>5</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Borç kırılım</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Субконто Дт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ext. Dim. Debit</v8:content>
+							<v8:content>8C2544A8-3D9E-1280-0895-584190AD319D</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -125,16 +109,8 @@
 					<f>5</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Dt tutarı</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма Дт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Dr amount</v8:content>
+							<v8:content>C344A29B-5883-3931-1844-451951809BAF</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -144,16 +120,8 @@
 					<f>5</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Hesap Alacak </v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Счет Кт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Account Cr</v8:content>
+							<v8:content>F9834105-D835-7EE6-6DAB-B94311DD6163</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -163,16 +131,8 @@
 					<f>6</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Alacak kırılım</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Субконто Кт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ext. Dim. Credit</v8:content>
+							<v8:content>3CD649EB-E54F-3FF8-89A9-9C45A70C187A</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -182,16 +142,8 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Ct tutarı</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма Кт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Cr amount</v8:content>
+							<v8:content>A87BB9F9-7BF4-25CD-D7E4-49D341EDB224</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -201,16 +153,8 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Tutar</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Amount</v8:content>
+							<v8:content>C2960711-5EAA-4B29-949A-AD101B6F4526</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -237,19 +181,9 @@
 					<f>11</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>[CurrencyAmountDr]
-[CurrencyDr]</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>[CurrencyAmountDr]
-[CurrencyDr]</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>[CurrencyAmountDr]
-[CurrencyDr]</v8:content>
+							<v8:content>BDF9E719-BA4D-FAAB-B130-0DFF1E8627B8[CurrencyAmountDr],[CurrencyDr]
+____________</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -271,19 +205,9 @@
 					<f>13</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>[CurrencyAmountCr]
-[CurrencyCr]</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>[CurrencyAmountCr]
-[CurrencyCr]</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>[CurrencyAmountCr]
-[CurrencyCr]</v8:content>
+							<v8:content>7E556739-A096-66B8-878B-B88C1D2E714B[CurrencyAmountCr],[CurrencyCr]
+____________</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -316,19 +240,9 @@
 					<f>11</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>[CurrencyAmountDr]
-[CurrencyDr]</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>[CurrencyAmountDr]
-[CurrencyDr]</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>[CurrencyAmountDr]
-[CurrencyDr]</v8:content>
+							<v8:content>D590842C-F80D-1E51-1012-2C9FECBE9C83[CurrencyAmountDr],[CurrencyDr]
+____________</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -350,19 +264,9 @@
 					<f>13</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>[CurrencyAmountCr]
-[CurrencyCr]</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>[CurrencyAmountCr]
-[CurrencyCr]</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>[CurrencyAmountCr]
-[CurrencyCr]</v8:content>
+							<v8:content>3BB522B3-99EB-6E99-9E98-88A510ACF1D1[CurrencyAmountCr],[CurrencyCr]
+____________</v8:content>
 						</v8:item>
 					</tl>
 				</c>

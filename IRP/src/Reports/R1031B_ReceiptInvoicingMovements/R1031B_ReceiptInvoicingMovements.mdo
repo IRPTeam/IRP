@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R1031B_ReceiptInvoicingMovements</name>
  <synonym>
-  <key>tr</key>
-  <value>R1031B Gelen faturaların hareketleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1031A Ожидающие закрытия поступления</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1031B Receipt invoicing movements</value>
+  <value>17B363A2-6860-F02F-F3E1-1390AEA38489</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R1031B_ReceiptInvoicingMovements.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="a47e72c5-c006-4cc0-98da-6cdd9ddf50d1">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>BD91F095-4526-EFEC-CEB8-8B3EF2F75255</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

@@ -2,18 +2,9 @@
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f5749d7f-4597-4a04-9a55-0073c5679fa7">
  <name>OpenCustomerAgreements</name>
  <synonym>
-  <key>tr</key>
-  <value>Müşteri sözleşmesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Соглашения клиента</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Customer terms</value>
+  <value>07A6931D-37D5-F95C-C195-572E7942C8AC</value>
  </synonym>
  <group>NavigationPanelImportant</group>
- <commandParameterType/>
  <representation>Auto</representation>
 </mdclass:CommonCommand>

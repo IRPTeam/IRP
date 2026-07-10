@@ -9,16 +9,8 @@
  </producedTypes>
  <name>AddAttributeAndPropertyValues</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek özellik değerleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Значения дополнительных реквизитов и сведений</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Additional attribute values</value>
+  <value>4628EC5C-3E60-E315-58FA-ABA429A03AD2</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -42,16 +34,8 @@
   <dataHistory>Use</dataHistory>
   <name>Ref</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellik değerleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значения дополнительных реквизитов и сведений</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attribute values</value>
+   <value>EE1AD57C-8587-9A86-60EC-CDFA2FC39FEA</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <minValue xsi:type="core:UndefinedValue"/>
@@ -77,16 +61,8 @@
   <dataHistory>Use</dataHistory>
   <name>Owner</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellik</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительный реквизит</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attribute</value>
+   <value>DA87B48C-9671-4BA6-6561-153439F0DD04</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -124,16 +100,8 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Ek özellik değerleri</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Значение дополнительных реквизитов и сведений</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Additional attribute value</value>
+  <value>38AE8224-966F-B4E9-9C1E-E1ECD57FDDBE</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -152,16 +120,8 @@
  <attributes uuid="41f52a81-828d-4ecb-9a3c-961d248c0804">
   <name>AdditionalID</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek ID</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительный ID</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional ID</value>
+   <value>D6EFBA13-DB99-1719-9ACE-EB2212FEBC76</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -180,25 +140,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <forms uuid="2f86661f-b92e-46ec-a5ad-2414105cdc3a">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>3CCCAC03-F3E3-908C-C157-7CA67E704E21</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -206,16 +156,8 @@
  <forms uuid="88007e72-96e4-46f6-9c87-b63f30e2eda0">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>466B5E74-FF94-3DEA-A760-0A1B086923C4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -223,16 +165,8 @@
  <forms uuid="800edfe4-6e05-4b19-b6d7-28952fb712b3">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>CC5F4907-49A7-5324-42D1-185B80FAB4AC</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

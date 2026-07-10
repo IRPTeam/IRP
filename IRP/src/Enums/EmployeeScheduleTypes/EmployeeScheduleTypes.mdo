@@ -7,47 +7,23 @@
  </producedTypes>
  <name>EmployeeScheduleTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Çalışan program türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы расписания сотрудников</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Employee schedule types</value>
+  <value>471026A8-7A73-4FF3-3E3B-BD65E2A378F9</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="ff2a97f4-2ec5-44b3-b5c6-72c930df820a">
   <name>Day</name>
   <synonym>
-   <key>tr</key>
-   <value>Gün</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>День</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Day</value>
+   <value>2DE12A7E-1C0F-73CD-DD09-9D3575E93B66</value>
   </synonym>
  </enumValues>
  <enumValues uuid="805ea384-3817-4375-9708-3e14f09dff32">
   <name>Hour</name>
   <synonym>
-   <key>tr</key>
-   <value>Saat</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Час</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Hour</value>
+   <value>19CEA46E-6A66-F2AE-E4FA-AAF6F064D57D</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

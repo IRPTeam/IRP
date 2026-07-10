@@ -9,16 +9,8 @@
  </producedTypes>
  <name>PartnerSegments</name>
  <synonym>
-  <key>tr</key>
-  <value>Cari hesap segmentleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Сегменты партнеров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Partner segments</value>
+  <value>DD4EB8A2-3322-09D3-3D2B-BFE4F47C41B2</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -57,16 +49,8 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Cari hesap segmenti</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Сегмент партнеров</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Partner segment</value>
+  <value>A7C44133-17F0-3BB6-6150-019553E2B4E0</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -84,16 +68,8 @@
  <attributes uuid="49ec20d0-dae2-4ab1-b612-ffb72869df60">
   <name>BanOnShipping</name>
   <synonym>
-   <key>tr</key>
-   <value>Sevkiyat yasakla</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Запрет отгрузки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ban on shipping</value>
+   <value>7EB3D563-F7F9-8FF2-2B7E-EB19EF06A8AD</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -107,16 +83,8 @@
  <attributes uuid="af747f77-9de2-4e54-a685-d6bf3a7655e1">
   <name>Managers</name>
   <synonym>
-   <key>tr</key>
-   <value>Plasiyers</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сегмент менеджеров</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Managers</value>
+   <value>F8A9195A-392C-6136-6A47-7929A70190B6</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -135,30 +103,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>3CC743DB-D5D2-57DA-AF5B-B8A5A81C2ADF</value>
   </synonym>
   <attributes uuid="285a16a0-e2aa-4872-beda-210015ec39c2">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>22A3D19E-351A-3E3A-A555-54D92E0CACD3</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -171,16 +123,8 @@
   <attributes uuid="3ba92f03-1f3c-496b-bf30-d8916c12e019">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>35250512-6C2E-4984-4B63-379F60045B6B</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -198,16 +142,8 @@
  <forms uuid="623fd972-0516-4c07-95f1-52f15ae054e6">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>4A4AAF4D-0B97-2A4B-B391-1613F5F6D346</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -215,16 +151,8 @@
  <forms uuid="de7381b3-6b24-491f-93f9-6a85249655e7">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>6F065275-DCE1-3705-5E2A-A3A3A1125744</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -232,16 +160,8 @@
  <forms uuid="c35a08b2-f2b3-44e8-a05c-58b6ca4b4cbb">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>17C209AF-35C9-2AFE-E80C-CC6B46162F89</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

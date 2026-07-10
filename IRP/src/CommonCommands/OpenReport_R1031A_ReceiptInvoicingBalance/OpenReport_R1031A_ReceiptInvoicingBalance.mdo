@@ -2,16 +2,8 @@
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="004f16bd-6ecb-46f4-b030-577ac54df6c4">
  <name>OpenReport_R1031A_ReceiptInvoicingBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R1031A Gelen fatura bakiyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1031A Ожидающие закрытия поступления</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1031A Receipt invoicing balance</value>
+  <value>F3D084BD-AE6D-B4EE-EAD6-6000F0845CAC</value>
  </synonym>
  <group>NavigationPanelOrdinary</group>
  <representation>Auto</representation>

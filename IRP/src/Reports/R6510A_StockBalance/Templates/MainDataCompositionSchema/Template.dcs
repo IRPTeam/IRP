@@ -11,16 +11,8 @@
 			<field>Store</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Depo</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Магазин</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Store</v8:content>
+					<v8:content>B69E8C3A-4120-E936-608F-FBDF553B80A0</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -32,16 +24,8 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Malzeme</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Номенклатура</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>8CB44919-CBE4-2574-45E3-3034411FB648</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -50,16 +34,8 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Varyant</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Характеристика</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>C6FF5682-F978-71EE-EB75-5B8480D77480</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -71,16 +47,8 @@
 			<field>SecondPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Periyot, saniye</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Период, второй</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, second</v8:content>
+					<v8:content>BDA0875C-71AD-8971-1399-9B2B1F23D391</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -93,16 +61,8 @@
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İşlem evrakı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Документ</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:content>A8FDC9DF-8CFC-5D24-4069-900273934474</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -115,16 +75,8 @@
 			<field>SerialLotNumber</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Seri lot numaraları</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Серия номенклатуры</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Serial lot number</v8:content>
+					<v8:content>ABE7501E-6484-97F6-68C0-04CF22AFB739</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -142,16 +94,8 @@
 			<dataPath>OpeningBalance</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Açılış bakiyesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Начальный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Opening balance</v8:content>
+					<v8:content>744A3199-8E5B-2DCA-A2F6-63007413500E</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -174,16 +118,8 @@
 			<field>ActualQuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sevk edilen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>На складе</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Actual</v8:content>
+					<v8:content>30539348-19FC-80FA-AC66-63B06742D490</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -197,16 +133,8 @@
 			<field>ActualQuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sevk edilen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>На складе</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Actual</v8:content>
+					<v8:content>DB8E8487-F397-8F36-6B92-2388EBDC2372</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -215,16 +143,8 @@
 			<field>ActualQuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sevk edilen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>На складе</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Actual</v8:content>
+					<v8:content>EA3C505B-3C6B-7395-5F23-3023E10D86B7</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -233,16 +153,8 @@
 			<field>ActualQuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sevk edilen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>На складе</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Actual</v8:content>
+					<v8:content>5A139E71-BE44-9E4F-F4C3-3A961E6362ED</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -256,16 +168,8 @@
 			<field>FreeQuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Serbest</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Свободный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Free</v8:content>
+					<v8:content>FE45E54F-FE9A-A511-1E35-5E9DD35F267E</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -274,16 +178,8 @@
 			<field>FreeQuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Serbest</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Свободный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Free</v8:content>
+					<v8:content>64B9C928-AF68-E3C6-669C-C8388F8A9E20</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -292,16 +188,8 @@
 			<field>ReservationQuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Rezerv</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>В резерве</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Reservation</v8:content>
+					<v8:content>1C63652C-6F05-3D4D-D607-783039AC2DE9</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -315,16 +203,8 @@
 			<field>ReservationQuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Rezerv</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>В резерве</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Reservation</v8:content>
+					<v8:content>4430D396-4F5E-0BE3-387C-CF46D832475F</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -333,16 +213,8 @@
 			<field>ReservationQuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Rezerv</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>В резерве</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Reservation</v8:content>
+					<v8:content>98024126-8A64-968E-EF8A-A1F7139BE29B</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -351,16 +223,8 @@
 			<field>ReservationQuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Rezerv</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>В резерве</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Reservation</v8:content>
+					<v8:content>353C9E25-74F4-A72D-DE03-3E57F34600BC</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -374,16 +238,8 @@
 			<field>TransitIncomingQuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yoldan gelen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>К приходу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transit incoming</v8:content>
+					<v8:content>5F0A2A19-61CE-9E8C-C590-091319403AB5</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -397,16 +253,8 @@
 			<field>TransitIncomingQuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yoldan gelen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>К приходу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transit incoming</v8:content>
+					<v8:content>64A80726-5D80-F904-4E9E-E2145602B9F8</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -415,16 +263,8 @@
 			<field>TransitIncomingQuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yoldan gelen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>К приходу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transit incoming</v8:content>
+					<v8:content>73E23E95-B4DC-617B-BD4F-F370AFDC6E1B</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -433,16 +273,8 @@
 			<field>TransitIncomingQuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yoldan gelen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>К приходу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transit incoming</v8:content>
+					<v8:content>0C154F6D-A2CD-411B-B0B6-641703CC7B84</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -456,16 +288,8 @@
 			<field>TransitOutgoingQuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yola çıkan</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>К расходу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transit outgoing</v8:content>
+					<v8:content>07DA3754-DAD4-7E68-817D-DB2BC1BBBAEE</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -479,16 +303,8 @@
 			<field>TransitOutgoingQuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yola çıkan</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>К расходу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transit outgoing</v8:content>
+					<v8:content>8E6AA61B-FB41-1E8E-EBC4-44B22BB1DF94</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -497,16 +313,8 @@
 			<field>TransitOutgoingQuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yola çıkan</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>К расходу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transit outgoing</v8:content>
+					<v8:content>A93CA9A8-3F9E-81C6-6990-07452081CF98</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -515,16 +323,8 @@
 			<field>TransitOutgoingQuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yola çıkan</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>К расходу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transit outgoing</v8:content>
+					<v8:content>A9B1A970-01A9-0D5E-EF11-1CFE409BEFDA</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -538,16 +338,8 @@
 			<field>InventoryQuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Stok</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Склад</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Inventory</v8:content>
+					<v8:content>653BAC56-FA66-F7B2-2067-72331C73576A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -561,16 +353,8 @@
 			<field>InventoryQuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Stok</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Склад</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Inventory</v8:content>
+					<v8:content>5D80C3CF-03C6-244A-AEAA-ABDD78055D50</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -579,16 +363,8 @@
 			<field>InventoryQuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Stok</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Склад</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Inventory</v8:content>
+					<v8:content>93AB9342-DB3A-A95F-FEDF-F1854232CE7A</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -597,16 +373,8 @@
 			<field>InventoryQuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Stok</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Склад</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Inventory</v8:content>
+					<v8:content>ECABD03F-6099-87E4-4A20-0CB3657692DB</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -620,16 +388,8 @@
 			<field>PreliminaryQuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>A7358A6D-7410-B74A-A9CD-D2EDC6E76D00</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -643,16 +403,8 @@
 			<field>PreliminaryQuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>C848902F-061B-1F26-6250-0680BB60541B</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -661,16 +413,8 @@
 			<field>PreliminaryQuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>A73424DA-DFBD-8A13-32C4-4C128A7D2CDD</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -679,16 +423,8 @@
 			<field>PreliminaryQuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>16AD2160-81BF-BE59-9106-6D298232324B</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -701,16 +437,8 @@
 			<dataPath>ClosingBalance</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Kapanış bakiyesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Конечный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Closing balance</v8:content>
+					<v8:content>C634D9F8-A8FE-7F82-2893-33C359A0FA00</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -718,16 +446,8 @@
 			<dataPath>Expense</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Çıkan</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Расход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Expense</v8:content>
+					<v8:content>4E1CC4D0-3419-2154-4741-15E24CBCA9C5</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -735,16 +455,8 @@
 			<dataPath>Receipt</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gelen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Приход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Receipt</v8:content>
+					<v8:content>B98B042B-37AE-64B4-4115-5334B019A579</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -753,16 +465,8 @@
 			<field>FreeQuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Serbest</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Свободный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Free</v8:content>
+					<v8:content>4106D042-FD9D-4CBA-A21B-BD567D1B0E4C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -776,16 +480,8 @@
 			<field>FreeQuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Serbest</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Свободный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Free</v8:content>
+					<v8:content>7F1D8E0A-260A-128C-C64C-C9F04B33BD56</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1073,16 +769,8 @@ FROM
 		<name>ReportPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>480FD19B-14B9-1B5E-E62D-D0CE3BAFE22F</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1099,16 +787,8 @@ FROM
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem başı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>C2AD8FA4-0B34-D770-0525-5A33C3021490</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1126,16 +806,8 @@ FROM
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem sonu</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Конец периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>35A74F0A-9AA8-6AA4-43AA-ADB035FAF3AA</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1153,16 +825,8 @@ FROM
 		<dcsset:name>Default</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Varsayılan</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>По умолчанию</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Default</v8:content>
+				<v8:content>5A69A558-54D2-0648-8C8E-E512E8BB9669</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">

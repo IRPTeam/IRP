@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R1014T_CanceledPurchaseOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>R1014 İptal edilen satın alma siparişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1014 Отменные заказы поставщикам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1014 Canceled purchase orders</value>
+  <value>42F91388-B303-CA40-0F3B-B116152ACF9E</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="fb895de3-234d-4b29-87aa-5ef18b59b83a">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>7D7EE8C4-0FF0-EC11-1A50-055F6D5FFC41</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +33,8 @@
  <resources uuid="9a5f2f3b-988e-40d4-9356-0f2ed91590a8">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>F80307D3-E0E6-1C40-018C-CFD98548E05A</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +46,8 @@
  <resources uuid="1d7549b3-8c7a-4776-b5cf-26f3765e78dd">
   <name>NetAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Net tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма без налогов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Net amount</value>
+   <value>274320E7-0E75-D879-9C0E-E15B577C1CE6</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -91,16 +59,8 @@
  <attributes uuid="1737832b-5187-4a82-a09b-c76030f83451">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложенный расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deferred calculation</value>
+   <value>DD707C4F-E18F-A84C-CA54-4D4CD102D3BB</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -112,16 +72,8 @@
  <dimensions uuid="95b6f74b-8ef3-426a-b9ce-0ed8ce4dc955">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>9A08E473-9B7D-0786-6E9A-A06D6A266B25</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -134,16 +86,8 @@
  <dimensions uuid="54ccd749-3235-4292-a6db-7fcb1860c8e5">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>6574404D-5F4B-046E-E754-43D6885B8FB9</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -156,16 +100,8 @@
  <dimensions uuid="4e7c7d7f-cd06-47d2-a85c-896537cba450">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>862EF845-8336-9841-1852-28D4C6C072C9</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -178,16 +114,8 @@
  <dimensions uuid="82447259-8f44-4941-88c6-e24003396860">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>13C86FB4-B45E-9DFB-B23A-ACCA6903DCA7</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -200,16 +128,8 @@
  <dimensions uuid="96af1479-ff9f-43af-b222-d85578bdc2ca">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>9011FC60-7295-A6E1-1265-59FA5B530D1C</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseReturnOrder</types>
@@ -223,16 +143,8 @@
  <dimensions uuid="2c03ddde-7c3e-4083-872a-09831f2aeaf6">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>C211C9A6-89B8-61C7-7055-5A80E5013FFF</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -245,16 +157,8 @@
  <dimensions uuid="66c9c885-6024-4f08-92f8-913aa520dd15">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row key</value>
+   <value>30F75354-0974-E7A1-1081-18EE0F34D310</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -267,16 +171,8 @@
  <dimensions uuid="3ede01a9-b8cc-45ab-ad7d-ae33b7b05da4">
   <name>CancelReason</name>
   <synonym>
-   <key>tr</key>
-   <value>İptal sebebi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Причина отмены</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cancel reason</value>
+   <value>C4629FAD-7C03-6973-3491-17987EBDC31E</value>
   </synonym>
   <type>
    <types>CatalogRef.CancelReturnReasons</types>

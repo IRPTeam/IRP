@@ -89,16 +89,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup header</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа шапка</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group header</value>
+     <value>713735EE-C92C-ED33-34EF-F61BEED730B2</value>
     </title>
     <extendedTooltip>
      <name>GroupHeaderExtendedTooltip</name>
@@ -268,16 +260,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Информация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Info</value>
+    <value>BC1F63D5-748B-066C-C4F3-34193B757E79</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -551,16 +535,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Yürütme nesneleri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Объекты исполнения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Execution objects</value>
+    <value>2F8175E4-0BD5-F2E7-7989-9F30365E0622</value>
    </title>
    <extendedTooltip>
     <name>GroupExecutionObjectsExtendedTooltip</name>
@@ -1203,16 +1179,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Aşamalar ve Görevler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Этапы и задачи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Stages and Tasks</value>
+    <value>893A4F57-DF2D-6570-0689-92570EACF5EB</value>
    </title>
    <extendedTooltip>
     <name>GroupStagesTasksExtendedTooltip</name>
@@ -1239,16 +1207,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>2D828B03-DEBA-93B4-4B93-33500B0B8535</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -1311,16 +1271,8 @@
    <columns>
     <name>Addressing</name>
     <title>
-     <key>tr</key>
-     <value>Adresleme</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Обращение</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Addressing</value>
+     <value>2B4C17E6-4113-53A7-740F-F7B77282821E</value>
     </title>
     <id>2</id>
     <valueType>

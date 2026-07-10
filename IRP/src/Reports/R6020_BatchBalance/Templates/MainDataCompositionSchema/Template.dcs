@@ -22,16 +22,8 @@
 			<field>QuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>FF48487A-A814-B9B5-51F5-594297C76A3E</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -44,16 +36,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -85,16 +69,8 @@
 			<field>QuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>9D460FF2-6976-FC34-47AB-BE38DAB00368</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -102,16 +78,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -129,16 +97,8 @@
 			<field>QuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>41AEA425-C926-BBCF-F54B-B9057893BF8E</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -151,16 +111,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -171,16 +123,8 @@
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İşlem evrakı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Документ</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:content>DF25BAB1-77E2-4024-404E-EE892C84FF97</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -194,16 +138,8 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Malzeme</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Номенклатура</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>D9E8E3B7-9BCB-CDA2-26EF-F3E6D1797AAC</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -215,16 +151,8 @@
 			<field>QuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>56E3FC16-DB28-61ED-D983-3C0DE7CDEA5C</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -232,16 +160,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -301,16 +221,8 @@
 			<dataPath>Resources.OpeningBalance</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Açılış bakiyesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Начальный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Opening balance</v8:content>
+					<v8:content>762BEC89-A1B3-4165-53E6-6FB58317982E</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -318,16 +230,8 @@
 			<dataPath>Resources.Receipt</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Resources.Receipt</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Ресурсы.Приход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Resources.Receipt</v8:content>
+					<v8:content>5B568932-116D-5564-4BD8-84EFDAE4E3B2</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -335,16 +239,8 @@
 			<dataPath>Resources.Expense</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Kaynaklar.Gider</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Ресурсы.Расход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Resources.Expense</v8:content>
+					<v8:content>F2885B06-4EC6-5643-3C99-9BEE6C60E6ED</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -352,16 +248,8 @@
 			<dataPath>Resources.ClosingBalance</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Kapanış bakiyesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Конечный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Closing balance</v8:content>
+					<v8:content>1B0FA5DE-2C95-C985-5FC0-09D516DDA4FD</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -369,16 +257,8 @@
 			<dataPath>Resources</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Kaynaklar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Ресурсы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Resources</v8:content>
+					<v8:content>195CBE6B-1854-BE9D-DAFA-AD7B5877FECF</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -387,16 +267,8 @@
 			<field>InvoiceAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura tutarı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Инвойсная стоимость сумма</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>7DDBD510-1272-DB46-631F-F3608E4A063A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -409,16 +281,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -429,16 +293,8 @@
 			<field>InvoiceAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura tutarı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Инвойсная стоимость сумма</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>5630469D-3B11-4172-26F1-12DD5F0A2797</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -446,16 +302,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -466,16 +314,8 @@
 			<field>InvoiceAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura tutarı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Инвойсная стоимость сумма</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>1B101DBF-F85C-9608-8831-175A9622FBD1</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -483,16 +323,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -503,16 +335,8 @@
 			<field>InvoiceAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura tutarı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Инвойсная стоимость сумма</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>E83E7777-7775-DA30-0FD4-42035776DF5F</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -525,16 +349,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -545,16 +361,8 @@
 			<field>InvoiceTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Инвойсная стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice (tax)</v8:content>
+					<v8:content>C234FFB6-5ACC-7894-46A5-52382CC2BAE7</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -567,16 +375,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -587,16 +387,8 @@
 			<field>InvoiceTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Инвойсная стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice (tax)</v8:content>
+					<v8:content>C9B2525F-B379-125F-F74A-A6F3526CC3F0</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -604,16 +396,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -624,16 +408,8 @@
 			<field>InvoiceTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Инвойсная стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice (tax)</v8:content>
+					<v8:content>F22F22A6-383C-5983-3D5D-DDBE8C76CEA9</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -641,16 +417,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -661,16 +429,8 @@
 			<field>InvoiceTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Инвойсная стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice (tax)</v8:content>
+					<v8:content>859FEF79-E8F4-9450-0363-3A8DF94C5627</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -683,16 +443,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -703,16 +455,8 @@
 			<field>IndirectCostAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dolaylı maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Косвенная доп. стоимость</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost</v8:content>
+					<v8:content>91460744-B944-1BDA-AEC7-70D321E4625F</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -725,16 +469,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -745,16 +481,8 @@
 			<field>IndirectCostAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dolaylı maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Косвенная доп. стоимость</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost</v8:content>
+					<v8:content>9E1DE412-619F-01A6-6E56-66CC9DFAE259</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -762,16 +490,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -782,16 +502,8 @@
 			<field>IndirectCostAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dolaylı maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Косвенная доп. стоимость</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost</v8:content>
+					<v8:content>844FCA0E-4499-E71F-F36B-BD4D9C88B590</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -799,16 +511,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -819,16 +523,8 @@
 			<field>IndirectCostAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dolaylı maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Косвенная доп. стоимость</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost</v8:content>
+					<v8:content>A81E4190-2376-C8A0-0335-53812B74968A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -841,16 +537,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -861,16 +549,8 @@
 			<field>IndirectCostTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dolaylı maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Косвенная доп. стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost (tax)</v8:content>
+					<v8:content>203DBB66-AF71-5621-110F-F2582B7885D6</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -883,16 +563,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -903,16 +575,8 @@
 			<field>IndirectCostTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dolaylı maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Косвенная доп. стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost (tax)</v8:content>
+					<v8:content>27E241E3-795F-1304-4FC6-676E49DCC048</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -920,16 +584,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -940,16 +596,8 @@
 			<field>IndirectCostTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dolaylı maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Косвенная доп. стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost (tax)</v8:content>
+					<v8:content>63A50A72-BF94-6CFD-DFF7-75D60A533FD8</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -957,16 +605,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -977,16 +617,8 @@
 			<field>IndirectCostTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dolaylı maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Косвенная доп. стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost (tax)</v8:content>
+					<v8:content>30D2F3C9-0A06-08E4-4158-8D194FE2E402</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -999,16 +631,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1019,16 +643,8 @@
 			<field>ExtraCostAmountByRatioOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Oranla ekstra maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. стоимость по коефф.</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost by ratio</v8:content>
+					<v8:content>C1020D1C-3778-EE39-954B-B0CA3C9A8712</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1041,16 +657,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1061,16 +669,8 @@
 			<field>ExtraCostAmountByRatioReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Oranla ekstra maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. стоимость по коефф.</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost by ratio</v8:content>
+					<v8:content>21FB968A-0A2E-D12E-E1A7-775EBE5FA263</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1078,16 +678,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1098,16 +690,8 @@
 			<field>ExtraCostAmountByRatioExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Oranla ekstra maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. стоимость по коефф.</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost by ratio</v8:content>
+					<v8:content>8A35DC6B-FC99-4F52-2A00-006929AE7BC0</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1115,16 +699,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1135,16 +711,8 @@
 			<field>ExtraCostAmountByRatioClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Oranla ekstra maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. стоимость по коефф.</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost by ratio</v8:content>
+					<v8:content>59C0293D-D466-E5EA-A301-11D8AB7E54D6</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1157,16 +725,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1177,16 +737,8 @@
 			<field>ExtraCostTaxAmountByRatioOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Oranla ekstra maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. стоимость по коефф. (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost by ratio (tax)</v8:content>
+					<v8:content>CF1F8C09-7E45-3522-2A29-965271A99816</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1199,16 +751,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1219,16 +763,8 @@
 			<field>ExtraCostTaxAmountByRatioReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Oranla ekstra maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. стоимость по коефф. (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost by ratio (tax)</v8:content>
+					<v8:content>5A840D58-C00B-352B-B2C4-4A75D436E670</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1236,16 +772,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1256,16 +784,8 @@
 			<field>ExtraCostTaxAmountByRatioExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Oranla ekstra maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. стоимость по коефф. (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost by ratio (tax)</v8:content>
+					<v8:content>146CACB8-9454-9166-6D31-13CA91CD5EF6</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1273,16 +793,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1293,16 +805,8 @@
 			<field>ExtraCostTaxAmountByRatioClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Oranla ekstra maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. стоимость по коефф. (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost by ratio (tax)</v8:content>
+					<v8:content>7D3F800F-C6F5-9EDA-AB78-89F67BDCF70B</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1315,16 +819,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1335,16 +831,8 @@
 			<field>ExtraDirectCostAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek doğrudan maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. прямая стоимость</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost</v8:content>
+					<v8:content>BBC691F2-496A-899D-D966-60560247D54E</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1357,16 +845,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1377,16 +857,8 @@
 			<field>ExtraDirectCostAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek doğrudan maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. прямая стоимость</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost</v8:content>
+					<v8:content>05CE3961-DD3F-B3BD-D4F9-939C6BAA7113</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1394,16 +866,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1414,16 +878,8 @@
 			<field>ExtraDirectCostAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek doğrudan maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. прямая стоимость</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost</v8:content>
+					<v8:content>C49EDDB4-3543-53F0-0DB4-4F87B00CAECE</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1431,16 +887,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1451,16 +899,8 @@
 			<field>ExtraDirectCostAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek doğrudan maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. прямая стоимость</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost</v8:content>
+					<v8:content>EE07AE44-AA01-2325-58F1-120170350FCF</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1473,16 +913,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1493,16 +925,8 @@
 			<field>ExtraDirectCostTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ekstra doğrudan maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. прямая стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost (tax)</v8:content>
+					<v8:content>325F6AE7-E905-1941-1529-949E44CFF75E</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1515,16 +939,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1535,16 +951,8 @@
 			<field>ExtraDirectCostTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ekstra doğrudan maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. прямая стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost (tax)</v8:content>
+					<v8:content>599E54CD-8221-E4F4-4FC8-8B47859E963A</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1552,16 +960,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1572,16 +972,8 @@
 			<field>ExtraDirectCostTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ekstra doğrudan maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. прямая стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost (tax)</v8:content>
+					<v8:content>EA6C1BE2-0A9D-94CF-F826-6CEEDF4C4F1A</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1589,16 +981,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1609,16 +993,8 @@
 			<field>ExtraDirectCostTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ekstra doğrudan maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. прямая стоимость (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost (tax)</v8:content>
+					<v8:content>CC25FD43-4B9B-7112-223F-FF15468FE946</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1631,16 +1007,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1651,16 +1019,8 @@
 			<field>AllocatedCostAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılan maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. расходы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost</v8:content>
+					<v8:content>E718DBC3-2944-508C-CCF0-07E01F57ABD3</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1673,16 +1033,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1693,16 +1045,8 @@
 			<field>AllocatedCostAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılan maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. расходы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost</v8:content>
+					<v8:content>81950E0B-EA43-B352-2817-7AF934629B2D</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1710,16 +1054,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1730,16 +1066,8 @@
 			<field>AllocatedCostAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılan maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. расходы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost</v8:content>
+					<v8:content>48A3A332-6A4B-20D3-3D01-15CBD36D78B7</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1747,16 +1075,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1767,16 +1087,8 @@
 			<field>AllocatedCostAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılan maliyet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. расходы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost</v8:content>
+					<v8:content>0A412A40-F0FA-6570-0F79-95A085016540</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1789,16 +1101,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1809,16 +1113,8 @@
 			<field>AllocatedCostTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tahsis edilen maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. расходы (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost (tax)</v8:content>
+					<v8:content>F51BF8FD-F28E-7296-6DAF-F19D1DD4CE54</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1831,16 +1127,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1851,16 +1139,8 @@
 			<field>AllocatedCostTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tahsis edilen maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. расходы (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost (tax)</v8:content>
+					<v8:content>F331D815-E502-0B6F-F30D-D628487CFED0</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1868,16 +1148,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1888,16 +1160,8 @@
 			<field>AllocatedCostTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tahsis edilen maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. расходы (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost (tax)</v8:content>
+					<v8:content>F5FA1358-DF43-4EA5-57B3-338A962ABD78</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1905,16 +1169,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1925,16 +1181,8 @@
 			<field>AllocatedCostTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tahsis edilen maliyet (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. расходы (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost (tax)</v8:content>
+					<v8:content>8992DE30-CB35-4A57-742C-C1A0E42118AC</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1947,16 +1195,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1967,16 +1207,8 @@
 			<field>AllocatedRevenueAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılmış gelir</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. доходы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue</v8:content>
+					<v8:content>724AA35A-9651-92AF-F3BC-C5FBD6D25323</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1989,16 +1221,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2009,16 +1233,8 @@
 			<field>AllocatedRevenueAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılmış gelir</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. доходы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue</v8:content>
+					<v8:content>521A4B90-B40E-5351-1CE2-29914BDFB214</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2026,16 +1242,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2046,16 +1254,8 @@
 			<field>AllocatedRevenueAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılmış gelir</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. доходы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue</v8:content>
+					<v8:content>E96D9BDE-9D13-B0F4-4CB6-6ED9B9680DFD</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2063,16 +1263,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2083,16 +1275,8 @@
 			<field>AllocatedRevenueAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılmış gelir</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. доходы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue</v8:content>
+					<v8:content>2CF94ED3-3044-346C-C683-313574673DE0</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2105,16 +1289,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2125,16 +1301,8 @@
 			<field>AllocatedRevenueTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılan gelir (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. доходы (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue (tax)</v8:content>
+					<v8:content>6D628B8A-6066-040D-D269-94F8D7CCCE76</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2147,16 +1315,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2167,16 +1327,8 @@
 			<field>AllocatedRevenueTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılan gelir (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. доходы (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue (tax)</v8:content>
+					<v8:content>E944D97F-2C13-F771-164C-C15BF17DBF9C</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2184,16 +1336,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2204,16 +1348,8 @@
 			<field>AllocatedRevenueTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılan gelir (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. доходы (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue (tax)</v8:content>
+					<v8:content>EA8B1C96-AA31-322D-D9DD-D4AC36BC4017</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2221,16 +1357,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2241,16 +1369,8 @@
 			<field>AllocatedRevenueTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ayrılan gelir (vergi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доп. доходы (налоги)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue (tax)</v8:content>
+					<v8:content>67BE1678-6472-F328-8D4C-CBADA52E26A4</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2263,16 +1383,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>F430585A-4125-6888-80F7-7432E4809FAE</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2283,16 +1395,8 @@
 			<field>PreliminaryQuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>D003CD78-5CB1-743B-B10E-E780AEA9F568</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2305,16 +1409,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2325,16 +1421,8 @@
 			<field>PreliminaryQuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>BFDE31AF-CBBC-BDE9-981C-CA583B1E6F0E</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2342,16 +1430,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2362,16 +1442,8 @@
 			<field>PreliminaryQuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>24E6D7A9-0C4C-8529-961B-B26FB22C055E</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2379,16 +1451,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2399,16 +1463,8 @@
 			<field>PreliminaryQuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>376B18EF-8FC5-2477-7E2B-B412482DACF5</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2421,16 +1477,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2441,16 +1489,8 @@
 			<field>PreliminaryAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön (tutar)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный (сумма)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>C9A24B1A-6958-6D8F-F4F7-7E14C34BEF42</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2463,16 +1503,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2483,16 +1515,8 @@
 			<field>PreliminaryAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön (tutar)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный (сумма)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>96D30BD7-FB97-2432-2279-9286642905D6</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2500,16 +1524,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2520,16 +1536,8 @@
 			<field>PreliminaryAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön (tutar)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный (сумма)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>E58CC373-ED25-EEAC-C1CE-E1C4A41DBE74</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2537,16 +1545,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2557,16 +1557,8 @@
 			<field>PreliminaryAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön (tutar)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный (сумма)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>B8AA082F-BFCB-A833-3BD2-2B583971B3C9</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2579,16 +1571,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2599,16 +1583,8 @@
 			<field>PreliminaryTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön (vergi tutarı)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный (сумма налога)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>15D5A358-CC9F-FBC7-731F-F1345D6414F5</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2621,16 +1597,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2641,16 +1609,8 @@
 			<field>PreliminaryTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön (vergi tutarı)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный (сумма налога)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>B05F7394-A383-1DBA-A53C-C59DE91905F8</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2658,16 +1618,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2678,16 +1630,8 @@
 			<field>PreliminaryTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön (vergi tutarı)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный (сумма налога)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>084F5EA1-7BF0-F511-19F4-49FC23EFF33E</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2695,16 +1639,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2715,16 +1651,8 @@
 			<field>PreliminaryTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ön (vergi tutarı)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Предварительный (сумма налога)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>47767767-F048-41F1-143F-FD781E09333E</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2737,16 +1665,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>ACE4777E-0562-1F83-36C1-143DE56ED202</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -2801,16 +1721,8 @@
 				<field>Item</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Malzeme</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Номенклатура</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Item</v8:content>
+						<v8:content>C75B1478-D910-93AB-BEA3-3F4CA17E7077</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2823,16 +1735,8 @@
 				<field>Recorder</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>İşlem evrakı</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Документ</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Recorder</v8:content>
+						<v8:content>0059F3C4-8304-3416-621A-AD1AC9068D12</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -2868,16 +1772,8 @@
 				<field>IsRelevance</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Geçerli</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Актуальный</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Is relevance</v8:content>
+						<v8:content>5DAE67B8-A655-6991-15C8-8FBADD8C1231</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -4057,16 +2953,8 @@ ORDER BY
 				<field>IsRelevance</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Geçerli</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Актуальный</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Is relevance</v8:content>
+						<v8:content>81D45676-5B5D-685C-C39C-CBC5BAC9BD8F</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -4075,16 +2963,8 @@ ORDER BY
 				<field>Batch</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Parti</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Партия</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Batch</v8:content>
+						<v8:content>3075BB21-95EB-EECE-E79F-F418D931C14D</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -4100,16 +2980,8 @@ ORDER BY
 				<field>Item</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Malzeme</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Номенклатура</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Item</v8:content>
+						<v8:content>C7F2DB3F-E3AC-0B55-57ED-D4F9317158EE</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -4136,16 +3008,8 @@ ORDER BY
 				<field>QuantityReceipt</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Miktar gelen</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Количество расход</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Quantity receipt</v8:content>
+						<v8:content>49311A2D-05C5-B816-635B-B5030308BDF6</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -4157,16 +3021,8 @@ ORDER BY
 				<field>QuantityExpense</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Miktar çıkan</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Количество расход</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Quantity expense</v8:content>
+						<v8:content>512AAD37-8707-B38F-F922-280254DF7A89</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -4178,16 +3034,8 @@ ORDER BY
 				<field>InvoiceAmountReceipt</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Fatura miktarı makbuzu</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content> Инвойсная стоимость приход</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Invoice amount receipt</v8:content>
+						<v8:content>71B1509F-1F3E-45DC-CE02-263DB8C1B181</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -4199,16 +3047,8 @@ ORDER BY
 				<field>PreliminaryQuantityReceipt</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Ön miktar gelen</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Предварительное количество приход</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Preliminary quantity receipt</v8:content>
+						<v8:content>7AB0C2B9-3F50-E041-1856-635C6F07781E</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -4220,16 +3060,8 @@ ORDER BY
 				<field>PreliminaryAmountReceipt</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Ön tutar gelen</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Предварительная сумма приход</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Preliminary amount receipt</v8:content>
+						<v8:content>6D6C4D6D-28D8-A33F-F53C-C8D19CA1DB29</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -4241,16 +3073,8 @@ ORDER BY
 				<field>PreliminaryQuantityExpense</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Ön miktar çıkan</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Предварительное количество расход</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Preliminary quantity expense</v8:content>
+						<v8:content>A30DE933-C433-B102-2E8C-CE7F7C663A6E</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -4593,16 +3417,8 @@ WHERE
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem başı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>D1CA56BF-0E4A-6BAA-A6D3-33D71C1D95C1</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -4620,16 +3436,8 @@ WHERE
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem sonu</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Конец периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>0C202359-973D-C8BC-C816-6A5335EA9031</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -4647,16 +3455,8 @@ WHERE
 		<name>ReportPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>147E5C43-0779-6A29-9870-0AC8E44EB0FA</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -4676,16 +3476,8 @@ WHERE
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:lwsTitle>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Açılış bakiyesi</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Начальный остаток</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Opening balance</v8:content>
+							<v8:content>AF6B1B81-B9BE-1089-954E-E1F0D932668B</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -4744,16 +3536,8 @@ WHERE
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:lwsTitle>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Gelen</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Приход</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Receipt</v8:content>
+							<v8:content>FF96148B-F59A-CCCA-A2DB-B7A1D0341F8A</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -4812,16 +3596,8 @@ WHERE
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:lwsTitle>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Çıkan</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Расход</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Expense</v8:content>
+							<v8:content>5EA3E371-B753-E260-0F25-56D50156B425</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -4880,16 +3656,8 @@ WHERE
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:lwsTitle>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Kapanış bakiyesi</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Конечный остаток</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Closing balance</v8:content>
+							<v8:content>0557786F-DB89-7A98-8304-4982D6BB221C</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -4973,16 +3741,8 @@ WHERE
 					<dcsset:userSettingID>b6476ecc-b78a-40bd-a80c-e04c27d66ca3</dcsset:userSettingID>
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Dönem</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Период</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Period</v8:content>
+							<v8:content>E54273CA-0F12-A9C3-36C9-962E71E052F7</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>
@@ -5044,16 +3804,8 @@ WHERE
 							<dcscor:parameter>Text</dcscor:parameter>
 							<dcscor:value xsi:type="v8:LocalStringType">
 								<v8:item>
-									<v8:lang>tr</v8:lang>
-									<v8:content>Fazla parti bakiyesi</v8:content>
-								</v8:item>
-								<v8:item>
-									<v8:lang>ru</v8:lang>
-									<v8:content>Over Batch balance</v8:content>
-								</v8:item>
-								<v8:item>
 									<v8:lang>en</v8:lang>
-									<v8:content>Over Batch balance</v8:content>
+									<v8:content>15682DE1-E58B-91D6-6B3C-CCDA2F5D843E</v8:content>
 								</v8:item>
 							</dcscor:value>
 						</dcscor:item>

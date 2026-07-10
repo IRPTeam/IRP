@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>2F73BA1A-3BF1-7982-221B-BB4C5F674237</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -105,16 +97,8 @@
    <name>Number</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number</value>
+    <value>435E2F0F-6F1C-A2E9-99D1-1C6B2DA64371</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -155,16 +139,8 @@
    <name>Date</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>24F12D9B-7E57-A212-2563-39B86A9511A1</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -283,16 +259,8 @@
    <name>DocumentAmount</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>D1F4790A-3378-04AC-CA4C-C17F8026B707</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -331,16 +299,8 @@
    <name>Currency</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>37D551B8-9DF3-4ED7-7CA0-0C9CC45CF3A2</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -423,16 +383,8 @@
    <name>Company</name>
    <id>34</id>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>34600FAF-660E-0751-18A5-5D54AE2C6852</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -985,16 +937,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>MF mevcut</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Есть БО</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is have JE</value>
+       <value>F77FE855-3BA8-3511-1F63-3FE9994B3ABB</value>
       </content>
      </localValue>
     </title>

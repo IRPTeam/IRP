@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typePrice</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip fiyat</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип цена</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type price</value>
+  <value>7200330A-F77E-BD0F-FCFD-D69A3AC20CFB</value>
  </synonym>
  <type>
   <types>Number</types>

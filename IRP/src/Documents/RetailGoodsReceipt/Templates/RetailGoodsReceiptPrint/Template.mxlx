@@ -114,16 +114,8 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Perakende mal kabulü [Number] [Date]</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Приемка розничной продажи [Number] [Date]</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Retail goods receipt [Number] [Date]</v8:content>
+							<v8:content>6A62E563-2CC7-6685-5D35-5386E4A8087A[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -160,16 +152,8 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Şirket:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Организация:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:content>7FF5B895-B809-ED3C-C0B1-119DF4C953CD</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -192,16 +176,8 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Cari hesap:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Партнер:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Partner:</v8:content>
+							<v8:content>7FC93888-5243-470B-B8D7-75A338922584</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -231,16 +207,8 @@
 					<f>11</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>#</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>#</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>D2B8C4A1-94D0-8DD6-64C3-37E18F3F960C</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -250,16 +218,8 @@
 					<f>12</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Malzeme</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Номенклатура</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>47C90EF6-7D8C-9170-0740-0FB24963AF85</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -269,16 +229,8 @@
 					<f>13</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Varyant</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Характеристика</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>CFB92BA1-312F-58FC-C972-2C1E3E1CC698</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -288,16 +240,8 @@
 					<f>14</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Miktar</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Количество</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>BF0664F5-F192-1D2B-B1C3-3565059FEF94</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -307,16 +251,8 @@
 					<f>14</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Birim</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Ед. изм.</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>EF8E5266-E4B4-9741-1985-58E1EFB8EEFC</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -425,16 +361,8 @@
 					<f>18</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Sorumlu:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Ответственный:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>F01F6A6A-27D2-304D-D960-049BEB41CA67</v8:content>
 						</v8:item>
 					</tl>
 				</c>

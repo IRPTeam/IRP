@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b34be8f7-61d0-44ac-821d-6923b62f8750">
  <name>DocFixedAssetRevaluationServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge sabit kıymet yeniden değerleme sunucusu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Док переоценка основных средств сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc fixed asset revaluation server</value>
+  <value>C45386DA-7E21-1ED6-63A4-47016E9E5145</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

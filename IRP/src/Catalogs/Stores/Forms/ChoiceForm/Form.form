@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>02BFA36F-987C-5AA6-6EA6-6B8AB0AB81B8</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>70B945D2-5EF5-4180-0EB2-299388E57327</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -478,16 +462,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açıklama</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>714BFA07-770E-9E34-4D47-707AE4BB9D62</value>
       </content>
      </localValue>
     </title>
@@ -581,16 +557,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>İş yerlerini filtrele</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Фильтр по компании</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Company filter</value>
+       <value>DCDD6F54-BEAF-186A-A1F7-778AE98494DC</value>
       </content>
      </localValue>
     </title>
@@ -604,16 +572,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şirket filtresi değil</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Без фильтра по компании</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Not company filter</value>
+       <value>9ECEEFE2-6E61-6B4A-A8A3-36C3EC38D91F</value>
       </content>
      </localValue>
     </title>

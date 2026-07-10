@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="baad6cec-8b98-4197-b97e-1fe3e89ca1b5">
  <name>DocPurchaseOrderServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak satın alma siparişi sunucu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ заказ поставщику сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc purchase order server</value>
+  <value>267F6ADF-D289-F8E4-484C-C31BBD7897C4</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

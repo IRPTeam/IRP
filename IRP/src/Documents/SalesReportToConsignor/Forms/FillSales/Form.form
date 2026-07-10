@@ -135,16 +135,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sağ</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Справа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Right</value>
+    <value>F64751B0-0190-D536-6E5D-D8B3BCD5B276</value>
    </title>
    <extendedTooltip>
     <name>GroupTitleRightExtendedTooltip</name>
@@ -216,16 +208,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sol</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Слева</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Left</value>
+    <value>F7E2177E-BB0C-DE5E-E55C-C23DC2159FE1</value>
    </title>
    <extendedTooltip>
     <name>GroupTitleLeftExtendedTooltip</name>
@@ -253,16 +237,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Başlık nesneleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заголовок номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Title items</value>
+   <value>115DE5A2-D420-EA74-4DD5-5A32AC5B57B3</value>
   </title>
   <extendedTooltip>
    <name>GroupTitleItemsExtendedTooltip</name>
@@ -1139,16 +1115,8 @@
  <attributes>
   <name>SalesPeriod</name>
   <title>
-   <key>tr</key>
-   <value>Satış dönemi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Период продаж</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Sales period</value>
+   <value>9572FA24-CB2F-5E22-2B68-86EED9C303AC</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1164,16 +1132,8 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Организация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company</value>
+   <value>EC48B594-0EA3-3590-0114-4441F3E7E5AB</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1189,16 +1149,8 @@
  <attributes>
   <name>Partner</name>
   <title>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Партнер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Partner</value>
+   <value>28C145CC-B0A0-D7E9-9CB5-50CC74425D0D</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1214,16 +1166,8 @@
  <attributes>
   <name>Agreement</name>
   <title>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Agreement</value>
+   <value>02FAE2E9-5245-5831-14BA-AA7F876AD92E</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1239,16 +1183,8 @@
  <attributes>
   <name>PriceIncludeTax</name>
   <title>
-   <key>tr</key>
-   <value>Fiyata KDV dahil</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Цена включает НДС</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Price include tax</value>
+   <value>F5D5B868-EE7E-76B2-25F9-9551408D0207</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1264,16 +1200,8 @@
  <attributes>
   <name>OwnerUUID</name>
   <title>
-   <key>tr</key>
-   <value>Sahip UUID</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>UUID владельца</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Owner UUID</value>
+   <value>B7478953-B54C-81FA-AE06-66B5ACE8F218</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1289,16 +1217,8 @@
  <attributes>
   <name>Sales</name>
   <title>
-   <key>tr</key>
-   <value>Satış</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Продажа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Sales</value>
+   <value>397146DC-05CA-EFB9-927C-CB8FA7F78FC8</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1313,16 +1233,8 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item</value>
+    <value>82D4E9C1-5A5D-E4A4-46FF-F071D3108C39</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1338,16 +1250,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>89FAC9A0-7574-344D-DA9B-BEBD27041004</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1363,16 +1267,8 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ед. изм.</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unit</value>
+    <value>32F13F63-031B-FE27-7A98-8A61621C59E8</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1388,16 +1284,8 @@
   <columns>
    <name>PriceType</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид цены</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Price type</value>
+    <value>07C61EB8-8590-98DF-FA2C-C1CF82411702</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1413,16 +1301,8 @@
   <columns>
    <name>ConsignorPrice</name>
    <title>
-    <key>tr</key>
-    <value>Konsinye fiyatı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цена комитента</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Consignor price</value>
+    <value>CC580F64-01DC-F43A-A831-1924FF48B60F</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1438,16 +1318,8 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цена</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Price</value>
+    <value>B46D289F-2BC8-4769-9DF7-7A5BEDE08559</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1463,16 +1335,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>5F0FD41B-142A-149D-D6C1-19EE483E2177</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1488,16 +1352,8 @@
   <columns>
    <name>NetAmount</name>
    <title>
-    <key>tr</key>
-    <value>Net tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма без налогов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Net amount</value>
+    <value>4513523E-E15E-CFA0-01FB-B66B7DCA8245</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1513,16 +1369,8 @@
   <columns>
    <name>TotalAmount</name>
    <title>
-    <key>tr</key>
-    <value>Toplam tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Общая сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Total amount</value>
+    <value>4CC94B06-8E61-6331-12DA-A9073402D9A7</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1538,16 +1386,8 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>27D4A9BF-8B2D-79F9-9627-751793B80AC6</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1563,16 +1403,8 @@
   <columns>
    <name>SalesInvoice</name>
    <title>
-    <key>tr</key>
-    <value>Satış faturası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Реализация товаров и услуг</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Sales invoice</value>
+    <value>BEAA5F81-7929-A151-1A3B-BA696F678CB9</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1589,16 +1421,8 @@
   <columns>
    <name>PurchaseInvoice</name>
    <title>
-    <key>tr</key>
-    <value>Satın alma faturası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Поступление товаров и услуг</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Purchase invoice</value>
+    <value>87A3D523-EEC9-D085-58FE-EA7F3436C834</value>
    </title>
    <id>19</id>
    <valueType>
@@ -1615,16 +1439,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>E29617F8-B660-45E9-9B77-7AB4D7252814</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1640,16 +1456,8 @@
   <columns>
    <name>SumColumn</name>
    <title>
-    <key>tr</key>
-    <value>Tutar kolon</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Колонка сумм</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Sum column</value>
+    <value>43E45F3A-ABAF-D962-2F45-5A7A494B5FAF</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1668,16 +1476,8 @@
   <columns>
    <name>TradeAgentFeePercent</name>
    <title>
-    <key>tr</key>
-    <value>Konsinye alan komisyon oranı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Процент вознаграждения комиссионера</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Trade agent fee percent</value>
+    <value>69D97024-6969-3B78-8AAD-D01EC5D8279C</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1693,16 +1493,8 @@
   <columns>
    <name>SourceOfOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Envanter menşei</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Источник происхождения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source of origin</value>
+    <value>0774624C-370B-AB77-7282-2C78769250AB</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1719,16 +1511,8 @@
  <formCommands>
   <name>FillSales</name>
   <title>
-   <key>tr</key>
-   <value>Satışları doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить продажи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill sales</value>
+   <value>E1AD5395-DAA5-1A2B-B441-12BB65300EF8</value>
   </title>
   <id>1</id>
   <use>
@@ -1744,16 +1528,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>8B5C4843-0FAD-06D7-709F-FE850EC6DD50</value>
   </title>
   <id>4</id>
   <use>
@@ -1769,16 +1545,8 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check all</value>
+   <value>AAA3F245-CF63-0F39-9445-54A84C428597</value>
   </title>
   <id>5</id>
   <use>
@@ -1798,16 +1566,8 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck all</value>
+   <value>5F573858-CE28-FE66-6509-9B4B2CAF00B6</value>
   </title>
   <id>6</id>
   <use>
@@ -1827,16 +1587,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>D303BA41-B697-8753-3C4A-A9C0068069AF</value>
   </title>
   <id>7</id>
   <use>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f2c14a1b-cfc1-4d0d-b2e0-62901b427923">
  <name>Report_A0011_TrialBalanceByAccount</name>
  <synonym>
-  <key>tr</key>
-  <value>A0011 Hesap mizanı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет A0011_ОборотноСальдоваяВедомостьПоСчетам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report A0011_TrialBalanceByAccount</value>
+  <value>3D24744B-E739-5A66-6AD3-3373B8C4CBC9</value>
  </synonym>
 </mdclass:Role>

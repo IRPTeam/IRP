@@ -7,16 +7,8 @@
  </producedTypes>
  <name>SimpleBatch</name>
  <synonym>
-  <key>tr</key>
-  <value>Temel parti</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Простая партия</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Simple batch</value>
+  <value>D6156D43-B85E-043A-A973-3A7C3125D1DB</value>
  </synonym>
  <moveBoundaryOnPosting>DontMove</moveBoundaryOnPosting>
  <documents>Document.PurchaseReturn</documents>
@@ -29,16 +21,8 @@
  <dimensions uuid="36798efe-f04a-4f25-91e8-95ec4c2897c0">
   <name>SimpleBatch</name>
   <synonym>
-   <key>tr</key>
-   <value>Temel parti</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Простая партия</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Simple batch</value>
+   <value>34D69653-5B24-E3C6-62BA-AA982B40811F</value>
   </synonym>
   <type>
    <types>CatalogRef.SimpleBatch</types>

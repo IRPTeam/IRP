@@ -10,32 +10,16 @@
  </producedTypes>
  <name>AccountingExtraDimensionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe ek kırılımlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Дополнительные субконто</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Accounting extra dimensions</value>
+  <value>2DA9C58E-8DD3-6641-17ED-D9FFD411CF00</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
  <createOnInput>DontUse</createOnInput>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Muhasebe ek kırılımı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Дополнительное субконто</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Accounting extra dimension</value>
+  <value>9BAA346F-E96C-EABF-F86D-DD49B1793950</value>
  </objectPresentation>
  <characteristicExtValues>Catalog.ExtDimensions</characteristicExtValues>
  <type>
@@ -65,16 +49,8 @@
  <forms uuid="f4dd26fd-54fe-4c77-80d5-f0865834bff8">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>B0BC9DE6-B751-832C-C4F4-4A9731D7CF84</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -82,16 +58,8 @@
  <forms uuid="e2ac2796-e38b-4e4f-9569-4d5026a0b343">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>E5F54E53-BB77-634B-B4CF-F584F247C79A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -99,16 +67,8 @@
  <forms uuid="ab9a7520-23ef-4f58-a5cf-e6d790c4a04d">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>A1EC8271-320B-71D5-52E0-08C3A0B9ECD2</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

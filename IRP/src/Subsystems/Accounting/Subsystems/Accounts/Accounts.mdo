@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f29f0eae-04ea-4c35-993f-b6c0eed26abd">
  <name>Accounts</name>
  <synonym>
-  <key>tr</key>
-  <value>Hesaplar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>План счетов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Accounts</value>
+  <value>CB011B62-3348-9CEA-A646-6266A1D91760</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ProductionCostsAllocation</name>
  <synonym>
-  <key>tr</key>
-  <value>Üretim maliyetlerinin dağıtımı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Распределение производственных затрат</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Production costs allocation</value>
+  <value>D5C6DA3B-BD37-7BC3-34CA-AC5FAE544759</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ProductionCostsAllocation.StandardAttribute.Number</inputByString>
@@ -59,28 +51,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Üretim maliyetlerinin dağıtımı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Распределение производственных затрат</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Production costs allocation</value>
+  <value>9DC23BCC-5518-6C2E-E0E7-771E24954959</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Üretim maliyeti tahsisleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Распределения производственных затрат</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Production costs allocations</value>
+  <value>3D30EA90-1B86-FB63-31AA-AE61EA13BD15</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -100,16 +76,8 @@
  <attributes uuid="b22648c0-5f65-4633-b8bd-5894fb9d8da8">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>F32A022D-3BA6-08AB-BEC9-958E4BC19FD5</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -124,16 +92,8 @@
  <attributes uuid="094f4223-bf83-434d-8a9b-f7b36a6befb6">
   <name>BeginDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата начала</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Begin date</value>
+   <value>D7004E8E-CE52-DF32-2EA4-4BBB4C727D77</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -150,16 +110,8 @@
  <attributes uuid="f7c7f474-47b5-4c7b-9ffe-e2a4271f9c2c">
   <name>EndDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата окончания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>End date</value>
+   <value>6CD0E9C3-2F14-CAD8-8043-3BF170498EC2</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -176,16 +128,8 @@
  <forms uuid="61090556-50ea-4c58-b357-3e01c6946ae4">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>0932EBB8-42C8-DAC5-5140-08B289D370F0</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -193,16 +137,8 @@
  <forms uuid="47f6daa4-1521-4c65-a59f-0bfee984a334">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>653B8D54-6516-9D95-5DBC-C5B15607A499</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -210,16 +146,8 @@
  <forms uuid="66a83e53-f1bb-4494-aeaa-5349b9b5180b">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>C401C0F6-3D82-C6FC-C048-8EDA542D5342</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -231,30 +159,14 @@
   </producedTypes>
   <name>ProductionCostsList</name>
   <synonym>
-   <key>tr</key>
-   <value>Üretim maliyetleri listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Список себестоимости производства</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Production costs list</value>
+   <value>71F3DCCA-3E23-7E85-58BB-BA879F135A52</value>
   </synonym>
   <attributes uuid="c34e7aca-0893-4443-be05-fef01fe4abc3">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>790A541D-1F37-5416-6861-13DF2DFAF2F0</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -267,16 +179,8 @@
   <attributes uuid="e9e93cee-d322-4154-ab00-c25459336a84">
    <name>ProfitLossCenter</name>
    <synonym>
-    <key>tr</key>
-    <value>Kar/Zarar merkezi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Центр прибылей/убытков</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Profit loss center</value>
+    <value>6B8D0F01-C25D-F724-450D-D67E9B103346</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -289,16 +193,8 @@
   <attributes uuid="caa51e1f-da72-40c3-822a-55521db5c68f">
    <name>ExpenseType</name>
    <synonym>
-    <key>tr</key>
-    <value>Gider tipi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Статьи затрат</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Expense type</value>
+    <value>9BC0F78D-919D-3661-1057-785E1278F932</value>
    </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -323,16 +219,8 @@
   <attributes uuid="be4f07e3-e76c-4352-834c-9c917aa04386">
    <name>Currency</name>
    <synonym>
-    <key>tr</key>
-    <value>Döviz</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валюты</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency</value>
+    <value>0BBD9D6A-23BD-AF36-6C3E-EDB239D9DDA9</value>
    </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
@@ -345,16 +233,8 @@
   <attributes uuid="f32ffe82-290b-416b-9899-5c96959b0737">
    <name>Amount</name>
    <synonym>
-    <key>tr</key>
-    <value>Tutar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Сумма</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Amount</value>
+    <value>E79BA315-E88B-CFA2-2B71-15993F48E20E</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -371,30 +251,14 @@
   </producedTypes>
   <name>ProductionDurationsList</name>
   <synonym>
-   <key>tr</key>
-   <value>Üretim süreleri listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Список тайминга производства</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Production durations list</value>
+   <value>527BBE0D-E2E1-7D07-74D7-71180347ADAB</value>
   </synonym>
   <attributes uuid="5cbaacfa-b40a-4319-b53a-880052050497">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>73135FDD-FD23-2D8D-DBD8-8F8B361AC6A3</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -407,16 +271,8 @@
   <attributes uuid="0462a6fa-6c1b-4224-b464-663387e8ad0f">
    <name>BusinessUnit</name>
    <synonym>
-    <key>tr</key>
-    <value>Departman</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Подразделение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Business unit</value>
+    <value>86F6C77D-47A9-B7DF-F38E-E88FF1AC67F2</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -436,16 +292,8 @@
   <attributes uuid="62966703-eeaf-4cb8-a167-0d34ed7f1476">
    <name>Item</name>
    <synonym>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Item</value>
+    <value>3BF5C1A5-0690-22C4-46F4-40B57003566C</value>
    </synonym>
    <type>
     <types>CatalogRef.Items</types>
@@ -459,16 +307,8 @@
   <attributes uuid="6140313a-0323-42b3-9302-b1a635172738">
    <name>ItemKey</name>
    <synonym>
-    <key>tr</key>
-    <value>Varyant</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Item key</value>
+    <value>B73DDD41-5055-DB3D-D5E7-7EB4F376B5EF</value>
    </synonym>
    <type>
     <types>CatalogRef.ItemKeys</types>
@@ -486,16 +326,8 @@
   <attributes uuid="8baf865b-12ec-4f85-800a-e18ce9c627c1">
    <name>Duration</name>
    <synonym>
-    <key>tr</key>
-    <value>Süre</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Время</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Duration</value>
+    <value>81015147-1C6D-6B00-07EE-E739CCA2E682</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -512,16 +344,8 @@
   <attributes uuid="da84ca7e-9a8b-43fc-9a4c-30ebe3484d46">
    <name>Amount</name>
    <synonym>
-    <key>tr</key>
-    <value>Tutar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Сумма</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Amount</value>
+    <value>7FD168FA-5623-A8CA-A643-3EAAB6FAE540</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -538,30 +362,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>32AE47D2-F4DE-CEA4-495E-E218276AD7DD</value>
   </synonym>
   <attributes uuid="d1f22986-ece4-4530-929f-71069b4bb298">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>A70D5027-FB88-846C-CE0C-C6BD6DF153E0</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -573,16 +381,8 @@
   <attributes uuid="56b14958-996c-4d3c-963b-ded0432c2cbd">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>192C2E3C-294E-EFF9-9FDF-FC885C8BB257</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>

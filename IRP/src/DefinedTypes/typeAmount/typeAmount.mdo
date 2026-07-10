@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeAmount</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip tutar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип сумма</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type amount</value>
+  <value>A58E350F-E8FA-A257-7398-8D1C9A95F288</value>
  </synonym>
  <type>
   <types>Number</types>

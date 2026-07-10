@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="98e9bed9-0ab2-4391-9393-22835bc09951">
  <name>AccumulationRegisters_R7050T_ProductionDurations</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R7050T ÜretimSüreleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R7050T ПродолжительностьПроизводства</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R7050T ProductionDurations</value>
+  <value>4F1ACEC8-41C2-A1EF-F4FC-C3503CA88C24____________</value>
  </synonym>
 </mdclass:Role>

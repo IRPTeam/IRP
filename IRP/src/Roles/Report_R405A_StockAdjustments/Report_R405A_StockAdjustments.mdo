@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2e1a548a-2de9-414b-a168-7491b72c6985">
  <name>Report_R405A_StockAdjustments</name>
  <synonym>
-  <key>tr</key>
-  <value>R405A Stok eşitlemeleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R405A_КорректировкиЗапасов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R405A_StockAdjustments</value>
+  <value>5632699E-174B-D947-7136-6A9B7DF8CB44</value>
  </synonym>
 </mdclass:Role>

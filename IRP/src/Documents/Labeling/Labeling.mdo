@@ -9,16 +9,8 @@
  </producedTypes>
  <name>Labeling</name>
  <synonym>
-  <key>tr</key>
-  <value>Seri lot tanımlama fişi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Штрихкодирование товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Labeling</value>
+  <value>D7621AC2-94AB-011C-C0EC-C1EAE61A3265</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.Labeling.StandardAttribute.Number</inputByString>
@@ -59,28 +51,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Seri lot tanımlama fişi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Штрихкодирование товаров</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Labeling</value>
+  <value>3C5AEA82-44B8-B320-017C-CD0DB558B083</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Seri lot tanımlama fişleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Документы штрихкодирования товаров</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Labeling list</value>
+  <value>A67B6A7E-118B-19CE-ECFA-AA895883673E</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -97,16 +73,8 @@
  <forms uuid="11702bf6-a43f-4d69-8fb3-039bfee037bf">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>01D191F4-6F86-0B80-022A-AF75BA801B1B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -114,16 +82,8 @@
  <forms uuid="48d35278-5c96-4e0b-894a-dc515dbf21e0">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>57C21968-366B-C119-9AAD-DF35DC733410</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -131,16 +91,8 @@
  <forms uuid="60ffe9d9-2df9-4387-8582-c72a14759c32">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>CB2C1AA3-29AA-6A74-467B-BAE9D6324696</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -152,30 +104,14 @@
   </producedTypes>
   <name>ItemList</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Товары</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item list</value>
+   <value>72DFCA77-CD86-3A6C-C230-076ED444F2E0</value>
   </synonym>
   <attributes uuid="830c948f-9c23-4d44-ac75-0a2280a6bd73">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>89DE68E4-DF08-DF57-7656-6846771592F4</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -187,16 +123,8 @@
   <attributes uuid="cf81c048-5697-4b10-aac3-79e1a29d534a">
    <name>Item</name>
    <synonym>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Item</value>
+    <value>5807FD57-3B9E-667B-BBF7-70906F04F63A</value>
    </synonym>
    <type>
     <types>CatalogRef.Items</types>
@@ -210,16 +138,8 @@
   <attributes uuid="b79f3a6a-b0d9-4e6c-841c-b55221f8d776">
    <name>ItemKey</name>
    <synonym>
-    <key>tr</key>
-    <value>Varyant</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Item key</value>
+    <value>F0A53DDF-C23A-C102-2E70-0468039F6291</value>
    </synonym>
    <type>
     <types>CatalogRef.Items</types>
@@ -239,16 +159,8 @@
   <attributes uuid="c52a8178-e9b4-4948-bb32-0f7618cd4fe2">
    <name>SerialLotNumber</name>
    <synonym>
-    <key>tr</key>
-    <value>Ürün seri/lot numarası</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Item serial/lot number</value>
+    <value>51C54D27-6BCB-DEA6-6A75-5866243E1394</value>
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -261,16 +173,8 @@
   <attributes uuid="2f43d1ff-ca82-4f7e-8e28-140d1d1ac8c3">
    <name>Barcode</name>
    <synonym>
-    <key>tr</key>
-    <value>Barkod</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Штрихкод</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Barcode</value>
+    <value>784CF29C-7A43-A2D7-77E8-8D5561B58785</value>
    </synonym>
    <type>
     <types>DefinedType.typeBarcode</types>
@@ -285,16 +189,8 @@
   <attributes uuid="5b525886-6f77-4eea-b705-7d7ebf9661f0">
    <name>PurchaseOrder</name>
    <synonym>
-    <key>tr</key>
-    <value>Satın alma siparişi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Заказ поставщику</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Purchase order</value>
+    <value>46F433AA-A73C-0A3C-CC82-2FE4C0E158F6</value>
    </synonym>
    <type>
     <types>DocumentRef.PurchaseOrder</types>
@@ -312,30 +208,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>0A924891-6012-8F49-9CC2-2397C25D98BE</value>
   </synonym>
   <attributes uuid="506af94a-702b-44e8-8676-b48b10bee70c">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>FC29D0BA-3607-99B4-48AE-E9FEE19306B3</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -347,16 +227,8 @@
   <attributes uuid="1abd48b8-9db2-4523-bc7e-d4efa9728bb9">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>F10D0416-EFD2-4813-3222-2B023EDA93CA</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -373,16 +245,8 @@
  <commands uuid="7244e3b7-050d-47eb-b6ef-1b6153ee8801">
   <name>GenerateLabeling</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot tanımlama fişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Штрихкодирование товаров</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Labeling</value>
+   <value>3D41B82E-7E76-6388-8E3E-E4961EC2A2EA</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a7821804-f466-4e68-ba71-3359b5c2e6c9">
  <name>AccumulationRegisters_R6510B_StockBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>Birikim kayıt tablosu R6510B Stok envanter</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Регистры накопления R6510B Остатки товаров на складах</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R6510B Stock Balance</value>
+  <value>8072A1E6-2BD5-F6F5-5D80-023F72429B98______</value>
  </synonym>
 </mdclass:Role>

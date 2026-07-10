@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b9e29d90-4784-4d79-b752-d55af8135950">
  <name>AccumulationRegisters_R3010B_CashOnHand</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R3010B NakitElde</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R3010B НаличныеВКассе</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R3010B CashOnHand</value>
+  <value>D58BAAE9-FDA0-4541-111F-F373227B7A29___</value>
  </synonym>
 </mdclass:Role>

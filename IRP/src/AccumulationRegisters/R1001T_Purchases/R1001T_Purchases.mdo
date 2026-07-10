@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R1001T_Purchases</name>
  <synonym>
-  <key>tr</key>
-  <value>R1001 Alımlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1001 Закупки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1001 Purchases</value>
+  <value>DBA6849A-7676-EBC1-127E-E7E9D10C17A1</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="bce1b574-6597-4606-b569-e56970be1fbb">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>D0969DF0-9462-11DF-FF66-63EFD919C676</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +33,8 @@
  <resources uuid="5ee1dea2-e096-4843-a256-d795834a08f0">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>74F662C2-D39C-0A5C-CBA9-97E248D468BD</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +46,8 @@
  <resources uuid="93705fc5-3c3b-4b95-8e4c-2dde7f6ee3d5">
   <name>NetAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Net tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма без налогов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Net amount</value>
+   <value>CDF5FA36-BAB0-55F8-822F-FE7CD607A9D8</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -91,16 +59,8 @@
  <resources uuid="958ef8f2-4169-4608-ba66-9756c3111b76">
   <name>OffersAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Iskonto tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма скидки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Offers amount</value>
+   <value>E007546A-C90B-E8F0-0E71-10C320231C0D</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -112,16 +72,8 @@
  <attributes uuid="04da4ff4-7f4d-45e9-a7ef-69fb58902e5e">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложенный расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deferred calculation</value>
+   <value>93B849EE-0F5D-7B23-35A9-9698F51E530E</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -133,16 +85,8 @@
  <dimensions uuid="ab15f0ca-794b-45c6-b049-f2bcad87c364">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>737F00EF-47F0-4B3D-DDAA-A768AF53A975</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -155,16 +99,8 @@
  <dimensions uuid="32ab055c-34ab-4988-ba3b-e0493a0d6ce5">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>E3625BDF-84A2-9893-3843-39DDCE56C137</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -177,16 +113,8 @@
  <dimensions uuid="743053f0-c98c-49ee-9453-e31ecd9ca12d">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>76E0F165-12C6-3FB7-71A8-84B0BEB4296D</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -199,16 +127,8 @@
  <dimensions uuid="277819aa-dbbc-4604-8601-6f25c8a53b3e">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>723AF632-52B5-218D-DB9C-C4E4A72434D2</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -221,16 +141,8 @@
  <dimensions uuid="73362536-a651-422a-953c-034c3cb69457">
   <name>Invoice</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Инвойс</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Invoice</value>
+   <value>0CAF134A-3E65-3BA3-3CE3-3DD45778DC1F</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -245,16 +157,8 @@
  <dimensions uuid="165d5e26-1cff-4c7e-89b9-1955c2ac41fa">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>478A704D-EC22-B4F2-2F33-3B64A05F688F</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -267,16 +171,8 @@
  <dimensions uuid="642c0830-2e94-4061-a3a1-11cab963a702">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>3F77C223-12FF-7DCB-BD89-9E736F800C7B</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -289,16 +185,8 @@
  <dimensions uuid="9215611c-64fe-40a6-948e-4759c066c5dd">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row key</value>
+   <value>D3656CAC-BECD-C5FA-ABAB-B5D6C166A767</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>

@@ -7,62 +7,30 @@
  </producedTypes>
  <name>ItemTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Malzeme tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Виды номенклатуры</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Item types</value>
+  <value>AB57E0B5-BCD9-D765-528A-A5B011A824BA</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="4be789f8-2d36-4169-9f2d-4c825c8d712c">
   <name>Service</name>
   <synonym>
-   <key>tr</key>
-   <value>Servis</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Услуга</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Service</value>
+   <value>A7DAA372-24CA-CB14-43B6-64CD6A78B58E</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7bbe3a49-8365-4785-a38c-abee4d666e13">
   <name>Product</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Товар</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Product</value>
+   <value>CF93B13A-6D72-419B-BF85-5B469FA4F065</value>
   </synonym>
  </enumValues>
  <enumValues uuid="53b457bc-5d47-4e8b-858f-a43c58bf269f">
   <name>Certificate</name>
   <synonym>
-   <key>tr</key>
-   <value>Sertifika</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сертификат</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Certificate</value>
+   <value>7A7D1A4E-6013-A73A-A120-0F549120847B</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

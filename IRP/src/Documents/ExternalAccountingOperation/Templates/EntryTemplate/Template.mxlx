@@ -93,16 +93,8 @@
 					<f>9</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>No</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>№ </v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>№</v8:content>
+							<v8:content>4495681A-A2EE-FA37-75E1-14D355D5348F</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -112,16 +104,8 @@
 					<f>10</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Şirket</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Организация</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company</v8:content>
+							<v8:content>577070D2-AE3D-6158-895B-B3101D811555</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -131,16 +115,8 @@
 					<f>11</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Hesap Borç </v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Счет Дт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Account Dr</v8:content>
+							<v8:content>EB417F9E-D739-B962-2D5B-B2611FD7A882</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -150,16 +126,8 @@
 					<f>12</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Para birimi Borç </v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Валюта Дт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Currency Dr</v8:content>
+							<v8:content>7B6E220C-A8AC-B769-98CC-C59CCA0B481D</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -169,16 +137,8 @@
 					<f>13</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Ek özellik Değeri Bç 1</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Внеш. Значение Размера ДТ 1</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ext. Demension Value Dr 1</v8:content>
+							<v8:content>5BC096B8-98D5-8707-74B2-21D11FF08DFE</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -188,16 +148,8 @@
 					<f>14</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Hesap Alacak </v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Счет Кт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Account Cr</v8:content>
+							<v8:content>8788AE21-9090-AF04-4DF3-34BF8A400DE6</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -207,16 +159,8 @@
 					<f>15</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Para birimi Alacak </v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Валюта Кт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Currency Cr</v8:content>
+							<v8:content>E3267142-325B-2CFA-A3C1-155593115831</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -226,16 +170,8 @@
 					<f>16</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Ek özellik Değeri Ak 1</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Внеш. Значение Размера КТ 1</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ext. Demension Value Cr 1</v8:content>
+							<v8:content>D993EF78-20C2-E487-7FA4-4EE65CF00B96</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -251,16 +187,8 @@
 					<f>17</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Döviz</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Валюта</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Currency</v8:content>
+							<v8:content>3B5A6CCA-F57C-3F2B-BEA6-67C8745D37AE</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -275,16 +203,8 @@
 					<f>18</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Tutar dövizi Bç</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма Валюта ДТ</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ammount Currency Dr</v8:content>
+							<v8:content>DEFFB862-2182-1FB6-6819-90A153C478D1</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -294,16 +214,8 @@
 					<f>19</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Ek özellik Değeri Bç 2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Внеш. Значение Размера ДТ 2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ext. Demension Value Dr 2</v8:content>
+							<v8:content>65F0F099-4AB1-5800-098A-A1F1019E3711</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -318,16 +230,8 @@
 					<f>21</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Tutar dövizi Ak</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма Валюта КТ</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ammount Currency Cr</v8:content>
+							<v8:content>8C2EA683-3FE9-0867-7434-4A822A82469E</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -337,16 +241,8 @@
 					<f>22</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Ek özellik Değeri Ak 2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Внеш. Значение Размера КТ 2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ext. Demension Value Cr 2</v8:content>
+							<v8:content>F6D115D2-9979-3222-293C-CC16CEA902FF</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -362,16 +258,8 @@
 					<f>23</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Tutar</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Amount</v8:content>
+							<v8:content>AC10ABAA-4CF9-43DB-B151-1224163B27B7</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -386,16 +274,8 @@
 					<f>24</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Miktar Borç </v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Количество Дт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity Dr</v8:content>
+							<v8:content>0DAC18A4-C1A6-7FC7-7E85-51D379A8A497</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -405,16 +285,8 @@
 					<f>25</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Ek özellik Değeri Bç 3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Внеш. Значение Размера ДТ 3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ext. Demension Value Dr 3</v8:content>
+							<v8:content>A630DF2C-894A-50FC-C0C5-53B4D511A82B</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -429,16 +301,8 @@
 					<f>26</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Miktar Alacak </v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Количество Кт</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity Cr</v8:content>
+							<v8:content>C4CD5E14-95C6-4B05-5EFF-FB7F1631E19E</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -448,16 +312,8 @@
 					<f>27</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Ek özellik Değeri Ak 3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Внеш. Значение Размера КТ 3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Ext. Demension Value Cr 3</v8:content>
+							<v8:content>FB3A589E-615B-8143-383E-EF36667C48DA</v8:content>
 						</v8:item>
 					</tl>
 				</c>

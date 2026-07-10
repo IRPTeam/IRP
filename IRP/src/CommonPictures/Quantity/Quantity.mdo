@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3d29e4aa-9d19-4d80-9499-eebca6edc29b">
  <name>Quantity</name>
  <synonym>
-  <key>tr</key>
-  <value>Miktar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Количество</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Quantity</value>
+  <value>62F28E6E-FA51-1F8D-D8EF-F57CF3213554</value>
  </synonym>
 </mdclass:CommonPicture>

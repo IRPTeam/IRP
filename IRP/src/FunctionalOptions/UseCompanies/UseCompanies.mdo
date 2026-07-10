@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d03c1fd8-ca72-4887-a70f-942bec1c6dc5">
  <name>UseCompanies</name>
  <synonym>
-  <key>tr</key>
-  <value>Birden fazla şirket kullanmak</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать организации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use companies</value>
+  <value>C22EFE6B-BAF0-A1DD-D0EF-F0543F7CFC39</value>
  </synonym>
  <location>Constant.UseCompanies</location>
  <privilegedGetMode>true</privilegedGetMode>

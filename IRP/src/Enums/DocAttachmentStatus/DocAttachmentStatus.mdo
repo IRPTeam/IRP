@@ -7,16 +7,8 @@
  </producedTypes>
  <name>DocAttachmentStatus</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak ekleme statüsü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Статус прикрепления документа</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc attachment status</value>
+  <value>36299230-70B1-6402-2846-699EC5E6D083</value>
  </synonym>
  <standardAttributes>
   <dataHistory>Use</dataHistory>
@@ -39,46 +31,22 @@
  <enumValues uuid="d9da0692-2d43-4b64-96ba-f57e584fb70b">
   <name>AllFilesPresent</name>
   <synonym>
-   <key>tr</key>
-   <value>Tüm dosyalar mevcut</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Все файлы на месте</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>All files present</value>
+   <value>564DCC67-1052-8995-56C0-0595FF90F574</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4c4df86c-2d86-4296-9062-716ba9d31f6a">
   <name>NotEnoughFiles</name>
   <synonym>
-   <key>tr</key>
-   <value>Eksik dosya</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Недостаточно файлов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Not enough files</value>
+   <value>63A234EB-7A3C-8568-89BE-E0E71FDF43C3</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a391c5f3-9783-4c0a-a569-1cdc1e5f3c52">
   <name>NoFiles</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya yok</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Файлов нет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>No files</value>
+   <value>63AC7461-8C70-E73D-DF1D-D3FB504D147A</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

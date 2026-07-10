@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="411a2fa6-ace0-4405-8b29-9fe94932dbe5">
  <name>PriceManagment</name>
  <synonym>
-  <key>tr</key>
-  <value>Fiyat yönetimi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Управление ценами</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Price managment</value>
+  <value>DBEEC81F-40DF-0052-210A-AD8F8BEF876B</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

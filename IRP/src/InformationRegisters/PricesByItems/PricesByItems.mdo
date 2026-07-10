@@ -11,46 +11,22 @@
  </producedTypes>
  <name>PricesByItems</name>
  <synonym>
-  <key>tr</key>
-  <value>Fiyatlar - malzeme bazlı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Цены по номенклатуре</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Prices by items</value>
+  <value>5E0FAAC4-431E-255B-BCFD-DC86CB05BF2B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
  <writeMode>RecorderSubordinate</writeMode>
  <dataLockControlMode>Managed</dataLockControlMode>
  <listPresentation>
-  <key>tr</key>
-  <value>Fiyat - malzeme bazlı</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Цена по номенклатуре</value>
- </listPresentation>
- <listPresentation>
   <key>en</key>
-  <value>Price by item</value>
+  <value>B17765A7-4F07-2DC4-424F-F17663DF7E12</value>
  </listPresentation>
  <resources uuid="d0df159a-c565-4481-896b-57b86d6f3e82">
   <name>Price</name>
   <synonym>
-   <key>tr</key>
-   <value>Fiyat</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Цена</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Price</value>
+   <value>202BFB1D-3F81-5244-427B-B348B0DC4811</value>
   </synonym>
   <type>
    <types>DefinedType.typePrice</types>
@@ -64,16 +40,8 @@
  <resources uuid="8150cd31-7aa1-44ea-9fb9-50612a328335">
   <name>InputUnit</name>
   <synonym>
-   <key>tr</key>
-   <value>Birim</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расчетная ед. изм.</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Input unit</value>
+   <value>EE5B096B-DD94-A0BC-CAA0-0C48143BF7FC</value>
   </synonym>
   <type>
    <types>CatalogRef.Units</types>
@@ -87,16 +55,8 @@
  <resources uuid="26a39ca4-3241-4ef2-a8b8-07b6101558e0">
   <name>InputPrice</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesaplama fiyatı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расчетная цена</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Input price</value>
+   <value>C2E54116-1B4C-AC7B-BD8F-F26E6C92CE83</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -110,16 +70,8 @@
  <dimensions uuid="7ae8d1a1-689f-45d4-80e8-e79508e026a5">
   <name>PriceType</name>
   <synonym>
-   <key>tr</key>
-   <value>Fiyat tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип цен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Price type</value>
+   <value>8CBBB95A-12FA-F806-6291-1B43971F0561</value>
   </synonym>
   <type>
    <types>CatalogRef.PriceTypes</types>
@@ -134,16 +86,8 @@
  <dimensions uuid="00551b69-018d-4e89-bd84-0f2451dacf52">
   <name>Item</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item</value>
+   <value>B91F666C-B6BB-0FB5-5CAA-AB56883B6C2A</value>
   </synonym>
   <type>
    <types>DefinedType.typeItem</types>
@@ -159,16 +103,8 @@
  <dimensions uuid="f4ceca5a-db0b-499c-8e3d-0ede1bcba49c">
   <name>Unit</name>
   <synonym>
-   <key>tr</key>
-   <value>Birim</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ед. изм.</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Unit</value>
+   <value>2B89A59A-FF5D-7167-7BB6-6CDDAB49A48D</value>
   </synonym>
   <type>
    <types>CatalogRef.Units</types>

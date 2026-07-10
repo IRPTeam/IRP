@@ -197,16 +197,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Sorgu ayarları</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Настройки запроса     </value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Query settings</value>
+      <value>B1FF96EC-8B1B-A7E4-4709-95333AB01FFE</value>
      </title>
      <extendedTooltip>
       <name>GroupQueryFilterExtendedTooltip</name>
@@ -236,16 +228,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Belgeler için grup filtresi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа отбор документов</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group filter documents</value>
+     <value>F1601FA8-B356-1096-620A-A8E2A8E9E400</value>
     </title>
     <extendedTooltip>
      <name>GroupFilterDocumentsExtendedTooltip</name>
@@ -518,16 +502,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Belgeleri doldur</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Заполнить документы</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Fill documents</value>
+       <value>CC8CD616-6F3F-B66C-CD9E-EE03F612FC3D</value>
       </title>
       <extendedTooltip>
        <name>DocumentListGroupFillDocumentsExtendedTooltip</name>
@@ -690,16 +666,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Doğrulamalar</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Проверки</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Checks</value>
+       <value>F4968BB5-45DC-0C51-18D1-1C6D7891C3FD</value>
       </title>
       <extendedTooltip>
        <name>DocumentListGroupChecksExtendedTooltip</name>
@@ -837,16 +805,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Filtre</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Отбор</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Filter</value>
+    <value>3481130A-1F50-152F-F748-86BF18E4D5E6</value>
    </title>
    <extendedTooltip>
     <name>PageFilterExtendedTooltip</name>
@@ -1809,16 +1769,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kontrol</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проверка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Check</value>
+    <value>11F5D68C-6F87-A17E-EB2E-EB8766874208</value>
    </title>
    <extendedTooltip>
     <name>PageCheckExtendedTooltip</name>
@@ -2440,16 +2392,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Kayıtlar</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Проводки</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Records</value>
+       <value>27C07D59-BBEC-542C-C599-93E93259A218</value>
       </title>
       <extendedTooltip>
        <name>PostingInfoGroupRecordsExtendedTooltip</name>
@@ -2528,16 +2472,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>İçe/Dışa Aktar</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Импорт/Экспорт</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Import/Export</value>
+       <value>EE8E82FC-DFBB-0F45-5F49-90A46B28947F</value>
       </title>
       <extendedTooltip>
        <name>PostingInfoGroupImportExportExtendedTooltip</name>
@@ -2769,16 +2705,8 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>Araç çubuk sol</value>
-         </title>
-         <title>
-          <key>ru</key>
-          <value>Панель команд лево</value>
-         </title>
-         <title>
           <key>en</key>
-          <value>Command bar left</value>
+          <value>A1ED317E-32FD-40BC-CEBC-C379F86914E1</value>
          </title>
          <extendedTooltip>
           <name>CommandBarLeftExtendedTooltip</name>
@@ -2856,16 +2784,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Current movements</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Текущие проводки</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Current movements</value>
+         <value>1F15B809-053D-9D9E-EFDD-D37583B1917F</value>
         </title>
         <extendedTooltip>
          <name>GroupLeftDocExtendedTooltip</name>
@@ -2953,16 +2873,8 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>Araç çubuk sağ</value>
-         </title>
-         <title>
-          <key>ru</key>
-          <value>Панель команд право</value>
-         </title>
-         <title>
           <key>en</key>
-          <value>Command bar right</value>
+          <value>61E5ECE7-EC42-0B28-8DAA-A1F43F0254C7</value>
          </title>
          <extendedTooltip>
           <name>CommandBarRightExtendedTooltip</name>
@@ -3040,16 +2952,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>New movements</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Новые проводки</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>New movements</value>
+         <value>A89B81B0-2865-BFDE-E38E-E6E24013CF39</value>
         </title>
         <extendedTooltip>
          <name>GroupRightDocExtendedTooltip</name>
@@ -3081,16 +2985,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Diff docs</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Разн доки</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Diff docs</value>
+        <value>2C1764B4-2B48-3DFA-A18A-AFE89044C1E9</value>
        </title>
        <extendedTooltip>
         <name>GroupDiffDocsExtendedTooltip</name>
@@ -3118,16 +3014,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Fark</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Разница</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Difference</value>
+       <value>7D5A1CF7-4E50-DFEF-F7F0-03E75334E1CB</value>
       </title>
       <extendedTooltip>
        <name>PageDiffExtendedTooltip</name>
@@ -3279,16 +3167,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Mevcut Hareket</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>ТекущееДвижение</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Current movement</value>
+       <value>53A71FFD-A8B7-EE72-2194-433944767343</value>
       </title>
       <extendedTooltip>
        <name>PageCurrentMovementExtendedTooltip</name>
@@ -3440,16 +3320,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Yeni hareket</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Новое движение</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>New movement</value>
+       <value>14B8523D-38CA-FA57-7473-35F5BAB3B412</value>
       </title>
       <extendedTooltip>
        <name>PageNewMovementExtendedTooltip</name>
@@ -3473,16 +3345,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Pages diff</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Разница страниц</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Pages diff</value>
+      <value>F1F294A2-4FCB-A86B-BCC0-0E73ECA4CD62</value>
      </title>
      <extendedTooltip>
       <name>PagesDiffExtendedTooltip</name>
@@ -3505,16 +3369,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Kayıt farkı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>РазницаПроводок</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Posting diff</value>
+     <value>6190998D-A2A6-59B1-1A06-698E8FCA80B3</value>
     </title>
     <extendedTooltip>
      <name>GroupDiffExtendedTooltip</name>
@@ -3543,16 +3399,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kayıt</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проведение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Posting</value>
+    <value>92CD3223-8B4B-A600-0613-373C2F346660</value>
    </title>
    <extendedTooltip>
     <name>PagePostingExtendedTooltip</name>
@@ -3579,16 +3427,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Evraklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Документы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Documents</value>
+   <value>6E1B6B28-9B1E-E901-17DF-F635ED746362</value>
   </title>
   <extendedTooltip>
    <name>PagesDocumentsExtendedTooltip</name>
@@ -3646,16 +3486,8 @@
  <attributes>
   <name>DocumentList</name>
   <title>
-   <key>tr</key>
-   <value>Belge listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список документов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document list</value>
+   <value>B061D29F-2C39-56D9-9B71-1606F34F0ABF</value>
   </title>
   <id>3</id>
   <valueType>
@@ -3670,16 +3502,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>666F7C31-C0C0-A521-1190-0794EC669A5B</value>
    </title>
    <id>4</id>
    <valueType>
@@ -3695,16 +3519,8 @@
   <columns>
    <name>DocumentType</name>
    <title>
-    <key>tr</key>
-    <value>Evrak tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document type</value>
+    <value>75AF28C4-25E4-5D65-5923-309B4C9A399D</value>
    </title>
    <id>6</id>
    <valueType>
@@ -3721,16 +3537,8 @@
   <columns>
    <name>Date</name>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>DF9A5FEF-F27E-62C1-18DC-C48109C73DDF</value>
    </title>
    <id>17</id>
    <valueType>
@@ -3747,16 +3555,8 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Картинка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picture</value>
+    <value>316F7915-1A16-F9F7-7338-819E4A3387ED</value>
    </title>
    <id>18</id>
    <valueType>
@@ -3777,16 +3577,8 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Период</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Period</value>
+   <value>22DFF105-04D4-B4F2-2713-3CC694DF70CB</value>
   </title>
   <id>5</id>
   <valueType>
@@ -3805,16 +3597,8 @@
  <attributes>
   <name>CheckList</name>
   <title>
-   <key>tr</key>
-   <value>Kontrol listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список проверки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check list</value>
+   <value>5B018C7F-5B48-5CDE-ECB0-05679733B20E</value>
   </title>
   <id>7</id>
   <valueType>
@@ -3829,16 +3613,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>D91B47BA-D712-7A2B-B6C6-6E4FEF6F1D9B</value>
    </title>
    <id>10</id>
    <valueType>
@@ -3854,16 +3630,8 @@
   <columns>
    <name>ErrorID</name>
    <title>
-    <key>tr</key>
-    <value>Hata ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID Ошибки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Error ID</value>
+    <value>B2AC3DD0-D37B-290C-C231-18C12A8DC0A6</value>
    </title>
    <id>11</id>
    <valueType>
@@ -3880,16 +3648,8 @@
   <columns>
    <name>RowKey</name>
    <title>
-    <key>tr</key>
-    <value>Satır anahtarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Row key</value>
+    <value>7F76B67E-0BC8-7BAC-CD04-43823804D84D</value>
    </title>
    <id>12</id>
    <valueType>
@@ -3905,16 +3665,8 @@
   <columns>
    <name>LineNumber</name>
    <title>
-    <key>tr</key>
-    <value>Satır numarası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Line number</value>
+    <value>CDDD12A7-3AAE-616F-FFF6-6C0BDC53AE62</value>
    </title>
    <id>13</id>
    <valueType>
@@ -3933,16 +3685,8 @@
   <columns>
    <name>Fixed</name>
    <title>
-    <key>tr</key>
-    <value>Düzeltildi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Фиксированная</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Fixed</value>
+    <value>3ED8B32A-E60E-4A87-7AFC-CDFDB09CC561</value>
    </title>
    <id>14</id>
    <valueType>
@@ -3958,16 +3702,8 @@
   <columns>
    <name>ProblemWhileQuickFix</name>
    <title>
-    <key>tr</key>
-    <value>Hızlı düzeltme sırasında sorun</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проблемы при быстром исправлении</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Problem while quick fix</value>
+    <value>496B3A9C-1316-4697-7C24-42B037DCB71D</value>
    </title>
    <id>15</id>
    <valueType>
@@ -3984,16 +3720,8 @@
   <columns>
    <name>Date</name>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>83E24621-D614-95D3-3D30-09377735F865</value>
    </title>
    <id>16</id>
    <valueType>
@@ -4010,16 +3738,8 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Картинка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picture</value>
+    <value>23A485FD-0553-2447-7FD6-679F9E849074</value>
    </title>
    <id>19</id>
    <valueType>
@@ -4040,16 +3760,8 @@
  <attributes>
   <name>ErrorsGroups</name>
   <title>
-   <key>tr</key>
-   <value>Hatalar grupları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группы ошибок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Errors groups</value>
+   <value>8325DE77-ED8D-8C80-0203-3857B953AEC3</value>
   </title>
   <id>20</id>
   <valueType>
@@ -4064,16 +3776,8 @@
   <columns>
    <name>ErrorID</name>
    <title>
-    <key>tr</key>
-    <value>Hata ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID Ошибки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Error ID</value>
+    <value>34DDB719-4ED0-3E1B-B3BC-C63350582BED</value>
    </title>
    <id>21</id>
    <valueType>
@@ -4090,16 +3794,8 @@
   <columns>
    <name>Documents</name>
    <title>
-    <key>tr</key>
-    <value>Evraklar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Documents</value>
+    <value>F628927D-404F-A99D-D83F-F7A617A89A65</value>
    </title>
    <id>22</id>
    <valueType>
@@ -4119,16 +3815,8 @@
   <columns>
    <name>Cases</name>
    <title>
-    <key>tr</key>
-    <value>Vakalar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Варианты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Cases</value>
+    <value>FD4B04C4-ED7A-4FCE-ED60-05743EDBFD5B</value>
    </title>
    <id>23</id>
    <valueType>
@@ -4147,16 +3835,8 @@
   <columns>
    <name>Fixed</name>
    <title>
-    <key>tr</key>
-    <value>Düzeltildi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Фиксированный</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Fixed</value>
+    <value>FC95DA6B-6643-48D3-3B88-896EFF6990F8</value>
    </title>
    <id>24</id>
    <valueType>
@@ -4172,16 +3852,8 @@
   <columns>
    <name>ErrorDescription</name>
    <title>
-    <key>tr</key>
-    <value>Açıklama</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>2D532B5F-551C-24C2-23D1-19A803E9CCF1</value>
    </title>
    <id>25</id>
    <valueType>
@@ -4198,16 +3870,8 @@
   <columns>
    <name>FixDescription</name>
    <title>
-    <key>tr</key>
-    <value>Tanımı düzelt</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Исправить наименования</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Fix description</value>
+    <value>D34A9A98-9D6A-03ED-D692-2F0B0D1007EC</value>
    </title>
    <id>26</id>
    <valueType>
@@ -4225,16 +3889,8 @@
  <attributes>
   <name>ErrorFilter</name>
   <title>
-   <key>tr</key>
-   <value>Hata filtresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Фильтр ошибок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Error filter</value>
+   <value>1CE61918-5FA0-DB9B-B86F-F6C0859693C9</value>
   </title>
   <id>27</id>
   <valueType>
@@ -4251,16 +3907,8 @@
  <attributes>
   <name>FullCheckList</name>
   <title>
-   <key>tr</key>
-   <value>Tam kontrol listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить список проверок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Full check list</value>
+   <value>0BF7A21E-B0B9-9955-5126-61A95E45C370</value>
   </title>
   <id>28</id>
   <valueType>
@@ -4278,16 +3926,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>REf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>BA34D72E-CCDD-A57F-F8F5-5946DF5D0486</value>
    </title>
    <id>10</id>
    <valueType>
@@ -4303,16 +3943,8 @@
   <columns>
    <name>ErrorID</name>
    <title>
-    <key>tr</key>
-    <value>Hata ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID Ошибки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Error ID</value>
+    <value>6E71016E-2393-C57E-E72F-F2351DE21EDE</value>
    </title>
    <id>11</id>
    <valueType>
@@ -4329,16 +3961,8 @@
   <columns>
    <name>RowKey</name>
    <title>
-    <key>tr</key>
-    <value>Satır anahtarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Row key</value>
+    <value>23836DC2-74E1-FC13-35A4-4A93511895B1</value>
    </title>
    <id>12</id>
    <valueType>
@@ -4354,16 +3978,8 @@
   <columns>
    <name>LineNumber</name>
    <title>
-    <key>tr</key>
-    <value>Satır numarası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Line number</value>
+    <value>72B31710-306D-5F2A-AE90-0A111D085A93</value>
    </title>
    <id>13</id>
    <valueType>
@@ -4382,16 +3998,8 @@
   <columns>
    <name>Fixed</name>
    <title>
-    <key>tr</key>
-    <value>Düzeltildi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Фиксированная</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Fixed</value>
+    <value>EA545E5D-2F24-670E-E51B-B1007847A454</value>
    </title>
    <id>14</id>
    <valueType>
@@ -4407,16 +4015,8 @@
   <columns>
    <name>ProblemWhileQuickFix</name>
    <title>
-    <key>tr</key>
-    <value>Hızlı düzeltme sırasında sorun</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проблемы при быстром исправлении</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Problem while quick fix</value>
+    <value>01C91B2E-E694-663C-C468-8ABADE3575E5</value>
    </title>
    <id>15</id>
    <valueType>
@@ -4433,16 +4033,8 @@
   <columns>
    <name>Date</name>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>F66D2796-7C0B-7E9C-CC73-36C0FDA50F0E</value>
    </title>
    <id>16</id>
    <valueType>
@@ -4459,16 +4051,8 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Картинка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picture</value>
+    <value>36DC6F8A-7FDB-BC38-896D-D37C09248FA4</value>
    </title>
    <id>19</id>
    <valueType>
@@ -4489,16 +4073,8 @@
  <attributes>
   <name>JobList</name>
   <title>
-   <key>tr</key>
-   <value>İş listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список заданий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Job list</value>
+   <value>49C29A8B-2CED-D0C7-7713-38564739E82C</value>
   </title>
   <id>29</id>
   <valueType>
@@ -4513,16 +4089,8 @@
   <columns>
    <name>JobID</name>
    <title>
-    <key>tr</key>
-    <value>Görev ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID задания</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Job ID</value>
+    <value>A472BE5A-6FFD-EC93-3DB5-5F5FC6864FF2</value>
    </title>
    <id>30</id>
    <valueType>
@@ -4539,16 +4107,8 @@
   <columns>
    <name>Log</name>
    <title>
-    <key>tr</key>
-    <value>Log</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Логи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Log</value>
+    <value>67AEB688-6A71-2F95-5106-60A3C49A03DE</value>
    </title>
    <id>32</id>
    <valueType>
@@ -4565,16 +4125,8 @@
   <columns>
    <name>Status</name>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Status</value>
+    <value>B5618695-6A72-52AB-BCD9-95E531A1BADD</value>
    </title>
    <id>33</id>
    <valueType>
@@ -4591,16 +4143,8 @@
   <columns>
    <name>Done</name>
    <title>
-    <key>tr</key>
-    <value>Tamamlandı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Завершено</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Done</value>
+    <value>F0FB4825-55A6-9D49-9149-9605519458E4</value>
    </title>
    <id>34</id>
    <valueType>
@@ -4618,16 +4162,8 @@
  <attributes>
   <name>OnlyPosted</name>
   <title>
-   <key>tr</key>
-   <value>Sadece gönderilen</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Только проведенные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Only posted</value>
+   <value>885D8077-39F9-5950-0A35-5D8AD0D1F0D2</value>
   </title>
   <id>31</id>
   <valueType>
@@ -4646,16 +4182,8 @@
  <attributes>
   <name>PostingInfo</name>
   <title>
-   <key>tr</key>
-   <value>Gönderim bilgisi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Информация о проведении</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Posting info</value>
+   <value>F7F08E48-854B-6599-9AD9-9CB8C43BEECB</value>
   </title>
   <id>35</id>
   <valueType>
@@ -4670,16 +4198,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>REf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>A07BB393-0D5A-6AA2-213B-B4F95AE1F8A2</value>
    </title>
    <id>36</id>
    <valueType>
@@ -4695,16 +4215,8 @@
   <columns>
    <name>RegName</name>
    <title>
-    <key>tr</key>
-    <value>Kayıt adı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование регистра</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Reg name</value>
+    <value>1FE7E902-D6A8-BCD7-75C1-1BEC9ED5FB53</value>
    </title>
    <id>37</id>
    <valueType>
@@ -4721,16 +4233,8 @@
   <columns>
    <name>Date</name>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>C9C6E224-B2A2-BD65-5BA5-5994A8AB5DDB</value>
    </title>
    <id>38</id>
    <valueType>
@@ -4749,16 +4253,8 @@
   <columns>
    <name>NewMovement</name>
    <title>
-    <key>tr</key>
-    <value>Yeni hareket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Новое движение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>New movement</value>
+    <value>601A5F58-01E0-3E08-8CB9-93EC306172CB</value>
    </title>
    <id>39</id>
    <valueType/>
@@ -4772,16 +4268,8 @@
   <columns>
    <name>Select</name>
    <title>
-    <key>tr</key>
-    <value>Seç</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Выбрать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Select</value>
+    <value>B7BE9E49-1881-D04C-C85E-E8E9627AD2CA</value>
    </title>
    <id>45</id>
    <valueType>
@@ -4797,16 +4285,8 @@
   <columns>
    <name>DocumentType</name>
    <title>
-    <key>tr</key>
-    <value>Evrak tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document type</value>
+    <value>B141560A-EF1E-5104-4771-1E86FB7564DD</value>
    </title>
    <id>46</id>
    <valueType>
@@ -4823,16 +4303,8 @@
   <columns>
    <name>Errors</name>
    <title>
-    <key>tr</key>
-    <value>Hatalar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ошибки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Errors</value>
+    <value>F2115492-6BA6-557D-DB5F-FAF05D3F1088</value>
    </title>
    <id>47</id>
    <valueType>
@@ -4849,16 +4321,8 @@
   <columns>
    <name>Processed</name>
    <title>
-    <key>tr</key>
-    <value>İşlenmiş</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Обработано</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Processed</value>
+    <value>0BBF6686-9FD0-1B3C-C799-9064D9D2C0FF</value>
    </title>
    <id>48</id>
    <valueType>
@@ -4875,16 +4339,8 @@
  <attributes>
   <name>CurrentMovement</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut Hareket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ТекущееДвижение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current movement</value>
+   <value>F3872F49-B182-2FC4-485E-E0E456098F6F</value>
   </title>
   <id>40</id>
   <valueType>
@@ -4900,16 +4356,8 @@
  <attributes>
   <name>NewMovement</name>
   <title>
-   <key>tr</key>
-   <value>Yeni hareket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Новое движение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>New movement</value>
+   <value>DB17C18A-5704-99DD-D4B6-6E6F8F8A3D62</value>
   </title>
   <id>42</id>
   <valueType>
@@ -4925,16 +4373,8 @@
  <attributes>
   <name>CurrentRegName</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut kayıt adı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущее имя рег</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current reg name</value>
+   <value>F3C6A742-2B4A-449A-A007-70F1B34575D9</value>
   </title>
   <id>44</id>
   <valueType>
@@ -4951,16 +4391,8 @@
  <attributes>
   <name>SkipCheckRegisters</name>
   <title>
-   <key>tr</key>
-   <value>Kayıt kontrollerini atla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пропустить проверку регистров</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Skip check registers</value>
+   <value>5FB0F521-4788-32E5-5F98-89E67FCB7947</value>
   </title>
   <id>49</id>
   <valueType>
@@ -4987,16 +4419,8 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Организация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company</value>
+   <value>65687596-F164-7161-1238-8CC82716AFFB</value>
   </title>
   <id>50</id>
   <valueType>
@@ -5017,16 +4441,8 @@
  <attributes>
   <name>DiffDocLeft</name>
   <title>
-   <key>tr</key>
-   <value>Diff doc left</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разн док лево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Diff doc left</value>
+   <value>7AD30E1D-12FA-67F3-3B1C-CF0B7854C1FF</value>
   </title>
   <id>55</id>
   <valueType>
@@ -5043,16 +4459,8 @@
  <attributes>
   <name>DiffDocRight</name>
   <title>
-   <key>tr</key>
-   <value>Diff doc right</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разн док право</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Diff doc right</value>
+   <value>7D60510D-06FC-2FFD-D528-8D46FFA20DF7</value>
   </title>
   <id>56</id>
   <valueType>
@@ -5069,16 +4477,8 @@
  <attributes>
   <name>DiffCellsLeft</name>
   <title>
-   <key>tr</key>
-   <value>Diff cells left</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разн клетка лево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Diff cells left</value>
+   <value>64691DF5-804C-CEB8-8DD9-97BA28B8B487</value>
   </title>
   <id>57</id>
   <valueType>
@@ -5093,16 +4493,8 @@
   <columns>
    <name>NumberRow</name>
    <title>
-    <key>tr</key>
-    <value>Number row</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number row</value>
+    <value>5F109E07-FAFA-88DF-F37A-A37555B8AAAA</value>
    </title>
    <id>59</id>
    <valueType>
@@ -5121,16 +4513,8 @@
   <columns>
    <name>NumberColumn</name>
    <title>
-    <key>tr</key>
-    <value>Number column</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер колонки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number column</value>
+    <value>669AB3B1-88E9-4B4A-A03D-D6B9349C50FD</value>
    </title>
    <id>60</id>
    <valueType>
@@ -5150,16 +4534,8 @@
  <attributes>
   <name>DiffCellsRight</name>
   <title>
-   <key>tr</key>
-   <value>Diff cells right</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разн клетка право</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Diff cells right</value>
+   <value>49B8A8BC-B1C2-166E-ED5D-D6E0384DE065</value>
   </title>
   <id>58</id>
   <valueType>
@@ -5174,16 +4550,8 @@
   <columns>
    <name>NumberRow</name>
    <title>
-    <key>tr</key>
-    <value>Number row</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number row</value>
+    <value>70750587-6FAA-A033-33B4-4AE5BDA000CC</value>
    </title>
    <id>61</id>
    <valueType>
@@ -5202,16 +4570,8 @@
   <columns>
    <name>NumberColumn</name>
    <title>
-    <key>tr</key>
-    <value>Number column</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Колонка номера</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number column</value>
+    <value>BC3AEEC7-5BC2-464A-AA46-642AAE9252C8</value>
    </title>
    <id>62</id>
    <valueType>
@@ -5231,16 +4591,8 @@
  <attributes>
   <name>BlockDiffDocActivate</name>
   <title>
-   <key>tr</key>
-   <value>Block diff doc activate</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Блокировать активацию разниц по документам</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Block diff doc activate</value>
+   <value>714188F2-31E5-FAC8-8868-8C5117B5D6F3</value>
   </title>
   <id>63</id>
   <valueType>
@@ -5256,16 +4608,8 @@
  <attributes>
   <name>MapRowsLeft</name>
   <title>
-   <key>tr</key>
-   <value>Map rows left</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Соответствие строки лево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Map rows left</value>
+   <value>8588D4A6-61D3-E3E8-8E7F-FE6483102DC0</value>
   </title>
   <id>64</id>
   <valueType/>
@@ -5279,16 +4623,8 @@
  <attributes>
   <name>MapRowsRight</name>
   <title>
-   <key>tr</key>
-   <value>Map rows right</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Соответствие строки право</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Map rows right</value>
+   <value>B076D57E-9B25-1609-9809-9F1C26D6C66E</value>
   </title>
   <id>65</id>
   <valueType/>
@@ -5302,16 +4638,8 @@
  <attributes>
   <name>MapColumnsLeft</name>
   <title>
-   <key>tr</key>
-   <value>Map columns left</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Соответствие колонок лево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Map columns left</value>
+   <value>6134D179-FF3B-C2AF-F656-6C5B7E1ECE92</value>
   </title>
   <id>66</id>
   <valueType/>
@@ -5325,16 +4653,8 @@
  <attributes>
   <name>MapColumnsRight</name>
   <title>
-   <key>tr</key>
-   <value>Map columns right</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Соответствие колонок право</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Map columns right</value>
+   <value>0CE9CE3F-9CDD-6F7D-D19D-D739DB997A59</value>
   </title>
   <id>67</id>
   <valueType/>
@@ -5348,16 +4668,8 @@
  <attributes>
   <name>PackSize</name>
   <title>
-   <key>tr</key>
-   <value>Paket boyutu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Размер пакета      </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pack size</value>
+   <value>2C073F74-A975-7BF7-747D-D0361273851A</value>
   </title>
   <id>68</id>
   <valueType>
@@ -5379,16 +4691,8 @@
  <attributes>
   <name>QueryText</name>
   <title>
-   <key>tr</key>
-   <value>Sorgu metni</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текст запроса         </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Query text</value>
+   <value>5CF0262B-B59A-15F3-32A2-272DC6FDC625</value>
   </title>
   <id>69</id>
   <valueType>
@@ -5405,16 +4709,8 @@
  <formCommands>
   <name>FillDocuments</name>
   <title>
-   <key>tr</key>
-   <value>Belgeleri doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить документы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill documents</value>
+   <value>B2C287D4-7D33-5E2D-D183-3718F1878D3B</value>
   </title>
   <id>1</id>
   <use>
@@ -5430,16 +4726,8 @@
  <formCommands>
   <name>CheckDocuments</name>
   <title>
-   <key>tr</key>
-   <value>Belgeleri kontrol et</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проверить документы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check documents</value>
+   <value>C3BF7CA3-D163-2EB5-512F-F82F30A69480</value>
   </title>
   <id>4</id>
   <use>
@@ -5455,16 +4743,8 @@
  <formCommands>
   <name>QuickFix</name>
   <title>
-   <key>tr</key>
-   <value>Hızlı düzeltme (seçili satırlar)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Исправить (выбранные строки)</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Quick fix (selected rows)</value>
+   <value>6BE73258-541B-8C2C-CB1E-E7148977E83F</value>
   </title>
   <id>5</id>
   <use>
@@ -5480,16 +4760,8 @@
  <formCommands>
   <name>QuickFixError</name>
   <title>
-   <key>tr</key>
-   <value>Hızlı düzeltme (hata)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Быстрое исправление (ошибка)</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Quick fix (error)</value>
+   <value>F1FD5B3D-73C5-6F22-2716-67D0F1CB77D9</value>
   </title>
   <id>6</id>
   <use>
@@ -5509,16 +4781,8 @@
  <formCommands>
   <name>SetFilterByError</name>
   <title>
-   <key>tr</key>
-   <value>Hata ile filtreyi ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить отбор по ошибке</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set filter by error</value>
+   <value>D01E323D-C91A-1A47-7286-6496CBD85EB3</value>
   </title>
   <id>7</id>
   <use>
@@ -5538,16 +4802,8 @@
  <formCommands>
   <name>CheckPosting</name>
   <title>
-   <key>tr</key>
-   <value>Gönderimi kontrol et</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проверка проведения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check posting</value>
+   <value>EF372C22-FCB2-C86C-C452-23C1E778044A</value>
   </title>
   <id>9</id>
   <use>
@@ -5563,16 +4819,8 @@
  <formCommands>
   <name>ShowPostingDiff</name>
   <title>
-   <key>tr</key>
-   <value>Fark gönderimini göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать разницу проводок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show posting diff</value>
+   <value>F8075EEF-235A-B68F-F7E2-238447D36D73</value>
   </title>
   <id>10</id>
   <use>
@@ -5592,16 +4840,8 @@
  <formCommands>
   <name>CheckAllPostInfo</name>
   <title>
-   <key>tr</key>
-   <value>Seçileni kontrol et</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проверить выбранное</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check selected</value>
+   <value>B1E08CB6-5846-E575-50BF-F24F686A3E4D</value>
   </title>
   <id>11</id>
   <use>
@@ -5620,16 +4860,8 @@
  <formCommands>
   <name>UncheckAllPostInfo</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kayıt bilgilerini işaretleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>СнятьОтметкиСоВсехСообщений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck all post info</value>
+   <value>1CD58239-56EF-7885-5511-1AC582A3214A</value>
   </title>
   <id>12</id>
   <use>
@@ -5648,16 +4880,8 @@
  <formCommands>
   <name>PostingInfoPostSelectedDocument</name>
   <title>
-   <key>tr</key>
-   <value>Seçili dokümanı gönder</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Опубликовать выбранный документ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Post selected document</value>
+   <value>41FAA280-D60C-E772-24AF-F860EC7CB048</value>
   </title>
   <id>13</id>
   <use>
@@ -5677,16 +4901,8 @@
  <formCommands>
   <name>PostingInfoWriteRecordSet</name>
   <title>
-   <key>tr</key>
-   <value>Seçilen Kayıtları Yaz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ЗаписатьВыбранныеЗаписи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Write selected records</value>
+   <value>7BF395AE-B225-76D3-3C7B-B6DF8378242B</value>
   </title>
   <id>14</id>
   <use>
@@ -5706,16 +4922,8 @@
  <formCommands>
   <name>PostingInfoExportData</name>
   <title>
-   <key>tr</key>
-   <value>Veri dışarı aktarma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Экспорт данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Export data</value>
+   <value>384051E4-D1B3-A162-2A1A-A7226F18BFCA</value>
   </title>
   <id>15</id>
   <use>
@@ -5734,16 +4942,8 @@
  <formCommands>
   <name>PostingInfoImportData</name>
   <title>
-   <key>tr</key>
-   <value>Veri aktarımı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ИмпортДанных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Import data</value>
+   <value>9DB1279C-0108-0413-3C0F-FE895501956E</value>
   </title>
   <id>16</id>
   <use>
@@ -5762,16 +4962,8 @@
  <formCommands>
   <name>PostingInfoClearSkipRows</name>
   <title>
-   <key>tr</key>
-   <value>Satırları Temizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОчиститьСтроки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Clear rows</value>
+   <value>7AB3962C-8110-34EA-AED9-96C8ADDAD59A</value>
   </title>
   <id>17</id>
   <use>
@@ -5790,29 +4982,13 @@
  <formCommands>
   <name>UpdateCheckSelectedRows</name>
   <title>
-   <key>tr</key>
-   <value>Güncelleme Kontrolü (seçili satırlar)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновление проверки (выбранные строки)</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update check (selected rows)</value>
+   <value>D73C4320-B088-3CAD-D23E-ECCE998C07B6</value>
   </title>
   <id>18</id>
   <toolTip>
-   <key>tr</key>
-   <value>Güncelleme Fişi (seçili satırlar)</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Обновить проводки (выбранные строки)</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Update posting (selected rows)</value>
+   <value>73066F5C-2486-2047-79D8-852913B7597C</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -5830,29 +5006,13 @@
  <formCommands>
   <name>UpdatePostingSelectedRows</name>
   <title>
-   <key>tr</key>
-   <value>Güncelleme Fişi (seçili satırlar)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить проводки (выбранные строки)</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update posting (selected rows)</value>
+   <value>C4CF07FD-03CC-0A32-2A94-4378950D46CC</value>
   </title>
   <id>19</id>
   <toolTip>
-   <key>tr</key>
-   <value>Güncelleme Fişi (seçili satırlar)</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Обновить проводки (выбранные строки)</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Update posting (selected rows)</value>
+   <value>92AB2195-A49D-4F4F-FCAB-B2B30A185750</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -5870,16 +5030,8 @@
  <formCommands>
   <name>CheckAccountingAnalytics</name>
   <title>
-   <key>tr</key>
-   <value>Check accounting analytics</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проверить бухгалтерскую аналитику</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check accounting analytics</value>
+   <value>698EDCA6-FA61-5663-33D6-6B23965BAE48</value>
   </title>
   <id>20</id>
   <use>
@@ -5895,16 +5047,8 @@
  <formCommands>
   <name>PrevChangesLeft</name>
   <title>
-   <key>tr</key>
-   <value>Prev changes left</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предыдущая разница лево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Prev changes left</value>
+   <value>F5D79C48-ED1E-9964-4645-52802999600F</value>
   </title>
   <id>25</id>
   <use>
@@ -5924,16 +5068,8 @@
  <formCommands>
   <name>NextChangeLeft</name>
   <title>
-   <key>tr</key>
-   <value>Next change left</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Следующие изменени лево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Next change left</value>
+   <value>8A9C0BF8-82BB-AB91-18C4-400FEB9093FA</value>
   </title>
   <id>26</id>
   <use>
@@ -5952,16 +5088,8 @@
  <formCommands>
   <name>NextChangeRight</name>
   <title>
-   <key>tr</key>
-   <value>Next change right</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Следующие изменени право</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Next change right</value>
+   <value>057834EA-8AD4-FD31-15F6-65D465B0509F</value>
   </title>
   <id>27</id>
   <use>
@@ -5980,16 +5108,8 @@
  <formCommands>
   <name>PrevChangesRight</name>
   <title>
-   <key>tr</key>
-   <value>Prev changes right</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предыдущая разница право</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Prev changes right</value>
+   <value>7869EE22-E4F1-3CA2-2C45-5F030FFEAD8A</value>
   </title>
   <id>28</id>
   <use>
@@ -6009,16 +5129,8 @@
  <formCommands>
   <name>ExpandDiff</name>
   <title>
-   <key>tr</key>
-   <value>Expand diff</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разширить разницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Expand diff</value>
+   <value>8A5FA840-0AAF-C8DC-CDF4-4ABC95F960F0</value>
   </title>
   <id>30</id>
   <use>
@@ -6038,16 +5150,8 @@
  <formCommands>
   <name>CheckAccountingTranslations</name>
   <title>
-   <key>tr</key>
-   <value>Check accounting translations</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проверить бухгалтерские операции</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check accounting translations</value>
+   <value>C6A59B35-F7EC-6EFE-ED01-1CE7B58DC854</value>
   </title>
   <id>31</id>
   <use>
@@ -6063,16 +5167,8 @@
  <formCommands>
   <name>MoveWithoutCheck</name>
   <title>
-   <key>tr</key>
-   <value>Kontol atla (tekrar kaydetme için)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пропустить проверку (для перепроведения)</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Skeep check (for reposting)</value>
+   <value>CDA2B89F-F3AB-5E1A-A02D-DF4F874C2846</value>
   </title>
   <id>33</id>
   <use>
@@ -6092,16 +5188,8 @@
  <formCommands>
   <name>FillQueryTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Sorgu şablonu doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполните шаблон запроса</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill query template</value>
+   <value>F4FA0C64-B378-63AE-E354-497A0C037A69</value>
   </title>
   <id>34</id>
   <use>
@@ -6117,16 +5205,8 @@
  <formCommands>
   <name>FillAccountingDocuments</name>
   <title>
-   <key>tr</key>
-   <value>Muhasebe evrakları doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить бухгалтерские документы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill accounting documents</value>
+   <value>4D75EBEA-2FF3-B1D5-5174-4EA6D732ED81</value>
   </title>
   <id>35</id>
   <use>

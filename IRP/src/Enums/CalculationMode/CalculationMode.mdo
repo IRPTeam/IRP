@@ -7,47 +7,23 @@
  </producedTypes>
  <name>CalculationMode</name>
  <synonym>
-  <key>tr</key>
-  <value>Hesaplama türü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Вид расчета</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Calculation mode</value>
+  <value>8505C14B-944B-EB44-427C-CFB23E16ECF5</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="bffa7f17-aa06-4533-8238-f6597368a5b9">
   <name>LandedCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Ürün maliyet hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расчет себестоимости товаров</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Landed cost</value>
+   <value>1E2C22DD-B87A-E61A-A02A-A6690EAD1E41</value>
   </synonym>
  </enumValues>
  <enumValues uuid="721900e9-3d68-49fc-8872-40ceb43b6ac1">
   <name>LandedCostBatchReallocate</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme parti transferi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Перемещение партий</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Landed cost (batch reallocate)</value>
+   <value>D7FEC479-AF29-669A-AA4F-FABA24E6FD06</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

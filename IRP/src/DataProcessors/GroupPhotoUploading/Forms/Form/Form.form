@@ -235,16 +235,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Yol grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Путь</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of path</value>
+   <value>728188DF-BEC2-1B89-9AF1-12885D3C2CBF</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -369,16 +361,8 @@
     <name>FilesTableIsSaved</name>
     <id>61</id>
     <title>
-     <key>tr</key>
-     <value>S</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>С</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>S</value>
+     <value>66E5FAAE-C872-A3BE-E6AA-ADC88936BE75</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -389,16 +373,8 @@
      <segments>FilesTable.IsSaved</segments>
     </dataPath>
     <toolTip>
-     <key>tr</key>
-     <value>File is saved</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Файл сохранён</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>File is saved</value>
+     <value>20457B41-5048-0363-3D7A-A302E0AE8F65</value>
     </toolTip>
     <extendedTooltip>
      <name>FilesTableIsSavedExtendedTooltip</name>
@@ -483,16 +459,8 @@
     <name>FilesTableIsLinked</name>
     <id>88</id>
     <title>
-     <key>tr</key>
-     <value>L</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>П</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>L</value>
+     <value>1978424D-4185-B749-9BC2-2341A106C505</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -503,16 +471,8 @@
      <segments>FilesTable.IsLinked</segments>
     </dataPath>
     <toolTip>
-     <key>tr</key>
-     <value>File is linked</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Файл привязан</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>File is linked</value>
+     <value>7CCE680C-FC18-1590-0C7C-C31A94869942</value>
     </toolTip>
     <extendedTooltip>
      <name>FilesTableIsLinkedExtendedTooltip</name>
@@ -831,16 +791,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Dosya Alanı Grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Файл область</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of File Area</value>
+   <value>17AD196B-0257-B2A7-7C0A-AE8DD34AE64F</value>
   </title>
   <extendedTooltip>
    <name>GroupFileAreaExtendedTooltip</name>
@@ -901,16 +853,8 @@
  <attributes>
   <name>FolderPath</name>
   <title>
-   <key>tr</key>
-   <value>Klasör yolu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Путь к каталогу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Folder path</value>
+   <value>00C841A5-2AAC-A0D2-2F85-559DEEE1CB43</value>
   </title>
   <id>2</id>
   <valueType>
@@ -927,16 +871,8 @@
  <attributes>
   <name>FilesTable</name>
   <title>
-   <key>tr</key>
-   <value>Dosyalar tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица файлов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Files table</value>
+   <value>A1BB4E8D-84B5-5806-6B00-0573EC796530</value>
   </title>
   <id>3</id>
   <valueType>
@@ -951,16 +887,8 @@
   <columns>
    <name>FilePath</name>
    <title>
-    <key>tr</key>
-    <value>Dosya yolu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Путь к файлу</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>File path</value>
+    <value>43ABCE5E-FE47-9961-1BEF-F88D69835638</value>
    </title>
    <id>4</id>
    <valueType>
@@ -977,16 +905,8 @@
   <columns>
    <name>Owner</name>
    <title>
-    <key>tr</key>
-    <value>Sahip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Владелец</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Owner</value>
+    <value>5AFDA5AE-0A09-4279-9604-438C4FB14E77</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1002,16 +922,8 @@
   <columns>
    <name>MD5</name>
    <title>
-    <key>tr</key>
-    <value>MD5</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>MD5</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>MD5</value>
+    <value>2E1F4F81-16D3-494E-EA71-13C2646B3354</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1030,16 +942,8 @@
   <columns>
    <name>Size</name>
    <title>
-    <key>tr</key>
-    <value>Boyut (Mb)</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Размер (Мб)</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Size (Mb)</value>
+    <value>8EBEA544-4C49-4161-10BB-BF6AD366AFE8</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1059,16 +963,8 @@
   <columns>
    <name>UUID</name>
    <title>
-    <key>tr</key>
-    <value>UUID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>UUID</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>UUID</value>
+    <value>E5440D6E-9749-2522-2C5B-B66342A55533</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1087,16 +983,8 @@
   <columns>
    <name>FileRef</name>
    <title>
-    <key>tr</key>
-    <value>Dosya ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка файла</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>File ref</value>
+    <value>A47A8287-05B3-3F46-6A7F-FB60710F49F0</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1112,16 +1000,8 @@
   <columns>
    <name>Extension</name>
    <title>
-    <key>tr</key>
-    <value>Uzantı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Расширение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Extension</value>
+    <value>44871930-1389-530A-AECE-EA2EDB7B5DF8</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1140,16 +1020,8 @@
   <columns>
    <name>URI</name>
    <title>
-    <key>tr</key>
-    <value>URI</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>URI</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>URI</value>
+    <value>A47F4080-662C-D160-0B7D-D72C5231A0A4</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1166,16 +1038,8 @@
   <columns>
    <name>IsSaved</name>
    <title>
-    <key>tr</key>
-    <value>Kaydedildi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сохранен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is saved</value>
+    <value>5F383DE9-ECC4-FBF5-543F-FF22D6C0CBB3</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1191,16 +1055,8 @@
   <columns>
    <name>IsFileCreate</name>
    <title>
-    <key>tr</key>
-    <value>Dosya oluşturuldu mu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Файл создан</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is file create</value>
+    <value>A1EB6F4F-2AA1-7DA5-5232-203F6E5A5A3E</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1216,16 +1072,8 @@
   <columns>
    <name>FileName</name>
    <title>
-    <key>tr</key>
-    <value>Dosya ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя файла</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>File name</value>
+    <value>1F85FBB4-7371-F9E7-71CB-B7F19B3D351D</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1242,16 +1090,8 @@
   <columns>
    <name>IsLinked</name>
    <title>
-    <key>tr</key>
-    <value>Bağlantılı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Привязано  </value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is linked</value>
+    <value>6306058D-5FAB-2CBF-F3CD-D9AB0ECACB0E</value>
    </title>
    <id>25</id>
    <valueType>
@@ -1268,16 +1108,8 @@
  <attributes>
   <name>PictureIntegrationSettings</name>
   <title>
-   <key>tr</key>
-   <value>Resim entegrasyon ayarları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки интеграции изображений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture integration settings</value>
+   <value>B6FBB45E-2E35-3909-9A5E-E8083CDCC5F8</value>
   </title>
   <id>7</id>
   <valueType/>
@@ -1291,16 +1123,8 @@
  <attributes>
   <name>Preview</name>
   <title>
-   <key>tr</key>
-   <value>Ön izleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предварительный просмотр</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Preview</value>
+   <value>51009B56-5013-6900-0E02-2BF79F1320A8</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1316,16 +1140,8 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Просмотр изображений HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture view HTML</value>
+   <value>9672EDAC-1F40-BCB4-4C5B-BA6B4285EDBF</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1342,16 +1158,8 @@
  <attributes>
   <name>EnableToLoad</name>
   <title>
-   <key>tr</key>
-   <value>Yüklemeye etkinleştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Включить загрузку</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Enable to load</value>
+   <value>98EE9B82-0874-EAA9-99F9-90EAAE00C190</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1367,16 +1175,8 @@
  <attributes>
   <name>PictureConnectionSetting</name>
   <title>
-   <key>tr</key>
-   <value>Resim bağlantı ayarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки подключения изображений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture connection setting</value>
+   <value>596CB2B3-A4A4-AF57-763E-E26F75E34111</value>
   </title>
   <id>15</id>
   <valueType/>
@@ -1390,16 +1190,8 @@
  <attributes>
   <name>Start</name>
   <title>
-   <key>tr</key>
-   <value>Start</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Старт</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Start</value>
+   <value>0CD7A497-0CBB-5414-40A8-852E5CEB6928</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1416,16 +1208,8 @@
  <attributes>
   <name>Finish</name>
   <title>
-   <key>tr</key>
-   <value>Bitiş</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Закончить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Finish</value>
+   <value>ACC01919-BBF2-4E8E-E6F3-3D541D2D2B99</value>
   </title>
   <id>20</id>
   <valueType>
@@ -1442,16 +1226,8 @@
  <attributes>
   <name>PreviewScaleSize</name>
   <title>
-   <key>tr</key>
-   <value>Önizleme ölçek boyutu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Размер превью</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Preview scale size</value>
+   <value>799801D5-EB96-3A9B-B99D-DFF640128DD7</value>
   </title>
   <id>22</id>
   <valueType>
@@ -1471,16 +1247,8 @@
  <attributes>
   <name>BackgroundJobUUID</name>
   <title>
-   <key>tr</key>
-   <value>Arka plan işi UUID</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>UUID фонового задания</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Background job UUID</value>
+   <value>B8EA9F1F-1216-1426-605E-E36CC89BEB41</value>
   </title>
   <id>24</id>
   <valueType>
@@ -1496,16 +1264,8 @@
  <formCommands>
   <name>SelectPath</name>
   <title>
-   <key>tr</key>
-   <value>Yol seç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать путь</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Select path</value>
+   <value>F112E17F-1DD9-1F4B-B1D1-193921A7E62F</value>
   </title>
   <id>1</id>
   <use>
@@ -1525,16 +1285,8 @@
  <formCommands>
   <name>AnalizeFolder</name>
   <title>
-   <key>tr</key>
-   <value>Analiz klasörü</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Анализировать каталог</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Analize folder</value>
+   <value>3FD9A9FD-38F0-CA01-1DD5-529CA3F81DDE</value>
   </title>
   <id>2</id>
   <use>
@@ -1554,16 +1306,8 @@
  <formCommands>
   <name>FindOwner</name>
   <title>
-   <key>tr</key>
-   <value>Sahibi bul</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Найти владельца</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Find owner</value>
+   <value>628642A6-4016-4F94-4606-66725B754AC3</value>
   </title>
   <id>3</id>
   <use>
@@ -1583,16 +1327,8 @@
  <formCommands>
   <name>Load</name>
   <title>
-   <key>tr</key>
-   <value>Yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load</value>
+   <value>97D81215-4914-2579-9352-2373D7FA3E27</value>
   </title>
   <id>4</id>
   <use>

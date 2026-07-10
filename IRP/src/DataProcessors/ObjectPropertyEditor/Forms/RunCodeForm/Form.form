@@ -4,16 +4,8 @@
   <name>AvailableVariables</name>
   <id>10</id>
   <title>
-   <key>tr</key>
-   <value>ObjectRef - geçerli veri ref ile çalışmak için değişkenin adı.</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ObjectRef - переменная для работы с ссылкой текущих данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>ObjectRef - the name of the variable to work with the current data ref. </value>
+   <value>7DFA7F8A-4857-9AEE-E067-7140ACB0D146____________________________________</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -155,16 +147,8 @@
  <attributes>
   <name>CodeText</name>
   <title>
-   <key>tr</key>
-   <value>Kod metni</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текст кода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Code text</value>
+   <value>2BF9DB10-A841-0B64-49B2-2858785374DE</value>
   </title>
   <id>1</id>
   <valueType>
@@ -181,16 +165,8 @@
  <attributes>
   <name>ObjectTable</name>
   <title>
-   <key>tr</key>
-   <value>Nesne tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица объекта</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Object table</value>
+   <value>0747F426-D3C5-46DB-BFFC-CF6036562320</value>
   </title>
   <id>2</id>
   <valueType>
@@ -205,16 +181,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>1E07106B-5B64-D32E-E20D-D8755A81C769</value>
    </title>
    <id>3</id>
    <valueType>
@@ -231,16 +199,8 @@
  <formCommands>
   <name>RunCode</name>
   <title>
-   <key>tr</key>
-   <value>Kod çalıştır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Запустить код</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Run code</value>
+   <value>C1BF3CD6-3374-3301-1709-9C2DD5F88F26</value>
   </title>
   <id>1</id>
   <use>

@@ -2,16 +2,8 @@
 <mdclass:Configuration xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f795147b-016b-4e3c-9d02-58181f16d51e">
  <name>IRP</name>
  <synonym>
-  <key>tr</key>
-  <value>IRP</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>IRP</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>IRP</value>
+  <value>E4F05234-725D-115F-F919-943CEFD80159</value>
  </synonym>
  <containedObjects classId="9cd510cd-abfc-11d4-9434-004095e12fc7" objectId="e3520cbe-9782-4189-a67d-a0c8964a51a5"/>
  <containedObjects classId="9fcd25a0-4822-11d4-9414-008048da11f9" objectId="a697ecc7-e3f7-4c7b-a293-303c19a1ddf6"/>
@@ -74,40 +66,16 @@
  <mainSectionPicture/>
  <defaultLanguage>Language.English</defaultLanguage>
  <copyright>
-  <key>tr</key>
-  <value>IRP Team</value>
- </copyright>
- <copyright>
-  <key>ru</key>
-  <value>IRP Team</value>
- </copyright>
- <copyright>
   <key>en</key>
-  <value>IRP Team</value>
+  <value>4F7C5B43-116A-8289-97BC-C49299A0FCCA</value>
  </copyright>
  <vendorInformationAddress>
-  <key>tr</key>
-  <value>https://github.com/IRPTeam/IRP</value>
- </vendorInformationAddress>
- <vendorInformationAddress>
-  <key>ru</key>
-  <value>https://github.com/IRPTeam/IRP</value>
- </vendorInformationAddress>
- <vendorInformationAddress>
   <key>en</key>
-  <value>https://github.com/IRPTeam/IRP</value>
+  <value>17350D68-3A6C-A909-94AD-DD8EB37B9293</value>
  </vendorInformationAddress>
- <configurationInformationAddress>
-  <key>tr</key>
-  <value>https://github.com/IRPTeam/IRP</value>
- </configurationInformationAddress>
- <configurationInformationAddress>
-  <key>ru</key>
-  <value>https://github.com/IRPTeam/IRP</value>
- </configurationInformationAddress>
  <configurationInformationAddress>
   <key>en</key>
-  <value>https://github.com/IRPTeam/IRP</value>
+  <value>E0BC1B7F-E9C8-22EB-B407-7520A1BD66AF</value>
  </configurationInformationAddress>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
@@ -116,96 +84,48 @@
  <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
   <name>English</name>
   <synonym>
-   <key>tr</key>
-   <value>İngilizce</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Английский</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>English</value>
+   <value>96CDEA4C-7F08-DEC0-0263-396C284D923D</value>
   </synonym>
   <languageCode>en</languageCode>
  </languages>
  <languages uuid="415e5f90-29b0-4f1b-a0a7-42cb96b2b637">
   <name>Turkish</name>
   <synonym>
-   <key>tr</key>
-   <value>Türkçe</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Турецкий</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Turkish</value>
+   <value>AB5061E4-B222-B3B1-1F5B-B4B4B454CFCE</value>
   </synonym>
   <languageCode>tr</languageCode>
  </languages>
  <languages uuid="d624d3ce-c30c-4aa3-951e-9629714a3809">
   <name>Russian</name>
   <synonym>
-   <key>tr</key>
-   <value>Rusça</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Русский</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Russian</value>
+   <value>94490969-4E47-73B8-8B8D-D98BA0695B60</value>
   </synonym>
   <languageCode>ru</languageCode>
  </languages>
  <languages uuid="eaf5ce2f-f41e-4912-9067-c51b8c98c69c">
   <name>French</name>
   <synonym>
-   <key>tr</key>
-   <value>Fransızca</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Француский</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>French</value>
+   <value>19D5F077-BA46-D62B-BF3E-E99091D7030A</value>
   </synonym>
   <languageCode>fr</languageCode>
  </languages>
  <languages uuid="6c7093f5-ffe3-4d21-b9a4-2eab98a4864b">
   <name>German</name>
   <synonym>
-   <key>tr</key>
-   <value>Almanca</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Немецкий</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>German</value>
+   <value>4E5FDF49-AE60-8345-5027-7F915E6471D1</value>
   </synonym>
   <languageCode>de</languageCode>
  </languages>
  <languages uuid="b37d11ba-9391-4abb-b99b-01f060a79638">
   <name>HASH</name>
   <synonym>
-   <key>tr</key>
-   <value>Hash</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>HASH</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>HASH</value>
+   <value>FB02560D-AE21-EC5B-BAD3-3888D5949590</value>
   </synonym>
   <languageCode>ha</languageCode>
  </languages>
@@ -669,6 +589,7 @@
  <roles>Role.Document_OutgoingExchRateAdjustmentInvoice</roles>
  <roles>Role.AccumulationRegisters_R6510B_StockBalance</roles>
  <roles>Role.Report_R6510A_StockBalance</roles>
+ <roles>Role.Document_Storno</roles>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -736,6 +657,8 @@
  <commonModules>CommonModule.CurrenciesClient</commonModules>
  <commonModules>CommonModule.CurrenciesClientServer</commonModules>
  <commonModules>CommonModule.CurrenciesServer</commonModules>
+ <commonModules>CommonModule.DashboardClient</commonModules>
+ <commonModules>CommonModule.DashboardServer</commonModules>
  <commonModules>CommonModule.DataVersioningServer</commonModules>
  <commonModules>CommonModule.DefaultDataServer</commonModules>
  <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
@@ -801,6 +724,8 @@
  <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
  <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
  <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
+ <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceClient</commonModules>
+ <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceServer</commonModules>
  <commonModules>CommonModule.DocIncomingPaymentOrderClient</commonModules>
  <commonModules>CommonModule.DocIncomingPaymentOrderServer</commonModules>
  <commonModules>CommonModule.DocInternalSupplyRequestClient</commonModules>
@@ -826,6 +751,8 @@
  <commonModules>CommonModule.DocOpeningEntryClient</commonModules>
  <commonModules>CommonModule.DocOpeningEntryServer</commonModules>
  <commonModules>CommonModule.DocOrderClosingServer</commonModules>
+ <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceClient</commonModules>
+ <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceServer</commonModules>
  <commonModules>CommonModule.DocOutgoingPaymentOrderClient</commonModules>
  <commonModules>CommonModule.DocOutgoingPaymentOrderServer</commonModules>
  <commonModules>CommonModule.DocPayrollClient</commonModules>
@@ -931,6 +858,7 @@
  <commonModules>CommonModule.FilesClient</commonModules>
  <commonModules>CommonModule.FilesClientServer</commonModules>
  <commonModules>CommonModule.FilesServer</commonModules>
+ <commonModules>CommonModule.FillingClientServer</commonModules>
  <commonModules>CommonModule.FillingWithDefaultDataEvent</commonModules>
  <commonModules>CommonModule.FillingWithDefaultDataReuse</commonModules>
  <commonModules>CommonModule.FixDocumentProblemsServer</commonModules>
@@ -980,6 +908,7 @@
  <commonModules>CommonModule.OffersClientServer</commonModules>
  <commonModules>CommonModule.OffersServer</commonModules>
  <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
+ <commonModules>CommonModule.PDFFunctionsClientServer</commonModules>
  <commonModules>CommonModule.PeriodClosingServer</commonModules>
  <commonModules>CommonModule.PictureViewerClient</commonModules>
  <commonModules>CommonModule.PictureViewerClientServer</commonModules>
@@ -1032,13 +961,8 @@
  <commonModules>CommonModule.ViewServer_V2</commonModules>
  <commonModules>CommonModule.WorkstationClient</commonModules>
  <commonModules>CommonModule.WorkstationServer</commonModules>
- <commonModules>CommonModule.DashboardClient</commonModules>
- <commonModules>CommonModule.DashboardServer</commonModules>
- <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceClient</commonModules>
- <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceServer</commonModules>
- <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceClient</commonModules>
- <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceServer</commonModules>
- <commonModules>CommonModule.PDFFunctionsClientServer</commonModules>
+ <commonModules>CommonModule.DocStornoClient</commonModules>
+ <commonModules>CommonModule.DocStornoServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1226,6 +1150,7 @@
  <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
  <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
  <definedTypes>DefinedType.UseUniqueID</definedTypes>
+ <definedTypes>DefinedType.typeDocumentsWithStorno</definedTypes>
  <commonCommands>CommonCommand.AddProperties</commonCommands>
  <commonCommands>CommonCommand.AttachedFiles</commonCommands>
  <commonCommands>CommonCommand.EditConstants</commonCommands>
@@ -1414,6 +1339,7 @@
  <commonForms>CommonForm.ChoiceTransactionBasis</commonForms>
  <commonForms>CommonForm.ChoicePaymentBasis</commonForms>
  <commonForms>CommonForm.EditManualOffers</commonForms>
+ <commonForms>CommonForm.EditOrderClosingDate</commonForms>
  <catalogs>Catalog.AccessGroups</catalogs>
  <catalogs>Catalog.AccessKey</catalogs>
  <catalogs>Catalog.AccessProfiles</catalogs>
@@ -1621,6 +1547,7 @@
  <documents>Document.FixedAssetRevaluation</documents>
  <documents>Document.IncomingExchRateAdjustmentInvoice</documents>
  <documents>Document.OutgoingExchRateAdjustmentInvoice</documents>
+ <documents>Document.Storno</documents>
  <sequences>Sequence.SimpleBatch</sequences>
  <enums>Enum.AccountingAnalyticTypes</enums>
  <enums>Enum.AccrualAndDeductionPeriodicity</enums>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c7406d22-bae6-4a8a-91fc-cde2d4b7627f">
  <name>Report_R2011A_SalesOrdersShipment</name>
  <synonym>
-  <key>tr</key>
-  <value>R2011A Satış siparişlerin sevkiyatı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R2011A_ОтгрузкаЗаказовНаПродажу</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R2011A_SalesOrdersShipment</value>
+  <value>50F0F80C-8736-60F4-4054-40C1796557F6</value>
  </synonym>
 </mdclass:Role>

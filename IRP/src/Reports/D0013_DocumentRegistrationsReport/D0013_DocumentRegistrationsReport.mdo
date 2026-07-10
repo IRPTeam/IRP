@@ -6,32 +6,16 @@
  </producedTypes>
  <name>D0013_DocumentRegistrationsReport</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak hareket raporu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Движения документа</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document registrations report</value>
+  <value>B80B1CB8-A34A-B960-060A-AE56A4BA60F7</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>Report.D0013_DocumentRegistrationsReport.Form.ReportForm</defaultForm>
  <forms uuid="6dee31f1-d62d-48b5-b0e2-9ca62cec3a7f">
   <name>ReportForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Rapor formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма отчета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Report form</value>
+   <value>93406EA7-8BDA-A23D-D914-45980586D2E0</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -39,31 +23,15 @@
  <templates uuid="d14a12c6-2345-42a5-a78d-7cdba85316a1">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Template</value>
+   <value>5EDAB610-2358-AE9C-CD86-6E89D8FB97DE</value>
   </synonym>
  </templates>
  <commands uuid="a58a72b2-363c-46be-96aa-5ab5cd8f0cd3">
   <name>RegistrationsReportInfo</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt tablo detayları bilgisi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отчет по движениям</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Registrations report info</value>
+   <value>C69150F5-AB51-1003-3FB5-591AD50C095F</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>
@@ -76,6 +44,7 @@
    <types>DocumentRef.ExternalAccountingOperation</types>
    <types>DocumentRef.CashPayment</types>
    <types>DocumentRef.AdditionalDeduction</types>
+   <types>DocumentRef.Storno</types>
    <types>DocumentRef.AdditionalCostAllocation</types>
    <types>DocumentRef.EmployeeSickLeave</types>
    <types>DocumentRef.WorkOrderClosing</types>

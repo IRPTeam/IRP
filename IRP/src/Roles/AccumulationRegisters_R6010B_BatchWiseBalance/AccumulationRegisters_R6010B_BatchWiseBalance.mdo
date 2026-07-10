@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ee3230e3-1fc0-41dc-8926-0c6351961d74">
  <name>AccumulationRegisters_R6010B_BatchWiseBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R6010B PartiBazındaBakiye</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R6010B ПартионныйБаланс</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R6010B BatchWiseBalance</value>
+  <value>0730545A-5A51-665D-D3E0-096D3A386C4D_________</value>
  </synonym>
 </mdclass:Role>

@@ -259,16 +259,8 @@
  <attributes>
   <name>IssueList</name>
   <title>
-   <key>tr</key>
-   <value>Talep listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список проблем</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Issue list</value>
+   <value>D2FDC544-70EC-7927-770E-E93183269C3D</value>
   </title>
   <id>2</id>
   <valueType>
@@ -414,16 +406,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>İş emri</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Заказ наряд</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Work order</value>
+       <value>EBB464EA-9A0D-470C-C148-86392AC6CF12</value>
       </content>
      </localValue>
     </title>
@@ -449,16 +433,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Personel</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Сотрудник</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Employee</value>
+       <value>4FFDEE63-3235-11DD-D6B7-7F38FA9F18BC</value>
       </content>
      </localValue>
     </title>

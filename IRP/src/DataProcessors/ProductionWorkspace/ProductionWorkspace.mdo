@@ -6,32 +6,16 @@
  </producedTypes>
  <name>ProductionWorkspace</name>
  <synonym>
-  <key>tr</key>
-  <value>Üretim masaüstü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Рабочее место мастера</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Production workspace</value>
+  <value>7C3106FB-EBE3-8AC3-3B1D-DDD79F270A86</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ProductionWorkspace.Form.Form</defaultForm>
  <forms uuid="d07bc542-b86a-4fb0-b495-576154e0a354">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>E8C8EF72-BD9E-CBC8-8783-3BD2CBE971B7</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

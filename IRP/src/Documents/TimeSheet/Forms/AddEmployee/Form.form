@@ -327,16 +327,8 @@
   </items>
   <items xsi:type="form:Addition">
    <title>
-    <key>tr</key>
-    <value>Arama satırı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Строка поиска</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Search string</value>
+    <value>10CD9C44-E93F-C3FC-CD11-1D9FA1DFB147</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -367,16 +359,8 @@
   </items>
   <items xsi:type="form:Addition">
    <title>
-    <key>tr</key>
-    <value>Arama kontrolü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Поиск управления</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Search control</value>
+    <value>D8B7F1B9-9CAB-5D12-2441-1B61D8A0DAAA</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -425,16 +409,8 @@
  <attributes>
   <name>EmployeeTable</name>
   <title>
-   <key>tr</key>
-   <value>Çalışan tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица сотрудников</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Employee table</value>
+   <value>27300F1F-7C38-130D-D0B2-2117715C5667</value>
   </title>
   <id>2</id>
   <valueType>
@@ -449,16 +425,8 @@
   <columns>
    <name>Employee</name>
    <title>
-    <key>tr</key>
-    <value>Personel</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сотрудник</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Employee</value>
+    <value>313E02D4-1A75-5055-568F-F76C8095E7AC</value>
    </title>
    <id>4</id>
    <valueType>
@@ -474,16 +442,8 @@
   <columns>
    <name>Selected</name>
    <title>
-    <key>tr</key>
-    <value>Seçilmiş</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Выбранные</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Selected</value>
+    <value>D88C8CD4-C371-ADDC-CED1-19718688F5D3</value>
    </title>
    <id>5</id>
    <valueType>
@@ -500,16 +460,8 @@
  <formCommands>
   <name>Select</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Select</value>
+   <value>61FC89BD-BF70-6FA3-3C0E-EB5E024FFEFF</value>
   </title>
   <id>1</id>
   <use>
@@ -525,16 +477,8 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check all</value>
+   <value>B5A0739A-B401-58EB-BB41-1CE34A1DFC08</value>
   </title>
   <id>2</id>
   <use>
@@ -553,16 +497,8 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck all</value>
+   <value>C4504BC8-5211-6E68-8689-99AEACF5B0E9</value>
   </title>
   <id>3</id>
   <use>

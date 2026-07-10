@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3b2efe0d-0c76-4fc8-a0e6-a2787caaf3ce">
  <name>Report_R5020A_PartnersBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R5020A Cari hesap bakiyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R5020A_БалансПартнеров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R5020A_PartnersBalance</value>
+  <value>9D5B7E36-581B-C8C8-8CF0-0E03B66004FA</value>
  </synonym>
 </mdclass:Role>

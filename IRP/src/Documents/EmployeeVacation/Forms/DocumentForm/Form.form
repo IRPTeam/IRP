@@ -13,16 +13,8 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>310</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа декораций рисунок свернутой шапки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <value>0FF490E4-C8D1-887D-D3DF-F0DBADD388E6____</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -62,16 +54,8 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>313</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>E52B7886-66F9-8657-7FC0-0432EC42178B</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -173,16 +157,8 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>321</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>93C73233-0C27-80CB-B810-0E2CEB8E161B</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -697,28 +673,12 @@
       <autoMaxHeight>true</autoMaxHeight>
       <wrap>true</wrap>
       <format>
-       <key>tr</key>
-       <value>NZ=</value>
-      </format>
-      <format>
-       <key>ru</key>
-       <value>NZ=</value>
-      </format>
-      <format>
        <key>en</key>
-       <value>NZ=</value>
+       <value>23ABC2F1-7E26-781C-CA5D-D29D1EDBB381</value>
       </format>
-      <editFormat>
-       <key>tr</key>
-       <value>NZ=</value>
-      </editFormat>
-      <editFormat>
-       <key>ru</key>
-       <value>NZ=</value>
-      </editFormat>
       <editFormat>
        <key>en</key>
-       <value>NZ=</value>
+       <value>BB9EB5AD-BE74-6925-5D33-3C4C0AC01909</value>
       </editFormat>
       <chooseType>true</chooseType>
       <typeDomainEnabled>true</typeDomainEnabled>
@@ -765,28 +725,12 @@
       <autoMaxHeight>true</autoMaxHeight>
       <wrap>true</wrap>
       <format>
-       <key>tr</key>
-       <value>NZ=</value>
-      </format>
-      <format>
-       <key>ru</key>
-       <value>NZ=</value>
-      </format>
-      <format>
        <key>en</key>
-       <value>NZ=</value>
+       <value>57BE61A1-523A-9CB8-89C5-56C7E2A8DB54</value>
       </format>
-      <editFormat>
-       <key>tr</key>
-       <value>NZ=</value>
-      </editFormat>
-      <editFormat>
-       <key>ru</key>
-       <value>NZ=</value>
-      </editFormat>
       <editFormat>
        <key>en</key>
-       <value>NZ=</value>
+       <value>F9C88E60-CB5A-0B1B-BD6B-B86185DF765B</value>
       </editFormat>
       <chooseType>true</chooseType>
       <typeDomainEnabled>true</typeDomainEnabled>
@@ -843,28 +787,12 @@
       <autoMaxHeight>true</autoMaxHeight>
       <wrap>true</wrap>
       <format>
-       <key>tr</key>
-       <value>NZ=</value>
-      </format>
-      <format>
-       <key>ru</key>
-       <value>NZ=</value>
-      </format>
-      <format>
        <key>en</key>
-       <value>NZ=</value>
+       <value>99C5A7AE-B1DB-FB29-9900-0A913A4C9F28</value>
       </format>
-      <editFormat>
-       <key>tr</key>
-       <value>NZ=</value>
-      </editFormat>
-      <editFormat>
-       <key>ru</key>
-       <value>NZ=</value>
-      </editFormat>
       <editFormat>
        <key>en</key>
-       <value>NZ=</value>
+       <value>ED4358B5-A4B9-DFF6-690C-CC9C4661BFE5</value>
       </editFormat>
       <chooseType>true</chooseType>
       <typeDomainEnabled>true</typeDomainEnabled>
@@ -992,16 +920,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Çalışan tatilleri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Отпуска сотрудников</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Employee vacations</value>
+    <value>F896916E-5E2E-59F9-90B2-2ED3E78DD5B7</value>
    </title>
    <extendedTooltip>
     <name>GroupEmployeeVacationsExtendedTooltip</name>
@@ -1028,16 +948,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ek özellikler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительные реквизиты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Additional attributes</value>
+    <value>9664560C-E0D6-6A5F-F171-13BCC7EF2FD0</value>
    </title>
    <extendedTooltip>
     <name>GroupAddAttributesExtendedTooltip</name>
@@ -1151,16 +1063,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ek olarak</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Дополнительно</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>More</value>
+     <value>B9AC0006-94A8-15A6-6F1D-D27977A8E2BB</value>
     </title>
     <extendedTooltip>
      <name>GroupMoreExtendedTooltip</name>
@@ -1270,16 +1174,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>FAB05998-3A2D-4F08-8519-994E0D93D977</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -1303,16 +1199,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>A7FFCF8B-EB38-C481-1C78-8643BCBF2F00</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -1489,16 +1377,8 @@
    <columns>
     <name>TotalDays</name>
     <title>
-     <key>tr</key>
-     <value>Toplam</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Total</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Total</value>
+     <value>0F57A1B9-3B2D-2C98-8BF5-566884F9B75D</value>
     </title>
     <id>11</id>
     <valueType>
@@ -1518,16 +1398,8 @@
    <columns>
     <name>OwnCostDays</name>
     <title>
-     <key>tr</key>
-     <value>Kendi ücretli günler</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Дней за свой счет</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Own cost days</value>
+     <value>9CD4E723-FDD5-CA19-9A99-923285B6F674</value>
     </title>
     <id>12</id>
     <valueType>
@@ -1549,16 +1421,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>12BC1587-14A9-6E1E-E66B-BC1CF9EAD5E9</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1575,16 +1439,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>4235700C-C226-3B94-446F-F1AD020EE5AC</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1603,16 +1459,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать row key</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>D142359B-286C-AECF-FFF0-047639F703DA</value>
   </title>
   <id>9</id>
   <use>
@@ -1631,16 +1479,8 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать скрытые таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show hidden tables</value>
+   <value>D7BC8AD4-5462-D8A7-7AF3-3B05227A52FB</value>
   </title>
   <id>15</id>
   <use>

@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R8515T_CostOfFixedAsset</name>
  <synonym>
-  <key>tr</key>
-  <value>R8515 Sabit kıymet maliyeti</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R8515 Стоимость основных средств</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R8515 Cost of fixed asset</value>
+  <value>3034DED8-84EE-B0F7-700E-ECE936460183</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="6be16e83-354e-471c-ad11-c57d5fdcb98a">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>6C50690D-B38A-1E01-14F7-7936A4E0C40B</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +33,8 @@
  <attributes uuid="2b473920-9257-460e-aa93-3e0c17f97c25">
   <name>CalculationMovementCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet hesaplama fişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расчет себестоимости товаров</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Calculation movement cost</value>
+   <value>40C6BB60-6787-FB7F-F9A1-108541AA0CA8</value>
   </synonym>
   <type>
    <types>DocumentRef.CalculationMovementCosts</types>
@@ -71,16 +47,8 @@
  <dimensions uuid="49bc164b-851c-451a-87e2-3862f2d762b0">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>E58CB298-D490-F783-3DBE-E201C1743ACE</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -93,16 +61,8 @@
  <dimensions uuid="a87c22dd-d08a-4e24-8848-686b4b7e0cde">
   <name>FixedAsset</name>
   <synonym>
-   <key>tr</key>
-   <value>Sabit kıymet</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основное средство</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Fixed asset</value>
+   <value>E972E26F-4B7A-52EC-CECF-FC65045C7660</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -115,16 +75,8 @@
  <dimensions uuid="d60ea697-398d-4d5a-ade6-7ac7411c3690">
   <name>LedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>1CFBBB2F-6C73-8253-3FF7-7DAA543723FE</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssetsLedgerTypes</types>

@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="72c0dd2d-a611-4c24-bbfd-61b16ff848b1">
  <name>Treasury</name>
  <synonym>
-  <key>tr</key>
-  <value>Finans</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Казначейство</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Treasury</value>
+  <value>7C98DBD6-8ADB-DA88-8E82-27819F5E2228</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

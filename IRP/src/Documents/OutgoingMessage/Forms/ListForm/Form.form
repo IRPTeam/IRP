@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>D7092B4E-8C1F-CDCA-A91C-C291B2EEEB1A</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -768,16 +760,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sent</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отправлено</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sent</value>
+       <value>4CC391B1-CA45-87C7-70E3-363239FB5DD1</value>
       </content>
      </localValue>
     </title>
@@ -788,16 +772,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Gönderilme tarihi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Дата отправки</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Date sent</value>
+       <value>56F4DEB6-AF93-7AC3-3427-7E46F675C78B</value>
       </content>
      </localValue>
     </title>
@@ -808,16 +784,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>SMS alıcıları</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Получатели</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Recipients</value>
+       <value>6BE32885-77C5-3B3C-CEA2-204C5E7807D4</value>
       </content>
      </localValue>
     </title>
@@ -832,16 +800,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Göndermek için</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отправить</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>To send</value>
+       <value>78CEA7E0-68DB-F2FD-D25A-AF449A5EC880</value>
       </content>
      </localValue>
     </title>

@@ -526,16 +526,8 @@
  <attributes>
   <name>SalesReportList</name>
   <title>
-   <key>tr</key>
-   <value>Satışlar listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список отчета по продажам</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Sales report list</value>
+   <value>469F0CEC-6A29-1E8F-FC51-1DD296E32DA6</value>
   </title>
   <id>1</id>
   <valueType>
@@ -550,16 +542,8 @@
   <columns>
    <name>SalesReportRef</name>
    <title>
-    <key>tr</key>
-    <value>Satışlar ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка на отчет по продажам</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Sales report ref</value>
+    <value>E7910492-F0C7-8116-620B-B5DE0C9BC0D6</value>
    </title>
    <id>2</id>
    <valueType>
@@ -575,16 +559,8 @@
   <columns>
    <name>CompanyPresentation</name>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>B249C05F-D443-716B-B72E-E80036C062B4</value>
    </title>
    <id>3</id>
    <valueType>
@@ -601,16 +577,8 @@
   <columns>
    <name>StartDate</name>
    <title>
-    <key>tr</key>
-    <value>Başlangıç tarihi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Начало периода</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Start date</value>
+    <value>3FBC3917-7CF1-C0BE-EF56-67F9C943AF9E</value>
    </title>
    <id>4</id>
    <valueType>
@@ -629,16 +597,8 @@
   <columns>
    <name>EndDate</name>
    <title>
-    <key>tr</key>
-    <value>Bitiş tarihi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата окончания</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>End date</value>
+    <value>F05049BC-3577-B4DF-F6AA-A906823864DE</value>
    </title>
    <id>5</id>
    <valueType>
@@ -657,16 +617,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>D39F7774-F6C9-20E0-0C5A-A038487A2616</value>
    </title>
    <id>6</id>
    <valueType>
@@ -682,16 +634,8 @@
   <columns>
    <name>Date</name>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>0D89E163-635D-C8B9-96CB-B10B16883875</value>
    </title>
    <id>7</id>
    <valueType>
@@ -708,16 +652,8 @@
   <columns>
    <name>Number</name>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number</value>
+    <value>D5AD0452-785D-B3A5-5B10-09E825705E7E</value>
    </title>
    <id>8</id>
    <valueType>
@@ -736,16 +672,8 @@
   <columns>
    <name>LegalNamePresentation</name>
    <title>
-    <key>tr</key>
-    <value>Fatura hesabı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Контрагент</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Legal name</value>
+    <value>A69975EF-0949-E0BE-E669-903DB180D8DF</value>
    </title>
    <id>9</id>
    <valueType>
@@ -762,16 +690,8 @@
   <columns>
    <name>PartnerTermPresentation</name>
    <title>
-    <key>tr</key>
-    <value>Sözleşme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Соглашение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Partner term</value>
+    <value>8C84D0A2-9F4F-A7DA-AF5B-BEE3005A41D3</value>
    </title>
    <id>10</id>
    <valueType>
@@ -789,16 +709,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>33CB3CF6-80C6-8B8A-A960-02DF8394788D</value>
   </title>
   <id>1</id>
   <use>
@@ -814,16 +726,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>0902FA8C-45E2-D42F-FA17-751AF9CBABAD</value>
   </title>
   <id>2</id>
   <use>

@@ -437,16 +437,8 @@
     <name>OurCompany</name>
     <id>15</id>
     <title>
-     <key>tr</key>
-     <value>Kendi şirketimiz</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Наша организация</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Our Company</value>
+     <value>E1398469-11A0-A071-1112-25DB5E133E40</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -488,16 +480,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основной</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Info</value>
+    <value>1AC32CED-F27F-0BBA-A354-4D7EC308A46D</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -977,16 +961,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Dövizler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currencies</value>
+    <value>850F5A6C-A9C2-D5ED-DD5E-E56FA273652F</value>
    </title>
    <extendedTooltip>
     <name>GroupCurrenciesExtendedTooltip</name>
@@ -1013,16 +989,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>İletişim bilgileri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Контактная информация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Contact information</value>
+    <value>6F3941C9-3AAC-1D27-7306-638F640AFFDC</value>
    </title>
    <extendedTooltip>
     <name>GroupContactInformationExtendedTooltip</name>
@@ -1368,16 +1336,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Vergi tipleri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид налога</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Tax types</value>
+    <value>21E9F6CE-DB87-1A97-7CEA-ADF4A66204E1</value>
    </title>
    <extendedTooltip>
     <name>GroupTaxesExtendedTooltip</name>
@@ -1729,16 +1689,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Defter tipleri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Типы учета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ledger types</value>
+    <value>453D2306-5402-7E11-160F-F1FCD743DF42</value>
    </title>
    <extendedTooltip>
     <name>GroupLedgerTypesExtendedTooltip</name>
@@ -1763,16 +1715,8 @@
     <name>LandedCostCurrencyMovementType</name>
     <id>128</id>
     <title>
-     <key>tr</key>
-     <value>Çoklu döviz hareket tipi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Вид мультивалютной аналитики</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Currency movement type</value>
+     <value>4B58A4BC-111F-D21B-B56B-B2F1CD3C08AB</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -2013,16 +1957,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Tutar düzeltmesi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Корректировка суммы</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Amount correction</value>
+     <value>5DE138D7-BFC5-B5B0-07F7-76634CFFEA83</value>
     </title>
     <extendedTooltip>
      <name>GroupAmountCorrectionExtendedTooltip</name>
@@ -2052,16 +1988,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ürün maliyet hesaplama</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Расчет себестоимости товаров</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Landed cost</value>
+    <value>C470BBAE-8F11-122C-C5F1-1C2494C18377</value>
    </title>
    <extendedTooltip>
     <name>GroupLandedCostExtendedTooltip</name>
@@ -2128,16 +2056,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Konsinye satış</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Комиссионная торговля</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Comission trading</value>
+    <value>93E7978D-BC0D-574D-D488-8AD7C46AF719</value>
    </title>
    <extendedTooltip>
     <name>GroupComissionTradingExtendedTooltip</name>
@@ -2290,16 +2210,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup 2</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа 2</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group2</value>
+      <value>BCCF9CA5-6FFD-CD0E-E725-553E6BA27002</value>
      </title>
      <extendedTooltip>
       <name>Group2ExtendedTooltip</name>
@@ -2410,16 +2322,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup3</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа3</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group3</value>
+      <value>1DBD42E3-0AFF-28F4-4ABA-A9522F39E783</value>
      </title>
      <extendedTooltip>
       <name>Group3ExtendedTooltip</name>
@@ -2447,16 +2351,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup 1</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа 1</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group1</value>
+     <value>3B1B1DC8-A843-C31A-A200-0FDAB8081266</value>
     </title>
     <extendedTooltip>
      <name>Group1ExtendedTooltip</name>
@@ -2484,16 +2380,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Maaş</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Зарплата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Salary</value>
+    <value>758F6FDC-E767-7720-0647-7B1DE7E32E86</value>
    </title>
    <extendedTooltip>
     <name>GroupSalaryExtendedTooltip</name>
@@ -2590,16 +2478,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Прочее</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>9574458D-5A36-47EA-AB17-76ACB87D21B1</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -2623,16 +2503,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group pages</value>
+   <value>D4831AB2-9C9B-1FBE-E860-01A5BAC873B3</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -2696,16 +2568,8 @@
  <attributes>
   <name>CompanyTaxes</name>
   <title>
-   <key>tr</key>
-   <value>Şirket vergileri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Налоги организации</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company taxes</value>
+   <value>649DEE78-A19E-1610-06C5-5B2E34F10472</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2721,16 +2585,8 @@
   <columns>
    <name>Tax</name>
    <title>
-    <key>tr</key>
-    <value>Vergi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Налог</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Tax</value>
+    <value>4667E8EB-9E59-C327-745F-F57CA5B309FD</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2746,16 +2602,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Применить</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>667BF1B5-859B-83D3-33CF-FC9473EBF5CE</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2771,16 +2619,8 @@
   <columns>
    <name>Priority</name>
    <title>
-    <key>tr</key>
-    <value>Önem</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Приоритет</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Priority</value>
+    <value>1F38A12F-2483-99AA-AB83-36EDFB9E6E5F</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2799,16 +2639,8 @@
   <columns>
    <name>Period</name>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Период</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Period</value>
+    <value>CF9BDEED-F310-86E7-773F-F716B441D89A</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2827,16 +2659,8 @@
   <columns>
    <name>IncludeToLandedCost</name>
    <title>
-    <key>tr</key>
-    <value>Maliyete dahil et</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Включать в расчет себестоимости</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Include to landed cost</value>
+    <value>F09EBE11-38D9-2BBF-F231-1ABEB1399E1E</value>
    </title>
    <id>13</id>
    <valueType>
@@ -2853,16 +2677,8 @@
  <attributes>
   <name>RewriteTaxes</name>
   <title>
-   <key>tr</key>
-   <value>Vergileri yeniden kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Перезапись налогов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Rewrite taxes</value>
+   <value>9DBE5CA8-2298-54CA-A3F3-36A132370AE3</value>
   </title>
   <id>7</id>
   <valueType>
@@ -2878,16 +2694,8 @@
  <attributes>
   <name>RewriteLedgerTypes</name>
   <title>
-   <key>tr</key>
-   <value>Defter tiplerini tekrar kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Перезаписать типы учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Rewrite Ledger types</value>
+   <value>BB3C5078-775E-32CA-A8AD-D53C5974762D</value>
   </title>
   <id>8</id>
   <valueType>
@@ -2903,16 +2711,8 @@
  <attributes>
   <name>CompanyLedgerTypes</name>
   <title>
-   <key>tr</key>
-   <value>Şirket defter tipleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Типы учета организации</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company Ledger types</value>
+   <value>9C4C6F10-56D5-DB0C-C545-53061CFEAF87</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2928,16 +2728,8 @@
   <columns>
    <name>LedgerType</name>
    <title>
-    <key>tr</key>
-    <value>Defter tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип учета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ledger type</value>
+    <value>376CAE3E-F760-7472-2EE5-5FB5CA42DA88</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2953,16 +2745,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использовать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>746BC1C4-61E5-0812-2294-4F1DD5E80D15</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2978,16 +2762,8 @@
   <columns>
    <name>Period</name>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Период</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Period</value>
+    <value>F5F7A0D0-F0CF-F974-4A5B-BA0A75EEA97F</value>
    </title>
    <id>12</id>
    <valueType>

@@ -6,32 +6,16 @@
  </producedTypes>
  <name>BuilderExample</name>
  <synonym>
-  <key>tr</key>
-  <value>Oluşturucu örneği</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Пример построителя</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Builder example</value>
+  <value>5504C317-0E25-0B5F-FD7D-D95B547F2CCD</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.BuilderExample.Form.Form</defaultForm>
  <forms uuid="9744201a-740c-4db8-9a08-fc436e69034e">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>2C55AB2D-3746-C053-318F-FD5D4934A93D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

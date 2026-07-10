@@ -9,16 +9,8 @@
  </producedTypes>
  <name>SystemAttributesSets</name>
  <synonym>
-  <key>tr</key>
-  <value>Sistem öznitelikleri kümeleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Наборы системных атрибутов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>System attributes sets</value>
+  <value>AE3AF0D5-FD91-21EA-A48B-B6768CB79DB9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -214,30 +206,14 @@
   </producedTypes>
   <name>Attributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek alanlar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Attributes</value>
+   <value>48F85470-9926-412D-D2A3-3953D801A4CF</value>
   </synonym>
   <attributes uuid="5d89ba3b-7da2-4abf-bd82-357c89a004e2">
    <name>Attribute</name>
    <synonym>
-    <key>tr</key>
-    <value>Alan</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Реквизит</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Attribute</value>
+    <value>ADB73CC1-A12F-6C06-6BDA-ABE1EC171166</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.SystemAttributes</types>
@@ -250,16 +226,8 @@
   <attributes uuid="45e6e4a1-2396-48d2-97b8-a997f066487f">
    <name>Collection</name>
    <synonym>
-    <key>tr</key>
-    <value>Tahsilat</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Коллекция</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Collection</value>
+    <value>EE833D9C-BA60-E3F5-5688-8C32810A95AC</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -273,16 +241,8 @@
  <forms uuid="5b6059ca-ef88-40bd-b4c5-3d2ceae21916">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>538AF290-03C0-F938-81C7-78190250EA50</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -290,16 +250,8 @@
  <forms uuid="37b8e0b6-bc65-4fac-8e78-a7a21fc02822">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>7FBB8BFF-804F-09EB-B818-87F4CB4137A9</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -307,16 +259,8 @@
  <forms uuid="12127867-c361-487b-a510-086f8b5b9b22">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>15A32729-E46F-4A4C-C318-893E788E835C</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

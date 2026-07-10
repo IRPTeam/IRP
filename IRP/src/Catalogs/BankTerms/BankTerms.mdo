@@ -9,16 +9,8 @@
  </producedTypes>
  <name>BankTerms</name>
  <synonym>
-  <key>tr</key>
-  <value>Banka sözleşmesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Соглашения с банком</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Bank terms</value>
+  <value>4B0B583C-25F7-5A7D-D0D4-421F2C5227BB</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -58,16 +50,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Banka sözleşmesi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Соглашение с банком</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Bank term</value>
+  <value>D061849D-A124-BB2B-BE3E-E204F8BD7EC9</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -85,16 +69,8 @@
  <attributes uuid="7baa8ab8-9eec-4b10-8816-49bd5db0db85">
   <name>BankTermType</name>
   <synonym>
-   <key>tr</key>
-   <value>Banka dönem tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид банковского договора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Bank term type</value>
+   <value>E7338C91-1A97-284E-E0DF-F3572525D805</value>
   </synonym>
   <type>
    <types>EnumRef.BankTermTypes</types>
@@ -114,30 +90,14 @@
   </producedTypes>
   <name>PaymentTypes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme tipleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Виды оплаты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Payment types</value>
+   <value>FC00F26B-BD72-29A4-46D7-77B1DCF8907B</value>
   </synonym>
   <attributes uuid="9b1be556-6dfd-403c-9cc7-32fe9703f5e0">
    <name>PaymentType</name>
    <synonym>
-    <key>tr</key>
-    <value>Ödeme tipi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид оплаты</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Payment type</value>
+    <value>28076651-08B4-72F3-3F3E-E1B02673F9DC</value>
    </synonym>
    <type>
     <types>CatalogRef.PaymentTypes</types>
@@ -150,16 +110,8 @@
   <attributes uuid="605e9138-cc11-49eb-b8ee-714774369177">
    <name>Percent</name>
    <synonym>
-    <key>tr</key>
-    <value>Yüzde</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Процент</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Percent</value>
+    <value>CC3E001E-AF78-3100-0EC6-6726672D7B0A</value>
    </synonym>
    <type>
     <types>DefinedType.typePercent</types>
@@ -172,16 +124,8 @@
   <attributes uuid="78623f56-8170-45ab-a554-fa1264aedc41">
    <name>Account</name>
    <synonym>
-    <key>tr</key>
-    <value>Kasa/Banka</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Касса/Банковский счет</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Account</value>
+    <value>9AC7B6F4-BC13-2607-7C3D-DA81842C3E98</value>
    </synonym>
    <type>
     <types>CatalogRef.CashAccounts</types>
@@ -194,16 +138,8 @@
   <attributes uuid="e99205c1-a89e-48ea-ad08-c14f1c197a04">
    <name>Partner</name>
    <synonym>
-    <key>tr</key>
-    <value>Cari hesap</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Партнер</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Partner</value>
+    <value>9D983C5D-2115-2072-28E4-4CDF02EB54A9</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>
@@ -216,16 +152,8 @@
   <attributes uuid="42b278f2-eb0b-4e68-88cf-4b7d5f47c2a3">
    <name>LegalName</name>
    <synonym>
-    <key>tr</key>
-    <value>Fatura hesabı</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Контрагент</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Legal name</value>
+    <value>EDC31B34-2216-FDE4-4DEB-BEDFCD360992</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
@@ -246,16 +174,8 @@
   <attributes uuid="1f49099a-607f-49e9-b3e9-483a9b92eb7b">
    <name>PartnerTerms</name>
    <synonym>
-    <key>tr</key>
-    <value>Sözleşmeler</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Соглашения</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Partner terms</value>
+    <value>41B2059F-9982-0930-029C-C7B271D40F02</value>
    </synonym>
    <type>
     <types>CatalogRef.Agreements</types>
@@ -282,16 +202,8 @@
   <attributes uuid="c865cd95-9722-42ff-8ad1-9ac3aab9d67e">
    <name>LegalNameContract</name>
    <synonym>
-    <key>tr</key>
-    <value>Fatura hesap kontratı</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Договор контрагента</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Legal name contract</value>
+    <value>EFF79E63-9D94-E590-0261-1C083F3233CD</value>
    </synonym>
    <type>
     <types>CatalogRef.LegalNameContracts</types>
@@ -313,30 +225,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>6F62F7DC-FFC0-B7D2-2914-467AD5D7280A</value>
   </synonym>
   <attributes uuid="037899f4-e070-4abb-9c0c-d6569b1a39c3">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>7E07CA07-EF96-078A-A896-66E0478E897D</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -349,16 +245,8 @@
   <attributes uuid="ea4615e7-b86a-48d5-8d2d-d30396d5df34">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>9DD17B14-E6A4-A60E-EFF9-96CA8E3804D6</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -376,16 +264,8 @@
  <forms uuid="97a56386-ca18-47bd-b5d2-5c54ea6834ff">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>4D5FA92A-2036-DD2F-F2DE-ED0AA09A7A98</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -393,16 +273,8 @@
  <forms uuid="6418a24e-626b-427c-90dd-8b10d847e3ad">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>7F38307A-28A8-A5EF-F5A8-8F07D2380EB3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -410,16 +282,8 @@
  <forms uuid="79a3f6cd-26c6-429f-856f-493f55a4f7b9">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>6F9CD266-0852-2378-8BA9-9D42F4B642AC</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

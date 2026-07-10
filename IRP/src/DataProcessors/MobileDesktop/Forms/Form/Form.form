@@ -52,16 +52,8 @@
      <color>Style.FormBackColor</color>
     </borderColor>
     <inputHint>
-     <key>tr</key>
-     <value>Malzeme</value>
-    </inputHint>
-    <inputHint>
-     <key>ru</key>
-     <value>Номенклатура</value>
-    </inputHint>
-    <inputHint>
      <key>en</key>
-     <value>Item</value>
+     <value>9330E6B1-CD3F-5501-1F8D-DAA53D92F3BA</value>
     </inputHint>
    </extInfo>
   </items>
@@ -120,16 +112,8 @@
      <color>Style.FormBackColor</color>
     </borderColor>
     <inputHint>
-     <key>tr</key>
-     <value>Özellik</value>
-    </inputHint>
-    <inputHint>
-     <key>ru</key>
-     <value>Характеристика</value>
-    </inputHint>
-    <inputHint>
      <key>en</key>
-     <value>Property</value>
+     <value>4E1BCAC5-2442-842D-DACF-F206037C7DA3</value>
     </inputHint>
    </extInfo>
   </items>
@@ -215,16 +199,8 @@
     <name>SerialLotNumber</name>
     <id>108</id>
     <title>
-     <key>tr</key>
-     <value>Seri lot numaraları</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Серия номенклатуры</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Serial lot number</value>
+     <value>4206A9E8-5B20-E450-0726-62B05A4588FB</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -264,16 +240,8 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
      <inputHint>
-      <key>tr</key>
-      <value>Seri lot numaraları</value>
-     </inputHint>
-     <inputHint>
-      <key>ru</key>
-      <value>Серия номенклатуры</value>
-     </inputHint>
-     <inputHint>
       <key>en</key>
-      <value>Serial lot number</value>
+      <value>87603093-E73B-E5A8-88F3-347E7331766D</value>
      </inputHint>
     </extInfo>
    </items>
@@ -321,16 +289,8 @@
        <horizontalStretch>true</horizontalStretch>
        <verticalStretch>true</verticalStretch>
        <nonselectedPictureText>
-        <key>tr</key>
-        <value>Resim bulunamadı</value>
-       </nonselectedPictureText>
-       <nonselectedPictureText>
-        <key>ru</key>
-        <value>Картинка не найдена</value>
-       </nonselectedPictureText>
-       <nonselectedPictureText>
         <key>en</key>
-        <value>Picture not found</value>
+        <value>1A88B88F-1A23-CE85-5F01-147C5CCC0A3B</value>
        </nonselectedPictureText>
        <border xsi:type="core:BorderDef">
         <width>1</width>
@@ -344,16 +304,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Sayfa slider</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Картинки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Page slider</value>
+      <value>D43E60BA-D514-4B3C-CDFE-E6B3A928289E</value>
      </title>
      <extendedTooltip>
       <name>PageSliderExtendedTooltip</name>
@@ -380,16 +332,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Sayfa ek bilgiler</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Страница доп. информация</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Page add info</value>
+      <value>EF6C2AB6-347D-1BB2-2A1D-D10DB104E004</value>
      </title>
      <extendedTooltip>
       <name>PageAddInfoExtendedTooltip</name>
@@ -413,16 +357,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Slider grubu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа слайдер</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group slider</value>
+     <value>06051509-FA94-0D28-8EB0-09C14F9A148A</value>
     </title>
     <extendedTooltip>
      <name>GroupSliderExtendedTooltip</name>
@@ -444,16 +380,8 @@
     <name>ItemItemType</name>
     <id>83</id>
     <title>
-     <key>tr</key>
-     <value>Tip</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Вид</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Type</value>
+     <value>94F05171-B51F-DC94-4C6B-B8FE352C6E5A</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -492,16 +420,8 @@
     <name>ItemItemID</name>
     <id>86</id>
     <title>
-     <key>tr</key>
-     <value>ID</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Артикул</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>ID</value>
+     <value>004115EF-6A81-C4F5-5DC4-4635F5FA852F</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -540,16 +460,8 @@
     <name>ItemKeyItemKeyID</name>
     <id>89</id>
     <title>
-     <key>tr</key>
-     <value>Anahtar ID</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Артикул характеристики</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Key ID</value>
+     <value>BA8248F0-8AA8-584B-BD3B-B45BAF0DE70A</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -591,28 +503,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Картинка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picture</value>
+    <value>D4F27940-7D5B-7B03-3B76-6E1837EBAD95</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup resim</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа картинки</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group picture</value>
+    <value>E6E2C778-6FD8-0214-4D58-81ACDA7D2686</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupPictureExtendedTooltip</name>
@@ -874,28 +770,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzemeler özellikleri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Свойства номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Items property</value>
+    <value>73808D97-5503-5B9A-A561-12C478489AB5</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup malzeme özellikleri</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа объект свойство</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group items property</value>
+    <value>832B1DDA-23C9-6CAD-DB19-959771740FCB</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupItemsPropertyExtendedTooltip</name>
@@ -1150,28 +1030,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Anahtar özellik</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Свойства характеристики</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key property</value>
+    <value>DFF55902-928A-FC92-2FE6-6590A607B4C1</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup anahtar özellikleri</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа ключ свойство</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group key property</value>
+    <value>CA73F0EC-D416-39A5-5EF9-9A61C74EECEA</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupKeyPropertyExtendedTooltip</name>
@@ -1357,16 +1221,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings</value>
+    <value>EFE4B408-186B-2314-4798-83B3537CD5C8</value>
    </title>
    <extendedTooltip>
     <name>GroupSettingsExtendedTooltip</name>
@@ -1390,28 +1246,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group pages</value>
+   <value>85BD0C05-3F9B-C258-8423-3340093E8148</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа страниц</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group pages</value>
+   <value>6A1C73A9-FAA6-3C0C-C29C-C7D66341EF17</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1532,16 +1372,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup footer</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа подвал</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group bottom</value>
+   <value>F33DC7F9-7130-C8BB-B8EC-CF6F33C90270</value>
   </title>
   <extendedTooltip>
    <name>GroupBottomExtendedTooltip</name>
@@ -1631,16 +1463,8 @@
  <attributes>
   <name>Barcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Штрихкод</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Barcode</value>
+   <value>662137D7-0B8E-8842-2DF5-53E5DF805E92</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1657,16 +1481,8 @@
  <attributes>
   <name>ItemRef</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item ref</value>
+   <value>68DD9FD3-5BA4-43FC-C9E6-6BFEC0C92AB8</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1682,16 +1498,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>19FAB825-F34E-8933-31C2-23C638C994BF</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1708,16 +1516,8 @@
  <attributes>
   <name>Photo</name>
   <title>
-   <key>tr</key>
-   <value>Foto</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Фото</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Photo</value>
+   <value>271BFFAD-51E9-7208-82D5-5DA5427C4DE8</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1733,16 +1533,8 @@
  <attributes>
   <name>PictureDecoration</name>
   <title>
-   <key>tr</key>
-   <value>Resim dekorasyon</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Декорация картинки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture decoration</value>
+   <value>E6A180D4-F6C2-A167-79F4-493FA7018715</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1759,16 +1551,8 @@
  <attributes>
   <name>SerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>FA78EF2C-FC25-712E-EB3E-EB1D1EEB4B53</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1785,16 +1569,8 @@
  <attributes>
   <name>UseSeriallotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lotları kullan</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Использовать серийные номера</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Use seriallot number</value>
+   <value>E00E13BF-BD30-45A1-1755-5B6672BC622A</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1810,16 +1586,8 @@
  <attributes>
   <name>CountScanTheSameItem</name>
   <title>
-   <key>tr</key>
-   <value>Aynı ürünün taranma sayısı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество сканируемых штрихкодов на один товар</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Count scan the same item</value>
+   <value>FD86E11E-A22C-F61D-D9D9-922645C7FAFF</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1842,16 +1610,8 @@
  <attributes>
   <name>AlreadyScanCount</name>
   <title>
-   <key>tr</key>
-   <value>Zaten taranan sayım</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество просканированных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Already scan count</value>
+   <value>ED8C453A-8142-1ED8-83CA-AFFED74AFB1E</value>
   </title>
   <id>12</id>
   <valueType>
@@ -1871,16 +1631,8 @@
  <attributes>
   <name>HideScanButton</name>
   <title>
-   <key>tr</key>
-   <value>Tarama butonunu gizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скрыть кнопку сканирования штрихкода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Hide scan button</value>
+   <value>66B1D2F5-9B8A-6A81-1CDF-F06E67AAEA0E</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1899,16 +1651,8 @@
  <attributes>
   <name>HideStatusButton</name>
   <title>
-   <key>tr</key>
-   <value>Durum düğmesini gizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скрыть кнопку статуса</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Hide status button</value>
+   <value>BAEDCCF2-933D-CDF5-553D-D27040B2DFD7</value>
   </title>
   <id>14</id>
   <valueType>
@@ -1945,29 +1689,13 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>309D0953-D9F6-611E-E64A-ABB0C681108A</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tamam</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>ОК</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>OK</value>
+   <value>03FDBFC4-6AE8-DF79-92B1-1E309B6D930E</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1982,29 +1710,13 @@
  <formCommands>
   <name>NotOK</name>
   <title>
-   <key>tr</key>
-   <value>OK Değil</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Не подтверждено</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Not OK</value>
+   <value>759D1B1D-8B7C-42F9-9505-59F646EEC791</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>tr</key>
-   <value>OK Değil</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Не подтверждено</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Not OK</value>
+   <value>CA07D061-5D01-2918-872A-A3CDBBF831CD</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2019,16 +1731,8 @@
  <formCommands>
   <name>Clear</name>
   <title>
-   <key>tr</key>
-   <value>Temizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Очистить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Clear</value>
+   <value>497EBA5C-75BA-E5C2-21D2-2E531DB8A79D</value>
   </title>
   <id>4</id>
   <use>

@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R2010A_SalesOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>R2010A Satış siparişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2010A Заказы покупателей</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2010A Sales orders</value>
+  <value>F2E98A7D-303A-FC7D-DCB0-0DD8B19FE848</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R2010A_SalesOrders.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="9c802f1e-7c5a-4ea3-be9d-d55f5b58817e">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>8CBA15A1-2B8B-1D41-187D-D44C3C30D496</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

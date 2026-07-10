@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R6060A_CostOfGoodsSold</name>
  <synonym>
-  <key>tr</key>
-  <value>R6060A Satılan malların maliyeti</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R6060A Себестоимость реализованной продукции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R6060A Cost of goods sold</value>
+  <value>A662B493-6964-7220-09BE-EABA399CC884</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R6060A_CostOfGoodsSold.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="98b8e39d-87a7-4aee-a96e-62155004929d">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>293973CE-E0AB-A17E-EE2E-EE44A82740EF</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

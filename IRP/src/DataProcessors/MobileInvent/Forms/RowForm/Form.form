@@ -172,16 +172,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup 1</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа 1</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group1</value>
+   <value>0490498A-6804-8C28-8D5B-B6065C649261</value>
   </title>
   <extendedTooltip>
    <name>GroupScanExtendedTooltip</name>
@@ -344,16 +336,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Alt</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Подвал</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Bottom</value>
+   <value>5B557231-1331-5BED-D1BE-EDFAFCA101CC</value>
   </title>
   <extendedTooltip>
    <name>GroupBottomExtendedTooltip</name>
@@ -406,16 +390,8 @@
  <attributes>
   <name>Quantity</name>
   <title>
-   <key>tr</key>
-   <value>Miktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Quantity</value>
+   <value>3C45178F-BE04-BF99-96D2-24469C7DA806</value>
   </title>
   <id>2</id>
   <valueType>
@@ -431,16 +407,8 @@
  <attributes>
   <name>ItemRef</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item ref</value>
+   <value>7898CC54-0B69-1F03-3EF4-4556F8197BA5</value>
   </title>
   <id>3</id>
   <valueType>
@@ -456,16 +424,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>0A3BDA09-F78A-9B44-4449-95D7BDCF7FB8</value>
   </title>
   <id>4</id>
   <valueType>
@@ -482,16 +442,8 @@
  <attributes>
   <name>RowId</name>
   <title>
-   <key>tr</key>
-   <value>Satır ID</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Id строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Row id</value>
+   <value>01E1167F-D777-1171-1FEA-A86A6A052C51</value>
   </title>
   <id>6</id>
   <valueType>
@@ -510,16 +462,8 @@
  <attributes>
   <name>Picture</name>
   <title>
-   <key>tr</key>
-   <value>Resim</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Картинка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture</value>
+   <value>1D539D62-F24D-C983-3BB1-1E7CF4BD33AC</value>
   </title>
   <id>7</id>
   <valueType>
@@ -536,16 +480,8 @@
  <attributes>
   <name>AutoMode</name>
   <title>
-   <key>tr</key>
-   <value>Auto modu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Автоматический вариант</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Auto mode</value>
+   <value>8E01B989-A54E-AE0E-E1CC-C6EB4B511D89</value>
   </title>
   <id>8</id>
   <valueType>
@@ -561,16 +497,8 @@
  <attributes>
   <name>SerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>464ED092-0CD9-FCAE-EE14-44B20A9EC811</value>
   </title>
   <id>9</id>
   <valueType>
@@ -587,16 +515,8 @@
  <attributes>
   <name>UseSerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri/lot numaraları kullan</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ведется учет по сериям номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Use serial lot number</value>
+   <value>64384911-9371-A224-4213-36CE95922B5E</value>
   </title>
   <id>10</id>
   <valueType>
@@ -612,16 +532,8 @@
  <attributes>
   <name>ActiveItem</name>
   <title>
-   <key>tr</key>
-   <value>Aktif nesne</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Активный объект</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Active item</value>
+   <value>E28D0376-087E-C8B0-092E-E41847A2ED3F</value>
   </title>
   <id>11</id>
   <valueType>
@@ -638,16 +550,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>4E6F38A1-C12D-624D-D33F-F4822A4C9371</value>
   </title>
   <id>1</id>
   <use>

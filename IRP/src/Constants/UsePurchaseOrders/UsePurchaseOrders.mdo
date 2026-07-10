@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UsePurchaseOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>Satın alma siparişlerini kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать заказы на покупку</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use purchase orders</value>
+  <value>22BE18FA-5499-9A54-4B46-6A98F3E92595</value>
  </synonym>
  <type>
   <types>Boolean</types>

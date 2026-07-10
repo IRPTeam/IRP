@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Ayarlar</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Настройки</value>
- </title>
- <title>
   <key>en</key>
-  <value>Settings</value>
+  <value>923461C5-F6F8-CE20-0BE4-422BDA27DD87</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>AdditionalSettings</name>
@@ -52,16 +44,8 @@
     <columnsCount>1</columnsCount>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Normal yazı</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Обычная запись</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Normal writing</value>
+      <value>BA0CB9BC-10FB-5143-3206-6EE2F1EC180B</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>0</value>
@@ -69,16 +53,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>İlgili alanları güncelle</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Обновить связанные поля</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Update related fields</value>
+      <value>03A40182-EA5E-6DD3-3784-45CA946FD89A</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>1</value>
@@ -86,16 +62,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Zorunlu yazma (tehlikeli)</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Непосредственная запись (опасно)</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Forced writing (dangerous)</value>
+      <value>BEDCB9D5-6BB0-BD58-8714-4DD1B65C25A5</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>
@@ -180,16 +148,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Servis verilerinin gösterildiği grup</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа показа технических данных</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group of showing service data</value>
+    <value>FB1AE087-272F-9310-0A67-7E6F98BCFB0A</value>
    </title>
    <extendedTooltip>
     <name>ShowServiceDataExtendedTooltip</name>
@@ -217,16 +177,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ek ayarların grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа дополнительных настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of additional settings</value>
+   <value>82B7354A-8426-B377-75A0-0A17BC388A8A</value>
   </title>
   <extendedTooltip>
    <name>AdditionalSettingsExtendedTooltip</name>
@@ -632,16 +584,8 @@
  <attributes>
   <name>FieldsTable</name>
   <title>
-   <key>tr</key>
-   <value>Alanlar tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица полей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fields table</value>
+   <value>7BBCE32A-9B34-74A7-7879-9209758BE263</value>
   </title>
   <id>1</id>
   <valueType>
@@ -656,16 +600,8 @@
   <columns>
    <name>isVisible</name>
    <title>
-    <key>tr</key>
-    <value>Görünür</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Видимый</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is visible</value>
+    <value>687D4AD0-39CE-BC4B-B560-03DE7CC6BEE6</value>
    </title>
    <id>2</id>
    <valueType>
@@ -681,16 +617,8 @@
   <columns>
    <name>Field</name>
    <title>
-    <key>tr</key>
-    <value>Alan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Поле</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Field</value>
+    <value>97516EBD-5F96-3549-9CDB-B07133A3CEEC</value>
    </title>
    <id>3</id>
    <valueType>
@@ -707,16 +635,8 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>991A0CA1-4D75-0E44-4250-0765124159B6</value>
    </title>
    <id>4</id>
    <valueType>
@@ -733,16 +653,8 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Alan ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование поля</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Field name</value>
+    <value>26231046-F51B-8636-6947-7E9D1C6752E2</value>
    </title>
    <id>5</id>
    <valueType>
@@ -759,16 +671,8 @@
   <columns>
    <name>isServiceAttribute</name>
    <title>
-    <key>tr</key>
-    <value>Servis özelliği mi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это технический реквизит</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is service attribute</value>
+    <value>D43CD1DB-9C92-D944-4BE2-2E3CF057926F</value>
    </title>
    <id>7</id>
    <valueType>
@@ -785,16 +689,8 @@
  <attributes>
   <name>ShowServiceAttributes</name>
   <title>
-   <key>tr</key>
-   <value>Hizmet özelliklerini göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать технические реквизиты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show service attributes</value>
+   <value>2330CF8F-E858-37EE-E6F5-523A5875F359</value>
   </title>
   <id>6</id>
   <valueType>
@@ -810,16 +706,8 @@
  <attributes>
   <name>ShowServiceTables</name>
   <title>
-   <key>tr</key>
-   <value>Servis tablolarını göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать технические таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show service tables</value>
+   <value>64906129-D584-045A-AB3A-AC753DD8C7FE</value>
   </title>
   <id>10</id>
   <valueType>
@@ -835,16 +723,8 @@
  <attributes>
   <name>WritingMode</name>
   <title>
-   <key>tr</key>
-   <value>Yazma modu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Режим записи объекта = Истина</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Writing mode</value>
+   <value>37B9FDB2-3524-6B11-1199-949537F55C0A</value>
   </title>
   <id>11</id>
   <valueType>
@@ -864,16 +744,8 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check all</value>
+   <value>70171B5F-1867-D9BC-CAB0-07F62284BD14</value>
   </title>
   <id>1</id>
   <use>
@@ -892,16 +764,8 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck all</value>
+   <value>03C69BAE-9CAE-2AC5-516C-C318F426FAA6</value>
   </title>
   <id>2</id>
   <use>
@@ -920,16 +784,8 @@
  <formCommands>
   <name>ApplySetting</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları uygula</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Применить настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Apply setting</value>
+   <value>4D10C643-1E02-4427-7D02-2BEAB9518BDD</value>
   </title>
   <id>3</id>
   <use>

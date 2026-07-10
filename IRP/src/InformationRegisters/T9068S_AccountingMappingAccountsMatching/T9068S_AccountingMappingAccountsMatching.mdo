@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9068S_AccountingMappingAccountsMatching</name>
  <synonym>
-  <key>tr</key>
-  <value>T9068 Muhasebe mappingi (hesap mapping)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9068 Бухгалтерские соответствия (сопоставление счетов)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9068 Accounting mapping (accounts matching)</value>
+  <value>97D23ABF-6FBE-D9AF-F0ED-D517CA5CF9D9________</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="7a102bc2-62dd-496d-8b40-4824039d69ba">
   <name>TargetAccount</name>
   <synonym>
-   <key>tr</key>
-   <value>Hedef hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Счета учета получатель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Target account</value>
+   <value>A2C62708-D04D-C7F4-4D6B-B2879BE01057</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -54,16 +38,8 @@
  <attributes uuid="cc488211-20bb-4187-ada9-ff5b97ac0ad5">
   <name>AllExtDimensionValues1</name>
   <synonym>
-   <key>tr</key>
-   <value>Tüm</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Все</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>All</value>
+   <value>839940A8-28B0-9763-3CC4-4CAAE0F8FD62</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -77,16 +53,8 @@
  <attributes uuid="c7931a24-7c50-4260-b4b2-aafee6b0c1e0">
   <name>AllExtDimensionValues2</name>
   <synonym>
-   <key>tr</key>
-   <value>Tümü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Все</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>All</value>
+   <value>3A47853D-CDC2-635B-B60E-E15A6B407EA2</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -100,16 +68,8 @@
  <attributes uuid="6d4f18db-23c6-4126-b930-f658f2c906df">
   <name>AllExtDimensionValues3</name>
   <synonym>
-   <key>tr</key>
-   <value>Tüm</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Все</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>All</value>
+   <value>98AEE924-BDB7-86E8-858F-FC221515BA89</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -123,16 +83,8 @@
  <dimensions uuid="e0ff5eeb-090e-45a9-9ac5-0dd458d18145">
   <name>IntegrationSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Интеграционные настройки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Integration settings</value>
+   <value>ED17E858-5A08-D38D-D00E-E2B58238A223</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -148,16 +100,8 @@
  <dimensions uuid="92238cdd-08b2-4a5e-9772-44ab38845bd3">
   <name>SourceLedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип учета источник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source ledger type</value>
+   <value>0DCAE397-F904-5500-093D-DD7DB9C9D845</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -174,16 +118,8 @@
  <dimensions uuid="ad4760d0-ebf4-42cd-a971-82cb1dd252c2">
   <name>TargetLedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Hedef defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид учета получатель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Target ledger type</value>
+   <value>7114853B-5CD0-4D67-7153-37C979A5CE2A</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -199,16 +135,8 @@
  <dimensions uuid="7c1c2c02-710d-4397-8fe8-5da4389517c0">
   <name>SourceAccount</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Счет учета источник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source account</value>
+   <value>44C1662B-121C-C79A-A610-0ADA9FBA882E</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -225,16 +153,8 @@
  <dimensions uuid="894af47e-c4bc-475f-99cd-3a7325f6e231">
   <name>ExtDimensionType1</name>
   <synonym>
-   <key>tr</key>
-   <value>1</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>1</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>1</value>
+   <value>C13D64E1-9273-ACA9-9BEF-FAA5678C4B3F</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -250,16 +170,8 @@
  <dimensions uuid="05e7c737-2a48-4fb5-84b8-88181854c0f5">
   <name>ExtDimensionValue1</name>
   <synonym>
-   <key>tr</key>
-   <value>Kırılım değer 1</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение субконто 1</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ext dimension value1</value>
+   <value>39919BE8-3EA5-B564-4063-3B06C945D4B5</value>
   </synonym>
   <type>
    <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -282,16 +194,8 @@
  <dimensions uuid="4835f67c-37a3-41bf-adc0-715c1fb77730">
   <name>ExtDimensionType2</name>
   <synonym>
-   <key>tr</key>
-   <value>2</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>2</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>2</value>
+   <value>BD09AE9A-4877-0CB9-9033-38FF5F80E0A5</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -307,16 +211,8 @@
  <dimensions uuid="134f5ebc-87dd-4592-b044-7a1df9ff82d8">
   <name>ExtDimensionValue2</name>
   <synonym>
-   <key>tr</key>
-   <value>Kırılım değer 2</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение субконто 2</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ext dimension value2</value>
+   <value>E92944F9-2340-3F57-78B6-61610C523104</value>
   </synonym>
   <type>
    <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -339,16 +235,8 @@
  <dimensions uuid="31f93499-0c18-4037-842a-a6804b929b01">
   <name>ExtDimensionType3</name>
   <synonym>
-   <key>tr</key>
-   <value>3</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>3</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>3</value>
+   <value>B04E8328-8DEC-84C8-8E07-7846DAC04C34</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -364,16 +252,8 @@
  <dimensions uuid="6e297e6a-6ecb-49c7-8fa8-b15a016ce173">
   <name>ExtDimensionValue3</name>
   <synonym>
-   <key>tr</key>
-   <value>Kırılım değer 3</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение субконто 3</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ext dimension value3</value>
+   <value>E42BA50E-BE47-8001-1738-8D1B90413CFB</value>
   </synonym>
   <type>
    <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -396,16 +276,8 @@
  <forms uuid="fbe80b80-4e66-4f97-acd2-d550d4437e9a">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>B6BBBE2A-CA8A-E0BC-C6A4-47C3D80933E4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -413,16 +285,8 @@
  <forms uuid="1f91b8f0-6dda-458e-9d8c-e9187b40d29a">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>44D6CC0E-329C-FFC5-520C-C20E48661030</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

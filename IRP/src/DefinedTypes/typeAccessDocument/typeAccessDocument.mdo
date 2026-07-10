@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeAccessDocument</name>
  <synonym>
-  <key>tr</key>
-  <value>Erişim belgesi türü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип доступа документ</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type access document</value>
+  <value>48F73CB6-E5E3-0317-700C-C50CCA10133C</value>
  </synonym>
  <type>
   <types>DocumentObject.RetailSalesReceipt</types>

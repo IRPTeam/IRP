@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R1200_VendorsAging</name>
  <synonym>
-  <key>tr</key>
-  <value>R1200 Tedarikçiler yaşlandırması</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1200 Рассрочка поставщиков</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1200 Vendors aging</value>
+  <value>51D5AF46-A1D6-8E06-6B7B-B1BC1DB8128D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R1200_VendorsAging.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="b76f7cfd-5c14-4b5f-bf41-0608794ac028">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>62D0E40E-5970-ED8C-C12F-F0380EF1237E</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

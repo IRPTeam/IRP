@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fc9cfde3-8c56-4e6f-a2e0-ced7a66b1921">
  <name>ShowNumeratore</name>
  <synonym>
-  <key>tr</key>
-  <value>Numaratör göster</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Показать нумератор</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Show numeratore</value>
+  <value>19A7F591-A825-0A61-1B7D-D5D81E20FC6D</value>
  </synonym>
 </mdclass:CommonPicture>

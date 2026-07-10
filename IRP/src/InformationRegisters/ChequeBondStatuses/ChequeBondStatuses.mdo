@@ -11,16 +11,8 @@
  </producedTypes>
  <name>ChequeBondStatuses</name>
  <synonym>
-  <key>tr</key>
-  <value>Çek/Senet statüleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Статусы банковских чеков</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Cheque bond statuses</value>
+  <value>742E99BD-EE17-01EF-FE10-0B6E4E9F83D9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="4c44a6da-f3e9-40ba-b7b2-2fd9a8ef9865">
   <name>Status</name>
   <synonym>
-   <key>tr</key>
-   <value>Statü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Статус</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Status</value>
+   <value>5FD9749A-8F11-D455-59B1-1D77E54798FC</value>
   </synonym>
   <type>
    <types>CatalogRef.ObjectStatuses</types>
@@ -53,16 +37,8 @@
  <attributes uuid="23711939-b0f7-46ce-9ae3-188befc2f91f">
   <name>Author</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt oluşturan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Автор</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Author</value>
+   <value>AA3751A3-B8FE-5D5D-D56B-B5DE1F049C3D</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -76,16 +52,8 @@
  <dimensions uuid="46f5a4ea-65ca-47b3-b4cc-4550813bf30b">
   <name>Cheque</name>
   <synonym>
-   <key>tr</key>
-   <value>Çek/Senet</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Банковский чек</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cheque</value>
+   <value>D2A75D72-C823-9F9B-B954-4CF5C07EB168</value>
   </synonym>
   <type>
    <types>CatalogRef.ChequeBonds</types>

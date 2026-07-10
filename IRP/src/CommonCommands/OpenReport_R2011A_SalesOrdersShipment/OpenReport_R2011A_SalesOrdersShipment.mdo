@@ -2,16 +2,8 @@
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="11f2a8f7-e2cc-424c-b5e4-7bfff2dfa838">
  <name>OpenReport_R2011A_SalesOrdersShipment</name>
  <synonym>
-  <key>tr</key>
-  <value>R2011A Satış siparişlerin sevkiyatı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2011A Отгрузка заказов покупателей</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2011A Sales orders shipment</value>
+  <value>B4B79827-8C05-8624-45AC-CEFC77BC88CF</value>
  </synonym>
  <group>NavigationPanelOrdinary</group>
  <representation>Auto</representation>

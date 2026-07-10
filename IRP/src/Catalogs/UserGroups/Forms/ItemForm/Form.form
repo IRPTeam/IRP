@@ -430,16 +430,8 @@
  <attributes>
   <name>Users</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcılar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пользователи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Users</value>
+   <value>4A13E1A5-8CC6-5E2F-FE13-3EA869ECBFCA</value>
   </title>
   <id>2</id>
   <valueType>
@@ -474,16 +466,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kullanıcılar kimlik doğrulaması</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Идентификация пользователей</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Users login</value>
+       <value>8A68EE3B-DDDA-F70A-A6FD-D7BB7E780303</value>
       </content>
      </localValue>
     </title>
@@ -494,16 +478,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kullanıcı açıklamaları</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименования пользователя</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Users description</value>
+       <value>5872A86D-C375-D46D-D685-59929992DD98</value>
       </content>
      </localValue>
     </title>
@@ -513,16 +489,8 @@ WHERE
  <formCommands>
   <name>Settings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings</value>
+   <value>7BFDD5B1-BD0F-7586-6AC5-53200364C96A</value>
   </title>
   <id>1</id>
   <use>

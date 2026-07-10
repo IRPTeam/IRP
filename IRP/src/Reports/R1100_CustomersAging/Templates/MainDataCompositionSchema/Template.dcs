@@ -11,16 +11,8 @@
 			<field>CurrentAmount</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Mevcut Tutar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Текущая сумма</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Current amount</v8:content>
+					<v8:content>D70540B3-D6DE-621A-AF70-0905B5FE3365</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -33,16 +25,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>DAB6F348-7D6C-0F54-4D51-1097AAEBD4AC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -53,16 +37,8 @@
 			<field>Company</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şirket</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Организация</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Company</v8:content>
+					<v8:content>7A64C7AB-10A2-11C4-4AF9-91C6653EAF7A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -76,16 +52,8 @@
 			<field>CountDays</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gün say</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество дней</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Count days</v8:content>
+					<v8:content>67F690F4-8DED-F37E-EB0C-CFCFF3500D2B</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -98,16 +66,8 @@
 			<field>Partner</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Cari hesap</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Партнер</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Partner</v8:content>
+					<v8:content>361AC60A-27F1-0848-8601-15E46E2E5DF9</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -121,16 +81,8 @@
 			<field>Amount</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tutar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сумма</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount</v8:content>
+					<v8:content>E6A73F3F-B1CA-E240-0DB1-12837694E8D5</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -138,16 +90,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>DAB6F348-7D6C-0F54-4D51-1097AAEBD4AC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -158,16 +102,8 @@
 			<field>Agreement</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sözleşme</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Соглашение</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Agreement</v8:content>
+					<v8:content>4D60969C-4FA0-8B35-5B04-4FE7F30982EF</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -181,16 +117,8 @@
 			<field>CurrencyMovementType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>ParaBirimiHareketTipi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Тип движения валюты</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>CurrencyMovementType</v8:content>
+					<v8:content>7C773216-6685-6921-1000-0C431D3A456A</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -205,16 +133,8 @@
 			<field>PaymentTerm</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ödeme koşulu</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Условие оплаты</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Payment term</v8:content>
+					<v8:content>289B3B5B-8932-B272-2775-526F5B2B48B0</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -228,16 +148,8 @@
 			<field>Invoice</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Документ реализации</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice</v8:content>
+					<v8:content>6BFFB65D-B174-5E06-6198-859926EA1DBA</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -246,16 +158,8 @@
 			<field>CreditLimit</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Kredi Limiti</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Кредитный лимит</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Credit limit</v8:content>
+					<v8:content>374EA78D-7A91-0A4C-C79B-B317FABB236A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -268,16 +172,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>DAB6F348-7D6C-0F54-4D51-1097AAEBD4AC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -288,16 +184,8 @@
 			<field>TotalDue</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Toplam Borç</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Всего к оплате</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total due</v8:content>
+					<v8:content>622D3C6B-8486-54FC-C21C-C3DE0439BB3A</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -305,16 +193,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>DAB6F348-7D6C-0F54-4D51-1097AAEBD4AC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -325,16 +205,8 @@
 			<field>Currency</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валюта</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency</v8:content>
+					<v8:content>CDDDAEF0-FA64-F7B8-889C-C19CA406439C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -348,16 +220,8 @@
 			<field>PaymentDate</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>ÖdemeTarihi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Дата платежа</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>PaymentDate</v8:content>
+					<v8:content>5A708B59-BA55-F946-6BD1-169BEF3483EB</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -366,16 +230,8 @@
 			<field>ExpirationDate</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Son kullanım tarihi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Дата истечения срока</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Expiration date</v8:content>
+					<v8:content>E0CC145B-24E9-A238-8E46-63F2F924164F</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -388,16 +244,8 @@
 			<field>LegalName</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yasalİsim</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>ЮридическоеИмя</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>LegalName</v8:content>
+					<v8:content>299EDDAF-BB5E-442F-F100-0D6E4D174653</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -406,16 +254,8 @@
 			<field>AgingPeriodGroup</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yaşlandırma Dönemi Grubu</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Группа рассрочки периода</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Aging period group</v8:content>
+					<v8:content>AF1C35E6-0BCD-E323-340B-B60F71813E7D</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -434,16 +274,8 @@
 			<field>AgingPeriodType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yaşlandırma Dönemi Türü</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Тип рассрочки периода</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Aging period type</v8:content>
+					<v8:content>F2292423-A30C-DD16-6FD0-0DA9EBC202E8</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -457,16 +289,8 @@
 			<field>TotalFuture</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Toplam Gelecek</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Всего будущее</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total future</v8:content>
+					<v8:content>AAF6C82E-DAF4-8750-0BFD-D73D0824C125</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -474,16 +298,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>DAB6F348-7D6C-0F54-4D51-1097AAEBD4AC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -494,16 +310,8 @@
 			<field>TotalOverdue</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Toplam Gecikmiş</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Всего просрочено</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total overdue</v8:content>
+					<v8:content>7186457B-33C5-5EBA-A9FD-D079BE3B093C</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -511,16 +319,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>DAB6F348-7D6C-0F54-4D51-1097AAEBD4AC</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -531,16 +331,8 @@
 			<field>AgingPeriodSort</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Yaşlandırma Dönemi Sıralama</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сортировка рассрочки</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Aging period sort</v8:content>
+					<v8:content>70C5E0C1-4220-B302-2D90-08C35161B3FF</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -792,16 +584,8 @@ FROM
 		<expression>CurrentAmount + TotalOverdue + TotalFuture</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Tutar Farkı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Разница сумм</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Amount difference</v8:content>
+				<v8:content>88734CFB-8FFE-D336-6CE1-14883FAEBB51</v8:content>
 			</v8:item>
 		</title>
 		<appearance>
@@ -809,16 +593,8 @@ FROM
 				<dcscor:parameter>Format</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>NFD=2</v8:content>
+						<v8:content>E6CBE4A6-AC9E-88AF-FBE7-7327F9D310E4</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -832,16 +608,8 @@ FROM
 		<name>Period</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>8AC6D6F6-C97C-74DE-E257-735E6F486FD9</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -860,16 +628,8 @@ FROM
 		<name>AgingPeriods</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Yaşlandırma Dönemleri</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Периоды рассрочки</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Aging periods</v8:content>
+				<v8:content>E9D3485E-835E-C257-7B8E-E310A98960BC</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -884,16 +644,8 @@ FROM
 		<dcsset:name>Default</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Varsayılan</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>По умолчанию</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Default</v8:content>
+				<v8:content>92F2D417-754E-7A95-5B41-1804E57322A5</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
@@ -924,16 +676,8 @@ FROM
 					<dcsset:userSettingID>a423582b-af0a-4fff-9084-eb247120f5a6</dcsset:userSettingID>
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Dönem</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Период</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Period</v8:content>
+							<v8:content>62051714-290B-52DC-C9C3-3124F34FE833</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>
@@ -944,16 +688,8 @@ FROM
 					<dcsset:userSettingID>2fe745c7-818f-414a-887b-72e74b45275c</dcsset:userSettingID>
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Yaşlandırma Dönemleri</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Периоды рассрочки</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Aging periods</v8:content>
+							<v8:content>E5AA61D3-7DE3-C124-4C7C-C0FCDBAEB90B</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>

@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseAging</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Cari hesap yaşlandırma</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать отсрочку оплат партнеров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use aging</value>
+  <value>3CF4E9F7-22C7-825D-D1E2-2C3EF304C7D3</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -99,16 +99,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Sürüm numarası</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Номер релиза</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Release number</value>
+     <value>2F31DCBB-8DC2-F4CB-BF09-9BB6A8B3C3D7</value>
     </title>
     <extendedTooltip>
      <name>GroupReleaseNumberExtendedTooltip</name>
@@ -241,16 +233,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Bilgi listesi grubunu güncelle</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа список уведомлений по обновлению</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Update info list group</value>
+      <value>9FA2F379-8C8F-E215-5C93-308B3BDE3218</value>
      </title>
      <extendedTooltip>
       <name>UpdateInfoListGroupExtendedTooltip</name>
@@ -520,16 +504,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sol</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Слева</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Left</value>
+    <value>1C105C93-7E9D-AD2F-FE58-84941C6E7721</value>
    </title>
    <extendedTooltip>
     <name>GroupLeftExtendedTooltip</name>
@@ -653,16 +629,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup başlık</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа заголовок</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group head</value>
+     <value>EA171AB2-921A-4238-89DC-C2B4C081AE94</value>
     </title>
     <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
@@ -755,16 +723,8 @@
         <name>DecorationWaitJob</name>
         <id>932</id>
         <title>
-         <key>tr</key>
-         <value>Devam ediyor</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Ожидание</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Wait</value>
+         <value>076647F6-12DA-7D33-35E7-7216EE1EDA55</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -836,16 +796,8 @@
         <name>DecorationActiveJob</name>
         <id>938</id>
         <title>
-         <key>tr</key>
-         <value>Aktif</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Активно</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Active</value>
+         <value>95AED5B1-BFE1-F10A-A1AF-F399E168F985</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -918,16 +870,8 @@
         <name>DecorationFailedJob</name>
         <id>944</id>
         <title>
-         <key>tr</key>
-         <value>Başarısız</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Не успешен</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Failed</value>
+         <value>845B2DC1-CF02-3D6A-A0B5-5E4C8C349C50</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -999,16 +943,8 @@
         <name>DecorationComplitedJob</name>
         <id>950</id>
         <title>
-         <key>tr</key>
-         <value>Tamamlandı</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Завершено</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Complited</value>
+         <value>A0926CA4-BD43-5C4A-AE89-9AA23EFFC67D</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1080,16 +1016,8 @@
         <name>DecorationMaxJobStream</name>
         <id>956</id>
         <title>
-         <key>tr</key>
-         <value>Dekorasyon maks. iş akışı</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Максимальный поток задач декорации</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Decoration max job stream</value>
+         <value>CA8A245E-BB2F-1C33-35B8-872BCEF8E330</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1134,16 +1062,8 @@
         <skipOnInput>true</skipOnInput>
         <titleLocation>None</titleLocation>
         <toolTip>
-         <key>tr</key>
-         <value>Sistem tarafından eş zamanlı olarak başlatılacak görev sayısı.</value>
-        </toolTip>
-        <toolTip>
-         <key>ru</key>
-         <value>Количество задач, которые система запустит одновременно.</value>
-        </toolTip>
-        <toolTip>
          <key>en</key>
-         <value>The number of tasks that the system will launch simultaneously.</value>
+         <value>2987FB1A-9D5D-AE90-054E-E34664697873___________________________</value>
         </toolTip>
         <toolTipRepresentation>Button</toolTipRepresentation>
         <extendedTooltip>
@@ -1183,16 +1103,8 @@
         <name>DecorationTimeoutUpdate</name>
         <id>962</id>
         <title>
-         <key>tr</key>
-         <value>Dekorasyon Zaman Aşımı Güncelleme</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>ТаймаутОбновленияДекорации</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Decoration timeout update</value>
+         <value>8982D42E-E29E-BF1A-A78E-EC08A5A88D47</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1237,16 +1149,8 @@
         <skipOnInput>true</skipOnInput>
         <titleLocation>None</titleLocation>
         <toolTip>
-         <key>tr</key>
-         <value>İş Durumu Güncelleme Zaman Aşımı</value>
-        </toolTip>
-        <toolTip>
-         <key>ru</key>
-         <value>ТаймаутОбновленияСтатусаЗадания</value>
-        </toolTip>
-        <toolTip>
          <key>en</key>
-         <value>Update job status timeout</value>
+         <value>4688B3BB-FB2D-64D7-731D-D4D5791EFB9C</value>
         </toolTip>
         <toolTipRepresentation>Button</toolTipRepresentation>
         <extendedTooltip>
@@ -1288,16 +1192,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup üst</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа Верх</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group top</value>
+        <value>9B497B2E-0148-7CC1-15E7-7165C5F991C3</value>
        </title>
        <extendedTooltip>
         <name>GroupTopExtendedTooltip</name>
@@ -1438,16 +1334,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>İş listesi grubu simgesi</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Иконка группы задач</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Job list group icon</value>
+         <value>262066F0-E25F-1DF2-2D54-4CD4318815C0</value>
         </title>
         <width>3</width>
         <horizontalStretch>false</horizontalStretch>
@@ -1558,16 +1446,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>İş listesi grubu yüzdesi</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>ПроцентГруппыЗаданий</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Job list group percent</value>
+         <value>9180C4E0-7A87-3513-3690-0DBF0F50BCE3</value>
         </title>
         <extendedTooltip>
          <name>JobListGroupPercentExtendedTooltip</name>
@@ -1789,16 +1669,8 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>İş listesi grubu sonu</value>
-         </title>
-         <title>
-          <key>ru</key>
-          <value>Конец группы задач</value>
-         </title>
-         <title>
           <key>en</key>
-          <value>Job list group end</value>
+          <value>3F6630FB-F2E6-B38F-F67E-E66CCFF8AEAF</value>
          </title>
          <extendedTooltip>
           <name>JobListGroupEndExtendedTooltip</name>
@@ -1822,16 +1694,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>İş listesi grubu tarihi</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Дата группы задач</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Job list group date</value>
+         <value>BC0AB555-2A62-E29A-A15F-F0D9D893DF17</value>
         </title>
         <extendedTooltip>
          <name>JobListGroupDateExtendedTooltip</name>
@@ -2057,16 +1921,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>İş listesi grup hızı</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Группа скорости задач</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Job list group speed</value>
+         <value>7F7FC64B-5384-E854-4015-547DDFA85D29</value>
         </title>
         <extendedTooltip>
          <name>JobListGroupSpeedExtendedTooltip</name>
@@ -2370,16 +2226,8 @@
          <name>RunBackgroundJobInDebugMode</name>
          <id>1124</id>
          <title>
-          <key>tr</key>
-          <value>Hata ayıklama</value>
-         </title>
-         <title>
-          <key>ru</key>
-          <value>Отладка</value>
-         </title>
-         <title>
           <key>en</key>
-          <value>Debug</value>
+          <value>267C7F90-96A3-3EC9-946A-A6A212025FCB</value>
          </title>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2458,16 +2306,8 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Teknik bilgi</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Техническая инфо</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Technical info</value>
+         <value>410BBB99-3375-19C5-5AF4-439C79A0E1E8</value>
         </title>
         <extendedTooltip>
          <name>GroupTechnicalInfoExtendedTooltip</name>
@@ -2497,16 +2337,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Bilgi</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Информация</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Info</value>
+        <value>77A5B3EB-07BF-5597-765D-DD516A9459D6</value>
        </title>
        <extendedTooltip>
         <name>GroupBottomExtendedTooltip</name>
@@ -2537,16 +2369,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Çoklu görevler</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Многопоточно</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>MultiJob</value>
+       <value>0E6027AB-4D0E-9342-2B79-94A8C309D9B6</value>
       </title>
       <extendedTooltip>
        <name>GroupMultiJobExtendedTooltip</name>
@@ -2574,16 +2398,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Arka plan görevleri</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Регламентные задания</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Background jobs</value>
+      <value>AA3F218B-57AD-2143-3389-96C94F8E00DB</value>
      </title>
      <extendedTooltip>
       <name>GroupBackgroundJobsExtendedTooltip</name>
@@ -2607,16 +2423,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Sayfalar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Страницы</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Pages</value>
+     <value>2CD9A25C-DB0F-45F4-4641-13369EBC9DCA</value>
     </title>
     <extendedTooltip>
      <name>GroupPagesExtendedTooltip</name>
@@ -2895,16 +2703,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Hatalar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Ошибки</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Errors</value>
+     <value>2B725860-2B81-3FDA-A995-5C879970EF8F</value>
     </title>
     <extendedTooltip>
      <name>GroupValidationErrorsExtendedTooltip</name>
@@ -2934,16 +2734,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sağ</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Справа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Right</value>
+    <value>DE2F06AF-279E-85B0-0981-1BCEA8AC86E7</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -2971,16 +2763,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main</value>
+   <value>4D19DA03-E225-F6C6-6394-4106345CCADF</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -3045,16 +2829,8 @@
  <attributes>
   <name>FailedJob</name>
   <title>
-   <key>tr</key>
-   <value>Başarısız iş</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>НеудачноеЗадание</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Failed job</value>
+   <value>5850D712-F540-712E-EA68-81AE1B638E9D</value>
   </title>
   <id>26</id>
   <valueType>
@@ -3073,16 +2849,8 @@
  <attributes>
   <name>JobList</name>
   <title>
-   <key>tr</key>
-   <value>İş listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список заданий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Job list</value>
+   <value>C7795626-25A5-5B0B-B904-46B632C465A2</value>
   </title>
   <id>27</id>
   <valueType>
@@ -3097,16 +2865,8 @@
   <columns>
    <name>ID</name>
    <title>
-    <key>tr</key>
-    <value>ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>ID</value>
+    <value>45F14504-1599-CCFB-B639-951BA8AB0079</value>
    </title>
    <id>2</id>
    <valueType>
@@ -3125,16 +2885,8 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Иконка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Icon</value>
+    <value>D9E13B3A-EEB1-E19B-B01E-E4FFD134E35E</value>
    </title>
    <id>3</id>
    <valueType>
@@ -3150,16 +2902,8 @@
   <columns>
    <name>Title</name>
    <title>
-    <key>tr</key>
-    <value>Başlık</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Title</value>
+    <value>AAC9EF5C-2A6C-81CA-A6D0-0A9A7F124A75</value>
    </title>
    <id>4</id>
    <valueType>
@@ -3176,16 +2920,8 @@
   <columns>
    <name>Log</name>
    <title>
-    <key>tr</key>
-    <value>Log</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Логи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Log</value>
+    <value>2B255255-F21F-EB6F-F099-9626764F9E90</value>
    </title>
    <id>5</id>
    <valueType>
@@ -3202,16 +2938,8 @@
   <columns>
    <name>Start</name>
    <title>
-    <key>tr</key>
-    <value>Başlat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Начало</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Start</value>
+    <value>34B9C1D8-95F2-FA41-1C65-5CF21BA80069</value>
    </title>
    <id>6</id>
    <valueType>
@@ -3228,16 +2956,8 @@
   <columns>
    <name>End</name>
    <title>
-    <key>tr</key>
-    <value>Son</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Конец</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>End</value>
+    <value>C08708C7-EA97-A1ED-D9B1-193C0EE238D0</value>
    </title>
    <id>7</id>
    <valueType>
@@ -3254,16 +2974,8 @@
   <columns>
    <name>Speed</name>
    <title>
-    <key>tr</key>
-    <value>Hız</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Скорость</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Speed</value>
+    <value>672828D9-F8F2-E470-01CB-BDDA3241A81A</value>
    </title>
    <id>8</id>
    <valueType>
@@ -3280,16 +2992,8 @@
   <columns>
    <name>EndAt</name>
    <title>
-    <key>tr</key>
-    <value>Bitiş</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Завершить</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>End at</value>
+    <value>71F449CB-0FC7-0ECA-ABA2-20A58CC6F582</value>
    </title>
    <id>9</id>
    <valueType>
@@ -3306,16 +3010,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>F769F041-9642-77DB-B7E1-1EDE0BC99FE8</value>
    </title>
    <id>10</id>
    <valueType>
@@ -3332,16 +3028,8 @@
   <columns>
    <name>UserMessages</name>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı mesajları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Пользовательские сообщения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>User messages</value>
+    <value>656AA5C0-D554-AA1E-E040-0339E6C95670</value>
    </title>
    <id>11</id>
    <valueType>
@@ -3358,16 +3046,8 @@
   <columns>
    <name>Status</name>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Status</value>
+    <value>43B710EF-B026-FD33-3710-090AADFE4D0A</value>
    </title>
    <id>12</id>
    <valueType>
@@ -3383,16 +3063,8 @@
   <columns>
    <name>DataAddress</name>
    <title>
-    <key>tr</key>
-    <value>Veri adresi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Адрес данных</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Data address</value>
+    <value>99D547D6-4CFE-B7B8-8853-355BE1D210AB</value>
    </title>
    <id>14</id>
    <valueType>
@@ -3409,16 +3081,8 @@
   <columns>
    <name>NonJobData</name>
    <title>
-    <key>tr</key>
-    <value>İş olmayan veri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ДанныеНеПоРаботе</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Non job data</value>
+    <value>9B561711-A087-3017-74DF-F0CC75620F28</value>
    </title>
    <id>19</id>
    <valueType/>
@@ -3432,16 +3096,8 @@
   <columns>
    <name>JobParameters</name>
    <title>
-    <key>tr</key>
-    <value>İş parametreleri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Параметры задачи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Job parameters</value>
+    <value>4074CDCB-E1D2-7282-2202-23D6F61CFBF1</value>
    </title>
    <id>27</id>
    <valueType>
@@ -3458,16 +3114,8 @@
   <columns>
    <name>ProcedurePath</name>
    <title>
-    <key>tr</key>
-    <value>Prosedür yolu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ПутьПроцедуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Procedure path</value>
+    <value>0F78C842-2FE7-3F88-8AE7-759AE08B3A5E</value>
    </title>
    <id>28</id>
    <valueType>
@@ -3484,16 +3132,8 @@
   <columns>
    <name>PercentIndicator</name>
    <title>
-    <key>tr</key>
-    <value>Yüzde göstergesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Индикатор процента</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Percent indicator</value>
+    <value>92DF2036-D8CB-1268-8409-9AF1477FD15E</value>
    </title>
    <id>30</id>
    <valueType>
@@ -3510,16 +3150,8 @@
   <columns>
    <name>Percent</name>
    <title>
-    <key>tr</key>
-    <value>Yüzde124</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Процент</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Percent</value>
+    <value>B34CEBD6-0198-82C9-9D30-0B672C24445B</value>
    </title>
    <id>31</id>
    <valueType>
@@ -3538,16 +3170,8 @@
   <columns>
    <name>CallbackDone</name>
    <title>
-    <key>tr</key>
-    <value>Geri çağırma tamam</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Обратный вызов выполнен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Callback done</value>
+    <value>47393FA1-AF90-90F9-93F2-2BF5D52F7D70</value>
    </title>
    <id>33</id>
    <valueType>
@@ -3563,16 +3187,8 @@
   <columns>
    <name>DELETE_StepNumber</name>
    <title>
-    <key>tr</key>
-    <value>Etap numarasını SİL</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>УДАЛИТЬ номер шага</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>DELETE step number</value>
+    <value>D351D557-5A7B-2C23-3E9C-C48F86E011D6</value>
    </title>
    <id>38</id>
    <valueType>
@@ -3591,16 +3207,8 @@
   <columns>
    <name>UUID</name>
    <title>
-    <key>tr</key>
-    <value>UUID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>UUID</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>UUID</value>
+    <value>7789C97D-7287-0EA5-570F-F33E709C7B28</value>
    </title>
    <id>39</id>
    <valueType>
@@ -3617,16 +3225,8 @@
   <columns>
    <name>UpdateMethod</name>
    <title>
-    <key>tr</key>
-    <value>Güncelleme yöntemi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Метод обновления</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Update method</value>
+    <value>8D9EB6A6-2B8B-27F9-99F7-7FCB7CCCCBAE</value>
    </title>
    <id>74</id>
    <valueType>
@@ -3644,16 +3244,8 @@
  <attributes>
   <name>MaxJobStream</name>
   <title>
-   <key>tr</key>
-   <value>Maks. iş akışı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>МаксПотокЗаданий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Max job stream</value>
+   <value>1F39E891-118E-072D-D291-1ED8173F04B1</value>
   </title>
   <id>28</id>
   <valueType>
@@ -3675,16 +3267,8 @@
  <attributes>
   <name>RunBackgroundJobInDebugMode</name>
   <title>
-   <key>tr</key>
-   <value>Arka plan görevleri debut modunda çalıştır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Запускать фоновые задания в режиме отладки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Run background job in debug mode</value>
+   <value>AEAA4DDF-6954-02EA-A68E-E143658BBF8F</value>
   </title>
   <id>29</id>
   <valueType>
@@ -3700,16 +3284,8 @@
  <attributes>
   <name>UpdatePause</name>
   <title>
-   <key>tr</key>
-   <value>Güncelleme arası</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пауза обновления</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update pause</value>
+   <value>B3DF8FC3-A3F2-D8A5-5EA2-2834E0317D53</value>
   </title>
   <id>30</id>
   <valueType>
@@ -3731,16 +3307,8 @@
  <attributes>
   <name>WaitJob</name>
   <title>
-   <key>tr</key>
-   <value>Bekleme işi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ожидание задачи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Wait job</value>
+   <value>98B8E702-0B01-F19D-D92A-A0FEED2D9FAB</value>
   </title>
   <id>31</id>
   <valueType>
@@ -3759,16 +3327,8 @@
  <attributes>
   <name>ActiveJob</name>
   <title>
-   <key>tr</key>
-   <value>Aktif iş</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Активная задача</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Active job</value>
+   <value>CA6E9002-52DA-176C-CCF3-3F4373F2B799</value>
   </title>
   <id>32</id>
   <valueType>
@@ -3787,16 +3347,8 @@
  <attributes>
   <name>ComplitedJob</name>
   <title>
-   <key>tr</key>
-   <value>Tamamlanan iş</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ЗавершеноЗадание</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Complited job</value>
+   <value>A4AC7321-60D5-ECE1-1A47-7FC16D9027EA</value>
   </title>
   <id>36</id>
   <valueType>
@@ -3815,16 +3367,8 @@
  <attributes>
   <name>ValidationErrors</name>
   <title>
-   <key>tr</key>
-   <value>Doğrulama hataları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ошибки проверок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Validation errors</value>
+   <value>496297CD-6549-1EB9-93B5-5F3443254915</value>
   </title>
   <id>48</id>
   <valueType>
@@ -3839,16 +3383,8 @@
   <columns>
    <name>ErrorDescription</name>
    <title>
-    <key>tr</key>
-    <value>Hata açıklaması</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Описание ошибки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Error description</value>
+    <value>E2138700-C197-3C3C-C3D5-519EDCA7E4B4</value>
    </title>
    <id>49</id>
    <valueType>
@@ -3865,16 +3401,8 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Иконка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Icon</value>
+    <value>AC7CB1FD-7456-B670-0C47-79B12567435D</value>
    </title>
    <id>50</id>
    <valueType>
@@ -3893,16 +3421,8 @@
   <columns>
    <name>StepNumber</name>
    <title>
-    <key>tr</key>
-    <value>Adım numarası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер шага</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Step number</value>
+    <value>FEC5B3F3-D830-72AF-FE7F-F03F1E712BF8</value>
    </title>
    <id>51</id>
    <valueType>
@@ -3921,16 +3441,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>REf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>3F201213-1952-8CE0-0B9B-B415C09FDEA5</value>
    </title>
    <id>59</id>
    <valueType>
@@ -3947,16 +3459,8 @@
  <attributes>
   <name>UpdateInfoList</name>
   <title>
-   <key>tr</key>
-   <value>Bilgi listesi grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список уведомлений обновления</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update info list</value>
+   <value>B0C236FB-8CF4-5D30-0345-55C6964CD199</value>
   </title>
   <id>67</id>
   <valueType>
@@ -3971,16 +3475,8 @@
   <columns>
    <name>Method</name>
    <title>
-    <key>tr</key>
-    <value>Metod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Метод</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Method</value>
+    <value>D492CB5F-1813-7D4D-D2AE-E6B29096C899</value>
    </title>
    <id>68</id>
    <valueType>
@@ -3997,16 +3493,8 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>tr</key>
-    <value>Açıklama</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>C80D2C32-D0F6-83EC-C792-27BF039B2CFC</value>
    </title>
    <id>69</id>
    <valueType>
@@ -4023,16 +3511,8 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Иконка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Icon</value>
+    <value>61B4696E-D4B9-3060-0A86-604015E300C0</value>
    </title>
    <id>70</id>
    <valueType>
@@ -4051,16 +3531,8 @@
   <columns>
    <name>FullDescription</name>
    <title>
-    <key>tr</key>
-    <value>Uzun tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Полное наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Full description</value>
+    <value>1391194E-F04E-6E0B-BD7E-EBF31DE8162D</value>
    </title>
    <id>71</id>
    <valueType>
@@ -4077,16 +3549,8 @@
   <columns>
    <name>Scheduled</name>
    <title>
-    <key>tr</key>
-    <value>Zamanlanmış</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Запланировано</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Scheduled</value>
+    <value>FEC4E86A-9125-725F-F2B3-32DFAA2CCD6F</value>
    </title>
    <id>72</id>
    <valueType>
@@ -4102,16 +3566,8 @@
   <columns>
    <name>Status</name>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Status</value>
+    <value>783D0AB1-72B0-4BD7-7066-614DAF39A641</value>
    </title>
    <id>73</id>
    <valueType>
@@ -4128,16 +3584,8 @@
   <columns>
    <name>AppliedDate</name>
    <title>
-    <key>tr</key>
-    <value>Uygulanan tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата установки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Applied date</value>
+    <value>2BAA0CFE-FCC3-6337-7F27-7357EF27B1AC</value>
    </title>
    <id>76</id>
    <valueType>
@@ -4154,16 +3602,8 @@
   <columns>
    <name>ReleaseNumber</name>
    <title>
-    <key>tr</key>
-    <value>Sürüm numarası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер релиза</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Release number</value>
+    <value>6E037BB5-0A2A-A221-1879-9B35B986931C</value>
    </title>
    <id>77</id>
    <valueType>
@@ -4181,16 +3621,8 @@
  <attributes>
   <name>CurrentUpdateMethod</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut güncelleme yöntemi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущий способ обновления</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current update method</value>
+   <value>95B7BCA6-4A93-6B7A-A68F-F58AA84FD01C</value>
   </title>
   <id>75</id>
   <valueType>
@@ -4207,16 +3639,8 @@
  <attributes>
   <name>LastReleaseNumber</name>
   <title>
-   <key>tr</key>
-   <value>Son sürüm numarası</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Последний номер релиза</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Last release number</value>
+   <value>903FF7CC-283B-3C36-6D19-98122CCA7FC6</value>
   </title>
   <id>78</id>
   <valueType>
@@ -4233,16 +3657,8 @@
  <attributes>
   <name>CurrentReleaseNumber</name>
   <title>
-   <key>tr</key>
-   <value>Güncel sürüm numarası</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущий номер релиза</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current release number</value>
+   <value>1FF6B51E-6C82-4B89-9D99-98E9025D2EBB</value>
   </title>
   <id>79</id>
   <valueType>
@@ -4259,16 +3675,8 @@
  <formCommands>
   <name>RunCurrent</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut çalıştır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Запустить текущий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Run current</value>
+   <value>1B6D2D83-6634-3D44-4A0A-A733E169187D</value>
   </title>
   <id>5</id>
   <use>
@@ -4288,16 +3696,8 @@
  <formCommands>
   <name>UpdateStatuses</name>
   <title>
-   <key>tr</key>
-   <value>Durumları güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОбновитьСтатусы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update statuses</value>
+   <value>25559268-4BE6-CABA-A805-536F7F6028FA</value>
   </title>
   <id>7</id>
   <use>
@@ -4317,16 +3717,8 @@
  <formCommands>
   <name>RunAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümünü çalıştır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Запустить все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Run all</value>
+   <value>7BBCAC60-832D-7984-456A-A75A34C8E329</value>
   </title>
   <id>12</id>
   <use>
@@ -4346,16 +3738,8 @@
  <formCommands>
   <name>ClearJobs</name>
   <title>
-   <key>tr</key>
-   <value>Temizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Очистить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Clear</value>
+   <value>C5679B60-3F1A-7526-68BA-A519F7B83136</value>
   </title>
   <id>13</id>
   <use>

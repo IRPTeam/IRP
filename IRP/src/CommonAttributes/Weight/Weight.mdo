@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="371155a3-8f4b-41fa-9d5b-47ceb667b568">
  <name>Weight</name>
  <synonym>
-  <key>tr</key>
-  <value>Ağırlık</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Вес</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Weight</value>
+  <value>029A355F-2275-EEEB-BA6E-E84B7D943260</value>
  </synonym>
  <type>
   <types>Number</types>

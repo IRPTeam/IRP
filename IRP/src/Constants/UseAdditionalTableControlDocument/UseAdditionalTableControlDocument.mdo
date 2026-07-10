@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseAdditionalTableControlDocument</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek belge tablosu kontrolünü kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать дополнительный контроль табличных частей добкументов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use additional document table control</value>
+  <value>7C9A508F-9144-20F2-2232-2B046D87D5C9_</value>
  </synonym>
  <type>
   <types>Boolean</types>

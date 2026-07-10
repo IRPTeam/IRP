@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseBankDocuments</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Banka evrakları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать банковские документы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use bank documents</value>
+  <value>25CDC85F-1514-A351-1699-9CD77E891B2D</value>
  </synonym>
  <type>
   <types>Boolean</types>

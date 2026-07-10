@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R6025B_SimpleBatch</name>
  <synonym>
-  <key>tr</key>
-  <value>R6025 Temel parti</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R6025 Простая партия</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R6025 Simple batch</value>
+  <value>723B6FA1-EE8F-0B96-69D2-25C70B0F3C0C</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="868df77f-2a66-4b43-951d-61c5796f9f33">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Quantity</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>7FD86B28-BECB-73E8-8833-3B7E4A21308A</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <resources uuid="f1a58f8d-dc50-41db-89a0-9e0bdc67f4e4">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>41718CE6-0107-D6CE-EDC5-5CF438FDC237</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -69,16 +45,8 @@
  <dimensions uuid="f6e9d799-7423-4e89-b8fe-380c5a939718">
   <name>SimpleBatch</name>
   <synonym>
-   <key>tr</key>
-   <value>Temel parti</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Простая партия</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Simple batch</value>
+   <value>9F443CA2-13BD-4061-1E7A-A53DA79628B3</value>
   </synonym>
   <type>
    <types>CatalogRef.SimpleBatch</types>

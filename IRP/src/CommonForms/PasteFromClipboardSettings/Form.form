@@ -35,16 +35,8 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Stok adedi</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>По учету</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Exp. count</value>
+     <value>4D3B5153-C65F-6618-82A8-8D3E96A739E3</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>ExpCount</value>
@@ -52,16 +44,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Sayım adedi</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Фактическое количество</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Phys. count</value>
+     <value>D6A16660-208B-7A6A-A1F0-03A7DA0CDC6E</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>PhysCount</value>
@@ -125,16 +109,8 @@
  <attributes>
   <name>PasteQuantityAs</name>
   <title>
-   <key>tr</key>
-   <value>Miktarı şu şekilde yapıştır:</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вставить количество как...</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Paste quantity as</value>
+   <value>952AC1CC-E0FA-8A56-6515-5C6F5CD36178</value>
   </title>
   <id>1</id>
   <valueType>
@@ -151,16 +127,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>D0D7E77F-66BF-90F5-598C-CB73162A1181</value>
   </title>
   <id>1</id>
   <use>
@@ -176,16 +144,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>D89F91AF-873C-B5DB-B573-33428056D064</value>
   </title>
   <id>2</id>
   <use>

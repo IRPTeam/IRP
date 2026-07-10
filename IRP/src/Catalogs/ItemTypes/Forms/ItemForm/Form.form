@@ -186,16 +186,8 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Hizmet</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Услуга</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Service</value>
+     <value>2DAF74EA-16C2-6D11-1721-13784A12B12C</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ItemTypes.EnumValue.Service</value>
@@ -203,16 +195,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Malzeme</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Товар</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Product</value>
+     <value>F02E86C0-30EB-9BA0-028E-E367D69145A6</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ItemTypes.EnumValue.Product</value>
@@ -220,16 +204,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Sertifika</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Сертификат</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Certificate</value>
+     <value>F7633E77-237C-8E9B-B300-002CAC68B319</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ItemTypes.EnumValue.Certificate</value>
@@ -255,16 +231,8 @@
      <segments>Object.AlwaysAddNewRowAfterScan</segments>
     </dataPath>
     <toolTip>
-     <key>tr</key>
-     <value>Taramadan sonra, ürün her zaman yeni bir satır olarak eklenecektir. Ancak, farklı yerlerde, örneğin serilere göre gruplandırılabilir.</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>После сканирования товар всегда будет добавлен как новая строка. Однако в разных местах он все равно может быть сгруппирован, например, по серии.</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>After scanning, the product will always be added as a new line. However, in different places, it can still be grouped, for example, by series.</value>
+     <value>DA809B2F-C0CD-DB8E-E564-4369EF1270B3__________________________________________________________________________________________________________</value>
     </toolTip>
     <toolTipRepresentation>Button</toolTipRepresentation>
     <handlers>
@@ -307,16 +275,8 @@
      <segments>Object.NotUseLineGrouping</segments>
     </dataPath>
     <toolTip>
-     <key>tr</key>
-     <value>Temel alınarak belgeler oluşturulurken, tarama yapılırken, yükleme yapılırken - ürün gruplanmayacak, kaynaktaki gibi aynı şekilde yüklenecek.</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>При создании документов на основании, при сканировании, при загрузке - товар не будет сгруппирован, но будет загружен таким же образом, как в источнике.</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>When creating documents based on, when scanning, when uploading - the product will not be grouped, but will be loaded the same way as in the source.</value>
+     <value>7BB4F849-A4E7-4323-3DCB-BE015D1088D7________________________________________________________________________________________________________________</value>
     </toolTip>
     <toolTipRepresentation>Button</toolTipRepresentation>
     <extendedTooltip>
@@ -355,16 +315,8 @@
      <segments>Object.UseSerialLotNumber</segments>
     </dataPath>
     <toolTip>
-     <key>tr</key>
-     <value>Seri numaralarına göre takibi etkinleştir. Bu durumda, ürün serileri tüm belgelerde belirtilmelidir. Bu seçenek, bu tür ürünlerle ilgili daha önce oluşturulmuş belgeler varsa değiştirilmemelidir.</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Включите отслеживание по серийным номерам. В этом случае серия товара должна быть указана во всех документах. Этот параметр не следует изменять, если ранее были созданы документы с участием товаров этого типа.</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>Enable tracking by serial numbers. In this case, the product series must be specified in all documents. This option should not be changed if there were previously created documents involving products of this type.</value>
+     <value>1ED75FFE-C6FA-61D8-8FDD-D8E6B7C149B0_________________________________________________________________________________________________________________________________________________________________________________</value>
     </toolTip>
     <toolTipRepresentation>Button</toolTipRepresentation>
     <handlers>
@@ -401,16 +353,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Genel ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Общие настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Common settings</value>
+    <value>A8808D83-4C3D-B57B-BF78-800EAF262E09</value>
    </title>
    <extendedTooltip>
     <name>GroupCommonSettngsExtendedTooltip</name>
@@ -511,16 +455,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>2B07C7EE-0061-DF05-5561-1A5714695C1B</value>
    </title>
    <extendedTooltip>
     <name>GroupSerialLotNumberSettingsExtendedTooltip</name>
@@ -623,16 +559,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Envanter menşeileri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Источники происхождения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source of origins</value>
+    <value>21E076CD-2366-55B4-406F-FD16F40D8085</value>
    </title>
    <extendedTooltip>
     <name>GroupSourceOfOriginsSettingsExtendedTooltip</name>
@@ -662,16 +590,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings</value>
+   <value>6733367E-77FC-8D1F-F00E-ED52E8ADF4D9</value>
   </title>
   <extendedTooltip>
    <name>GrouSettingsExtendedTooltip</name>
@@ -1043,16 +963,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ulaşılabilir ek alanlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Доступные реквизиты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Available attributes</value>
+    <value>AF380E1A-8282-46F4-4F59-9AB0BCBBD9B7</value>
    </title>
    <extendedTooltip>
     <name>GroupAvailableAttributesExtendedTooltip</name>
@@ -1085,16 +997,8 @@
      <segments>Object.EachSerialLotNumberIsUnique</segments>
     </dataPath>
     <toolTip>
-     <key>tr</key>
-     <value>Bu seçenek etkinleştirildiğinde, sistem her serinin benzersiz olduğundan emin olacaktır, yani sadece bir kez alınabilir ve düşülebilir. Aynı zamanda, serideki miktar 1 olarak ayarlanabilir. Örneğin, bir telefonun IMEI'si.</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Когда эта опция включена, система гарантирует, что каждая серия уникальна, то есть она может быть получена и списана только один раз, а количество в серии может быть равно только 1. Например, IMEI телефона.</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>When this option is enabled, the system will ensure that each series is unique, meaning it can only be received and written off once. At the same time, the quantity in the series can be set to 1. For example, a phone's IMEI.</value>
+     <value>DE064DE1-D817-EE98-8095-58A29B0A2522____________________________________________________________________________________________________________________________________________________________________________________________</value>
     </toolTip>
     <toolTipRepresentation>Button</toolTipRepresentation>
     <extendedTooltip>
@@ -1133,16 +1037,8 @@
      <segments>Object.SingleRow</segments>
     </dataPath>
     <toolTip>
-     <key>tr</key>
-     <value>Bu seçeneği etkinleştirirseniz, her seri numarasını ayrı bir satırda belirtmek zorunda kalacaksınız. Yani, tek bir satırda birden fazla seriyi belirtmek mümkün olmayacak.</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Если вы включите эту опцию, то каждый серийный номер будет в отдельной строке. То есть, невозможно будет указать более одной серии в одной строке.</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>If you enable this option, then the system will have to specify each serial number in a separate line. That is, it will not be possible to specify more than one series in a single line.</value>
+     <value>4896C688-5565-EC4C-CD00-0A1BA19CC8A7_____________________________________________________________________________________________________________________________________________________</value>
     </toolTip>
     <toolTipRepresentation>Button</toolTipRepresentation>
     <handlers>
@@ -1423,16 +1319,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Seri lot ayarları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройки серийных номеров</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number settings</value>
+    <value>09007C61-02E5-B2E4-4F6F-F1D4190A8E6D</value>
    </title>
    <extendedTooltip>
     <name>PageSerialLotNumbersSettingsExtendedTooltip</name>
@@ -1528,16 +1416,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Tanım (malzeme)</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Наименовение (номенклатура)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Description (Item)</value>
+      <value>0DC60F1C-4E9D-60EE-ED62-261E8942A2B8</value>
      </title>
      <extendedTooltip>
       <name>GroupItemDescriptionTemplateExtendedTooltip</name>
@@ -1633,16 +1513,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Ful tanım (malzeme)</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Местное полное наименовение (номенклатура)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Local full description (Item)</value>
+      <value>1B3CD56B-2C01-66DC-CDC9-948209EF77FE</value>
      </title>
      <extendedTooltip>
       <name>GroupItemLocalFullDescriptionTemplateExtendedTooltip</name>
@@ -1738,16 +1610,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Yabancı ful tanımı (malzeme)</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Полное иностранное наименование (номенклатура)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Foreign full description (Item)</value>
+      <value>97ED083C-D79C-DC6C-C7C7-74354E62D784</value>
      </title>
      <extendedTooltip>
       <name>GroupItemForeignFullDescriptionTemplateExtendedTooltip</name>
@@ -1777,16 +1641,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Malzeme</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Номенклатура</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Item</value>
+     <value>825A8D42-71EC-0595-5B0B-BCB03447F823</value>
     </title>
     <titleFont xsi:type="core:FontRef">
      <font>Style.LargeTextFont</font>
@@ -1886,16 +1742,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Tanım (varyant)</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Наименование (характеристика)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Description (Item key)</value>
+      <value>2F9AF284-2286-1523-3B99-9BA55B5DB9B1</value>
      </title>
      <extendedTooltip>
       <name>GroupItemKeyDescriptionTemplateExtendedTooltip</name>
@@ -1991,16 +1839,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Ful tanım (varyant)</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Местное полное наименовение (характеристика)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Local full description (Item key)</value>
+      <value>A19C372C-BAFD-1668-8F0B-B44833A69C0E</value>
      </title>
      <extendedTooltip>
       <name>GroupItemKeyLocalFullDescriptionTemplateExtendedTooltip</name>
@@ -2096,16 +1936,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Yabancı ful tanımı (varyant)</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Полное иностранное наименование (характеристика)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Foreign full description (Item key)</value>
+      <value>FAD81F3A-69D7-F844-4303-33D192399DBE</value>
      </title>
      <extendedTooltip>
       <name>GroupItemKeyForeignFullDescriptionTemplateExtendedTooltip</name>
@@ -2135,16 +1967,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Varyant</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Характеристика</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Item key</value>
+     <value>546FDA26-66AB-6E3D-D219-9D09D6322A52</value>
     </title>
     <titleFont xsi:type="core:FontRef">
      <font>Style.LargeTextFont</font>
@@ -2175,16 +1999,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Tanım şablonları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаблоны наименований</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description templates</value>
+    <value>80A86809-E6E0-7340-00E7-73C9125E43D8</value>
    </title>
    <extendedTooltip>
     <name>PageDecriptionTemplateExtendedTooltip</name>
@@ -2208,16 +2024,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>F2F487D4-5AD1-5189-9B57-707AC3961F50</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -2277,16 +2085,8 @@
  <formCommands>
   <name>EditItemDescriptionTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Formula belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить формулу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set formula</value>
+   <value>A3B22481-A202-62FC-C8D9-9FC50CD89F33</value>
   </title>
   <id>1</id>
   <use>
@@ -2302,16 +2102,8 @@
  <formCommands>
   <name>EditItemLocalFullDescriptionTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Formula belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить формулу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set formula</value>
+   <value>346CEACB-FDD5-E3A4-42A3-3968B411063A</value>
   </title>
   <id>2</id>
   <use>
@@ -2327,16 +2119,8 @@
  <formCommands>
   <name>EditItemForeignFullDescriptionTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Formula belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить формулу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set formula</value>
+   <value>EF45428B-D32D-9E6C-CBE3-3F6DE1778B4A</value>
   </title>
   <id>3</id>
   <use>
@@ -2352,16 +2136,8 @@
  <formCommands>
   <name>EditItemKeyDescriptionTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Formula belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить формулу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set formula</value>
+   <value>DEAA836F-E899-323F-FC89-934CCE18F9FC</value>
   </title>
   <id>4</id>
   <use>
@@ -2377,16 +2153,8 @@
  <formCommands>
   <name>EditItemKeyForeignFullDescriptionTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Formula belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить формулу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set formula</value>
+   <value>4F0EC377-1423-1F76-6F30-0FD3BCF3E97A</value>
   </title>
   <id>5</id>
   <use>
@@ -2402,16 +2170,8 @@
  <formCommands>
   <name>EditItemKeyLocalFullDescriptionTemplate</name>
   <title>
-   <key>tr</key>
-   <value>Formula belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить формулу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set formula</value>
+   <value>8910BEFE-25A7-626B-B4BD-DFDFDAD9E3A8</value>
   </title>
   <id>6</id>
   <use>

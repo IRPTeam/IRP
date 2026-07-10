@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:core_1="http://g5.1c.ru/v8/dt/data-composition-system/core" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Erteleme fişini seçin</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Выбор отложенного чека</value>
- </title>
- <title>
   <key>en</key>
-  <value>Select postponed receipt</value>
+  <value>CF59B91C-8BEC-EF28-8B54-4A6A34636537</value>
  </title>
  <items xsi:type="form:Table">
   <name>Receipts</name>
@@ -1200,16 +1192,8 @@
  <attributes>
   <name>Receipts</name>
   <title>
-   <key>tr</key>
-   <value>Makbuzlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Чеки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Receipts</value>
+   <value>DD1BDD9A-32D3-57FE-E25E-E3F6732AAD35</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1288,16 +1272,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Gelen</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Приход</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Receipt</value>
+       <value>521967F4-681A-851A-A46B-B590558BDE04</value>
       </content>
      </localValue>
     </title>
@@ -1364,16 +1340,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tip</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Вид</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Type</value>
+       <value>04DA13A8-F287-497E-E343-3F5761FBC98E</value>
       </content>
      </localValue>
     </title>
@@ -1387,16 +1355,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şube</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Структурное подразделение</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Branch</value>
+       <value>3FB5A4C3-7599-15A7-7435-5624E8D68A87</value>
       </content>
      </localValue>
     </title>
@@ -1416,16 +1376,8 @@ WHERE
  <attributes>
   <name>ItemList</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Товары</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item list</value>
+   <value>06410347-6A90-4AEA-A9A8-89EFF683C657</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1440,16 +1392,8 @@ WHERE
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item</value>
+    <value>C0CAB008-B3E3-73EE-EDBD-D79BB9022542</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1465,16 +1409,8 @@ WHERE
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>70204E1E-C6C1-766E-E6FA-ABB3FB7D1484</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1490,16 +1426,8 @@ WHERE
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Unit</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Единица измерения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unit</value>
+    <value>C1DD7913-954C-928F-FE4E-EC58029C6813</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1515,16 +1443,8 @@ WHERE
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Quantity</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>39CC73E9-DE81-75AF-F3F6-66C81DF0E812</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1540,16 +1460,8 @@ WHERE
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цена</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Price</value>
+    <value>BB8FA5E5-EBB5-5229-92CD-DE190E635458</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1565,16 +1477,8 @@ WHERE
   <columns>
    <name>TaxAmount</name>
    <title>
-    <key>tr</key>
-    <value>Vergi tutarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма налогов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Tax amount</value>
+    <value>1DEFD22B-5594-2813-3A83-30641EAA61AE</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1590,16 +1494,8 @@ WHERE
   <columns>
    <name>OffersAmount</name>
    <title>
-    <key>tr</key>
-    <value>Iskonto tutarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма скидки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Offers amount</value>
+    <value>7803D1FB-8A88-5669-93CB-B3A726231105</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1615,16 +1511,8 @@ WHERE
   <columns>
    <name>NetAmount</name>
    <title>
-    <key>tr</key>
-    <value>Net tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма без налогов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Net amount</value>
+    <value>0587EFB0-BC02-0AEC-C1D8-8A0476D7B284</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1640,16 +1528,8 @@ WHERE
   <columns>
    <name>TotalAmount</name>
    <title>
-    <key>tr</key>
-    <value>Toplam tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Общая сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Total amount</value>
+    <value>9B59EE4D-9D85-82BD-D2ED-D4CE224592F6</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1666,16 +1546,8 @@ WHERE
  <attributes>
   <name>CurrentBranch</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut şube</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущее структурное подразделение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current branch</value>
+   <value>6773CD10-C41D-3644-485B-B7B347F81461</value>
   </title>
   <id>12</id>
   <valueType>
@@ -1691,16 +1563,8 @@ WHERE
  <formCommands>
   <name>CancelReceipts</name>
   <title>
-   <key>tr</key>
-   <value>Makbuzları iptal et</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить чеки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel receipts</value>
+   <value>4260D41E-E934-3D76-6B21-1A301F8DCADA</value>
   </title>
   <id>1</id>
   <use>

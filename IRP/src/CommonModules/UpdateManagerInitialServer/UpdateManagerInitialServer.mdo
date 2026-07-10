@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1ac22f34-ab6b-4be6-8d90-431cfe530cc7">
  <name>UpdateManagerInitialServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Güncelleme yöneticisi ilk sunucu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Менеджер обновления инициализация сервера</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Update manager initial server</value>
+  <value>4A79DA2E-D115-5124-4CB9-9029E6F48955</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

@@ -414,16 +414,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Boyutlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Измерения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Dimensions</value>
+   <value>D3B8D961-4728-E1D5-504D-D52D84534238</value>
   </title>
   <extendedTooltip>
    <name>GroupDimensionsExtendedTooltip</name>
@@ -440,16 +432,8 @@
    <group>Vertical</group>
    <behavior>Collapsible</behavior>
    <collapsedRepresentationTitle>
-    <key>tr</key>
-    <value>Boyutlar</value>
-   </collapsedRepresentationTitle>
-   <collapsedRepresentationTitle>
-    <key>ru</key>
-    <value>Измерения</value>
-   </collapsedRepresentationTitle>
-   <collapsedRepresentationTitle>
     <key>en</key>
-    <value>Dimensions</value>
+    <value>5FA92D8B-4BC4-8E19-9B97-7E7D9981BBEE</value>
    </collapsedRepresentationTitle>
    <collapsed>true</collapsed>
    <representation>WeakSeparation</representation>
@@ -509,16 +493,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ağırlık bilgisi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Информация о весе</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Weight information</value>
+   <value>C54B3BF0-5E42-5786-6F59-95485B42BCC1</value>
   </title>
   <extendedTooltip>
    <name>GroupWeightInformationExtendedTooltip</name>
@@ -535,16 +511,8 @@
    <group>HorizontalIfPossible</group>
    <behavior>Collapsible</behavior>
    <collapsedRepresentationTitle>
-    <key>tr</key>
-    <value>Ağırlık bilgisi</value>
-   </collapsedRepresentationTitle>
-   <collapsedRepresentationTitle>
-    <key>ru</key>
-    <value>Информация о весе</value>
-   </collapsedRepresentationTitle>
-   <collapsedRepresentationTitle>
     <key>en</key>
-    <value>Weight information</value>
+    <value>E080274C-5E2A-01C5-5307-735F24E2F835</value>
    </collapsedRepresentationTitle>
    <collapsed>true</collapsed>
    <representation>WeakSeparation</representation>
@@ -622,16 +590,8 @@
  <formCommands>
   <name>UnlockAttributes</name>
   <title>
-   <key>tr</key>
-   <value>Alan kilidi çöz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разблокировать реквизиты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unlock attributes</value>
+   <value>001ABC4A-0B3F-D756-66CB-BC069B24B95E</value>
   </title>
   <id>2</id>
   <use>

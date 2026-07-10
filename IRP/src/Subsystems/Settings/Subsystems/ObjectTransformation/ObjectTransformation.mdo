@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1ec9b38f-bd61-4562-ab04-b5f4065b211f">
  <name>ObjectTransformation</name>
  <synonym>
-  <key>tr</key>
-  <value>Nesne dönüşümü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Преобразование объекта</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Object transformation</value>
+  <value>DB198352-A6F0-45E3-3EFC-C729B5FE72B6</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

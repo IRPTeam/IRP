@@ -344,16 +344,8 @@
  <attributes>
   <name>PropertiesTable</name>
   <title>
-   <key>tr</key>
-   <value>Özellikler tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица свойств</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Properties table</value>
+   <value>8F27229E-FED2-D684-444B-B0ABCE6EDEE2</value>
   </title>
   <id>1</id>
   <valueType>
@@ -368,16 +360,8 @@
   <columns>
    <name>isMarked</name>
    <title>
-    <key>tr</key>
-    <value>İşeretlendi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Помечен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is marked</value>
+    <value>0085A4E6-14DB-95A4-438F-F9C7AFD986CB</value>
    </title>
    <id>2</id>
    <valueType>
@@ -393,16 +377,8 @@
   <columns>
    <name>Property</name>
    <title>
-    <key>tr</key>
-    <value>Özellik</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Свойство</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Property</value>
+    <value>D4660E1A-8920-51BF-FE70-0410F84FDAB0</value>
    </title>
    <id>3</id>
    <valueType>
@@ -419,16 +395,8 @@
   <columns>
    <name>isCollection</name>
    <title>
-    <key>tr</key>
-    <value>Bu koleksiyondur</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это коллекция</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is collection</value>
+    <value>91F0F274-375B-0A7D-DCD5-563BD212A2AA</value>
    </title>
    <id>4</id>
    <valueType>
@@ -444,16 +412,8 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>8ECA17DA-656F-CF69-929F-F9FB6C41C15B</value>
    </title>
    <id>5</id>
    <valueType/>
@@ -467,16 +427,8 @@
   <columns>
    <name>FieldName</name>
    <title>
-    <key>tr</key>
-    <value>Alan ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование поля</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Field name</value>
+    <value>BCCF4B51-F524-D7AA-A967-7A4C650C3E85</value>
    </title>
    <id>6</id>
    <valueType>
@@ -494,16 +446,8 @@
  <formCommands>
   <name>SetValues</name>
   <title>
-   <key>tr</key>
-   <value>Değerleri belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить значения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set values</value>
+   <value>7E60B59B-27C5-054B-BC49-95B12CFFD7B8</value>
   </title>
   <id>1</id>
   <use>
@@ -523,16 +467,8 @@
  <formCommands>
   <name>Uncheck</name>
   <title>
-   <key>tr</key>
-   <value>İşareti kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Убрать пометку</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck</value>
+   <value>C0BCFF91-F3CC-C1FF-F9E6-6FA2870ED421</value>
   </title>
   <id>2</id>
   <use>

@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseInventory</name>
  <synonym>
-  <key>tr</key>
-  <value>Envanteri kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать складские операции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use inventory</value>
+  <value>9F0373C4-C677-02A2-2E41-180617021505</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>PLSections</name>
  <synonym>
-  <key>tr</key>
-  <value>Kâr&amp;Zarar Bölümleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Аналитики P&amp;L</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>P&amp;L Sections</value>
+  <value>B1EAE529-C0A6-5B8D-DFBA-A9B754E5CF35</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -26,16 +18,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Kâr&amp;Zarar Bölümü</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Аналитика P&amp;L</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>P&amp;L Section</value>
+  <value>EABEA5AC-B326-DEB3-319B-B7CB2686F456</value>
  </objectPresentation>
  <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>
@@ -54,16 +38,8 @@
  <attributes uuid="e07a498c-80b6-494c-a497-15062d33244a">
   <name>SectionType</name>
   <synonym>
-   <key>tr</key>
-   <value>Bölüm tür</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Section type</value>
+   <value>7226176B-415F-3463-31C4-406A35F4091B</value>
   </synonym>
   <type>
    <types>EnumRef.PLSectionTypes</types>
@@ -78,16 +54,8 @@
  <attributes uuid="28705193-43f7-47fb-a3ba-724298101819">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>28B0F30C-4122-482F-F1A8-8FD70E40B5B9</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -104,16 +72,8 @@
  <attributes uuid="ac12289c-b0ae-4c35-b8e9-7b25f619551b">
   <name>Expression</name>
   <synonym>
-   <key>tr</key>
-   <value>İfade</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Выражение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Expression</value>
+   <value>E7AD4BEA-7CED-FC5D-D9A6-65808F06FF41</value>
   </synonym>
   <type>
    <types>String</types>
@@ -130,16 +90,8 @@
  <attributes uuid="dc64beb9-1331-41b4-a4cf-08d3f741c0ba">
   <name>SectionName</name>
   <synonym>
-   <key>tr</key>
-   <value>Bölüm adı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Наименование аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Section name</value>
+   <value>FFA247C4-69FD-04AB-B7B8-8EFE410BFA6A</value>
   </synonym>
   <type>
    <types>String</types>
@@ -161,30 +113,14 @@
   </producedTypes>
   <name>Accounts</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesaplar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>План счетов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Accounts</value>
+   <value>C81CBE6F-58FA-153D-D02D-D6B8CDF3E467</value>
   </synonym>
   <attributes uuid="82f26f76-2776-48cc-aef8-2e0bff67c8ae">
    <name>Account</name>
    <synonym>
-    <key>tr</key>
-    <value>Hesap</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Банковский счет</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Account</value>
+    <value>4DEBD4F2-AA65-8456-6D8E-E493784028DC</value>
    </synonym>
    <type>
     <types>ChartOfAccountsRef.Basic</types>
@@ -198,16 +134,8 @@
   <attributes uuid="44670ec4-32ab-4d63-8466-e2bcc2663ab8">
    <name>TurnoversType</name>
    <synonym>
-    <key>tr</key>
-    <value>Ciro türleri</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид оборотов</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Turnovers type</value>
+    <value>D59789E9-F972-8568-8A55-502D8AA9F1AD</value>
    </synonym>
    <type>
     <types>EnumRef.AccountingAnalyticTypes</types>
@@ -221,16 +149,8 @@
   <attributes uuid="06227a9a-90d5-4326-a84b-62f159b7b6da">
    <name>ExtDimensionNumber</name>
    <synonym>
-    <key>tr</key>
-    <value>Kırılım No</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Номер субконто</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension number</value>
+    <value>C78BB566-7E27-6288-8FB3-34C3C0E7676D</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -246,16 +166,8 @@
   <attributes uuid="ee66c128-d002-42a9-838c-668a607a5f6b">
    <name>ExtDimensionValue</name>
    <synonym>
-    <key>tr</key>
-    <value>Kırılım değeri</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension value</value>
+    <value>D98B7538-0EE4-A191-1F0E-EEDF5DCB633B</value>
    </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -269,16 +181,8 @@
  <forms uuid="d5f890e9-6547-4ad6-95a5-5e8e9e14fe2d">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>0A17E01F-172B-BCD7-7EE0-04D68A8F55F1</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -286,16 +190,8 @@
  <forms uuid="9046da4f-34a8-4da4-9e5f-fcd49778d356">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>5E2DA608-C023-1C08-85FF-F2B8862D8F42</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -303,16 +199,8 @@
  <forms uuid="8195b46f-4802-40a5-b34c-0a054d423fdc">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>22E1A476-1ED7-E301-1475-5DA602E52E88</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

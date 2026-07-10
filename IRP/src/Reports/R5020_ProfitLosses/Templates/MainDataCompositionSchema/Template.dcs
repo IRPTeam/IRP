@@ -11,16 +11,8 @@
 			<field>Company</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şirket</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Организация</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Company</v8:content>
+					<v8:content>2E94911F-FB7A-913F-FF71-1D7DDDAC1097</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -32,16 +24,8 @@
 			<field>CurrencyMovementType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Çoklu döviz hareket tipi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Вид мультивалютной аналитики</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Multi currency movement type</v8:content>
+					<v8:content>EFC51B3B-ED67-DB59-98D9-9D79C057C8E7</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -53,16 +37,8 @@
 			<field>AdditionalAnalytic</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek detaylar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Дополнительная аналитика</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Additional analytic</v8:content>
+					<v8:content>63AA4C13-8ED3-3B9B-B367-7B110030F8FA</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -74,16 +50,8 @@
 			<field>ExpenseType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gider tipi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Статья затрат</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Expense type</v8:content>
+					<v8:content>C2E899D0-7EC6-289A-AFF4-46F19390BBF0</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -98,16 +66,8 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Varyant</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Характеристика</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>0D9A9730-47AF-AB8C-CE48-83F18915F9F5</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -122,16 +82,8 @@
 			<field>Currency</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валюта</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency</v8:content>
+					<v8:content>FB9ADD67-4DC7-D4AC-C9D5-5FD9152531B0</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -146,16 +98,8 @@
 			<field>Branch</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şube</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Структурное подразделение</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Branch</v8:content>
+					<v8:content>4F75808D-E784-0AF2-23E6-6A17896F0800</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -167,16 +111,8 @@
 			<field>ProfitLossCenter</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gelir/Maliyet Merkezi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Центр прибылей/убытков</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Revenue/Cost center</v8:content>
+					<v8:content>2DE566C3-E4E6-973A-A8C8-8F7F0EE1A396</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -188,16 +124,8 @@
 			<field>FixedAsset</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sabit kıymet</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Основное средство</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Fixed asset</v8:content>
+					<v8:content>D285F28B-0D78-A024-4C84-4CADA90F8A90</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -212,16 +140,8 @@
 			<field>LedgerType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Defter tipi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Тип учета</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ledger type</v8:content>
+					<v8:content>190439A4-2971-C699-9BDC-C0607F5E289A</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -236,16 +156,8 @@
 			<field>Expenses</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Giderler</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Расходы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Expenses</v8:content>
+					<v8:content>D71E44E9-69D8-5C15-57D4-4FCEC65166B5</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -254,16 +166,8 @@
 			<field>RevenueWithTaxes</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Vergiler Dahil Gelir</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доход с налогами</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Revenue with taxes</v8:content>
+					<v8:content>A364C083-A0DB-365D-D174-4321D59C28A6</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -272,16 +176,8 @@
 			<field>Revenue</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gelir</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Доход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Revenue</v8:content>
+					<v8:content>1DAC4625-826C-A62B-BC11-1B593C8B624F</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -290,16 +186,8 @@
 			<field>RevenueType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gelir tipi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Статья доходов</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Revenue type</v8:content>
+					<v8:content>C9D32758-A1DC-8E73-3033-3AAFCD3D66C4</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -308,16 +196,8 @@
 			<field>ExpensesWithTaxes</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Vergiler Dahil Giderler</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Расходы с налогами</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Expenses with taxes</v8:content>
+					<v8:content>84A0A1F9-1630-E49C-C9B4-40948FEC3569</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -326,16 +206,8 @@
 			<field>GrossRevenueWithTaxes</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Vergiler Dahil Brüt Gelir</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валовой доход с налогами</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Gross revenue with taxes</v8:content>
+					<v8:content>83BB4766-CFFE-A91F-FAE7-7A5B9BC60F3E</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -344,16 +216,8 @@
 			<field>GrossRevenue</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Brüt Gelir</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валовой доход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Gross revenue</v8:content>
+					<v8:content>A26C0A56-FDD7-DF38-8B42-2B772AF3445D</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -368,16 +232,8 @@
 			<field>ExpenseRevenueType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gider Gelir Türü</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Тип дохода/расхода</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Expense revenue type</v8:content>
+					<v8:content>C5D3F2FF-86DE-AD7C-C00E-EA75873B2434</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -389,16 +245,8 @@
 			<field>SecondPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Periyot, saniye</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Период, второй</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, second</v8:content>
+					<v8:content>A4831026-DDE2-214F-F439-9DEF247C6070</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -411,16 +259,8 @@
 			<field>MonthPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, ay</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Период, месяц</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, month</v8:content>
+					<v8:content>77251394-1896-1768-86C4-417B087BED35</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -432,16 +272,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>DF=yyyy.AA</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>DF=yyyy.MM</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF=yyyy.MM</v8:content>
+							<v8:content>E2649A5F-171D-310A-A1E5-5CD149941730</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -452,16 +284,8 @@
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İşlem evrakı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Документ</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:content>273C61A3-0ED0-83D9-9146-654CFBD62662</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -554,16 +378,8 @@ FROM
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem başı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>C87D7474-4E12-7F2C-CE6A-AB2E036DD8D1</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -580,16 +396,8 @@ FROM
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem sonu</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Конец периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>B74820B0-BB5F-6A8E-EB4E-E2DC6FEBCE3D</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -606,16 +414,8 @@ FROM
 		<name>ReportPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>98787395-3A99-878A-A706-65319686419E</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -632,16 +432,8 @@ FROM
 		<dcsset:name>Default</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Varsayılan</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>По умолчанию</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Default</v8:content>
+				<v8:content>311FDEEA-BFCA-9353-3FCA-A1BD0BA7E887</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">

@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9500S_AccrualAndDeductionValues</name>
  <synonym>
-  <key>tr</key>
-  <value>T9500 Tahakkuk ve indirim değerleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9500 Значения начислений и удержаний</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9500 Accrual and deduction values</value>
+  <value>6C85063C-8861-DF21-124E-E1DB7D77CD47</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -29,30 +21,14 @@
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>T9500 Tahakkuk ve indirim değerleri</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>T9500 Значения начислений и удержаний</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>T9500 Accrual and deduction values</value>
+  <value>32EE22C8-C613-76FA-A540-0D8AB69B2A49</value>
  </recordPresentation>
  <resources uuid="b59ca333-121f-4f6b-8e16-8c8f767e566d">
   <name>Value</name>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Value</value>
+   <value>E75A9E9D-7867-66FE-EC65-5E8A2552E232</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -66,16 +42,8 @@
  <resources uuid="d5cc1bae-3cca-4e49-9119-15ad179d41b7">
   <name>NotActual</name>
   <synonym>
-   <key>tr</key>
-   <value>Güncel değil</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Неактуально</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Not actual</value>
+   <value>B3733DB4-142F-41E4-46E0-0F7A63BF963E</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -89,16 +57,8 @@
  <attributes uuid="d93d5b18-4b9a-471b-897e-6d67f427d109">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>F0C74BE0-AB65-ADAC-CA6B-BBB35A4CDFF4</value>
   </synonym>
   <type>
    <types>DocumentRef.OpeningEntry</types>
@@ -114,16 +74,8 @@
  <attributes uuid="89af9ab4-0e63-4945-b391-dcffd894d355">
   <name>CancelDocument</name>
   <synonym>
-   <key>tr</key>
-   <value>Belgeyi iptal et</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отменить документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cancel document</value>
+   <value>C33CC997-3274-C417-72C1-15380B6065F0</value>
   </synonym>
   <type>
    <types>DocumentRef.EmployeeTransfer</types>
@@ -137,16 +89,8 @@
  <dimensions uuid="a863a8e5-d920-4eb4-aa7f-992e946932e7">
   <name>EmployeeOrPosition</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan veya pozisyon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Должность сотрудника</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee or position</value>
+   <value>59333D98-9734-CB51-1344-4A4D4DA8B6C0</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -162,16 +106,8 @@
  <dimensions uuid="a24b7fdd-becd-45c3-ac63-92f224c35edf">
   <name>AccualOrDeductionType</name>
   <synonym>
-   <key>tr</key>
-   <value>Birikim veya kesinti türü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип начисления или удержания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Accual or deduction type</value>
+   <value>617216F7-0750-B462-245D-DBE2E6645FB1</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -186,16 +122,8 @@
  <forms uuid="e5b29c2d-7605-4734-83a0-a5ead78dbbab">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>3781C1CF-C615-E7BA-A0F0-0AD68150C209</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -203,16 +131,8 @@
  <forms uuid="a5ee3e78-71e2-43f2-a36f-4657d1c8895b">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>A37BD021-C56F-201A-A2DE-EE3E00C70EF3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

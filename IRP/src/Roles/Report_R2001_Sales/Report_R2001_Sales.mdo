@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f95d6b9d-2e80-4e67-ac67-877f3daad6be">
  <name>Report_R2001_Sales</name>
  <synonym>
-  <key>tr</key>
-  <value>R2001A Satışlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R2001_Продажи</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R2001_Sales</value>
+  <value>DCFDDDD0-D787-C0C8-816C-C48E8B3BF20D</value>
  </synonym>
 </mdclass:Role>

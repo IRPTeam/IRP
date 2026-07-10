@@ -2,16 +2,8 @@
 <mdclass:CommonTemplate xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="971111f6-d7cc-4673-8070-897ba10e7807">
  <name>HTMLPrintEmulJSON</name>
  <synonym>
-  <key>tr</key>
-  <value>HTMLPrint emul JSON</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>HTML эмул. печати JSON</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>HTMLPrint emul JSON</value>
+  <value>59DAD152-A691-24F9-943F-FCEB0E655203</value>
  </synonym>
  <templateType>TextDocument</templateType>
 </mdclass:CommonTemplate>

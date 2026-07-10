@@ -51,16 +51,8 @@
     <typeDomainEnabled>true</typeDomainEnabled>
     <textEdit>true</textEdit>
     <inputHint>
-     <key>tr</key>
-     <value>Doldurun ve Enter basınız</value>
-    </inputHint>
-    <inputHint>
-     <key>ru</key>
-     <value>Введите и нажмите Enter</value>
-    </inputHint>
-    <inputHint>
      <key>en</key>
-     <value>Type and press enter</value>
+     <value>32781F88-F9C1-3164-4539-9CFF43CD142A</value>
     </inputHint>
    </extInfo>
   </items>
@@ -416,6 +408,7 @@
      <name>ItemListItemListCommandBack</name>
      <id>104</id>
      <visible>true</visible>
+     <enabled>false</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
@@ -1428,16 +1421,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Seçilen</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Подобрано</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picked out</value>
+   <value>EC7FBBDF-489F-4EF4-4919-99D16557592D</value>
   </title>
   <extendedTooltip>
    <name>GroupPickedOutExtendedTooltip</name>
@@ -1512,16 +1497,8 @@
  <attributes>
   <name>ItemKeyList</name>
   <title>
-   <key>tr</key>
-   <value>Varyant listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Товары</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key list</value>
+   <value>872FC4BA-CB56-07CE-EC19-9C91FC23062A</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1537,16 +1514,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>71637C30-9269-E4CE-E0B8-804D713A0048</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1562,16 +1531,8 @@
   <columns>
    <name>InStock</name>
    <title>
-    <key>tr</key>
-    <value>Stokta</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>В наличии</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>In stock</value>
+    <value>94068792-286A-6C40-09B9-9AF8584DBC14</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1590,16 +1551,8 @@
   <columns>
    <name>Title</name>
    <title>
-    <key>tr</key>
-    <value>Başlık</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Title</value>
+    <value>EA6EEF17-0CF8-EEA8-8582-220EFF7D1892</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1618,16 +1571,8 @@
   <columns>
    <name>PickedOut</name>
    <title>
-    <key>tr</key>
-    <value>Seçilen</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Выбранные документы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picked out</value>
+    <value>A3C458D5-66D7-AA0F-FC3A-A9F54F046FF7</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1643,16 +1588,8 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цена</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Price</value>
+    <value>213FDA31-495C-520A-A4EF-F166E078070D</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1668,16 +1605,8 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ед. изм.</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unit</value>
+    <value>85E1EEBF-05B5-419C-CAFF-F8BDAA924D86</value>
    </title>
    <id>24</id>
    <valueType>
@@ -1694,16 +1623,8 @@
   <columns>
    <name>InStockReceiver</name>
    <title>
-    <key>tr</key>
-    <value>Alıcı depodaki</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>В наличии на складе-получателе</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>In stock receiver</value>
+    <value>76B23D7A-6FEE-3F55-5994-4904739DF1A4</value>
    </title>
    <id>28</id>
    <valueType>
@@ -1722,16 +1643,8 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>4621B1E9-AAE2-9891-1B65-599118432D77</value>
    </title>
    <id>33</id>
    <valueType>
@@ -1747,16 +1660,8 @@
   <columns>
    <name>UseSerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri/lot numaraları kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ведется учет по сериям номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use serial lot number</value>
+    <value>77A9996B-FF01-D001-141A-A70281EFC673</value>
    </title>
    <id>34</id>
    <valueType>
@@ -1772,16 +1677,8 @@
   <columns>
    <name>isService</name>
    <title>
-    <key>tr</key>
-    <value>Bu hizmet</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это услуга</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is service</value>
+    <value>5000320C-DED2-7740-0225-561FD46692D4</value>
    </title>
    <id>39</id>
    <valueType>
@@ -1797,16 +1694,8 @@
   <columns>
    <name>AlwaysAddNewRowAfterScan</name>
    <title>
-    <key>tr</key>
-    <value>Okutulduğunda hep yeni satır ekle</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Всегда добавлять новую строку при сканировании</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Always add new row after scan</value>
+    <value>1F7713FB-3C6B-1A46-6A8D-D2BB18EBEE85</value>
    </title>
    <id>41</id>
    <valueType>
@@ -1822,16 +1711,8 @@
   <columns>
    <name>ControlCodeString</name>
    <title>
-    <key>tr</key>
-    <value>Kontrol kodu dizesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Контролировать коды</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Control code string</value>
+    <value>AD5123EF-21ED-2763-3873-3B3169D2BC2B</value>
    </title>
    <id>45</id>
    <valueType>
@@ -1847,16 +1728,8 @@
   <columns>
    <name>isCertificate</name>
    <title>
-    <key>tr</key>
-    <value>Sertifika var</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Есть сертификат</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is certificate</value>
+    <value>DB1D66E4-3549-67E6-6789-98C8C7A1EFAC</value>
    </title>
    <id>46</id>
    <valueType>
@@ -1873,16 +1746,8 @@
  <attributes>
   <name>ItemList</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Товары</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item list</value>
+   <value>8E343B46-2197-2608-8DB4-4AA83ACB6EF6</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1897,16 +1762,8 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item</value>
+    <value>4E3DA0AA-87C7-AD9D-D2F8-8CCE7521B022</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1922,16 +1779,8 @@
   <columns>
    <name>InStock</name>
    <title>
-    <key>tr</key>
-    <value>Stokta</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>В наличии</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>In stock</value>
+    <value>D34D7CBB-2D39-A49E-EC1C-C6A341896086</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1950,16 +1799,8 @@
   <columns>
    <name>Title</name>
    <title>
-    <key>tr</key>
-    <value>Başlık</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Title</value>
+    <value>19943585-2A32-FAEF-F0C4-40DAD2868095</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1978,16 +1819,8 @@
   <columns>
    <name>PickedOut</name>
    <title>
-    <key>tr</key>
-    <value>Seçilen</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Подобрано</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picked out</value>
+    <value>DBF631F4-16EE-68EB-B078-88D4080A1F53</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2003,16 +1836,8 @@
   <columns>
    <name>ItemKeyCount</name>
    <title>
-    <key>tr</key>
-    <value>Varyant sayısı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество характеристик</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key count</value>
+    <value>C934141C-53D9-31D1-1595-554B6DED9F46</value>
    </title>
    <id>17</id>
    <valueType>
@@ -2032,16 +1857,8 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цена</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Price</value>
+    <value>8D0908F1-91EB-6705-5C4B-BB4E26B10031</value>
    </title>
    <id>21</id>
    <valueType>
@@ -2057,16 +1874,8 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ед. изм.</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unit</value>
+    <value>A9FA06F4-F590-CAE6-6111-183068CAD845</value>
    </title>
    <id>25</id>
    <valueType>
@@ -2083,16 +1892,8 @@
   <columns>
    <name>InStockReceiver</name>
    <title>
-    <key>tr</key>
-    <value>Alıcı depodaki</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>В наличии на складе-получателе</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>In stock receiver</value>
+    <value>5A6CE22B-E78A-9D17-7198-8595AF00F51A</value>
    </title>
    <id>29</id>
    <valueType>
@@ -2111,16 +1912,8 @@
   <columns>
    <name>UseSerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri/lot numaraları kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ведется учет по сериям номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use serial lot number</value>
+    <value>ECACDF53-3A58-2D4F-F0BD-DDD9363BF360</value>
    </title>
    <id>35</id>
    <valueType>
@@ -2136,16 +1929,8 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>1B35BF44-C453-1EDD-DC28-8678A06880A1</value>
    </title>
    <id>36</id>
    <valueType>
@@ -2161,16 +1946,8 @@
   <columns>
    <name>isService</name>
    <title>
-    <key>tr</key>
-    <value>Bu hizmet</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это услуга</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is service</value>
+    <value>93E07411-5E76-4DAD-DB60-0BB7063E76BE</value>
    </title>
    <id>38</id>
    <valueType>
@@ -2186,16 +1963,8 @@
   <columns>
    <name>ControlCodeString</name>
    <title>
-    <key>tr</key>
-    <value>Kontrol kodu dizesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Контролировать коды</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Control code string</value>
+    <value>45AFA6EC-4E9F-0EA1-1906-6A8124FDD4C4</value>
    </title>
    <id>44</id>
    <valueType>
@@ -2211,16 +1980,8 @@
   <columns>
    <name>isCertificate</name>
    <title>
-    <key>tr</key>
-    <value>Sertifika var</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Есть сертификат</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is certificate</value>
+    <value>EA32F99F-E79E-7E73-34E7-7562B13EAAF3</value>
    </title>
    <id>47</id>
    <valueType>
@@ -2237,16 +1998,8 @@
  <attributes>
   <name>ItemTableValue</name>
   <title>
-   <key>tr</key>
-   <value>Malzemeler tablosu değeri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Значение таблицы номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item table value</value>
+   <value>9CB65AE4-938A-4B2D-D926-6908DA0BF721</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2261,16 +2014,8 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item</value>
+    <value>E8BC53B7-C6FD-D0D2-2F10-02DFB6127ABB</value>
    </title>
    <id>9</id>
    <valueType>
@@ -2286,16 +2031,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>2C4B645F-893E-CCD9-9226-611F0D100623</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2312,16 +2049,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>1D25E543-042C-9526-69CF-FD74AC90BF94</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2337,16 +2066,8 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цена</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Price</value>
+    <value>7C408233-E060-7867-7E86-659967CEF9E8</value>
    </title>
    <id>22</id>
    <valueType>
@@ -2362,16 +2083,8 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>3392A13D-801F-7AB1-1DB0-0333F3332CCB</value>
    </title>
    <id>23</id>
    <valueType>
@@ -2387,16 +2100,8 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ед. изм.</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unit</value>
+    <value>258A0029-87F0-F8B0-0398-84DA668183DA</value>
    </title>
    <id>26</id>
    <valueType>
@@ -2413,16 +2118,8 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>A3FB28EC-756D-3551-13BE-EE40AC7F5E62</value>
    </title>
    <id>31</id>
    <valueType>
@@ -2438,16 +2135,8 @@
   <columns>
    <name>UseSerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri/lot numaraları kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ведется учет по сериям номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use serial lot number</value>
+    <value>A6676EA9-F07A-A425-5D35-54C885E2C226</value>
    </title>
    <id>32</id>
    <valueType>
@@ -2463,16 +2152,8 @@
   <columns>
    <name>isService</name>
    <title>
-    <key>tr</key>
-    <value>Bu hizmet</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это услуга</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is service</value>
+    <value>E0FA7093-50CF-61CF-F5A1-14B580176E5B</value>
    </title>
    <id>37</id>
    <valueType>
@@ -2488,16 +2169,8 @@
   <columns>
    <name>SourceOfOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Envanter menşei</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Источник происхождения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source of origin</value>
+    <value>94D26410-6CB1-2AEF-F32A-ACA8FAE3F2AC</value>
    </title>
    <id>40</id>
    <valueType>
@@ -2513,16 +2186,8 @@
   <columns>
    <name>AlwaysAddNewRowAfterScan</name>
    <title>
-    <key>tr</key>
-    <value>Okutulduğunda hep yeni satır ekle</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Всегда добавлять новую строку при сканировании</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Always add new row after scan</value>
+    <value>EE2C8133-66D0-9D10-04AB-BC7FFFC6AE8D</value>
    </title>
    <id>42</id>
    <valueType>
@@ -2538,16 +2203,8 @@
   <columns>
    <name>ControlCodeString</name>
    <title>
-    <key>tr</key>
-    <value>Kontrol kodu dizesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Контролировать коды</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Control code string</value>
+    <value>9D8680DC-5EA3-F513-3C68-8E642BB6F729</value>
    </title>
    <id>43</id>
    <valueType>
@@ -2563,16 +2220,8 @@
   <columns>
    <name>isCertificate</name>
    <title>
-    <key>tr</key>
-    <value>Sertifika var</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это сертификат</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is certificate</value>
+    <value>90468C06-D403-2D42-24FF-F95C1F8A2B34</value>
    </title>
    <id>48</id>
    <valueType>
@@ -2589,16 +2238,8 @@
  <attributes>
   <name>ItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item type</value>
+   <value>4AA330D1-6BE8-02AE-E575-546DE806D45C</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2614,16 +2255,8 @@
  <attributes>
   <name>Stores</name>
   <title>
-   <key>tr</key>
-   <value>Depolar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Склады</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Stores</value>
+   <value>E041878E-EEFA-7856-637A-AFAC598C0118</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2642,16 +2275,8 @@
  <attributes>
   <name>EndPeriod</name>
   <title>
-   <key>tr</key>
-   <value>Son tarih</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Конец периода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>End period</value>
+   <value>FFC396DE-E1B7-64B1-1B07-723EA70BE21C</value>
   </title>
   <id>6</id>
   <valueType>
@@ -2668,16 +2293,8 @@
  <attributes>
   <name>PriceType</name>
   <title>
-   <key>tr</key>
-   <value>Fiyat tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип цен</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Price type</value>
+   <value>ECDB7BD4-1C7E-05F2-291F-FCA43B120B79</value>
   </title>
   <id>18</id>
   <valueType>
@@ -2693,16 +2310,8 @@
  <attributes>
   <name>TitleFilter</name>
   <title>
-   <key>tr</key>
-   <value>Filtre tanımı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Поиск по наименованию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Title filter</value>
+   <value>671FD54F-C996-E863-3BC6-61F1F9072927</value>
   </title>
   <id>19</id>
   <valueType>
@@ -2721,16 +2330,8 @@
  <attributes>
   <name>ReceiverStores</name>
   <title>
-   <key>tr</key>
-   <value>Alıcı depolar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Склад-получатель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Receiver stores</value>
+   <value>6E167CC4-2CFF-6271-1C14-415675D741EE</value>
   </title>
   <id>30</id>
   <valueType>
@@ -2749,16 +2350,8 @@
  <formCommands>
   <name>CommandBack</name>
   <title>
-   <key>tr</key>
-   <value>Geri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Назад</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Back</value>
+   <value>F6184609-AA96-CDE4-4222-21A59C122477</value>
   </title>
   <id>1</id>
   <use>
@@ -2774,16 +2367,8 @@
  <formCommands>
   <name>CommandSaveAndClose</name>
   <title>
-   <key>tr</key>
-   <value>Evraka aktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Перенести в документ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Transfer to document</value>
+   <value>6B915193-CBA3-999B-B6C4-41C4002035AE</value>
   </title>
   <id>2</id>
   <use>

@@ -10,16 +10,8 @@
  </producedTypes>
  <name>DELETE_R8013B_ConsignorBatchWiseBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R8013 Konsinye malzeme partileri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R8013 Остатки партий товаров принятых на комиссию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R8013 Consignor batch wise balance</value>
+  <value>9BF2C590-E677-B037-701C-C356C7A1FEF3</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="991ac407-cb13-41ac-99c1-4efba4ce29ef">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Quantity</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>666B87E0-8146-356F-F9FF-F6A02C537B32</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="4c12b9b9-32ad-401d-b4cb-452d38cc0488">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>FE912AF5-8706-71FC-C83B-BE97876D9F56</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="3cf724c8-2959-420c-af7b-eff1eb8c1668">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>5A1CAF0F-23CF-A712-2F38-8304C29EA7A7</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="b1f75247-9225-4a9f-8824-ba526c446a2e">
   <name>Batch</name>
   <synonym>
-   <key>tr</key>
-   <value>Parti</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партия</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Batch</value>
+   <value>FC302692-FF90-98D2-28DA-A4D7B4E7D9CE</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -115,16 +75,8 @@
  <dimensions uuid="c89878fc-2d28-46ae-8cbc-7b22d97f0dc9">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>1AF5E5F5-D368-3874-485A-AC7646AEF8E9</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -137,16 +89,8 @@
  <dimensions uuid="320e46ce-a39b-4fc7-bb72-8dacb60ee22c">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>14A410E9-E62E-7EB8-89F8-899402359BCD</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -159,16 +103,8 @@
  <dimensions uuid="8a5a804b-40bc-4bc8-aab5-30de2fc4fb4a">
   <name>SourceOfOrigin</name>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşei</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Источник происхождения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source of origin</value>
+   <value>DC14CBAB-684E-C75E-E264-4A86DA5016EB</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>

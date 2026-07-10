@@ -553,16 +553,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Hesap planları         </value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>План счетов</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Charts of accounts</value>
+      <value>A38FB2DA-2038-1097-75B8-8F1549834A4E</value>
      </title>
      <extendedTooltip>
       <name>GroupChartsOfAccountExtendedTooltip</name>
@@ -1040,16 +1032,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Kayıtlar</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Регистры</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Registers</value>
+      <value>E739FA24-CF6C-0FF7-7E09-9C3DE255E7BD</value>
      </title>
      <extendedTooltip>
       <name>GroupRegistersExtendedTooltip</name>
@@ -1079,16 +1063,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Sol</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Слева</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Left</value>
+     <value>923A1B21-065E-FD25-585E-E92E7F1375CF</value>
     </title>
     <extendedTooltip>
      <name>GroupLeft1ExtendedTooltip</name>
@@ -1567,16 +1543,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Şirketler</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Организации</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Companies</value>
+      <value>8991C110-F612-B1C6-67CA-A015F3B77A6B</value>
      </title>
      <extendedTooltip>
       <name>GroupCompaniesExtendedTooltip</name>
@@ -2054,16 +2022,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Dövizler</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Валюты</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Currencies</value>
+      <value>E2171CC9-F6EE-A5BF-F289-9FD99AF56FF9</value>
      </title>
      <extendedTooltip>
       <name>GroupCurrenciesExtendedTooltip</name>
@@ -2093,16 +2053,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Sağ</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Справа</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Right</value>
+     <value>4F06059B-E3C6-BECD-D689-92C9AC26086E</value>
     </title>
     <extendedTooltip>
      <name>GroupRight1ExtendedTooltip</name>
@@ -2130,16 +2082,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Adım 1        </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаг 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Step 1</value>
+    <value>C786BBF0-FDBB-C074-4DD7-70DEE615F12A</value>
    </title>
    <extendedTooltip>
     <name>GroupStep1ExtendedTooltip</name>
@@ -3526,16 +3470,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Adım 2        </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаг 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Step 2</value>
+    <value>FF2F85AA-281E-7B8A-AFCD-D997E5DA2797</value>
    </title>
    <extendedTooltip>
     <name>GroupStep2ExtendedTooltip</name>
@@ -4388,16 +4324,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Adım 3        </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаг 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Step 3</value>
+    <value>E81C182E-D954-3BBE-EC44-46480FD32CF0</value>
    </title>
    <extendedTooltip>
     <name>GroupStep3ExtendedTooltip</name>
@@ -4873,16 +4801,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Kaynak hesap</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Счет учета источник</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Source account</value>
+      <value>BE02C10F-2B04-0A4A-AF69-97CEF077C005</value>
      </title>
      <extendedTooltip>
       <name>GroupSourceAccounExtendedTooltip</name>
@@ -5148,16 +5068,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Hedef hesap</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Счета учета получатель</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Target account</value>
+      <value>16D75EFA-A8CF-6AE8-834C-C004C8266C7B</value>
      </title>
      <extendedTooltip>
       <name>GroupTargetAccountExtendedTooltip</name>
@@ -5689,16 +5601,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Dış boyut 1</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Субконто 1</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Ext dimension 1</value>
+      <value>9CAD83E7-5CDA-3CDC-C9DD-DEC73E6C754A</value>
      </title>
      <extendedTooltip>
       <name>GroupExtDimension1ExtendedTooltip</name>
@@ -6230,16 +6134,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Dış boyut 2</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Субконто 2</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Ext dimension 2</value>
+      <value>82C011DD-024E-AC00-01FB-B9820967DD0C</value>
      </title>
      <extendedTooltip>
       <name>GroupExtDimension2ExtendedTooltip</name>
@@ -6771,16 +6667,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Dış boyut 3</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Субконто 3</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Ext dimension 3</value>
+      <value>C42CCA78-1A2E-1749-9C58-8B5C63E1BCB0</value>
      </title>
      <extendedTooltip>
       <name>GroupExtDimension3ExtendedTooltip</name>
@@ -7013,16 +6901,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Adım 4        </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаг 4</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Step 4</value>
+    <value>15108545-0287-50CC-C4B7-7C81DE14E23A</value>
    </title>
    <extendedTooltip>
     <name>GroupStep4ExtendedTooltip</name>
@@ -7409,16 +7289,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Adım 5 (Kayıtlar Takma Adı)</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаг 5 (Синонимы регистраторов)</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Step 5 (Recorders Alias)</value>
+    <value>252884EF-5754-A0DD-D381-1C46B18A33EE</value>
    </title>
    <extendedTooltip>
     <name>GroupStep5ExtendedTooltip</name>
@@ -7630,16 +7502,8 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Tipik          </value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Normal charts of accounts</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Типовой</value>
+       <value>9EC6E18D-94A7-DBAF-FDC3-3D668E3B0D6B</value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Типовой</value>
@@ -7647,16 +7511,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Vergisel       </value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Tax charts of account</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Налоговый</value>
+       <value>B648A4AB-8952-3C04-4DF1-1D09D9E7EAC1</value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Налоговый</value>
@@ -7664,16 +7520,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>&lt;tüm&gt;</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>&lt;все&gt;</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>&lt;all&gt;</value>
+       <value>CECBC096-E3A0-3FE5-51F6-6E373B554D45</value>
       </presentation>
       <value xsi:type="core:UndefinedValue"/>
      </choiceList>
@@ -7817,16 +7665,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Test</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тест</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Test</value>
+    <value>86F63DF5-F563-AB79-9B26-678A6377300E</value>
    </title>
    <extendedTooltip>
     <name>GroupTestExtendedTooltip</name>
@@ -8039,16 +7879,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Mizan karşılaştırma</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сверка оборотно сальдовой ведомости</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Trial balance reconcilation</value>
+    <value>1BFF26D4-FA6F-4B92-2A65-537ADD34E579</value>
    </title>
    <extendedTooltip>
     <name>GroupTrialBalanceReconcilationExtendedTooltip</name>
@@ -8072,16 +7904,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Adımlar       </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Шаги</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Steps</value>
+   <value>4FE62838-8046-BE32-2820-0D453F6F7BD7</value>
   </title>
   <extendedTooltip>
    <name>GroupStepsExtendedTooltip</name>
@@ -8135,16 +7959,8 @@
  <attributes>
   <name>IntegrationSettings</name>
   <title>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Интеграционные настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Integration settings</value>
+   <value>BA70C732-9D08-6D72-2A09-90C871D7A75C</value>
   </title>
   <id>2</id>
   <valueType>
@@ -8161,16 +7977,8 @@
  <attributes>
   <name>ExternalChartsOfAccounts</name>
   <title>
-   <key>tr</key>
-   <value>Dış muhasebe planları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Внешний план счетов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>External charts of accounts</value>
+   <value>860FF244-13C0-6951-1BF0-0BF23C6E8CAF</value>
   </title>
   <id>3</id>
   <valueType>
@@ -8185,16 +7993,8 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>312EE98D-6B1D-4CEE-EBFD-D1E1F6159AF9</value>
    </title>
    <id>4</id>
    <valueType>
@@ -8211,16 +8011,8 @@
   <columns>
    <name>CodeMask</name>
    <title>
-    <key>tr</key>
-    <value>Kod maskesi     </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Маска кода</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Code mask</value>
+    <value>860E394B-AC65-4388-8A8B-B43FD2E39105</value>
    </title>
    <id>6</id>
    <valueType>
@@ -8237,16 +8029,8 @@
   <columns>
    <name>LedgerTypeVariant</name>
    <title>
-    <key>tr</key>
-    <value>Defter tip seçeneği</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вариант типа учета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ledger type variant</value>
+    <value>3D248EFC-55CB-BBDA-A91A-A56AD557E97C</value>
    </title>
    <id>7</id>
    <valueType>
@@ -8262,16 +8046,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>34F3B018-4DF3-E7FC-C23F-FDB992491D5A</value>
    </title>
    <id>8</id>
    <valueType>
@@ -8287,16 +8063,8 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование EN</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description en</value>
+    <value>C1A14AA4-DFE3-21E5-59E2-21E385FA6073</value>
    </title>
    <id>9</id>
    <valueType>
@@ -8313,16 +8081,8 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование RU</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description ru</value>
+    <value>16E64EB9-941C-097B-BC1F-F637D2686656</value>
    </title>
    <id>10</id>
    <valueType>
@@ -8339,16 +8099,8 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование TR</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description tr</value>
+    <value>B9AD918A-746F-F326-62A4-48864EA810FB</value>
    </title>
    <id>11</id>
    <valueType>
@@ -8365,16 +8117,8 @@
   <columns>
    <name>ExtraDimensionTypesName</name>
    <title>
-    <key>tr</key>
-    <value>Kırılım tip ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование типа субконо</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Extra dimension types name</value>
+    <value>8102F3F4-5FE2-457E-E282-2A2421087ECB</value>
    </title>
    <id>62</id>
    <valueType>
@@ -8392,16 +8136,8 @@
  <attributes>
   <name>ExternalAccounts</name>
   <title>
-   <key>tr</key>
-   <value>Dış hesaplar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Внешние счета учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>External accounts</value>
+   <value>0F7F13E2-9891-5737-7D65-547EDA0DD104</value>
   </title>
   <id>12</id>
   <valueType>
@@ -8416,16 +8152,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>REf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>E25FD892-4A10-A473-335B-BC618F70AEA1</value>
    </title>
    <id>13</id>
    <valueType>
@@ -8442,16 +8170,8 @@
   <columns>
    <name>ParentRef</name>
    <title>
-    <key>tr</key>
-    <value>Üst ref                   </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка владельца</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Parent ref</value>
+    <value>94C153F7-E206-B8B1-15E2-24B295D37CB0</value>
    </title>
    <id>14</id>
    <valueType>
@@ -8468,16 +8188,8 @@
   <columns>
    <name>Code</name>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Code</value>
+    <value>3F025F7F-A442-BEBB-B25E-EFAAA008572A</value>
    </title>
    <id>15</id>
    <valueType>
@@ -8494,16 +8206,8 @@
   <columns>
    <name>ParentCode</name>
    <title>
-    <key>tr</key>
-    <value>Üst kod                   </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код владельца</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Parent code</value>
+    <value>E0D3DDDD-42E6-1A6C-C51E-EFC9571D295A</value>
    </title>
    <id>16</id>
    <valueType>
@@ -8520,16 +8224,8 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование RU</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description ru</value>
+    <value>8A0985F2-8B31-9212-2809-9F37DC55E0BF</value>
    </title>
    <id>17</id>
    <valueType>
@@ -8546,16 +8242,8 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование EN</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description en</value>
+    <value>3D4A9ACF-4081-5C23-383F-F104621957D8</value>
    </title>
    <id>18</id>
    <valueType>
@@ -8572,16 +8260,8 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование TR</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description tr</value>
+    <value>8DEE8CDF-30F1-AC6C-C569-971F7F289023</value>
    </title>
    <id>19</id>
    <valueType>
@@ -8598,16 +8278,8 @@
   <columns>
    <name>Order</name>
    <title>
-    <key>tr</key>
-    <value>Sipariş</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Порядок</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Order</value>
+    <value>E3BC215E-A08C-1D30-0E1F-FCE511BDBA7A</value>
    </title>
    <id>20</id>
    <valueType>
@@ -8624,16 +8296,8 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>FDA2B00E-2BF8-B62C-C63E-E50FFBB1007D</value>
    </title>
    <id>21</id>
    <valueType>
@@ -8650,16 +8314,8 @@
   <columns>
    <name>OffBalance</name>
    <title>
-    <key>tr</key>
-    <value>Bilanço dışı              </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Забалансовый</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Off balance</value>
+    <value>CACD7EE3-DEDB-0616-6E8D-D263A4D5E119</value>
    </title>
    <id>22</id>
    <valueType>
@@ -8675,16 +8331,8 @@
   <columns>
    <name>NotUsedForRecords</name>
    <title>
-    <key>tr</key>
-    <value>Kayıtlar için kullanılmaz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Не используется для записей</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Not used for records</value>
+    <value>23534F96-9694-C4F8-83E5-5F006747D699</value>
    </title>
    <id>23</id>
    <valueType>
@@ -8700,16 +8348,8 @@
   <columns>
    <name>Currency</name>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>072F0FFB-DBFD-1431-1B59-9D7F11E38F9D</value>
    </title>
    <id>24</id>
    <valueType>
@@ -8725,16 +8365,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>CBD92C12-6849-74C3-34D0-07330EAA2E3E</value>
    </title>
    <id>25</id>
    <valueType>
@@ -8750,16 +8382,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>F652A9FF-E21B-D811-15F9-9BBA77287EBF</value>
    </title>
    <id>26</id>
    <valueType>
@@ -8775,16 +8399,8 @@
   <columns>
    <name>InternalRef</name>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренняя ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ref</value>
+    <value>812FCFFB-6242-75F6-6F48-819E9514792D</value>
    </title>
    <id>29</id>
    <valueType>
@@ -8800,16 +8416,8 @@
   <columns>
    <name>ExtDimRef1</name>
    <title>
-    <key>tr</key>
-    <value>Dış boyut ref1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка субконто 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim ref1</value>
+    <value>4583D6C5-6DA9-1464-4B8E-E7AA167D88C4</value>
    </title>
    <id>70</id>
    <valueType>
@@ -8826,16 +8434,8 @@
   <columns>
    <name>ExtDimTurnoversOnly1</name>
    <title>
-    <key>tr</key>
-    <value>Yalnızca dış boyut ciroları1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Субконто 1 только обороты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim turnovers only1</value>
+    <value>17F65A88-F5F7-49A5-5F86-60F55FFE2406</value>
    </title>
    <id>71</id>
    <valueType>
@@ -8851,16 +8451,8 @@
   <columns>
    <name>ExtDimCurrency1</name>
    <title>
-    <key>tr</key>
-    <value>Ext dim para birimi1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма субконто 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim currency1</value>
+    <value>AD244FE4-646B-8E84-4C1C-C371AF03E067</value>
    </title>
    <id>72</id>
    <valueType>
@@ -8876,16 +8468,8 @@
   <columns>
    <name>ExtDimQuantity1</name>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktar1    </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество субконто 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim quantity1</value>
+    <value>5E3C81EB-A3DD-6C1C-C1EE-E46FF6FE98F9</value>
    </title>
    <id>73</id>
    <valueType>
@@ -8901,16 +8485,8 @@
   <columns>
    <name>ExtDimAmount1</name>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktarı1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма субконто 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim amount1</value>
+    <value>F5549504-39B8-F979-9075-5E7183B87A13</value>
    </title>
    <id>74</id>
    <valueType>
@@ -8926,16 +8502,8 @@
   <columns>
    <name>ExtDimAmount2</name>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktarı2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма субконто 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim amount2</value>
+    <value>55ECDD98-4D01-8A38-80C3-3B31745F5501</value>
    </title>
    <id>75</id>
    <valueType>
@@ -8951,16 +8519,8 @@
   <columns>
    <name>ExtDimCurrency2</name>
    <title>
-    <key>tr</key>
-    <value>Ext dim para birimi2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма субконто 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim currency2</value>
+    <value>D31E9496-D07B-053D-D18E-EB7227A2D930</value>
    </title>
    <id>76</id>
    <valueType>
@@ -8976,16 +8536,8 @@
   <columns>
    <name>ExtDimQuantity2</name>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktar2    </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество субконто 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim quantity2</value>
+    <value>85CCC21D-51A8-3D79-93ED-DBF534B9E762</value>
    </title>
    <id>77</id>
    <valueType>
@@ -9001,16 +8553,8 @@
   <columns>
    <name>ExtDimRef2</name>
    <title>
-    <key>tr</key>
-    <value>Dış boyut ref2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка субконто 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim ref2</value>
+    <value>45605E75-0505-ECE9-9430-0C9C52685AFD</value>
    </title>
    <id>78</id>
    <valueType>
@@ -9027,16 +8571,8 @@
   <columns>
    <name>ExtDimTurnoversOnly2</name>
    <title>
-    <key>tr</key>
-    <value>Yalnızca dış boyut ciroları2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Субконто 2 только обороты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim turnovers only2</value>
+    <value>C2152B0E-A854-7BF8-8BD5-548F166C3182</value>
    </title>
    <id>79</id>
    <valueType>
@@ -9052,16 +8588,8 @@
   <columns>
    <name>ExtDimAmount3</name>
    <title>
-    <key>tr</key>
-    <value>Ext dim tutar3     </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма субконто 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim amount3</value>
+    <value>5C5257D3-9793-7AB6-620F-FF30025591F3</value>
    </title>
    <id>80</id>
    <valueType>
@@ -9077,16 +8605,8 @@
   <columns>
    <name>ExtDimCurrency3</name>
    <title>
-    <key>tr</key>
-    <value>Ext dim para birimi3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма субконто 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim currency3</value>
+    <value>99A0E0B9-1A6D-7677-76D3-3F2FB8B5C5E2</value>
    </title>
    <id>81</id>
    <valueType>
@@ -9102,16 +8622,8 @@
   <columns>
    <name>ExtDimQuantity3</name>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktar3    </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество субконто 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim quantity3</value>
+    <value>8C6AE31B-712D-9AC8-8E5F-FD1948FC2E18</value>
    </title>
    <id>82</id>
    <valueType>
@@ -9127,16 +8639,8 @@
   <columns>
    <name>ExtDimRef3</name>
    <title>
-    <key>tr</key>
-    <value>Dış boyut ref3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка субконто 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim ref3</value>
+    <value>6A2D5290-1184-D1E1-1EF4-4F1885F4C52E</value>
    </title>
    <id>83</id>
    <valueType>
@@ -9153,16 +8657,8 @@
   <columns>
    <name>ExtDimTurnoversOnly3</name>
    <title>
-    <key>tr</key>
-    <value>Yalnızca dış boyut ciroları3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Субконто 3 только обороты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dim turnovers only3</value>
+    <value>2C6BDA8E-0037-B3C3-31E9-9E1FA7BA734C</value>
    </title>
    <id>84</id>
    <valueType>
@@ -9179,16 +8675,8 @@
  <attributes>
   <name>ChartOfAccount</name>
   <title>
-   <key>tr</key>
-   <value>Hesap planı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>План счетов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Chart of account</value>
+   <value>26347763-2918-A362-2177-7FD17C696BF0</value>
   </title>
   <id>28</id>
   <valueType>
@@ -9205,16 +8693,8 @@
  <attributes>
   <name>LedgerTypeVariant</name>
   <title>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вариант типа учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ledger type variant</value>
+   <value>6097D016-4688-FA84-4D89-9FA6344CADCE</value>
   </title>
   <id>30</id>
   <valueType>
@@ -9230,16 +8710,8 @@
  <attributes>
   <name>LedgerTypeVariantsMapping</name>
   <title>
-   <key>tr</key>
-   <value>Defter türü varyant eşleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Соответствия вариантов вида учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ledger type variants mapping</value>
+   <value>5A7FABF0-0124-6E30-0F7C-CAD126026DB1</value>
   </title>
   <id>31</id>
   <valueType/>
@@ -9253,16 +8725,8 @@
  <attributes>
   <name>TestPostResponse</name>
   <title>
-   <key>tr</key>
-   <value>Test post yanıtı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест POST ответа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test post response</value>
+   <value>6E722DBA-197C-F34D-DF24-4DF002690514</value>
   </title>
   <id>32</id>
   <valueType>
@@ -9279,16 +8743,8 @@
  <attributes>
   <name>TestPeriod</name>
   <title>
-   <key>tr</key>
-   <value>Test dönemi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест период</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test period</value>
+   <value>DBCC725A-EF80-4D4D-DF91-1B3170A8E954</value>
   </title>
   <id>33</id>
   <valueType>
@@ -9304,16 +8760,8 @@
  <attributes>
   <name>ExternalCompanies</name>
   <title>
-   <key>tr</key>
-   <value>Dış şirketler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Внешние организации</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>External companies</value>
+   <value>765FAFD9-7A2C-C7CD-D1A2-2531F97FE11E</value>
   </title>
   <id>34</id>
   <valueType>
@@ -9328,16 +8776,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>REf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>E75D361F-4668-6CFA-A071-1CD1E4B6294B</value>
    </title>
    <id>36</id>
    <valueType>
@@ -9354,16 +8794,8 @@
   <columns>
    <name>Code</name>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Code</value>
+    <value>8B850759-12A8-8A0C-CAD7-79F451485E87</value>
    </title>
    <id>38</id>
    <valueType>
@@ -9380,16 +8812,8 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование EN</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description en</value>
+    <value>5AB3F442-7380-EA28-8740-0D3641E7BC79</value>
    </title>
    <id>40</id>
    <valueType>
@@ -9406,16 +8830,8 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование RU</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description ru</value>
+    <value>A302CA62-AE29-05B7-7782-261933255CFC</value>
    </title>
    <id>42</id>
    <valueType>
@@ -9432,16 +8848,8 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование TR</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description tr</value>
+    <value>D279D2A7-ADBA-6F31-1E9D-D77EF470C22B</value>
    </title>
    <id>44</id>
    <valueType>
@@ -9458,16 +8866,8 @@
   <columns>
    <name>InternalRef</name>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренняя ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ref</value>
+    <value>7090B58D-3D43-D8B8-89E2-2B428BC3BC22</value>
    </title>
    <id>46</id>
    <valueType>
@@ -9483,16 +8883,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>6B95DB53-DCAE-D800-0618-8D9750F53167</value>
    </title>
    <id>48</id>
    <valueType>
@@ -9509,16 +8901,8 @@
  <attributes>
   <name>ExternalCurrencies</name>
   <title>
-   <key>tr</key>
-   <value>Dış para birimleri   </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Внешние валюты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>External currencies</value>
+   <value>91000221-C5D7-AEE7-742A-A4824C565EFA</value>
   </title>
   <id>35</id>
   <valueType>
@@ -9533,16 +8917,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>REf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>9793FDD5-AFF0-6427-79D1-1C9758EBF528</value>
    </title>
    <id>37</id>
    <valueType>
@@ -9559,16 +8935,8 @@
   <columns>
    <name>Code</name>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Code</value>
+    <value>2FF38DC9-6F8F-BAB1-167A-AB57C7905E36</value>
    </title>
    <id>39</id>
    <valueType>
@@ -9585,16 +8953,8 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование EN</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description en</value>
+    <value>0C6F2F18-35CA-8C68-8E88-8FF90551D803</value>
    </title>
    <id>41</id>
    <valueType>
@@ -9611,16 +8971,8 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование RU</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description ru</value>
+    <value>08C7C53E-595A-F6E6-6C6D-D43E98867099</value>
    </title>
    <id>43</id>
    <valueType>
@@ -9637,16 +8989,8 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование TR</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description tr</value>
+    <value>6788AD27-36F0-7EB9-9792-22B073934A4D</value>
    </title>
    <id>45</id>
    <valueType>
@@ -9663,16 +9007,8 @@
   <columns>
    <name>InternalRef</name>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренняя ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ref</value>
+    <value>1590CD78-293B-218E-E071-1533B5488933</value>
    </title>
    <id>47</id>
    <valueType>
@@ -9688,16 +9024,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>2F871018-AACF-FAEA-A7F4-40479CAD54BB</value>
    </title>
    <id>49</id>
    <valueType>
@@ -9714,16 +9042,8 @@
  <attributes>
   <name>ExternalRegisters</name>
   <title>
-   <key>tr</key>
-   <value>Dış kayıtlar         </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Внешние регистры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>External registers</value>
+   <value>39937BB3-140E-8630-0B51-1CD6407498FF</value>
   </title>
   <id>50</id>
   <valueType>
@@ -9738,16 +9058,8 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>B2E93BDA-A103-548D-D16A-AFAECFC05AD3</value>
    </title>
    <id>39</id>
    <valueType>
@@ -9764,16 +9076,8 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование EN</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description en</value>
+    <value>2DF81AF8-67C1-F007-7D0A-AD759DACB733</value>
    </title>
    <id>41</id>
    <valueType>
@@ -9790,16 +9094,8 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование RU</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description ru</value>
+    <value>CE54E0DB-BE46-817E-E6D5-5A8EAABE5BE0</value>
    </title>
    <id>43</id>
    <valueType>
@@ -9816,16 +9112,8 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование TR</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description tr</value>
+    <value>4D5C398F-AFF8-F915-504A-AC4E878B5801</value>
    </title>
    <id>45</id>
    <valueType>
@@ -9842,16 +9130,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>39F03D66-0A16-440C-CAFF-F0DC0D26E202</value>
    </title>
    <id>49</id>
    <valueType>
@@ -9867,16 +9147,8 @@
   <columns>
    <name>ChartOfAccountsName</name>
    <title>
-    <key>tr</key>
-    <value>Hesap planı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>План счетов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Chart of accounts</value>
+    <value>BC379906-69EC-4475-5DB3-321BAE7BF191</value>
    </title>
    <id>51</id>
    <valueType>
@@ -9893,16 +9165,8 @@
   <columns>
    <name>LedgerType</name>
    <title>
-    <key>tr</key>
-    <value>Defter tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип учета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ledger type</value>
+    <value>5D83E65E-79AA-772E-EC6C-CEA9C73701FD</value>
    </title>
    <id>52</id>
    <valueType>
@@ -9919,16 +9183,8 @@
  <attributes>
   <name>ExternalExtDimensions</name>
   <title>
-   <key>tr</key>
-   <value>Dış ek boyutlar     </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Внешние субконто</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>External ext dimensions</value>
+   <value>741A1DE0-FA18-E941-1A7F-F741029BC78C</value>
   </title>
   <id>53</id>
   <valueType>
@@ -9943,16 +9199,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>REf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>C4868CFE-83E4-1CB6-6948-8CA5E5652C24</value>
    </title>
    <id>54</id>
    <valueType>
@@ -9969,16 +9217,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>918D53BA-22FC-0487-7C98-89B4E369CAB2</value>
    </title>
    <id>55</id>
    <valueType>
@@ -9994,16 +9234,8 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование EN</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description en</value>
+    <value>90C984EF-0493-B923-34A4-4BC20D73F192</value>
    </title>
    <id>56</id>
    <valueType>
@@ -10020,16 +9252,8 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование RU</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description ru</value>
+    <value>2B29C076-12AE-0C4F-F0AE-EE0E16A51059</value>
    </title>
    <id>57</id>
    <valueType>
@@ -10046,16 +9270,8 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование TR</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description tr</value>
+    <value>28A609A3-9D51-DF1B-B180-06F63A439FD3</value>
    </title>
    <id>58</id>
    <valueType>
@@ -10072,16 +9288,8 @@
   <columns>
    <name>Code</name>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Code</value>
+    <value>B2D5DF4C-5445-51A6-61F2-25DA72215385</value>
    </title>
    <id>59</id>
    <valueType>
@@ -10098,16 +9306,8 @@
   <columns>
    <name>BaseClass</name>
    <title>
-    <key>tr</key>
-    <value>Temel sınıf            </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс основания</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Base class</value>
+    <value>829903A3-A60F-1560-050F-F0C8B0831426</value>
    </title>
    <id>64</id>
    <valueType>
@@ -10124,16 +9324,8 @@
   <columns>
    <name>Class</name>
    <title>
-    <key>tr</key>
-    <value>Sınıf                  </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Class</value>
+    <value>210E028F-FAA8-A73A-AB52-23CE333F2638</value>
    </title>
    <id>65</id>
    <valueType>
@@ -10150,16 +9342,8 @@
   <columns>
    <name>IsRef</name>
    <title>
-    <key>tr</key>
-    <value>Ref mi                    </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is ref</value>
+    <value>2F72B242-9E0B-3185-520B-B95E51742369</value>
    </title>
    <id>66</id>
    <valueType>
@@ -10175,16 +9359,8 @@
   <columns>
    <name>InternalRef</name>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренняя ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ref</value>
+    <value>B7A13105-E286-186B-B668-8A869D70BD15</value>
    </title>
    <id>67</id>
    <valueType>
@@ -10200,16 +9376,8 @@
   <columns>
    <name>InternalBaseClass</name>
    <title>
-    <key>tr</key>
-    <value>İç kaynak sınıfı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний класс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal base class</value>
+    <value>D28C5346-6D3A-E105-5794-40A3805B3297</value>
    </title>
    <id>68</id>
    <valueType>
@@ -10226,16 +9394,8 @@
   <columns>
    <name>InternalClass</name>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний класс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal class</value>
+    <value>584BE407-89BF-BA4B-B273-39F67E18C94B</value>
    </title>
    <id>69</id>
    <valueType>
@@ -10252,16 +9412,8 @@
   <columns>
    <name>TypePresentation</name>
    <title>
-    <key>tr</key>
-    <value>Tip görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип представление</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type presentation</value>
+    <value>4E3E6FE7-E55D-52E0-012E-EE444C522BE5</value>
    </title>
    <id>85</id>
    <valueType>
@@ -10279,16 +9431,8 @@
  <attributes>
   <name>ExtraDimensionTypes</name>
   <title>
-   <key>tr</key>
-   <value>Ek boyut türleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дополнительные типы измерений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Extra dimension types</value>
+   <value>7585F16A-E861-0D3B-BF82-2693C92E5799</value>
   </title>
   <id>63</id>
   <valueType>
@@ -10305,16 +9449,8 @@
  <attributes>
   <name>TestRegisterName</name>
   <title>
-   <key>tr</key>
-   <value>Test kayıt adı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест наименование регистра</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test register name</value>
+   <value>902797F8-3D90-BFC1-15D1-1A2F36284EE3</value>
   </title>
   <id>86</id>
   <valueType>
@@ -10331,16 +9467,8 @@
  <attributes>
   <name>TestLoadAllRecords</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kayıtları test et</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест загрузка всех записей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test load all records</value>
+   <value>255D92B0-0178-AF5B-B049-9A8833D8D61B</value>
   </title>
   <id>87</id>
   <valueType>
@@ -10356,16 +9484,8 @@
  <attributes>
   <name>TestOpeningEntryDate</name>
   <title>
-   <key>tr</key>
-   <value>Test açılış kaydı tarihi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест дату ввода начальных остатков</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test opening entry date</value>
+   <value>315A0B3C-A03C-7F7C-C410-097D731602DD</value>
   </title>
   <id>88</id>
   <valueType>
@@ -10384,16 +9504,8 @@
  <attributes>
   <name>AccountMatching</name>
   <title>
-   <key>tr</key>
-   <value>Hesap eşleştirme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сопоставление счетов бух. учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Account matching</value>
+   <value>6513CCA6-0F2E-61E4-45C5-5F0481E4A0D5</value>
   </title>
   <id>89</id>
   <valueType>
@@ -10408,16 +9520,8 @@
   <columns>
    <name>SourceAccountRef</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap ref      </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка счета учета источника</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source account ref</value>
+    <value>352A14AE-5515-8D83-325B-BFCDFC88642B</value>
    </title>
    <id>90</id>
    <valueType>
@@ -10434,16 +9538,8 @@
   <columns>
    <name>SourceAccountCode</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap kodu     </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код счета источника</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source account code</value>
+    <value>FEF2D9E5-F5A1-1C56-6120-01540EF24D9E</value>
    </title>
    <id>91</id>
    <valueType>
@@ -10460,16 +9556,8 @@
   <columns>
    <name>SourceAccountDescription_ru</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap tanımı ru</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование ru счет учета источник</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source account description ru</value>
+    <value>245FA574-7FEC-86AC-CEDB-BAE1759C1A2E</value>
    </title>
    <id>92</id>
    <valueType>
@@ -10486,16 +9574,8 @@
   <columns>
    <name>SourceAccountDescription_en</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap tanımı en</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование en счет учета источник</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source account description en</value>
+    <value>490C17EB-E3F9-C113-3FBC-C242A16B156E</value>
    </title>
    <id>93</id>
    <valueType>
@@ -10512,16 +9592,8 @@
   <columns>
    <name>SourceAccountDescription_tr</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap tanımı tr</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование tr счет учета источник</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Source account description tr</value>
+    <value>DF8C3D13-4A63-4924-4F83-3ED7A6BC19C0</value>
    </title>
    <id>94</id>
    <valueType>
@@ -10538,16 +9610,8 @@
   <columns>
    <name>AllExtDimensionValues1</name>
    <title>
-    <key>tr</key>
-    <value>Tüm dış boyut değerleri1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Все значения субконто 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>All ext dimension values1</value>
+    <value>98DFBD17-FE22-935B-B14B-BD36FD76F0F2</value>
    </title>
    <id>95</id>
    <valueType>
@@ -10563,16 +9627,8 @@
   <columns>
    <name>AllExtDimensionValues2</name>
    <title>
-    <key>tr</key>
-    <value>Tüm dış boyut değerleri2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Все значения субконто 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>All ext dimension values2</value>
+    <value>67BD7694-CAEF-69B7-73DB-B49EB78750E1</value>
    </title>
    <id>96</id>
    <valueType>
@@ -10588,16 +9644,8 @@
   <columns>
    <name>AllExtDimensionValues3</name>
    <title>
-    <key>tr</key>
-    <value>Tüm dış boyut değerleri3 </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Все значения субконто 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>All ext dimension values3</value>
+    <value>178B5FF2-6A06-DE5C-C2A7-79F69767CED6</value>
    </title>
    <id>97</id>
    <valueType>
@@ -10613,16 +9661,8 @@
   <columns>
    <name>TargetAccountCode</name>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap kodu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код счета учета получателя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Target account code</value>
+    <value>3AD30213-34AC-C536-694E-E3AA4AD07B09</value>
    </title>
    <id>98</id>
    <valueType>
@@ -10639,16 +9679,8 @@
   <columns>
    <name>TargetAccountDescription_en</name>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap tanımı en</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Счет учета получатель en</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Target account description en</value>
+    <value>D01F557B-FE8F-F9F5-57CB-BD0E7CB2AD40</value>
    </title>
    <id>100</id>
    <valueType>
@@ -10665,16 +9697,8 @@
   <columns>
    <name>TargetAccountDescription_ru</name>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap tanımı ru</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Счет учета получатель ru</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Target account description ru</value>
+    <value>8EDC0FC4-B859-8251-130C-C780428CD14B</value>
    </title>
    <id>101</id>
    <valueType>
@@ -10691,16 +9715,8 @@
   <columns>
    <name>TargetAccountDescription_tr</name>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap tanımı tr</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Счет учета получатель tr</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Target account description tr</value>
+    <value>2C73DA00-8D6C-1436-6469-9D1F9186C2C8</value>
    </title>
    <id>102</id>
    <valueType>
@@ -10717,16 +9733,8 @@
   <columns>
    <name>TargetAccountRef</name>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка счета учета получателя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Target account ref</value>
+    <value>5E63A4CE-A223-4E65-515F-FA8D24906FAA</value>
    </title>
    <id>103</id>
    <valueType>
@@ -10743,16 +9751,8 @@
   <columns>
    <name>BaseClass1</name>
    <title>
-    <key>tr</key>
-    <value>Temel sınıf 1          </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс основания 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Base class 1</value>
+    <value>3AD32A6E-DFF9-6D5A-A63C-C4838236952D</value>
    </title>
    <id>105</id>
    <valueType>
@@ -10769,16 +9769,8 @@
   <columns>
    <name>BaseClass2</name>
    <title>
-    <key>tr</key>
-    <value>Temel sınıf 2          </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс основания 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Base class 2</value>
+    <value>AE772A2B-AEC6-E908-8F9E-EC73B6CB912A</value>
    </title>
    <id>106</id>
    <valueType>
@@ -10795,16 +9787,8 @@
   <columns>
    <name>BaseClass3</name>
    <title>
-    <key>tr</key>
-    <value>Temel sınıf 3          </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс основания 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Base class 3</value>
+    <value>1778E60B-44FC-23DA-ACB6-66BC8779D0E4</value>
    </title>
    <id>107</id>
    <valueType>
@@ -10821,16 +9805,8 @@
   <columns>
    <name>Class1</name>
    <title>
-    <key>tr</key>
-    <value>Sınıf 1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Class 1</value>
+    <value>E59B65FA-C03E-0D8D-D190-0568D9FC132B</value>
    </title>
    <id>109</id>
    <valueType>
@@ -10847,16 +9823,8 @@
   <columns>
    <name>Class2</name>
    <title>
-    <key>tr</key>
-    <value>Sınıf 2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Class 2</value>
+    <value>B69A05AA-68A2-860C-C499-931DE8E1D983</value>
    </title>
    <id>110</id>
    <valueType>
@@ -10873,16 +9841,8 @@
   <columns>
    <name>Class3</name>
    <title>
-    <key>tr</key>
-    <value>Sınıf 3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Class 3</value>
+    <value>BC398730-2E8B-777E-E775-54BC682ED124</value>
    </title>
    <id>111</id>
    <valueType>
@@ -10899,16 +9859,8 @@
   <columns>
    <name>IsRef1</name>
    <title>
-    <key>tr</key>
-    <value>Ref 1 mi                  </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это ссылка 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is ref 1</value>
+    <value>6D418505-82F8-4B14-4FFD-D75C63BAE3D1</value>
    </title>
    <id>113</id>
    <valueType>
@@ -10924,16 +9876,8 @@
   <columns>
    <name>IsRef2</name>
    <title>
-    <key>tr</key>
-    <value>Ref 2 mi                  </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это ссылка 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is ref 2</value>
+    <value>14E9A9B1-A868-AA94-4076-6156A27E8196</value>
    </title>
    <id>114</id>
    <valueType>
@@ -10949,16 +9893,8 @@
   <columns>
    <name>IsRef3</name>
    <title>
-    <key>tr</key>
-    <value>Ref 3 mi                  </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это ссылка 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is ref 3</value>
+    <value>908DBED9-496E-3960-07BE-E543D23EE433</value>
    </title>
    <id>115</id>
    <valueType>
@@ -10974,16 +9910,8 @@
   <columns>
    <name>ValueRef1</name>
    <title>
-    <key>tr</key>
-    <value>Değer ref1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение Ссылка1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value ref1</value>
+    <value>6639CE0B-B00D-C38B-B6D0-0E096EC27285</value>
    </title>
    <id>116</id>
    <valueType>
@@ -11000,16 +9928,8 @@
   <columns>
    <name>ValueRef2</name>
    <title>
-    <key>tr</key>
-    <value>Değer ref2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение Ссылка2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value ref2</value>
+    <value>CBB3CECD-ED22-FFDD-D4EB-B0FCB054142D</value>
    </title>
    <id>117</id>
    <valueType>
@@ -11026,16 +9946,8 @@
   <columns>
    <name>ValueRef3</name>
    <title>
-    <key>tr</key>
-    <value>Değer ref3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение Ссылка3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value ref3</value>
+    <value>EDE7BFE5-F2DC-FAFB-BDA7-7179DD47CA2A</value>
    </title>
    <id>118</id>
    <valueType>
@@ -11052,16 +9964,8 @@
   <columns>
    <name>ValueDescription_ru1</name>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı ru1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значения 1 наименование ru</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value description ru1</value>
+    <value>BD802A97-7202-3AAA-AA5C-C600733AE42E</value>
    </title>
    <id>119</id>
    <valueType>
@@ -11078,16 +9982,8 @@
   <columns>
    <name>ValueDescription_ru2</name>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı ru2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значения 2 наименование ru</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value description ru2</value>
+    <value>BB929760-86BF-5F8B-B4AF-FD69EDCCAD06</value>
    </title>
    <id>120</id>
    <valueType>
@@ -11104,16 +10000,8 @@
   <columns>
    <name>ValueDescription_ru3</name>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı ru3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значения 3 наименование ru</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value description ru3</value>
+    <value>08A129ED-C7B0-2B1E-E76D-D60B78A36D8B</value>
    </title>
    <id>121</id>
    <valueType>
@@ -11130,16 +10018,8 @@
   <columns>
    <name>ValueDescription_en1</name>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı en1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значения 1 наименование en</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value description en1</value>
+    <value>0FFF0672-074E-DED9-9963-3256F2C8F5B6</value>
    </title>
    <id>122</id>
    <valueType>
@@ -11156,16 +10036,8 @@
   <columns>
    <name>ValueDescription_en2</name>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı en2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значения 2 наименование en</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value description en2</value>
+    <value>A6DE72B2-DCBC-AD0A-A6A0-07951110D9BE</value>
    </title>
    <id>123</id>
    <valueType>
@@ -11182,16 +10054,8 @@
   <columns>
    <name>ValueDescription_en3</name>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı en3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значения 3 наименование en</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value description en3</value>
+    <value>3CB4AD7A-4049-976B-B2B9-9E622359BB71</value>
    </title>
    <id>124</id>
    <valueType>
@@ -11208,16 +10072,8 @@
   <columns>
    <name>ValueDescription_tr1</name>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı tr1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значения 2 наименование tr</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value description tr1</value>
+    <value>F4D1316C-CC18-AC4C-C9C7-7743960664F6</value>
    </title>
    <id>125</id>
    <valueType>
@@ -11234,16 +10090,8 @@
   <columns>
    <name>ValueDescription_tr2</name>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı tr2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значения 2 наименование tr</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value description tr2</value>
+    <value>B7636A2B-E7BC-3F56-6715-5BF4FDC8CA28</value>
    </title>
    <id>126</id>
    <valueType>
@@ -11260,16 +10108,8 @@
   <columns>
    <name>ValueDescription_tr3</name>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı tr3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значения 3 наименование tr</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value description tr3</value>
+    <value>B9CAD3EC-79C6-1365-52B4-48BEC406431E</value>
    </title>
    <id>127</id>
    <valueType>
@@ -11286,16 +10126,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>2D87DA30-39C6-8CF9-925C-CF0BE7092461</value>
    </title>
    <id>128</id>
    <valueType>
@@ -11311,16 +10143,8 @@
   <columns>
    <name>ExtDimensionRef1</name>
    <title>
-    <key>tr</key>
-    <value>Dış boyut referans1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка субконто 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dimension ref1</value>
+    <value>92AFE46C-0D84-860E-EE0E-EA1F70FE3133</value>
    </title>
    <id>129</id>
    <valueType>
@@ -11337,16 +10161,8 @@
   <columns>
    <name>ExtDimensionRef2</name>
    <title>
-    <key>tr</key>
-    <value>Dış boyut referans2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка субконто 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dimension ref2</value>
+    <value>EBA295F3-3588-7704-4994-429D2F2528C1</value>
    </title>
    <id>130</id>
    <valueType>
@@ -11363,16 +10179,8 @@
   <columns>
    <name>ExtDimensionRef3</name>
    <title>
-    <key>tr</key>
-    <value>Dış boyut ref3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка субконто 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext dimension ref3</value>
+    <value>0AB240B8-298F-2AFA-A255-51577252B685</value>
    </title>
    <id>131</id>
    <valueType>
@@ -11389,16 +10197,8 @@
   <columns>
    <name>InternalSourceAccount</name>
    <title>
-    <key>tr</key>
-    <value>Dahili kaynak hesap       </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний счет источник</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal source account</value>
+    <value>E53813DB-7539-E4B5-5719-9F3F0812BF87</value>
    </title>
    <id>133</id>
    <valueType>
@@ -11414,16 +10214,8 @@
   <columns>
    <name>InternalTargetAccount</name>
    <title>
-    <key>tr</key>
-    <value>Dahili hedef hesap        </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний счет получатель</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal target account</value>
+    <value>187790D4-165C-CADE-E826-6C2FB3E9F83B</value>
    </title>
    <id>134</id>
    <valueType>
@@ -11439,16 +10231,8 @@
   <columns>
    <name>InternalExtDimension1</name>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut1          </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний субконто 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ext dimension1</value>
+    <value>30421FB2-5418-6EE0-00DA-A1A39FEDFA5A</value>
    </title>
    <id>135</id>
    <valueType>
@@ -11464,16 +10248,8 @@
   <columns>
    <name>InternalExtDimension2</name>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut2          </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний субконто 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ext dimension2</value>
+    <value>D3BEE286-4186-57E5-5820-0E91938AED98</value>
    </title>
    <id>136</id>
    <valueType>
@@ -11489,16 +10265,8 @@
   <columns>
    <name>InternalExtDimension3</name>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut3          </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний субконто 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ext dimension3</value>
+    <value>A05D6BC4-074C-541B-B86A-A7F9540020EC</value>
    </title>
    <id>137</id>
    <valueType>
@@ -11514,16 +10282,8 @@
   <columns>
    <name>InternalExtDimensionValue1</name>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut değeri1   </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение внутреннего субконто 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ext dimension value1</value>
+    <value>1AB292DB-C5B5-CD57-7C34-49280F1632FA</value>
    </title>
    <id>138</id>
    <valueType>
@@ -11539,16 +10299,8 @@
   <columns>
    <name>InternalExtDimensionValue2</name>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut değeri2   </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение внутреннего субконто 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ext dimension value2</value>
+    <value>6CD9D2A6-BC2C-581B-BEF0-046923793C6B</value>
    </title>
    <id>139</id>
    <valueType>
@@ -11564,16 +10316,8 @@
   <columns>
    <name>InternalExtDimensionValue3</name>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut değeri3   </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение внутреннего субконто 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal ext dimension value3</value>
+    <value>7AE2F574-2F38-768F-F620-083FF677DCD9</value>
    </title>
    <id>140</id>
    <valueType>
@@ -11589,16 +10333,8 @@
   <columns>
    <name>InternalBaseClass1</name>
    <title>
-    <key>tr</key>
-    <value>Dahili temel sınıf1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс внутренней базы 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal base class1</value>
+    <value>AC75BC97-AC4E-5C72-2577-75C2A003F8D6</value>
    </title>
    <id>143</id>
    <valueType>
@@ -11615,16 +10351,8 @@
   <columns>
    <name>InternalClass1</name>
    <title>
-    <key>tr</key>
-    <value>Dahili sınıf1       </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний класс 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal class1</value>
+    <value>8866C1D1-DD22-8D1C-C3C7-7879171167AC</value>
    </title>
    <id>144</id>
    <valueType>
@@ -11641,16 +10369,8 @@
   <columns>
    <name>InternalBaseClass2</name>
    <title>
-    <key>tr</key>
-    <value>Dahili temel sınıf2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс внутренней базы 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal base class2</value>
+    <value>E6993DBD-542B-D942-207D-D0408F9A9858</value>
    </title>
    <id>145</id>
    <valueType>
@@ -11667,16 +10387,8 @@
   <columns>
    <name>InternalBaseClass3</name>
    <title>
-    <key>tr</key>
-    <value>Dahili temel sınıf3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Класс внутренней базы 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal base class3</value>
+    <value>7F23FB6F-C5F2-E7D6-6C33-3302C33C6CB8</value>
    </title>
    <id>146</id>
    <valueType>
@@ -11693,16 +10405,8 @@
   <columns>
    <name>InternalClass2</name>
    <title>
-    <key>tr</key>
-    <value>Dahili sınıf2       </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний класс 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal class2</value>
+    <value>F4CFB9E8-FCD2-E9A3-36CD-DD0CD9DC9DA9</value>
    </title>
    <id>147</id>
    <valueType>
@@ -11719,16 +10423,8 @@
   <columns>
    <name>InternalClass3</name>
    <title>
-    <key>tr</key>
-    <value>Dahili sınıf3       </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внутренний класс 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Internal class3</value>
+    <value>CC073B37-8CDD-46D3-32CF-FA2B5538EF40</value>
    </title>
    <id>148</id>
    <valueType>
@@ -11746,16 +10442,8 @@
  <attributes>
   <name>TargetChartOfAccount</name>
   <title>
-   <key>tr</key>
-   <value>Hedef hesap planı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>План счетов получатель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Target chart of account</value>
+   <value>1FD4E935-38C5-35EC-C0BE-E5D10AEECE6B</value>
   </title>
   <id>132</id>
   <valueType>
@@ -11772,16 +10460,8 @@
  <attributes>
   <name>SourceLedgerType</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak defter tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип учета источник</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Source ledger type</value>
+   <value>730694E5-88F3-46EE-EB56-6E8F2A8A9395</value>
   </title>
   <id>141</id>
   <valueType>
@@ -11797,16 +10477,8 @@
  <attributes>
   <name>TargetLedgerType</name>
   <title>
-   <key>tr</key>
-   <value>Hedef defter tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид учета получатель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Target ledger type</value>
+   <value>94B69166-C1DF-B7B2-2401-123C5B578388</value>
   </title>
   <id>142</id>
   <valueType>
@@ -11846,16 +10518,8 @@
  <attributes>
   <name>TrialBalancePeriod</name>
   <title>
-   <key>tr</key>
-   <value>Mizan dönem</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Период ОСВ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Trial balance period</value>
+   <value>2553B86E-EBC0-46F8-8829-964080394019</value>
   </title>
   <id>150</id>
   <valueType>
@@ -11871,16 +10535,8 @@
  <attributes>
   <name>LedgerTypeForReconcilation</name>
   <title>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>A8576742-251C-F744-4274-4D781FFC67FF</value>
   </title>
   <id>151</id>
   <valueType>
@@ -11896,16 +10552,8 @@
  <attributes>
   <name>ReconcilationBalanceResult</name>
   <title>
-   <key>tr</key>
-   <value>Mutabakat bakiyesi sonucu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат остатков сверки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Reconcilation balance result</value>
+   <value>FA45556F-980A-7213-3661-16B0347FAC7D</value>
   </title>
   <id>152</id>
   <valueType>
@@ -11922,16 +10570,8 @@
  <formCommands>
   <name>FillExternalChartOfAccounts</name>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill</value>
+   <value>DED10C37-CB77-5204-4E07-79E0AA0C5AC5</value>
   </title>
   <id>2</id>
   <use>
@@ -11947,16 +10587,8 @@
  <formCommands>
   <name>SetMappingExternalChartsOfAccounts</name>
   <title>
-   <key>tr</key>
-   <value>Uygunluk ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить соответствие</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set mapping</value>
+   <value>BD309017-FD43-8D3C-C7B0-06B043B742BC</value>
   </title>
   <id>3</id>
   <use>
@@ -11972,16 +10604,8 @@
  <formCommands>
   <name>FillExternalAccounts</name>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill</value>
+   <value>A3B7B261-9198-879E-ED2A-AF83A0C582C2</value>
   </title>
   <id>4</id>
   <use>
@@ -11997,16 +10621,8 @@
  <formCommands>
   <name>SetMappingExternalAccounts</name>
   <title>
-   <key>tr</key>
-   <value>Uygunluk ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить соответствие</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set mapping</value>
+   <value>4625252B-8A5F-18D7-7674-4BF60B70C037</value>
   </title>
   <id>5</id>
   <use>
@@ -12022,16 +10638,8 @@
  <formCommands>
   <name>SelectAllExternalAccounts</name>
   <title>
-   <key>tr</key>
-   <value>Tüm dış hesapları seç  </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все внешние счета учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Select all external accounts</value>
+   <value>FF899A45-FECC-AD19-9E5B-B9CE81FE6E16</value>
   </title>
   <id>6</id>
   <use>
@@ -12051,16 +10659,8 @@
  <formCommands>
   <name>UnselectAllExternalAccounts</name>
   <title>
-   <key>tr</key>
-   <value>Tüm harici hesapları seçme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Снять выбор со всех внешних счетов учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unselect all external accounts</value>
+   <value>26FB6CF2-F581-B814-41C5-55BE2AB91892</value>
   </title>
   <id>7</id>
   <use>
@@ -12080,16 +10680,8 @@
  <formCommands>
   <name>TestPostRequest</name>
   <title>
-   <key>tr</key>
-   <value>Test post isteği</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест POST запроса</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test post request</value>
+   <value>6CBE1D01-6C43-5998-84FC-CB2AE43DFF5A</value>
   </title>
   <id>8</id>
   <use>
@@ -12105,16 +10697,8 @@
  <formCommands>
   <name>FillExtarnalCompanies</name>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill</value>
+   <value>8D4A3739-4CDB-1165-5BC4-4258F137CD57</value>
   </title>
   <id>9</id>
   <use>
@@ -12130,16 +10714,8 @@
  <formCommands>
   <name>FillExternalCurrencies</name>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill</value>
+   <value>50C7990F-9A28-3199-9DB5-5774434EDBC4</value>
   </title>
   <id>10</id>
   <use>
@@ -12155,16 +10731,8 @@
  <formCommands>
   <name>SetMappingExternalCompanies</name>
   <title>
-   <key>tr</key>
-   <value>Uygunluk ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить соответствие</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set mapping</value>
+   <value>9D1987C2-4204-6553-34D0-05AF35C2CB99</value>
   </title>
   <id>11</id>
   <use>
@@ -12180,16 +10748,8 @@
  <formCommands>
   <name>SetMappingExternalCurrencies</name>
   <title>
-   <key>tr</key>
-   <value>Uygunluk ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить соответствие</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set mapping</value>
+   <value>280A67FE-6AEC-1EC0-0E9A-A1661BEC8EF9</value>
   </title>
   <id>12</id>
   <use>
@@ -12205,16 +10765,8 @@
  <formCommands>
   <name>TestLoadRecords</name>
   <title>
-   <key>tr</key>
-   <value>Test kayıtları yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест загрузки записей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test load records</value>
+   <value>E51A889C-19B8-63F6-68BB-B0E836478D6E</value>
   </title>
   <id>13</id>
   <use>
@@ -12230,16 +10782,8 @@
  <formCommands>
   <name>FillExternalRegisters</name>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill</value>
+   <value>E38A2417-B945-26B8-8DF7-7794B94746C2</value>
   </title>
   <id>14</id>
   <use>
@@ -12255,16 +10799,8 @@
  <formCommands>
   <name>SetMappingExternalRegisters</name>
   <title>
-   <key>tr</key>
-   <value>Uygunluk ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить соответствие</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set mapping</value>
+   <value>9576A095-2915-9FAE-EA1A-A6A560FB5359</value>
   </title>
   <id>15</id>
   <use>
@@ -12280,16 +10816,8 @@
  <formCommands>
   <name>FillExternalExtDimensions</name>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill</value>
+   <value>336391D2-5811-4AE7-7977-7DB5BA5B51A7</value>
   </title>
   <id>16</id>
   <use>
@@ -12305,16 +10833,8 @@
  <formCommands>
   <name>SetMappingExternalExtDimensions</name>
   <title>
-   <key>tr</key>
-   <value>Uygunluk ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить соответствие</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set mapping</value>
+   <value>1F901625-0487-116E-E1C1-127E39DCD26A</value>
   </title>
   <id>17</id>
   <use>
@@ -12330,16 +10850,8 @@
  <formCommands>
   <name>SelectAllExternalExtDimensions</name>
   <title>
-   <key>tr</key>
-   <value>Tüm dış ek boyutları seç  </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все внешние субконто</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Select all external ext dimensions</value>
+   <value>F83483EE-2B2D-4255-57D3-34B1A4BEA4FF</value>
   </title>
   <id>18</id>
   <use>
@@ -12358,16 +10870,8 @@
  <formCommands>
   <name>UnselectAllExternalExtDimensions</name>
   <title>
-   <key>tr</key>
-   <value>Tüm harici boyutları seçme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Снять выбор со всех внешних субконто</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unselect all external ext dimensions</value>
+   <value>A7752C50-0767-4193-309F-FC58CBA34C56</value>
   </title>
   <id>20</id>
   <use>
@@ -12386,16 +10890,8 @@
  <formCommands>
   <name>TestLoadOpeningEntry</name>
   <title>
-   <key>tr</key>
-   <value>Test açılış kaydını yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест загрузки ввода начальных остатков</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test load opening entry</value>
+   <value>0E47B329-3F8B-E50D-DE24-4B4B04B31162</value>
   </title>
   <id>21</id>
   <use>
@@ -12411,16 +10907,8 @@
  <formCommands>
   <name>TestPostRequest2</name>
   <title>
-   <key>tr</key>
-   <value>Test post isteği2</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест POST запроса 2</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test post request2</value>
+   <value>EF36E654-EA5D-F13C-C0F1-12E4E6D1E561</value>
   </title>
   <id>22</id>
   <use>
@@ -12436,16 +10924,8 @@
  <formCommands>
   <name>FillAccountMatching</name>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill</value>
+   <value>62BA9604-8863-F435-58BB-B219C94FA9F6</value>
   </title>
   <id>23</id>
   <use>
@@ -12461,16 +10941,8 @@
  <formCommands>
   <name>SetMappingAccountMatching</name>
   <title>
-   <key>tr</key>
-   <value>Eşlemeyi ayarla       </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить соответствие</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set mapping</value>
+   <value>017529F1-65B6-CCF5-5254-4BAE42F312B4</value>
   </title>
   <id>24</id>
   <use>
@@ -12486,16 +10958,8 @@
  <formCommands>
   <name>SelectAllAccountMatching</name>
   <title>
-   <key>tr</key>
-   <value>Tüm dış hesapları seç  </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все внешние счета учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Select all external accounts</value>
+   <value>5D238C61-BD82-D01F-FA81-1B38EF44A59B</value>
   </title>
   <id>25</id>
   <use>
@@ -12515,16 +10979,8 @@
  <formCommands>
   <name>UnselectAllAccountMatching</name>
   <title>
-   <key>tr</key>
-   <value>Tüm harici hesapları seçme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Снять выбор со всех внешних счетов учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unselect all external accounts</value>
+   <value>971F062A-D3F8-6872-28AA-A2B054ADB78B</value>
   </title>
   <id>26</id>
   <use>
@@ -12544,29 +11000,13 @@
  <formCommands>
   <name>LoadEAOWithReport</name>
   <title>
-   <key>tr</key>
-   <value>Tüm dış muhasebe evraklarını rapor ile beraber aktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить все внешние бухгалтерсие операции с отчетом</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load all EAO with report</value>
+   <value>BBD38C10-D2B4-191E-E0C1-1B878E322FE8</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tüm dış muhasebe evraklarını rapor ile beraber aktar</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Загрузить все внешние бухгалтерсие операции с отчетом</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Load all EAO with report</value>
+   <value>FCC8F1AE-09E1-CEBE-EFEF-F99F1A1CA5CA</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -12581,16 +11021,8 @@
  <formCommands>
   <name>FillRecordersMapping</name>
   <title>
-   <key>tr</key>
-   <value>Kayıtların eşleştirmesini doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить соответствие регистраторов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill recorders mapping</value>
+   <value>942B9E81-8BD6-A543-35A5-57EE972B4525</value>
   </title>
   <id>27</id>
   <use>
@@ -12606,16 +11038,8 @@
  <formCommands>
   <name>TrialBalanceReconciliation</name>
   <title>
-   <key>tr</key>
-   <value>Mizan karşılaştırma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сверка оборотно сальдовой ведомости</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Trial balance reconciliation</value>
+   <value>E994ABEC-3A7A-3055-5BE7-724B0A7FAF0E</value>
   </title>
   <id>28</id>
   <use>

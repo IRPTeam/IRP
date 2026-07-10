@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeAccountStatementBasises</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip cari hesap hareket ana evrak</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип основание взаиморасчета</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type account statement basises</value>
+  <value>BAA4C25B-78E5-602C-C93C-C911C46753B6</value>
  </synonym>
  <type>
   <types>DocumentRef.SalesReportFromTradeAgent</types>

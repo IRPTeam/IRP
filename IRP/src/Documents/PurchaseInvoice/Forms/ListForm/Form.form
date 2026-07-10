@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>6630D548-FF12-A12A-A438-8DC80C5ABB85</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -114,16 +106,8 @@
    </dataPath>
    <titleLocation>None</titleLocation>
    <toolTip>
-    <key>tr</key>
-    <value>Ödeme durumu</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Статус оплаты</value>
-   </toolTip>
-   <toolTip>
     <key>en</key>
-    <value>Payment status</value>
+    <value>11158E7E-9255-ECAB-B9D1-16B53CF4A567</value>
    </toolTip>
    <extendedTooltip>
     <name>PaymentStatusIconExtendedTooltip</name>
@@ -279,16 +263,8 @@
    <name>Status</name>
    <id>52</id>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Status</value>
+    <value>80FF2FD6-A72F-9515-56DD-DD5DF99B5A25</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1007,16 +983,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>MF mevcut</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Есть БО</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is have JE</value>
+       <value>412397C8-AE95-8247-705A-A3F3829D65D1</value>
       </content>
      </localValue>
     </title>
@@ -1027,16 +995,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ödeme durumu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Статус оплаты</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Payment status</value>
+       <value>FCC4DD1E-58D3-5452-2C96-6B2EB5B0E06B</value>
       </content>
      </localValue>
     </title>
@@ -1047,16 +1007,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ödeme durumu ikonu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Иконка статуса оплаты</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Payment status icon</value>
+       <value>A18DD0AE-5727-3870-0444-4C3D07CD3A5F</value>
       </content>
      </localValue>
     </title>

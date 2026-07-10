@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R5020A_PartnersBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R5020A Cari hesap bakiyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R5020A Взаиморасчеты с партнерами</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R5020A Partners balance</value>
+  <value>7D08680C-B43A-781C-C5B0-05E512C4CE14</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R5020A_PartnersBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="ea14a840-a554-49eb-b409-d9b38f67a203">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>B597E5BA-29B9-190A-AE00-04C1B44ED425</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

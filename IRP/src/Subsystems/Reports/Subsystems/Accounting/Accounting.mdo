@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="339aa979-c73c-4928-b9d7-610a51e8cc24">
  <name>Accounting</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Бухгалтерия</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Accounting</value>
+  <value>BF15D676-75C0-2693-323E-ED2406336F2C</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

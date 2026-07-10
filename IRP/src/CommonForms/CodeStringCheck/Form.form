@@ -162,16 +162,8 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Yok</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Нет</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>None</value>
+     <value>D07FAA79-AA5E-FAD4-44ED-DBFA03AA8596</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ControlCodeStringType.EnumValue.None</value>
@@ -179,16 +171,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Etiketleme kodu</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Честный знак</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Marking code</value>
+     <value>3FE63936-F892-7596-6695-5D830A9D229B</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ControlCodeStringType.EnumValue.MarkingCode</value>
@@ -196,16 +180,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Честный знак</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>КиЗ</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Good code</value>
+     <value>8ACC190A-B691-CF99-977A-A3423A06B33E</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ControlCodeStringType.EnumValue.GoodCodeData</value>
@@ -299,16 +275,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа верхние уровень</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>2E896761-904E-D5E3-3BCE-E95BB43E2E6A</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -368,16 +336,8 @@
   <name>DecorationInfo</name>
   <id>12</id>
   <title>
-   <key>tr</key>
-   <value>Kontrol kodu tara</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Просканируйте контрольные коды</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Scan control code</value>
+   <value>8F39BAF2-A07C-7CB3-3911-1C20F6E0BB5F</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -416,16 +376,8 @@
   <name>DecorationCheckIsOff</name>
   <id>44</id>
   <title>
-   <key>tr</key>
-   <value>Ek kontrol kullanılmıyor</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дополнительная проверка не используется</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Additional check not using</value>
+   <value>E4B8A0C9-FB57-8391-1B7F-FC8B3F187C74</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -493,16 +445,8 @@
    <name>CurrentCodesControlCodeStringType</name>
    <id>63</id>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>E2F78BA4-35DC-68B2-26E2-2071CBC174EA</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -587,16 +531,8 @@
    <name>CurrentCodesStringCode</name>
    <id>28</id>
    <title>
-    <key>tr</key>
-    <value>Taranan kodlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Просканированые коды</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Scanned codes</value>
+    <value>FC9D6697-5050-E9C3-30DE-E60F20CD7D30</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -640,16 +576,8 @@
    <name>CurrentCodesCodeIsApproved</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Approved</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Одобрено</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Approved</value>
+    <value>2CE320F7-8667-DD0C-C742-2A7AC401C184</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -921,16 +849,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ek bilgi göster </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать дополнительную информацию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show additional info</value>
+   <value>8FAB751F-9701-A75A-A1D6-673B02AAFC45</value>
   </title>
   <extendedTooltip>
    <name>GroupAdditionalInfoExtendedTooltip</name>
@@ -1091,16 +1011,8 @@
  <attributes>
   <name>Hardware</name>
   <title>
-   <key>tr</key>
-   <value>Donanım</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Оборудование</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Hardware</value>
+   <value>8E0A06B8-7A49-076F-F923-3CE3B1D5703E</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1116,16 +1028,8 @@
  <attributes>
   <name>RowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Row key</value>
+   <value>5F2A10A4-1054-8B83-3026-67183D8650CD</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1141,16 +1045,8 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>7D33B9FC-A1D6-0BAF-F0D0-0C17328A1DB1</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1166,16 +1062,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>3EB7BD41-6091-7A3F-FE8B-B96F289E4D63</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1192,16 +1080,8 @@
  <attributes>
   <name>LineNumber</name>
   <title>
-   <key>tr</key>
-   <value>Belgedeki satır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номер строки в документе</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Line in document</value>
+   <value>3D710F8F-A6EB-D1ED-D5B0-0F77B45C211A</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1220,16 +1100,8 @@
  <attributes>
   <name>CurrentCodes</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut kodlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущие коды</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current codes</value>
+   <value>E197A11C-518F-17CE-EA7C-C43D656411A5</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1244,16 +1116,8 @@
   <columns>
    <name>StringCode</name>
    <title>
-    <key>tr</key>
-    <value>Taranan kodlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Просканированые коды</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Scanned codes</value>
+    <value>40297659-45D8-29CB-BB4A-AE4C879060EF</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1270,16 +1134,8 @@
   <columns>
    <name>CodeIsApproved</name>
    <title>
-    <key>tr</key>
-    <value>Kod onaylandı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код подтвержден</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Code is approved</value>
+    <value>C8D03C84-2FDA-0377-7918-8B2E3A7B9E99</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1295,16 +1151,8 @@
   <columns>
    <name>NotCheck</name>
    <title>
-    <key>tr</key>
-    <value>Kontrol etme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Не проверять</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Not check</value>
+    <value>D6F9BA25-9512-6E02-22EE-EEF165859E7B</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1320,16 +1168,8 @@
   <columns>
    <name>ControlCodeStringType</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>25DEFCBE-E84E-9BEE-EA32-2BE424129AB4</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1345,16 +1185,8 @@
   <columns>
    <name>Prefix</name>
    <title>
-    <key>tr</key>
-    <value>Önek</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Префикс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Prefix</value>
+    <value>E286E548-A70D-3240-0D18-8C1E1E4974A2</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1373,16 +1205,8 @@
   <columns>
    <name>IndustryAttribute</name>
    <title>
-    <key>tr</key>
-    <value>Üretim özelliği </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Атрибут производства</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Industry attribute</value>
+    <value>B81833C7-5E46-D57E-E88F-F70081E52E4F</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1399,16 +1223,8 @@
   <columns>
    <name>ServerAnswer</name>
    <title>
-    <key>tr</key>
-    <value>Sunucu yanıtı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ответ сервера          </value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Server answer</value>
+    <value>F615A590-8044-5900-08C6-64D7E0DA5028</value>
    </title>
    <id>19</id>
    <valueType>
@@ -1426,16 +1242,8 @@
  <attributes>
   <name>isReturn</name>
   <title>
-   <key>tr</key>
-   <value>Bu iade</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Это возврат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Is return</value>
+   <value>DEE3AEC5-90B7-BCE8-8B42-2272A57B4127</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1451,16 +1259,8 @@
  <attributes>
   <name>AdditionalCheckIsOn</name>
   <title>
-   <key>tr</key>
-   <value>Ek kontrol açık</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Включить дополнительную проверку</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Additional check is on</value>
+   <value>4A31DFFF-A497-D72D-D992-247C88D97EF2</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1476,16 +1276,8 @@
  <attributes>
   <name>GetCodeStringFromSerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numarasından kod dizesi al</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Использовать маркировку из серийника</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Get code string from serial lot number</value>
+   <value>CDEFEC36-8B56-918D-D01D-D57281EB5C65__</value>
   </title>
   <id>14</id>
   <valueType>
@@ -1501,16 +1293,8 @@
  <attributes>
   <name>ControlCodeStringType</name>
   <title>
-   <key>tr</key>
-   <value>Kontrol kodu satır tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип маркировки товаров</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Control code string type</value>
+   <value>334F98D1-7636-4010-04EC-C6F5CA8081D2</value>
   </title>
   <id>15</id>
   <valueType>
@@ -1526,16 +1310,8 @@
  <attributes>
   <name>SerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>507189A5-BF90-580D-D821-1C89AECB5A8C</value>
   </title>
   <id>20</id>
   <valueType>
@@ -1552,16 +1328,8 @@
  <attributes>
   <name>IsCheckNeeded</name>
   <title>
-   <key>tr</key>
-   <value>Is check needed</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Нужна ли проверка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Is check needed</value>
+   <value>BD043ED8-E529-8CED-DC63-3A5ADA3F37A3</value>
   </title>
   <id>21</id>
   <valueType>
@@ -1577,16 +1345,8 @@
  <formCommands>
   <name>SearchByBarcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkoda göre ara</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Поиск по штрихкоду</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Search by barcode</value>
+   <value>14F91576-DB7E-48C3-334D-DFFBC0AD6763</value>
   </title>
   <id>2</id>
   <use>
@@ -1607,16 +1367,8 @@
  <formCommands>
   <name>Done</name>
   <title>
-   <key>tr</key>
-   <value>Tamamlandı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Завершено</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Done</value>
+   <value>42F9B894-AC94-498B-B35A-A66751436617</value>
   </title>
   <id>4</id>
   <use>
@@ -1632,16 +1384,8 @@
  <formCommands>
   <name>ApproveWithoutScan</name>
   <title>
-   <key>tr</key>
-   <value>Kod dizesi eksik</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Маркировка утеряна</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Code string is missing</value>
+   <value>5F68BC65-3851-263A-AF45-5A2455A23177</value>
   </title>
   <id>5</id>
   <use>
@@ -1661,16 +1405,8 @@
  <formCommands>
   <name>GetCodeStringFromSerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numarasından kod dizesi al</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Использовать маркировку из серийника</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Get code string from serial lot number</value>
+   <value>3AA2A616-3461-C3AB-B496-6AE8012F238B__</value>
   </title>
   <id>6</id>
   <use>

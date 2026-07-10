@@ -313,16 +313,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List</value>
+   <value>34260520-2974-C28A-A6C3-35660C59D2C7</value>
   </title>
   <id>1</id>
   <valueType>
@@ -354,16 +346,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kaynak evrak</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Документ основания</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Basis</value>
+       <value>3325534F-7E55-9886-66B1-1CB2155DDEB4</value>
       </content>
      </localValue>
     </title>
@@ -378,16 +362,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Simge</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Иконка</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Icon</value>
+       <value>EDA15190-BE4D-A5AB-BBD1-12C9F676239D</value>
       </content>
      </localValue>
     </title>
@@ -397,16 +373,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şirket</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Организация</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Company</value>
+       <value>6A04E140-AB70-A3C6-65A3-33D39BB29A2F</value>
       </content>
      </localValue>
     </title>
@@ -421,16 +389,8 @@ WHERE
  <formCommands>
   <name>Select</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Select</value>
+   <value>E64F5C1A-CA07-3436-69D3-3F255B3B3930</value>
   </title>
   <id>1</id>
   <use>

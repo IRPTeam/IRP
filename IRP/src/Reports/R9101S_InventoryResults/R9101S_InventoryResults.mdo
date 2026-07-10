@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R9101S_InventoryResults</name>
  <synonym>
-  <key>tr</key>
-  <value>R9101S Sayım sonuçları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R9101S Результаты инвентаризации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R9101S Inventory results</value>
+  <value>EFEA9DC5-B1FA-495E-E93B-B0C80B3A678B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R9101S_InventoryResults.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="4e96985f-fb67-4b34-a201-580d4c7c71b2">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>7CA09B40-D34E-4B37-713E-E049A1288EA8</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

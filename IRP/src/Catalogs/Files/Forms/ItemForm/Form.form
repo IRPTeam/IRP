@@ -89,16 +89,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Üst Grup </value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа заголовков </value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Header Group </value>
+     <value>701AA1BC-DBEF-6D5B-BD08-885FAC702702</value>
     </title>
     <extendedTooltip>
      <name>HeaderGroupExtendedTooltip</name>
@@ -527,11 +519,6 @@
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:PDFDocumentFieldExtInfo">
     <viewStatusAddition>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <name>PDFViewStatus</name>
      <id>84</id>
      <extendedTooltip>
@@ -916,16 +903,8 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Просмотр изображений HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture view HTML</value>
+   <value>87C8CBA7-0618-E469-9CAD-DBF09095ABE8</value>
   </title>
   <id>2</id>
   <valueType>
@@ -942,16 +921,8 @@
  <attributes>
   <name>PictureViewRegular</name>
   <title>
-   <key>tr</key>
-   <value>Resim normal önizleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обычный просмотр картинки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture view regular</value>
+   <value>41ABE4DB-E22F-DF66-61BD-DA0F13EC164A</value>
   </title>
   <id>3</id>
   <valueType>
@@ -968,16 +939,8 @@
  <attributes>
   <name>Preview</name>
   <title>
-   <key>tr</key>
-   <value>Önizleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предварительный просмотр</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Preview</value>
+   <value>D4F3F013-DBF0-7D17-7E6E-E0185F6BC52F</value>
   </title>
   <id>4</id>
   <valueType>
@@ -994,16 +957,8 @@
  <attributes>
   <name>PDF</name>
   <title>
-   <key>tr</key>
-   <value>PDF</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>PDF</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>PDF</value>
+   <value>2548A3A2-218F-D60F-F033-3AC77ACC3399</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1019,16 +974,8 @@
  <formCommands>
   <name>Upload</name>
   <title>
-   <key>tr</key>
-   <value>Yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Upload</value>
+   <value>1C8BD70A-FCCC-A936-65A8-83539D93D914</value>
   </title>
   <id>1</id>
   <use>
@@ -1048,16 +995,8 @@
  <formCommands>
   <name>Download</name>
   <title>
-   <key>tr</key>
-   <value>İndir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скачать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Download</value>
+   <value>98F55064-6D49-0143-3379-9273DB84ED4A</value>
   </title>
   <id>2</id>
   <use>

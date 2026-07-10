@@ -11,16 +11,8 @@
  </producedTypes>
  <name>ExecutionResults</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlem sonuçları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Результат исполнения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Execution results</value>
+  <value>45F0935C-323E-E0F1-157D-DADDFEA4C500</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -29,16 +21,8 @@
  <resources uuid="d4bcda21-5a7d-4738-8230-7052d2b064b6">
   <name>Process</name>
   <synonym>
-   <key>tr</key>
-   <value>Süreç</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Процесс</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Process</value>
+   <value>58B3432B-2656-8376-65DA-AE5374413D21</value>
   </synonym>
   <type>
    <types>BusinessProcessRef.ExecutionProcesses</types>
@@ -52,16 +36,8 @@
  <dimensions uuid="be6ff5fa-41f6-41bb-8ac3-fdfdfbcf1c48">
   <name>ExecutionObject</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem nesnesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Объект исполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Execution object</value>
+   <value>1ACF802F-1892-1B7C-C2E2-2A478F09D9E2</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -78,16 +54,8 @@
  <dimensions uuid="3461ad48-4e47-459d-ba44-e576c179a7db">
   <name>Result</name>
   <synonym>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Результат</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Result</value>
+   <value>23FA52EA-4642-C57F-F9CE-E1D671262137</value>
   </synonym>
   <type>
    <types>EnumRef.TaskResults</types>

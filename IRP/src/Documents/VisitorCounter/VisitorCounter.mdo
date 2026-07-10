@@ -9,16 +9,8 @@
  </producedTypes>
  <name>VisitorCounter</name>
  <synonym>
-  <key>tr</key>
-  <value>Ziyaretçi sayacı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Счетчик посетителей</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Visitor counter</value>
+  <value>A1370389-43C2-4A2B-BC57-713FA929939E</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.VisitorCounter.StandardAttribute.Number</inputByString>
@@ -59,28 +51,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Ziyaretçi sayacı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Счетчик посетителей</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Visitor counter</value>
+  <value>F20760EA-D95B-D5FD-D18A-A4E6E86F8248</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Ziyaretçi sayaçları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Счетчики посетителей</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Visitor counters</value>
+  <value>DACBB497-76F9-6A6A-A6E6-6E295F1A2DDC</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -96,16 +72,8 @@
  <attributes uuid="bd51bc41-d5c4-4b69-84a8-8482f2279f30">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>8DC4BA58-F4C2-CD94-4164-478AC048BA48</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -119,16 +87,8 @@
  <attributes uuid="440cf36e-853d-418a-9925-8419c15844ad">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>F226158A-CA98-8A0D-DF8B-B36584D16BD6</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -142,16 +102,8 @@
  <attributes uuid="e7a47292-71d4-4917-aef6-96954b0133ad">
   <name>VisitorCounter</name>
   <synonym>
-   <key>tr</key>
-   <value>Ziyaretçi sayacı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Счетчик посетителей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Visitor counter</value>
+   <value>4A0CBB8A-21E5-15A1-1B94-4DBDC0DCD63C</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -171,16 +123,8 @@
  <forms uuid="441fafca-f4d9-4a0a-9c65-0a23f79c46d6">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>3923A00E-C238-8D8C-CE8D-D606D4849C30</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -188,16 +132,8 @@
  <forms uuid="9f5607c9-ffb2-4463-9536-f2d4bdafcc95">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>6F5E6B8E-4FD5-CD05-5265-50DB64AE9EB2</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -205,16 +141,8 @@
  <forms uuid="c914a723-7231-49fe-8826-9b297e951822">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>54BC0E05-B20F-D2EF-F646-6D6FF5060AE3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -226,30 +154,14 @@
   </producedTypes>
   <name>CounterData</name>
   <synonym>
-   <key>tr</key>
-   <value>Sayaç verileri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Данные счетчика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Counter data</value>
+   <value>C1A1046B-10E6-A88A-AB53-31190D9C54F4</value>
   </synonym>
   <attributes uuid="e61fe969-6c63-4c1b-bc1a-8cc6934a58fe">
    <name>Time</name>
    <synonym>
-    <key>tr</key>
-    <value>Zaman</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Время</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Time</value>
+    <value>40DD680C-C428-0B1F-F036-6812B6302A01</value>
    </synonym>
    <type>
     <types>Date</types>
@@ -265,16 +177,8 @@
   <attributes uuid="11136aca-0601-42b1-93a8-78513a409ae1">
    <name>In</name>
    <synonym>
-    <key>tr</key>
-    <value>Giriş</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вход</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>In</value>
+    <value>C0D75FF5-A108-3457-7E40-035F938B3BB4</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -290,16 +194,8 @@
   <attributes uuid="39788a8b-beed-4bdc-90c5-c2e6f2bc2f72">
    <name>Out</name>
    <synonym>
-    <key>tr</key>
-    <value>Çıkış</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Выход</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Out</value>
+    <value>B654C0EC-85D2-D3B9-9D1E-E791A2DF4C6C</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -320,30 +216,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>8B657E16-49BC-6B6D-D5C0-021CDCE088C7</value>
   </synonym>
   <attributes uuid="7ebbcf9b-2f69-4cb5-9474-9c1977582f93">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>A5EDE31D-6F78-A8EB-B555-5C9E2A82523C</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -355,16 +235,8 @@
   <attributes uuid="b270cdf2-8a4a-4efb-9ef5-760a1e024660">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>C5A2F862-9D6D-C042-2D08-8EE554BA7830</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>

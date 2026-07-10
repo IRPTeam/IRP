@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="758ec2fb-e142-45dd-8a5a-b60bcf0569e5">
  <name>Report_R4010A_StockBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R4010A Stok bakiyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R4010A_ОстаткиЗапасов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R4010A_StockBalance</value>
+  <value>CE88815A-D398-85B8-80E2-2A403E9D52A8</value>
  </synonym>
 </mdclass:Role>

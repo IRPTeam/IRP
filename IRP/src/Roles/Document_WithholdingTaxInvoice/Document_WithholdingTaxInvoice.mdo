@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ece27a72-13c8-4b50-b5cc-ef89c779927a">
  <name>Document_WithholdingTaxInvoice</name>
  <synonym>
-  <key>tr</key>
-  <value>"Serbest meslek makbuzu" belgesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Акт (услуги) с удержанным налогом"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Withholding tax invoice"</value>
+  <value>DA170159-BC2E-0627-726A-A06159697F36</value>
  </synonym>
 </mdclass:Role>

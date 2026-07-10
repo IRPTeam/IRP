@@ -2,16 +2,8 @@
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="46b23ca1-9ddc-4c87-bf5e-f2fdfc8c042d">
  <name>OpenReport_R8510B_BookValueOfFixedAsset</name>
  <synonym>
-  <key>tr</key>
-  <value>R8510B Sabit kıymet değerleme raporu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R8510B Оценочная стоимость ОС</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R8510B Book value of fixed asset</value>
+  <value>6F8FA15B-DC4D-D25E-EFFE-EAA482A1968B</value>
  </synonym>
  <group>NavigationPanelOrdinary</group>
  <representation>Auto</representation>

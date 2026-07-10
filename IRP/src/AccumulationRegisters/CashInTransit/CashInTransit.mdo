@@ -10,16 +10,8 @@
  </producedTypes>
  <name>CashInTransit</name>
  <synonym>
-  <key>tr</key>
-  <value>Yoldaki paralar (CashInTransit)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Денежные средства в пути</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Cash in transit</value>
+  <value>E2BD5A93-0420-2E51-1AB6-66CEECCED3D8</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="310839ee-8736-4ed4-8fb0-e01386fb9fa1">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>DB39C273-804D-9B04-42CE-E173D3D60DA5</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <attributes uuid="ed7a0f01-761c-4f47-8b2f-1ebf160f7fb6">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложенный расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deferred calculation</value>
+   <value>29701559-70FE-DBA9-9D0B-B3FF9C653AF7</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -69,16 +45,8 @@
  <dimensions uuid="2fd92060-9607-4b0f-ac5a-923e15472234">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>F23A2129-7F1C-0EF7-79C0-081AD2D5AC4D</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -91,16 +59,8 @@
  <dimensions uuid="6d36e219-231f-4351-a12d-c9f58814ba8e">
   <name>BasisDocument</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis document</value>
+   <value>01C7B5B4-7FD1-6D99-9182-26BC46792A13</value>
   </synonym>
   <type>
    <types>DefinedType.typePlaningTransactionBasises</types>
@@ -113,16 +73,8 @@
  <dimensions uuid="9fe5ba8f-81df-4a0c-856e-ef82e1e8d5a9">
   <name>FromAccount</name>
   <synonym>
-   <key>tr</key>
-   <value>Çıkan kasa/banka</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отправитель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>From account</value>
+   <value>CC632AF9-ED59-736B-B6F4-47FDB8F7A2A3</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -135,16 +87,8 @@
  <dimensions uuid="15c6202d-fec6-4f27-8fa6-d0b2adbb79bd">
   <name>ToAccount</name>
   <synonym>
-   <key>tr</key>
-   <value>Giren kasa/banka</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Получатель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>To account</value>
+   <value>359ECFFD-FF68-A6E2-2E19-988B80E16174</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -157,16 +101,8 @@
  <dimensions uuid="61714246-2404-422d-b8f1-4ee8cd8384ca">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>5FAE842B-131B-FF88-8063-3782D8432D86</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -179,16 +115,8 @@
  <dimensions uuid="9c42ca13-4dc9-4761-8c48-92103e2e9d26">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>8F0DBC86-9166-B957-74DE-EC975DB396D3</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>

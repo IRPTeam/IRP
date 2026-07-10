@@ -6,32 +6,16 @@
  </producedTypes>
  <name>M1010A_PriceList</name>
  <synonym>
-  <key>tr</key>
-  <value>M1010A Fiyat listesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>M1010A Прайс лист</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>M1010A Price list</value>
+  <value>6DDC2A62-B5DC-6B86-6AC1-1C1EF76A2D0C</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.M1010A_PriceList.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="b45471be-e1fe-4d99-acfc-c6e282ae917c">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>8CE2BFEC-E8D8-36FC-C3B0-0379850B9638</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

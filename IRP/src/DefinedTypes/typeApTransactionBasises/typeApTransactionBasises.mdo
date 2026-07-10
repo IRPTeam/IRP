@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeApTransactionBasises</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip Satışlar işlem kaynağı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип основание операции взаиморасчета с поставщиком</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type AP transaction basises</value>
+  <value>362F4013-746E-04B2-2964-42363584D742</value>
  </synonym>
  <type>
   <types>DocumentRef.CashTransferOrder</types>

@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeAccountingDocuments</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe doküman türü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы учетных документов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type accounting documents</value>
+  <value>A7771593-072D-C828-8ED3-3477B1662EF4</value>
  </synonym>
  <type>
   <types>DocumentRef.AdditionalRevenueAllocation</types>

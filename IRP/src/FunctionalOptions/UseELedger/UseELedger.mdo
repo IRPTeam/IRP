@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="88af146c-11f1-4c33-a2d6-a64fc2e67f1a">
  <name>UseELedger</name>
  <synonym>
-  <key>tr</key>
-  <value>e-Defter kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать eLedger</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use eLedger</value>
+  <value>8B0B4436-EA57-FEAC-C0BF-FDBB17BD25E0</value>
  </synonym>
  <location>Constant.UseELedger</location>
  <privilegedGetMode>true</privilegedGetMode>

@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="55438a72-442d-4abb-8ea5-fe813a237651">
  <name>CreateDate</name>
  <synonym>
-  <key>tr</key>
-  <value>Oluşturulma tarihi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Дата создания</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Create date</value>
+  <value>EF3EFB83-C183-5596-6E9F-F9EE6F78401B</value>
  </synonym>
  <type>
   <types>Date</types>
@@ -135,6 +127,10 @@
  </content>
  <content>
   <metadata>Document.ChequeBondTransaction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Storno</metadata>
   <use>Use</use>
  </content>
  <content>

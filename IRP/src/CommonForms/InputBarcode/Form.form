@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Barkod</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Штрихкод</value>
- </title>
- <title>
   <key>en</key>
-  <value>Barcode</value>
+  <value>ECBFE319-7902-FD24-435E-EC72E31A53E4</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>GroupTop</name>
@@ -128,16 +120,8 @@
    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
     <checkBoxType>Tumbler</checkBoxType>
     <editFormat>
-     <key>tr</key>
-     <value>BF=Tek; BT=Çoklu</value>
-    </editFormat>
-    <editFormat>
-     <key>ru</key>
-     <value>BF=Single; BT=Multi</value>
-    </editFormat>
-    <editFormat>
      <key>en</key>
-     <value>BF=Single; BT=Multi</value>
+     <value>B1B51BC8-1898-5315-564B-B8D83538F04E</value>
     </editFormat>
    </extInfo>
   </items>
@@ -184,16 +168,8 @@
     <typeDomainEnabled>true</typeDomainEnabled>
     <textEdit>true</textEdit>
     <inputHint>
-     <key>tr</key>
-     <value>Giriş</value>
-    </inputHint>
-    <inputHint>
-     <key>ru</key>
-     <value>Enter</value>
-    </inputHint>
-    <inputHint>
      <key>en</key>
-     <value>Enter</value>
+     <value>7E1DA081-057E-3940-0518-8100EB665A2C</value>
     </inputHint>
    </extInfo>
   </items>
@@ -203,16 +179,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа верхние уровень</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>2B482076-59E5-D2D9-9343-32472E87C030</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -250,16 +218,8 @@
  <attributes>
   <name>Barcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Штрихкод</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Barcode</value>
+   <value>C9FE7FCC-6863-0716-6783-377F9A6530A4</value>
   </title>
   <id>1</id>
   <valueType>
@@ -276,16 +236,8 @@
  <attributes>
   <name>Multiline</name>
   <title>
-   <key>tr</key>
-   <value>Çok satırlı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Мультистрока</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Multiline</value>
+   <value>4F24B730-4A3E-FA74-41DC-C1188E8ED31C</value>
   </title>
   <id>2</id>
   <valueType>
@@ -301,16 +253,8 @@
  <attributes>
   <name>Delimiter</name>
   <title>
-   <key>tr</key>
-   <value>Ayırıcı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разделитель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Delimiter</value>
+   <value>39650A52-05D0-BD00-056A-AFBF33ECF893</value>
   </title>
   <id>3</id>
   <valueType>
@@ -327,16 +271,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>EB8F0D4A-DCCE-B9C1-1370-0D0401263814</value>
   </title>
   <id>1</id>
   <use>

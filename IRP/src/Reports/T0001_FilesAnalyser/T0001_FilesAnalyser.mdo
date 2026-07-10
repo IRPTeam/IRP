@@ -6,32 +6,16 @@
  </producedTypes>
  <name>T0001_FilesAnalyser</name>
  <synonym>
-  <key>tr</key>
-  <value>T0001 Dosya analiz</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T0001 Анализатор файлов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T0001 Files analyser</value>
+  <value>21E7F739-9AD8-D6E5-518F-FDEF457F29FC</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.T0001_FilesAnalyser.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="8c58c567-d830-4c5d-acb9-5d888922fe23">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>2A660B79-B13B-47DD-DA01-1356582720E1</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

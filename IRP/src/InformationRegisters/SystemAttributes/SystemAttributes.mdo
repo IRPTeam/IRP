@@ -11,32 +11,16 @@
  </producedTypes>
  <name>SystemAttributes</name>
  <synonym>
-  <key>tr</key>
-  <value>Sistem nitelikleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Системные атрибуты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>System attributes</value>
+  <value>51C832E3-754E-ECD9-9E9A-A5A8C8D6F950</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <resources uuid="5f0e1822-ae99-460d-8088-83d1040d7c82">
   <name>Value</name>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Value</value>
+   <value>1FA784B0-9A1C-20B8-81E6-6CCDC0F0E25C</value>
   </synonym>
   <type>
    <types>Characteristic.SystemAttributes</types>
@@ -50,16 +34,8 @@
  <dimensions uuid="dca8ee46-8d77-4e2c-bc18-169cc16159a7">
   <name>Object</name>
   <synonym>
-   <key>tr</key>
-   <value>Obje</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Объект</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Object</value>
+   <value>33ECE448-9A4B-353B-B51C-CF88DA14F5AA</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -76,16 +52,8 @@
  <dimensions uuid="cd583e45-8b8b-4727-aaa1-cf9289492dbd">
   <name>Property</name>
   <synonym>
-   <key>tr</key>
-   <value>Özellik</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Свойство</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Property</value>
+   <value>2C03C406-D743-6E33-3A23-34AC3E39C0FC</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.SystemAttributes</types>
@@ -101,16 +69,8 @@
  <dimensions uuid="f76f0360-2fcc-4b71-9e63-e3020833fb62">
   <name>Key</name>
   <synonym>
-   <key>tr</key>
-   <value>Anahtar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Key</value>
+   <value>2A0CD93C-FEB0-08F2-2A83-3A25B330E4DD</value>
   </synonym>
   <type>
    <types>Number</types>

@@ -162,28 +162,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа основная</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main</value>
+   <value>3A9187E7-3EDC-0886-6D91-1E28359756F6</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Group genel</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа основная</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group main</value>
+   <value>949A324E-1FF6-3D99-917D-DD2469156AA6</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -529,28 +513,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Tree</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дерево</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Tree</value>
+    <value>B60A426B-FC63-C7DB-BBD2-29853A1483E2</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup ağacı</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа дерево</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group tree</value>
+    <value>A9225C7A-94C0-4ADC-CB0F-FC1AF808B592</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupTreeExtendedTooltip</name>
@@ -618,28 +586,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>XML Preview</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Предварительный просмотр XML</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>XML Preview</value>
+    <value>44132347-3B0C-36B4-41D3-38461472162A</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup XML preview</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа XML предварительный просмотр</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group XMLPreview</value>
+    <value>277F312A-B8B1-3A9D-D920-07A17A9CB883</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupXMLPreviewExtendedTooltip</name>
@@ -707,28 +659,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>XML Kaynak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>XML источник</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>XML Source</value>
+    <value>8F3C58CB-D1C7-FFF7-7B24-461234F87A93</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Group XMLSource</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа XML источник</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group XMLSource</value>
+    <value>F7C8A4F9-9890-A95D-D774-43D43DFBF2B0</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupXMLSourceExtendedTooltip</name>
@@ -837,28 +773,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Validasyon yap</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проверить</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Validate</value>
+    <value>9ED7350F-C5A4-B52A-A8E0-0CC3C58FA484</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Group XMLTo validate</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа XML для проверки</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group XMLTo validate</value>
+    <value>84C50E70-FB9E-D7C7-73DF-F8F765B40FC7</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupXMLToValidateExtendedTooltip</name>
@@ -926,16 +846,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>JSON</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>JSON</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>JSON</value>
+    <value>C0C25ABD-77A4-C359-92A4-41EF351F6F1D</value>
    </title>
    <extendedTooltip>
     <name>GroupJSONExtendedTooltip</name>
@@ -959,28 +871,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group pages</value>
+   <value>9E000325-2BF0-70E5-5BD5-557A65EB759C</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа страницы</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group pages</value>
+   <value>778C25B1-71E6-A7C6-6DFF-FA06A3003F7A</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1005,16 +901,8 @@
    <name>FormReadStructure</name>
    <id>52</id>
    <title>
-    <key>tr</key>
-    <value>Read structure</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Структура чтения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Read structure</value>
+    <value>587C9734-8A19-D74F-F324-4734E5C0541D</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1042,16 +930,8 @@
    <name>FormValidateXML</name>
    <id>61</id>
    <title>
-    <key>tr</key>
-    <value>Validate XML</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проверить XML</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Validate XML</value>
+    <value>CE71045F-1D75-DA99-9F90-002FBC74270C</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1143,16 +1023,8 @@
  <attributes>
   <name>TreeData</name>
   <title>
-   <key>tr</key>
-   <value>Tree data</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Данные дерева</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Tree data</value>
+   <value>52E330F0-DD59-534C-C026-63CD73DE5BDA</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1167,16 +1039,8 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>10B9C869-4327-ACA1-10F5-5AF8E549135E</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1193,16 +1057,8 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>4BAF66E6-D878-BA34-4EDD-D1064C238EAE</value>
    </title>
    <id>4</id>
    <valueType/>
@@ -1216,16 +1072,8 @@
   <columns>
    <name>Array</name>
    <title>
-    <key>tr</key>
-    <value>Array</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Массив</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Array</value>
+    <value>89F9FF1A-9A20-51FE-E12B-B1EE90ACD8A1</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1241,16 +1089,8 @@
   <columns>
    <name>DataType</name>
    <title>
-    <key>tr</key>
-    <value>Data type</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип данных</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Data type</value>
+    <value>E7AE9493-3C91-3882-2948-8198CC202168</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1267,16 +1107,8 @@
   <columns>
    <name>CanBeEmpty</name>
    <title>
-    <key>tr</key>
-    <value>Boş olabilir</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Может быть пустым</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Can be empty</value>
+    <value>7583327F-CBB8-6D2F-F7AD-DED72F696C2D</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1293,16 +1125,8 @@
  <attributes>
   <name>XML</name>
   <title>
-   <key>tr</key>
-   <value>XML</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>XML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>XML</value>
+   <value>4671D1E1-AC33-9624-4D2B-B2B7232F99D5</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1322,16 +1146,8 @@
  <attributes>
   <name>HTML</name>
   <title>
-   <key>tr</key>
-   <value>HTML</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>HTML</value>
+   <value>7BC2C6E1-03F3-57BA-A55D-DD1C8B1850A6</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1348,16 +1164,8 @@
  <attributes>
   <name>XMLToValidate</name>
   <title>
-   <key>tr</key>
-   <value>XML to validate</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>XML для проверки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>XML to validate</value>
+   <value>23FFBCE6-59E8-1A28-832A-A754C3F1C7B4</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1377,16 +1185,8 @@
  <attributes>
   <name>ErrorLog</name>
   <title>
-   <key>tr</key>
-   <value>Error log</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Лог ошибок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Error log</value>
+   <value>08FA84EF-1BC6-F9E1-1EC4-4A18FC96116B</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1403,16 +1203,8 @@
  <attributes>
   <name>JSON</name>
   <title>
-   <key>tr</key>
-   <value>JSON</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>JSON</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>JSON</value>
+   <value>2CD3F945-75F6-557E-E3A2-20B81571A2B1</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1429,16 +1221,8 @@
  <attributes>
   <name>EmptyValues</name>
   <title>
-   <key>tr</key>
-   <value>Boş değerler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пустые значения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Empty values</value>
+   <value>281699D6-6C0A-8DB1-1440-05A85E281F40</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1454,29 +1238,13 @@
  <formCommands>
   <name>ReadStructure</name>
   <title>
-   <key>tr</key>
-   <value>Read structure</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Структура чтения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Read structure</value>
+   <value>1D05D062-2C6A-1469-94AE-E7C4846828E4</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Read structure</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Структура чтения</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Read structure</value>
+   <value>EC0FCB7D-1F04-906C-C1F5-5C8B83D42F35</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1491,29 +1259,13 @@
  <formCommands>
   <name>ValidateXML</name>
   <title>
-   <key>tr</key>
-   <value>Validate XML</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проверить XML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Validate XML</value>
+   <value>A9CDD0A6-CFC6-007D-D79D-D6AFF18626F4</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>Validate XML</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Проверить XML</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Validate XML</value>
+   <value>6E6F2F6A-5465-11A1-1451-13A0FDA0CE89</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1528,16 +1280,8 @@
  <formCommands>
   <name>ValidateJSON</name>
   <title>
-   <key>tr</key>
-   <value>JSON validasyon yap</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проверить JSON</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Validate JSON</value>
+   <value>8CCF86F0-7114-D22D-D8C3-3C46415E7B3B</value>
   </title>
   <id>3</id>
   <use>

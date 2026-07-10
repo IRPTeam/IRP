@@ -6,32 +6,16 @@
  </producedTypes>
  <name>PrintLabels</name>
  <synonym>
-  <key>tr</key>
-  <value>Etiket yazdırma</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Печать этикеток</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Print labels</value>
+  <value>1FDC0E4A-6890-74A7-76DD-D6AD4EA9948A</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.PrintLabels.Form.Form</defaultForm>
  <forms uuid="79bf9caa-da1e-4f49-bd78-798f2450b230">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>45B9FA0A-C378-4D90-0CF2-2F0DA7BA2C44</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -39,31 +23,15 @@
  <templates uuid="ce77775f-3a4c-4673-aae5-cce538cb53f3">
   <name>Default</name>
   <synonym>
-   <key>tr</key>
-   <value>Varsayılan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По умолчанию</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Default</value>
+   <value>2D8DFB4C-0548-B4BE-E04C-C87ABBA16B46</value>
   </synonym>
  </templates>
  <templates uuid="0cea30e5-8902-44f2-abec-ae197d79faec">
   <name>Prototype</name>
   <synonym>
-   <key>tr</key>
-   <value>Deneme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Прототип</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Prototype</value>
+   <value>3161AB15-4E7E-0A7D-D729-96A75D1B38F7</value>
   </synonym>
  </templates>
 </mdclass:DataProcessor>

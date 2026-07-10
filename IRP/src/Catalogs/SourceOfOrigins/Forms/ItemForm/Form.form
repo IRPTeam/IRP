@@ -79,16 +79,8 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Manual</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Вручную</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Manual</value>
+     <value>4CABA824-0FB7-0C0F-F48C-C65402258BFA</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>Manual</value>
@@ -480,16 +472,8 @@
  <attributes>
   <name>OwnerSelect</name>
   <title>
-   <key>tr</key>
-   <value>Sahip seçme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать владельца</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Owner select</value>
+   <value>8A25C729-241C-9292-2C1B-B2DE90563439</value>
   </title>
   <id>2</id>
   <valueType>
@@ -506,16 +490,8 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>B9171524-8399-02B4-4555-50EA6656F47D</value>
   </title>
   <id>3</id>
   <valueType>
@@ -531,16 +507,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>D0B8448C-ADEE-D964-4843-3E39AC8E9D33</value>
   </title>
   <id>4</id>
   <valueType>
@@ -556,16 +524,8 @@
  <attributes>
   <name>ItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item type</value>
+   <value>B4B4864F-B2B7-CA62-282C-C7C090020B94</value>
   </title>
   <id>5</id>
   <valueType>

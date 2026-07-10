@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>C6647DE2-E428-D383-37BE-EFDFD86008A7</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -99,16 +91,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>0C893EF4-7C3A-478D-DF71-1FD2A6C71F1B</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -217,16 +201,8 @@
    <name>PredefinedDataName</name>
    <id>28</id>
    <title>
-    <key>tr</key>
-    <value>Önceden tanımlı veri tanımı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование предопределенных данных</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Predefined data name</value>
+    <value>1E1CB4CF-8E02-CCBD-D42C-C849D39FFDD3</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

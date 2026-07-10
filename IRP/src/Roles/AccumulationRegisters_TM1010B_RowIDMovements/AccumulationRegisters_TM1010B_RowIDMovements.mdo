@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5c3a8672-832d-42e0-a9b9-bdf606edbe1a">
  <name>AccumulationRegisters_TM1010B_RowIDMovements</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları TM1010B SatırIDHareketleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления TM1010B ДвиженияПоСтрокам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters TM1010B RowIDMovements</value>
+  <value>8E85F9EE-05D6-1137-7B9F-FDC136A7E524________</value>
  </synonym>
 </mdclass:Role>

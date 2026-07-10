@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="34ed4f7e-a0fc-4de4-ac0e-ea1fc1cc87be">
  <name>Document_TaxesOperation</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak "Vergi işlemleri"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Операции с налогами"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Taxes operation"</value>
+  <value>72B846DB-65CD-C94E-EA7A-A0DC444CD549</value>
  </synonym>
 </mdclass:Role>

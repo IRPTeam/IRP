@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R3024B_SalesOrdersToBePaid</name>
  <synonym>
-  <key>tr</key>
-  <value>R3024 Ödenecek satış siparişler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R3024 Заказы покупателей к оплате</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R3024 Sales orders to be paid</value>
+  <value>BC286A49-E3D8-B4FF-FBE5-56A97661951F</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="25f1fe39-f366-4fbd-8c60-6125fee20e13">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>88A799FE-8CE5-C7DE-EC62-2AEBD155BD38</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="436517b7-61d7-4b2c-b80c-d6ed8f49c590">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>0C50E616-F160-711B-BA10-09A91EC9CC51</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="0b8fe485-c3dc-491f-ab3f-e80ae43e639d">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>D9EEAEBA-AC23-C919-95F6-6D654FB2358C</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="c081a1d5-3038-44d0-983e-fc31f4165edd">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>5D0694E2-2CD6-2047-751D-D096AB583503</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="cd0f73bf-4fd9-4dcc-87c8-2b4c7433155e">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>2FF28D13-8776-9757-730B-BC17BDBBDFCC</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="3bf05c71-d2c9-43bf-9605-bf7e4f11677a">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>7C2DBB1C-DC3F-E52F-F066-62F9BD4B58AD</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -158,16 +102,8 @@
  <dimensions uuid="8f57eddb-f5ca-4679-85c2-cac8c21500a8">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>9B60DD81-8727-8362-25BB-BE33AC761228</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesOrder</types>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c80119f6-eda4-418c-a8ed-f05c50dd8290">
  <name>Report_M1010A_PriceList</name>
  <synonym>
-  <key>tr</key>
-  <value>M1010A FiyatListesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет M1010A_ПрайсЛист</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report M1010A_PriceList</value>
+  <value>3CD61B6D-ECE7-29E7-73FE-EE5DA87C7BCD</value>
  </synonym>
 </mdclass:Role>

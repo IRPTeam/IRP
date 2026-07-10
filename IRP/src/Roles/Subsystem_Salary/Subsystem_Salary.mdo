@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="01a2773d-3b4e-49e7-9ff3-2eafde9cd24a">
  <name>Subsystem_Salary</name>
  <synonym>
-  <key>tr</key>
-  <value>Alt sistem Maaş</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Подсистема Зарплата</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Subsystem Salary</value>
+  <value>0DB7E163-6022-128B-BA8B-B397E69C8DB6</value>
  </synonym>
 </mdclass:Role>

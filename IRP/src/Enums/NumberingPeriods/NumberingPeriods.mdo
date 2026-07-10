@@ -7,92 +7,44 @@
  </producedTypes>
  <name>NumberingPeriods</name>
  <synonym>
-  <key>tr</key>
-  <value>Numaralandırma dönemleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Периоды нумерации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Numbering periods</value>
+  <value>E768D4B4-50AB-9EFB-BF9F-FDCB98A46848</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="164ffda1-5b38-4987-8816-c266d8b57d64">
   <name>NoPeriod</name>
   <synonym>
-   <key>tr</key>
-   <value>Dönem yok</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Без периода</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>No period</value>
+   <value>9CE42763-4BA6-26D1-1AC7-7FDBD7DDBE08</value>
   </synonym>
  </enumValues>
  <enumValues uuid="8b9fc439-2a49-45cd-bf89-908c5168b427">
   <name>Year</name>
   <synonym>
-   <key>tr</key>
-   <value>Yıl</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Год</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Year</value>
+   <value>B807407A-8880-4A24-4C56-6B7ECBA29050</value>
   </synonym>
  </enumValues>
  <enumValues uuid="179ac2a8-94e9-4e1c-8c73-ea6c8707a972">
   <name>Quarter</name>
   <synonym>
-   <key>tr</key>
-   <value>Çeyrek</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Квартал</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quarter</value>
+   <value>954504E3-2996-CA83-3706-6995C61531FD</value>
   </synonym>
  </enumValues>
  <enumValues uuid="619654c8-c988-4e02-ab94-5421bee3cbb4">
   <name>Month</name>
   <synonym>
-   <key>tr</key>
-   <value>Ay</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Месяц</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Month</value>
+   <value>4FDB440B-50AA-3405-55C0-05BAE4E7DFA4</value>
   </synonym>
  </enumValues>
  <enumValues uuid="107433a9-0f1d-4702-869f-572c50169440">
   <name>Week</name>
   <synonym>
-   <key>tr</key>
-   <value>Hafta</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Неделя</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Week</value>
+   <value>FB4AFDB9-06DF-E851-1450-023FE10DE30F</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

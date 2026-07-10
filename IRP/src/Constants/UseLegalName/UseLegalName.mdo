@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseLegalName</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Fatura hesabı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать - Контрагентов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use legal name</value>
+  <value>5470D4B0-D412-852F-F25D-D7F583F598F8</value>
  </synonym>
  <type>
   <types>Boolean</types>

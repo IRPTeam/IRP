@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R502A_ProfitLosses</name>
  <synonym>
-  <key>tr</key>
-  <value>R502A Kar ve Zararlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R502A Отчет по прибылям и убыткам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R502A Profit &amp; Losses</value>
+  <value>406A4E37-0760-13F0-00AE-E81F595958D4</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R502A_ProfitLosses.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="a712bd25-662e-4a8f-9a61-66fab9793c2f">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>FE4D4CD2-7EA4-51E2-27B9-90CE67DCDC97</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

@@ -291,16 +291,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Admin</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Админ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Admin</value>
+   <value>30A33466-BD2F-8BA1-10F2-290C52EF189A</value>
   </title>
   <extendedTooltip>
    <name>GroupAdminExtendedTooltip</name>
@@ -372,16 +364,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Организация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company</value>
+   <value>B2C3DE51-8D1E-E1CD-DCB5-5B2838148D9B</value>
   </title>
   <extendedTooltip>
    <name>GroupCompanyExtendedTooltip</name>

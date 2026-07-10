@@ -7,47 +7,23 @@
  </producedTypes>
  <name>AgingPeriodTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Yaşlandırma Dönemi Türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы периодов рассрочки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Aging period types</value>
+  <value>793983CC-EC94-24D6-6F4C-CBA387328D43</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="e5d9dcb9-ad80-40ca-a048-0dd356cf8a3f">
   <name>Overdue</name>
   <synonym>
-   <key>tr</key>
-   <value>Gecikmiş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Просрочено</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Overdue</value>
+   <value>070CEC35-A3E1-EC6D-DAA3-3AFDCE72CFBE</value>
   </synonym>
  </enumValues>
  <enumValues uuid="1ab988ae-0f72-4d42-b355-a4f025e860c2">
   <name>Future</name>
   <synonym>
-   <key>tr</key>
-   <value>Gelecek</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Будущее</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Future</value>
+   <value>FCA82846-D2AD-BAF2-22D6-67A05083C5C1</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

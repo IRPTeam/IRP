@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="842bca3d-0ea9-4f31-ab0e-77e743eab369">
  <name>Editor</name>
  <synonym>
-  <key>tr</key>
-  <value>Editör</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Редактор</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Editor</value>
+  <value>32382DA5-CC08-1FBC-CDC6-67A05DB3A936</value>
  </synonym>
  <type>
   <types>CatalogRef.Users</types>
@@ -126,6 +118,10 @@
  </content>
  <content>
   <metadata>Document.ChequeBondTransaction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Storno</metadata>
   <use>Use</use>
  </content>
  <content>

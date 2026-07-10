@@ -7,47 +7,23 @@
  </producedTypes>
  <name>AuditLockActions</name>
  <synonym>
-  <key>tr</key>
-  <value>Audit kilit hareketleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Действия аудиторского запрета изменения данных</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Audit lock actions</value>
+  <value>420C1766-BAC7-929B-B65D-D92311F8E40B</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="e8022f40-8087-41e6-8985-aad7b56b41da">
   <name>Lock</name>
   <synonym>
-   <key>tr</key>
-   <value>Kilitle</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Блокировка        </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Lock</value>
+   <value>9B19FE7A-64E5-AB91-1E2A-AF0F50647B7A</value>
   </synonym>
  </enumValues>
  <enumValues uuid="73a2ff79-ae65-4e72-8a18-f9f91fb1fcc5">
   <name>Unlock</name>
   <synonym>
-   <key>tr</key>
-   <value>Kilit aç</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Разблокировать</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Unlock</value>
+   <value>7CF3EB8A-0E88-A71F-F899-9480FDDF41D6</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

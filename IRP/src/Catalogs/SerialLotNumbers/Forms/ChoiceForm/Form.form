@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>B254C808-3A5F-8995-57B8-8D06CDCC7167</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Seri numarası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серийный номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial number</value>
+    <value>671C1C54-6D04-CAF6-678C-CA3A72E95553</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -424,16 +408,8 @@ WHERE
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполненные данные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filling data</value>
+   <value>50DD7120-F02E-6329-916D-D8F851EADC3B</value>
   </title>
   <id>2</id>
   <valueType>

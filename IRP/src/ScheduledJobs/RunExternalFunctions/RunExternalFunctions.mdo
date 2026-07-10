@@ -2,16 +2,8 @@
 <mdclass:ScheduledJob xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3724640d-0ab9-48b4-8769-e0850a587145">
  <name>RunExternalFunctions</name>
  <synonym>
-  <key>tr</key>
-  <value>Dış fonksiyonları çalıştır</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Исполнить внешние функции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Run external functions</value>
+  <value>E340CE50-A3B9-0A92-28E4-4C79B6DD165D</value>
  </synonym>
  <methodName>CommonModule.ServiceSystemServer.RunExternalFunctions</methodName>
  <key>RunExternalFunctions</key>

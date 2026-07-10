@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b4dd0d17-42e5-4bef-bc1d-343a6858d94a">
  <name>Report_D4010_ActualStocks</name>
  <synonym>
-  <key>tr</key>
-  <value>D4010 Stok bakiye raporu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет D4010_ФактическиеЗапасы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report D4010_ActualStocks</value>
+  <value>73E67A79-7F96-0788-8FFA-A9BA59E3F429</value>
  </synonym>
 </mdclass:Role>

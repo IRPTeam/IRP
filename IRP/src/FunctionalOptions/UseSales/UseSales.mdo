@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2bcaf8ab-32cc-4635-bcae-9ffad0333224">
  <name>UseSales</name>
  <synonym>
-  <key>tr</key>
-  <value>Satış modülü kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Продажи</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use sales</value>
+  <value>32ACCEB6-0EAF-95F2-20C5-58568225A18B</value>
  </synonym>
  <location>Constant.UseSales</location>
  <privilegedGetMode>true</privilegedGetMode>

@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UsePartnersHierarchy</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Cari hesap hiyerarşi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать иерархию партнеров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use partners hierarchy</value>
+  <value>FE904D89-1C90-3E51-1B96-64E816DC1CEE</value>
  </synonym>
  <type>
   <types>Boolean</types>

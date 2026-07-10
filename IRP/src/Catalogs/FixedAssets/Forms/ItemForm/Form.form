@@ -443,16 +443,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основной</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Info</value>
+    <value>561E7BB1-8A1D-3DD1-1901-12A1E1A420B2</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -476,16 +468,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>AFC2411A-B992-DC59-922D-DD66463F1C79</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>

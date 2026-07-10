@@ -2,16 +2,8 @@
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="625d865e-d116-4c48-9c15-d3bea7eaf2f7">
  <name>OpenReport_R4011B_FreeStockMovements</name>
  <synonym>
-  <key>tr</key>
-  <value>R4011B Serbest stok hareketleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4011B Движения свободных остатков</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4011B Free stock movements</value>
+  <value>B90D9CF6-66BF-C976-68FD-D72F7D8A196B</value>
  </synonym>
  <group>NavigationPanelOrdinary</group>
  <representation>Auto</representation>

@@ -116,16 +116,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Test</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test</value>
+   <value>054D3CFA-6BB9-F47F-FDD4-496D5F6E02CE</value>
   </title>
   <extendedTooltip>
    <name>GroupTestExtendedTooltip</name>
@@ -313,16 +305,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Tablolar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Таблицы</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Tables</value>
+     <value>ABC70BA3-D2E4-63F0-0104-4D6EEBE86B25</value>
     </title>
     <extendedTooltip>
      <name>TableCommandsExtendedTooltip</name>
@@ -345,16 +329,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Tablo komutlarını ekle</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вставить команды таблицы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Insert table commands</value>
+    <value>1E20C05F-2610-9432-2EB9-9A3B613CF9F6</value>
    </title>
    <extendedTooltip>
     <name>InsertTableCommandsExtendedTooltip</name>
@@ -375,16 +351,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ekleme komutları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа команд вставить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group insert commands</value>
+   <value>5F0FD6C2-BDDF-61A3-3753-3629E92CC864</value>
   </title>
   <extendedTooltip>
    <name>GroupInsertCommandsExtendedTooltip</name>
@@ -477,16 +445,8 @@
  <attributes>
   <name>FormulaText</name>
   <title>
-   <key>tr</key>
-   <value>Formül metni</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текст формулы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Formula text</value>
+   <value>1B47B9AF-1AF8-2104-439B-B07DDE416A51</value>
   </title>
   <id>1</id>
   <valueType>
@@ -503,16 +463,8 @@
  <attributes>
   <name>Source</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Источник</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Source</value>
+   <value>76422FC3-D0E6-D24D-D1E9-9617FE73F23D</value>
   </title>
   <id>2</id>
   <valueType>
@@ -528,16 +480,8 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>59F9D8FD-A9A1-577A-A48E-EDF54873DCCB</value>
   </title>
   <id>3</id>
   <valueType>
@@ -554,16 +498,8 @@
  <attributes>
   <name>FormData</name>
   <title>
-   <key>tr</key>
-   <value>Tarih formatı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Данные формы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Form data</value>
+   <value>5F470BC4-39E9-839D-DB63-365CE1B25EE0</value>
   </title>
   <id>4</id>
   <valueType/>
@@ -577,16 +513,8 @@
  <attributes>
   <name>TableName</name>
   <title>
-   <key>tr</key>
-   <value>Tablo ismi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Table name</value>
+   <value>B9E1B137-804D-2F73-3CF0-0D5FD60C5629</value>
   </title>
   <id>5</id>
   <valueType>
@@ -603,16 +531,8 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>BD7EE707-BA1B-4EDE-E4B3-39C98C9E813E</value>
   </title>
   <id>1</id>
   <use>
@@ -632,16 +552,8 @@
  <formCommands>
   <name>Test</name>
   <title>
-   <key>tr</key>
-   <value>Test</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test</value>
+   <value>54EC5973-5887-B44F-F652-248D7AAF5823</value>
   </title>
   <id>2</id>
   <use>
@@ -661,29 +573,13 @@
  <formCommands>
   <name>InsertResult</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>7FE314EF-D8D9-1EB1-15CC-C1BE54F010AC</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>tr</key>
-   <value>Hesaplama sonucu için değişken</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Переменная для расчитываемого результата</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>variable for the calculation result</value>
+   <value>D7DD580E-B8E5-F3ED-DBB9-9DDD47B91846</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -698,29 +594,13 @@
  <formCommands>
   <name>InsertSource</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Источник</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Source</value>
+   <value>B5C0FCC3-44F9-41E8-82D2-2A78A1E7FAD5</value>
   </title>
   <id>4</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yazdırılan nesne referansı</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Ссылка на объект печати</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>reference to the printed object</value>
+   <value>99904569-A823-FAE3-3D43-386AD97FA520</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -735,29 +615,13 @@
  <formCommands>
   <name>InsertCurrentRow</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut satır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущая строка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current row</value>
+   <value>60543C91-EB1A-52C7-7BB0-043AAABF59B7</value>
   </title>
   <id>5</id>
   <toolTip>
-   <key>tr</key>
-   <value>Mevcut tablo satırı için değişken</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Переменная для текущей строки таблицы</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>variable for the current table row</value>
+   <value>0606BF48-42A2-825F-F886-64038ED3FD48</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -772,29 +636,13 @@
  <formCommands>
   <name>InsertRowNumber</name>
   <title>
-   <key>tr</key>
-   <value>Satır numarası</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номер строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Row number</value>
+   <value>656B1428-99DF-8A9C-C28F-F1107F491D85</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tablo satır numarası için değişken</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Переменная для номера стоки таблицы</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>variable for the table row number</value>
+   <value>C4CD1455-C916-1F9F-FD27-791DB39A5AA3</value>
   </toolTip>
   <use>
    <common>true</common>

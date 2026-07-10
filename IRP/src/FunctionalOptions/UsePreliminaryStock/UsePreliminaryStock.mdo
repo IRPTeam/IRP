@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="53eeab3c-edfa-495e-a47e-7036180ffaa2">
  <name>UsePreliminaryStock</name>
  <synonym>
-  <key>tr</key>
-  <value>Ön stok kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать предварительные остатки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use preliminary stock</value>
+  <value>CE021322-5308-1D1A-AC58-8FFD65D0F785</value>
  </synonym>
  <location>Constant.UsePreliminaryStock</location>
  <privilegedGetMode>true</privilegedGetMode>

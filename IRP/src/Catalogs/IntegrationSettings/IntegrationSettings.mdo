@@ -9,16 +9,8 @@
  </producedTypes>
  <name>IntegrationSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Entegrasyon ayarları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Интеграционные настройки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Integration settings</value>
+  <value>B7490E7B-1EF6-87A4-48EC-C878CE7E3E21</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.IntegrationSettings.StandardAttribute.Description</inputByString>
@@ -58,16 +50,8 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Entegrasyon ayarları</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Настройка интеграции</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Integration setting</value>
+  <value>DD054816-2E93-026E-E0D3-36B4CCEDAA6F</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -86,16 +70,8 @@
  <attributes uuid="ac3d2f81-a9a7-41c7-a0af-a599320de4a2">
   <name>ExternalDataProc</name>
   <synonym>
-   <key>tr</key>
-   <value>Eklentiler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Внешняя обработка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Plugins</value>
+   <value>9BCE1853-866E-740C-C186-625E7E938C6B</value>
   </synonym>
   <type>
    <types>CatalogRef.ExternalDataProc</types>
@@ -109,16 +85,8 @@
  <attributes uuid="5185b3d9-aed5-4032-9d1d-e6b72e9584b6">
   <name>ExternalDataProcSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Eklentiler ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Настройки внешней обработки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Plugin settings</value>
+   <value>6BD572E7-3C31-F0A8-8E22-2056353D163C</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -132,16 +100,8 @@
  <attributes uuid="1ec86a86-9804-414c-96f9-68ce428fc58c">
   <name>IntegrationType</name>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип интеграции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Integration type</value>
+   <value>7385576B-95FB-79E8-8E17-794F1626C216</value>
   </synonym>
   <type>
    <types>EnumRef.IntegrationType</types>
@@ -155,16 +115,8 @@
  <attributes uuid="a2092519-7bdf-4673-94e3-2f34135de3cf">
   <name>StoreInSecureStorage</name>
   <synonym>
-   <key>tr</key>
-   <value>Güvenli depoda sakla</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сохранить в безопасном хранилище</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store in secure storage</value>
+   <value>75A93658-69EF-1356-6D1E-E8AFF2C442C9</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -182,30 +134,14 @@
   </producedTypes>
   <name>ConnectionSetting</name>
   <synonym>
-   <key>tr</key>
-   <value>Bağlantı ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Настройка соединения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Connection setting</value>
+   <value>AF7562DF-8F61-68AF-F954-4621C274656C</value>
   </synonym>
   <attributes uuid="57d75846-ee2d-4fad-af0a-bdb4d8b08721">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>FEC8361C-3B0C-9525-5108-8A2FBABFCAA8</value>
    </synonym>
    <type>
     <types>String</types>
@@ -220,16 +156,8 @@
   <attributes uuid="9fb103a4-9529-49ef-8233-0af93e10f924">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>2D0DBC45-2A29-68DE-ED4C-C706BEA20D0D</value>
    </synonym>
    <type>
     <types>CatalogRef.IntegrationSettings</types>
@@ -250,16 +178,8 @@
   <attributes uuid="ac5e9b31-f12f-4ce4-bfac-20fdd74292bc">
    <name>Hide</name>
    <synonym>
-    <key>tr</key>
-    <value>Sakla</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Скрыть</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Hide</value>
+    <value>E3EAF7F8-4822-42E7-7507-7001ABA9A98C</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -277,30 +197,14 @@
   </producedTypes>
   <name>ConnectionSettingTest</name>
   <synonym>
-   <key>tr</key>
-   <value>Bağlantı ayarlar testi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тестовые настройки подключения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Connection setting test</value>
+   <value>C84B1A05-E0E9-1E29-90EB-B1F6394CC66E</value>
   </synonym>
   <attributes uuid="71f413d5-dd65-43f3-ab91-b3e51c267641">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>C0B08EAA-50C3-4C0A-A72C-C5F3D58C9B7D</value>
    </synonym>
    <type>
     <types>String</types>
@@ -315,16 +219,8 @@
   <attributes uuid="2a0867a4-48f0-425e-86f9-3e45d48bb2cb">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>B01CDAB0-6174-7D53-36F5-57F2C4895FBC</value>
    </synonym>
    <type>
     <types>CatalogRef.IntegrationSettings</types>
@@ -345,16 +241,8 @@
   <attributes uuid="5eb863bf-66ca-428f-b9d7-2349bfba70a8">
    <name>Hide</name>
    <synonym>
-    <key>tr</key>
-    <value>Sakla</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Скрыть</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Hide</value>
+    <value>1DDC3701-D6B3-51CC-C3AA-AE634149E90C</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -372,30 +260,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>1A73D4E4-B099-3FF7-76DD-D4032BBAF196</value>
   </synonym>
   <attributes uuid="1cd8ca83-aee5-43a1-a8fa-1aa847295236">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>E44438C7-F8E6-0356-6973-3BD3CA8182D8</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -408,16 +280,8 @@
   <attributes uuid="d97e439c-e250-4642-9258-2676025981fe">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>99692AB3-0F28-16F6-6D19-97548E8EDA65</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -435,16 +299,8 @@
  <forms uuid="e749d2bf-5157-4d93-a33e-4f0203e35727">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>3FE73551-191F-DD6A-A34A-AA5F9BB21F00</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -452,16 +308,8 @@
  <forms uuid="2372430b-0f7a-4193-adf8-1a7b85c24a60">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>306D0D2A-1BE9-8878-8A2E-E947F8F0076C</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -469,16 +317,8 @@
  <forms uuid="68a5298f-8922-45e6-b773-65267493f547">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>C705F34F-3CE6-464B-B3B8-839024AD675E</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

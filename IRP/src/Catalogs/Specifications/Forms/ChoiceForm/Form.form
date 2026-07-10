@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>689D54FE-F40C-AF43-3F81-1426F35485BA</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>5AEEB5D1-456D-BA50-00AF-F2ECC00F7D87</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -147,16 +131,8 @@
    <name>Type</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>9487E5C4-6A2A-032D-DBE9-924073CC3209</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -426,16 +402,8 @@ FROM
  <attributes>
   <name>CustomFilterByItem</name>
   <title>
-   <key>tr</key>
-   <value>İsteğe bağlı malzemeye göre filtre</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пользовательский фильтр по номенклатуре</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Custom filter by item</value>
+   <value>69DE788A-FF5C-3BDC-C802-2AA492410E43</value>
   </title>
   <id>2</id>
   <valueType/>

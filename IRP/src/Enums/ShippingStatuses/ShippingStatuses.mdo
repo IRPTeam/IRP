@@ -7,62 +7,30 @@
  </producedTypes>
  <name>ShippingStatuses</name>
  <synonym>
-  <key>tr</key>
-  <value>Sevk statüleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Статусы отгрузки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Shipping statuses</value>
+  <value>A377F656-6E61-76A1-191B-B6767516B558</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="8f0c034c-f422-47c1-949b-ec5a652e70dd">
   <name>Awaiting</name>
   <synonym>
-   <key>tr</key>
-   <value>Beklemede</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>В ожидании</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Awaiting</value>
+   <value>44803DB5-EA12-6328-87E1-1F035E63D9B1</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7ebce830-5a3c-45f1-affe-08ee471e30ab">
   <name>Shipping</name>
   <synonym>
-   <key>tr</key>
-   <value>Sevkediliyor</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>В процессе</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Shipping</value>
+   <value>3012463A-815A-3224-40FD-D58CA465469E</value>
   </synonym>
  </enumValues>
  <enumValues uuid="823f4804-22ee-44e3-9fe9-909dfcfd3b22">
   <name>Closed</name>
   <synonym>
-   <key>tr</key>
-   <value>Tamamlandı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Завершен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Closed</value>
+   <value>950B3EC6-2F10-86DE-ED78-89683CD0B243</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

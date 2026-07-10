@@ -89,16 +89,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Верх</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>DEBD6347-AE28-F996-611A-A48F747A30AA</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -239,16 +231,8 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>"Kaynak"ı Ref olarak kullanabileceğiniz ve Boolean olarak döndürebileceğiniz bazı kodları değerlendirin</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Выполнить код, где можно использовать "Source" как Ref и возвращаемое значение — логическое</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>Eval some code where can be used "Source" as Ref and return is Boolean</value>
+    <value>D64439CC-34B8-3ED4-4964-476ED64CE4B9__________________________________</value>
    </inputHint>
   </extInfo>
  </items>
@@ -327,16 +311,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group settings</value>
+   <value>E4648183-7832-7C8A-A2EA-A844C682D8B4</value>
   </title>
   <extendedTooltip>
    <name>GroupSettingsExtendedTooltip</name>
@@ -841,16 +817,8 @@
     <name>MappingFillMapping</name>
     <id>50</id>
     <title>
-     <key>tr</key>
-     <value>Liste güncelle</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Обновить список</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Update list</value>
+     <value>A75217BD-2962-A292-242E-E59E49464A09</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1110,16 +1078,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup tipler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа специальных предложений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group types</value>
+   <value>AE6D929D-D64C-47E1-15D0-0EF6A99FF993</value>
   </title>
   <extendedTooltip>
    <name>GroupTypesExtendedTooltip</name>
@@ -1175,16 +1135,8 @@
  <formCommands>
   <name>FillMapping</name>
   <title>
-   <key>tr</key>
-   <value>Eşleştirmeyi doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить сопоставления</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill mapping</value>
+   <value>D01FDDFC-A576-ECB7-7541-10E779B24E96</value>
   </title>
   <id>1</id>
   <use>
@@ -1200,16 +1152,8 @@
  <formCommands>
   <name>ClearDefaultValue</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan değeri temizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Очистить значение по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Clear default value</value>
+   <value>AE078E11-F683-E8C7-79E6-6FE27120682E</value>
   </title>
   <id>2</id>
   <use>

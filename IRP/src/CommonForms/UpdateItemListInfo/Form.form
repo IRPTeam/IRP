@@ -59,16 +59,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Komut çubuğu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Командная панель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Command bar</value>
+   <value>D5341710-6272-5E47-7556-67FECD2C1CD4</value>
   </title>
   <extendedTooltip>
    <name>GroupCommandBarExtendedTooltip</name>
@@ -479,16 +471,8 @@
  <attributes>
   <name>PriceTypes</name>
   <title>
-   <key>tr</key>
-   <value>Fiyat türlerini güncelleyin</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить виды цен</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update price types</value>
+   <value>0463A7EE-A8F0-1B67-7951-15A432803C30</value>
   </title>
   <id>1</id>
   <valueType>
@@ -504,16 +488,8 @@
  <attributes>
   <name>Prices</name>
   <title>
-   <key>tr</key>
-   <value>Fiyatları güncelleyin</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить цены</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update prices</value>
+   <value>1C0B2625-AD01-7C4D-D18E-E7374CD93CF9</value>
   </title>
   <id>2</id>
   <valueType>
@@ -529,16 +505,8 @@
  <attributes>
   <name>Stores</name>
   <title>
-   <key>tr</key>
-   <value>Depoları güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить склады</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update stores</value>
+   <value>DBC87B94-D7A6-BC6E-ED67-7E8453C056E6</value>
   </title>
   <id>3</id>
   <valueType>
@@ -554,16 +522,8 @@
  <attributes>
   <name>PaymentTerm</name>
   <title>
-   <key>tr</key>
-   <value>Ödeme koşulu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Условие оплаты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Payment term</value>
+   <value>E16EE10D-C04A-E8EB-BDA9-98AD7262EC51</value>
   </title>
   <id>4</id>
   <valueType>
@@ -579,16 +539,8 @@
  <attributes>
   <name>TaxRates</name>
   <title>
-   <key>tr</key>
-   <value>Vergi oranları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Налоговые ставки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Tax rates</value>
+   <value>A3782D34-323E-F89C-C4C4-4E9674C29AF6</value>
   </title>
   <id>5</id>
   <valueType>
@@ -604,16 +556,8 @@
  <attributes>
   <name>PaymentAgent</name>
   <title>
-   <key>tr</key>
-   <value>Ödeme aracı kurum</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Платежный агент</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Payment agent</value>
+   <value>A12E4F09-84F1-70BC-CD16-68FB7206EC12</value>
   </title>
   <id>6</id>
   <valueType>
@@ -629,16 +573,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>C402E2DB-2C72-3116-6ED2-2C984DE04770</value>
   </title>
   <id>1</id>
   <use>
@@ -654,16 +590,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>2BDE4C7D-D38D-1131-1610-0B34FA7619F8</value>
   </title>
   <id>2</id>
   <use>
@@ -679,16 +607,8 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check all</value>
+   <value>B2DB48DA-F614-2130-0917-7776E6E721DD</value>
   </title>
   <id>3</id>
   <use>
@@ -708,16 +628,8 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck all</value>
+   <value>F6D230D8-64DD-CF2C-CC7B-B8737DE22463</value>
   </title>
   <id>4</id>
   <use>

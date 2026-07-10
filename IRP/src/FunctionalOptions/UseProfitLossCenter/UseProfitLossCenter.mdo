@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="869ca4ae-6278-4595-8e69-ec206e0f1b20">
  <name>UseProfitLossCenter</name>
  <synonym>
-  <key>tr</key>
-  <value>Kar zarar merkezini kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Центры прибылей и убытков</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use profit loss center</value>
+  <value>3F629A09-17F0-1EF1-1E23-39CA4903B159</value>
  </synonym>
  <location>Constant.UseProfitLossCenter</location>
  <privilegedGetMode>true</privilegedGetMode>

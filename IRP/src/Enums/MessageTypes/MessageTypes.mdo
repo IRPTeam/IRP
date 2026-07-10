@@ -7,32 +7,16 @@
  </producedTypes>
  <name>MessageTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Message types</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип сообщения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Message types</value>
+  <value>2CEB2778-CE07-A69F-F3BC-CC6D8D1B1615</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="f27dd828-8dd4-485f-a800-98acdd709b20">
   <name>Email</name>
   <synonym>
-   <key>tr</key>
-   <value>E-posta</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Email</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Email</value>
+   <value>822B1A53-2D8E-65A8-8CFB-BA403C2D8C9E</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

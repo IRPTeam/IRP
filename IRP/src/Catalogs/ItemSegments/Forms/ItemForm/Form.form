@@ -347,16 +347,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>İçerik grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа контента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of content</value>
+   <value>8E7778B9-0482-C284-4382-2C4E2FB789E5</value>
   </title>
   <extendedTooltip>
    <name>GroupContentExtendedTooltip</name>
@@ -420,16 +412,8 @@
  <attributes>
   <name>ContentSegment</name>
   <title>
-   <key>tr</key>
-   <value>İçerik segmenti</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сегмент контента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Content segment</value>
+   <value>F9101AFD-CE13-8ABB-B48F-FE8F5F39ED39</value>
   </title>
   <id>2</id>
   <valueType>
@@ -473,16 +457,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Segment</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Сегмент</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Segment</value>
+       <value>F748971C-940C-B6FE-EEB4-466053382211</value>
       </content>
      </localValue>
     </title>
@@ -501,16 +477,8 @@ WHERE
  <formCommands>
   <name>Check</name>
   <title>
-   <key>tr</key>
-   <value>Kontrol</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Проверка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check</value>
+   <value>CE3D1CC6-5C0A-8112-2522-26E0DFBC6F0B</value>
   </title>
   <id>1</id>
   <use>
@@ -530,16 +498,8 @@ WHERE
  <formCommands>
   <name>LoadDataFromTable</name>
   <title>
-   <key>tr</key>
-   <value>Tablodan veriyi yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить данные из таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load data from table</value>
+   <value>AB568740-AB1A-F42C-CED3-31F0C69AA79A</value>
   </title>
   <id>2</id>
   <use>

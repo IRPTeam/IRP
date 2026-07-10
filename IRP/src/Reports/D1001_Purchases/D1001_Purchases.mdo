@@ -6,32 +6,16 @@
  </producedTypes>
  <name>D1001_Purchases</name>
  <synonym>
-  <key>tr</key>
-  <value>D1001 Alımlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>D1010 Закупки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>D1001 Purchases</value>
+  <value>5ACC9C8C-9F70-B17E-EFDC-C1C58449F45D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.D1001_Purchases.Template.Template</mainDataCompositionSchema>
  <templates uuid="ba189443-b3f1-45cd-9a43-57958a5cd477">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Template</value>
+   <value>3FCD9887-D19F-BB50-090D-D96D8A803DDA</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

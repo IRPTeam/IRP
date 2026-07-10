@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>F384E122-5E38-CD54-458F-F8FA2D833478</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -58,16 +50,8 @@
    <name>Number</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number</value>
+    <value>C4B8D7AD-1342-9F40-0919-9186B618186A</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -108,16 +92,8 @@
    <name>Date</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>460E34CE-DC32-10E7-723B-BEEDB8DA7D9B</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -236,16 +212,8 @@
    <name>DocumentAmount</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>693B268C-517D-D07E-E9D8-8E272C7555A4</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -284,16 +252,8 @@
    <name>Currency</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>EBF14E39-B268-14CF-F3A6-6564E01DBE2B</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -376,16 +336,8 @@
    <name>Company</name>
    <id>34</id>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>2F277FA3-3235-7575-540A-A05202CDBE8E</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

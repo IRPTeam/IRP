@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseRetail</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Perakende</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать розничный модуль</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use retail</value>
+  <value>41AC9129-D788-5CD7-7374-4F540F9764CD</value>
  </synonym>
  <type>
   <types>Boolean</types>

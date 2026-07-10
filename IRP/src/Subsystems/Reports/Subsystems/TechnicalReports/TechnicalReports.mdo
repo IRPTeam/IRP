@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cd02a701-eff0-4957-96b5-abee66cfccc1">
  <name>TechnicalReports</name>
  <synonym>
-  <key>tr</key>
-  <value>Teknik raporlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Технические отчёты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Technical reports</value>
+  <value>1A21DBEF-F868-6E92-2F91-10C8E38D92A4</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

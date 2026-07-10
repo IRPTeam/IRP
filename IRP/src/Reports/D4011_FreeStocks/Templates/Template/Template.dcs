@@ -11,16 +11,8 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Varyant</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Характеристика</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>35325297-A37A-8C01-1689-928F00C00766</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -32,16 +24,8 @@
 			<field>QuantityTurnover</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Turnover</v8:content>
+					<v8:content>C26B3330-FC2D-C6B1-139B-B88B1B8651C4</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -50,16 +34,8 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Malzeme</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Номенклатура</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>B6CB5605-1ADC-BB46-681E-EA1B85339A7E</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -71,16 +47,8 @@
 			<field>Store</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Depo</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Склад</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Store</v8:content>
+					<v8:content>240C81AA-3525-F6F0-0405-54A512F55EFD</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -92,16 +60,8 @@
 			<field>QuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar son bakiye</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Конечный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Ending balance</v8:content>
+					<v8:content>E541A308-228F-0417-7A59-906CEF022DB4</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -115,16 +75,8 @@
 			<field>QuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar çıkan</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Расход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Expense</v8:content>
+					<v8:content>B1104113-8965-D368-8E22-21957839B7BB</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -133,16 +85,8 @@
 			<field>QuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar dönem başı bakiye</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Начальный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Starting balance</v8:content>
+					<v8:content>3B69962C-07BD-254A-AC4D-DFF8DA0A1321</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -156,16 +100,8 @@
 			<field>QuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar gelen</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Приход</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Receipt</v8:content>
+					<v8:content>C5716C8A-3C6C-9DA5-594B-B26A5DAE65FA</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -174,16 +110,8 @@
 			<field>DayPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, gün</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Период, день</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Day</v8:content>
+					<v8:content>12BB111D-D4DB-1A3F-F8E3-3F04E44E4C47</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -195,16 +123,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
+							<v8:content>0D280BDC-41E4-303F-F787-73437F020208</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -215,16 +135,8 @@
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İşlem evrakı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Документ</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:content>9BD1203C-0B79-E1F8-82C3-3CBCF4355C61</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -237,16 +149,8 @@
 			<field>MonthPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, ay</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Период, месяц</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Month</v8:content>
+					<v8:content>282110A2-486E-DB22-2FE8-83788B9B6A30</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -258,16 +162,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>DF='MMMM yyyy'</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>DF='MMMM yyyy'</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF='MMMM yyyy'</v8:content>
+							<v8:content>4847562E-ED7A-1962-23C2-2E5CEF1B5BD7</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -278,16 +174,8 @@
 			<field>SecondPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, saniye</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Период, секунда</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Second</v8:content>
+					<v8:content>3EE3446F-D854-F0C4-4FE1-1040413149ED</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -300,16 +188,8 @@
 			<field>WeekPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, hafta</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Период, неделя</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Week</v8:content>
+					<v8:content>43A47A2B-E8BF-9EC2-2CF5-5094A40AA048</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -321,16 +201,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
+							<v8:content>0D280BDC-41E4-303F-F787-73437F020208</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -346,16 +218,8 @@
 			<field>YearPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, yıl</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Период, год</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Year</v8:content>
+					<v8:content>C9615779-C496-A3AA-A5E6-67CE1EAB6E85</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -367,16 +231,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>DF=yyyy</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>DF=yyyy</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF=yyyy</v8:content>
+							<v8:content>022FDAA0-0585-2471-1583-34493C314870</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -386,16 +242,8 @@
 			<dataPath>Periods</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönemler</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Периоды</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Periods</v8:content>
+					<v8:content>4FDFD769-819B-5EC5-517D-D2B012A83829</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -403,16 +251,8 @@
 			<dataPath>Quantity</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>D507AD72-4C85-0C43-3A3C-C79E62BD0E09</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -459,16 +299,8 @@ FROM
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem başı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>1E5911F9-108E-F0F5-5D1B-BD8C9D461694</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -486,16 +318,8 @@ FROM
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem sonu</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Конец периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>AC5D9442-D6EE-C8B8-8B73-332484BBE228</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -513,16 +337,8 @@ FROM
 		<name>Period</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>8D237E96-E7A5-95D0-09C0-0B4DD5CB8DDD</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -575,16 +391,8 @@ FROM
 					<dcsset:userSettingID>952015c8-42e0-4370-8a0a-56096cbd936a</dcsset:userSettingID>
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Dönem</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Период</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Period</v8:content>
+							<v8:content>29454D25-99F3-68E5-5C57-7B5F1FA0CDBF</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>

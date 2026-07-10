@@ -46,16 +46,8 @@
     <typeDomainEnabled>true</typeDomainEnabled>
     <textEdit>true</textEdit>
     <inputHint>
-     <key>tr</key>
-     <value>Malzeme</value>
-    </inputHint>
-    <inputHint>
-     <key>ru</key>
-     <value>Номенклатура</value>
-    </inputHint>
-    <inputHint>
      <key>en</key>
-     <value>Item</value>
+     <value>837D2758-9054-3A67-7C92-2DB71C139B01</value>
     </inputHint>
    </extInfo>
   </items>
@@ -110,16 +102,8 @@
      </datapath>
     </choiceParameterLinks>
     <inputHint>
-     <key>tr</key>
-     <value>Varyant</value>
-    </inputHint>
-    <inputHint>
-     <key>ru</key>
-     <value>Характеристика</value>
-    </inputHint>
-    <inputHint>
      <key>en</key>
-     <value>Item key</value>
+     <value>F1AEC384-499F-E914-41EB-B5339A6EC1F0</value>
     </inputHint>
    </extInfo>
   </items>
@@ -227,16 +211,8 @@
       </datapath>
      </choiceParameterLinks>
      <inputHint>
-      <key>tr</key>
-      <value>Birim</value>
-     </inputHint>
-     <inputHint>
-      <key>ru</key>
-      <value>Ед. изм.</value>
-     </inputHint>
-     <inputHint>
       <key>en</key>
-      <value>Unit</value>
+      <value>9E27F034-EE81-C422-27A1-18A11989D529</value>
      </inputHint>
     </extInfo>
    </items>
@@ -369,16 +345,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Planlama grubu 1</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа планирования 1</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Planning group1</value>
+      <value>7A5C7DFC-64C4-052B-BB11-17F81D4CC0FF</value>
      </title>
      <extendedTooltip>
       <name>PlanningGroupExtendedTooltip</name>
@@ -585,6 +553,7 @@
       <name>ProductionPlusInventoryTransfer</name>
       <id>58</id>
       <visible>true</visible>
+      <enabled>false</enabled>
       <userVisible>
        <common>true</common>
       </userVisible>
@@ -618,16 +587,8 @@
       <common>true</common>
      </userVisible>
      <toolTip>
-      <key>tr</key>
-      <value>Grup üretim ve depo transfer fişi</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Группа производство плюс перемещение товаров</value>
-     </toolTip>
-     <toolTip>
       <key>en</key>
-      <value>Group production plus inventory transfer</value>
+      <value>86F9AA31-F2A2-3BB0-0E5E-E32AFD2F3C95____</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupProductionPlusInventoryTransferExtendedTooltip</name>
@@ -652,6 +613,7 @@
       <name>InventoryTransfer</name>
       <id>56</id>
       <visible>true</visible>
+      <enabled>false</enabled>
       <userVisible>
        <common>true</common>
       </userVisible>
@@ -685,16 +647,8 @@
       <common>true</common>
      </userVisible>
      <toolTip>
-      <key>tr</key>
-      <value>Grup depo transfer fişi</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Группа перемещение товаров</value>
-     </toolTip>
-     <toolTip>
       <key>en</key>
-      <value>Group inventory transfer</value>
+      <value>E4174331-CD02-DBBB-B670-03848E71B40A</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupInventoryTransferExtendedTooltip</name>
@@ -719,6 +673,7 @@
       <name>Productions</name>
       <id>54</id>
       <visible>true</visible>
+      <enabled>false</enabled>
       <userVisible>
        <common>true</common>
       </userVisible>
@@ -752,16 +707,8 @@
       <common>true</common>
      </userVisible>
      <toolTip>
-      <key>tr</key>
-      <value>Grup üretim</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Группа производство</value>
-     </toolTip>
-     <toolTip>
       <key>en</key>
-      <value>Group productions</value>
+      <value>42323983-2EF2-F660-0FC1-1EAF93DBE566</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupProductionsExtendedTooltip</name>
@@ -788,16 +735,8 @@
       <common>true</common>
      </userVisible>
      <toolTip>
-      <key>tr</key>
-      <value>Grup evraklar</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Группа документы</value>
-     </toolTip>
-     <toolTip>
       <key>en</key>
-      <value>Group documents</value>
+      <value>35AC5AFF-891C-131B-B2A9-963D4B849048</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupDocumentsExtendedTooltip</name>
@@ -821,28 +760,12 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Butonlar sayfası</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Страницы кнопок</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Button pages</value>
+     <value>BC81E897-DAFE-4A41-1D81-1B391CBC3B67</value>
     </title>
-    <toolTip>
-     <key>tr</key>
-     <value>Butonlar sayfası</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Страницы кнопок</value>
-    </toolTip>
     <toolTip>
      <key>en</key>
-     <value>Button pages</value>
+     <value>940E390B-EFB0-0D5F-F572-2F93915EDDF8</value>
     </toolTip>
     <extendedTooltip>
      <name>ButtonPagesExtendedTooltip</name>
@@ -996,16 +919,8 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>5D6E2EBD-F9F5-8783-364E-E52D622D84BB</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1021,16 +936,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>28671BB9-B095-9B8C-CE6B-B9D39D7DF7B5</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1046,16 +953,8 @@
  <attributes>
   <name>Quantity</name>
   <title>
-   <key>tr</key>
-   <value>Miktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Quantity</value>
+   <value>4744C033-B984-8D61-19AC-C2E64575D3E7</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1071,16 +970,8 @@
  <attributes>
   <name>Unit</name>
   <title>
-   <key>tr</key>
-   <value>Birim</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ед. изм.</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unit</value>
+   <value>D4567E10-2392-4712-2F19-9F26665E8476</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1096,16 +987,8 @@
  <attributes>
   <name>Planning</name>
   <title>
-   <key>tr</key>
-   <value>Planlama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Планирование</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Planning</value>
+   <value>4A630A30-0E5A-F58D-D72A-A382DB19CB71</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1120,16 +1003,8 @@
   <columns>
    <name>PlanningPeriod</name>
    <title>
-    <key>tr</key>
-    <value>Planlama dönemi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Период планирования</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Planning period</value>
+    <value>5F8E086C-97AF-8A7C-CF4B-B1F49FA8A181</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1145,16 +1020,8 @@
   <columns>
    <name>LeftToProduce</name>
    <title>
-    <key>tr</key>
-    <value>Üretilecek</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Осталось произвести</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Left to produce</value>
+    <value>CCAD8CDE-109E-1259-9312-2677CB7ADBCC</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1170,16 +1037,8 @@
   <columns>
    <name>ProductionPlanning</name>
    <title>
-    <key>tr</key>
-    <value>Üretim planlama fişi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Планирование производства</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Production planning</value>
+    <value>29E932DB-6E8A-0BF4-4A77-7E07B8F8CFE3</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1195,16 +1054,8 @@
   <columns>
    <name>BusinessUnit</name>
    <title>
-    <key>tr</key>
-    <value>Departman</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Подразделение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Business unit</value>
+    <value>7E4B68FF-3B55-63F4-4096-6E3025344F99</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1220,16 +1071,8 @@
   <columns>
    <name>Company</name>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>89062F78-055B-9CCC-C87F-F43101AAF9DD</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1245,16 +1088,8 @@
   <columns>
    <name>ProductionType</name>
    <title>
-    <key>tr</key>
-    <value>Üretim tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид производства</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Production type</value>
+    <value>32C6257B-DFF0-B586-6B8A-AEC10D754BE3</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1270,16 +1105,8 @@
   <columns>
    <name>StoreProduction</name>
    <title>
-    <key>tr</key>
-    <value>Hazır ürün deposu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Склад готовой продукции</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Store production</value>
+    <value>9BD197FD-F4D0-A4AA-AC54-4C1C2CCF024E</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1295,16 +1122,8 @@
   <columns>
    <name>BillOfMaterials</name>
    <title>
-    <key>tr</key>
-    <value>Üretim reçetesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Спецификация (Производство)</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Bill of materials</value>
+    <value>DD459370-2A92-6977-741C-CD0C3747CFA9</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1320,16 +1139,8 @@
   <columns>
    <name>OutputID</name>
    <title>
-    <key>tr</key>
-    <value>Çıkış ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID вывода</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Output ID</value>
+    <value>A77B17DD-8589-5B74-4079-9715BA7443D4</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1348,16 +1159,8 @@
   <columns>
    <name>UniqueID</name>
    <title>
-    <key>tr</key>
-    <value>Unique ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Уникальный ID</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unique ID</value>
+    <value>3839A3B4-DDD4-9450-03E5-5D91427D18F0</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1376,16 +1179,8 @@
   <columns>
    <name>TotalQuantity</name>
    <title>
-    <key>tr</key>
-    <value>Toplam miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Итоговое количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Total quantity</value>
+    <value>131BDF65-9831-973C-C8DF-FED618E38EE8</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1401,16 +1196,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>F05AFD2C-16EE-5591-1A05-54628AD70393</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1427,16 +1214,8 @@
  <attributes>
   <name>PlanningPresentation</name>
   <title>
-   <key>tr</key>
-   <value>Planlama sunumu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Представление планирования</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Planning presentation</value>
+   <value>B504C4EE-F628-1C81-1B5B-B9C7189318C0</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1451,16 +1230,8 @@
   <columns>
    <name>PlanningPeriod</name>
    <title>
-    <key>tr</key>
-    <value>Planlama dönemi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Период планирования</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Planning period</value>
+    <value>0241C347-D912-F4A2-2AF6-65C803553348</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1476,16 +1247,8 @@
   <columns>
    <name>LeftToProduce</name>
    <title>
-    <key>tr</key>
-    <value>Üretilecek</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Осталось произвести</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Left to produce</value>
+    <value>038CF3E1-004E-F9E9-9016-6AEFA57C5CD4</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1501,16 +1264,8 @@
   <columns>
    <name>ProductionPlanning</name>
    <title>
-    <key>tr</key>
-    <value>Üretim planlama fişi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Планирование производства</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Production planning</value>
+    <value>CAD27FDB-BB3D-005B-B065-5D46E4C7C2AA</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1526,16 +1281,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>930FC1B2-1B55-7170-07EF-F3EFA507C5D9</value>
    </title>
    <id>24</id>
    <valueType>
@@ -1552,16 +1299,8 @@
  <attributes>
   <name>CreatedAttributes</name>
   <title>
-   <key>tr</key>
-   <value>Oluşturulan öznitelikler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Созданные реквизиты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Created attributes</value>
+   <value>06633F89-6ECE-13ED-DE3D-DCAA5BA5881C</value>
   </title>
   <id>25</id>
   <valueType>
@@ -1597,16 +1336,8 @@
  <formCommands>
   <name>InputBarcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod giriniz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ввести штрихкод</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Input barcode</value>
+   <value>B4E0AB4A-34CC-5A40-0AAD-D44B805A785A</value>
   </title>
   <id>2</id>
   <use>
@@ -1625,16 +1356,8 @@
  <formCommands>
   <name>Productions</name>
   <title>
-   <key>tr</key>
-   <value>Alım irsaliyesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Производство</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>PR</value>
+   <value>59D3D7E3-E051-D521-110D-D1C146AA2C83</value>
   </title>
   <id>4</id>
   <use>
@@ -1650,16 +1373,8 @@
  <formCommands>
   <name>InventoryTransfer</name>
   <title>
-   <key>tr</key>
-   <value>Depo transfer fişi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Перемещение товаров</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>IT</value>
+   <value>1C379CBF-EC63-82D6-693E-E9E3938DF4FB</value>
   </title>
   <id>5</id>
   <use>
@@ -1675,29 +1390,13 @@
  <formCommands>
   <name>ProductionPlusInventoryTransfer</name>
   <title>
-   <key>tr</key>
-   <value>Üretim ve depo transfer fişi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Производство + Перемещение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>PR+IT</value>
+   <value>591983D8-1F5E-F527-7303-3D192337ED55</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Üretim ve depo transfer fişi</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Производство плюс перемещение</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Production plus inventory transfer</value>
+   <value>83224EA8-2BC2-7544-45EE-ECA22B2B7DE7</value>
   </toolTip>
   <use>
    <common>true</common>

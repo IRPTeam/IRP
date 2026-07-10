@@ -237,16 +237,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>DF12FC38-9B74-A212-24A2-2B4C56F36091</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -278,16 +270,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>685C9F7F-7DDF-6FA7-7B12-287F7E38BE5B</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -367,16 +351,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>D0424256-5105-4056-6308-8E4D944F5C09</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -824,16 +800,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açıklama</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>3B4125DE-10D1-9619-91EE-E65F3BAD15DE</value>
       </content>
      </localValue>
     </title>
@@ -931,16 +899,8 @@ FROM
  <attributes>
   <name>FilterCustomer</name>
   <title>
-   <key>tr</key>
-   <value>Müşteri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Клиент</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Customer</value>
+   <value>B74AD82A-FFB4-DB8D-DD42-2369D656BE01</value>
   </title>
   <id>3</id>
   <valueType>
@@ -956,16 +916,8 @@ FROM
  <attributes>
   <name>FilterVendor</name>
   <title>
-   <key>tr</key>
-   <value>Terarikçi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Поставщик</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Vendor</value>
+   <value>61CC2E91-5180-A0D6-6BF2-2AC8F9108DD6</value>
   </title>
   <id>4</id>
   <valueType>
@@ -981,16 +933,8 @@ FROM
  <attributes>
   <name>FilterEmployee</name>
   <title>
-   <key>tr</key>
-   <value>Personel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Employee</value>
+   <value>78A86674-0DD3-5F7A-A86A-A651CBB97524</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1006,16 +950,8 @@ FROM
  <attributes>
   <name>FilterConsignor</name>
   <title>
-   <key>tr</key>
-   <value>Konsiyeye veren</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комитент</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Consignor</value>
+   <value>91B61FB9-4A70-F3EB-BDE3-31DEA6209043</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1032,16 +968,8 @@ FROM
  <attributes>
   <name>FilterTradeAgent</name>
   <title>
-   <key>tr</key>
-   <value>Ödeme aracı kurum</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комиссионер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Trade agent</value>
+   <value>C088DD7A-16DE-208F-F3E7-73F1B8D5D43D</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1058,16 +986,8 @@ FROM
  <attributes>
   <name>FilterOther</name>
   <title>
-   <key>tr</key>
-   <value>Diğer</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Прочий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Other</value>
+   <value>7F82D745-31F2-9D01-1425-5F44E7AC262F</value>
   </title>
   <id>8</id>
   <valueType>

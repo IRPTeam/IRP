@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="db0999a3-e902-4307-a6b1-fbaf652a05a0">
  <name>UseBusinessProcess</name>
  <synonym>
-  <key>tr</key>
-  <value>İş süreçleri kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать бизнес процессы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use business process</value>
+  <value>2A2C036F-BA5C-9067-7B67-7F9078FD9BCB</value>
  </synonym>
  <location>Constant.UseBusinessProcess</location>
  <privilegedGetMode>true</privilegedGetMode>

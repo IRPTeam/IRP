@@ -9,16 +9,8 @@
  </producedTypes>
  <name>IDInfoAddresses</name>
  <synonym>
-  <key>tr</key>
-  <value>Adresler hiyerarşisi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Адресная иерархия</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Addresses hierarchy</value>
+  <value>896C922F-C33D-727A-AC1F-FF71D6871E22</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.IDInfoAddresses.StandardAttribute.Code</inputByString>
@@ -67,16 +59,8 @@
   <dataHistory>Use</dataHistory>
   <name>Owner</name>
   <synonym>
-   <key>tr</key>
-   <value>Sahip</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Владелец</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Owner</value>
+   <value>5697B57A-E9AE-9AD1-14F2-2E04806FCB14</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -89,16 +73,8 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>tr</key>
-   <value>Üst öğe</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Родитель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Parent</value>
+   <value>3CC2EA8B-CA12-BD41-1094-4C7AB1AE4580</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -127,16 +103,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Adres hiyerarşisi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Адресная иерархия</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Address hierarchy</value>
+  <value>81FD9FAD-D926-E8D6-6218-8BA4C7B6B919</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <hierarchyType>HierarchyOfItems</hierarchyType>
@@ -157,16 +125,8 @@
  <attributes uuid="40eba57e-a472-49ad-9fe9-740da1de86bc">
   <name>Level</name>
   <synonym>
-   <key>tr</key>
-   <value>Seviye</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Уровень</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Level</value>
+   <value>808A50AD-A265-60D5-58AA-AAC968EC8F6D</value>
   </synonym>
   <type>
    <types>String</types>
@@ -176,25 +136,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="ee83bd43-d0bc-44bb-a7db-3e97f09176ce">
   <name>Country</name>
   <synonym>
-   <key>tr</key>
-   <value>Ülke</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Страна</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Country</value>
+   <value>B8800BEB-E476-76CF-FF89-9944D19C703D</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -208,16 +158,8 @@
  <attributes uuid="e585b9b0-decc-47f5-a52e-241f40e7f411">
   <name>FullDescription</name>
   <synonym>
-   <key>tr</key>
-   <value>Uzun tanım</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Полное наименование</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Full description</value>
+   <value>84B3F259-151C-C126-6838-899AD281AF52</value>
   </synonym>
   <type>
    <types>String</types>
@@ -227,25 +169,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <forms uuid="23652c9c-63d4-4c58-b035-2e529ba406b0">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>81BB7054-ACD2-0F21-1E96-61C7BE9CA89A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -253,16 +185,8 @@
  <forms uuid="a48d47b9-9910-448a-baf4-a4d1f7839108">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>51D1907F-31FE-A1C4-4719-91EDA58A7997</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -270,16 +194,8 @@
  <forms uuid="44dbe7fb-86c1-4233-b669-ddcec914d84c">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>5E3D32E4-D8D9-0E24-400C-CE24720DC9C5</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

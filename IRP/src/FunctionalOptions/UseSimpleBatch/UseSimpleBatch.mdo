@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4f6aa703-e96f-4372-b022-6f264eec4460">
  <name>UseSimpleBatch</name>
  <synonym>
-  <key>tr</key>
-  <value>Temel parti kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать простую партию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use simple batch</value>
+  <value>B3083C0B-25D4-0B1A-A094-414F162E30FD</value>
  </synonym>
  <location>Constant.UseSimpleBatch</location>
  <privilegedGetMode>true</privilegedGetMode>

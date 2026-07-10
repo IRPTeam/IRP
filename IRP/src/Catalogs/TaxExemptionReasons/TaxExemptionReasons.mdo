@@ -9,16 +9,8 @@
  </producedTypes>
  <name>TaxExemptionReasons</name>
  <synonym>
-  <key>tr</key>
-  <value>Vergi istisna sebepleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Причина налогового исключения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Tax exemption reasons</value>
+  <value>51A8F9C3-AD74-CA0B-B3C4-40BB88D27E1B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -97,16 +89,8 @@
  <createOnInput>Use</createOnInput>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Vergi istisna sebebi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Причина налогового исключения</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Tax exemption reason</value>
+  <value>A4304611-D36C-7471-19AC-C26E3BE21439</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -124,16 +108,8 @@
  <attributes uuid="f4887185-70c9-4501-b364-fb0d10342e7c">
   <name>Country</name>
   <synonym>
-   <key>tr</key>
-   <value>Ülke</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Страна</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Country</value>
+   <value>2D367CC0-F7F7-46CD-DB43-326470437E29</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -147,16 +123,8 @@
  <attributes uuid="c5db01dd-718a-416b-a5d1-38b34e60cd55">
   <name>TaxRate</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi oranı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налоговая ставка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax rate</value>
+   <value>6DABD8AC-A84B-106D-DF8B-B5FBFE7D2908</value>
   </synonym>
   <type>
    <types>CatalogRef.TaxRates</types>
@@ -174,30 +142,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>399385A8-04C7-DD88-8F02-2CC3F5F32676</value>
   </synonym>
   <attributes uuid="b7970092-8ea0-40a0-99a9-38d9598d8a1f">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>2E64DD3F-B35A-CCB8-8D15-57169B729F15</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -209,16 +161,8 @@
   <attributes uuid="9d71e802-f2d2-4c48-a36e-188fdc7844cf">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>D745E703-C859-2081-15BE-E8B553B57C2A</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -235,16 +179,8 @@
  <forms uuid="bd4f16bf-3a63-499c-a4b7-233d98fdcf7c">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>239F00DD-D29A-0263-301C-CCC07560DA65</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

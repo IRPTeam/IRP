@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R1031B_ReceiptInvoicing</name>
  <synonym>
-  <key>tr</key>
-  <value>R1031 Satın alma irsaliye fatura kapama</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1031 Контроль закрытия - Приход товаров/Поступления</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1031 Receipt invoicing</value>
+  <value>F0B8934C-4B6A-968D-D593-326EBD602C47</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="fc5d934e-ba74-424c-95b1-910f6db83942">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>856829AB-D0B5-15B6-6FCD-DC3C7B092EE6</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="a901bf72-12b1-4354-9cb0-95e226be4a83">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>8F2E41B0-E567-F7F9-98C7-7B625A5722C4</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="7c6032bb-a7a8-4a6a-b5ad-75eff15d6a7c">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>56617EC9-6F29-B65A-AA90-0D04643405EE</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="5b684240-ff68-44c3-9e0b-05e99f3be4d9">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>8FDAF837-C94F-E239-9028-82BB808D373A</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="a3ad9e95-87eb-477a-9d06-d6a2a8ec9a7b">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis</value>
+   <value>BA95DB9A-014A-A5FE-EF66-68CC6C7D3EC1</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -139,16 +91,8 @@
  <dimensions uuid="9cc84783-0eb5-4dda-95b9-7dfef9b493ae">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>098ABB52-1C8B-B77B-BE3B-B2217BAA1611</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2a1187ae-91a3-49b2-af75-ba12d11d5559">
  <name>Document_ProductionPlanningClosing</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Üretim planlamasını kapatma"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Закрытие плана производства"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Production planning closing"</value>
+  <value>084AA7CA-527E-2FEA-A70E-EBD16EC36A75__</value>
  </synonym>
 </mdclass:Role>

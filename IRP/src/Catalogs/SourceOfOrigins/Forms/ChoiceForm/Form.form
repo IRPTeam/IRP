@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>9E32AC3E-7EE2-72D7-7351-1DC307AAE6D5</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -602,16 +594,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Malzeme</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Номенклатура</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item</value>
+       <value>E2BC8F0E-7A43-8E64-4B51-15B13D76F7CC</value>
       </content>
      </localValue>
     </title>
@@ -626,16 +610,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Filtre uygula</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Использовать отбор</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Use filter</value>
+       <value>03820DA6-C4B7-2A0C-C99C-C4DBA1D0F1A9</value>
       </content>
      </localValue>
     </title>
@@ -647,16 +623,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Malzeme tipi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Вид номенклатуры</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item type</value>
+       <value>50388EB1-1325-F64E-E272-282340FBC608</value>
       </content>
      </localValue>
     </title>
@@ -671,16 +639,8 @@
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Varyant</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Характеристика</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item key</value>
+       <value>7D15B1AE-12B5-56DD-D52E-EE87422E7E64</value>
       </content>
      </localValue>
     </title>
@@ -695,16 +655,8 @@
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполненные данные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filling data</value>
+   <value>6E909B5C-F482-DF6C-CC47-77E753CE88BE</value>
   </title>
   <id>2</id>
   <valueType>

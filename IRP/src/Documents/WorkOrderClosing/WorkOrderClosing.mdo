@@ -9,16 +9,8 @@
  </producedTypes>
  <name>WorkOrderClosing</name>
  <synonym>
-  <key>tr</key>
-  <value>İş emri kapanışı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Закрытие заказ наряда</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Work order closing</value>
+  <value>042644A4-CE15-2466-63E3-3401653ECA94</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.WorkOrderClosing.StandardAttribute.Number</inputByString>
@@ -27,28 +19,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>İş emri kapanışı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Закрытие заказ наряда</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Work order closing</value>
+  <value>B55BB1E9-3334-C257-7BDD-DE4503C809DE</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>İş emri kapanışları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Закрытия заказ нарядов</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Work order closings</value>
+  <value>0B5E5258-6657-67AD-D751-14E6CD336588</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -63,16 +39,8 @@
  <attributes uuid="3ec84411-56f2-440d-989a-4aed241db534">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>8C0EF12B-F0B2-DAE4-41D7-7FC29CB0F8CC</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -87,16 +55,8 @@
  <forms uuid="c02890d7-1004-4a0b-8db7-89036fa0461e">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>6C56157A-2650-E852-23F6-6F40CCB5AFD8</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -104,16 +64,8 @@
  <forms uuid="4c31fd92-d2c0-4f5b-b16f-257b59f54fbf">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>09BECAB6-CD9B-A987-7ACA-A4ED9814948F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -121,16 +73,8 @@
  <forms uuid="577f519e-f00b-4090-8433-d406c3dd4715">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>7BE18138-8735-C84A-A71F-F1A301543454</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

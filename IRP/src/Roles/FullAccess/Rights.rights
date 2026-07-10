@@ -567,6 +567,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.Storno</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.PLSections</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -2158,6 +2165,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.IncomingExchRateAdjustmentInvoice</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.AccountingOperations</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -2207,6 +2221,13 @@
 		</right>
 		<right>
 			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.OutgoingExchRateAdjustmentInvoice</name>
+		<right>
+			<name>InteractiveDelete</name>
 			<value>false</value>
 		</right>
 	</object>

@@ -110,16 +110,8 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>Nesne seç</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Выбрать объект</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>Select object</value>
+    <value>91F3F020-3AE9-4F3C-C08D-D629CD81D2B6</value>
    </inputHint>
   </extInfo>
  </items>
@@ -457,16 +449,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sonraki uygun statüler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Следующие возможные статусы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Next possible statuses</value>
+    <value>C2164E85-2E4A-E400-0E17-764DCFE4D6E5</value>
    </title>
    <extendedTooltip>
     <name>GroupNextPossibleStatusesExtendedTooltip</name>
@@ -523,16 +507,8 @@
      <radioButtonsType>Tumbler</radioButtonsType>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Проведение</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Posting</value>
+       <value>B99B5D9D-6C65-5FAB-B929-97EBF338B45C</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
@@ -540,16 +516,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Düzeltme kaydı</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Сторно</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Correction</value>
+       <value>94811500-EA1A-83F9-9B06-618430358F4D</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
@@ -557,16 +525,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Ters kayıt</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Отменяет проводки</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Reversal</value>
+       <value>8A3EEA89-EBBC-D1CA-A993-3E588A487E0F</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
@@ -574,16 +534,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt yok</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Без изменений</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Nothing</value>
+       <value>65EDF5E9-148C-2B7D-DEDB-B2E9AAE6151D</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
@@ -627,16 +579,8 @@
      <radioButtonsType>Tumbler</radioButtonsType>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Проведение</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Posting</value>
+       <value>BFABDB95-EB14-6DAD-DB3B-B4AED6EABB14</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
@@ -644,16 +588,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Düzeltme kaydı</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Сторно</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Correction</value>
+       <value>64D66AB5-2617-0671-19FA-A019A0342466</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
@@ -661,16 +597,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Ters kayıt</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Отменяет проводки</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Reversal</value>
+       <value>B4D223A3-792A-62BF-F282-2B41D0DE5CE4</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
@@ -678,16 +606,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt yok</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Без изменений</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Nothing</value>
+       <value>71C1A431-62B9-1067-73C7-7370D060CF3C</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
@@ -731,16 +651,8 @@
      <radioButtonsType>Tumbler</radioButtonsType>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Проведение</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Posting</value>
+       <value>95B09AF9-8B8E-5ABB-BE99-95921610A788</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
@@ -748,16 +660,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Düzeltme kaydı</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Сторно</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Correction</value>
+       <value>71E7C723-DB47-B844-4247-7184BA2D8EA0</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
@@ -765,16 +669,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Ters kayıt</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Отменяет проводки</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Reversal</value>
+       <value>5D4C0099-3F00-B99F-F870-06C360D39268</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
@@ -782,16 +678,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt yok</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Без изменений</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Nothing</value>
+       <value>292E8084-FE38-BAF0-009B-BCBFC131F753</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
@@ -835,16 +723,8 @@
      <radioButtonsType>Tumbler</radioButtonsType>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Проведение</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Posting</value>
+       <value>DBCAAD30-E980-BA0C-CF66-60C4E380F406</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
@@ -852,16 +732,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Düzeltme kaydı</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Сторно</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Correction</value>
+       <value>AF19815B-5BF4-7826-6811-1A02FBE9DD20</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
@@ -869,16 +741,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Ters kayıt</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Отменяет проводки</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Reversal</value>
+       <value>79AC889A-8C05-ADD8-81B5-5344F7A4ABAE</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
@@ -886,16 +750,8 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt yok</value>
-      </presentation>
-      <presentation>
-       <key>ru</key>
-       <value>Без изменений</value>
-      </presentation>
-      <presentation>
        <key>en</key>
-       <value>Nothing</value>
+       <value>56AB91C1-8E35-58F1-1D35-5722567E402D</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
@@ -909,16 +765,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kayıt</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проведение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Posting</value>
+    <value>97961223-8D80-9324-46AA-A086CAF9CF5F</value>
    </title>
    <extendedTooltip>
     <name>GroupPostingExtendedTooltip</name>
@@ -1149,16 +997,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kullanıcılar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Пользователи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Users</value>
+    <value>049D4D03-34FE-67AD-DEC5-57D0B9D4DEAF</value>
    </title>
    <extendedTooltip>
     <name>GroupUsersExtendedTooltip</name>
@@ -1182,16 +1022,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>678ABDB3-A0BA-0B7E-E781-15216FB91D71</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>

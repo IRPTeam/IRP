@@ -9,16 +9,8 @@
  </producedTypes>
  <name>LedgerTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Defter tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы учета</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Ledger types</value>
+  <value>27013C80-1DE1-81E1-1DEC-C271F831F8CE</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.LedgerTypes.StandardAttribute.Code</inputByString>
@@ -59,16 +51,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Defter tipi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Тип учета</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Ledger type</value>
+  <value>716684AC-4591-529C-CCAB-BA6599CCB707</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -86,16 +70,8 @@
  <attributes uuid="8c72245f-3e16-4de3-af8b-bf52de45f5a5">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency movement type</value>
+   <value>5A3B87B6-89ED-228A-AD88-869097068708</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -110,16 +86,8 @@
  <attributes uuid="b447373e-e36a-496a-beef-fd2c21f0f21c">
   <name>LedgerTypeVariant</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вариант типа учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type variant</value>
+   <value>2C1EAFBF-1B18-7FE5-57F1-171C5FCF69F9</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -134,16 +102,8 @@
  <attributes uuid="3d76805a-d007-41e0-b8d6-832db4e6ea3f">
   <name>SourceLedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип учета источник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source ledger type</value>
+   <value>1F963976-C84A-0D8D-D8EA-A9B20A656C1E</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -157,16 +117,8 @@
  <attributes uuid="a5894c6a-c5c4-4993-9e62-8c110e8236ea">
   <name>IntegrationSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Интеграционные настройки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Integration settings</value>
+   <value>2D0A7A9B-1AE3-C8EB-B2B4-40F737CF7DF4</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -180,16 +132,8 @@
  <attributes uuid="ef9dacfc-f7ab-4157-8be3-f8be5d6fdd6a">
   <name>ELedgerLocalizationCode</name>
   <synonym>
-   <key>tr</key>
-   <value>eLedger lokalizasyon kodu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>eLedger код локализации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>eLedger localization code</value>
+   <value>A80B8967-605E-0528-8918-8BB633F2346F</value>
   </synonym>
   <type>
    <types>String</types>
@@ -210,30 +154,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>3349CE1B-AA96-8C4A-A3B6-63F0B98EA3E3</value>
   </synonym>
   <attributes uuid="82422dc0-f5b2-4be6-8141-fc9ec3e34593">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>761A6229-B7BF-D806-6BBC-C47C17892C0F</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -246,16 +174,8 @@
   <attributes uuid="0afa644b-2eb2-451d-8528-a0df92068036">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>CC644D09-4266-37F3-3089-9F00C84A5D0E</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -272,16 +192,8 @@
   <attributes uuid="4e3cc1b0-6b99-4c4e-b8af-ef293f9d53d4">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Текстовая строка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Search literal</value>
+    <value>AECB5E9C-29C3-428E-EA19-9C44F6133680</value>
    </synonym>
    <type>
     <types>String</types>
@@ -302,30 +214,14 @@
   </producedTypes>
   <name>PLOffset</name>
   <synonym>
-   <key>tr</key>
-   <value>P&amp;L offset</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Закрытие счетов прибылей/убытков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>P&amp;L offset</value>
+   <value>334F9F06-DA97-FFA6-6B03-38BEBA09B617</value>
   </synonym>
   <attributes uuid="8ae69f15-a9a7-49db-83ad-0e6b9e68d6d4">
    <name>FromAccount</name>
    <synonym>
-    <key>tr</key>
-    <value>Çıkan kasa/banka</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Отправитель</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>From account</value>
+    <value>99964BFB-B9EB-66DB-B2F7-77D6BB4FEA44</value>
    </synonym>
    <type>
     <types>ChartOfAccountsRef.Basic</types>
@@ -343,16 +239,8 @@
   <attributes uuid="1e671dc0-df49-435b-b019-6afab15a572e">
    <name>BalanceType</name>
    <synonym>
-    <key>tr</key>
-    <value>Balance type</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид остатка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Balance type</value>
+    <value>C12F1000-CA67-B4BB-B26F-FA5C36CC3430</value>
    </synonym>
    <type>
     <types>EnumRef.AccountingAnalyticTypes</types>
@@ -366,16 +254,8 @@
   <attributes uuid="ecefa0c3-80b2-4d16-a6b6-a090fc42deff">
    <name>ToAccount</name>
    <synonym>
-    <key>tr</key>
-    <value>Giren kasa/banka</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Получатель</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>To account</value>
+    <value>59EFFDF5-069A-6AD7-76A7-7ED4E0368414</value>
    </synonym>
    <type>
     <types>ChartOfAccountsRef.Basic</types>
@@ -393,16 +273,8 @@
   <attributes uuid="5c6879e9-051c-4408-a2a8-6254ae137d0f">
    <name>BySubAccounts</name>
    <synonym>
-    <key>tr</key>
-    <value>By sub accounts</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>По субсчетам</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>By sub accounts</value>
+    <value>CCA79189-9AA1-AAE2-2DD4-45402F1D5A57</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -416,16 +288,8 @@
  <forms uuid="691b8cd4-a6b7-4669-b207-05be9ee72b6b">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>A7AF6E14-420E-0785-5559-91BA4E910A87</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -433,16 +297,8 @@
  <forms uuid="1f753216-2f72-4bb3-b2ce-82641c91ad90">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>0163469B-C4D2-0BBA-A632-281625CFCEA3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -450,16 +306,8 @@
  <forms uuid="4280f9ba-37d9-4651-a434-56109e9f6f96">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>ABD6831E-8A65-5A01-1924-4BCCDEB1BE7B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

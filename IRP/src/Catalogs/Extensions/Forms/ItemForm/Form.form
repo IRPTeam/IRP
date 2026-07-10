@@ -210,16 +210,8 @@
  <attributes>
   <name>FileAddress</name>
   <title>
-   <key>tr</key>
-   <value>Dosya adresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Адрес файла</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>File address</value>
+   <value>8694B514-12C0-21AF-FD96-6CB383C82C9B</value>
   </title>
   <id>2</id>
   <valueType>
@@ -236,16 +228,8 @@
  <attributes>
   <name>FileURL</name>
   <title>
-   <key>tr</key>
-   <value>Dosya URL</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>URL файла</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>File URL</value>
+   <value>22C4DE3D-972B-CDF3-3560-090EAE0042F7</value>
   </title>
   <id>3</id>
   <valueType>
@@ -262,29 +246,13 @@
  <formCommands>
   <name>AddFile</name>
   <title>
-   <key>tr</key>
-   <value>Dosya ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Добавить файл</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Add file</value>
+   <value>FF7CED18-E9FD-5B1A-A9B6-6EC37D00D49F</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Dosya ekle</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Добавить файл</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Add file</value>
+   <value>0B0430C3-614B-D3F9-992B-B021EB3BCB8C</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -303,29 +271,13 @@
  <formCommands>
   <name>SaveFile</name>
   <title>
-   <key>tr</key>
-   <value>Dosya kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить файл</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save file</value>
+   <value>04DABC7C-4256-6E47-7243-3626BE3405C9</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>Dosya kaydet</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Сохранить файл</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Save file</value>
+   <value>EFE64C6C-D311-FBCA-A9DF-F93E1E059E20</value>
   </toolTip>
   <use>
    <common>true</common>

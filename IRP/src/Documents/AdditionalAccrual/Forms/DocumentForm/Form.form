@@ -13,16 +13,8 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>310</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа декораций рисунок свернутой шапки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <value>8562DAFF-3AE2-1C0E-E9E2-2DF5B637C19A____</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -62,16 +54,8 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>313</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>A7661E08-EF9F-7A33-3084-47DF1EA8127C</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -173,16 +157,8 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>321</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>BC3F890D-6702-7C46-6E03-3DD09D995E01</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -963,16 +939,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Tahakkuk</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Начисление</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Accrual</value>
+    <value>E0D3402A-671A-1A92-2416-6F9483520D59</value>
    </title>
    <extendedTooltip>
     <name>GroupAccrualExtendedTooltip</name>
@@ -999,16 +967,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ek özellikler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительные реквизиты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Additional attributes</value>
+    <value>73AE575C-4831-3E86-6339-943F9B13D1D6</value>
    </title>
    <extendedTooltip>
     <name>GroupAddAttributesExtendedTooltip</name>
@@ -1275,16 +1235,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Numaratör grubu</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа нумерации</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group of numerator</value>
+      <value>7C2E7EDC-1E2F-AB37-7CE0-05AE77527AFC</value>
      </title>
      <extendedTooltip>
       <name>GroupNumeratorExtendedTooltip</name>
@@ -1312,16 +1264,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ek olarak</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Дополнительно</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>More</value>
+     <value>D3D35CC7-FC5B-71BF-FA12-2885EC5F85F2</value>
     </title>
     <extendedTooltip>
      <name>GroupMoreExtendedTooltip</name>
@@ -1431,16 +1375,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>C2ACC4C6-C54B-C919-9FCC-C47B2B1EB167</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -1464,16 +1400,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>0E618FAC-AFE5-D325-5AC6-6B255AA335B5</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -1504,16 +1432,8 @@
      <name>TotalAcrualAmount</name>
      <id>1530</id>
      <title>
-      <key>tr</key>
-      <value>Toplam</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Итого</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Total</value>
+      <value>E52B57D7-BBE6-F836-60C3-34E5F18F8C21</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1597,16 +1517,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup tahakkuk miktarı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Сумма группового начисления</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group accrual amount</value>
+     <value>3D264D49-B91B-DEA2-2C13-34FA174034C9</value>
     </title>
     <extendedTooltip>
      <name>GroupAccrualAmountExtendedTooltip</name>
@@ -1777,16 +1689,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>62B6CD7E-36BE-172A-A4DF-F64414CC4B94</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1803,16 +1707,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>4DD4F3B4-8DCF-9F93-3AC1-1BFAE24526E9</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1831,16 +1727,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать row key</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>F9ECAD92-1E21-531A-A033-34DAF1035A37</value>
   </title>
   <id>9</id>
   <use>
@@ -1859,16 +1747,8 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать скрытые таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show hidden tables</value>
+   <value>72F1739C-3BBD-64D0-0C0D-D79A23441A5D</value>
   </title>
   <id>15</id>
   <use>
@@ -1887,29 +1767,13 @@
  <formCommands>
   <name>EditCurrencies</name>
   <title>
-   <key>tr</key>
-   <value>Dövizleri düzelt</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Редактирование валют</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit currencies</value>
+   <value>F9C16094-A2E0-3100-0E91-17E48560EAC7</value>
   </title>
   <id>16</id>
   <toolTip>
-   <key>tr</key>
-   <value>Evrak için döviz kurları değiştir</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Изменить курс валют для документа</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Edit exchange rates for document</value>
+   <value>61CC5404-0B2E-E41B-BEFC-C0FD3DC0A9B7</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1927,29 +1791,13 @@
  <formCommands>
   <name>SetNewNumber</name>
   <title>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set new number</value>
+   <value>22BADDF3-40B6-6B37-7024-484FEB07FECC</value>
   </title>
   <id>17</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Set new number</value>
+   <value>71D0474C-6595-96F8-8142-243E7CB1F2C4</value>
   </toolTip>
   <use>
    <common>true</common>

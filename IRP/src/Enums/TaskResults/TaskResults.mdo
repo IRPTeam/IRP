@@ -7,77 +7,37 @@
  </producedTypes>
  <name>TaskResults</name>
  <synonym>
-  <key>tr</key>
-  <value>Görev sonuçları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Результаты задачи</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Task results</value>
+  <value>FA2D5389-229E-DF69-9B67-705B1959C3C8</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="c4c3633b-6907-44cb-9284-fbc4168698cb">
   <name>Executed</name>
   <synonym>
-   <key>tr</key>
-   <value>Yürütüldü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Выполнен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Executed</value>
+   <value>9263CB28-2364-51F9-9D56-6487F0463447</value>
   </synonym>
  </enumValues>
  <enumValues uuid="8004f8ad-4e44-4de6-9efa-7cc907cafe62">
   <name>Verified</name>
   <synonym>
-   <key>tr</key>
-   <value>Kontrol edildi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Проверен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Verified</value>
+   <value>F16D4580-3FF2-EFF2-255A-A903740FE70E</value>
   </synonym>
  </enumValues>
  <enumValues uuid="85cdda64-aaf7-4b86-b845-5347559719ad">
   <name>Confirmed</name>
   <synonym>
-   <key>tr</key>
-   <value>Onaylandı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Подтвержден</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Confirmed</value>
+   <value>00EB3296-782B-45AA-AF55-5AB40AC3317E</value>
   </synonym>
  </enumValues>
  <enumValues uuid="41a92b5a-a21d-4c71-b3ac-fd89f3256f24">
   <name>Canceled</name>
   <synonym>
-   <key>tr</key>
-   <value>İptal edildi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отменен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Canceled</value>
+   <value>72C294A2-1AF2-CAA9-9C02-26534637CA30</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

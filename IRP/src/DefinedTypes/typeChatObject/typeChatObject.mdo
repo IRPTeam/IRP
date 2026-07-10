@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeChatObject</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip sohbet objesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип объект чата</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type chat object</value>
+  <value>8BCEB926-C76A-C8CB-B7F7-77AD861994C6</value>
  </synonym>
  <type>
   <types>DocumentRef.PurchaseInvoice</types>

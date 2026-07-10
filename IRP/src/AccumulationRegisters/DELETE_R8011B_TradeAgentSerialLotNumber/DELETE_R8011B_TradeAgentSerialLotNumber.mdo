@@ -10,16 +10,8 @@
  </producedTypes>
  <name>DELETE_R8011B_TradeAgentSerialLotNumber</name>
  <synonym>
-  <key>tr</key>
-  <value>R8011 Konsinyeye alan seri lot numaraları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R8011 Серии комиссионера</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R8011 Trade agent serial lot number</value>
+  <value>822319B7-138C-63D9-94CB-BECEF97390BE</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="45265e7b-d456-44a2-adf5-615be9c5325e">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Quantity</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>859A2F61-4268-848C-C435-545556C6D397</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="84c2d501-ab2e-4677-ba05-8245775a45c4">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>AF99BFB3-E85A-9E0C-C4D5-52C8B68256B9</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="2f9bc066-f309-462d-a5fb-f9f2b80fe93d">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>02FAC0B1-419A-9E18-8261-17B6D0143ADA</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="e84c397d-68a9-4aa9-9c1e-c03371c8114b">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>81D001E9-2F19-A93B-B910-0EB407C969F0</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="82fe6c73-f111-42b4-a64d-46ae22eb933b">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Agreement</value>
+   <value>95171131-34B9-7751-1CF1-15591C00F4C0</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="f7c54fc7-1c59-462f-a2bd-bc2ac1992598">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>1972B777-2BBE-0028-8315-54AF5EFF6AFF</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>

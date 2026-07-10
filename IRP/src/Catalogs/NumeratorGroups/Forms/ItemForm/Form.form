@@ -196,16 +196,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanım grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа использования</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of using</value>
+   <value>F9D133C4-826D-1DBE-E787-77759154ACFB</value>
   </title>
   <extendedTooltip>
    <name>GroupUsingExtendedTooltip</name>
@@ -395,16 +387,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup numara</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа номеров</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of number</value>
+     <value>5A376088-9F24-556D-D394-401F88561F1B</value>
     </title>
     <extendedTooltip>
      <name>GroupNumberExtendedTooltip</name>
@@ -483,16 +467,8 @@
         <name>DecorationNumber</name>
         <id>94</id>
         <title>
-         <key>tr</key>
-         <value>Numara</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Номер</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Number</value>
+         <value>BCB4B754-454C-D430-0C0E-EE6AB415A7CE</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -562,16 +538,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup numara</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа номеров</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of number</value>
+        <value>78A5F3FE-5373-19C4-4CBB-B84BCE0E5B50</value>
        </title>
        <extendedTooltip>
         <name>GroupHintNumberExtendedTooltip</name>
@@ -600,16 +568,8 @@
         <name>DecorationYear4</name>
         <id>106</id>
         <title>
-         <key>tr</key>
-         <value>Yıl (4)</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Год (4)</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Year (4)</value>
+         <value>7D6346B7-12F4-91CF-F950-00BEC3EE7EBC</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -679,16 +639,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup yıl 4</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа года 4</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of year 4</value>
+        <value>B13FBED2-3A1B-8C81-1CA1-135111ABC73D</value>
        </title>
        <extendedTooltip>
         <name>GroupHintYear4ExtendedTooltip</name>
@@ -717,16 +669,8 @@
         <name>DecorationYear2</name>
         <id>103</id>
         <title>
-         <key>tr</key>
-         <value>Yıl (2)</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Год (2)</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Year (2)</value>
+         <value>6A5EDC6C-4C85-11D1-167C-C6430F0F6F96</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -796,16 +740,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup yıl 2</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа года 2</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of year 2</value>
+        <value>258BBB1F-BB0C-AA54-46D8-8E48229C1172</value>
        </title>
        <extendedTooltip>
         <name>GroupHintYear2ExtendedTooltip</name>
@@ -834,16 +770,8 @@
         <name>DecorationQuarter</name>
         <id>124</id>
         <title>
-         <key>tr</key>
-         <value>Çeyrek</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Квартал</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Quarter</value>
+         <value>8EC99A6F-510A-722F-F0BE-E53EAE8D377A</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -913,16 +841,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup çeyrek</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа квартала</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of quarter</value>
+        <value>B980E9B5-7D8D-DE2D-DE22-263BE19E1736</value>
        </title>
        <extendedTooltip>
         <name>GroupHintQuarterExtendedTooltip</name>
@@ -950,16 +870,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup ipucular 1</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа подсказки 1</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group hints 1</value>
+       <value>7DDB559E-A1CB-78AB-BE95-51742ACECB1D</value>
       </title>
       <extendedTooltip>
        <name>GroupHints1ExtendedTooltip</name>
@@ -994,16 +906,8 @@
         <name>DecorationMonth2</name>
         <id>130</id>
         <title>
-         <key>tr</key>
-         <value>Ay (2)</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Месяц (2)</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Month (2)</value>
+         <value>01DA8681-9DA0-19A4-4D49-94174BAC3D79</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1073,16 +977,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup ay 2</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа месяц 2</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of month 2</value>
+        <value>687E4FA1-DDFA-763C-C61E-E04E6E8DF58B</value>
        </title>
        <extendedTooltip>
         <name>GroupHintMonth2ExtendedTooltip</name>
@@ -1111,16 +1007,8 @@
         <name>DecorationMonth1</name>
         <id>127</id>
         <title>
-         <key>tr</key>
-         <value>Ay (1)</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Месяц (1)</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Month (1)</value>
+         <value>EB44CE11-00DB-E601-1C02-232F60D76223</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1190,16 +1078,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup ay 1</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа месяц 1</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of month 1</value>
+        <value>FC595002-B9A5-7F4D-D59C-C073C242963B</value>
        </title>
        <extendedTooltip>
         <name>GroupHintMonth1ExtendedTooltip</name>
@@ -1228,16 +1108,8 @@
         <name>DecorationWeek2</name>
         <id>142</id>
         <title>
-         <key>tr</key>
-         <value>Hafta (2)</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Неделя (2)</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Week (2)</value>
+         <value>E3E49B09-2058-63E0-0FEB-B4FAF55F5CB3</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1307,16 +1179,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup hafta 2</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа недели 2</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of week 2</value>
+        <value>4A2780FF-4E31-54F3-3F66-60072EC3BBD0</value>
        </title>
        <extendedTooltip>
         <name>GroupHintWeek2ExtendedTooltip</name>
@@ -1345,16 +1209,8 @@
         <name>DecorationWeek1</name>
         <id>121</id>
         <title>
-         <key>tr</key>
-         <value>Hafta (1)</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Неделя (1)</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Week (1)</value>
+         <value>FF2F7A91-B528-A932-2DAE-E30FDC95FDB2</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1424,16 +1280,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup hafta 1</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа недели 1</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of week 1</value>
+        <value>A314DDD4-C969-16E2-2A63-367BE26ED75A</value>
        </title>
        <extendedTooltip>
         <name>GroupHintWeek1ExtendedTooltip</name>
@@ -1461,16 +1309,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup ipucular 2</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа подсказки 2</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group hints 2</value>
+       <value>36BBBDEB-10D1-23C7-7594-4A02EEE217B9</value>
       </title>
       <extendedTooltip>
        <name>GroupHints2ExtendedTooltip</name>
@@ -1505,16 +1345,8 @@
         <name>DecorationBasicCompany</name>
         <id>100</id>
         <title>
-         <key>tr</key>
-         <value>Şirket öneki</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Префикс организации</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Company prefix</value>
+         <value>0D20B385-2B20-DDCD-DF75-525E5A948673</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1584,16 +1416,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup basit Şirket</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа простые Организация</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of basic Company</value>
+        <value>9354A0C7-77BC-A519-988A-A74F891493CF</value>
        </title>
        <extendedTooltip>
         <name>GroupHintBasicCompanyExtendedTooltip</name>
@@ -1622,16 +1446,8 @@
         <name>DecorationBasicBranch</name>
         <id>206</id>
         <title>
-         <key>tr</key>
-         <value>Şube öneki</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Префикс структурного подразделения</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Branch prefix</value>
+         <value>E5ECE960-191D-4449-90AC-CA065F0733E7</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1701,16 +1517,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup basit Şube</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа простые Структурные подразделения</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of basic Branch</value>
+        <value>CC4249DC-9E93-763B-B4F2-2D7AFBC017A0</value>
        </title>
        <extendedTooltip>
         <name>GroupHintBasicBranchExtendedTooltip</name>
@@ -1739,16 +1547,8 @@
         <name>DecorationBasicCatalog</name>
         <id>214</id>
         <title>
-         <key>tr</key>
-         <value>Kart liste öneki</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Префикс справочника</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Catalog prefix</value>
+         <value>9A56CFC8-1A00-B6EA-A5A7-7F1E2286D650</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1818,16 +1618,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup basit Kart listesi</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа простые Справочник</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of basic Catalog</value>
+        <value>1E33A096-2A43-8E48-8363-318DD982D687</value>
        </title>
        <extendedTooltip>
         <name>GroupHintBasicCatalogExtendedTooltip</name>
@@ -1856,16 +1648,8 @@
         <name>DecorationBasicDocument</name>
         <id>222</id>
         <title>
-         <key>tr</key>
-         <value>Evrak öneki</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Префик документа</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>Document prefix</value>
+         <value>6B2FBB01-CD47-47EA-A065-54591FF7FF57</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1935,16 +1719,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup basit Evrak</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа простые Документ</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group of basic Document</value>
+        <value>BC0DB64F-C526-5FF1-1347-721C85D7A10B</value>
        </title>
        <extendedTooltip>
         <name>GroupHintBasicDocumentExtendedTooltip</name>
@@ -1972,16 +1748,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup ipucuar 2</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа подсказки 2</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group hints 2</value>
+       <value>825C4627-02CC-C682-289B-BF9A310DD069</value>
       </title>
       <extendedTooltip>
        <name>GroupHints3ExtendedTooltip</name>
@@ -2015,16 +1783,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup ipucular 4</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа подсказки 4</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group hints 4</value>
+       <value>7EAB56A5-162E-6BAE-EFD1-1C506A21B7E5</value>
       </title>
       <extendedTooltip>
        <name>GroupHints4ExtendedTooltip</name>
@@ -2055,16 +1815,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>İpucular</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Подсказки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Hints</value>
+      <value>12B2E7A5-E4D1-E312-2578-8F5BB2E6BFFF</value>
      </title>
      <extendedTooltip>
       <name>GroupHintsExtendedTooltip</name>
@@ -2094,16 +1846,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Numara şablonu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Шаблон номера</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Number template</value>
+     <value>F482A337-FF95-1D89-9348-86A887290FE3</value>
     </title>
     <extendedTooltip>
      <name>GroupTemplateExtendedTooltip</name>
@@ -2208,16 +1952,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup Örnek</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа Примеры</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group of Example</value>
+      <value>9DD938D2-6014-7444-496D-DD8ED4959564</value>
      </title>
      <extendedTooltip>
       <name>ExampleGroupExtendedTooltip</name>
@@ -2282,16 +2018,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Test</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Тестирование</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Testing</value>
+     <value>5F02A55D-B278-016E-E177-7D974C8B0793</value>
     </title>
     <extendedTooltip>
      <name>GroupTestingExtendedTooltip</name>
@@ -2321,16 +2049,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Şablon</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Шаблон</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Template</value>
+    <value>6A2F4B15-749A-8DA8-8C6B-BE2981BC63B6</value>
    </title>
    <extendedTooltip>
     <name>MainPageExtendedTooltip</name>
@@ -2610,16 +2330,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Evraklar için</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Для документов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>For documents</value>
+    <value>CD3377AB-1F28-DB89-92D7-70BCC4BDE454</value>
    </title>
    <extendedTooltip>
     <name>DocumentsPageExtendedTooltip</name>
@@ -2944,16 +2656,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kart listeler için</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Для справочников</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>For catalogs</value>
+    <value>DFFCB7D2-12EB-1DF0-05DA-AD6FCFCF4FD7</value>
    </title>
    <extendedTooltip>
     <name>CatalogsPageExtendedTooltip</name>
@@ -3079,16 +2783,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Прочее</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>468B6BED-22C5-F30C-CBE0-028BC452B95C</value>
    </title>
    <extendedTooltip>
     <name>OtherPageExtendedTooltip</name>
@@ -3112,16 +2808,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>B99DF3BE-8E59-455D-DD5C-C6CF4271C6E6</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -3181,16 +2869,8 @@
  <attributes>
   <name>Example</name>
   <title>
-   <key>tr</key>
-   <value>Örnek</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пример</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Example</value>
+   <value>36DDE526-DEB6-F346-6A51-16FF14F58CCC</value>
   </title>
   <id>2</id>
   <valueType>
@@ -3207,16 +2887,8 @@
  <attributes>
   <name>FormData</name>
   <title>
-   <key>tr</key>
-   <value>Tarih formatı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Данные формы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Form data</value>
+   <value>7AA3B4D7-7E47-A53F-F867-706044C2F4D5</value>
   </title>
   <id>3</id>
   <valueType/>
@@ -3230,16 +2902,8 @@
  <formCommands>
   <name>Check</name>
   <title>
-   <key>tr</key>
-   <value>Kontrol</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check</value>
+   <value>13CDF42A-0DAE-4066-6FE1-1EBAF4FBDB76</value>
   </title>
   <id>1</id>
   <use>

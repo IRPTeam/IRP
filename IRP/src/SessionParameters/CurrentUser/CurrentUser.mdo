@@ -2,16 +2,8 @@
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="129c323f-34a5-444e-85cf-8e49e7d1e838">
  <name>CurrentUser</name>
  <synonym>
-  <key>tr</key>
-  <value>Geçerli kullanıcı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Текущий пользователь</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Current user</value>
+  <value>D8AA7EE7-5E72-9791-12F3-33A05F7972C8</value>
  </synonym>
  <type>
   <types>CatalogRef.Users</types>

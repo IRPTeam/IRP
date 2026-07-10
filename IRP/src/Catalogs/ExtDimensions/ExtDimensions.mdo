@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ExtDimensions</name>
  <synonym>
-  <key>tr</key>
-  <value>Kırılımlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Субконто</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Ext dimensions</value>
+  <value>0606057A-0390-6764-4BDA-A25B2B136A06</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -50,28 +42,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Kırılım</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Субконто</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Ext dimension</value>
+  <value>64A88734-C77A-E5E9-94D5-59B856BD8C5C</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Kırılımlar</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Субконто</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Ext dimensions</value>
+  <value>C07430EC-4827-F858-8BDD-D17D49344869</value>
  </listPresentation>
  <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>
@@ -95,30 +71,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>377FCDDF-2D72-EFEA-AC1A-AB8B73669F10</value>
   </synonym>
   <attributes uuid="ba418065-5d43-4e1d-936f-c59cb4b7e730">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>E8371115-6C39-3D92-2BCC-C450795E95CE</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -131,16 +91,8 @@
   <attributes uuid="fda70baa-121b-4369-bc0c-6f0911308a84">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>6D443BBF-5B20-EC16-640F-F7CCDBFDA127</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -157,16 +109,8 @@
   <attributes uuid="b60dbb09-991f-4d0b-a2eb-8c68036852b9">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Текстовая строка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Search literal</value>
+    <value>A0A76C3F-4390-51C4-480B-BD0A3D12C867</value>
    </synonym>
    <type>
     <types>String</types>
@@ -183,16 +127,8 @@
  <forms uuid="0c5ef59d-c2ca-4e2b-88ef-2cbf3df1384e">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>7FCB20E6-2BFA-193F-FAAE-E72243E3A76D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -200,16 +136,8 @@
  <forms uuid="edbce98d-c5de-4575-b026-b483611aa5f1">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>40644DF7-8B89-33C7-711A-A326096FACFC</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -217,16 +145,8 @@
  <forms uuid="5ee95b6b-5a69-4893-b1d3-68ee0abc8d8f">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>63F42833-2F2A-3B4C-C037-7DF07FF86E05</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

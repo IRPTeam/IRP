@@ -167,16 +167,8 @@
     <pictureSize>Proportionally</pictureSize>
     <hyperlink>true</hyperlink>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Logo Eklemek İçin Tıkla</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
-     <key>ru</key>
-     <value>Нажмите, чтобы добавить логотип</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
      <key>en</key>
-     <value>Click to add logo</value>
+     <value>02F6FCF0-79CE-561D-D326-6B6492AD5E5B</value>
     </nonselectedPictureText>
     <border xsi:type="core:BorderDef">
      <style>Single</style>
@@ -228,16 +220,8 @@
     <pictureSize>Proportionally</pictureSize>
     <hyperlink>true</hyperlink>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Mühür Eklemek İçin Tıkla</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
-     <key>ru</key>
-     <value>Добавить печать</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
      <key>en</key>
-     <value>Click to add seal</value>
+     <value>E2C6760A-57BD-7693-3518-8C691F40A7CC</value>
     </nonselectedPictureText>
     <border xsi:type="core:BorderDef">
      <style>Single</style>
@@ -252,16 +236,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup Resimleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа изображений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group pictures</value>
+   <value>F9C84AAA-4BB5-0F6B-BBFC-C0F9B27E5FB3</value>
   </title>
   <extendedTooltip>
    <name>GroupPicturesExtendedTooltip</name>
@@ -361,16 +337,8 @@
  <attributes>
   <name>Logo</name>
   <title>
-   <key>tr</key>
-   <value>Logo</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Логотип</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Logo</value>
+   <value>2A973718-D2C4-EA9C-C04C-C3D5F25F185F</value>
   </title>
   <id>2</id>
   <valueType>
@@ -387,16 +355,8 @@
  <attributes>
   <name>Seal</name>
   <title>
-   <key>tr</key>
-   <value>Mühür</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Печать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Seal</value>
+   <value>5AAE4522-3C1B-7836-6708-8D12DDDDD9A8</value>
   </title>
   <id>3</id>
   <valueType>
@@ -413,16 +373,8 @@
  <attributes>
   <name>DefaultColor</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan Renk</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Цвет по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Default color</value>
+   <value>00628FB9-9260-1152-2F26-6EDF52579539</value>
   </title>
   <id>4</id>
   <valueType>

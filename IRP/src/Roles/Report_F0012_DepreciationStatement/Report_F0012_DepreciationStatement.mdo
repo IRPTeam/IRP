@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8c1e6970-0a44-4514-b413-8376e2586a46">
  <name>Report_F0012_DepreciationStatement</name>
  <synonym>
-  <key>tr</key>
-  <value>F0012 Amortisman</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет F0012_ОтчетАмортизации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report F0012_DepreciationStatement</value>
+  <value>D29129DC-A24D-B54F-FA71-1BFF7B3A0178</value>
  </synonym>
 </mdclass:Role>

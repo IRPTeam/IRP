@@ -2101,16 +2101,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Boyutlar</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Измерения</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Dimensions</value>
+      <value>0F290E7E-437B-7205-5123-34A9418CF2D8</value>
      </title>
      <extendedTooltip>
       <name>Group7ExtendedTooltip</name>
@@ -2424,16 +2416,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Kaynaklar</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Ресурсы</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Resources</value>
+      <value>170E661C-F3B8-05BD-DAF3-340C5F605757</value>
      </title>
      <extendedTooltip>
       <name>Group8ExtendedTooltip</name>
@@ -2457,16 +2441,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup 1</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа 1</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group1</value>
+     <value>E1256708-2B87-8FF7-7766-69A27EC2A293</value>
     </title>
     <extendedTooltip>
      <name>Group1ExtendedTooltip</name>
@@ -2490,16 +2466,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group3</value>
+    <value>029F1960-1E43-2B2C-C73C-CE866B194E50</value>
    </title>
    <extendedTooltip>
     <name>Group3ExtendedTooltip</name>
@@ -2527,16 +2495,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup 2</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа 2</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group2</value>
+   <value>E8A053CE-7C62-F8B4-429B-B1B9F7A7A9A2</value>
   </title>
   <extendedTooltip>
    <name>Group2ExtendedTooltip</name>
@@ -2669,16 +2629,8 @@
  <attributes>
   <name>Documents</name>
   <title>
-   <key>tr</key>
-   <value>Evraklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Документы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Documents</value>
+   <value>45946E5E-4D23-1F12-26F4-48EFF62317A2</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2693,16 +2645,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>86EEC58C-83CD-5830-0E71-1DE8A0AB3A5C</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2718,16 +2662,8 @@
   <columns>
    <name>TabularSection</name>
    <title>
-    <key>tr</key>
-    <value>Tablo bölümü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Таблица секции</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Tabular section</value>
+    <value>A7BEF18F-26D6-D922-2FAF-F4056AB67AF0</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2744,16 +2680,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>3301865D-DB1B-BCE5-557A-AB31BA9339A9</value>
    </title>
    <id>7</id>
    <valueType>
@@ -2770,16 +2698,8 @@
   <columns>
    <name>LineNumber</name>
    <title>
-    <key>tr</key>
-    <value>Satır numarası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Line number</value>
+    <value>D37A2DC4-5018-CA7B-BDAA-A54326A2605B</value>
    </title>
    <id>8</id>
    <valueType>
@@ -2798,16 +2718,8 @@
   <columns>
    <name>DepTabularSection</name>
    <title>
-    <key>tr</key>
-    <value>Dep tablo bölümü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Док табличная часть</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Dep tabular section</value>
+    <value>D58D242E-4158-B77E-E523-3EE3DC95A2A5</value>
    </title>
    <id>9</id>
    <valueType>
@@ -2824,16 +2736,8 @@
   <columns>
    <name>DepLineNumber</name>
    <title>
-    <key>tr</key>
-    <value>Amortisman satır numarası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер строки документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Dep line number</value>
+    <value>AA46BBF7-4720-0C0D-D795-525779519139</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2852,16 +2756,8 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>5525CCE9-892A-6788-848F-FEDB1D2228B3</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2877,16 +2773,8 @@
   <columns>
    <name>IsOk</name>
    <title>
-    <key>tr</key>
-    <value>Tamam</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Все ок</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is ok</value>
+    <value>2C09AC4E-73E2-6B2C-C19C-CF4A60DD07C3</value>
    </title>
    <id>12</id>
    <valueType>
@@ -2902,16 +2790,8 @@
   <columns>
    <name>DocumentName</name>
    <title>
-    <key>tr</key>
-    <value>Evrak ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document name</value>
+    <value>EF585037-ADF9-D997-700B-B76F764FDE9C</value>
    </title>
    <id>13</id>
    <valueType>
@@ -2928,16 +2808,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>09992818-6587-C1EC-C9EC-C49C9E20925A</value>
    </title>
    <id>14</id>
    <valueType>
@@ -2953,16 +2825,8 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item</value>
+    <value>2936D86E-8A54-2F90-0F7D-D87DA60C19E8</value>
    </title>
    <id>15</id>
    <valueType>
@@ -2978,16 +2842,8 @@
   <columns>
    <name>RepeatingLines</name>
    <title>
-    <key>tr</key>
-    <value>Tekrar eden satırlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Повторяющиеся строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Repeating lines</value>
+    <value>99283996-4CC0-788F-F476-63D2E5E8D7FB</value>
    </title>
    <id>27</id>
    <valueType>
@@ -3006,16 +2862,8 @@
   <columns>
    <name>CurrentPriceType</name>
    <title>
-    <key>tr</key>
-    <value>Geçerli fiyat tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Текущий вид цены</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Current price type</value>
+    <value>48FCA2FE-BF75-BA86-6188-84147C53DFF8</value>
    </title>
    <id>32</id>
    <valueType>
@@ -3031,16 +2879,8 @@
   <columns>
    <name>CurrentPrice</name>
    <title>
-    <key>tr</key>
-    <value>Mevcut fiyat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Текущая цена</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Current price</value>
+    <value>259FF486-6961-515C-CD5B-B15EA235D37B</value>
    </title>
    <id>33</id>
    <valueType>
@@ -3056,16 +2896,8 @@
   <columns>
    <name>NewPrice</name>
    <title>
-    <key>tr</key>
-    <value>Yeni fiyat</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Новая цена</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>New price</value>
+    <value>DC759B50-3EC3-1215-5796-615955DB5E3A</value>
    </title>
    <id>34</id>
    <valueType>
@@ -3081,16 +2913,8 @@
   <columns>
    <name>ResultPriceType</name>
    <title>
-    <key>tr</key>
-    <value>Sonuç fiyat türü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Итоговый тип цен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Result price type</value>
+    <value>DAF9A1F0-D2D2-D755-5087-77FA8E5A232F</value>
    </title>
    <id>35</id>
    <valueType>
@@ -3106,16 +2930,8 @@
   <columns>
    <name>ResultPrice</name>
    <title>
-    <key>tr</key>
-    <value>Sonuç fiyatı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Итоговая цена</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Result price</value>
+    <value>1A2F1F5E-83EA-F5A1-1CA6-6207BEECEC8C</value>
    </title>
    <id>36</id>
    <valueType>
@@ -3131,16 +2947,8 @@
   <columns>
    <name>AcceptNewPrice</name>
    <title>
-    <key>tr</key>
-    <value>Fiyatı değiştir</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Изменить цену</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Change price</value>
+    <value>3651F047-4355-81E1-12CB-B5E46A0EFFDE</value>
    </title>
    <id>37</id>
    <valueType>
@@ -3156,16 +2964,8 @@
   <columns>
    <name>WithPrice</name>
    <title>
-    <key>tr</key>
-    <value>Fiyatlı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>С ценой</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>With price</value>
+    <value>1FA87980-2113-FCA7-78AF-F71688F19399</value>
    </title>
    <id>40</id>
    <valueType>
@@ -3181,16 +2981,8 @@
   <columns>
    <name>KeySLN</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar SLN</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ SLN</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key SLN</value>
+    <value>2CE86B9A-32BF-1CA4-415E-E4BEC36DB55D</value>
    </title>
    <id>48</id>
    <valueType>
@@ -3208,16 +3000,8 @@
  <attributes>
   <name>Registers</name>
   <title>
-   <key>tr</key>
-   <value>Kayıtlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Регистры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Registers</value>
+   <value>804386BD-1116-2A46-6FE0-0BB8C0B652B8</value>
   </title>
   <id>16</id>
   <valueType>
@@ -3232,16 +3016,8 @@
   <columns>
    <name>RegisterName</name>
    <title>
-    <key>tr</key>
-    <value>Kayıt tablo tanımı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование регистра</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Register name</value>
+    <value>CCEFC5BA-3EB0-A276-6DA2-2E45C1DCDE63</value>
    </title>
    <id>17</id>
    <valueType>
@@ -3258,16 +3034,8 @@
   <columns>
    <name>RecordUUID</name>
    <title>
-    <key>tr</key>
-    <value>Kayıt UUID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>UUID записи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Record UUID</value>
+    <value>AFA45AA0-FDC4-C393-3131-1A334BE165DE</value>
    </title>
    <id>18</id>
    <valueType>
@@ -3284,16 +3052,8 @@
   <columns>
    <name>Dimensions</name>
    <title>
-    <key>tr</key>
-    <value>Boyutlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Измерения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Dimensions</value>
+    <value>0FC6F040-F304-C169-9AEC-C38255EA4A5A</value>
    </title>
    <id>19</id>
    <valueType>
@@ -3310,16 +3070,8 @@
   <columns>
    <name>Resources</name>
    <title>
-    <key>tr</key>
-    <value>Kaynaklar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ресурсы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Resources</value>
+    <value>8671D03A-1953-D0D1-15E3-3EA296065335</value>
    </title>
    <id>20</id>
    <valueType>
@@ -3336,16 +3088,8 @@
   <columns>
    <name>KeySLN</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar SLN</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ SLN</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key SLN</value>
+    <value>EB02C5B4-E628-B4CE-E920-087ECBAC8DF4</value>
    </title>
    <id>49</id>
    <valueType>
@@ -3363,16 +3107,8 @@
  <attributes>
   <name>Dimensions</name>
   <title>
-   <key>tr</key>
-   <value>Boyutlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Измерения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Dimensions</value>
+   <value>47B4C84D-952E-1555-5F26-62AF8AD85E9E</value>
   </title>
   <id>21</id>
   <valueType>
@@ -3387,16 +3123,8 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>7E546F99-6A8D-77F7-77D2-2BE5AAB14690</value>
    </title>
    <id>22</id>
    <valueType>
@@ -3413,16 +3141,8 @@
   <columns>
    <name>RecordUUID</name>
    <title>
-    <key>tr</key>
-    <value>Kayıt UUID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>UUID записи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Record UUID</value>
+    <value>B2E9C1E7-5A91-FA45-5929-93D14DA52004</value>
    </title>
    <id>23</id>
    <valueType>
@@ -3439,16 +3159,8 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>011CCB0D-51E9-FE00-0FBC-C04BE71209BF</value>
    </title>
    <id>25</id>
    <valueType/>
@@ -3462,16 +3174,8 @@
   <columns>
    <name>NewValue</name>
    <title>
-    <key>tr</key>
-    <value>Yeni değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Новое значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>New value</value>
+    <value>BD3E99EC-FD3A-74CE-E862-2C3F5EFBD93C</value>
    </title>
    <id>38</id>
    <valueType/>
@@ -3486,16 +3190,8 @@
  <attributes>
   <name>Resources</name>
   <title>
-   <key>tr</key>
-   <value>Boyutlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Измерения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Dimensions</value>
+   <value>258BBCE8-DF6C-3CF8-8BCD-D54686EF23C7</value>
   </title>
   <id>26</id>
   <valueType>
@@ -3510,16 +3206,8 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>F41FF15C-2611-06AB-BBAA-A1D58880AD0B</value>
    </title>
    <id>22</id>
    <valueType>
@@ -3536,16 +3224,8 @@
   <columns>
    <name>RecordUUID</name>
    <title>
-    <key>tr</key>
-    <value>Kayıt UUID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>UUID записи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Record UUID</value>
+    <value>50A966BE-B7F9-E3D5-58FE-E38DCA2310FE</value>
    </title>
    <id>23</id>
    <valueType>
@@ -3562,16 +3242,8 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>694141C6-2098-20FF-FC7B-BC1EE3FB32F2</value>
    </title>
    <id>25</id>
    <valueType/>
@@ -3585,16 +3257,8 @@
   <columns>
    <name>NewValue</name>
    <title>
-    <key>tr</key>
-    <value>Yeni değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Новое значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>New value</value>
+    <value>0A105958-BA4D-5F78-8098-8169F44E4199</value>
    </title>
    <id>39</id>
    <valueType/>
@@ -3609,16 +3273,8 @@
  <attributes>
   <name>SerialLotNumbers</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaralar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Серии номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot numbers</value>
+   <value>38FA06F7-BA20-DEA0-0135-50E6F088A163</value>
   </title>
   <id>41</id>
   <valueType>
@@ -3633,16 +3289,8 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>BF0F19A0-B10C-C1BA-A658-8869DD3CE369</value>
    </title>
    <id>42</id>
    <valueType>
@@ -3658,16 +3306,8 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item</value>
+    <value>CA840114-BE9B-63A6-6105-540D0ADA707A</value>
    </title>
    <id>43</id>
    <valueType>
@@ -3683,16 +3323,8 @@
   <columns>
    <name>NewItem</name>
    <title>
-    <key>tr</key>
-    <value>Yeni öğe</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Новая номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>New item</value>
+    <value>D3ED38F4-3719-DB99-9027-752AE316BC46</value>
    </title>
    <id>44</id>
    <valueType>
@@ -3708,16 +3340,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>2D23CBC2-01A4-2545-5CA4-4DB6DDA6CD86</value>
    </title>
    <id>45</id>
    <valueType>
@@ -3733,16 +3357,8 @@
   <columns>
    <name>NewItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Yeni öğe anahtarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Новая характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>New item key</value>
+    <value>0FF47565-4391-C813-36AF-F57CFEF2E50C</value>
    </title>
    <id>46</id>
    <valueType>
@@ -3758,16 +3374,8 @@
   <columns>
    <name>KeySLN</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar SLN</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ SLN</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key SLN</value>
+    <value>9A06720B-AB8D-2F76-62AC-C30DD2A65D73</value>
    </title>
    <id>47</id>
    <valueType>
@@ -3785,16 +3393,8 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>21F2C673-FE96-B245-5BDF-F09354FF347B</value>
   </title>
   <id>50</id>
   <valueType>
@@ -3810,16 +3410,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>62527308-55E2-E95B-BC76-6CE1F917727F</value>
   </title>
   <id>51</id>
   <valueType>
@@ -3835,16 +3427,8 @@
  <formCommands>
   <name>FindRefs</name>
   <title>
-   <key>tr</key>
-   <value>Referansları bul</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Найти ссылки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Find refs</value>
+   <value>40B9673E-DAD7-E80A-A4CE-EA8EF6BB9E0A</value>
   </title>
   <id>1</id>
   <use>
@@ -3860,16 +3444,8 @@
  <formCommands>
   <name>Replace</name>
   <title>
-   <key>tr</key>
-   <value>Değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заменить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Replace</value>
+   <value>0D59A139-A867-EF4B-BBE1-11A8E00169FE</value>
   </title>
   <id>2</id>
   <use>
@@ -3885,16 +3461,8 @@
  <formCommands>
   <name>SetItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Öğe anahtarını ayarla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить ключ номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set item key</value>
+   <value>4194F008-FECF-5F64-4B3D-D6D1AFC4E35A</value>
   </title>
   <id>3</id>
   <use>
@@ -3910,16 +3478,8 @@
  <formCommands>
   <name>Load</name>
   <title>
-   <key>tr</key>
-   <value>Yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load</value>
+   <value>06D51083-4D9B-A7BF-FA31-1EE1951CF307</value>
   </title>
   <id>4</id>
   <use>

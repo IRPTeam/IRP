@@ -5,16 +5,8 @@
  </producedTypes>
  <name>UseUniqueID</name>
  <synonym>
-  <key>tr</key>
-  <value>Eşsiz ID kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использование уникального ID</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use unique ID</value>
+  <value>04EB5C54-1EEE-EC55-56FC-CA646CCE1F85</value>
  </synonym>
  <type>
   <types>CatalogObject.TaxRates</types>

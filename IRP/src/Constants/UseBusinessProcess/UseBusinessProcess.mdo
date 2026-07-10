@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseBusinessProcess</name>
  <synonym>
-  <key>tr</key>
-  <value>İş süreçleri kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать бизнес процессы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use business process</value>
+  <value>34504B92-EAC0-083E-E6A8-823150ADC203</value>
  </synonym>
  <type>
   <types>Boolean</types>

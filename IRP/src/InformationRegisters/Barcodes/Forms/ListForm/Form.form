@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>AD8A998F-5CC5-39FA-A5D7-7DDCCE072528</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -416,16 +408,8 @@
  <attributes>
   <name>ItemFilter</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme filtresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Фильтр элемента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item filter</value>
+   <value>92BCDF7A-B2F2-C712-2774-4E730BD8D9A7</value>
   </title>
   <id>2</id>
   <valueType>
@@ -441,16 +425,8 @@
  <attributes>
   <name>UseItemFilter</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme filtre kullan</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Использовать фильтр</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Use item filter</value>
+   <value>68017CAA-5E57-3EED-D90E-E687FD9FC64A</value>
   </title>
   <id>3</id>
   <valueType>
@@ -466,16 +442,8 @@
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполненные данные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filling data</value>
+   <value>32FB0083-1DC6-9155-50C3-3F61B4CD3817</value>
   </title>
   <id>4</id>
   <valueType>
@@ -492,16 +460,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>A0608831-61FA-A4AC-CD73-36E501031F37</value>
   </title>
   <id>6</id>
   <valueType>

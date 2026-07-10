@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f7becb2c-cfa3-478f-a806-30883464f365">
  <name>TemplateAccumulationRegisters</name>
  <synonym>
-  <key>tr</key>
-  <value>Şablon birikim kayıtları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Шаблон регистров накопления</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Template accumulation registers</value>
+  <value>181E2909-66C0-2063-3EB7-7E2C17DF367F</value>
  </synonym>
 </mdclass:Role>

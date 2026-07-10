@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>F08A42AE-4B79-84C8-88B7-7E41F0754E63</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -250,16 +242,8 @@
    <name>Quantity</name>
    <id>34</id>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Q.</value>
+    <value>286C5F0E-1FD2-3491-1CA2-230232754697</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -295,16 +279,8 @@
    <name>Currency</name>
    <id>37</id>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валютный</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>C.</value>
+    <value>DA02B7F3-7F5B-60E2-24DC-CFF1F8532D41</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -413,16 +389,8 @@
    <name>ExtraDimension1</name>
    <id>60</id>
    <title>
-    <key>tr</key>
-    <value>Kırılım 1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Субконто 1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext. Dim 1</value>
+    <value>7CF1B7E7-100C-1435-5E14-4C61B382C7BC</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -465,16 +433,8 @@
    <name>ExtraDimension2</name>
    <id>63</id>
    <title>
-    <key>tr</key>
-    <value>Kırılım 2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Субконто 2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext. Dim 2</value>
+    <value>CDBF1ED1-75F1-FF17-7252-2D7C45C9226E</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -517,16 +477,8 @@
    <name>ExtraDimension3</name>
    <id>66</id>
    <title>
-    <key>tr</key>
-    <value>Kırılım 3</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Субконто 3</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ext. Dim 3</value>
+    <value>EBAC5C8E-78F1-0174-4DA4-4BB696117BE4</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -780,16 +732,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Kırılım 1</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Субконто 1</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ext. Dim 1</value>
+   <value>24874824-E859-5D63-341C-C051167711F1</value>
   </title>
   <id>1</id>
   <valueType>
@@ -879,16 +823,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tip</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Вид</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Type</value>
+       <value>227793A7-B54A-232B-B99B-BF90310D5D95</value>
       </content>
      </localValue>
     </title>
@@ -899,16 +835,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tanım</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>56A8C81C-AA9D-479B-BA8A-A8E7EDCC4EFA</value>
       </content>
      </localValue>
     </title>
@@ -991,16 +919,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ekstra boyut1</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Дополнительное измерение1</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Extra dimension1</value>
+       <value>7F6300B8-D8B8-DC87-75B9-9572024FA90A</value>
       </content>
      </localValue>
     </title>
@@ -1011,16 +931,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ek boyut2</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Дополнительный размер2</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Extra dimension2</value>
+       <value>9DE13631-E757-41A0-0ED7-74D066C03D39</value>
       </content>
      </localValue>
     </title>
@@ -1031,16 +943,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ek boyut3</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Дополнительный размер3</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Extra dimension3</value>
+       <value>80F1E35B-2DA6-E89E-E000-0FA7B7FAD03C</value>
       </content>
      </localValue>
     </title>
@@ -1051,16 +955,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ekstra boyut</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Доп. измерение</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Extra dimension</value>
+       <value>29A413DD-6EED-2F47-7B80-094FC889F613</value>
       </content>
      </localValue>
     </title>
@@ -1070,16 +966,8 @@ FROM
  <attributes>
   <name>LedgerTypeVariant</name>
   <title>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вариант типа учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ledger type variant</value>
+   <value>F0B5FF90-C922-15E8-8C16-67F585DEF0CD</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1095,16 +983,8 @@ FROM
  <formCommands>
   <name>LoadChartsOfAccounts</name>
   <title>
-   <key>tr</key>
-   <value>Hesap planlarını yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузка планов счетов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load charts of accounts</value>
+   <value>FD6384FF-CBF4-04C6-60F5-54B7C745739E</value>
   </title>
   <id>1</id>
   <use>

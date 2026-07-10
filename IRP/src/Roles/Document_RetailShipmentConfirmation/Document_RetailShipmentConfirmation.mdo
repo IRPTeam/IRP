@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="57f81998-6812-44b6-b621-10b5bcf214cf">
  <name>Document_RetailShipmentConfirmation</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Perakende sevkiyat onayı"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Подтверждение розничной отгрузки"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Retail shipment confirmation"</value>
+  <value>C04A9177-1CD0-2286-66FE-EDB1A99860C9___</value>
  </synonym>
 </mdclass:Role>

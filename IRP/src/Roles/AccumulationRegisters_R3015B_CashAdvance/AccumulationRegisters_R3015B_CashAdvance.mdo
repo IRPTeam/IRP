@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="341384fb-1f26-4739-afad-962046962f43">
  <name>AccumulationRegisters_R3015B_CashAdvance</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R3015B NakitAvans</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R3015B АвансыНаличными</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R3015B CashAdvance</value>
+  <value>BBDAFBD0-F5E0-F082-27D7-753957E00C2B____</value>
  </synonym>
 </mdclass:Role>

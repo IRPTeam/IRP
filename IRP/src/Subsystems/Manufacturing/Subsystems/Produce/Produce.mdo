@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4c135557-6d1a-42d2-9cb2-95108f005dab">
  <name>Produce</name>
  <synonym>
-  <key>tr</key>
-  <value>Üret</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Производить</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Produce</value>
+  <value>E61DFAE8-DEC1-7732-2890-09EF72849CA5</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

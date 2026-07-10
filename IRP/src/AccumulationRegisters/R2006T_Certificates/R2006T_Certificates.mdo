@@ -10,46 +10,22 @@
  </producedTypes>
  <name>R2006T_Certificates</name>
  <synonym>
-  <key>tr</key>
-  <value>R2006 Sertifikaları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2006 Сертификаты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2006 Certificates</value>
+  <value>5E3BAFCA-88E0-9582-229C-C641BD794153</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>
  <listPresentation>
-  <key>tr</key>
-  <value>R2006 Sertifikaları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>R2006 Сертификаты</value>
- </listPresentation>
- <listPresentation>
   <key>en</key>
-  <value>R2006 Certificates</value>
+  <value>3F14B2C2-5DC5-9FFA-AAC7-772AD79FC846</value>
  </listPresentation>
  <resources uuid="643be08c-53a5-4efb-85c8-81ae4e470121">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Quantity</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>9E665CEA-AE72-D34E-EC5D-D46FB603F458</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -64,16 +40,8 @@
  <resources uuid="eb50441c-8146-44c3-bd6c-fd356e24003c">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>BBED4C5B-99EF-2441-12C8-83979AC3C45E</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -88,16 +56,8 @@
  <attributes uuid="1b17cc57-3a8b-4447-85a4-63efaa9e2156">
   <name>MovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид движения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Movement type</value>
+   <value>80CD0302-9F8D-EFF6-68D8-88803E9096D5</value>
   </synonym>
   <type>
    <types>String</types>
@@ -112,16 +72,8 @@
  <dimensions uuid="b3f3e021-c0ce-409a-babb-74bda53eb543">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>27391913-1A00-9881-1BBC-C172D1F05F7B</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -134,16 +86,8 @@
  <dimensions uuid="f3cf2231-9147-4fbd-889d-ac21370e3cc3">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>56133C7E-948D-E2F4-44BD-D96FE4F63989</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>

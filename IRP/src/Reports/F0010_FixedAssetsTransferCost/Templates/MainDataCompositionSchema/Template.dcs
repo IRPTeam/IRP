@@ -50,16 +50,8 @@
 			<field>OpeningCost</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Opening cost</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Начальные затраты  </v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Opening cost</v8:content>
+					<v8:content>F24B9135-7572-38E4-4316-6E0742263213</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -67,16 +59,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>4CFB7113-F787-02FC-C9A8-8DD0A6DFF71F</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -99,16 +83,8 @@
 			<field>CommisioningCost</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Commisioning cost</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Затраты на ввод в эксплуатацию</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Commisioning cost</v8:content>
+					<v8:content>154CD146-266F-C6ED-DE84-4959BAA3907F</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -116,16 +92,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>4CFB7113-F787-02FC-C9A8-8DD0A6DFF71F</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -140,16 +108,8 @@
 			<field>ModernizationCost</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Modernization cost</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Затраты на модернизацию</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Modernization cost</v8:content>
+					<v8:content>E408BEEF-5481-0476-6ECA-AA39BACF1484</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -157,16 +117,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>4CFB7113-F787-02FC-C9A8-8DD0A6DFF71F</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -181,16 +133,8 @@
 			<field>TransferCost</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Transfer cost</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Затраты на передачу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Transfer cost</v8:content>
+					<v8:content>EB274953-CF00-F61B-B1D6-6A41A13EA996</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -198,16 +142,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>4CFB7113-F787-02FC-C9A8-8DD0A6DFF71F</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -222,16 +158,8 @@
 			<field>DecomissioningCost</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Decomissioning cost</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Затраты на вывод из эксплуатации</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Decomissioning cost</v8:content>
+					<v8:content>B28999D8-C455-3CC6-68A0-066C30EE9B3C</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -239,16 +167,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>4CFB7113-F787-02FC-C9A8-8DD0A6DFF71F</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -283,16 +203,8 @@
 			<field>DepreciationRate</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Amortisman oranı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Норма амортизации</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Depreciation rate</v8:content>
+					<v8:content>0C0C6821-8697-32D5-592F-FA53FE7BDCC0</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -372,16 +284,8 @@ FROM
 		<expression>CommisioningCost + OpeningCost +ModernizationCost - DecomissioningCost - TransferCost</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Before adjustment cost</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Затраты до корректировки</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Before adjustment cost</v8:content>
+				<v8:content>9CAF774F-3457-A744-4FFC-C4EE34432C48</v8:content>
 			</v8:item>
 		</title>
 		<appearance>
@@ -389,16 +293,8 @@ FROM
 				<dcscor:parameter>Format</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>NFD=2</v8:content>
+						<v8:content>B859D484-9C19-137E-EA3C-CB6BB2B2DF72</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -413,16 +309,8 @@ FROM
 		<expression>(CommisioningCost + OpeningCost +ModernizationCost - DecomissioningCost - TransferCost) * DepreciationRate</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Amortisman tahakkuku</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Амортизация         </v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Depreciation</v8:content>
+				<v8:content>2177A388-6DAF-F6C4-4089-9A406B8F0D44</v8:content>
 			</v8:item>
 		</title>
 		<appearance>
@@ -430,16 +318,8 @@ FROM
 				<dcscor:parameter>Format</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>NFD=2</v8:content>
+						<v8:content>B859D484-9C19-137E-EA3C-CB6BB2B2DF72</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -456,16 +336,8 @@ FROM
 ((CommisioningCost + OpeningCost +ModernizationCost - DecomissioningCost - TransferCost) * DepreciationRate)</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Closing cost</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Затраты на закрытие</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Closing cost</v8:content>
+				<v8:content>376E2811-30CF-ABFA-AE55-5D132E4CFE8C</v8:content>
 			</v8:item>
 		</title>
 		<appearance>
@@ -473,16 +345,8 @@ FROM
 				<dcscor:parameter>Format</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>NFD=2</v8:content>
+						<v8:content>B859D484-9C19-137E-EA3C-CB6BB2B2DF72</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -532,16 +396,8 @@ FROM
 		<name>Company</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Şirket</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Организация</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Company</v8:content>
+				<v8:content>3174351C-8619-BFFC-CC0E-ED8E0935733A</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -566,16 +422,8 @@ FROM
 		<name>Period</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>ECA9FA89-5ED6-AFDF-F9D5-506BC803CB66</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -589,16 +437,8 @@ FROM
 		<name>StartDate</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Başlangıç tarihi</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Start date</v8:content>
+				<v8:content>63722DAB-8250-54C9-96C5-501AD27502B7</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -617,16 +457,8 @@ FROM
 		<name>EndDate</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Bitiş tarihi</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Дата окончания больничного</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End date</v8:content>
+				<v8:content>D477433C-76FC-330D-D832-2667895FB77D</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

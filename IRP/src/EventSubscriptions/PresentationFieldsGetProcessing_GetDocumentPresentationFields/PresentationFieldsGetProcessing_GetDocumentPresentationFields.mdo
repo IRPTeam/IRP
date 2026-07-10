@@ -2,16 +2,8 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fbb5c4a9-9883-41da-98e1-28c518af857a">
  <name>PresentationFieldsGetProcessing_GetDocumentPresentationFields</name>
  <synonym>
-  <key>tr</key>
-  <value>Sunum alanları işleme belge sunumu alanlarını alır</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Получение полей обработки получения полей документа презентации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Presentation fields get processing get document presentation fields</value>
+  <value>20BC024A-5553-B86D-D59C-CF3A1EB8C5B1_______________________________</value>
  </synonym>
  <source>
   <types>DocumentManager.SalesReturn</types>

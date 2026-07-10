@@ -147,16 +147,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Evrak ağacı grup satırı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Строка группы дерева документов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Documents tree group row</value>
+    <value>BD14C05E-6E52-03BC-C971-17968F3F82A3</value>
    </title>
    <extendedTooltip>
     <name>DocumentsTreeGroupRowExtendedTooltip</name>
@@ -398,16 +390,8 @@
    </items>
    <items xsi:type="form:Addition">
     <title>
-     <key>tr</key>
-     <value>Arama satırı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Строка поиска</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Search string</value>
+     <value>38DAF0A7-56AD-5A43-3620-05A113F19BCC</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -800,16 +784,8 @@
    <name>AllAttributesValueTableAttributeSynonym</name>
    <id>87</id>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>96D3E18F-D588-E3D9-96E8-82262D74E96D</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1080,16 +1056,8 @@
  <attributes>
   <name>DocumentsTree</name>
   <title>
-   <key>tr</key>
-   <value>Evrak ağacı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дерево документов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Documents tree</value>
+   <value>7C9954DF-3EA3-D978-8407-74D4438FA485</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1104,16 +1072,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>38BB4509-8E12-BF9C-CC97-7E2F82CE7D9F</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1129,16 +1089,8 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>938A875C-75C5-09A9-97BB-B42515AC767A</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1154,16 +1106,8 @@
   <columns>
    <name>Posted</name>
    <title>
-    <key>tr</key>
-    <value>Kaydedildi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Провести</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Posted</value>
+    <value>48B5350F-5886-BEC3-3364-4D829927D6C4</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1179,16 +1123,8 @@
   <columns>
    <name>DeletionMark</name>
    <title>
-    <key>tr</key>
-    <value>Silmek için işaret</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Пометить на удаление</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Deletion mark</value>
+    <value>42CACA5D-209E-4EE3-38A7-7B539FCB048D</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1204,16 +1140,8 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Представление</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>9DE6E829-685A-BDC5-57A0-0390A8E89C4C</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1230,16 +1158,8 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>0FE7D567-5F4A-B988-894C-C4711E6E2218</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1256,16 +1176,8 @@
   <columns>
    <name>LimitationByParent</name>
    <title>
-    <key>tr</key>
-    <value>Üst öğeye göre sınır</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ограничение по родителю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Limitation by parent</value>
+    <value>8B407C2B-5788-FE40-0E6C-C4E6ADF73F3D</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1281,16 +1193,8 @@
   <columns>
    <name>DocumentStatus</name>
    <title>
-    <key>tr</key>
-    <value>Evrak statüsü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document status</value>
+    <value>D8DDF628-68FB-63ED-D6E6-6EC2341507C7</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1309,16 +1213,8 @@
   <columns>
    <name>IsCurrentDocument</name>
    <title>
-    <key>tr</key>
-    <value>Bu işaretlenen evrak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Текущий документ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is current document</value>
+    <value>2E3BF5F5-7258-57A6-699C-CD87A18702CE</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1335,16 +1231,8 @@
  <attributes>
   <name>DocumentRef</name>
   <title>
-   <key>tr</key>
-   <value>Evrak ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка документа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document ref</value>
+   <value>4D9FA2ED-BC31-7E12-2AAE-E0B4275C07DF</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1360,16 +1248,8 @@
  <attributes>
   <name>CacheAttributes</name>
   <title>
-   <key>tr</key>
-   <value>Önbellek ek alanları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Атрибуты кэша</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cache attributes</value>
+   <value>E02EAE29-7977-4892-2974-41E1653EF573</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1384,16 +1264,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>48D581C3-D572-D0E6-6202-2F712B17C4DF</value>
    </title>
    <id>4</id>
    <valueType/>
@@ -1407,16 +1279,8 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>6487906D-3371-10AA-A2C6-6A32CA49512B</value>
    </title>
    <id>5</id>
    <valueType/>
@@ -1431,16 +1295,8 @@
  <attributes>
   <name>Cache</name>
   <title>
-   <key>tr</key>
-   <value>Önbellek</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Кэш</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cache</value>
+   <value>4BAE9B89-A437-C325-564E-E4EF10718B2D</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1455,16 +1311,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>12BA8656-0FFA-CB5F-FC98-80AB9F09BDA9</value>
    </title>
    <id>8</id>
    <valueType/>
@@ -1478,16 +1326,8 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>851FF961-FD4C-89CD-D72D-DE3DEC9B3764</value>
    </title>
    <id>9</id>
    <valueType/>
@@ -1502,16 +1342,8 @@
  <attributes>
   <name>ListAttributesToShow</name>
   <title>
-   <key>tr</key>
-   <value>Gösterilecek alanlar listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список доп. реквизитов для вывода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List attributes to show</value>
+   <value>C7950623-8F32-529C-C52D-DF8642FE3F21</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1531,16 +1363,8 @@
  <attributes>
   <name>AllAttributesValueTable</name>
   <title>
-   <key>tr</key>
-   <value>Tüm alanlar değer tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица значений всех реквизитов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>All attributes value table</value>
+   <value>6F1DE5D8-1099-4CFD-D884-4E65988CF8AE</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1556,16 +1380,8 @@
   <columns>
    <name>AttributeName</name>
    <title>
-    <key>tr</key>
-    <value>Alan ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование реквизита</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Attribute name</value>
+    <value>BC1B8DA4-E918-A1A0-0AF1-19220CF1BB0F</value>
    </title>
    <id>1</id>
    <valueType>
@@ -1582,16 +1398,8 @@
   <columns>
    <name>AttributeSynonym</name>
    <title>
-    <key>tr</key>
-    <value>Alan eşanlamlı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Синоним реквизита</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Attribute synonym</value>
+    <value>4FEB93E4-5DE7-B037-7A13-3AD554450331</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1608,16 +1416,8 @@
   <columns>
    <name>AttributeType</name>
    <title>
-    <key>tr</key>
-    <value>Alan tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип реквизита</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Attribute type</value>
+    <value>4FC93135-A5EE-3D08-8839-9D8151235FB8</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1633,16 +1433,8 @@
   <columns>
    <name>Check</name>
    <title>
-    <key>tr</key>
-    <value>Kontrol</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проверка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Check</value>
+    <value>6D71D535-3766-007F-F330-0ABA2E39F30D</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1659,16 +1451,8 @@
  <formCommands>
   <name>Edit</name>
   <title>
-   <key>tr</key>
-   <value>Değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Редактировать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit</value>
+   <value>B91A3276-C273-5E64-43ED-DAA6F8BB8F03</value>
   </title>
   <id>1</id>
   <use>
@@ -1688,16 +1472,8 @@
  <formCommands>
   <name>Post</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Провести</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Post</value>
+   <value>13038626-2DBB-809A-A912-2110E3E777EE</value>
   </title>
   <id>2</id>
   <use>
@@ -1717,16 +1493,8 @@
  <formCommands>
   <name>Unpost</name>
   <title>
-   <key>tr</key>
-   <value>Kaydetme iptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить проведение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unpost</value>
+   <value>F9B141F4-AD12-1C09-97BC-C4379AE86CF7</value>
   </title>
   <id>3</id>
   <use>
@@ -1746,16 +1514,8 @@
  <formCommands>
   <name>Delete</name>
   <title>
-   <key>tr</key>
-   <value>Kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пометить на удаление/Снять пометку</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Delete</value>
+   <value>A007C5CD-4E3B-3CA7-7E82-266E412FBD6D</value>
   </title>
   <id>4</id>
   <use>
@@ -1775,16 +1535,8 @@
  <formCommands>
   <name>Refresh</name>
   <title>
-   <key>tr</key>
-   <value>Yenile</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Refresh</value>
+   <value>1A75B016-8FC6-D428-80C0-0492420C809F</value>
   </title>
   <id>6</id>
   <use>
@@ -1804,16 +1556,8 @@
  <formCommands>
   <name>GenerateForCurrent</name>
   <title>
-   <key>tr</key>
-   <value>Aktif olanı için</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Для текущего</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>For current</value>
+   <value>00A296AB-F040-40B0-0979-939AFF554FD2</value>
   </title>
   <id>7</id>
   <use>
@@ -1829,29 +1573,13 @@
  <formCommands>
   <name>ShowColumns</name>
   <title>
-   <key>tr</key>
-   <value>Sütunları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать колонки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show columns</value>
+   <value>D33D8EA7-507F-783A-A024-4A54C76E29BB</value>
   </title>
   <id>5</id>
   <toolTip>
-   <key>tr</key>
-   <value>Ek sütunları göster</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Показать дополнительные колонки</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Show additional columns</value>
+   <value>6FCC7900-B189-3601-10F3-3CFD97C62AEB</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1866,16 +1594,8 @@
  <formCommands>
   <name>SelectAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Select all</value>
+   <value>3F2944D8-0ED5-24C0-0102-2D234695F162</value>
   </title>
   <id>8</id>
   <use>
@@ -1894,16 +1614,8 @@
  <formCommands>
   <name>DeselectAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaret kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить выбор всех</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Deselect all</value>
+   <value>E0AC8A0B-EC8D-D1F4-4F8F-F84613921251</value>
   </title>
   <id>9</id>
   <use>

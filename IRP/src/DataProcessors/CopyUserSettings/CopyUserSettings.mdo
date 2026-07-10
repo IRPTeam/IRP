@@ -6,32 +6,16 @@
  </producedTypes>
  <name>CopyUserSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı ayarlarını kopyala</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Копировать настройки пользователя</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Copy user settings</value>
+  <value>C61A5805-66E9-E0B9-92B8-8F49FA909DAA</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.CopyUserSettings.Form.Form</defaultForm>
  <forms uuid="2c294ee3-7a50-4fd3-9914-55e9fbdaab22">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>6FA6D9B0-03D5-076E-EAE3-3F861FD46E5B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

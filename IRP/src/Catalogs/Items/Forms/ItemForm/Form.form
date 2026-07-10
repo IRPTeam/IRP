@@ -111,16 +111,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ayarlar paneli göster</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Показать панель настроек</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>View settings panel</value>
+     <value>02DFAFEB-DE2E-38CD-DBA2-2A4A38D145EC</value>
     </title>
     <extendedTooltip>
      <name>ViewSettingsPanelExtendedTooltip</name>
@@ -147,16 +139,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup HTML</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа HTML</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group HTML</value>
+    <value>263ADFC1-6B22-C306-6A03-38E17F852824</value>
    </title>
    <extendedTooltip>
     <name>GroupHTMLExtendedTooltip</name>
@@ -854,16 +838,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup ana sol (ilk kısım)</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Главная группа слева (первая часть)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group main left (first part)</value>
+      <value>4272DABE-7458-ECD3-3116-6C34A8EC191C</value>
      </title>
      <extendedTooltip>
       <name>GroupMainLeftFirstPartExtendedTooltip</name>
@@ -1069,16 +1045,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Boyutlar</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Измерения</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Dimensions</value>
+       <value>9FF930E3-34A8-EB46-6504-460AAC312018</value>
       </title>
       <extendedTooltip>
        <name>GroupDimensionsExtendedTooltip</name>
@@ -1095,16 +1063,8 @@
        <group>Vertical</group>
        <behavior>Collapsible</behavior>
        <collapsedRepresentationTitle>
-        <key>tr</key>
-        <value>Boyutlar</value>
-       </collapsedRepresentationTitle>
-       <collapsedRepresentationTitle>
-        <key>ru</key>
-        <value>Измерения</value>
-       </collapsedRepresentationTitle>
-       <collapsedRepresentationTitle>
         <key>en</key>
-        <value>Dimensions</value>
+        <value>716A5F50-6B74-A97B-BB85-50F3BAEC2EEE</value>
        </collapsedRepresentationTitle>
        <collapsed>true</collapsed>
        <representation>WeakSeparation</representation>
@@ -1164,16 +1124,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Ağırlık bilgisi</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Информация о весе</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Weight information</value>
+       <value>3787C4E6-133A-53C2-220F-F5F39EE7BDA0</value>
       </title>
       <extendedTooltip>
        <name>GroupWeightInformationExtendedTooltip</name>
@@ -1190,16 +1142,8 @@
        <group>HorizontalIfPossible</group>
        <behavior>Collapsible</behavior>
        <collapsedRepresentationTitle>
-        <key>tr</key>
-        <value>Ağırlık bilgisi</value>
-       </collapsedRepresentationTitle>
-       <collapsedRepresentationTitle>
-        <key>ru</key>
-        <value>Информация о весе</value>
-       </collapsedRepresentationTitle>
-       <collapsedRepresentationTitle>
         <key>en</key>
-        <value>Weight information</value>
+        <value>30E784A3-A02A-5EE5-5730-02524BD7BB07</value>
        </collapsedRepresentationTitle>
        <collapsed>true</collapsed>
        <representation>WeakSeparation</representation>
@@ -1225,16 +1169,8 @@
         <segments>Object.ControlCodeString</segments>
        </dataPath>
        <toolTip>
-        <key>tr</key>
-        <value>POS'da kontrol dizesi ile ek kontrol yap</value>
-       </toolTip>
-       <toolTip>
-        <key>ru</key>
-        <value>Выполнять дополнительный контроль кодов в РМК</value>
-       </toolTip>
-       <toolTip>
         <key>en</key>
-        <value>Do additional check by control string in POS</value>
+        <value>A2CFBF48-2E80-2A0C-CE6E-E1753FD6A3D2________</value>
        </toolTip>
        <toolTipRepresentation>Button</toolTipRepresentation>
        <handlers>
@@ -1345,16 +1281,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Muhasebe ayarları</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Настройки учета</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Accounting settings</value>
+       <value>AE553119-D663-14BA-ACF7-79B350C81FE2</value>
       </title>
       <extendedTooltip>
        <name>GroupAccountingSettingsExtendedTooltip</name>
@@ -1371,16 +1299,8 @@
        <group>Vertical</group>
        <behavior>Collapsible</behavior>
        <collapsedRepresentationTitle>
-        <key>tr</key>
-        <value>Muhasebe ayarları</value>
-       </collapsedRepresentationTitle>
-       <collapsedRepresentationTitle>
-        <key>ru</key>
-        <value>Настройки учета</value>
-       </collapsedRepresentationTitle>
-       <collapsedRepresentationTitle>
         <key>en</key>
-        <value>Accounting settings</value>
+        <value>EBB056C7-3619-35F1-1868-8EE6A89E8907</value>
        </collapsedRepresentationTitle>
        <collapsed>true</collapsed>
        <representation>WeakSeparation</representation>
@@ -1644,16 +1564,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Gönderenler bilgisi</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Информация о кометенте</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Consignors info</value>
+       <value>476864DF-BDEC-FED0-0E11-1C0294EA3943</value>
       </title>
       <extendedTooltip>
        <name>GroupConsignorsInfoExtendedTooltip</name>
@@ -1670,16 +1582,8 @@
        <group>Vertical</group>
        <behavior>Collapsible</behavior>
        <collapsedRepresentationTitle>
-        <key>tr</key>
-        <value>Gönderenler bilgisi</value>
-       </collapsedRepresentationTitle>
-       <collapsedRepresentationTitle>
-        <key>ru</key>
-        <value>Информация о кометенте</value>
-       </collapsedRepresentationTitle>
-       <collapsedRepresentationTitle>
         <key>en</key>
-        <value>Consignors info</value>
+        <value>B97D488C-A45B-C4AB-B5CD-D376722EC1FA</value>
        </collapsedRepresentationTitle>
        <collapsed>true</collapsed>
        <representation>WeakSeparation</representation>
@@ -1696,16 +1600,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup ana sol (ikinci kısım)</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Главная группа слева (вторая часть)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group main left (second part)</value>
+      <value>EC347086-872E-EE4A-A1BF-FC4A8E6DB7F4</value>
      </title>
      <extendedTooltip>
       <name>GroupMainLeftSecondPartExtendedTooltip</name>
@@ -1814,16 +1710,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ana</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основное</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Main</value>
+    <value>9DF46CFA-1285-5D86-6E93-35DE6B0F49D3</value>
    </title>
    <horizontalStretch>true</horizontalStretch>
    <extendedTooltip>
@@ -1885,16 +1773,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup (sol)</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группировка по левому краю</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group left</value>
+     <value>3A4333EB-C014-7E2B-B8AB-B416394037FC</value>
     </title>
     <extendedTooltip>
      <name>GroupLeftExtendedTooltip</name>
@@ -1953,16 +1833,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup (sağ)</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группировка по правому краю</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group right</value>
+     <value>0471B051-59AC-B072-242C-C6515B9EBBBB</value>
     </title>
     <extendedTooltip>
      <name>GroupRightExtendedTooltip</name>
@@ -1988,16 +1860,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ek detaylar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Additional</value>
+    <value>99614EED-5B7A-DE18-8F6A-AD3C7AB43B6D</value>
    </title>
    <horizontalStretch>true</horizontalStretch>
    <extendedTooltip>
@@ -2137,16 +2001,8 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Description</value>
+   <value>5FADD7D9-C336-99B9-9005-562551825A23</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2163,16 +2019,8 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Просмотр изображений HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture view HTML</value>
+   <value>18D6DFF0-A02F-E65B-BF15-5E2D41849EEB</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2189,16 +2037,8 @@
  <attributes>
   <name>AddAttributeViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Ek özellik görünümü HTML</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отображение дополнительного реквизита в HTML поле</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Additional attribute view HTML</value>
+   <value>88DEAAE4-4DAF-D9AB-BAB0-0A4AEDFFE39E</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2215,16 +2055,8 @@
  <attributes>
   <name>DetailsTree</name>
   <title>
-   <key>tr</key>
-   <value>Detaylar Ağacı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Детали дерева</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Details tree</value>
+   <value>B263C929-86F5-C426-653C-C5E560DFF80D</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2239,16 +2071,8 @@
   <columns>
    <name>RefValue</name>
    <title>
-    <key>tr</key>
-    <value>Ref değeri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылочное значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref value</value>
+    <value>BBD8E8B6-B1BA-890C-C9AE-EC4F8F161C3D</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2264,16 +2088,8 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>tr</key>
-    <value>Açıklama</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>61DC4771-51ED-DAFD-D110-0F748B290EE7</value>
    </title>
    <id>7</id>
    <valueType/>
@@ -2288,16 +2104,8 @@
  <formCommands>
   <name>ViewAdditionalAttribute</name>
   <title>
-   <key>tr</key>
-   <value>Ek alanları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать внешний реквизит</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>View additional attribute</value>
+   <value>E7EB6AE2-31A8-F26C-C08B-B0F8E92293DB</value>
   </title>
   <id>1</id>
   <use>
@@ -2317,16 +2125,8 @@
  <formCommands>
   <name>ViewPictures</name>
   <title>
-   <key>tr</key>
-   <value>Resimleri göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать картинки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>View pictures</value>
+   <value>C569272E-36E9-21AC-CDD8-82566F8048FC</value>
   </title>
   <id>2</id>
   <use>
@@ -2346,16 +2146,8 @@
  <formCommands>
   <name>ViewDetailsTree</name>
   <title>
-   <key>tr</key>
-   <value>Detaylar Ağacını Görüntüle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Просмотр деталей дерева</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>View details tree</value>
+   <value>8AD187C4-812F-60C6-6173-374F1EB26D2E</value>
   </title>
   <id>3</id>
   <use>
@@ -2375,16 +2167,8 @@
  <formCommands>
   <name>Tree_RefreshData</name>
   <title>
-   <key>tr</key>
-   <value>Verileri Yenile</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить данные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Refresh data</value>
+   <value>4CAA84D5-1179-B54F-F158-8949028DDD32</value>
   </title>
   <id>4</id>
   <use>
@@ -2404,16 +2188,8 @@
  <formCommands>
   <name>Tree_ExpandAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümünü Genişlet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Развернуть дерево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Tree expand all</value>
+   <value>84321429-0D48-7762-20B0-0DFBCB277DDE</value>
   </title>
   <id>5</id>
   <use>
@@ -2433,16 +2209,8 @@
  <formCommands>
   <name>Tree_CollapseAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümünü Daralt</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Свернуть дерево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Tree collapse all</value>
+   <value>3E5304C5-CBD5-4E9B-BA7E-EEB4B5D6D215</value>
   </title>
   <id>6</id>
   <use>

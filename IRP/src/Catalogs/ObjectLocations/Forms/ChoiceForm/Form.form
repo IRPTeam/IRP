@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>7E7D6998-EDEE-9BF1-11C4-43083DC4EC33</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -403,16 +395,8 @@ END
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şehir belirlendi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Город установлен  </value>
-      </content>
-      <content>
        <key>en</key>
-       <value>City is set</value>
+       <value>65721883-9B23-2F52-226D-D5B3AA0369E0</value>
       </content>
      </localValue>
     </title>
@@ -427,16 +411,8 @@ END
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>İl</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Город</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>City</value>
+       <value>0DE40F2A-37A8-E16A-AF15-5DC19F557C98</value>
       </content>
      </localValue>
     </title>

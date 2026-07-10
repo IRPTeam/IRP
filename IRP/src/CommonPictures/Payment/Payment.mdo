@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eb522a27-890c-4f99-b952-e2312cc9474c">
  <name>Payment</name>
  <synonym>
-  <key>tr</key>
-  <value>Ödeme</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Оплата</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Payment</value>
+  <value>FB21BE53-FB3D-E4B8-85E4-4103A8673161</value>
  </synonym>
 </mdclass:CommonPicture>

@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R8015T_ConsignorPrices</name>
  <synonym>
-  <key>tr</key>
-  <value>R8015 Konsinye ürün fiyatları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R8015 Цены товаров принятых на комиссию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R8015 Consignor prices</value>
+  <value>ADE1F54B-D8CB-2A37-75D2-2B58F72CDBC9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="e11a6da3-b59f-42bd-9946-e36d8c0302e6">
   <name>Price</name>
   <synonym>
-   <key>tr</key>
-   <value>Fiyat</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Цена</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Price</value>
+   <value>49BC8655-CD91-9201-173E-E56D9AD7D0B1</value>
   </synonym>
   <type>
    <types>DefinedType.typePrice</types>
@@ -49,16 +33,8 @@
  <dimensions uuid="74b7b33a-c8ae-4caa-9e2c-0a480f8249d9">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>918E7689-F2E3-FC3C-C7E5-5D80E62A3F41</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -72,16 +48,8 @@
  <dimensions uuid="99b1dca6-87f3-429a-82c0-33c95cb4b431">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>4DD19710-F373-19DF-F869-9665499042B7</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -95,16 +63,8 @@
  <dimensions uuid="6169b536-4451-494b-adc7-df62447ef25a">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner term</value>
+   <value>1AF5C38C-0CC8-8E55-5ECF-F66EC6CF484F</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -118,16 +78,8 @@
  <dimensions uuid="a1e9c6e8-44c4-4388-8cff-3f10fad63406">
   <name>PurchaseInvoice</name>
   <synonym>
-   <key>tr</key>
-   <value>Satın alma faturası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Поступление товаров и услуг</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Purchase invoice</value>
+   <value>F70C48AF-B848-EC75-5861-1DCA0968E531</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -140,16 +92,8 @@
  <dimensions uuid="ab1c4fbf-2717-4ab0-b86f-a45c7dc8be59">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>C9E4D61B-E6D2-36B8-8B5B-BCA577AEF24C</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -162,16 +106,8 @@
  <dimensions uuid="1f36c149-93b2-4308-b0a1-11e9748337a8">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>3F6E0095-EC17-DBEC-C11B-B95BE20CE1B8</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -184,16 +120,8 @@
  <dimensions uuid="8873fe27-cc28-488e-bc35-500b892efa1d">
   <name>SourceOfOrigin</name>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşei</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Источник происхождения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source of origin</value>
+   <value>F37EA478-E5CE-BA3A-A259-9DB96DABDC0E</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>
@@ -206,16 +134,8 @@
  <dimensions uuid="467a7e71-f8b6-4a74-b582-6a32cc6953d9">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>F13351C9-1819-0724-4610-074F233B0EA2</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -227,16 +147,8 @@
  <dimensions uuid="c89c6587-bebd-449e-947d-ecd3897ddb47">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>9D0AADB3-EA24-00CB-B5DF-FBA33DE7474C</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -248,16 +160,8 @@
  <dimensions uuid="fb1c1438-a754-4e23-bf33-29cecb58b22c">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction currency</value>
+   <value>4AA9D7DE-D57A-9AC2-2642-25269256266A</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

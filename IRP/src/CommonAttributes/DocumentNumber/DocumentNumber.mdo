@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c72e5c82-4336-4502-8552-f61ba61e9fd9">
  <name>DocumentNumber</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak numarası</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Номер документа</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document number</value>
+  <value>6D47D340-4BFB-B591-1801-1728B84AA669</value>
  </synonym>
  <type>
   <types>String</types>

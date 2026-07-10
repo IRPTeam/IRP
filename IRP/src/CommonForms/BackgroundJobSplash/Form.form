@@ -7,16 +7,8 @@
    <name>Decoration</name>
    <id>52</id>
    <title>
-    <key>tr</key>
-    <value>Dekorasyon1</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Рисунок1</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Decoration1</value>
+    <value>85387A7A-A5A8-6177-72B7-7AC5A2A58434</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -151,16 +143,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup Üst</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа Верх</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group Top</value>
+     <value>72387402-F31C-F484-4770-0AA974F272D7</value>
     </title>
     <extendedTooltip>
      <name>GroupTopExtendedTooltip</name>
@@ -275,16 +259,8 @@
      <name>EndDate</name>
      <id>12</id>
      <title>
-      <key>tr</key>
-      <value>Bitiş</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Завершено</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Finish</value>
+      <value>F57394FF-6BF7-D21B-B4DF-F26BDD122945</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -339,16 +315,8 @@
      </dataPath>
      <titleLocation>None</titleLocation>
      <toolTip>
-      <key>tr</key>
-      <value>Bitirildiğinde bu formu kapatmayın</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Не закрывать эту форму при окончании</value>
-     </toolTip>
-     <toolTip>
       <key>en</key>
-      <value>Do not close this form on finish</value>
+      <value>7FF20A95-19C6-7990-0CC7-766B564F4250</value>
      </toolTip>
      <toolTipRepresentation>Button</toolTipRepresentation>
      <extendedTooltip>
@@ -381,16 +349,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup footer</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа подвал</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group bottom</value>
+     <value>2609C4FD-4CC9-D57D-D0FB-B6E7A70F955E</value>
     </title>
     <extendedTooltip>
      <name>GroupBottomExtendedTooltip</name>
@@ -585,16 +545,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Mesajlar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Уведомления</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Messages</value>
+     <value>0F4FCC85-C1BE-1A56-6649-9CB071126126</value>
     </title>
     <extendedTooltip>
      <name>GroupMessagesExtendedTooltip</name>
@@ -624,16 +576,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup Bilgisi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа Инфо</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group Info</value>
+    <value>BB6A0FBE-7DA6-FC94-43D2-2A4412ECFD20</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -661,16 +605,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup resmi ve bilgi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа картинка и информация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group picture and info</value>
+   <value>4244A6E4-AC38-DCCA-A98A-A4F70DAC08D9</value>
   </title>
   <extendedTooltip>
    <name>GroupPictureAndInfoExtendedTooltip</name>
@@ -767,16 +703,8 @@
  <attributes>
   <name>JobTitle</name>
   <title>
-   <key>tr</key>
-   <value>İş unvanı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заголовок задания</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Job title</value>
+   <value>F7D38F0D-D6D4-7383-3E97-7B2F999B0F22</value>
   </title>
   <id>1</id>
   <valueType>
@@ -793,16 +721,8 @@
  <attributes>
   <name>Percent</name>
   <title>
-   <key>tr</key>
-   <value>Yüzde124</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Процент</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Percent</value>
+   <value>1D701DBD-DC8F-316E-EC50-0AB5DB9E25E5</value>
   </title>
   <id>2</id>
   <valueType>
@@ -821,16 +741,8 @@
  <attributes>
   <name>StartDate</name>
   <title>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Начало периода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Start date</value>
+   <value>2CBCE94F-90CE-E07E-E6F5-5F52892B5B94</value>
   </title>
   <id>3</id>
   <valueType>
@@ -847,16 +759,8 @@
  <attributes>
   <name>EndDate</name>
   <title>
-   <key>tr</key>
-   <value>Bitiş tarihi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дата окончания</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>End date</value>
+   <value>088AA09C-6044-219F-F72E-E252B484F08C</value>
   </title>
   <id>4</id>
   <valueType>
@@ -875,16 +779,8 @@
  <attributes>
   <name>EndIn</name>
   <title>
-   <key>tr</key>
-   <value>Bitiş yaklaşık ~</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Окончение через ~</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>End in ~</value>
+   <value>9AD8EFF8-788C-E645-5D65-5FFA5D043267</value>
   </title>
   <id>5</id>
   <valueType>
@@ -903,16 +799,8 @@
  <attributes>
   <name>SystemMessages</name>
   <title>
-   <key>tr</key>
-   <value>Sistem mesajları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Системные сообщения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>System messages</value>
+   <value>91C2CB4B-A3EA-A4F9-950A-A5A0D80C992E</value>
   </title>
   <id>6</id>
   <valueType>
@@ -927,16 +815,8 @@
   <columns>
    <name>Message</name>
    <title>
-    <key>tr</key>
-    <value>Mesaj</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сообщение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Message</value>
+    <value>8854EB88-5113-3962-2D78-8F5CCB87D1D2</value>
    </title>
    <id>7</id>
    <valueType>
@@ -954,16 +834,8 @@
  <attributes>
   <name>DoNotCloseOnFinish</name>
   <title>
-   <key>tr</key>
-   <value>Bitince kapatma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Не закрывать при окончании</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Do not close on finish</value>
+   <value>7A0EE658-8D36-57B3-39D4-41C72B74005E</value>
   </title>
   <id>8</id>
   <valueType>
@@ -982,16 +854,8 @@
  <attributes>
   <name>FormCanBeClose</name>
   <title>
-   <key>tr</key>
-   <value>Form kapatılabilir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Форма может быть закрыта</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Form can be close</value>
+   <value>2F0D7921-C45E-FC45-5733-3A89876CFAB3</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1007,16 +871,8 @@
  <attributes>
   <name>StartTime</name>
   <title>
-   <key>tr</key>
-   <value>Başlat</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Старт</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Start</value>
+   <value>534EE6AE-98F3-D0A8-82CC-CB582F43DEFC</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1035,16 +891,8 @@
  <attributes>
   <name>JobUUID</name>
   <title>
-   <key>tr</key>
-   <value>İş UUID</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>UUID регламентного задания</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Job UUID</value>
+   <value>D9617FE2-A74B-AA89-94F0-0F5A6DC8C1B8</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1061,16 +909,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>C65A7649-1BBD-F07B-B1D5-5B07FBF79389</value>
   </title>
   <id>1</id>
   <use>
@@ -1086,16 +926,8 @@
  <formCommands>
   <name>CancelJob</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>AF76E223-8B1D-06C1-1933-334B45DB6327</value>
   </title>
   <id>3</id>
   <use>

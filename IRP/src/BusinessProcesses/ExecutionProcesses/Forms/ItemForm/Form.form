@@ -89,16 +89,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup numara</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа номер</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group number</value>
+     <value>548642BB-B9E2-FC99-9915-5D8EC651A10D</value>
     </title>
     <extendedTooltip>
      <name>GroupNumberExtendedTooltip</name>
@@ -315,16 +307,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup başlangıcı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Групповое начало</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group starting</value>
+     <value>F6603097-35A3-7D3C-CD5C-C0C112A44536</value>
     </title>
     <extendedTooltip>
      <name>GroupStartingExtendedTooltip</name>
@@ -430,16 +414,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup tamamlama</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Групповое завершение</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group completing</value>
+     <value>47EDDB66-BD4C-1541-1442-2B971A4B36F9</value>
     </title>
     <extendedTooltip>
      <name>GroupCompletingExtendedTooltip</name>
@@ -508,16 +484,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup iptali</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Групповая отмена</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group cancellation</value>
+     <value>306F39A4-ADA5-0DAD-DAA5-54C789644559</value>
     </title>
     <extendedTooltip>
      <name>GroupCancellationExtendedTooltip</name>
@@ -621,16 +589,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Информация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Info</value>
+    <value>9F23A262-A7F1-DCF6-6C54-42D3572838C4</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -1273,16 +1233,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Aşamalar ve Görevler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Этапы и задачи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Stages and Tasks</value>
+    <value>54F93724-C0E4-8A2C-CCE7-7F500647265A</value>
    </title>
    <extendedTooltip>
     <name>GroupStagesTasksExtendedTooltip</name>
@@ -1364,16 +1316,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Yol haritası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Блок-схема</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Flowchart</value>
+    <value>861ECF0B-5711-090E-E9BC-C21CD2FC92BE</value>
    </title>
    <extendedTooltip>
     <name>PageFlowchartExtendedTooltip</name>
@@ -1400,16 +1344,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>DC0AAF3B-7097-D977-7F0C-CD8938F78975</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -1471,16 +1407,8 @@
    <columns>
     <name>Addressing</name>
     <title>
-     <key>tr</key>
-     <value>Adresleme</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Обращение</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Addressing</value>
+     <value>FF03CB96-8505-CD9C-CB96-63645C609AA9</value>
     </title>
     <id>2</id>
     <valueType>
@@ -1499,16 +1427,8 @@
  <attributes>
   <name>FlowchartDocument</name>
   <title>
-   <key>tr</key>
-   <value>Akış şeması belgesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Документ блок-схемы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Flowchart document</value>
+   <value>245BA547-3146-2F87-703E-E38FB666870D</value>
   </title>
   <id>3</id>
   <valueType>

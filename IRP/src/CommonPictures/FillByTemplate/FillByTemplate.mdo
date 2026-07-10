@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="796661ed-777d-443f-83e6-0a3689e8b9a7">
  <name>FillByTemplate</name>
  <synonym>
-  <key>tr</key>
-  <value>Şablona göre doldur</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Заполнить по шаблону</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Fill by template</value>
+  <value>CF80B23A-823F-C232-2069-9E7A92DF7699</value>
  </synonym>
 </mdclass:CommonPicture>

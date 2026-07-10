@@ -11,16 +11,8 @@
  </producedTypes>
  <name>LoggerNotification</name>
  <synonym>
-  <key>tr</key>
-  <value>Kayıt günlüğü bildirimleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Уведомление логирования</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Logger notification</value>
+  <value>ED564C59-0004-5107-7349-914FB2FC75A5</value>
  </synonym>
  <editType>InDialog</editType>
  <standardAttributes>
@@ -60,16 +52,8 @@
  <resources uuid="b3f29712-fdf4-47e6-a37d-57dbdc85b1ee">
   <name>SendEmail</name>
   <synonym>
-   <key>tr</key>
-   <value>Mail gönderme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отправить маил</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Send email</value>
+   <value>C0AC7820-5A9E-3CD9-97B6-660811C17CF6</value>
   </synonym>
   <comment>Need to send email to user</comment>
   <type>
@@ -84,16 +68,8 @@
  <resources uuid="7352440b-e6dc-48aa-8299-b045d1929df1">
   <name>Sended</name>
   <synonym>
-   <key>tr</key>
-   <value>Gönderildi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отправлен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Sended</value>
+   <value>46CCC26F-BF27-B675-54A0-0F7B0D23C393</value>
   </synonym>
   <comment>Email was sended</comment>
   <type>
@@ -108,16 +84,8 @@
  <resources uuid="f66a3d6f-fedc-4d3a-970e-85186d4001cc">
   <name>UserRead</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı okudu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Прочитано пользователем</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User read</value>
+   <value>A04DF37D-3EF9-FDCC-C7FB-B286E5E5DD62</value>
   </synonym>
   <comment>User read email or message</comment>
   <type>
@@ -132,16 +100,8 @@
  <resources uuid="7c8d95fa-e744-4a04-8ad5-2a1c48fd5837">
   <name>WaitForOpenRef</name>
   <synonym>
-   <key>tr</key>
-   <value>Ref açmak için bekleme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ссылка ожидающая открытия</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Wait for open ref</value>
+   <value>7FFE42CE-72AE-7D2F-FD3E-EBEEA8FA7C4B</value>
   </synonym>
   <comment>Wait until user open ref</comment>
   <type>
@@ -156,16 +116,8 @@
  <resources uuid="518a44ef-5fab-4874-baf3-6c2ff64df03b">
   <name>RefOpened</name>
   <synonym>
-   <key>tr</key>
-   <value>Ref açılmıştı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ссылка была открыта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ref opened</value>
+   <value>59F84397-E808-CEEE-E91F-FFEA71F06899</value>
   </synonym>
   <comment>User open ref</comment>
   <type>
@@ -180,16 +132,8 @@
  <dimensions uuid="0830cea0-ff2f-4b20-ab46-4dbfa77b4f51">
   <name>NotifyID</name>
   <synonym>
-   <key>tr</key>
-   <value>Bildirim ID</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>ID уведомления</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Notify ID</value>
+   <value>23355E59-7D16-5A5F-F331-164A25A72E15</value>
   </synonym>
   <type>
    <types>String</types>
@@ -207,16 +151,8 @@
  <dimensions uuid="d52fdcf0-7732-4071-ba49-9505e44aa22c">
   <name>User</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Пользователь</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User</value>
+   <value>CB1C08D4-E5D9-D2A6-67E6-63D76365A3FD</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -232,16 +168,8 @@
  <dimensions uuid="17eb7d56-be7d-43cd-a603-88b6265ffb33">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis</value>
+   <value>DD63BDE4-2323-BED4-4A93-3943ED4FD6C8</value>
   </synonym>
   <type>
    <types>AnyRef</types>

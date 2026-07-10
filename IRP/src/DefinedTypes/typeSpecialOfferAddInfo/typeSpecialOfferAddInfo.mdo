@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeSpecialOfferAddInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>Özel teklif türü ek bilgi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип специальные предложения доп инфо</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type special offer add info</value>
+  <value>08469DCB-7F13-31D6-67E4-43C9FA0D53EA</value>
  </synonym>
  <type>
   <types>Boolean</types>

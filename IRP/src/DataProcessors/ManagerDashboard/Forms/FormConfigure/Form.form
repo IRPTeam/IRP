@@ -388,28 +388,12 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Yeni oluştur</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Создать новый</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Create new</value>
+       <value>624FDB4E-2DED-51A8-808E-E6523D2ED292</value>
       </title>
-      <toolTip>
-       <key>tr</key>
-       <value>Satış ekran araçları yeni oluştur</value>
-      </toolTip>
-      <toolTip>
-       <key>ru</key>
-       <value>Создать новый виджет: продажи</value>
-      </toolTip>
       <toolTip>
        <key>en</key>
-       <value>Sales widgets create new</value>
+       <value>3EF47C3F-4D69-7A5B-B582-2B3156232DF6</value>
       </toolTip>
       <extendedTooltip>
        <name>SalesWidgetsCreateNewExtendedTooltip</name>
@@ -553,28 +537,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Satış</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Продажа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Sales</value>
+    <value>1FAD5437-7362-1A68-8FB5-529C999B6E4D</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Satış grubu</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа (продажи)</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group sales</value>
+    <value>07F80EFF-9289-FA36-69DE-EC94BA519483</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupSalesExtendedTooltip</name>
@@ -908,28 +876,12 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Yeni oluştur</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Создать новый</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Create new</value>
+       <value>529F35FD-A160-672D-D9B5-5E6155A2BA9A</value>
       </title>
-      <toolTip>
-       <key>tr</key>
-       <value>Alım araçları yeni oluştur</value>
-      </toolTip>
-      <toolTip>
-       <key>ru</key>
-       <value>Создать новый виджет: закупки</value>
-      </toolTip>
       <toolTip>
        <key>en</key>
-       <value>Purchases widgets create new</value>
+       <value>1FEC3651-DEA5-73B1-1FD9-91F115D5A0A3</value>
       </toolTip>
       <extendedTooltip>
        <name>PurchasesWidgetsCreateNewExtendedTooltip</name>
@@ -1073,28 +1025,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Alımlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Закупки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Purchases</value>
+    <value>9701C171-ACAF-FB2E-E139-983E8D7B3D62</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Alımları gruplandır</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа (закупки)</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group purchases</value>
+    <value>00C0E754-1741-989C-CBF9-9E5A4A63BB07</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupPurchasesExtendedTooltip</name>
@@ -1479,28 +1415,12 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Yeni oluştur</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Создать новый</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Create new</value>
+       <value>C4E9E05C-A3D7-0960-08F7-7D5F525E1A84</value>
       </title>
-      <toolTip>
-       <key>tr</key>
-       <value>Yeni nakit ekran araçları oluştur</value>
-      </toolTip>
-      <toolTip>
-       <key>ru</key>
-       <value>Создать новый виджет: деньги</value>
-      </toolTip>
       <toolTip>
        <key>en</key>
-       <value>Money widgets create new</value>
+       <value>D20A7E5C-B343-A20C-CAC5-52B0018C1C64</value>
       </toolTip>
       <extendedTooltip>
        <name>MoneyWidgetsCreateNewExtendedTooltip</name>
@@ -1644,28 +1564,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Nakit</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Деньги</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Money</value>
+    <value>3F50EF61-5EBA-7BDA-AB47-71AA3318A716</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Nakiti gruplandır</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа (деньги)</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group money</value>
+    <value>2008E35C-AFA9-D07E-ECE7-79D52BDB6317</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupMoneyExtendedTooltip</name>
@@ -1689,28 +1593,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group pages</value>
+   <value>9451F8C2-AA7C-A441-1C92-23ACD29B5FE6</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа страницы</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group pages</value>
+   <value>8610CEB0-B584-5ECF-FDAC-C5F9A2C4A0F2</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1818,16 +1706,8 @@
  <attributes>
   <name>SalesWidgets</name>
   <title>
-   <key>tr</key>
-   <value>Satış ekran araçları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Виджеты: продажи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Sales widgets</value>
+   <value>13DA9C00-97E7-29FF-F631-17CF43176E27</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1842,16 +1722,8 @@
   <columns>
    <name>WidgetName</name>
    <title>
-    <key>tr</key>
-    <value>Araç adı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование виджета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Widget name</value>
+    <value>4CE5F46B-9BB4-39A4-4B50-0095152A83F3</value>
    </title>
    <id>1</id>
    <valueType>
@@ -1868,16 +1740,8 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>FA37AEE7-2058-E7E5-5371-1A6EB8C8972A</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1894,16 +1758,8 @@
   <columns>
    <name>Enabled</name>
    <title>
-    <key>tr</key>
-    <value>Etkin</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Включено</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Enabled</value>
+    <value>C33FF669-87FC-8379-9049-93201D073E53</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1919,16 +1775,8 @@
   <columns>
    <name>ID</name>
    <title>
-    <key>tr</key>
-    <value>ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>ID</value>
+    <value>081D6ABA-31FE-A980-02FB-B96D7951ECA0</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1945,16 +1793,8 @@
   <columns>
    <name>Json</name>
    <title>
-    <key>tr</key>
-    <value>Json</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>JSON</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Json</value>
+    <value>88824D3F-734A-8729-9155-56FEE4BBE380</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1971,16 +1811,8 @@
   <columns>
    <name>IndicatorName</name>
    <title>
-    <key>tr</key>
-    <value>Göstergenin ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование индикатора</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Indicator name</value>
+    <value>18FE9065-E541-ABBF-F5BE-EFDC503A21A8</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1998,16 +1830,8 @@
  <attributes>
   <name>PurchasesWidgets</name>
   <title>
-   <key>tr</key>
-   <value>Alım ekran araçları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Виджеты закупок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Purchases widgets</value>
+   <value>6328B02F-EC29-DAA2-234A-A3E7E9695062</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2022,16 +1846,8 @@
   <columns>
    <name>WidgetName</name>
    <title>
-    <key>tr</key>
-    <value>Araç adı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование виджета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Widget name</value>
+    <value>A50FE383-E0F3-5213-31D4-4FF9DD23BDC1</value>
    </title>
    <id>1</id>
    <valueType>
@@ -2048,16 +1864,8 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>021EB07A-9AC3-7AE9-9E5B-B3EAF41293FF</value>
    </title>
    <id>2</id>
    <valueType>
@@ -2074,16 +1882,8 @@
   <columns>
    <name>Enabled</name>
    <title>
-    <key>tr</key>
-    <value>Etkin</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Включено</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Enabled</value>
+    <value>CFABAD53-53D5-5D0E-E228-8B5D7D723B1F</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2099,16 +1899,8 @@
   <columns>
    <name>ID</name>
    <title>
-    <key>tr</key>
-    <value>ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>ID</value>
+    <value>C386F16B-25FE-8464-422E-E20EC7E42959</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2125,16 +1917,8 @@
   <columns>
    <name>Json</name>
    <title>
-    <key>tr</key>
-    <value>Json</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>JSON</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Json</value>
+    <value>7DA5135B-A145-3EF1-13FF-F68E8F44A115</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2151,16 +1935,8 @@
   <columns>
    <name>IndicatorName</name>
    <title>
-    <key>tr</key>
-    <value>Göstergenin ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование индикатора</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Indicator name</value>
+    <value>7C940CC3-30F6-96F8-81F8-84CEA5939752</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2178,16 +1954,8 @@
  <attributes>
   <name>MoneyWidgets</name>
   <title>
-   <key>tr</key>
-   <value>Nakit ekran araçları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Виджеты: деньги</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Money widgets</value>
+   <value>874CB1D9-1F3B-1760-03D5-51ED6BA979E1</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2202,16 +1970,8 @@
   <columns>
    <name>WidgetName</name>
    <title>
-    <key>tr</key>
-    <value>Araç adı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование виджета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Widget name</value>
+    <value>AFAE3F8D-62FC-D65C-C8DC-C9528520213E</value>
    </title>
    <id>1</id>
    <valueType>
@@ -2228,16 +1988,8 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>FE1A8852-2B05-AA61-1A02-2B45BE0CF090</value>
    </title>
    <id>2</id>
    <valueType>
@@ -2254,16 +2006,8 @@
   <columns>
    <name>Enabled</name>
    <title>
-    <key>tr</key>
-    <value>Etkin</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Включено</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Enabled</value>
+    <value>A4668EFB-DFE2-28D8-8022-295AEA460E7E</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2279,16 +2023,8 @@
   <columns>
    <name>ID</name>
    <title>
-    <key>tr</key>
-    <value>ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>ID</value>
+    <value>AB6A3446-322B-A917-707F-F0A1686E0E71</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2305,16 +2041,8 @@
   <columns>
    <name>Json</name>
    <title>
-    <key>tr</key>
-    <value>Json</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>JSON</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Json</value>
+    <value>9EE3C684-21B5-BAFC-C034-47F91D118A0E</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2331,16 +2059,8 @@
   <columns>
    <name>IndicatorName</name>
    <title>
-    <key>tr</key>
-    <value>Göstergenin ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование индикатора</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Indicator name</value>
+    <value>BB29AFB1-B275-22BF-FAE0-05BD862A91E8</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2358,16 +2078,8 @@
  <attributes>
   <name>User</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пользователь</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User</value>
+   <value>1FF6E9A2-126C-CC11-11E6-6385C8EE02F5</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2384,29 +2096,13 @@
  <formCommands>
   <name>Sales_AverageBill</name>
   <title>
-   <key>tr</key>
-   <value>Ortalama fiş tutarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Средний счет</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Average bill</value>
+   <value>B17E744C-B45B-23AC-C718-86FD5FD37738</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Satış fiş ortalaması</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Средний чек продаж</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Sales average bill</value>
+   <value>58BE4ED8-25AD-5A03-360C-CF5ACDEEA418</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2421,29 +2117,13 @@
  <formCommands>
   <name>Sales_SalesAmount</name>
   <title>
-   <key>tr</key>
-   <value>Satış tutarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сумма продаж</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Sales amount</value>
+   <value>5A01B35B-35CE-D0D2-24F1-1199958C7A05</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>Satışlar Satış tutarı</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Сумма продаж</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Sales sales amount</value>
+   <value>7CB456E2-549A-8696-6472-28548C6CBE35</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2458,29 +2138,13 @@
  <formCommands>
   <name>Sales_SalerReturnPercentage</name>
   <title>
-   <key>tr</key>
-   <value>Satış iade yüzdesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Процент возврата продавца</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Saler return percentage</value>
+   <value>D4C735B6-C59E-E2A1-19DF-FE8EBD3928D7</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>tr</key>
-   <value>Satışlar Satış iadesi yüzdesi</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Процент возврата продавца (продажи)</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Sales saler return percentage</value>
+   <value>6EF1576F-0D5D-A2D9-97D1-16D860719B4A</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2495,29 +2159,13 @@
  <formCommands>
   <name>Purchases_VolumeOfPurchases</name>
   <title>
-   <key>tr</key>
-   <value>Satın alma hacmi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Объем закупок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Volume of purchases</value>
+   <value>FD835C04-3A86-8E00-0F74-4E9E30991FF1</value>
   </title>
   <id>4</id>
   <toolTip>
-   <key>tr</key>
-   <value>Satınalma hacmi satınalma</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Объем закупок</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Purchases volume of purchases</value>
+   <value>94524524-B95E-1047-7E8F-F688F5462D24</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2532,29 +2180,13 @@
  <formCommands>
   <name>Purchases_StockBalance</name>
   <title>
-   <key>tr</key>
-   <value>Stok bakiyesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Остаток на складе</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Stock balance</value>
+   <value>FCA140AA-61D2-9B46-6F53-32D698006AE9</value>
   </title>
   <id>5</id>
   <toolTip>
-   <key>tr</key>
-   <value>Satınalma stok bakiyesi</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Остаток закупок на складе</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Purchases stock balance</value>
+   <value>7DE3C815-AF1C-22BE-E3F4-433D0790B015</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2569,29 +2201,13 @@
  <formCommands>
   <name>Money_CashBalance</name>
   <title>
-   <key>tr</key>
-   <value>Nakit bakiyesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Денежный остаток</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cash balance</value>
+   <value>C23C49EE-A234-2329-979C-CFDE89EEED61</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Nakit bakiyesi</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Денежный остаток</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Money cash balance</value>
+   <value>88599D3A-90E6-F5BD-D6C7-7AE28765B754</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2606,29 +2222,13 @@
  <formCommands>
   <name>Money_PaymentsFromClients</name>
   <title>
-   <key>tr</key>
-   <value>Müşterilerden gelen ödemeler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Платежи от клиентов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Payments from clients</value>
+   <value>288E1DB5-85DA-40D2-2353-3F0CFDAF7E76</value>
   </title>
   <id>7</id>
   <toolTip>
-   <key>tr</key>
-   <value>Müşterilerden gelen ödemeler</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Платежи от клиентов</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Money payments from clients</value>
+   <value>F05CDEBC-C95C-D6E8-88F6-64E292E62661</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2643,29 +2243,13 @@
  <formCommands>
   <name>Money_PaymentsToSuppliers</name>
   <title>
-   <key>tr</key>
-   <value>Tedarikçilere yapılan ödemeler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Платежи поставщикам</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Payments to suppliers</value>
+   <value>C84D2640-E5EB-1D89-94E1-136E488F370E</value>
   </title>
   <id>8</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tedarikçilere yapılan ödemeler</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Платежи поставщикам</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Money payments to suppliers</value>
+   <value>DAB61C74-00C9-1F4F-F19E-E6A4A052B414</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2680,29 +2264,13 @@
  <formCommands>
   <name>Money_ApAr</name>
   <title>
-   <key>tr</key>
-   <value>Borç/Alacak</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ДТ\КР</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>AP\AR</value>
+   <value>6FDB1750-1204-F616-62B1-112BC68E21BE</value>
   </title>
   <id>9</id>
   <toolTip>
-   <key>tr</key>
-   <value>Nakit Borç Alacak</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Деньги ДТ/КТ</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Money ap ar</value>
+   <value>B8569ADF-BB32-7832-27D2-26E34A6FA796</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2717,29 +2285,13 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Записать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save</value>
+   <value>3A510E3E-499C-AD15-5406-6A213D6ACF7C</value>
   </title>
   <id>10</id>
   <toolTip>
-   <key>tr</key>
-   <value>Kaydet</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Записать</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Save</value>
+   <value>575830FD-D680-2834-476A-A3A6AF055798</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2754,29 +2306,13 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>74925DBE-C577-1A26-6ADC-C38562E80BB6</value>
   </title>
   <id>11</id>
   <toolTip>
-   <key>tr</key>
-   <value>İptal</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Отмена</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Cancel</value>
+   <value>807545E2-451A-11B8-8777-7B59F5B5CD23</value>
   </toolTip>
   <use>
    <common>true</common>

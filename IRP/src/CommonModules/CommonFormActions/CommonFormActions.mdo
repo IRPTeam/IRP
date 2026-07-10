@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4470d229-1d5a-4247-a266-058caed43185">
  <name>CommonFormActions</name>
  <synonym>
-  <key>tr</key>
-  <value>Ortak formlar hareketler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Действия в общих формах</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Common form actions</value>
+  <value>745E9BA8-C7DD-EA0D-D8D1-1B244075DCB1</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

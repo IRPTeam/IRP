@@ -7,47 +7,23 @@
  </producedTypes>
  <name>FileTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Dosya tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы файлов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>File types</value>
+  <value>02BA5230-9E60-0F90-0FAE-E445A93F38E4</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="6bcb92dd-9ffe-4709-a9c5-139534f3c6a5">
   <name>Picture</name>
   <synonym>
-   <key>tr</key>
-   <value>Resim</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Картинка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Picture</value>
+   <value>15844467-DC33-8E75-54D8-88FB092AD896</value>
   </synonym>
  </enumValues>
  <enumValues uuid="e042a707-962f-42cb-bb06-9a71e171479a">
   <name>Other</name>
   <synonym>
-   <key>tr</key>
-   <value>Diğer</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительно</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Other</value>
+   <value>AC4D0448-555E-2A97-7A33-36C77F616915</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

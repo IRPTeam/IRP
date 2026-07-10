@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="213b451e-d85e-4bbf-a501-f7e7ed03475e">
  <name>DELETE_AccumulationRegisters_R3040B_WithholdingTax</name>
  <synonym>
-  <key>tr</key>
-  <value>DELETE AccumulationRegisters R3040B Withholding tax</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>DELETE AccumulationRegisters R3040B Withholding tax</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>DELETE AccumulationRegisters R3040B Withholding tax</value>
+  <value>1F04E478-D677-FC87-79AF-F9DF66D79760_______________</value>
  </synonym>
 </mdclass:Role>

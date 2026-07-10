@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R2020B_AdvancesFromCustomers</name>
  <synonym>
-  <key>tr</key>
-  <value>R2020 Müşteriden alınan avanslar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2020 Авансы полученные (от покупателей)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2020 Advances from customer</value>
+  <value>E594FDA3-9922-AF03-3E75-5C79272A19A9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="bc565959-e5be-40d7-9021-6918e31922fc">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>43883092-C9F9-528A-ABA2-2F4C9F45E351</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <attributes uuid="74156356-3cb5-40af-9788-17bd414d6c0d">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложенный расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deferred calculation</value>
+   <value>94AA2D60-0946-D593-3329-90D63A46B0EA</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -69,16 +45,8 @@
  <attributes uuid="dfa14517-2083-488c-ab4c-1bd670bb3bdd">
   <name>CustomersAdvancesClosing</name>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri avans kapatma</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Закрытие авансов покупателей.</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Customers advances closing</value>
+   <value>03CF7915-C20D-EE19-9597-7D22954DA3D0</value>
   </synonym>
   <type>
    <types>DocumentRef.CustomersAdvancesClosing</types>
@@ -91,16 +59,8 @@
  <dimensions uuid="6d1fceaa-4d14-4ac0-a260-1215f41f41e3">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>34131496-8CD8-9304-46F5-5BBB1CEB5314</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -113,16 +73,8 @@
  <dimensions uuid="baaff813-c320-46b2-a85c-db9eaee99eb3">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>64348530-B4EF-1E54-4C92-2C3391EEEEA2</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -135,16 +87,8 @@
  <dimensions uuid="3c274199-7e2f-404a-82ec-e9ebce40597c">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>FDE34573-DF52-002B-B7B3-347A7B5EC026</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -157,16 +101,8 @@
  <dimensions uuid="74ae7b67-27a1-45b2-a914-064c03e3acb5">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>855355F0-4A93-2152-27E1-1BFB592D01D8</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -179,16 +115,8 @@
  <dimensions uuid="6603e41f-7f53-4509-b203-a26d06099aaf">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction currency</value>
+   <value>0231A945-B122-8AA5-5D35-5F4B52EC12DF</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -201,16 +129,8 @@
  <dimensions uuid="764b3298-ada4-4121-8d33-e4d4e86986d0">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>1BDEAE7A-BD26-36DC-CE99-991868CED10B</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -223,16 +143,8 @@
  <dimensions uuid="8f7c1592-a04b-46f7-bb20-c54c72dc1228">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>460B8492-F029-4125-5A89-94AA147876E6</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -245,16 +157,8 @@
  <dimensions uuid="12800477-ab08-44ea-a808-09d0e264ac22">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>110E0236-F4D9-4EB6-6449-93E90593462F</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesOrder</types>
@@ -267,16 +171,8 @@
  <dimensions uuid="1a780c97-2683-448f-ad82-4d19d8a77681">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Agreement</value>
+   <value>E8C87204-14BF-A627-70AD-D11E3F3503BD</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -289,16 +185,8 @@
  <dimensions uuid="4d2405c1-314a-48cf-b0b6-43eab72ee5b5">
   <name>Project</name>
   <synonym>
-   <key>tr</key>
-   <value>Proje</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Проект</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Project</value>
+   <value>62FECAB8-2DD0-A342-23BC-C13C49177562</value>
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>

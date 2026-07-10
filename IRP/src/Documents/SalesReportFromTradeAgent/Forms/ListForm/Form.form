@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>A0B91285-94BD-C239-9315-580CA5FAE8FB</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -680,16 +672,8 @@ GROUP BY
  <formCommands>
   <name>CreateBySalesReport</name>
   <title>
-   <key>tr</key>
-   <value>Satışlara göre oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Создать на основании отчета о продажа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Create by sales report</value>
+   <value>054CF3A1-5FD5-7A06-6151-11E9165F27CC</value>
   </title>
   <id>1</id>
   <use>

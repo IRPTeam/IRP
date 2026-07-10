@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseVariableItemKey</name>
  <synonym>
-  <key>tr</key>
-  <value>Değişken varyant kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать заменяемые характеристики</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use variable item key</value>
+  <value>9F3F875F-691C-745D-D33A-AA251CB97FFF</value>
  </synonym>
  <type>
   <types>Boolean</types>

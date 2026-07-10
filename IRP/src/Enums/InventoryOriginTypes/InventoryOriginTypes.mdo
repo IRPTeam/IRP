@@ -7,47 +7,23 @@
  </producedTypes>
  <name>InventoryOriginTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Envanter köken tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы источников происхождения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Inventory origin types</value>
+  <value>7870BE89-4455-1931-1438-8C0C0C944958</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="8b770027-4040-430b-bd60-a033ee4ee9fe">
   <name>OwnStocks</name>
   <synonym>
-   <key>tr</key>
-   <value>Kendi stoklar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Наши остатки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Own stocks</value>
+   <value>D483D862-FB3A-5450-0CBF-F1C11B6ED712</value>
   </synonym>
  </enumValues>
  <enumValues uuid="10251ca8-1774-461c-b5ca-cb919cfa3357">
   <name>ConsignorStocks</name>
   <synonym>
-   <key>tr</key>
-   <value>Konsinye stoklar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Товары комитента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Consignor stocks</value>
+   <value>E691E9AD-9D3E-49DB-B6BC-C4A268D00A4A</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

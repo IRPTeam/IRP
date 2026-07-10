@@ -9,16 +9,8 @@
  </producedTypes>
  <name>FullExchange</name>
  <synonym>
-  <key>tr</key>
-  <value>Tam veri alış veriş</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Полный обмен</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Full exchange</value>
+  <value>95CBA5DB-8994-98D8-87AD-D0D526301634</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>ExchangePlan.FullExchange.StandardAttribute.Code</inputByString>
@@ -28,28 +20,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Tam veri alış veriş</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Полный обмен</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Full exchange</value>
+  <value>0CBC3C35-796E-FA8C-CC81-144BBBA93818</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Tam veri alış veriş</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Полный обмен</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Full exchange</value>
+  <value>EACD427F-E6B8-3F90-0975-5FFCDB81BCC8</value>
  </listPresentation>
  <codeLength>9</codeLength>
  <codeAllowedLength>Variable</codeAllowedLength>

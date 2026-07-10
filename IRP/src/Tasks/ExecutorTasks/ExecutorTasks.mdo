@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ExecutorTasks</name>
  <synonym>
-  <key>tr</key>
-  <value>Sorumlu görevleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Задачи исполнителя</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Executor tasks</value>
+  <value>4A10708B-A3AD-360C-C056-6E5BEB780678</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Task.ExecutorTasks.StandardAttribute.Number</inputByString>
@@ -27,16 +19,8 @@
   <dataHistory>Use</dataHistory>
   <name>Executed</name>
   <synonym>
-   <key>tr</key>
-   <value>Yürütüldü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Выполнен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Executed</value>
+   <value>2034F079-E659-BA82-2F04-4BCDC9F607CA</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <minValue xsi:type="core:UndefinedValue"/>
@@ -85,16 +69,8 @@
   <dataHistory>Use</dataHistory>
   <name>Date</name>
   <synonym>
-   <key>tr</key>
-   <value>Oluşturma tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата создания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Creation date</value>
+   <value>D7545B1F-290C-A6F9-92F2-2212EB5C7A93</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
@@ -113,16 +89,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Sorumlu görevi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Задача исполнителя</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Executor task</value>
+  <value>3612EA4A-CAF0-D648-8F33-39482541A739</value>
  </objectPresentation>
  <numberType>String</numberType>
  <numberLength>12</numberLength>
@@ -139,16 +107,8 @@
  <attributes uuid="31d35137-351f-4664-ab13-fa0001bc1ef0">
   <name>TaskID</name>
   <synonym>
-   <key>tr</key>
-   <value>Task ID</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Идентификатор задачи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Task ID</value>
+   <value>8B4CF7B2-1CF4-9A29-998B-BB90A88080A6</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -161,16 +121,8 @@
  <attributes uuid="e87573de-2b60-45d6-ba98-27ab839b54a2">
   <name>IterationNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Yineleme sayısı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер итерации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Iteration number</value>
+   <value>CD0248A5-2958-8C84-4FBA-AF0AC34688ED</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -188,16 +140,8 @@
  <attributes uuid="dd956db2-fbe2-41c8-bb86-c02d567fc1b8">
   <name>TaskType</name>
   <synonym>
-   <key>tr</key>
-   <value>Görev tür</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип задачи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Task type</value>
+   <value>9D669FFB-393E-1224-429B-B6BD2515CAED</value>
   </synonym>
   <type>
    <types>EnumRef.TaskTypes</types>
@@ -211,16 +155,8 @@
  <attributes uuid="fb794c54-4023-4b62-93b5-21ff604b612b">
   <name>Detailing</name>
   <synonym>
-   <key>tr</key>
-   <value>Detaylandırma</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Детализация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Detailing</value>
+   <value>30C040B1-20F0-A332-228C-C4C3D41B8555</value>
   </synonym>
   <type>
    <types>String</types>
@@ -235,16 +171,8 @@
  <attributes uuid="cf5cc5e1-9c59-4893-ab8a-2c224cd59dae">
   <name>ExecutionObject</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem nesnesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Объект исполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Execution object</value>
+   <value>9D0A27C2-A781-25C6-60E3-32353F550B17</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -259,16 +187,8 @@
  <attributes uuid="df7821de-c294-49de-808e-8a5fb1459969">
   <name>ExecutionDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Gerçekleştirme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Исполнение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Execution</value>
+   <value>30014E95-3969-48A5-529F-FD57C5D8BA85</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -283,16 +203,8 @@
  <attributes uuid="28b3d2b9-dec9-4bf8-a31b-a2ad255d627e">
   <name>AcceptetionForExecutionDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Kabul edildi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Принятие</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Acceptetion</value>
+   <value>D046175C-95AE-73AD-DE73-33C204A50FF3</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -307,16 +219,8 @@
  <attributes uuid="3ac56b96-dfee-47fe-a36d-d6a4ef082bec">
   <name>Canceled</name>
   <synonym>
-   <key>tr</key>
-   <value>İptal edildi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отменен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Canceled</value>
+   <value>A646C212-5177-89DD-DC14-4B36B5628AB2</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -329,16 +233,8 @@
  <attributes uuid="aeef31f3-5e83-40cf-bc67-558d2e7bb2f3">
   <name>AutoExecute</name>
   <synonym>
-   <key>tr</key>
-   <value>Otomatik yürütme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Автоматическое выполнение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Auto-execute</value>
+   <value>64E3A615-DF4B-DCA4-4CF3-37DBAE10F510</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -352,16 +248,8 @@
  <forms uuid="513d82d4-5088-403e-8052-333c67529f8b">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>8179D315-2468-2EF5-53C6-6CFA85998C92</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -369,16 +257,8 @@
  <forms uuid="d2372d06-c778-499e-be9a-984e0a0cadab">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>0A4E3AAB-CF51-FEAA-A6F4-47B3554D7EBC</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -386,16 +266,8 @@
  <addressingAttributes uuid="76df2495-c72a-4906-8f08-7946bb8f7bfa">
   <name>CurrentExecutor</name>
   <synonym>
-   <key>tr</key>
-   <value>Mevcut sorumlu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Текущий исполнитель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Current executor</value>
+   <value>CAA273E5-EF34-4FF5-5569-9A2E2AA9D49C</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -410,16 +282,8 @@
  <addressingAttributes uuid="3310a9eb-9db3-48e1-aa49-da92c9bb35d1">
   <name>UserGroup</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı grubu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа пользователей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User group</value>
+   <value>73F3CDF9-C749-4BB3-3D15-5DE85BA2417C</value>
   </synonym>
   <type>
    <types>CatalogRef.UserGroups</types>
@@ -434,16 +298,8 @@
  <addressingAttributes uuid="d5269c0c-29da-4ef5-9d28-9c5d1f1c7035">
   <name>Position</name>
   <synonym>
-   <key>tr</key>
-   <value>Pozisyon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Должность</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Position</value>
+   <value>9F97DE63-B1EC-93C8-8D0B-B7FBCAB1061E</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -458,16 +314,8 @@
  <addressingAttributes uuid="2f7b4990-0fe9-487e-bd3a-ef04af2da85d">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>24A66151-94FC-3AA1-1E3D-DBC6732B8A4D</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -482,16 +330,8 @@
  <addressingAttributes uuid="724c24bc-1305-4bbe-898b-e4748b9b7db1">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Центр прибылей/убытков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Profit loss center</value>
+   <value>FB4F7576-84C3-1B4A-AB4E-E3DE98092E12</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

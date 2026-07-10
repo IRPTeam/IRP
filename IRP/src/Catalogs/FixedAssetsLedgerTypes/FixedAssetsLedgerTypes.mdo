@@ -9,16 +9,8 @@
  </producedTypes>
  <name>FixedAssetsLedgerTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymetler defteri türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Вид расчета основных средств</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Fixed assets ledger types</value>
+  <value>265FE923-D9F8-09A7-7311-1D7FFA82D5C8</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -56,28 +48,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Sabit kıymet defter tipi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Вид учета основного средства</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Fixed assets ledger type</value>
+  <value>432E3C13-3E44-F576-6C7B-B4BBBF968361</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Sabit kıymetler defteri türleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Виды учета основных средств</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Fixed assets ledger types</value>
+  <value>F1FD6FD5-C4F9-E7F7-74DC-C207BAFD3CCB</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -95,16 +71,8 @@
  <attributes uuid="d4bf9cc4-a137-43b8-b910-871a1f620fab">
   <name>CalculateDepreciation</name>
   <synonym>
-   <key>tr</key>
-   <value>Amortismanı hesapla</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расчитывать амортизацию</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Calculate depreciation</value>
+   <value>09F6C232-3C4E-D7F5-5623-3D4A918B3F3F</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -118,16 +86,8 @@
  <attributes uuid="c4642348-f87a-4c61-894c-c693376383b9">
   <name>ExpenseType</name>
   <synonym>
-   <key>tr</key>
-   <value>Gider tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Статьи затрат</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Expense type</value>
+   <value>86BF292D-67DA-2C53-35C4-4527794D4596</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -150,30 +110,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>CA7240AF-C2D7-0E29-9CFB-BCEEF60AE011</value>
   </synonym>
   <attributes uuid="a9c715e9-f162-40e1-b636-d14cba82db6c">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>A5E15776-A091-62B9-9324-45FB30B097CE</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -186,16 +130,8 @@
   <attributes uuid="1cd779ef-5a60-4586-9c5f-7d1c00fc68b9">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>E8DCE422-F75D-9EED-DCC5-5BA46F1B8FBC</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -212,16 +148,8 @@
   <attributes uuid="2ba0fec4-880d-412c-914d-4e9d903ddf89">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Текстовая строка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Search literal</value>
+    <value>67B8F4DF-31E5-1EAF-FAA4-4B943C523F4B</value>
    </synonym>
    <type>
     <types>String</types>
@@ -238,16 +166,8 @@
  <forms uuid="dfe9580e-7f0c-464e-97b4-34df3dd1be3b">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>159BEE1F-669A-09AD-D65B-BEEF7BAA9251</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -255,16 +175,8 @@
  <forms uuid="26fdf537-ca5c-4729-ad8b-3aa05612ce74">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>55A1AA46-9244-6CB9-9E70-0A149CFC5EA7</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -272,16 +184,8 @@
  <forms uuid="c911b183-57e4-443d-93af-011c00b759b6">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>4C65E549-72DC-195C-C866-61ABF02C2214</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -7,16 +7,8 @@
  </producedTypes>
  <name>DefaultFilesStorageVolume</name>
  <synonym>
-  <key>tr</key>
-  <value>Varsayılan dosya depolama yeri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Том хранения файлов по умолчанию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Default files storage volume</value>
+  <value>2AE77741-B078-615D-D8F0-02023361A986</value>
  </synonym>
  <type>
   <types>CatalogRef.FileStorageVolumes</types>

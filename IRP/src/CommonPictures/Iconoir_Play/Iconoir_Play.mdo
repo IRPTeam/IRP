@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="77c0c572-cbed-4df3-a6d5-3e111246a8e3">
  <name>Iconoir_Play</name>
  <synonym>
-  <key>tr</key>
-  <value>Oynat</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Iconoir воспроизвести</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Iconoir play</value>
+  <value>8F326B42-1DB0-461D-D0F8-80AB18D4B751</value>
  </synonym>
 </mdclass:CommonPicture>

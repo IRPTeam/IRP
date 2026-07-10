@@ -10,16 +10,8 @@
     <name>Period</name>
     <id>1</id>
     <title>
-     <key>tr</key>
-     <value>Ekle</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Добавить</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Add</value>
+     <value>3E118A89-96B4-4D78-82C0-01FCAF36B633</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -144,16 +136,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sol)</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группировка по левому краю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group left</value>
+    <value>865D81C4-2CB9-FB48-8446-60191428A175</value>
    </title>
    <extendedTooltip>
     <name>GroupLeftExtendedTooltip</name>
@@ -273,16 +257,8 @@
      </dataPath>
      <titleLocation>None</titleLocation>
      <toolTip>
-      <key>tr</key>
-      <value>Zorluk seviyesi</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Уровень сложности</value>
-     </toolTip>
-     <toolTip>
       <key>en</key>
-      <value>Difficult level</value>
+      <value>D2BB6F3B-A071-8AAE-EBA5-51850BB744FE</value>
      </toolTip>
      <extendedTooltip>
       <name>DifficultLevelExtendedTooltip</name>
@@ -319,16 +295,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup seviye</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа уровня</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group lvl</value>
+     <value>21785A2E-07F2-978D-D3AC-C6661BA088F4</value>
     </title>
     <extendedTooltip>
      <name>GroupLvlExtendedTooltip</name>
@@ -391,16 +359,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sağ)</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группировка по правому краю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group right</value>
+    <value>012DF0EA-25F9-0FF0-0A9B-B679985EFA26</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -427,16 +387,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа верхние уровень</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>146E1A64-6884-8636-60BB-BE98FB3F4ECF</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -466,16 +418,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup footer</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа подвал</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group bottom</value>
+   <value>E1051846-26B3-8E72-2CD3-390E750D792F</value>
   </title>
   <extendedTooltip>
    <name>GroupBottomExtendedTooltip</name>
@@ -549,16 +493,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Комментарий</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>BBC29362-F06A-72BC-C662-29160D0DCCEF</value>
    </title>
    <extendedTooltip>
     <name>PageDescriptionExtendedTooltip</name>
@@ -626,16 +562,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı mesajları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Пользовательские сообщения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>User messages</value>
+    <value>73014047-AD27-62E3-318D-D88A1F954139</value>
    </title>
    <extendedTooltip>
     <name>PageUserMassagesExtendedTooltip</name>
@@ -704,16 +632,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Log</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Логи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Log</value>
+    <value>98CFA22A-8AC6-4CBD-D796-669686C696FB</value>
    </title>
    <extendedTooltip>
     <name>PageLogExtendedTooltip</name>
@@ -781,16 +701,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sonuç</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Результат</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Result</value>
+    <value>57850B20-D3CE-5902-2898-8382422948C8</value>
    </title>
    <extendedTooltip>
     <name>PageResultExtendedTooltip</name>
@@ -858,16 +770,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Parametreler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Параметры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Parameters</value>
+    <value>66C83FDD-9DAD-CB3B-B54B-B6D5483D846A</value>
    </title>
    <extendedTooltip>
     <name>PageParametersExtendedTooltip</name>
@@ -891,16 +795,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar genel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы основные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages main</value>
+   <value>A04ADFFD-E12F-CEC8-889F-FCF716C1A4A5</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -952,16 +848,8 @@
  <attributes>
   <name>Logs</name>
   <title>
-   <key>tr</key>
-   <value>Kayıtlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Логи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Logs</value>
+   <value>C5F3917D-779C-9237-734A-AC06D18C3F7B</value>
   </title>
   <id>2</id>
   <valueType>
@@ -978,16 +866,8 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>CC50A163-6BDF-46B2-2685-5B2954B18715</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1004,16 +884,8 @@
  <attributes>
   <name>DataParameters</name>
   <title>
-   <key>tr</key>
-   <value>Veri parametreleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Параметры данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Data parameters</value>
+   <value>E5D44873-180D-0999-92FB-B15314AA8C88</value>
   </title>
   <id>4</id>
   <valueType>

@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UsePreliminaryStock</name>
  <synonym>
-  <key>tr</key>
-  <value>Ön stok kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать предварительные остатки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use preliminary stock</value>
+  <value>F1B21503-7930-9CE1-1045-5077EF08BA82</value>
  </synonym>
  <type>
   <types>Boolean</types>

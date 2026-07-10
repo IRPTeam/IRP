@@ -6,32 +6,16 @@
  </producedTypes>
  <name>ScanBarcode</name>
  <synonym>
-  <key>tr</key>
-  <value>Barkod okut</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Сканирование штрихкода</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Scan barcode</value>
+  <value>19CBB2EF-0581-46DD-DEE0-046FA07D7B08</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ScanBarcode.Form.Form</defaultForm>
  <attributes uuid="72468f78-2375-4869-ad40-b0afc5e1f4ba">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis</value>
+   <value>39F74D27-EC80-DBED-D33B-B22787C3EC06</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -46,30 +30,14 @@
   </producedTypes>
   <name>ItemList</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Товары</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item list</value>
+   <value>8177A908-B11D-B6C7-7F01-1319B3F0E86C</value>
   </synonym>
   <attributes uuid="a4e9b360-ca8d-4976-bf4b-213d82096b33">
    <name>Item</name>
    <synonym>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Item</value>
+    <value>5E29AA38-7CA9-EB3F-F24A-A0C1162A3723</value>
    </synonym>
    <type>
     <types>CatalogRef.Items</types>
@@ -81,16 +49,8 @@
   <attributes uuid="2dee50a0-fa19-4d5e-9aa2-e77b18767708">
    <name>ItemKey</name>
    <synonym>
-    <key>tr</key>
-    <value>Varyant</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Item key</value>
+    <value>68A647F8-AB71-8AC1-198C-C720D66BB425</value>
    </synonym>
    <type>
     <types>CatalogRef.ItemKeys</types>
@@ -103,16 +63,8 @@
   <attributes uuid="0c940dc0-1154-421d-8778-2981c9b2e3d3">
    <name>Unit</name>
    <synonym>
-    <key>tr</key>
-    <value>Birim</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ед. изм.</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Unit</value>
+    <value>934326BD-8944-A454-40EF-FA6DD9179864</value>
    </synonym>
    <type>
     <types>CatalogRef.Units</types>
@@ -124,16 +76,8 @@
   <attributes uuid="1ca49b3e-f959-45a2-8c9d-d08352d4ebcd">
    <name>Quantity</name>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Количество</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Quantity</value>
+    <value>03E7FFBB-F789-B6D0-02A5-50DC0AD9791E</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -145,16 +89,8 @@
   <attributes uuid="8edb82e4-1177-4938-adcf-964f2e03ab53">
    <name>ScannedQuantity</name>
    <synonym>
-    <key>tr</key>
-    <value>Okutulan</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Просканировано</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Scanned</value>
+    <value>99F55734-2845-1CBB-BAD1-1C375723E8C1</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -166,16 +102,8 @@
   <attributes uuid="8c500f5a-d6de-4abb-95a5-7735a09062f0">
    <name>UseSerialLotNumber</name>
    <synonym>
-    <key>tr</key>
-    <value>Seri/lot numaraları kullan</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ведется учет по сериям номенклатуры</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Use serial lot number</value>
+    <value>03F1544D-FF1D-D552-22D7-7C8DDE9CCC99</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -187,16 +115,8 @@
   <attributes uuid="8cb14662-8fad-4911-ad43-0085ecdac8a5">
    <name>SerialLotNumber</name>
    <synonym>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>1DF548EC-45D7-2F05-5C4A-A6247164F5AB</value>
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -208,16 +128,8 @@
   <attributes uuid="73436e19-6c37-471b-9620-83e674c9fbfa">
    <name>ScannedSerialLotNumber</name>
    <synonym>
-    <key>tr</key>
-    <value>Taranan seri lot numarası</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Просканированный серийный номер</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Scanned serial lot number</value>
+    <value>DFA0FCDF-0A93-38FA-ADFC-C0B5119852B4</value>
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -230,16 +142,8 @@
  <forms uuid="2c533795-bfcc-4d37-b4c7-055e4d38192e">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>99C2F5CF-526E-362A-AD93-393844055B58</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -247,16 +151,8 @@
  <forms uuid="5888f1d9-2318-47b4-a37a-e4b37214bb73">
   <name>RowForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма строка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row form</value>
+   <value>2D086703-5696-1CCB-BECE-EE06DF78B0F2</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

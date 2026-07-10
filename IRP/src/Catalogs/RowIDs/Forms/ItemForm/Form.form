@@ -559,16 +559,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ana</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основное</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Main</value>
+    <value>44D2E695-0180-D354-4154-4477F8AFD434</value>
    </title>
    <extendedTooltip>
     <name>GroupMainPageExtendedTooltip</name>
@@ -1181,16 +1173,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Depolar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Склады</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Stores</value>
+    <value>55F792B2-E87F-0435-56D6-608153607B0F</value>
    </title>
    <extendedTooltip>
     <name>GroupStoresExtendedTooltip</name>
@@ -1570,16 +1554,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Satışlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Продажи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Sales</value>
+    <value>3A247404-A200-2ABF-F9D6-680CBF1A4287</value>
    </title>
    <extendedTooltip>
     <name>GroupSalesExtendedTooltip</name>
@@ -1919,16 +1895,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Alımlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Закупки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Purchases</value>
+    <value>1C9F6DA4-991F-F3FB-BD55-57934F3B3452</value>
    </title>
    <extendedTooltip>
     <name>GroupPurchasesExtendedTooltip</name>
@@ -1952,16 +1920,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group pages</value>
+   <value>B5C12423-1651-C9C8-8FB5-518502BA6B58</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>

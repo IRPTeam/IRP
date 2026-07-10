@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="26190b65-7194-4d2f-8bfb-93f785c249ad">
  <name>DocFixedAssetTransferServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymet transfer sunucusu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Док Перемещение основного средства сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc fixed asset transfer server</value>
+  <value>58E7676F-97C5-B798-8D4D-DC6B8CDB7FF5</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

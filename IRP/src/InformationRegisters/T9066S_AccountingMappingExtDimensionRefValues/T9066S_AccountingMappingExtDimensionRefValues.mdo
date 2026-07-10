@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9066S_AccountingMappingExtDimensionRefValues</name>
  <synonym>
-  <key>tr</key>
-  <value>T9066 Muhasebe mappingi (kırılım ref değerleri)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9066 Бухгалтерские соответствия (ссылочные значения субконто)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9066 Accounting mapping (ext dimension ref values)</value>
+  <value>EBC144CC-7E03-F74C-CF18-89D959E51B19_______________</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="9bab276d-a759-492c-9c21-d9db0942f7e0">
   <name>ExtDimensionValue</name>
   <synonym>
-   <key>tr</key>
-   <value>Kırılım değeri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение субконто</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ext dimension value</value>
+   <value>F41E6803-F11D-67F6-6B4A-A483D024FDF7</value>
   </synonym>
   <type>
    <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -53,16 +37,8 @@
  <dimensions uuid="289b8763-295b-4041-aadf-e45b77bb9c24">
   <name>IntegrationSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Интеграционные настройки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Integration settings</value>
+   <value>DEC936A1-75AB-1AF9-9CD7-787C4E3C1156</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -78,16 +54,8 @@
  <dimensions uuid="0247c0b1-b10a-4934-bc24-465b6b039ae1">
   <name>ExternalRef</name>
   <synonym>
-   <key>tr</key>
-   <value>Dış ref</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Внешняя ссылка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>External ref</value>
+   <value>8F535763-11FE-EF44-4865-50E15B1CAE33</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -103,16 +71,8 @@
  <dimensions uuid="af203e82-9be8-4f72-9a4c-5bb1de70b643">
   <name>ExtDimensionType</name>
   <synonym>
-   <key>tr</key>
-   <value>Kırılım tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип субконто</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ext dimension type</value>
+   <value>BE23E0AF-BA23-566F-FB40-0395970C2AA2</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -127,16 +87,8 @@
  <forms uuid="c5779614-f3ee-4d6c-b7ff-bfd9f6b985f3">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>BF6EE670-9A78-2E15-5EA3-354622E9FD8B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -144,16 +96,8 @@
  <forms uuid="17b9b073-f777-473a-a0b2-9fd9ffc9a3ca">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>05043E35-6E2B-C06B-BED6-6135A706D860</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

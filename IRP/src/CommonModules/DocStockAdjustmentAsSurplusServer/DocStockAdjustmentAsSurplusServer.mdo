@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9a92226e-9f7d-4e85-b420-7be3e37d0812">
  <name>DocStockAdjustmentAsSurplusServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Doc stok sayım giriş fişi server</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ оприходование товаров сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc stock adjustment as surplus server</value>
+  <value>4A8CBAEC-E8E5-2F1A-A552-257022D5C6EE__</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

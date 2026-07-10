@@ -9,32 +9,16 @@
  </producedTypes>
  <name>ReportOptions</name>
  <synonym>
-  <key>tr</key>
-  <value>Rapor seçenekleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Варианты отчета</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report options</value>
+  <value>5447B212-8F04-3463-3954-4B0888E065DC</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Rapor seçeneği</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Вариант отчета</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Report option</value>
+  <value>5D9C8749-45C1-196B-B332-268D5B6073AF</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -49,16 +33,8 @@
  <attributes uuid="6ccd4096-7481-44ed-aff0-4dbf174d94c8">
   <name>ObjectKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Nesne anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ объекта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Object key</value>
+   <value>B2A80C92-F690-74CF-FD75-555961514C53</value>
   </synonym>
   <type>
    <types>String</types>
@@ -68,25 +44,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="1852a63e-536c-4218-8bd2-374c73f4e4bf">
   <name>Option</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçenek</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вариант</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Option</value>
+   <value>8F9FBF26-838D-6559-9601-161688653AB6</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -100,16 +66,8 @@
  <forms uuid="e6c58e50-1134-4822-83f4-420a88051843">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>4D68D1E1-04EB-F837-7BAF-F8320556807D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

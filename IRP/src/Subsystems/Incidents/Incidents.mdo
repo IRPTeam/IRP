@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d6c711ff-d985-4e9b-b37d-1679b64bfca2">
  <name>Incidents</name>
  <synonym>
-  <key>tr</key>
-  <value>Talepler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Инциденты </value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Incidents</value>
+  <value>216389F5-8520-B49C-CADC-C0F7C16CD036</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

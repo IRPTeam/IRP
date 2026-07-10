@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c359dfc0-1a7c-4223-852a-04dfdf914171">
  <name>Document_CashTransferOrder</name>
  <synonym>
-  <key>tr</key>
-  <value>"Nakit transfer emri" belgesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Приказ о переводе денег"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Cash transfer order"</value>
+  <value>34635501-515C-DC59-9CB3-313BFA132616</value>
  </synonym>
 </mdclass:Role>

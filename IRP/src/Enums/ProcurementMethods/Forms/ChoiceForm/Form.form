@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Tedarik şekli seç</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Выбор метода обеспечения</value>
- </title>
- <title>
   <key>en</key>
-  <value>Choose procurement method</value>
+  <value>6A49B70A-78D4-4D9E-E5CD-DF63798CACC8</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>GroupForm</name>
@@ -353,16 +345,8 @@
  <attributes>
   <name>Stock</name>
   <title>
-   <key>tr</key>
-   <value>Stoktan</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отгрузить со склада</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Stock</value>
+   <value>3B09CF5F-A30F-BE97-7164-484721F34204</value>
   </title>
   <id>2</id>
   <valueType>
@@ -378,16 +362,8 @@
  <attributes>
   <name>Purchase</name>
   <title>
-   <key>tr</key>
-   <value>Alımlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Закупки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Purchase</value>
+   <value>740F20C5-D38C-1F31-196E-E0C7635B972F</value>
   </title>
   <id>3</id>
   <valueType>
@@ -403,16 +379,8 @@
  <attributes>
   <name>NoReserve</name>
   <title>
-   <key>tr</key>
-   <value>Rezervsiz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Без резерва</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>No reserve</value>
+   <value>92AA9D92-1166-10C4-4502-20D040D5030B</value>
   </title>
   <id>4</id>
   <valueType>
@@ -428,16 +396,8 @@
  <attributes>
   <name>PickedProcurementMethods</name>
   <title>
-   <key>tr</key>
-   <value>Seçilen tedarik şekli</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнение обеспечения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picked procurement methods</value>
+   <value>76440BEE-D74A-7EFB-B3D3-308AC6A5E435</value>
   </title>
   <id>5</id>
   <valueType>
@@ -461,16 +421,8 @@
  <attributes>
   <name>IncomingReserve</name>
   <title>
-   <key>tr</key>
-   <value>Beklenen rezerv</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Входящий резерв</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Incoming reserve</value>
+   <value>6F040D87-4F64-630D-DB2D-D265396CDBB7</value>
   </title>
   <id>6</id>
   <valueType>
@@ -486,16 +438,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>C5C1111D-BE82-4505-5178-8661C15FD7FB</value>
   </title>
   <id>2</id>
   <use>

@@ -15,16 +15,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>En Üst Grup</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Шапка группа</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Top Group</value>
+     <value>6C5C1E86-41BF-E670-0D76-661F84600F2B</value>
     </title>
     <extendedTooltip>
      <name>TopGroupExtendedTooltip</name>
@@ -179,16 +171,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Üst öğe listesi grubu</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Верхняя группа списка товаров</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Item list group top</value>
+       <value>EF3770F0-09CF-E942-233E-E0E23F1D648F</value>
       </title>
       <extendedTooltip>
        <name>ItemListGroupTopExtendedTooltip</name>
@@ -366,16 +350,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>ItemList grubunun üçüncü satırı</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Третяя линия группа Товаров</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>The third line of the ItemList group</value>
+       <value>5D394C68-AEC9-0521-1BBD-D3C912FBBAB3</value>
       </title>
       <extendedTooltip>
        <name>ItemListGroupThirdRowExtendedTooltip</name>
@@ -398,16 +374,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup malzeme</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа номенклатура</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group Item</value>
+      <value>5C221997-DCCC-B36C-C864-4EBD9AA29CDC</value>
      </title>
      <extendedTooltip>
       <name>ItemListGroupItemExtendedTooltip</name>
@@ -555,16 +523,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzeme listesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Товары</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item list</value>
+    <value>C7B1B343-5930-5DB6-65EC-C5312A10FA6E</value>
    </title>
    <extendedTooltip>
     <name>PageItemListExtendedTooltip</name>
@@ -647,28 +607,12 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ek detaylar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Дополнительно</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Additional</value>
+     <value>0F531A9B-5C06-95BA-A177-7638A022C114</value>
     </title>
-    <toolTip>
-     <key>tr</key>
-     <value>Grup ekstra       </value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Дополнительная группа</value>
-    </toolTip>
     <toolTip>
      <key>en</key>
-     <value>Group additional</value>
+     <value>07B0A26F-EE06-5435-5483-38608FEF1AE3</value>
     </toolTip>
     <extendedTooltip>
      <name>GroupAdditionalExtendedTooltip</name>
@@ -685,16 +629,8 @@
      <group>HorizontalIfPossible</group>
      <behavior>Collapsible</behavior>
      <collapsedRepresentationTitle>
-      <key>tr</key>
-      <value>Ek detaylar</value>
-     </collapsedRepresentationTitle>
-     <collapsedRepresentationTitle>
-      <key>ru</key>
-      <value>Дополнительно</value>
-     </collapsedRepresentationTitle>
-     <collapsedRepresentationTitle>
       <key>en</key>
-      <value>Additional</value>
+      <value>C8AFEC04-92D0-C2FD-D0E9-9DD812C03F48</value>
      </collapsedRepresentationTitle>
      <collapsed>true</collapsed>
      <representation>WeakSeparation</representation>
@@ -956,16 +892,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Evrakları oluştur</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Создать документы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Create documents</value>
+    <value>88651AA3-98A5-BD34-4BBC-C9BC2D7EDE49</value>
    </title>
    <extendedTooltip>
     <name>PageCreateDocumentsExtendedTooltip</name>
@@ -989,16 +917,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основные страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main Pages</value>
+   <value>986658AE-0398-923E-E8D3-3C9B8A51587D</value>
   </title>
   <extendedTooltip>
    <name>MainPagesExtendedTooltip</name>
@@ -1063,16 +983,8 @@
  <attributes>
   <name>ByOneScan</name>
   <title>
-   <key>tr</key>
-   <value>Tek tek okutma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сканирование по одному</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>By one scan</value>
+   <value>1574AB0C-7D31-E309-99FE-E22A652B54EA</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1088,16 +1000,8 @@
  <attributes>
   <name>HideDecoration</name>
   <title>
-   <key>tr</key>
-   <value>Dekorasyonu gizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Спрятать картинку</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Hide decoration</value>
+   <value>E0772353-D3D2-8A9F-F1FA-A287FC3FDEB7</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1127,16 +1031,8 @@
  <formCommands>
   <name>CreateSC</name>
   <title>
-   <key>tr</key>
-   <value>Sevkiyat Onayı   </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Расходный ордер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Shipment Confirmation</value>
+   <value>79875E4B-28D4-18AD-D436-62C1568B0F58</value>
   </title>
   <id>5</id>
   <use>
@@ -1152,16 +1048,8 @@
  <formCommands>
   <name>CreateGR</name>
   <title>
-   <key>tr</key>
-   <value>Mal Kabulü       </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Приходный ордер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Goods Receipt</value>
+   <value>9EDCF96D-A7D8-EE1D-DBFE-E3CE84A6FBEB</value>
   </title>
   <id>6</id>
   <use>
@@ -1177,16 +1065,8 @@
  <formCommands>
   <name>CreateIT</name>
   <title>
-   <key>tr</key>
-   <value>Envanter Transferi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Перемещение товаров</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Inventory Transfer</value>
+   <value>ED4BD395-9DC9-71A9-9968-880EEDF5F36C</value>
   </title>
   <id>7</id>
   <use>
@@ -1202,29 +1082,13 @@
  <formCommands>
   <name>ClearItemList</name>
   <title>
-   <key>tr</key>
-   <value>Öğe listesini temizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Очистить список товаров</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Clear item list</value>
+   <value>17212107-10DD-FB1F-FE39-9356929CBAE0</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>Öğe listesini temizle</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Очистить список товаров</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Clear item list</value>
+   <value>A9D2176B-DD5C-B378-843E-E7E498129467</value>
   </toolTip>
   <use>
    <common>true</common>

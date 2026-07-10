@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dd04137a-8ec7-4e94-aa65-f7320199b0fc">
  <name>AccumulationRegisters_R3027B_EmployeeCashAdvance</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R3027B ÇalışanAvansı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R3027B АвансыСотрудникам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R3027B EmployeeCashAdvance</value>
+  <value>053C6B23-13E8-4258-80F3-353BC142071A____________</value>
  </synonym>
 </mdclass:Role>

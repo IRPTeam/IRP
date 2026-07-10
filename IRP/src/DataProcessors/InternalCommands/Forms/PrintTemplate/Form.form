@@ -40,16 +40,8 @@
  <attributes>
   <name>CommandDescription</name>
   <title>
-   <key>tr</key>
-   <value>Komut tanımı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование команды</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Command description</value>
+   <value>ED14BFBA-712B-415E-EE78-8A1007F66803</value>
   </title>
   <id>2</id>
   <valueType/>
@@ -63,16 +55,8 @@
  <attributes>
   <name>TemplateRef</name>
   <title>
-   <key>tr</key>
-   <value>Şablon referansı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка шаблона</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Template ref</value>
+   <value>663F5EA5-BA4D-7807-7C13-3984FC6238C2</value>
   </title>
   <id>3</id>
   <valueType>

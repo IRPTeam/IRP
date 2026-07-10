@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T6060S_BatchCostAllocationInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>T6060 Parti ek gider dağıtım bilgisi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T6060 Информация по распределению доп. расходов на партию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T6060 Batch cost allocation info</value>
+  <value>2626C0C8-4ED4-141A-A5D5-5507D561AEAB</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="bff4de2e-84d0-4daf-af23-457250af6d71">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>58B85CF0-A1D0-6F59-9F37-76CA4990CD9D</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -53,16 +37,8 @@
  <resources uuid="609e5eba-9db7-4b35-b549-8355385f276f">
   <name>AmountTax</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма налогов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount tax</value>
+   <value>5F2A020D-AFA6-58D8-8710-06BC3D788873</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -76,16 +52,8 @@
  <dimensions uuid="7cd20313-2980-46bc-b881-e2ba95f51a63">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>B7ADC01D-B644-F068-871F-F90CB58EF130</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -100,16 +68,8 @@
  <dimensions uuid="a30ccb8e-501c-4334-a444-205c7c52a8a1">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>F75F6AC2-21C3-0E96-66D0-0A93627B5EAE</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -124,16 +84,8 @@
  <dimensions uuid="3334f81c-18a2-41cd-8a47-33009a25b330">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>B39826E7-B084-ABE5-50C0-02503B85C8F0</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -149,16 +101,8 @@
  <dimensions uuid="6e76db97-f3f2-46d9-99f9-974529da527a">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>CCFD8A01-1F0D-94F8-8D66-67D3B70BDAA4</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -173,16 +117,8 @@
  <dimensions uuid="b39016a8-2875-49f0-a251-3b9ee439fa6b">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency movement type</value>
+   <value>C93F5B9D-963E-3559-9094-470CD41E54D8</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -197,16 +133,8 @@
  <dimensions uuid="ec741feb-5aa9-4404-95dc-51bdce1d4a77">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>72E37AE1-A5BC-D2B4-4900-08905E5130DB</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -221,16 +149,8 @@
  <dimensions uuid="aeb95fe0-49ac-4f10-ae4c-eb1189c0cff1">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>66D57104-F019-9E77-73FB-B7F97039AB54</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>

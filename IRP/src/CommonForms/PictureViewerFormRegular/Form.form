@@ -64,16 +64,8 @@
  <attributes>
   <name>PictureTempAddress</name>
   <title>
-   <key>tr</key>
-   <value>Resim geçici adres</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Временный адрес картинки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture temp address</value>
+   <value>8D371C69-BDE7-0CB6-6DFE-E59DA007038B</value>
   </title>
   <id>1</id>
   <valueType>

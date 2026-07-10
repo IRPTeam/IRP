@@ -37,16 +37,8 @@
 			<field>ShippedQuantity</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sevk adedi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>В расходном ордере</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Shipped quantity</v8:content>
+					<v8:content>C994AE2F-DCA1-DADE-EA93-37EDB9A8946F</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -81,16 +73,8 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Malzeme</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Номенклатура</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>C7E4E34B-BB87-BD39-9B73-3E2BF1F94142</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -99,16 +83,8 @@
 			<field>OrderQuantity</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sipariş adedi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество по заказу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Order quantity</v8:content>
+					<v8:content>FD6B8D71-D389-DE80-0B01-146F7E630AD7</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -117,16 +93,8 @@
 			<field>OrderAmount</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Sipariş tutarı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сумма по заказу</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Order amount</v8:content>
+					<v8:content>82160008-1DF8-1D66-6E29-98DBF8391DB2</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -135,16 +103,8 @@
 			<field>InvoicedQuantity</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество в ЭСФ</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoiced quantity</v8:content>
+					<v8:content>D23E95A5-B3EB-A6AB-BC46-67E989E96B41</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -153,16 +113,8 @@
 			<field>InvoicedAmount</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Faturalanan tutar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сумма по реализации</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoiced amount</v8:content>
+					<v8:content>B660C48D-B280-7143-39EF-F95111F7E78B</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -171,16 +123,8 @@
 			<field>CanceledQuantity</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İptal edilen miktar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Отмененное количество</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Canceled quantity</v8:content>
+					<v8:content>D2128F53-BF13-BC43-3174-4F1602F19357</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -189,16 +133,8 @@
 			<field>CanceledAmount</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İptal edilen tutar</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Отмененная сумма</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Canceled amount</v8:content>
+					<v8:content>6F4F6D25-F868-A1D9-9595-59CDC1E151B5</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -334,16 +270,8 @@ FROM
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem başı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>C54772FB-781E-1421-1427-7759E6DA642F</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -361,16 +289,8 @@ FROM
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem sonu</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Конец периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>70AB51F0-5DB3-26C3-328A-A9D3E906EA93</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -388,16 +308,8 @@ FROM
 		<name>ReportPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Rapor dönemi</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период отчета</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Report period</v8:content>
+				<v8:content>5D2D3967-8EBB-DE11-1EBF-F9F39CD12A6C</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

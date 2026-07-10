@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ExternalAccountingOperation</name>
  <synonym>
-  <key>tr</key>
-  <value>Dış muhasebe kaydı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Внешние бух. операции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>External accounting operation</value>
+  <value>77A9D7AD-3E55-262F-F91F-F4C562FDEB9B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ExternalAccountingOperation.StandardAttribute.Number</inputByString>
@@ -66,16 +58,8 @@
  <attributes uuid="c1376c16-89e2-44bc-bab5-a93a2041351a">
   <name>RecorderRef</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaydedici ref </value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ссылка регистратора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Recorder ref</value>
+   <value>5C46C480-9BE8-17ED-D75A-A95C6E85826A</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -90,16 +74,8 @@
  <attributes uuid="aa4eb62a-3b44-4124-874d-9b8c8f8deca2">
   <name>RecorderPresentation</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaydedici sunumu </value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Представление регистратора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Recorder presentation</value>
+   <value>9BAA8B36-A5FB-12B4-4EC1-1B8F8E3662FA</value>
   </synonym>
   <type>
    <types>String</types>
@@ -116,16 +92,8 @@
  <attributes uuid="1aebbf5f-fed3-48ae-935b-4bfd27821dbc">
   <name>RecorderURL</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt evrağın URL'i</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>URL регистратора </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Recorder URL</value>
+   <value>CECB54F6-BDE0-0CF9-9CE0-0794950CD142</value>
   </synonym>
   <type>
    <types>String</types>
@@ -135,25 +103,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="1b015963-2d3b-4bc4-aeb5-cf15ad263fe3">
   <name>LedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>50B9833E-C4D9-AC99-9123-3615250CD9F4</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -168,16 +126,8 @@
  <attributes uuid="f77ba85d-5dae-460c-b150-dc8ac75df28a">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>F1C6C329-91CE-617A-A40B-BF97B71C54FB</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -197,16 +147,8 @@
  <attributes uuid="563419e5-8f0d-4b23-98dc-32569176c8b6">
   <name>RecorderName</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaydedici adı </value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Наименование регистратора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Recorder name</value>
+   <value>6E5EA189-0925-EFFD-DD9E-EC876E6097AF</value>
   </synonym>
   <type>
    <types>String</types>
@@ -223,16 +165,8 @@
  <attributes uuid="e3f2fb32-7d60-48f0-8a3c-15000c6c5c77">
   <name>IsOpeningEntry</name>
   <synonym>
-   <key>tr</key>
-   <value>Açılış kaydı mı </value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ввод начальных остатков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is opening entry</value>
+   <value>8EC2BAA3-98C8-F41D-DA4D-D653AE97830A</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -246,16 +180,8 @@
  <attributes uuid="81fd9c61-7239-4451-b87c-e80c7d7b4d8b">
   <name>AccountingCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>Muhasebe dövizi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Регламентная валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Accounting currency</value>
+   <value>00793AC4-4E36-A98A-A37A-AD3931FB7484</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -269,16 +195,8 @@
  <attributes uuid="52181fb8-e1f7-49ae-a560-7bd1235b9bf9">
   <name>DocumentCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak dövizi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document currency</value>
+   <value>E7554ABE-B892-12FB-BB70-05BAFD1B51B7</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -292,16 +210,8 @@
  <forms uuid="79ee5856-dc75-430e-a3d5-dfac48f2bf78">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>C7F3217A-B8E9-03E1-1BBE-E43CB023B6CE</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -309,16 +219,8 @@
  <forms uuid="ed01191e-3f58-45f9-8ddf-88f101787e57">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>1E892FEA-AD6C-27DD-D375-59DEC85F420E</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -326,16 +228,8 @@
  <forms uuid="6582a22a-397f-4660-86c1-e873fa757680">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>5289C983-02A6-9A59-950B-B928ECA0F2F5</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -343,16 +237,8 @@
  <forms uuid="122a8ab1-bdae-41b2-8afa-1f3dcbc1b604">
   <name>RowForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма строка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row form</value>
+   <value>76B60504-90ED-BBF5-5F86-6F2A4058178F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -364,30 +250,14 @@
   </producedTypes>
   <name>Records</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıtlar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Проводки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Records</value>
+   <value>C9392E01-1E27-93FD-D3B9-9FC699B93943</value>
   </synonym>
   <attributes uuid="b0c68528-a384-4d25-b66b-ea6537955c1d">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>6F68D19B-0BEB-E0FE-E6E0-0BF245955109</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -400,16 +270,8 @@
   <attributes uuid="baabf376-724b-4048-8338-47c4eaddc276">
    <name>Period</name>
    <synonym>
-    <key>tr</key>
-    <value>Dönem</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Период</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Period</value>
+    <value>BAB0454D-8F71-1712-2CFD-DC2B13837138</value>
    </synonym>
    <type>
     <types>Date</types>
@@ -423,16 +285,8 @@
   <attributes uuid="84f0e255-c3d1-4d7e-82ff-8a47c797830e">
    <name>Activity</name>
    <synonym>
-    <key>tr</key>
-    <value>Aktivite </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Активность</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Activity</value>
+    <value>0C07EC25-EC09-BE06-67C7-747665D62AC6</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -445,16 +299,8 @@
   <attributes uuid="878e1562-5a5f-4b27-bc44-0c8832b2a081">
    <name>CompanyRef</name>
    <synonym>
-    <key>tr</key>
-    <value>Şirket ref </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Организация ссылка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Company ref</value>
+    <value>A80F9794-14F6-0D20-059F-FCB47D3B485E</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -467,16 +313,8 @@
   <attributes uuid="f71c15b6-cab2-4b88-948a-d9106ac327a8">
    <name>CompanyPresentation</name>
    <synonym>
-    <key>tr</key>
-    <value>Şirket sunumu </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Организация представление</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Company presentation</value>
+    <value>4C7163F6-C3EB-14E3-35A8-8501C03A14E2</value>
    </synonym>
    <type>
     <types>String</types>
@@ -492,16 +330,8 @@
   <attributes uuid="7e5a6c01-60c4-46f2-a327-7094abda61cc">
    <name>Company</name>
    <synonym>
-    <key>tr</key>
-    <value>Şirket</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Организация</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Company</value>
+    <value>3BEA5F0F-3FD6-547E-EDA5-5484AE94E007</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
@@ -514,16 +344,8 @@
   <attributes uuid="4a195c1e-67b8-40e2-acd7-1d4f46ea47ca">
    <name>CurrencyRef</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi ref </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валюта ссылка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency ref</value>
+    <value>C914D4F8-B0FE-B97C-C90A-A7036354F31C</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -536,16 +358,8 @@
   <attributes uuid="507fb5ea-4ad6-456e-b21c-6b4a5b6a8f9d">
    <name>CurrencyPresentation</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi sunumu</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валта представление</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency presentation</value>
+    <value>644124C4-8C69-5AC9-9FEB-BCCEF54B2065</value>
    </synonym>
    <type>
     <types>String</types>
@@ -561,16 +375,8 @@
   <attributes uuid="2f8db63d-e57b-4aaf-b49f-28af5c58b4c8">
    <name>Currency</name>
    <synonym>
-    <key>tr</key>
-    <value>Döviz</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валюта</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency</value>
+    <value>84546BD9-206D-2EA5-5881-1D95006AF5D0</value>
    </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
@@ -583,16 +389,8 @@
   <attributes uuid="2a47b4e6-1b5d-48cf-a608-412596e1f786">
    <name>AccountDrRef</name>
    <synonym>
-    <key>tr</key>
-    <value>Hesap Borç ref </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Счет Дт Ссылка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Account Dr ref</value>
+    <value>0C50856E-C209-FD3E-E418-8735DF7CAE03</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -605,16 +403,8 @@
   <attributes uuid="64b46f4d-1865-4850-a767-3cc4b2ca8c90">
    <name>AccountDrPresentation</name>
    <synonym>
-    <key>tr</key>
-    <value>Hesap Borç sunumu </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Счет Дт представление</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Account Dr presentation</value>
+    <value>89F03C34-1EAA-739A-AC3D-D217E4646C99</value>
    </synonym>
    <type>
     <types>String</types>
@@ -630,16 +420,8 @@
   <attributes uuid="16840753-cdef-4dca-939a-5db855077d58">
    <name>AccountDr</name>
    <synonym>
-    <key>tr</key>
-    <value>Hesap Borç </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Счет Дт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Account Dr</value>
+    <value>25241830-13D0-C04C-C35D-DB56EE792E8C</value>
    </synonym>
    <type>
     <types>ChartOfAccountsRef.Basic</types>
@@ -652,16 +434,8 @@
   <attributes uuid="ec60d261-509a-452f-839b-7b7c651ad1b9">
    <name>CurrencyDrRef</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi Borç ref </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валюта Дт ссылка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency Dr ref</value>
+    <value>DFC8AA36-ED10-442D-D4A7-7ACC479092C0</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -674,16 +448,8 @@
   <attributes uuid="68465cc1-caf9-4a92-a7d7-631ccdd0db1d">
    <name>CurrencyDrPresentation</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi Borç sunumu </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валюта Дт представление</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency Dr presentation</value>
+    <value>5CFF0192-9EA8-D097-758E-E9598E712425</value>
    </synonym>
    <type>
     <types>String</types>
@@ -699,16 +465,8 @@
   <attributes uuid="cbaed439-a00c-4ed9-9247-7cb3697f940c">
    <name>CurrencyDr</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi Borç </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валюта Дт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency Dr</value>
+    <value>A4EDB548-2F12-3EBD-DFD0-095730B67030</value>
    </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
@@ -721,16 +479,8 @@
   <attributes uuid="6da0874a-cc7e-47fe-9d98-6e9a25c2d7f7">
    <name>AmountCurrencyDr</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi Borç Tutarı </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валютная сумма Дт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Amount currency Dr</value>
+    <value>ECE0DAF4-4953-7113-3A72-2AB290AD6E0D</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -743,16 +493,8 @@
   <attributes uuid="d805f9b1-0292-481e-a666-5f48af541632">
    <name>QuantityDr</name>
    <synonym>
-    <key>tr</key>
-    <value>Borç miktarı</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Количество Дт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Quantity Dr</value>
+    <value>B53615CA-18D2-4E55-59E9-985BD3F29C59</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -765,16 +507,8 @@
   <attributes uuid="b3b59d1f-eaec-47e2-b9f2-996895a87f2f">
    <name>AccountCrRef</name>
    <synonym>
-    <key>tr</key>
-    <value>Hesap Alacak ref </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Счет Кт Ссылка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Account Cr ref</value>
+    <value>6ACBBB98-50D7-168E-EA76-6EC2DB1E5086</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -787,16 +521,8 @@
   <attributes uuid="339e5cfb-2569-415d-8502-83e48932fa1e">
    <name>AccountCrPresentation</name>
    <synonym>
-    <key>tr</key>
-    <value>Hesap Alacak sunumu </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Счет Кт представление</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Account Cr presentation</value>
+    <value>0569C085-DA16-9538-8DFC-CE9CD016321B</value>
    </synonym>
    <type>
     <types>String</types>
@@ -812,16 +538,8 @@
   <attributes uuid="4c3b7923-dc29-412e-be4a-2c54be04df0f">
    <name>AccountCr</name>
    <synonym>
-    <key>tr</key>
-    <value>Hesap Alacak </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Счет Кт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Account Cr</value>
+    <value>797D0BFE-DF07-E893-3035-5A71AD1B6E8D</value>
    </synonym>
    <type>
     <types>ChartOfAccountsRef.Basic</types>
@@ -834,16 +552,8 @@
   <attributes uuid="5c4e1212-8a12-4e64-ac57-0f31137bca3a">
    <name>CurrencyCrRef</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi Alacak ref </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валюта Кт ссылка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency Cr ref</value>
+    <value>3C3F6F79-C2F4-46E2-2AB0-0D3839240EE8</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -856,16 +566,8 @@
   <attributes uuid="e19d62f1-1147-48d3-bad0-caa81ff2b3f2">
    <name>CurrencyCrPresentation</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi Alacak sunumu </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валюта Кт представление</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency Cr presentation</value>
+    <value>4088CB2F-3CA1-F69C-C6F3-39272B8D1739</value>
    </synonym>
    <type>
     <types>String</types>
@@ -881,16 +583,8 @@
   <attributes uuid="d9e5a6af-3d6a-4eef-921a-969740a343af">
    <name>CurrencyCr</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi Alacak </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валюта Кт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency Cr</value>
+    <value>9F94E250-28D7-67DA-A7C9-9C6C192FC4F7</value>
    </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
@@ -903,16 +597,8 @@
   <attributes uuid="0f562d87-0a14-4ab3-aebd-efb6e4d2e231">
    <name>AmountCurrencyCr</name>
    <synonym>
-    <key>tr</key>
-    <value>Para birimi Alacak Tutarı </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Валютная сумма Кт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Amount currency Cr</value>
+    <value>E24D82FF-7996-A554-4E2B-BE0C2A30898F</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -925,16 +611,8 @@
   <attributes uuid="fa9f268a-68d3-44ab-b189-1f28fee7eef8">
    <name>QuantityCr</name>
    <synonym>
-    <key>tr</key>
-    <value>Miktar Alacak </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Количество Кт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Quantity Cr</value>
+    <value>68D9D848-52E7-4E45-5BA8-866CD1926471</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -947,16 +625,8 @@
   <attributes uuid="43c78f26-032d-4791-b9ea-2a263d5652a2">
    <name>Amount</name>
    <synonym>
-    <key>tr</key>
-    <value>Tutar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Сумма</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Amount</value>
+    <value>ED17421F-F20F-F945-5D49-992C598DC116</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -969,16 +639,8 @@
   <attributes uuid="4424f11c-e1fc-43c5-9adf-2578d61b9269">
    <name>OperationTitle</name>
    <synonym>
-    <key>tr</key>
-    <value>Operasyon başlığı </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Наименование операции</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Operation title</value>
+    <value>8FD9878E-6B51-4542-2ECF-F33737B5A398</value>
    </synonym>
    <type>
     <types>String</types>
@@ -994,16 +656,8 @@
   <attributes uuid="5c641c16-4e41-47a9-b99d-a4fc40013914">
    <name>ChartNameDr</name>
    <synonym>
-    <key>tr</key>
-    <value>Grafik adı Borç </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Наименование плана счетов Дт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Chart name Dr</value>
+    <value>1C7E7B16-8A34-C300-081F-F43B5106D851</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1019,16 +673,8 @@
   <attributes uuid="8e4c39ed-a93c-48bf-9b4a-e53ba0b32e74">
    <name>ChartNameCr</name>
    <synonym>
-    <key>tr</key>
-    <value>Grafik adı Alacak </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Наименование плана счетов Кт</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Chart name Cr</value>
+    <value>D5D5591C-4746-2A4A-A9E6-664715D32694</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1044,16 +690,8 @@
   <attributes uuid="35ac0b0d-cd38-487c-b454-d3f79d7e392b">
    <name>ExtDimensionRefDr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut ref borç1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ссылка субконто Дт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension ref dr1</value>
+    <value>08E0ED6D-26FA-E309-9C86-6D0CBE590F2D</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1065,16 +703,8 @@
   <attributes uuid="b4ad9432-ce30-4e77-a43d-8927a74d60d6">
    <name>BaseClassDr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Temel sınıf borç1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс основания Дт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Base class dr1</value>
+    <value>5C598D27-E274-82EF-FD7A-ACD987210437</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1090,16 +720,8 @@
   <attributes uuid="7d5f83ce-0a58-4a98-844c-b6825bdc7206">
    <name>ClassDr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Sınıf borç1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс Дт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Class dr1</value>
+    <value>76FE86E5-E216-FB11-1343-3C83A5645BA3</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1115,16 +737,8 @@
   <attributes uuid="c7e1452b-861a-49b5-8f51-48e2b60de4cf">
    <name>ExtDimensionValueDr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut değeri borç1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Дт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension value dr1</value>
+    <value>6BD57A8E-3BED-72CD-D057-77556DFB95AE</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1140,16 +754,8 @@
   <attributes uuid="9c553d35-f7f0-4b2a-9c26-3bd0148d587d">
    <name>ExtDimensionTypeDr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut türü borç1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид субконто Дт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension type dr1</value>
+    <value>EBBBB1CC-F2CA-42FE-E565-59C9BC51093E</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1162,16 +768,8 @@
   <attributes uuid="b59912f5-8809-4b35-9b15-5c901c85de6d">
    <name>InternalBaseClassDr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili temel sınıf borç1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс внутреннего основания Дт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal base class dr1</value>
+    <value>23BDE3E6-7651-BD80-06FD-D8819A52B0E8</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1187,16 +785,8 @@
   <attributes uuid="35174b20-abd2-496c-96a1-19df3e25079a">
    <name>InternalClassDr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili sınıf borç1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Внутренний класс Дт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal class dr1</value>
+    <value>09C2D8F0-4FCC-5284-4212-2D629088D517</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1212,16 +802,8 @@
   <attributes uuid="745919c5-3654-4ba4-9977-a24957a63494">
    <name>InternalExtDimensionValueDr1</name>
    <synonym>
-    <key>tr</key>
-    <value>ek. boyut değeri Borç1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Дт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>ext. dimension value Dr1</value>
+    <value>9C0FC6BB-D213-3FAD-D247-7FE891867DC6</value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1234,16 +816,8 @@
   <attributes uuid="cee4592a-0573-44ac-9a67-4f798657b068">
    <name>ExtDimensionRefDr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut ref borç2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ссылка субконто Дт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension ref dr2</value>
+    <value>E271F484-DEF6-1F86-648E-E363CC7FEA3C</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1255,16 +829,8 @@
   <attributes uuid="e61c086f-77b4-4c56-9cb1-9e74e0e50edb">
    <name>BaseClassDr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Temel sınıf borç2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс основания Дт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Base class dr2</value>
+    <value>46BB4A1B-24AE-8E82-23BF-F7642F036586</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1280,16 +846,8 @@
   <attributes uuid="9bcf89ea-fd13-4c4d-86d3-eef83ee0640b">
    <name>ClassDr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Sınıf borç2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс Дт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Class dr2</value>
+    <value>FD30772A-B509-1F8A-A196-6DCF86DA9A93</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1305,16 +863,8 @@
   <attributes uuid="58ccffb8-0f31-4e17-b4f7-713ad952c238">
    <name>ExtDimensionValueDr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut değeri borç2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Дт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension value dr2</value>
+    <value>C7070602-17B6-1585-577E-E416F01D3C72</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1330,16 +880,8 @@
   <attributes uuid="dc83fa89-f27a-4be9-bcb3-427e51b91e55">
    <name>ExtDimensionTypeDr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut türü borç2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид субконто Дт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension type dr2</value>
+    <value>300B817D-B8BA-221F-F49D-D840E96095CA</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1352,16 +894,8 @@
   <attributes uuid="269582bd-78f4-4510-85db-d23e94c83964">
    <name>InternalBaseClassDr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili temel sınıf borç2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс внутреннего основания Дт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal base class dr2</value>
+    <value>D17FA1C8-FE9D-20FF-F84E-EFF92BE22B55</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1377,16 +911,8 @@
   <attributes uuid="fd950a1b-aa24-406c-920d-3ea79047766a">
    <name>InternalClassDr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili sınıf borç2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Внутренний класс Дт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal class dr2</value>
+    <value>298529B0-090C-D0F0-0C0E-E29C3905D715</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1402,16 +928,8 @@
   <attributes uuid="9a9a4e2b-0bbb-440f-84ae-bffb1f0d2667">
    <name>InternalExtDimensionValueDr2</name>
    <synonym>
-    <key>tr</key>
-    <value>ek. boyut değeri Borç2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Дт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>ext. dimension value Dr2</value>
+    <value>7C7FF971-A84F-335B-BD5D-DD7E992E0383</value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1424,16 +942,8 @@
   <attributes uuid="d46eefb3-7f9a-4ef3-a439-b55cc3f53830">
    <name>ExtDimensionRefDr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut ref borç3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ссылка субконто Дт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension ref dr3</value>
+    <value>9C795434-C2CF-F5D8-803F-F1AEF731B0EF</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1445,16 +955,8 @@
   <attributes uuid="a04c3fdd-cfc9-402a-a06b-3bf935c9f95c">
    <name>BaseClassDr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Temel sınıf borç3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс основания Дт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Base class dr3</value>
+    <value>FE1C10C7-AB29-23BD-DE1A-A06786BF21A3</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1470,16 +972,8 @@
   <attributes uuid="61ba105b-aa53-463d-901b-14379655e630">
    <name>ClassDr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Sınıf borç3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс Дт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Class dr3</value>
+    <value>6B677A28-E1D4-912B-BC54-49A5A2C9839C</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1495,16 +989,8 @@
   <attributes uuid="7b2778d4-24d9-4415-9e7f-aa70400d4726">
    <name>ExtDimensionValueDr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut değeri borç3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Дт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension value dr3</value>
+    <value>DD8ABDE3-BFCF-E0C5-5808-8D68BA80035D</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1520,16 +1006,8 @@
   <attributes uuid="4a395b56-0f7c-47ab-91ad-4b9898920f5e">
    <name>ExtDimensionTypeDr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut türü borç3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид субконто Дт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension type dr3</value>
+    <value>B86310B6-B26A-3B74-4960-00EF840DE2BA</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1542,16 +1020,8 @@
   <attributes uuid="ad8c458e-65ba-4c34-aa6d-ce3044cb14dd">
    <name>InternalBaseClassDr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili temel sınıf borç3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс внутреннего основания Дт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal base class dr3</value>
+    <value>BACF5527-F66A-53D8-8F29-920BF88CB3A3</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1567,16 +1037,8 @@
   <attributes uuid="c78fed4d-eb16-4148-aa43-ecb6706c0f9e">
    <name>InternalClassDr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili sınıf borç3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Внутренний класс Дт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal class dr3</value>
+    <value>FC1B95E6-B428-CD44-4906-6A0580B15DD4</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1592,16 +1054,8 @@
   <attributes uuid="5f6703f8-41a6-4d75-8790-0746ccdd19f9">
    <name>InternalExtDimensionValueDr3</name>
    <synonym>
-    <key>tr</key>
-    <value>ek. boyut değeri Borç3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Дт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>ext. dimension value Dr3</value>
+    <value>438B0ED9-144B-A52F-FBA9-9D58E471AA96</value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1614,16 +1068,8 @@
   <attributes uuid="f03f8cac-ead0-449c-baaa-10e993ce3bda">
    <name>ExtDimensionRefCr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut ref alacak1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ссылка субконто Кт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension ref cr1</value>
+    <value>91E965AC-6B58-6BE5-54EF-F30363873D74</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1635,16 +1081,8 @@
   <attributes uuid="8cb53629-02de-492e-aed8-d94105f36bd8">
    <name>BaseClassCr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Temel sınıf alacak1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс основания Кт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Base class cr1</value>
+    <value>760C4938-BD9F-1192-2ACA-AF4A4BB65021</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1660,16 +1098,8 @@
   <attributes uuid="f9c581d0-7bd9-46d9-8c69-0b08f06215b7">
    <name>ClassCr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Sınıf alacak1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс Кт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Class cr1</value>
+    <value>586F83D6-A07C-68FB-B791-16FCCBE99A2F</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1685,16 +1115,8 @@
   <attributes uuid="5cb45627-e4fa-4330-98db-834b976af9ce">
    <name>ExtDimensionValueCr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut değeri alacak1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Кт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension value cr1</value>
+    <value>28BFACA9-F04B-E300-016B-B10C2357FE7A</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1710,16 +1132,8 @@
   <attributes uuid="fb740310-efb2-4e8a-b3ce-4efbf29af31f">
    <name>ExtDimensionTypeCr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut türü alacak1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид субконто Кт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension type cr1</value>
+    <value>C2E58F46-111C-B65C-CA50-04A2BC28B9A2</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1732,16 +1146,8 @@
   <attributes uuid="f49c36f9-cf2d-48ae-98b1-9c37375ba3a7">
    <name>InternalBaseClassCr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili temel sınıf alacak1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс внутреннего основания Кт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal base class cr1</value>
+    <value>54D1342E-B4A6-17FE-E48F-F2B8D889A15C</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1757,16 +1163,8 @@
   <attributes uuid="bc485950-d9a8-4919-ba44-b3a699d33862">
    <name>InternalClassCr1</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili sınıf alacak1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Внутренний класс Кт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal class cr1</value>
+    <value>02E53257-1DA9-3CDD-D865-56071386311E</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1782,16 +1180,8 @@
   <attributes uuid="ae9976c9-a4ba-4a08-8fdf-fc56ffde5e57">
    <name>InternalExtDimensionValueCr1</name>
    <synonym>
-    <key>tr</key>
-    <value>ek. boyut değeri Alacak1 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Кт 1</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>ext. dimension value Cr1</value>
+    <value>BA246E39-F148-B509-962C-C0AFFC5C299C</value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1804,16 +1194,8 @@
   <attributes uuid="0d74560c-9db5-4d70-908f-045f12512809">
    <name>ExtDimensionRefCr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut ref alacak2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ссылка субконто Кт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension ref cr2</value>
+    <value>93168701-ECA7-88A3-3BB1-114F45F77918</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1825,16 +1207,8 @@
   <attributes uuid="9e18a67c-40a2-49f1-b242-12aa9a5e2840">
    <name>BaseClassCr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Temel sınıf alacak2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс основания Кт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Base class cr2</value>
+    <value>F29BB6C4-46D2-A0A1-121E-EC068CC0BA35</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1850,16 +1224,8 @@
   <attributes uuid="2ea767ca-e439-4e15-9859-9df71e9cd09a">
    <name>ClassCr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Sınıf alacak2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс Кт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Class cr2</value>
+    <value>D23D3BAC-A675-A405-5A7E-E63FADF8CFEF</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1875,16 +1241,8 @@
   <attributes uuid="8886a9ac-563e-4021-abeb-ef84a8fe624a">
    <name>ExtDimensionValueCr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut değeri alacak2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Кт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension value cr2</value>
+    <value>B0FE56FB-AB44-DDE7-7C40-05B2DEF1EAB0</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1900,16 +1258,8 @@
   <attributes uuid="c85097b5-e7ef-401c-85b2-edbdf45bf6dc">
    <name>ExtDimensionTypeCr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut türü alacak2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид субконто Кт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension type cr2</value>
+    <value>C082A674-42C3-993A-A03D-D61A731D3D9C</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1922,16 +1272,8 @@
   <attributes uuid="1dd00be9-e11e-4e8e-b752-a767dffdaedd">
    <name>InternalBaseClassCr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili temel sınıf alacak2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс внутреннего основания Кт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal base class cr2</value>
+    <value>C5B56F2C-3D7E-828E-E591-11DDBEF4287F</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1947,16 +1289,8 @@
   <attributes uuid="8901eb14-431b-4dff-b800-b47c9a75389c">
    <name>InternalClassCr2</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili sınıf alacak2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Внутренний класс Кт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal class cr2</value>
+    <value>7727D492-6376-A7B0-09CE-E19E63714772</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1972,16 +1306,8 @@
   <attributes uuid="bb6190c8-9cc5-4d2e-9823-79fd1077237e">
    <name>InternalExtDimensionValueCr2</name>
    <synonym>
-    <key>tr</key>
-    <value>ek. boyut değeri Alacak2 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Кт 2</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>ext. dimension value Cr2</value>
+    <value>BD937687-A879-31DB-BF77-7B63E7013942</value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1994,16 +1320,8 @@
   <attributes uuid="4a2249bb-6eac-42c4-9d27-97d8c9267d38">
    <name>ExtDimensionRefCr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut ref alacak3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ссылка субконто Кт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension ref cr3</value>
+    <value>3D052A0A-70C7-412A-A924-44E579E5DC30</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -2015,16 +1333,8 @@
   <attributes uuid="0d0e0d36-0ae4-4af5-bebb-49d05bde0ff2">
    <name>BaseClassCr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Temel sınıf alacak3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс основания Кт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Base class cr3</value>
+    <value>8CBA9308-42E3-3E3C-C89B-BDD39FD96730</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2040,16 +1350,8 @@
   <attributes uuid="aeed7e39-04a2-469b-a649-4f14a46a2677">
    <name>ClassCr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Sınıf alacak3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс Кт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Class cr3</value>
+    <value>08A3059B-E3DF-F77B-BD41-155701669ECB</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2065,16 +1367,8 @@
   <attributes uuid="9a444f10-d9c0-4437-a323-fa6ec7f17303">
    <name>ExtDimensionValueCr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut değeri alacak3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Кт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension value cr3</value>
+    <value>05D25792-E969-0991-11E1-182BAE953E64</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2090,16 +1384,8 @@
   <attributes uuid="36663361-ab8c-4d18-a955-64abe36a2ac0">
    <name>ExtDimensionTypeCr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Ek boyut türü alacak3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид субконто Кт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Ext dimension type cr3</value>
+    <value>3DB23F27-B080-DCDF-F22F-F96031E386D0</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -2112,16 +1398,8 @@
   <attributes uuid="e30dfa85-f273-4708-985b-64c7950439a4">
    <name>InternalBaseClassCr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili temel sınıf alacak3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Класс внутреннего основания Кт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal base class cr3</value>
+    <value>47104931-0B9D-57A3-34C6-6805F0211F60</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2137,16 +1415,8 @@
   <attributes uuid="4177785a-d287-4173-8337-4b89fa678bba">
    <name>InternalClassCr3</name>
    <synonym>
-    <key>tr</key>
-    <value>Dahili sınıf alacak3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Внутренний класс Кт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Internal class cr3</value>
+    <value>6A34FC44-6811-F021-1183-3C5776A28A55</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2162,16 +1432,8 @@
   <attributes uuid="d9f59bfe-6d00-49c7-89e0-c47348750419">
    <name>InternalExtDimensionValueCr3</name>
    <synonym>
-    <key>tr</key>
-    <value>ek. boyut değeri Alacak3 </value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение субконто Кт 3</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>ext. dimension value Cr3</value>
+    <value>327B29F2-D9C0-32EA-A3F1-1C3BCA7C9877</value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -2189,30 +1451,14 @@
   </producedTypes>
   <name>Currencies</name>
   <synonym>
-   <key>tr</key>
-   <value>Dövizler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currencies</value>
+   <value>08F1CF5C-8018-15B6-6B11-1D00D04BC1FD</value>
   </synonym>
   <attributes uuid="4617ab59-ecd5-4fd9-a747-6b7377edf54b">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Key</value>
+    <value>5DD292E1-8A56-A137-76D5-587DAFDE068F</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -2225,16 +1471,8 @@
   <attributes uuid="aec37176-c69d-47f3-b6cc-f968c93a9d38">
    <name>CurrencyFrom</name>
    <synonym>
-    <key>tr</key>
-    <value>Dövizden</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>С валюты</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Currency from</value>
+    <value>58AB8018-2224-F771-10D2-2CF1321EF401</value>
    </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
@@ -2247,16 +1485,8 @@
   <attributes uuid="8b71e479-f92b-4e3d-a29b-35f0bc4ea3b9">
    <name>Rate</name>
    <synonym>
-    <key>tr</key>
-    <value>Oran</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ставка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Rate</value>
+    <value>2C388CC2-3588-9CB3-31CE-E2AAC6B275BE</value>
    </synonym>
    <type>
     <types>DefinedType.typeCurrencyRate</types>
@@ -2269,16 +1499,8 @@
   <attributes uuid="a7d00681-fa42-41e4-95f9-65ed7af605c8">
    <name>ReverseRate</name>
    <synonym>
-    <key>tr</key>
-    <value>Ters kur</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Обратный курс</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Reverse rate</value>
+    <value>2472B745-702E-C3DF-FF03-3C54E7B600C1</value>
    </synonym>
    <type>
     <types>DefinedType.typeCurrencyRate</types>
@@ -2291,16 +1513,8 @@
   <attributes uuid="37ec6a13-aa94-40c7-bb2e-d7d7552859cf">
    <name>ShowReverseRate</name>
    <synonym>
-    <key>tr</key>
-    <value>Ters kur göster</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Показать обратный курс</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Show reverse rate</value>
+    <value>A5136914-546F-F390-00FE-E3EEF844F1D2</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -2313,16 +1527,8 @@
   <attributes uuid="751b0cd7-e5c1-4021-b349-d5d007435a52">
    <name>Multiplicity</name>
    <synonym>
-    <key>tr</key>
-    <value>Çarpan</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Кратность</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Multiplicity</value>
+    <value>FB1E6FD5-3D16-6D2B-B957-7466EA3964AC</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -2338,16 +1544,8 @@
   <attributes uuid="2f075576-132b-46de-8d2a-dff542e7648d">
    <name>MovementType</name>
    <synonym>
-    <key>tr</key>
-    <value>Hareket tipi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид движения</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Movement type</value>
+    <value>02B05FB8-C771-8456-68BE-E8D236708C58</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -2360,16 +1558,8 @@
   <attributes uuid="10a87085-66ad-4793-a7be-19e01b2bd1ed">
    <name>Amount</name>
    <synonym>
-    <key>tr</key>
-    <value>Tutar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Сумма</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Amount</value>
+    <value>494DC67A-56A2-E8EE-EAB5-58599E470BB9</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -2382,16 +1572,8 @@
   <attributes uuid="d768b8a4-4418-41c1-9067-7eac6469fafa">
    <name>IsFixed</name>
    <synonym>
-    <key>tr</key>
-    <value>Sabittir</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Фиксированный</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Is fixed</value>
+    <value>FDBE211F-8563-C751-1494-4DD3378A548F</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -2409,30 +1591,14 @@
   </producedTypes>
   <name>Errors</name>
   <synonym>
-   <key>tr</key>
-   <value>Hatalar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ошибки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Errors</value>
+   <value>50218EF6-C0AE-E986-67B8-8E8F24AADA8D</value>
   </synonym>
   <attributes uuid="720d3e81-f200-4968-9984-7b88aa877680">
    <name>Error</name>
    <synonym>
-    <key>tr</key>
-    <value>Hata</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ошибка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Error</value>
+    <value>491F7E3B-7B9A-89C5-562B-B7F0DD6602CE</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2453,30 +1619,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>9055216F-A65E-3A1D-D38A-A8D825909123</value>
   </synonym>
   <attributes uuid="b63c0e07-5aa3-4568-8be6-c00fd8e5668b">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>E1CA0A74-BE85-651F-F72E-E6CD4E98D3FD</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -2488,16 +1638,8 @@
   <attributes uuid="6f4031e5-d1a6-4308-856c-2e7ddb33d991">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>BCC37007-A775-7E10-0C53-374ED75BDC77</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -2514,16 +1656,8 @@
  <templates uuid="545b6b97-400a-44c4-a5fe-d9099f8192e6">
   <name>EntryTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон записи </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Entry template</value>
+   <value>AF5383A1-7AA8-D3B0-0F61-140459FDEDA9</value>
   </synonym>
  </templates>
 </mdclass:Document>

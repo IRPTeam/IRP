@@ -7,62 +7,30 @@
  </producedTypes>
  <name>TypeExternalObject</name>
  <synonym>
-  <key>tr</key>
-  <value>Dış öbje tipi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Вид внешнего объекта</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type external object</value>
+  <value>73A81D7B-A4ED-5564-40AA-ABD6E220B027</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="401ac063-5a3f-4116-91fe-8817ced8947e">
   <name>Extension</name>
   <synonym>
-   <key>tr</key>
-   <value>Uzantı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расширение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Extension</value>
+   <value>75AC927B-1A40-F9D4-4298-82B68A005F3A</value>
   </synonym>
  </enumValues>
  <enumValues uuid="2931f186-90f6-4b67-8994-b30b800ab7b2">
   <name>DataProcessor</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri işlemci</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Внешняя обработка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Data processor</value>
+   <value>4541C4C9-725D-5BCE-E66B-B9907A28F82F</value>
   </synonym>
  </enumValues>
  <enumValues uuid="f0a63691-762e-45f7-a9aa-3a5b7378beb4">
   <name>Report</name>
   <synonym>
-   <key>tr</key>
-   <value>Rapor</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Report</value>
+   <value>165D5FE1-6496-398D-DC6B-B9C71E675789</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

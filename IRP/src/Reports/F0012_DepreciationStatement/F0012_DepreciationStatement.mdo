@@ -6,32 +6,16 @@
  </producedTypes>
  <name>F0012_DepreciationStatement</name>
  <synonym>
-  <key>tr</key>
-  <value>Amortisman raporu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Ведомость по амортизации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Depreciation statement</value>
+  <value>593CC0F9-40CE-610E-E58E-EC1ED10623BC</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.F0012_DepreciationStatement.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="4ebbd589-6f66-4c53-8d37-ab0f36243645">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>923DE340-BEA8-8017-74BF-F85F9E296E40</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

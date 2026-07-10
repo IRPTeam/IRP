@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseAdditionalSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Ek ayarlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать дополнительные настройки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use additional settings</value>
+  <value>E22095B4-EC49-24FB-B680-0064184D93E0</value>
  </synonym>
  <type>
   <types>Boolean</types>

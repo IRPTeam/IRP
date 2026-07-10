@@ -57,28 +57,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Gösterge Paneli</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Панель мониторинга</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Dashboard</value>
+    <value>4D0137FD-544C-E063-39DF-F7A65AD763C9</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Gösterge Paneli gruplandır</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа (панель мониторинга)</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group dashboard</value>
+    <value>3822C590-1A55-227A-A735-5604B7545865</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupDashboardExtendedTooltip</name>
@@ -509,28 +493,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Прочее</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>9022428B-F7B1-8646-631B-B9EAE025AF47</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup diğer</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа дополнительно</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group other</value>
+    <value>8F47976C-6C7D-6D4A-A38A-AB5143ECA643</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -554,28 +522,12 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana sayfaklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основные страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main pages</value>
+   <value>79642D73-6698-DBFC-C789-9F8E59DE8A27</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>A6AF3503-1CCF-EB0C-CC5F-F46BE421D891</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -677,16 +629,8 @@
  <attributes>
   <name>html</name>
   <title>
-   <key>tr</key>
-   <value>Html</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Html</value>
+   <value>3E38F8A4-97B2-0177-7686-667BE347B5B5</value>
   </title>
   <id>2</id>
   <valueType>
@@ -703,16 +647,8 @@
  <attributes>
   <name>WidgetSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ekran aracı ayarları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки виджета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Widget settings</value>
+   <value>80B698CC-98F3-1E5C-C05D-D065C2E70752</value>
   </title>
   <id>3</id>
   <valueType>
@@ -727,16 +663,8 @@
   <columns>
    <name>WidgetName</name>
    <title>
-    <key>tr</key>
-    <value>Ekran aracı adı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование виджета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Widget name</value>
+    <value>0166E877-A673-C33E-E61D-D776934D7292</value>
    </title>
    <id>1</id>
    <valueType>
@@ -753,16 +681,8 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>4DBA9BC9-604B-D223-331D-DD2F3E6265A8</value>
    </title>
    <id>2</id>
    <valueType>
@@ -779,16 +699,8 @@
   <columns>
    <name>Enabled</name>
    <title>
-    <key>tr</key>
-    <value>Etkin</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Включено</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Enabled</value>
+    <value>2D7FCB11-DDBE-3AB9-9FB5-50E59378D85C</value>
    </title>
    <id>3</id>
    <valueType>
@@ -804,16 +716,8 @@
   <columns>
    <name>ID</name>
    <title>
-    <key>tr</key>
-    <value>ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>ID</value>
+    <value>A649E40F-0728-33A5-5640-033EF62FAC3F</value>
    </title>
    <id>4</id>
    <valueType>
@@ -830,16 +734,8 @@
   <columns>
    <name>Json</name>
    <title>
-    <key>tr</key>
-    <value>Json</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>JSON</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Json</value>
+    <value>179E8008-381E-23C9-9F7B-BE1C06DAF496</value>
    </title>
    <id>5</id>
    <valueType>
@@ -856,16 +752,8 @@
   <columns>
    <name>IndicatorName</name>
    <title>
-    <key>tr</key>
-    <value>Göstergenin ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование индикатора</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Indicator name</value>
+    <value>BFAEC14E-F323-CF32-2C69-9B1A89EEBC74</value>
    </title>
    <id>6</id>
    <valueType>
@@ -882,16 +770,8 @@
   <columns>
    <name>SectionName</name>
    <title>
-    <key>tr</key>
-    <value>Bölüm adı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование аналитики</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Section name</value>
+    <value>D491B0C2-EE94-5796-626C-C10C3C5FAAC0</value>
    </title>
    <id>7</id>
    <valueType>
@@ -909,29 +789,13 @@
  <formCommands>
   <name>Refresh</name>
   <title>
-   <key>tr</key>
-   <value>Yenile</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Refresh</value>
+   <value>5E44EBB1-6FA2-7148-8631-134F8531A203</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yenile</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Обновить</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Refresh</value>
+   <value>7EA517AF-DADF-60EB-B246-6248A177A038</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -950,29 +814,13 @@
  <formCommands>
   <name>Configure</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настроить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Configure</value>
+   <value>67F71464-907F-52C2-2D99-9AB92DC42643</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Настроить</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Configure</value>
+   <value>1415A8EF-1108-ABB7-79E0-06561F1DA6DF</value>
   </toolTip>
   <use>
    <common>true</common>

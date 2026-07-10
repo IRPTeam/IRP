@@ -249,16 +249,8 @@
  <attributes>
   <name>Executor</name>
   <title>
-   <key>tr</key>
-   <value>Sorumlu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Исполнитель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Executor</value>
+   <value>5B0B2F37-62CE-B334-4EAD-DAE0EDF677DA</value>
   </title>
   <id>1</id>
   <valueType>
@@ -274,16 +266,8 @@
  <attributes>
   <name>UserGroup</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользователей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User group</value>
+   <value>B8FBF282-8E69-1332-2B3A-A4B93CD2EFE5</value>
   </title>
   <id>2</id>
   <valueType>
@@ -299,16 +283,8 @@
  <attributes>
   <name>Position</name>
   <title>
-   <key>tr</key>
-   <value>Pozisyon</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Должность</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Position</value>
+   <value>26E4DF18-00AF-49D9-90ED-DE659E9D45B3</value>
   </title>
   <id>3</id>
   <valueType>
@@ -324,16 +300,8 @@
  <attributes>
   <name>Branch</name>
   <title>
-   <key>tr</key>
-   <value>Şube</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Branch</value>
+   <value>D994350C-DD7F-D98A-ABE0-01233597E29A</value>
   </title>
   <id>4</id>
   <valueType>
@@ -349,16 +317,8 @@
  <attributes>
   <name>ProfitLossCenter</name>
   <title>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Центр прибылей/убытков</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Profit loss center</value>
+   <value>09D48223-FE30-5074-4751-17ACC75C8706</value>
   </title>
   <id>5</id>
   <valueType>
@@ -375,16 +335,8 @@
  <attributes>
   <name>TableName</name>
   <title>
-   <key>tr</key>
-   <value>Tablo ismi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Table name</value>
+   <value>82F978C8-2D07-844A-AFB9-9689D2C8AD1E</value>
   </title>
   <id>7</id>
   <valueType>
@@ -401,16 +353,8 @@
  <attributes>
   <name>TableRow</name>
   <title>
-   <key>tr</key>
-   <value>Tablo satırı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Строка таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Table row</value>
+   <value>C8AA1C42-0E5D-1F2D-D053-321E551F1A70</value>
   </title>
   <id>8</id>
   <valueType>
@@ -429,16 +373,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>5CD16AE9-F71F-0878-8F2C-CA02C5BF123E</value>
   </title>
   <id>1</id>
   <use>

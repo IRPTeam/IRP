@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>65CE2563-85E0-3BB7-7ACC-C7B12E848123</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>F6F100B7-49F9-0632-2D51-16DF40A993C9</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -150,16 +134,8 @@
    <name>UnsafeMode</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Güvensiz biçim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Небезопасный режим</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unsafe mode</value>
+    <value>ADE7A1C6-A48C-E157-765D-DD1CADA674E2</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

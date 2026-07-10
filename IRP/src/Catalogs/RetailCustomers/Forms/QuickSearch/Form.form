@@ -7,16 +7,8 @@
    <name>Code</name>
    <id>55</id>
    <title>
-    <key>tr</key>
-    <value>ID</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Артикул</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>ID</value>
+    <value>5479BFAA-2691-05F9-9975-5C2067C7594E</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -673,16 +665,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List</value>
+   <value>9B52F5F9-8A9C-C7CB-B635-517D45C38B10</value>
   </title>
   <id>2</id>
   <valueType>
@@ -708,16 +692,8 @@
  <attributes>
   <name>RetailCustomer</name>
   <title>
-   <key>tr</key>
-   <value>Perakende müşteri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Розничный покупатель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Retail customer</value>
+   <value>EB0373D9-445D-E338-8E65-52FDF6BF23B4</value>
   </title>
   <id>6</id>
   <valueType>
@@ -735,16 +711,8 @@
  <formCommands>
   <name>Clear</name>
   <title>
-   <key>tr</key>
-   <value>Temizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Очистить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Clear</value>
+   <value>6ACF47B4-E13D-390E-EC4A-A68459357080</value>
   </title>
   <id>4</id>
   <use>
@@ -764,16 +732,8 @@
  <formCommands>
   <name>Select</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>45E6CC96-E1BC-2286-65C0-0797E7A8E939</value>
   </title>
   <id>5</id>
   <use>

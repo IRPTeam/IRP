@@ -7,62 +7,30 @@
  </producedTypes>
  <name>OffersDocumentTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Kampanya evrak tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы документов применения скидок</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Offers document types</value>
+  <value>6BB3E68F-B76B-5889-9AE5-56BEB1BC326F</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="36aa2d3e-10bb-4389-b48d-b9b99b1a090c">
   <name>Sales</name>
   <synonym>
-   <key>tr</key>
-   <value>Satışlar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Продажи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Sales</value>
+   <value>81C5F69B-1C77-F0F3-3C20-0457610395BD</value>
   </synonym>
  </enumValues>
  <enumValues uuid="9abf9c49-906d-4937-a4f7-5455e1618acc">
   <name>Purchases</name>
   <synonym>
-   <key>tr</key>
-   <value>Alımlar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Закупки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Purchases</value>
+   <value>18831DBF-090B-7EBE-E7E2-28868E027F9A</value>
   </synonym>
  </enumValues>
  <enumValues uuid="9495b4a6-a1b8-4fbc-af2f-28e3cc407852">
   <name>PurchasesAndSales</name>
   <synonym>
-   <key>tr</key>
-   <value>Alımlar ve satışlar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Закупки и продажи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Purchases and sales</value>
+   <value>3A605062-6DF8-3A5F-FC1E-ED5CD457CC07</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

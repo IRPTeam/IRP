@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f22c0241-6732-4e4f-ad23-24827a97d1d0">
  <name>LoadDataFromTable</name>
  <synonym>
-  <key>tr</key>
-  <value>Tablodan veriyi yükle</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Загрузить данные из таблицы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Load data from table</value>
+  <value>D583A3B0-9CB4-7617-7872-25C630C6BCE7</value>
  </synonym>
 </mdclass:CommonPicture>

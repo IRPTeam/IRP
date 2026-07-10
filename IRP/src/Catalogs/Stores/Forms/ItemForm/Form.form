@@ -152,16 +152,8 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
      <inputHint>
-      <key>tr</key>
-      <value>Tüm şirketler için geçerli</value>
-     </inputHint>
-     <inputHint>
-      <key>ru</key>
-      <value>Доступно для всех организаций</value>
-     </inputHint>
-     <inputHint>
       <key>en</key>
-      <value>Shared for all companies</value>
+      <value>CFE43FFF-8D78-05AB-B102-2EF393C2B6F9</value>
      </inputHint>
     </extInfo>
    </items>
@@ -429,16 +421,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основной</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Info</value>
+    <value>0582279C-3F5B-DD75-5CDD-DC54A0F362E4</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -465,16 +449,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>İletişim bilgileri</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Контактная информация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Contact information</value>
+    <value>7318143F-A216-0180-03E7-7B3BD7FF3DB1</value>
    </title>
    <extendedTooltip>
     <name>GroupContactInformationExtendedTooltip</name>
@@ -498,16 +474,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group pages</value>
+   <value>69A690BC-2F18-4B9A-A08B-B5E152D36129</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>

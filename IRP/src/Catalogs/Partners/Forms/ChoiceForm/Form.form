@@ -237,16 +237,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>F5E87463-6495-5E9C-C5DF-F4BBD39C29B6</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -278,16 +270,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>7DE2C706-64F3-84CF-F80C-CF9FC8E489F7</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -367,16 +351,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>C8C25674-D7BB-9B93-36C9-99C2EE1756A4</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -833,16 +809,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açıklama</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>17B91DE6-CD0F-3752-248B-BE0BDF942A33</value>
       </content>
      </localValue>
     </title>
@@ -948,16 +916,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şirketlere göre cari hesaplar</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Партнёры по компаниям</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Partners by companies</value>
+       <value>694389D0-A808-D55D-D584-4D88DC9A079D</value>
       </content>
      </localValue>
     </title>
@@ -972,16 +932,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Cari hesapları şirketlere göre filtrele</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Фильтровать партнёров по компаниям</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Filter partners by companies</value>
+       <value>3D124362-9432-B28D-D1E4-462195558A80</value>
       </content>
      </localValue>
     </title>
@@ -995,16 +947,8 @@ WHERE
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполненные данные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filling data</value>
+   <value>DD803526-BD0A-F4DA-AFD7-7CC174ADD2A2</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1021,16 +965,8 @@ WHERE
  <attributes>
   <name>FilterCustomer</name>
   <title>
-   <key>tr</key>
-   <value>Müşteri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Клиент</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Customer</value>
+   <value>3E2DEA97-F0F5-F3AF-F445-5CFAFA455471</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1046,16 +982,8 @@ WHERE
  <attributes>
   <name>FilterEmployee</name>
   <title>
-   <key>tr</key>
-   <value>Personel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Employee</value>
+   <value>D4CCB0DF-7EE9-F95E-E330-05C8FDC026F9</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1071,16 +999,8 @@ WHERE
  <attributes>
   <name>FilterVendor</name>
   <title>
-   <key>tr</key>
-   <value>Terarikçi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Поставщик</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Vendor</value>
+   <value>DE1751C5-6DF8-95A6-6B6B-BBAF492C4B21</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1096,16 +1016,8 @@ WHERE
  <attributes>
   <name>FilterConsignor</name>
   <title>
-   <key>tr</key>
-   <value>Konsiyeye veren</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комитент</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Consignor</value>
+   <value>5E8E7146-F86B-EE53-3C94-4F014B8D5F5E</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1122,16 +1034,8 @@ WHERE
  <attributes>
   <name>FilterTradeAgent</name>
   <title>
-   <key>tr</key>
-   <value>Ödeme aracı kurum</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комиссионер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Trade agent</value>
+   <value>8EAD05B2-4936-864B-B12D-D78BE41AE1F2</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1148,16 +1052,8 @@ WHERE
  <attributes>
   <name>FilterOther</name>
   <title>
-   <key>tr</key>
-   <value>Diğer</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Прочий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Other</value>
+   <value>B0B092EB-13A0-2908-8F70-02D9C86EF143</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1173,16 +1069,8 @@ WHERE
  <attributes>
   <name>FilterGroupType</name>
   <title>
-   <key>tr</key>
-   <value>Filtre grubu türü</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа отбора типов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filter group type</value>
+   <value>CE70AEDF-3755-3932-29BF-F292A1935B1A</value>
   </title>
   <id>10</id>
   <valueType>

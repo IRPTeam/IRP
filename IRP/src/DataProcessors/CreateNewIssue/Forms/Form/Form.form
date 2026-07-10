@@ -40,16 +40,8 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>Ülke</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Страна</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>Country</value>
+    <value>089DDE7E-692A-8BE2-2F92-234532A29515</value>
    </inputHint>
   </extInfo>
  </items>
@@ -93,16 +85,8 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>İl</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Город</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>City</value>
+    <value>E214ABD0-0201-3B3E-E17D-DCFBC2FE2CA5</value>
    </inputHint>
   </extInfo>
  </items>
@@ -113,19 +97,9 @@
    <name>DecorationErrorMaxDistance</name>
    <id>87</id>
    <title>
-    <key>tr</key>
-    <value>Cihaz koordinatları mevcut lokasyon ve hedef lokasyon arasında büyük fark gösteriyor.
-Hedefe yaklaşınız ve tekrar koordinaları güncelleyiniz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Координаты устройства показывают большое расстояние между местоположением и текущей позицией.
-Подойдите ближе и обновите координаты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Device coordinates show a large distance between the location and the current position.
-Move closer and update the coordinates</value>
+    <value>41D8DE6E-825C-9A15-58D4-4540D267358A___________________________________________________
+______________________________________</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -158,19 +132,9 @@ Move closer and update the coordinates</value>
    <name>DecorationErrorUpdateGPS</name>
    <id>80</id>
    <title>
-    <key>tr</key>
-    <value>Mevcut GPS koordinatları alınamadı
-Devam etmek için koordintları güncelleyin</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Не могу получить текущие GPS координаты
-Обновите координаты для продолжения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Cannot retrieve current GPS coordinates
-Update coordinates for continue</value>
+    <value>CC45F4C6-2070-0834-46BE-E03ECD764DB6___
+_______________________________</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -232,16 +196,8 @@ Update coordinates for continue</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup koordinat hataları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа ошибок координат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group error coordinates</value>
+   <value>310925C2-B160-8D10-0F59-9FFBE833ED6F</value>
   </title>
   <groupVerticalAlign>Center</groupVerticalAlign>
   <extendedTooltip>
@@ -309,16 +265,8 @@ Update coordinates for continue</value>
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>Lokasyon</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Местоположение</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>Location</value>
+    <value>6455F6E9-D358-592D-DC37-7AD012B9BBC9</value>
    </inputHint>
   </extInfo>
  </items>
@@ -362,16 +310,8 @@ Update coordinates for continue</value>
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>Talep tipi</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Тип проблемы       </value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>Issue type</value>
+    <value>3F014098-53EA-0D22-203B-BB2463F86818</value>
    </inputHint>
   </extInfo>
  </items>
@@ -455,16 +395,8 @@ Update coordinates for continue</value>
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>Detay açıklama</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Подробное наименование</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>Detail description</value>
+    <value>03E498DC-AF30-5129-99D9-907C2E186A63</value>
    </inputHint>
   </extInfo>
  </items>
@@ -508,16 +440,8 @@ Update coordinates for continue</value>
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>Kayıt oluşturan</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Автор</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>Author</value>
+    <value>E1B5A8AB-7914-2C84-43B1-1E8652EBABB0</value>
    </inputHint>
   </extInfo>
  </items>
@@ -677,28 +601,12 @@ Update coordinates for continue</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup buton ek dosyalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа кнопок вложения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group button attachment</value>
+   <value>7075819C-A175-58D8-8C69-9D12B18D0357</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Grup buton ek dosyalar</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Группа кнопок вложения</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Group button attachment</value>
+   <value>B3B300F7-ACD8-C1D3-3A45-53C8DA07B2EB</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupButtonAttachmentExtendedTooltip</name>
@@ -1055,28 +963,12 @@ Update coordinates for continue</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sayfa ek dosya listesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Страница списка вложений</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Page attachment list</value>
+    <value>D79AAD7F-F519-0271-1C62-2A6CE3B474A0</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Sayfa ek dosya listesi</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Страница списка вложений</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Page attachment list</value>
+    <value>123932A2-0D30-86CE-ED11-114DA7766852</value>
    </toolTip>
    <verticalStretch>true</verticalStretch>
    <extendedTooltip>
@@ -1101,28 +993,12 @@ Update coordinates for continue</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar ek dosya listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список вложений страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages attachment list</value>
+   <value>67374B82-FB86-35A6-6058-8AC88A92F2A0</value>
   </title>
-  <toolTip>
-   <key>tr</key>
-   <value>Sayfalar ek dosya listesi</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Список вложений страниц</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
-   <value>Pages attachment list</value>
+   <value>A1916009-8DF6-2DAD-D927-7D4A0E3B4DA9</value>
   </toolTip>
   <extendedTooltip>
    <name>PagesAttachmentListExtendedTooltip</name>
@@ -1231,16 +1107,8 @@ Update coordinates for continue</value>
  <attributes>
   <name>AttachedList</name>
   <title>
-   <key>tr</key>
-   <value>Ek dosyalar listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список вложений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attached list</value>
+   <value>F117A069-BF63-C172-288E-E7A4AC029DC6</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1255,16 +1123,8 @@ Update coordinates for continue</value>
   <columns>
    <name>Image</name>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Изображение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Image</value>
+    <value>909B58C3-F733-1A4C-C796-63967C8C568C</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1280,16 +1140,8 @@ Update coordinates for continue</value>
   <columns>
    <name>Extension</name>
    <title>
-    <key>tr</key>
-    <value>Uzantı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value> Расширение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value> Extension</value>
+    <value>635C93D5-8E0A-BA89-9837-7F25C496E302</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1306,16 +1158,8 @@ Update coordinates for continue</value>
   <columns>
    <name>BD</name>
    <title>
-    <key>tr</key>
-    <value>BD</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>BD          </value>
-   </title>
-   <title>
     <key>en</key>
-    <value>BD</value>
+    <value>CBCAD386-1F9A-FCEF-F30B-BDEF5F0DD088</value>
    </title>
    <id>8</id>
    <valueType/>
@@ -1329,16 +1173,8 @@ Update coordinates for continue</value>
   <columns>
    <name>IsImage</name>
    <title>
-    <key>tr</key>
-    <value>Bu resim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это изображение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is image</value>
+    <value>A6827099-EE1E-B761-1591-154CD268C4F6</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1354,16 +1190,8 @@ Update coordinates for continue</value>
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>632EABA9-19DB-83E5-5CF6-636D250C413D</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1380,16 +1208,8 @@ Update coordinates for continue</value>
   <columns>
    <name>Uploaded</name>
    <title>
-    <key>tr</key>
-    <value>Yüklendi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Выгружен</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Uploaded</value>
+    <value>A3BEF86F-FBAC-48B5-54B5-5FA1B3757CA0</value>
    </title>
    <id>1</id>
    <valueType>
@@ -1405,16 +1225,8 @@ Update coordinates for continue</value>
   <columns>
    <name>UploadStatus</name>
    <title>
-    <key>tr</key>
-    <value>Yükleme statüsü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус загрузки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Upload status</value>
+    <value>AB848FB5-C0E3-3789-9DC8-8D0D2D4DBFD6</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1431,16 +1243,8 @@ Update coordinates for continue</value>
  <attributes>
   <name>IssueRef</name>
   <title>
-   <key>tr</key>
-   <value>Talep ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка на проблему</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Issue ref</value>
+   <value>19A97E3C-15FB-996A-ACAA-AE24D6F1C7E5</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1456,16 +1260,8 @@ Update coordinates for continue</value>
  <formCommands>
   <name>AddAttachments</name>
   <title>
-   <key>tr</key>
-   <value>Ek dosya ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Добавить вложения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Add attachments</value>
+   <value>0681C8CA-78B9-FB18-8BD8-8E757D6166E8</value>
   </title>
   <id>1</id>
   <use>
@@ -1485,16 +1281,8 @@ Update coordinates for continue</value>
  <formCommands>
   <name>AddPhoto</name>
   <title>
-   <key>tr</key>
-   <value>Foto ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Добавить фото </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Add photo</value>
+   <value>EFD89814-80CA-367F-F351-12F7C51C3A92</value>
   </title>
   <id>3</id>
   <use>
@@ -1514,16 +1302,8 @@ Update coordinates for continue</value>
  <formCommands>
   <name>AddVideo</name>
   <title>
-   <key>tr</key>
-   <value>Video ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Добавить видео</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Add video</value>
+   <value>09D9B463-FE80-1B6D-D85B-B46FFBFDC7AA</value>
   </title>
   <id>4</id>
   <use>
@@ -1543,16 +1323,8 @@ Update coordinates for continue</value>
  <formCommands>
   <name>CreateIssue</name>
   <title>
-   <key>tr</key>
-   <value>Talep oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Создать проблему</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Create issue</value>
+   <value>9F986A98-D92D-31E6-60B3-3F4CC218755F</value>
   </title>
   <id>5</id>
   <use>
@@ -1572,16 +1344,8 @@ Update coordinates for continue</value>
  <formCommands>
   <name>UpdateCoordinates</name>
   <title>
-   <key>tr</key>
-   <value>Koordinatları güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить координаты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update coordinates</value>
+   <value>3B28C607-0AD6-1ABB-B191-1DCA54FC0EC3</value>
   </title>
   <id>6</id>
   <use>

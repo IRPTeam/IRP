@@ -7,16 +7,8 @@
  </producedTypes>
  <name>DisableLinkedRowsIntegrity</name>
  <synonym>
-  <key>tr</key>
-  <value>Bağlantılı satırların bütünlüğünü devre dışı bırak</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отключить проверку связки строк</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Disable linked rows integrity</value>
+  <value>6F6A8A87-2CD8-AA95-587D-D51D7005E55C</value>
  </synonym>
  <type>
   <types>Boolean</types>

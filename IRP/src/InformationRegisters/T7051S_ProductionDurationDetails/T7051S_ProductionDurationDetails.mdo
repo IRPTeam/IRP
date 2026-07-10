@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T7051S_ProductionDurationDetails</name>
  <synonym>
-  <key>tr</key>
-  <value>T7051 Üretim süresi detayları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T7051 Детализация производственного тайминга</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T7051 Production duration details</value>
+  <value>6F7DC31E-9BEF-A4C2-2585-5D30016D4BA7</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="f4c0c32d-ad26-4780-ae33-af68c4c45c0e">
   <name>Duration</name>
   <synonym>
-   <key>tr</key>
-   <value>Süre</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Время</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Duration</value>
+   <value>1AE8AEC0-9F08-A8CD-DDAE-EF5871D7CBD3</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -56,16 +40,8 @@
  <dimensions uuid="a49d2cf4-4f16-423b-805d-17cd7f27198d">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>56932C96-8D96-A5CA-A2B0-079C17E69DDA</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -80,16 +56,8 @@
  <dimensions uuid="b168c583-ef43-429f-9524-ec5f9a37808e">
   <name>BusinessUnit</name>
   <synonym>
-   <key>tr</key>
-   <value>Departman</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Business unit</value>
+   <value>4E78FAA0-5B2E-FFDD-D743-388FFF1FEEF2</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -110,16 +78,8 @@
  <dimensions uuid="b6a527a5-5f61-41c1-91fc-7acee261e038">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>803A704C-02CD-39A5-59D7-7BBDDD34A313</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -133,16 +93,8 @@
  <dimensions uuid="01251559-ba0e-4fae-8162-9d7c23321fc2">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>461767F5-0617-38FC-C164-4C10BE3D915A</value>
   </synonym>
   <type>
    <types>DocumentRef.Production</types>
@@ -157,16 +109,8 @@
  <dimensions uuid="64050a1e-8c5b-4eee-baf7-c34391b9a34c">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>582C1368-6050-229E-EB32-215749487C91</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>

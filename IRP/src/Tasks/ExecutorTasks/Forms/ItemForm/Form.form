@@ -132,16 +132,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup tarihleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Групповые даты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group dates</value>
+   <value>A88BAACE-B407-13B0-042F-F611633AC22E</value>
   </title>
   <extendedTooltip>
    <name>GroupDatesExtendedTooltip</name>
@@ -246,16 +238,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup header</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа шапка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group header</value>
+   <value>BA86737A-AE74-99C1-13BB-B4218EC8D933</value>
   </title>
   <extendedTooltip>
    <name>GroupHeaderExtendedTooltip</name>
@@ -380,16 +364,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup sorumlusu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Групповой исполнитель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group executor</value>
+   <value>388EE252-B117-F00B-BEAD-DE2A8CBCD467</value>
   </title>
   <extendedTooltip>
    <name>GroupExecutorExtendedTooltip</name>
@@ -660,16 +636,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Adresleme gruplar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Групповая адресация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group addressing</value>
+   <value>8DFEACEC-A16F-9B2C-C383-34051ADF97C5</value>
   </title>
   <extendedTooltip>
    <name>GroupAddressingExtendedTooltip</name>
@@ -934,16 +902,8 @@
  <formCommands>
   <name>AcceptForExecution</name>
   <title>
-   <key>tr</key>
-   <value>Görevi kabul et</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Принять к исполнению</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Accept for execution</value>
+   <value>5045AFEF-A9D5-A2E3-313D-D7D11175AF57</value>
   </title>
   <id>2</id>
   <use>
@@ -959,16 +919,8 @@
  <formCommands>
   <name>Canceled</name>
   <title>
-   <key>tr</key>
-   <value>İptal edildi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменен</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Canceled</value>
+   <value>9C382F22-8D55-FBED-DE64-4E788477C85C</value>
   </title>
   <id>3</id>
   <use>
@@ -988,16 +940,8 @@
  <formCommands>
   <name>Comleted</name>
   <title>
-   <key>tr</key>
-   <value>Tamamlandı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Завершен</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comleted</value>
+   <value>E5CB9239-48CF-FC12-2ACC-C059D38D4B3F</value>
   </title>
   <id>4</id>
   <use>

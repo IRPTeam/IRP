@@ -6,32 +6,16 @@
  </producedTypes>
  <name>D4011_FreeStocks</name>
  <synonym>
-  <key>tr</key>
-  <value>D4011 Serbest stoklar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>D4011 Свободные остатки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>D4011 Free stocks</value>
+  <value>FC375475-81D3-A6FB-B72C-C4459589BD9D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.D4011_FreeStocks.Template.Template</mainDataCompositionSchema>
  <templates uuid="d08b8ad8-39c5-4d79-bdb5-651ba66bf88b">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Template</value>
+   <value>C0EA5F3C-989C-2845-5F15-5A9F0A964846</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

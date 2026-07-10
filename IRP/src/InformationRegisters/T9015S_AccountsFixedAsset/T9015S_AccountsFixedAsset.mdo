@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9015S_AccountsFixedAsset</name>
  <synonym>
-  <key>tr</key>
-  <value>Muh. hesap (sabit kıymet)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Бух. счета (Основные средства)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Accounts (Fixed asset)</value>
+  <value>D61D18A8-D27D-F9A9-96A8-8F31B666855A</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,30 +20,14 @@
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Muh. hesap (sabit kıymet)</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Бух. счета (Основные средства)</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Accounts (Fixed asset)</value>
+  <value>595823D0-6DE6-294E-E3D3-399D1C83D560</value>
  </recordPresentation>
  <resources uuid="817b5145-cf25-4dd9-a426-e0c2f48af7b9">
   <name>Account</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Счет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Account</value>
+   <value>DBAC4FD6-AF84-BC88-84C0-09971F952CF6</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -70,16 +46,8 @@
  <resources uuid="a0d30041-365e-43dc-8c99-27c05bf108f8">
   <name>AccountDepreciation</name>
   <synonym>
-   <key>tr</key>
-   <value>Muh. hesap (amortisman)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Счет (амортизация)</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Account (depreciation)</value>
+   <value>820C5B39-938C-AFDA-A1E2-2D93F4E795D3</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -98,16 +66,8 @@
  <dimensions uuid="863f5cd4-9923-4aeb-a12f-682ca9a40690">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>AB44B472-7D2F-FC71-13ED-D7537117A759</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -124,16 +84,8 @@
  <dimensions uuid="3edccb6e-f859-456b-915e-9a604def5a17">
   <name>LedgerTypeVariant</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вариант типа учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type variant</value>
+   <value>8B3D56E6-F442-6CE4-4384-4B1F13B0EDDF</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -150,16 +102,8 @@
  <dimensions uuid="e6026510-8b33-44b9-b96e-31c13edb4a57">
   <name>FixedAsset</name>
   <synonym>
-   <key>tr</key>
-   <value>Sabit kıymet</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основное средство</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Fixed asset</value>
+   <value>25B14267-C408-EBAA-A5C9-988F3CBC5AC7</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -176,16 +120,8 @@
  <dimensions uuid="f0f33f86-6301-46c2-b702-109a6fdab303">
   <name>Type</name>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Type</value>
+   <value>736AA445-BFEA-205D-D2A3-3B3C2107B2AF</value>
   </synonym>
   <type>
    <types>EnumRef.FixedAssetTypes</types>
@@ -200,16 +136,8 @@
  <forms uuid="8dfe1166-1a7a-4913-81d5-e10693aacf16">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>5BE0B68F-73FF-AD2D-DA94-4FC67F302DD5</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2b1bea52-d584-4283-b926-aa66ca628842">
  <name>Subsystem_SalesAR</name>
  <synonym>
-  <key>tr</key>
-  <value>Alt Sistem Satış AR</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Подсистема Продаж</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Subsystem Sales AR</value>
+  <value>1B37241E-84EE-3136-68E9-9E2F9695472E</value>
  </synonym>
 </mdclass:Role>

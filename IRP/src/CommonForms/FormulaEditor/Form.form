@@ -393,16 +393,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа основная</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main</value>
+   <value>654C67EE-F340-8CD2-243F-FE88966678DE</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -538,16 +530,8 @@
  <attributes>
   <name>Formula</name>
   <title>
-   <key>tr</key>
-   <value>Formül        </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Формула</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Formula</value>
+   <value>424854B0-611B-707D-D82F-FC9361E8C451</value>
   </title>
   <id>1</id>
   <valueType>
@@ -564,16 +548,8 @@
  <attributes>
   <name>PropertySet</name>
   <title>
-   <key>tr</key>
-   <value>Özellik seti  </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Набор свойств</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Property set</value>
+   <value>0F35E3B4-1C8E-77D6-6768-8EDBCA6F1C50</value>
   </title>
   <id>3</id>
   <valueType>
@@ -589,16 +565,8 @@
  <attributes>
   <name>SettingsComposer</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar sihirbazı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Компоновщик настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings composer</value>
+   <value>00D6FC01-0CD8-8C5C-C2FD-D00FBF642992</value>
   </title>
   <id>4</id>
   <valueType>
@@ -614,16 +582,8 @@
  <attributes>
   <name>Operators</name>
   <title>
-   <key>tr</key>
-   <value>Operatörler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Операторы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Operators</value>
+   <value>0CA7E582-BE58-1C5D-DC22-2797A77A3315</value>
   </title>
   <id>5</id>
   <valueType>
@@ -638,16 +598,8 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>954230ED-2573-B7A6-6C4B-B8D1A22BD6FC</value>
    </title>
    <id>6</id>
    <valueType>
@@ -664,16 +616,8 @@
   <columns>
    <name>Operator</name>
    <title>
-    <key>tr</key>
-    <value>Operatör      </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Оператор  </value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Operator</value>
+    <value>A2868CD8-F047-4EB7-7B11-19D9F3386DF3</value>
    </title>
    <id>7</id>
    <valueType>
@@ -690,16 +634,8 @@
   <columns>
    <name>Shift</name>
    <title>
-    <key>tr</key>
-    <value>Vardiya       </value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Смена     </value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Shift</value>
+    <value>031FCD8C-981C-CA96-6092-266666DE41E7</value>
    </title>
    <id>8</id>
    <valueType>
@@ -719,16 +655,8 @@
  <attributes>
   <name>SourceName</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak ismi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование источника</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Source name</value>
+   <value>84806495-75E3-3087-7EFF-F93A373D44F5</value>
   </title>
   <id>9</id>
   <valueType>
@@ -745,16 +673,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>A4FF35D1-05D7-F714-4646-60D1ABF7C031</value>
   </title>
   <id>1</id>
   <use>
@@ -770,16 +690,8 @@
  <formCommands>
   <name>Check</name>
   <title>
-   <key>tr</key>
-   <value>Kontrol</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check</value>
+   <value>5736EE1D-DF85-5B09-956E-E9143BEEE4B9</value>
   </title>
   <id>2</id>
   <use>

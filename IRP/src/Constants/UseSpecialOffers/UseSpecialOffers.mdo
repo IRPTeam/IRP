@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseSpecialOffers</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Kampanyalar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать скидки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use special offers</value>
+  <value>88B533A0-3743-3DBA-AD76-6665B7EDA23B</value>
  </synonym>
  <type>
   <types>Boolean</types>

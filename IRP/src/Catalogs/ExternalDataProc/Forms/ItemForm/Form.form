@@ -311,16 +311,8 @@
  <attributes>
   <name>DataProcStorageAddress</name>
   <title>
-   <key>tr</key>
-   <value>Veri işlemci depolama adresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Адрес хранения внешней обработки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Data proc storage address</value>
+   <value>EA502A97-FB5B-B90D-D720-0AE46E4022BE</value>
   </title>
   <id>2</id>
   <valueType>
@@ -337,29 +329,13 @@
  <formCommands>
   <name>AddExtDataProc</name>
   <title>
-   <key>tr</key>
-   <value>Eklenti ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Добавить внешнюю обработку</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Add plugin</value>
+   <value>1A3CC7C5-16CE-2726-6DA7-756BCF938EDA</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Eklenti ekle</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Добавить внешнюю обработку</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Add plugin</value>
+   <value>5E2A9328-4211-58BA-AB3B-BCA559343DBC</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -374,16 +350,8 @@
  <formCommands>
   <name>ExportExtDataProc</name>
   <title>
-   <key>tr</key>
-   <value>Eklentiyi dışa aktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Экспорт внешней обработки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Export plugin</value>
+   <value>7559E2F5-BB32-2E44-488F-FA10D7E33192</value>
   </title>
   <id>2</id>
   <use>

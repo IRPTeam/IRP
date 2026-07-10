@@ -10,19 +10,9 @@
     <name>WarningsLabel</name>
     <id>68</id>
     <title>
-     <key>tr</key>
-     <value>Geçerli vardyanın kaydedilmez evraklar. 
-Veri düzeltilmelidir!</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Документы текущей кассовой смены, которые не могут быть проведены. 
-Данные необходимо исправить!</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Documents of the current session that could not be posted. 
-Data needs to be corrected!</value>
+     <value>1A2CC518-596E-4810-01A2-26253C601F72_______________________
+___________________________</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -73,16 +63,8 @@ Data needs to be corrected!</value>
      <name>ListOfWarningDocumentsRef</name>
      <id>50</id>
      <title>
-      <key>tr</key>
-      <value>Evraklar</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Документы</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Documents</value>
+      <value>01A2666F-0F04-9892-2E28-881D72A0328F</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -341,16 +323,8 @@ Data needs to be corrected!</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Uyarılar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Предупреждения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Warnings</value>
+    <value>CC0ADF25-619E-D81B-BAB3-326A37EDB187</value>
    </title>
    <extendedTooltip>
     <name>WarningsPageExtendedTooltip</name>
@@ -375,19 +349,9 @@ Data needs to be corrected!</value>
     <name>CashboxLabel</name>
     <id>77</id>
     <title>
-     <key>tr</key>
-     <value>Yazar kasa şimdi kapanıyor.
- X reporu alıp, aşağıdaki veri ile kıyaslayınız.</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Закрытие смены на фискальном регистраторе.
-Небходимо снять отчет без гашения и сверить с текущими данными системы.</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Cash registers are now closing.
-Take X-reports and compare with the data below.</value>
+     <value>0B5B092C-3BF9-D2BE-E798-82F57C19B34C
+_______________________________________________</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -518,16 +482,8 @@ Take X-reports and compare with the data below.</value>
      <name>CashTableAmountInBase</name>
      <id>96</id>
      <title>
-      <key>tr</key>
-      <value>Programa göre</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>По программе</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>In Base</value>
+      <value>3DBDEDC3-B21B-4CC5-5EB6-607AA5904642</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -572,16 +528,8 @@ Take X-reports and compare with the data below.</value>
      <name>CashTableAmountInRegister</name>
      <id>99</id>
      <title>
-      <key>tr</key>
-      <value>Yazar kasada</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>По регистру</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>In Register</value>
+      <value>BC9537F0-01ED-DDD0-0A39-91A4D4D0664D</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -784,16 +732,8 @@ Take X-reports and compare with the data below.</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Nakit çekmece</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Денежные ящики</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Cashboxes</value>
+    <value>355D368C-56BF-25F6-6E8D-DB699F2A71A2</value>
    </title>
    <extendedTooltip>
     <name>CashboxesPageExtendedTooltip</name>
@@ -818,19 +758,9 @@ Take X-reports and compare with the data below.</value>
     <name>TerminalLabel</name>
     <id>107</id>
     <title>
-     <key>tr</key>
-     <value>Banka pos terminaller kapanıyor.
- X raporu alıp, aşağıdaki veri ile kıyaslayınız.</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Закрытие смена на платежных терминалах.
- Необходимо снять предварительные отчеты и сверить с текущими данными системы.</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Payment terminals are now closing.
-Take X-reports and compare with the data below.</value>
+     <value>636BB46C-E226-D6C6-6959-9B729B29FD8C
+_______________________________________________</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1002,16 +932,8 @@ Take X-reports and compare with the data below.</value>
      <name>TerminalTableAmountInBase</name>
      <id>129</id>
      <title>
-      <key>tr</key>
-      <value>Programa göre</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>По программе</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>In Base</value>
+      <value>F66A915E-D51D-56D1-1851-1F7A99000A7C</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1056,16 +978,8 @@ Take X-reports and compare with the data below.</value>
      <name>TerminalTableAmountInTerminal</name>
      <id>132</id>
      <title>
-      <key>tr</key>
-      <value>Banka pos terminalinde</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>По платежному терминалу</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>In Terminal</value>
+      <value>A9E898CF-4926-2AFE-EA5E-E7F5308B811C</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1268,16 +1182,8 @@ Take X-reports and compare with the data below.</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Banka posları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Терминалы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Terminals</value>
+    <value>2D2D0E4C-4A21-2E72-2785-5B803E094910</value>
    </title>
    <extendedTooltip>
     <name>TerminalsPageExtendedTooltip</name>
@@ -1416,16 +1322,8 @@ Take X-reports and compare with the data below.</value>
     <name>DecorationLabelChecking</name>
     <id>241</id>
     <title>
-     <key>tr</key>
-     <value>Tutar bakiye kontrolü</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Проверка сумм по остатку</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Checking balance amounts</value>
+     <value>36E65940-5264-C3D3-3460-0E2F00B76BB5</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1633,16 +1531,8 @@ Take X-reports and compare with the data below.</value>
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Programa göre bakiyeler grubu</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа остатков по программе</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group of balance in base</value>
+      <value>F0368D6D-5293-A0E2-22DC-C952F3D11B5D</value>
      </title>
      <extendedTooltip>
       <name>GroupBalanceInBaseExtendedTooltip</name>
@@ -1968,16 +1858,8 @@ Take X-reports and compare with the data below.</value>
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Gerçek bakiyeler grubu</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа физических остатков</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group of real balances</value>
+      <value>F5010F2E-9690-FC1C-C62C-C7A4BAD33EF6</value>
      </title>
      <extendedTooltip>
       <name>GroupBalanceRealExtendedTooltip</name>
@@ -2005,16 +1887,8 @@ Take X-reports and compare with the data below.</value>
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup bakiye grupları</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа группы остатков</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of balance groups</value>
+     <value>A7BD4A91-6995-E28B-B10A-AACDDAD23F2E</value>
     </title>
     <extendedTooltip>
      <name>GroupOfBalanceGroupsExtendedTooltip</name>
@@ -2152,16 +2026,8 @@ Take X-reports and compare with the data below.</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bakiye</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Остаток</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Balance</value>
+    <value>E5DC9DCC-345E-D6BA-A77C-CE2DA9843952</value>
    </title>
    <extendedTooltip>
     <name>BalancePageExtendedTooltip</name>
@@ -2303,25 +2169,11 @@ Take X-reports and compare with the data below.</value>
     <name>ClosingLabel</name>
     <id>162</id>
     <title>
-     <key>tr</key>
-     <value>Tüm veriler doğrulanmıştır. Vardiya kapanabilir.
-
-1. Konsolide perakende satış fişi kapatmak için aşağıdaki butona basınız
-2. Z rapor almak</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Все данные были проверены. Смену можно закрывать.
-
-1. Нажмите на кнопку ниже для того, что бы закрыть Отчет о розничных продажах
-2. Сформировать отчеты с гашением</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>All data has been verified. You can close the session.
+     <value>FCD89B8C-A593-B90F-F7F2-2E9FD8A4F43B__________________
 
-1. Click on the button below to close the Consolidated Retail Sales document
-2. Take Z-reports</value>
+____________________________________________________________________________
+_________________</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -2394,16 +2246,8 @@ Take X-reports and compare with the data below.</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bitiş</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Закончить</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Finish</value>
+    <value>8703CE6E-C3BD-B118-8B0D-DAD8E1E2B9AD</value>
    </title>
    <extendedTooltip>
     <name>FinishPageExtendedTooltip</name>
@@ -2427,16 +2271,8 @@ Take X-reports and compare with the data below.</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup kapanış sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страниц закрытия</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of closing pages</value>
+   <value>E53E1222-26A6-FBD8-8E67-7DB99AEE21B3</value>
   </title>
   <extendedTooltip>
    <name>ClosingPagesExtendedTooltip</name>
@@ -2522,16 +2358,8 @@ Take X-reports and compare with the data below.</value>
    <name>Close</name>
    <id>160</id>
    <title>
-    <key>tr</key>
-    <value>Çıkış</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Выход</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Exit</value>
+    <value>42E0968D-9355-53E5-5A6A-A45246B64C79</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -2578,16 +2406,8 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Организация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company</value>
+   <value>8AF44E6F-FD6E-2FF4-438E-E91B2D409BF4</value>
   </title>
   <id>1</id>
   <valueType>
@@ -2603,16 +2423,8 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>Store</name>
   <title>
-   <key>tr</key>
-   <value>Depo</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Склад</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Store</value>
+   <value>224F6601-648B-D871-1875-5FE9CF6E51D7</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2628,16 +2440,8 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>Branch</name>
   <title>
-   <key>tr</key>
-   <value>Şube</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Branch</value>
+   <value>D3142F78-CC47-E114-4ED6-6F4BB3E03B9C</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2653,16 +2457,8 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>Workstation</name>
   <title>
-   <key>tr</key>
-   <value>Çalışma yeri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Рабочее место</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Workstation</value>
+   <value>DD847F1D-29DD-46E6-6737-7B5AD4598C69</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2678,16 +2474,8 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>CashAccount</name>
   <title>
-   <key>tr</key>
-   <value>Kasa/Banka</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Касса/банк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cash account</value>
+   <value>539EFCC1-D8C3-BC10-0FDA-AA0C4BA4CB8B</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2703,16 +2491,8 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>ConsolidatedRetailSales</name>
   <title>
-   <key>tr</key>
-   <value>Konsolide perakende satış fişleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отчеты о розничных продажах</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Consolidated retail sales</value>
+   <value>47E34E0F-F445-CAA8-8374-4F94A6164CE6</value>
   </title>
   <id>6</id>
   <valueType>
@@ -2729,16 +2509,8 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>ListOfWarningDocuments</name>
   <title>
-   <key>tr</key>
-   <value>Uyarı evrakların listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список документов с предупреждениями</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List of warning documents</value>
+   <value>79DDD9D8-CD3E-021F-F662-29DDC14BF709</value>
   </title>
   <id>11</id>
   <valueType>
@@ -2813,16 +2585,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Konsolide perakende satış fişleri</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отчеты о розничных продажах</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Consolidated retail sales</value>
+       <value>AB3C7EDA-621E-7FCC-C913-3AE7C5884143</value>
       </content>
      </localValue>
     </title>
@@ -2839,16 +2603,8 @@ WHERE
  <attributes>
   <name>WarningDocumentsAreExisted</name>
   <title>
-   <key>tr</key>
-   <value>Uyarı evraklar mevcut</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Есть документы с предупреждением</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Warning documents are existed</value>
+   <value>676E0C77-0CB0-0403-34C0-0C2CB7891404</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2864,16 +2620,8 @@ WHERE
  <attributes>
   <name>CashTable</name>
   <title>
-   <key>tr</key>
-   <value>Naklit tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица наличных денег</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cash table</value>
+   <value>0D153A2B-C7BA-F301-1741-1B433CF38678</value>
   </title>
   <id>13</id>
   <valueType>
@@ -2888,16 +2636,8 @@ WHERE
   <columns>
    <name>PaymentType</name>
    <title>
-    <key>tr</key>
-    <value>Ödeme tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид оплаты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Payment type</value>
+    <value>96C6AD0A-3B3E-AF03-3693-357BE19D23FD</value>
    </title>
    <id>14</id>
    <valueType>
@@ -2913,16 +2653,8 @@ WHERE
   <columns>
    <name>AmountInBase</name>
    <title>
-    <key>tr</key>
-    <value>Programa göre tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма остатка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount in base</value>
+    <value>DEC786DD-2E0E-2703-32A7-7D6E0C38640F</value>
    </title>
    <id>15</id>
    <valueType>
@@ -2938,16 +2670,8 @@ WHERE
   <columns>
    <name>AmountInRegister</name>
    <title>
-    <key>tr</key>
-    <value>Kasada bakiye</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма по регистру</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount in register</value>
+    <value>122AFA38-140D-0112-295D-DD997016C7B6</value>
    </title>
    <id>16</id>
    <valueType>
@@ -2963,16 +2687,8 @@ WHERE
   <columns>
    <name>Operation</name>
    <title>
-    <key>tr</key>
-    <value>İşlem</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Операция</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Operation</value>
+    <value>31FF7293-042F-C5D0-03CD-DE3F19266F36</value>
    </title>
    <id>25</id>
    <valueType>
@@ -2989,16 +2705,8 @@ WHERE
   <columns>
    <name>isReturn</name>
    <title>
-    <key>tr</key>
-    <value>Bu iade</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это возврат</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is return</value>
+    <value>81D96932-E43D-CE12-2A3F-F6060B516A64</value>
    </title>
    <id>36</id>
    <valueType>
@@ -3015,16 +2723,8 @@ WHERE
  <attributes>
   <name>CashConfirm</name>
   <title>
-   <key>tr</key>
-   <value>Gerçek veri ile program verisi arasındaki farkına onay veriyorum.</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Я подтверждаю разницу между учетными и фактическими данными</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>I confirm the difference between actual data and accounting.</value>
+   <value>6C8C385A-3648-D32B-BE05-5D8A6A7AC392________________________</value>
   </title>
   <id>17</id>
   <valueType>
@@ -3040,16 +2740,8 @@ WHERE
  <attributes>
   <name>TerminalTable</name>
   <title>
-   <key>tr</key>
-   <value>Banka pos terminal tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица платежных терминалов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Terminal table</value>
+   <value>B75E9537-8793-EA79-9493-35B7EADCEC20</value>
   </title>
   <id>18</id>
   <valueType>
@@ -3064,16 +2756,8 @@ WHERE
   <columns>
    <name>PaymentType</name>
    <title>
-    <key>tr</key>
-    <value>Ödeme tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид оплаты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Payment type</value>
+    <value>9E59BBBE-1833-44F4-4CAC-C4AD61EE6364</value>
    </title>
    <id>19</id>
    <valueType>
@@ -3089,16 +2773,8 @@ WHERE
   <columns>
    <name>PaymentTerminal</name>
    <title>
-    <key>tr</key>
-    <value>Ödeme terminali</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Платежный терминал</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Payment terminal</value>
+    <value>A9789857-E560-D828-85A5-50C00E6B7A6E</value>
    </title>
    <id>20</id>
    <valueType>
@@ -3114,16 +2790,8 @@ WHERE
   <columns>
    <name>AmountInBase</name>
    <title>
-    <key>tr</key>
-    <value>Programa göre tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма остатка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount in base</value>
+    <value>ABAC2CFE-B6C5-B1B8-8648-89F772127681</value>
    </title>
    <id>21</id>
    <valueType>
@@ -3139,16 +2807,8 @@ WHERE
   <columns>
    <name>AmountInTerminal</name>
    <title>
-    <key>tr</key>
-    <value>Banka post terminalindeki tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма по платежному терминалу</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount in terminal</value>
+    <value>CEB33768-8E15-A1E6-6FA3-357FD3A57568</value>
    </title>
    <id>22</id>
    <valueType>
@@ -3164,16 +2824,8 @@ WHERE
   <columns>
    <name>Operation</name>
    <title>
-    <key>tr</key>
-    <value>İşlem</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Операция</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Operation</value>
+    <value>5E7E40B7-980B-35AB-BD81-125D0B2EA3D4</value>
    </title>
    <id>26</id>
    <valueType>
@@ -3190,16 +2842,8 @@ WHERE
   <columns>
    <name>isReturn</name>
    <title>
-    <key>tr</key>
-    <value>Bu iade</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это возврат</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is return</value>
+    <value>DFE14173-CF0F-FD24-433E-E52F7AAFC6C0</value>
    </title>
    <id>37</id>
    <valueType>
@@ -3216,16 +2860,8 @@ WHERE
  <attributes>
   <name>TerminalConfirm</name>
   <title>
-   <key>tr</key>
-   <value>Gerçek veri ile program verisi arasındaki farkına onay veriyorum.</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Я подтверждаю разницу между учетными и фактическими данными</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>I confirm the difference between actual data and accounting.</value>
+   <value>99CCFDF8-03A1-8CC4-465D-D952E48DA4AF________________________</value>
   </title>
   <id>23</id>
   <valueType>
@@ -3241,16 +2877,8 @@ WHERE
  <attributes>
   <name>BalanceBegin</name>
   <title>
-   <key>tr</key>
-   <value>Devreden</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Начальный остаток</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>At the begin</value>
+   <value>E51CC61A-091E-4BF8-89C3-3C4EB4BDD90F</value>
   </title>
   <id>27</id>
   <valueType>
@@ -3266,16 +2894,8 @@ WHERE
  <attributes>
   <name>BalanceCashIn</name>
   <title>
-   <key>tr</key>
-   <value>Para girişi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Внесение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cash In</value>
+   <value>60496F46-2AB4-155E-EB71-12C8813E2E66</value>
   </title>
   <id>28</id>
   <valueType>
@@ -3291,16 +2911,8 @@ WHERE
  <attributes>
   <name>BalanceCashOut</name>
   <title>
-   <key>tr</key>
-   <value>Nakit çıkışı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изъятие</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cash Out</value>
+   <value>1190C0B3-1CFD-D4EC-CF07-7577A98C85FE</value>
   </title>
   <id>29</id>
   <valueType>
@@ -3316,16 +2928,8 @@ WHERE
  <attributes>
   <name>BalanceEnd</name>
   <title>
-   <key>tr</key>
-   <value>Dönem sonu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>На конец</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>At the end</value>
+   <value>98141CEE-32BB-C432-2639-9F173C054C47</value>
   </title>
   <id>30</id>
   <valueType>
@@ -3341,16 +2945,8 @@ WHERE
  <attributes>
   <name>BalanceReal</name>
   <title>
-   <key>tr</key>
-   <value>Gerçek nakit</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Физический остаток наличных денег</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Real cash</value>
+   <value>0B83793A-61E5-1528-8134-4EE353EEB372</value>
   </title>
   <id>31</id>
   <valueType>
@@ -3366,16 +2962,8 @@ WHERE
  <attributes>
   <name>BalanceConfirm</name>
   <title>
-   <key>tr</key>
-   <value>Gerçek veri ile program verisi arasındaki farkına onay veriyorum.</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Я подтверждаю разницу между учетными и фактическими данными</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>I confirm the difference between actual data and accounting.</value>
+   <value>DF41C093-DAA7-88C5-584E-E8A2C6406C8E________________________</value>
   </title>
   <id>32</id>
   <valueType>
@@ -3391,16 +2979,8 @@ WHERE
  <attributes>
   <name>OpeningDate</name>
   <title>
-   <key>tr</key>
-   <value>Açılış tarihi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дата открытия</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Opening date</value>
+   <value>DF4C7FF8-B67F-5A46-6319-9F5075FD3F6B</value>
   </title>
   <id>33</id>
   <valueType>
@@ -3417,16 +2997,8 @@ WHERE
  <attributes>
   <name>BalanceRealIn</name>
   <title>
-   <key>tr</key>
-   <value>Gerçek nakit girişi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Физическое внесение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Real cash In</value>
+   <value>08F34621-8F6C-8E2B-BA2C-C92058EB8AAA</value>
   </title>
   <id>38</id>
   <valueType>
@@ -3442,16 +3014,8 @@ WHERE
  <attributes>
   <name>BalanceRealOut</name>
   <title>
-   <key>tr</key>
-   <value>Gerçek nakit çıkışı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Физическая сумма изъятия</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Real cash out</value>
+   <value>FBAE8812-BDFD-0E78-825D-D9401496FAE0</value>
   </title>
   <id>39</id>
   <valueType>
@@ -3467,16 +3031,8 @@ WHERE
  <attributes>
   <name>BalanceRealBedin</name>
   <title>
-   <key>tr</key>
-   <value>Gerçek ilk tarih bakiye</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Физический начальный остаток</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Real begin</value>
+   <value>45A955FB-2B5F-5884-4A64-4422AE989AFF</value>
   </title>
   <id>40</id>
   <valueType>
@@ -3492,16 +3048,8 @@ WHERE
  <attributes>
   <name>AutoCreateMoneyTransfer</name>
   <title>
-   <key>tr</key>
-   <value>Para transferi otomatik oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Автоматическое создание перемещения денег</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Auto create money transfer</value>
+   <value>4D383094-6895-E261-19DD-D0BCC04F1B06</value>
   </title>
   <id>41</id>
   <valueType>
@@ -3517,16 +3065,8 @@ WHERE
  <formCommands>
   <name>CloseSession</name>
   <title>
-   <key>tr</key>
-   <value>Seans kapat</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Закрыть кассовую смену</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Close session</value>
+   <value>6D2640D2-42AE-0CF2-2FED-DD18C92DAA2A</value>
   </title>
   <id>1</id>
   <use>
@@ -3542,16 +3082,8 @@ WHERE
  <formCommands>
   <name>DeleteDoc</name>
   <title>
-   <key>tr</key>
-   <value>Silmek için işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пометить на удаление</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Mark to delete</value>
+   <value>E4785887-392D-6382-28D2-2F08ED18C269</value>
   </title>
   <id>3</id>
   <use>
@@ -3571,16 +3103,8 @@ WHERE
  <formCommands>
   <name>EditDoc</name>
   <title>
-   <key>tr</key>
-   <value>Evrakı değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменить документ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit document</value>
+   <value>D7738954-39DF-15FE-E190-04DBFDFB8A6F</value>
   </title>
   <id>4</id>
   <use>
@@ -3600,16 +3124,8 @@ WHERE
  <formCommands>
   <name>PreviousPage</name>
   <title>
-   <key>tr</key>
-   <value>Önceki</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предыдущая</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Previous page</value>
+   <value>02D46F59-27A6-145D-D9C5-5BB97B558EF0</value>
   </title>
   <id>5</id>
   <use>
@@ -3629,16 +3145,8 @@ WHERE
  <formCommands>
   <name>ToCurrent</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli olana</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Следующая</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>To current</value>
+   <value>A3BB235A-5011-6E3D-D772-21718DC3FFD6</value>
   </title>
   <id>6</id>
   <use>

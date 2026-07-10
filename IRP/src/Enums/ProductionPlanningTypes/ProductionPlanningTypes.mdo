@@ -7,77 +7,37 @@
  </producedTypes>
  <name>ProductionPlanningTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>(CORE) Üretim planlama tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>(CORE) Виды планирования производства</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>(CORE) Production planning types</value>
+  <value>607BA7BD-F921-1875-5F7F-FCED6E3B6BB3</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="2005d8c3-7f25-498a-8560-1e5ad514bec2">
   <name>Planned</name>
   <synonym>
-   <key>tr</key>
-   <value>Planlanan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Итого план</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Planned</value>
+   <value>BBE652D4-2E41-D8D5-5AA9-9E0E609712DD</value>
   </synonym>
  </enumValues>
  <enumValues uuid="1e69ac9e-abe9-4cca-bbf8-70369f7720c6">
   <name>Produced</name>
   <synonym>
-   <key>tr</key>
-   <value>Üretilen</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Произведено</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Produced</value>
+   <value>48ADAE89-1E82-C49F-FE32-2F0B23605E78</value>
   </synonym>
  </enumValues>
  <enumValues uuid="dcbf66b8-cfda-4f71-8a13-892ce3ad2aa5">
   <name>PlanAdjustment</name>
   <synonym>
-   <key>tr</key>
-   <value>Plan düzeltme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Корректировка планирования</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Plan adjustment</value>
+   <value>9BF59484-34D2-40D5-50C1-149737503AAD</value>
   </synonym>
  </enumValues>
  <enumValues uuid="2dfc5b64-cda2-463e-b631-970b22070334">
   <name>Closing</name>
   <synonym>
-   <key>tr</key>
-   <value>Kapanış</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Закрытие</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Closing</value>
+   <value>0A901864-4F7F-5531-19B7-7F5036271EA5</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

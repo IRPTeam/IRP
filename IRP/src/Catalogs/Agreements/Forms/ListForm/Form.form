@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>BCE2D3A6-3DE2-3F6E-E07B-B20183E61DF9</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -178,16 +170,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>D610E8F5-D566-3AB0-00E8-832662C641A5</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -310,16 +294,8 @@
    <name>Kind</name>
    <id>28</id>
    <title>
-    <key>tr</key>
-    <value>Tür</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Kind</value>
+    <value>0F466118-59AD-355D-D021-14A51ADC6109</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -402,16 +378,8 @@
    <name>ApArPostingDetail</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Alacak Hesapları / Borç Hesapları kayıt detayları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид взаиморасчетов</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>AP/AR posting detail</value>
+    <value>1505E4A2-7B2F-22E0-0BF7-7E6534670D76</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -870,16 +838,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açıklama</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>1D52A268-D5A9-9898-86C0-0462293C564C</value>
       </content>
      </localValue>
     </title>
@@ -1049,16 +1009,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kullanım bitiş tarihi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Дата окончания использования</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>End of use date</value>
+       <value>F91C89EA-1CA5-87DD-D6F7-7589328098F0</value>
       </content>
      </localValue>
     </title>
@@ -1075,16 +1027,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ortak filtresi dahil et</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Включить фильтр по партнеру</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Include filter by partner</value>
+       <value>50979F39-7FE6-FB1C-C16D-D8AFDE103775</value>
       </content>
      </localValue>
     </title>
@@ -1098,16 +1042,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Cari hesap</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Партнер</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Partner</value>
+       <value>FCF2B22C-E3CD-82C5-5595-5BB4DE3F8B5A</value>
       </content>
      </localValue>
     </title>
@@ -1121,16 +1057,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ortak segmentleri dahil et</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Включить сегменты партнеров</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Include partner segments</value>
+       <value>5CD81E10-60BB-6257-7EF1-14C0FF4F7305</value>
       </content>
      </localValue>
     </title>
@@ -1144,16 +1072,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kullanım bitiş tarihi filtresi dahil et</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Включить фильтр по дате окончания использования</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Include filter by end of use date</value>
+       <value>4D3B7264-2897-2CC8-8D44-469B9F310A2D</value>
       </content>
      </localValue>
     </title>
@@ -1167,16 +1087,8 @@ WHERE
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполненные данные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filling data</value>
+   <value>AA95C409-25F4-EB50-0077-7FC9E7CF35BE</value>
   </title>
   <id>2</id>
   <valueType>

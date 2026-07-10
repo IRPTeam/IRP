@@ -9,16 +9,8 @@
  </producedTypes>
  <name>MovementRules</name>
  <synonym>
-  <key>tr</key>
-  <value>Hareket kuralları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Правила движений</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Movement rules</value>
+  <value>F374BFB9-C5DE-F62A-A933-3BB0D54FD7E5</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.MovementRules.StandardAttribute.Code</inputByString>
@@ -104,16 +96,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Hareket kuralı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Правило движений</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Movement rule</value>
+  <value>E01B403A-02AC-7A5F-F746-6626FDEAAD7B</value>
  </objectPresentation>
  <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>
@@ -346,16 +330,8 @@
   </producedTypes>
   <name>NextSteps</name>
   <synonym>
-   <key>tr</key>
-   <value>Sonraki adımlar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Следующий шаг</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Next steps</value>
+   <value>470CE047-069A-6C32-2C41-159D84E276DF</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -368,16 +344,8 @@
   <attributes uuid="991c7d26-70e4-4919-82bc-8dd996ae988c">
    <name>Step</name>
    <synonym>
-    <key>tr</key>
-    <value>Adım</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Шаг</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Step</value>
+    <value>01336A25-04C5-2AE2-2CF6-61F117133898</value>
    </synonym>
    <type>
     <types>CatalogRef.MovementRules</types>

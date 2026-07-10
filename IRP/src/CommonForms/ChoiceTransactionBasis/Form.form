@@ -360,16 +360,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List</value>
+   <value>F5E6344E-26D7-CB47-7540-0B47D303B4D7</value>
   </title>
   <id>1</id>
   <valueType>
@@ -863,16 +855,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Evrak</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Документ</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Document</value>
+       <value>D353CB49-A229-02D9-9FA0-004338F01B12</value>
       </content>
      </localValue>
     </title>
@@ -887,16 +871,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sözleşme</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Соглашение</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Partner term</value>
+       <value>7CFDFAF0-C9B1-7A0D-D238-83664A8DE441</value>
       </content>
      </localValue>
     </title>
@@ -906,16 +882,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Perakende satış fişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Розничные чеки - Продажа</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Retail sales receipt</value>
+       <value>77A66BB5-1E59-29EC-C106-6E12AE417B4C</value>
       </content>
      </localValue>
     </title>
@@ -929,16 +897,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Alacak dekontu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Кредит-нота</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Credit note</value>
+       <value>D6039CB0-858E-7476-6F3D-DEB5D17D5AAB</value>
       </content>
      </localValue>
     </title>
@@ -952,16 +912,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Satın alma faturası</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Поступление товаров и услуг</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Purchase invoice</value>
+       <value>04791C14-84D0-8898-8BD6-647766869AE1</value>
       </content>
      </localValue>
     </title>
@@ -975,16 +927,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Finansal transfer siparişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Заявка на перемещение денежных средств</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Cash transfer order</value>
+       <value>967127E5-B563-DFC1-1966-65C2B4712D73</value>
       </content>
      </localValue>
     </title>
@@ -998,16 +942,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Serbest meslek makbuzu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Акт (услуги) с удержанным налогом</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Withholding tax invoice</value>
+       <value>5D8243EE-2DEF-15AC-C958-8DF9DF4098A2</value>
       </content>
      </localValue>
     </title>
@@ -1021,16 +957,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Borç dekontu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Дебет-нота</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Debit note</value>
+       <value>A2FC64B4-C566-2AC6-64F3-3754BA4B2E32</value>
       </content>
      </localValue>
     </title>
@@ -1044,16 +972,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Satış faturası</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Реализация товаров и услуг</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sales invoice</value>
+       <value>FDFD0F28-2ACF-BBBF-F763-30CD150D41B6</value>
       </content>
      </localValue>
     </title>
@@ -1067,16 +987,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Satış siparişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Заказ покупателя</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sales order</value>
+       <value>C202C43D-19F3-79CB-B5F4-4ADCEB673E34</value>
       </content>
      </localValue>
     </title>
@@ -1090,16 +1002,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Konsiyeye verene satış raporu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отчет комитенту о продажах</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sales report to consignor</value>
+       <value>10946F4C-30BC-9B2D-D319-9DD64BFACEB5</value>
       </content>
      </localValue>
     </title>
@@ -1113,16 +1017,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Cari hesap</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Партнер</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Partner</value>
+       <value>043253D6-6C68-B17A-AFAD-D52E43F01352</value>
       </content>
      </localValue>
     </title>
@@ -1136,16 +1032,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Alım iadesi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Возврат поставщику</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Purchase return</value>
+       <value>002E5A37-00BC-E66F-F387-71FD0DE14DB6</value>
       </content>
      </localValue>
     </title>
@@ -1159,16 +1047,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Satın alma siparişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Заказ поставщику</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Purchase order</value>
+       <value>CE14287B-4E4B-5E9A-AD40-0E7B7070858A</value>
       </content>
      </localValue>
     </title>
@@ -1182,16 +1062,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şirket</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Организация</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Company</value>
+       <value>779F2286-A2A4-FA31-1E38-800E68DD7A22</value>
       </content>
      </localValue>
     </title>
@@ -1205,16 +1077,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Personel iş avans kapaması</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Авансовый отчет сотрудника</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Employee cash advance</value>
+       <value>DD96E7FB-32C0-0ED7-7A46-64A1B0E13695</value>
       </content>
      </localValue>
     </title>
@@ -1228,16 +1092,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Satış iadesi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Возврат товаров от покупателя</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sales return</value>
+       <value>66F839A7-959D-7392-2053-3BAE299E48E5</value>
       </content>
      </localValue>
     </title>
@@ -1251,16 +1107,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Perakende iade fişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Розничные чеки - Возврат</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Retail return receipt</value>
+       <value>DD4A1D56-8955-789C-C6BA-ACB1FF1A081A</value>
       </content>
      </localValue>
     </title>
@@ -1274,16 +1122,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Konsiyeye alandan satış raporu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отчеты комиссионера о продажах</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sales report from trade agent</value>
+       <value>FECAAD2D-465C-8B21-1CED-D03879855B81</value>
       </content>
      </localValue>
     </title>
@@ -1297,16 +1137,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açılış kayıt fişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Ввод начальных остатков</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Opening entry</value>
+       <value>2EFECB91-DF7D-2A21-13AA-ADE9BBA48565</value>
       </content>
      </localValue>
     </title>
@@ -1320,16 +1152,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sipariştir</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Это заказ</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is order</value>
+       <value>0B3764E1-BCBD-009E-EDE4-49F2A553014A</value>
       </content>
      </localValue>
     </title>
@@ -1343,16 +1167,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sözleşme</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Соглашение</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Agreement</value>
+       <value>74E44926-D12D-D67D-D624-4B043F6C8976</value>
       </content>
      </localValue>
     </title>
@@ -1366,16 +1182,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Fatura hesabı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Контрагент</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Legal name</value>
+       <value>D2708CD2-6F68-4AC0-0B84-41E9DA1FD07B</value>
       </content>
      </localValue>
     </title>

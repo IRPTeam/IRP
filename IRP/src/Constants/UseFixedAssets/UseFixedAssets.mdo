@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseFixedAssets</name>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymetleri kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Основеые средства</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use fixed assets</value>
+  <value>3206D99C-F60E-6B10-0C19-9F03B304B8E9</value>
  </synonym>
  <type>
   <types>Boolean</types>

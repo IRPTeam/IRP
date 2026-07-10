@@ -6,32 +6,16 @@
  </producedTypes>
  <name>InternalCommands</name>
  <synonym>
-  <key>tr</key>
-  <value>Dahili Komutlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Внутренние команды</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Internal commands</value>
+  <value>960F81EB-0B24-A0F3-3FFF-FEA6EE9BB53B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.InternalCommands.Form.CommandTemplate</defaultForm>
  <forms uuid="b24ce069-1bb0-40fb-bcf1-1f748b9a4dae">
   <name>CommandTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Komut Şablonu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон команды</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Command template</value>
+   <value>975F78E6-9ED0-AAE1-17C8-8A101FC49749</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -39,16 +23,8 @@
  <forms uuid="27a931da-792e-4779-851a-8e7bf241219d">
   <name>SetNotActive</name>
   <synonym>
-   <key>tr</key>
-   <value>Aktif Olmayanı Ayarla</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Установить неактивным</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Set not active</value>
+   <value>27F9A2A1-5CEA-F64E-E518-81C50F527417</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -56,16 +32,8 @@
  <forms uuid="11eb96fe-8fc0-4f37-b3ac-5600e7e15bc5">
   <name>ShowNotActive</name>
   <synonym>
-   <key>tr</key>
-   <value>Aktif Olmayanı Göster</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Показать неактивные</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Show not active</value>
+   <value>EE221730-FAF3-A8D1-12C1-1EDA7EF987C4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -73,16 +41,8 @@
  <forms uuid="c47bff1b-3b89-4768-9752-fa9c0fbe5fa7">
   <name>GroupEditingProperties</name>
   <synonym>
-   <key>tr</key>
-   <value>Özellikleri düzenle</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Редактировать свойства</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Edit properties</value>
+   <value>A17CD48B-9B8A-B2A4-4BD8-808242BCEA1F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -90,16 +50,8 @@
  <forms uuid="6aae06fd-3034-4f77-a1c3-c3757c418c29">
   <name>CloneValueFromFirstRow</name>
   <synonym>
-   <key>tr</key>
-   <value>İlk satırdan değeri klonla</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Клонировать значение из первой строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Clone value from first row</value>
+   <value>6AE2F365-2D31-64F8-8A55-5551A9276BFC</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -107,16 +59,8 @@
  <forms uuid="dd969621-5cb5-474e-8c22-54876a64f044">
   <name>LoadDataFromTable</name>
   <synonym>
-   <key>tr</key>
-   <value>Tablodan veriyi yükle</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Загрузить данные из таблицы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Load data from table</value>
+   <value>D8614D60-7361-27D1-1FF0-00FC89117B62</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -124,16 +68,8 @@
  <forms uuid="25dc0fd4-7989-4078-8958-27c13b6dcace">
   <name>LoadDataFromTable_Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Tablodan veri yükle (form)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Загрузить данные из таблицы (форма)</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Load data from table (form)</value>
+   <value>3D3FCD46-1B72-024C-C126-6E1426B8C4DC</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -141,16 +77,8 @@
  <forms uuid="0bd55598-3f42-4f1b-838d-c989a189fd48">
   <name>AuditLock</name>
   <synonym>
-   <key>tr</key>
-   <value>Audit kilidi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Аудиторский запрет изменения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Audit lock</value>
+   <value>0343084C-E70C-075D-DE08-832C50C453CA</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -158,16 +86,8 @@
  <forms uuid="7ccf662b-7384-4cfe-97d9-6cfb8e88b57b">
   <name>OpenVendorPrices</name>
   <synonym>
-   <key>tr</key>
-   <value>Open vendor prices</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Открыть цены поставщиков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Open vendor prices</value>
+   <value>5BEFEEFF-D06F-374D-DC41-1DBA595CEFF1</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -175,16 +95,8 @@
  <forms uuid="f7488c15-ff05-4fa7-b83a-90c9f0f159c6">
   <name>PrintTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon yazdır</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон печати</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Print template</value>
+   <value>25872728-D58B-143B-B76A-A0B5FFB3084F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -192,16 +104,8 @@
  <forms uuid="96ba903f-48e1-416e-b190-e10e2e09f416">
   <name>ShowNumerator</name>
   <synonym>
-   <key>tr</key>
-   <value>Numaratör göster</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Показать нумератор</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Show numerator</value>
+   <value>4BB02379-5DE0-7C53-3CB7-713C5463DB94</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -209,16 +113,8 @@
  <forms uuid="33a1e88c-7429-4740-90bf-6f0afdbec654">
   <name>ExecutionTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Yürütme numunesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблоны выполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Execution template</value>
+   <value>754D8A55-7FDD-49D8-80E3-31CCDC2BFC96</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -226,16 +122,8 @@
  <forms uuid="e1785ae8-e4fc-414a-a88e-005766fafd9a">
   <name>EditQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar düzeltme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ввод количества</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Edit quantity</value>
+   <value>9C457F51-F965-E405-5F70-042BA8E68757</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

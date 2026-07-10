@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>0AF91792-BA87-865C-C16F-F47FE1DC81FE</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -788,16 +780,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kapalı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Заказ закрыт</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Closed</value>
+       <value>A511FEBC-1815-4F65-5694-4B5CF7ACBF76</value>
       </content>
      </localValue>
     </title>
@@ -880,16 +864,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sipariş kapatma</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Закрытие заказа</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Closing order</value>
+       <value>7471C217-5352-8D15-5516-69E316E44D31</value>
       </content>
      </localValue>
     </title>

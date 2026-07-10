@@ -157,16 +157,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Eşsiz MD5</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Уникальный MD5</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unique MD5</value>
+   <value>87823704-6937-2829-9DC9-92CF462001F2</value>
   </title>
   <extendedTooltip>
    <name>GroupUniqueMD5ExtendedTooltip</name>
@@ -233,16 +225,8 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Malzeme takımı</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Набор</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Bundle</value>
+      <value>7E396DA2-D80E-730D-DB0D-D35B9B1FC121</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.SpecificationType.EnumValue.Bundle</value>
@@ -250,16 +234,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Set</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Комплект</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Set</value>
+      <value>9E88EA0C-B9A3-B2F3-3102-24C02BA2A20D</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.SpecificationType.EnumValue.Set</value>
@@ -267,16 +243,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Varyanta göre takım</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Набор по характеристике</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Bundle by item key</value>
+      <value>A98ED1F1-F72A-4A80-0CFD-DB41A2241A23</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.SpecificationType.EnumValue.BundleByItemKey</value>
@@ -391,16 +359,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Yeni sayfa ekle</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Добавление новой вкладки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Add new page</value>
+    <value>A56EF839-D8BD-7FF5-565F-FC173F3CD11B</value>
    </title>
    <extendedTooltip>
     <name>GroupAddNewPageExtendedTooltip</name>
@@ -760,28 +720,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzeme listesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Товары</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item list</value>
+    <value>8B8F8E90-97C1-4B95-51F1-1C743EFA3E76</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup malzemeler</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа Товары</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group item list</value>
+    <value>67B5F322-4B85-E854-4F7E-E9E1583A3845</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupItemListExtendedTooltip</name>
@@ -805,16 +749,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>9233ECB6-8062-80B6-6499-91C6C32A382C</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -881,16 +817,8 @@
    <columns>
     <name>IsExternalLinked</name>
     <title>
-     <key>tr</key>
-     <value>Dışarıdan bağlı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Связан внешне</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Is external linked</value>
+     <value>A8AED279-7618-73DB-B91F-F56C91E64DE7</value>
     </title>
     <id>1</id>
     <valueType>
@@ -908,16 +836,8 @@
  <attributes>
   <name>DynamicDataForm</name>
   <title>
-   <key>tr</key>
-   <value>Dinamik veri formu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Динамическая форма</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Dynamic data form</value>
+   <value>19E15439-AD8B-10F4-4E85-561BFDD4E659</value>
   </title>
   <id>6</id>
   <valueType>

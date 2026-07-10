@@ -120,16 +120,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Tutar (grup)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сумма (группа) </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Amount (group)</value>
+   <value>6F2ECE77-9B9F-32A5-5443-30CC7DA703DD</value>
   </title>
   <extendedTooltip>
    <name>GroupAmountExtendedTooltip</name>
@@ -810,16 +802,8 @@
  <attributes>
   <name>Documents</name>
   <title>
-   <key>tr</key>
-   <value>Evraklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Документы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Documents</value>
+   <value>357B0C85-9778-38B5-5D51-18B668C5AE28</value>
   </title>
   <id>1</id>
   <valueType>
@@ -834,16 +818,8 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document</value>
+    <value>0CF7B5DA-AAE9-E829-90E9-9A93D1F686AB</value>
    </title>
    <id>2</id>
    <valueType>
@@ -859,16 +835,8 @@
   <columns>
    <name>Partner</name>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Партнер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Partner</value>
+    <value>4CB2CF87-FC8F-FA24-4879-9CDA8051D5EB</value>
    </title>
    <id>3</id>
    <valueType>
@@ -884,16 +852,8 @@
   <columns>
    <name>Agreement</name>
    <title>
-    <key>tr</key>
-    <value>Sözleşme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Соглашение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Partner term</value>
+    <value>37FE2283-4580-72CB-B796-6223D3B377CB</value>
    </title>
    <id>4</id>
    <valueType>
@@ -909,16 +869,8 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>CFA68293-28C6-46C6-64EB-B8BE379C4CED</value>
    </title>
    <id>5</id>
    <valueType>
@@ -934,16 +886,8 @@
   <columns>
    <name>Payment</name>
    <title>
-    <key>tr</key>
-    <value>Ödeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Оплата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Payment</value>
+    <value>75E7A754-741B-FEFB-BF62-2EDA0A4A76FF</value>
    </title>
    <id>7</id>
    <valueType>
@@ -959,16 +903,8 @@
   <columns>
    <name>Order</name>
    <title>
-    <key>tr</key>
-    <value>Sipariş</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Порядок</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Order</value>
+    <value>9C39087B-4F3E-3C67-7222-2C7D87D283B0</value>
    </title>
    <id>8</id>
    <valueType>
@@ -985,16 +921,8 @@
   <columns>
    <name>Project</name>
    <title>
-    <key>tr</key>
-    <value>Proje</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Проект</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Project</value>
+    <value>562E9A73-F67E-F8D7-7C57-75888B269307</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1010,16 +938,8 @@
   <columns>
    <name>LegalName</name>
    <title>
-    <key>tr</key>
-    <value>Fatura hesabı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Контрагент</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Legal name</value>
+    <value>C4A81F60-61B7-EDC5-50AD-D7CA36CA55F7</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1035,16 +955,8 @@
   <columns>
    <name>LegalNameContract</name>
    <title>
-    <key>tr</key>
-    <value>Fatura hesap kontratı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Договор контрагента</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Legal name contract</value>
+    <value>EB8D9755-7C2B-93F0-035C-C5EA9AD4BAD5</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1060,16 +972,8 @@
   <columns>
    <name>DocDate</name>
    <title>
-    <key>tr</key>
-    <value>Evrak tarihi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Doc date</value>
+    <value>1BF8725D-9BF3-2591-1299-95997A710916</value>
    </title>
    <id>24</id>
    <valueType>
@@ -1086,16 +990,8 @@
   <columns>
    <name>RowKey</name>
    <title>
-    <key>tr</key>
-    <value>Satır anahtarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Row key</value>
+    <value>BE483046-6468-8410-0492-2AECB4DF4F04</value>
    </title>
    <id>25</id>
    <valueType>
@@ -1111,16 +1007,8 @@
   <columns>
    <name>Check</name>
    <title>
-    <key>tr</key>
-    <value>Kontrol</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тест</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Check</value>
+    <value>6F5DA92A-D19F-3CB7-7C0B-BC6B49230007</value>
    </title>
    <id>26</id>
    <valueType>
@@ -1137,16 +1025,8 @@
  <attributes>
   <name>Amount</name>
   <title>
-   <key>tr</key>
-   <value>Tutar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сумма</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Amount</value>
+   <value>C41967EA-825D-7118-8711-1D06C6FFD733</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1163,16 +1043,8 @@
  <attributes>
   <name>FilterPartner</name>
   <title>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Партнер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Partner</value>
+   <value>7B05A595-9219-F6D2-2B7A-AE3D16B2F392</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1188,16 +1060,8 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Организация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company</value>
+   <value>52C712F4-4D0E-6715-5106-6045FC9FE74E</value>
   </title>
   <id>15</id>
   <valueType>
@@ -1213,16 +1077,8 @@
  <attributes>
   <name>Branch</name>
   <title>
-   <key>tr</key>
-   <value>Şube</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Branch</value>
+   <value>F86D40D3-B3F0-874A-AE1D-D4A7AD7F6FA5</value>
   </title>
   <id>16</id>
   <valueType>
@@ -1238,16 +1094,8 @@
  <attributes>
   <name>RegisterName</name>
   <title>
-   <key>tr</key>
-   <value>Kayıt tablo tanımı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование регистра</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Register name</value>
+   <value>D68989EB-E555-CD80-0272-273968AE45A1</value>
   </title>
   <id>17</id>
   <valueType>
@@ -1264,16 +1112,8 @@
  <attributes>
   <name>DocRef</name>
   <title>
-   <key>tr</key>
-   <value>Evrak ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка документа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Doc ref</value>
+   <value>56F6FD63-D2D7-3891-1CB4-49B57CABCD1D</value>
   </title>
   <id>18</id>
   <valueType>
@@ -1289,16 +1129,8 @@
  <attributes>
   <name>AllowedTypes</name>
   <title>
-   <key>tr</key>
-   <value>İzin verilen tipler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разрешенные типы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Allowed types</value>
+   <value>51CB33F3-834A-F2DB-BBB3-32A5EAA7EAF3</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1313,16 +1145,8 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>A6B8AF36-E633-3C23-37C8-84BC725697D5</value>
    </title>
    <id>23</id>
    <valueType/>
@@ -1337,16 +1161,8 @@
  <attributes>
   <name>SelectedDocuments</name>
   <title>
-   <key>tr</key>
-   <value>Seçilen evraklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбранные документы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Selected documents</value>
+   <value>AD70E721-41B7-D966-652F-F932097B92DA</value>
   </title>
   <id>20</id>
   <valueType>
@@ -1361,16 +1177,8 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document</value>
+    <value>36ED7137-28A6-FC0D-DAF7-7B6B477607E7</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1386,16 +1194,8 @@
   <columns>
    <name>Partner</name>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Партнер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Partner</value>
+    <value>53022198-51BF-CE34-49A0-0FBDC871ADCA</value>
    </title>
    <id>27</id>
    <valueType>
@@ -1411,16 +1211,8 @@
   <columns>
    <name>Agreement</name>
    <title>
-    <key>tr</key>
-    <value>Sözleşme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Соглашение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Agreement</value>
+    <value>79F9E4FA-F0F0-1FC8-8EE7-7F6E76876312</value>
    </title>
    <id>28</id>
    <valueType>
@@ -1437,16 +1229,8 @@
  <attributes>
   <name>Currency</name>
   <title>
-   <key>tr</key>
-   <value>Döviz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Валюта</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Currency</value>
+   <value>A9327960-0BD8-9F95-5BA5-50784A5E32F2</value>
   </title>
   <id>21</id>
   <valueType>
@@ -1462,16 +1246,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>29D0912D-64B5-1F69-9D05-58C5BAE16545</value>
   </title>
   <id>1</id>
   <use>
@@ -1487,16 +1263,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>18B91E7E-836F-3124-4878-8B02A0F93C8A</value>
   </title>
   <id>2</id>
   <use>
@@ -1512,16 +1280,8 @@
  <formCommands>
   <name>Calculate</name>
   <title>
-   <key>tr</key>
-   <value>Hesapla</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Рассчитать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Calculate</value>
+   <value>789C1384-EE92-63BE-E154-408875647D7D</value>
   </title>
   <id>3</id>
   <use>
@@ -1541,16 +1301,8 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check all</value>
+   <value>5DE2D6AA-F2CC-C172-2FB0-0DB3C7C6F7FE</value>
   </title>
   <id>4</id>
   <use>
@@ -1569,16 +1321,8 @@
  <formCommands>
   <name>UnckeckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unckeck all</value>
+   <value>08163D95-2746-0842-201B-B0F5F7E227CF</value>
   </title>
   <id>5</id>
   <use>

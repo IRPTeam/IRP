@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="28ec22b5-cc2d-42c5-b9f0-8f0fc75f1f71">
  <name>Report_R5022A_Expenses</name>
  <synonym>
-  <key>tr</key>
-  <value>R5022A Giderler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R5022A_Расходы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R5022A_Expenses</value>
+  <value>3CD3BA56-5C8C-CBB5-5CB6-647254388326</value>
  </synonym>
 </mdclass:Role>

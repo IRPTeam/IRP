@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ELedgerRegistry</name>
  <synonym>
-  <key>tr</key>
-  <value>eDefter kayıt defteri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Реестр eLedger</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>eLedger registry</value>
+  <value>E30F77DE-46D4-CF23-3376-6C5FC8C1C1FB</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ELedgerRegistry.StandardAttribute.Number</inputByString>
@@ -56,28 +48,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>eDefter kayıt defteri</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Реестр eLedger</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>eLedger registry</value>
+  <value>CF24C342-6700-49EC-CE02-23DA683CC41B</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>e-Defter kayıt defterleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Реестры eLedger</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>eLedger registries</value>
+  <value>54F18C07-6147-B810-04F0-0BAF23681059</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -93,16 +69,8 @@
  <attributes uuid="92d4daf8-f93d-4ea6-8da8-7ee892f3dac2">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>CF0421B6-4B19-48CA-A8D4-460851E85823</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -118,16 +86,8 @@
  <attributes uuid="f822ba80-e0d1-4249-a186-8febaeaff385">
   <name>LedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>25E25953-9EBC-0D83-3ADB-BDB1ACCDE952</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -142,16 +102,8 @@
  <attributes uuid="ef882848-a1a0-47b1-bea4-4121076ed00f">
   <name>BeginDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата начала</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Begin date</value>
+   <value>956FACAF-6E69-842A-A4B1-1BED91B92CA4</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -169,16 +121,8 @@
  <attributes uuid="74f8d81a-676f-4d93-bbe8-f1e6a88bcb16">
   <name>EndDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата окончания больничного</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>End date</value>
+   <value>FFC57581-028B-87D1-1873-32A8A0BE6138</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -196,16 +140,8 @@
  <forms uuid="76f7780e-1248-400d-9d61-e57d8b479676">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>68D00442-6583-55CC-C6BA-AF28934897EE</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -213,16 +149,8 @@
  <forms uuid="732ad9ff-7724-4753-9f69-168c0f986f8c">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>B9BDE9A8-D575-5EAB-B91C-CBB63D90BEE9</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -230,16 +158,8 @@
  <forms uuid="8eae42e6-1774-4f17-a2ac-e658a67d1164">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>6B175CFC-2644-CA35-53CC-CBB003586996</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -251,30 +171,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>EF78246D-8415-2672-2009-97D26635FFE7</value>
   </synonym>
   <attributes uuid="f7724882-97fb-4d66-8061-773644109f78">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>869722CE-632C-ABC2-2970-0904B46D1D87</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -286,16 +190,8 @@
   <attributes uuid="160f0f83-0513-4842-b638-f1bb947478d5">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>E1B09C9C-F74E-D9BD-DD5B-B6D7838EF52A</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -312,16 +208,8 @@
  <commands uuid="18dcd3e4-9a7f-44f4-8d8e-5d779c19eeee">
   <name>ExportToCSV</name>
   <synonym>
-   <key>tr</key>
-   <value>CSV'ye Dışa Aktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Экспорт в CSV</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Export to CSV</value>
+   <value>57A68E13-9AD1-DE0B-BA5A-A8DAFE4F2F3F</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>
@@ -332,16 +220,8 @@
  <commands uuid="71c33c5f-9f13-4b1e-977e-e11016d0f29b">
   <name>ExportToCSV_ZIP</name>
   <synonym>
-   <key>tr</key>
-   <value>CSV.ZIP'e aktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Экспортировать в CSV.ZIP</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Export to CSV.ZIP</value>
+   <value>50CEB026-B23C-A0EB-B70D-D1E2A8B1DCB3</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>

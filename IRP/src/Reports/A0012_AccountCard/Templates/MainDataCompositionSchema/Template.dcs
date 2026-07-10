@@ -11,16 +11,8 @@
 			<field>Account</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Hesap</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Банковский счет</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Account</v8:content>
+					<v8:content>BEE13B40-7CEB-829C-C02A-AF55AD259C5E</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -37,16 +29,8 @@
 			<field>Company</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şirket</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Организация</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Company</v8:content>
+					<v8:content>4CCBB354-A9ED-7814-493E-E958B8D6466C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -69,16 +53,8 @@
 			<field>Currency</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валюта</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency</v8:content>
+					<v8:content>B0A1D5EC-7BA9-D19B-B8F8-84E453BC38A5</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -90,16 +66,8 @@
 			<field>ExtDimension1</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gen. ölç.1</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто 1</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim.1</v8:content>
+					<v8:content>E0FD598C-F136-477C-C4B9-9D52319AF473</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -112,16 +80,8 @@
 			<field>ExtDimension2</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek boyut.2</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто 2</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim.2</v8:content>
+					<v8:content>166DFFB1-E099-AB22-24C1-1C5D21751184</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -134,16 +94,8 @@
 			<field>ExtDimension3</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek boyut.3</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто 3</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim.3</v8:content>
+					<v8:content>E6D6B6B7-DFC7-B748-81CA-A47A1A323518</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -156,16 +108,8 @@
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İşlem evrakı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Документ</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:content>835188E5-5A8E-5D0D-D843-3DA256A918A3</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -185,16 +129,8 @@
 			<field>AmountOpeningBalanceDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tutar Dr (açılış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сумма Дт (Начальный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Dr (opening balance)</v8:content>
+					<v8:content>EC58430F-86D7-5027-70F4-4A37D4F03765</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -207,16 +143,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -231,16 +159,8 @@
 			<field>AmountOpeningBalanceCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tutar Cr (açılış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сумма Кт (Начальный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Cr (opening balance)</v8:content>
+					<v8:content>D504B348-524A-5034-48F3-3F87D1BE0BF7</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -253,16 +173,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -277,16 +189,8 @@
 			<field>AmountClosingBalanceDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tutar Dr (kapanış bakiyesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сумма Дт (Конечный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Dr (closing balance</v8:content>
+					<v8:content>C613313F-0FB5-ED02-2010-031D4BF3BBB8</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -299,16 +203,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -323,16 +219,8 @@
 			<field>AmountClosingBalanceCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tutar Alacak (kapanış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сумма Кт (Конечный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Cr (closing balance)</v8:content>
+					<v8:content>072002D7-5A06-B25D-DBA4-4EAD77F74298</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -345,16 +233,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -369,16 +249,8 @@
 			<field>CurrencyAmountOpeningBalanceDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Para birimi tut. Dr (açılış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валютнаы сумма Дт (Начальный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Dr (opening balance)</v8:content>
+					<v8:content>640AF8F4-2D92-1EAD-D59C-C0A11501AC6A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -391,16 +263,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -415,16 +279,8 @@
 			<field>CurrencyAmountOpeningBalanceCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz Tutarı Alacak (açılış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валютнаы сумма Кт (Начальный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Cr (opening balance)</v8:content>
+					<v8:content>B5640F04-4A21-1C9C-C0CB-BC62DCE6F01A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -437,16 +293,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -461,16 +309,8 @@
 			<field>CurrencyAmountClosingBalanceDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz tut. Dr (kapanış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валютнаы сумма Дт (Конечный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Dr (closing balance)</v8:content>
+					<v8:content>3A643D87-21AF-D48C-CEE1-1F5722E4347B</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -483,16 +323,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -507,16 +339,8 @@
 			<field>CurrencyAmountClosingBalanceCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz tut. Cr (kapanış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валютная сумма Кт (Конечный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Cr (closing balance)</v8:content>
+					<v8:content>38B550E0-20E1-C281-171B-B52CCE6BAC36</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -529,16 +353,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -553,16 +369,8 @@
 			<field>QuantityClosingBalanceDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar Dr (kapanış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество Дт (Конечный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Dr (closing balance)</v8:content>
+					<v8:content>3AAC35B6-4351-0E09-9CFF-FAC77DD211B8</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -575,16 +383,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>396D7F95-9356-06CF-FCC7-79B492FD8B3E</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -599,16 +399,8 @@
 			<field>QuantityClosingBalanceCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar Cr (kapanış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество Кт (Начальный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Cr (closing balance)</v8:content>
+					<v8:content>231E3CE4-3149-B83E-ECC8-8172A49CCBC2</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -621,16 +413,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>396D7F95-9356-06CF-FCC7-79B492FD8B3E</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -645,16 +429,8 @@
 			<field>QuantityOpeningBalanceDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar Borç (açılış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество Дт (Начальный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Dr (opening balance)</v8:content>
+					<v8:content>1C8E312F-56C3-AEED-D2A8-811D22F92141</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -667,16 +443,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>396D7F95-9356-06CF-FCC7-79B492FD8B3E</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -691,16 +459,8 @@
 			<field>QuantityOpeningBalanceCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar Alacak (açılış bakiyesi)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество Кт (Начальный остаток)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Cr (opening balance)</v8:content>
+					<v8:content>FCDB1908-CB92-CFD8-8DDC-C2AE41713018</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -713,16 +473,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>396D7F95-9356-06CF-FCC7-79B492FD8B3E</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -737,16 +489,8 @@
 			<field>AmountTurnoverCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tutar Cr (ciro)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сумма Кт (Оборот)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Cr (turnover)</v8:content>
+					<v8:content>4046582A-43B7-11FE-E708-812EE49B1D14</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -754,16 +498,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -778,16 +514,8 @@
 			<field>AmountTurnoverDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tutar Dr (ciro)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Сумма Дт (Оборот)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Dr (turnover)</v8:content>
+					<v8:content>7FEA9056-9FE9-200D-D8A3-3853193DDC0C</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -795,16 +523,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -818,16 +538,8 @@
 			<dataPath>OpeningBalance</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Açılış bakiyesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Начальный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Opening balance</v8:content>
+					<v8:content>26EA8B8D-2CD7-5EA8-8659-9248983B32DC</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -835,16 +547,8 @@
 			<dataPath>ClosingBalance</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Kapanış bakiyesi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Конечный остаток</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Closing balance</v8:content>
+					<v8:content>C3A36A61-1E41-D79B-B363-330C26CC521F</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -852,16 +556,8 @@
 			<dataPath>Turnovers</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönüşümler</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Обороты</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Turnovers</v8:content>
+					<v8:content>A7F6D470-D574-099A-AF95-5A1A25C1B273</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -870,16 +566,8 @@
 			<field>QuantityTurnoverDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar Dr (ciro)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество Дт (Оборот)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Dr (turnover)</v8:content>
+					<v8:content>D82E56A7-AF50-F64F-F299-94067D0099E3</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -887,16 +575,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>396D7F95-9356-06CF-FCC7-79B492FD8B3E</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -911,16 +591,8 @@
 			<field>QuantityTurnoverCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar Alacak (ciro)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Количество Кт (Оборот)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Cr (turnover)</v8:content>
+					<v8:content>CBA31607-467E-E321-10AF-FCA359447854</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -928,16 +600,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=3</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>396D7F95-9356-06CF-FCC7-79B492FD8B3E</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -952,16 +616,8 @@
 			<field>CurrencyAmountTurnoverDr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz tut. Dr (ciro)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валютнаы сумма Дт (Оборот)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Dr (turnover)</v8:content>
+					<v8:content>C3398D5C-3CC4-BBA8-8CD5-5C19015749A7</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -969,16 +625,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -993,16 +641,8 @@
 			<field>CurrencyAmountTurnoverCr</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz Tutarı Alacak (ciro)</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Валютнаы сумма Кт (Оборот)</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Cr (turnover)</v8:content>
+					<v8:content>0E10C086-AC70-B6F7-7ECA-A57FED1C0EBE</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1010,16 +650,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>689A27A3-490D-2C15-52C0-0E3F02FA7506</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -1042,16 +674,8 @@
 			<field>ExtDimensionCr1</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Ek boyut. Cr1</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто Кт1</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim. Cr1</v8:content>
+					<v8:content>D66D11BB-5B6E-DD26-67F9-91F5EAC624B0</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1064,16 +688,8 @@
 			<field>ExtDimensionCr2</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gen. ölç. Cr2</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто Кт2</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim. Cr2</v8:content>
+					<v8:content>EF8221FA-6288-7CCE-EB7A-A80E7046083B</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1086,16 +702,8 @@
 			<field>ExtDimensionCr3</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gen. ölç. Cr3</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто Кт3</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim. Cr3</v8:content>
+					<v8:content>C46CB682-9581-583A-A628-86F6A4EF7AB1</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1108,16 +716,8 @@
 			<field>ExtDimensionDr1</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gen. ölç. Dr1</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто Дт1</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim. Dr1</v8:content>
+					<v8:content>88F74A0D-4B58-2434-403E-E6C10E5E6B17</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1130,16 +730,8 @@
 			<field>ExtDimensionDr2</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gen. ölç. Dr2</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто Дт2</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim. Dr2</v8:content>
+					<v8:content>FCB9D878-2F9B-F718-842D-D8B045931CD4</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1152,16 +744,8 @@
 			<field>ExtDimensionDr3</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Gen. ölç. Dr3</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Субконто Дт3</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim. Dr3</v8:content>
+					<v8:content>EF5A6265-DA4D-E7A4-48DE-E77CC741970D</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1227,16 +811,8 @@
 			<dataPath>Indicators</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Göstergeler</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Идентификаторы</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indicators</v8:content>
+					<v8:content>E7DC150F-71BE-FE7D-D0B6-6242E2C1E03D</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1296,16 +872,8 @@ FROM
 		<expression>"Amt"</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>GöstergesiTut</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Идентификатор Сумма</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Indicator Amt</v8:content>
+				<v8:content>11AF13D8-0F73-89C9-9AA5-578158954F4C</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -1314,16 +882,8 @@ FROM
 		<expression>"Qty."</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Gösterge Mik.</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Идентификатор Колво</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Indicator Qty</v8:content>
+				<v8:content>4B0BF0F1-D586-8F87-7147-732ABABEE92A</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -1332,16 +892,8 @@ FROM
 		<expression>"Curr."</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Gösterge Curr</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Идентификатор Вал</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Indicator Curr</v8:content>
+				<v8:content>71FBC032-AA6C-1BB2-2A62-2A9CB9198C57</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -1356,16 +908,8 @@ End
 </expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Bakiye</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Остаток</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Balance</v8:content>
+				<v8:content>336DA315-C9A9-4789-938E-E0BC9EBA4307</v8:content>
 			</v8:item>
 		</title>
 		<appearance>
@@ -1373,16 +917,8 @@ End
 				<dcscor:parameter>Format</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>NFD=2</v8:content>
+						<v8:content>977DC050-80A8-6CAF-F302-2C9D4007189C</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -1473,16 +1009,8 @@ End
 		<name>Period</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>C23D9792-799F-5B6A-A151-126CD063872E</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1495,16 +1023,8 @@ End
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem başı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Начало периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>79E03FC6-3C60-A64E-E2D0-0BC242A803ED</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1522,16 +1042,8 @@ End
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem sonu</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Конец периода</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>CF18E349-8953-6AC3-33C5-5E2805FB2094</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1549,16 +1061,8 @@ End
 		<name>Top</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Üst</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Верх</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Top</v8:content>
+				<v8:content>7E5323DA-E872-779C-C220-032D6FA9C956</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1580,16 +1084,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Tut.</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Сум.</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Amt.</v8:content>
+								<v8:content>DD1B5D8C-D21F-4308-8057-70D232D5006E</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1605,16 +1101,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Mik.</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Колво</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Qty.</v8:content>
+								<v8:content>F3BC5701-DEDF-FB56-64C1-1693E2DC672A</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1630,16 +1118,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>PC</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Ед</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>PC</v8:content>
+								<v8:content>F3A7BA63-D15F-8142-2E87-7CEB88879F5E</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1655,16 +1135,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Açılış bakiyesi Dr</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Начальный остаток Дт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Opening balance Dr</v8:content>
+								<v8:content>4F1ED21E-E4EB-B663-36DF-F9CD7AE968AC</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1686,16 +1158,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Dr ciroları</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Дт Обороты</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Dr turnovers</v8:content>
+								<v8:content>B4FAD208-1A2C-687D-D135-5F365AEBB4B9</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1717,16 +1181,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Cr dönüşümleri</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Кт Обороты</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Cr turnovers</v8:content>
+								<v8:content>6E77B2CA-B810-FD1C-C9A0-05632237A7FD</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1748,16 +1204,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Kapanış bakiyesi Dr</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Конечный остаток Дт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Closing balance Dr</v8:content>
+								<v8:content>7D3C2516-C252-65E0-03B3-3CCC21E5D735</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1779,16 +1227,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Kapanış bakiyesi Alacak</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Конечный остаток Кт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Closing balance Cr</v8:content>
+								<v8:content>C6E67032-613E-1079-98F4-46AAB360F0F4</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1810,16 +1250,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Göstergeler</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Идентификаторы</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Indicators</v8:content>
+								<v8:content>0C678C87-76A8-32B9-9706-6940B6EE887D</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1861,16 +1293,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Açılış Bakiyesi Alacak</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Начальный остаток Кт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Opening balance Cr</v8:content>
+								<v8:content>D1D2640B-FA9C-490B-B63F-FE92D958EDBC</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1908,16 +1332,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Mik</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Колв</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Qty</v8:content>
+								<v8:content>7F0273CA-B371-021B-BF9D-DFC8690726B4</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1941,16 +1357,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Tut.</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Сум.</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Amt.</v8:content>
+								<v8:content>992A8778-E092-89C3-3D57-79FE89D2592C</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1974,16 +1382,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Döv.</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Вал.</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Curr.</v8:content>
+								<v8:content>4DCAE1AB-CB1E-3067-7F68-8D9E0735FCFA</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1999,16 +1399,8 @@ End
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Mik.</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Колво</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Qty.</v8:content>
+								<v8:content>03B3021E-0556-92F7-7E3E-E57C8713A3C4</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -2036,16 +1428,8 @@ End
 		<dcsset:name>AccountCard</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Hesap kartı</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Карточка счета</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Account card</v8:content>
+				<v8:content>13264A9A-F45C-90A9-9708-800870851AAF</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
@@ -2180,16 +1564,8 @@ End
 					<dcsset:userSettingID>eeaa5d18-5f96-486f-bd0c-6809263c9b58</dcsset:userSettingID>
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Dönem</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Период</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Period</v8:content>
+							<v8:content>97FC63CB-4FAA-3A92-240D-D5BFDB7722DC</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>

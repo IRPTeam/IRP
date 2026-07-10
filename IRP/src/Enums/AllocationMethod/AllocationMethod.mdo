@@ -7,62 +7,30 @@
  </producedTypes>
  <name>AllocationMethod</name>
  <synonym>
-  <key>tr</key>
-  <value>Dağıtma metodu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Метод распределения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Allocation method</value>
+  <value>87665D2F-8C2E-5940-0464-4DDE00B54322</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="1da518d1-f7cb-4fb2-9edd-c2328e23e654">
   <name>ByQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktara göre</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По количеству</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>By quantity</value>
+   <value>305D674C-BDAF-682D-D664-40E7795315B7</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0494e610-3666-4c25-a684-e75ed7f472fa">
   <name>ByAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutara göre</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По сумме</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>By amount</value>
+   <value>A01F7F1A-6F38-2A76-6880-0A568F01D1DC</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7be6addf-d26f-418e-a1a7-bcd620c64431">
   <name>ByWeight</name>
   <synonym>
-   <key>tr</key>
-   <value>Ağırlığa göre</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По весу</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>By weight</value>
+   <value>EA635319-CA2C-E1A8-8EA7-726A1E9E4D71</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

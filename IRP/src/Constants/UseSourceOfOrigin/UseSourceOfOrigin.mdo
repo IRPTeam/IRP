@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseSourceOfOrigin</name>
  <synonym>
-  <key>tr</key>
-  <value>Kaynak kökeni kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать источники происхождения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use source of origin</value>
+  <value>F7433BE4-A691-7CE1-118D-D6C54062BEBD</value>
  </synonym>
  <type>
   <types>Boolean</types>

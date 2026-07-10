@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6524a9c4-fb50-4566-8cef-644aa8146583">
  <name>Document_OutgoingPaymentOrder</name>
  <synonym>
-  <key>tr</key>
-  <value>"Giden ödeme emri" belgesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Исходящий платежный поручение"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Outgoing payment order"</value>
+  <value>618F883A-451D-F963-3205-569197C48ED5</value>
  </synonym>
 </mdclass:Role>

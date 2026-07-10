@@ -13,16 +13,8 @@
      <name>FormWriteMovements</name>
      <id>33</id>
      <title>
-      <key>tr</key>
-      <value>Hareketleri yaz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Запись движений</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Write movements</value>
+      <value>29B15FE2-DD93-A691-1D89-95109189F4A5</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -51,16 +43,8 @@
      <name>FormWriteMovementsWithRegisterSelfControl</name>
      <id>56</id>
      <title>
-      <key>tr</key>
-      <value>Hareketleri sakla (kayıt tablosu kendi kontrolü)</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Запись движений (самоконтроль регистра)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Write movements (register self-control)</value>
+      <value>21E697AF-57EE-2DA1-1B10-07710CF76BB0___</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -90,28 +74,12 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Hareketleri yaz</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Запись движений</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Write movements</value>
+     <value>E7439407-3B4E-7C28-86F9-9325349DF7A7</value>
     </title>
-    <toolTip>
-     <key>tr</key>
-     <value>Grup hareketleri yazma menüsü</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Меню групповой записи движений</value>
-    </toolTip>
     <toolTip>
      <key>en</key>
-     <value>Group write movemements menu</value>
+     <value>15DB239E-DCA8-96FB-B8C8-89DFD69B7B59</value>
     </toolTip>
     <toolTipRepresentation>ShowLeft</toolTipRepresentation>
     <extendedTooltip>
@@ -135,28 +103,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Hareketleri yaz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Запись движений</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Write movements</value>
+    <value>0EBD4045-EBBF-CFB0-0F74-4E7794648926</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Grup hareketleri yazma araç çubuğu</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Панель управления групповой записью движений</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group write movements control panel</value>
+    <value>B3A2BEA2-E84C-8563-335A-AC7150341D73</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupWriteMovementsControlPanelExtendedTooltip</name>
@@ -177,16 +129,8 @@
    <name>ManualMovementsEdit</name>
    <id>30</id>
    <title>
-    <key>tr</key>
-    <value>El ile değiştir</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ручное редактирование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Manual edit</value>
+    <value>BFD5AD8E-ECC7-B33A-A708-84B99C41F8CE</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -325,16 +269,8 @@
    <name>DoNotControlWriteRules</name>
    <id>41</id>
    <title>
-    <key>tr</key>
-    <value>Yazma kurallar devre dışı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Нет правил контроля записи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>No control write rules</value>
+    <value>F028E56B-A55D-92FA-A4D8-87CEFFF614CD</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -429,28 +365,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Test2</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тест2</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Test2</value>
+    <value>B26BB8AF-A8DA-3ADE-E50B-B4847DA5F1C1</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Test2</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Тест2</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Test2</value>
+    <value>B0392987-B74E-817D-D6F8-8753D16738D3</value>
    </toolTip>
    <extendedTooltip>
     <name>Test2ExtendedTooltip</name>
@@ -501,16 +421,8 @@
  <attributes>
   <name>ManualMovementsEdit</name>
   <title>
-   <key>tr</key>
-   <value>Manuel harketleri değişitirme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ручное редактирование движений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Manual movements edit</value>
+   <value>54838135-7E72-FB0A-AD36-663D7B9A77F1</value>
   </title>
   <id>2</id>
   <valueType>
@@ -526,16 +438,8 @@
  <attributes>
   <name>DoNotControlWriteRules</name>
   <title>
-   <key>tr</key>
-   <value>Yazma kurallarını kontrol etme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Не контролировать правила записи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Do not control write rules</value>
+   <value>B0B473EF-0041-06D8-88D7-7518ED58E42E</value>
   </title>
   <id>3</id>
   <valueType>
@@ -551,29 +455,13 @@
  <formCommands>
   <name>WriteMovements</name>
   <title>
-   <key>tr</key>
-   <value>Hareketleri yaz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Запись движений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Write movements</value>
+   <value>3EF5A9DA-A055-D4FB-BA8D-D2938876931E</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Hareketleri yaz</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Запись движений</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Write movements</value>
+   <value>F9252DF0-B001-5C36-6BFE-E772EDF0E3FF</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -588,16 +476,8 @@
  <formCommands>
   <name>RereadPostingData</name>
   <title>
-   <key>tr</key>
-   <value>Kaydetme verisini tekrar oku</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Перечитать данные проведения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Reread posting data</value>
+   <value>F8FE146D-F159-6739-9F20-0921BCC4126C</value>
   </title>
   <id>2</id>
   <use>
@@ -613,29 +493,13 @@
  <formCommands>
   <name>MovementAnalysis</name>
   <title>
-   <key>tr</key>
-   <value>Hareket analizi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Анализ движений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Movement analysis</value>
+   <value>0D62752D-C59F-B557-77B8-8DE96DB62048</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>tr</key>
-   <value>Hareket analizi</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Анализ движений</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Movement analysis</value>
+   <value>5DE01E56-A5FE-0607-74C0-0EFD486FA16F</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -650,29 +514,13 @@
  <formCommands>
   <name>WriteMovementsWithRegisterSelfControl</name>
   <title>
-   <key>tr</key>
-   <value>Kayıt tablo kendi kontrolü ile hareketleri yaz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Запись движений с самоконтролем регистра</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Write movements with register self control</value>
+   <value>950E25F0-C6EB-03E7-7C05-58AADF1CE989______</value>
   </title>
   <id>4</id>
   <toolTip>
-   <key>tr</key>
-   <value>Kayıt tablo kendi kontrolü ile hareketleri yaz</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Запись движений с самоконтролем регистра</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Write movements with register self control</value>
+   <value>2E1DA50D-D916-2A1B-B0E0-070C9F77F945______</value>
   </toolTip>
   <use>
    <common>true</common>

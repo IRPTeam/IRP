@@ -11,16 +11,8 @@
  </producedTypes>
  <name>AppliedDatabaseUpdates</name>
  <synonym>
-  <key>tr</key>
-  <value>Uygulanan veritabanı güncellemeleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Установленные обновления базы данных</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Applied database updates</value>
+  <value>6909A8BF-DEF5-6628-8024-4B1C4BD500BA</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,16 +20,8 @@
  <dimensions uuid="e9a7762e-5196-4407-a586-66beaa0b9691">
   <name>UpdateMethod</name>
   <synonym>
-   <key>tr</key>
-   <value>Güncelleme yöntemi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Метод обновления</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Update method</value>
+   <value>497C2E17-E823-6543-3B93-37238E765828</value>
   </synonym>
   <type>
    <types>String</types>
@@ -55,16 +39,8 @@
  <dimensions uuid="5a6f5f57-0e9e-4237-b48f-dc4f7ad8c0a0">
   <name>AppliedDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Uygulanan tarih</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата установки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Applied date</value>
+   <value>16F09CCB-1779-A292-24BD-D3668D41061A</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -80,16 +56,8 @@
  <dimensions uuid="74f5e996-b91c-4292-a350-56f387e5f4a3">
   <name>ReleaseNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Sürüm numarası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер релиза</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Release number</value>
+   <value>33BF7C03-CF4E-09BE-E5A1-1EDD575D73F2</value>
   </synonym>
   <type>
    <types>String</types>

@@ -7,92 +7,44 @@
  </producedTypes>
  <name>SalesTransactionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Satış işlem tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Вид операций реализации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Sales transaction types</value>
+  <value>78B67442-AD82-5C32-255A-A8375EA291B5</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="ecf776ab-9e00-4383-8903-f79f90804b12">
   <name>Sales</name>
   <synonym>
-   <key>tr</key>
-   <value>Satış</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Продажа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Sales</value>
+   <value>0B6D7CF7-0DC5-1EA1-10E4-4065C22495AB</value>
   </synonym>
  </enumValues>
  <enumValues uuid="c314613a-f1b1-4991-873f-be6f6d2d91b6">
   <name>ShipmentToTradeAgent</name>
   <synonym>
-   <key>tr</key>
-   <value>Konsiyeye alana sevkiyat</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отгрузка комиссионеру</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Shipment to trade agent</value>
+   <value>C735672C-C118-567F-F01C-C4ABEC744925</value>
   </synonym>
  </enumValues>
  <enumValues uuid="68f46b93-cb50-4c25-9982-77c7c902a13c">
   <name>RetailSales</name>
   <synonym>
-   <key>tr</key>
-   <value>Perakende satışlar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Розничный продажи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Retail sales</value>
+   <value>43C2BD2A-6F86-FD91-1385-5F41D31AC473</value>
   </synonym>
  </enumValues>
  <enumValues uuid="9c13a8d0-a355-4fe0-9618-d7690dbe2760">
   <name>CurrencyRevaluationCustomer</name>
   <synonym>
-   <key>tr</key>
-   <value>Para birimi yeniden değerleme Müşteri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Переоценка валюты клиента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency revaluation customer</value>
+   <value>B33FB2F9-C03F-6E12-2DFD-D382E14B951B</value>
   </synonym>
  </enumValues>
  <enumValues uuid="dac34fb0-e697-40c8-a7ea-54d62d301f66">
   <name>CurrencyRevaluationVendor</name>
   <synonym>
-   <key>tr</key>
-   <value>Para birimi yeniden değerleme Tedarikçi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Переоценка валюты поставщика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency revaluation vendor</value>
+   <value>E4BDCD09-D09C-7234-47DD-D5FC30679338</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="789a38b2-3306-4ad4-aa8a-b6a1d63e7aa6">
  <name>UseSalesOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>Satış siparişlerinin kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать заказы на продажу</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use sales orders</value>
+  <value>3395263C-B212-8B05-5D44-46269F4F6CDC</value>
  </synonym>
  <location>Constant.UseSalesOrders</location>
  <privilegedGetMode>true</privilegedGetMode>

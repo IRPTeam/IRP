@@ -35,16 +35,8 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Stok adedi</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>По учету</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Exp. count</value>
+     <value>0FD758AE-BB5E-D43C-C59D-DEFD62D9F953</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>ExpCount</value>
@@ -52,16 +44,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Sayım adedi</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Фактическое количество</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Phys. count</value>
+     <value>97B10236-FAE9-668D-D4D7-7819C8DEAC5A</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>PhysCount</value>
@@ -160,16 +144,8 @@
  <attributes>
   <name>CopyQuantityAs</name>
   <title>
-   <key>tr</key>
-   <value>Miktarı şu şekilde kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопировать количество как...</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy quantity as</value>
+   <value>A5A3DB84-5666-B1B7-7403-33E73859F6FD</value>
   </title>
   <id>1</id>
   <valueType>
@@ -186,16 +162,8 @@
  <attributes>
   <name>CopySelectedRows</name>
   <title>
-   <key>tr</key>
-   <value>Seçili satırları kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопировать выбранные строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy selected rows</value>
+   <value>948F039F-10E0-7CF9-9CD2-22DD63C08CB7</value>
   </title>
   <id>2</id>
   <valueType>
@@ -211,16 +179,8 @@
  <attributes>
   <name>SourceRef</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка источника</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Source ref</value>
+   <value>D1DE9749-4F4C-5E86-699F-F54575B9A8F6</value>
   </title>
   <id>3</id>
   <valueType>
@@ -236,16 +196,8 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>01ACB685-4851-4F1D-DB00-04C7F536857B</value>
   </title>
   <id>1</id>
   <use>
@@ -261,16 +213,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>71F3046F-D35F-D73A-ADAD-D156EE983462</value>
   </title>
   <id>2</id>
   <use>

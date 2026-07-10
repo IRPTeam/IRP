@@ -11,16 +11,8 @@
  </producedTypes>
  <name>DELETE_T2011S_TransactionsCurrencyRevaluation</name>
  <synonym>
-  <key>tr</key>
-  <value>T2011S İşlemler para birimi değerlemesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T2011S Переоценка валюты транзакций</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T2011S Transactions currency revaluation</value>
+  <value>1EA0EC4E-DA94-4130-0236-6DE528F42366____</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="88ed0ebe-5b67-471e-bd13-9e661cca19cc">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>16460BD0-0AB9-E05D-D5FA-A229BB504B6C</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -53,16 +37,8 @@
  <dimensions uuid="2b5e9cd5-03ed-474f-bd3b-51d1b221e320">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>EFF3130F-EEEC-B736-6508-887B5AA3879A</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -77,16 +53,8 @@
  <dimensions uuid="8b82dd88-3e61-466f-9026-c7350581d298">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>F1312507-76F4-52A6-6F46-658151CE5C4D</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -101,16 +69,8 @@
  <dimensions uuid="19dbe722-6ab0-4df6-8ff8-a09806de180f">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>F4164A33-7D52-7091-122B-BDE732CDCBEA</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesReportFromTradeAgent</types>
@@ -144,16 +104,8 @@
  <dimensions uuid="19d4eaf6-37d1-4bce-8a57-458e96031edf">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>AB5FFE41-310D-966A-A950-08603A9E37C8</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -166,16 +118,8 @@
  <dimensions uuid="09561e60-f4eb-45e3-a024-b60e2bf0f6e4">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>F159751F-B6EB-17EE-ED68-89B6E159F0F9</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -190,16 +134,8 @@
  <dimensions uuid="775fcf8a-e0ee-45d4-ab31-2516f3899df0">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction currency</value>
+   <value>7F9F9402-37D6-340D-D3F3-3FF7B8733376</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -212,16 +148,8 @@
  <dimensions uuid="02ed3933-0cee-4a7a-b83f-9d551c692e5f">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>3954019B-7E74-59B1-1E86-66F9E3FD38C8</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -236,16 +164,8 @@
  <dimensions uuid="3dc6c4e2-0e6a-4c15-ab84-803e391279ea">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>95F8430A-2D85-ACC5-57D3-3EE947F1E31D</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -260,16 +180,8 @@
  <dimensions uuid="5143bc7b-3f17-4810-9e55-6df416897354">
   <name>TransactionDocument</name>
   <synonym>
-   <key>tr</key>
-   <value>Hareket evrakı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction document</value>
+   <value>F0AB83B8-449F-2453-3C34-4F8F7202ECFF</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesReportFromTradeAgent</types>
@@ -293,16 +205,8 @@
  <dimensions uuid="937d78ae-59f4-4a9d-9194-e73f372c9938">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Agreement</value>
+   <value>ECCF961A-45DE-F48D-D926-688FE66DD8DA</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -317,16 +221,8 @@
  <dimensions uuid="701ca33e-c5ee-470b-ab4e-604a5cae4b7e">
   <name>TransactionOrder</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap hareket siparişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction order</value>
+   <value>1CAD382F-8EE6-BD05-577D-DE980EEE263C</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>

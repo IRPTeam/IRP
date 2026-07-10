@@ -6,32 +6,16 @@
  </producedTypes>
  <name>SystemSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Sistem ayarları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Настройки системы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>System settings</value>
+  <value>84135F92-077E-E613-3784-4C8BA4ED7799</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.SystemSettings.Form.Form</defaultForm>
  <forms uuid="8b9f4c4d-a1cb-4665-9cb6-0512fe997ce5">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>A8BFF7F8-7475-5102-251A-AD566C3BFBA8</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

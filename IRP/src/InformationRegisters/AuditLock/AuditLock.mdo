@@ -11,57 +11,25 @@
  </producedTypes>
  <name>AuditLock</name>
  <synonym>
-  <key>tr</key>
-  <value>Audit kilidi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Аудиторский запрет изменения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Audit lock</value>
+  <value>D4F7CF89-788D-F842-2936-6E0B6F271921</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Audit kilidi</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Аудиторский запрет изменения</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Audit lock</value>
+  <value>03E4B563-27C8-25D7-7C64-4577415CFAA4</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Audit kilidi</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Блокировки аудита</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Audit locks</value>
+  <value>59C94AD7-E88E-6ABD-DAFE-E79197C155E4</value>
  </listPresentation>
  <dimensions uuid="4f0971b4-a3aa-4451-905d-705816410b0f">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>75CFB40B-9C8D-2235-512D-DC62D19E0D83</value>
   </synonym>
   <type>
    <types>DocumentRef</types>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>Currencies</name>
  <synonym>
-  <key>tr</key>
-  <value>Dövizler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Валюты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Currencies</value>
+  <value>BE170E29-BA8C-5326-65AD-D0EB3C0B1D21</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Currencies.StandardAttribute.Code</inputByString>
@@ -135,16 +127,8 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Döviz</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Валюта</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Currency</value>
+  <value>DC57064C-7B57-E77A-A0C7-7D752DEBD4C1</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -169,16 +153,8 @@
  <attributes uuid="e3dbb019-b9eb-4392-8faf-8ebae3fc898e">
   <name>Symbol</name>
   <synonym>
-   <key>tr</key>
-   <value>Simge</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Символ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Symbol</value>
+   <value>3B12617B-6FC7-2EC4-40CB-B553F338B865</value>
   </synonym>
   <type>
    <types>String</types>
@@ -188,25 +164,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="1477549c-e8a4-4fab-a6a4-3dd8dca6b8d0">
   <name>NumericCode</name>
   <synonym>
-   <key>tr</key>
-   <value>Sayısal kod</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Цифровой код</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Numeric code</value>
+   <value>B2C2EA6B-036F-FBD5-5CEC-C2C8C98DB8CB</value>
   </synonym>
   <type>
    <types>String</types>
@@ -216,9 +182,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -229,30 +193,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>BA761D8B-FCE3-6168-8739-9E4C73E7405C</value>
   </synonym>
   <attributes uuid="792a950e-0ebe-4767-a929-d6dc90221fac">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>2FF7E91C-EF07-8040-0B81-115B25E9F9B5</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -265,16 +213,8 @@
   <attributes uuid="37cdff14-e6cc-4f88-a49d-ac1f0ebe5aa5">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>FBF95CA8-933D-6022-20B6-6AA88C2F136F</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -292,16 +232,8 @@
  <forms uuid="81b4c231-1b4b-4178-99c2-a6e580eca048">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>D94EB308-7546-C56E-E440-04954173344F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -309,16 +241,8 @@
  <forms uuid="5d50a584-ae6b-40f6-a633-88795cb903f6">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>1509472E-10E1-E522-28E9-989404D7653D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -326,16 +250,8 @@
  <forms uuid="f8aa0177-f31c-4524-878a-bba836bab82d">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>8236D61B-5FE3-2690-0174-4A05A9D1A749</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -343,16 +259,8 @@
  <forms uuid="e3fc7388-8c22-455d-9f70-24df8b272d48">
   <name>SelectIntegration</name>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon seç</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Выбор интеграции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Select integration</value>
+   <value>EFCBC431-C14B-3924-4DB3-3CA2C8FA7FB5</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -360,16 +268,8 @@
  <forms uuid="5d0b6755-7929-43b5-b090-bf6a674234b7">
   <name>LoadCurrencies</name>
   <synonym>
-   <key>tr</key>
-   <value>Dövizleri yükle</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Загрузить валюты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Load currencies</value>
+   <value>ACBEACB8-12F3-87C2-2A25-5EB1009783C0</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -377,16 +277,8 @@
  <templates uuid="9e8375d4-6b4a-4b02-963f-b3c2bcf22d67">
   <name>CurrencyList</name>
   <synonym>
-   <key>tr</key>
-   <value>Dövizler listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Список валют</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency list</value>
+   <value>CA18C511-3EFC-C6B4-4DE9-91F40F60E40F</value>
   </synonym>
   <comment>https://github.com/wiredmax/world-currencies</comment>
   <templateType>BinaryData</templateType>

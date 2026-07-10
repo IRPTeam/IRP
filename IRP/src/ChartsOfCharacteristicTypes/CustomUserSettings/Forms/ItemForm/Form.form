@@ -301,16 +301,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Nesneler grubu</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа объектов применения</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Refers to objects group</value>
+      <value>FEACB3DE-C48A-4F0E-EFD0-07398B0F181C</value>
      </title>
      <extendedTooltip>
       <name>RefersToObjectsGroupExtendedTooltip</name>
@@ -475,16 +467,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Nesneler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Объекты применения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Refers to objects</value>
+    <value>5D9B4B16-8EE2-0566-6B54-43312EF058F4</value>
    </title>
    <extendedTooltip>
     <name>GroupRefersToObjectsExtendedTooltip</name>
@@ -508,16 +492,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа основная</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main</value>
+   <value>A2152D40-2370-413D-DEE3-33E648B2B0F0</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -576,16 +552,8 @@
    <columns>
     <name>PictureIndex</name>
     <title>
-     <key>tr</key>
-     <value>Resim indeksi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Индекс картинки</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Picture index</value>
+     <value>F6F90452-5E96-A9D8-8598-81D176123095</value>
     </title>
     <id>2</id>
     <valueType>
@@ -606,16 +574,8 @@
  <formCommands>
   <name>AddRefersToObject</name>
   <title>
-   <key>tr</key>
-   <value>Nesneleri doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Добавить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Add refers to object</value>
+   <value>B43D3D90-B0D0-836E-EB8F-F925AEE42D33</value>
   </title>
   <id>1</id>
   <use>

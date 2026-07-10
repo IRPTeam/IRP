@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="90504654-6356-4add-8330-77c58dac6cf4">
  <name>Document_JournalEntry</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak "Muhasebe fişi"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Бухгалтерская операция"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Journal entry"</value>
+  <value>E67E07CD-7DE5-DE87-734E-EB2D7B924D22</value>
  </synonym>
 </mdclass:Role>

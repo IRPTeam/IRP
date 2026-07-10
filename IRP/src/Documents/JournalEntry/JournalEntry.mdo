@@ -9,16 +9,8 @@
  </producedTypes>
  <name>JournalEntry</name>
  <synonym>
-  <key>tr</key>
-  <value>Mahsup fişi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Бухгалтерская операция</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Journal entry</value>
+  <value>B41B4448-24D6-D7DC-C26F-F1040CE1D3A4</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.JournalEntry.StandardAttribute.Number</inputByString>
@@ -59,28 +51,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Mahsup fişi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Бухгалтерская операция</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Journal entry</value>
+  <value>20D1EE12-7D20-0785-5F8A-A2E663FB54F6</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Mahsup fişleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Бухгалтерские операции</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Journal entries</value>
+  <value>F02E4DF8-AA4A-8725-5C0B-BAFC00A33C5C</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -96,16 +72,8 @@
  <attributes uuid="6be09410-c60e-4f67-9a7a-796dffddd541">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>6F72A227-F90C-F3CD-DACC-C9BFFE9DBA1B</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -120,16 +88,8 @@
  <attributes uuid="7c7a88b5-e014-4533-a568-be5246c62a8c">
   <name>LedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>6EBF9DF8-96B1-FB0A-A208-853B237356D0</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -144,16 +104,8 @@
  <attributes uuid="394ef6d8-5b4b-46b0-b464-409486bf29a0">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis</value>
+   <value>E17F0DC4-ECEF-E236-6B98-8074C8F4CE91</value>
   </synonym>
   <type>
    <types>DefinedType.typeAccountingDocuments</types>
@@ -168,16 +120,8 @@
  <attributes uuid="a6b8398a-18fb-4b0b-a9a4-4b5c007c767a">
   <name>UserDefined</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı tanımlı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Произвольный</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User defined</value>
+   <value>3CD4B146-0955-49DE-E3C4-4E84B0CE4CF0</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -191,16 +135,8 @@
  <attributes uuid="16d4f230-101a-4b44-961e-4232dc36ac0f">
   <name>ELedgerRegistry</name>
   <synonym>
-   <key>tr</key>
-   <value>eDefter kayıt defteri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Реестр eLedger</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>eLedger registry</value>
+   <value>323ACF50-7F2D-27B4-499C-C31CDABAA32A</value>
   </synonym>
   <type>
    <types>DocumentRef.ELedgerRegistry</types>
@@ -214,16 +150,8 @@
  <attributes uuid="868732cf-c360-4d4a-9970-141c91f0ee40">
   <name>SequentalNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Sıra numarası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Порядковый номер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Sequental number</value>
+   <value>3EEB7202-8A3A-F417-7C96-6FEB35543061</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -240,16 +168,8 @@
  <forms uuid="a7ceddf1-8c4e-44f9-a830-42106fc0bc53">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>42BECB6B-852C-87DC-C961-1CF0C649E8EE</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -257,16 +177,8 @@
  <forms uuid="f6fb5536-eb71-4fec-ae16-cf171fca6762">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>86EF530C-2CE7-00A6-6D94-45CA6A0E0F20</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -274,16 +186,8 @@
  <forms uuid="57195246-c6a2-46b0-bc5a-cbc57208d5b4">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>706E41CF-8667-4217-751B-BF442659B617</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -291,16 +195,8 @@
  <forms uuid="f0b17e7e-fd9c-49f0-9f1f-5ee97e40078c">
   <name>SelectLedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi seç</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Выбрать тип учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Select ledger type</value>
+   <value>E5A7099D-9D53-DBCE-EEDB-B420C482229C</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -312,30 +208,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>3EE6323A-2B20-AC7E-EA0A-A23991C86809</value>
   </synonym>
   <attributes uuid="afae46d8-9248-44f5-a78f-9431a4bf0192">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>9979F836-7778-8131-1E36-65A94D37A383</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -347,16 +227,8 @@
   <attributes uuid="63c74c89-8858-4b78-8b26-797f8a5242a5">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>2373A98F-FCF0-7DF0-029F-FDE307BB7427</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -377,30 +249,14 @@
   </producedTypes>
   <name>Errors</name>
   <synonym>
-   <key>tr</key>
-   <value>Hatalar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ошибки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Errors</value>
+   <value>B2F9E381-D614-9A0C-C672-215A82DB799E</value>
   </synonym>
   <attributes uuid="40aa1101-080a-412f-bc13-a5bf5d005d7d">
    <name>Error</name>
    <synonym>
-    <key>tr</key>
-    <value>Hata</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ошибка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Error</value>
+    <value>1DAF46A3-CCE1-537E-E825-58B73282AADD</value>
    </synonym>
    <type>
     <types>String</types>
@@ -417,16 +273,8 @@
  <commands uuid="3ff17cfd-55b1-44f3-afc7-73b16bb66d4a">
   <name>JournalEntry</name>
   <synonym>
-   <key>tr</key>
-   <value>Mahsup fişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Бухгалтерская операция</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Journal entry</value>
+   <value>FC448AC6-CE4B-59C6-6CB2-24868FE70A52</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>
@@ -440,16 +288,8 @@
  <commands uuid="796873d7-7d25-4821-8d80-2ec5c1d8ee2b">
   <name>JournalEntryMultipleDocuments</name>
   <synonym>
-   <key>tr</key>
-   <value>Mahsup fişler (çoklu oluşturma)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Бухгалтерская операция (несколько документов)</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Journal entry (multiple documents)</value>
+   <value>B0C5F92B-E3EB-E131-1608-820A7766D59E</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>

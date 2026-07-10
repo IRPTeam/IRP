@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R3027B_EmployeeCashAdvance</name>
  <synonym>
-  <key>tr</key>
-  <value>R3027 Personel iş avans kapamaları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R3027 Авансовые отчеты сотрудников</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R3027 Employee cash advance</value>
+  <value>4E87B20D-8DD7-98BB-B9CC-C6757565894A</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="b6bf6f7d-207f-4688-8d96-e6de0e2f6193">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>69CFEFBD-7A9B-E03F-F6AD-DD5C9F0684F3</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <attributes uuid="5e947daa-ef48-495b-931b-5570725e1b17">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложенный расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deferred calculation</value>
+   <value>E4474257-1527-2D5A-A80F-FD8B7DE8D6AA</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -69,16 +45,8 @@
  <dimensions uuid="4033391a-2d06-4025-a52f-b933fe6fc5ff">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>C92ADAA0-F2B7-080E-EF17-78E4FA96DFBE</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -91,16 +59,8 @@
  <dimensions uuid="94f2251b-0bf3-4dfc-8857-d9bc7f15e853">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>E0D9C14F-7D86-4B57-7EAF-F7EDD60E1E8B</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -113,16 +73,8 @@
  <dimensions uuid="3283efc8-7f76-4d75-8982-7006e6512cc9">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>E6D0FD26-A8C1-78C2-24C4-434EA02A3E36</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -135,16 +87,8 @@
  <dimensions uuid="09e27bdc-0c7f-4cab-be4c-3ba1576b4262">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Agreement</value>
+   <value>856901B3-EF41-B426-6FE4-4DC27E551ACA</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -157,16 +101,8 @@
  <dimensions uuid="6f393e4c-ef01-42b1-bfac-78d6de246a72">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>95297D35-81F8-66FB-BA22-2B32FFF3BDF1</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -179,16 +115,8 @@
  <dimensions uuid="a2008d4b-5c5d-4c50-9ea7-c75f6bca8084">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction currency</value>
+   <value>E1B7A0A9-AFA4-D8AD-DC1E-E089AF97724E</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -201,16 +129,8 @@
  <dimensions uuid="0fc622b3-9e2c-4366-b474-99fcea78a387">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>C08DCC92-DA36-5C02-2364-4A3768BA0835</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>

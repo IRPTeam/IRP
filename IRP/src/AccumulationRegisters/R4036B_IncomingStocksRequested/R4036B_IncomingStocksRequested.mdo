@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R4036B_IncomingStocksRequested</name>
  <synonym>
-  <key>tr</key>
-  <value>R4035 Gelecek mallar rezervi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4036 Заявки на планируемый приход товара</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4036 Incoming stock requested</value>
+  <value>D516A5F2-B15D-95E6-6681-1EFD3582067A</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="6e3b4657-bef1-4ba0-9d3c-64f16fbe9fc5">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>9C63A282-0CC0-A42F-F72E-E222432258D6</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="f757a851-79ce-4d05-be44-b57a67b7b872">
   <name>IncomingStore</name>
   <synonym>
-   <key>tr</key>
-   <value>Gelen depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад получатель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Incoming store</value>
+   <value>084D41BE-DBD7-2EFE-E452-2BE0E2003F45</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="2a2fa763-221b-4880-9add-345d746d5d0a">
   <name>RequesterStore</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep eden depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад заявитель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Requester store</value>
+   <value>7B28BD45-A4CA-BDBB-B847-715EB96F7AF0</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="63952859-daf8-48f3-9aba-42c3b61b5605">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>1B7B9438-07F6-01CE-EF24-48DCADEDB969</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="37950e3b-bf61-478a-a6b8-57daf6e4a6d6">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>E59CAC06-6BD8-D692-2AF6-620FFD7B4E65</value>
   </synonym>
   <type>
    <types>DocumentRef.ProductionPlanning</types>
@@ -138,16 +90,8 @@
  <dimensions uuid="6eba2b27-88a2-4810-ade4-a925802c2e28">
   <name>Requester</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep eden</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ заявитель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Requester</value>
+   <value>1BC01C5B-D0FA-6A12-2241-1BD1903AE04D</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesOrder</types>

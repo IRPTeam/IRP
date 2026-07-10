@@ -7,62 +7,30 @@
  </producedTypes>
  <name>BatchType</name>
  <synonym>
-  <key>tr</key>
-  <value>Parti tipi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип партии</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Batch type</value>
+  <value>9B52B31C-6670-539A-AED7-77481B23EC07</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="c97b56ee-5329-4fef-87a3-22af2bd3e78c">
   <name>BatchShortageOutgoing</name>
   <synonym>
-   <key>tr</key>
-   <value>Parti noksanı - çıkan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Недостача по партии - расход</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Batch shortage outgoing</value>
+   <value>543695EC-CB57-897F-F00B-B53B1FB9FD63</value>
   </synonym>
  </enumValues>
  <enumValues uuid="c75bc187-47e7-422d-83c0-fc8f2a2c9a27">
   <name>NotCalculated</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesaplanmadı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Не рассчитан</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Not calculated</value>
+   <value>5C1522F2-8BC4-3583-3DBB-B5327E1D5FE1</value>
   </synonym>
  </enumValues>
  <enumValues uuid="43c08b4b-f630-4168-a62b-9f4088e9000f">
   <name>BatchShortageIncoming</name>
   <synonym>
-   <key>tr</key>
-   <value>Parti noksanı - gelen</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Недостача по партии - приход</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Batch shortage incoming</value>
+   <value>4C377114-2FE2-C26C-C4A9-997E04388E83</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

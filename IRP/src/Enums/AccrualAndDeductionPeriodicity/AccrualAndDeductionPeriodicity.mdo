@@ -7,62 +7,30 @@
  </producedTypes>
  <name>AccrualAndDeductionPeriodicity</name>
  <synonym>
-  <key>tr</key>
-  <value>Tahakkuk ve kesinti periyodikliği</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Периодичность начислений и удержаний</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Accrual and deduction periodicity</value>
+  <value>4DC87BC8-8D0C-EB46-6A56-6C7FBB0CB055</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="2e629677-1166-4c65-aa1c-a4b227e8cecb">
   <name>ByDay</name>
   <synonym>
-   <key>tr</key>
-   <value>Günlük</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По дням</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>By day</value>
+   <value>0B3FF5F2-F8B1-A519-9BDE-EBEC4D021E28</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0b1a7c6f-4f07-4805-b7f5-df97941eaee0">
   <name>ByPeriod</name>
   <synonym>
-   <key>tr</key>
-   <value>Döneme göre</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По периоду</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>By period</value>
+   <value>F177652B-67DA-EA49-9D89-9664A34D2B6C</value>
   </synonym>
  </enumValues>
  <enumValues uuid="8d74e46e-bab9-4515-909e-296a0905041f">
   <name>OneTime</name>
   <synonym>
-   <key>tr</key>
-   <value>Tek seferlik</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Единоразово</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>One time</value>
+   <value>5D59CDCF-8341-23D3-30B8-8DE6C28103CC</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -11,16 +11,8 @@
  </producedTypes>
  <name>TranformedObjectsLink</name>
  <synonym>
-  <key>tr</key>
-  <value>Dönüştürülmüş nesneler bağlantısı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Ссылка на преобразованные объекты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Tranformed objects link</value>
+  <value>E3A1B764-D874-7FBE-EFF1-1EED480C55F5</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,16 +20,8 @@
  <resources uuid="76ebd240-83a0-48f4-8d66-1635a8af1804">
   <name>TransformationRule</name>
   <synonym>
-   <key>tr</key>
-   <value>Dönüşüm kuralı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Правило преобразования</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transformation rule</value>
+   <value>59D5E84E-E508-25A8-8DB5-59F0E130BCBF</value>
   </synonym>
   <type>
    <types>CatalogRef.TransformationRules</types>
@@ -52,16 +36,8 @@
  <dimensions uuid="5ad8d5ba-4ba1-4507-85bf-9b7383b4a32d">
   <name>Source</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Источник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source</value>
+   <value>DC77CBC7-7829-6D31-16DF-F43EFD09DE2B</value>
   </synonym>
   <type>
    <types>AnyRef</types>
@@ -77,16 +53,8 @@
  <dimensions uuid="4cacf033-bfd5-4590-a3c2-ad5d828b35aa">
   <name>Target</name>
   <synonym>
-   <key>tr</key>
-   <value>Hedef</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Получатель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Target</value>
+   <value>46C20C22-5722-5C62-2A5E-EAC1B0BD2BF4</value>
   </synonym>
   <type>
    <types>AnyRef</types>

@@ -7,77 +7,37 @@
  </producedTypes>
  <name>ExternalFunctionType</name>
  <synonym>
-  <key>tr</key>
-  <value>Dış fonksiyon tipi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип внешней функции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>External function type</value>
+  <value>43F704B0-DC67-75E1-1505-554D71FD3DD3</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="c499e7b4-ff9e-4de8-8703-b76cc226b606">
   <name>Eval</name>
   <synonym>
-   <key>tr</key>
-   <value>Eval</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вычислить</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Eval</value>
+   <value>0A01C5FB-FD60-DC10-0F21-1E24639C7693</value>
   </synonym>
  </enumValues>
  <enumValues uuid="94dbb95f-6d1b-48cc-8b9b-b97808d23472">
   <name>RegExp</name>
   <synonym>
-   <key>tr</key>
-   <value>RegExp</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Регулярные выражения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Reg exp</value>
+   <value>BF5E9DE1-A272-F081-15BF-F955F0905953</value>
   </synonym>
  </enumValues>
  <enumValues uuid="251a7a5c-963d-4838-a444-68415369d7f3">
   <name>Execute</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalıştır</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Выполнить</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Execute</value>
+   <value>20D06732-B63B-60A1-1813-320DB9B57FE2</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b3d16ef0-4733-4912-ab40-d7a4e85f54ed">
   <name>ReturnResultByRegExpMatch</name>
   <synonym>
-   <key>tr</key>
-   <value>RegExp'e göre sonucu iade et</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вернуть результат по совпадению RegExp </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Return result by reg exp match</value>
+   <value>307CD9AC-5662-41A1-140A-A5C9C03CD5C5</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

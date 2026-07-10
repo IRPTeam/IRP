@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a1d18123-ca53-41cb-9e17-563f95310c28">
  <name>Report_R3021A_CashInTransit</name>
  <synonym>
-  <key>tr</key>
-  <value>R3021A Yoldaki nakit</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R3021A_ДенежныеСредстваВПути</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R3021A_CashInTransit</value>
+  <value>31783985-B712-E34C-C159-980CAE269545</value>
  </synonym>
 </mdclass:Role>

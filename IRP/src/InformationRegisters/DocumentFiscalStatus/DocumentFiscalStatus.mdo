@@ -11,45 +11,21 @@
  </producedTypes>
  <name>DocumentFiscalStatus</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak fiscal statüsü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Фискальный статус документа</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document fiscal status</value>
+  <value>F353865F-6D41-531D-D745-5822BF56FD2D</value>
  </synonym>
  <editType>InDialog</editType>
  <defaultRecordForm>InformationRegister.DocumentFiscalStatus.Form.RecordForm</defaultRecordForm>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Evrak fiscal statüsü</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Фискальный статус документа</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Document fiscal status</value>
+  <value>B43D2316-736F-B5DF-F3D9-9CF9E52FFA8C</value>
  </recordPresentation>
  <resources uuid="06a1ad82-83ab-4490-9370-1fb93414cfbd">
   <name>Status</name>
   <synonym>
-   <key>tr</key>
-   <value>Statü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Статус</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Status</value>
+   <value>FCB99D63-FF83-A24C-C16B-B198E17B32A5</value>
   </synonym>
   <type>
    <types>EnumRef.DocumentFiscalStatuses</types>
@@ -64,16 +40,8 @@
  <resources uuid="b8841297-d7a8-4c73-be98-77f5bedbafe3">
   <name>Device</name>
   <synonym>
-   <key>tr</key>
-   <value>Cihaz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Устройство</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Device</value>
+   <value>AB378A8F-4637-6DF7-7F78-831F036A27E7</value>
   </synonym>
   <type>
    <types>CatalogRef.Hardware</types>
@@ -87,16 +55,8 @@
  <resources uuid="29538d99-67df-4149-a55e-76ea03fe15f3">
   <name>DeviceNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Cihaz numarası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер устройства</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Device number</value>
+   <value>891AE238-18D7-0A93-3D63-3C321D12DAC2</value>
   </synonym>
   <type>
    <types>String</types>
@@ -113,16 +73,8 @@
  <resources uuid="badebfa3-0b35-4b94-84fd-afd47c241f8d">
   <name>ShiftNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Vardya numarası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер смены</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Shift number</value>
+   <value>5EB95B24-B2BB-B0D0-0913-3D538CC4B0C5</value>
   </synonym>
   <type>
    <types>String</types>
@@ -139,16 +91,8 @@
  <resources uuid="e246ca83-846a-43f2-8abf-1dc8b0b904e7">
   <name>CheckNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Çek numarası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер чека</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Check number</value>
+   <value>42D457AA-0EE6-B470-0C6C-C490E56C0A50</value>
   </synonym>
   <type>
    <types>String</types>
@@ -165,16 +109,8 @@
  <resources uuid="4b1bde1e-fa56-4a1f-b88d-8e9e5d1fe5fa">
   <name>CheckDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Kontrol tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата чека</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Check date</value>
+   <value>2A3BC278-D1B5-02FC-C2D6-6D24DCE03C97</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -189,16 +125,8 @@
  <attributes uuid="57efa06c-9cde-43c8-a1ca-1af9b4c65b19">
   <name>FiscalResponse</name>
   <synonym>
-   <key>tr</key>
-   <value>Yazak kasa cevabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Фискальный ответ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Fiscal response</value>
+   <value>3489741C-AB68-8DB6-620D-D12BEFBBF552</value>
   </synonym>
   <type>
    <types>String</types>
@@ -213,16 +141,8 @@
  <attributes uuid="3ea10de5-40f9-4384-99f4-65bb473e7a82">
   <name>DataPresentation</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri görüntüleme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Представление данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Data presentation</value>
+   <value>C9F94EEA-E40C-EC3A-ABE0-038FD46A6E91</value>
   </synonym>
   <type>
    <types>String</types>
@@ -239,16 +159,8 @@
  <dimensions uuid="8aca71c3-5c59-4c48-a43c-62bc7ebf4959">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>87D454E9-D9AF-F06E-E168-8C2B440E7257</value>
   </synonym>
   <type>
    <types>DocumentRef.CashPayment</types>
@@ -272,16 +184,8 @@
  <forms uuid="5d6082ab-02c4-41d5-9aba-a58b77555a72">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>9E224A09-73C3-045F-FE52-24EC70467F22</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

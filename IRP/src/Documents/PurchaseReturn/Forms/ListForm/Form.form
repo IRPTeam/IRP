@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>007CAF6A-17DE-7EA2-27E0-0E37F261CAFB</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -836,16 +828,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Statü</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Статус</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Status</value>
+       <value>6A4F2965-C4FF-9071-13F5-5627A0537844</value>
       </content>
      </localValue>
     </title>
@@ -856,16 +840,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Depo</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Склад</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Store</value>
+       <value>B8C75B5B-5E54-9F82-2E61-177583E6A6EC</value>
       </content>
      </localValue>
     </title>
@@ -956,16 +932,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>MF mevcut</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Есть БО</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is have JE</value>
+       <value>07171D2F-431C-C160-09E1-195E4ABF4436</value>
       </content>
      </localValue>
     </title>
@@ -1071,16 +1039,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Period</value>
+       <value>62FA1288-58A8-331A-A27C-C02E106D10C4</value>
       </content>
      </localValue>
     </title>

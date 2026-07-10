@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>D4A3E622-1F9D-21C2-2851-1A179E244848</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -114,16 +106,8 @@
    </dataPath>
    <titleLocation>None</titleLocation>
    <toolTip>
-    <key>tr</key>
-    <value>Ödeme durumu</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Статус оплаты</value>
-   </toolTip>
-   <toolTip>
     <key>en</key>
-    <value>Payment status</value>
+    <value>AF11BBD8-4497-0F13-30E2-237A4810BF7B</value>
    </toolTip>
    <extendedTooltip>
     <name>PaymentStatusIconExtendedTooltip</name>
@@ -902,16 +886,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>MF mevcut</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Есть БО</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is have JE</value>
+       <value>BEE3965A-9A0E-43FE-E930-02F1C46CCE40</value>
       </content>
      </localValue>
     </title>
@@ -922,16 +898,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ödeme durumu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Статус оплаты</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Payment status</value>
+       <value>0D0B5CB3-0D55-E69D-D386-6BAD42FE28FD</value>
       </content>
      </localValue>
     </title>
@@ -958,16 +926,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ödeme durumu ikonu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Иконка статуса оплаты</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Payment status icon</value>
+       <value>7E878BD4-E8FE-7CC9-925F-F36D39F757D7</value>
       </content>
      </localValue>
     </title>
@@ -1049,16 +1009,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Period</value>
+       <value>3BE3EB88-14D8-4F8E-EBC5-5C1AE71F5C60</value>
       </content>
      </localValue>
     </title>

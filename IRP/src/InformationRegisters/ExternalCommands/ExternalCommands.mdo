@@ -11,56 +11,24 @@
  </producedTypes>
  <name>ExternalCommands</name>
  <synonym>
-  <key>tr</key>
-  <value>Tanımlanabilir kullanıcı arayüz komutları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Определяемые интерфейсные команды</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Definable UI commands</value>
+  <value>0E7E38FB-4EAA-3776-618E-EE6A470D27D3</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Tanımlanabilir kullanıcı arayüz komutu</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Определяемая интерфейсная команда</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Definable UI command</value>
+  <value>7BA38BE5-E56B-D193-39F7-7BD5CC163ECF</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Tanımlanabilir kullanıcı arayüz komutları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Определяемые интерфейсные команды</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Definable UI commands</value>
+  <value>16475A17-EEB1-0993-3D5F-F22F20F29F2B</value>
  </listPresentation>
  <attributes uuid="92cefc83-a142-48d0-86c8-043db20fe599">
   <name>InterfaceGroup</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı arayüzü grubu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Интерфейсная группа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>UI group</value>
+   <value>9693984D-B399-E775-52E9-977CE2A08329</value>
   </synonym>
   <type>
    <types>CatalogRef.InterfaceGroups</types>
@@ -74,16 +42,8 @@
  <dimensions uuid="2b90e7ef-49a5-406a-b7fc-4138a96c0073">
   <name>ConfigurationMetadata</name>
   <synonym>
-   <key>tr</key>
-   <value>Konfigürasyon anaverisi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Метаданное конфигурации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Configuration metadata</value>
+   <value>1F2C6615-A25E-BEE1-1B64-4B09475379F8</value>
   </synonym>
   <type>
    <types>CatalogRef.ConfigurationMetadata</types>
@@ -100,16 +60,8 @@
  <dimensions uuid="d6b1f3be-56cb-4814-b415-2cb76b669e63">
   <name>ExternalDataProc</name>
   <synonym>
-   <key>tr</key>
-   <value>Eklentiler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Внешняя обработка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Plugins</value>
+   <value>64E46CDD-EB19-F712-2089-92A9534F4F4F</value>
   </synonym>
   <type>
    <types>CatalogRef.ExternalDataProc</types>
@@ -126,16 +78,8 @@
  <dimensions uuid="f335d9fa-da17-426d-a51c-1b468ba3a8f7">
   <name>FormType</name>
   <synonym>
-   <key>tr</key>
-   <value>Form tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип формы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form type</value>
+   <value>B1ED9F25-A909-83C3-34F0-08562FD35E29</value>
   </synonym>
   <type>
    <types>EnumRef.FormTypes</types>

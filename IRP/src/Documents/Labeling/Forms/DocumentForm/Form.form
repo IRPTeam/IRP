@@ -13,16 +13,8 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>41</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu tanım birleşmiş resim</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Сворачиваемая группа формы</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <value>D910C0AE-F535-D689-9DF8-85F469D7BBF0____</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -62,16 +54,8 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>117</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>3AD5D71F-C486-2DA0-08E3-37937069017C</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -173,16 +157,8 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>120</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>9D9B748A-BAFB-A387-74C2-22C8F9FA87E1</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -513,16 +489,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satın alma siparişi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заказ поставщику</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Purchase Order</value>
+   <value>627FD5C7-7CC7-D163-3D54-470A9D31BAB5</value>
   </title>
   <extendedTooltip>
    <name>GroupTitleExtendedTooltip</name>
@@ -776,16 +744,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Barkodları oluştur</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Сгенерировать штрихкода</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Generate barcode</value>
+      <value>A2F976E5-E046-2F67-78A7-776BA20DAFEB</value>
      </title>
      <extendedTooltip>
       <name>ItemsGroupGenerateBarcodeExtendedTooltip</name>
@@ -926,16 +886,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzeme listesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Товары</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item list</value>
+    <value>4734C7B8-B8D4-F028-8644-4F0F4D886166</value>
    </title>
    <extendedTooltip>
     <name>GroupItemListExtendedTooltip</name>
@@ -962,16 +914,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group other</value>
+    <value>550DC99D-0FA5-92B9-92E8-8F3B702D4236</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -995,16 +939,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>39FD43B1-F36D-9C3F-F23D-D9F7A39322AC</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -1100,16 +1036,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>B746E01B-EB4A-C458-87CE-EA79F217B66F</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1126,16 +1054,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup malzemeler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>7B650375-7299-9D48-8818-8F12F1A70B7F</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1154,16 +1074,8 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать скрытые таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show hidden tables</value>
+   <value>2D8F8FCF-F572-E82A-AD4C-CB45F14B9401</value>
   </title>
   <id>1</id>
   <use>

@@ -111,16 +111,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Dış Ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Внешняя ссылка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>External Ref</value>
+   <value>58A0BD54-50C2-4711-1FB2-2B68ED18068D</value>
   </title>
   <extendedTooltip>
    <name>GroupExternalRefExtendedTooltip</name>
@@ -376,16 +368,8 @@
  <formCommands>
   <name>EditUUID</name>
   <title>
-   <key>tr</key>
-   <value>UUID değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменить UUID</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit UUID</value>
+   <value>7A540305-BD4A-BBC7-77D7-73FB3D6AD896</value>
   </title>
   <id>1</id>
   <use>

@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9550S_EmployeeSickLeave</name>
  <synonym>
-  <key>tr</key>
-  <value>T9550 Çalışan hasta izni</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9550 Больничные сотрудников</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9550 Employee sick leave</value>
+  <value>9AD9017C-724C-7842-2A4C-CBAD3A59EE4D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -29,16 +21,8 @@
  <dimensions uuid="32f53c60-e19f-4e34-b6d7-2b5882f43e8c">
   <name>Date</name>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Date</value>
+   <value>6D3345B1-09DE-8240-034D-DF6CBED5502D</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -56,16 +40,8 @@
  <dimensions uuid="599bf306-e828-4a0f-a920-5972f41c0d0f">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>C606045E-00A7-E792-2D10-0DB457043B5A</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -80,16 +56,8 @@
  <dimensions uuid="a98027cd-465b-44b5-b3d8-c87a827e2449">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>2E657C73-C05A-F1EC-CE04-42EBCF8C81D6</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -104,16 +72,8 @@
  <dimensions uuid="ab4c88e2-6772-4734-8e43-00449ee42353">
   <name>Employee</name>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee</value>
+   <value>4DC2103A-3182-066A-AF50-04563FD9C80A</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

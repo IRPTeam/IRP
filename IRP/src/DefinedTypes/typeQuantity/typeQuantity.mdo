@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeQuantity</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip miktar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип количество</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type quantity</value>
+  <value>BE554327-4B37-3970-0C43-38E1E777BC70</value>
  </synonym>
  <type>
   <types>Number</types>

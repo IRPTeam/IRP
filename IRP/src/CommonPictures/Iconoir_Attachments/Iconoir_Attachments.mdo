@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="50e4fcf6-3b6e-406a-8662-6cfa83595b76">
  <name>Iconoir_Attachments</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek dosyalar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Iconoir вложения </value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Iconoir attachments</value>
+  <value>49A887FE-FBFD-60A0-0554-4D910770BAAB</value>
  </synonym>
 </mdclass:CommonPicture>

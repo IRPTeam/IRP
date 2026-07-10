@@ -9,16 +9,8 @@
  </producedTypes>
  <name>VehicleTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Araç tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Виды транспортных средств</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Vehicle types</value>
+  <value>81C4D14B-40BD-4ADA-AF0A-A56A0A38E752</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.VehicleTypes.StandardAttribute.Code</inputByString>
@@ -57,28 +49,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Araç tipi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Вид транспортного средства</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Vehicle type</value>
+  <value>4F4F7A5E-8B37-7FAB-B65B-B8E6252FD9D2</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Araç tipleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Виды транспортных средств</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Vehicle types</value>
+  <value>6A7F48FF-1BAF-9170-081C-C600C66D2E57</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -98,30 +74,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>D67770DB-35A3-78E1-14B0-0DE6E0304A3C</value>
   </synonym>
   <attributes uuid="862acc4e-a421-4465-a03f-34b7a08d1983">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>65EA070B-A107-2B19-9226-64BCB92E6FC0</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -134,16 +94,8 @@
   <attributes uuid="72d1de48-7284-424f-8fea-d60d92b5df7d">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>24321B0E-AB26-D454-4BFE-E7FEDD2AFF4F</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -160,16 +112,8 @@
   <attributes uuid="0dd5546c-8202-41b0-9d82-dc2411ce3161">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Текстовая строка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Search literal</value>
+    <value>95065E9C-9FF4-A4C3-3CF6-61113CA05168</value>
    </synonym>
    <type>
     <types>String</types>
@@ -186,16 +130,8 @@
  <forms uuid="8f7de77e-a8bb-438b-af41-8bd92445708d">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>75E5C1E0-75D7-D813-3610-06EECF9EC739</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -203,16 +139,8 @@
  <forms uuid="6805fd02-4539-4064-929d-fc49c15b6f6f">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>1DF2B033-7D85-9EA5-54EA-A382A09A9B83</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -220,16 +148,8 @@
  <forms uuid="77f16ea8-8150-4c76-bd46-4de2e341d57b">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>5D360E28-41FD-75E8-88E9-99EDE04E87D0</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

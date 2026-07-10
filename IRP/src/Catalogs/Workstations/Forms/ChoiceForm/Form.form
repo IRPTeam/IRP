@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>641E6120-5DD9-C5FF-F555-5DB87B656592</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -338,16 +330,8 @@
  <attributes>
   <name>CurrentWorkstation</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli çalışma yeri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущее рабочее место</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current workstation</value>
+   <value>AE3837C5-17B0-AD55-59F3-3FEFF49A9583</value>
   </title>
   <id>2</id>
   <valueType>

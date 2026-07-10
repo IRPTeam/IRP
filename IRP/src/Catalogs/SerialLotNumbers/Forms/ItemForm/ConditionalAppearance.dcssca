@@ -21,16 +21,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>&lt;Bu şirket için kendi stokları&gt;</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>&lt;Для этой компании собственные остатки&gt;</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>&lt;For this company is own stocks&gt;</v8:content>
+						<v8:content>3DE96D97-6C4A-7D26-64B0-04B7769DAE02</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -57,16 +49,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>&lt;Bu şirket için kendi stokları&gt;</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>&lt;Для этой компании собственные остатки&gt;</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>&lt;For this company is own stocks&gt;</v8:content>
+						<v8:content>EDC8E45E-FB0A-F313-3D5A-AFE16E566E0A</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

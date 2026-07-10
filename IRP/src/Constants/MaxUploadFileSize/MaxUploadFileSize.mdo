@@ -7,16 +7,8 @@
  </producedTypes>
  <name>MaxUploadFileSize</name>
  <synonym>
-  <key>tr</key>
-  <value>Maksimum yükleme dosya boyutu (bayt cinsinden)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Максимальный размер файла для загрузки (в байтах)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Max upload file size (in bytes)</value>
+  <value>EB56505D-9463-5ABF-F1B7-7CDD1EF1F4F9</value>
  </synonym>
  <type>
   <types>Number</types>

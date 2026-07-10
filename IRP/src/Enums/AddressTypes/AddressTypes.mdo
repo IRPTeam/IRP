@@ -7,77 +7,37 @@
  </producedTypes>
  <name>AddressTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Adres türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы адресов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Address types</value>
+  <value>0EAF650F-08B7-7E8F-F1FD-D577B1151219</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="a960cfb0-07be-4eba-9f46-1684987974b1">
   <name>Legal</name>
   <synonym>
-   <key>tr</key>
-   <value>Yerel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Локальная валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal</value>
+   <value>74A36AA0-6167-9706-6CFD-DEBED429DC7C</value>
   </synonym>
  </enumValues>
  <enumValues uuid="f48c81e6-5d52-4111-a35d-ec457f98e943">
   <name>Phisical</name>
   <synonym>
-   <key>tr</key>
-   <value>Fiziksel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Физический</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Phisical</value>
+   <value>C5FE5F26-C620-B60A-AB0E-E4A705075D8B</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a235c31b-ad9d-4431-b583-95f2933b5e06">
   <name>Shipment</name>
   <synonym>
-   <key>tr</key>
-   <value>Sevkiyat</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Транспортировка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Shipment</value>
+   <value>104FD1E3-8B6F-1B00-02EB-BEA36643B327</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0270931a-aa87-484f-b087-5b4c3b906721">
   <name>Other</name>
   <synonym>
-   <key>tr</key>
-   <value>Diğer</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительно</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Other</value>
+   <value>4BE9C996-5ADA-5040-0252-2E8550C5A433</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

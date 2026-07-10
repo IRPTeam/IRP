@@ -7,47 +7,23 @@
  </producedTypes>
  <name>ProductionTransactionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Üretim işlem türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы транзакций производства</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Production transaction types</value>
+  <value>7BA3CA89-7B69-F154-4285-505B6DCEE6AE</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="7fa684b5-c180-48e9-9a36-8d0480e50a71">
   <name>Produce</name>
   <synonym>
-   <key>tr</key>
-   <value>Üret</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Производить</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Produce</value>
+   <value>1E5567F9-1DEA-530C-C21F-F965C0D9633B</value>
   </synonym>
  </enumValues>
  <enumValues uuid="38a73a47-f6e1-47ee-bd17-2758e5245bfd">
   <name>Repacking</name>
   <synonym>
-   <key>tr</key>
-   <value>Yeniden paketleme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Перепроизводство</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Repacking</value>
+   <value>D53D83D6-9A17-352D-DA22-231082ACA943</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

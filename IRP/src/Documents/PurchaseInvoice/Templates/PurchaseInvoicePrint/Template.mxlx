@@ -126,16 +126,8 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Satın alma faturası [Number] [Date]</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Счет на покупку [Number] [Date]</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Purchase invoice [Number] [Date]</v8:content>
+							<v8:content>81E6E77E-6DC2-4EA1-1234-49EDC4CF0BF7[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -172,16 +164,8 @@
 					<f>9</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Şirket:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Организация:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:content>03DB454C-55A2-49F2-22E7-7E8EAB32774B</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -204,16 +188,8 @@
 					<f>9</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Cari hesap:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Партнер:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Partner:</v8:content>
+							<v8:content>01302F7C-9AEE-64E2-2DA5-5A7AC83C0B0E</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -243,16 +219,8 @@
 					<f>12</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>#</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>#</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>EC464DAB-AD43-EDFD-D98A-AC25CFE07C19</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -262,16 +230,8 @@
 					<f>13</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Malzeme</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Номенклатура</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>FA5FCF60-30D7-8932-2A1E-E514BF6683A2</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -281,16 +241,8 @@
 					<f>14</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Varyant</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Характеристика</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>1A0E22FA-BBE8-F785-54B8-82BFF1092D28</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -300,16 +252,8 @@
 					<f>15</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Miktar</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Количество</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>0559C6B0-CB77-6D20-0F46-68894FE0CA5C</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -319,16 +263,8 @@
 					<f>15</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Birim</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Unit</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>F5C26059-BFB5-C1BA-A894-4C90EE9521BA</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -338,16 +274,8 @@
 					<f>15</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Fiyat</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Цена</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Price</v8:content>
+							<v8:content>377A016C-E819-F700-0567-75E5CF42013D</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -357,16 +285,8 @@
 					<f>16</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>İndirim tutarı</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма скидки</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Offers аmount</v8:content>
+							<v8:content>39AC0882-43C1-FCC3-39B5-54FDCB552C9F</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -376,16 +296,8 @@
 					<f>17</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Vergi tutarı</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма налогов</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Tax amount</v8:content>
+							<v8:content>307BA973-21DB-205B-BBF7-7C26FFED46A1</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -395,16 +307,8 @@
 					<f>17</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Toplam tutar</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Итого</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Total amount</v8:content>
+							<v8:content>5D39C319-F592-9520-03C3-357CB5C468E4</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -492,16 +396,8 @@
 					<f>23</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Vergi hariç tutar:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма без налогов:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Net amount:</v8:content>
+							<v8:content>AF511E42-230E-E8CD-D27B-B26516D507D8</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -528,16 +424,8 @@
 					<f>23</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Toplam vergi:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Итого налогов:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Total tax:</v8:content>
+							<v8:content>BFE7AA2F-E23A-25B5-5628-8A563B8AD72B</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -571,16 +459,8 @@
 					<f>25</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>İndirim tutarı:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Сумма скидки:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Offers amount:</v8:content>
+							<v8:content>036416AF-2D42-9504-4CF4-4DB4B2DDDE4E</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -637,16 +517,8 @@
 					<f>25</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Toplam tutar:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Итого:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Total amount:</v8:content>
+							<v8:content>E25ECC7C-5FC8-0536-6E6C-C998EC9EB293</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -668,16 +540,8 @@
 					<f>23</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Döviz:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Валюты:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Currency:</v8:content>
+							<v8:content>103BA660-7C57-3B0B-B07B-B5B87759AC6B</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -711,16 +575,8 @@
 					<f>27</f>
 					<tl>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Sorumlu:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Ответственный:</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>4948A618-8339-BD03-3F1A-A21DAD5374B0</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -1030,16 +886,8 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>NFD=2</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>NFD=2</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>NFD=2</v8:content>
+				<v8:content>1FBD8D9B-A2B8-B04F-FC1B-BB2C2545BE09</v8:content>
 			</v8:item>
 		</format>
 	</format>
@@ -1059,16 +907,8 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>NFD=2</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>NFD=2</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>NFD=2</v8:content>
+				<v8:content>1FBD8D9B-A2B8-B04F-FC1B-BB2C2545BE09</v8:content>
 			</v8:item>
 		</format>
 	</format>

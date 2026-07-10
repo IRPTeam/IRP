@@ -121,16 +121,8 @@
         <radioButtonsType>Tumbler</radioButtonsType>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Müşteri</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>Клиент</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>Customer</value>
+          <value>485B3B43-DBA4-B2F1-167F-F6423AFEEF0F</value>
          </presentation>
          <value xsi:type="core:ReferenceValue">
           <value>Enum.AgreementTypes.EnumValue.Customer</value>
@@ -138,16 +130,8 @@
         </choiceList>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Terarikçi</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>Поставщик</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>Vendor</value>
+          <value>6F4F0F4D-5AC8-7106-65B0-01588230A528</value>
          </presentation>
          <value xsi:type="core:ReferenceValue">
           <value>Enum.AgreementTypes.EnumValue.Vendor</value>
@@ -155,16 +139,8 @@
         </choiceList>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Konsiyeye veren</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>Комитент</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>Consignor</value>
+          <value>1ABB4B08-1F36-6EB4-4118-8AD08690E033</value>
          </presentation>
          <value xsi:type="core:ReferenceValue">
           <value>Enum.AgreementTypes.EnumValue.Consignor</value>
@@ -172,16 +148,8 @@
         </choiceList>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Ödeme aracı kurum</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>Комиссионер</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>Trade agent</value>
+          <value>B90451A7-3BE7-6FC6-60BE-E0476CEFE22C</value>
          </presentation>
          <value xsi:type="core:ReferenceValue">
           <value>Enum.AgreementTypes.EnumValue.TradeAgent</value>
@@ -189,16 +157,8 @@
         </choiceList>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Diğer</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>Прочее</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>Other</value>
+          <value>B7A46306-4FF7-C815-5EAC-C0AB59101DC4</value>
          </presentation>
          <value xsi:type="core:ReferenceValue">
           <value>Enum.AgreementTypes.EnumValue.Other</value>
@@ -245,16 +205,8 @@
         <radioButtonsType>Tumbler</radioButtonsType>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Normal</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>Обычное</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>Regular</value>
+          <value>967773DB-8C73-F786-641F-F56FAF375CD5</value>
          </presentation>
          <value xsi:type="core:ReferenceValue">
           <value>Enum.AgreementKinds.EnumValue.Regular</value>
@@ -262,16 +214,8 @@
         </choiceList>
         <choiceList>
          <presentation>
-          <key>tr</key>
-          <value>Standart</value>
-         </presentation>
-         <presentation>
-          <key>ru</key>
-          <value>Стандартное</value>
-         </presentation>
-         <presentation>
           <key>en</key>
-          <value>Standard</value>
+          <value>97BB2757-BF44-2EDA-ADB2-228676893571</value>
          </presentation>
          <value xsi:type="core:ReferenceValue">
           <value>Enum.AgreementKinds.EnumValue.Standard</value>
@@ -342,16 +286,8 @@
        <radioButtonsType>Tumbler</radioButtonsType>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Evrak detaylı</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>По документам</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>By documents</value>
+         <value>FE511315-F459-1FF4-4E90-0A5D95911152</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.ApArPostingDetail.EnumValue.ByDocuments</value>
@@ -359,16 +295,8 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Sözleşmeye göre</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>По соглашениям</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>By partner terms</value>
+         <value>2B17FD6F-7BD4-AABA-A6E6-69F5BEC9F222</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.ApArPostingDetail.EnumValue.ByAgreements</value>
@@ -376,16 +304,8 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Standart sözleşmeye göre</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>По стандартным соглашениям</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>By standard partner term</value>
+         <value>79A00EEC-50AF-FDB8-80C6-6F08A880A5A4</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.ApArPostingDetail.EnumValue.ByStandardAgreement</value>
@@ -649,16 +569,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Ana bilgi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Основная информация</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Main info</value>
+      <value>AC834BB5-1EED-B88D-DD4F-FF9E96C08A74</value>
      </title>
      <extendedTooltip>
       <name>GroupMainInfoExtendedTooltip</name>
@@ -959,16 +871,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Ek bilgi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Дополнительные данные</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Additional info</value>
+      <value>E6C09DC4-C997-873F-FFFF-FAB57A3E4851</value>
      </title>
      <extendedTooltip>
       <name>GroupAdditionalInfoExtendedTooltip</name>
@@ -998,16 +902,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup bilgi üst</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа инфо топ</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group info top</value>
+     <value>D578D5B9-9B25-A600-0276-65FE56ECB308</value>
     </title>
     <extendedTooltip>
      <name>GroupInfoTopExtendedTooltip</name>
@@ -1151,16 +1047,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Fiyat bayrakları</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Переключателя цен</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Price flags</value>
+      <value>167EBC60-E29F-B25A-A98C-C1D0919293B1</value>
      </title>
      <extendedTooltip>
       <name>GroupPriceFlagsExtendedTooltip</name>
@@ -1188,16 +1076,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Fiyat ayarları</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Настройка цен</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Price settings</value>
+     <value>AF1A2C5F-36BB-2878-8F5B-BA26D3637FD1</value>
     </title>
     <extendedTooltip>
      <name>GroupPriceSettingsExtendedTooltip</name>
@@ -1340,16 +1220,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Numaratör grubu</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа нумерации</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group of numerator</value>
+      <value>4A29B587-79DE-DCEF-FB45-56486DBF9672</value>
      </title>
      <extendedTooltip>
       <name>GroupNumeratorExtendedTooltip</name>
@@ -1417,16 +1289,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Anlaşma bilgisi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Информация по соглашению</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Agreement info</value>
+     <value>C946A029-5944-A5D4-4D73-3232A47E4B45</value>
     </title>
     <extendedTooltip>
      <name>GroupAgreementInfoExtendedTooltip</name>
@@ -1540,16 +1404,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Mağaza ve teslimat</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Склад и доставка</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Store and delivery</value>
+     <value>2953B8D4-4931-5D33-3335-5458E5433D84</value>
     </title>
     <extendedTooltip>
      <name>GroupStoreAndDeliverySettingsExtendedTooltip</name>
@@ -1580,16 +1436,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основной</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Info</value>
+    <value>4A3861AA-7743-5FA3-3E1F-FF0A7728CB46</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -1797,16 +1645,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Borç limiti &amp; Yaşlandırma</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Лимиты и отсрочки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Credit limit &amp; Aging</value>
+    <value>579CE0B2-F59A-8753-31B6-606C00939423</value>
    </title>
    <extendedTooltip>
     <name>GroupCreditlimitAndAgingExtendedTooltip</name>
@@ -2087,16 +1927,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Konsinye satış</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Комиссионная торговля</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Commission trade</value>
+    <value>409E4679-757B-2527-7DB1-14E03292F5B7</value>
    </title>
    <extendedTooltip>
     <name>GroupCommissionTradeExtendedTooltip</name>
@@ -2123,16 +1955,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Прочее</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>231F8E53-88E3-5591-1555-506DE4E506F7</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -2156,16 +1980,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>87183459-04A4-DF8E-E4CD-DABFF3A61015</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -2225,16 +2041,8 @@
  <attributes>
   <name>DocumentsExist</name>
   <title>
-   <key>tr</key>
-   <value>Belgeler mevcut</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Есть документы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Documents exist</value>
+   <value>BF92F881-1A05-8C68-87B4-4A338CD21562</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2250,29 +2058,13 @@
  <formCommands>
   <name>SetNewNumber</name>
   <title>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set new number</value>
+   <value>BF34769D-9F07-72D4-486D-D531E9C544E5</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Set new number</value>
+   <value>DCCD1598-DA5B-C8EA-A701-16AC10F134B9</value>
   </toolTip>
   <use>
    <common>true</common>

@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R5020_ProfitLosses</name>
  <synonym>
-  <key>tr</key>
-  <value>R5020 Kar zararları  </value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R5020 Убытки и прибыли</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R5020 Profit losses</value>
+  <value>E7805C11-73A6-6DC8-8E44-425A9A6CF277</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R5020_ProfitLosses.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="408430a1-1df5-41b3-a048-b77ecfd0fe98">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>D0A02979-0CC1-2172-2652-293DE9162F4E</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

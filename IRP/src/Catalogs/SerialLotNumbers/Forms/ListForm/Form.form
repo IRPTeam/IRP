@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>746DEFAF-BF38-9AD5-5F40-05BCCCFE777D</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Seri numarası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серийный номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial number</value>
+    <value>BBA1F7AA-A593-45FD-D821-14EFE17EF0A5</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -150,16 +134,8 @@
    <name>Inactive</name>
    <id>27</id>
    <title>
-    <key>tr</key>
-    <value>Aktif değil</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Неактивная</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Inactive</value>
+    <value>724A1590-252C-93D6-6C43-3D534B750115</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -195,16 +171,8 @@
    <name>Owner</name>
    <id>22</id>
    <title>
-    <key>tr</key>
-    <value>Sahip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Владелец</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Owner</value>
+    <value>4CA90F10-0FFE-00D2-2480-0D5686F59D2F</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -543,16 +511,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Malzeme ref</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Ссылка номенклатура</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item ref</value>
+       <value>9ADC2054-6526-BE06-659E-E1D40C208C04</value>
       </content>
      </localValue>
     </title>
@@ -569,16 +529,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Malzeme tipi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Вид номенклатуры</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item type</value>
+       <value>986B99CD-C325-98A6-6558-8C8400633A25</value>
       </content>
      </localValue>
     </title>
@@ -595,16 +547,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Bu varyant</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Это характеристика</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is item key</value>
+       <value>140D52B2-36BC-DA6C-C190-09BB9D0F3035</value>
       </content>
      </localValue>
     </title>
@@ -616,16 +560,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Varyant ref</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Ссылка характеристики</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Item key ref</value>
+       <value>4D229AC5-2A22-6D61-1948-87603FE04C67</value>
       </content>
      </localValue>
     </title>
@@ -642,16 +578,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Bu malzeme tipi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Это вид номенклатуры</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is item type</value>
+       <value>C660B5E4-B000-5DED-DE96-64462EC1F414</value>
       </content>
      </localValue>
     </title>
@@ -663,16 +591,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Bu malzeme</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Это номенклатура</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is item</value>
+       <value>7B863245-FAC7-F2C0-0995-54F97287A5F6</value>
       </content>
      </localValue>
     </title>
@@ -684,16 +604,8 @@ WHERE
  <attributes>
   <name>SerialLotNumberOwner</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot sahibi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Владелец серийных номеров</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot number owner</value>
+   <value>B19D982B-E9A8-143D-DFB9-9621D3990FD5</value>
   </title>
   <id>2</id>
   <valueType>

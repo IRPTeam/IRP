@@ -11,57 +11,25 @@
  </producedTypes>
  <name>BarcodeScanInfoCheck</name>
  <synonym>
-  <key>tr</key>
-  <value>Bilgi kontrolü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Проверка информации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Info check</value>
+  <value>F31F5B8B-80E9-2832-2230-08BF8E4D977D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Bilgi kontrolü</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Проверка информации</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Info check</value>
+  <value>6A845CAE-E116-8244-4094-42C1C3C0C547</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Bilgi kontrolü</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Проверка информации</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Info check</value>
+  <value>6ED2A0C8-0EB7-6FF2-239C-C7E157D36C4C</value>
  </listPresentation>
  <resources uuid="3a42492d-21f8-4dc0-99b6-9691901e995b">
   <name>Status</name>
   <synonym>
-   <key>tr</key>
-   <value>Statü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Статус</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Status</value>
+   <value>A44E78EC-AD90-5715-5B3F-FA4CEBAC1741</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -75,16 +43,8 @@
  <resources uuid="087ec7fc-14d7-42cb-9291-c79b395cf281">
   <name>User</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Пользователь</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User</value>
+   <value>AD43833D-7401-4DFC-C5B9-97BA1090E11C</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -98,16 +58,8 @@
  <dimensions uuid="c42dcbc2-82c8-4978-a18b-e66ff626c500">
   <name>Item</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item</value>
+   <value>65D7EB6F-CEA4-2A51-1E4F-F7B5C59A9F14</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -124,16 +76,8 @@
  <dimensions uuid="ff2d5ab0-6090-4064-9bb0-fd81af4dadd6">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>B67E3141-52AE-47A2-2DB7-7007033DB058</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -150,16 +94,8 @@
  <dimensions uuid="35bc3a39-94b8-4441-b9ee-fd44b9285ee6">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>3A37C2CB-7519-FEDE-E8FC-CE3891C849E8</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>

@@ -11,56 +11,24 @@
  </producedTypes>
  <name>BranchBankTerms</name>
  <synonym>
-  <key>tr</key>
-  <value>Şube banka sözleşmesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Соглашение с банком структурного подразделения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Branch bank terms</value>
+  <value>E17C2A46-0B8D-A5B7-7891-1AAAE3094335</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Şube banka sözleşmesi</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Соглашение с банком структурного подразделения</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Branch bank term</value>
+  <value>22B27C73-B638-3E97-7A90-0C8BE71F482B</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Şube banka sözleşmeleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Соглашения с банком структурного подразделения</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Branch bank terms</value>
+  <value>9C2E466F-12D0-42AB-BF4B-B5CC6545CCCC</value>
  </listPresentation>
  <dimensions uuid="495bc5fa-d746-44a1-8a3e-abd9d5bc7fb8">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>0AFFC725-A0FA-2782-2967-774D311392EF</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -76,16 +44,8 @@
  <dimensions uuid="45b0d38b-549e-40af-9673-82adaed1ae44">
   <name>BankTerm</name>
   <synonym>
-   <key>tr</key>
-   <value>Banka sözleşmesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение с банком</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Bank term</value>
+   <value>2C19970E-D0FB-48C5-5B56-615EA6DB5916</value>
   </synonym>
   <type>
    <types>CatalogRef.BankTerms</types>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>IDInfoSets</name>
  <synonym>
-  <key>tr</key>
-  <value>İletişim bilgi setleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Настройки контактной информации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Contact info sets</value>
+  <value>12F50846-C14C-258B-B101-1E23278FE270</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -26,16 +18,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>İletişim bilgi seti</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Настройки контактной информации</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Contact info set</value>
+  <value>176BF3A6-6B9D-9E1D-DF97-76C800373F4B</value>
  </objectPresentation>
  <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>
@@ -78,30 +62,14 @@
   </producedTypes>
   <name>IDInfoTypes</name>
   <synonym>
-   <key>tr</key>
-   <value>İletişim bilgi türleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид контактной информации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Contact info types</value>
+   <value>47D27DD5-FE18-7DC3-38C3-386B613F708C</value>
   </synonym>
   <attributes uuid="6d89c214-8d2d-400b-832d-b3b2a2a84fc7">
    <name>IDInfoType</name>
    <synonym>
-    <key>tr</key>
-    <value>İletişim bilgi türü</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид контактной информации</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Contact info type</value>
+    <value>0056B65C-C000-EDAA-A8AB-B147E22FEB9A</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
@@ -113,16 +81,8 @@
   <attributes uuid="e83e531a-fc1e-47e4-8a00-88fdde5f3b9d">
    <name>Condition</name>
    <synonym>
-    <key>tr</key>
-    <value>Koşul</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Условие</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Condition</value>
+    <value>3FA0EBD5-AFF8-3B5A-AF2C-C127433DFFDF</value>
    </synonym>
    <type>
     <types>ValueStorage</types>
@@ -134,16 +94,8 @@
   <attributes uuid="b4187b53-0f80-4dee-a00b-086de74bd280">
    <name>IsConditionSet</name>
    <synonym>
-    <key>tr</key>
-    <value>Koşul belirlendi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Условие</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Is condition set</value>
+    <value>E5D3A01E-D5D6-ACA8-84ED-D38130420554</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -159,16 +111,8 @@
  <forms uuid="f08efaf3-5938-432a-8dff-098c00f34d57">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>D985D068-D3A3-8B84-4414-4F09CEF5D778</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -176,16 +120,8 @@
  <forms uuid="271fcb48-951b-4df7-97a1-8670eddf9a8e">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>E3D3D732-6860-BEE3-3042-2B9D504B161D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -193,16 +129,8 @@
  <forms uuid="e52d1a10-929d-4ab3-a346-2dc67ad4ad5f">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>E7B3E764-DF39-6D5D-D45D-D443F252AF64</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -210,16 +138,8 @@
  <forms uuid="ec0f09b0-b42e-4a37-a589-2703f508597a">
   <name>EditCondition</name>
   <synonym>
-   <key>tr</key>
-   <value>Koşul değiştir</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Редактировать условие</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Edit condition</value>
+   <value>62DC58BC-92A7-808D-DFE9-94A976D6485B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -227,32 +147,16 @@
  <templates uuid="5e050964-1a71-4925-acb4-cfa30fac99fd">
   <name>DCS_Catalog</name>
   <synonym>
-   <key>tr</key>
-   <value>DCS kart listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Справочник DCS</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>DCS catalog</value>
+   <value>32DB2AF4-0137-89A0-0487-76EEC1C29430</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>
  <templates uuid="560090de-208d-4be6-80e8-490462b943d5">
   <name>DCS_Document</name>
   <synonym>
-   <key>tr</key>
-   <value>DCS evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ DCS</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>DCS document</value>
+   <value>1B129531-0BC2-DF5B-B359-95CBBB42A2CE</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

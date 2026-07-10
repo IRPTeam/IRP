@@ -186,16 +186,8 @@
    <name>CurrenciesTableCurrencyFrom</name>
    <id>21</id>
    <title>
-    <key>tr</key>
-    <value>Gönderen</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>С</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>From</value>
+    <value>6A7E5413-09F2-DB47-7E03-3A551ACD838C</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -240,16 +232,8 @@
    <name>CurrenciesTableMovementTypeCurrency</name>
    <id>45</id>
    <title>
-    <key>tr</key>
-    <value>Alıcı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>На</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>To</value>
+    <value>CAE0FA7F-3E95-0754-4412-26D9B503F69A</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -341,16 +325,8 @@
    <name>CurrenciesTableRatePresentation</name>
    <id>48</id>
    <title>
-    <key>tr</key>
-    <value>Oran</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ставка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Rate</value>
+    <value>F44C371F-AC52-1685-54B3-34AE3D59DECB</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -752,16 +728,8 @@
  <attributes>
   <name>Currencies</name>
   <title>
-   <key>tr</key>
-   <value>Dövizler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Валюты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Currencies</value>
+   <value>513752BE-72A9-7F20-0760-0656631C1E56</value>
   </title>
   <id>1</id>
   <valueType>
@@ -776,16 +744,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>AA98B2B5-7BC7-D0AA-A303-38BB875F074D</value>
    </title>
    <id>2</id>
    <valueType>
@@ -814,16 +774,8 @@
   <columns>
    <name>Rate</name>
    <title>
-    <key>tr</key>
-    <value>Oran</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ставка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Rate</value>
+    <value>E61AD647-B624-C9F4-44FE-E6F57E54336C</value>
    </title>
    <id>4</id>
    <valueType>
@@ -839,16 +791,8 @@
   <columns>
    <name>ReverseRate</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Обратный курс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Reverse rate</value>
+    <value>7449A260-D4D0-818A-A23B-BC1DFAAE010F</value>
    </title>
    <id>5</id>
    <valueType>
@@ -864,16 +808,8 @@
   <columns>
    <name>ShowReverseRate</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur göster</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Показать обратный курс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Show reverse rate</value>
+    <value>9D4FCB60-3D86-0B16-6E1C-CF3B79B4C6AD</value>
    </title>
    <id>6</id>
    <valueType>
@@ -889,16 +825,8 @@
   <columns>
    <name>Multiplicity</name>
    <title>
-    <key>tr</key>
-    <value>Çarpan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Кратность</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Multiplicity</value>
+    <value>112BEB8A-A2C2-924A-AB74-41C25823A68E</value>
    </title>
    <id>7</id>
    <valueType>
@@ -917,16 +845,8 @@
   <columns>
    <name>MovementType</name>
    <title>
-    <key>tr</key>
-    <value>Hareket tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статья движених денежных средств</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Movement type</value>
+    <value>B4C37A20-A601-B5B1-1975-50917301B789</value>
    </title>
    <id>8</id>
    <valueType>
@@ -942,16 +862,8 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>EEC67D4F-FCEA-6849-933C-C095EECA77A8</value>
    </title>
    <id>9</id>
    <valueType>
@@ -967,16 +879,8 @@
   <columns>
    <name>RatePresentation</name>
    <title>
-    <key>tr</key>
-    <value>Kur görüntüleme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Представление курса</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Rate presentation</value>
+    <value>81920D06-7E66-E072-2786-629AE56DB19F</value>
    </title>
    <id>10</id>
    <valueType>
@@ -992,16 +896,8 @@
   <columns>
    <name>IsVisible</name>
    <title>
-    <key>tr</key>
-    <value>Görünür</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Видимый</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is visible</value>
+    <value>F6B5D714-B3F6-E697-7EAB-B1D501D858E6</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1017,16 +913,8 @@
   <columns>
    <name>IsFixed</name>
    <title>
-    <key>tr</key>
-    <value>Sabittir</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Фиксированный</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is fixed</value>
+    <value>FF85991A-0FA7-07F7-74BE-EF2552511E2C</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1042,16 +930,8 @@
   <columns>
    <name>RateOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Kur aslı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Базовый курс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Rate origin</value>
+    <value>A7B8953B-1C36-B9E4-4FA5-50CE97B280C8</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1067,16 +947,8 @@
   <columns>
    <name>ReverseRateOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur aslı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Обратный базовый курс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Reverse rate origin</value>
+    <value>A0FA85B5-05B7-24A5-52BA-AFA64F8C3C45</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1092,16 +964,8 @@
   <columns>
    <name>MultiplicityOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Çarpan aslı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Базовая кратность</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Multiplicity origin</value>
+    <value>BBD7A97D-A87D-11ED-D80B-B0E7854B769C</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1121,16 +985,8 @@
  <attributes>
   <name>DocumentAmount</name>
   <title>
-   <key>tr</key>
-   <value>Evrak tutarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сумма документа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document amount</value>
+   <value>903C28C5-67CC-63DA-A1AF-F79CF1ABE191</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1146,16 +1002,8 @@
  <attributes>
   <name>RowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Row key</value>
+   <value>95104E1A-B762-8330-0611-1AE195C7D35F</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1171,16 +1019,8 @@
  <attributes>
   <name>Ref</name>
   <title>
-   <key>tr</key>
-   <value>Ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ref</value>
+   <value>EB9836C6-C6F1-5C7A-A104-43A98F67C121</value>
   </title>
   <id>24</id>
   <valueType>
@@ -1196,16 +1036,8 @@
  <attributes>
   <name>Date</name>
   <title>
-   <key>tr</key>
-   <value>Tarih</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дата</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Date</value>
+   <value>E1386D26-C256-9B71-1222-2EAA66EC2A8A</value>
   </title>
   <id>25</id>
   <valueType>
@@ -1222,16 +1054,8 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Организация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company</value>
+   <value>97BB79AB-00E0-E621-1A9D-D76BF1832658</value>
   </title>
   <id>26</id>
   <valueType>
@@ -1247,16 +1071,8 @@
  <attributes>
   <name>Currency</name>
   <title>
-   <key>tr</key>
-   <value>Döviz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Валюта</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Currency</value>
+   <value>88002758-9F95-AB54-4727-76B82B0ECA45</value>
   </title>
   <id>27</id>
   <valueType>
@@ -1272,16 +1088,8 @@
  <attributes>
   <name>Agreement</name>
   <title>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Agreement</value>
+   <value>640FD8B7-E4C3-B2F2-2199-9D2B01DD7D03</value>
   </title>
   <id>28</id>
   <valueType>
@@ -1297,16 +1105,8 @@
  <attributes>
   <name>CurrenciesFromDocument</name>
   <title>
-   <key>tr</key>
-   <value>Dövizler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Валюты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Currencies</value>
+   <value>535CC053-02E7-E459-9F1E-E7128E4F2E3E</value>
   </title>
   <id>29</id>
   <valueType>
@@ -1321,16 +1121,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>EA720885-F631-B756-6759-9DBE4FFA0843</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1359,16 +1151,8 @@
   <columns>
    <name>Rate</name>
    <title>
-    <key>tr</key>
-    <value>Oran</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ставка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Rate</value>
+    <value>22EA8125-2E1C-5D50-05F9-93E1880089B9</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1384,16 +1168,8 @@
   <columns>
    <name>ReverseRate</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Обратный курс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Reverse rate</value>
+    <value>15901458-0080-9D5C-CC4E-E505E9EEC01E</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1409,16 +1185,8 @@
   <columns>
    <name>ShowReverseRate</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur göster</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Показать обратный курс</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Show reverse rate</value>
+    <value>0E9662F4-3024-B4C5-5468-8A6940230959</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1434,16 +1202,8 @@
   <columns>
    <name>Multiplicity</name>
    <title>
-    <key>tr</key>
-    <value>Çarpan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Кратность</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Multiplicity</value>
+    <value>9E3A6BC7-A683-E5E2-2FD6-6C9735AA58E8</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1462,16 +1222,8 @@
   <columns>
    <name>MovementType</name>
    <title>
-    <key>tr</key>
-    <value>Hareket tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статья движених денежных средств</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Movement type</value>
+    <value>B1F955AC-4724-BF84-45C2-2A114F069E0F</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1487,16 +1239,8 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>925CE52C-6273-50CD-D36F-F5119DDCFF17</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1512,16 +1256,8 @@
   <columns>
    <name>IsFixed</name>
    <title>
-    <key>tr</key>
-    <value>Sabittir</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Фиксированный</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is fixed</value>
+    <value>7E9B4185-5D06-A031-104B-B5766E11FFE0</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1538,16 +1274,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>D663088D-CEC9-DC4B-BE29-9A645BF0D248</value>
   </title>
   <id>1</id>
   <use>
@@ -1563,16 +1291,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>FD14406E-3489-34CC-C2DD-D195A89679CE</value>
   </title>
   <id>2</id>
   <use>
@@ -1588,16 +1308,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtar göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать ключ строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>9272CFAB-4897-3FFA-ABA1-1A233C330C47</value>
   </title>
   <id>3</id>
   <use>
@@ -1616,16 +1328,8 @@
  <formCommands>
   <name>CurrencyRates</name>
   <title>
-   <key>tr</key>
-   <value>Döviz kurları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Курсы валюты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Currency rates</value>
+   <value>76781D8C-8048-0389-902F-FD17E2E83EF4</value>
   </title>
   <id>4</id>
   <use>
@@ -1645,16 +1349,8 @@
  <formCommands>
   <name>Update</name>
   <title>
-   <key>tr</key>
-   <value>Update</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update</value>
+   <value>3E1D4B77-39C3-9D45-595C-C21A38DD47DD</value>
   </title>
   <id>5</id>
   <use>

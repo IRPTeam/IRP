@@ -43,16 +43,8 @@
    </dataPath>
    <titleLocation>None</titleLocation>
    <toolTip>
-    <key>tr</key>
-    <value>HTML ön izleme için simge</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Картинка для превью в HTML поле</value>
-   </toolTip>
-   <toolTip>
     <key>en</key>
-    <value>Icon for HTML preview</value>
+    <value>06632194-841F-9913-3EC5-53F307EBB608</value>
    </toolTip>
    <extendedTooltip>
     <name>IconExtendedTooltip</name>
@@ -83,16 +75,8 @@
     <height>3</height>
     <hyperlink>true</hyperlink>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Eklemek için tıklayın</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
-     <key>ru</key>
-     <value>Нажмите, чтобы добавить картинку</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
      <key>en</key>
-     <value>Click to add</value>
+     <value>AFD7E897-6B95-7243-316A-AB3D288E79F1</value>
     </nonselectedPictureText>
     <border xsi:type="core:BorderDef">
      <style>Single</style>
@@ -225,16 +209,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Değer türü grubu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа значения типа</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group of value type</value>
+     <value>00A106B9-1EF7-7EB1-1979-9D3C89CA4B69</value>
     </title>
     <extendedTooltip>
      <name>ValueTypeGroupExtendedTooltip</name>
@@ -451,16 +427,8 @@
  <attributes>
   <name>Icon</name>
   <title>
-   <key>tr</key>
-   <value>Simge</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Иконка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Icon</value>
+   <value>26429D08-DE3A-C2C3-39FB-B870B614BDEE</value>
   </title>
   <id>2</id>
   <valueType>
@@ -477,16 +445,8 @@
  <formCommands>
   <name>SetRequiredAtAllSets</name>
   <title>
-   <key>tr</key>
-   <value>"Zorunlu" işareti tümü için uygula</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить обязательное заполнение для всех реквизитов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set "Required" at all sets</value>
+   <value>5F36B7D8-16B2-FBA4-4A26-63F93158BD4E</value>
   </title>
   <id>1</id>
   <use>

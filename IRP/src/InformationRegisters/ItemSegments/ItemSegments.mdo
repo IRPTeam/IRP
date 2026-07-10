@@ -11,57 +11,25 @@
  </producedTypes>
  <name>ItemSegments</name>
  <synonym>
-  <key>tr</key>
-  <value>Malzeme segmentlerinin içeriği</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Состав сегмента номенклатуры</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Item segments content</value>
+  <value>9D304577-AA79-C8EF-F6A2-2CE5CD1D3F3E</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultRecordForm>InformationRegister.ItemSegments.Form.RecordForm</defaultRecordForm>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Malzeme segment içeriği</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Состав сегмента номенклатуры</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Item segment content</value>
+  <value>0C059F55-ADB6-6717-7FA0-097CCEFFA529</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Malzeme segmentlerinin içeriği</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Состав сегмента номенклатуры</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Item segments content</value>
+  <value>002595FC-293A-0BE9-95B0-086310AF3395</value>
  </listPresentation>
  <dimensions uuid="5154e93f-9298-49ae-bee3-ba4b78f8b6cc">
   <name>Segment</name>
   <synonym>
-   <key>tr</key>
-   <value>Segment</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сегмент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Segment</value>
+   <value>A1FAAC60-ECE8-F03A-AF81-1AC549A40102</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemSegments</types>
@@ -80,16 +48,8 @@
  <dimensions uuid="301acb84-f422-4b06-9c55-3601244d674b">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>6DB309D3-1F58-DF92-2DE3-32FF4CD4F422</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -106,16 +66,8 @@
  <dimensions uuid="0df05573-2b69-4d78-ab71-71f134e25f14">
   <name>Item</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item</value>
+   <value>0E73BB0D-745E-9948-8A8B-B666B25343DE</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -132,16 +84,8 @@
  <forms uuid="4aa1fa94-5f82-4bc2-b7cb-0c31b116b349">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>B4F775C3-429A-A5B3-33FB-B21B87076AAB</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

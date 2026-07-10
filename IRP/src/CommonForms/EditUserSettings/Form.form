@@ -4,16 +4,8 @@
   <name>UserOrGroup</name>
   <id>50</id>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı/Kullanıcı grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пользователь/Группа пользователей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User/User group</value>
+   <value>31D35C4C-732A-3043-3940-0517D380CA6B</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -239,16 +231,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Üst veri ağaç grubu sütunlar adı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа дерева метаданных наименование колонок</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Metadata tree group name columns</value>
+    <value>C33ED0BD-2484-8751-1191-1C1CACEF8EC6</value>
    </title>
    <extendedTooltip>
     <name>MetadataTreeGroupNameColumnsExtendedTooltip</name>
@@ -418,16 +402,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Üstveri ağaç grubu yönetme</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа дерева метаданных управление</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Metadata tree group manage</value>
+     <value>0AA0C0F9-DE13-6B06-6708-833DC28A28E3</value>
     </title>
     <extendedTooltip>
      <name>MetadataTreeGroupManageExtendedTooltip</name>
@@ -654,16 +630,8 @@
  <attributes>
   <name>UserOrGroup</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı veya grup</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пользователь или группа пользователей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User or group</value>
+   <value>50087C56-816D-D5DD-DDFA-A59B05730DDF</value>
   </title>
   <id>1</id>
   <valueType>
@@ -680,16 +648,8 @@
  <attributes>
   <name>MetadataTree</name>
   <title>
-   <key>tr</key>
-   <value>Üstveri ağacı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дерево метаданных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Metadata tree</value>
+   <value>2A033E93-75C7-A2B3-3315-5F9F0DF5E33D</value>
   </title>
   <id>2</id>
   <valueType>
@@ -704,16 +664,8 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>6E39A55E-6913-A23F-F4C9-9ACD290F5BE3</value>
    </title>
    <id>3</id>
    <valueType>
@@ -730,16 +682,8 @@
   <columns>
    <name>FullName</name>
    <title>
-    <key>tr</key>
-    <value>Tam isim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Полное наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Full name</value>
+    <value>8BBF36B2-F928-E4E6-6355-57A398336B06</value>
    </title>
    <id>4</id>
    <valueType>
@@ -756,16 +700,8 @@
   <columns>
    <name>GroupName</name>
    <title>
-    <key>tr</key>
-    <value>Grup isim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование группы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group name</value>
+    <value>8F4F5DCD-6094-A9DE-EE4A-A979F4B4E5FF</value>
    </title>
    <id>5</id>
    <valueType>
@@ -782,16 +718,8 @@
   <columns>
    <name>Synonym</name>
    <title>
-    <key>tr</key>
-    <value>Eşanlamlı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Синоним</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Synonym</value>
+    <value>E8843AFC-1D79-A2C6-6D22-233EA58175F6</value>
    </title>
    <id>6</id>
    <valueType>
@@ -808,16 +736,8 @@
   <columns>
    <name>KindOfAttribute</name>
    <title>
-    <key>tr</key>
-    <value>Öznitellik türü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид реквизита</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Kind of attribute</value>
+    <value>89CE2899-01B6-AD07-75B0-0C1421C35891</value>
    </title>
    <id>7</id>
    <valueType>
@@ -833,16 +753,8 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>EE862298-2E0E-8FD6-64AC-CC38CE5DC3B7</value>
    </title>
    <id>8</id>
    <valueType>
@@ -870,16 +782,8 @@
   <columns>
    <name>TypeRestriction</name>
    <title>
-    <key>tr</key>
-    <value>Kısıtlama tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ограничение по типу</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type restriction</value>
+    <value>0C9BFD8E-EC81-BF1A-A075-5D62DFD4D585</value>
    </title>
    <id>9</id>
    <valueType>
@@ -895,16 +799,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использовать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>0DD23219-F415-C41F-F923-3CE9059CE007</value>
    </title>
    <id>10</id>
    <valueType>
@@ -920,16 +816,8 @@
   <columns>
    <name>SettingID</name>
    <title>
-    <key>tr</key>
-    <value>Ayarları ID'si</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>ID Настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Setting ID</value>
+    <value>93AE215F-D4BF-5B5E-EE6C-CF881BC65E98</value>
    </title>
    <id>11</id>
    <valueType>
@@ -945,16 +833,8 @@
   <columns>
    <name>AddAttributeRef</name>
    <title>
-    <key>tr</key>
-    <value>Ek öznitelik bağlantısı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка дополнительного реквизита</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Additional attribute ref</value>
+    <value>8FF80632-F58B-30A1-1484-4963947F1153</value>
    </title>
    <id>12</id>
    <valueType>
@@ -970,16 +850,8 @@
   <columns>
    <name>ValueFromGroup</name>
    <title>
-    <key>tr</key>
-    <value>Gruptan değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение группы пользовательских настроек</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value from group</value>
+    <value>AAD33324-88DD-11EF-F055-5DBC98AA5D99</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1007,16 +879,8 @@
   <columns>
    <name>PictureIndex</name>
    <title>
-    <key>tr</key>
-    <value>Resim indeksi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Индекс картинки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picture index</value>
+    <value>29CC5BFE-EDEF-E49D-DE09-942FA2602677</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1036,16 +900,8 @@
  <attributes>
   <name>FilterByName</name>
   <title>
-   <key>tr</key>
-   <value>İsime göre filtre</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Фильтр по наименованию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filter by name</value>
+   <value>D1C3ADA5-9CEE-A2DD-DC54-4CC1A8BCACDD</value>
   </title>
   <id>15</id>
   <valueType>
@@ -1062,16 +918,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>234D5B0C-DABB-0054-40FA-AE27EEC1DA82</value>
   </title>
   <id>1</id>
   <use>
@@ -1087,16 +935,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>8247538F-CDA6-2481-169F-F34CFF856294</value>
   </title>
   <id>2</id>
   <use>
@@ -1112,16 +952,8 @@
  <formCommands>
   <name>MetadataTreeCollapseAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü daralt</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Свернуть все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Collapse all</value>
+   <value>7A4F889A-07F5-326F-FA69-944D58C23130</value>
   </title>
   <id>5</id>
   <use>
@@ -1140,16 +972,8 @@
  <formCommands>
   <name>MetadataTreeExpandAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü genişlet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Развернуть все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Expande all</value>
+   <value>9285CE5B-770B-A3F1-1670-0408D1C82958</value>
   </title>
   <id>6</id>
   <use>
@@ -1168,16 +992,8 @@
  <formCommands>
   <name>SetDefaultSettings</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan değerleri belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить настройки по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set default settings</value>
+   <value>EB519C35-41C3-0E5D-DF90-084FB6937ADF</value>
   </title>
   <id>7</id>
   <use>

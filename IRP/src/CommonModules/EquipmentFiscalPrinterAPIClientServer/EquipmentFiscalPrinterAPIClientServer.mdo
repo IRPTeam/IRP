@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="44f669c6-bf41-4b84-bc57-5d2cf256b6a7">
  <name>EquipmentFiscalPrinterAPIClientServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Ekipman fiskal yazıcı API</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Торговое оборудование API фискального регистратора</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Equipment fiscal printer API</value>
+  <value>DDDA9D6E-D6D2-1C19-99DC-C1096FD5BC08</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <server>true</server>

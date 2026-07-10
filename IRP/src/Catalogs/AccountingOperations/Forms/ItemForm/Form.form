@@ -251,16 +251,8 @@
  <formCommands>
   <name>ELedgerDetailComment</name>
   <title>
-   <key>tr</key>
-   <value>e-Defter detaylı açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>eLedger детальный комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>eLedger detail comment</value>
+   <value>1A456112-48D3-837A-A304-4576184FBAAE</value>
   </title>
   <id>1</id>
   <use>

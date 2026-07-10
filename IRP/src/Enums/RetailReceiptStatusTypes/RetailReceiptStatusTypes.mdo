@@ -7,77 +7,37 @@
  </producedTypes>
  <name>RetailReceiptStatusTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Perakende fiş durum türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы статусов розничных чеков</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Retail receipt status types</value>
+  <value>F0905F03-67F0-209A-A50E-E22B682FE7A2</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="fb121f4b-f6a7-4c35-91d7-fb78e03564d1">
   <name>Completed</name>
   <synonym>
-   <key>tr</key>
-   <value>Tamamlandı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Завершен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Completed</value>
+   <value>54D51633-51E8-7808-80B2-2829386E881D</value>
   </synonym>
  </enumValues>
  <enumValues uuid="720f01c6-7145-42a0-88df-0dc8627873d5">
   <name>Canceled</name>
   <synonym>
-   <key>tr</key>
-   <value>İptal edildi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отменен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Canceled</value>
+   <value>02FCF856-CBF6-249D-D4E5-5B62B5E4C397</value>
   </synonym>
  </enumValues>
  <enumValues uuid="058dc9ae-28ba-4b59-81a4-e26e27225be4">
   <name>Postponed</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelendi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Postponed</value>
+   <value>432E5E41-3998-9D15-5217-7E71F2CC3EE3</value>
   </synonym>
  </enumValues>
  <enumValues uuid="214e36d1-e51a-4c74-a790-2bb6c47aafcb">
   <name>PostponedWithReserve</name>
   <synonym>
-   <key>tr</key>
-   <value>Rezervli olarak ertelendi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложен с резервированием</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Postponed with reserve</value>
+   <value>BE7472BE-5FB4-7E95-5B46-61FFB32C0B13</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

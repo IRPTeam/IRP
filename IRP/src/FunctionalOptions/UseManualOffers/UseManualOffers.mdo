@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2f89125e-13bc-48f8-bc2f-721d2246069c">
  <name>UseManualOffers</name>
  <synonym>
-  <key>tr</key>
-  <value>Manuel indirimleri kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать ручные скидки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use manual offers</value>
+  <value>08D2CCA2-FB49-41A7-71D9-9101A8A739D4</value>
  </synonym>
  <location>Constant.UseManualOffers</location>
  <privilegedGetMode>true</privilegedGetMode>

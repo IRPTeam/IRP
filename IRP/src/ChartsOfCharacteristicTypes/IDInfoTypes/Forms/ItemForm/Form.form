@@ -534,16 +534,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Eklentiler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Внешние обработки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Plugins</value>
+    <value>87D6CDED-A4B5-9565-57F3-39F1808DF64B</value>
    </title>
    <extendedTooltip>
     <name>GroupPageExternalDataProcExtendedTooltip</name>
@@ -774,16 +766,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bağlı değerler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Связанные виды контактной информации</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Related values</value>
+    <value>86B0494F-0E14-C23B-B913-3B47E8A060ED</value>
    </title>
    <extendedTooltip>
     <name>GroupRelatedValuesExtendedTooltip</name>
@@ -807,16 +791,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа главных страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main pages</value>
+   <value>D4243ECF-E47C-FC0F-F74C-C428AAF9076F</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -912,16 +888,8 @@
  <attributes>
   <name>AddressResult</name>
   <title>
-   <key>tr</key>
-   <value>Adres sonucu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Адрес результата</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Address result</value>
+   <value>1A2C7D69-2031-D424-4232-2DD7A42EAEC9</value>
   </title>
   <id>2</id>
   <valueType>
@@ -938,16 +906,8 @@
  <attributes>
   <name>RowNumber</name>
   <title>
-   <key>tr</key>
-   <value>Satır numarası</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номер строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Row number</value>
+   <value>B5383A0C-E6F9-A018-86E3-3C648C003323</value>
   </title>
   <id>3</id>
   <valueType>
@@ -966,29 +926,13 @@
  <formCommands>
   <name>SetSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları belirle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set settings</value>
+   <value>4A3EDCB4-AF09-4761-149F-F5DE9CEB160D</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Ayarları belirle</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Заполнить настройки</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Set settings</value>
+   <value>7B029BB3-4A67-8B3E-EB59-9D52CF6AD515</value>
   </toolTip>
   <use>
    <common>true</common>

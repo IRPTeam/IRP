@@ -36,16 +36,8 @@
 			<field>InventoryNumber</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Envanter numarası</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Инвентаризационный номер</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Inventory number</v8:content>
+					<v8:content>75037724-15AB-CF82-29F4-4EF8BCF560FA</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -93,16 +85,8 @@
 			<field>DepreciationRate</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Amortisman oranı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Норма амортизации</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Depreciation rate</v8:content>
+					<v8:content>779F7EDD-37A9-F524-448A-A12B681FF812</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -117,16 +101,8 @@
 			<field>InitialCost</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İlk maliyet değeri</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Первонач. стоимость</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Initial cost</v8:content>
+					<v8:content>592A763E-ADD1-E069-9CEC-CA05C64F76B5</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -134,16 +110,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>5452EA07-3D98-EA4B-BD00-07C63DD57846</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -171,16 +139,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
+							<v8:content>38FB5B58-18E8-3396-6EF9-941E9C1EC882</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -205,16 +165,8 @@
 			<field>CommissioningDate</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Devreye alma tarihi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Дата ввода в эксплуатацию</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Commissioning date</v8:content>
+					<v8:content>6B99A883-D968-B6E5-56AB-B3AF87BD23A7</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -222,16 +174,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
+							<v8:content>38FB5B58-18E8-3396-6EF9-941E9C1EC882</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -267,16 +211,8 @@ WHERE
 		<name>Date</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Tarih</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Дата</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Date</v8:content>
+				<v8:content>C981061A-9955-A85F-FCD5-5731DC20974A</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -294,16 +230,8 @@ WHERE
 		<name>Company</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Şirket</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Организация</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Company</v8:content>
+				<v8:content>B8119459-0DE0-D239-9410-0D6DC4333C42</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -339,31 +267,15 @@ WHERE
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:lwsTitle>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Gelen</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Приход</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Receipt</v8:content>
+							<v8:content>707A5BEF-372E-71DB-BA32-2E2D96029FCD</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 						<dcsset:lwsTitle>
 							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>Belge tarihi, numarası</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Дата док., номер</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Doc date, number</v8:content>
+								<v8:content>E2CEB7EA-0B48-0D30-02DA-A7B7332F531A</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">

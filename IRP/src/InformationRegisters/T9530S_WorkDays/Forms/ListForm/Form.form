@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>BE63B583-1224-71CF-F106-60680E9C0B6E</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -170,16 +162,8 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Takvim</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Календарь</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Calendar</value>
+     <value>35236EAE-93E3-3285-56CC-CB81018D847B</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>Calendar</value>
@@ -187,16 +171,8 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Tablo</value>
-    </presentation>
-    <presentation>
-     <key>ru</key>
-     <value>Таблица</value>
-    </presentation>
-    <presentation>
      <key>en</key>
-     <value>Table</value>
+     <value>6D68B649-B2A2-5EBE-EC45-576B1091A72E</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>Table</value>
@@ -467,16 +443,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sayfa Listesi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Список страниц</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Page List</value>
+    <value>74E8ECA0-1330-E421-157C-C8678155C5D6</value>
    </title>
    <extendedTooltip>
     <name>GroupListExtendedTooltip</name>
@@ -560,16 +528,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sayfa Takvimi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Календарь страницы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Page Calendar</value>
+    <value>305D5A0B-5E7E-BFC0-0412-25C22FD3130A</value>
    </title>
    <extendedTooltip>
     <name>GroupCalendarExtendedTooltip</name>
@@ -593,16 +553,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>GrupSayfaları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>GroupPages</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>GroupPages</value>
+   <value>0B56FA6F-A5E0-50AF-F18D-D9F3377B3096</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -734,16 +686,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Çalışan programı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Штатное расписание</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Employee schedule</value>
+       <value>53F9F6B1-63D9-6747-7E03-38FCF652FFC3</value>
       </content>
      </localValue>
     </title>
@@ -758,16 +702,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Başlangıç tarihi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Начало периода</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Begin period</value>
+       <value>B4FDB0A6-A83A-BF0E-E935-52973E16AC4E</value>
       </content>
      </localValue>
     </title>
@@ -783,16 +719,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Son tarih</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Конец периода</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>End period</value>
+       <value>69598201-68EB-57E2-2DF5-511BC81A3F2D</value>
       </content>
      </localValue>
     </title>
@@ -808,16 +736,8 @@ WHERE
  <attributes>
   <name>EmployeeScheduleFilter</name>
   <title>
-   <key>tr</key>
-   <value>Çalışan programı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Штатное расписание</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Employee schedule</value>
+   <value>BA2287F4-EF8C-515F-F611-1196389ADB62</value>
   </title>
   <id>2</id>
   <valueType>
@@ -833,16 +753,8 @@ WHERE
  <attributes>
   <name>ListMode</name>
   <title>
-   <key>tr</key>
-   <value>Liste modu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Режим списка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List mode</value>
+   <value>CC267B61-5E90-34FB-BED9-9E78F8D63DC0</value>
   </title>
   <id>3</id>
   <valueType>
@@ -859,16 +771,8 @@ WHERE
  <attributes>
   <name>Calendar</name>
   <title>
-   <key>tr</key>
-   <value>Takvim</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Календарь</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Calendar</value>
+   <value>E0D8D06E-E0C0-DBDC-C4B9-99D5159EDB72</value>
   </title>
   <id>5</id>
   <valueType>
@@ -887,16 +791,8 @@ WHERE
  <attributes>
   <name>Period</name>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Период</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Period</value>
+   <value>8CBEB2C0-8E6F-C884-4FBF-F2EC52E865AF</value>
   </title>
   <id>6</id>
   <valueType>
@@ -912,16 +808,8 @@ WHERE
  <formCommands>
   <name>CreateSchedule</name>
   <title>
-   <key>tr</key>
-   <value>Program oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Создать график</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Create schedule</value>
+   <value>4690E247-E2C1-4D00-00EC-CE23A0A8F0CE</value>
   </title>
   <id>1</id>
   <use>
@@ -941,16 +829,8 @@ WHERE
  <formCommands>
   <name>CopySchedule</name>
   <title>
-   <key>tr</key>
-   <value>Programı kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Копировать расписание</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy schedule</value>
+   <value>7FC451D6-570D-E43E-E3DA-A752736B8575</value>
   </title>
   <id>2</id>
   <use>

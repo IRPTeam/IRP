@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseRetailOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Perakende müşteri siparişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать - заказы розничных покупателей</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use retail orders</value>
+  <value>2BF394A0-10E0-90B6-6822-2CF15F22A8A5</value>
  </synonym>
  <type>
   <types>Boolean</types>

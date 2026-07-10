@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R6021_BatchBalanceSimple</name>
  <synonym>
-  <key>tr</key>
-  <value>R6021 Toplu bakiye (basit)</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R6021 Партионный баланс (простой)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R6021 Batch balance (simple)</value>
+  <value>32A535B9-72BB-03B3-337A-A6A4F743771F</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R6021_BatchBalanceSimple.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="0c06b934-435b-4fca-959a-c33c07349d8f">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>59E65875-0F0F-C00E-E4D1-19BC979571C7</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

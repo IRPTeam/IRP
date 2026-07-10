@@ -2,16 +2,8 @@
 <mdclass:CommonCommand xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c17260bc-05a0-48ea-87ea-bdfe487cc7ac">
  <name>AttachedFiles</name>
  <synonym>
-  <key>tr</key>
-  <value>Dış dosyalar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Прикрепленные файлы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Attached files</value>
+  <value>9AA1A9A6-81FA-FB6F-FEBE-E0BC0DE9422B</value>
  </synonym>
  <group>FormCommandBarImportant</group>
  <commandParameterType>
@@ -19,16 +11,8 @@
  </commandParameterType>
  <representation>Auto</representation>
  <toolTip>
-  <key>tr</key>
-  <value>Dış dosyalar</value>
- </toolTip>
- <toolTip>
-  <key>ru</key>
-  <value>Прикрепленные файлы</value>
- </toolTip>
- <toolTip>
   <key>en</key>
-  <value>Attached files</value>
+  <value>8533C3C1-B7FD-F9B4-4680-0FA4B0FDD287</value>
  </toolTip>
  <picture xsi:type="core:PictureRef">
   <picture>CommonPicture.AttachFiles</picture>

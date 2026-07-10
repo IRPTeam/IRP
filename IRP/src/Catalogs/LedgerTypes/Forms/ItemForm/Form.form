@@ -463,16 +463,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup görünüm</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Представление группы</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group presentation</value>
+      <value>AF49BAD5-AD54-766F-F7D6-63F66F2D67CE</value>
      </title>
      <extendedTooltip>
       <name>GroupPresentationExtendedTooltip</name>
@@ -694,16 +686,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>İşlemler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Операции</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Operations</value>
+    <value>0E5C7B6B-364D-7A5B-B35A-A558783C19F2</value>
    </title>
    <extendedTooltip>
     <name>PageOperationsExtendedTooltip</name>
@@ -1047,16 +1031,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>P&amp;L offset</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Закрытие счетов прибылей/убытков</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>P&amp;L offset</value>
+    <value>396AB125-B57A-4811-108F-F295E0ED0329</value>
    </title>
    <extendedTooltip>
     <name>PagePLOffsetExtendedTooltip</name>
@@ -1080,16 +1056,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>26DA70E6-FB7E-6923-3036-603A5C190BFC</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1157,16 +1125,8 @@
  <attributes>
   <name>OperationsTree</name>
   <title>
-   <key>tr</key>
-   <value>Hareketler ağacı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дерево операций</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Operations tree</value>
+   <value>7950F7FE-D40A-493B-BD85-5282F98304B4</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1181,16 +1141,8 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document</value>
+    <value>53F839A0-C1F5-7236-69A5-5017987BED3E</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1206,16 +1158,8 @@
   <columns>
    <name>AccountingOperation</name>
    <title>
-    <key>tr</key>
-    <value>Muhasebe işlemi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Бухгалтерская операция</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Accounting operation</value>
+    <value>F1B37C38-159B-A546-61F0-03ED0C55F326</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1231,16 +1175,8 @@
   <columns>
    <name>Period</name>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Период</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Period</value>
+    <value>901C0432-AD6C-84DB-B6D8-86FB3509B016</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1259,16 +1195,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использовать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>FAF4B12F-1679-DD49-95B4-411CE7097AC4</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1284,16 +1212,8 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Уровень</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Level</value>
+    <value>503A905E-E0C2-2997-7A1D-D7C978F335E5</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1312,16 +1232,8 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Картинка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Picture</value>
+    <value>EF373182-DF88-CAAE-EF4B-BF80690CA173</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1340,16 +1252,8 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Специальные предложения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>B17B352F-4A78-4FA3-33DC-C6F717E1A221</value>
    </title>
    <id>9</id>
    <valueType>

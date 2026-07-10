@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ObjectStatuses</name>
  <synonym>
-  <key>tr</key>
-  <value>Nesne statüleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Статусы объектов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Objects statuses</value>
+  <value>631A92EC-39E6-DC00-0F4A-AED4DE952166</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -76,16 +68,8 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>tr</key>
-   <value>Obje</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Объект</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Object</value>
+   <value>23C522B3-5FC5-3CDD-D326-658F2CCA8B43</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -147,16 +131,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Nesne statüsü</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Статус объекта</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Objects status</value>
+  <value>F5640E2D-F435-E01C-C0F5-537CB7838FB7</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <limitLevelCount>true</limitLevelCount>
@@ -291,16 +267,8 @@
  <attributes uuid="2fcc43d5-489e-4b83-a634-2af9a1f4c676">
   <name>SetByDefault</name>
   <synonym>
-   <key>tr</key>
-   <value>Varsayılan olarak ayarla</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По умолчанию</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Set by default</value>
+   <value>909688B7-EBF3-E10B-B2C6-6F45DCBB6867</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -314,16 +282,8 @@
  <attributes uuid="31a6a12e-7f2d-4b1b-98f4-bca102f78a63">
   <name>Posting</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Делает проводки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Posting</value>
+   <value>B7AA0326-29A8-27AC-C5DE-EDD7A8D6834F</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -337,16 +297,8 @@
  <attributes uuid="7fbe4cc5-58e8-4b32-95c8-1dfd400b9951">
   <name>PostingChequeBondBalance</name>
   <synonym>
-   <key>tr</key>
-   <value>Çek/senet bakiyeleri (ChequeBondBalance)</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Остаток обязательств по чекам</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cheque bond balance</value>
+   <value>A7298C8C-2D42-A876-61D8-814FA3826D73</value>
   </synonym>
   <type>
    <types>EnumRef.DocumentPostingTypes</types>
@@ -360,16 +312,8 @@
  <attributes uuid="463dfb00-3550-4d9e-925a-a18d4f68f05e">
   <name>PostingVendorTransactions</name>
   <synonym>
-   <key>tr</key>
-   <value>Tedarikçi hareketleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Транзакции поставщика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Vendor transactions</value>
+   <value>C8C8AE48-7E4B-DCCA-A61D-D9E6D38166D5</value>
   </synonym>
   <type>
    <types>EnumRef.DocumentPostingTypes</types>
@@ -383,16 +327,8 @@
  <attributes uuid="c42a76cb-644c-469a-a964-fc8fddfc5fdc">
   <name>PostingCustomerTransactions</name>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri hareketleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Транзакции покупателей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Customer transactions</value>
+   <value>D578BB46-89A3-0996-6610-03E5BA8F214C</value>
   </synonym>
   <type>
    <types>EnumRef.DocumentPostingTypes</types>
@@ -406,16 +342,8 @@
  <attributes uuid="06f5beeb-e052-4592-9c2f-72c71096775d">
   <name>PostingCashPlanning</name>
   <synonym>
-   <key>tr</key>
-   <value>Finansal planlama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Планирование денежных средств</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cash planning</value>
+   <value>081ADA22-91D4-B89C-CA0A-A1A190BB1A38</value>
   </synonym>
   <type>
    <types>EnumRef.DocumentPostingTypes</types>
@@ -433,30 +361,14 @@
   </producedTypes>
   <name>NextPossibleStatuses</name>
   <synonym>
-   <key>tr</key>
-   <value>Sonraki uygun statüler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Следующие возможные статусы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Next possible statuses</value>
+   <value>ABC4AC60-4696-946B-B7DF-F41A4871E817</value>
   </synonym>
   <attributes uuid="1787d1b7-e818-4ffc-8059-56acd4b34f1e">
    <name>Status</name>
    <synonym>
-    <key>tr</key>
-    <value>Statü</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Статус</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Status</value>
+    <value>AA9C2E69-C4FE-0337-7AF6-63C67EE02749</value>
    </synonym>
    <type>
     <types>CatalogRef.ObjectStatuses</types>
@@ -474,30 +386,14 @@
   </producedTypes>
   <name>Users</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcılar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Пользователи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Users</value>
+   <value>E17E8F1B-1675-DCDA-AA4B-BE6D9DF680D1</value>
   </synonym>
   <attributes uuid="4761ed49-0134-4f45-84c0-284694101fe9">
    <name>User</name>
    <synonym>
-    <key>tr</key>
-    <value>Kullanıcı</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Пользователь</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>User</value>
+    <value>B4775CD6-237D-F5BA-A687-71472F906D5E</value>
    </synonym>
    <type>
     <types>CatalogRef.Users</types>
@@ -516,30 +412,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>587D5B6E-9E8F-7C16-67AF-F4AC1CFC9100</value>
   </synonym>
   <attributes uuid="bea53aa4-76b8-4e10-bb72-c59a88790af0">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>C3745599-1FEC-D908-8EA5-58697329F2AD</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -552,16 +432,8 @@
   <attributes uuid="b24edfb8-fb26-4105-b608-a954006c8ca0">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>0C0993CB-79CF-69D2-2B15-543A6B9AA006</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -579,16 +451,8 @@
  <forms uuid="65420be6-a4f9-47e1-b911-63d0c2e2c8f9">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>23EEC6D2-5331-573E-E436-6FE23A9419A3</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -596,16 +460,8 @@
  <forms uuid="3a481351-84ab-45b2-ba05-538f6facd794">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>10C26E09-3F0F-D9ED-D24B-B5FAC166AAD9</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -613,16 +469,8 @@
  <forms uuid="000993b6-5857-4338-93a8-33327b5c475d">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>5653374B-D3BF-C4E5-5695-5E75FE44CFDF</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -630,16 +478,8 @@
  <forms uuid="11d323fb-ea58-4d49-bb16-b4eb36d457c0">
   <name>GroupForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма группы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group form</value>
+   <value>1AF8B576-ED0E-DDB1-1F8A-AF2C8BF7E19F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

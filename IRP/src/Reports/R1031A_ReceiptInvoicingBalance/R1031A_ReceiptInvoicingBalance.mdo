@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R1031A_ReceiptInvoicingBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R1031A Gelen fatura bakiyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1031A Ожидающие закрытия поступления</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1031A Receipt invoicing balance</value>
+  <value>1AA38248-9BB3-B2E0-092E-E4AD91711CB4</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R1031A_ReceiptInvoicingBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="f3b7c3e6-0047-4234-af24-6aff0878429f">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>6B486D75-05B2-2ECC-C2DE-E7A7CDF097F2</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

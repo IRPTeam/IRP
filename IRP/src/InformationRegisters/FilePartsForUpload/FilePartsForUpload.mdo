@@ -11,16 +11,8 @@
  </producedTypes>
  <name>FilePartsForUpload</name>
  <synonym>
-  <key>tr</key>
-  <value>Yükleme için dosya parçaları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Части файла для загрузки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>File parts for upload</value>
+  <value>7BB8FA9B-F748-2D4D-D8C2-22137CC078A3</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,16 +20,8 @@
  <resources uuid="84db1fc4-f55e-4671-a9e4-21772852bbb8">
   <name>Loaded</name>
   <synonym>
-   <key>tr</key>
-   <value>Yüklendi  </value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Загружено</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Loaded</value>
+   <value>1C068890-D1F8-0CA1-1DA6-62E21994565D</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -51,16 +35,8 @@
  <resources uuid="7efb94f0-59f9-4344-91f1-7e647980f498">
   <name>Content</name>
   <synonym>
-   <key>tr</key>
-   <value>İçerik</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Содержание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Content</value>
+   <value>19E5C79C-C4C4-D98F-F23D-DB60142EFAE1</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -74,16 +50,8 @@
  <attributes uuid="68f66e27-6c36-4437-98c4-f65b99afb9ea">
   <name>CreateDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Oluşturulma tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата создания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Create date</value>
+   <value>B8DEA9C3-D3BF-1BA2-2B83-3B9DDE0F3305</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -98,16 +66,8 @@
  <dimensions uuid="45ed711b-4709-4638-a057-eb71b4a87155">
   <name>MD5</name>
   <synonym>
-   <key>tr</key>
-   <value>M d5      </value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>MD5     </value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>M d5</value>
+   <value>E9A09C65-C784-EC12-21B7-776E2CAC24CB</value>
   </synonym>
   <type>
    <types>String</types>
@@ -120,24 +80,14 @@
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="4267113d-0dff-44e1-9131-f648d1a71972">
   <name>PartNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Parça numarası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер партии</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Part number</value>
+   <value>FEF8B3EE-370B-7E49-9830-019CC5B5ED6A</value>
   </synonym>
   <type>
    <types>Number</types>

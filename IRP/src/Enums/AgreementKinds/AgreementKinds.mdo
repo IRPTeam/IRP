@@ -7,47 +7,23 @@
  </producedTypes>
  <name>AgreementKinds</name>
  <synonym>
-  <key>tr</key>
-  <value>Sözleşme türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Виды соглашений</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Partner term kinds</value>
+  <value>D37111DE-B59E-50D9-913B-B978488E76DD</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="85e06622-ad8c-4c22-b9d7-d669ae867684">
   <name>Regular</name>
   <synonym>
-   <key>tr</key>
-   <value>Normal</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Обычное</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Regular</value>
+   <value>CBB9D140-8BF8-8949-9399-9EC543EAF059</value>
   </synonym>
  </enumValues>
  <enumValues uuid="3ee710d5-f20a-4b3d-b2b3-fe39692a7ac8">
   <name>Standard</name>
   <synonym>
-   <key>tr</key>
-   <value>Standart</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Стандартное</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Standard</value>
+   <value>E45B1182-D2AD-215C-CB28-8AEC064C9F15</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>BatchReallocateOutgoing</name>
  <synonym>
-  <key>tr</key>
-  <value>Malzeme parti transfer - çıkan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Перемещение партий товаров - исходящий</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Batch reallocate outgoing</value>
+  <value>5FA0A5D4-7654-1C27-70CE-E8C363D7658C</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.BatchReallocateOutgoing.StandardAttribute.Number</inputByString>
@@ -27,28 +19,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Malzeme parti transfer - çıkan</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Перемещение партий товаров - исходящий</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Batch reallocate outgoing</value>
+  <value>C137166A-66AD-C0EE-EDB5-53050659D22A</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Parti dağıtımı çıkan</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Пакетное перераспределение расходов</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Batch reallocate outgoings</value>
+  <value>7A41C303-A68B-B0BA-A58C-C39268B634D8</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -59,25 +35,17 @@
  <defaultChoiceForm>Document.BatchReallocateOutgoing.Form.ChoiceForm</defaultChoiceForm>
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
- <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="ce41a778-b8a7-476d-a4bf-bffe83857a7d">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>A48B4350-F0BA-F0D3-3DC9-901265B5143B</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -91,16 +59,8 @@
  <attributes uuid="32fc8423-905a-4d7f-9a8d-2dd9846a0910">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>33088B9D-E1EC-49F8-8487-77DFCD8B09A1</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -126,16 +86,8 @@
  <attributes uuid="a7314bc0-6221-4a77-acd3-83cfe7fd6dd8">
   <name>BatchReallocate</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme parti tranferi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партия распределения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Batch reallocate</value>
+   <value>3B3740ED-7868-0288-8B27-77DE36F0D1E4</value>
   </synonym>
   <type>
    <types>DocumentRef.CalculationMovementCosts</types>
@@ -150,16 +102,8 @@
  <attributes uuid="9e9bd57d-e94b-42b2-bb69-e91c73d7a8af">
   <name>Incoming</name>
   <synonym>
-   <key>tr</key>
-   <value>Gelen</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Входящий</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Incoming</value>
+   <value>97E9408B-7AD9-C4A9-909F-FCCA93CE5371</value>
   </synonym>
   <type>
    <types>DocumentRef.BatchReallocateIncoming</types>
@@ -173,16 +117,8 @@
  <forms uuid="3bab1d26-8d3a-45fc-9953-871e3092389b">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document form</value>
+   <value>E093C737-13CB-C90A-AD0D-DA039C060123</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -190,16 +126,8 @@
  <forms uuid="6f8c65f2-99c7-41c8-a454-898446d5dc63">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>F2A85E86-51B5-E303-3688-896F811465A0</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -207,16 +135,8 @@
  <forms uuid="4c488de3-a813-40a3-b275-58ba90086b74">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>F16254C7-392C-0672-23C4-4207F3E711F4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -228,30 +148,14 @@
   </producedTypes>
   <name>ItemList</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Товары</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item list</value>
+   <value>82F81278-606B-8087-7AC4-46B5727C3DEB</value>
   </synonym>
   <attributes uuid="b71e1ebe-ea6f-42fe-b69b-1a800741acc0">
    <name>ItemKey</name>
    <synonym>
-    <key>tr</key>
-    <value>Varyant</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Item key</value>
+    <value>4FCC114F-4CCE-4488-8783-39883D28C202</value>
    </synonym>
    <type>
     <types>CatalogRef.ItemKeys</types>
@@ -264,16 +168,8 @@
   <attributes uuid="18aecdf3-74e9-4dab-9de3-7c1f4bd66002">
    <name>Store</name>
    <synonym>
-    <key>tr</key>
-    <value>Depo</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Склад</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Store</value>
+    <value>1F4E7D23-7157-80A3-39DB-BC7FD4366187</value>
    </synonym>
    <type>
     <types>CatalogRef.Stores</types>
@@ -291,16 +187,8 @@
   <attributes uuid="018a4e34-73fd-498a-b4b0-30e112b9f519">
    <name>Branch</name>
    <synonym>
-    <key>tr</key>
-    <value>Şube</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Структурное подразделение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Branch</value>
+    <value>98F19555-CFAF-91B2-2BD0-060AD8441039</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -313,16 +201,8 @@
   <attributes uuid="98cdb7f8-e545-4de2-9cf5-4fd02a33c89c">
    <name>Quantity</name>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Количество</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Quantity</value>
+    <value>6C0CD41D-84F3-3BAC-C1E8-8E01A8BA4A00</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>

@@ -7,47 +7,23 @@
  </producedTypes>
  <name>AmountCorrectionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Tutar düzeltme türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы коррекции суммы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Amount correction types</value>
+  <value>1198A110-5EB7-2F7E-E9E0-0F2562FF0D07</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="a30a71e3-07b5-4475-ab17-8941a841da10">
   <name>Expense</name>
   <synonym>
-   <key>tr</key>
-   <value>Çıkan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расход</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Expense</value>
+   <value>89A744F8-0DBF-6D5E-E850-0737200E17AD</value>
   </synonym>
  </enumValues>
  <enumValues uuid="fb6a93a2-7cb0-4e3a-899b-a43d41d2c736">
   <name>Revenue</name>
   <synonym>
-   <key>tr</key>
-   <value>Gelir</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Доход</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Revenue</value>
+   <value>F7178174-9E28-A536-68EE-E351CC13C244</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

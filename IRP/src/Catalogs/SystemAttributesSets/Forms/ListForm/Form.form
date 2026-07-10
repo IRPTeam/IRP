@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>12BCB923-1A51-6AEF-F9C3-31142AD5FC3D</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -346,16 +338,8 @@
  <formCommands>
   <name>FillByDefault</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan olarak doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill by default</value>
+   <value>0ECCB234-61E8-1834-4576-65D67D484F87</value>
   </title>
   <id>1</id>
   <use>
@@ -371,16 +355,8 @@
  <formCommands>
   <name>UpdateRegister</name>
   <title>
-   <key>tr</key>
-   <value>Kayıt güncelleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить регистр</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update register</value>
+   <value>D74C61EF-B99C-BEB2-22D2-2337B889C285</value>
   </title>
   <id>2</id>
   <use>

@@ -40,16 +40,8 @@
  <attributes>
   <name>CommandDescription</name>
   <title>
-   <key>tr</key>
-   <value>Komut tanımı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование команды</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Command description</value>
+   <value>6937BDED-13FA-5853-3535-5F61F662AE9E</value>
   </title>
   <id>2</id>
   <valueType/>

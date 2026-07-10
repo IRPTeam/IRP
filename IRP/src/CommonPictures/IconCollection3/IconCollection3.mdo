@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d6194c2c-c03d-4d0c-8909-6875634c2631">
  <name>IconCollection3</name>
  <synonym>
-  <key>tr</key>
-  <value>Resim kolleksiyon3</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Картинка3</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Icon collection3</value>
+  <value>06B9BE6B-86B7-6AFB-B6B1-1C5E46B8C2ED</value>
  </synonym>
 </mdclass:CommonPicture>

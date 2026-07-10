@@ -409,16 +409,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Değişken</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Пользовательский</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Custom</value>
+    <value>27B974A7-26AB-B6F3-307D-D7746ED649A2</value>
    </title>
    <extendedTooltip>
     <name>GroupPageCustomExtendedTooltip</name>
@@ -498,16 +490,8 @@
      <name>StandardOptionsPresentation</name>
      <id>167</id>
      <title>
-      <key>tr</key>
-      <value>Rapor seçeneği</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Вариант отчета</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Report option</value>
+      <value>F6F74886-765D-D499-9B17-72EF44E3E166</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -707,16 +691,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Standart</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Стандартное</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Standard</value>
+    <value>1E6EEE82-98A5-9997-730C-C43F68FFF5CF</value>
    </title>
    <extendedTooltip>
     <name>GroupPageStandardExtendedTooltip</name>
@@ -806,16 +782,8 @@
  <attributes>
   <name>OptionsList</name>
   <title>
-   <key>tr</key>
-   <value>Seçenek listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Варианты отчетов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Options list</value>
+   <value>BD716267-1B67-578E-E3D9-955F52D39563</value>
   </title>
   <id>2</id>
   <valueType>
@@ -867,16 +835,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Geçerli ayar</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Это текущая настройка</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is current option</value>
+       <value>2C8CC1D4-A138-B578-8C5E-E8F5FC5C283B</value>
       </content>
      </localValue>
     </title>
@@ -887,16 +847,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ayar anahtarı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Ключ настройки</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Option key</value>
+       <value>7D3C6C87-5EE9-C498-8277-795D85EC9D21</value>
       </content>
      </localValue>
     </title>
@@ -907,16 +859,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Paylaşıldı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Общий</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Shared</value>
+       <value>2AD62776-7BBD-7519-95D7-7C5B5ABF564F</value>
       </content>
      </localValue>
     </title>
@@ -927,16 +871,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Rapor seçeneği</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Вариант отчета</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Report option</value>
+       <value>4CCD5477-9ACB-BE29-9197-7F00557E86E3</value>
       </content>
      </localValue>
     </title>
@@ -974,16 +910,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Nesne anahtarı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Ключ объекта</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Object key</value>
+       <value>63D0F935-EDFC-7FB3-3913-34D1BD91C558</value>
       </content>
      </localValue>
     </title>
@@ -1001,16 +929,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kayıt oluşturan</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Автор</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Author</value>
+       <value>8DCF2176-2E57-92B7-7E8B-B94187A815A2</value>
       </content>
      </localValue>
     </title>
@@ -1025,16 +945,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Mevcut ayarlar anahtarı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Ключ текущих настроек</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Current settings key</value>
+       <value>1EE3DA03-6B8F-EB9D-DC9D-DA6F08769647</value>
       </content>
      </localValue>
     </title>
@@ -1052,16 +964,8 @@ WHERE
  <attributes>
   <name>CurrentSettingsKey</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut ayarlar anahtarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ключ текущих настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current settings key</value>
+   <value>A32474DA-9945-03B5-5E32-29EACD403B6D</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1080,16 +984,8 @@ WHERE
  <attributes>
   <name>ObjectKey</name>
   <title>
-   <key>tr</key>
-   <value>Nesne anahtarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ключ объекта</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Object key</value>
+   <value>2BA9060A-3813-6FC7-7FFF-FC1FD3CD97A3</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1106,16 +1002,8 @@ WHERE
  <attributes>
   <name>StandardOptions</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan ayar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Стандарные варианты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Standard options</value>
+   <value>13B394BA-E607-038D-D351-1D3B57F06C18</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1130,16 +1018,8 @@ WHERE
   <columns>
    <name>isCurrentOption</name>
    <title>
-    <key>tr</key>
-    <value>Geçerli ayar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это текущая настройка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is current option</value>
+    <value>EF748057-2919-46D8-8D23-33D245E8EBA2</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1155,16 +1035,8 @@ WHERE
   <columns>
    <name>OptionKey</name>
    <title>
-    <key>tr</key>
-    <value>Ayar anahtarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Option key</value>
+    <value>E967C64F-A34F-3185-5193-341587092AC9</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1183,16 +1055,8 @@ WHERE
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Специальные предложения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>FFB2E61A-CFAE-EEC3-3DC1-16516CCAC41E</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1212,16 +1076,8 @@ WHERE
  <formCommands>
   <name>LoadSetting</name>
   <title>
-   <key>tr</key>
-   <value>Yükleme ayarları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load setting</value>
+   <value>311A48FD-295B-A0DE-EA95-5257A56232C0</value>
   </title>
   <id>1</id>
   <use>
@@ -1237,16 +1093,8 @@ WHERE
  <formCommands>
   <name>ShowMarkedForDeletion</name>
   <title>
-   <key>tr</key>
-   <value>Silmek için işaretlenenleri göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать помеченые на удаление</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show marked for deletion</value>
+   <value>BE78F028-28A3-DB41-1E81-10E1942BA35B</value>
   </title>
   <id>2</id>
   <use>

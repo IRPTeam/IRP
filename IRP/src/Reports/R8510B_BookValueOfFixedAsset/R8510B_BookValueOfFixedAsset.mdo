@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R8510B_BookValueOfFixedAsset</name>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymetin defter değeri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Балансовая стоимость основных средств</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Book value of fixed asset</value>
+  <value>6BF47FFA-8184-CF2F-F769-916D9D737371</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R8510B_BookValueOfFixedAsset.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="8829cffa-542e-4e42-9088-e757b5fa72f8">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>755C78FD-7581-F0AB-BEA4-4C0EAB8FD68A</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

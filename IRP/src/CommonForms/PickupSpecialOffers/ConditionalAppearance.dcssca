@@ -78,16 +78,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>✔</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>✔</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>✔</v8:content>
+						<v8:content>73B3671F-BC1E-77A2-2878-8B23AA0C30B6</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -111,16 +103,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>☐</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>☐</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>☐</v8:content>
+						<v8:content>CE28FB44-378C-6A9F-F6D7-7BCFE7907A89</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

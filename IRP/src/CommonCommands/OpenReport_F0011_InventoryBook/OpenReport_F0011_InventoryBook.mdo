@@ -2,16 +2,8 @@
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8e3b7c1c-d7db-47ba-8372-ebd9ce5904c3">
  <name>OpenReport_F0011_InventoryBook</name>
  <synonym>
-  <key>tr</key>
-  <value>F0011 Envanter kitabı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>F0011 Инвентарная книга</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>F0011 Inventory book</value>
+  <value>333C09C0-16B7-A2A4-4FA2-2EAF67090F71</value>
  </synonym>
  <group>NavigationPanelOrdinary</group>
  <representation>Auto</representation>

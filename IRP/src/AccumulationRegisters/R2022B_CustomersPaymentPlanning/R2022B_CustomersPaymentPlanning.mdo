@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R2022B_CustomersPaymentPlanning</name>
  <synonym>
-  <key>tr</key>
-  <value>R2022 Müşteri ödeme planlaması</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2022 Планирование оплат от покупателей</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2022 Customers payment planning</value>
+  <value>3D8D946C-BB48-2BF1-1A6E-E03DCE81A494</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="903bb7bd-c7c5-434b-ae80-9ed957b8a8e4">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>E668302F-C898-51EE-E16F-F39858BDB413</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="b469216e-828d-46f4-9876-5ded6c2f82a3">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>9EE5C17E-588A-8A02-2E93-34DD4BCA5DA1</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="8300256c-7527-4162-8231-cb34975f913b">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>CB789CFF-573A-FE76-6410-0C439B4461AC</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="c392b976-8221-4116-937f-b0a1e0005ec1">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis</value>
+   <value>EB8F76D2-BAD9-D065-5EA4-4A7650951FB1</value>
   </synonym>
   <type>
    <types>DocumentRef.DebitNote</types>
@@ -116,16 +76,8 @@
  <dimensions uuid="46e876d5-2b92-4e6e-bba9-b228f60f7ac4">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>A168B147-3D31-0901-1871-17F184C740B2</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -138,16 +90,8 @@
  <dimensions uuid="f184c479-5107-4e59-93a8-f6c314584f96">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>EB6F9AC1-68A0-B4B0-08D7-7B41F0B4866F</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -160,16 +104,8 @@
  <dimensions uuid="f0a7d05a-19be-49e9-9824-d7088270bd3a">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Agreement</value>
+   <value>B682C06A-5E3D-F198-85B1-1587C472ED16</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>

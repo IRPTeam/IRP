@@ -2,16 +2,8 @@
 <mdclass:CommonCommand xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="90b0d7d2-7f86-4bd6-a82c-491da0f5be16">
  <name>IDInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>İletişim bilgi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Контактная информация</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Contact info</value>
+  <value>318A9A52-A4CC-53D8-8057-7F4A19FBB756</value>
  </synonym>
  <group>FormCommandBarImportant</group>
  <commandParameterType>

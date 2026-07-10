@@ -59,16 +59,8 @@
     <name>DecorationChangeActive</name>
     <id>124</id>
     <title>
-     <key>tr</key>
-     <value>Aktif:</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Активный:</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Active:</value>
+     <value>312A2E33-5F2A-A1A9-94DC-C1C8E88D575E</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -129,16 +121,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Aktif</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Активный</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Active</value>
+    <value>18DE158A-7733-6AAD-D6DA-A3AD245037C0</value>
    </title>
    <extendedTooltip>
     <name>GroupChangeActiveExtendedTooltip</name>
@@ -165,16 +149,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup header</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа шапка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group header</value>
+   <value>24BF1D50-AD10-90C5-5986-6687D47F57B4</value>
   </title>
   <extendedTooltip>
    <name>GroupHeaderExtendedTooltip</name>
@@ -650,16 +626,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sol)</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группировка по левому краю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group left</value>
+    <value>C38F0E67-C898-7DCD-D040-0B619FD9C004</value>
    </title>
    <extendedTooltip>
     <name>GroupLeftExtendedTooltip</name>
@@ -849,16 +817,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sağ)</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группировка по правому краю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group right</value>
+    <value>D68C13CA-D71C-140A-ADAE-E2EC0E1F77FE</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -885,16 +845,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Başlık nesneleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заголовок номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Title items</value>
+   <value>FF73662C-3D62-1AC4-455A-A8F047C471F6</value>
   </title>
   <extendedTooltip>
    <name>GroupTitleItemsExtendedTooltip</name>
@@ -1387,16 +1339,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Karışım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Состав</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Content</value>
+    <value>78116C5A-D1B1-4221-1CBE-EFE9C769F045</value>
    </title>
    <extendedTooltip>
     <name>PageContentExtendedTooltip</name>
@@ -1566,16 +1510,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup Üretim ağacı</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Производственное дерево группа 1</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Production tree group1</value>
+      <value>618CB4A7-4BE2-B011-1766-6D379FD6B1D3</value>
      </title>
      <extendedTooltip>
       <name>ProductionTreeGroupItemItemKeyExtendedTooltip</name>
@@ -1791,16 +1727,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Detaylar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Details</value>
+    <value>5A1CB5CD-E3CF-CFAD-DF77-77FAA1B5C8DB</value>
    </title>
    <extendedTooltip>
     <name>PageDetailsExtendedTooltip</name>
@@ -1824,16 +1752,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana sayfaklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основные страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main pages</value>
+   <value>18F33D6D-54FC-2EA6-6865-54E78B6559BE</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -1948,16 +1868,8 @@
  <attributes>
   <name>ProductionTree</name>
   <title>
-   <key>tr</key>
-   <value>Üretim ağacı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Производственное дерево</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Production tree</value>
+   <value>D595E36D-411C-E9AA-A0F9-9AF7783F6B10</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1972,16 +1884,8 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Mamul, yarım mamul, malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Готовая продукция, Полуфабрикат, Сырье</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Product, Semiproduct, Material</value>
+    <value>EF9C9CFD-8123-FEBE-EBF7-7C263BC10DE4</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1997,16 +1901,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>64BC0534-BADF-E4CC-C99F-FF64224FB623</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2022,16 +1918,8 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ед. изм.</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Unit</value>
+    <value>0E8E246C-43C7-D428-8000-0D8ECE60DB0C</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2047,16 +1935,8 @@
   <columns>
    <name>ItemPicture</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme resimi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Картинка номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item picture</value>
+    <value>6998CA31-86F1-3F66-6AB7-75141790D62D</value>
    </title>
    <id>7</id>
    <valueType>
@@ -2075,16 +1955,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>354A2C98-131D-D72F-F50F-F5AF02BB625D</value>
    </title>
    <id>8</id>
    <valueType>
@@ -2101,16 +1973,8 @@
  <attributes>
   <name>ProductionPlanningExists</name>
   <title>
-   <key>tr</key>
-   <value>Üretim planlama fişi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Планирование производства</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Production planning</value>
+   <value>0C571E0E-8615-6C8D-DEAE-EC72FD7C9471</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2127,16 +1991,8 @@
  <formCommands>
   <name>SetAsDefault</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan olarak işaretle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить как основной</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set as default</value>
+   <value>8ADC445F-FF90-B6C9-9AAC-C85828ABA852</value>
   </title>
   <id>1</id>
   <use>
@@ -2168,16 +2024,8 @@
  <formCommands>
   <name>UnlockForm</name>
   <title>
-   <key>tr</key>
-   <value>Formun kilidini aç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разблокировать форму</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unlock form</value>
+   <value>88C1FF36-1A90-2F9E-E78B-BC8CBB4AB33D</value>
   </title>
   <id>3</id>
   <use>

@@ -9,16 +9,8 @@
  </producedTypes>
  <name>NumeratorGroups</name>
  <synonym>
-  <key>tr</key>
-  <value>Numaratör grupları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Группы нумерации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Numerator groups</value>
+  <value>B81C9569-7CB2-FC5B-BD00-0B8A4634CB04</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -40,16 +32,8 @@
  <attributes uuid="f346e238-85fc-41d9-8cc2-fdc33b4d7e26">
   <name>BasicRule</name>
   <synonym>
-   <key>tr</key>
-   <value>Basit kural</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Простое правило</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basic rule</value>
+   <value>6DE5F037-D40A-ADCE-E1A5-52938BB32236</value>
   </synonym>
   <type>
    <types>CatalogRef.NumeratorBasicRules</types>
@@ -64,16 +48,8 @@
  <attributes uuid="64a19c42-f5b0-4dbe-b969-ee9733ce7e4a">
   <name>BeginDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата начала</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Begin date</value>
+   <value>7472DCE8-6AB8-D294-4968-8C82A1292C7A</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -90,16 +66,8 @@
  <attributes uuid="4ec95725-bfb0-4932-838b-c1a36ca2b2e2">
   <name>EndDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата окончания больничного</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>End date</value>
+   <value>B2CAA324-B6FB-33EA-A9D0-0403F1120BE1</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -116,16 +84,8 @@
  <attributes uuid="ddabfcb7-6290-4429-b357-ccf15173bdff">
   <name>ByDefault</name>
   <synonym>
-   <key>tr</key>
-   <value>Varsayılan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По умолчанию</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>By default</value>
+   <value>EB0C4BA2-2640-20FE-E808-8A63401095DC</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -139,16 +99,8 @@
  <attributes uuid="7b2010aa-55e4-4991-8061-a60834181154">
   <name>NumberingPeriod</name>
   <synonym>
-   <key>tr</key>
-   <value>Numaralandırma dönemi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Период нумерации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Numbering period</value>
+   <value>370EF976-EB05-A797-7942-283A5ADE98C0</value>
   </synonym>
   <type>
    <types>EnumRef.NumberingPeriods</types>
@@ -164,16 +116,8 @@
  <attributes uuid="497b742a-0641-4d0e-8971-915a1e9ce719">
   <name>NumberTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Numara şablonu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон номера</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Number template</value>
+   <value>D57F763E-378F-3B71-13E9-90EB933B9C7E</value>
   </synonym>
   <type>
    <types>String</types>
@@ -190,16 +134,8 @@
  <attributes uuid="d83cf392-d979-441f-b6a6-e7213f0f2a0c">
   <name>StartNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Başlangıç numarası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Начальное число</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Start number</value>
+   <value>BD5A45B9-8F94-7781-11A4-48DA75007BCC</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -221,16 +157,8 @@
  <attributes uuid="0b6c4532-eca8-4492-a8f1-beeb5ff4f048">
   <name>TotalLength</name>
   <synonym>
-   <key>tr</key>
-   <value>Toplam uzunluk</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Общая длинна</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Total length</value>
+   <value>C0516176-76E8-1A74-4688-84C48ACEB5A0</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -250,16 +178,8 @@
  <attributes uuid="905b1814-748f-4edf-9206-851d95baed25">
   <name>WithoutLeadingZeros</name>
   <synonym>
-   <key>tr</key>
-   <value>Önden sıfırlar yok</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Без лидирующих нулей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Without leading zeros</value>
+   <value>C308F3C3-0797-B4A0-091F-FE841890AB77</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -273,16 +193,8 @@
  <attributes uuid="bbecdb02-69f5-47f0-b46f-434dabc18d9f">
   <name>UniquenessControl</name>
   <synonym>
-   <key>tr</key>
-   <value>Benzersizlik kontrolü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контроль уникальности</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Uniqueness control</value>
+   <value>97711F3F-3773-D7B3-3EE4-40FA52E986B1</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -296,16 +208,8 @@
  <attributes uuid="6ad3f9b8-ecb0-4cc1-beda-16694fea0808">
   <name>AllowedManualEditing</name>
   <synonym>
-   <key>tr</key>
-   <value>Manuel düzenlemeye izin verildi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Разрешено ручное исправление</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Allowed manual editing</value>
+   <value>58995175-955B-BFC8-8FE3-3FB1820616BE</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -323,30 +227,14 @@
   </producedTypes>
   <name>Documents</name>
   <synonym>
-   <key>tr</key>
-   <value>Evraklar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Documents</value>
+   <value>4896C82B-0B5E-EDC6-6AA0-02D0E2198E48</value>
   </synonym>
   <attributes uuid="599e4363-5b37-486c-8775-b72d22d9ac6c">
    <name>Document</name>
    <synonym>
-    <key>tr</key>
-    <value>Evrak</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Документ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Document</value>
+    <value>22764457-48BC-C5F5-593F-FC5519AC7F75</value>
    </synonym>
    <type>
     <types>CatalogRef.ConfigurationMetadata</types>
@@ -365,16 +253,8 @@
   <attributes uuid="d39229ce-7115-4370-9bd7-6b5be28c3f51">
    <name>NumberName</name>
    <synonym>
-    <key>tr</key>
-    <value>Numara alan ismi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Номер наименования реквизита</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Number attribute name</value>
+    <value>E544CE71-BAB9-F5A5-52CC-C65EAB21101B</value>
    </synonym>
    <type>
     <types>String</types>
@@ -395,30 +275,14 @@
   </producedTypes>
   <name>Catalogs</name>
   <synonym>
-   <key>tr</key>
-   <value>Kart listeleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Справочники</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Catalogs</value>
+   <value>39794389-615E-BA30-0423-382E69FB21B4</value>
   </synonym>
   <attributes uuid="d43d698a-0804-4f80-8356-9019b86de996">
    <name>Catalog</name>
    <synonym>
-    <key>tr</key>
-    <value>Kart listesi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Справочник</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Catalog</value>
+    <value>E427E263-E48A-35AC-C95F-F7053BFA60B7</value>
    </synonym>
    <type>
     <types>CatalogRef.ConfigurationMetadata</types>
@@ -438,16 +302,8 @@
   <attributes uuid="31abc440-40fd-4c64-b6c5-7d5c2c64b14a">
    <name>NumberName</name>
    <synonym>
-    <key>tr</key>
-    <value>Numara alan ismi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Номер наименования реквизита</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Number attribute name</value>
+    <value>0E689E80-FD90-F1CF-FB25-52B9406E7687</value>
    </synonym>
    <type>
     <types>String</types>
@@ -464,16 +320,8 @@
   <attributes uuid="ac3324c1-ec14-4e11-b8ce-d5e0ff86f3eb">
    <name>DateName</name>
    <synonym>
-    <key>tr</key>
-    <value>Tarih alan ismi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Наименование реквизита данных</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Date attribute name</value>
+    <value>52832E07-537F-A3CF-F3E8-843F23FDC948</value>
    </synonym>
    <type>
     <types>String</types>
@@ -490,16 +338,8 @@
  <forms uuid="7606d065-d154-4e8c-9c85-3b9d65b6c947">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>637B359A-7E89-EC3E-E241-11248FC675FB</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -507,16 +347,8 @@
  <forms uuid="a4281941-8726-4c72-8c63-add8c3d04846">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>BB818386-1335-C177-7DD0-0684DEE1C520</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -524,16 +356,8 @@
  <forms uuid="6d88fe4d-131f-4c8c-82b6-afca151a1cce">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>C83880E5-99FC-973D-D4B9-9BE0CFD93B0A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

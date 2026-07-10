@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b7b0fa3f-2464-4271-822c-1f8bc685f0be">
  <name>AccountingReports</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe raporları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Бухгалтерские отчеты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Accounting reports</value>
+  <value>B5C97990-79D2-886B-BD39-9033919B3F2B</value>
  </synonym>
 </mdclass:Role>

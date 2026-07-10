@@ -70,11 +70,6 @@
   <showInFooter>true</showInFooter>
   <extInfo xsi:type="form:PDFDocumentFieldExtInfo">
    <viewStatusAddition>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <name>PDFViewerViewStatus</name>
     <id>13</id>
     <extendedTooltip>
@@ -153,16 +148,8 @@
   <name>DecorationNoTemplate</name>
   <id>7</id>
   <title>
-   <key>tr</key>
-   <value>Şablon yok</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Шаблон не существует</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>No template exist</value>
+   <value>A3993C44-7CD6-A42C-C78D-DB490E65B314</value>
   </title>
   <enabled>true</enabled>
   <userVisible>
@@ -239,16 +226,8 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Просмотр изображений HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture view HTML</value>
+   <value>2BA22B7C-3533-E548-8DB0-0D2C98C9B7ED</value>
   </title>
   <id>2</id>
   <valueType>
@@ -265,16 +244,8 @@
  <attributes>
   <name>FileRef</name>
   <title>
-   <key>tr</key>
-   <value>Dosya ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ссылка файла</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>File ref</value>
+   <value>663F302F-78CF-DEA4-4ED9-9102807278DD</value>
   </title>
   <id>3</id>
   <valueType>
@@ -290,16 +261,8 @@
  <attributes>
   <name>PDFViewer</name>
   <title>
-   <key>tr</key>
-   <value>PDF önizleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>PDF Просмотрщик</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>PDFViewer</value>
+   <value>5C5C245B-19A1-4FBA-AFBE-E812E57D6DBA</value>
   </title>
   <id>4</id>
   <valueType>
@@ -315,16 +278,8 @@
  <attributes>
   <name>IsPDF</name>
   <title>
-   <key>tr</key>
-   <value>bu PDF</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Это PDF</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Is PDF</value>
+   <value>26E417C0-56E6-49FC-CCEA-AF80AF83E286</value>
   </title>
   <id>5</id>
   <valueType>

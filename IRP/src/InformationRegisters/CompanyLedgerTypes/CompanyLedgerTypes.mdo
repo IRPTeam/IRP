@@ -11,16 +11,8 @@
  </producedTypes>
  <name>CompanyLedgerTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Şirket defter tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы учета организации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Company Ledger types</value>
+  <value>4C79E52E-50D0-CC71-168A-A548B73D3D71</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,30 +20,14 @@
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Şirket defter tipi</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Основной тип учета организации</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Company Ledger type</value>
+  <value>36434703-F428-983A-AB5F-F384FFDE50DB</value>
  </recordPresentation>
  <resources uuid="56275698-670b-40ed-8aac-77eaf3c633c8">
   <name>Use</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use</value>
+   <value>8233491B-B349-2A21-1B10-03A5965C2373</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -65,16 +41,8 @@
  <dimensions uuid="95725f3e-0c15-4fec-a886-f8da0546ffa2">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>3D075061-12B5-F3D4-454E-ECFCA909EAFB</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -91,16 +59,8 @@
  <dimensions uuid="724971e2-ddd5-4137-b4ba-e19241e5fbf9">
   <name>LedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>8D0F0273-5D07-109B-BAA5-5A3F418E8C85</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -115,16 +75,8 @@
  <forms uuid="e7dea011-ba9f-4ed6-8494-dd1c03f7b839">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>963CC91F-DDCA-E877-7CBE-E96F9D3538CA</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

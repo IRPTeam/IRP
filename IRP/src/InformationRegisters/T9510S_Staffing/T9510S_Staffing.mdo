@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9510S_Staffing</name>
  <synonym>
-  <key>tr</key>
-  <value>T9510 Personel</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9510 Штатное расписание</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9510 Staffing</value>
+  <value>E4B2D05B-998D-1891-1C85-5C390EBACB26</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,30 +20,14 @@
  <writeMode>RecorderSubordinate</writeMode>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>T9510 Personel</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>T9510 Штатное расписание</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>T9510 Staffing</value>
+  <value>2446617E-C8C9-0A69-9E4D-DE514A9F1940</value>
  </recordPresentation>
  <resources uuid="9cb6e57a-70d6-4fc2-9027-a2450ac5952d">
   <name>Fired</name>
   <synonym>
-   <key>tr</key>
-   <value>İşten çıkarıldı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Уволен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Fired</value>
+   <value>0C968C24-F353-0C7B-BE14-449BD1B601ED</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -65,16 +41,8 @@
  <resources uuid="95ea41d9-90e9-4cb1-944b-92fab3f71fdd">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>4C437CF2-9636-0952-26DF-F3D9C842F744</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -89,16 +57,8 @@
  <resources uuid="08cf0f3d-9c8f-4400-b832-1ed4370c50e5">
   <name>Position</name>
   <synonym>
-   <key>tr</key>
-   <value>Pozisyon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Должность</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Position</value>
+   <value>D5C5A325-B644-7456-6057-798B0AA1669A</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -113,16 +73,8 @@
  <resources uuid="7932025f-cf57-4902-a0d9-4970756e669a">
   <name>EmployeeSchedule</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan programı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Штатное расписание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee schedule</value>
+   <value>24F8BEEF-60F1-CA0C-CB20-0286EBCFA358</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>
@@ -136,16 +88,8 @@
  <resources uuid="d602b2d2-0f89-4119-a8b3-dd93f977d11a">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Центр прибылей/убытков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Profit loss center</value>
+   <value>5DA04FFA-B2AA-B480-00E0-0B371F104224</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -159,16 +103,8 @@
  <dimensions uuid="2e192fcd-665c-480f-b747-f730bbad1bff">
   <name>Employee</name>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee</value>
+   <value>28E7EF5D-BC8F-3E30-01BC-C056E95D06A3</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -191,16 +127,8 @@
  <dimensions uuid="2e48b39e-efcf-4d15-b911-2f4ccc60e020">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>BF26C3C5-53DC-80CD-DE96-627AAE964C19</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>

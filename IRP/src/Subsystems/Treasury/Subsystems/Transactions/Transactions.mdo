@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="54e688f2-a9eb-4646-90eb-5b83bb62cc4b">
  <name>Transactions</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlemler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Транзакции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Transactions</value>
+  <value>CC6BB560-0E6D-137E-E67F-FAD8D6F3F2AF</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

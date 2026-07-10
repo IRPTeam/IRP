@@ -433,16 +433,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List</value>
+   <value>F71B46F3-D329-152F-FDCE-ECBFD3D8A1F7</value>
   </title>
   <id>1</id>
   <valueType>
@@ -492,16 +484,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tutar</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Сумма</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Amount</value>
+       <value>25E2B73B-4411-4740-0C7C-CD557BF7EC52</value>
       </content>
      </localValue>
     </title>
@@ -512,16 +496,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>VergiMiktarı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Сумма налогов</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>TaxAmount</value>
+       <value>210E210E-0BDE-9E29-9EAC-CA03B32368E3</value>
       </content>
      </localValue>
     </title>
@@ -552,16 +528,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Simge</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Иконка</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Icon</value>
+       <value>3CF060BC-8632-0B1D-D138-8FECAE1E2287</value>
       </content>
      </localValue>
     </title>
@@ -571,16 +539,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Bakiye dönemi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период остатка</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Balance period</value>
+       <value>6362AD15-C898-761D-DC09-988591455754</value>
       </content>
      </localValue>
     </title>
@@ -596,16 +556,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Period</value>
+       <value>D680F640-C4A8-505B-B95F-F3DBF7F2AB7D</value>
       </content>
      </localValue>
     </title>
@@ -620,16 +572,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Seçilen evraklar</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Выбранные документы</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Selected documents</value>
+       <value>E6156294-19CA-5E63-3810-04808DF3FAAD</value>
       </content>
      </localValue>
     </title>
@@ -641,16 +585,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şirket</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Организация</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Company</value>
+       <value>6266D19C-ED09-1E91-1943-332369484F1F</value>
       </content>
      </localValue>
     </title>
@@ -665,16 +601,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Çoklu döviz hareket tipi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Вид мультивалютной аналитики</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Currency movement type</value>
+       <value>768C5355-02EB-E412-2168-8854603E6A8F</value>
       </content>
      </localValue>
     </title>
@@ -689,16 +617,8 @@ GROUP BY
  <formCommands>
   <name>Select</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Select</value>
+   <value>86ACF016-9B5D-EBB5-53A5-597EAA2F7BD0</value>
   </title>
   <id>1</id>
   <use>

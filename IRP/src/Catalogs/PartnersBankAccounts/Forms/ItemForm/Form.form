@@ -115,16 +115,8 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
      <inputHint>
-      <key>tr</key>
-      <value>Döviz</value>
-     </inputHint>
-     <inputHint>
-      <key>ru</key>
-      <value>Валюта</value>
-     </inputHint>
-     <inputHint>
       <key>en</key>
-      <value>Currency</value>
+      <value>E1218893-8216-DC16-663C-C9BD8EB2769D</value>
      </inputHint>
     </extInfo>
    </items>
@@ -134,16 +126,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup numara</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group number</value>
+    <value>62A37133-6EDF-3F83-37D3-3A28F0DFEEF1</value>
    </title>
    <extendedTooltip>
     <name>GroupNumberExtendedTooltip</name>
@@ -338,16 +322,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа основная</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main</value>
+   <value>05247460-85AA-C524-419B-B1FFA5433E78</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>

@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>1F80BEC8-1018-59B2-2B78-8C927DB459EC</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>22</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>1365A271-A0AD-C8F7-7B02-2842ABC04421</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -150,16 +134,8 @@
    <name>PredefinedDataName</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Önceden tanımlı veri tanımı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование предопределенных данных</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Predefined data name</value>
+    <value>BB07329D-3111-2A7F-FA5C-CDFB8832DC92</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -446,16 +422,8 @@ FROM
  <formCommands>
   <name>FillDefaultDescriptions</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan tanımları doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить наименования по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill default descriptions</value>
+   <value>829D4828-5167-AC37-7DC4-494B04AAA961</value>
   </title>
   <id>1</id>
   <use>

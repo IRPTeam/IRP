@@ -2,16 +2,8 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="98433293-8b9e-4135-a0d9-3904c305f3a1">
  <name>OnWrite_SystemAttributes</name>
  <synonym>
-  <key>tr</key>
-  <value>Sistem nitelikleri saklarken</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>При записи системных атрибутов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>On write system attributes</value>
+  <value>C8ED27AD-8954-0FD3-3FC1-18E61F005637</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

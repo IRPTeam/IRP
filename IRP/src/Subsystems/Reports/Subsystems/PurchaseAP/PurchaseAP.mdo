@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3dd5df2a-a2dc-4a7d-ab73-316b9ec4b305">
  <name>PurchaseAP</name>
  <synonym>
-  <key>tr</key>
-  <value>Alımlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Закупки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Purchase  - A/P</value>
+  <value>44CF5CA1-28B6-E111-1300-05DD5523AB97</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

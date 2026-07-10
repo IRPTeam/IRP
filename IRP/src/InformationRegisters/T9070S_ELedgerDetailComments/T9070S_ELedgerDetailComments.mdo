@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T9070S_ELedgerDetailComments</name>
  <synonym>
-  <key>tr</key>
-  <value>T9070 e-Defter detaylı açıklamalar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9070 eLedger подробные комментарии</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9070 eLedger detail comments</value>
+  <value>5BD1649C-E1E2-FD98-8500-0A56F3D0E339</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,16 +20,8 @@
  <resources uuid="2124ccfc-b339-4343-9db0-fee4f7dde3ee">
   <name>DetailComment</name>
   <synonym>
-   <key>tr</key>
-   <value>Detaylı açıklama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Подробный комментарий</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Detail comment</value>
+   <value>3C433A75-96F3-C718-85CF-F06EA6D3B76A</value>
   </synonym>
   <type>
    <types>String</types>
@@ -54,16 +38,8 @@
  <dimensions uuid="37d3eefe-d2fc-4657-accc-29eb92b78786">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>F55102E3-35A5-5AD4-4666-64F7DE3A0E25</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -78,16 +54,8 @@
  <dimensions uuid="4d4ffc16-f07f-40c1-b4ca-93f25e1d5b83">
   <name>LedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>D2BF3064-A4AA-1A14-42DE-E79D5FF948CD</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -102,16 +70,8 @@
  <dimensions uuid="077c1916-3b51-4a50-b2d8-9a13198d0973">
   <name>AccountingOperation</name>
   <synonym>
-   <key>tr</key>
-   <value>Muhasebe işlemi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Бухгалтерская операция</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Accounting operation</value>
+   <value>26AE9077-AA59-EAF8-85ED-DBC3745DFA8B</value>
   </synonym>
   <type>
    <types>CatalogRef.AccountingOperations</types>
@@ -126,16 +86,8 @@
  <dimensions uuid="dc3fce65-57cb-4407-905f-31f0101cc5fe">
   <name>LocalizationCode</name>
   <synonym>
-   <key>tr</key>
-   <value>Lokalisasyon kodu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Код локализации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Localization code</value>
+   <value>1A8A5611-BD43-1B47-74D3-3515DD798D98</value>
   </synonym>
   <type>
    <types>String</types>
@@ -153,16 +105,8 @@
  <forms uuid="9b853df8-3267-45a6-b537-0b65cc187c83">
   <name>EditForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Formu değiştir</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Редактировать форму</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Edit form</value>
+   <value>E861E94B-1EC9-FEA7-7F6B-B653EE57F15B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

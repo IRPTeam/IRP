@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>F36FE14C-DDF6-DFA2-2105-55A4EEF12EA2</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -448,16 +440,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tanım</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Наименование</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Description</value>
+       <value>E9FAF7B2-08D4-379F-F9BD-D1EC437F1267</value>
       </content>
      </localValue>
     </title>
@@ -467,16 +451,8 @@ FROM
  <formCommands>
   <name>FillDefaultDescriptions</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan tanımları doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить наименования по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill default descriptions</value>
+   <value>D4EBED8B-9CE3-69B4-4D79-99A2B2D15A50</value>
   </title>
   <id>1</id>
   <use>

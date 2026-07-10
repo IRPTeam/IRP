@@ -119,16 +119,8 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>tr</key>
-    <value>Tüm şirketler için</value>
-   </inputHint>
-   <inputHint>
-    <key>ru</key>
-    <value>Для всех организаций</value>
-   </inputHint>
-   <inputHint>
     <key>en</key>
-    <value>For all companies</value>
+    <value>434C839E-1D28-795C-C46F-F0768C2FB1B8</value>
    </inputHint>
   </extInfo>
  </items>

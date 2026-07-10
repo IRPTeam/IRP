@@ -6,32 +6,16 @@
  </producedTypes>
  <name>ManagerDashboard</name>
  <synonym>
-  <key>tr</key>
-  <value>Yönetici Gösterge Paneli</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Панель менеджера</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Manager dashboard</value>
+  <value>43B6972E-9E48-5026-663F-FC4C1C73AC9C</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ManagerDashboard.Form.Form</defaultForm>
  <forms uuid="e7351bcf-3ed8-4c62-9523-c4ffd3ec63d6">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>91EB4F18-1939-565E-E5E8-895F17281B1A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -39,16 +23,8 @@
  <forms uuid="b15ac5b3-0569-4232-aec6-9a3cf89c0cf3">
   <name>FormConfigure</name>
   <synonym>
-   <key>tr</key>
-   <value>Form yapılandır</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Настройка формы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form configure</value>
+   <value>5F7F406E-B661-0D5D-DAE4-45CA6C6C72B9</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -56,16 +32,8 @@
  <forms uuid="3f949a51-6861-4530-a540-6f11e4f7e8bf">
   <name>FormWidgetSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Araç ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Настройки виджета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Widget settings</value>
+   <value>FFFFC3FC-5608-8220-0BF2-2AE56720434A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -73,16 +41,8 @@
  <templates uuid="abc69167-c47f-4007-8f23-e8888f132700">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Template</value>
+   <value>70BD4270-2E61-3BE3-310B-BC90D4DDC6C0</value>
   </synonym>
   <templateType>TextDocument</templateType>
  </templates>

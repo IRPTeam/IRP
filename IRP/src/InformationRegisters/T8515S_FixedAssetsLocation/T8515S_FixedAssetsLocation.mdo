@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T8515S_FixedAssetsLocation</name>
  <synonym>
-  <key>tr</key>
-  <value>T8515 Sabit kıymet konumu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T8515 Местонахождение основных средств</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T8515 Fixed asset location</value>
+  <value>4FA37D0A-0B2C-9FC7-7855-5799E5D27221</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="7bbcaa88-5a18-498e-b037-e9f0599bac84">
   <name>IsActive</name>
   <synonym>
-   <key>tr</key>
-   <value>Aktif mi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Активен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is active</value>
+   <value>E110EC27-FD2A-8288-8EEE-EE2B22B7FEE2</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -53,16 +37,8 @@
  <dimensions uuid="e103b650-4969-4e87-8051-ce3eb9ff5b09">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>10CF19EA-18E1-975B-BD3C-C1558362DFDD</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -77,16 +53,8 @@
  <dimensions uuid="c8615636-3d12-4148-a541-31acde1d9dda">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>E66885B6-90DE-0302-21DF-FF04BC7D879E</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -101,16 +69,8 @@
  <dimensions uuid="5be09eac-59ce-4415-bff6-826ce27812dd">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Центр прибылей/убытков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Profit loss center</value>
+   <value>311D5630-9709-4745-5B9B-B2E2A5F7FC5D</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -125,16 +85,8 @@
  <dimensions uuid="2e7a534d-31a3-41ae-a145-cb429fc9de36">
   <name>FixedAsset</name>
   <synonym>
-   <key>tr</key>
-   <value>Sabit kıymet</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основное средство</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Fixed asset</value>
+   <value>3DD60734-8920-417C-CCAC-CF0D4772B3A1</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -149,16 +101,8 @@
  <dimensions uuid="8e16012e-fdcd-4045-9593-112477a7e21c">
   <name>ResponsiblePerson</name>
   <synonym>
-   <key>tr</key>
-   <value>Sorumlu kişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>МОЛ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Responsible person</value>
+   <value>67EBD9DB-2A76-8450-03A2-24D662C16969</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Seri lot numarasını seç</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Выбрать серийный номер</value>
- </title>
- <title>
   <key>en</key>
-  <value>Select serial lot numbers</value>
+  <value>A9A22BCF-9851-84D5-599E-E11ECBAA77C4</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>GroupTop</name>
@@ -153,16 +145,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа верхние уровень</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>BEF03326-6ADD-29AE-E5D1-1047DC57332D</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -260,16 +244,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа создать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group create</value>
+   <value>D6B8AA37-DBDA-CE3D-D8E8-8D2889D4BD6A</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -301,16 +277,8 @@
    <name>DecorationSelected</name>
    <id>52</id>
    <title>
-    <key>tr</key>
-    <value>Malzemeler miktarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество номенклатур</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Items quantity</value>
+    <value>8B838796-9809-2C8E-EBC8-8485F77E9A67</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -395,16 +363,8 @@
    <name>DecorationFrom</name>
    <id>61</id>
    <title>
-    <key>tr</key>
-    <value>Seri lot numara seti</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серийные номера устанавлены для</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serials set for</value>
+    <value>4143AB57-E13A-F0BF-FC59-92359FB57C66</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -497,16 +457,8 @@
     <segments>AutoCreateNewSerialLotNumbers</segments>
    </dataPath>
    <toolTip>
-    <key>tr</key>
-    <value>Barkod daha önce kullanılmadıysa, yeni seri lot numarasını oluştur</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Создавать новый серийный номер, если не найден штрихкод</value>
-   </toolTip>
-   <toolTip>
     <key>en</key>
-    <value>Create new serial lot number, if barcode not used before</value>
+    <value>C006F488-3080-D4A9-9029-9DDA4D61A973____________________</value>
    </toolTip>
    <toolTipRepresentation>Button</toolTipRepresentation>
    <extendedTooltip>
@@ -699,16 +651,8 @@
      <segments>SerialLotNumbers.Locked</segments>
     </dataPath>
     <toolTip>
-     <key>tr</key>
-     <value>Bu seri lot numarası eşsizdir, tekrar oluşturulamaz.</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Текущий серийный номер уникален и не может быть добавлен больше одного раза</value>
-    </toolTip>
-    <toolTip>
      <key>en</key>
-     <value>Current serial number is unique, and can not be added more then one time</value>
+     <value>82C30D3A-36EF-4426-653C-CCC7DA716DF9____________________________________</value>
     </toolTip>
     <extendedTooltip>
      <name>SerialLotNumbersLockedExtendedTooltip</name>
@@ -791,16 +735,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа серийные номера</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot numbers group</value>
+    <value>DFEDE218-E0FC-5650-0135-558DF021A2B0</value>
    </title>
    <extendedTooltip>
     <name>SerialLotNumbersGroupExtendedTooltip</name>
@@ -1009,16 +945,8 @@
    <name>DecorationLock</name>
    <id>97</id>
    <title>
-    <key>tr</key>
-    <value>Resim kilit</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Декорация замок</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Decoration lock</value>
+    <value>115594D5-9F64-783B-BE3E-EED90BDDD4B7</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1086,16 +1014,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup Legend</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Легенда</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group Legend</value>
+   <value>451EF223-DC39-2787-7136-6CD811801025</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -1228,16 +1148,8 @@
  <attributes>
   <name>RowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Row key</value>
+   <value>EAEE6208-D49E-D8A5-5CB3-32DEFE9E733E</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1253,16 +1165,8 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>2BF323C8-91B2-4E57-7AD5-504512ED2B1E</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1278,16 +1182,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>4137D395-B5AB-B1F6-64B9-93E37D3D54F8</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1303,16 +1199,8 @@
  <attributes>
   <name>SerialLotNumbers</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaralar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Серии номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot numbers</value>
+   <value>237F3CBD-2638-2865-5B9E-EDEED2370DB2</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1327,16 +1215,8 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>92C43915-73E4-3A39-9731-17F18DEC4963</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1352,16 +1232,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>867338FE-C53D-DB67-79D8-8BCD7C6DD642</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1377,16 +1249,8 @@
   <columns>
    <name>isUnique</name>
    <title>
-    <key>tr</key>
-    <value>Eşsizdir</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Является уникальным</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is unique</value>
+    <value>55116BF3-1C75-6D31-1031-15C5801F249F</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1402,16 +1266,8 @@
   <columns>
    <name>Locked</name>
    <title>
-    <key>tr</key>
-    <value>Kilitli</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Заблокировано</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Locked</value>
+    <value>46D80567-AFAA-AFDF-F51E-EF5BAD586B22</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1428,16 +1284,8 @@
   <columns>
    <name>CodeIsApproved</name>
    <title>
-    <key>tr</key>
-    <value>Kod onaylandı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код подтвержден</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Code is approved</value>
+    <value>97C2776C-0F4D-1753-3F8E-E3CA17A14D0E</value>
    </title>
    <id>19</id>
    <valueType>
@@ -1454,16 +1302,8 @@
  <attributes>
   <name>ItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item type</value>
+   <value>85A3656A-1726-6E57-7D23-3BBEB4028F11</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1479,16 +1319,8 @@
  <attributes>
   <name>ItemQuantity</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme miktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item quantity</value>
+   <value>3BCA21BB-A239-49D3-332A-A6DDE2315169</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1504,16 +1336,8 @@
  <attributes>
   <name>SelectedCount</name>
   <title>
-   <key>tr</key>
-   <value>Seçilen miktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать количество</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Selected count</value>
+   <value>9021A62B-D8B3-8537-7A6E-E6D14955D0A0</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1529,16 +1353,8 @@
  <attributes>
   <name>SerialLotNumberStatus</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numara statüsü</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Статус сериии номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot number status</value>
+   <value>FF7EF780-0D29-E27B-B473-32BAAB42BDF5</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1555,16 +1371,8 @@
  <attributes>
   <name>LastBarcode</name>
   <title>
-   <key>tr</key>
-   <value>Son barkod</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Последний штрихкод</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Last barcode</value>
+   <value>E4E5B034-CA98-508C-C36E-E27F88F812A3</value>
   </title>
   <id>12</id>
   <valueType>
@@ -1581,16 +1389,8 @@
  <attributes>
   <name>AutoCreateNewSerialLotNumbers</name>
   <title>
-   <key>tr</key>
-   <value>Otomatik oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Авто. создание</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Auto create</value>
+   <value>4F940627-273A-8B69-962C-CA18E4FCB4AD</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1606,16 +1406,8 @@
  <attributes>
   <name>SingleMode</name>
   <title>
-   <key>tr</key>
-   <value>Tekli biçim</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Единичный режим</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Single mode</value>
+   <value>91342883-BC78-7C47-7221-117F945FFB08</value>
   </title>
   <id>16</id>
   <valueType>
@@ -1631,16 +1423,8 @@
  <attributes>
   <name>SerialLotNumberSingle</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>6931739A-315B-7353-3F52-248F5CD997B1</value>
   </title>
   <id>17</id>
   <valueType>
@@ -1656,16 +1440,8 @@
  <attributes>
   <name>Hardware</name>
   <title>
-   <key>tr</key>
-   <value>Donanım</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Оборудование</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Hardware</value>
+   <value>AD43C150-B404-5770-0C37-7BED9DA4C575</value>
   </title>
   <id>18</id>
   <valueType>
@@ -1681,16 +1457,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>3B5217BC-5CE3-5A89-982C-C51EC75FD7EC</value>
   </title>
   <id>1</id>
   <use>
@@ -1706,16 +1474,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>7CA84B32-6FE7-67C3-3460-08BCEEBF9DF7</value>
   </title>
   <id>2</id>
   <use>
@@ -1731,19 +1491,9 @@
  <formCommands>
   <name>SearchByBarcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod
-bul (F7)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Поиск по
-ШК (F7)</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Search by
-barcode (F7)</value>
+   <value>48AF0BDE-5279-BCDE-E6AB-BCFAEF9FF60C
+____________</value>
   </title>
   <id>3</id>
   <use>
@@ -1764,16 +1514,8 @@ barcode (F7)</value>
  <formCommands>
   <name>CreateSerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Oluştur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Создать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Create</value>
+   <value>3031A068-25F9-1ACD-D601-143BE0A9C21D</value>
   </title>
   <id>4</id>
   <use>

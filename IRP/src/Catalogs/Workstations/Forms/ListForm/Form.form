@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>3A9FB451-7093-742E-EE8D-D1C6D4A13CE2</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -366,16 +358,8 @@
  <attributes>
   <name>CurrentWorkstation</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli çalışma yeri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущее рабочее место</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current workstation</value>
+   <value>13C89B91-E6D5-4C28-81D3-3A505A88218E</value>
   </title>
   <id>2</id>
   <valueType>
@@ -391,16 +375,8 @@
  <formCommands>
   <name>SetCurrentWorkstation</name>
   <title>
-   <key>tr</key>
-   <value>Çalışma yeri aktifleştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить рабочее место как текущее</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set current workstation</value>
+   <value>85AFFC3B-6E44-8B64-4787-7F86BB93628B</value>
   </title>
   <id>1</id>
   <use>

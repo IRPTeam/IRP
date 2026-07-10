@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8a9e6129-1f88-493a-bc95-9c9bbbfbf886">
  <name>Document_Bundling</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Paketleme"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Комплектация"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Bundling"</value>
+  <value>826165B1-40AF-B047-7C59-9ADA56A1B89C</value>
  </synonym>
 </mdclass:Role>

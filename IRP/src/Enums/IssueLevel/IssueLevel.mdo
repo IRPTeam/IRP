@@ -7,62 +7,30 @@
  </producedTypes>
  <name>IssueLevel</name>
  <synonym>
-  <key>tr</key>
-  <value>Talep seviyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Уровень проблемы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Issue level</value>
+  <value>AE81C517-4F36-4A7D-DF3B-B05DE38C8068</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="29724469-40fe-4151-ba9b-8e092a16314c">
   <name>Low</name>
   <synonym>
-   <key>tr</key>
-   <value>Düşük</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Низкий</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Low</value>
+   <value>4F782477-F03A-B11D-D587-71ED0F95A96E</value>
   </synonym>
  </enumValues>
  <enumValues uuid="fca1b9ef-1903-46b5-8cc1-5e7bf909d538">
   <name>Normal</name>
   <synonym>
-   <key>tr</key>
-   <value>Normal</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Нормальный</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Normal</value>
+   <value>5E457537-50AC-C8BD-DAAD-DE02EA3ABBB5</value>
   </synonym>
  </enumValues>
  <enumValues uuid="e2dfcc2c-dd30-4ecb-96ef-8e5537d7ff95">
   <name>High</name>
   <synonym>
-   <key>tr</key>
-   <value>Yüksek</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Высокий</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>High</value>
+   <value>32FEA2EA-7777-3ABD-D696-667085E49369</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

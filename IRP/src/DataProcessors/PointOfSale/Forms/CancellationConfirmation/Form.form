@@ -1,34 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>İptal etme onayı</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Подтверждение отмены</value>
- </title>
- <title>
   <key>en</key>
-  <value>Cancellation confirmation</value>
+  <value>B75DDB44-E0C8-4E22-2127-7DD39A05AAEE</value>
  </title>
  <items xsi:type="form:Decoration">
   <name>WarningMessage</name>
   <id>13</id>
   <title>
-   <key>tr</key>
-   <value>POS cihazında işlemi İPTAL ediyorsunuz.
-Devam etmek istediğinizden emin misiniz?</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сейчас вы отменяете транзакцию Продажи/Возврата на POS-терминале!
-Вы уверены, что хотите обработать транзакцию?</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Now you are canceling Sales/Return transaction on pos terminal!
-Are you sure you want to process transaction?</value>
+   <value>E3373566-E8BA-C62D-DAD8-863AC8528D96___________________________
+_____________________________________________</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -110,16 +92,8 @@ Are you sure you want to process transaction?</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>İzin verme grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа подтверждения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of confirm</value>
+   <value>F6A1BE27-104D-0953-3A5F-FE489670ADDA</value>
   </title>
   <height>3</height>
   <extendedTooltip>
@@ -150,6 +124,7 @@ Are you sure you want to process transaction?</value>
    <name>OK</name>
    <id>9</id>
    <visible>true</visible>
+   <enabled>false</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
@@ -202,16 +177,8 @@ Are you sure you want to process transaction?</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Komutlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа команд  </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of commands</value>
+   <value>4EC8DD29-A01B-ECB9-9981-1020F9A2A7ED</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -250,16 +217,8 @@ Are you sure you want to process transaction?</value>
  <attributes>
   <name>WarningMessage</name>
   <title>
-   <key>tr</key>
-   <value>Uyarı mesası</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сообщение предупреждения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Warning message</value>
+   <value>741F49DF-C357-5504-4299-9B924694DD5B</value>
   </title>
   <id>1</id>
   <valueType>
@@ -276,16 +235,8 @@ Are you sure you want to process transaction?</value>
  <attributes>
   <name>Confirm</name>
   <title>
-   <key>tr</key>
-   <value>Evet, ne yatığımı biliyorum</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Да, я знаю, что делаю</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Yes, I do know what am I doing</value>
+   <value>6862E8EE-0E49-E130-0C7E-E472728708C5</value>
   </title>
   <id>2</id>
   <valueType>
@@ -301,16 +252,8 @@ Are you sure you want to process transaction?</value>
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>ОК</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>OK</value>
+   <value>C4B9A91A-4330-9605-5E77-71B81A153222</value>
   </title>
   <id>1</id>
   <use>
@@ -326,16 +269,8 @@ Are you sure you want to process transaction?</value>
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>3C0B0E00-49A3-900E-E36E-E41F4EE659DD</value>
   </title>
   <id>2</id>
   <use>

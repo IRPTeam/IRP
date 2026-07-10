@@ -48,16 +48,8 @@
       <typeDomainEnabled>true</typeDomainEnabled>
       <textEdit>true</textEdit>
       <inputHint>
-       <key>tr</key>
-       <value>Hedef konum [ C:\Files ]</value>
-      </inputHint>
-      <inputHint>
-       <key>ru</key>
-       <value>Папка назначения [ C:\Files ]</value>
-      </inputHint>
-      <inputHint>
        <key>en</key>
-       <value>Destination dir [ C:\Files ]</value>
+       <value>0A682DE1-AF0D-2316-63A5-5D0A6DA5402E</value>
       </inputHint>
      </extInfo>
     </items>
@@ -107,16 +99,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup Üst</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа Верх</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group Top</value>
+     <value>D88F5D36-3599-DDDC-C8FF-FAD195141322</value>
     </title>
     <extendedTooltip>
      <name>GroupTopExtendedTooltip</name>
@@ -502,16 +486,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Rapor</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Отчет</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Report</value>
+    <value>ADACE6F7-7F7E-00A2-2D28-8AC8654E73B8</value>
    </title>
    <extendedTooltip>
     <name>PageReportExtendedTooltip</name>
@@ -663,16 +639,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings</value>
+    <value>B84681EF-197D-329F-FA6F-F4393D9C2680</value>
    </title>
    <extendedTooltip>
     <name>PageSettingsExtendedTooltip</name>
@@ -696,16 +664,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana sayfaklar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основные страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main pages</value>
+   <value>EE104B2F-1B93-6871-199A-A33384B0BD77</value>
   </title>
   <extendedTooltip>
    <name>MainPagesExtendedTooltip</name>
@@ -825,16 +785,8 @@
  <attributes>
   <name>DataSettingsComposer</name>
   <title>
-   <key>tr</key>
-   <value>Veri inşa edilme şeması</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Компоновщик настроек данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Data settings composer</value>
+   <value>E4F05798-0D6B-1B94-48DD-D0D8F5A22E43</value>
   </title>
   <id>6</id>
   <valueType>
@@ -851,16 +803,8 @@
  <attributes>
   <name>FileTable</name>
   <title>
-   <key>tr</key>
-   <value>Dosya tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица файлов     </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>File table</value>
+   <value>945A6D6D-ABAF-E63D-D17F-FF557C8646C2</value>
   </title>
   <id>7</id>
   <valueType>
@@ -875,16 +819,8 @@
   <columns>
    <name>Path</name>
    <title>
-    <key>tr</key>
-    <value>Path</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Путь</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Path</value>
+    <value>3EE2560D-51F4-6D4F-F30D-DC9A3CC423EC</value>
    </title>
    <id>8</id>
    <valueType>
@@ -901,16 +837,8 @@
   <columns>
    <name>File</name>
    <title>
-    <key>tr</key>
-    <value>Dosya</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Файл</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>File</value>
+    <value>F6DA1383-7D07-7A61-1E95-536294473AD8</value>
    </title>
    <id>9</id>
    <valueType>
@@ -926,16 +854,8 @@
   <columns>
    <name>FileExists</name>
    <title>
-    <key>tr</key>
-    <value>Dosya mevcut</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Файл существует           </value>
-   </title>
-   <title>
     <key>en</key>
-    <value>File exists</value>
+    <value>B68173C6-1759-1557-707E-E71CA47F8C94</value>
    </title>
    <id>11</id>
    <valueType>
@@ -951,16 +871,8 @@
   <columns>
    <name>Error</name>
    <title>
-    <key>tr</key>
-    <value>Hata</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ошибка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Error</value>
+    <value>84C54E0B-17D8-A6B2-282A-AF8A8EA1E2F9</value>
    </title>
    <id>12</id>
    <valueType>
@@ -978,16 +890,8 @@
  <attributes>
   <name>Path</name>
   <title>
-   <key>tr</key>
-   <value>Path</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Путь</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Path</value>
+   <value>FA545D20-E1AC-3EE7-70E3-3186D00FCCAF</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1007,16 +911,8 @@
  <formCommands>
   <name>Analyze</name>
   <title>
-   <key>tr</key>
-   <value>Analiz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Анализировать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Analyze</value>
+   <value>EE9DB1AB-D639-48A1-1994-4C6B70B7435A</value>
   </title>
   <id>1</id>
   <use>
@@ -1032,16 +928,8 @@
  <formCommands>
   <name>Check</name>
   <title>
-   <key>tr</key>
-   <value>Kontrol</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check</value>
+   <value>BF676A20-C461-98A1-177B-B4397F343556</value>
   </title>
   <id>2</id>
   <use>
@@ -1061,16 +949,8 @@
  <formCommands>
   <name>Download</name>
   <title>
-   <key>tr</key>
-   <value>İndir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скачать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Download</value>
+   <value>3B8FCFBB-F678-7695-54A7-7383213DB60A</value>
   </title>
   <id>3</id>
   <use>

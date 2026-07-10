@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7bd60864-7e04-45ca-bf95-c7f863fd43d7">
  <name>ObjectAccess</name>
  <synonym>
-  <key>tr</key>
-  <value>Nesne erişimi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Доступ объекта</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Object access</value>
+  <value>CC018777-0537-1D46-6BEA-A520C62E79EA</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

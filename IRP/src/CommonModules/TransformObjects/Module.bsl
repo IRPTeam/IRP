@@ -397,11 +397,10 @@ EndFunction
 Procedure FillTableRows(Source, Rule, Wrapper, TableName)
 	TableRules = Rule.Mapping.Unload(New Structure("SortingIndex", TableName));
 	
-	//@skip-check variable-value-type
+	//@skip-check variable-value-type, property-return-type
 	For Each SourceRow In Source[TableName] Do // ValueTableRow
 		TableHasKey = CommonFunctionsClientServer.ObjectHasProperty(SourceRow, "Key");
-		TargetRow = BuilderAPI.AddRow(Wrapper, TableName, False, ?(TableHasKey, SourceRow.Key, Undefined));
-		
+		TargetRow = BuilderAPI.AddRow(Wrapper, TableName, False, ?(TableHasKey, SourceRow.Key, Undefined), SourceRow.LineNumber); // ValueTableRow
 		FillTableRowAttributes(Source, SourceRow, Rule, Wrapper, TargetRow, TableName, TableRules);
 	EndDo;
 EndProcedure

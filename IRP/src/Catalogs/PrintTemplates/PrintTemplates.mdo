@@ -9,16 +9,8 @@
  </producedTypes>
  <name>PrintTemplates</name>
  <synonym>
-  <key>tr</key>
-  <value>Çıktı şablonları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Шаблоны печати</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Print templates</value>
+  <value>EE2E95CC-151E-FC95-58CD-D612018B1207</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -101,16 +93,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Şablon yazdır</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Шаблон печати</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Print template</value>
+  <value>C7DBCB9D-2005-991C-CC24-4D5BF024E142</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -127,16 +111,8 @@
  <attributes uuid="5909f91c-d6a4-4907-895e-6f60178f488e">
   <name>ValueOfTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon değeri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение шаблона</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Value of template</value>
+   <value>67F4E427-F3C4-D41D-D359-9DC898C07F9A</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -150,16 +126,8 @@
  <attributes uuid="2062d8af-7f44-47cc-9648-d7814d2d082d">
   <name>ExternalDataProc</name>
   <synonym>
-   <key>tr</key>
-   <value>Eklentiler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Внешние обработки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Plugins</value>
+   <value>D8C417C6-9911-B467-7E84-45878CE04C44</value>
   </synonym>
   <type>
    <types>CatalogRef.ExternalDataProc</types>
@@ -173,16 +141,8 @@
  <attributes uuid="5a0ed788-40a1-426e-8879-cc8cdf7aa976">
   <name>Type</name>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Type</value>
+   <value>0DF1CF55-866A-DC5B-B7D9-96BCCAC2D051</value>
   </synonym>
   <type>
    <types>EnumRef.PrintTemplateTypes</types>
@@ -196,16 +156,8 @@
  <attributes uuid="42061cd9-aadb-492c-8dd3-510c70091cc3">
   <name>PrintWithoutPreview</name>
   <synonym>
-   <key>tr</key>
-   <value>Ön izleme olmadan yazdırma</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Печать без предварительного просмотра</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Print without preview</value>
+   <value>59C9B5A2-4DC0-9A9D-D925-5D97DC1A363E</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -219,16 +171,8 @@
  <forms uuid="c0e52768-591d-442c-b661-8174b871df74">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>F90D1C3E-B9B9-3C4B-BC85-5D2F5B2A6110</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -236,16 +180,8 @@
  <forms uuid="9f618435-a68c-462e-bdca-13dd070d3fb5">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>520166A0-2A94-4F5C-C116-6A6FDFF0B18F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -253,16 +189,8 @@
  <forms uuid="17f4a9ad-15df-4eb3-a364-6ad902d0be7b">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>C51F88DC-6869-29CA-AD2F-FF78049C7381</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -270,47 +198,23 @@
  <templates uuid="5c2bb1f9-b0cd-448e-a1ff-b36b34edc031">
   <name>Default</name>
   <synonym>
-   <key>tr</key>
-   <value>Varsayılan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>По умолчанию</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Default</value>
+   <value>F948FB13-3F9F-E4EC-CEDF-F8AE27BB6F88</value>
   </synonym>
  </templates>
  <templates uuid="72cf4cec-add8-4b70-b8c2-f342288a01f6">
   <name>DataSource</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak veri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Источник данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Data source</value>
+   <value>2657821E-D089-03B6-6AB1-1AB021BB9A5D</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>
  <templates uuid="b79ab6b2-6fd2-4abb-88b2-38f3d72bd547">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Template</value>
+   <value>BE46C075-A171-7D80-08F3-3E07BE6BA47C</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

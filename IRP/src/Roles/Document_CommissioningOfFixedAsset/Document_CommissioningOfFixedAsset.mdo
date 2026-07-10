@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fc4e4780-ab70-4da3-b456-bcda492c6536">
  <name>Document_CommissioningOfFixedAsset</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Sabit kıymet devreye alma"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Принятие к учету основных средств"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Commissioning of fixed asset"</value>
+  <value>6DA41407-44F2-A87E-EE95-5E045AB324EF___</value>
  </synonym>
 </mdclass:Role>

@@ -294,16 +294,8 @@
  <attributes>
   <name>DataMapping</name>
   <title>
-   <key>tr</key>
-   <value>Veri mappleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сопоставление данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Data mapping</value>
+   <value>36FB2534-8D76-1FE7-74F6-6B3A6F1C1C69</value>
   </title>
   <id>1</id>
   <valueType>
@@ -318,16 +310,8 @@
   <columns>
    <name>Info</name>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основной</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Info</value>
+    <value>608D9511-43DB-5DD4-44D3-3FCBE88AF408</value>
    </title>
    <id>3</id>
    <valueType>
@@ -345,16 +329,8 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Значение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Value</value>
+    <value>562624F0-01BB-8D2B-BCE9-9386676CED8E</value>
    </title>
    <id>4</id>
    <valueType>
@@ -371,16 +347,8 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>92E5B18B-AA5A-6C59-98AF-FA3795C0CCEC</value>
    </title>
    <id>5</id>
    <valueType>
@@ -396,16 +364,8 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Type</value>
+    <value>CECF3095-054B-9248-8283-304890E2E1C4</value>
    </title>
    <id>6</id>
    <valueType>
@@ -423,16 +383,8 @@
  <attributes>
   <name>TopLevel</name>
   <title>
-   <key>tr</key>
-   <value>Üst seviye</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Верхний уровень</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Top level</value>
+   <value>9BC791C7-D516-3A3D-DAF3-3090D66537E2</value>
   </title>
   <id>7</id>
   <valueType>
@@ -448,16 +400,8 @@
  <formCommands>
   <name>SaveMapping</name>
   <title>
-   <key>tr</key>
-   <value>Mapping kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить сопоставление</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save mapping</value>
+   <value>672A1269-698B-DE58-8CF2-2E7C7C21794A</value>
   </title>
   <id>1</id>
   <use>

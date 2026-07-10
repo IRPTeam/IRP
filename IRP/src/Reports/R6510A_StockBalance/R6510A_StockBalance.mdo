@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R6510A_StockBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R6510A Stok envanter</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R6510A Остатки товаров на складах</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R6510A Stock balance</value>
+  <value>8431128A-14F3-4A56-6F8D-D1E70F36DC1D</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R6510A_StockBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="c104551f-ac2f-41eb-8070-d733615cb210">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>6FD5A9D8-48C7-2314-48AB-B3847910B7F1</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

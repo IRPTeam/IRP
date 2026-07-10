@@ -11,16 +11,8 @@
  </producedTypes>
  <name>ExecutionProcessStatus</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlem süreci durumu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Статус процесса исполнения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Execution process status</value>
+  <value>FC5ADFB8-B089-99BE-EEBA-AAF929738297</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -29,16 +21,8 @@
  <resources uuid="2f912733-008c-49f9-bc17-78fd6b4e76d0">
   <name>CurrentStage</name>
   <synonym>
-   <key>tr</key>
-   <value>Mevcut aşama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Текущая стадия</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Current stage</value>
+   <value>78C6A9A2-1A93-ADA1-1888-8E28A883A806</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -52,16 +36,8 @@
  <resources uuid="b74d4945-b34d-4352-aec9-107a621fe934">
   <name>CurrentTask</name>
   <synonym>
-   <key>tr</key>
-   <value>Mevcut görev</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Текущая задача</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Current task</value>
+   <value>81703231-E88C-3FD1-10BD-D2FDFD359BEE</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -75,16 +51,8 @@
  <resources uuid="e4ca5f73-f11f-4d77-99c5-f8f8227c2394">
   <name>IterationNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Yineleme sayısı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер итерации</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Iteration number</value>
+   <value>5B86CDE1-22F9-9611-1F20-027B9899F1BA</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -102,16 +70,8 @@
  <dimensions uuid="215faa98-9456-4f5b-b9cd-4e44a53adcf2">
   <name>ExecutionProcess</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem süreci</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Процесс исполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Execution process</value>
+   <value>78FC54EF-0870-16AF-F4FA-AE52C1E1D507</value>
   </synonym>
   <type>
    <types>BusinessProcessRef.ExecutionProcesses</types>
@@ -126,16 +86,8 @@
  <dimensions uuid="f9f6b351-ed93-457c-b7e0-b65da115b720">
   <name>StatusTime</name>
   <synonym>
-   <key>tr</key>
-   <value>Durum zamanı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Время статуса</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Status time</value>
+   <value>6095A542-A1E4-8778-809D-DC5035C19BB1</value>
   </synonym>
   <type>
    <types>Number</types>

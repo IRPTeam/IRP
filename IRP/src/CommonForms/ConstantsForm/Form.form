@@ -1232,16 +1232,8 @@
  <formCommands>
   <name>UpdateInterface</name>
   <title>
-   <key>tr</key>
-   <value>Arayüz güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить интерфейс</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update interface</value>
+   <value>71337CE5-5FAB-1BDE-ECBD-D3A0FFBCC2F5</value>
   </title>
   <id>1</id>
   <use>

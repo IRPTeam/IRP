@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UsePaymentOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>Ödeme siparişlerini kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать платежные поручения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use payment orders</value>
+  <value>14A6BA7A-A68B-1816-69A7-7B1C672E9C7C</value>
  </synonym>
  <type>
   <types>Boolean</types>

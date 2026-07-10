@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="537b2f35-6b76-4ae3-9dff-fe9f5a4f5dd6">
  <name>Retail</name>
  <synonym>
-  <key>tr</key>
-  <value>Perakende</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Розница</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Retail</value>
+  <value>763F3301-F0E3-FF1F-F1EC-C951175F0942</value>
  </synonym>
 </mdclass:CommonPicture>

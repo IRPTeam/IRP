@@ -11,16 +11,8 @@
 			<field>PriceType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fiyat tipi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Тип цен</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price type</v8:content>
+					<v8:content>6483BD72-D6B2-B652-2A6F-FFFFF9AC9049</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -32,16 +24,8 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Varyant</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Характеристика</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>BAC1139E-8B7E-5CBC-C074-42FC9051C856</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -53,16 +37,8 @@
 			<field>Price</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fiyat</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Цена</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price</v8:content>
+					<v8:content>427E105D-F82D-8702-28AA-A99A60EC8A16</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -70,16 +46,8 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>1A20D69E-AE6F-BBC2-2D6D-DDCC7DB99FA8</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -94,16 +62,8 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Malzeme</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Номенклатура</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>A0EEB331-C055-C489-9059-90A04A80D948</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -112,16 +72,8 @@
 			<field>ItemType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Malzeme tipi</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Вид номенклатуры</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item type</v8:content>
+					<v8:content>8745FC98-A4F8-8D4E-ED89-9C9D965D4684</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -130,16 +82,8 @@
 			<field>ItemKeyPresentation</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Varyant.Görünüm</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Характеристика</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key.Presentation</v8:content>
+					<v8:content>A5818F30-5F18-9913-343A-A9D1DB7B1B2D</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -148,16 +92,8 @@
 			<field>ModelCode</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Model code</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Артикул</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Model code</v8:content>
+					<v8:content>F0B56836-DBEB-7699-9F94-484646467D0A</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -166,16 +102,8 @@
 			<field>SKU</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Stok Kodu</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>SKU</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>SKU</v8:content>
+					<v8:content>7532B1E4-18A9-D72F-F308-89A5E9C76BC0</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -184,16 +112,8 @@
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İşlem evrakı</v8:content>
-				</v8:item>
-				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Документ</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:content>CB32FDB6-AF41-F3DC-C29C-C9D296932622</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -241,16 +161,8 @@ FROM
 		<name>Period</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Период</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>7D094CCD-A58C-BC8A-A6EC-CA55DEA7A34E</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

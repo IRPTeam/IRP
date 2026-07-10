@@ -10,16 +10,8 @@
  </producedTypes>
  <name>DELETE_R8012B_ConsignorInventory</name>
  <synonym>
-  <key>tr</key>
-  <value>R8012 Konsinye stokları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R8012 Товара полученные на комиссию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R8012 Consignor inventory</value>
+  <value>1A55BF50-12B9-6ABF-F752-27DD2AB67123</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="33c93756-ab98-4f90-b1b3-41f091b7394c">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Quantity</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>43251192-3221-6275-5C45-51A9EECE5CC1</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="3757ef09-b92f-4e6b-9727-c5188eb0f072">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>B9AB9E7C-8216-0D6D-D6E7-7DFAEDA85BF0</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="2231a966-6c1b-4a64-b482-7ec839a3b18e">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>33797455-2E80-2BA8-8034-432E4279336F</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="7719ed76-0ce9-447e-a502-d0a6de56b9a0">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>42B58179-85BE-4DB9-936E-E115CD0070FD</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="c0990f6a-5527-4fe1-84df-ecefa3bf4629">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>447BF74E-869C-0BCD-D64C-C663666818BA</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="eabd981d-f2d9-4446-bbae-c55619bc6296">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Agreement</value>
+   <value>7CC0EC82-D194-EA00-08FD-D6A088724461</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -158,16 +102,8 @@
  <dimensions uuid="983def76-a969-4af7-8052-f3d11afab1e0">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>61DD0964-8BCE-CD35-5573-3A27F9510DE9</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>

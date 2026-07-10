@@ -12,16 +12,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Serbest ayarlar klasörü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Папка пользовательских настроек</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Custom settings folder</value>
+    <value>40F39298-F227-0784-430F-FAE8F9C77476</value>
    </title>
    <verticalStretch>false</verticalStretch>
    <extendedTooltip>
@@ -50,16 +42,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup parametreler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа настраиваемые параметры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group custom parameters</value>
+   <value>28379ECA-A9E1-7641-127C-CC0B2651EF9B</value>
   </title>
   <extendedTooltip>
    <name>GroupCustomParametersExtendedTooltip</name>
@@ -248,16 +232,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup yazı tipi düzeltme sonucu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа результат форматирования шрифта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group result font formatting</value>
+    <value>FA92935C-DB8F-029A-A39F-FA2C0668D800</value>
    </title>
    <extendedTooltip>
     <name>GroupResultFontFormattingExtendedTooltip</name>
@@ -516,16 +492,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup kenar sonucu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа результат границы</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group result borders</value>
+    <value>AD6E53E6-0D25-D9F8-87B6-637F9F7DB256</value>
    </title>
    <extendedTooltip>
     <name>GroupResultBordersExtendedTooltip</name>
@@ -654,16 +622,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup hızalama sonucu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа результат выравнивания</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group result align</value>
+    <value>758D7691-6F7C-A1D3-38A5-5ACBFA779B80</value>
    </title>
    <extendedTooltip>
     <name>GroupResultAlignExtendedTooltip</name>
@@ -769,28 +729,12 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Undo/Redo result</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Результат назад вперед</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Result un re do</value>
+     <value>94F8557C-7ABD-A32D-D4DA-A1FD94411D7E</value>
     </title>
-    <toolTip>
-     <key>tr</key>
-     <value>Undo/Redo result</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Результат назад вперед</value>
-    </toolTip>
     <toolTip>
      <key>en</key>
-     <value>Result un re do</value>
+     <value>93008142-30BD-F100-0337-7A8420E0B171</value>
     </toolTip>
     <extendedTooltip>
      <name>ResultUnReDoExtendedTooltip</name>
@@ -812,16 +756,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup diğer sonuç</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа результат другой</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group result other</value>
+    <value>B7960580-0883-96B5-543A-A14F0D51440A</value>
    </title>
    <extendedTooltip>
     <name>GroupResultOtherExtendedTooltip</name>
@@ -841,16 +777,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup araç çubuk sonucu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа результат панель свойств</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group result command bar</value>
+   <value>6D33D05B-0C9D-3296-67A5-516DF4FB56F2</value>
   </title>
   <extendedTooltip>
    <name>GroupResultCommandBarExtendedTooltip</name>
@@ -934,16 +862,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Form grup araç çubuğu sakla</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа сохранить в панели команд</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Form group command bar save</value>
+    <value>3D205C81-42D3-F871-1FFA-A2D8A5BCA99D</value>
    </title>
    <extendedTooltip>
     <name>FormGroupCommandBarSaveExtendedTooltip</name>
@@ -1075,16 +995,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Form grup araç çubuğu daralt</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сворачиваемая группа в панели команд</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Form group command bar collapse</value>
+    <value>DF5E3112-E16A-2098-874B-BF80D6BB8526</value>
    </title>
    <extendedTooltip>
     <name>FormGroupCommandBarCollapseExtendedTooltip</name>
@@ -1242,16 +1154,8 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>3443C742-C3D3-496A-AD8E-E8316895FD7F</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1282,16 +1186,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup malzemeler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>AF474785-03A5-15EC-CEA1-10D869DDCFCD</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1310,16 +1206,8 @@
  <attributes>
   <name>IsDetailProcessing</name>
   <title>
-   <key>tr</key>
-   <value>Detal işleniyor</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обрабатывается детализация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Is detail processing</value>
+   <value>D0237016-998E-94F0-00EA-A7928637AB32</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1335,16 +1223,8 @@
  <attributes>
   <name>IsUserFilter</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı filtresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пользовательский отбор</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Is user filter</value>
+   <value>417DC33F-0419-530C-CBD3-3A00A389708B</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1360,16 +1240,8 @@
  <attributes>
   <name>UserFilters</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı filtreleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пользовательские отборы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User filters</value>
+   <value>F6720832-B58D-C3B1-1CB7-770815C6EBC6</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1386,16 +1258,8 @@
  <formCommands>
   <name>CustomParameters</name>
   <title>
-   <key>tr</key>
-   <value>Parametreler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настраиваемые параметры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Custom parameters</value>
+   <value>152C7E4A-8BA3-5523-3E39-972AA1B105E5</value>
   </title>
   <id>1</id>
   <use>
@@ -1411,16 +1275,8 @@
  <formCommands>
   <name>EditReport</name>
   <title>
-   <key>tr</key>
-   <value>Rapor düzelt</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменить представление</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit report</value>
+   <value>8B3B74A3-09FF-61A7-73FE-E6D1498CE8F0</value>
   </title>
   <id>2</id>
   <use>

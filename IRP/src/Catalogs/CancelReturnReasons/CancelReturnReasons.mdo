@@ -9,16 +9,8 @@
  </producedTypes>
  <name>CancelReturnReasons</name>
  <synonym>
-  <key>tr</key>
-  <value>İptal/İade sebebi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Причины отмены/возврата</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Cancel/Return reasons</value>
+  <value>EE7D6822-22F2-D91F-F5E5-51F485049010</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.CancelReturnReasons.StandardAttribute.Code</inputByString>
@@ -59,16 +51,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>İptal/İade sebebi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Причины отмены/возврата</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Cancel/Return reason</value>
+  <value>C6982784-A2E1-8464-40A6-6C472F9F7E27</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -89,30 +73,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>F3878443-715E-ED93-3159-992F688FFF6A</value>
   </synonym>
   <attributes uuid="8b6b292b-e21f-40d2-9562-3e35a817c308">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>92F9BB9E-9EDC-7A1E-E52D-D39299A89888</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -125,16 +93,8 @@
   <attributes uuid="b9761ab2-83ce-4ad9-876f-857d5dc80b47">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>07E11913-6142-53BE-EFD0-05ED67A3A7A7</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -152,16 +112,8 @@
  <forms uuid="e810c5d2-ad92-4231-a4e8-e57ede69f39d">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>5D4687FF-27A2-E5EF-F588-8A9D20CD91D4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -169,16 +121,8 @@
  <forms uuid="7013cfec-0872-4e46-adf8-1261471ed510">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>EC56E96D-D20F-23C9-92E3-30E9EEF85078</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -186,16 +130,8 @@
  <forms uuid="98ade9a8-0683-4a43-9d95-d05a19963128">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>1705E727-5495-8E6A-A07E-EB356977172D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

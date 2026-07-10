@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeCurrencyRate</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip döviz kuru</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип курс валют</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type currency rate</value>
+  <value>FE162027-24B6-477E-EC5C-C5DC8773742E</value>
  </synonym>
  <type>
   <types>Number</types>

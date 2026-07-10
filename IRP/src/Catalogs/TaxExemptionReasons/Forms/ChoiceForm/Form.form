@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>67FED7CE-824C-FF5F-FF11-1947B7D29BE0</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -139,16 +131,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Filtreler grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа фильтров  </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of filters</value>
+   <value>B0DD8E8D-ED1A-C141-147B-BDFFFC730954</value>
   </title>
   <extendedTooltip>
    <name>GroupFiltersExtendedTooltip</name>
@@ -569,16 +553,8 @@ FROM
  <attributes>
   <name>TaxRate</name>
   <title>
-   <key>tr</key>
-   <value>Vergi oranı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Налоговая ставка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Tax rate</value>
+   <value>33314B63-0222-60BD-DB5D-D51E75D74552</value>
   </title>
   <id>2</id>
   <valueType>
@@ -594,16 +570,8 @@ FROM
  <attributes>
   <name>Country</name>
   <title>
-   <key>tr</key>
-   <value>Ülke</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страна</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Country</value>
+   <value>67EF2088-7D73-3CF1-1042-2DD553E75EAA</value>
   </title>
   <id>3</id>
   <valueType>

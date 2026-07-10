@@ -11,16 +11,8 @@
  </producedTypes>
  <name>CurrencyRates</name>
  <synonym>
-  <key>tr</key>
-  <value>Döviz kurları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Курсы валюты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Currency rates</value>
+  <value>21C9EF7D-E21F-11F8-895F-F752F5A55FCF</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultListForm>InformationRegister.CurrencyRates.Form.ListForm</defaultListForm>
@@ -28,42 +20,18 @@
  <mainFilterOnPeriod>true</mainFilterOnPeriod>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Döviz kuru</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Курс валюты</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Currency rate</value>
+  <value>62855400-6C4D-D8DE-E715-588C97F22727</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Döviz kurları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Курсы валюты</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Currency rates</value>
+  <value>3C710D20-09F5-EF1E-E540-0571B8D8C1F7</value>
  </listPresentation>
  <resources uuid="a6129b2c-aedf-4ead-abdd-824477778f4f">
   <name>Multiplicity</name>
   <synonym>
-   <key>tr</key>
-   <value>Çarpan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Кратность</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multiplicity</value>
+   <value>65C83A02-5D2B-1EAA-AD50-0F4A059DCF2B</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -82,16 +50,8 @@
  <resources uuid="db86501b-de2d-4f98-97d6-e03fbd89b224">
   <name>Rate</name>
   <synonym>
-   <key>tr</key>
-   <value>Oran</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ставка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Rate</value>
+   <value>3EEADA0C-24A9-DDE6-6BAD-DD45907DC9E8</value>
   </synonym>
   <type>
    <types>DefinedType.typeCurrencyRate</types>
@@ -105,16 +65,8 @@
  <dimensions uuid="9c3b0ee4-351f-43c5-bfca-e33a2b05c817">
   <name>CurrencyFrom</name>
   <synonym>
-   <key>tr</key>
-   <value>Dövizden</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>С валюты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency from</value>
+   <value>C1773060-F0C0-8652-2960-0BA83C32E5C2</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -130,16 +82,8 @@
  <dimensions uuid="846f0ce7-3734-45ed-a4b8-d829224173b4">
   <name>CurrencyTo</name>
   <synonym>
-   <key>tr</key>
-   <value>Dövize</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>На валюту</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency to</value>
+   <value>9EC6480A-C98E-E7E8-8DF4-40CCFD823C09</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -155,16 +99,8 @@
  <dimensions uuid="18187ec9-383e-4f7c-8279-0684d287d97a">
   <name>Source</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Источник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source</value>
+   <value>774D0D23-8495-6EE0-0D32-25D7F1288601</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -186,16 +122,8 @@
  <forms uuid="0cf1ccae-45c0-4e6c-bcc5-d15e68bf89a1">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>EF1A205E-4B25-587A-A5B7-7998CE4CF131</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -203,16 +131,8 @@
  <commands uuid="051859f2-425e-4f35-9eda-1150d1602b51">
   <name>CurrencyRates</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz kurları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Курсы валюты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency rates</value>
+   <value>55FFB949-C42E-F737-76F4-435B6011A746</value>
   </synonym>
   <group>FormNavigationPanelGoTo</group>
   <commandParameterType>

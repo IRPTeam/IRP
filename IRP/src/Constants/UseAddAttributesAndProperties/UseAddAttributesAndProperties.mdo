@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseAddAttributesAndProperties</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Ek alan ve özellikler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать дополнительные реквизиты и свойства</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use add attributes and properties</value>
+  <value>8080C58A-5123-7E25-5C00-07DEB130921A</value>
  </synonym>
  <type>
   <types>Boolean</types>

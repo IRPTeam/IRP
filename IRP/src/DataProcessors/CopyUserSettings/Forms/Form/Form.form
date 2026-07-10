@@ -532,16 +532,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup sol</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группировка по левому краю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group left</value>
+    <value>8F6B1995-F8E9-B161-163F-F1EA5448020F</value>
    </title>
    <extendedTooltip>
     <name>GroupLeftExtendedTooltip</name>
@@ -709,16 +701,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Kullanıcı adı tablo grubu</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа таблицы имен пользователей</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>User name table group</value>
+      <value>1A63DB4D-ED0B-DD77-771E-EB6347503F51</value>
      </title>
      <extendedTooltip>
       <name>UserNameTableGroupExtendedTooltip</name>
@@ -911,16 +895,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sağ)</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группировка по правому краю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group right</value>
+    <value>11741377-FE11-9836-6540-0885AB1CC6D8</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -948,16 +924,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main</value>
+   <value>42E11EF2-9686-BC56-6923-3CA992D53A0D</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -1040,16 +1008,8 @@
  <attributes>
   <name>SettingsStorageName</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar depolama adı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Имя хранилища настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings storage name</value>
+   <value>61EA1308-7F45-CA05-576B-B390D3F13578</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1067,16 +1027,8 @@
  <attributes>
   <name>UserName</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı adı (form)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Имя пользователя (от)</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User name (from)</value>
+   <value>2B6EA179-7005-90A1-1A6D-D38AA6337A29</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1094,16 +1046,8 @@
  <attributes>
   <name>Settings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar (form)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки (от)  </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings (from)</value>
+   <value>C9747BC2-3EE1-C1E4-4C48-88F41B691713</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1118,16 +1062,8 @@
   <columns>
    <name>Object</name>
    <title>
-    <key>tr</key>
-    <value>Obje</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Объект</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Object</value>
+    <value>7499CC39-C9BB-44E2-24C8-8CF8C9E0774E</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1144,16 +1080,8 @@
   <columns>
    <name>SettingsKey</name>
    <title>
-    <key>tr</key>
-    <value>Ayarlar anahtarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ настроек</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings key</value>
+    <value>047F9898-0378-AFC3-311C-C1B2454FCFD4</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1170,16 +1098,8 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Специальные предложения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>E244048C-E287-DD3A-AC2D-DE98A3957E8B</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1196,16 +1116,8 @@
   <columns>
    <name>User</name>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Пользователь</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>User</value>
+    <value>BADAE6E4-A52E-6AFF-FA0E-E1A02E6BA229</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1222,16 +1134,8 @@
   <columns>
    <name>Settings</name>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings</value>
+    <value>B6702744-5253-3E86-6BA7-7CED03239D48</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1248,16 +1152,8 @@
   <columns>
    <name>SettingsType</name>
    <title>
-    <key>tr</key>
-    <value>Ayarlar tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип настроек   </value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Settings type</value>
+    <value>1ED130BC-17BC-90AC-C3A1-11448C6034BF</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1274,16 +1170,8 @@
   <columns>
    <name>ObjectKey</name>
    <title>
-    <key>tr</key>
-    <value>Nesne anahtarı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ объекта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Object key</value>
+    <value>311AA0E5-7DDF-CACE-EE84-45FD82679E4C</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1301,16 +1189,8 @@
  <attributes>
   <name>UserNameTable</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı adı tablo</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица имен пользователей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User name table</value>
+   <value>2CD3703C-189F-4FB5-5462-22752A4A46B9</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1325,16 +1205,8 @@
   <columns>
    <name>User</name>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Пользователь</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>User</value>
+    <value>B0A033C0-5505-2883-314C-CC5EB759B11C</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1351,16 +1223,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>729E7FD0-68CD-6511-1A3D-DC9E1D7DFA7D</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1376,16 +1240,8 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Иконка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Icon</value>
+    <value>4113DE06-6911-0AE4-41CC-CB9D1A3D3B21</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1405,16 +1261,8 @@
  <formCommands>
   <name>UpdateSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update settings</value>
+   <value>D8A95B95-FA34-5D3E-EFB0-07E61AFAF4A9</value>
   </title>
   <id>1</id>
   <use>
@@ -1434,16 +1282,8 @@
  <formCommands>
   <name>CheckAllUsers</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcıları kontrol edin</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать всех пользователей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check all users</value>
+   <value>CF0D5359-0F97-EFCF-F817-7997DCA9012E</value>
   </title>
   <id>3</id>
   <use>
@@ -1463,16 +1303,8 @@
  <formCommands>
   <name>UncheckAllUsers</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcıların işaretini kaldırın</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить для всех выбранных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck all users</value>
+   <value>58E93103-551D-F88D-D54D-D26A078EF99F</value>
   </title>
   <id>4</id>
   <use>
@@ -1492,16 +1324,8 @@
  <formCommands>
   <name>CopySettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları kopyala</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Копировать настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy settings</value>
+   <value>96C72F44-4E06-A9B0-0F49-9FFB720E9D25</value>
   </title>
   <id>5</id>
   <use>

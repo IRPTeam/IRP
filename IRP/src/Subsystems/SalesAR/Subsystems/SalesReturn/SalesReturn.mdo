@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8088e811-238e-43db-b5a7-5e5cd668357c">
  <name>SalesReturn</name>
  <synonym>
-  <key>tr</key>
-  <value>Satış iadesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Возврат товаров от покупателя</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Sales return</value>
+  <value>B75C3FD1-06B1-264B-B429-9C62F0BC5EE9</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

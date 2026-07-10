@@ -18,16 +18,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>0</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>0</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>0</v8:content>
+						<v8:content>D37FC7F6-21F3-1159-9A22-2A28D61CC9D3</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

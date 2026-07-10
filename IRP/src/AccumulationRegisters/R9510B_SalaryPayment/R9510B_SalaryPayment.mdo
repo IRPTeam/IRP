@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R9510B_SalaryPayment</name>
  <synonym>
-  <key>tr</key>
-  <value>R9510 Maaş ödemesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R9510 Оплата зарплаты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R9510 Salary payment</value>
+  <value>9F49004E-F59F-5FB3-3B77-78A80620B302</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="2168aced-9e7f-4620-8d2b-f002f46b5b5e">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>C494E83F-2E4D-A1C6-6C38-846BD4A64C70</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="13b3c642-16ff-498e-9cb4-8223c3873683">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>847B0AB5-FD0C-62E9-9ABC-C774A4FD7DF2</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="1b890c46-8e14-4800-a084-80989c5e334a">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>4B077BFD-B52C-75D0-0F03-34D98E27084C</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="31e95a1d-655d-4b13-be83-8a9b35cb4721">
   <name>Employee</name>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сотрудник</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Employee</value>
+   <value>D7FD74F2-5924-3124-4E44-4F0E5BD027FC</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="39bf295f-abea-4476-b5d5-5a700cb6b78a">
   <name>PaymentPeriod</name>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme periyodu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Период оплат</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Payment period</value>
+   <value>8260382D-83FF-D3B7-705C-CDE76424EB27</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="c8d75a4f-73b9-4bb0-8d74-20db10518d9a">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>A1A6D355-0353-D993-3570-0DBDC0F221A0</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -158,16 +102,8 @@
  <dimensions uuid="1d31c1a8-fb2f-436f-9ac7-cc2b1b73c6f4">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction currency</value>
+   <value>A461DBDA-0684-A587-77AA-A171175A08FF</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -180,16 +116,8 @@
  <dimensions uuid="4f229409-bff8-4245-ae55-3b676a9bdcb3">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>33BBD261-6761-B260-0C50-04738673B026</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -202,16 +130,8 @@
  <dimensions uuid="c5667240-f66a-4291-97fa-1f0e9006ebc6">
   <name>CalculationType</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesaplama tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вариант оплаты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Calculation type</value>
+   <value>BD64A244-2AB5-3A1F-F6A2-2A9CCF5CC1EA</value>
   </synonym>
   <type>
    <types>CatalogRef.SalaryCalculationType</types>

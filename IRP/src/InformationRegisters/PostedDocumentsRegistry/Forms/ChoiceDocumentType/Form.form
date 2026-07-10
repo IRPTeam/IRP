@@ -278,16 +278,8 @@
  <attributes>
   <name>DocumentTypes</name>
   <title>
-   <key>tr</key>
-   <value>Evrak tipleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Типы документоа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document types</value>
+   <value>68647D1C-8B2D-4555-568A-A017A6CB8ACE</value>
   </title>
   <id>1</id>
   <valueType>
@@ -302,16 +294,8 @@
   <columns>
    <name>DocumentName</name>
    <title>
-    <key>tr</key>
-    <value>Evrak ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document name</value>
+    <value>D93C2070-B7D2-B0CC-CFB6-6DF16D98C4DD</value>
    </title>
    <id>2</id>
    <valueType>
@@ -328,16 +312,8 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Специальные предложения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Presentation</value>
+    <value>D015D3AC-4DBF-A271-1E9D-DB8725DFB868</value>
    </title>
    <id>3</id>
    <valueType>
@@ -354,16 +330,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>47F7622B-5E3A-2047-7500-004F563DF7EA</value>
    </title>
    <id>4</id>
    <valueType>
@@ -380,16 +348,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>9E480660-56CB-1F7D-D411-14FE9C4602E2</value>
   </title>
   <id>1</id>
   <use>
@@ -405,16 +365,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>DB08E243-AA3F-6661-1C04-43214B19B9C6</value>
   </title>
   <id>2</id>
   <use>

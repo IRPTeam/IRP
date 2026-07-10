@@ -7,62 +7,30 @@
  </producedTypes>
  <name>MaterialTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Hammadde tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Виды сырья</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Material types</value>
+  <value>38136236-1D86-48A4-46DE-E43632B72F2C</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="17e6394c-250f-4cb9-a77a-8b594ec088e7">
   <name>Material</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сырье</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Material</value>
+   <value>56011111-174B-D85F-F097-72887DF111C1</value>
   </synonym>
  </enumValues>
  <enumValues uuid="282e2f9f-cdba-4872-81a4-0756df7dfcf6">
   <name>Semiproduct</name>
   <synonym>
-   <key>tr</key>
-   <value>Yarı mamul</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Полуфабрикат</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Semiproduct</value>
+   <value>6A793379-F155-DB7D-DC42-2F98723269DE</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b64afdb9-640f-48b8-8105-bcdb70e094af">
   <name>Service</name>
   <synonym>
-   <key>tr</key>
-   <value>Hizmet</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Услуга</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Service</value>
+   <value>7D2FEE1F-7956-0E05-5001-194B5695AD0A</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

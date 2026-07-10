@@ -16,16 +16,8 @@
    <name>DocumentsNamesDocumentName</name>
    <id>14</id>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>1057F95F-44EF-BBBD-DDC5-5659897F3455</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -68,16 +60,8 @@
    <name>DocumentsNamesDocumentSynonym</name>
    <id>17</id>
    <title>
-    <key>tr</key>
-    <value>Eşanlamlı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Синоним</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Synonym</value>
+    <value>B22C7D61-6F97-D5E9-9A26-67AAF32DC30D</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -256,16 +240,8 @@
  <attributes>
   <name>DocumentsNames</name>
   <title>
-   <key>tr</key>
-   <value>Evraklar isimleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименования документов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Documents names</value>
+   <value>8B786BFE-42F4-09A3-3358-8FBD5E407F6D</value>
   </title>
   <id>1</id>
   <valueType>
@@ -280,16 +256,8 @@
   <columns>
    <name>DocumentName</name>
    <title>
-    <key>tr</key>
-    <value>Evrak ismi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document name</value>
+    <value>5456ED56-ECB7-12F3-3B84-4B42D4EF8A6B</value>
    </title>
    <id>1</id>
    <valueType>
@@ -306,16 +274,8 @@
   <columns>
    <name>DocumentSynonym</name>
    <title>
-    <key>tr</key>
-    <value>Evrak eşanlamlı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Синоним документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document synonym</value>
+    <value>E1070A4C-7CFC-5C1D-D369-99CDE81CCCB0</value>
    </title>
    <id>2</id>
    <valueType>

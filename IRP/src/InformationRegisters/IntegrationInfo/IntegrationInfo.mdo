@@ -11,56 +11,24 @@
  </producedTypes>
  <name>IntegrationInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>Entegrasyon ek bilgileri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Дополнительные интеграционные настройки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Integration additional information</value>
+  <value>C0E1371B-38A4-82C3-3075-5D4BD1BACFE1</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Entegrasyon ek bilgileri</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Дополнительные интеграционные настройки</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Integration additional information</value>
+  <value>6A902B75-B705-14B0-0AB6-6600CB970DEE</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Entegrasyon ek bilgileri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Дополнительные интеграционные настройки</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Integration additional informations</value>
+  <value>25E7609A-4ABA-1FCC-C28C-C2E43D4CD9B8</value>
  </listPresentation>
  <resources uuid="d2a5b90d-55df-4a3e-82cb-c3e52fa5f31f">
   <name>Value</name>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Value</value>
+   <value>19956C90-8E98-D877-74CF-F7BFBF47D068</value>
   </synonym>
   <type>
    <types>String</types>
@@ -70,23 +38,13 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </resources>
  <resources uuid="937b8196-d8f5-44c0-8828-6e42e7c64f7a">
   <name>SecondValue</name>
   <synonym>
-   <key>tr</key>
-   <value>İkinci değer</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Второе значение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Second value</value>
+   <value>CA5A4FBD-FEEF-89BE-EAC4-41C979A0E3D1</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -107,23 +65,13 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </resources>
  <dimensions uuid="978efd38-0f6c-476e-97d4-4e6b0d21b7c3">
   <name>isProduct</name>
   <synonym>
-   <key>tr</key>
-   <value>Canlı ortam</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это товар</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is product</value>
+   <value>ECFEAF78-F68B-B15E-E274-4601DBC01CF3</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -139,16 +87,8 @@
  <dimensions uuid="0fc7edc6-8ac0-4c81-95cc-3e616e62304f">
   <name>IntegrationSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Настройка интеграции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Integration settings</value>
+   <value>FBBDA254-83D9-E348-8193-3AB335B96327</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -165,16 +105,8 @@
  <dimensions uuid="ec938a94-f118-419f-bb75-e70992854f56">
   <name>Key</name>
   <synonym>
-   <key>tr</key>
-   <value>Anahtar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Key</value>
+   <value>09E9A5B6-A7B0-75F8-8D19-9144CDF1AFF4</value>
   </synonym>
   <type>
    <types>String</types>
@@ -188,9 +120,7 @@
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
 </mdclass:InformationRegister>

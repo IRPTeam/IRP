@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="32f5e3a7-3b7f-4e35-b469-751a27be97e5">
  <name>CurrencyRateDirection</name>
  <synonym>
-  <key>tr</key>
-  <value>Döviz kur yönü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Направление курса валюты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Currency rate direction</value>
+  <value>323E5970-DFE8-C3A9-9458-84D9CE9F2093</value>
  </synonym>
 </mdclass:CommonPicture>

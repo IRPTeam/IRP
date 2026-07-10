@@ -237,16 +237,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup tarih</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа даты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group date</value>
+   <value>E5D16CF4-9AF0-3613-354B-B4CA6C98A714</value>
   </title>
   <extendedTooltip>
    <name>GroupDateExtendedTooltip</name>
@@ -482,16 +474,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Верхняя</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>6E36ECA3-4B8D-4AB3-3FE4-448E18D87EAE</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -522,16 +506,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ek alanlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дополнительные атрибуты группы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group additional attributes</value>
+   <value>B3F7F82E-654D-9DE6-682C-CA4136A83089</value>
   </title>
   <extendedTooltip>
    <name>GroupAddAttributesExtendedTooltip</name>

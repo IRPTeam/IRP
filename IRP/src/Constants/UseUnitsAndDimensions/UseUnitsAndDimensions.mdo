@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseUnitsAndDimensions</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Malzeme ek birimleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использование ед. изм. товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use units and dimensions</value>
+  <value>C05ACB25-D7C8-7101-18F2-20782EBF23D3</value>
  </synonym>
  <type>
   <types>Boolean</types>

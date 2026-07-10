@@ -6,32 +6,16 @@
  </producedTypes>
  <name>UpdateDatabase</name>
  <synonym>
-  <key>tr</key>
-  <value>Veritabanı güncelle</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Обновление базы данных</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Update database</value>
+  <value>F45C4EC4-C996-D441-1D50-0AB973B2CE4F</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.UpdateDatabase.Form.Form</defaultForm>
  <forms uuid="53f2db0b-5d93-40de-baaa-08b5a6564be2">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>CD02F771-9002-DCB7-7C64-4C11D0846BDF</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

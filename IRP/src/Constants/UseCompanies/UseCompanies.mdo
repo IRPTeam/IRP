@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseCompanies</name>
  <synonym>
-  <key>tr</key>
-  <value>Birden fazla şirket kullanmak</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать организации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use companies</value>
+  <value>366B0C13-9FA4-C8CE-E968-8AD2AD779F37</value>
  </synonym>
  <type>
   <types>Boolean</types>

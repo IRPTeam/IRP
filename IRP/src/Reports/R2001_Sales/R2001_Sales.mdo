@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R2001_Sales</name>
  <synonym>
-  <key>tr</key>
-  <value>R2001 Satışlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2001 Продажи</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2001 Sales</value>
+  <value>42B5163B-7ECB-D050-0100-05814C3AC7DA</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R2001_Sales.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="d916ed77-b37f-4819-be62-074ddf4de540">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>EAF55A0A-D3ED-713B-BA14-4F344F225160</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

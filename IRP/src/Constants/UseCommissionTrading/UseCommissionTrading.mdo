@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseCommissionTrading</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Konsinye satışı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать комиссионную торговлю</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use commission trading</value>
+  <value>84CD1CA7-E770-5DFC-C7D5-52FF2004A4C3</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -82,16 +82,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Верх</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>9B22470E-15B6-EB17-738C-C31E019BE075</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -751,16 +743,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Genel ayarlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Основные настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Main settings</value>
+    <value>27260ABC-9FC8-C4C2-2730-04CA2CCD610C</value>
    </title>
    <extendedTooltip>
     <name>GroupProductionExtendedTooltip</name>
@@ -1092,16 +1076,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Test ayarları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тестовые настройки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Test settings</value>
+    <value>0E695C86-87E1-B0F0-0A1C-CC6027A18914</value>
    </title>
    <extendedTooltip>
     <name>GroupTestExtendedTooltip</name>
@@ -1125,16 +1101,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа страниц</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group pages</value>
+   <value>5745E00B-99C2-FC58-8C26-6035A59A3D2A</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1159,16 +1127,8 @@
    <name>ConnectionSettingContextMenuTestConnection</name>
    <id>40</id>
    <title>
-    <key>tr</key>
-    <value>Test</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тест</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Test</value>
+    <value>058CF228-5F98-5FD3-3568-85937B7BAB58</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1230,16 +1190,8 @@
  <attributes>
   <name>AddressResult</name>
   <title>
-   <key>tr</key>
-   <value>Adres sonucu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Адрес результата</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Address result</value>
+   <value>8183747B-189E-E5AD-D352-2A65B3D042A6</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1256,16 +1208,8 @@
  <formCommands>
   <name>FillByDefault</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan olarak doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill by default</value>
+   <value>424B0040-B2E2-CAC3-3781-1C0EBCFEF7A3</value>
   </title>
   <id>1</id>
   <use>
@@ -1281,16 +1225,8 @@
  <formCommands>
   <name>TestConnection</name>
   <title>
-   <key>tr</key>
-   <value>Bağlantı kontrol et</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест соединения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test connection</value>
+   <value>C83799F2-C4AA-062B-B3B6-61348A471ECD</value>
   </title>
   <id>2</id>
   <use>
@@ -1310,16 +1246,8 @@
  <formCommands>
   <name>ExternalDataProcSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings</value>
+   <value>CBF1BF85-6EAD-97FC-C59D-D41E785AD15C</value>
   </title>
   <id>3</id>
   <use>
@@ -1335,16 +1263,8 @@
  <formCommands>
   <name>Login</name>
   <title>
-   <key>tr</key>
-   <value>Login</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Авторизация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Login</value>
+   <value>2F2B82C7-FC22-58C4-4B69-969A15188140</value>
   </title>
   <id>4</id>
   <use>
@@ -1360,16 +1280,8 @@
  <formCommands>
   <name>CopyFromProd</name>
   <title>
-   <key>tr</key>
-   <value>Canlı ortam kopyası</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скопировать основные настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Copy from prod</value>
+   <value>D62AE8D3-C21D-BEC5-5B24-4F51E0A63D04</value>
   </title>
   <id>5</id>
   <use>

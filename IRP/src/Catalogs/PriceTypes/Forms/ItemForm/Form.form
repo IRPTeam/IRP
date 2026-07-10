@@ -366,16 +366,8 @@
  <attributes>
   <name>AddressResult</name>
   <title>
-   <key>tr</key>
-   <value>Adres sonucu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Адрес результата</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Address result</value>
+   <value>AAB5F1A1-CFA8-9B3D-D660-00FC73C8033F</value>
   </title>
   <id>2</id>
   <valueType>
@@ -392,16 +384,8 @@
  <formCommands>
   <name>ExternalDataProcSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Settings</value>
+   <value>7823C730-7B57-C13C-CF77-7B26BEADB14A</value>
   </title>
   <id>1</id>
   <use>

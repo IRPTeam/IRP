@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeSpecialOfferBonus</name>
  <synonym>
-  <key>tr</key>
-  <value>Özel teklif bonus tipi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип скидки бонусом</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type special offer bonus</value>
+  <value>5B81F5E2-9212-1F8F-F792-2B5A8207DFF7</value>
  </synonym>
  <type>
   <types>Number</types>

@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R4020T_StockTransferOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>R4020 Depo transfer fişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4020 Заказы на перемещение товара</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4020 Stock transfer orders</value>
+  <value>8FC00295-92DF-5235-5F20-077E0B135854</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="964ae822-76b2-427c-ab7d-5c36bfa4d5b8">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>C4F59E11-CBE5-ADAD-D78E-EF67EF846039</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +33,8 @@
  <dimensions uuid="22fdf663-9f68-4df4-a8d7-8dded8826938">
   <name>StoreSender</name>
   <synonym>
-   <key>tr</key>
-   <value>Gönderen depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад-отправитель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store sender</value>
+   <value>4E472BAC-B624-E08F-F5CE-E4A0C6BE130D</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -71,16 +47,8 @@
  <dimensions uuid="74c3f1e8-5cf7-4751-9e0e-b985c6627487">
   <name>StoreReceiver</name>
   <synonym>
-   <key>tr</key>
-   <value>Giriş depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад-получатель</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store receiver</value>
+   <value>5BB717F7-468C-50B2-2CB6-69BD605A766E</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -93,16 +61,8 @@
  <dimensions uuid="4127be96-237e-4892-86d0-25c389e811cb">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>B42C4CA9-6778-5F6D-DFB0-07AEC8AC224A</value>
   </synonym>
   <type>
    <types>DocumentRef.InventoryTransferOrder</types>
@@ -115,16 +75,8 @@
  <dimensions uuid="84e60da2-4de8-4ec8-bf7b-c2cde02ee890">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>09D497BC-CBE7-9823-32F9-96F9691E78CF</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -137,16 +89,8 @@
  <dimensions uuid="0032d339-301f-4f33-96a3-99d3e255c2f7">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row key</value>
+   <value>E0924827-45B6-FDF4-4201-1A1B6147E649</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>

@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseCashTransactions</name>
  <synonym>
-  <key>tr</key>
-  <value>Nakit işlemleri kullanın</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать кассовые операции</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use cash transactions</value>
+  <value>83FC8205-5B3B-1416-635C-C868E386FC2F</value>
  </synonym>
  <type>
   <types>Boolean</types>

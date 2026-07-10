@@ -84,16 +84,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Description</value>
+   <value>96FB3EA9-BAC9-1772-2E68-8B8CF39612F9</value>
   </title>
   <extendedTooltip>
    <name>GroupDescriptionExtendedTooltip</name>
@@ -202,16 +194,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа верхние уровень</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group top</value>
+   <value>DE04A293-9BC3-40CB-B368-8515AFD1F4FF</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -321,16 +305,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup EVAL kod ayarları</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа настройки преобразовать код</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group Eval code settings</value>
+     <value>06A2B0A1-9CB6-E3F4-4907-77E55C49B60C</value>
     </title>
     <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
@@ -431,16 +407,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Sonuç</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Результат</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Result</value>
+     <value>41EFAB19-04FF-2147-73AF-F7A2ED5D77CA</value>
     </title>
     <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
@@ -512,16 +480,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Код</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Code</value>
+    <value>3D2C29CF-9F6A-05F0-0460-0EC634AF18D1</value>
    </title>
    <extendedTooltip>
     <name>PageCodeExtendedTooltip</name>
@@ -793,16 +753,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Parametreler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Параметры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Parameters</value>
+    <value>08E3A491-EFDF-9EA8-8FA9-9592072A6A41</value>
    </title>
    <extendedTooltip>
     <name>PageParametersExtendedTooltip</name>
@@ -864,16 +816,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup top RegExp girişi</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа первые RegExp вывод</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group top RegExp input</value>
+       <value>5F1D818D-BAD4-8875-5C1E-EF70BCD85716</value>
       </title>
       <extendedTooltip>
        <name>GroupTopRegExpInputExtendedTooltip</name>
@@ -899,16 +843,8 @@
       <name>RegExp</name>
       <id>92</id>
       <title>
-       <key>tr</key>
-       <value>RegExp</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>RegExp</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>RegExp</value>
+       <value>22C5850B-EB60-5E66-63B3-3921718877C5</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -956,16 +892,8 @@
         <faceName>Courier New</faceName>
        </font>
        <inputHint>
-        <key>tr</key>
-        <value>RegExp</value>
-       </inputHint>
-       <inputHint>
-        <key>ru</key>
-        <value>Регулярные выражения</value>
-       </inputHint>
-       <inputHint>
         <key>en</key>
-        <value>Reg exp</value>
+        <value>58A91296-60D9-17C9-95D4-4E15E0EE6F30</value>
        </inputHint>
       </extInfo>
      </items>
@@ -982,16 +910,8 @@
       </dataPath>
       <titleLocation>None</titleLocation>
       <toolTip>
-       <key>tr</key>
-       <value>RegExp tamamlandıktan sonra kodu çalıştır</value>
-      </toolTip>
-      <toolTip>
-       <key>ru</key>
-       <value>Выполнить код после исполнения RegExp</value>
-      </toolTip>
-      <toolTip>
        <key>en</key>
-       <value>Execute code after regexp done</value>
+       <value>8822F2EB-6D87-FF12-21F2-2973EA9643EC</value>
       </toolTip>
       <extendedTooltip>
        <name>ExternalCodeForRegExpExtendedTooltip</name>
@@ -1026,16 +946,8 @@
         <faceName>Courier New</faceName>
        </font>
        <inputHint>
-        <key>tr</key>
-        <value>RegExp tamamlandıktan sonra kodu çalıştır</value>
-       </inputHint>
-       <inputHint>
-        <key>ru</key>
-        <value>Выполнить код после исполнения RegExp</value>
-       </inputHint>
-       <inputHint>
         <key>en</key>
-        <value>Execute code after regexp done</value>
+        <value>2EE39749-BCCD-8C4D-D486-619D9803B66D</value>
        </inputHint>
       </extInfo>
      </items>
@@ -1087,16 +999,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>RegExp girişi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>RegExp ввод</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>RegExp input</value>
+      <value>7901F10D-542B-D8E5-53EF-F233B83CBC30</value>
      </title>
      <extendedTooltip>
       <name>GroupRegExpInputExtendedTooltip</name>
@@ -1126,16 +1030,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>RegExp verisi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Данные RegExp</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>RegExp data</value>
+      <value>3B53BBFC-7A6E-603D-D2A8-892FFF5B648D</value>
      </title>
      <extendedTooltip>
       <name>GroupRegExpDataExtendedTooltip</name>
@@ -1162,16 +1058,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup RegExp sol</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа RegExp лево</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group RegExp left</value>
+     <value>53CE6124-D4E2-7B55-56A3-31DC2225E0CD</value>
     </title>
     <extendedTooltip>
      <name>GroupRegExpLeftExtendedTooltip</name>
@@ -1252,16 +1140,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Analiz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Анализировать</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Analyze</value>
+      <value>54F31024-7A55-BE60-0179-999438560483</value>
      </title>
      <extendedTooltip>
       <name>PageRegExpTestRowsAnalyzeExtendedTooltip</name>
@@ -1459,16 +1339,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Liste</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Список</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>List</value>
+      <value>CD2CEA30-97CC-BEE6-6E5D-DC24C5ED45D1</value>
      </title>
      <extendedTooltip>
       <name>PageRexExpTestRowsExtendedTooltip</name>
@@ -1495,16 +1367,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Sayfalar RegExp satırlar testi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Страница RegExp тестирование строк</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Pages RegExp test rows</value>
+     <value>7EDAB015-F7C6-18DF-F89C-CFC8ADC29842</value>
     </title>
     <extendedTooltip>
      <name>PagesRegExpTestRowsExtendedTooltip</name>
@@ -1528,16 +1392,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>RegExp</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>RegExp</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>RegExp</value>
+    <value>0CE80FD2-6468-E0B7-7CB5-550584E57CF5</value>
    </title>
    <extendedTooltip>
     <name>PageRegExpExtendedTooltip</name>
@@ -1608,16 +1464,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sonuç</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Результат</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Result</value>
+    <value>4C7DEA3F-7236-61B2-2165-50A2824E0EF9</value>
    </title>
    <extendedTooltip>
     <name>PageResultExtendedTooltip</name>
@@ -1648,16 +1496,8 @@
      <name>JobScheduleInfo</name>
      <id>145</id>
      <title>
-      <key>tr</key>
-      <value>Geçerli zamanlayıcı</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Текущее расписание</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Current scheduler</value>
+      <value>8A475355-9FC1-3072-263F-F88C17FD5EF1</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1770,16 +1610,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup top zamanlayıcı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа расписания</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group top scheduler</value>
+     <value>088451AD-466E-A57C-CE22-21E8AE32D7E5</value>
     </title>
     <extendedTooltip>
      <name>GroupTopSchedulerExtendedTooltip</name>
@@ -1809,16 +1641,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup sonraki görev</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа следующее задание</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group next job</value>
+     <value>B8E0114D-A88A-E201-186B-BFE72B37219F</value>
     </title>
     <extendedTooltip>
      <name>GroupNextJobExtendedTooltip</name>
@@ -1885,16 +1709,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Zamanlayıcı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Расписание</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Scheduler</value>
+    <value>5ED303EC-F438-46C9-9968-867C5FC0D702</value>
    </title>
    <extendedTooltip>
     <name>PageSchedulerExtendedTooltip</name>
@@ -1928,16 +1744,8 @@
       <name>TestCheckResultStringMatch</name>
       <id>187</id>
       <title>
-       <key>tr</key>
-       <value>Test satırı</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Тестовая строка</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Test string</value>
+       <value>DFD1CA79-E89F-C231-1820-0DEC54F33C48</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -2008,16 +1816,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Sonuç üst</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Результат шапка</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Result top</value>
+      <value>AB0225D0-25FC-90E8-8556-68E8DDD42902</value>
      </title>
      <extendedTooltip>
       <name>GroupResultTopExtendedTooltip</name>
@@ -2084,16 +1884,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Test örneği</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Тестовый кейс</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Test case</value>
+     <value>A0AD09D5-4E8F-AE7B-B343-3721000B9F85</value>
     </title>
     <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
@@ -2375,16 +2167,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Örnek</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вариант</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Case</value>
+    <value>D964BA81-B8E3-940D-DC0F-FBAAF2890E4D</value>
    </title>
    <extendedTooltip>
     <name>GroupResultByRegexpExtendedTooltip</name>
@@ -2411,16 +2195,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основное</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main</value>
+   <value>7D0A08E9-8526-6AFC-C122-2709CF5404AB</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -2523,16 +2299,8 @@
    <columns>
     <name>RegExpFailed</name>
     <title>
-     <key>tr</key>
-     <value>RegExp başarısız</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>RegExp выполнено НЕ успешно</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Reg exp failed</value>
+     <value>400B06A9-4F31-DE57-7817-7A27D11F41F3</value>
     </title>
     <id>5</id>
     <valueType>
@@ -2550,16 +2318,8 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>A4E6BD27-4B75-50B1-15ED-D51817683CF5</value>
   </title>
   <id>2</id>
   <valueType/>
@@ -2573,16 +2333,8 @@
  <attributes>
   <name>ResultJSON</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç JSON</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат JSON</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result JSON</value>
+   <value>F50BF355-E6EB-D066-683D-D57CAB7663C3</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2599,16 +2351,8 @@
  <attributes>
   <name>RegExpResult</name>
   <title>
-   <key>tr</key>
-   <value>RegExp sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат RegExp</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Reg exp result</value>
+   <value>90EAC843-0914-0036-6F2F-FC2EDF712F35</value>
   </title>
   <id>8</id>
   <valueType>
@@ -2625,16 +2369,8 @@
  <attributes>
   <name>HTMLRegExpTestRowsAnalyze</name>
   <title>
-   <key>tr</key>
-   <value>HTML RegExp test satırlar analiz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>HTML RegExp анализ тестрования строк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>HTMLReg exp test rows analyze</value>
+   <value>5B74DC1A-FFAF-D5C4-4FDF-F18C64C7DB2F</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2651,16 +2387,8 @@
  <attributes>
   <name>JobScheduleInfo</name>
   <title>
-   <key>tr</key>
-   <value>Görev zamanlama bilgileri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Информация о расписании задания</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Job schedule info</value>
+   <value>B07ABF98-D6D4-6E76-697A-AE5E2F413479</value>
   </title>
   <id>10</id>
   <valueType/>
@@ -2675,16 +2403,8 @@
  <attributes>
   <name>ResultMatches</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç seçenekleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат совпадений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result matches</value>
+   <value>CC0480FF-C635-CFD5-56F0-07AF817A86AD</value>
   </title>
   <id>11</id>
   <valueType>
@@ -2699,16 +2419,8 @@
   <columns>
    <name>Result</name>
    <title>
-    <key>tr</key>
-    <value>Sonuç</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Результат</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Result</value>
+    <value>2A976F04-F5AA-DCC3-329A-A623ED744380</value>
    </title>
    <id>13</id>
    <valueType>
@@ -2738,16 +2450,8 @@
   <columns>
    <name>RegExp</name>
    <title>
-    <key>tr</key>
-    <value>RegExp</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Регулярные выражения</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Reg exp</value>
+    <value>E014A7D1-34A5-AB06-672B-B800E8090088</value>
    </title>
    <id>14</id>
    <valueType>
@@ -2764,16 +2468,8 @@
  <attributes>
   <name>CheckResultMatch</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Результат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result</value>
+   <value>49D09A58-42B2-AC1A-A5B1-1B8695C3CF54</value>
   </title>
   <id>17</id>
   <valueType/>
@@ -2787,16 +2483,8 @@
  <attributes>
   <name>TestCheckResultStringMatch</name>
   <title>
-   <key>tr</key>
-   <value>Test kontrol sonuç satır eşitlemesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Строка проверки результата совпадения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test check result string match</value>
+   <value>F134F7B3-ABD1-1A16-6D20-07ED1DEAFDC6</value>
   </title>
   <id>18</id>
   <valueType>
@@ -2813,16 +2501,8 @@
  <attributes>
   <name>ResultLog</name>
   <title>
-   <key>tr</key>
-   <value>Result log [ ResultInfo.Log.Add("Some log") ]</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Логирование результата [ ResultInfo.Log.Add("Some log") ]</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Result log [ ResultInfo.Log.Add("Some log") ]</value>
+   <value>0D59E806-37D9-06E2-24E4-4670453C812C_________</value>
   </title>
   <id>19</id>
   <valueType>
@@ -2839,16 +2519,8 @@
  <formCommands>
   <name>Run</name>
   <title>
-   <key>tr</key>
-   <value>Çalıştır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Run</value>
+   <value>9C33FD58-A024-2CE9-9D37-7E75564FC8CB</value>
   </title>
   <id>1</id>
   <use>
@@ -2868,16 +2540,8 @@
  <formCommands>
   <name>RunRegExp</name>
   <title>
-   <key>tr</key>
-   <value>Çalıştır</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выполнить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Run</value>
+   <value>F490D17A-856D-49D7-706F-FE9DAB4FD517</value>
   </title>
   <id>2</id>
   <use>
@@ -2897,16 +2561,8 @@
  <formCommands>
   <name>EditScheduler</name>
   <title>
-   <key>tr</key>
-   <value>Çizelge değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Изменить расписание</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Edit schedule</value>
+   <value>053100AB-9476-CBAB-B74E-E0A4AC0FB763</value>
   </title>
   <id>3</id>
   <use>
@@ -2927,16 +2583,8 @@
  <formCommands>
   <name>CheckTestResult</name>
   <title>
-   <key>tr</key>
-   <value>Kontrol</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тест</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check</value>
+   <value>6ACFCB3F-4C8B-89EA-AAA4-4AFF57A34B30</value>
   </title>
   <id>4</id>
   <use>

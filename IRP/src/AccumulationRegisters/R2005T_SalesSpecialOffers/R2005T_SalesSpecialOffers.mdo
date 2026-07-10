@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R2005T_SalesSpecialOffers</name>
  <synonym>
-  <key>tr</key>
-  <value>R2005 Satışlar iskontoları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R2005 Скидки продаж</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R2005 Sales special offers</value>
+  <value>D745CB31-E5FA-E791-1030-0B75BE03D7F3</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="d657341f-caab-488f-bc74-4f7a85fd61d2">
   <name>SalesAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма продаж</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Sales amount</value>
+   <value>7A5B344C-C5FE-2EE2-2E49-9EE8799E66FC</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +33,8 @@
  <resources uuid="665014b9-fd02-42b0-8c7a-87a2704976a5">
   <name>NetAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Net tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма без налогов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Net amount</value>
+   <value>A461D8D6-5A94-55BD-D01B-BA82DB15C92F</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +46,8 @@
  <resources uuid="655195cb-121d-423f-bf17-77402c1fc0d1">
   <name>OffersAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Iskonto tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма скидки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Offers amount</value>
+   <value>AF811AD6-894F-CAA4-4F2D-D29B55744F0A</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -91,16 +59,8 @@
  <resources uuid="f0fae0a6-caa2-4c4a-a0f0-7ce01001585a">
   <name>NetOfferAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Net iskonto tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма скидки без налогов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Net offer amount</value>
+   <value>B807ABFA-FDEF-D305-5974-4687ABFBF4AF</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -112,16 +72,8 @@
  <dimensions uuid="23e24540-8054-41df-b155-00e0c8c62d74">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>35FA21C7-72A0-3A00-08DF-FA13A0414F2E</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -134,16 +86,8 @@
  <dimensions uuid="167d2194-6166-4a20-91b2-d60e909d3e18">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>EFFEE0F6-92FB-5373-3680-0DD42D7643C5</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -156,16 +100,8 @@
  <dimensions uuid="8ee5717c-a1eb-4dfc-8b78-5d9bf950d6f1">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>41950FB3-5690-B80C-C7BC-C4DB00D7BEE1</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -178,16 +114,8 @@
  <dimensions uuid="32f28889-ace4-4b49-989a-6ee65afce17a">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>7CB5EABB-7BD7-6E01-1DF8-8840C126A4B0</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -200,16 +128,8 @@
  <dimensions uuid="77cad49f-0119-4c51-b96d-0bdd499b8875">
   <name>Invoice</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Инвойс</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Invoice</value>
+   <value>C76FE844-C9AA-774D-DC1D-D83960752693</value>
   </synonym>
   <type>
    <types>DocumentRef.RetailSalesReceipt</types>
@@ -223,16 +143,8 @@
  <dimensions uuid="beb0287d-f388-4887-a9d0-4be15671f930">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>02B27212-C993-3543-3056-6823081C8AE6</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -245,16 +157,8 @@
  <dimensions uuid="7996715a-5b50-4885-8957-a07b29129862">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row key</value>
+   <value>A7B6BA6C-AF86-6C40-09A5-5D9C86D935A1</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -267,16 +171,8 @@
  <dimensions uuid="4e541823-76bd-4375-a8f2-176f71a1ec64">
   <name>SpecialOffer</name>
   <synonym>
-   <key>tr</key>
-   <value>Kampanya</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Скидка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Special offer</value>
+   <value>544A2E08-28D3-178F-F276-66183676C214</value>
   </synonym>
   <type>
    <types>CatalogRef.SpecialOffers</types>

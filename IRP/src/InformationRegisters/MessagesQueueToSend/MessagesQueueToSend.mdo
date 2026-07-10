@@ -11,16 +11,8 @@
  </producedTypes>
  <name>MessagesQueueToSend</name>
  <synonym>
-  <key>tr</key>
-  <value>Messages queue to send</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Очередь сообщений к отправке</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Messages queue to send</value>
+  <value>AAEDE318-B420-41C8-8868-857D90DFC8B8</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -63,16 +55,8 @@
  <resources uuid="45c795ba-4cd4-43c8-b83e-686f52eb1427">
   <name>Sent</name>
   <synonym>
-   <key>tr</key>
-   <value>Sent</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отправлено</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Sent</value>
+   <value>226A7B68-9AC5-F303-3A0B-BB29A7FC6FAA</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -86,16 +70,8 @@
  <resources uuid="914fa114-cc40-470f-8020-7637357fbdd6">
   <name>DateSent</name>
   <synonym>
-   <key>tr</key>
-   <value>Gönderilme tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата отправки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Date sent</value>
+   <value>30C48F96-EB0A-C39B-BCF7-7B58704F8A9E</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -110,16 +86,8 @@
  <resources uuid="45f9757e-0819-47e2-bb94-23879116ba86">
   <name>NumberAttempts</name>
   <synonym>
-   <key>tr</key>
-   <value>Number attempts</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество попыток</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Number attempts</value>
+   <value>072A622F-0B87-72E4-4800-019A0EF3F0BF</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -137,16 +105,8 @@
  <resources uuid="24688239-9a34-4f09-8b19-5acd58913ef2">
   <name>LastWarning</name>
   <synonym>
-   <key>tr</key>
-   <value>Last warning</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Последнее предупреждение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Last warning</value>
+   <value>9C74D372-3650-F2A2-2517-73225D19A2C0</value>
   </synonym>
   <type>
    <types>String</types>
@@ -161,16 +121,8 @@
  <dimensions uuid="21da98f1-2bf6-416d-8aec-5555d7b109fb">
   <name>Message</name>
   <synonym>
-   <key>tr</key>
-   <value>Mesaj</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сообщение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Message</value>
+   <value>F0D3CA3A-1038-894B-B6D3-3EBF43B03E2F</value>
   </synonym>
   <type>
    <types>DocumentRef.OutgoingMessage</types>

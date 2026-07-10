@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseFinance</name>
  <synonym>
-  <key>tr</key>
-  <value>Finans modülü kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Казначейство</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use finance</value>
+  <value>1C768052-7CC8-D981-1DDE-ECEF3A4EBAFC</value>
  </synonym>
  <type>
   <types>Boolean</types>

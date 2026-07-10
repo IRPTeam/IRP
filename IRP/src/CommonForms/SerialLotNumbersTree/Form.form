@@ -428,16 +428,8 @@
  <attributes>
   <name>SerialLotNumbersTree</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numara ağacı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дерево серий номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot numbers tree</value>
+   <value>5ACF52B2-4921-D44F-F2F5-50395B9040F9</value>
   </title>
   <id>2</id>
   <valueType>
@@ -453,16 +445,8 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ключ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Key</value>
+    <value>1EC5D235-7F2E-DD06-68D9-961B9B4581CB</value>
    </title>
    <id>157</id>
    <valueType>
@@ -478,16 +462,8 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номенклатура</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item</value>
+    <value>6EA46037-1872-A678-8F1F-FD7980A5266D</value>
    </title>
    <id>158</id>
    <valueType>
@@ -503,16 +479,8 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key</value>
+    <value>EAB2A835-E894-4E5A-ACFE-ECF09FC5B5B1</value>
    </title>
    <id>159</id>
    <valueType>
@@ -528,16 +496,8 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серия номенклатуры</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>8378D994-FE02-7A21-1A6C-CA4EE478F483</value>
    </title>
    <id>160</id>
    <valueType>
@@ -553,16 +513,8 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Quantity</value>
+    <value>ED142C01-CD1B-9C56-6115-50AED9D37436</value>
    </title>
    <id>161</id>
    <valueType>
@@ -578,16 +530,8 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Уровень</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Level</value>
+    <value>79325A1E-6736-A6C4-443C-C6F3DEE49BCE</value>
    </title>
    <id>162</id>
    <valueType>
@@ -606,16 +550,8 @@
   <columns>
    <name>ItemKeyQuantity</name>
    <title>
-    <key>tr</key>
-    <value>Varyant adet</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Количество характеристики</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Item key quantity</value>
+    <value>CB4FE3C3-2E50-438F-FB6D-D5FEF743D4B0</value>
    </title>
    <id>165</id>
    <valueType>

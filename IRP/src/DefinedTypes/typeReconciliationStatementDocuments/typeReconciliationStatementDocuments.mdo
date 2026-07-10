@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeReconciliationStatementDocuments</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip cari hesap mutabakat evrakları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип документы сверки взаиморасчетов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type reconciliation statement documents</value>
+  <value>8A80FC8D-FA90-FEE9-92E1-1D050581D8E6___</value>
  </synonym>
  <type>
   <types>DocumentRef.SalesReportFromTradeAgent</types>

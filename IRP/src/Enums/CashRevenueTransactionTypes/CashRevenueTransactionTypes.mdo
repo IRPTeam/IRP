@@ -7,47 +7,23 @@
  </producedTypes>
  <name>CashRevenueTransactionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Kasa gelir işlem türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Виды операций прочих доходов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Cash revenue transaction types</value>
+  <value>7A95BD16-FF0E-70F7-7508-826FCCBA5C99</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="fb3a9311-4137-456e-ab8a-c2b30ba76555">
   <name>CurrentCompanyRevenue</name>
   <synonym>
-   <key>tr</key>
-   <value>Mevcut şirket geliri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Приход текущей компании</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Current company revenue</value>
+   <value>3B63E9E7-F6B1-4FC4-4178-829C82D611D7</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b37f8a54-8d3c-487d-a756-41c2056ebe59">
   <name>OtherCompanyRevenue</name>
   <synonym>
-   <key>tr</key>
-   <value>Diğer şirket gelirleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Приход другой компании</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Other company revenue</value>
+   <value>85F6A91E-3DC8-FF28-8246-6FC3159E65F1</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

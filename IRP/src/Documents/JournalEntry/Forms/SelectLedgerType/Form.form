@@ -142,16 +142,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Mahsup fişleri grup resim</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Бух. операции группа картинка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Journal entrys group icon</value>
+    <value>B8625410-2562-92B1-1CBE-E9424466CA69</value>
    </title>
    <extendedTooltip>
     <name>JournalEntriesGroupIconExtendedTooltip</name>
@@ -405,16 +397,8 @@
  <attributes>
   <name>JournalEntries</name>
   <title>
-   <key>tr</key>
-   <value>Mahsup fişleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Бухгалтерские операции</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Journal entrys</value>
+   <value>F8AC1890-F7C8-66FB-BE7D-DB6DE0EE24B3</value>
   </title>
   <id>1</id>
   <valueType>
@@ -429,16 +413,8 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Иконка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Icon</value>
+    <value>A12052B6-E2D8-760A-AFE8-854BDB11361F</value>
    </title>
    <id>2</id>
    <valueType>
@@ -454,16 +430,8 @@
   <columns>
    <name>JournalEntry</name>
    <title>
-    <key>tr</key>
-    <value>Mahsup fişi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Бухгалтерская операция</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Journal entry</value>
+    <value>07474243-FD71-8F74-4952-26C7A96067F1</value>
    </title>
    <id>3</id>
    <valueType>
@@ -479,16 +447,8 @@
   <columns>
    <name>LedgerType</name>
    <title>
-    <key>tr</key>
-    <value>Defter tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип учета</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ledger type</value>
+    <value>CC94A629-ADCE-D9FA-A4EE-E28734C8F3FC</value>
    </title>
    <id>4</id>
    <valueType>
@@ -504,16 +464,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>B8211C34-728A-8576-6E12-2FFFA9B6DDD6</value>
    </title>
    <id>6</id>
    <valueType>
@@ -530,16 +482,8 @@
  <attributes>
   <name>IsMultipleDocuments</name>
   <title>
-   <key>tr</key>
-   <value>Çoklu belge var mı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Несколько документов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Is multiple documents</value>
+   <value>671E82B0-F333-4ABE-E7CF-FB66ADCC7C63</value>
   </title>
   <id>5</id>
   <valueType>
@@ -555,16 +499,8 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>5A13C32A-EA1B-EC30-0ADD-D0EA9392C642</value>
   </title>
   <id>1</id>
   <use>
@@ -580,16 +516,8 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>D3D9F28C-C21C-5A6D-D9F2-27EA72244B25</value>
   </title>
   <id>2</id>
   <use>

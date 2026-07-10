@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UsePartnerTerms</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Cari hesap sözleşme</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать партнерские соглашения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use partner terms</value>
+  <value>CCBA3507-6FA6-7CB9-90FD-D21BA947F28F</value>
  </synonym>
  <type>
   <types>Boolean</types>

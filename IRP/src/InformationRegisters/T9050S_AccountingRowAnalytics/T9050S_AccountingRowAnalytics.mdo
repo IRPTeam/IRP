@@ -11,56 +11,24 @@
  </producedTypes>
  <name>T9050S_AccountingRowAnalytics</name>
  <synonym>
-  <key>tr</key>
-  <value>T9050 Muhasebe satır analitikleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9050 Аналитика бухгалтерской строки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9050 Accounting row analytics</value>
+  <value>A546FFF9-A80F-CEF9-9DAB-B135379B1D6C</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>T9050 Muhasebe satır analitikleri</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>T9050 Аналитика строк бухгалтерии</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>T9050 Accounting row analytics</value>
+  <value>79DFF6EB-1484-D1DF-FFA8-8DBFED8FA0A9</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>T9050 Muhasebe satır analitikleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>T9050 Аналитика строк бухгалтерии</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>T9050 Accounting row analytics</value>
+  <value>F11D7651-AA57-6C61-1758-859E2963BE50</value>
  </listPresentation>
  <dimensions uuid="96c86a0b-59a3-4f6e-b9f4-aee00d7321fd">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>3A3B41A4-17C7-8D61-1C85-5FB6E80143AF</value>
   </synonym>
   <type>
    <types>DefinedType.typeAccountingDocuments</types>
@@ -76,16 +44,8 @@
  <dimensions uuid="8841446f-55d9-4309-b381-401d2ffc6c58">
   <name>Key</name>
   <synonym>
-   <key>tr</key>
-   <value>Anahtar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Key</value>
+   <value>642001BE-A537-2258-88B8-88FE3AC3BCEF</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -94,23 +54,13 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </dimensions>
  <dimensions uuid="5b8c160f-9d4e-48c2-9416-b9505abe413c">
   <name>Operation</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Операция</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Operation</value>
+   <value>534446CF-882D-8986-6604-44772AC20045</value>
   </synonym>
   <type>
    <types>CatalogRef.AccountingOperations</types>
@@ -124,16 +74,8 @@
  <dimensions uuid="8ab1c6e5-9b00-4672-9929-bead96e4c455">
   <name>LedgerType</name>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>00E93610-1DB0-731C-CF7F-F132F0C0CFC6</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -147,16 +89,8 @@
  <dimensions uuid="e87f9a6f-fc50-4bb7-9ee1-58469a78ae44">
   <name>AccountDebit</name>
   <synonym>
-   <key>tr</key>
-   <value>Borç</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дебет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Debit</value>
+   <value>06420D90-5B0B-D33F-FEC1-1CC0E923964F</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -171,16 +105,8 @@
  <dimensions uuid="6ef1f0e8-2c53-4178-87da-e2d7a5936bf1">
   <name>AccountCredit</name>
   <synonym>
-   <key>tr</key>
-   <value>Alacak hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Счет Кт</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Account credit</value>
+   <value>2E3582A5-F921-8177-7DF4-4FED0E34F747</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -195,16 +121,8 @@
  <dimensions uuid="669d81d5-6902-440d-b1ff-76f38ba96658">
   <name>IsFixed</name>
   <synonym>
-   <key>tr</key>
-   <value>Sabittir</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Фиксированный</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is fixed</value>
+   <value>0F496120-9EC7-A44E-EF66-6898379A6C37</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -218,16 +136,8 @@
  <dimensions uuid="b89f97e9-d729-425f-be87-9891ef5d6001">
   <name>UUID</name>
   <synonym>
-   <key>tr</key>
-   <value>UUID</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>UUID</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>UUID</value>
+   <value>6C676362-C943-BA60-0056-6F57640F1050</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>

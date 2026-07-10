@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>A1C9696A-4AF0-C5B0-0143-3859B781DD2B</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -114,16 +106,8 @@
    </dataPath>
    <titleLocation>None</titleLocation>
    <toolTip>
-    <key>tr</key>
-    <value>Ödeme durumu</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Статус оплаты</value>
-   </toolTip>
-   <toolTip>
     <key>en</key>
-    <value>Payment status</value>
+    <value>37494D16-3EA0-78DC-C279-9665BB38AD56</value>
    </toolTip>
    <extendedTooltip>
     <name>PaymentStatusIconExtendedTooltip</name>
@@ -166,16 +150,8 @@
    <name>Number</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number</value>
+    <value>E4EAA437-74FA-9FBC-CECF-F27ED947FB09</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -216,16 +192,8 @@
    <name>Date</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>C4CDDDE7-CB86-EF9A-AD2A-A3688B0B976F</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -304,16 +272,8 @@
    <name>Status</name>
    <id>46</id>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Status</value>
+    <value>E588C62E-4374-236B-B11A-AAC13190AD81</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -394,16 +354,8 @@
    <name>Partner</name>
    <id>22</id>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Партнер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Partner</value>
+    <value>AA52F610-1562-7D7B-BF07-785D6AE1C4E1</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -442,16 +394,8 @@
    <name>LegalName</name>
    <id>37</id>
    <title>
-    <key>tr</key>
-    <value>Fatura hesabı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Контрагент</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Legal name</value>
+    <value>2254262E-63CA-D71A-ABCD-D49C9484AAE5</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -494,16 +438,8 @@
    <name>DocumentAmount</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>140AA82D-75D3-724C-C51F-F38C8EA3AC7B</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -542,16 +478,8 @@
    <name>Currency</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>C4D50118-97D6-5D0B-B3C5-54591A0415D0</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -634,16 +562,8 @@
    <name>Author</name>
    <id>40</id>
    <title>
-    <key>tr</key>
-    <value>Sorumlu</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Автор</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Author</value>
+    <value>61344A97-A9CF-669E-E01F-FE38D8717843</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -686,16 +606,8 @@
    <name>Company</name>
    <id>34</id>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>E261D00A-A660-C57A-AFBA-AF82AD79B75C</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -738,16 +650,8 @@
    <name>Ref</name>
    <id>28</id>
    <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>245E5EFA-DCDE-F2B7-7357-74858D4B90BD</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1100,16 +1004,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Statü</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Статус</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Status</value>
+       <value>F94917C4-A32B-C2E3-3275-5DE47BD97F50</value>
       </content>
      </localValue>
     </title>
@@ -1172,16 +1068,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Depo</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Склад</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Store</value>
+       <value>FCA9E075-1E73-EC5D-D2E3-32652AC30B0A</value>
       </content>
      </localValue>
     </title>
@@ -1204,16 +1092,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>JE var mı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Есть БО</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is have JE</value>
+       <value>1CC85242-0570-F0F0-03CB-BB2E2118FC17</value>
       </content>
      </localValue>
     </title>
@@ -1415,16 +1295,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Period</value>
+       <value>F855B25D-05EE-80AC-C238-8867A4ADF595</value>
       </content>
      </localValue>
     </title>

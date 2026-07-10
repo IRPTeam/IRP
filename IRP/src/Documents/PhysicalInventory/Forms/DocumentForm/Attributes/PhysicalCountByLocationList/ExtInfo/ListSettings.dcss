@@ -53,16 +53,8 @@
 					<dcscor:parameter>Text</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Silindi</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Удален</v8:content>
-						</v8:item>
-						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Deleted</v8:content>
+							<v8:content>AAC899AA-2819-57BB-BF7D-D31B94FAA821</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>

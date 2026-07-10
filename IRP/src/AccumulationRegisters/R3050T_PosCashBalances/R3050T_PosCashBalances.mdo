@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R3050T_PosCashBalances</name>
  <synonym>
-  <key>tr</key>
-  <value>R3050 POS nakit bakieleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R3050 Остатки по POS терминалам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R3050 Pos cash balances</value>
+  <value>8BAABD59-44B3-EAD6-694E-E4FD239C5AAD</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="680ed740-a0a5-48ef-93d5-5aaa0d061962">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>3C0CC693-EC0D-93D6-6E4F-F6378471753E</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +33,8 @@
  <resources uuid="2ebf7488-6e51-45bc-848d-3cedd4010847">
   <name>Commission</name>
   <synonym>
-   <key>tr</key>
-   <value>Komisyon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма комиссии</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Commission</value>
+   <value>7B64E0AA-A0C6-9735-5C2C-C43FDD6767F3</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="af1ba1a6-e7b1-4078-b73b-e6922878883f">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>C3B2D2E8-65FD-5503-385B-B50920FD4434</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="78181d18-902d-473b-bdab-0181bc61a1a7">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>F2113FB8-1B1F-0834-47CC-C0063450D230</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="cb0c3f9e-d203-4145-aab8-ffc154c46b9f">
   <name>Account</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Касса/банк</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Account</value>
+   <value>D6CEE87B-7075-93D6-6450-07A66E85F9DE</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="51544a7a-c21a-45d3-ab27-b513bdb1970c">
   <name>PaymentType</name>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид оплаты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Payment type</value>
+   <value>5470452D-C157-3790-01D9-9303C50DE06E</value>
   </synonym>
   <type>
    <types>CatalogRef.PaymentTypes</types>
@@ -158,16 +102,8 @@
  <dimensions uuid="700f4c5a-7bf8-454a-817e-171122f59797">
   <name>PaymentTerminal</name>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme terminali</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Платежный терминал</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Payment terminal</value>
+   <value>17C5F38B-9C7C-F72F-F2C5-5C91ECB2C800</value>
   </synonym>
   <type>
    <types>CatalogRef.PaymentTerminals</types>

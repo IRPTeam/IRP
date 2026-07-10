@@ -7,77 +7,37 @@
  </producedTypes>
  <name>TypeEquipment</name>
  <synonym>
-  <key>tr</key>
-  <value>Donanım türü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Вид оборудования</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type equipment</value>
+  <value>BE47A4A8-736D-99EE-E4A7-7C6372CB8EA1</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="b55052e6-bac8-4642-aca9-2b563fde894f">
   <name>BankTerminal</name>
   <synonym>
-   <key>tr</key>
-   <value>POS terminal</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Банковский терминал</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Bank terminal</value>
+   <value>5D5932F5-FAD0-5E63-3757-7875C64761AB</value>
   </synonym>
  </enumValues>
  <enumValues uuid="93331c36-34de-457d-ae04-66f664429268">
   <name>Display</name>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri ekranı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дисплей покупателя</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Display</value>
+   <value>5EF6A59C-394F-A361-1281-1C83F10EACEB</value>
   </synonym>
  </enumValues>
  <enumValues uuid="da26fb28-a4dc-4c61-ab68-1f5c8b3375c2">
   <name>FiscalPrinter</name>
   <synonym>
-   <key>tr</key>
-   <value>Yazar kasa</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Фискальный принтер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Fiscal printer</value>
+   <value>EDEE75A5-F6B0-84C8-83A9-95241239416A</value>
   </synonym>
  </enumValues>
  <enumValues uuid="bda90896-6092-4344-8de2-f24591d094d7">
   <name>ReceiptPrinter</name>
   <synonym>
-   <key>tr</key>
-   <value>Fiş yazıcısı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Принтер чеков</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Receipt printer</value>
+   <value>B3A04949-2FB0-0EA5-5A75-53F79135F5EF</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

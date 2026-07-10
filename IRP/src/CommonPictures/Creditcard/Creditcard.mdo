@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0afb2a6e-8a8d-41b1-9e9c-6d831928aa02">
  <name>Creditcard</name>
  <synonym>
-  <key>tr</key>
-  <value>Kredi kartı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Кредитная карта</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Creditcard</value>
+  <value>F29110BB-DC38-63E9-9440-01DBE3418D51</value>
  </synonym>
 </mdclass:CommonPicture>

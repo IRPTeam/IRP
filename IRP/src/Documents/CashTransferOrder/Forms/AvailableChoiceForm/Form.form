@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Finansal transfer siparişleri</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Заявки на перемещение денежных средств</value>
- </title>
- <title>
   <key>en</key>
-  <value>Cash transfer orders</value>
+  <value>17BBBCCF-93A2-2141-1E83-375EFC8B0FB7</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>ListSettingsComposerUserSettings</name>
@@ -21,16 +13,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>02E08E64-FD25-5874-4E83-3AED9BE75643</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -70,16 +54,8 @@
    <name>Selected</name>
    <id>67</id>
    <title>
-    <key>tr</key>
-    <value>Seçilmiş</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Выбранные</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Selected</value>
+    <value>AF56DF00-C607-E7AC-CC8A-AC0FCD462F83</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -115,16 +91,8 @@
    <name>Number</name>
    <id>49</id>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Number</value>
+    <value>C0ABCF9B-427E-B7F4-423B-B2A5C0546754</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -167,16 +135,8 @@
    <name>Date</name>
    <id>52</id>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>4DB5BE96-393F-0FC9-97DD-D5D2D5624664</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -219,16 +179,8 @@
    <name>Company</name>
    <id>61</id>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>32EF8E5A-04B0-856B-B18A-A110C95206FC</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -271,16 +223,8 @@
    <name>Sender</name>
    <id>55</id>
    <title>
-    <key>tr</key>
-    <value>Gönderen</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Отправитель</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Sender</value>
+    <value>DD92E5A7-FF25-FDB4-4087-7C60CE3CF046</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -323,16 +267,8 @@
    <name>SendCurrency</name>
    <id>58</id>
    <title>
-    <key>tr</key>
-    <value>Gönderilen döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта отправки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Send currency</value>
+    <value>08885D49-BB6D-1298-8DF8-89A32E643730</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -375,16 +311,8 @@
    <name>IsCurrencyExchange</name>
    <id>64</id>
    <title>
-    <key>tr</key>
-    <value>Bu döviz bozdurma</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это обмен валюты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is currency exchange</value>
+    <value>9AA25830-78C8-72B6-6FBB-BAF0225C5327</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -745,16 +673,8 @@ where
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Seçilmiş</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Выбранные</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Selected</value>
+       <value>836EF731-1612-EC10-00B4-46523ED57159</value>
       </content>
      </localValue>
     </title>
@@ -801,16 +721,8 @@ where
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Bu döviz bozdurma</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Это обмен валюты</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is currency exchange</value>
+       <value>D1AB3CAD-077C-2EB6-6391-108AF802BDE2</value>
       </content>
      </localValue>
     </title>
@@ -824,16 +736,8 @@ where
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Seçilen belgeler dizisi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Массив выбранных документов</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Array of selected documents</value>
+       <value>47F0BC34-108A-B5EC-C325-529758402A7B</value>
       </content>
      </localValue>
     </title>
@@ -845,16 +749,8 @@ where
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Planlama işlemi temeli dizisi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Массив оснований транзакций планирования</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Array of planing transaction basis</value>
+       <value>14B51230-5C83-A76F-F014-4E4BCE44BAC6</value>
       </content>
      </localValue>
     </title>
@@ -866,16 +762,8 @@ where
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Seçili belgeler dizisini kullan</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Использовать массив выбранных документов</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Use array of selected documents</value>
+       <value>70481825-939E-334F-F51E-EF1AAA07238A</value>
       </content>
      </localValue>
     </title>

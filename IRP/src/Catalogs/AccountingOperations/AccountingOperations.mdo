@@ -9,16 +9,8 @@
  </producedTypes>
  <name>AccountingOperations</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe hareket şablonları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Шаблоны бухгалтерских проводок</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Accounting operations</value>
+  <value>B15971B6-CDE5-0F8B-B2CA-A84D524C5536</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.AccountingOperations.StandardAttribute.Code</inputByString>
@@ -77,16 +69,8 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document</value>
+   <value>F354C69A-AA9B-CF7E-EEA1-13921F97D4FA</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -147,16 +131,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Muhasebe işlemi</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Бухгалтерская операция</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Accounting operation</value>
+  <value>3A260B86-6088-041D-DE74-4F39E84C4448</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <limitLevelCount>true</limitLevelCount>
@@ -1252,16 +1228,8 @@
  <attributes uuid="327cc162-7389-4392-bd17-275963a184c7">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>A775F0FB-5159-24FF-FC9E-EA2C6FF7F52E</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -1282,30 +1250,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>CFD06523-7C1C-C3F5-5D1A-A73413BD0302</value>
   </synonym>
   <attributes uuid="3a6aabb0-0b1e-4a08-a2f9-ab4b553e5792">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>B29468FB-9BA7-7A8E-E104-40F1E3B1EF25</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -1318,16 +1270,8 @@
   <attributes uuid="7128a0e7-cda7-4b6a-a9a4-5cc105165d94">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>FF97F25B-3A7D-54A8-8A7D-DAC8C4B26089</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -1345,16 +1289,8 @@
  <forms uuid="246f6fca-52db-4e34-8f5c-f33d4b2fec75">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>5710B2F1-C5DF-41F1-1F6E-E39FA51EBEE2</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -1362,16 +1298,8 @@
  <forms uuid="8c969c2b-d43e-427f-b435-5597b3a4c92d">
   <name>GroupForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма группы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group form</value>
+   <value>F53A82BD-64CA-A377-77AD-D408987F0436</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -1379,16 +1307,8 @@
  <forms uuid="350e9d14-ae04-4329-b8ca-107fe4614d22">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>5B1B4FD6-22D6-1068-85D0-0A00C0571126</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -1396,16 +1316,8 @@
  <forms uuid="aa13437d-1884-404b-a68e-b12d5e00c862">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>53158C77-D0F4-BFAC-CC60-029441E91ACD</value>
   </synonym>
   <help>
    <pages>
@@ -1418,16 +1330,8 @@
  <forms uuid="4b45f1d9-ea85-4349-8e60-aff66d983189">
   <name>GroupChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа форм выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group choice form</value>
+   <value>65D7536C-D2C1-D687-7E07-74C95B57DB14</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

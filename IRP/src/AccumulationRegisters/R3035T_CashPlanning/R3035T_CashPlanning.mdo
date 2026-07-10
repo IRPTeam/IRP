@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R3035T_CashPlanning</name>
  <synonym>
-  <key>tr</key>
-  <value>R3035 Finansal planlama</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R3035 Планирование денежных средств</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R3035 Cash planning</value>
+  <value>44BA4C81-1493-6BC0-0018-8A74EAF24BD2</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="fc714122-31e8-45ce-b8a0-e13ba46099f8">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>CC0BDFA9-50C9-D6DE-E821-16637C279272</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +33,8 @@
  <attributes uuid="d2b9135f-e339-41c9-aeb9-79b796a19898">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложенный расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deferred calculation</value>
+   <value>51E1EFC4-F241-4B55-5526-6A570E951627</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="1ac1a12b-ddd5-494d-bacf-e25695704457">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>39833B2E-CD49-9C98-8090-09BE32FD83C8</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="14720588-f951-4bb5-8ced-51293438724c">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>E9B2626D-ECC6-CA4E-E9A9-9354BEE2F89A</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="f6e992e9-e8e5-4d9b-a331-c0c39a04a7e9">
   <name>Account</name>
   <synonym>
-   <key>tr</key>
-   <value>Kasa/Banka</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Касса/Банковский счет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Account</value>
+   <value>7A699534-2557-D9FA-ADC7-7F46D30CEABB</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="17cd708c-7a33-44e0-a8f8-bd4d9590a1a6">
   <name>BasisDocument</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis document</value>
+   <value>5CAF66D5-26A7-DF1F-FD46-604EADA4E40D</value>
   </synonym>
   <type>
    <types>DefinedType.typePlaningTransactionBasises</types>
@@ -158,16 +102,8 @@
  <dimensions uuid="e338568d-462c-4a27-9c25-c21b904592e8">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>C034F5C2-A488-E87A-A86C-CCCBB759D877</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -180,16 +116,8 @@
  <dimensions uuid="77dfc47b-a680-4564-b547-ee3569b84c2b">
   <name>CashFlowDirection</name>
   <synonym>
-   <key>tr</key>
-   <value>Nakit akış yönü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Направление денежного потока</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cash flow direction</value>
+   <value>309EB0B1-5FD3-7E89-98D5-5D887280E221</value>
   </synonym>
   <type>
    <types>EnumRef.CashFlowDirections</types>
@@ -202,16 +130,8 @@
  <dimensions uuid="fe68b927-0d0d-434f-928d-476d5051eac2">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>FFFF5273-6827-E760-000D-D2E65EAD3699</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -224,16 +144,8 @@
  <dimensions uuid="0a6e57bd-3640-4b77-8dcb-538b194031ea">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>191B88ED-8A19-1BD3-3739-9D9E3E8377DC</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -246,16 +158,8 @@
  <dimensions uuid="1460b4e0-4a90-4125-aadd-1cdca4f5329c">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>1E6B0D9E-9775-7327-75F4-4BB682BA5175</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -268,16 +172,8 @@
  <dimensions uuid="d06ca054-690c-44fe-9089-b11670d57039">
   <name>FinancialMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Finans hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Статья ДДС</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Financial movement type</value>
+   <value>FAD3F83A-DF7B-1F7F-FA75-5827170F1C34</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -290,16 +186,8 @@
  <dimensions uuid="3adc5d19-57a4-46cc-b0de-a1498b699694">
   <name>PlanningPeriod</name>
   <synonym>
-   <key>tr</key>
-   <value>Planlama dönemi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Период планирования</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Planning period</value>
+   <value>064C6FF4-D3CE-D60D-D543-3CE617E292DC</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>

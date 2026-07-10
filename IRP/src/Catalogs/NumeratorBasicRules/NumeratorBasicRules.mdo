@@ -9,16 +9,8 @@
  </producedTypes>
  <name>NumeratorBasicRules</name>
  <synonym>
-  <key>tr</key>
-  <value>Numaratör basit kuralları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Простые правила нумерации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Numerator basic rules</value>
+  <value>F37D52BB-7E08-17B3-3D72-23F7C57AF344</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -40,16 +32,8 @@
  <attributes uuid="41b3d529-ad17-416b-a0c2-a6deec3f0001">
   <name>UseCompanyPrefix</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket öneki kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать префикс организаций</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use company prefix</value>
+   <value>900A7BFD-5BAC-5031-1724-40DB44FBF538</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -63,16 +47,8 @@
  <attributes uuid="b7919bda-6d7e-4da5-a4bb-7105f1251db7">
   <name>UseBranchPrefix</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube öneki kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать префикс структурных подразделений</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use branch prefix</value>
+   <value>E80FC09A-B24D-C42D-D7D7-78AF5E3086E8</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -86,16 +62,8 @@
  <attributes uuid="368b3464-eea1-4390-9253-e6eab383c064">
   <name>UseDocumentPrefix</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak öneki kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать префикс документов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use document prefix</value>
+   <value>F99E10CA-3520-E334-4BF6-642EC19ABFDB</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -109,16 +77,8 @@
  <attributes uuid="e7088b1e-c415-4b13-b797-33554d8eecc6">
   <name>UseCatalogPrefix</name>
   <synonym>
-   <key>tr</key>
-   <value>Kart liste öneki kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать префикс справочников</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use catalog prefix</value>
+   <value>2AB8C22A-67AC-774E-E7EF-F8807E366D2A</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -132,16 +92,8 @@
  <attributes uuid="632e8b5c-008f-47b3-bf73-cccdd1590cad">
   <name>UseTransactionTypePrefix</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem tipi öneki kullan</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать префикс вида операций</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Use transaction type prefix</value>
+   <value>4D42DD61-3E86-2B1C-CFF7-73FB4C28A01C</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -155,16 +107,8 @@
  <attributes uuid="82cd8585-3b05-4f3b-ab95-92c792b7bcb6">
   <name>PrefixTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Önek şablonu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблоны префиксов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Prefix template</value>
+   <value>286AEB10-C069-6C99-9754-45629FEB01E6</value>
   </synonym>
   <type>
    <types>String</types>
@@ -185,30 +129,14 @@
   </producedTypes>
   <name>CompanyPrefixes</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket önekleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Префиксы организаций</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company prefixes</value>
+   <value>F93F9313-52E3-7C3A-AA43-3DB69997BA8B</value>
   </synonym>
   <attributes uuid="f8a3be0c-b968-4e2f-ba49-6f31b58d67bf">
    <name>Company</name>
    <synonym>
-    <key>tr</key>
-    <value>Şirket</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Организация</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Company</value>
+    <value>B83B5972-B4D0-FC17-7BD0-02DA1BB70588</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
@@ -221,16 +149,8 @@
   <attributes uuid="b421afb3-cc30-4d4a-82ac-4c6bec8dd54a">
    <name>Prefix</name>
    <synonym>
-    <key>tr</key>
-    <value>Önek</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Префикс</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Prefix</value>
+    <value>092D0DE9-9C00-F2BA-A0C9-9F8CD6AE9A0D</value>
    </synonym>
    <type>
     <types>String</types>
@@ -251,30 +171,14 @@
   </producedTypes>
   <name>BranchPrefixes</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube önekleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Префиксы структурных подразделений</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch prefixes</value>
+   <value>0B8A71CE-7204-9E67-7585-52A9A6DA5976</value>
   </synonym>
   <attributes uuid="7aee9922-74a2-46a1-9c37-8c52b8232f33">
    <name>Branch</name>
    <synonym>
-    <key>tr</key>
-    <value>Şube</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Структурное подразделение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Branch</value>
+    <value>2545FCF6-34B1-12E6-634C-C755FB69D8C5</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -287,16 +191,8 @@
   <attributes uuid="72734ce1-2c06-4564-958b-bbb8af34f6d1">
    <name>Prefix</name>
    <synonym>
-    <key>tr</key>
-    <value>Önek</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Префикс</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Prefix</value>
+    <value>14D8779C-649D-E3F6-6FB1-1E5A88A87EC0</value>
    </synonym>
    <type>
     <types>String</types>
@@ -317,30 +213,14 @@
   </producedTypes>
   <name>DocumentPrefixes</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak önekleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Префиксы документов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Document prefixes</value>
+   <value>061AB117-00F2-A49D-D858-84977BF64097</value>
   </synonym>
   <attributes uuid="ba988261-4b06-4b5f-a2a9-87d0ec7ac026">
    <name>Document</name>
    <synonym>
-    <key>tr</key>
-    <value>Evrak</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Документ</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Document</value>
+    <value>5E2BE516-4C35-B930-0B65-58526A22E711</value>
    </synonym>
    <type>
     <types>CatalogRef.ConfigurationMetadata</types>
@@ -359,16 +239,8 @@
   <attributes uuid="fd6e80ca-3d91-4f7c-8762-21d48a5487a2">
    <name>TransactionType</name>
    <synonym>
-    <key>tr</key>
-    <value>İşlem tipi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид операции</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Transaction type</value>
+    <value>9C92D09C-1348-9323-305D-D50D61EE387E</value>
    </synonym>
    <type>
     <types>EnumRef</types>
@@ -381,16 +253,8 @@
   <attributes uuid="74ef9336-49e2-42a2-b5bd-d19a1db54773">
    <name>Prefix</name>
    <synonym>
-    <key>tr</key>
-    <value>Önek</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Префикс</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Prefix</value>
+    <value>F8410A71-F3EB-2B30-0B16-6A4FC9EE48C2</value>
    </synonym>
    <type>
     <types>String</types>
@@ -411,30 +275,14 @@
   </producedTypes>
   <name>CatalogPrefixes</name>
   <synonym>
-   <key>tr</key>
-   <value>Kart liste önekleri</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Префиксы справочников</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Catalog prefixes</value>
+   <value>B278A97C-EA5C-3486-6A51-14F12327912F</value>
   </synonym>
   <attributes uuid="b342d6f7-ec98-45a6-80cd-6e5775ce16d9">
    <name>Catalog</name>
    <synonym>
-    <key>tr</key>
-    <value>Kart listesi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Справочник</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Catalog</value>
+    <value>EF862C3E-2F07-D5F0-0657-7849EFE3D8C3</value>
    </synonym>
    <type>
     <types>CatalogRef.ConfigurationMetadata</types>
@@ -453,16 +301,8 @@
   <attributes uuid="af3d301a-6244-4eab-95c6-68cd18116bd4">
    <name>Prefix</name>
    <synonym>
-    <key>tr</key>
-    <value>Önek</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Префикс</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Prefix</value>
+    <value>B076CE45-2027-1DE9-96DD-D6F9C54EC65F</value>
    </synonym>
    <type>
     <types>String</types>
@@ -479,16 +319,8 @@
  <forms uuid="cb5de234-d43c-4546-9bb8-6f28269bbd64">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>9DC81B5C-6B05-1216-6AA3-31BF5456736B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -496,16 +328,8 @@
  <forms uuid="c74bafc6-3edf-4e37-8b3a-f4d40338333a">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>A6ABF626-4F13-0E13-3B76-63BC101D8A6E</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -513,16 +337,8 @@
  <forms uuid="8913cbba-107e-44e8-9706-f69ba20c4001">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>CCB0EDD1-69F9-359B-B4CD-DC78ED38D309</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

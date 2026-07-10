@@ -403,16 +403,8 @@
  <attributes>
   <name>FileAddress</name>
   <title>
-   <key>tr</key>
-   <value>Dosya adresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Адрес файла</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>File address</value>
+   <value>359923E1-17DF-67D5-5808-82E73516F46D</value>
   </title>
   <id>2</id>
   <valueType>
@@ -429,16 +421,8 @@
  <attributes>
   <name>CurrentStatus</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut durum</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущий статус</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current status</value>
+   <value>8CD74A05-673B-EEFA-A97B-B392E4866238</value>
   </title>
   <id>3</id>
   <valueType>
@@ -455,16 +439,8 @@
  <attributes>
   <name>DriverInfo</name>
   <title>
-   <key>tr</key>
-   <value>Sürücü bilgi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Информация по драйверу</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Driver info</value>
+   <value>C214993D-DEE2-65B4-4CC8-831DA955FF87</value>
   </title>
   <id>5</id>
   <valueType>
@@ -481,29 +457,13 @@
  <formCommands>
   <name>AddFile</name>
   <title>
-   <key>tr</key>
-   <value>Dosya ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Добавить файл</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Add file</value>
+   <value>E81E1850-DA18-9E81-1D9A-ABFAF9C20645</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Dosya ekle</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Добавить файл</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Add file</value>
+   <value>D84C0E46-5CA7-67F1-1549-9E8ADEFC5B32</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -522,29 +482,13 @@
  <formCommands>
   <name>SaveFile</name>
   <title>
-   <key>tr</key>
-   <value>Dosya kaydet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить файл</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save file</value>
+   <value>F803C2C3-1351-AE0E-E49B-B67349122CF3</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>Dosya kaydet</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Сохранить файл</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Save file</value>
+   <value>124588B6-C60D-CA66-6044-44307562E61C</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -562,16 +506,8 @@
  <formCommands>
   <name>Install</name>
   <title>
-   <key>tr</key>
-   <value>Kurulum yap</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Install</value>
+   <value>75D628A7-9D7C-AE01-122E-EEBF74E7FD0A</value>
   </title>
   <id>3</id>
   <use>

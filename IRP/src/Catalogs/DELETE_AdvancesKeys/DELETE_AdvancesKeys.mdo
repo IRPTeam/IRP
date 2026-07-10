@@ -9,16 +9,8 @@
  </producedTypes>
  <name>DELETE_AdvancesKeys</name>
  <synonym>
-  <key>tr</key>
-  <value>DELETE advances keys</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>УДАЛИТЬ ключи авансов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>DELETE advances keys</value>
+  <value>F8FD2E99-968B-5919-9C40-062DFECF28F9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.DELETE_AdvancesKeys.StandardAttribute.Code</inputByString>
@@ -28,16 +20,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Cari hesap avanslar anahtarı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Ключ авансов партнеров</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Advances key</value>
+  <value>6B0804A5-1A8B-5F10-0A5C-C405F91B232B</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -52,16 +36,8 @@
  <attributes uuid="4c9e05b1-0ac3-4e6e-99b0-454721701ae2">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>6EB47E6C-E7F9-B4E4-49AD-D54533276FBE</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -76,16 +52,8 @@
  <attributes uuid="b2fb7c3b-5464-42b7-b401-3a70cb9983cd">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>4635C62B-35E5-9E17-7304-4904989E7960</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -100,16 +68,8 @@
  <attributes uuid="913ac9ba-e05d-486a-ad82-4a90a18ec5c5">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>F1AF9865-075C-F618-82D6-618A9ED19B17</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -124,16 +84,8 @@
  <attributes uuid="49bf3e20-c81e-4350-9693-375416da0bfd">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>07E64DF7-1C21-722C-CBBB-B92D5DFB1334</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -148,16 +100,8 @@
  <attributes uuid="21fbdff3-b36b-4fcb-a8b3-20923bf0f19d">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>1138135E-8C5D-DB67-7628-84653F51CF73</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -172,16 +116,8 @@
  <attributes uuid="3dde9a80-d3a7-4244-93db-0627a564fd42">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Порядок</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>110CB6F4-F28D-D0AD-D1AE-ED86FD255D12</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>
@@ -197,16 +133,8 @@
  <attributes uuid="b4c57577-6aca-464b-9de7-407367ac8643">
   <name>IsVendorAdvance</name>
   <synonym>
-   <key>tr</key>
-   <value>Bu tedarikçi avansı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это аванс поставщика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is vendor advance</value>
+   <value>49C24D85-B8AC-B98F-F923-3A0FBCC640F9</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -221,16 +149,8 @@
  <attributes uuid="53cf98d1-c59d-4d51-bb1c-7dc4e4c4415f">
   <name>IsCustomerAdvance</name>
   <synonym>
-   <key>tr</key>
-   <value>Bu müşteri avansı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это аванс покупателя</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is customer advance</value>
+   <value>3E1F0D0F-0B2C-A475-589E-E51DEFB9318F</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -245,16 +165,8 @@
  <attributes uuid="3b542a14-5bb6-4c08-a36a-4bbe1f238e11">
   <name>AdvanceAgreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Avans sözleşmesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение аванса</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Advance agreement</value>
+   <value>5DE49184-0C40-5321-1F50-058DCFED4876</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -268,16 +180,8 @@
  <attributes uuid="8baea242-546c-4b57-93c5-2c48da23dc11">
   <name>Project</name>
   <synonym>
-   <key>tr</key>
-   <value>Proje</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Проект</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Project</value>
+   <value>DA71E994-F6CB-BDF4-4B33-364552B9CF6D</value>
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>
@@ -291,16 +195,8 @@
  <forms uuid="3a3a98d5-4e8c-4c4b-bfae-2cc9aa07242a">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>3FD83FB4-8A0C-E175-5FB3-3A5E4D5F9A2F</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

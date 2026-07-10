@@ -97,16 +97,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup işaret</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа индикатора</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group flag</value>
+    <value>448D41EA-A6A8-5842-2867-721605C456C1</value>
    </title>
    <extendedTooltip>
     <name>GroupFlagExtendedTooltip</name>
@@ -395,16 +387,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ülke özellikleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Свойства страны</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Country property</value>
+   <value>8F1C9CF5-27F8-D5B7-7A65-5FD45329C837</value>
   </title>
   <extendedTooltip>
    <name>GroupCountryPropertyExtendedTooltip</name>
@@ -469,16 +453,8 @@
  <attributes>
   <name>Flag</name>
   <title>
-   <key>tr</key>
-   <value>İşaret</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Индикатор</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Flag</value>
+   <value>FBE75D08-8AEB-78F7-7888-8F35A4C2E51B</value>
   </title>
   <id>2</id>
   <valueType>

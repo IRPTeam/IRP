@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="09a8739f-db9e-4a4a-82ed-53a3efc61dcb">
  <name>Document_WorkOrder</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak "İş Emri"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Рабочий заказ"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Work order"</value>
+  <value>042CB0C0-57E5-673C-C826-65908E9CAC46</value>
  </synonym>
 </mdclass:Role>

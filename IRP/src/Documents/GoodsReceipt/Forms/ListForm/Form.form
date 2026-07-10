@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>063CE83A-5828-FFD5-5A03-37BF7D15DABB</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -172,16 +164,8 @@
    <name>Status</name>
    <id>43</id>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статус</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Status</value>
+    <value>1A4796C6-EFBD-F1C6-60C4-415F7F2BB1E2</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -684,16 +668,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Depo</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Склад</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Store</value>
+       <value>08A233A4-E328-5267-77D9-90A961FA7DAE</value>
       </content>
      </localValue>
     </title>
@@ -708,16 +684,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Statü</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Статус</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Status</value>
+       <value>468E1FD7-F901-7442-2A30-094FC22066A3</value>
       </content>
      </localValue>
     </title>
@@ -835,16 +803,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Period</value>
+       <value>0AB13B37-EE58-602B-B0F3-3DD6254C16F0</value>
       </content>
      </localValue>
     </title>

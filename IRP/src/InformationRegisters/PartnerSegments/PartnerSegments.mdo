@@ -11,56 +11,24 @@
  </producedTypes>
  <name>PartnerSegments</name>
  <synonym>
-  <key>tr</key>
-  <value>Cari hesap segment içerikleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Сегменты партнеров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Partner segments content</value>
+  <value>49CF1BA7-8389-38D5-58F6-633F9B8C0152</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Cari hesap segment içeriği</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Сегмент партнеров</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>Partner segment content</value>
+  <value>6CDAA99C-5E6E-CF38-8FC0-067014939C66</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Cari hesap segment içerikleri</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Сегменты партнеров</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Partner segments content</value>
+  <value>0A9F1306-964E-6A46-658F-F2FB3D5122D9</value>
  </listPresentation>
  <dimensions uuid="53831403-55b9-489e-840c-53c917b9803d">
   <name>Segment</name>
   <synonym>
-   <key>tr</key>
-   <value>Segment</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сегмент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Segment</value>
+   <value>C40C302A-53B1-956D-DFA8-8C018A368CF7</value>
   </synonym>
   <type>
    <types>CatalogRef.PartnerSegments</types>
@@ -76,16 +44,8 @@
  <dimensions uuid="7cde4128-1ef8-44a7-81d1-de50e58abb58">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>A0A36022-B6AF-F89C-CDDC-CD732CD26384</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

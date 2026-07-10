@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>B0EEB26D-14B2-BDEF-F600-049E0690F1EC</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>DD7BEAFF-4BE8-AA4B-BBBE-EB35D6C9E77F</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -379,16 +363,8 @@ FROM
  <attributes>
   <name>FilterBankTerm</name>
   <title>
-   <key>tr</key>
-   <value>Banka terimi filtresi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Фильтр банковского соглашения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Filter bank term</value>
+   <value>6391BE9B-0DFA-7AD0-0D2C-C14A0A3F7FBE</value>
   </title>
   <id>2</id>
   <valueType>

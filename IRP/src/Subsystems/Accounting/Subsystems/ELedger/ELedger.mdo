@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0b759d23-1ff2-4d4d-b873-4408e983f0d7">
  <name>ELedger</name>
  <synonym>
-  <key>tr</key>
-  <value>e-Defter</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>eLedger</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>eLedger</value>
+  <value>16399733-D5C7-8CE0-0325-5F8C884712A3</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

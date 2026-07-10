@@ -9,16 +9,8 @@
  </producedTypes>
  <name>TransformationRules</name>
  <synonym>
-  <key>tr</key>
-  <value>Dönüşüm kuralları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Правила трансформации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Transformation rules</value>
+  <value>27AB135F-653D-73D8-82C1-1BB004A59135</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.TransformationRules.StandardAttribute.Code</inputByString>
@@ -41,16 +33,8 @@
  <attributes uuid="c4387bc1-bbda-46e6-8131-a95e9389a074">
   <name>SourceType</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak tür</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Тип источника</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source type</value>
+   <value>DF41FBF1-AB7D-3A1B-BA74-483BBB183C9E</value>
   </synonym>
   <type>
    <types>CatalogRef.ConfigurationMetadata</types>
@@ -64,16 +48,8 @@
  <attributes uuid="b809bd3a-7f9f-43fb-9244-d9462e28b010">
   <name>TargetType</name>
   <synonym>
-   <key>tr</key>
-   <value>Hedef tür</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Целевой тип</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Target type</value>
+   <value>FCF075EA-935C-D3A6-6F3D-DA3728F5E9F0</value>
   </synonym>
   <type>
    <types>CatalogRef.ConfigurationMetadata</types>
@@ -87,16 +63,8 @@
  <attributes uuid="51f5d169-6616-4380-b223-cdb9ac0033f3">
   <name>SourceCondition</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak koşul</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Условие источника</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source condition</value>
+   <value>2C27DE2D-385E-BA8B-BEE0-0DD91CC0269D</value>
   </synonym>
   <type>
    <types>String</types>
@@ -111,16 +79,8 @@
  <attributes uuid="d1f8f7f7-e39f-47ee-9263-cbea22c650f2">
   <name>AutoTransform</name>
   <synonym>
-   <key>tr</key>
-   <value>Otomatik dönüşüm</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Автотрансформация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Auto transform</value>
+   <value>43D5FE9A-0966-E5E2-29C3-32DEA53FC60F</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -134,16 +94,8 @@
  <attributes uuid="073be237-c76d-4774-9ea2-c76c9535f363">
   <name>UpdateLinkedTarget</name>
   <synonym>
-   <key>tr</key>
-   <value>Bağlantılı hedefi güncelle</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Обновить связанный целевой объект</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Update linked target</value>
+   <value>A8A57165-4D24-0DF7-7836-68FDAB42B5B7</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -161,30 +113,14 @@
   </producedTypes>
   <name>Mapping</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri eşleme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сопоставление</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Mapping</value>
+   <value>04DEE4F2-C2A8-A3E7-79E8-82DE8511F881</value>
   </synonym>
   <attributes uuid="de9b6a77-a716-467e-af0d-b2239bb0089d">
    <name>SourceAttribute</name>
    <synonym>
-    <key>tr</key>
-    <value>Kaynak özniteliği</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Атрибут источника</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Source attribute</value>
+    <value>EF45F995-17C6-117A-A0CC-C7988FAB4C07</value>
    </synonym>
    <type>
     <types>String</types>
@@ -198,16 +134,8 @@
   <attributes uuid="bd1946c4-b226-4fa8-a7cf-41ef40c474be">
    <name>TargetAttribute</name>
    <synonym>
-    <key>tr</key>
-    <value>Hedef niteliği</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Целевой атрибут</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Target attribute</value>
+    <value>6D7F7DF0-F66E-29B0-05B9-950FC53F1338</value>
    </synonym>
    <type>
     <types>String</types>
@@ -221,16 +149,8 @@
   <attributes uuid="39e50f5c-b5de-43b7-9622-9678025aab13">
    <name>Copy</name>
    <synonym>
-    <key>tr</key>
-    <value>Kopyala</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Копировать</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Copy</value>
+    <value>D33025CD-DA02-959F-F66E-EA3A8B91DEF9</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -243,16 +163,8 @@
   <attributes uuid="76b4b615-fcf3-401e-8fd3-b43e8011d0f9">
    <name>LockTargetAttribute</name>
    <synonym>
-    <key>tr</key>
-    <value>Hedef niteliğini kilitle</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Заблокировать целевой атрибут</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Lock target attribute</value>
+    <value>1E46EE86-3EDB-FCFC-C9EB-B7D95B4D63C6</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -265,32 +177,16 @@
   <attributes uuid="029d4989-fe1b-4409-934f-ffa6ad6824b0">
    <name>EvalTargetAttribute</name>
    <synonym>
-    <key>tr</key>
-    <value>Hedef niteliğini değerlendir</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вычислить целевой атрибут</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Eval target attribute</value>
+    <value>F8647C3F-C7D9-C72A-A5C9-9FBD5BC56EC6</value>
    </synonym>
    <type>
     <types>String</types>
     <stringQualifiers/>
    </type>
    <toolTip>
-    <key>tr</key>
-    <value>"Kaynak"ın Referans olarak ve "KaynakSatırı"nın kaynaktan geçerli satır olarak kullanılabileceği bazı kodları değerlendirin</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Выполнить код, где можно использовать "Source" как Ref, и "SourceRow" как текущую строку из источника</value>
-   </toolTip>
-   <toolTip>
     <key>en</key>
-    <value>Eval some code where can be used "Source" as Ref, And "SourceRow" as current row from source</value>
+    <value>72C0FBE4-5F23-8AFF-F196-6123A03154CA________________________________________________________</value>
    </toolTip>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -300,16 +196,8 @@
   <attributes uuid="83204934-4b23-4532-b4ff-c70a61cac580">
    <name>MustBeFilled</name>
    <synonym>
-    <key>tr</key>
-    <value>Doldurulması gerekir</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Должно быть заполнено</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Must be filled</value>
+    <value>E188C97E-61A9-46D8-8CF9-9B61CC600399</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -322,16 +210,8 @@
   <attributes uuid="5e98473e-2d9f-4345-8697-4a2e401764f9">
    <name>SourceType</name>
    <synonym>
-    <key>tr</key>
-    <value>Kaynak tür</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Тип источника</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Source type</value>
+    <value>CB1F19D3-38FC-C4E5-560F-F67DA62C0975</value>
    </synonym>
    <type>
     <types>String</types>
@@ -345,16 +225,8 @@
   <attributes uuid="12afd658-1968-4d44-9a35-03bdd3d3a248">
    <name>TargetType</name>
    <synonym>
-    <key>tr</key>
-    <value>Hedef tür</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Целевой тип</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Target type</value>
+    <value>2579CF7B-889A-0FBA-A3DA-AB7D981662E5</value>
    </synonym>
    <type>
     <types>String</types>
@@ -368,16 +240,8 @@
   <attributes uuid="b50ff9e9-9025-4cd6-abfd-910b55f8e5e7">
    <name>DefaultValue</name>
    <synonym>
-    <key>tr</key>
-    <value>Varsayılan değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение по умолчанию</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Default value</value>
+    <value>E75C33A4-7910-D42A-A25C-CF2C457919E1</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -405,16 +269,8 @@
   <attributes uuid="9481afd5-4a80-4678-b5d6-6d31d7b397a3">
    <name>SortingIndex</name>
    <synonym>
-    <key>tr</key>
-    <value>Sıralama dizini</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Индекс сортировки</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Sorting index</value>
+    <value>5A8BBFED-2807-81E3-3410-03322AE217CA</value>
    </synonym>
    <type>
     <types>String</types>
@@ -430,16 +286,8 @@
   <attributes uuid="7dc52d58-4a75-410c-8952-591ea56dec26">
    <name>LinkedByRule</name>
    <synonym>
-    <key>tr</key>
-    <value>Kuralla bağlı</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Связано правилом</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Linked by rule</value>
+    <value>CC576C8A-6411-C4D8-8C8D-DE89D35D0119</value>
    </synonym>
    <type>
     <types>CatalogRef.TransformationRules</types>
@@ -453,16 +301,8 @@
  <forms uuid="04612d3a-a8c0-42d2-bed3-67be3728f9bd">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>92DEDF85-54F8-C5D0-060E-EDBFEE4D364C</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

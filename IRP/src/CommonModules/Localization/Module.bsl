@@ -1005,6 +1005,10 @@
 // * Error_UnknownRefType - String - 
 // * Error_StepsEnablerNotDefined - String - 
 // * Error_UnsupportedExternalLinkSC3 - String - 
+// * Error_CreatingPDF - String -
+// * Error_ReadingPDF - String -
+// * Error_ChromiumNotFound - String -
+// * Error_TableNotSupportedInBuilder - String -
 // * Task_Result_Execution - String - 
 // * Task_Result_Execution_Not - String - 
 // * Task_Result_Verification - String - 
@@ -1016,736 +1020,286 @@ Function Strings(Lang) Export
 	Strings = New Structure();
 
 #Region SimpleBatch
-	Strings.Insert("SB_NotEnoughBatch", NStr("en='Not enough batch %1: On stock: %2; In document: %3.';
-		|ru='Недостаточно партии %1: На складе: %2; В документе: %3.';
-		|tr='Yetersiz parti %1: Stokta: %2; Evrakta: %3.'", Lang));
+	Strings.Insert("SB_NotEnoughBatch", NStr("en='8D130C08-2706-8E28-8BA9-9CF74F1215E0_______________%1,%2,%3'", Lang));
 #EndRegion
 
 #Region FunctionalOptions
-	Strings.Insert("FO_Group_BaseSettings", NStr("en='Base settings';
-		|ru='Основные настройки';
-		|tr='Ana ayarlar'", Lang));
-	Strings.Insert("FO_Group_MasterData", NStr("en='Master data';
-		|ru='Справочники';
-		|tr='Tanımlar'", Lang));
-	Strings.Insert("FO_Group_Trading", NStr("en='Trading';
-		|ru='Торговля';
-		|tr='Ticaret'", Lang));
-	Strings.Insert("FO_Group_Inventory", NStr("en='Inventory';
-		|ru='Склад';
-		|tr='Stok'", Lang));
-	Strings.Insert("FO_Group_Money", NStr("en='Money';
-		|ru='Деньги';
-		|tr='Nakit'", Lang));
-	Strings.Insert("FO_Group_Accounting", NStr("en='Accounting';
-		|ru='Бухгалтерия';
-		|tr='Muhasebe'", Lang));
-	Strings.Insert("FO_Group_Other", NStr("en='Other';
-		|ru='Прочее';
-		|tr='Diğer'", Lang));
+	Strings.Insert("FO_Group_BaseSettings", NStr("en='1AE1B3D1-227C-25A5-5487-73B8BD8589B2'", Lang));
+	Strings.Insert("FO_Group_MasterData", NStr("en='DA323A19-261F-753D-D979-9B790C314E0A'", Lang));
+	Strings.Insert("FO_Group_Trading", NStr("en='E85840E3-3286-EA52-26A5-505901A3A84A'", Lang));
+	Strings.Insert("FO_Group_Inventory", NStr("en='D7038179-8BD7-8C2D-DE17-7104E08E0031'", Lang));
+	Strings.Insert("FO_Group_Money", NStr("en='DE59072A-1463-99AD-DB1F-F12C481F3DFF'", Lang));
+	Strings.Insert("FO_Group_Accounting", NStr("en='C6825F9C-23E8-0040-0A8A-A0CDF47246DB'", Lang));
+	Strings.Insert("FO_Group_Other", NStr("en='A1230F6F-CE39-F878-893B-B50DBBC8AD0C'", Lang));
 #EndRegion
 
 #Region GenericErrors
-        Strings.Insert("JobAborted", NStr("en='Job aborted';
-        	|ru='Регламентное задание прервано';
-        	|tr='İşlem iptal edildi'", Lang));
-        Strings.Insert("CannotConnectDriver", NStr("en='Can not connect driver';
-        	|ru='Не получается подключить драйвер';
-        	|tr='Driver bağlanılamıyor'", Lang));
-        Strings.Insert("CannotConnectHardwareService", NStr("en='Can not connect to hardware service.';
-        	|ru='Не получается подключиться к сервису оборудования.';
-        	|tr='Donanım servisine bağlanılamıyor.'", Lang));
-        Strings.Insert("CannotAttachAddIn", NStr("en='Can not attach AddIn %1';
-        	|ru='Не получается подкрепить AddIn %1';
-        	|tr='%1 Eklentisi eklenemiyor'", Lang));
-        Strings.Insert("CannotGetDataKKT", NStr("en='Can not get data KKT';
-        	|ru='Не получается получить данные ККМ';
-        	|tr='Yazar kasadan veri alınamıyor'", Lang));
-        Strings.Insert("NotFoundOriginRowForClone", NStr("en='Not found origin row for clone';
-        	|ru='Не найден источник происхождения для клонирования';
-        	|tr='Klon için orijinal satır bulunamadı'", Lang));
-        Strings.Insert("SerialOwnerNotItemKey", NStr("en='Serial lot number owner is not Item key';
-        	|ru='Владелец серийного номера не характеристика';
-        	|tr='Seri lot numarası sahibi Ürün anahtarı değil'", Lang));
-        Strings.Insert("WrongAdvanceDirection", NStr("en='Wrong advance direction';
-        	|ru='Неправильное направление аванса';
-        	|tr='Yanlış avans yönü'", Lang));
-        Strings.Insert("UnknownTransactionType", NStr("en='Unknown transaction type';
-        	|ru='Неизвестный вид операции';
-        	|tr='Bilinmeyen işlem türü'", Lang));
-        Strings.Insert("UnknownTransactionTypeT2015", NStr("en='Unknown transaction type in [T2015S_TransactionsInfo]';
-        	|ru='Неизвестный вид операции в [T2015S_TransactionsInfo]';
-        	|tr='[T2015S_TransactionsInfo] içinde bilinmeyen işlem türü'", Lang));
-        Strings.Insert("UnknownTransactionTypeTableT2014", NStr("en='Unknown transaction type in [Table_T2014S_AdvancesInfo]';
-        	|ru='Неизвестный вид операции в [Table_T2014S_AdvancesInfo]';
-        	|tr='[Table_T2014S_AdvancesInfo] tablosunda bilinmeyen işlem türü'", Lang));
-        Strings.Insert("NotSupportedDRR5022TCashAdvance", NStr("en='Not supported [DR_R5022T_Expenses_CR_R3015B_CashAdvance]';
-        	|ru='Не поддерживаемый [DR_R5022T_Expenses_CR_R3015B_CashAdvance]';
-        	|tr='Desteklenmiyor [DR_R5022T_Expenses_CR_R3015B_CashAdvance]'", Lang));
-        Strings.Insert("ErrorOnPostingDocument", NStr("en='Error on posting document';
-        	|ru='Ошибка проведения документа';
-        	|tr='Belge kaydederken hata oluştu'", Lang));
-        Strings.Insert("ConvertingDataToFillingValuesFailed", NStr("en='Converting Data to Filling values failed';
-        	|ru='Неполучилось преобразовать дату в заполняемые значения';
-        	|tr='Verilerin Doldurma değerlerine dönüştürülmesi başarısız oldu'", Lang));
-        Strings.Insert("AnalyticTypeNotDefined", NStr("en='Analytic type is not defined';
-        	|ru='Тип аналитики не определен';
-        	|tr='Analitik tür tanımlanmamış'", Lang));
-        Strings.Insert("PropertyBeforeChangeDataPathNoRows", NStr("en='PropertyBeforeChange.List.DataPath is set but rows is Undefined';
-        	|ru='PropertyBeforeChange.List.DataPath установлено но строки неопределены';
-        	|tr='PropertyBeforeChange.List.DataPath ayarlandı ancak satırlar tanımsız'", Lang));
-       Strings.Insert("OneJobFailed", NStr("en='One job is failed';
-       	|ru='Одно регламентое задание отработало с ошибкой';
-       	|tr='Bir iş başarısız oldu'", Lang));
-       Strings.Insert("UnsupportedUpdateStatus", NStr("en='Unsupported update status %1';
-       	|ru='Неподдерживаемый статус обновления %1';
-       	|tr='Desteklenmeyen güncelleme durumu %1'", Lang));
-       Strings.Insert("DocumentQueryError", NStr("en='Document [%1], Error: %2';
-       	|ru='Документ [%1], Ошибка: %2';
-       	|tr='Belge [%1], Hata: %2'", Lang));
-       Strings.Insert("UnknownFilterType", NStr("en='Unknown filter type %1';
-       	|ru='Неизвестный тип отбора %1';
-       	|tr='Bilinmeyen filtre türü %1'", Lang));
-       Strings.Insert("FoundMoreThanOneWhenOptionNot", NStr("en='Found more than 1 %1 when option NOT %2';
-       	|ru='Найдено больше 1 %1 когда условие НЕТ %2';
-       	|tr='Seçenek %2 olmadığında %1''den fazla bulundu'", Lang));
-       Strings.Insert("DescriptionFormulaOperandError", NStr("en='Can not eval description formula. error operand %1:%2';
-       	|ru='Не получается преобразовать формула наименовения. Операнд ошибки %1:%2';
-       	|tr='Açıklama formülü değerlendirilemiyor. Hata işleneni %1:%2'", Lang));
-       Strings.Insert("CacheRowsUndefined", NStr("en='Error read data from cache by data path %1 rows is Undefined';
-       	|ru='Ошибка чтения данных из кеша по пути %1 строка неопределена';
-       	|tr='%1 veri yolu satırları tarafından önbellekten veri okunurken hata oluştu. Tanımsız'", Lang));
-       Strings.Insert("CachePropertyNotFound", NStr("en='Property by DataPath %1 not found in CacheBeforeChange';
-       	|ru='Свойство по данных пути %1 не найдено в CacheBeforeChange';
-       	|tr='DataPath %1''e ait özellik CacheBeforeChange''de bulunamadı'", Lang));
-       Strings.Insert("WrongListProperty", NStr("en='Wrong list property %1';
-       	|ru='Неправильный список свойства %1';
-       	|tr='Yanlış liste özelliği %1'", Lang));
-       Strings.Insert("CachePropertyDeleteNotFound", NStr("en='Not found property in cache for delete %1';
-       	|ru='Не найдено свойство для удаления из кеша %1';
-       	|tr='%1 silme işlemi için önbellekte özellik bulunamadı'", Lang));
-       Strings.Insert("WrongDatapathRemoveCache", NStr("en='Wrong datapath remove from cache %1';
-       	|ru='Неправильное путь данных удаления из кеша %1';
-       	|tr='%1 önbelleğinden yanlış veri yolu kaldırıldı'", Lang));
-       Strings.Insert("UnknownAgreementTypeByDebtType", NStr("en='Unknown AgreementType by DebtType %1';
-       	|ru='Неизвестный тип соглашения для вида задолженности %1';
-       	|tr='Bilinmeyen Sözleşme Türü Borç Türüne Göre %1'", Lang));
-       Strings.Insert("IDInfoNotFoundByName", NStr("en='Not found IDInfo by name %1';
-       	|ru='Не найдена контактная информация по имени %1';
-       	|tr='%1 adına ait IDInfo bulunamadı'", Lang));
-       Strings.Insert("MoreThanOneAnalyticRowsFilter", NStr("en='More than 1 analytic rows by filter: Key[%1] Operation[%2] LedgerType[%3]';
-       	|ru='Больше одной аналитики строк для отбора: Ключ [%1] Операция [%2] Тип учета [%3]';
-       	|tr='Filtreye göre 1''den fazla analitik satır: Anahtar[%1] İşlem[%2] Defter Türü[%3]'", Lang));
-       Strings.Insert("DocumentAccountingOpNotSupported", NStr("en='Document %1 not supported accounting operation %2';
-       	|ru='Документ %1 не поддерживается бухгалтерской операцией %2';
-       	|tr='Belge %1, %2 muhasebe işlemini desteklemiyor'", Lang));
-       Strings.Insert("UnsupportedRegisterName", NStr("en='Unsupported register name %1';
-       	|ru='Неподдерживаемое имя регистра %1';
-       	|tr='Desteklenmeyen kayıt adı %1'", Lang));
-       Strings.Insert("UnsupportedCheckType", NStr("en='Unsupported check type %1';
-       	|ru='Неподдерживаемый вид проверки %1';
-       	|tr='Desteklenmeyen kontrol türü %1'", Lang));
-       Strings.Insert("ExtDimensionTypeNotDefined", NStr("en='Not defined ext. dimension type for %1 %2 %3';
-       	|ru='Не определен тип внешнего субконто для %1 %2 %3';
-       	|tr='%1 %2 %3 için tanımlanmamış dış boyut türü'", Lang));
-       Strings.Insert("ExternalRefValueNotFound", NStr("en='Not found value for external ref %1';
-       	|ru='Не найдено значение для внешней ссылки %1';
-       	|tr='%1 harici referansı için değer bulunamadı'", Lang));
-       Strings.Insert("ExternalValueNotFound", NStr("en='Not found value for external value %1';
-       	|ru='Не найдено значение для внешнего значения %1';
-       	|tr='%1 harici değeri için değer bulunamadı'", Lang));
-       Strings.Insert("UnsupportedTransactionType", NStr("en='Unsapported transaction type %1';
-       	|ru='Неподдерживаемый вид опурации %1';
-       	|tr='Desteklenmeyen işlem türü %1'", Lang));
-       Strings.Insert("GetBasisesNotSupported", NStr("en='GetBasises() not support %1';
-       	|ru='GetBasises() не поддерживается %1';
-       	|tr='GetBasises() %1''i desteklemiyor'", Lang));
-       Strings.Insert("UnsupportedExternalLink", NStr("en='Not supported External link for %1';
-       	|ru='Не поддерживаемая Внешняя ссылка для %1';
-       	|tr='%1 için harici bağlantı desteklenmiyor'", Lang));
-       Strings.Insert("UnsupportedInternalLink", NStr("en='Not supported Internal link for %1';
-       	|ru='Не поддерживаемая Внутреняя ссылка для %1';
-       	|tr='%1 için Dahili bağlantı desteklenmiyor'", Lang));
-       Strings.Insert("UnknownControlCodeStringType", NStr("en='Unknown ControlCodeStringType';
-       	|ru='Неизвестный тип маркировки';
-       	|tr='Bilinmeyen ControlCodeStringType'", Lang));
-        Strings.Insert("CannotGetPointInTime", NStr("en='Can not get point in time';
-        	|ru='Не получается получить отметку времени';
-        	|tr='Zaman noktasından bilgi alınamıyor'", Lang));
-        Strings.Insert("CannotFiscalizeCCSTypeNone", NStr("en='Can not fiscalize item with Control Code String Type as None. Select type in item, or switch off Control string';
-        	|ru='Не получается фискализировать номенклатуру с неопределенным значением типа контрольного кода маркировки. Укажите тип маркировки или отключите учет маркированного товара у номенклатуры.';
-        	|tr='Kontrol Kodu Dizesi Türü Yok olan öğe malileştirilemiyor. Öğedeki türü seçin veya Kontrol dizgisini kapatın.'", Lang));
-        Strings.Insert("CannotFiscalizeCCSTypeEmpty", NStr("en='Can not fiscalize item while Control Code String Type is Empty. Select type in item, or switch off Control string';
-        	|ru='Не получается фискализировать номенклатуру с пустым значением типа контрольного кода маркировки. Укажите тип маркировки или отключите учет маркированного товара у номенклатуры.';
-        	|tr='Kontrol Kodu Dizesi Türü Boşken öğe malileştirilemez. Öğedeki türü seçin veya Kontrol dizgesini kapatın.'", Lang));
-        Strings.Insert("ControlStringCodeNotFilled", NStr("en='Control string code not filled. Row: %1';
-        	|ru='Код маркировки не заполнен. Строка: %1';
-        	|tr='Kontrol dizesi kodu doldurulmadı. Satır: %1'", Lang));
-        Strings.Insert("ControlStringCodeCountMismatch", NStr("en='Control string code count not the same as item quantity. Row: %1';
-        	|ru='Количество маркировок расходится с количеством товаров. Строка: %1';
-        	|tr='Kontrol dizesi kod sayısı, ürün miktarıyla aynı değil. Satır: %1'", Lang));
-        Strings.Insert("ControlStringMultipleRowsNotSupported", NStr("en='Not suppoted send more then 1 control code by each row. Row: %1';
-        	|ru='Не поддерживается отправка более одного кода маркировки для каждой строки. Строка: %1';
-        	|tr='Her satıra 1''den fazla kontrol kodu gönderilmesi desteklenmiyor. Satır: %1'", Lang));
-        Strings.Insert("WrongExternalFunctionType", NStr("en='Wrong External function type.';
-        	|ru='Неправильный тип внешних функций.';
-        	|tr='Yanlış Harici fonksiyon tipi.'", Lang));
-        Strings.Insert("CurrencyInfoMoreThanOne", NStr("en='CurrencyInfo.Count() > 1';
-        	|ru='Количество информации по валютам > 1';
-        	|tr='Para BirimiBilgisi.Sayısı() > 1'", Lang));
-        Strings.Insert("RowsWithStoresEmpty", NStr("en='RowsWithStores.Count() = 0';
-        	|ru='RowsWithStores.Count() = 0';
-        	|tr='RowsWithStores.Count() = 0'", Lang));
-        Strings.Insert("DefaultAgreementOnlyCustVendor", NStr("en='Get default agreement implement only for customer or vendor';
-        	|ru='Получить соглашение по умолчанию применимо только для покупателей и поставщиков';
-        	|tr='Varsayılan sözleşmenin yalnızca müşteri veya satıcı için uygulanmasını sağlayın'", Lang));
-        Strings.Insert("BatchForSalesReturnNotFound", NStr("en='Not found batch for sales return';
-        	|ru='Не найдена партия для возврата от покупателя';
-        	|tr='Satış iadesi için parti bulunamadı'", Lang));
-        Strings.Insert("UnsupportedRowDataType", NStr("en='Unsupported type of row data';
-        	|ru='Неподдерживаемый тип данных строки';
-        	|tr='Desteklenmeyen satır verisi türü'", Lang));
-        Strings.Insert("UnsupportedType", NStr("en='Unsupported type %1';
-        	|ru='Неподдерживаемый тип %1';
-        	|tr='Desteklenmeyen tür %1'", Lang));
-        Strings.Insert("LoadMoreThanOneTableNotImplemented", NStr("en='load more than one table not implemented';
-        	|ru='загрузка больше одной таблицы не применяема';
-        	|tr='birden fazla tablo yükleme uygulanmadı'", Lang));
-        Strings.Insert("TempStorageTypeNotSupported", NStr("en='not supported temp storage data type';
-        	|ru='не поддерживаемое временное хранилизе для типы данных';
-        	|tr='desteklenmeyen geçici depolama veri türü'", Lang));
-        Strings.Insert("UnsupportedOperation", NStr("en='Unsupported operation %1';
-        	|ru='Неподдерживаемая операция %1';
-        	|tr='Desteklenmeyen işlem %1'", Lang));
-        Strings.Insert("UnsupportedDirection", NStr("en='Unsupported direction %1';
-        	|ru='Неподдерживаемое направление %1';
-        	|tr='Desteklenmeyen yön %1'", Lang));
-        Strings.Insert("UnsupportedDocumentType", NStr("en='Unsupported document type %1';
-        	|ru='Неподдерживаемый тип документа %1';
-        	|tr='Desteklenmeyen belge türü %1'", Lang));
-        Strings.Insert("UnsupportedRegisterMetadata", NStr("en='Unsupported register metadata %1';
-        	|ru='Неподдерживаемые метаданные регистра %1';
-        	|tr='Desteklenmeyen kayıt meta verisi %1'", Lang));
-        Strings.Insert("UnsupportedWhoIsChanged", NStr("en='Unsupported [WhoIsChanged] = %1';
-        	|ru='Неподдерживаемый [WhoIsChanged] = %1';
-        	|tr='Desteklenmiyor [WhoIsChanged] = %1'", Lang));
-        Strings.Insert("WrongDataPath", NStr("en='Wrong data path %1';
-        	|ru='Неправильный путь данных %1';
-        	|tr='Yanlış veri yolu %1'", Lang));
+        Strings.Insert("JobAborted", NStr("en='D4EA092E-0437-D17F-F20B-BBFB6AF63BB7'", Lang));
+        Strings.Insert("CannotConnectDriver", NStr("en='F87C276A-3050-4E5A-ABD8-86A4A90077D1'", Lang));
+        Strings.Insert("CannotConnectHardwareService", NStr("en='41F8304B-7832-BF9D-DCCF-F8D7E86AC3C6'", Lang));
+        Strings.Insert("CannotAttachAddIn", NStr("en='1ABCF541-9FB5-1625-54E4-4D1B5CBFB783%1'", Lang));
+        Strings.Insert("CannotGetDataKKT", NStr("en='D6FB7553-9BFE-429A-AF93-343548F79E55'", Lang));
+        Strings.Insert("NotFoundOriginRowForClone", NStr("en='E674C2AA-F328-CB07-7EE5-5CC9EE5A7602'", Lang));
+        Strings.Insert("SerialOwnerNotItemKey", NStr("en='7EBFED4A-46D2-300E-EF6F-F2194704EEAF___'", Lang));
+        Strings.Insert("WrongAdvanceDirection", NStr("en='7E9F1F95-4DEA-AEE6-613C-CCAADA371A8D'", Lang));
+        Strings.Insert("UnknownTransactionType", NStr("en='622B41C5-969B-B904-424E-EAC2C3DC9BFC'", Lang));
+        Strings.Insert("UnknownTransactionTypeT2015", NStr("en='50745935-CA14-D33E-EDAD-DF4AD4EE091B_________________[T2015S_TransactionsInfo]'", Lang));
+        Strings.Insert("UnknownTransactionTypeTableT2014", NStr("en='4BE79F5C-161B-EDE7-7E98-804A0B0DC995___________________[Table_T2014S_AdvancesInfo]'", Lang));
+        Strings.Insert("NotSupportedDRR5022TCashAdvance", NStr("en='52BB1575-4416-BDD9-9B7E-E7888DA866E4____________________[DR_R5022T_Expenses_CR_R3015B_CashAdvance]'", Lang));
+        Strings.Insert("ErrorOnPostingDocument", NStr("en='9F04B8AA-2501-BA8D-D78D-DB174DDBD05A'", Lang));
+        Strings.Insert("ConvertingDataToFillingValuesFailed", NStr("en='5C34A248-6BD0-98AE-ED37-7B829096356F____'", Lang));
+        Strings.Insert("AnalyticTypeNotDefined", NStr("en='4E33D9CB-FF0D-7AB0-024A-AC4D90F9845E'", Lang));
+        Strings.Insert("PropertyBeforeChangeDataPathNoRows", NStr("en='C866E21E-20C4-84A3-3773-30318EF2DA99___________________________'", Lang));
+       Strings.Insert("OneJobFailed", NStr("en='DDCA0E04-28AF-4FE4-4C9E-E961FF66F0B2'", Lang));
+       Strings.Insert("UnsupportedUpdateStatus", NStr("en='06921477-F87C-2187-7D16-65A9ECECE785%1'", Lang));
+       Strings.Insert("DocumentQueryError", NStr("en='4A997EC6-568C-FE52-2219-9CADB94CEFD8%1,%2'", Lang));
+       Strings.Insert("UnknownFilterType", NStr("en='A068FF46-E1E6-028D-DBA3-31C3A9D812B0%1'", Lang));
+       Strings.Insert("FoundMoreThanOneWhenOptionNot", NStr("en='75441006-3D70-4AA3-30C4-4ACAE9DE658D___%1,%2'", Lang));
+       Strings.Insert("DescriptionFormulaOperandError", NStr("en='C7525718-F759-801E-EFA3-3161C459D2DE_________________%1,%2'", Lang));
+       Strings.Insert("CacheRowsUndefined", NStr("en='25A70917-F3FD-F88D-D783-3C2F5A9DE383________________________%1'", Lang));
+       Strings.Insert("CachePropertyNotFound", NStr("en='39364743-3DCB-E749-932E-E8ECAF726DCB__________________%1'", Lang));
+       Strings.Insert("WrongListProperty", NStr("en='DEA4F561-9E53-387D-D066-664154123526%1'", Lang));
+       Strings.Insert("CachePropertyDeleteNotFound", NStr("en='FC9CDCD2-3DF1-6DD7-7E5D-DF5190D9A8C7_____%1'", Lang));
+       Strings.Insert("WrongDatapathRemoveCache", NStr("en='92DFB0F6-9784-74FD-D0D7-7CD19CFD2013%1'", Lang));
+       Strings.Insert("UnknownAgreementTypeByDebtType", NStr("en='E2EF2170-C49F-11B2-2BC9-95B358A79742%1'", Lang));
+       Strings.Insert("IDInfoNotFoundByName", NStr("en='5D1E0AA0-6A29-DA12-2785-57491D23785C%1'", Lang));
+       Strings.Insert("MoreThanOneAnalyticRowsFilter", NStr("en='0C7ADF95-05E6-5710-0896-69A8305E90E9_____________________________________%1,%2,%3'", Lang));
+       Strings.Insert("DocumentAccountingOpNotSupported", NStr("en='4F6D7788-84E7-ED8C-C560-08AF2E66E657_____________%1,%2'", Lang));
+       Strings.Insert("UnsupportedRegisterName", NStr("en='A5F7A21E-CC79-493D-D15B-B5EDA785B39A%1'", Lang));
+       Strings.Insert("UnsupportedCheckType", NStr("en='AEBB80D8-1DBE-1D38-8BC0-03EEAD7ABE0C%1'", Lang));
+       Strings.Insert("ExtDimensionTypeNotDefined", NStr("en='7622F2C2-C134-DFCF-FF42-25518702F0D0________%1,%2,%3'", Lang));
+       Strings.Insert("ExternalRefValueNotFound", NStr("en='AAB85844-37D8-9DAA-A546-6D5F93A25BCE%1'", Lang));
+       Strings.Insert("ExternalValueNotFound", NStr("en='A05AC762-4FD2-BADB-B681-16A8ABC75C1B_%1'", Lang));
+       Strings.Insert("UnsupportedTransactionType", NStr("en='00817809-EE79-3C32-2274-46F260CC6BE8%1'", Lang));
+       Strings.Insert("GetBasisesNotSupported", NStr("en='BA372E02-1787-7FE5-51F9-92520AA40A1A%1'", Lang));
+       Strings.Insert("UnsupportedExternalLink", NStr("en='29C2D1E6-F687-4380-0D46-6275EE0DABF4%1'", Lang));
+       Strings.Insert("UnsupportedInternalLink", NStr("en='CBDC9027-DFE0-675A-AF8F-F884F8745905%1'", Lang));
+       Strings.Insert("UnknownControlCodeStringType", NStr("en='1E3B0C6C-3B05-7739-9A7D-DE9399A3AFCF'", Lang));
+        Strings.Insert("CannotGetPointInTime", NStr("en='A9F42016-5B51-3C68-86D8-8E46B6925D90'", Lang));
+        Strings.Insert("CannotFiscalizeCCSTypeNone", NStr("en='25E329A4-ED07-BE1F-FF2D-DF2615E27230___________________________________________________________________________'", Lang));
+        Strings.Insert("CannotFiscalizeCCSTypeEmpty", NStr("en='54A1C913-D0C4-776B-BDD6-63EF10253169_____________________________________________________________________________'", Lang));
+        Strings.Insert("ControlStringCodeNotFilled", NStr("en='BF9D6BDB-9F88-F9E0-066B-B22CA779AD71___%1'", Lang));
+        Strings.Insert("ControlStringCodeCountMismatch", NStr("en='FED0B007-FDC9-F06F-F451-162C1873C826____________________________%1'", Lang));
+        Strings.Insert("ControlStringMultipleRowsNotSupported", NStr("en='2A7BF742-5FF1-15D0-0025-54FA54BF6625___________________________%1'", Lang));
+        Strings.Insert("WrongExternalFunctionType", NStr("en='C6CF08DF-004E-475E-E899-96B3ACB849E1'", Lang));
+        Strings.Insert("CurrencyInfoMoreThanOne", NStr("en='A94BCADB-0EBD-C072-2248-807C9CDA7435'", Lang));
+        Strings.Insert("RowsWithStoresEmpty", NStr("en='670ABB14-6D2C-0AEF-F5B2-2E2A8C1A22CB'", Lang));
+        Strings.Insert("DefaultAgreementOnlyCustVendor", NStr("en='0A637850-239A-97DA-A56A-A09028353092_______________________'", Lang));
+        Strings.Insert("BatchForSalesReturnNotFound", NStr("en='14248BF7-7EC8-F4C1-1B40-08DABE317324'", Lang));
+        Strings.Insert("UnsupportedRowDataType", NStr("en='B718B7B7-14A7-51B0-0278-8262A9D07EF0'", Lang));
+        Strings.Insert("UnsupportedType", NStr("en='5B8325F7-CEFE-BC63-3B21-119FBCA81556%1'", Lang));
+        Strings.Insert("LoadMoreThanOneTableNotImplemented", NStr("en='06994157-982E-1F63-31C8-85F854D80263____'", Lang));
+        Strings.Insert("TempStorageTypeNotSupported", NStr("en='53B20DA6-D3B9-0095-50B8-8FDB70369F88'", Lang));
+        Strings.Insert("UnsupportedOperation", NStr("en='3ECAAAB2-7F4F-F62C-C31D-D6E570A09A2C%1'", Lang));
+        Strings.Insert("UnsupportedDirection", NStr("en='C77D0340-69E0-48B3-3F55-5AD6AB47844E%1'", Lang));
+        Strings.Insert("UnsupportedDocumentType", NStr("en='769F3777-E0C4-A8CF-FDDD-DEEDB8501866%1'", Lang));
+        Strings.Insert("UnsupportedRegisterMetadata", NStr("en='CFD0C2A5-A62B-22BC-C798-8C62DE6A390B%1'", Lang));
+        Strings.Insert("UnsupportedWhoIsChanged", NStr("en='C84D29C8-D949-AAC2-2CCA-AD64D257B519[WhoIsChanged],%1'", Lang));
+        Strings.Insert("WrongDataPath", NStr("en='58C96F3E-CCA5-04A2-23C3-3A10AD6739FC%1'", Lang));
 
-        Strings.Insert("TypeNotFound", NStr("en='Type not found %1';
-        	|ru='Тип не найден %1';
-        	|tr='Tür bulunamadı %1'", Lang));
-        Strings.Insert("CreateNewAnalyticsNotSupported", NStr("en='Create new analytics with Document type not supported';
-        	|ru='Создание новых аналитик с типом документа не поддерживается';
-        	|tr='Belge türü desteklenmiyorken yeni analizler oluşturun'", Lang));
-        Strings.Insert("TaxNotAllowedForDocument", NStr("en='Tax not allowed for document, check tax settings';
-        	|ru='Налог не разрешен для документа, проверьте настройки налогов';
-        	|tr='Belge için vergiye izin verilmiyor, vergi ayarlarını kontrol edin'", Lang));
-        Strings.Insert("RiseTestFalseString", NStr("en='RiseTestFalseString';
-        	|ru='RiseTestFalseString';
-        	|tr='RiseTestFalseString'", Lang));
-        Strings.Insert("CorrectionDescriptionRequired", NStr("en='Correction description has to be filled.';
-        	|ru='Наименование корректировки должно быть заполнено.';
-        	|tr='Düzeltme açıklamasının doldurulması gerekmektedir.'", Lang));
-        Strings.Insert("GoodsReceiptPreliminaryPurchaseInvoice", NStr("en='Change transaction type or clear purchase invoice. In preliminary type can not be filled purchase invoice';
-        	|ru='Необходимо изменить вид оперцаии или очистить поступление товаров. В виде операции предварительных остатко не может быть заполнено поступление товаров.';
-        	|tr='İşlem türünü değiştirin veya satın alma faturasını temizleyin. Ön türde satın alma faturası doldurulamaz.'", Lang));
-        Strings.Insert("UndefinedTabularSection", NStr("en='Undefined tabular section for : [%1] [%2]';
-        	|ru='Неопределена табличная часть для : [%1] [%2]';
-        	|tr='[%1] [%2] için tanımsız tablo bölümü'", Lang));
-        Strings.Insert("RecordSetCountNotOne", NStr("en='RecordSet.Count() <> 1 [%1]';
-        	|ru='RecordSet.Count() <> 1 [%1]';
-        	|tr='KayıtKümesi.Sayısı() <> 1 [%1]'", Lang));
-        Strings.Insert("UnsupportedMetadata", NStr("en='Not supported metadata : [%1]';
-        	|ru='Не поддерживаемые метаданные : [%1]';
-        	|tr='Desteklenmeyen meta veri: [%1]'", Lang));
-        Strings.Insert("ItemListRowsCountNotOne", NStr("en='ItemListRows.Count() <> 1 :[%1] [%2]';
-        	|ru='ItemListRows.Count() <> 1 :[%1] [%2]';
-        	|tr='ÖğeListesiSatırları.Sayısı() <> 1 :[%1] [%2]'", Lang));
-        Strings.Insert("MainRowsCountNotOne", NStr("en='MainRows.Count() <> 1 :[%1] [%2]';
-        	|ru='MainRows.Count() <> 1 :[%1] [%2]';
-        	|tr='AnaSatırlar.Sayısı() <> 1 :[%1] [%2]'", Lang));
-        Strings.Insert("UnableReplaceRef", NStr("en='Unable replace ref [%1]';
-        	|ru='Не получилось заменить ссылку [%1]';
-        	|tr='Referans [%1] değiştirilemiyor'", Lang));
-        Strings.Insert("UnsupportedSettingStorageName", NStr("en='Unsupported setting storage name [%1]';
-        	|ru='Неподдерживаемое имя хранилища настроек [%1]';
-        	|tr='Desteklenmeyen ayar depolama adı [%1]'", Lang));
-        Strings.Insert("InternalAccountNotFound", NStr("en='Not found internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]';
-        	|ru='Не найден внутренний счет учета - Настройки интеграции:[%1] План счетов:[%2] Ref[%3]';
-        	|tr='Dahili hesap bulunamadı - Entegrasyon ayarları:[%1] Hesap planı:[%2] Referans[%3]'", Lang));
-        Strings.Insert("InternalAccountMoreThanOne", NStr("en='Found more than 1 internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]';
-        	|ru='Найдено больше 1 внутреннего счета - Настройки интеграции:[%1] План счетов:[%2] Ref[%3]';
-        	|tr='1''den fazla dahili hesap bulundu - Entegrasyon ayarları:[%1] Hesap planı:[%2] Referans[%3]'", Lang));
-       Strings.Insert("UnsupportedAnalyticType", NStr("en='Unsupported analytic type [%1]';
-       	|ru='Неподдерживаемый тип аналитики [%1]';
-       	|tr='Desteklenmeyen analitik türü [%1]'", Lang));
-       Strings.Insert("ItemFormUnknownCommand", NStr("en='Unknown command %1';
-       	|ru='Неизвестная команда %1';
-       	|tr='Bilinmeyen komut %1'", Lang));
-       Strings.Insert("LedgerLocalizationCodeNotFilled", NStr("en='Ledger localization code not filled for ledger type %1';
-       	|ru='Код локализации типа учета не заполнен для типа учета %1';
-       	|tr='%1 muhasebe türü için muhasebe yerelleştirme kodu doldurulmadı'", Lang));
-       Strings.Insert("LedgerAccountMainDrNotDefined", NStr("en='Not defined Account main Dr %1 %2';
-       	|ru='Не определен основной Счет учета Дт %1 %2';
-       	|tr='Tanımlanmamış Hesap ana Borç %1 %2'", Lang));
-       Strings.Insert("LedgerAccountSubDrNotDefined", NStr("en='Not defined Account sub Dr %1 %2';
-       	|ru='Не определен подчиненный Счет учета Дт %1 %2';
-       	|tr='Tanımlanmamış Hesap alt Borç %1 %2'", Lang));
-       Strings.Insert("LedgerAccountMainCrNotDefined", NStr("en='Not defined Account main Cr %1 %2';
-       	|ru='Не определен основной Счет учета Кт %1 %2';
-       	|tr='Tanımlanmamış Hesap ana Alacak %1 %2'", Lang));
-       Strings.Insert("LedgerAccountSubCrNotDefined", NStr("en='Not defined Account sub Cr %1 %2';
-       	|ru='Не определен подчиненный Счет учета Кт %1 %2';
-       	|tr='Tanımlanmamış Hesap alt Alacak %1 %2'", Lang));
-       Strings.Insert("InvoiceTypeNotSupported", NStr("en='Not supported invoice type %1';
-       	|ru='Не поддерживаемый вид инвойса %1';
-       	|tr='%1 fatura türü desteklenmiyor'", Lang));
-       Strings.Insert("FewRetailCustomerFound", NStr("en='Multiple retail customers found';
-       	|ru='Найдено больше одного розничного покупателя';
-       	|tr='Birden fazla perakende müşterisi bulundu'", Lang));
+        Strings.Insert("TypeNotFound", NStr("en='E8EDF4E6-3D27-632B-BF80-0798E47C8FA6%1'", Lang));
+        Strings.Insert("CreateNewAnalyticsNotSupported", NStr("en='0AB2F952-1904-5AD3-3E95-57F1DF3A6CC5_________________'", Lang));
+        Strings.Insert("TaxNotAllowedForDocument", NStr("en='8C89459D-B7A1-1452-26B1-1376E07AF842____________'", Lang));
+        Strings.Insert("RiseTestFalseString", NStr("en='CD3B4249-1920-303C-C63B-B93F7BC8E0D5'", Lang));
+        Strings.Insert("CorrectionDescriptionRequired", NStr("en='7CCB658C-82E5-8CD1-135F-F53ACA656383____'", Lang));
+        Strings.Insert("GoodsReceiptPreliminaryPurchaseInvoice", NStr("en='8543E83C-2E59-3463-3682-2845B5BA5E18_____________________________________________________________________'", Lang));
+        Strings.Insert("UndefinedTabularSection", NStr("en='FD64DBFA-2FFE-AF20-00C6-6F7C311CF1BD_____%1,%2'", Lang));
+        Strings.Insert("RecordSetCountNotOne", NStr("en='C2E7BB94-241F-4383-39BB-B8B8E54EC0C2%1'", Lang));
+        Strings.Insert("UnsupportedMetadata", NStr("en='B172613F-3087-83A6-6AD3-388CB6D2FCBC%1'", Lang));
+        Strings.Insert("ItemListRowsCountNotOne", NStr("en='D8256A21-1C8B-CC29-9DCB-B8FAA78A2196%1,%2'", Lang));
+        Strings.Insert("MainRowsCountNotOne", NStr("en='1FFF95F9-E2B1-BFA0-032D-DB0316742424%1,%2'", Lang));
+        Strings.Insert("UnableReplaceRef", NStr("en='749D5E21-5436-4B17-794B-B05BC8F789F7%1'", Lang));
+        Strings.Insert("UnsupportedSettingStorageName", NStr("en='0C6B32A8-5385-BEFC-C776-6EF505FD7B0D_%1'", Lang));
+        Strings.Insert("InternalAccountNotFound", NStr("en='FC198899-F07A-5B1B-B432-2459013AE915_________________________________________________%1,%2,%3'", Lang));
+        Strings.Insert("InternalAccountMoreThanOne", NStr("en='20B74A85-2564-180F-F04E-EA8067DF0A0E_________________________________________________________%1,%2,%3'", Lang));
+       Strings.Insert("UnsupportedAnalyticType", NStr("en='D228016C-8B7B-4973-3119-910288A5AAA5%1'", Lang));
+       Strings.Insert("ItemFormUnknownCommand", NStr("en='A7A107F6-6DE6-262A-A799-91B19EF666B4%1'", Lang));
+       Strings.Insert("LedgerLocalizationCodeNotFilled", NStr("en='FFCA1C57-AAF6-4FEB-B45E-E0CAC41433B9__________________%1'", Lang));
+       Strings.Insert("LedgerAccountMainDrNotDefined", NStr("en='5CC83168-13F6-0549-9EF0-0E43D522E152%1,%2'", Lang));
+       Strings.Insert("LedgerAccountSubDrNotDefined", NStr("en='07B9F888-DAB7-5D9D-D326-6EE825B72B32%1,%2'", Lang));
+       Strings.Insert("LedgerAccountMainCrNotDefined", NStr("en='832B96CE-1E28-3B22-2695-51CC9037D68A%1,%2'", Lang));
+       Strings.Insert("LedgerAccountSubCrNotDefined", NStr("en='90BA74FD-F23D-CE12-2BB3-34F7E75A4648%1,%2'", Lang));
+       Strings.Insert("InvoiceTypeNotSupported", NStr("en='C9138535-A9F8-E0A5-5F6A-AE4FEEEA6FFD%1'", Lang));
+       Strings.Insert("FewRetailCustomerFound", NStr("en='C54DF8F9-1DD7-3C45-5B26-68635BE986A1'", Lang));
 #EndRegion
 
 #Region Access
-	Strings.Insert("ACS_UnknownValueType", NStr("en='Can not create Access Key. Unknows value type.';
-		|ru='Не удалось создать Ключ Доступа. Неизвестный тип значения';
-		|tr='Erişim Anahtarı oluşturulamıyor. Bilinmeyen değer türü.'", Lang));
+	Strings.Insert("ACS_UnknownValueType", NStr("en='B2FD40A5-6AEB-720F-F57B-B5C7495847E3__________'", Lang));
 #EndRegion
 
 #Region Certificates
 	
-	Strings.Insert("CERT_OnlyProdOrCert", NStr("en='In the document, there can be either goods or certificates.';
-		|ru='В документе могут быть либо товары, либо сертификаты.';
-		|tr='Belgede ya mallar ya da sertifikalar olabilir.'", Lang));
-	Strings.Insert("CERT_CertAlreadyUsed", NStr("en='Certificate %1 has already been used before and cannot be used again.';
-		|ru='Сертификат %1 уже использовался ранее и не может быть использован снова.';
-		|tr='Sertifika %1 daha önce kullanılmış ve tekrar kullanılamaz.'", Lang));
-	Strings.Insert("CERT_CannotBeSold", NStr("en='Certificate %1 cannot be issued again.';
-		|ru='Сертификат %1 не может быть выдан снова.';
-		|tr='Sertifika %1 tekrar düzenlenemez.'", Lang));
-	Strings.Insert("CERT_HasNotBeenUsed", NStr("en='Certificate %1 has not been used before.';
-		|ru='Сертификат %1 не использовался ранее.';
-		|tr='Sertifika %1 daha önce kullanılmadı.'", Lang));
+	Strings.Insert("CERT_OnlyProdOrCert", NStr("en='B23AEC17-DC42-3AE7-76EF-F74CE2DD0F01_______________________'", Lang));
+	Strings.Insert("CERT_CertAlreadyUsed", NStr("en='7F831318-FA37-23EA-ABE2-26ED72964559_________________________________%1'", Lang));
+	Strings.Insert("CERT_CannotBeSold", NStr("en='084A8C57-248A-E7E4-4DE4-4CAA5FAAEB4E__%1'", Lang));
+	Strings.Insert("CERT_HasNotBeenUsed", NStr("en='FF5A2F03-D7D1-F4D3-3142-2193E0BC26B9____%1'", Lang));
 
 #EndRegion
 
 #Region Validation
 
-	Strings.Insert("EmailIsEmpty", NStr("en='Email is empty.';
-		|ru='Маил пустой.';
-		|tr='E-posta boş.'", Lang));
-	Strings.Insert("Only1SymbolAtCanBeSet", NStr("en='Only 1 symbol @ can be set.';
-		|ru='Только один символ @ может быть установлен.';
-		|tr='Yalnızca 1 sembol @ kullanılabilir.'", Lang));
-	Strings.Insert("InvalidLengthOfLocalPart", NStr("en='Invalid length of the local part.';
-		|ru='Не корректная длинна левой части.';
-		|tr='Yerel kısmın uzunluğu geçersiz.'", Lang));
-	Strings.Insert("InvalidLengthOfDomainPart", NStr("en='Invalid length of the domain part.';
-		|ru='Не корректная длинна доменной части.';
-		|tr='Alan adının uzunluğu geçersiz.'", Lang));
-	Strings.Insert("LocalPartStartEndDot", NStr("en='The local part should not start or end with a dot.';
-		|ru='Левая часть не может начинаться или заканчиваться на точку.';
-		|tr='Yerel kısım nokta ile başlamamalı veya bitmemeli.'", Lang));
-	Strings.Insert("LocalPartConsecutiveDots", NStr("en='Local part contains consecutive dots.';
-		|ru='Левая часть содержит последовательные точки.';
-		|tr='Yerel kısım ardışık noktalar içeriyor.'", Lang));
-	Strings.Insert("DomainPartStartsWithDot", NStr("en='Domain part starts with a dot.';
-		|ru='Доменная часть начинается с точки.';
-		|tr='Etki alanı kısmı bir nokta ile başlar.'", Lang));
-	Strings.Insert("DomainPartConsecutiveDots", NStr("en='Domain part contains consecutive dots.';
-		|ru='Доменная часть содержит последовательные точки.';
-		|tr='Etki alanı kısmı ardışık noktalar içeriyor.'", Lang));
-	Strings.Insert("DomainPartMin1Dot", NStr("en='Domain part has to contain at least 1 dot.';
-		|ru='Доменная часть должна содержать хотя бы одну точку.';
-		|tr='Etki alanı kısmında en az 1 nokta bulunmalıdır.'", Lang));
-	Strings.Insert("DomainIdentifierExceedsLength", NStr("en='Domain identifier exceeds the allowed length.';
-		|ru='Идентификатор домена превышает допустимую длинну';
-		|tr='Alan tanımlayıcı izin verilen uzunluğu aşıyor.'", Lang));
-	Strings.Insert("InvalidCharacterInAddress", NStr("en='Invalid character: ""%1""';
-		|ru='Не корректный символ: ""%1""';
-		|tr='Geçersiz karakter: ""%1""'", Lang));
-	Strings.Insert("AddAttributeCannotUseWithProperty", NStr("en='Can not use the same type as attribute and property. Type: %1';
-		|ru='Нельзя использовать один и тот же тип в качестве доп. реквизита и доп. свойства. Тип: %1';
-		|tr='Ek alan ve ek özellik olarak aynı türü kullanamazsınız. Tür: %1'", Lang));
-	Strings.Insert("AddAttributeTagPathHasNotTwoPart", NStr("en='Wrong path for tag: [%1]. It has to conrains two parts - table and attribute names, ex. ItemsList.Store';
-		|ru='Неверный путь для тега: [%1]. Он должен содержать две части - наименование таблицы и атрибута, например, ItemsList.Store';
-		|tr='Etiket için yanlış yol: [%1]. İki parça içermeli - tablo ve öznitelik isimleri, örn. ItemsList.Store'", Lang));
+	Strings.Insert("EmailIsEmpty", NStr("en='FC6A7415-2AA7-0FDD-D7A1-109058F2A6B6'", Lang));
+	Strings.Insert("Only1SymbolAtCanBeSet", NStr("en='3734B0E2-96B7-52C3-3627-7A9BADA0E767'", Lang));
+	Strings.Insert("InvalidLengthOfLocalPart", NStr("en='48D49EC6-1491-7427-72B8-8CB1F26E7219'", Lang));
+	Strings.Insert("InvalidLengthOfDomainPart", NStr("en='25D6B8B0-AAF3-9639-9100-0E320B44B308'", Lang));
+	Strings.Insert("LocalPartStartEndDot", NStr("en='CA19202D-5312-73E1-1F20-07FD0BE5DDB9______________'", Lang));
+	Strings.Insert("LocalPartConsecutiveDots", NStr("en='02189676-4D20-A250-06CD-D56C2A45C425_'", Lang));
+	Strings.Insert("DomainPartStartsWithDot", NStr("en='97C7F736-1D34-DD66-6FD5-5812B519A23C'", Lang));
+	Strings.Insert("DomainPartConsecutiveDots", NStr("en='3A8D2C70-C1D5-4B90-0AF7-7690DCEDB1AB__'", Lang));
+	Strings.Insert("DomainPartMin1Dot", NStr("en='F7B52324-4259-AFAC-C331-1F369E0F22D4______'", Lang));
+	Strings.Insert("DomainIdentifierExceedsLength", NStr("en='75F3EAF3-EA2D-3291-125E-E75CADA882C1_________'", Lang));
+	Strings.Insert("InvalidCharacterInAddress", NStr("en='BED10CF7-8B1F-B93C-C92D-D6CC4B75B1F4%1'", Lang));
+	Strings.Insert("AddAttributeCannotUseWithProperty", NStr("en='4DB3A879-E19A-046C-C2C2-2FEF2D814EC9_________________________%1'", Lang));
+	Strings.Insert("AddAttributeTagPathHasNotTwoPart", NStr("en='A26D5B9B-58AF-9F37-716C-CEB206E62C09___________________________________________________________________%1'", Lang));
 
 #EndRegion
 
 #Region SMS
-	Strings.Insert("SMS_SendIsOk", NStr("en='SMS sent successfully';
-		|ru='SMS удачно отправлена';
-		|tr='SMS başarıyla gönderildi'", Lang));
-	Strings.Insert("SMS_SendIsError", NStr("en='Error while SMS send';
-		|ru='Обшика при отправке SMS';
-		|tr='SMS gönderilirken hata oluştu'", Lang));
-        Strings.Insert("SMS_WaitUntilNextSend", NStr("en='Wait until next send. %1 second';
-        	|ru='Подождите следующей отправки. %1 секунд';
-        	|tr='Bir sonraki gönderiye kadar bekle. %1 saniye'", Lang));
-        Strings.Insert("SMS_SMSCodeWrong", NStr("en='Not valid SMS code. Try again.';
-        	|ru='Не корректный SMS код. Повторите еще раз.';
-        	|tr='Geçersiz SMS kodu. Tekrar deneyin.'", Lang));
-        Strings.Insert("DefaultSMSProviderEmpty", NStr("en='Fill constant default SMS provider.';
-        	|ru='Заполнить значение по умолчанию константа SMS провайдера.';
-        	|tr='Sabit varsayılan SMS sağlayıcısını doldurun.'", Lang));
-        Strings.Insert("SMSModuleNotFound", NStr("en='Can not find SMS module';
-        	|ru='Модуль СМС не найден';
-        	|tr='SMS modülü bulunamadı'", Lang));
-        Strings.Insert("SMSMethodNotSupported", NStr("en='Not supported method: %1';
-        	|ru='Не поддерживаемый метод: %1';
-        	|tr='Desteklenmeyen yöntem: %1'", Lang));
+	Strings.Insert("SMS_SendIsOk", NStr("en='DD77B758-A86A-0CAE-EE53-31CE699BB1D8'", Lang));
+	Strings.Insert("SMS_SendIsError", NStr("en='1AA01DBD-B625-E81E-EE95-5E1E66F9CEC1'", Lang));
+        Strings.Insert("SMS_WaitUntilNextSend", NStr("en='CB532443-C98B-A99A-A19D-DAACA093B226%1'", Lang));
+        Strings.Insert("SMS_SMSCodeWrong", NStr("en='22332D2D-8E98-007C-C167-715E712928D7'", Lang));
+        Strings.Insert("DefaultSMSProviderEmpty", NStr("en='E5EBB090-1184-9A6E-E2E1-1278E6DA2ECC'", Lang));
+        Strings.Insert("SMSModuleNotFound", NStr("en='46A82833-FC47-2CCE-EFCA-A841D82A3843'", Lang));
+        Strings.Insert("SMSMethodNotSupported", NStr("en='2BC29086-1E9B-7C60-03C2-285CB5ADD614%1'", Lang));
 #EndRegion
 
 #Region AdditionalTableControl
 
-	Strings.Insert("ATC_001", NStr("en='Unknown document type: %1';
-		|ru='Неизвестный тип документа: %1';
-		|tr='Bilinmeyen belge türü: %1'", Lang));
-	Strings.Insert("ATC_NotSupported", NStr("en='Not supported. Documents need to be edited manually.';
-		|ru='Не поддерживается. Документы необходимо редактировать вручную.';
-		|tr='Desteklenmiyor. Belgeler manuel olarak düzenlenmelidir.'", Lang));
+	Strings.Insert("ATC_001", NStr("en='42FC6FF7-49DB-39C6-67BE-EBF72DE0ABD0%1'", Lang));
+	Strings.Insert("ATC_NotSupported", NStr("en='584D5AE1-AC8F-4ABA-A111-16420ED2010F________________'", Lang));
 	
-	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en='Row: %1. Tax amount in item list is not equal to tax amount in tax list';
-		|ru='Строка: %1. Сумма налогов не равна общей сумме налогов в табличной части налогов';
-		|tr='Satır: %1. Kalemler listesindeki vergi tutarı ile vergi listesindeki vergi tutarı eşit değil'", Lang));
-	Strings.Insert("ATC_ErrorNetAmountGreaterTotalAmount", NStr("en='Row: %1. Net amount is greater than total amount';
-		|ru='Строка: %1. Сумма без налогов больше суммы документа';
-		|tr='Satır: %1. Net tutar toplam tutardan daha büyük'", Lang));
-	Strings.Insert("ATC_ErrorQuantityIsZero", NStr("en='Row: %1. Quantity is zero';
-		|ru='Строка: %1. Количество равно 0';
-		|tr='Satır: %1. Miktar sıfır'", Lang));
-	Strings.Insert("ATC_ErrorQuantityInBaseUnitIsZero", NStr("en='Row: %1. Quantity in base unit is zero';
-		|ru='Строка: %1. Коеффициент в основной ед. изм. равно 0';
-		|tr='Satır: %1. Temel birimde miktar sıfır'", Lang));
-	Strings.Insert("ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList", NStr("en='Row: %1. Offers amount in item list is not equal to offers amount in offers list';
-		|ru='Строка: %1. Суммы скидок в табличной части товаров не равна общей сумме скидок в табличной части скидок';
-		|tr='Satır: %1. Ürün listesindeki teklif miktarı teklifler listesindeki teklif miktarıyla eşit değil'", Lang));
-	Strings.Insert("ATC_ErrorItemTypeIsNotService", NStr("en='Row: %1. Item type is not service';
-		|ru='Строка: %1. Вид номенклатуры не является услугой';
-		|tr='Satır: %1. Öğe türü hizmet değil'", Lang));
-	Strings.Insert("ATC_ErrorItemTypeUseSerialNumbers", NStr("en='Row: %1. Item type uses serial numbers';
-		|ru='Строка: %1. Вид номенклатуры использует серийные номера';
-		|tr='Satır: %1. Öğe tipi seri numaraları kullanıyor'", Lang));
-	Strings.Insert("ATC_ErrorItemTypeNotUseSerialNumbers", NStr("en='Row: %1. Item type does not use serial numbers';
-		|ru='Строка: %1. Тип элемента не использует серийные номера';
-		|tr='Satır: %1. Ürün türü seri numaralarını kullanmıyor'", Lang));
-	Strings.Insert("ATC_ErrorUseSerialButSerialNotSet", NStr("en='Row: %1. Serial is not set but is required';
-		|ru='Строка: %1. Серийные номера отсутствуют, но они обязательны к заполнению';
-		|tr='Satır: %1. Seri belirtilmemiş ancak gereklidir'", Lang));
-	Strings.Insert("ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList", NStr("en='Row: %1. Quantity in serial list table is not the same as quantity in item list';
-		|ru='Строка: %1. Количество в серийных номерах не соответствует количеству в товарах';
-		|tr='Satır: %1. Seri liste tablosundaki miktar, öğe listesindeki miktarla aynı değil'", Lang));
-	Strings.Insert("ATC_ErrorItemNotEqualItemInItemKey", NStr("en='Row: %1. Item is not equal to item in item key';
-		|ru='Строка: %1. Номенклатура в строке не соответствует номенклатуре в характеристике';
-		|tr='Satır: %1. Ürün, anahtarın içindeki ürünle eşit değil'", Lang));
-	Strings.Insert("ATC_ErrorTotalAmountMinusNetAmountNotEqualTaxAmount", NStr("en='Row: %1. Total amount minus net amount is not equal to tax amount';
-		|ru='Строка: %1. Сумма документа за вычетом налогов не равна сумме без налогов';
-		|tr='Satır: %1. Toplam tutar net tutardan vergi tutarıyla eşit değil'", Lang));
-	Strings.Insert("ATC_ErrorQuantityInItemListNotEqualQuantityInRowID", NStr("en='Row: %1. Quantity in item list is not equal to quantity in row ID';
-		|ru='Строка: %1. Количество в табличной части Товары не соответствует количеству в Row ID';
-		|tr='Satır: %1. Ürün listesindeki miktar ile satır ID''deki miktar eşit değil'", Lang));
-	Strings.Insert("ATC_ErrorQuantityNotEqualQuantityInBaseUnit", NStr("en='Row: %1. Quantity not equal quantity in base unit when unit quantity equal 1';
-		|ru='Строка: %1. Количество не равняется количеству в основной ед. изм. не смотря на то, что коефф. ед. изм равен 1';
-		|tr='Satır: %1. Miktar, birim miktarı 1 olduğunda temel birimdeki miktarla eşit değil'", Lang));
-	Strings.Insert("ATC_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en='Row: %1. Not filled quantity in source of origins';
-		|ru='Строка: %1. Не заполнено количество в источниках происхождения';
-		|tr='Satır: %1. Kaynak kökenlerinde miktar doldurulmadı'", Lang));
-	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en='Row: %1. Quantity in source of origins diff quantity in serial lot number';
-		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в серийных номерах';
-		|tr='Satır: %1. Köken kaynağındaki miktar seri lot numarasındaki miktarla farklı'", Lang));
-	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en='Row: %1. Quantity in source of origins diff quantity in item list';
-		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в товарах';
-		|tr='Satır: %1. Köken kaynaklarının miktarı, öğe listesindeki miktarla farklı'", Lang));
-	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en='Row: %1. Not filled Unit';
-		|ru='Строка: %1. Не заполненна единица измерений';
-		|tr='Satır: %1. Birim doldurulmamış'", Lang));
-	Strings.Insert("ATC_ErrorNotFilledInventoryOrigin", NStr("en='Row: %1. Not filled Inventory origin';
-		|ru='Строка: %1. Не заполнен источник происождения';
-		|tr='Satır: %1. Stok başlangıcı doldurulmamış'", Lang));
-	Strings.Insert("ATC_ErrorPaymentsAmountIsZero", NStr("en='Row: %1. Payment amount is zero';
-		|ru='Строка: %1. Сумма платежа равна нулю';
-		|tr='Satır: %1. Ödeme miktarı sıfır'", Lang));
+	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en='FEEAFB9D-5E25-B767-7B8B-B93BDB23AC77___________________________________%1'", Lang));
+	Strings.Insert("ATC_ErrorNetAmountGreaterTotalAmount", NStr("en='9D76B365-C68E-4E6D-DDD2-258CD0344415____________%1'", Lang));
+	Strings.Insert("ATC_ErrorQuantityIsZero", NStr("en='9B407B95-9C8F-65EC-C301-184B63E55437%1'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInBaseUnitIsZero", NStr("en='057122C8-551B-C31B-BA38-8A5BB77060D1__%1'", Lang));
+	Strings.Insert("ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList", NStr("en='EAA5BDB8-EC60-64CB-BF74-4F6DF80DB319____________________________________________%1'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeIsNotService", NStr("en='8F1CB26A-9C56-54FE-EBE2-27E960BC1C21%1'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeUseSerialNumbers", NStr("en='0FBB3D76-E065-26F7-7A5D-D227478F4BAD__%1'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeNotUseSerialNumbers", NStr("en='A1FE476E-420B-A9AC-C2E1-1741754C5DC8__________%1'", Lang));
+	Strings.Insert("ATC_ErrorUseSerialButSerialNotSet", NStr("en='856BA5AA-6D90-0B96-6A59-92F75DD4D876______%1'", Lang));
+	Strings.Insert("ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList", NStr("en='9251745D-FF57-9F11-1B99-9A02E7868587___________________________________________%1'", Lang));
+	Strings.Insert("ATC_ErrorItemNotEqualItemInItemKey", NStr("en='8A49E8E9-C099-30D5-5AD3-311629121D5F__________%1'", Lang));
+	Strings.Insert("ATC_ErrorTotalAmountMinusNetAmountNotEqualTaxAmount", NStr("en='64650178-A40E-4401-1ED2-251D2C9D497D_____________________________%1'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInItemListNotEqualQuantityInRowID", NStr("en='17C7862D-B39C-ED92-2DCB-B9DFB39EFCDC_____________________________%1'", Lang));
+	Strings.Insert("ATC_ErrorQuantityNotEqualQuantityInBaseUnit", NStr("en='C82EFA88-4123-3416-689E-E631D06A1B65________________________________________%1'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en='291B2810-BA90-1925-570B-BBE768F3C5EA_____________%1'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en='055BED30-ED80-C1BA-A52B-B01C69029AD9_____________________________________%1'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en='B9322415-54A8-0AAD-D36D-DC7FA87D13A4_____________________________%1'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en='275C8DBD-0BD7-9DB6-64F8-8D8FEDE50D1D%1'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledInventoryOrigin", NStr("en='A71D2A72-3793-DA94-474D-D05475E5D975%1'", Lang));
+	Strings.Insert("ATC_ErrorPaymentsAmountIsZero", NStr("en='D84987A2-7BEA-88FB-B387-737EE5A9B21F%1'", Lang));
 	
-	Strings.Insert("ATC_ErrorNotFilledPaymentMethod", NStr("en='Not filled Payment method';
-		|ru='Метод оплаты не заполнен';
-		|tr='Ödeme yöntemi doldurulmadı'", Lang));
-	Strings.Insert("ATC_ErrorNotFilledPurchaseTransactionType", NStr("en='Not filled Transaction type in Purchase';
-		|ru='Не заполнен тип транзакции в Покупке';
-		|tr='Satınalmada İşlem türü doldurulmadı'", Lang));
-	Strings.Insert("ATC_ErrorNotFilledSalesTransactionType", NStr("en='Not filled Transaction type in Sale';
-		|ru='Не заполнен тип транзакции в Продаже';
-		|tr='Satışta İşlem tipi doldurulmamış'", Lang));
-	Strings.Insert("ATC_ErrorNotFilledSalesReturnTransactionType", NStr("en='Not filled Transaction type in Sale Return';
-		|ru='Не заполнен тип транзакции в Возврате продажи';
-		|tr='Satış İadesinde İşlem Türü doldurulmamış'", Lang));
-	Strings.Insert("ATC_ErrorNotFilledPurchaseReturnTransactionType", NStr("en='Not filled Transaction type in Purchase Return';
-		|ru='Не заполнен тип транзакции в Возврате покупки';
-		|tr='Satın Alma İadesinde İşlem türü doldurulmamış'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledPaymentMethod", NStr("en='B068BDD0-9333-2ED3-3651-1463739FF167'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledPurchaseTransactionType", NStr("en='DDEF1085-5918-1EC1-16BE-E7561881954A___'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledSalesTransactionType", NStr("en='74AF0879-8F34-663B-B3B8-84565F5E7D58'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledSalesReturnTransactionType", NStr("en='CCD54348-ECCC-1EDC-CA08-800481426794______'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledPurchaseReturnTransactionType", NStr("en='54232D7F-E925-0F01-1408-8F75C192EE7C__________'", Lang));
 	
-	Strings.Insert("ATC_FIX_ErrorItemTypeUseSerialNumbers", NStr("en='Setting the ""Use serial lot number"" flag in document lines.';
-		|ru='Установка флага ""Использовать серийный номер партии"" в строках документа.';
-		|tr='Belge satırlarında ""Seri lot numarası kullan"" bayrağını ayarlama.'", Lang));
-	Strings.Insert("ATC_FIX_ErrorItemTypeNotUseSerialNumbers", NStr("en='Unchecking the ""Use serial lot number"" flag in document lines.';
-		|ru='Снятие флага ""Использовать серийный номер партии"" в строках документа.';
-		|tr='Belge satırlarında ""Seri lot numarasını kullan"" işaretinin kaldırılması.'", Lang));
-	Strings.Insert("ATC_FIX_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en='Adds or updates rows in the ""Source of origins"" table to match the related rows in the ""Item list""';
-		|ru='Добавляет или изменяет строки в табличной части ""Источнике происхождения"" для того что бы сопоставить их с табличной частью ""Товары""';
-		|tr='""Köken kaynakları"" tablosundaki satırları, ""Öğe listesi""ndeki ilgili satırlarla eşleşecek şekilde ekler veya günceller'", Lang));
-	Strings.Insert("ATC_FIX_ErrorNotFilledInventoryOrigin", NStr("en='Instead of empty values, ""Own stocks"" will be set.';
-		|ru='Вместо пустых значений будет установлено ""Собственные запасы"".';
-		|tr='Boş değerler yerine ""Kendi stoklar"" ayarlanacak.'", Lang));
-	Strings.Insert("ATC_FIX_ErrorNotFilledPaymentMethod", NStr("en='Instead of empty values, ""Full calculation"" will be set.';
-		|ru='Вместо пустых значений будет установлено ""Полный расчет"".';
-		|tr='Boş değerler yerine, ""Tam hesaplama"" ayarlanacak.'", Lang));
-	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseTransactionType", NStr("en='Instead of empty values, ""Purchase"" will be set.';
-		|ru='Вместо пустых значений будет установлено ""Покупка"".';
-		|tr='Boş değerler yerine ""Satın Alma"" ayarlanacak.'", Lang));
-	Strings.Insert("ATC_FIX_ErrorNotFilledSalesTransactionType", NStr("en='Instead of empty values, ""Sales"" will be set.';
-		|ru='Вместо пустых значений будет установлено ""Продажи"".';
-		|tr='Boş değerler yerine, ""Satışlar"" ayarlanacak.'", Lang));
-	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en='Instead of empty values, ""Return from customer"" will be set.';
-		|ru='Вместо пустых значений будет установлено ""Возврат от клиента"".';
-		|tr='Boş değerler yerine, ""Müşteriden iade"" ayarlanacak.'", Lang));
-	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en='Instead of empty values, ""Return to vendor"" will be set.';
-		|ru='Вместо пустых значений будет установлено ""Возврат поставщику"".';
-		|tr='Boş değerler yerine, ""Satıcıya iade"" ayarlanacak.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorItemTypeUseSerialNumbers", NStr("en='FFD0B625-B7A1-C2B1-18D9-9D829EE85CBC_______________________'", Lang));
+	Strings.Insert("ATC_FIX_ErrorItemTypeNotUseSerialNumbers", NStr("en='F9454638-E202-29F9-990A-A5689F8E2E74__________________________'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en='C0454772-AD58-3F15-58B5-5D2706D75395______________________________________________________________'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledInventoryOrigin", NStr("en='DA110687-7099-DBC6-6F23-319ED2FC6727______________'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledPaymentMethod", NStr("en='09A3D0B0-B15A-717C-C396-62819ACF56ED____________________'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseTransactionType", NStr("en='6230A8A5-A04B-D7BF-FCDD-D0E2B2CB0F0C____________'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledSalesTransactionType", NStr("en='AD8B0153-8D6E-EBC1-19ED-D84481558AEA_________'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en='5B5F9EC0-7C09-A634-4BC0-00B6687D86EF________________________'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en='AA9B23AA-06AB-1241-193B-BFA73B1C1123____________________'", Lang));
 	
-	Strings.Insert("ATC_ErrorAddAttributesIsUnknowAttribute", NStr("en='Unknown attribute: %1 : %2';
-		|ru='Неизвестный атрибут: %1 : %2';
-		|tr='Bilinmeyen alan: %1 : %2'", Lang));
-	Strings.Insert("ATC_FIX_ErrorAddAttributesIsUnknowAttribute", NStr("en='Unknown attribute will be remove';
-		|ru='Неизвестный атрибут будет удален';
-		|tr='Bilinmeyen alanlar kaldırılacak'", Lang));
-	Strings.Insert("ATC_ErrorAddAttributesNotSetTag", NStr("en='Not filled Tag-Attribute: %1%2';
-		|ru='Не заполнен Реквизит-Атрибут: %1%2';
-		|tr='Tag veya öznitellik belirlenmedi: %1%2'", Lang));
-	Strings.Insert("ATC_FIX_ErrorAddAttributesNotSetTag", NStr("en='Attribute will be set';
-		|ru='Реквизит будет установлен';
-		|tr='Öznitellik belirlenecek'", Lang));
+	Strings.Insert("ATC_ErrorAddAttributesIsUnknowAttribute", NStr("en='3FA595CD-2A19-6C04-4245-5B251AE54A59%1,%2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesIsUnknowAttribute", NStr("en='FD811865-EE5D-5538-8A94-4C7525D11D7E'", Lang));
+	Strings.Insert("ATC_ErrorAddAttributesNotSetTag", NStr("en='9A1F491F-FB69-9522-2901-1C92CDA9B530%1,%2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesNotSetTag", NStr("en='3475B7CB-0BE8-52A1-1243-3A8E1F481DCC'", Lang));
 	
 #EndRegion
 
 #Region Equipment
-	Strings.Insert("Eq_001", NStr("en='Installed';
-		|ru='Установлен';
-		|tr='Kuruldu'", Lang));
-	Strings.Insert("Eq_002", NStr("en='Not installed';
-		|ru='Не установлен';
-		|tr='Kurulmadı'", Lang));
-	Strings.Insert("Eq_003", NStr("en='There are no errors.';
-		|ru='Ошибок нет.';
-		|tr='Bir hata tespit edilemedi.'", Lang));
-	Strings.Insert("Eq_004", NStr("en='%1 connected.';
-		|ru='%1 успешно присоединен.';
-		|tr='%1 başarıyla bağlandı.'", Lang));
-	Strings.Insert("Eq_005", NStr("en='%1 NOT connected.';
-		|ru='%1 НЕ присоединен.';
-		|tr='%1 bağlanamadı.'", Lang));
-	Strings.Insert("Eq_006", NStr("en='Installed on current PC.';
-		|ru='Установить на текущий компьютер';
-		|tr='Bu bilgisayara kurulmuştu.'", Lang));
-	Strings.Insert("Eq_007", NStr("en='Can not connect device %1';
-		|ru='Не получилось подключить оборудование %1';
-		|tr='Cihaz bağlanamadı %1'", Lang));
-	Strings.Insert("Eq_008", NStr("en='%1 disconnected.';
-		|ru='%1 отключен.';
-		|tr='%1 bağlantısı kesildi.'", Lang));
-	Strings.Insert("Eq_009", NStr("en='%1 NOT disconnected.';
-		|ru='%1 НЕ отключен.';
-		|tr='%1 bağlantısı kesilmedi.'", Lang));
-	Strings.Insert("Eq_010", NStr("en='Can not disconnect device %1';
-		|ru='Оборудование %1 не получилось отключить';
-		|tr='Cihaz %1 bağlantısı kesilemiyor'", Lang));
-	Strings.Insert("Eq_011", NStr("en='Already connected';
-		|ru='Уже подключен';
-		|tr='Zaten bağlı'", Lang));
-	Strings.Insert("Eq_012", NStr("en='Already disconnected';
-		|ru='Уже подключен';
-		|tr='Zaten bağlantısı kesildi'", Lang));
-	Strings.Insert("Eq_013", NStr("en='Hardware not found';
-		|ru='Оборудование не найдено';
-		|tr='Donanım bulunamadı'", Lang));
-	Strings.Insert("Eq_CanNotFindAPIModule", NStr("en='Can not find API module. Check `Equipment API Module` in Hardware';
-		|ru='API модуль не найден. Проверьте ""Модуль API оборудования"" в торговом оборудовании';
-		|tr='API modülü bulunamadı. Donanımda `Ekipman API Modülü`nü kontrol edin'", Lang));
+	Strings.Insert("Eq_001", NStr("en='2ACBE9CB-918E-5CA4-4B54-448D14B89456'", Lang));
+	Strings.Insert("Eq_002", NStr("en='F1E13A8D-2ED8-ADC2-2374-402EFA2B3E5B'", Lang));
+	Strings.Insert("Eq_003", NStr("en='08EDF311-D69B-6D9B-B217-7C92285099FC'", Lang));
+	Strings.Insert("Eq_004", NStr("en='7D2B329C-8AA3-DF71-10D2-2CDA601B061B%1'", Lang));
+	Strings.Insert("Eq_005", NStr("en='DD1E860D-7E1A-A7E9-9536-61058CFACAE9%1'", Lang));
+	Strings.Insert("Eq_006", NStr("en='63274FFF-2508-818E-E2F8-8E41BB4B8192'", Lang));
+	Strings.Insert("Eq_007", NStr("en='AFA3F338-0134-F0FA-AB5B-B0CEBC5F1D51%1'", Lang));
+	Strings.Insert("Eq_008", NStr("en='C58D3B33-8154-F8E0-07CB-B9F825FF31AF%1'", Lang));
+	Strings.Insert("Eq_009", NStr("en='D47C4F42-DA99-23D1-1623-3C059C2AF1A5%1'", Lang));
+	Strings.Insert("Eq_010", NStr("en='C978511E-9B6A-4EB7-707F-F9861E96AE5A%1'", Lang));
+	Strings.Insert("Eq_011", NStr("en='5A05005B-7B64-4B83-3EF8-823A97925AED'", Lang));
+	Strings.Insert("Eq_012", NStr("en='E71553E5-C90C-E9BA-AD83-3367FA21DDF7'", Lang));
+	Strings.Insert("Eq_013", NStr("en='2FA97482-F29D-1CB2-264C-C504F86545D0'", Lang));
+	Strings.Insert("Eq_CanNotFindAPIModule", NStr("en='60CB1618-7F7F-2207-7FCF-FB65FC5A1B9F_____________________________'", Lang));
 	
-	Strings.Insert("EqError_001", NStr("en='The device is connected. The device must be disabled before the operation.';
-		|ru='Устройство подключено. Устройство должно быть отключено перед началом работы.';
-		|tr='Cihaz bağlandı. İşlemden önce cihaz devre dışı bırakılmalı.'", Lang));
+	Strings.Insert("EqError_001", NStr("en='12AF2C44-1C6C-67F9-9662-2B9957D8A02B______________________________________'", Lang));
 
-	Strings.Insert("EqError_002", NStr("en='The device driver could not be downloaded.
-		|Check that the driver is correctly installed and registered in the system.';
-		|ru='Драйвер устройства не может быть загружен. 
-		|Проверьте, что драйвер правильно установлен и зарегистрирован в системе.';
-		|tr='Cihaz sürücüsü yüklenemedi.
-		|Sürücünün düzgün kurulduğundan ve sistemde kayıtlı (registered) olduğundan emin olunuz.'",
+	Strings.Insert("EqError_002", NStr("en='BDB6874B-4FED-EAC0-0FEA-A8A16F1FA39D______
+		|_________________________________________________________________________'",
 		Lang));
 
-	Strings.Insert("EqError_003", NStr("en='It has to be minimum one dot at Add ID.';
-		|ru='Необходимо иметь минимум одну точку в доп. ID.';
-		|tr='Ek ID''de minimum bir nokta olmalıdır.'", Lang));
-	Strings.Insert("EqError_004", NStr("en='Before install driver - it has to be loaded.';
-		|ru='Перед тем как установить драйвер, он должен быть загружен.';
-		|tr='Sürücü yükemeden öncesi indirmek lazım.'", Lang));
-	Strings.Insert("EqError_005", NStr("en='The equipment driver %1 has incorrect AddIn ID %2.';
-		|ru='У драйвера оборудования %1 неправильный AddIn ID %2.';
-		|tr='Donanım %1 sürücüsü yanlış AddIn ID %2 bilgisine sahiptir.'", Lang));
+	Strings.Insert("EqError_003", NStr("en='7AB8D3F6-7A36-1C4A-A2A3-3C2F5B3F7F71___'", Lang));
+	Strings.Insert("EqError_004", NStr("en='CC3865AA-6A99-BD43-3620-0D8FC532E98D________'", Lang));
+	Strings.Insert("EqError_005", NStr("en='68BB357C-8B23-FC0F-F8CC-C6C098F55087______________%1,%2'", Lang));
 	
-	Strings.Insert("EqFP_ShiftIsExpired", NStr("en='Shift has already expired.';
-		|ru='Смена уже завершилась.';
-		|tr='Vardiya süresi doldu.'", Lang));
-	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en='Shift already opened.';
-		|ru='Смена уже открыта.';
-		|tr='Vardya artık açılmış.'", Lang));
-	Strings.Insert("EqFP_ShiftIsNotOpened", NStr("en='Shift is not opened.';
-		|ru='Смена не открыта.';
-		|tr='Vardya açılmamıştı.'", Lang));
-	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en='Shift already closed.';
-		|ru='Смена уже закрыта.';
-		|tr='Vardya kapanmıştı.'", Lang));
-	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en='Operation cannot be completed because the document has already been printed. You can only print a copy.';
-		|ru='Действие не может быть совершено, потому что документ уже был распечатан. Возможно только печать копии.';
-		|tr='İşlem tamamlanamaz çünkü belge zaten basılmış. Yalnızca bir kopyasını yazdırabilirsiniz.'", Lang));
-	Strings.Insert("EqFP_DocumentNotPrintedOnFiscal", NStr("en='Document was not found on the fiscal device.';
-		|ru='Документ не был найден на фискальном регистраторе';
-		|tr='Belge mali cihazda bulunamadı.'", Lang));
-	Strings.Insert("EqFP_FiscalDeviceIsEmpty", NStr("en='Fiscal device not set.';
-		|ru='Фискальное устройство не установлено.';
-		|tr='Fiskal cihaz ayarlanmadı.'", Lang));
-	Strings.Insert("EqFP_CannotPrintNotPosted", NStr("en='Document in not posted.';
-		|ru='Документ не проведен.';
-		|tr='Belge kaydedilmedi.'", Lang));
-	Strings.Insert("EqFP_CanPrintOnlyComplete", NStr("en='Document can be printed only in Complete status.';
-		|ru='Документ может быть напечатан только в статусе Завершено.';
-		|tr='Belge yalnızca Tamamlandı durumunda yazdırılabilir.'", Lang));
+	Strings.Insert("EqFP_ShiftIsExpired", NStr("en='1A32B4B2-0FCB-0100-0499-9987B14B32DB'", Lang));
+	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en='891A0E4B-4FDF-E739-9FE9-9ABB43F0D481'", Lang));
+	Strings.Insert("EqFP_ShiftIsNotOpened", NStr("en='5D100E28-E77D-1279-9BC6-620D085AC49F'", Lang));
+	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en='4344A774-5C8F-CA35-544E-EFACF40F229B'", Lang));
+	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en='82EFCC2F-01DE-66D9-91D2-2A7A3F0C7F03___________________________________________________________________'", Lang));
+	Strings.Insert("EqFP_DocumentNotPrintedOnFiscal", NStr("en='B8A6E2A8-93E9-7C78-87D6-699FE0D07C27________'", Lang));
+	Strings.Insert("EqFP_FiscalDeviceIsEmpty", NStr("en='8E60A7CE-9055-61E5-5EF4-480975323BD5'", Lang));
+	Strings.Insert("EqFP_CannotPrintNotPosted", NStr("en='0D210B61-E849-22AD-DEA5-5E735458607B'", Lang));
+	Strings.Insert("EqFP_CanPrintOnlyComplete", NStr("en='0F276C36-EA6A-B062-2F05-51212FB08DA5____________'", Lang));
 	
-	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='The document is already has transaction code. Transaction already was done. Else clear RRN code.';
-		|ru='В документе уже есть код транзакции. Транзакция уже проведена. При необходимости можно очистить ККИ код.';
-		|tr='Belge zaten işlem koduna sahip. İşlem zaten yapıldı. Aksi takdirde RRN kodunu temizleyin.'", Lang));
-	Strings.Insert("EqAc_LastSettlementHasError", NStr("en='Last settlement has error. Try get new one.';
-		|ru='В последней сверке обнаружена ошибка. Попробуйте получить новую.';
-		|tr='Son ödeme hatası var. Yeni bir tane almayı deneyin.'", Lang));
-	Strings.Insert("EqAc_LastSettlementNotFound", NStr("en='Last settlement not found. Make sure that logging is enabled for this equipment.';
-		|ru='Последняя сверка не найдена. Убедитесь, что для этого оборудования включено ведение логов.';
-		|tr='Son yerleşim bulunamadı. Bu ekipman için günlüğe kaydetmenin etkinleştirildiğinden emin olun.'", Lang));
-	Strings.Insert("EqAc_NotAllPaymentDone", NStr("en='Not all payment done.';
-		|ru='Не все платежи выполнены.';
-		|tr='Tüm ödemeler yapılmadı.'", Lang));
+	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='38560148-B2BF-9ADE-E1B1-1C7D9D72310D____________________________________________________________'", Lang));
+	Strings.Insert("EqAc_LastSettlementHasError", NStr("en='09F34BBD-9DC6-23F0-01A5-5B8618DEBCA8_______'", Lang));
+	Strings.Insert("EqAc_LastSettlementNotFound", NStr("en='A1E6197E-4820-60B5-5165-5F692F0C6C8B____________________________________________'", Lang));
+	Strings.Insert("EqAc_NotAllPaymentDone", NStr("en='024F2B24-693F-4DC8-8BD6-61E60FA2FF2C'", Lang));
 	
-	Strings.Insert("EqFP_CanNotOpenSessionRegistrationKM", NStr("en='Can not open session registration KM.';
-		|ru='Не удалось открыть сессию регистрации кодов';
-		|tr='KM oturum kaydı açılamıyor.'", Lang));
-	Strings.Insert("EqFP_CanNotRequestKM", NStr("en='Can not request KM.';
-		|ru='Не удалось запросить состояние кодов';
-		|tr='KM talep edilemiyor.'", Lang));
-	Strings.Insert("EqFP_CanNotGetProcessingKMResult", NStr("en='Can not get processing KM result.';
-		|ru='Не удалось получить данные о регистрации кодов';
-		|tr='İşlem KM sonucu alınamıyor.'", Lang));
-	Strings.Insert("EqFP_CanNotCloseSessionRegistrationKM", NStr("en='Can not close session registration KM.';
-		|ru='Не удалось закрыть сессию регистрации кодов';
-		|tr='KM oturum kaydı kapatılamıyor.'", Lang));
-	Strings.Insert("EqFP_GetWrongAnswerFromProcessingKM", NStr("en='Get wrong answer from Processing KM.';
-		|ru='Получен ошибочный ответ при проверке кодов';
-		|tr='KM İşleme yanlış cevap alındı.'", Lang));
-	Strings.Insert("EqFP_ScanedCodeStringAlreadyExists", NStr("en='Current barcode already use at document line: %1';
-		|ru='Текущий штрихкод уже используется в документе. Строка: %1';
-		|tr='Geçerli barkod zaten belge satırında kullanılıyor: %1'", Lang));
+	Strings.Insert("EqFP_CanNotOpenSessionRegistrationKM", NStr("en='B206D595-734F-D1B6-6145-5F27E106F976_'", Lang));
+	Strings.Insert("EqFP_CanNotRequestKM", NStr("en='027006B3-A953-C48B-BEE2-2BF65EC764F5'", Lang));
+	Strings.Insert("EqFP_CanNotGetProcessingKMResult", NStr("en='A5C3A5A5-7502-6DA7-753F-FF2E59D7B255'", Lang));
+	Strings.Insert("EqFP_CanNotCloseSessionRegistrationKM", NStr("en='BD929E8D-9973-B59B-B3DA-AED780A0B6A6__'", Lang));
+	Strings.Insert("EqFP_GetWrongAnswerFromProcessingKM", NStr("en='7FC06814-28BC-9EB9-9FF5-518ECB48946B'", Lang));
+	Strings.Insert("EqFP_ScanedCodeStringAlreadyExists", NStr("en='7234659F-83E1-AF81-16B6-67AB99C51845____________%1'", Lang));
 
-	Strings.Insert("EqFP_ProblemWhileCheckCodeString", NStr("en='Problem while check code: %1';
-		|ru='Ошибка при проверке кода: %1';
-		|tr='Kod kontrolü sırasında sorun oluştu: %1'", Lang));
+	Strings.Insert("EqFP_ProblemWhileCheckCodeString", NStr("en='E2FF06B6-B257-8BF4-46CA-AAB7AFCB9091%1'", Lang));
 
-	Strings.Insert("EqFP_ErrorWhileConfirmCode", NStr("en='Error while confirm code on request: %1';
-		|ru='Ошибка при попытке запроса подтверждения: %1';
-		|tr='İstek üzerinde kod onaylanırken hata: %1'", Lang));
-	Strings.Insert("EqFP_CashierNameCanNotBeEmpty", NStr("en='Cashier name can not be empty. Author -> Partner -> Description (lang)';
-		|ru='Имя кассира не может быть пустым. Автор -> Партнер -> Наименование (язык)';
-		|tr='Kasiyer adı boş olamaz. Yazar -> Ortak -> Tanım (dil)'", Lang));
-	Strings.Insert("EqFP_ReceivedWrongAnswerFromDevice", NStr("en='Received wrong answer from device. Contact Administrator.';
-		|ru='Получен неверный ответ от устройства. Свяжитесь с Администратором.';
-		|tr='Cihazdan tanımsız cevap geldi. Sistem yöneticisine başvurunuz.'", Lang));
+	Strings.Insert("EqFP_ErrorWhileConfirmCode", NStr("en='EAAAB44F-230B-4D24-420D-DDC32BD9D564___%1'", Lang));
+	Strings.Insert("EqFP_CashierNameCanNotBeEmpty", NStr("en='B89593FE-869C-63B4-46C6-661BF6A279B7__________________________________'", Lang));
+	Strings.Insert("EqFP_ReceivedWrongAnswerFromDevice", NStr("en='6656A149-807A-E65C-C0A6-643ECB4335B6_____________________'", Lang));
 
 #EndRegion
 
 #Region POS
 
-	Strings.Insert("POS_s1", NStr("en='Amount paid is less than amount of the document';
-		|ru='Сумма оплаты меньше суммы документа';
-		|tr='Ödeme tutarı satış tutarından daha küçüktür'", Lang));
-	Strings.Insert("POS_s2", NStr("en='Card fees are more than the amount of the document';
-		|ru='Сумма оплат по безналичному расчету больше суммы документа';
-		|tr='Kart ile ödeme tutarı satış tutarından daha büyüktür'", Lang));
-	Strings.Insert("POS_s3", NStr("en='There is no need to use cash, as card payments are sufficient to pay';
-		|ru='Суммы по безналичному расчету для оплаты достаточно. Нет необходимости дополнительно использовать наличный расчет. ';
-		|tr='Nakit tutar girmenize gerek yok, çünkü kart ile alınan ödeme yeterlidir'", Lang));
-	Strings.Insert("POS_s4", NStr("en='Amounts of payments are incorrect';
-		|ru='Суммы оплат некорректны';
-		|tr='Ödeme tutarlarda hata var'", Lang));
-	Strings.Insert("POS_s5", NStr("en='Select sales person';
-		|ru='Выбрать продавца';
-		|tr='Satış elemanı seç'", Lang));
-	Strings.Insert("POS_s6", NStr("en='Clear all Items before closing POS';
-		|ru='Удалить все строки перед закрытие рабочего места кассира';
-		|tr='POS kapatılmadan önce tüm Öğeleri temizle'", Lang));
+	Strings.Insert("POS_s1", NStr("en='C15B90DE-68AD-3EBA-AD98-8EEF3FDC0321___________'", Lang));
+	Strings.Insert("POS_s2", NStr("en='F4F3AE64-CE81-7FC0-07DF-F7A5695AFDCE______________'", Lang));
+	Strings.Insert("POS_s3", NStr("en='32F2458A-3533-19C4-48E8-820C070706BD________________________________'", Lang));
+	Strings.Insert("POS_s4", NStr("en='C651CCA6-C776-2F3C-C2A9-9147EC84C906'", Lang));
+	Strings.Insert("POS_s5", NStr("en='3456913C-3209-3E35-5C58-8C389AEE8FB6'", Lang));
+	Strings.Insert("POS_s6", NStr("en='1498905F-EFE2-6C8B-B73E-E883AF4C4525'", Lang));
 	
-	Strings.Insert("POS_Error_ErrorOnClosePayment", NStr("en='Cancel all payment before close form.';
-		|ru='Провести отмену всех оплат перед закрытием формы.';
-		|tr='Formu kapatmadan önce tüm ödemeleri iptal edin.'", Lang));
-	Strings.Insert("POS_Error_ErrorOnPayment", NStr("en='There some problem to do payment with %1. Retry?';
-		|ru='Возникли проблемы с оплатой %1. Повторить?';
-		|tr='%1 ile ödeme yaparken bazı sorunlar var. Tekrar deneyin mi?'", Lang));
-	Strings.Insert("POS_Error_CancelPayment", NStr("en='Operation with %1 by amount: %2 will be canceled.';
-		|ru='Операция с %1 на сумму: %2 будет отменена.';
-		|tr='%1 ile yapılan %2 tutarındaki işlem iptal edilecek.'", Lang));
-	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en='Cancel payment problem [%1: %2]. Payment not canceled.
-		|Copy message and send it to administrator';
-		|ru='Проблема отмены платежа [%1: %2]. Платеж не отменен.
-		|Скопируйте сообщение и отправьте его администратору';
-		|tr='Ödeme iptali sorunu [%1: %2]. Ödeme iptal edilmedi.
-		|Mesajı kopyalayın ve yöneticiye gönderin'", Lang));
-	Strings.Insert("POS_Error_ReturnAmountLess", NStr("en='There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .';
-		|ru='Для документа возврата ""%4"" есть более подходящяя позиция %3, чем %2 из %1.';
-		|tr='""%1"" öğesinden %2 adet var, bu miktar ""%4"" belgesinde iade için mevcut olan %3 miktarından fazla.'", Lang));
-	Strings.Insert("POS_Error_CannotFindUser", NStr("en='Can not find user with barcode [%1]';
-		|ru='Не найден пользователь для штрихкода [%1]';
-		|tr='Barkodla [%1] kullanıcı bulunamıyor'", Lang));
+	Strings.Insert("POS_Error_ErrorOnClosePayment", NStr("en='4AEC73EC-A4B9-B492-25E5-59452547AB6B_'", Lang));
+	Strings.Insert("POS_Error_ErrorOnPayment", NStr("en='AFE803CB-310F-9F66-6073-3091D38C057C____________%1'", Lang));
+	Strings.Insert("POS_Error_CancelPayment", NStr("en='DBF8FB3F-6DDB-2E8A-A018-811C38772443_____________%1,%2'", Lang));
+	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en='77C877D0-A442-FF36-63CD-DA5F6314BE56__________________%1,%2
+		|________________________________________'", Lang));
+	Strings.Insert("POS_Error_ReturnAmountLess", NStr("en='11272D29-D8D2-F144-4610-0FC7DEEEC414___________________________________________________%2,%1,%3,%4'", Lang));
+	Strings.Insert("POS_Error_CannotFindUser", NStr("en='61A8FB34-BE88-965E-E5A3-3147D3A8FC30%1'", Lang));
 	
-	Strings.Insert("POS_Error_ThisBarcodeFromAnotherItem", NStr("en='This is barcode used for %1';
-		|ru='Этот код уже используется для %1';
-		|tr='Bu barkod %1 için kullanılıyor'", Lang));
-	Strings.Insert("POS_Error_ThisIsNotControleStringBarcode", NStr("en='Scan control string barcode. Wrong barcode %1';
-		|ru='Просканируйте штрихкод маркировки. Не верный штрихкод: %1';
-		|tr='Kontrol dizesi barkodunu tarayın. Yanlış barkod %1'", Lang));
-	Strings.Insert("POS_Error_CheckFillingForAllCodes", NStr("en='Scan control string for each item.';
-		|ru='Сканировать котнрольные коды для каждого элемента';
-		|tr='Her öğe için kontrol dizesi tarayın.'", Lang));
+	Strings.Insert("POS_Error_ThisBarcodeFromAnotherItem", NStr("en='2AA78212-76C8-B1A1-13FA-ABEDBAD23A79%1'", Lang));
+	Strings.Insert("POS_Error_ThisIsNotControleStringBarcode", NStr("en='BF0B05F4-FC60-A8CB-B35E-EFF2C618CF96_________%1'", Lang));
+	Strings.Insert("POS_Error_CheckFillingForAllCodes", NStr("en='214E414C-5AFF-ED94-462F-F04DE41C7080'", Lang));
 	
-	Strings.Insert("POS_ClearAllItems", NStr("en='Clear all items before continuing';
-		|ru='Очистите все элементы перед продолжением';
-		|tr='Devam etmeden önce tüm öğeleri temizleyin'", Lang));
-	Strings.Insert("POS_CancelPostponed", NStr("en='%1 postponed receipts cancelled';
-		|ru='%1 отложенных чеков отменено';
-		|tr='%1 ertelenmiş alımlar iptal edildi'", Lang));
+	Strings.Insert("POS_ClearAllItems", NStr("en='C96C7BE6-0EA9-6F5F-F4C6-6B62CC38B44C'", Lang));
+	Strings.Insert("POS_CancelPostponed", NStr("en='25ED6CCC-3DDF-C986-64C7-7546AE0052D9%1'", Lang));
 	
-	Strings.Insert("POS_ERROR_NoDeletingPrintedReceipt", NStr("en='Error! Receipt is already printed: %1';
-		|ru='Ошибка! Чек уже напечатан: %1';
-		|tr='Hata! Makbuz zaten basıldı: %1'", Lang));
+	Strings.Insert("POS_ERROR_NoDeletingPrintedReceipt", NStr("en='93FE8992-26A0-BAD9-9CDF-FFA07EF3C44C_%1'", Lang));
 	
-	Strings.Insert("POS_Warning_Revert", NStr("en='Now you are canceling Sales/Return transaction on pos terminal!
-		|Are you sure you want to process transaction?';
-		|ru='Сейчас вы отменяете транзакцию Продажи/Возврата на POS-терминале!
-		|Вы уверены, что хотите обработать транзакцию?';
-		|tr='POS cihazında işlemi İPTAL ediyorsunuz.
-		|Devam etmek istediğinizden emin misiniz?'", Lang));
+	Strings.Insert("POS_Warning_Revert", NStr("en='A7D69DF5-150D-E6CA-AE55-5C52E193FA34___________________________
+		|____________________________________________'", Lang));
 	
-	Strings.Insert("POS_Warning_ReturnInDay", NStr("en='Now you are going to RETURN money by pos terminal.
-		|Are you sure you want to process transaction?';
-		|ru='Сейчас вы собираетесь ВЕРНУТЬ деньги через POS-терминал. 
-		|Вы уверены, что хотите обработать транзакцию?';
-		|tr='POS terminal ile para IADESİ yapmak üzeresiniz.
-		|İşlemi yapmak istediğinizden emin misiniz?'", Lang));
+	Strings.Insert("POS_Warning_ReturnInDay", NStr("en='5C1208F3-C9B4-E212-2400-09FA01D92061______________
+		|____________________________________________'", Lang));
 	
 #EndRegion
 
@@ -1754,440 +1308,224 @@ Function Strings(Lang) Export
 	// %1 - localhost
 	// %2 - 8080 
 	// %3 - There is no internet connection
-	Strings.Insert("S_002", NStr("en='Cannot connect to %1:%2. Details: %3';
-		|ru='Не получается подключиться к %1:%2. Подробности: %3.';
-		|tr='%1:%2 ile bağlantı kurulamıyor. Ayrıntılar:%3'", Lang));
+	Strings.Insert("S_002", NStr("en='98C73CFE-FE0F-F69C-C6F7-727C78259421%1,%2,%3'", Lang));
 	
 	// %1 - localhost
 	// %2 - 8080
-	Strings.Insert("S_003", NStr("en='Received response from %1:%2';
-		|ru='Полученный ответ от %1:%2';
-		|tr='%1:%2 tarafından yanıt alındı'", Lang));
-	Strings.Insert("S_004", NStr("en='Resource address is empty.';
-		|ru='Адрес ресурса не заполнен.';
-		|tr='Kaynak adresi boş.'", Lang));
+	Strings.Insert("S_003", NStr("en='79F8EFE1-7E8F-2C76-6A1D-D8000BA60160%1,%2'", Lang));
+	Strings.Insert("S_004", NStr("en='8C65C9E2-3A01-7928-8AE1-1E2BD440332C'", Lang));
 	
 	// %1 - connection_to_other_system
-	Strings.Insert("S_005", NStr("en='Integration setting with name %1 is not found.';
-		|ru='Настройки интеграции с наименованием %1 не найдены.';
-		|tr='%1 adıyla entegrasyon ayarı bulunamadı.'", Lang));
-	Strings.Insert("S_006", NStr("en='Method is not supported in Web Client.';
-		|ru='В web клиенте метод не поддерживается.';
-		|tr='Yöntem Web İstemcisinde desteklenmiyor'", Lang));
+	Strings.Insert("S_005", NStr("en='8A7F3B77-DE4D-114C-CCE0-02FBBCB31116__________%1'", Lang));
+	Strings.Insert("S_006", NStr("en='F61A10D4-15D3-5E52-2CB0-093C51FEC9E0__'", Lang));
 	
 	// Special offers
-	Strings.Insert("S_013", NStr("en='Unsupported object type: %1.';
-		|ru='Неподдерживаемый тип объекта: %1.';
-		|tr='Desteklenmeyen nesne türü: %1.'", Lang));
+	Strings.Insert("S_013", NStr("en='EB919343-C448-AB04-4CA5-59170E2D70E9%1'", Lang));
 	
 	// FileTransfer
-	Strings.Insert("S_014", NStr("en='File name is empty.';
-		|ru='Имя файла не заполнено';
-		|tr='Dosya adı boş.'", Lang));
-	Strings.Insert("S_015", NStr("en='Path for saving is not set.';
-		|ru='Путь сохранения не установлен.';
-		|tr='Kaydetme yolu belirlenmemiş.'", Lang));
+	Strings.Insert("S_014", NStr("en='1A9E4676-663D-3ABD-D03C-C301085DBAD0'", Lang));
+	Strings.Insert("S_015", NStr("en='2EBC3422-D630-9AF9-9DB8-8C57217ED72D'", Lang));
 	
 	// Test connection
 	// %1 - Method unsupported on web client
 	// %2 - 404
 	// %3 - Text frim site
-	Strings.Insert("S_016", NStr("en='%1 Status code: %2 %3';
-		|ru='%1 Статус код: %2 %3';
-		|tr='%1 Durum kodu: %2 %3'", Lang));
+	Strings.Insert("S_016", NStr("en='8A6925D9-C33E-111C-CCE0-03D2919B3B22%1,%2,%3'", Lang));
 	
 	//	scan barcode
-	Strings.Insert("S_018", NStr("en='Item added.';
-		|ru='Номенклатура добавлена.';
-		|tr='Malzeme eklendi.'", Lang)); 
+	Strings.Insert("S_018", NStr("en='A5E55F5C-E6A5-4CD2-2BD6-6B85CA908DD0'", Lang)); 
 	
 	// %1 - 123123123123
-	Strings.Insert("S_019", NStr("en='Barcode %1 not found.';
-		|ru='Штрихкод %1 не найден.';
-		|tr='%1 barkodu bulunamadı.'", Lang));
-	Strings.Insert("S_022", NStr("en='Currencies in the base documents must match.';
-		|ru='Валюты в документах-основания должны совпадать.';
-		|tr='Ana belgelerdeki para birimleri eşleşmelidir.'", Lang));
-	Strings.Insert("S_023", NStr("en='Procurement method';
-		|ru='Метод обеспечения';
-		|tr='Tedarik şekli'", Lang));
+	Strings.Insert("S_019", NStr("en='FF8DA589-E0EE-573A-A632-26DD7254335D%1'", Lang));
+	Strings.Insert("S_022", NStr("en='231A83D3-BA44-3BC2-2BD1-1D36072D6BC4________'", Lang));
+	Strings.Insert("S_023", NStr("en='5C861201-7421-FC59-95BA-A53F5DBFCF5D'", Lang));
 
-	Strings.Insert("S_026", NStr("en='Selected icon will be resized to 16x16 px.';
-		|ru='Размер выбранной иконки будет изменен до 16x16 px.';
-		|tr='Seçilen simge 16x16 piksel olarak yeniden boyutlandırılacaktır.'", Lang));
+	Strings.Insert("S_026", NStr("en='73DE04EC-9D4E-577F-F131-11E80A3FCB02______'", Lang));
 
 	// presentation of empty value for query result
-	Strings.Insert("S_027", NStr("en='[Not filled]';
-		|ru='[не заполнено]';
-		|tr='[ Doldurulmamış ]'", Lang));
+	Strings.Insert("S_027", NStr("en='93B84AB4-8908-FB5E-E6FE-EF29DC51B661'", Lang));
 	// operation is Success
-	Strings.Insert("S_028", NStr("en='Success';
-		|ru='Успешно';
-		|tr='Başarılı'", Lang));
-	Strings.Insert("S_029", NStr("en='Not supporting web client';
-		|ru='Не поддерживаемый wreb клиент';
-		|tr='Desteklenmeyen web istemci'", Lang));
-	Strings.Insert("S_030", NStr("en='Cashback';
-		|ru='Сдача';
-		|tr='Para üstü'", Lang));
-	Strings.Insert("S_031", NStr("en='or';
-		|ru='или';
-		|tr='veya'", Lang));
-	Strings.Insert("S_032", NStr("en='Add code, ex: CommonFunctionsServer.GetCurrentSessionDate()';
-		|ru='Добавить код, например: CommonFunctionsServer.GetCurrentSessionDate()';
-		|tr='Kod ekle, örn: CommonFunctionsServer.GetCurrentSessionDate()'", Lang));
+	Strings.Insert("S_028", NStr("en='05DFDF96-ED3A-86C2-2113-308BD08F51E2'", Lang));
+	Strings.Insert("S_029", NStr("en='D7B37F17-CC11-34E9-950A-A3CC7889BF78'", Lang));
+	Strings.Insert("S_030", NStr("en='3C022A3A-8B10-D4FF-F9A6-6F1B2CA8F08C'", Lang));
+	Strings.Insert("S_031", NStr("en='6D47E737-CB85-FD15-5757-7EA5E6D5C177'", Lang));
+	Strings.Insert("S_032", NStr("en='93977B36-BF8B-E095-5A55-52EC29274861_______________________'", Lang));
 #EndRegion
 
 #Region Service
-	Strings.Insert("Form_001", NStr("en='New page';
-		|ru='Новая страница';
-		|tr='Yeni sayfa'", Lang));
-	Strings.Insert("Form_002", NStr("en='Delete';
-		|ru='Пометить на удаление/Снять пометку';
-		|tr='Kaldır'", Lang));
-	Strings.Insert("Form_003", NStr("en='Quantity';
-		|ru='Количество';
-		|tr='Miktar'", Lang));
-	Strings.Insert("Form_004", NStr("en='Customer terms';
-		|ru='Соглашения клиента';
-		|tr='Müşteri sözleşmesi'", Lang));
-	Strings.Insert("Form_005", NStr("en='Customers';
-		|ru='Клиенты';
-		|tr='Müşteriler'", Lang));
-	Strings.Insert("Form_006", NStr("en='Vendors';
-		|ru='Поставщики';
-		|tr='Tedarikçiler'", Lang));
-	Strings.Insert("Form_007", NStr("en='Vendor terms';
-		|ru='Соглашения поставщика';
-		|tr='Tedarikçi sözleşmesi'", Lang));
-	Strings.Insert("Form_008", NStr("en='User';
-		|ru='Пользователь';
-		|tr='Kullanıcı'", Lang));
-	Strings.Insert("Form_009", NStr("en='User group';
-		|ru='Группа пользователей';
-		|tr='Kullanıcı grubu'", Lang));
-	Strings.Insert("Form_013", NStr("en='Date';
-		|ru='Дата';
-		|tr='Tarih'", Lang));
-	Strings.Insert("Form_014", NStr("en='Number';
-		|ru='Номер';
-		|tr='Numara'", Lang));
+	Strings.Insert("Form_001", NStr("en='227B2DD1-03AA-8EA0-0130-07913DEAA02F'", Lang));
+	Strings.Insert("Form_002", NStr("en='84ADEDC7-D2D9-875F-FB00-081005992A16'", Lang));
+	Strings.Insert("Form_003", NStr("en='51E1E7E3-9C72-BEB1-1C62-233C85FF58E4'", Lang));
+	Strings.Insert("Form_004", NStr("en='3A659EB0-B69D-6043-30FB-B56170EF5E3D'", Lang));
+	Strings.Insert("Form_005", NStr("en='9394DC76-A7E8-AA35-5FC6-6517717CEECF'", Lang));
+	Strings.Insert("Form_006", NStr("en='B0A85FF6-4C94-A282-28AD-D851313053EA'", Lang));
+	Strings.Insert("Form_007", NStr("en='9E101B46-651D-F3D8-850B-B67E254DDC33'", Lang));
+	Strings.Insert("Form_008", NStr("en='76C447B0-C7AF-4EE9-9529-9D625A59668E'", Lang));
+	Strings.Insert("Form_009", NStr("en='3C31AAC3-37C3-4A7F-FC55-5277B640ED15'", Lang));
+	Strings.Insert("Form_013", NStr("en='3D008872-6735-3A1E-E347-7972676B69B3'", Lang));
+	Strings.Insert("Form_014", NStr("en='DE5C20EC-29F2-7402-284B-BF659223D0EC'", Lang));
 	
 	// change icon
-	Strings.Insert("Form_017", NStr("en='Change';
-		|ru='Изменить';
-		|tr='Değiştir'", Lang));
+	Strings.Insert("Form_017", NStr("en='74E5F6E1-D312-680E-EFD2-2CD9FE8D3E87'", Lang));
 	
 	// clear icon
-	Strings.Insert("Form_018", NStr("en='Clear';
-		|ru='Очистить';
-		|tr='Temizle'", Lang));
+	Strings.Insert("Form_018", NStr("en='01A3C395-0082-6352-2C6D-DE29579D0ED6'", Lang));
 	
 	// cancel answer on question
-	Strings.Insert("Form_019", NStr("en='Cancel';
-		|ru='Отмена';
-		|tr='İptal'", Lang));
+	Strings.Insert("Form_019", NStr("en='DDD7EF50-72B0-BFA5-5330-0591CFF31B84'", Lang));
 	
 	// PriceInfo report 
-	Strings.Insert("Form_022", NStr("en='1. By item keys';
-		|ru='1. По характеристике номенклатуры';
-		|tr='1. Varyantlara göre'", Lang));
-	Strings.Insert("Form_023", NStr("en='2. By properties';
-		|ru='2. По свойствам';
-		|tr='2. Özelliklere göre'", Lang));
-	Strings.Insert("Form_024", NStr("en='3. By items';
-		|ru='3. По номенклатуре';
-		|tr='3. Malzemelere göre'", Lang));
+	Strings.Insert("Form_022", NStr("en='5165ACC2-B401-935D-D480-00C1904631D1'", Lang));
+	Strings.Insert("Form_023", NStr("en='DAA047BB-B2DE-61DC-C271-1FC693A09820'", Lang));
+	Strings.Insert("Form_024", NStr("en='D6FA468B-E15B-393A-AB44-4E88EA28492D'", Lang));
 
-	Strings.Insert("Form_025", NStr("en='Create from classifier';
-		|ru='Создать по классификатору';
-		|tr='Sınıflandırıcıdan oluştur'", Lang));
+	Strings.Insert("Form_025", NStr("en='AC4FAC5D-1C6A-FF08-8762-2C4DE1F2F498'", Lang));
 
-	Strings.Insert("Form_026", NStr("en='Item Bundle';
-		|ru='Номенклатура набора';
-		|tr='Malzeme Paketi'", Lang));
-	Strings.Insert("Form_027", NStr("en='Item';
-		|ru='Номенклатура';
-		|tr='Malzeme'", Lang));
-	Strings.Insert("Form_028", NStr("en='Item type';
-		|ru='Вид номенклатуры';
-		|tr='Malzeme tipi'", Lang));
-	Strings.Insert("Form_029", NStr("en='External attributes';
-		|ru='Внешние реквизиты';
-		|tr='Dış özellikler'", Lang));
-	Strings.Insert("Form_030", NStr("en='Dimensions';
-		|ru='Измерения';
-		|tr='Boyutlar'", Lang));
-	Strings.Insert("Form_031", NStr("en='Weight information';
-		|ru='Информация о весе';
-		|tr='Ağırlık bilgisi'", Lang));
-	Strings.Insert("Form_032", NStr("en='Period';
-		|ru='Период';
-		|tr='Dönem'", Lang));
-	Strings.Insert("Form_033", NStr("en='Show all';
-		|ru='Показать все';
-		|tr='Tümü göster'", Lang));
-	Strings.Insert("Form_034", NStr("en='Hide all';
-		|ru='Скрыть все';
-		|tr='Tümü sakla'", Lang));
-	Strings.Insert("Form_035", NStr("en='Head';
-		|ru='Шапка';
-		|tr='Başlık'", Lang));
-	Strings.Insert("Form_036", NStr("en='Set as default';
-		|ru='Установить как основной';
-		|tr='Varsayılan olarak işaretle'", Lang));
-	Strings.Insert("Form_037", NStr("en='Unset as default';
-		|ru='Убрать как основной';
-		|tr='Varsayılan olarak kaldır'", Lang));
-	Strings.Insert("Form_038", NStr("en='Employee';
-		|ru='Сотрудники';
-		|tr='Personel'", Lang));
-	Strings.Insert("Form_039", NStr("en='Add attribute in additional attribute set in extension tab for current object type: %1';
-		|ru='Добавить атрибут в дополнительный набор атрибутов на вкладке расширения для текущего типа объекта: %1';
-		|tr='Mevcut nesne türü için uzantı sekmesinde ek özellik setine özellik ekle: %1'", Lang));
-	Strings.Insert("Form_040", NStr("en='Select any row to split';
-		|ru='Выберите любую строку для разделения';
-		|tr='Dağıtmak için herhangi bir satırı seçin'", Lang));
-	Strings.Insert("Form_041", NStr("en='It cannot split the row where the quantity is 0';
-		|ru='Нельзя разделить строку с количеством 0';
-		|tr='Miktarı 0 olan satırı dağıtılamaz'", Lang));
-	Strings.Insert("Form_042", NStr("en='Set the quantity for the new row';
-		|ru='Укажите количество для новой строки';
-		|tr='Yeni satır için miktarı giriniz'", Lang));
-	Strings.Insert("Form_043", NStr("en='Quantity can only be greater than 0 and less than %1';
-		|ru='Количество должно быть > 0 и < %1';
-		|tr='Miktar yalnızca 0''dan büyük ve %1''den küçük olabilir'", Lang));
+	Strings.Insert("Form_026", NStr("en='E0AC9FCC-9D45-D0DC-C9C7-7D6C190CAF86'", Lang));
+	Strings.Insert("Form_027", NStr("en='E11A9633-AAB7-9E79-9E1F-F2F41A079399'", Lang));
+	Strings.Insert("Form_028", NStr("en='BD0CF784-FA96-07CD-DF4C-C8E40971F21D'", Lang));
+	Strings.Insert("Form_029", NStr("en='D77E20E9-9717-F4C1-1730-0C0927F7C2F3'", Lang));
+	Strings.Insert("Form_030", NStr("en='89F2DDF5-67A1-438C-CE0D-D3DA5F4FD3E7'", Lang));
+	Strings.Insert("Form_031", NStr("en='BFEEFF52-20AD-AF77-7C32-23C3B5F10C45'", Lang));
+	Strings.Insert("Form_032", NStr("en='E87BDF37-8430-6F7D-D38B-BF761F0A337D'", Lang));
+	Strings.Insert("Form_033", NStr("en='0A9FBC58-63EA-C372-2C5E-E515D470C4D3'", Lang));
+	Strings.Insert("Form_034", NStr("en='052F0577-20BB-3E49-9994-4CC5AD196A54'", Lang));
+	Strings.Insert("Form_035", NStr("en='A0FC3957-8964-4C1C-CD12-2F3677D7515A'", Lang));
+	Strings.Insert("Form_036", NStr("en='8AAE363D-12B2-6A31-1F7D-DDFDFDA7C195'", Lang));
+	Strings.Insert("Form_037", NStr("en='001DE2EF-D30A-B295-5EC5-5095B02C988B'", Lang));
+	Strings.Insert("Form_038", NStr("en='773327A1-6E49-DCE9-9CF7-73DC06D9F09F'", Lang));
+	Strings.Insert("Form_039", NStr("en='8D0A7925-2616-7BA2-294A-A79D10138249__________________________________________________%1'", Lang));
+	Strings.Insert("Form_040", NStr("en='073F5E84-CB99-80B3-3993-3805907AEAED'", Lang));
+	Strings.Insert("Form_041", NStr("en='53051146-E442-571B-BE6C-C83456A35355___________'", Lang));
+	Strings.Insert("Form_042", NStr("en='9990F68F-7E2F-2AE5-5746-645B1718C196'", Lang));
+	Strings.Insert("Form_043", NStr("en='C5F67AE3-AF76-A5C3-3B2B-B1541092798D________________%1'", Lang));
 #EndRegion
 
 #Region ErrorMessages
 
 	// %1 - en
-	Strings.Insert("Error_002", NStr("en='%1 description is empty';
-		|ru='%1 наименование не заполнено';
-		|tr='%1 açıklaması boş'", Lang));
-	Strings.Insert("Error_003", NStr("en='Fill any description.';
-		|ru='Заполните наименование.';
-		|tr='Herhangi bir açıklama girininiz.'", Lang));
-	Strings.Insert("Error_004", NStr("en='Metadata is not supported.';
-		|ru='Метаданные не поддерживаются.';
-		|tr='Meta veriler desteklenmiyor.'", Lang));
+	Strings.Insert("Error_002", NStr("en='0113D0EB-C466-2577-7BC4-44B6F56FDFF1%1'", Lang));
+	Strings.Insert("Error_003", NStr("en='BA266C05-3421-D0EE-EE7A-A406CBA08DEB'", Lang));
+	Strings.Insert("Error_004", NStr("en='0AC17093-CA57-8467-757E-ECD5B5FE0A5F'", Lang));
 	
 	// %1 - en
-	Strings.Insert("Error_005", NStr("en='Fill the description of an additional attribute %1.';
-		|ru='Заполните наименование дополнительного реквизита %1.';
-		|tr='Ek bir %1 özniteliğinin açıklamasını doldurunuz.'", Lang));
-	Strings.Insert("Error_008", NStr("en='Groups are created by an administrator.';
-		|ru='Группы создаются администратором.';
-		|tr='Gruplar bir yönetici tarafından oluşturulur.'", Lang));
+	Strings.Insert("Error_005", NStr("en='ED4444FA-3815-FC1A-A954-4F173D88D88F_______________%1'", Lang));
+	Strings.Insert("Error_008", NStr("en='D0827563-58BE-1583-37C8-826C2C629735___'", Lang));
 	
 	// %1 - Number 111 is not unique
-	Strings.Insert("Error_009", NStr("en='Cannot write the object: [%1].';
-		|ru='Ошибка при записи объекта: [%1].';
-		|tr='Nesne yazılamıyor: [%1].'", Lang));
+	Strings.Insert("Error_009", NStr("en='EA95834D-E092-EEEF-FA52-2933AB601FE8%1'", Lang));
 	
 	// %1 - Number
-	Strings.Insert("Error_010", NStr("en='Field [%1] is empty.';
-		|ru='Поле [%1] не заполнено.';
-		|tr='[%1] alanı boş.'", Lang));
-	Strings.Insert("Error_011", NStr("en='Add at least one row.';
-		|ru='Нужно добавить хоть одну строку.';
-		|tr='En az bir satır ekleyin.'", Lang));
-	Strings.Insert("Error_012", NStr("en='Variable is not named according to the rules.';
-		|ru='Переменная названа не в соответствии с правилами.';
-		|tr='Değişken, kurallara göre adlandırılmaz.'", Lang));
-	Strings.Insert("Error_013", NStr("en='Value is not unique.';
-		|ru='Значение не уникально.';
-		|tr='Değer benzersiz değil.'", Lang));
-	Strings.Insert("Error_014", NStr("en='Password and password confirmation do not match.';
-		|ru='Пароль и подтверждение пароля не совпадают.';
-		|tr='Parola ve parola onayı eşleşmiyor.'", Lang));
-	Strings.Insert("Error_015", NStr("en='Password cannot be empty.';
-		|ru='Пароль не может быть пустым.';
-		|tr='Şifre boş olamaz'", Lang));
+	Strings.Insert("Error_010", NStr("en='426FD697-FBB8-3173-315D-D2CF4EB3C542%1'", Lang));
+	Strings.Insert("Error_011", NStr("en='E524A3AE-2C0F-106A-A841-1B595B2191D6'", Lang));
+	Strings.Insert("Error_012", NStr("en='6FE6133A-B423-683F-F705-58E5954B0C8F_________'", Lang));
+	Strings.Insert("Error_013", NStr("en='660E5F0E-F220-AFD0-09B3-371796A45A18'", Lang));
+	Strings.Insert("Error_014", NStr("en='0DCD9C17-D710-8DB4-42B1-120B1053E5F4____________'", Lang));
+	Strings.Insert("Error_015", NStr("en='09515EA0-360A-AD0B-B77D-D1F7D588E4DD'", Lang));
 
 	// %1 - Sales order
-	Strings.Insert("Error_016", NStr("en='There are no more items that you need to order from suppliers in the ""%1"" document.';
-		|ru='В документе ""%1"" не осталось товаров по которым необходимо сделать заказ поставщику.';
-		|tr='""%1"" belgesinde tedarikçilerden sipariş etmeniz gereken başka ürün yok.'", Lang));
+	Strings.Insert("Error_016", NStr("en='BFAD82ED-0F41-C433-3DE6-67E2994069BE_______________________________________________%1'", Lang));
 	
 	// %1 - Goods receipt
 	// %2 - Purchase invoice
-	Strings.Insert("Error_017", NStr("en='First, create a ""%1"" document or clear the ""%1 before %2"" check box on the ""Other"" tab.';
-		|ru='Вначале необходимо создать документ ""%1"" или снять галочку ""%1 перед документом %2"" на вкладке ""Дополнительно"".';
-		|tr='İlk olarak, bir ""%1"" belgesi oluşturun veya ""Diğer"" sekmesindeki ""%1 %2''den önce"" onay kutusunu temizleyin.'", Lang));
+	Strings.Insert("Error_017", NStr("en='5B76BA8D-C9B6-A3D1-1AFD-DE27FFD6061C___________________________________________________%1,%1,%2'", Lang));
 
 	// %1 - Shipment confirmation
 	// %1 - Sales invoice
-	Strings.Insert("Error_018", NStr("en='First, create a ""%1"" document or clear the ""%1 before %2"" check box on the ""Other"" tab.';
-		|ru='Вначале необходимо создать документ ""%1"" или снять галочку ""%1 перед документом %2"" на вкладке ""Дополнительно"".';
-		|tr='İlk olarak, bir ""%1"" belgesi oluşturun veya ""Diğer"" sekmesindeki ""%1 %2''den önce"" onay kutusunu temizleyin.'", Lang));
+	Strings.Insert("Error_018", NStr("en='5B76BA8D-C9B6-A3D1-1AFD-DE27FFD6061C___________________________________________________%1,%1,%2'", Lang));
 	
 	// %1 - Goods receipt
 	// %2 - Purchase invoice
-	Strings.Insert("Error_019", NStr("en='There are no lines for which you need to create a ""%1"" document in the ""%2"" document.';
-		|ru='Строки по которым необходимо создать документ ""%1"" отсутствуют в документе ""%2"".';
-		|tr='""%2"" belgesinde ""%1"" belgesi oluşturmanız gereken satır yok.'", Lang));
+	Strings.Insert("Error_019", NStr("en='685ECF3B-3B2E-5094-4D7F-F4EF6469DD03_________________________________________________%1,%2'", Lang));
 
 	// %1 - 12
-	Strings.Insert("Error_020", NStr("en='Specify a base document for line %1.';
-		|ru='Необходимо заполнить документ-основания по строке %1.';
-		|tr='%1 satırı için bir ana belge belirtin.'", Lang));
+	Strings.Insert("Error_020", NStr("en='B37C787D-20E4-3A0B-BB9B-BC029F565C96%1'", Lang));
 
 	// %1 - Purchase invoice
-	Strings.Insert("Error_021", NStr("en='There are no products to return in the ""%1"" document. All products are already returned.';
-		|ru='По всем товарам из выбранного документа ""%1"" уже был оформлен возврат.';
-		|tr='""%1"" belgesinde iade edilecek ürün yok. Tüm ürünler zaten iade edildi.'", Lang));
+	Strings.Insert("Error_021", NStr("en='2897AB70-DADB-B465-5BE8-89288A1D7BDD____________________________________________________%1'", Lang));
 
 	// %1 - Internal supply request
-	Strings.Insert("Error_023", NStr("en='There are no more items that you need to order from suppliers in the ""%1"" document.';
-		|ru='В документе ""%1"" не осталось товаров по которым необходимо сделать заказ поставщику.';
-		|tr='""%1"" belgesinde tedarikçilerden sipariş etmeniz gereken başka ürün yok.'", Lang));
+	Strings.Insert("Error_023", NStr("en='BFAD82ED-0F41-C433-3DE6-67E2994069BE_______________________________________________%1'", Lang));
 	
 	// %1 - Goods receipt
 	// %2 - Purchase invoice
-	Strings.Insert("Error_028", NStr("en='Select the ""%1 before %2"" check box on the ""Other"" tab.';
-		|ru='Необходимо установить галочку ""%1 перед документом %2"" на вкладке ""Дополнительно"".';
-		|tr='""Diğer"" sekmesinde ""%2''den %1 önce"" onay kutusunu seçin.'", Lang));
+	Strings.Insert("Error_028", NStr("en='62F69A0E-BD98-8E96-6C78-869CEC550794___________________%1,%2'", Lang));
 	
 	// %1 - Cash account
 	// %2 - 12
 	// %3 - Cheque bonds
-	Strings.Insert("Error_030", NStr("en='Specify %1 in line %2 of the %3.';
-		|ru='Поле %1 обязателено для заполнения в строке %2 %3.';
-		|tr='%3''ün %2 satırında %1 belirtin.'", Lang));
+	Strings.Insert("Error_030", NStr("en='CEECB2D4-E76F-BF9C-C846-6AA80E30C6D6%1,%2,%3'", Lang));
 
-	Strings.Insert("Error_031", NStr("en='Items were not received from the supplier according to the procurement method.';
-		|ru='Заказанные товары у поставщика для обеспечения заказа не были получены.';
-		|tr='Tedarik yöntemine göre malzemeler tedarikçiden alınmadı.'", Lang));
-	Strings.Insert("Error_032", NStr("en='Action not completed.';
-		|ru='Действие не завершено.';
-		|tr='Eylem tamamlanmadı.'", Lang));
-	Strings.Insert("Error_033", NStr("en='Duplicate attribute.';
-		|ru='Реквизит дублируется.';
-		|tr='Yinelenen özellik.'", Lang));
+	Strings.Insert("Error_031", NStr("en='85C069F4-A2F1-FCF2-2C65-521182900709__________________________________________'", Lang));
+	Strings.Insert("Error_032", NStr("en='D7AF204D-B470-1AA4-4396-631F642F8D64'", Lang));
+	Strings.Insert("Error_033", NStr("en='78FCD961-C2C4-65D2-2F5D-D72E820DB4A4'", Lang));
 	// %1 - Google drive
-	Strings.Insert("Error_034", NStr("en='%1 is not a picture storage volume.';
-		|ru='%1 не является томом для хранения изображений.';
-		|tr='%1 bir resim depolama birimi değil.'", Lang));
-	Strings.Insert("Error_035", NStr("en='Cannot upload more than 1 file.';
-		|ru='Невозможно загрузить более 1 файла.';
-		|tr='1''den fazla dosya yüklenemez.'", Lang));
-	Strings.Insert("Error_037", NStr("en='Unsupported type of data composition comparison.';
-		|ru='Неподдерживаемый тип сравнения состава данных.';
-		|tr='Desteklenmeyen veri bileşimi karşılaştırması türü.'", Lang));
-	Strings.Insert("Error_040", NStr("en='Only picture files are supported.';
-		|ru='Поддерживается только тип файла - картинка.';
-		|tr='Yalnızca resim dosyaları desteklenir.'", Lang));
-	Strings.Insert("Error_041", NStr("en='Tax table contains more than 1 row [key: %1] [tax: %2].';
-		|ru='Таблица налогов содержит больше 1 строки [ключ: %1] [налог: %2].';
-		|tr='Vergi tablosu 1''den fazla satır içeriyor [anahtar: %1] [vergi: %2].'", Lang));
+	Strings.Insert("Error_034", NStr("en='221A5633-F1E0-FA3C-C825-5CD1D7327A8F%1'", Lang));
+	Strings.Insert("Error_035", NStr("en='75433875-3AEE-131C-C081-14134780F698'", Lang));
+	Strings.Insert("Error_037", NStr("en='FBAA655F-62A0-9C36-6DE4-4E581E7F8479____________'", Lang));
+	Strings.Insert("Error_040", NStr("en='6492349E-23E0-C216-62AC-C12DAB5F732F'", Lang));
+	Strings.Insert("Error_041", NStr("en='4DC7D4A3-FA69-DD32-23A6-6D1C8F65C7A2___________________%1,%2'", Lang));
 	// %1 - Name
-	Strings.Insert("Error_042", NStr("en='Cannot find a tax by column name: %1.';
-		|ru='Не найден налог по наименованию колонки: %1.';
-		|tr='Sütun adına göre bir vergi bulunamıyor: %1.'", Lang));
-	Strings.Insert("Error_043", NStr("en='Unsupported document type.';
-		|ru='Неподдерживаемый тип документа.';
-		|tr='Desteklenmeyen belge türü.'", Lang));
-	Strings.Insert("Error_044", NStr("en='Operation is not supported.';
-		|ru='Недопустимая операция.';
-		|tr='İşlem desteklenmiyor.'", Lang));
-	Strings.Insert("Error_045", NStr("en='Document is empty.';
-		|ru='Документ не заполнен.';
-		|tr='Belge boş.'", Lang));
+	Strings.Insert("Error_042", NStr("en='F06C605D-FBE4-8036-6AE0-03F9C7B2CA1A_%1'", Lang));
+	Strings.Insert("Error_043", NStr("en='E698AD41-9633-95B1-1D8A-A0B4BEC55E57'", Lang));
+	Strings.Insert("Error_044", NStr("en='9C25EA1F-74B2-D733-38AD-D09AC2A82F79'", Lang));
+	Strings.Insert("Error_045", NStr("en='D287FB4A-BE14-8C4A-AC64-46267916F2CA'", Lang));
 	// %1 - Currency
-	Strings.Insert("Error_047", NStr("en='""%1"" is a required field.';
-		|ru='Поле ""%1"" обязательное для заполнения.';
-		|tr='""%1"" zorunlu bir alandır.'", Lang));
-	Strings.Insert("Error_049", NStr("en='Default picture storage volume is not set.';
-		|ru='Том хранения файлов по умолчанию не заполнен.';
-		|tr='Varsayılan resim saklama hacmi ayarlanmamıştır.'", Lang));
-	Strings.Insert("Error_050", NStr("en='Currency exchange is available only for the same-type accounts (cash accounts or bank accounts).';
-		|ru='Обмен валюты возможен только между счетами одного типа (между двумя кассами или между двумя банковскими счетами).';
-		|tr='Döviz değişimi yalnızca aynı türdeki hesaplar için (kasa hesapları veya banka hesapları) kullanılabilir.'",
+	Strings.Insert("Error_047", NStr("en='62D03E8E-7153-150C-CEFB-B19B92466273%1'", Lang));
+	Strings.Insert("Error_049", NStr("en='62B7B9E4-7030-AF40-0A01-15ED9C977D9E______'", Lang));
+	Strings.Insert("Error_050", NStr("en='6FCA17B9-D80A-FB7C-C09C-C0B006FA5097____________________________________________________________'",
 		Lang));
 	// %1 - Bank payment
-	Strings.Insert("Error_051", NStr("en='There are no lines for which you can create a ""%1"" document, or all ""%1"" documents are already created.';
-		|ru='Отсутствуют строки по которым необходимо создать ""%1"" или же все документы ""%1"" уже были созданы ранее.';
-		|tr='Kendisi için bir ""%1"" belgesi oluşturabileceğiniz satır yok veya tüm ""%1"" belgeleri zaten oluşturulmuş.'",
+	Strings.Insert("Error_051", NStr("en='5C064016-A587-32EE-EE32-243636898AD0___________________________________________________________________%1,%1'",
 		Lang));
 	// %1 - Main store
 	// %2 - Use shipment confirmation
 	// %3 - Shipment confirmations
-	Strings.Insert("Error_052", NStr("en='Cannot clear the ""%2"" check box. 
-		|Documents ""%3"" from store %1 were already created.';
-		|ru='Снять галочку ""%2"" невозможно. 
-		|Ранее со склада %1 уже были созданы документы ""%3"".';
-		|tr='""%2"" onay kutusu temizlenemiyor.
-		|%1 mağazasından ""%3"" belgeleri zaten oluşturulmuş.'", Lang));
+	Strings.Insert("Error_052", NStr("en='AA54EC0E-91B6-F64A-AC84-452B19083EBA%2,%3,%1
+		|_________________________________________________'", Lang));
 	
 	// %1 - Main store
 	// %2 - Use goods receipt
 	// %3 - Goods receipts
-	Strings.Insert("Error_053", NStr("en='Cannot clear the ""%2"" check box. Documents ""%3"" from store %1 were already created.';
-		|ru='Невозможно снять галочку ""%2"". Ранее со склада %1 уже были созданы документы ""%3"".';
-		|tr='""%2"" onay kutusu temizlenemiyor. %1 mağazasından ""%3"" belgeleri zaten oluşturulmuş.'", Lang));
+	Strings.Insert("Error_053", NStr("en='169F34CA-EC97-C3B6-6CB1-1978E41FBC37_______________________________________________%2,%3,%1'", Lang));
 	
 	// %1 - sales order
-	Strings.Insert("Error_054", NStr("en='Cannot continue. The ""%1"" document has an incorrect status.';
-		|ru='Продолжение невозможно. Документ ""%1"" имеет не корректный статус.';
-		|tr='Devam edilemiyor. ""%1"" belgesinin durumu yanlış.'", Lang));
+	Strings.Insert("Error_054", NStr("en='D001895C-CF54-03DA-AB68-8592B7A522DA_______________________%1'", Lang));
 
-	Strings.Insert("Error_055", NStr("en='There are no lines with a correct procurement method.';
-		|ru='Отсутствуют строки с нужным способом обеспечения.';
-		|tr='Doğru tedarik yöntemine sahip hatlar yoktur.'", Lang));
+	Strings.Insert("Error_055", NStr("en='B39F867D-8289-A9EF-F9F2-2D1A791FDE8F_________________'", Lang));
 
 	// %1 - sales order
 	// %2 - purchase order
-	Strings.Insert("Error_056", NStr("en='All items in the ""%1"" document are already ordered using the ""%2"" document(s).';
-		|ru='Все товары в документе ""%1"" уже заказаны документом ""%2"".';
-		|tr='""%1"" belgesindeki tüm öğeler ""%2"" belgeleri kullanılarak zaten sıralanmıştır.'", Lang));
+	Strings.Insert("Error_056", NStr("en='EF671ACB-DE09-7407-740B-B7952CB05E4E__________________________________________%1,%2'", Lang));
 	
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
-	Strings.Insert("Error_057", NStr("en='You do not need to create a ""%1"" document for the selected ""%2"" document(s).';
-		|ru='Для выбранного документа ""%1"" не нужно создавать документ ""%2"".';
-		|tr='Seçili ""%2"" dokümanlar için ""%1"" doküman oluşturmanıza gerek yoktur.'", Lang));
+	Strings.Insert("Error_057", NStr("en='E81EDDF1-3A75-365B-B5F7-702C41D776E9________________________________________%1,%2'", Lang));
 	
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
-	Strings.Insert("Error_058", NStr("en='The total amount of the ""%2"" document(s) is already paid on the basis of the ""%1"" document(s).';
-		|ru='Вся сумма по документу ""%2"" уже была выдана по документу ""%1"".';
-		|tr='""%2"" belgelerinin toplam tutarı, ""%1"" belgeleri temelinde zaten ödendi.'",
+	Strings.Insert("Error_058", NStr("en='C90EA75D-D03B-0AB7-7AE3-3E4D5BEC24B0__________________________________________________________%2,%1'",
 		Lang));
 	
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
-	Strings.Insert("Error_059", NStr("en='In the selected documents, there are ""%2"" document(s) with existing ""%1"" document(s)
-		| and those that do not require a ""%1"" document.';
-		|ru='В списке выбранных документов ""%2"" есть те по которым уже был создан документ ""%1""
-		| и те по которым документ ""%1"" создавать не нужно.';
-		|tr='Seçilen belgelerde, mevcut ""%1"" belgelerine sahip ""%2"" belgeler var
-		|  ve ""%1"" belgesi gerektirmeyenler.'", Lang));
+	Strings.Insert("Error_059", NStr("en='D4900E23-9ED2-96F1-1044-4843DB60D1B3________________________________________________%2,%1,%1
+		|______________________________________________'", Lang));
 	
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
-	Strings.Insert("Error_060", NStr("en='The total amount of the ""%2"" document(s) is already received on the basis of the ""%1"" document(s).';
-		|ru='Вся сумма по документу ""%2"" уже была получена по документу ""%1"".';
-		|tr='""%2"" belgelerinin toplam miktarı, ""%1"" belgeleri temelinde zaten alındı.'",
+	Strings.Insert("Error_060", NStr("en='EF70A607-8DE8-1437-74EA-A835F2D1E999______________________________________________________________%2,%1'",
 		Lang));
 	
 	// %1 - Main store
 	// %2 - Shipment confirmation
 	// %3 - Sales order
-	Strings.Insert("Error_064", NStr("en='You do not need to create a ""%2"" document for store(s) %1. The item will be shipped using the ""%3"" document.';
-		|ru='Для склада %1 нет необходимости создавать документ ""%2"". Товар будет отгружен по документу ""%3"".';
-		|tr='%1 mağazaları için ""%2"" belgesi oluşturmanıza gerek yok. Ürün, ""%3"" belgesi kullanılarak gönderilecek.'",
+	Strings.Insert("Error_064", NStr("en='99D8460D-37CE-73BC-C5F3-3FD860DF3695________________________________________________________________________%2,%1,%3'",
 		Lang));
 
-	Strings.Insert("Error_065", NStr("en='Item key is not unique.';
-		|ru='Характеристика не уникальна.';
-		|tr='Varyant benzersiz değil.'", Lang));
-	Strings.Insert("Error_066", NStr("en='Specification is not unique.';
-		|ru='Спецификация товара не уникальна.';
-		|tr='Spesifikasyon benzersiz değil.'", Lang));
-	Strings.Insert("Error_067", NStr("en='Fill Users or Group tables.';
-		|ru='Для таблиц пользователей или групп пользователей';
-		|tr='Kullanıcı ve Grup tabloları doldur'", Lang));
+	Strings.Insert("Error_065", NStr("en='A22626EC-2501-45E7-725B-BD5122E7B488'", Lang));
+	Strings.Insert("Error_066", NStr("en='39549BA4-46F3-8465-58D7-769D778D1770'", Lang));
+	Strings.Insert("Error_067", NStr("en='3602983B-E5E0-4DB4-4328-8B8FBEC87B98'", Lang));
 
 	// %1 - 12
 	// %2 - Boots
@@ -2197,9 +1535,7 @@ Function Strings(Lang) Export
 	// %6 - 15
 	// %7 - 4
 	// %8 - pcs
-	Strings.Insert("Error_068", NStr("en='Line No. [%1] [%2 %3] %4 remaining: %5 %8. Required: %6 %8. Lacking: %7 %8.';
-		|ru='Строка № [%1] [%2%3] %4 остаток: %5%8 Требуется: %6%8 Разница: %7%8.';
-		|tr='Satır No. [%1] [%2 %3] %4aldı: %5 %8. Gerekli: %6 %8. Eksik: %7 %8.'", Lang));
+	Strings.Insert("Error_068", NStr("en='89E56E12-B988-990F-F809-9AE241FE5927_______________________________________%1,%2,%3,%4,%5,%8,%6,%8,%7,%8'", Lang));
 
 	// %1 - 12
 	// %2 - Boots
@@ -2210,18 +1546,14 @@ Function Strings(Lang) Export
 	// %7 - 15
 	// %8 - 4
 	// %9 - pcs
-	Strings.Insert("Error_068_2", NStr("en='Line No. [%1] [%2 %3] Serial lot number [%4] %5 remaining: %6 %9. Required: %7 %9. Lacking: %8 %9.';
-		|ru='Номер строки [%1] [%2 %3] Серийный номер [%4] %5 остаток: %6 %9. Требуется: %7 %9. Недостача: %8 %9.';
-		|tr='Satır numarası [%1] [%2 %3] Seri lot numarası [%4] %5 kalan: %6 %9. İhtiyaç duyulan: %7 %9. Eksik: %8 %9.'", Lang));
+	Strings.Insert("Error_068_2", NStr("en='F50EDAFE-3F0E-889B-B3CA-A0F5D9AAD8B9______________________________________________________________%1,%2,%3,%4,%5,%6,%9,%7,%9,%8,%9'", Lang));
 
 	// %1 - Store 1
 	// %2 - Boots
 	// %3 - Red XL
 	// %4 - 4
 	// %5 - pcs
-	Strings.Insert("Error_069", NStr("en='Store [%1] [%2 %3] Lacking: %4 %5.';
-		|ru='Магазин [%1] [%2 %3] Недостает: %4 %5.';
-		|tr='Mağaza [%1] [%2 %3] Eksik: %4 %5.'", Lang));
+	Strings.Insert("Error_069", NStr("en='16D993DE-31C2-5E20-0C1F-FAD93DB6A9D8%1,%2,%3,%4,%5'", Lang));
 
 	// %1 - Store 1
 	// %2 - Boots
@@ -2229,67 +1561,45 @@ Function Strings(Lang) Export
 	// %4 - 00001
 	// %5 - 4
 	// %6 - pcs
-	Strings.Insert("Error_069_2", NStr("en='Store [%1] [%2 %3] Serial lot number [%4] Lacking: %5 %6.';
-		|ru='Магазин [%1] [%2 %3] Серия [%4] Недостает: %5 %6.';
-		|tr='Mağaza [%1] [%2 %3] Seri lot numarası [%4] Eksik: %5 %6.'", Lang));
+	Strings.Insert("Error_069_2", NStr("en='175A32B5-22CA-3BE9-97DD-D0819FC34611_____________________%1,%2,%3,%4,%5,%6'", Lang));
 
 	// %1 - some extention name
-	Strings.Insert("Error_071", NStr("en='Plugin ""%1"" is not connected.';
-		|ru='Внешняя обработка ""%1"" не подключена.';
-		|tr='""%1"" eklentisi bağlı değil.'", Lang));
+	Strings.Insert("Error_071", NStr("en='0C44E77F-1114-B0A6-67EA-A574ED3CF2D0%1'", Lang));
 	
 	// %1 - 12
-	Strings.Insert("Error_072", NStr("en='Specify a store in line %1.';
-		|ru='В строке %1 необходимо заполнить склад.';
-		|tr='%1 satırında bir mağaza belirtin.'", Lang));
+	Strings.Insert("Error_072", NStr("en='19ADB838-653D-FC1F-F1C7-7A42F37E2B84%1'", Lang));
 
 	// %1 - Sales order
 	// %2 - Goods receipt
-	Strings.Insert("Error_073", NStr("en='All items in the ""%1"" document(s) are already received using the ""%2"" document(s).';
-		|ru='Все товары по документу ""%1"" уже получены на основании документа ""%2"".';
-		|tr='""%1"" belgelerindeki tüm öğeler, ""%2"" belgeleri kullanılarak zaten alındı.'", Lang));
-	Strings.Insert("Error_074", NStr("en='Currency transfer is available only when amounts are equal.';
-		|ru='При перемещении денежных средств в одной валюте сумма отправки и получения должны совпадать.';
-		|tr='Para birimi transferi yalnızca tutarlar eşit olduğunda kullanılabilir.'", Lang));
+	Strings.Insert("Error_073", NStr("en='689661E2-280E-50A4-4ABF-FEE0701B3EB3______________________________________________%1,%2'", Lang));
+	Strings.Insert("Error_074", NStr("en='25155807-E759-A7A0-0F4B-BDC01355603A_______________________'", Lang));
 
 	// %1 - Physical count by location
-	Strings.Insert("Error_075", NStr("en='There are ""%1"" documents that are not closed.';
-		|ru='Есть незакрытые документы ""%1"".';
-		|tr='Kapatılmamış ""%1"" dokümanlar var.'", Lang));
+	Strings.Insert("Error_075", NStr("en='8CA034FB-FA39-6087-768D-D79F93988CE7_________%1'", Lang));
 	
 	// %1 - 12
-	Strings.Insert("Error_077", NStr("en='Basis document is empty in line %1.';
-		|ru='Не заполнен документ основания в строке %1';
-		|tr='Ana belge %1 satırında boş.'", Lang));
+	Strings.Insert("Error_077", NStr("en='C59C12B6-13A5-3E7B-B48A-A0425358ACF9%1'", Lang));
 	
 	// %1 - 1 %2 - 2
-	Strings.Insert("Error_078", NStr("en='Quantity [%1] does not match the quantity [%2] by serial/lot numbers';
-		|ru='Количество [%1] по строке не совпадает с количеством [%2] заполненным по серийным номерам. ';
-		|tr='Girilen [%1] adet, seri lotuna ait [%2] adedinden farklıdır'",
+	Strings.Insert("Error_078", NStr("en='0654D34F-29A1-F79B-B728-80803A689DF1________________________________%1,%2'",
 		Lang));
 	
 	// %1 - 100.00 
 	// %2 - 120.00
-	Strings.Insert("Error_079", NStr("en='Payment amount [%1] and return amount [%2] not match';
-		|ru='Сумма оплаты [%1] и сумма возврата [%2] не сходятся';
-		|tr='Ödeme tutar ([%1]) iade tutarından ([%2]) farklıdır'", Lang));
+	Strings.Insert("Error_079", NStr("en='6DEE7EA6-AC39-4E5A-ABF6-605951A834EB________________%1,%2'", Lang));
 	
 	// %1 - 1 
 	// %2 - Goods receipt 
 	// %3 - 10 
 	// %4 - 8
-	Strings.Insert("Error_080", NStr("en='In line %1 quantity by %2 %3 greater than %4';
-		|ru='В строке %1 количество %2 %3 больше чем %4';
-		|tr='%1 satırında %2 %3 adet %4 adedinden daha büyük'", Lang));
+	Strings.Insert("Error_080", NStr("en='9D0AB0BD-0953-A023-39F3-3AB8F3C93191________%1,%2,%3,%4'", Lang));
 	
 	// %1 - 1 
 	// %2 - Dress 
 	// %3 - Red/38 
 	// %4 - 8 
 	// %5 - 10
-	Strings.Insert("Error_081", NStr("en='In line %1 quantity by %2-%3 %4 greater than quantity %5';
-		|ru='В строке %1 количество %2-%3 %4 больше чем количество %5';
-		|tr='%1 satırında miktar %2-%3 miktar %5ten %4 fazla'",
+	Strings.Insert("Error_081", NStr("en='046F6248-0F4A-307A-A481-10BB1ACE4436____________________%1,%2,%3,%4,%5'",
 		Lang));
 	
 	// %1 - 1 
@@ -2297,41 +1607,27 @@ Function Strings(Lang) Export
 	// %3 - Red/38 
 	// %4 - 10 
 	// %5 - 8
-	Strings.Insert("Error_082", NStr("en='In line %1 quantity by %2-%3 %4 less than quantity %5';
-		|ru='В строке %1 количество товара %2-%3 %4 меньше чем количество %5';
-		|tr='%1 satırda %2-%3 %4 miktarı %5 miktarından daha küçüktür'",
+	Strings.Insert("Error_082", NStr("en='5424D8B7-CCD3-EBE7-7505-538EAC1BB89C_________________%1,%2,%3,%4,%5'",
 		Lang));
 	
 	// %1 - 12 
-	Strings.Insert("Error_083", NStr("en='Location with number `%1` not found.';
-		|ru='Локация с номером %1 не найдена.';
-		|tr='`%1` nolu lokasyon bulunamadı'", Lang));
+	Strings.Insert("Error_083", NStr("en='CC4350DA-2E1F-070E-E22B-BF252BA831BD%1'", Lang));
 	
 	// %1 - 1000
 	// %2 - 300
 	// %3 - 350
 	// %4 - 50
 	// %5 - USD
-	Strings.Insert("Error_085", NStr("en='Credit limit exceeded. Limit: %1, limit balance: %2, transaction: %3, lack: %4 %5';
-		|ru='Превышение лимита взаиморасчетов. Лимит: %1, остаток взаиморасчетов: %2, транзакция: %3, не хватающая сумма: %4 %5';
-		|tr='Borç limiti aşıldı. Limit: %1, limit bakiyesi: %2, işlem: %3, yetersiz tutar: %4 %5'", Lang));
+	Strings.Insert("Error_085", NStr("en='CB15E49E-A257-013C-C0B6-6C73739E5CD1_____________________________________________%1,%2,%3,%4,%5'", Lang));
 	
 	// %1 - 10
 	// %2 - 20	
-	Strings.Insert("Error_086", NStr("en='Amount : %1 not match Payment term amount: %2';
-		|ru='Сумма (%1) не сходится с условиями оплата (%2)';
-		|tr='%1 tutarı, ödeme toplamı %2 ile tutmuyor'", Lang));
+	Strings.Insert("Error_086", NStr("en='01D919AA-D46D-B211-161E-E040C3A2BD6E_________%1,%2'", Lang));
 
-	Strings.Insert("Error_087", NStr("en='Parent can not be empty';
-		|ru='Родитель не может быть пустым';
-		|tr='Üst öğe boş olamaz'", Lang));
-	Strings.Insert("Error_088", NStr("en='Basis unit has to be filled, if item filter used.';
-		|ru='Если устанавливается фильтр по номенклатуре, основная единица измерения должны быть заполнена.';
-		|tr='Malzemeye göre filtre uygulandığı takdirse, ana birimi doldurmak lazım.'", Lang));
+	Strings.Insert("Error_087", NStr("en='FEA8078F-3330-6DC8-8DB1-15FDBBF7F2A6'", Lang));
+	Strings.Insert("Error_088", NStr("en='F6E12406-C2AB-7DF4-443B-BC6672A2C932_____________'", Lang));
 
-	Strings.Insert("Error_089", NStr("en='Description%1 ""%2"" is already in use.';
-		|ru='Наименование(%1) ""%2"" уже используется.';
-		|tr='%1 ""%2"" tanımı mevcuttur.'", Lang));
+	Strings.Insert("Error_089", NStr("en='8BD39D29-9CF1-2B40-01C1-1F3C0500D1FC_%1,%2'", Lang));
 	
 	// %1 - Boots
 	// %2 - Red XL
@@ -2340,9 +1636,7 @@ Function Strings(Lang) Export
 	// %5 - 15
 	// %6 - 4
 	// %7 - pcs
-	Strings.Insert("Error_090", NStr("en='[%1 %2] %3 remaining: %4 %7. Required: %5 %7. Lacking: %6 %7.';
-		|ru='[%1 %2] %3 остаток: %4 %7. Требуется: %5 %7. Не хватает: %6 %7.';
-		|tr='[%1 %2] %3 kalan: %4 %7. İhtiyaç: %5 %7. Eksik: %6 %7.'", Lang));
+	Strings.Insert("Error_090", NStr("en='4504BC02-6927-6C01-1940-0295B36AA5AA_________________________%1,%2,%3,%4,%7,%5,%7,%6,%7'", Lang));
 
 	// %1 - Boots
 	// %2 - Red XL
@@ -2352,2588 +1646,1220 @@ Function Strings(Lang) Export
 	// %5 - 15
 	// %6 - 4
 	// %7 - pcs
-	Strings.Insert("Error_090_2", NStr("en='[%1 %2] Serial lot number [%3] %4 remaining: %5 %6. Required: %6 %8. Lacking: %7 %8.';
-		|ru='[%1 %2] серийный номер [%3] %4 остаток: %5 %6. Требуется: %6 %8. Недостаток: %7 %8.';
-		|tr='[%1 %2] Seri lot numarası [%3] %4 kalan: %5 %6. İhtiyaç duyulan: %6 %8. Eksik: %7 %8.'", Lang));
+	Strings.Insert("Error_090_2", NStr("en='0535752A-789F-3CDE-EDB4-46B3A0DFA449________________________________________________%1,%2,%3,%4,%5,%6,%6,%8,%7,%8'", Lang));
 
-	Strings.Insert("Error_091", NStr("en='Only Administrator can create users.';
-		|ru='Только Администраторы могут создавать пользователей';
-		|tr='Sadece sistem yöneticiler kullanıcıları oluşturabilir.'", Lang));
+	Strings.Insert("Error_091", NStr("en='1DC46B3F-55F4-0A71-163D-D283EA1C8CFC'", Lang));
 
-	Strings.Insert("Error_092", NStr("en='Can not use %1 role in SaaS mode';
-		|ru='Роль %1 нельзя использовать в Saas режиме';
-		|tr='%1 rolü SaaS modunda kullanılamaz'", Lang));
-	Strings.Insert("Error_093", NStr("en='Cancel reason has to be filled if string was canceled';
-		|ru='Если строка отменена, необходимо указать причину отмены';
-		|tr='Satır iptal olduğunda iptal sebebi doldurulmalıdır'", Lang));
-	Strings.Insert("Error_094", NStr("en='Can not use confirmation of shipment without goods receipt';
-		|ru='Нельзя вводить расходную накладную, без приходной накладной по данному виду отгрузки';
-		|tr='Satın alma irsaliyesi olmadan sevk irsaliyesi oluşturulamaz'", Lang));
+	Strings.Insert("Error_092", NStr("en='66160944-996A-61EB-B113-372A5BFD863B%1'", Lang));
+	Strings.Insert("Error_093", NStr("en='4DC4DD14-4A21-E402-2A48-85D093815400_________________'", Lang));
+	Strings.Insert("Error_094", NStr("en='C171E61B-DD64-88F2-2166-6DC9652B6419______________________'", Lang));
 	
 	// %1 - 100.00 
 	// %2 - 120.00
-	Strings.Insert("Error_095", NStr("en='Payment amount [%1] and sales amount [%2] not match';
-		|ru='Сумма оплаты [%1] не равна сумме продажи [%2] ';
-		|tr='[%1] ödeme tutarı [%2] satış tutarına eşit değil'", Lang));
+	Strings.Insert("Error_095", NStr("en='58DBC9E1-19E2-7A65-57B6-6F6ABEAA44BC_______________%1,%2'", Lang));
 	
 	// %1 - 1
 	// %2 - Boots
 	// %3 - Red XL
-	Strings.Insert("Error_096", NStr("en='Can not delete linked row [%1] [%2] [%3]';
-		|ru='Невозможно удалить связанную строку [%1] [%2] [%3]';
-		|tr='Bağlantı sağlanmış satır silinemez [%1] [%2] [%3]'", Lang));
+	Strings.Insert("Error_096", NStr("en='215383D0-BF8D-1D2C-CFA1-1E61785F36FC____%1,%2,%3'", Lang));
 
 	// %1 - 1
 	// %2 - Boots
 	// %3 - Red XL
-	Strings.Insert("Error_097", NStr("en='Wrong linked row [%1] [%2] [%3]';
-		|ru='Неверно связанная строка [%1] [%2] [%3]';
-		|tr='Yanlış bağlantı sağlanan satır [%1] [%2] [%3]'", Lang));
+	Strings.Insert("Error_097", NStr("en='60C7AC27-4907-043D-DB32-24ED9C0E26CA%1,%2,%3'", Lang));
 	
 	// %1 - 1
 	// %2 - Store
 	// %3 - Store 01
 	// %4 - Store 02
-	Strings.Insert("Error_098", NStr("en='Wrong linked row [%1] for column [%2] used value [%3] wrong value [%4]';
-		|ru='Неверно связанна строка [%1] для столбца [%2] использованное значение [%3] неправильное значение [%4]';
-		|tr='Satır bağlatma hatası [%1] kolon [%2] kullanılan değer [%3] yanlış değer [%4]'", Lang));
+	Strings.Insert("Error_098", NStr("en='D5E5772B-160B-4C2F-F101-158318FFC886__________________________________%1,%2,%3,%4'", Lang));
 	
 	// %1 - Partner
 	// %2 - Partner 01
 	// %3 - Partner 02
-	Strings.Insert("Error_099", NStr("en='Wrong linked data [%1] used value [%2] wrong value [%3]';
-		|ru='Неверно связанные данные [%1] используемое значение [%2] неправильное значение [%3]';
-		|tr='Yanlış bağlantı verisi [%1] kullanılan değer [%2] yanlış değer [%3]'", Lang));
+	Strings.Insert("Error_099", NStr("en='CC8C1B36-BC05-6D37-762D-DF5164D95915___________________%1,%2,%3'", Lang));
 	
 	// %1 - Value 01
 	// %2 - Value 02
-	Strings.Insert("Error_100", NStr("en='Wrong linked data, used value [%1] wrong value [%2]';
-		|ru='Неверно связанные данные строк, используемое значение [%1] неправильное значение [%2]';
-		|tr='Yanlış bağlantı verisi, kullanılan değer [%1] yanlış değer [%2]'", Lang));
+	Strings.Insert("Error_100", NStr("en='9E7FBA0D-1E6F-9DC1-1539-9E37F09B08B5_______________%1,%2'", Lang));
 	
-	Strings.Insert("Error_101", NStr("en='Select any document';
-		|ru='Необходимо выбрать документ';
-		|tr='Evrakı seçiniz'", Lang));
-	Strings.Insert("Error_102", NStr("en='Default file storage volume is not set.';
-		|ru='Не указан том хранения файлов.';
-		|tr='Varsayılan dosya depolama yeri seçilmedi.'", Lang));
-	Strings.Insert("Error_103", NStr("en='%1 is undefined.';
-		|ru='%1 неопределен.';
-		|tr='%1 tanımlı değil.'", Lang));
-	Strings.Insert("Error_104", NStr("en='Document [%1] have negative stock balance';
-		|ru='По документу [%1] есть отрицательный остаток на складе';
-		|tr='[%1] evrakı eksi stok bakiyesine düştü'", Lang));
-	Strings.Insert("Error_105", NStr("en='Document [%1] already have related documents';
-		|ru='У документа [%1] уже есть связанные документы';
-		|tr='[%1] evrakın bağlı evraklar mevcuttur'", Lang));
-	Strings.Insert("Error_106", NStr("en='Can not lock data';
-		|ru='Заблокировать данные не получилось';
-		|tr='Veri kilitlenemedi'", Lang));
-	Strings.Insert("Error_107", NStr("en='You try to call deleted service %1.';
-		|ru='Попытка вызвать сервис %1, который помеченн на удаление.';
-		|tr='Silmek için işaretlenen %1 servisi çağırıldı.'", Lang));
-	Strings.Insert("Error_108", NStr("en='Field is filled, but it has to be empty.';
-		|ru='Поле заполнено, но оно должно быть пустым';
-		|tr='Alan dolduruldu, fakat alanın boş olması gerekmtektedir.'", Lang));
-	Strings.Insert("Error_109", NStr("en='Serial lot number name [ %1 ] is not match template: %2';
-		|ru='Наименование серийного номера [ %1 ] не соответствует шаблону: %2';
-		|tr='Seri lot numara tanımı [ %1 ] şablona uymamaktadır, şablon: %2'", Lang) + Chars.LF);
-	Strings.Insert("Error_110", NStr("en='Current serial lot number already has movements, it can not disable stock detail option';
-		|ru='Данный серийный номер уже имеет движения, нельзя отменять признак';
-		|tr='Bu seri lot numarasının hareketleti var, bu yüzden stok takip belirtisi değiştirilemez'", Lang) + Chars.LF);
-	Strings.Insert("Error_111", NStr("en='Period is empty [%1] : [%2]';
-		|ru='Период не заполнен [%1] : [%2]';
-		|tr='Dönem boştur [%1] : [%2]'", Lang) + Chars.LF);
-	Strings.Insert("Error_112", NStr("en='Not set ledger type by company [%1]';
-		|ru='Не указан тип учета у организации [%1]';
-		|tr='Şirket ayarlarında defter tipi belirtilmemiş [%1]'", Lang));
-	Strings.Insert("Error_113", NStr("en='Serial lot number [ %1 ] has to be unique at the document';
-		|ru='Серийный номер [ %1 ] должен быть уникальным в документе';
-		|tr='Evrakta [ %1 ] seri lot numarası eşsiz olmalıdır'", Lang) + Chars.LF);
-	Strings.Insert("Error_114", NStr("en='""Landed cost"" is a required field.';
-		|ru='""Себестоимость"" это обязательное поле для заполнения';
-		|tr='""Maliyet tutarı"" zorunlu alan'", Lang) + Chars.LF);
-	Strings.Insert("Error_115", NStr("en='Error while test connection';
-		|ru='Ошибка при тестировании соединения';
-		|tr='Bağlantı test hatası'", Lang) + Chars.LF);
-	Strings.Insert("Error_116", NStr("en='Cannot unpost, document is closed by [ %1 ]';
-		|ru='Отказ отмены проведения, документ закрыт документом [%1]';
-		|tr='Kaydetme iptal edilemedi, evrak [%1] tarafından kapanmıştı'", Lang) + Chars.LF);
-	Strings.Insert("Error_117", NStr("en='Sales return when sales by different dates not support';
-		|ru='Не поддерживается возврат датой отличной от даты продажи';
-		|tr='Başka güne ait iadeler desteklenmemektedir'", Lang) + Chars.LF);
-	Strings.Insert("Error_118", NStr("en='Cannot set deletion mark, document is closed by [ %1 ]';
-		|ru='Документ не может быть помечен на удаление, так как закрыт документом [%1]';
-		|tr='Silmek için işaretleme başarısız, bu evrak [%1] evrakı tarafından kapatılmıştı'", Lang) + Chars.LF);
-	Strings.Insert("Error_119", NStr("en='Error Eval code';
-		|ru='Ошибка кода Выполнить';
-		|tr='EVAL kod hatası'", Lang) + Chars.LF);
-	Strings.Insert("Error_120", NStr("en='Consignor batch shortage Item key: %1 Store: %2 Required:%3 Remaining:%4 Lack:%5';
-		|ru='Нехватка партии комитента, номенклатура: %1, склад: %2. Требуется:%3 Остаток:%4 Не хватает:%5';
-		|tr='Konsinye parti eksiği, Varyant: %1 Depo: %2 Gerekiyor:%3 Kalan:%4 Eksik:%5'", Lang) + Chars.LF);
-	Strings.Insert("Error_121", NStr("en='Goods received from consignor cannot be shipped to trade agent';
-		|ru='Товары полученные от комитента не могут быть отправлены комиссионеру';
-		|tr='Konsinye olarak alınan mallar, konsinye olarak verilemez'", Lang) + Chars.LF);
-	Strings.Insert("Error_122", NStr("en='Error. Find recursive basis by RowID: %1. Basis list:';
-		|ru='Ошибка. Найдено замкнутый цикл по ID стрки: %1. Список документов основания:';
-		|tr='Hata. Satır ID kaynak evraklarında sonsuz döngü bulundu: %1. Kaynak evrak listesi:'", Lang) + Chars.LF);
-	Strings.Insert("Error_123", NStr("en='Error. Retail customer is not filled';
-		|ru='Ошибка. Не заполнен розничный покупатель';
-		|tr='Hata. Perakende müşteri boştur'", Lang) + Chars.LF);
-	Strings.Insert("Error_124", NStr("en='Quantity limit exceeded. line number: [%1] quantity: [%2] limit: [%3]';
-		|ru='Превышение лимита количества. Номер строки: [%1] количество: [%2] лимит: [%3]';
-		|tr='Miktar limiti aşıldı. satır numarası: [%1] miktar: [%2] limit: [%3]'", Lang));
-	Strings.Insert("Error_125", NStr("en='Invoice for document: [%1] is empty';
-		|ru='Инвойс для документа [%1] пуст';
-		|tr='Belge için fatura: [%1] boş'", Lang));
-	Strings.Insert("Error_126", NStr("en='Document does not have transaction types';
-		|ru='В документе не указан тип транзакции';
-		|tr='Belge işlem türlerine sahip değil'", Lang));
-	Strings.Insert("Error_127", NStr("en='Quantity must be more than 0';
-		|ru='Количество должно быть больше 0';
-		|tr='Miktar 0''dan fazla olmalıdır'", Lang));
-	Strings.Insert("Error_128", NStr("en='Wrong data in basis document';
-		|ru='Не правильные данные в документе основания';
-		|tr='Temel belgede yanlış veri'", Lang));
-	Strings.Insert("Error_129", NStr("en='Transaction type [%1] is available only for own stocks, [%2][%3] is [%4] stocks';
-		|ru='Тип транзакции [%1] доступен только для собственных запасов, [%2][%3] является запасами [%4]';
-		|tr='İşlem türü [%1] yalnızca kendi stokları için geçerlidir, [%2][%3] [%4] stoklarıdır'", Lang));
-	Strings.Insert("Error_130", NStr("en='Transaction type [%1] is available only for consignor stocks, [%2][%3] is own stocks';
-		|ru='Тип транзакции [%1] доступен только для запасов комитента, [%2][%3] являются собственными запасами';
-		|tr='İşlem türü [%1] sadece komitent stokları için geçerlidir, [%2][%3] kendi stoklarıdır'", Lang));
-	Strings.Insert("Error_131", NStr("en='Receipt from consignor [%1][%2] is available only for consignor [%3]';
-		|ru='Получение от комитента [%1][%2] доступно только для комитента [%3]';
-		|tr='Komitent [%1][%2] tarafından alınan fiş yalnızca komitent [%3] için geçerlidir'", Lang));	
-	Strings.Insert("Error_132", NStr("en='Company [%1] can only be specified once';
-		|ru='Компания [%1] может быть указана только один раз';
-		|tr='Şirket [%1] yalnızca bir kez belirtilebilir'", Lang));	
-	Strings.Insert("Error_133", NStr("en='Opening entry [Shipment to trade agent] is available only for own stocks, [%1][%2] is [%3] stocks';
-		|ru='Открытие записи [Отгрузка торговому агенту] доступно только для собственных запасов, [%1][%2] является запасами [%3]';
-		|tr='Açılış kaydı [Ticari acente için sevkiyat] yalnızca kendi stoklarınız için geçerlidir, [%1][%2] [%3] stoklarıdır'", Lang));
-	Strings.Insert("Error_134", NStr("en='Transaction type [Receipt from consignor] is available only for consignor stocks, [%1][%2] is own stocks';
-		|ru='Тип транзакции [Получение от комитента] доступен только для запасов комитента, [%1][%2] являются собственными запасами';
-		|tr='İşlem türü [Komitentten alım] sadece komitent stokları için geçerlidir, [%1][%2] kendi stoklarıdır'", Lang));
-	Strings.Insert("Error_135", NStr("en='Receipt from consignor [%1][%2] is available only for consignor [%3]';
-		|ru='Получение от комитента [%1][%2] доступно только для комитента [%3]';
-		|tr='Komitent [%1][%2] tarafından alınan fiş yalnızca komitent [%3] için geçerlidir'", Lang));	
-	Strings.Insert("Error_136", NStr("en='Serial lot number is not unique, duplicate codes:[%1]';
-		|ru='Серийный номер партии не уникален, дублирующие коды:[%1]';
-		|tr='Seri lot numarası benzersiz değil, yinelenen kodlar:[%1]'", Lang));	
-	Strings.Insert("Error_137", NStr("en='Not filled [Key] in tabular section [%1] line number[%2]';
-		|ru='Не заполнено [Key] в табличной части [%1] номер строки[%2]';
-		|tr='[%1] tablo bölümündeki [%2] satır numarasında [Key] doldurulmamış'", Lang));	
-	Strings.Insert("Error_138", NStr("en='Cannot change the unit from [%1] to [%2], used in document [%3]';
-		|ru='Невозможно изменить единицу измерения с [%1] на [%2], используется в документе [%3]';
-		|tr='Birimi [%1]''den [%2]''ye değiştiremezsiniz, [%3] belgesinde kullanılmıştır'", Lang));	
-	Strings.Insert("Error_139", NStr("en='Description not unique [%1]';
-		|ru='Наименование не уникально [%1]';
-		|tr='Tanım benzersiz değil [%1]'", Lang));	
-	Strings.Insert("Error_140", NStr("en='Partner type is required';
-		|ru='Требуется тип партнера';
-		|tr='Ortak tipi gerekli'", Lang));	
-	Strings.Insert("Error_141", NStr("en='[%1] cannot be changed, has posted documents';
-		|ru='[%1] изменить нельзя, есть проведенные документы';
-		|tr='[%1] değiştirilemez, kaydedilmiş evraklar mevcut'", Lang));	
-	Strings.Insert("Error_142", NStr("en='Wrong combination of send and receive debt type';
-		|ru='Неверное сочетание типов дебиторской и кредиторской задолженности';
-		|tr='Borç ve alacak tiplerin yanlıştır'", Lang));	
-	Strings.Insert("Error_143", NStr("en='Document Bank payment (currency exchange) not entered';
-		|ru='Документ Банковский платеж (обмен валют) не введен';
-		|tr='Banka ödeme evrakı (döviz bozdurma) girilmemiştir'", Lang));	
-	Strings.Insert("Error_EmptyCurrency", NStr("en='Currency not entered';
-		|ru='Валюта не указана';
-		|tr='Döviz girilmedi'", Lang));
-	Strings.Insert("Error_EmptyTransactionType", NStr("en='Transaction type not entered';
-		|ru='Вид документа не указан';
-		|tr='İşlem tipi girilmedi'", Lang));
-	Strings.Insert("Error_144", NStr("en='Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.';
-		|ru='Движения документа были изменены вручную. Перепроведение или отмена проведения невозможны из-за ручных корректировок.';
-		|tr='Evrak hareketler manuel olarak değişitirilmişti. Tekrar kaydetme veya kaydetme iptal manuel düzeltilen evraklar için devre dışıdır.'", Lang));
-	Strings.Insert("Error_PartnerBalanceCheckfailed", NStr("en='""Amount"" does not equal the sum of all resources';
-		|ru='""Сумма"" не равна сумме всех ресурсов';
-		|tr='""Tutar"" tüm kaynaklara eşit değildir'", Lang));
+	Strings.Insert("Error_101", NStr("en='4F9381BA-F2DA-2359-924D-D1D79D8E74D7'", Lang));
+	Strings.Insert("Error_102", NStr("en='4984BC1A-8650-B262-2BF4-45A8387B5E75___'", Lang));
+	Strings.Insert("Error_103", NStr("en='D815617C-4C65-369D-D068-882877F95002%1'", Lang));
+	Strings.Insert("Error_104", NStr("en='86FF9451-BABB-A71B-B71A-A4E760C8449F_____%1'", Lang));
+	Strings.Insert("Error_105", NStr("en='CDE2E0F5-22FB-4F46-6943-3C2B60F2E202________%1'", Lang));
+	Strings.Insert("Error_106", NStr("en='EC9C7860-3423-A6AF-FBEA-A6B64A0673B9'", Lang));
+	Strings.Insert("Error_107", NStr("en='0357E942-1C2F-E45A-A966-6CDB8736DE90%1'", Lang));
+	Strings.Insert("Error_108", NStr("en='C08AAE36-640B-6059-9F88-87706A0E66F6____'", Lang));
+	Strings.Insert("Error_109", NStr("en='50297B54-ECF7-9914-4826-6EC1B7190DEC___________________%1,%2'", Lang) + Chars.LF);
+	Strings.Insert("Error_110", NStr("en='8F075F91-D9A3-3F19-9752-2F1FCB9B0880___________________________________________________'", Lang) + Chars.LF);
+	Strings.Insert("Error_111", NStr("en='7C3E2B86-C801-C553-36F5-5C0874B667FE%1,%2'", Lang) + Chars.LF);
+	Strings.Insert("Error_112", NStr("en='A2FFF192-4449-CDC8-8FE1-1AB86D66EF68%1'", Lang));
+	Strings.Insert("Error_113", NStr("en='10438675-E1E3-2595-53DD-D66EEE1C8D61_____________________%1'", Lang) + Chars.LF);
+	Strings.Insert("Error_114", NStr("en='D0535E82-0359-EAB3-3ACB-B8043B49ADDC'", Lang) + Chars.LF);
+	Strings.Insert("Error_115", NStr("en='D96780DE-FDFC-3F10-00E0-077875AC62FB'", Lang) + Chars.LF);
+	Strings.Insert("Error_116", NStr("en='66C45146-A2BE-0C41-17EB-B10CEBC4A3EA_______%1'", Lang) + Chars.LF);
+	Strings.Insert("Error_117", NStr("en='33F068CC-2596-431E-EE52-2B8BACA979CB__________________'", Lang) + Chars.LF);
+	Strings.Insert("Error_118", NStr("en='D30EE97D-7E8E-E6B8-807C-C4C6D55D5009__________________%1'", Lang) + Chars.LF);
+	Strings.Insert("Error_119", NStr("en='C17F4E05-426E-2951-16FD-DF936C1F3792'", Lang) + Chars.LF);
+	Strings.Insert("Error_120", NStr("en='0F97EB4F-6714-0C25-54EC-C990B16B9C76____________________________________________%1,%2,%3,%4,%5'", Lang) + Chars.LF);
+	Strings.Insert("Error_121", NStr("en='65C38AD4-E22C-E525-5996-6480BD666CE0__________________________'", Lang) + Chars.LF);
+	Strings.Insert("Error_122", NStr("en='CFA714EF-526E-EE4B-B6C7-7444CA835AE8_________________%1'", Lang) + Chars.LF);
+	Strings.Insert("Error_123", NStr("en='2E64B810-7D19-1039-9731-1CFFC36E8FF5'", Lang) + Chars.LF);
+	Strings.Insert("Error_124", NStr("en='8736E939-04CD-2012-2E59-91322A67E628_________________________________%1,%2,%3'", Lang));
+	Strings.Insert("Error_125", NStr("en='262758F2-39E3-E79E-E0D5-542AA38171CE%1'", Lang));
+	Strings.Insert("Error_126", NStr("en='995E666A-9C31-443B-B672-2CC98CB89A90____'", Lang));
+	Strings.Insert("Error_127", NStr("en='AC701768-B0EA-8F37-7C95-5A07D07B5879'", Lang));
+	Strings.Insert("Error_128", NStr("en='0D816E9A-93A8-C961-1CAE-EA0FEA3635CD'", Lang));
+	Strings.Insert("Error_129", NStr("en='07B40E21-C8F5-2816-68FF-F9B54E56EE79___________________________________________%1,%2,%3,%4'", Lang));
+	Strings.Insert("Error_130", NStr("en='26493AC3-607C-9AB0-0B6B-B080E0735D0F________________________________________________%1,%2,%3'", Lang));
+	Strings.Insert("Error_131", NStr("en='9A790E55-39FC-9AEA-A535-53476F4B03D0________________________________%1,%2,%3'", Lang));	
+	Strings.Insert("Error_132", NStr("en='8498B73D-A259-49C2-29B0-060F6AD8D9F6___%1'", Lang));	
+	Strings.Insert("Error_133", NStr("en='32262A2B-8BBB-C171-1349-92A3B1D6F30E_____________________________________________________________%1,%2,%3'", Lang));
+	Strings.Insert("Error_134", NStr("en='66C2B773-43D3-0243-3C39-96F24BE46BE6____________________________________________________________________%1,%2'", Lang));
+	Strings.Insert("Error_135", NStr("en='9A790E55-39FC-9AEA-A535-53476F4B03D0________________________________%1,%2,%3'", Lang));	
+	Strings.Insert("Error_136", NStr("en='6D3EF491-3F25-B523-3C52-228FB101E89C_________________%1'", Lang));	
+	Strings.Insert("Error_137", NStr("en='5FBDF7C2-CDE6-613C-C010-09FE72B9E0DC____________________[Key],%1,%2'", Lang));	
+	Strings.Insert("Error_138", NStr("en='AE919687-D5E5-C8B7-72D0-05939CAE3A28___________________________%1,%2,%3'", Lang));	
+	Strings.Insert("Error_139", NStr("en='B41318A8-8B5D-84CC-CCEF-F5251D0DA821%1'", Lang));	
+	Strings.Insert("Error_140", NStr("en='053E3DA7-0112-EA64-45AE-EFEA79717738'", Lang));	
+	Strings.Insert("Error_141", NStr("en='58C8999C-94E6-824C-C33E-E9D55B2FB9D9________%1'", Lang));	
+	Strings.Insert("Error_142", NStr("en='C6B8586A-A0FE-9DEF-FAF1-1BF3E1E15A58___________'", Lang));	
+	Strings.Insert("Error_143", NStr("en='F29A27AA-E1C5-55DE-E681-1A0B7CF0A232_________________'", Lang));	
+	Strings.Insert("Error_EmptyCurrency", NStr("en='873BA3B5-4FE2-05A4-475A-A9DA2D37777C'", Lang));
+	Strings.Insert("Error_EmptyTransactionType", NStr("en='D24795CB-D16A-F8B5-5FD3-38287AB121EC'", Lang));
+	Strings.Insert("Error_144", NStr("en='FDC0F2F8-5242-F88A-ACFD-D616C484EBE3____________________________________________________________________________'", Lang));
+	Strings.Insert("Error_PartnerBalanceCheckfailed", NStr("en='7BBA4501-417F-F330-0F72-2530F5485BB2____________'", Lang));
 	
 	// %1 - Register name
-	Strings.Insert("Error_145", NStr("en='Differences detected between the current manual movements and the potential automated movements in register [%1].';
-		|ru='Обнаружены различия между текущими ручными движениями и потенциальными автоматическими движениями в регистре [%1].';
-		|tr='[%1] kayıt tablosunda mevcut ve potansiyel kayıtları arasında farklar tespit edilmişti.'", Lang));
+	Strings.Insert("Error_145", NStr("en='BFD67D3A-90F6-EDE7-7F5E-E54CA4B0311A_____________________________________________________________________________%1'", Lang));
 	
-	Strings.Insert("Error_146", NStr("en='Document in not posted.';
-		|ru='Документ не проведен.';
-		|tr='Belge kaydedilmedi.'", Lang));
-	Strings.insert("Error_147", NStr("en='The document has manual entries and cannot be canceled.';
-		|ru='Документ имеет ручные записи и не может быть отменён.';
-		|tr='Evrak hareketleri manuel olarak değiştirilmişti, iptal edilemez.'", Lang));
-	Strings.Insert("Error_148", NStr("en='Debit\Credit note is available only when amounts are equal.';
-		|ru='Суммы в одной валюте должны быть равны';
-		|tr='Borç alacak dekontu sadece eşit tutarlar ile girilebilir'", Lang));
+	Strings.Insert("Error_146", NStr("en='0D210B61-E849-22AD-DEA5-5E735458607B'", Lang));
+	Strings.insert("Error_147", NStr("en='0BFD3CA7-AEEE-BC87-7F0E-E17228A189CE___________________'", Lang));
+	Strings.Insert("Error_148", NStr("en='B2754FBE-9217-D4CD-D916-62E3C603AC74_______________________'", Lang));
 
-	Strings.Insert("Error_149", NStr("en='Fill field';
-		|ru='Заполните поле';
-		|tr='Alan doldur'", Lang));
-	Strings.Insert("Error_150", NStr("en='Can not find file at data base';
-		|ru='Не найден файл в базе данных';
-		|tr=',Veritabanında dosya bulunamadı'", Lang));
-	Strings.Insert("Error_151", NStr("en='Can not find file at storage service';
-		|ru='Не найден файл в службе хранения';
-		|tr='Serviste dosya muhafaza yeri bulunamıyor'", Lang));
-	Strings.Insert("Error_152", NStr("en='Cannot convert to UUID [%1]';
-		|ru='Не получилось преобразовать в UUID [%1]';
-		|tr='UUID''e dönüştürülemedi [%1]'", Lang));
-	Strings.Insert("Error_153", NStr("en='Debit is empty [%1] row-key[%2]';
-		|ru='Дебет пуст [%1] строка/ключ [%2]';
-		|tr='Borç boş [%1] satır-anahtar [%2]'", Lang));
-	Strings.Insert("Error_154", NStr("en='Credit is empty [%1] row-key[%2]';
-		|ru='Кредит пуст [%1] строка/ключ [%2]';
-		|tr='Alacak boş [%1] satır-anahtar [%2]'", Lang));
+	Strings.Insert("Error_149", NStr("en='CB5CC892-86D4-D14E-ED15-5DE3DBD49CBB'", Lang));
+	Strings.Insert("Error_150", NStr("en='A3B71130-EB85-149B-B1E8-8A6B5558A4AB'", Lang));
+	Strings.Insert("Error_151", NStr("en='2C08B0F8-96FB-0121-1245-5F1E5DB6D895'", Lang));
+	Strings.Insert("Error_152", NStr("en='87B58B7F-3D1F-1432-290A-A23DD00BEAD6%1'", Lang));
+	Strings.Insert("Error_153", NStr("en='A9043817-64B2-BC4A-A124-461540E5DA46%1,%2'", Lang));
+	Strings.Insert("Error_154", NStr("en='9D89783D-8F31-2A3E-E4E0-0176E8150ADB%1,%2'", Lang));
 	
-	Strings.Insert("Error_155", NStr("en='Company is empty row-key[%1]';
-		|ru='Организация пуста строка/ключ [%1]';
-		|tr='Şirket boş satır-anahtar [%1]'", Lang));
-	Strings.Insert("Error_156", NStr("en='Currency is empty row-key[%1]';
-		|ru='Валюта пуста строка/ключ [%1]';
-		|tr='Döviz boş, satır-anahtar [%1]'", Lang));
-	Strings.Insert("Error_157", NStr("en='Account Dr is empty row-key[%1]';
-		|ru='Счет Дт пуст строка/ключ [%1]';
-		|tr='Borç hesap boş satır-anahtar[%1]'", Lang));
-	Strings.Insert("Error_158", NStr("en='Account Cr is empty row-key[%1]';
-		|ru='Счет Кт пуст строка/ключ [%1]';
-		|tr='Alacak hesap boş satır-anahtar[%1]'", Lang));
-	Strings.Insert("Error_159", NStr("en='Currency Dr is empty row-key[%1]';
-		|ru='Валюта Дт пуста строка/ключ [%1]';
-		|tr='Borç döviz boş, satır-anahtar [%1]'", Lang));
-	Strings.Insert("Error_160", NStr("en='Currency Cr is empty row-key[%1]';
-		|ru='Валюта Кт пуста строка/ключ [%1]';
-		|tr='Alacak döviz boş, satır-anahtar [%1]'", Lang));
-	Strings.Insert("Error_161", NStr("en='Ext. dimension 1 value Dr is empty row-key[%1]';
-		|ru='Субконто 1 значение Дт пусто строка/ключ [%1]';
-		|tr='Ext. boyut 1 değeri Dr boş satır-anahtarı[%1] '", Lang));
-	Strings.Insert("Error_162", NStr("en='Ext. dimension 1 type Dr is empty row-key[%1]';
-		|ru='Субконто 1 значение Дт пусто строка/ключ [%1]';
-		|tr='Ext. boyut 1 tipi Dr boş satır-anahtarı[%1]'", Lang));
-	Strings.Insert("Error_163", NStr("en='Ext. dimension 2 value Dr is empty row-key[%1]';
-		|ru='Субконто 2 значение Дт пусто строка/ключ [%1]';
-		|tr='Ek boyut 2 değeri Dr boş satır-anahtarı[%1]'", Lang));
-	Strings.Insert("Error_164", NStr("en='Ext. dimension 2 type Dr is empty row-key[%1]';
-		|ru='Субконто 2 значение Дт пусто строка/ключ [%1]';
-		|tr='Ek boyut 2 tipi Dr boş satır-anahtarı[%1] '", Lang));
-	Strings.Insert("Error_165", NStr("en='Ext. dimension 3 value Dr is empty row-key[%1]';
-		|ru='Субконто 3 значение Дт пусто строка/ключ [%1]';
-		|tr='Ext. boyut 3 değeri Dr boş satır-anahtarı[%1]'", Lang));
-	Strings.Insert("Error_166", NStr("en='Ext. dimension 3 type Dr is empty row-key[%1]';
-		|ru='Субконто 3 значение Дт пусто строка/ключ [%1]';
-		|tr='Ext. boyut 3 tipi Dr boş satır-anahtarı[%1]'", Lang));
-	Strings.Insert("Error_167", NStr("en='Ext. dimension 1 value Cr is empty row-key[%1]';
-		|ru='Субконто 1 значение Кт пусто строка/ключ [%1]';
-		|tr='Ek boyut 1 değeri Cr boş satır-anahtarı[%1]'", Lang));
-	Strings.Insert("Error_168", NStr("en='Ext. dimension 1 type Cr is empty row-key[%1]';
-		|ru='Субконто 1 значение Кт пусто строка/ключ [%1]';
-		|tr='Ek boyut 1 tipi Cr boş satır-anahtarı[%1] '", Lang));
-	Strings.Insert("Error_169", NStr("en='Ext. dimension 2 value Cr is empty row-key[%1]';
-		|ru='Субконто 2 значение Кт пусто строка/ключ [%1]';
-		|tr='Ek boyut 2 değeri Cr boş satır-anahtarı[%1]'", Lang));
-	Strings.Insert("Error_170", NStr("en='Ext. dimension 2 type Cr is empty row-key[%1]';
-		|ru='Субконто 2 значение Кт пусто строка/ключ [%1]';
-		|tr='Ek boyut 2 tipi Cr boş satır-anahtarı[%1] '", Lang));
-	Strings.Insert("Error_171", NStr("en='Ext. dimension 3 value Cr is empty row-key[%1]';
-		|ru='Субконто 3 значение Кт пусто строка/ключ [%1]';
-		|tr='Ek boyut 3 değeri Cr boş satır-anahtarı[%1] '", Lang));
-	Strings.Insert("Error_172", NStr("en='Ext. dimension 3 type Cr is empty row-key[%1]';
-		|ru='Субконто 3 значение Кт пусто строка/ключ [%1]';
-		|tr='Ek boyut 3 tipi Cr boş satır-anahtarı[%1] '", Lang));
-	Strings.Insert("Error_173", NStr("en='Currency rate from [%1] to [%2] not set';
-		|ru='Курс валюты с [%1] по [%2] не установлен';
-		|tr='[%1]''den [%2]''ye döviz kuru ayarlanmamış'", Lang));
-	Strings.Insert("Error_174", NStr("en='There can be only one currency set in the document.';
-		|ru='В документе может быть указана только одна валюта.';
-		|tr='Evrakta sadece tek döviz seçilebilir.'", Lang));
-	Strings.Insert("Error_175", NStr("en='Recorder URL is Empty';
-		|ru='URL регистратора пуст';
-		|tr='Kayıt evrağın URL boştur'", Lang));
-	Strings.Insert("Error_176", NStr("en='Fill Integration Settings in ""Ledger Type""';
-		|ru='Заполните настройки интеграции в ""Типе журнала""';
-		|tr='""Defter tipinde"" Entegrasyon ayaraları seçiniz'", Lang));
-	Strings.Insert("Error_177", NStr("en='Lack of advances [%1] [%2] [%3]';
-		|ru='Не достаточно суммы аванса  [%1] [%2] [%3]';
-		|tr='Avans eksikliği [%1] [%2] [%3]'", Lang));
-	Strings.Insert("Error_178", NStr("en='Order already closed';
-		|ru='Заказ уже закрыт';
-		|tr='Sipariş daha önce kapanmıştı'", Lang));
-	Strings.Insert("Error_179", NStr("en='Number [%1] is already used for [%2]';
-		|ru='Номер [%1] уже использован для [%2]';
-		|tr='[%1] numarası [%2] için zaten kullanılıyor'", Lang));
-	Strings.Insert("Error_180", NStr("en='Only system record allowed';
-		|ru='Только системная запись разрешена';
-		|tr='Yalnızca sistem kaydına izin verilir'", Lang));
-	Strings.Insert("Error_181", NStr("en='Attribute already on form. Remove duplicate from set: [%1]';
-		|ru='Реквизиты уже на форме. Удалите дублированный набор: [%1]';
-		|tr='Öznitelik zaten formda mevcut. Tekrarlayan kaldırın: [%1]'", Lang));
-	Strings.Insert("Error_182", NStr("en='Account [%1] [%2]. Lacking: %3 %2.';
-		|ru='Касса/банк [%1] [%2]. Не хватает: %3 %2.';
-		|tr='Hesap [%1] [%2]. Eksik: %3 %2.'", Lang));
-	Strings.Insert("Error_183", NStr("en='By document [%1]. Lacking: %3 %2.';
-		|ru='По документу [%1]. Отсутствует: %3 %2.';
-		|tr='Belgeye göre [%1]. Eksik: %3 %2.'", Lang));
-	Strings.Insert("Error_184", NStr("en='Currency is a required field.';
-		|ru='Поле «Валюта» обязательно для заполнения.';
-		|tr='Para birimi zorunlu bir alandır.'", Lang));
-	Strings.Insert("Error_185", NStr("en='Wrong linked row [%1]: Document date [%2] less than Basis date [%3]';
-		|ru='Неправильно связанная строка [%1]: Дата документа [%2] меньше базовой даты [%3]';
-		|tr='Yanlış bağlantılı satır [%1]: Belge tarihi [%2], Temel tarihten [%3] küçük'", Lang));
-	Strings.Insert("Error_186", NStr("en='Document date [%1] greater than date [%2] in [%3]';
-		|ru='Дата документа [%1] больше даты [%2] в [%3]';
-		|tr='Belge tarihi [%1], [%3] içindeki [%2] tarihinden büyük'", Lang));
-	Strings.Insert("Error_187", NStr("en='Error chage quantity for [%1]';
-		|ru='Ошибка изменения количества на [%1]';
-		|tr='[%1] için miktar değişikliği hatası'", Lang));
-	Strings.Insert("Error_188", NStr("en='Section with name [%1] already exists';
-		|ru='Аналитика с наименовением [%1] уже существует';
-		|tr='[%1] adlı bölüm zaten mevcut'", Lang));
-	Strings.Insert("Error_189", NStr("en='Ext. dimension number is required field';
-		|ru='Субконто это обязательное поле';
-		|tr='Ek boyut numarası zorunlu alandır'", Lang));
-	Strings.Insert("Error_190", NStr("en='Shipment without financial documents is prohibited';
-		|ru='Отгрузка без финансовых документов запрещена';
-		|tr='Fatura olmadan ürün sevki yasaklandı'", Lang));
+	Strings.Insert("Error_155", NStr("en='D09EE7DD-A1AD-BF85-5048-8D0D60B65AD2%1'", Lang));
+	Strings.Insert("Error_156", NStr("en='9DED6BBF-AC53-E948-8A71-1A5505F28B15%1'", Lang));
+	Strings.Insert("Error_157", NStr("en='A8247101-7E6E-A32E-EB1D-DF7FC538A853%1'", Lang));
+	Strings.Insert("Error_158", NStr("en='0C84BD1F-99EF-3E61-145A-A6BB834540C0%1'", Lang));
+	Strings.Insert("Error_159", NStr("en='52A03623-00CF-BD81-1862-29C4F64D284C%1'", Lang));
+	Strings.Insert("Error_160", NStr("en='0550D570-28C7-E397-7267-7A251F940EE4%1'", Lang));
+	Strings.Insert("Error_161", NStr("en='944B5181-3E4F-14CC-C8FC-C5FCD74328F5__________%1'", Lang));
+	Strings.Insert("Error_162", NStr("en='BD5345EF-0FA4-13E8-891A-A26EB4B88AA7_________%1'", Lang));
+	Strings.Insert("Error_163", NStr("en='FFD57EEC-A165-0587-72DF-FFD5454446B0__________%1'", Lang));
+	Strings.Insert("Error_164", NStr("en='D57505F3-E001-9251-1502-2978A0A50725_________%1'", Lang));
+	Strings.Insert("Error_165", NStr("en='C057E7B0-DB45-ABB7-7B0E-E59A5EE4DAE2__________%1'", Lang));
+	Strings.Insert("Error_166", NStr("en='D2411305-4859-C328-889F-FDCD35ECAB13_________%1'", Lang));
+	Strings.Insert("Error_167", NStr("en='560DFBE0-DD4B-F6C2-2C02-2364EDBA6EE6__________%1'", Lang));
+	Strings.Insert("Error_168", NStr("en='464F6DAE-7943-88FE-EC3E-EF78CC2D2314_________%1'", Lang));
+	Strings.Insert("Error_169", NStr("en='89D19792-0680-01E3-3EE4-4AAD2839D04A__________%1'", Lang));
+	Strings.Insert("Error_170", NStr("en='688B19F4-C3B1-4C25-50F7-7E274541A298_________%1'", Lang));
+	Strings.Insert("Error_171", NStr("en='E52837B3-7B68-69D7-76D9-98BFB026377B__________%1'", Lang));
+	Strings.Insert("Error_172", NStr("en='E6FD491F-26AF-B467-79D4-4652BBEB7EAF_________%1'", Lang));
+	Strings.Insert("Error_173", NStr("en='670BB4F5-A168-4A06-6B77-74D45D54DA64___%1,%2'", Lang));
+	Strings.Insert("Error_174", NStr("en='390614C2-170F-0D40-09A8-8BDC8233B2F4_______________'", Lang));
+	Strings.Insert("Error_175", NStr("en='E431424E-7422-3473-30F0-0F65E75DA6ED'", Lang));
+	Strings.Insert("Error_176", NStr("en='EC73475A-A7C0-87FE-E827-72EDED0BFAB7______'", Lang));
+	Strings.Insert("Error_177", NStr("en='BD83F615-81A8-A0E1-1DE0-0595A225081F%1,%2,%3'", Lang));
+	Strings.Insert("Error_178", NStr("en='0B489E71-3C28-936B-B06E-E2FA8BDFE9D0'", Lang));
+	Strings.Insert("Error_179", NStr("en='206F9984-1245-05BD-DCB3-335B8D0FB7EC%1,%2'", Lang));
+	Strings.Insert("Error_180", NStr("en='C129EA99-7595-C47F-FB74-48BD3C1A089B'", Lang));
+	Strings.Insert("Error_181", NStr("en='88BB25DB-FB72-AD59-927B-B1D2AD64C5D8______________________%1'", Lang));
+	Strings.Insert("Error_182", NStr("en='0B120AE5-9309-2049-93C6-6DAE018D3032%1,%2,%3,%2'", Lang));
+	Strings.Insert("Error_183", NStr("en='5E2E8F11-B5B0-729D-D127-7C675F81142C%1,%3,%2'", Lang));
+	Strings.Insert("Error_184", NStr("en='CE2D9F01-8E48-4F71-1924-40E75F00F21B'", Lang));
+	Strings.Insert("Error_185", NStr("en='D241C971-0664-4F82-2487-78F9A2A88C2E_______________________________%1,%2,%3'", Lang));
+	Strings.Insert("Error_186", NStr("en='E203DA14-D0AB-3DC0-064B-BF0A811E60CD_____________%1,%2,%3'", Lang));
+	Strings.Insert("Error_187", NStr("en='356FEE66-FAAA-C061-1497-725D1ED51AF0%1'", Lang));
+	Strings.Insert("Error_188", NStr("en='4D06FE22-7053-F407-7CA3-3475367FFDC8_%1'", Lang));
+	Strings.Insert("Error_189", NStr("en='0F7D27FD-DB0C-C82F-FECD-D2D58CCA0911___'", Lang));
+	Strings.Insert("Error_190", NStr("en='7821CDE5-C4A7-7C2F-FDB8-8B42926E4149______________'", Lang));
+	Strings.Insert("Error_191", NStr("en='C54613D8-4415-1800-02DA-AD4D7A51C32B_%1,%2'", Lang));
+	Strings.Insert("Error_192",   NStr("en='B5741F7D-70FF-C395-5DAE-ECC04B0E526B________%1,%2'", Lang));
+	Strings.Insert("Error_193",   NStr("en='2F0DA734-9AC1-F9A3-3C34-4CD527DB31C4%1'", Lang));
 	
-	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
-		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
-		|tr='Toplam tutarı doldur. Satır: [%1]'", Lang));
+	Strings.Insert("Error_FillTotalAmount", NStr("en='E76C9AA7-C27F-D236-698A-A1ACB6BB42B1%1'", Lang));
 	
 	// manufacturing errors
-	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';
-		|ru='Повторяющееся сырье [%1]';
-		|tr='Tekrarlanan hammadde [%1]'", Lang));
-	Strings.Insert("MF_Error_002", NStr("en='Looped semiproduct [%1]';
-		|ru='Рекурсивный полуфабрикат [%1]';
-		|tr='İlmik olmuş yarı mamul: [%1]'", Lang));
-	Strings.Insert("MF_Error_003", NStr("en='Planning by [%1] [%2] [%3] alredy exists';
-		|ru='Планирование  [%1] [%2] [%3] уже существует';
-		|tr='[%1] [%2] [%3] planlama mevcuttur'", Lang));
-	Strings.Insert("MF_Error_004", NStr("en='Document date [%1] less than Planning date [%2]';
-		|ru='Дата документ %1 меньше даты планирования %2';
-		|tr='Evrak [%1] tarihi planlama [%2] tarihinden daha küçüktür'", Lang));
-	Strings.Insert("MF_Error_005", NStr("en='Document date [%1] less than last Planning correction date [%2]';
-		|ru='%1 дата документа меньше даты корректировки планирования %2';
-		|tr='Evrak [%1] tarihi son planlama düzeltme [%2] tarihinden daha küçüktür'", Lang));
-	Strings.Insert("MF_Error_006", NStr("en='Start date [%1] greater than End date [%2]';
-		|ru='Дата начала [%1] больше даты окончания [%2]';
-		|tr='[%1] başlangıç tarihi [%2] son tarihinden daha büyüktür'", Lang));
-	Strings.Insert("MF_Error_007", NStr("en='Start date [%1] intersect Period [%2]';
-		|ru='Дата окончания [%1] пересекается с периодом [%2]';
-		|tr='[%1] ilk tarih [%2] dönemi ile çakışıyor'", Lang));
-	Strings.Insert("MF_Error_008", NStr("en='End date [%1] intersect Period [%2]';
-		|ru='Дата начала %1 пересекается с периодом %2';
-		|tr='[%1] son tarih [%2] dönemi ile çakışıyor'", Lang));
-	Strings.Insert("MF_Error_009", NStr("en='Planning closing by [%1] [%2] [%3] alredy exists';
-		|ru='Документ планирования уже существует: [%1] [%2] [%3]';
-		|tr='Üretim planlama mevcuttur [%1] [%2] [%3]'", Lang));
-	Strings.Insert("MF_Error_010", NStr("en='Select any production planing';
-		|ru='Выбрать любое планирование производства';
-		|tr='Herhangi bir üretim planlamayı seçin'", Lang));
+	Strings.Insert("MF_Error_001", NStr("en='44E3826B-EB30-78FB-BD72-28BF991D58A7%1'", Lang));
+	Strings.Insert("MF_Error_002", NStr("en='E8244BD1-F875-0A61-1044-458E61075D6E%1'", Lang));
+	Strings.Insert("MF_Error_003", NStr("en='471B5968-5722-3311-18A8-85C0C56F5C58____%1,%2,%3'", Lang));
+	Strings.Insert("MF_Error_004", NStr("en='07200F5E-B706-24D8-8F39-9138F78C7A43___________%1,%2'", Lang));
+	Strings.Insert("MF_Error_005", NStr("en='0944670B-1FA3-61DE-E044-4B33C3F34B50___________________________%1,%2'", Lang));
+	Strings.Insert("MF_Error_006", NStr("en='FA5FE583-AF24-57D1-1F59-99A24908F712______%1,%2'", Lang));
+	Strings.Insert("MF_Error_007", NStr("en='0AC84C4E-7BE5-DC31-1E73-39209A9F7DF8_%1,%2'", Lang));
+	Strings.Insert("MF_Error_008", NStr("en='B7EBC8FF-9D5A-9589-96EC-CDB8670B7824%1,%2'", Lang));
+	Strings.Insert("MF_Error_009", NStr("en='0CF650C8-E82B-45A6-6862-2F726D0B33D1____________%1,%2,%3'", Lang));
+	Strings.Insert("MF_Error_010", NStr("en='250962D8-AC20-59CB-B28E-E6E2B1D07324'", Lang));
 	
 	// Errors matching attributes of basis and related documents
-	Strings.Insert("Error_ChangeAttribute_RelatedDocsExist", NStr("en='Cannot change %1 if related documents exist';
-		|ru='Нельзя изменить %1 если есть связанные документы';
-		|tr='Bağlı evrak varsa, %1 değiştirilemez'", Lang));
-	Strings.Insert("Error_AttributeDontMatchValueFromBasisDoc", NStr("en='%1 must be [%2] (according to %3)';
-		|ru='%1 должен быть [%2] (по %3)';
-		|tr='%1 olmalı [%2] (buna göre: %3)'", Lang));
-	Strings.Insert("Error_AttributeDontMatchValueFromBasisDoc_Row", NStr("en='%1 must be [%2] (according to %3) in row [%4]';
-		|ru='%1 должен быть [%2] (по %3) в строке [%4]';
-		|tr='%1 olmalı [%2] (buna göre %3) satırda [%4]'", Lang));
+	Strings.Insert("Error_ChangeAttribute_RelatedDocsExist", NStr("en='95DED6FD-B4A5-4F85-5388-8DA0D53AD217_______%1'", Lang));
+	Strings.Insert("Error_AttributeDontMatchValueFromBasisDoc", NStr("en='6941CF7D-E952-86E3-3178-826DE2A11DE0%1,%2,%3'", Lang));
+	Strings.Insert("Error_AttributeDontMatchValueFromBasisDoc_Row", NStr("en='E6E9E7BB-2D31-BF38-8845-5048B2F4799B_________%1,%2,%3,%4'", Lang));
 	
 	// Store does not match company
-	Strings.Insert("Error_Store_Company", NStr("en='Store [%1] does not match company [%2]';
-		|ru='Склад [%1] не соответствует организации [%2]';
-		|tr='[%1] deposu [%2] şirketine uygun değil'", Lang));
-	Strings.Insert("Error_Store_Company_Row", NStr("en='Store [%1] in row [%3] does not match company [%2]';
-		|ru='Склад [%1] в строке [%3] не соответствует организации [%2]';
-		|tr='[%3] satırdaki [%1] depo [%2] şirketine uygun değil'", Lang));
+	Strings.Insert("Error_Store_Company", NStr("en='821A83D3-FDC1-0316-6FDC-C962DE7C23BF__%1,%2'", Lang));
+	Strings.Insert("Error_Store_Company_Row", NStr("en='AEB3EC05-DFD2-AB7A-ABBD-DEC073E326F4______________%1,%3,%2'", Lang));
 	
-	Strings.Insert("Error_MaximumAccessKey", NStr("en='Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]';
-		|ru='Не удалось создать ключ доступа. Необходимо добавить новый реквизит [ValueRef] к справочнику [ObjectAccessKeys]';
-		|tr='Erişim anahtarı oluşturulamıyor. Katalog [ObjectAccessKeys] içine yeni [ValueRef] özelliği ekleyin'", Lang));
+	Strings.Insert("Error_MaximumAccessKey", NStr("en='7B23D33B-76A6-DA86-6375-59FD3FEFA938_________________________________________________[ValueRef],[ObjectAccessKeys]'", Lang));
 #EndRegion
 
 #Region LandedCost
 
-	Strings.Insert("LC_Error_001", NStr("en='Can not receipt Batch key by sales return: %1 , Quantity: %2 , Doc: %3';
-		|ru='Не получилось оприходовать ключ партии возврата: %1 , Количество: %2 , Документ: %3';
-		|tr='Satış iadenin envanter giriş hatası. İade: %1 , Miktar: %2 , Evrak: %3'", Lang) + Chars.LF);
-	Strings.Insert("LC_Error_002", NStr("en='Can not expense Batch key: %1 , Quantity: %2 , Doc: %3';
-		|ru='Не получилос списать ключ партии: %1 , Количество: %2 , Документ: %3';
-		|tr='Envanter çıkış hatası. Parti anahtarı: %1 , Miktar: %2 , Evrak: %3'", Lang) + Chars.LF);
-	Strings.Insert("LC_Error_003", NStr("en='Can not receipt Batch key: %1 , Quantity: %2 , Doc: %3';
-		|ru='Не получилось оприходовать ключ партии: %1 , Количество: %2 , Документ: %3';
-		|tr='Envanter giriş hatası. Parti anahtarı: %1 , Miktar: %2 , Evrak: %3'", Lang) + Chars.LF);
+	Strings.Insert("LC_Error_001", NStr("en='C78F2BE0-37C0-D7A8-8EB3-353BCFA061B5__________________________________%1,%2,%3'", Lang) + Chars.LF);
+	Strings.Insert("LC_Error_002", NStr("en='5042D1C9-C223-5581-1DF7-715CA5D55E7E__________________%1,%2,%3'", Lang) + Chars.LF);
+	Strings.Insert("LC_Error_003", NStr("en='265E354E-9790-DA0F-F3F8-8AA62D9BE09D__________________%1,%2,%3'", Lang) + Chars.LF);
 #EndRegion
 
 #Region InfoMessages
 	// %1 - Purchase invoice
 	// %2 - Purchase order
-	Strings.Insert("InfoMessage_001", NStr("en='The ""%1"" document does not fully match the ""%2"" document because 
-		|there is already another ""%1"" document that partially covered this ""%2"" document.';
-		|ru='Созданный документ ""%1"" не совпадает с документом ""%2"" в силу того, что ранее
-		| уже создан документ ""%1"", который частично закрыл документ ""%2"".';
-		|tr='""%1"" belgesi, ""%2"" belgesiyle tam olarak eşleşmiyor çünkü
-		|zaten bu ""%2"" belgesini kısmen kapsayan başka bir ""%1"" belgesi var.'",
+	Strings.Insert("InfoMessage_001", NStr("en='FFC804AB-4AE0-6E2C-C1F0-0A2295C6F202_____________________________%1,%2,%1,%2
+		|________________________________________________________________________________'",
 		Lang));
 	// %1 - Boots
-	Strings.Insert("InfoMessage_002", NStr("en='Object %1 created.';
-		|ru='Объект %1 создан.';
-		|tr='%1 nesnesi oluşturuldu.'", Lang));
-	Strings.Insert("InfoMessage_003", NStr("en='This is a service form.';
-		|ru='Это сервисная форма.';
-		|tr='Bu bir hizmet formudur.'", Lang));
-	Strings.Insert("InfoMessage_004", NStr("en='Save the object to continue.';
-		|ru='Для продолжения необходимо сохранить объект.';
-		|tr='Devam etmek için nesneyi kaydedin.'", Lang));
-	Strings.Insert("InfoMessage_005", NStr("en='Done';
-		|ru='Завершено';
-		|tr='Tamamlandı'", Lang));
+	Strings.Insert("InfoMessage_002", NStr("en='B0701656-DF69-8DAB-B913-3D7486267528%1'", Lang));
+	Strings.Insert("InfoMessage_003", NStr("en='9AE27686-C33D-E8C9-9F98-84B1433D8EF6'", Lang));
+	Strings.Insert("InfoMessage_004", NStr("en='8BBA90B8-E049-1EDA-A975-576A423FAF11'", Lang));
+	Strings.Insert("InfoMessage_005", NStr("en='807FB5AE-34C6-44DE-EA92-24F5987DFE40'", Lang));
 	
 	// %1 - Physical count by location
-	Strings.Insert("InfoMessage_006", NStr("en='The ""%1"" document is already created. You can update the quantity.';
-		|ru='Документы ""%1"" уже созданы. Возможно использовать только функцию обновления количества.';
-		|tr='""%1"" belgesi zaten oluşturulmuş. Miktarı güncelleyebilirsiniz.'", Lang));
+	Strings.Insert("InfoMessage_006", NStr("en='EA9DDDB9-C870-7B2A-ABC3-3DCB122E0286______________________________%1'", Lang));
 
-	Strings.Insert("InfoMessage_007", NStr("en='#%1 date: %2';
-		|ru='#%1 дата: %2';
-		|tr='#%1 tarih: %2'", Lang));
+	Strings.Insert("InfoMessage_007", NStr("en='69B878AE-601E-EE40-0978-8F8AC2CCB78A%1,%2'", Lang));
 	// %1 - 12
 	// %2 - 20.02.2020
-	Strings.Insert("InfoMessage_008", NStr("en='#%1 date: %2';
-		|ru='#%1 дата: %2';
-		|tr='#%1 tarih: %2'", Lang));
+	Strings.Insert("InfoMessage_008", NStr("en='69B878AE-601E-EE40-0978-8F8AC2CCB78A%1,%2'", Lang));
 
-	Strings.Insert("InfoMessage_009", NStr("en='Total quantity doesnt match. Please count one more time. You have one more try.';
-		|ru='Общее количество не сходится. Введите еще раз. Осталась последняя попытка.';
-		|tr='Girilen ve sayılan toplam adet tutmadı. Lütfen bir daha sayın. Bir deneme daha var.'", Lang));
-	Strings.Insert("InfoMessage_010", NStr("en='Total quantity doesnt match. Location need to be count again (current count is annulated).';
-		|ru='Общее количество не совпадает. Локацию необходимо отсканировать заново (текущие данные очищены).';
-		|tr='Toplam miktar tutmuyor. Lokasyon tekrar okutulmalı (okutulan veri silinmişti).'", Lang));
-	Strings.Insert("InfoMessage_011", NStr("en='Total quantity is ok. Please scan and count next location.';
-		|ru='Общее количество правильное. Можно начать работу со следующей локацией.';
-		|tr='Mevcut lokasyon ile ilgili girilen ve sayılan adet tuttu. Lütfen bir sonraki lokasyonu okutun.'", Lang));
+	Strings.Insert("InfoMessage_009", NStr("en='814171D6-98E9-E3AD-D26F-F053E0883C60___________________________________________'", Lang));
+	Strings.Insert("InfoMessage_010", NStr("en='D429D4BF-C7AA-341A-A330-0ECB099A86ED______________________________________________________'", Lang));
+	Strings.Insert("InfoMessage_011", NStr("en='B0B00E1E-120C-A9CE-E28D-D6EE7982275A______________________'", Lang));
 	
 	// %1 - 12
 	// %2 - Vasiya Pupkin
-	Strings.Insert("InfoMessage_012", NStr("en='Current location #%1 was started by another user. User: %2';
-		|ru='Сканирование текущей локации %1 было начато другим пользователем. Пользователь: %2';
-		|tr='Bu lokasyon (#%1) başka kullanıcı tarafından başlatıldı. Kullanıcı: %2'", Lang));
+	Strings.Insert("InfoMessage_012", NStr("en='676D356D-A381-935C-CAF0-0B9A9392CABE______________________%1,%2'", Lang));
 	
 	// %1 - 12
-	Strings.Insert("InfoMessage_013", NStr("en='Current location #%1 was linked to you. Other users will not be able to scan it.';
-		|ru='Текущая локация %1 закреплена за вами. Другие пользователи не смогут с ней работать.';
-		|tr='#%1 lokasyon size atanmıştır. Diğer kullanıcılar bu lokasyonu okutamazlar.'", Lang));
+	Strings.Insert("InfoMessage_013", NStr("en='76186C2D-0ACA-88A3-39E9-99721B565458____________________________________________%1'", Lang));
 	
 	// %1 - 12
-	Strings.Insert("InfoMessage_014", NStr("en='Current location #%1 was scanned and closed before. Please scan next location.';
-		|ru='Текущая локация (%1) уже была отсканирована и закрыта. Пожалуйста, отсканируйте следующую локацию .';
-		|tr='Bu %1 lokasyon daha önce okutulmuş ve kapatılmıştı. Bir sonraki lokasyon okutunuz.'", Lang));
+	Strings.Insert("InfoMessage_014", NStr("en='FC8EDAC2-45F6-5A6B-BB68-88E10461AD8A__________________________________________%1'", Lang));
 	
 	// %1 - 123456
-	Strings.Insert("InfoMessage_015", NStr("en='Serial lot %1 was not found. Create new?';
-		|ru='Серийный номер %1 не найдет. Создать новый?';
-		|tr='%1 seri numarası bulunamadı. Yeni oluşturmak ister misiniz?'", Lang));
+	Strings.Insert("InfoMessage_015", NStr("en='D64BCB30-B45B-5141-171B-B623CBD815AF____%1'", Lang));
 
 	// %1 - 123456
 	// %2 - Some item
-	Strings.Insert("InfoMessage_016", NStr("en='Scanned barcode %1 is using for another items %2';
-		|ru='Отсканированный штрихкод %1 уже используется для номенклатуры %2';
-		|tr='Okutulan %1 barkod, başka malzeme (%2) için tanımlıdır.'", Lang));
+	Strings.Insert("InfoMessage_016", NStr("en='2A8AB474-72F0-FFEA-A775-5B506C9C4940____________%1,%2'", Lang));
 	
 	// %1 - 123456
-	Strings.Insert("InfoMessage_017", NStr("en='Scanned barcode %1 is not using set for serial numbers';
-		|ru='Отсканированный штрихкод %1 не используется для серийных номеров';
-		|tr='Okutulan %1 barkod seri lot numara seti kullanmıyor'", Lang));
-	Strings.Insert("InfoMessage_018", NStr("en='Add or scan serial lot number';
-		|ru='Добавьте серию или считайте штрихкод серии';
-		|tr='Seri seçin veya barkodu okutun'", Lang));
+	Strings.Insert("InfoMessage_017", NStr("en='7E590F4D-F249-7B01-1874-4171E8F5DCCF__________________%1'", Lang));
+	Strings.Insert("InfoMessage_018", NStr("en='3D8F680C-F2D3-0D04-4A51-197C02E19800'", Lang));
 
-	Strings.Insert("InfoMessage_019", NStr("en='Data lock reasons:';
-		|ru='Причина запрета:';
-		|tr='Veri değiştirme kısıtlama sebebi:'", Lang));
+	Strings.Insert("InfoMessage_019", NStr("en='FBEC7A8C-D8E6-ABCC-C161-1BB773D5C2DF'", Lang));
 
-	Strings.Insert("InfoMessage_020", NStr("en='Created document: %1';
-		|ru='Создан документ: %1';
-		|tr='Evrak oluştur: %1'", Lang));
+	Strings.Insert("InfoMessage_020", NStr("en='5CC35B61-5B4D-D65C-C44B-BF05879F7AD6%1'", Lang));
   
   	// %1 - 42
-	Strings.Insert("InfoMessage_021", NStr("en='Can not unlock attributes, this is element used %1 times, ex.:';
-		|ru='Невозможно разблокировать реквизиты, данный элемент использовался %1 раз, например:';
-		|tr='Alan kilidi kaldırılamaz, nesne %1 kez kullanıldı, örneğin:'",
+	Strings.Insert("InfoMessage_021", NStr("en='3B58AABB-DC28-0521-196A-A414033C0487__________________________%1'",
 		Lang));
   	// %1 - 
-	Strings.Insert("InfoMessage_022", NStr("en='This order is closed by %1';
-		|ru='Этот заказ уже закрыт документом %1';
-		|tr='Bu sipariş %1 ile kapatılmıştı.'", Lang));
-	Strings.Insert("InfoMessage_023", NStr("en='Can not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.';
-		|ru='Нельзя вводить расходную накладную, без приходной накладной по данному виду отгрузки. Включено использование приходной накладной.';
-		|tr='Satın alma irsaliyesi olmadan sevk irsaliyesi oluşturulamaz. Satın alma irsaliye devrede.'", Lang));
-	Strings.Insert("InfoMessage_024", NStr("en='Will be available after save.';
-		|ru='Доступен к изменению после записи объекта.';
-		|tr='Kaydettikten sonra ulaşılabilir olacak'", Lang));
-	Strings.Insert("InfoMessage_025", NStr("en='Before start to scan - choose location';
-		|ru='Перед началом сканирования необходимо выбрать локацию';
-		|tr='Barkod okutmadan önce lokasyon seçmek gerekir'", Lang));
-	Strings.Insert("InfoMessage_026", NStr("en='Can not add Service item type: %1';
-		|ru='Товар с типом сервис не добавлен: %1';
-		|tr='Hizmet malzeme tipi eklenemez: %1'", Lang));
+	Strings.Insert("InfoMessage_022", NStr("en='894C97CF-D822-FB2B-B50D-D6A0D3240864%1'", Lang));
+	Strings.Insert("InfoMessage_023", NStr("en='6780AB0D-BB90-05FF-FB8C-CD8E7E4BA5C2__________________________________________________________'", Lang));
+	Strings.Insert("InfoMessage_024", NStr("en='02BA8FCE-3BA8-F96E-E866-6F001B7BA172'", Lang));
+	Strings.Insert("InfoMessage_025", NStr("en='ED9B6C54-E3A9-5038-81AE-E1C05428AA15__'", Lang));
+	Strings.Insert("InfoMessage_026", NStr("en='F9EFD155-BDC5-9BDA-AB21-1E6D78511505%1'", Lang));
 	// %1 - 123123123
 	// %2 - Item name
 	// %3 - Item key
 	// %4 - Serial lot number
-	Strings.Insert("InfoMessage_027", NStr("en='Barcode [%1] is exists for item: %2 [%3] %4';
-		|ru='Штрихкод [%1] существует для номенклатуры: %2 [%3] %4';
-		|tr='Barkod [%1] sistemde mevcut, malzeme: %2 [%3] %4'", Lang));
-	Strings.Insert("InfoMessage_028", NStr("en='New serial [ %1 ] created for item key [ %2 ]';
-		|ru='Новая серия [ %1 ] созданная для серийного номера [ %2 ]';
-		|tr='Yeni seri lot numarası [ %1 ] oluşturuldu, malzeme: [ %2 ]'", Lang));
-	Strings.Insert("InfoMessage_029", NStr("en='This is unique serial and it can be only one at the document';
-		|ru='Это уникальный серийный номер, он должен быть в документе в количестве 1';
-		|tr='Bu seri lot numarası eşsizdir ve sadece tek bir defa evrakta kullanılabilir'", Lang));
-	Strings.Insert("InfoMessage_030", NStr("en='Scan barcode of Item, not serial lot numbers';
-		|ru='Просканируйте штрихкод товара, а не серийного номера';
-		|tr='Seri lot barkodu değil, ürün barkodu okutunuz'", Lang));
-	Strings.Insert("InfoMessage_031", NStr("en='Do you want to continue job?';
-		|ru='Вы действительно хотите продолжить выполнение задания?';
-		|tr='Görev devam etmek istediğinizden emin misiniz?'", Lang));
-	Strings.Insert("InfoMessage_032", NStr("en='Do you want to pause job?';
-		|ru='Вы действительно хотите поставить выполнение задания на паузу?';
-		|tr='Görev duraklamak istediğinizden emin misiniz?'", Lang));
-	Strings.Insert("InfoMessage_033", NStr("en='Do you want to stop job?';
-		|ru='Вы действительно хотите остановить задание?';
-		|tr='Görev durdurmak istediğinizden emin misiniz?'", Lang));
+	Strings.Insert("InfoMessage_027", NStr("en='07AE0505-29D8-F0AC-C18B-B42E0D95D737_______%1,%2,%3,%4'", Lang));
+	Strings.Insert("InfoMessage_028", NStr("en='94A21A2D-9FA7-6CC9-91E9-9BC38FDE6D6A_________%1,%2'", Lang));
+	Strings.Insert("InfoMessage_029", NStr("en='60A9A696-6344-D007-746D-D8E2C84BFD6E________________________'", Lang));
+	Strings.Insert("InfoMessage_030", NStr("en='490E480D-7798-BED8-858C-C6D639E71DFE________'", Lang));
+	Strings.Insert("InfoMessage_031", NStr("en='D423BB64-F19F-D081-1286-6D97280B357D'", Lang));
+	Strings.Insert("InfoMessage_032", NStr("en='9EEA4625-3ACD-95E3-35E6-6A6853EF09F0'", Lang));
+	Strings.Insert("InfoMessage_033", NStr("en='8683584B-F5E0-0497-7192-25D7E7EC364D'", Lang));
 	
-	Strings.Insert("InfoMessage_034", NStr("en='Time zone not changed';
-		|ru='Часовой пояс не изменен';
-		|tr='Zaman dilimi değiştirilmedi'", Lang));
-	Strings.Insert("InfoMessage_035", NStr("en='Time zone changed to %1';
-		|ru='Часовой пояс изменен как %1';
-		|tr='Zaman dilimi %1 olarak değiştirildi'", Lang));
-	Strings.Insert("InfoMessage_036", NStr("en='Attach file for ""%1"" as ""%2""';
-		|ru='Прикрепите файл для ""%1"" как ""%2""';
-		|tr='""%1"" belgesi ""%2"" olarak ekleyiniz'", Lang));
-	Strings.Insert("InfoMessage_037", NStr("en='Add link or any add any description';
-		|ru='Добавьте ссылку или любое наименование';
-		|tr='Bağlantı veya belge tanımı giriniz'", Lang));
-	Strings.Insert("InfoMessage_AttachFile_NonSelectDocType", NStr("en='Attach document';
-		|ru='Прикрепить документ';
-		|tr='Dış evrak ekle'", Lang));
-	Strings.Insert("InfoMessage_AttachFile_SelectDocType", NStr("en='Click to add document';
-		|ru='Нажмите для добавления документа';
-		|tr='Belge eklemek için tıklayınız'", Lang) + Chars.LF + "%1");
-	Strings.Insert("InfoMessage_AttachFile_MaxFileSize", NStr("en='File size %1 is %2 Mb, which is larger than the allowed size of %3 Mb.';
-		|ru='Размер файла %1 составляет %2 Мб, что больше допустимого размера %3 Мб.';
-		|tr='%1 dosyanın boyutu %2 MB ve izin verilen %3 MB''ten fazladır'", Lang) + Chars.LF + "%1");
-	Strings.Insert("InfoMessage_038", NStr("en='New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.';
-		|ru='Новые движения документа идентичны ручным корректировкам. Флажок ""Редактирование ручных движений"" теперь не нужен и может быть удалён.';
-		|tr='Yeni evrak hareketleri manuel hareketlerine eşittir. ""Menuel hareket düzeltme"" işareti gereksiz olduğundan kaldırılabilir.'", Lang));
-	Strings.Insert("InfoMessage_039", NStr("en='Movements successfully recorded';
-		|ru='Движения успешно записаны';
-		|tr='Hareketler başarıyla kadyedildi'", Lang));
-	Strings.Insert("InfoMessage_040", NStr("en='File not found';
-		|ru='Файл не найден';
-		|tr='Dosya bulunamadı'", Lang));
-	Strings.Insert("InfoMessage_041", NStr("en='Select type of attached document';
-		|ru='Выберите тип прикрепляемого документа';
-		|tr='Ek dosya formatını seç'", Lang));
+	Strings.Insert("InfoMessage_034", NStr("en='545C9E2A-91C0-0073-32BA-AF97DF8C44F7'", Lang));
+	Strings.Insert("InfoMessage_035", NStr("en='384DA243-1523-D17D-DDD1-147614CEA196%1'", Lang));
+	Strings.Insert("InfoMessage_036", NStr("en='3428361F-AE28-E594-48D2-2BCD86BEF2DE%1,%2'", Lang));
+	Strings.Insert("InfoMessage_037", NStr("en='CBF9C85A-B0EC-4772-29C0-015E09E84E14'", Lang));
+	Strings.Insert("InfoMessage_AttachFile_NonSelectDocType", NStr("en='762875CB-16A5-CEE1-1896-633AEB30DAB3'", Lang));
+	Strings.Insert("InfoMessage_AttachFile_SelectDocType", NStr("en='F6853798-DCF1-4328-8761-19463EBE69CB'", Lang) + Chars.LF + "%1");
+	Strings.Insert("InfoMessage_AttachFile_MaxFileSize", NStr("en='4ED58E60-FD47-A00D-D6AE-EE106E5BCE7D__________________________________%1,%2,%3'", Lang) + Chars.LF + "%1");
+	Strings.Insert("InfoMessage_038", NStr("en='62B4FE33-28D5-0B14-4389-95507838FF47_______________________________________________________________________________________________________'", Lang));
+	Strings.Insert("InfoMessage_039", NStr("en='0847EC02-3E83-9ADB-B486-668861C8D2AA'", Lang));
+	Strings.Insert("InfoMessage_040", NStr("en='6D300CE5-9D61-E3DF-F97A-AE98B83E3069'", Lang));
+	Strings.Insert("InfoMessage_041", NStr("en='1178CB2C-F006-0CB8-8E12-208D516358C4'", Lang));
 	
-	Strings.Insert("InfoMessage_WriteObject", NStr("en='Save object, before continue.';
-		|ru='Сохраните объект, прежде чем продолжить.';
-		|tr='Devam etmeden önce objeyi saklayınız.'", Lang));
-	Strings.Insert("InfoMessage_Payment", NStr("en='Payment (+)';
-		|ru='Оплата (+)';
-		|tr='Ödeme (+)'", Lang));
-	Strings.Insert("InfoMessage_PaymentReturn", NStr("en='Payment Return';
-		|ru='Оплата возврата';
-		|tr='Ödeme İadesi'", Lang));
-	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en='Session is closed';
-		|ru='Смена закрыта';
-		|tr='Vardya kapandı'", Lang));
-	Strings.Insert("InfoMessage_Sales", NStr("en='Sales';
-		|ru='Продажа';
-		|tr='Satış'", Lang));
-	Strings.Insert("InfoMessage_Returns", NStr("en='Returns';
-		|ru='Возвраты';
-		|tr='İadeler'", Lang));
-	Strings.Insert("InfoMessage_ReturnTitle", NStr("en='Return';
-		|ru='Возврат';
-		|tr='İade'", Lang));
-	Strings.Insert("InfoMessage_POS_Title", NStr("en='Point of sales';
-		|ru='Рабочее место кассира';
-		|tr='Satış ekranı'", Lang));
-	Strings.Insert("InfoMessage_CanOpenOnlyNewStatus", NStr("en='Cash shift can only be opened for a document with the status ""New"".';
-		|ru='Кассовую смену можно открыть только для документа со статусом ""Новый"".';
-		|tr='Nakit vardiya yalnızca ""Yeni"" durumundaki bir belge için açılabilir.'", Lang));
-	Strings.Insert("InfoMessage_CanCloseOnlyOpenStatus", NStr("en='Cash shift can only be closed for a document with the status ""Open"".';
-		|ru='Кассовую смену можно закрыть только для документа со статусом ""Открыто"".';
-		|tr='Kasa vardiyası yalnızca ""Açık"" durumundaki bir belge için kapatılabilir.'", Lang));
+	Strings.Insert("InfoMessage_WriteObject", NStr("en='2928233E-7EA0-DD38-830F-F339347701A0'", Lang));
+	Strings.Insert("InfoMessage_Payment", NStr("en='FC6DE927-8CF3-CA10-00D4-4E9938551163'", Lang));
+	Strings.Insert("InfoMessage_PaymentReturn", NStr("en='3D2C3CCC-09EE-9DDC-CE2C-C4CD508625B3'", Lang));
+	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en='2CF4ABE9-AA01-7514-49D7-7204273080AE'", Lang));
+	Strings.Insert("InfoMessage_Sales", NStr("en='75E38679-AD3C-44CA-AA6A-ACA40EE5389C'", Lang));
+	Strings.Insert("InfoMessage_Returns", NStr("en='9E07A203-B7B2-827F-F078-8A7FAB816EEB'", Lang));
+	Strings.Insert("InfoMessage_ReturnTitle", NStr("en='9A3436E4-BEC9-8944-41BA-AF4A31AD12EF'", Lang));
+	Strings.Insert("InfoMessage_POS_Title", NStr("en='31813FBC-D80C-9225-5D36-6956EFD760B5'", Lang));
+	Strings.Insert("InfoMessage_CanOpenOnlyNewStatus", NStr("en='284C1380-831C-5E60-08A6-6EE2B550AD21_______________________________'", Lang));
+	Strings.Insert("InfoMessage_CanCloseOnlyOpenStatus", NStr("en='ABFD9C56-3324-8ADE-EE4C-C3A85D6A707C________________________________'", Lang));
 	
-	Strings.Insert("InfoMessage_NotProperty", NStr("en='The object has no properties for editing';
-		|ru='У объекта нет свойств для редактирования';
-		|tr='Nesnenin düzenleme için özellikleri yok'", Lang));
-	Strings.Insert("InfoMessage_DataUpdated", NStr("en='The data has been updated';
-		|ru='Данные были обновлены';
-		|tr='Veriler güncellendi'", Lang));
-	Strings.Insert("InfoMessage_DataSaved", NStr("en='The data has been saved';
-		|ru='Данные были сохранены';
-		|tr='Veriler kaydedildi'", Lang));
-	Strings.Insert("InfoMessage_SettingsApplied", NStr("en='The settings have been applied';
-		|ru='Настройки применены';
-		|tr='Ayarlar uygulandı'", Lang));
-	Strings.Insert("InfoMessage_ImportError", NStr("en='Import data to product database is locked. Go to Settings page';
-		|ru='Импорт данных в рабочую базу заблокирован. Перейдите на вкладку настроек.';
-		|tr='Ürün veritabanına veri aktarımı kilitlendi. Ayarlar sayfasına gidin'", Lang));
+	Strings.Insert("InfoMessage_NotProperty", NStr("en='02C79FF5-9CFD-9F6B-BE86-6F2F0AA88437____'", Lang));
+	Strings.Insert("InfoMessage_DataUpdated", NStr("en='E5AE080C-6497-AF5F-F5FD-D47610F02C4C'", Lang));
+	Strings.Insert("InfoMessage_DataSaved", NStr("en='856BDF35-4BD7-A4A2-2570-0454B37F2431'", Lang));
+	Strings.Insert("InfoMessage_SettingsApplied", NStr("en='F464A6E0-3D5E-0B33-3168-8A1B24308C00'", Lang));
+	Strings.Insert("InfoMessage_ImportError", NStr("en='182157D2-8568-9AE7-7ABE-E3C490D89032__________________________'", Lang));
+	Strings.Insert("InfoMessage_PostingDocument", NStr("en='972BD2A2-FDEC-46D6-6054-4339B8934034'", Lang));
 	
 #EndRegion
 
 #Region QuestionToUser
-	Strings.Insert("QuestionToUser_001", NStr("en='Write the object to continue. Continue?';
-		|ru='Для продолжения необходимо сохранить объект. Продолжить?';
-		|tr='Devam etmek için nesneyi yazın. Devam edilsin mi?'", Lang));
-	Strings.Insert("QuestionToUser_002", NStr("en='Do you want to switch to scan mode?';
-		|ru='Переключиться в режим сканирования?';
-		|tr='Tarama moduna geçmek istiyor musunuz?'", Lang));
-	Strings.Insert("QuestionToUser_003", NStr("en='Filled data on cheque bonds transactions will be deleted. Do you want to update %1?';
-		|ru='Заполненные данные по чекам будут очищены. Обновить %1? ';
-		|tr='Doldurulmuş çek/senet bilgiler temizlenecek. %1 güncellemek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_004", NStr("en='Do you want to change tax rates according to the partner term?';
-		|ru='Изменить налоговые ставки в соответствии с соглашением?';
-		|tr='Vergileri sözleşmeye göre değiştirmek ister misiniz?'",
+	Strings.Insert("QuestionToUser_001", NStr("en='A9E96B84-50BF-39F8-8912-294ABA32F584___'", Lang));
+	Strings.Insert("QuestionToUser_002", NStr("en='84F9EDB0-7FE7-BB53-3DFF-FEDC60A73F53'", Lang));
+	Strings.Insert("QuestionToUser_003", NStr("en='D20C8C9D-71C4-2AF6-6B4A-AF80E1EE3BC9_______________________________________________%1'", Lang));
+	Strings.Insert("QuestionToUser_004", NStr("en='42913706-A1D1-9035-54E7-78FFD2D603A0__________________________'",
 		Lang));
-	Strings.Insert("QuestionToUser_005", NStr("en='Do you want to update filled stores?';
-		|ru='Обновить заполненные склады?';
-		|tr='Tüm depoları güncellemek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_006", NStr("en='Do you want to update filled currency?';
-		|ru='Обновить заполненные цены';
-		|tr='Doldurulan para birimini güncellemek istiyor musunuz?'", Lang));
-	Strings.Insert("QuestionToUser_007", NStr("en='Transaction table will be cleared. Continue?';
-		|ru='Таблица транзакций будет очищена. Продолжить?';
-		|tr='İşlemler tablosu temizlenecek. Devam etmek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_008", NStr("en='Changing the currency will clear the rows with cash transfer documents. Continue?';
-		|ru='При изменении валюты заполненные строки будут отвязаны от документа перемещения денежных средств. Продолжить?';
-		|tr='Para birimini değiştirmek, nakit transferi belgelerini içeren satırları temizleyecektir. Devam ediyor muyuz?'", Lang));
-	Strings.Insert("QuestionToUser_009", NStr("en='Do you want to replace filled stores with store %1?';
-		|ru='Хотите заменить текущие склады на склад: %1?';
-		|tr='Dolu depoları %1 deposu ile değiştirmek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_011", NStr("en='Do you want to replace filled price types with price type %1?';
-		|ru='Хотите заменить текущие типы цен на : %1?';
-		|tr='Dolu fiyat tipleri %1 fiyat tipi ile değiştirmek ister misiniz?'",
+	Strings.Insert("QuestionToUser_005", NStr("en='79090F78-B86C-8CA9-9EC7-7121335DC155'", Lang));
+	Strings.Insert("QuestionToUser_006", NStr("en='84DA2153-50FD-514A-A75A-A6C873B298CD__'", Lang));
+	Strings.Insert("QuestionToUser_007", NStr("en='B6FF0C07-C95C-AE7B-B49B-BDED479A01C0________'", Lang));
+	Strings.Insert("QuestionToUser_008", NStr("en='1F6CF3E5-261C-8567-7E7F-F298C5ED4457_____________________________________________'", Lang));
+	Strings.Insert("QuestionToUser_009", NStr("en='5D0A9502-D09D-EE19-92BB-BF2C3A688AB2_______________%1'", Lang));
+	Strings.Insert("QuestionToUser_011", NStr("en='3ED3D8EC-4717-EB96-6E92-2862D69EC297_________________________%1'",
 		Lang));
-	Strings.Insert("QuestionToUser_012", NStr("en='Do you want to exit?';
-		|ru='Вы действительно хотите выйти?';
-		|tr='Çıkmak istediğinizden emin misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_013", NStr("en='Do you want to update filled prices?';
-		|ru='Обновить заполненные цены?';
-		|tr='Doldurulmuş fiyatları güncellemek istiyor musunuz?'", Lang));
-	Strings.Insert("QuestionToUser_014", NStr("en='Transaction type is changed. Do you want to update filled data?';
-		|ru='Тип операции изменен. Обновить заполненные данные? ';
-		|tr='İşlem türü değiştirildi. Doldurulmuş verileri güncellemek istiyor musunuz?'",
+	Strings.Insert("QuestionToUser_012", NStr("en='584DFA8C-67CE-A827-7591-11A73CA166A1'", Lang));
+	Strings.Insert("QuestionToUser_013", NStr("en='EC5E82AF-314A-FC2C-CBC5-58E3F19865B6'", Lang));
+	Strings.Insert("QuestionToUser_014", NStr("en='EF54791F-6E5C-3357-70BF-F35441FE3636___________________________'",
 		Lang));
-	Strings.Insert("QuestionToUser_015", NStr("en='Filled data will be cleared. Continue?';
-		|ru='Заполненные данные будут очищены. Продолжить?';
-		|tr='Doldurulan veriler silinecektir. Devam edilsin mi?'", Lang));
-	Strings.Insert("QuestionToUser_016", NStr("en='Do you want to change or clear the icon?';
-		|ru='Заменить или удалить иконку?';
-		|tr='Simgeyi değiştirmek mi yoksa temizlemek mi istiyorsunuz?'", Lang));
-	Strings.Insert("QuestionToUser_017", NStr("en='How many documents to create?';
-		|ru='Сколько немобходимо создать документов?';
-		|tr='Kaç tane evrak oluşturulsun?'", Lang));
-	Strings.Insert("QuestionToUser_018", NStr("en='Please enter total quantity';
-		|ru='Введите пожалуйста общее количество';
-		|tr='Toplam lokasyon adedini giriniz'", Lang));
-	Strings.Insert("QuestionToUser_019", NStr("en='Do you want to update payment term?';
-		|ru='Хотите обновить условия оплаты?';
-		|tr='Ödeme şekli güncellemek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_020", NStr("en='Do you want to overwrite saved option?';
-		|ru='Хотите перезаписать сохраненный вариант?';
-		|tr='Daha önce kaydedilmiş seçeneği ezip kaydetmek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_021", NStr("en='Do you want to close this form? All changes will be lost.';
-		|ru='Вы хотите закрыть текущую форму? Все изменения будут потеряны.';
-		|tr='Bu formu kapatmak istediğinizden emin misiniz? Tüm değişiklikler geri alınacaktır.'", Lang));
-	Strings.Insert("QuestionToUser_022", NStr("en='Do you want to upload this files';
-		|ru='Вы хотите загрузить эти файлы?';
-		|tr='Dosya yüklemek ister misiniz?'", Lang) + ": " + Chars.LF + "%1");
-	Strings.Insert("QuestionToUser_023", NStr("en='Do you want to fill according to cash transfer order?';
-		|ru='Перезаполнить по перемещению денежных средств?';
-		|tr='Kas/banka transfer fişine göre doldurulsun mu?'", Lang));
-	Strings.Insert("QuestionToUser_024", NStr("en='Change planning period?';
-		|ru='Поменять период планирования?';
-		|tr='Planlama dönemi değiştirmek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_025", NStr("en='Do you want to update filled tax rates?';
-		|ru='Вы действительно хотите обновить заполненные налоговые ставки?';
-		|tr='Doldurulan vergi oranlarını güncellemek istiyor musunuz?'", Lang));
-	Strings.Insert("QuestionToUser_026", NStr("en='Do you want to update payment agent?';
-		|ru='Вы хотите обновить платежного агента?';
-		|tr='Ödeme acentesini güncellemek istiyor musunuz?'", Lang));
-	Strings.Insert("QuestionToUser_027", NStr("en='Filled data by employee [%1] will be cleared. Continue?';
-		|ru='Заполненные данные сотрудником [%1] будут очищены. Продолжить?';
-		|tr='Çalışan [%1] tarafından doldurulan veriler silinecek. Devam edilsin mi?'", Lang));
-	Strings.Insert("QuestionToUser_028", NStr("en='Do you want to refund the client?';
-		|ru='Вы хотите вернуть клиенту?';
-		|tr='Müşteriye iade yapmak istiyor musunuz?'", Lang));
-	Strings.Insert("QuestionToUser_029", NStr("en='New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?';
-		|ru='Новые движения документа соответствуют ручным корректировкам, делая флажок ""Редактирование ручных движений"" ненужным. Хотите ли вы удалить этот флажок?';
-		|tr='Yeni evrak hareketleri manuel hareketlerine eşittir. ""Menuel hareket düzeltme"" işaretleme gereksiz. Devam etmek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_030", NStr("en='Do you want to restore movements to default?';
-		|ru='Вы хотите восстановить движения по умолчанию?';
-		|tr='Ayarları varsayınlara getirmek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_031", NStr("en='Do you want to change tax rates according to the company?';
-		|ru='Вы хотите поменять налоги согласно организации?';
-		|tr='Şirket ayarlarına göre vergileri değiştirmek ister misiniz?'",
+	Strings.Insert("QuestionToUser_015", NStr("en='566C8F1D-37C4-4F01-1E27-7C34EFE6EE8E__'", Lang));
+	Strings.Insert("QuestionToUser_016", NStr("en='462DDA43-7262-0C57-7236-6DEEF7A29A8D____'", Lang));
+	Strings.Insert("QuestionToUser_017", NStr("en='500EB9FD-0360-1554-41AF-F9E4A54F9817'", Lang));
+	Strings.Insert("QuestionToUser_018", NStr("en='2584DE9A-9DA7-4DB1-18E6-66D706013F7A'", Lang));
+	Strings.Insert("QuestionToUser_019", NStr("en='DF7B3259-79B0-DEF6-6E57-7D9A1BD8315C'", Lang));
+	Strings.Insert("QuestionToUser_020", NStr("en='C3694019-9A38-4FF9-93A3-3746C62EAE65__'", Lang));
+	Strings.Insert("QuestionToUser_021", NStr("en='3CF7325D-B570-FF56-6785-531A3A1238E0_____________________'", Lang));
+	Strings.Insert("QuestionToUser_022", NStr("en='87A22B00-E444-2CE1-127B-BAEBBF815A63'", Lang) + ": " + Chars.LF + "%1");
+	Strings.Insert("QuestionToUser_023", NStr("en='C9022A5E-7435-BB46-626E-EE13082A14B8_________________'", Lang));
+	Strings.Insert("QuestionToUser_024", NStr("en='A1F40F0A-25D7-98FA-A0DB-B7894066759C'", Lang));
+	Strings.Insert("QuestionToUser_025", NStr("en='515F34B7-5162-4856-68E3-3B524240914E___'", Lang));
+	Strings.Insert("QuestionToUser_026", NStr("en='07F191BC-9351-881F-F44F-F68BAB5C5EA3'", Lang));
+	Strings.Insert("QuestionToUser_027", NStr("en='97D4DED5-D07E-B7D4-497B-B4CE8B1691CC___________________%1'", Lang));
+	Strings.Insert("QuestionToUser_028", NStr("en='8C422C34-EA75-8D7E-E296-6F68D69E5DDB'", Lang));
+	Strings.Insert("QuestionToUser_029", NStr("en='702B3291-6073-39F0-0844-41430CDE4DAE_________________________________________________________________________________________________________________'", Lang));
+	Strings.Insert("QuestionToUser_030", NStr("en='044A4D5D-DFC6-D6F1-19B9-903B50609F32________'", Lang));
+	Strings.Insert("QuestionToUser_031", NStr("en='0D24930B-E6EC-B469-9637-7403F4EFE383_____________________'",
 		Lang));
-	Strings.Insert("QuestionToUser_032", NStr("en='Do you want to create new legal name?';
-		|ru='Создать нового контрагента?';
-		|tr='Yeni fatura hesabı oluşturulsun mu?'", Lang));
-	Strings.Insert("QuestionToUser_033", NStr("en='Do you want to create new partner term?';
-		|ru='Создать новое соглашение?';
-		|tr='Yeni sözleşme oluşturulsun mu?'", Lang));
+	Strings.Insert("QuestionToUser_032", NStr("en='3C6C9323-5660-EBBC-C22B-B3993DC80E9C_'", Lang));
+	Strings.Insert("QuestionToUser_033", NStr("en='9A5CFBA7-753B-ABC5-599C-C2E3569B5B15___'", Lang));
+	Strings.Insert("QuestionToUser_034", NStr("en='6A53336A-80B2-8686-6D2C-CD7260BB6835__________'", Lang));
 		
 #EndRegion
 
 #Region SuggestionToUser
-	Strings.Insert("SuggestionToUser_1", NStr("en='Select a value';
-		|ru='Выберите значение';
-		|tr='Bir değer seçin'", Lang));
-	Strings.Insert("SuggestionToUser_2", NStr("en='Enter a barcode';
-		|ru='Введите штрихкод';
-		|tr='Bir barkod giriniz'", Lang));
-	Strings.Insert("SuggestionToUser_3", NStr("en='Enter an option name';
-		|ru='Наименование параметра ввода';
-		|tr='Bir seçenek adı giriniz'", Lang));
-	Strings.Insert("SuggestionToUser_4", NStr("en='Enter a new option name';
-		|ru='Введите новое наименование параметра';
-		|tr='Yeni bir seçenek adı giriniz'", Lang));
+	Strings.Insert("SuggestionToUser_1", NStr("en='959143D6-AEDC-7727-7F74-4AC4E38771F0'", Lang));
+	Strings.Insert("SuggestionToUser_2", NStr("en='9A13DD97-963E-1BC4-427D-DCC49DAF6A86'", Lang));
+	Strings.Insert("SuggestionToUser_3", NStr("en='B6C062DB-F7F2-6A70-0283-3DA0593F6509'", Lang));
+	Strings.Insert("SuggestionToUser_4", NStr("en='C1EA5B18-606D-9845-5FFB-BE95CCE2E9AD'", Lang));
 #EndRegion
 
 #Region UsersEvent
-	Strings.Insert("UsersEvent_001", NStr("en='User not found by UUID %1 and name %2.';
-		|ru='Пользователь по UUID %1 и имени %2не найден.';
-		|tr='Kullanıcı, %1 UUID ve %2 adı ile bulunamadı.'", Lang));
-	Strings.Insert("UsersEvent_002", NStr("en='User found by UUID %1 and name %2.';
-		|ru='Пользователь по UUID %1 и имени %2 найден.';
-		|tr='Kullanıcı, %1 UUID ve %2 adı tarafından bulundu.'", Lang));
-	Strings.Insert("UsersEvent_003", NStr("en='Only Administrator can launch another user.';
-		|ru='Только администратор может запустить другого пользователя.';
-		|tr='Yalnızca Yönetici başka bir kullanıcıyı başlatabilir.'", Lang));
-	Strings.Insert("UsersEvent_004", NStr("en='Infobase user not found.';
-		|ru='Пользователь информационной базы не найден.';
-		|tr='Infobase kullanıcısı bulunamadı.'", Lang));
-	Strings.Insert("UsersEvent_005", NStr("en='Very long launch. Password returned without confirmation.';
-		|ru='Очень долгий запуск. Пароль возвращен без подтверждения.';
-		|tr='Çok uzun başlatma. Şifre onay alınmadan geri döndü.'", Lang));
+	Strings.Insert("UsersEvent_001", NStr("en='0561B68D-7DE2-D9CB-B279-958454D654EC__%1,%2'", Lang));
+	Strings.Insert("UsersEvent_002", NStr("en='A4FE5236-C977-BFD7-7393-3CF3845B0F6A%1,%2'", Lang));
+	Strings.Insert("UsersEvent_003", NStr("en='61591E4B-0998-E989-92CA-A5A6DA39D24D_______'", Lang));
+	Strings.Insert("UsersEvent_004", NStr("en='1DDC0FE0-9892-786C-CB13-38C8E70D5449'", Lang));
+	Strings.Insert("UsersEvent_005", NStr("en='63B8B094-B150-D3B4-4FCB-B5A904CB4FC3_____________________'", Lang));
 #EndRegion
 
 #Region Items
 	
 	// Interface
-	Strings.Insert("I_1", NStr("en='Enter description';
-		|ru='Введите Наименование';
-		|tr='Açıklama giriniz'", Lang));
-	Strings.Insert("I_2", NStr("en='Click to enter comment';
-		|ru='Нажмите для редактирорвания комментария';
-		|tr='Açıklama girmek için tıklayınız'", Lang));
-	Strings.Insert("I_3", NStr("en='Fill out the document';
-		|ru='Заполните документ';
-		|tr='Belgeyi doldurunuz'", Lang));
-	Strings.Insert("I_4", NStr("en='Find %1 rows in table by key %2';
-		|ru='Найти %1 строк в таблице по ключу %2';
-		|tr='Tabloda %2 anahtara göre %1 bulmak'", Lang));
-	Strings.Insert("I_5", NStr("en='Not supported table';
-		|ru='Не поддерживаемая таблица';
-		|tr='Desteklenmeyen tablo'", Lang));
-	Strings.Insert("I_6", NStr("en='Ordered without ISR';
-		|ru='Заказано без ЗОТ';
-		|tr='Normal sipariş'", Lang));
-	Strings.Insert("I_7", NStr("en='Change rights';
-		|ru='Замена прав';
-		|tr='Hakları değiştir'", Lang));
-	Strings.Insert("I_8", NStr("en='Rollback rights';
-		|ru='Отменить замену прав';
-		|tr='Geri alma hakları'", Lang));
+	Strings.Insert("I_1", NStr("en='CF633766-69D6-AC22-2FA2-21DF61CB554C'", Lang));
+	Strings.Insert("I_2", NStr("en='2B0365FC-2B39-D6C3-3A63-3F9033A27EC2'", Lang));
+	Strings.Insert("I_3", NStr("en='30ED1AA4-EE80-2D37-761C-C9A1182FF786'", Lang));
+	Strings.Insert("I_4", NStr("en='F2138751-DA6B-23D8-82FC-C37ECA25E82A%1,%2'", Lang));
+	Strings.Insert("I_5", NStr("en='A7E7DC5A-9A28-D58F-F9DB-BC040736D241'", Lang));
+	Strings.Insert("I_6", NStr("en='8D7BF2D6-40CA-54B9-9902-2A1A50E618EB'", Lang));
+	Strings.Insert("I_7", NStr("en='32BF802D-7A2E-0B5A-A55C-CB0F6B803813'", Lang));
+	Strings.Insert("I_8", NStr("en='10D00172-B133-A52E-E4EC-C813A08901CF'", Lang));
 
 #EndRegion
 
 #Region Exceptions
-	Strings.Insert("Exc_001", NStr("en='Unsupported object type.';
-		|ru='Неподдерживаемый тип объекта.';
-		|tr='Desteklenmeyen nesne türü.'", Lang));
-	Strings.Insert("Exc_002", NStr("en='No conditions';
-		|ru='Без условий';
-		|tr='Koşul yok'", Lang));
-	Strings.Insert("Exc_003", NStr("en='Method is not implemented: %1.';
-		|ru='Метод не реализован: %1.';
-		|tr='Yöntem uygulanmadı: %1.'", Lang));
-	Strings.Insert("Exc_004", NStr("en='Cannot extract currency from the object.';
-		|ru='Валюта из объекта не извлечена.';
-		|tr='Nesneden para birimi çıkarılamıyor.'", Lang));
-	Strings.Insert("Exc_005", NStr("en='Library name is empty.';
-		|ru='Наименование библиотеки не заполнено.';
-		|tr='Kütüphane adı boş.'", Lang));
-	Strings.Insert("Exc_006", NStr("en='Library data does not contain a version.';
-		|ru='Данные библиотеки не содержат версии.';
-		|tr='Kütüphane veriler sürümü içermiyor.'", Lang));
-	Strings.Insert("Exc_007", NStr("en='Not applicable for library version %1.';
-		|ru='Не применимо для версии библиотеки: %1.';
-		|tr='%1 kütüphane sürümü için geçerli değil.'", Lang));
-	Strings.Insert("Exc_008", NStr("en='Unknown row key.';
-		|ru='Неизвестный ключ строки.';
-		|tr='Bilinmeyen satır anahtarı.'", Lang));
-	Strings.Insert("Exc_009", NStr("en='Error: %1';
-		|ru='Ошибка: %1';
-		|tr='Hata: %1'", Lang));
-	Strings.Insert("Exc_010", NStr("en='Unknown metadata type: %1';
-		|ru='Неизвестный тип метаданных: %1';
-		|tr='Bilinmeyen meta veri türü: %1'", Lang));
-	Strings.Insert("Exc_011", NStr("en='Unknown command name: %1';
-		|ru='Неизвестное имя команды: %1';
-		|tr='Bilinmeyen komut adı: %1'", Lang));
-	Strings.Insert("Exc_012", NStr("en='Save error! Changing ""%1"" is available only for user ""%2""';
-		|ru='Ошибка сохранения! Изменение ""%1"" доступно только для пользователя ""%2""';
-		|tr='Kayıt hatası! ""%1"" değişikliği yalnızca ""%2"" kullanıcısı için mümkündür'", Lang));
-	Strings.Insert("Exc_013", NStr("en='Related document exists: %1';
-		|ru='Есть связанные документы: %1';
-		|tr='İlgili belge mevcut: %1'", Lang));
-	Strings.Insert("Exc_014", NStr("en='Wrong range';
-		|ru='Не правильный диапазон';
-		|tr='Yanlış aralık'", Lang));
-	Strings.Insert("Exc_015", NStr("en='Overlapping ranges';
-		|ru='Пересекающиеся диапазоны';
-		|tr='Çakışan aralıklar'", Lang));
-	Strings.Insert("Exc_016", NStr("en='Unsupported data format';
-		|ru='Неподдерживаемый формат данных';
-		|tr='Desteklenmeyen veri biçimi'", Lang));
+	Strings.Insert("Exc_001", NStr("en='ED473741-2816-8D61-1759-9A23648A446A'", Lang));
+	Strings.Insert("Exc_002", NStr("en='FB8F183A-146C-7563-3CED-DA024E0C096C'", Lang));
+	Strings.Insert("Exc_003", NStr("en='9FCB2D44-93CE-0C6F-F1F2-218EF8A5B8AA%1'", Lang));
+	Strings.Insert("Exc_004", NStr("en='C92F5C9D-DC5B-A472-2C20-0691AA1F9BAE____'", Lang));
+	Strings.Insert("Exc_005", NStr("en='F3624115-6397-0461-1E34-4683C18F5999'", Lang));
+	Strings.Insert("Exc_006", NStr("en='7BF9C2B5-6EC8-8B12-2354-4754CCACE8E8____'", Lang));
+	Strings.Insert("Exc_007", NStr("en='D3DA9ECB-25AB-ECDB-B8EB-B8ACF0294F7A__%1'", Lang));
+	Strings.Insert("Exc_008", NStr("en='5704C566-1EE3-0F55-5988-86D9EF107C79'", Lang));
+	Strings.Insert("Exc_009", NStr("en='12A174BD-4463-6BE7-7E7A-AB27FB0CAF50%1'", Lang));
+	Strings.Insert("Exc_010", NStr("en='CF406191-1D5B-480F-F65F-F99D235C65C4%1'", Lang));
+	Strings.Insert("Exc_011", NStr("en='E00F369B-430D-5BFB-B353-31C87EE8CF5F%1'", Lang));
+	Strings.Insert("Exc_012", NStr("en='24DF48BC-51FB-7CF3-308C-C54BAD250E26_____________________%1,%2'", Lang));
+	Strings.Insert("Exc_013", NStr("en='B273D567-936F-34CD-DC2A-A0A7BFD60582%1'", Lang));
+	Strings.Insert("Exc_014", NStr("en='25E362DE-D38D-7A3C-CF55-507EB1F37B17'", Lang));
+	Strings.Insert("Exc_015", NStr("en='93E20531-381C-7553-3465-5520E98A8318'", Lang));
+	Strings.Insert("Exc_016", NStr("en='D3AAAE21-0735-323A-A86D-DF88B4188647'", Lang));
 #EndRegion
 
 #Region Saas
 	// %1 - 12
-	Strings.Insert("Saas_001", NStr("en='Area %1 not found.';
-		|ru='Рабочая область %1 не найдена.';
-		|tr='%1 alanı bulunamadı.'", Lang));
+	Strings.Insert("Saas_001", NStr("en='2F405459-6649-0EB0-0733-30635AF2054E%1'", Lang));
 	
 	// %1 - closed
-	Strings.Insert("Saas_002", NStr("en='Area status: %1.';
-		|ru='Статус рабочей области: %1.';
-		|tr='Alan durumu:%1.'", Lang));
+	Strings.Insert("Saas_002", NStr("en='ACECB33F-8161-5912-22EC-CB10F5A9E443%1'", Lang));
 	
 	// %1 - en
-	Strings.Insert("Saas_003", NStr("en='Localization %1 of the company is not available.';
-		|ru='Локализация компании %1 не доступна.';
-		|tr='Şirketin %1 yerelleştirmesi mevcut değil. '", Lang));
+	Strings.Insert("Saas_003", NStr("en='4BB22BA6-4B72-4624-488D-DA3D974083CF____________%1'", Lang));
 
-	Strings.Insert("Saas_004", NStr("en='Area preparation completed';
-		|ru='Подготовка области завершена';
-		|tr='Bölge hazırlaması tamamlandı.'", Lang));
+	Strings.Insert("Saas_004", NStr("en='536C7FB7-6FB9-B20F-F41E-E78B94AC7029'", Lang));
 #EndRegion
 
 #Region FillingFromClassifiers
     // Do not modify "en" strings
-	Strings.Insert("Class_001", NStr("en='Purchase price';
-		|ru='Цена закупки';
-		|tr='Alım fiyatı'", Lang));
-	Strings.Insert("Class_002", NStr("en='Sales price';
-		|ru='Цена продажи';
-		|tr='Satış fiyatı'", Lang));
-	Strings.Insert("Class_003", NStr("en='Prime cost';
-		|ru='Себестоимость';
-		|tr='Birim maliyet fiyatı'", Lang));
-	Strings.Insert("Class_004", NStr("en='Service';
-		|ru='Сервис';
-		|tr='Servis'", Lang));
-	Strings.Insert("Class_005", NStr("en='Product';
-		|ru='Товар';
-		|tr='Malzeme'", Lang));
-	Strings.Insert("Class_006", NStr("en='Main store';
-		|ru='Главный склад';
-		|tr='Ana depo'", Lang));
-	Strings.Insert("Class_007", NStr("en='Main manager';
-		|ru='Главный менеджер';
-		|tr='Ana sorumlu'", Lang));
-	Strings.Insert("Class_008", NStr("en='pcs';
-		|ru='шт';
-		|tr='adet'", Lang));
+	Strings.Insert("Class_001", NStr("en='383F84AA-6C94-9CF2-282E-ECBAABFE25C4'", Lang));
+	Strings.Insert("Class_002", NStr("en='9048D720-30FF-481F-FC3C-C69763E3108A'", Lang));
+	Strings.Insert("Class_003", NStr("en='B9E76F2E-CEEC-C606-659F-F85495D82DFD'", Lang));
+	Strings.Insert("Class_004", NStr("en='4765EBF3-4BD5-C7D2-2F1A-A12A24B44756'", Lang));
+	Strings.Insert("Class_005", NStr("en='C8EB8E41-4CB5-CC12-24BB-BC19A061172B'", Lang));
+	Strings.Insert("Class_006", NStr("en='78C6CA81-3F7B-1050-0EA7-70628D95C5FA'", Lang));
+	Strings.Insert("Class_007", NStr("en='3E4C4E38-16F1-5382-2B30-0D2F4B0EB586'", Lang));
+	Strings.Insert("Class_008", NStr("en='5073B496-F747-0E7F-FE83-33CF32FDCCE0'", Lang));
 #EndRegion
 
 #Region Titles
 	// %1 - Cheque bond transaction
-	Strings.Insert("Title_00100", NStr("en='Select base documents in the ""%1"" document.';
-		|ru='Выбор документов-оснований в документе ""%1""';
-		|tr='""%1"" belgesindeki ana belgeleri seçin.'", Lang));	// Form PickUpDocuments
+	Strings.Insert("Title_00100", NStr("en='AEE4D090-D941-7C7F-F863-38D420349377_______%1'", Lang));	// Form PickUpDocuments
 #EndRegion
 
 #Region ChoiceListValues
-	Strings.Insert("CLV_1", NStr("en='All';
-		|ru='Все';
-		|tr='Tümü'", Lang));
-	Strings.Insert("CLV_2", NStr("en='Transaction type';
-		|ru='Вид операции';
-		|tr='İşlem tipi'", Lang));
+	Strings.Insert("CLV_1", NStr("en='43FD3975-BF22-AC9B-BFAE-E4E7C6F06735'", Lang));
+	Strings.Insert("CLV_2", NStr("en='770D4154-3E22-B8CE-EF5C-C81988E02B67'", Lang));
 #EndRegion
 
 #Region SalesOrderStatusReport
-	Strings.Insert("SOR_1", NStr("en='Not enough items in free stock';
-		|ru='Не достаточно товара на остатках';
-		|tr='Serbest stok bakiyesi yetersizdir'", Lang));
+	Strings.Insert("SOR_1", NStr("en='1CECCA8B-87DF-341E-EB6A-A071CE31293A'", Lang));
 #EndRegion
 
 #Region Report
-	Strings.Insert("R_001", NStr("en='Item key';
-		|ru='Характеристика';
-		|tr='Varyant'", Lang) + " = ");
-	Strings.Insert("R_002", NStr("en='Property';
-		|ru='Свойство';
-		|tr='Özellik'", Lang) + " = ");
-	Strings.Insert("R_003", NStr("en='Item';
-		|ru='Номенклатура';
-		|tr='Malzeme'", Lang) + " = ");
-	Strings.Insert("R_004", NStr("en='Specification';
-		|ru='Спецификация товара';
-		|tr='Ürün reçetesi'", Lang) + " = ");
+	Strings.Insert("R_001", NStr("en='E62C3083-B853-4D48-8DBF-FCEC1D45BEDC'", Lang) + " = ");
+	Strings.Insert("R_002", NStr("en='06757165-B424-5995-5B8E-E8CF53B11763'", Lang) + " = ");
+	Strings.Insert("R_003", NStr("en='E11A9633-AAB7-9E79-9E1F-F2F41A079399'", Lang) + " = ");
+	Strings.Insert("R_004", NStr("en='370EC6F3-12C6-8790-0827-791D63FE1D60'", Lang) + " = ");
 #EndRegion
 
 #Region Defaults
-	Strings.Insert("Default_001", NStr("en='pcs';
-		|ru='шт';
-		|tr='adet'", Lang));
-	Strings.Insert("Default_002", NStr("en='Customer standard term';
-		|ru='Стандартное соглашение для покупателей';
-		|tr='Müşteri standart sözleşmesi'", Lang));
-	Strings.Insert("Default_003", NStr("en='Vendor standard term';
-		|ru='Стандартное соглашение для поставщиков';
-		|tr='Tedarikçi standart sözleşmesi'", Lang));
-	Strings.Insert("Default_004", NStr("en='Customer price type';
-		|ru='Тип цен покупателя';
-		|tr='Müşteri fiyat tipi'", Lang));
-	Strings.Insert("Default_005", NStr("en='Vendor price type';
-		|ru='Тип цен поставщика';
-		|tr='Tedarikçi fiyat tipi'", Lang));
-	Strings.Insert("Default_006", NStr("en='Partner term currency type';
-		|ru='Валюта соглашения';
-		|tr='Cari hesap sözleşme dövizi'", Lang));
-	Strings.Insert("Default_007", NStr("en='Legal currency type';
-		|ru='Локальныей тип валют';
-		|tr='Local döviz tipi'", Lang));
-	Strings.Insert("Default_008", NStr("en='American dollar';
-		|ru='Доллар США';
-		|tr='Amerika doları'", Lang));
-	Strings.Insert("Default_009", NStr("en='USD';
-		|ru='USD';
-		|tr='USD'", Lang));
-	Strings.Insert("Default_010", NStr("en='$';
-		|ru='$';
-		|tr='$'", Lang));
-	Strings.Insert("Default_011", NStr("en='My Company';
-		|ru='Моя организация';
-		|tr='Benim şirketim'", Lang));
-	Strings.Insert("Default_012", NStr("en='My Store';
-		|ru='Мой склад';
-		|tr='Benim depom'", Lang));
+	Strings.Insert("Default_001", NStr("en='5073B496-F747-0E7F-FE83-33CF32FDCCE0'", Lang));
+	Strings.Insert("Default_002", NStr("en='43814F6A-B5B3-94E3-3911-1B8F0DEF67C2'", Lang));
+	Strings.Insert("Default_003", NStr("en='443D581B-5AA7-0125-5C42-29C100671374'", Lang));
+	Strings.Insert("Default_004", NStr("en='CD19DDFD-5943-13BA-A685-58FED354A35F'", Lang));
+	Strings.Insert("Default_005", NStr("en='D1C57971-9A33-6B3F-FB4B-BF0B0D942DC4'", Lang));
+	Strings.Insert("Default_006", NStr("en='002BEA64-3D2F-A4BE-E840-00DAD4A2CB46'", Lang));
+	Strings.Insert("Default_007", NStr("en='4C870B49-28A3-B7D5-54B3-36CD473DBDB4'", Lang));
+	Strings.Insert("Default_008", NStr("en='905E774F-B7D7-8E57-73EC-C6C66E278893'", Lang));
+	Strings.Insert("Default_009", NStr("en='D29D968C-4503-682C-CD32-2883776A36CA'", Lang));
+	Strings.Insert("Default_010", NStr("en='AA861704-7450-FCD6-649A-A917119D2649'", Lang));
+	Strings.Insert("Default_011", NStr("en='66665127-264A-292F-F302-269C75E8632E'", Lang));
+	Strings.Insert("Default_012", NStr("en='8B9E2143-7C34-7302-2379-9631F5E2D732'", Lang));
 #EndRegion
 
 #Region MetadataString
-	Strings.Insert("Str_Catalog", NStr("en='Catalog';
-		|ru='Справочник';
-		|tr='Kart listesi'", Lang));
-	Strings.Insert("Str_Catalogs", NStr("en='Catalogs';
-		|ru='Справочники';
-		|tr='Kart listeleri'", Lang));
-	Strings.Insert("Str_Document", NStr("en='Document';
-		|ru='Документ';
-		|tr='Evrak'", Lang));
-	Strings.Insert("Str_Documents", NStr("en='Documents';
-		|ru='Документы';
-		|tr='Evraklar'", Lang));
-	Strings.Insert("Str_Code", NStr("en='Code';
-		|ru='Код';
-		|tr='Kod'", Lang));
-	Strings.Insert("Str_Description", NStr("en='Description';
-		|ru='Наименование';
-		|tr='Tanım'", Lang));
-	Strings.Insert("Str_Parent", NStr("en='Parent';
-		|ru='Родитель';
-		|tr='Üst öğe'", Lang));
-	Strings.Insert("Str_Owner", NStr("en='Owner';
-		|ru='Владелец';
-		|tr='Sahip'", Lang));
-	Strings.Insert("Str_DeletionMark", NStr("en='Deletion mark';
-		|ru='Пометить на удаление';
-		|tr='Silmek için işaret'", Lang));
-	Strings.Insert("Str_Number", NStr("en='Number';
-		|ru='Номер';
-		|tr='Numara'", Lang));
-	Strings.Insert("Str_Date", NStr("en='Date';
-		|ru='Дата';
-		|tr='Tarih'", Lang));
-	Strings.Insert("Str_Posted", NStr("en='Posted';
-		|ru='Провести';
-		|tr='Kaydedildi'", Lang));
-	Strings.Insert("Str_InformationRegister", NStr("en='Information register';
-		|ru='Регистр сведений';
-		|tr='Bilgi kayıt tablosu'", Lang));
-	Strings.Insert("Str_InformationRegisters", NStr("en='Information registers';
-		|ru='Регистры сведений';
-		|tr='Bilgi kayıtları'", Lang));
-	Strings.Insert("Str_AccumulationRegister", NStr("en='Accumulation register';
-		|ru='Регистр накопления';
-		|tr='Birikim kayıt tablosu'", Lang));
-	Strings.Insert("Str_AccumulationRegisters", NStr("en='Accumulation registers';
-		|ru='Регистры накопления';
-		|tr='Birikim kayıtları'", Lang));
+	Strings.Insert("Str_Catalog", NStr("en='84EA5A5C-2A97-B5A2-2FB2-221CED2FA793'", Lang));
+	Strings.Insert("Str_Catalogs", NStr("en='4E4F5F66-B05D-A74E-E326-6914AAF23566'", Lang));
+	Strings.Insert("Str_Document", NStr("en='00F25807-3FF5-B97A-A0BB-B2B2B755479B'", Lang));
+	Strings.Insert("Str_Documents", NStr("en='2349B062-39B3-F670-0FF7-7D1A8B91C2D5'", Lang));
+	Strings.Insert("Str_Code", NStr("en='DC8AF8BA-BC8F-CF4F-FB1A-A05215E78098'", Lang));
+	Strings.Insert("Str_Description", NStr("en='C11CA7CC-D015-4536-60B2-2D6C7BCC9E43'", Lang));
+	Strings.Insert("Str_Parent", NStr("en='7D72BED3-411E-6A53-383F-FC0128F65BFD'", Lang));
+	Strings.Insert("Str_Owner", NStr("en='12619392-AC2C-DA10-05A2-2854B0FE271C'", Lang));
+	Strings.Insert("Str_DeletionMark", NStr("en='AC006B8B-E32E-023C-C75D-D58FBC6EAE9B'", Lang));
+	Strings.Insert("Str_Number", NStr("en='DE5C20EC-29F2-7402-284B-BF659223D0EC'", Lang));
+	Strings.Insert("Str_Date", NStr("en='3D008872-6735-3A1E-E347-7972676B69B3'", Lang));
+	Strings.Insert("Str_Posted", NStr("en='0C99C226-2477-1379-9218-808A449878E1'", Lang));
+	Strings.Insert("Str_InformationRegister", NStr("en='9164AB4D-8548-7975-5D86-6E6AD089709E'", Lang));
+	Strings.Insert("Str_InformationRegisters", NStr("en='062DA272-6596-F8C2-2A72-299D85F26818'", Lang));
+	Strings.Insert("Str_AccumulationRegister", NStr("en='7B261BDD-8302-1FF0-0E66-6055AEC23D97'", Lang));
+	Strings.Insert("Str_AccumulationRegisters", NStr("en='BD0454BC-7075-603C-C50E-E52101C306B8'", Lang));
 #EndRegion
 
 #Region AdditionalSettings
-	Strings.Insert("Add_Setiings_001", NStr("en='Additional settings';
-		|ru='Дополнительные настройки';
-		|tr='Ek ayarlar'", Lang));
-	Strings.Insert("Add_Setiings_002", NStr("en='Point of sale';
-		|ru='Рабочее место кассира';
-		|tr='Satış ekranı'", Lang));
-	Strings.Insert("Add_Setiings_003", NStr("en='Disable - Change price';
-		|ru='Запретить - Замена цены';
-		|tr='Devre dışı bırak - Fiyatı değiştir'", Lang));
-	Strings.Insert("Add_Setiings_004", NStr("en='Disable - Create return';
-		|ru='Запретить - Создание возврата';
-		|tr='Devre dışı bırak - İade oluştur'", Lang));
-	Strings.Insert("Add_Setiings_005", NStr("en='Documents';
-		|ru='Документы';
-		|tr='Evraklar'", Lang));
-	Strings.Insert("Add_Setiings_006", NStr("en='Disable - Change author';
-		|ru='Отключить - Изменять автора';
-		|tr='Devre dışı bırak - Yazarı değiştir'", Lang));
-	Strings.Insert("Add_Setiings_007", NStr("en='Link\Unlink document rows';
-		|ru='Связать\отменить связку строки документов';
-		|tr='Belge satırlarını Bağla\Bağlantıyı kes'", Lang));
-	Strings.Insert("Add_Setiings_008", NStr("en='Disable - Calculate rows on link rows';
-		|ru='Отключить - Расчет строки при связке строк';
-		|tr='Devre Dışı Bırak - Bağlantı satırlarındaki satırları hesapla'", Lang));
-	Strings.Insert("Add_Setiings_009", NStr("en='Use reverse basises tree';
-		|ru='Использовать перевернутое дерево оснований';
-		|tr='Ters basit ağaçları kullan'", Lang));
-	Strings.Insert("Add_Setiings_010", NStr("en='Linked documents';
-		|ru='Документы связанные по строкам';
-		|tr='Bağlı evraklar'", Lang));
-	Strings.Insert("Add_Setiings_011", NStr("en='Use reverse tree';
-		|ru='Перевернуть дерево';
-		|tr='Ters ağacı kullan'", Lang));
-	Strings.Insert("Add_Setiings_012", NStr("en='Enable - Change price type';
-		|ru='Включить - Изменить тип цены';
-		|tr='Etkinleştir - Fiyat tipi değiştir'", Lang));
-	Strings.Insert("Add_Settings_013", NStr("en='Attached files to documents control';
-		|ru='Прикрепленные файлы для контроля документов';
-		|tr='Evrek denetimi için eklenen dosyalar'", Lang));
-	Strings.Insert("Add_Settings_014", NStr("en='Enable - Change filters';
-		|ru='Включить - Изменить фильтры';
-		|tr='Etkin - Değişim filtreler'", Lang));
-	Strings.Insert("Add_Settings_015", NStr("en='Enable - Check-mode';
-		|ru='Включить - Режим проверки';
-		|tr='Etkin - Denetim modu'", Lang));
-	Strings.Insert("Add_Settings_016", NStr("en='Company';
-		|ru='Организация';
-		|tr='Şirket'", Lang));
-	Strings.Insert("Add_Settings_017", NStr("en='Branch';
-		|ru='Структурное подразделение';
-		|tr='Şube'", Lang));
-	Strings.Insert("Add_Settings_018", NStr("en='Catalogs';
-		|ru='Справочники';
-		|tr='Kart listeleri'", Lang));
-	Strings.Insert("Add_Settings_019", NStr("en='Disable - Disable automatic creation of Company and Agreement for Partner';
-		|ru='Отключить - Автосоздание контрагента и соглашения при создании партнера';
-		|tr='Devre dışı - Cari hesap oluştururken fatura hesap ve sözleşmeyi otomatik oluştur'", Lang));
+	Strings.Insert("Add_Setiings_001", NStr("en='1D1CD7D8-0EEC-1562-24C6-6F53B74299B8'", Lang));
+	Strings.Insert("Add_Setiings_002", NStr("en='58778F23-6B02-42AB-B76B-B5E29277F72A'", Lang));
+	Strings.Insert("Add_Setiings_003", NStr("en='E21473EF-7572-25A3-3D52-271FE108516F'", Lang));
+	Strings.Insert("Add_Setiings_004", NStr("en='1D9ED810-53A8-908E-EA5E-EC2B25BA399A'", Lang));
+	Strings.Insert("Add_Setiings_005", NStr("en='2349B062-39B3-F670-0FF7-7D1A8B91C2D5'", Lang));
+	Strings.Insert("Add_Setiings_006", NStr("en='21993D20-8899-503E-E997-709C278E0796'", Lang));
+	Strings.Insert("Add_Setiings_007", NStr("en='D20D3D2C-C5E8-0F7E-E080-05099D117F4C'", Lang));
+	Strings.Insert("Add_Setiings_008", NStr("en='3CE4F70E-4D4A-BF70-074D-DE97C17395D9_'", Lang));
+	Strings.Insert("Add_Setiings_009", NStr("en='6FC03045-30DF-F685-5833-326367964C34'", Lang));
+	Strings.Insert("Add_Setiings_010", NStr("en='03609E0B-20FF-8D62-2FDC-C7E84A918326'", Lang));
+	Strings.Insert("Add_Setiings_011", NStr("en='C00C15D1-B130-7112-2A1B-BF2BCC576DD1'", Lang));
+	Strings.Insert("Add_Setiings_012", NStr("en='D20056CC-CBC8-E086-6E33-36F57FCBDD52'", Lang));
+	Strings.Insert("Add_Settings_013", NStr("en='0EE1AEE5-8530-27C2-27AA-A1A7414C44BB'", Lang));
+	Strings.Insert("Add_Settings_014", NStr("en='8A497443-A015-EFC6-6C73-38F198D1C181'", Lang));
+	Strings.Insert("Add_Settings_015", NStr("en='C90CA6E5-EE1E-1CD4-425D-D7B689F6F4FC'", Lang));
+	Strings.Insert("Add_Settings_016", NStr("en='34690DDA-7B34-6B9B-BC46-604965B1CA28'", Lang));
+	Strings.Insert("Add_Settings_017", NStr("en='20D41353-04EE-CD87-78A9-953CFC7D03FA'", Lang));
+	Strings.Insert("Add_Settings_018", NStr("en='4E4F5F66-B05D-A74E-E326-6914AAF23566'", Lang));
+	Strings.Insert("Add_Settings_019", NStr("en='E8D0D51C-7A85-01BE-E0B0-02160F9C192F_____________________________________'", Lang));
 #EndRegion
 
 #Region Mobile
 	// %1 - Some item key
 	// %2 - Other item key
-	Strings.Insert("Mob_001", NStr("en='Current barcode used in %1
-		|But before you scan for %2';
-		|ru='Текущий штрихкод использован в %1
-		|Но перед этим был просканирован %2';
-		|tr='Mevcut barkod %1''de kullanımda
-		|Ancak önce %2 için taradınız'", Lang));
+	Strings.Insert("Mob_001", NStr("en='E35C43E4-7A03-BC8A-A5C2-22AFC13864B4%1,%2
+		|_________________________'", Lang));
 #EndRegion
 	
 #Region CopyPaste
-	Strings.Insert("CP_001", NStr("en='Copy to clipboard';
-		|ru='Скопировано в буфер';
-		|tr='Panoya kopyala'", Lang));
-	Strings.Insert("CP_002", NStr("en='Paste from clipboard';
-		|ru='Вставить из буфера';
-		|tr='Panodan yapıştır'", Lang));
-	Strings.Insert("CP_003", NStr("en='Can be copy only [%1]';
-		|ru='Может быть скопирован только [%1]';
-		|tr='Sadece [%1] kopyalanabilir'", Lang));
-	Strings.Insert("CP_004", NStr("en='Copied';
-		|ru='Скопировано';
-		|tr='Kopyalandı'", Lang));
-	Strings.Insert("CP_005", NStr("en='NOT copied';
-		|ru='НЕ скопирован';
-		|tr='Kopyalanmadı'", Lang));
-	Strings.Insert("CP_006", NStr("en='Copied %1 rows';
-		|ru='Скопировано %1 строк';
-		|tr='%1 satır kopyalandı'", Lang));
-	Strings.Insert("CP_007", NStr("en='Paste values from clipboard';
-		|ru='Вставить данные из буфера';
-		|tr='Bellekten değerleri yapıştır'", Lang));
+	Strings.Insert("CP_001", NStr("en='F1611FFF-015E-7377-7199-9C2EC2F80D5D'", Lang));
+	Strings.Insert("CP_002", NStr("en='1331309A-4F59-8EBA-A78C-C6B7F83000C7'", Lang));
+	Strings.Insert("CP_003", NStr("en='7B5E2FF2-E007-9BE1-1925-5103322DAE63%1'", Lang));
+	Strings.Insert("CP_004", NStr("en='E93C22BC-9F8B-C682-2B7B-BE3F47795385'", Lang));
+	Strings.Insert("CP_005", NStr("en='CFB4356F-62DB-F7D4-483E-E96C458C1092'", Lang));
+	Strings.Insert("CP_006", NStr("en='BBC0084A-4931-982D-D1F0-0CDBE6887303%1'", Lang));
+	Strings.Insert("CP_007", NStr("en='B66C12F6-FE5E-591B-B8AA-A457A216A4D0'", Lang));
 #EndRegion	
 	
 #Region LoadDataFromTable
-	Strings.Insert("LDT_Button_Title",   NStr("en='Load data from table';
-		|ru='Загрузить данные из таблицы';
-		|tr='Tablodan veriyi yükle'", Lang));
-	Strings.Insert("LDT_Button_ToolTip", NStr("en='Load data from table';
-		|ru='Загрузить данные из таблицы';
-		|tr='Tablodan veriyi yükle'", Lang));
-	Strings.Insert("LDT_FailReading", NStr("en='Failed to read the value: [%1]';
-		|ru='Не удалось прочитать значение: [%1]';
-		|tr='Değer okunamadı: [%1]'", Lang));
-	Strings.Insert("LDT_ValueNotFound", NStr("en='Nothing was found for [%1]';
-		|ru='Ничего не было найдено для [%1]';
-		|tr='[%1] için hiçbir şey bulunamadı'", Lang));
-	Strings.Insert("LDT_TooMuchFound", NStr("en='Several variants were found for [%1]';
-		|ru='Несколько вариантов было найдено для [%1]';
-		|tr='[%1] için birden fazla varyant bulundu'", Lang));
+	Strings.Insert("LDT_Button_Title",   NStr("en='2C56766B-874D-8F20-05B6-68339C31E899'", Lang));
+	Strings.Insert("LDT_Button_ToolTip", NStr("en='2C56766B-874D-8F20-05B6-68339C31E899'", Lang));
+	Strings.Insert("LDT_FailReading", NStr("en='E5DF2A41-E695-2DD6-6D85-5E219126FCDE%1'", Lang));
+	Strings.Insert("LDT_ValueNotFound", NStr("en='3257ADF4-9AAC-C999-96D5-57D0BA45CD4C%1'", Lang));
+	Strings.Insert("LDT_TooMuchFound", NStr("en='584444C6-B53F-2CC0-0D63-35E98D2EED42%1'", Lang));
 #EndRegion
 
 #Region OpenVendorPrices
-	Strings.Insert("OVP_Button_Title",   NStr("en='Open vendor prices';
-		|ru='Открыть цены поставщиков';
-		|tr='Open vendor prices'", Lang));
-	Strings.Insert("OVP_Button_ToolTip", NStr("en='Open vendor prices';
-		|ru='Открыть цены поставщиков';
-		|tr='Open vendor prices'", Lang));	
+	Strings.Insert("OVP_Button_Title",   NStr("en='19A6D677-E5AA-033C-C241-1C9D454E7E36'", Lang));
+	Strings.Insert("OVP_Button_ToolTip", NStr("en='19A6D677-E5AA-033C-C241-1C9D454E7E36'", Lang));	
 #EndRegion	
 
 #Region OpenSerialLotNumberTree
-	Strings.Insert("OpenSLNTree_Button_Title",   NStr("en='Open serial lot number tree';
-		|ru='Открыть дерево серийных номеров';
-		|tr='Seri lot numarası ağacını aç'", Lang));
-	Strings.Insert("OpenSLNTree_Button_ToolTip", NStr("en='Open serial lot number tree';
-		|ru='Открыть дерево серийных номеров';
-		|tr='Seri lot numarası ağacını aç'", Lang));
+	Strings.Insert("OpenSLNTree_Button_Title",   NStr("en='F319F521-30A3-C3CE-E818-830F533DAFF9'", Lang));
+	Strings.Insert("OpenSLNTree_Button_ToolTip", NStr("en='F319F521-30A3-C3CE-E818-830F533DAFF9'", Lang));
 #EndRegion	
 	
 #Region BackgroundJobs
-	Strings.Insert("BgJ_Title_001",   NStr("en='Background job is running';
-		|ru='Фоновое задание запущено';
-		|tr='Arkaplan işi çalışıyor'", Lang));
-	Strings.Insert("BgJ_Title_002",   NStr("en='Load Item list';
-		|ru='Загрузить список товаров';
-		|tr='Ürün listesi yükle'", Lang));
+	Strings.Insert("BgJ_Title_001",   NStr("en='F7529FA0-4E93-3951-1238-86DF00FE05FF'", Lang));
+	Strings.Insert("BgJ_Title_002",   NStr("en='FF252B8B-BF08-D4DB-B491-16B1605FEA9D'", Lang));
 #EndRegion	
 	
 #Region Salary
-	Strings.Insert("Salary_Err_001",   NStr("en='Wrong period';
-		|ru='Неправильный период';
-		|tr='Yanlış dönem'", Lang));
-	Strings.Insert("Salary_Err_002",   NStr("en='Employee schedule not selected';
-		|ru='Расписание сотрудника не выбрано';
-		|tr='Çalışan programı seçilmedi'", Lang));
-	Strings.Insert("Salary_Err_003",   NStr("en='Begin Date less than End Date';
-		|ru='Дата начала меньше даты окончания';
-		|tr='Başlangıç Tarihi bitiş tarihinden küçük'", Lang));
+	Strings.Insert("Salary_Err_001",   NStr("en='D3F42266-FB98-A3CA-AE19-95F83790D41B'", Lang));
+	Strings.Insert("Salary_Err_002",   NStr("en='EA8FB05A-DB89-F208-8E49-99040656C608'", Lang));
+	Strings.Insert("Salary_Err_003",   NStr("en='3FDF5E4E-BD13-0EB1-1508-8D06D7A5DF3F'", Lang));
 	
-	Strings.Insert("Salary_WeekDays_1",   NStr("en='Monday';
-		|ru='Понедельник';
-		|tr='Pazartesi'", Lang));
-	Strings.Insert("Salary_WeekDays_2",   NStr("en='Tuesday';
-		|ru='Вторник';
-		|tr='Salı'", Lang));
-	Strings.Insert("Salary_WeekDays_3",   NStr("en='Wednesday';
-		|ru='Среда';
-		|tr='Çarşamba'", Lang));
-	Strings.Insert("Salary_WeekDays_4",   NStr("en='Thursday';
-		|ru='Четверг';
-		|tr='Perşembe'", Lang));
-	Strings.Insert("Salary_WeekDays_5",   NStr("en='Friday';
-		|ru='Пятница';
-		|tr='Cuma'", Lang));
-	Strings.Insert("Salary_WeekDays_6",   NStr("en='Saturday';
-		|ru='Суббота';
-		|tr='Cumartesi'", Lang));
-	Strings.Insert("Salary_WeekDays_7",   NStr("en='Sunday';
-		|ru='Воскресенье';
-		|tr='Pazar'", Lang));
+	Strings.Insert("Salary_WeekDays_1",   NStr("en='26C67A4E-C1B5-27AB-B64A-AB368A757DEA'", Lang));
+	Strings.Insert("Salary_WeekDays_2",   NStr("en='587A862B-2CE0-319F-F3A6-65DAE2C4ED24'", Lang));
+	Strings.Insert("Salary_WeekDays_3",   NStr("en='E91BFFC1-2CD7-49E8-8EE7-7486D67FB795'", Lang));
+	Strings.Insert("Salary_WeekDays_4",   NStr("en='382960F4-13ED-2B92-258D-D62623508371'", Lang));
+	Strings.Insert("Salary_WeekDays_5",   NStr("en='51F25496-5983-4675-53DB-BE10C7686DFE'", Lang));
+	Strings.Insert("Salary_WeekDays_6",   NStr("en='FF499A26-EA87-2ABD-D01D-D3536571B965'", Lang));
+	Strings.Insert("Salary_WeekDays_7",   NStr("en='2CB1250A-B18E-E9EC-C89E-EF0B613FC13A'", Lang));
 #EndRegion
 
 #Region Accounting
 
-Strings.Insert("AccountingError_01", NStr("en='Account [%1] not used for records';
-	|ru='Счет [%1] не используется для записей';
-	|tr='Hesap [%1] kayıtlar için kullanılmıyor'", Lang));
-Strings.Insert("AccountingError_02", NStr("en='Debit - is a required field.';
-	|ru='Дебет - обязательное поле.';
-	|tr='Borç - gerekli bir alandır.'", Lang));
-Strings.Insert("AccountingError_03", NStr("en='Credit - is a required field.';
-	|ru='Кредит - обязательное поле.';
-	|tr='Kredi - zorunlu bir alandır.'", Lang));
-Strings.Insert("AccountingError_04", NStr("en='Record period - is a required field.';
-	|ru='Период записи - это обязательное поле.';
-	|tr='Kayıt dönemi - zorunlu bir alandır.'", Lang));
-Strings.Insert("AccountingError_05", NStr("en='Not set any ledger types';
-	|ru='Не установлены типы счетов';
-	|tr='Hiçbir defter türü ayarlanmadı'", Lang));
+Strings.Insert("AccountingError_01", NStr("en='A66CEA04-DF75-40BF-FC97-79BF9696C13C%1'", Lang));
+Strings.Insert("AccountingError_02", NStr("en='DBB7C8F5-F0EA-8EE5-53CF-F882C03E75DA'", Lang));
+Strings.Insert("AccountingError_03", NStr("en='FE697020-AB71-9DA8-84BD-DACF7ECAD5F7'", Lang));
+Strings.Insert("AccountingError_04", NStr("en='A488C83F-F43D-2692-20DE-EA24847DEF71'", Lang));
+Strings.Insert("AccountingError_05", NStr("en='2F9243AB-2436-8A54-4EF4-4D598B22669A'", Lang));
 
-Strings.Insert("AccountingQuestion_01", NStr("en='Change [Quantity] mark in analytics';
-	|ru='Изменить [Quantity] метку в аналитике';
-	|tr='Analitiklerde [Quantity] işaretini değiştir'", Lang));
-Strings.Insert("AccountingQuestion_02", NStr("en='Change [Currency] mark in analytics';
-	|ru='Изменить [Currency] отметку в аналитике';
-	|tr='Analitiklerde [Currency] işaretini değiştir'", Lang));
+Strings.Insert("AccountingQuestion_01", NStr("en='5E7890FE-4E81-0BCB-B31B-B2CC83F247E3[Quantity]'", Lang));
+Strings.Insert("AccountingQuestion_02", NStr("en='90F59EC5-D33A-7504-42D2-27EC8ED87F6E[Currency]'", Lang));
 
-Strings.Insert("AccountingInfo_01", NStr("en='Load complete';
-	|ru='Загрузка завершена';
-	|tr='Yükleme tamam'", Lang));
-Strings.Insert("AccountingInfo_02", NStr("en='<For all transaction types>';
-	|ru='<Для всех видов операций>';
-	|tr='<Tüm işlem tipleri için>'", Lang));
-Strings.Insert("AccountingInfo_03", NStr("en='Profit loss center';
-	|ru='Центр прибылей/убытков';
-	|tr='Kar/Zarar merkezi'", Lang));
-Strings.Insert("AccountingInfo_04", NStr("en='Expense/Revenue';
-	|ru='Расходы/Доходы';
-	|tr='Gider/Gelir'", Lang));
-Strings.Insert("AccountingInfo_05", NStr("en='Expense/Revenue & Profit loss center';
-	|ru='Расходы/Доходы & Центр убытков и прибылей';
-	|tr='Gider/Gelir ve kar zarar merkezi'", Lang));
-Strings.Insert("AccountingInfo_06", NStr("en='Employee';
-		|ru='Сотрудники';
-		|tr='Personel'", Lang));
+Strings.Insert("AccountingInfo_01", NStr("en='2DE35D08-C922-4A3E-ED85-5CA8D65195BC'", Lang));
+Strings.Insert("AccountingInfo_02", NStr("en='9746781D-2DA9-3D23-3500-09644A90C3E9'", Lang));
+Strings.Insert("AccountingInfo_03", NStr("en='F4D432FE-8E38-A74D-D74F-F7B73E1F4B07'", Lang));
+Strings.Insert("AccountingInfo_04", NStr("en='6E7CAF0B-7DD9-AF78-8DFC-C2D48329EDB0'", Lang));
+Strings.Insert("AccountingInfo_05", NStr("en='9BC04F79-2A42-F076-60B3-324B13ACFAF4'", Lang));
+Strings.Insert("AccountingInfo_06", NStr("en='773327A1-6E49-DCE9-9CF7-73DC06D9F09F'", Lang));
 
-Strings.Insert("AccountingJE_prefix_01", NStr("en='JE ';
-	|ru='JE ';
-	|tr='JE '", Lang));
+Strings.Insert("AccountingJE_prefix_01", NStr("en='54372627-A6E3-2FBF-FF01-1E8F32DD9303'", Lang));
 
 Strings.Insert("BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand", 
-	NStr("en='BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
-		|ru='BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
-		|tr='BankaÖdeme DR (R1020B_TedarikçiAvansları R1021B_Tedarikçiİşlemleri) CR (R3010B_EldekiNakit)'", Lang)); 
+	NStr("en='32CB61CA-D13F-8BB3-3C39-9B68A048767E_______________________________________________________'", Lang)); 
 
 Strings.Insert("BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
-	NStr("en='BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|ru='BankPayment Дебет (R1021B_VendorsTransactions) Кредит (R1020B_AdvancesToVendors)';
-		|tr='BankaÖdeme DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar)'", Lang));
+	NStr("en='F8FAE334-BD4D-C0B3-3217-76B6E9EB6416_____________________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions",
-	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
-		|ru='BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
-		|tr='BankReceipt DR (R3010B_EldekiNakit) CR (R2020B_MüşteridenAvanslar_R2021B_Müşteriİşlemleri)'", Lang));
+	NStr("en='630C6D0F-2D7D-6DB2-2A07-71F00091BF6B_____________________________________________________________'", Lang));
 
 Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions",
-	NStr("en='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)';
-		|ru='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)';
-		|tr='PurchaseInvoice DR (R4050B_StokEnvanter_R5022T_Giderler) CR (R1021B_Tedarikçiİşlemleri)'", Lang));
+	NStr("en='80A9BEAD-A37F-C5BC-CA79-9770CD21F697______________________________________________________'", Lang));
 
 Strings.Insert("PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
-	NStr("en='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|ru='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|tr='PurchaseInvoice DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar)'", Lang));
+	NStr("en='0FC25167-AECC-2676-6B78-85E9E0F2EAF3_________________________________________'", Lang));
 
 Strings.Insert("PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
-	NStr("en='PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
-		|ru='ПокупкаInvoice Дебет (R1040B_TaxesOutgoing) Кредит (R1021B_VendorsTransactions)';
-		|tr='SatınalmaFaturası DR (R1040B_GidenVergiler) CR (R1021B_Tedarikçiİşlemleri)'", Lang));
+	NStr("en='C97FBF79-B362-2984-4027-7F86B0AF2B1C_____________________________________'", Lang));
 
 Strings.Insert("RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory",
-	NStr("en='RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)';
-		|ru='RetailSalesReceipt Дебет (R5022T_Expenses) Кредит (R4050B_StockInventory)';
-		|tr='PerakendeSatışFişi DR (R5022T_Giderler) CR (R4050B_StokEnvanteri)'", Lang));
+	NStr("en='9CAEB40A-2AF8-BA3A-A09E-E51A0B8DF5F1______________________________'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory",
-	NStr("en='SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)';
-		|ru='SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)';
-		|tr='SatışFaturası DR (R5022T_Giderler) CR (R4050B_StokEnvanteri)'", Lang));
+	NStr("en='E447FC6C-23A0-B01E-E2AF-FE3833416A9E________________________'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
-	NStr("en='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)';
-		|ru='SalesInvoice Дт (R2021B_CustomersTransactions) Кт (R5021T_Revenues)';
-		|tr='SatışFaturası DR (R2021B_Müşteriİşlemleri) CR (R5021T_Gelirler)'", Lang));
+	NStr("en='2C155001-43FE-A352-27BB-BA17F7CC292B_______________________________'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
-	NStr("en='SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)';
-		|ru='Счет-фактура продажи ДР (R2021B_CustomersTransactions) КР (R2040B_TaxesIncoming)';
-		|tr='SatışFaturası DR (R2021B_Müşteriİşlemleri) CR (R2040B_GelenVergiler) '", Lang));
+	NStr("en='C1D48C49-55A6-CD8E-EC88-846C979BC417____________________________________'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
-	NStr("en='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
-		|ru='SalesInvoice Дт (R2020B_AdvancesFromCustomers) Кт (R2021B_CustomersTransactions)';
-		|tr='SalesInvoice DR (R2020B_MüşterilerdenAvanslar) CR (R2021B_Müşteriİşlemleri)'", Lang));
+	NStr("en='BBFB3A13-2AF2-B3BB-BE25-514241D84871____________________________________________'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)';
-		|ru='ForeignCurrencyRevaluation Дт (R5022T_Expenses) Кт (R2020B_AdvancesFromCustomers)';
-		|tr='YabancıParaDeğerleme DR (R5022T_Giderler) CR (R2020B_MüşterilerdenAvanslar)'", Lang));
+	NStr("en='5F8FC0F1-C63E-DDA6-6F29-911B5AFE3C62_____________________________________________'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation Дт (R2020B_AdvancesFromCustomers) Кт (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R2020B_MüşterilerdenAvanslar) CR (R5021T_Gelirler)'", Lang));
+	NStr("en='FC31E6D4-F0C8-2514-452A-A52C740E238C_____________________________________________'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
+	NStr("en='ADB63049-3EEB-53D2-2261-18E86F804814__________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R3010B_CashOnHand) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R3010B_CashOnHand) CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R3010B_CashOnHand) CR (R5021T_Revenues)'", Lang));
+	NStr("en='26D6E9B9-F3A6-0ED2-2102-21DC617B3277__________________________________'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'", Lang));
+	NStr("en='565365A5-8F9D-01D1-1C4E-EB7BB8CA3EA2___________________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R1021B_VendorsTransactions) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R1021B_VendorsTransactions) CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R1021B_VendorsTransactions) CR (R5021T_Revenues)'", Lang));
+	NStr("en='252C0AA0-80CA-84FB-B852-2AE8E88813E7___________________________________________'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2040B_TaxesIncoming)';
-		|ru='Переоценка иностранной валюты ДР (R5022T_Expenses) КР (R2040B_TaxesIncoming)';
-		|tr='YabancıParaDeğerleme DR (R5022T_Giderler) CR (R2040B_GelenVergiler) '", Lang));
+	NStr("en='1B3D7C74-B7F4-7723-3005-5B2196B15C05_____________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R2040B_TaxesIncoming) CR (R5021T_Revenues)';
-		|ru='Переоценка иностранной валюты ДР (R2040B_TaxesIncoming) КР (R5021T_Revenues)';
-		|tr='YabancıParaDeğerleme DR (R2040B_GelenVergiler) CR (R5021T_Gelirler) '", Lang));
+	NStr("en='AB618ECA-5E19-E53D-DF35-5CC95AC4B590_____________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R9510B_SalaryPayment)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R9510B_SalaryPayment)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R9510B_SalaryPayment)'", Lang));
+	NStr("en='59593238-6565-259E-E04D-D7412E8FEEB1_____________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R9510B_SalaryPayment) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R9510B_SalaryPayment) CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R9510B_SalaryPayment) CR (R5021T_Revenues)'", Lang));
+	NStr("en='C789175E-35C9-AB3E-E931-177003C19328_____________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1020B_AdvancesToVendors)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1020B_AdvancesToVendors)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1020B_AdvancesToVendors)'", Lang));
+	NStr("en='3F30CAF3-0A76-7AD9-9F55-51451A3A1641_________________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R1020B_AdvancesToVendors CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R1020B_AdvancesToVendors CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R1020B_AdvancesToVendors CR (R5021T_Revenues)'", Lang));
+	NStr("en='C0B821E2-CB5E-7511-1864-4F3C7C3100E6________________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'", Lang));
+	NStr("en='F7054A61-9598-954C-CF32-2DF2540B8DE7_____________________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'", Lang));
+	NStr("en='1E7211C5-D690-35B3-3E7B-B81A4865FB18_____________________________________________'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1040B_TaxesOutgoing)';
-		|ru='Переоценка иностранной валюты ДР (R5022T_Expenses) КР (R1040B_TaxesOutgoing)';
-		|tr='YabancıParaDeğerleme DR (R5022T_Giderler) CR (R1040B_GidenVergiler) '", Lang));
+	NStr("en='AE96C850-4F2F-274A-AB2C-C8DE29FEB86F_____________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R1040B_TaxesOutgoing) CR (R5021T_Revenues)';
-		|ru='Переоценка иностранной валюты ДР (R1040B_TaxesOutgoing) КР (R5021T_Revenues)';
-		|tr='YabancıParaDeğerleme DR (R1040B_GidenVergiler) CR (R5021T_Gelirler) '", Lang));
+	NStr("en='B54D4C64-3A49-69FB-B168-8C75D0541C86_____________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3015B_CashAdvance)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3015B_CashAdvance)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3015B_CashAdvance)'", Lang));
+	NStr("en='E15BA479-D02A-ADA3-3F81-19F1013F8DA8___________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R3015B_CashAdvance) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R3015B_CashAdvance) CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R3015B_CashAdvance) CR (R5021T_Revenues)'", Lang));
+	NStr("en='960A7364-BEEA-010C-CD1A-A292B512D874___________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'", Lang));
+	NStr("en='414A1A12-0777-E0A6-6794-44E3706BE9DE___________________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R3027B_EmployeeCashAdvance) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R3027B_EmployeeCashAdvance) CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R3027B_EmployeeCashAdvance) CR (R5021T_Revenues)'", Lang));
+	NStr("en='40E97E80-CE1F-72F8-86A1-1F7C7F284A01___________________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'", Lang));
+	NStr("en='6895D844-7BE2-A319-9828-8A327A4DF4A2_________________________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'", Lang));
+	NStr("en='B5097FB9-20CA-AE24-4149-9792F8867FB0_________________________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
-	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R8510B_BookValueOfFixedAsset)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R8510B_BookValueOfFixedAsset)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R8510B_BookValueOfFixedAsset)'", Lang));
+	NStr("en='3CCAC90A-4D19-E043-392E-EE9DC5C9AA42_____________________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
-	NStr("en='ForeignCurrencyRevaluation DR (R8510B_BookValueOfFixedAsset) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R8510B_BookValueOfFixedAsset) CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R8510B_BookValueOfFixedAsset) CR (R5021T_Revenues)'", Lang));
+	NStr("en='4A006432-EDA4-F980-092E-E41BDEBD7D33_____________________________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
-	NStr("en='BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
-		|ru='ПоступлениеНаРасчетныйСчет Дт (R2020B_AdvancesFromCustomers) Кт (R2021B_CustomersTransactions)';
-		|tr='BankaMakbuzu DR (R2020B_MüşterilerdenAlınanPeşinatlar) CR (R2021B_Müşteriİşlemleri)'", Lang));
+	NStr("en='9DFD9B3C-9871-1976-6FB6-625B1760E998___________________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand",
-	NStr("en='CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
-		|ru='Денежный платеж Дебет (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) Кредит (R3010B_CashOnHand)';
-		|tr='NakitÖdeme DR (R1020B_TedarikçilereAvanslar_R1021B_Tedarikçiİşlemleri) CR (R3010B_EldekiNakit)'", Lang));
+	NStr("en='99AA294E-3414-EEBF-F836-61263FDE8B77_______________________________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
-	NStr("en='CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|ru='CashPayment Дебет (R1021B_VendorsTransactions) Кредит (R1020B_AdvancesToVendors)';
-		|tr='NakitÖdeme DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar)'", Lang));
+	NStr("en='0D47E21F-D6CF-5EBA-A512-20C69512CF30_____________________________________'", Lang));
 	
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions",
-	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
-		|ru='CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
-		|tr='CashReceipt DR (R3010B_EldekiNakit) CR (R2020B_MüşteridenAvanslar_R2021B_Müşteriİşlemleri)'", Lang)); 
+	NStr("en='0B272409-76F8-A3F3-38F2-2A957C8C1B12_____________________________________________________________'", Lang)); 
 	
 Strings.Insert("CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
-	NStr("en='CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
-		|ru='ПриходныйКассовыйОрдер Дт (R2020B_AdvancesFromCustomers) Кт (R2021B_CustomersTransactions)';
-		|tr='NakitMakbuzu DR (R2020B_MüşterilerdenAlınanPeşinatlar) CR (R2021B_Müşteriİşlemleri)'", Lang));
+	NStr("en='B4E703C9-2E5B-92EC-C027-71216ABE35B4___________________________________________'", Lang));
 	
 Strings.Insert("CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
-	NStr("en='CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|ru='CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|tr='CashExpense DR (R5022T_Giderler) CR (R3010B_EldekiNakit)'", Lang));
+	NStr("en='74230ED3-D310-3E79-919A-A427ABA738A5___________________'", Lang));
 	
 Strings.Insert("CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues",
-	NStr("en='CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)';
-		|ru='CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)';
-		|tr='CashRevenue DR (R3010B_EldekiNakit) CR (R5021_Gelirler)'", Lang));
+	NStr("en='A4D5D19F-CF03-EAAD-D2B8-8DD3FC192DB0__________________'", Lang));
 	
 Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues",
-	NStr("en='DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)';
-		|ru='DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)';
-		|tr='Borç Dekontu DR (R1021B_Tedarikçiİşlemleri) CR (R5021_Gelirler)'", Lang));
+	NStr("en='E1967B71-4C50-F893-3247-7BC94A377C7E_________________________'", Lang));
 
 Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
-	NStr("en='DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|ru='DebitNote Дт (R1021B_VendorsTransactions) Кт (R1020B_AdvancesToVendors)';
-		|tr='DebitNote DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar)'", Lang));
+	NStr("en='7B249F9C-AEBD-0E70-0C1B-B0938BD966B5___________________________________'", Lang));
 
 Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues",
-	NStr("en='DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)';
-		|ru='DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)';
-		|tr='DebitNote DR (R2021B_Müşteriİşlemleri) CR (R5021_Gelirler)'", Lang));
+	NStr("en='56C6639E-C648-903B-BD2B-B8EA0A5C51B0___________________________'", Lang));
 
 Strings.Insert("DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
-	NStr("en='DebitNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
-		|ru='DebitNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
-		|tr='DebitNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));
+	NStr("en='DCBFFC6C-515B-EF3A-A391-1C74F21B5F1B_________________________________________'", Lang));
 
 Strings.Insert("DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues",
-	NStr("en='DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)';
-		|ru='DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)';
-		|tr='Borç Dekontu DR (R5015B_DiğerOrtaklarİşlemleri) CR (R5021_Gelirler)'", Lang));
+	NStr("en='812FA080-6E20-7502-26EC-CBB48E33B2CE_______________________________'", Lang));
 
 Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming",
-	NStr("en='DebitNote DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming)';
-		|ru='ДебетоваяНота Дт (R1021B_VendorsTransactions) Кт (R2040B_TaxesIncoming)';
-		|tr='Borç Dekontu DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming) '", Lang));
+	NStr("en='36E16BCE-AEA1-43C8-86ED-D0D7FCCC2893_______________________________'", Lang));
 
 Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
-	NStr("en='DebitNote (DR_R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)';
-		|ru='ДебетоваяНота (Дт_R2021B_CustomersTransactions) Кт (R2040B_TaxesIncoming)';
-		|tr='Borç Dekontu (DR_R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming) '", Lang));
+	NStr("en='F7179F8D-D5DB-A521-1537-7EC725CA2C04_________________________________'", Lang));
 	
 Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions",
-	NStr("en='CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)';
-		|ru='CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)';
-		|tr='Alacak Dekontu DR (R5022T_Giderler) CR (R2021B_Müşteriİşlemleri)'", Lang));
+	NStr("en='0BCBB721-D920-06C3-3AC6-6103B6E48E86_____________________________'", Lang));
 	
 Strings.Insert("CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
-	NStr("en='CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
-		|ru='CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
-		|tr='Alacak Dekontu DR (R2020B_MüşterilerdenAvanslar) CR (R2021B_Müşteriİşlemleri)'", Lang));
+	NStr("en='1E25517D-6D4E-FD52-230C-C7F58D664F24__________________________________________'", Lang));
 
 Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
-	NStr("en='CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|ru='CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|tr='Alacak Dekontu DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar)'", Lang));
+	NStr("en='9ACC873B-F4E8-6E13-3D8F-FBB21E8163F6____________________________________'", Lang));
 	
 Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
-	NStr("en='CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
-		|ru='CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
-		|tr='Alacak Dekontu DR (R5022T_Giderler) CR (R1021B_Tedarikçiİşlemleri)'", Lang));
+	NStr("en='E2E6E93F-9B7B-72C7-7A7A-A30743868957___________________________'", Lang));
 
 Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
-	NStr("en='CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
-		|ru='CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
-		|tr='Alacak Dekontu DR (R5022T_Giderler) CR (R5015B_DiğerOrtaklarİşlemleri)'", Lang));
+	NStr("en='ED805170-0FB4-0046-64E5-5BE41E7D5EF7_________________________________'", Lang));
 
 Strings.Insert("CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
-	NStr("en='CreditNote DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
-		|ru='КредитоваяНота Дт (R1040B_TaxesOutgoing) Кт (R1021B_VendorsTransactions)';
-		|tr='Alacak Dekontu DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions) '", Lang));
+	NStr("en='0FEFF871-FB3E-8FB0-0FCC-CDDE9520FF6C________________________________'", Lang));
 
 Strings.Insert("CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions",
-	NStr("en='CreditNote DR (R1040B_TaxesOutgoing) CR (R2021B_CustomersTransactions)';
-		|ru='КредитоваяНота Дт (R1040B_TaxesOutgoing) Кт (R2021B_CustomersTransactions)';
-		|tr='Alacak Dekontu DR (R1040B_TaxesOutgoing) CR (R2021B_CustomersTransactions)'", Lang));
+	NStr("en='8DF4EF66-0F3D-DAAD-DAD6-6168FC9F3C6E__________________________________'", Lang));
 
 Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand",
-	NStr("en='MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)';
-		|ru='ПереводДС ДР (R3010B_НаличныеВКассе) КР (R3010B_НаличныеВКассе)';
-		|tr='ParaTransferi DR (R3010B_NakitElde) CR (R3010B_NakitElde)'", Lang));
+	NStr("en='FEDF768B-1C91-739D-DAF4-4FC043271593_______________________'", Lang));
 	
 Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit",
-	NStr("en='MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)';
-		|ru='ПереводДС ДР (R3010B_НаличныеВКассе) КР (R3021B_ДеньгиВПути)';
-		|tr='ParaTransferi DR (R3010B_NakitElde) CR (R3021B_NakitYolda)'", Lang));
+	NStr("en='DE554D0F-8572-E91F-F20D-DA709FCB708E__________________________'", Lang));
 
 Strings.Insert("MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand",
-	NStr("en='MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)';
-		|ru='ПереводДС ДР (R3021B_ДеньгиВПути) КР (R3010B_НаличныеВКассе)';
-		|tr='ParaTransferi DR (R3021B_NakitYolda) CR (R3010B_ElindekiNakit)'", Lang));
+	NStr("en='3B8EEC66-D5C1-6B3C-CD46-6997B4362CA1__________________________'", Lang));
 
 Strings.Insert("MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues",
-	NStr("en='MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)';
-		|ru='ПереводДенег ДР (R3021B_ДеньгиВПути) КР (R5021T_Доходы)';
-		|tr='ParaTransferi DR (R3021B_NakitYolda) CR (R5021T_Gelirler)'", Lang));
+	NStr("en='0A57FDDE-E62A-2F1D-DA9A-AA9EDA743F97________________________'", Lang));
 
 Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
-	NStr("en='MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)';
-		|ru='ПереводДС ДР (R5022T_Расходы) КР (R3021B_ДеньгиВПути)';
-		|tr='ParaTransferi DR (R5022T_Giderler) CR (R3021B_NakitYolda)'", Lang));
+	NStr("en='8495BAE7-9615-10F0-0859-9D620CBBC2A0________________________'", Lang));
 
 Strings.Insert("CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory",
-	NStr("en='CommissioningOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)';
-		|ru='ВводВЭксплуатациюОсновногоСредства Дт (R8510B_BookValueOfFixedAsset) Кт (R4050B_StockInventory)';
-		|tr='Sabit Kıymet İşletmeye Alma DR (R8510B_Sabit Kıymetin Defter Değeri) CR (R4050B_Stok Envanteri)'", Lang));
+	NStr("en='2BD545A4-9F79-F187-72F0-057023D0938C__________________________________________________'", Lang));
 
 Strings.Insert("DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset",
-	NStr("en='DecommissioningOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)';
-		|ru='СписаниеОсновногоСредства Дт (R4050B_StockInventory) Кт (R8510B_BookValueOfFixedAsset)';
-		|tr='Sabit Kıymet Devreden Çıkarma DR (R4050B_Stok Envanteri) CR (R8510B_Sabit Kıymetin Defter Değeri)'", Lang));
+	NStr("en='7BF5B39A-F7A0-A245-53F4-443BE74CFD79____________________________________________________'", Lang));
 
 Strings.Insert("ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory",
-	NStr("en='ModernizationOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)';
-		|ru='МодернизацияОсновногоСредства Дт (R8510B_BookValueOfFixedAsset) Кт (R4050B_StockInventory)';
-		|tr='Sabit Kıymet Modernizasyonu DR (R8510B_Sabit Kıymetin Defter Değeri) CR (R4050B_Stok Envanteri)'", Lang));
+	NStr("en='82DE6302-7930-03E8-8965-57116623E1AD__________________________________________________'", Lang));
 
 Strings.Insert("ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset",
-	NStr("en='ModernizationOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)';
-		|ru='МодернизацияОсновногоСредства Дт (R4050B_StockInventory) Кт (R8510B_BookValueOfFixedAsset)';
-		|tr='Sabit Kıymet Modernizasyonu DR (R4050B_Stok Envanteri) CR (R8510B_Sabit Kıymetin Defter Değeri)'", Lang));
+	NStr("en='E70079FB-CEC0-9BDA-A246-65CB2F8A27C9__________________________________________________'", Lang));
 
 Strings.Insert("FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset",
-	NStr("en='FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)';
-		|ru='ПередачаОсновногоСредства Дт (R8510B_BookValueOfFixedAsset) Кт (R8510B_BookValueOfFixedAsset)';
-		|tr='Sabit Kıymet Transferi DR (R8510B_Sabit Kıymetin Defter Değeri) CR (R8510B_Sabit Kıymetin Defter Değeri)'", Lang));
+	NStr("en='BBC85647-ACB3-6578-8844-40119ACCF2BA__________________________________________________'", Lang));
 
 Strings.Insert("DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset",
-	NStr("en='DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)';
-		|ru='РасчетАмортизации Дт (R5022T_Expenses) Кт (DepreciationFixedAsset)';
-		|tr='Amortisman Hesaplama DR (R5022T_Giderler) CR (AmortismanSabitKıymet)'", Lang));
+	NStr("en='52965161-2F53-FC15-55BB-B3232A5C541F____________________________________'", Lang));
 
 Strings.Insert("BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand",
-	NStr("en='BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)';
-		|ru='СписаниеСРасчетногоСчета Дт (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) Кт (R3010B_CashOnHand)';
-		|tr='BankaÖdemesi DR (R2020B_MüşterilerdenAlınanPeşinatlar_R2021B_Müşteriİşlemleri) CR (R3010B_ElindekiNakit)'", Lang));
+	NStr("en='501A058B-BDE4-EC26-6A3D-D033F1287EC6_____________________________________________________________'", Lang));
 
 Strings.Insert("BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
-	NStr("en='BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|ru='СписаниеСРасчетногоСчета Дт (R2021B_CustomersTransactions) Кт (R2020B_AdvancesFromCustomers)';
-		|tr='BankaÖdemesi DR (R2021B_Müşteriİşlemleri) CR (R2020B_MüşterilerdenAlınanPeşinatlar)'", Lang));
+	NStr("en='B918D93C-C4AF-CCC6-656C-C537196747C9___________________________________________'", Lang));
 
 Strings.Insert("BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand",
-	NStr("en='BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)';
-		|ru='BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)';
-		|tr='BankaÖdemesi DR (R5015B_DiğerOrtaklarİşlemleri) CR (R3010B_EldenNakit)'", Lang));
+	NStr("en='D4CCEEFB-C9C3-0299-9F91-1A42A9BD2206____________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand",
-	NStr("en='CashPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)';
-		|ru='РасходныйКассовыйОрдер Дт (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) Кт (R3010B_CashOnHand)';
-		|tr='NakitÖdeme DR (R2020B_MüşterilerdenAlınanPeşinatlar_R2021B_Müşteriİşlemleri) CR (R3010B_ElindekiNakit)'", Lang));
+	NStr("en='94D3BD77-FCDC-714A-A9AF-F3F0162CD5AD_____________________________________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
-	NStr("en='CashPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|ru='РасходныйКассовыйОрдер Дт (R2021B_CustomersTransactions) Кт (R2020B_AdvancesFromCustomers)';
-		|tr='NakitÖdeme DR (R2021B_Müşteriİşlemleri) CR (R2020B_MüşterilerdenAlınanPeşinatlar)'", Lang));
+	NStr("en='5F252199-4C61-F587-7548-822329A9C06B___________________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand",
-	NStr("en='CashPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)';
-		|ru='CashPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)';
-		|tr='NakitÖdeme DR (R9510B_MaaşÖdemesi) CR (R3010B_EldenNakit)'", Lang));
+	NStr("en='1C9B649B-4A37-9CF9-9B8D-D58514CF4249________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
-	NStr("en='CashPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)';
-		|ru='CashPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)';
-		|tr='NakitÖdeme DR (R3027B_PersonelAvansı) CR (R3010B_EldenNakit)'", Lang));
+	NStr("en='B1A4363C-2E41-E766-6B4E-EC2FFCD99C71______________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions",
-	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)';
-		|ru='СписаниеСРасчетногоСчета Дт (R3010B_CashOnHand) Кт (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)';
-		|tr='BankaMakbuzu DR (R3010B_ElindekiNakit) CR (R1020B_SatıcılaraVerilenPeşinatlar_R1021B_Satıcıİşlemleri)'", Lang));
+	NStr("en='09FF34D2-23F4-48F1-1F14-4491FA4FA83C_______________________________________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions",
-	NStr("en='BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)';
-		|ru='ПоступлениеНаРасчетныйСчет Дт (R1020B_AdvancesToVendors) Кт (R1021B_VendorsTransactions)';
-		|tr='BankaMakbuzu DR (R1020B_SatıcılaraVerilenPeşinatlar) CR (R1021B_Satıcıİşlemleri)'", Lang));
+	NStr("en='96891E31-75C7-CC10-0C10-051182E55003_____________________________________'", Lang));
 
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions",
-	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)';
-		|ru='ПриходныйКассовыйОрдер Дт (R3010B_CashOnHand) Кт (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)';
-		|tr='NakitMakbuzu DR (R3010B_ElindekiNakit) CR (R1020B_SatıcılaraVerilenPeşinatlar_R1021B_Satıcıİşlemleri)'", Lang));
+	NStr("en='2A789CE5-9A3B-3A4D-D00D-D707B6B28B15_______________________________________________________'", Lang));
 
 Strings.Insert("CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions",
-	NStr("en='CashReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)';
-		|ru='ПриходныйКассовыйОрдер Дт (R1020B_AdvancesToVendors) Кт (R1021B_VendorsTransactions)';
-		|tr='NakitMakbuzu DR (R1020B_SatıcılaraVerilenPeşinatlar) CR (R1021B_Satıcıİşlemleri)'", Lang));
+	NStr("en='2747B301-676E-05B3-36B5-54CBBA413316_____________________________________'", Lang));
 
 Strings.Insert("BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
-	NStr("en='BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)';
-		|ru='СписаниеСРасчетногоСчета Дт (R3021B_CashInTransitIncoming) Кт (R3010B_CashOnHand) (Перевод наличных)';
-		|tr='BankaÖdemesi DR (R3021B_NakliyeHalindekiNakitGelen) CR (R3010B_ElindekiNakit) (Nakit transferi)'", Lang));
+	NStr("en='37DC2E19-EBD6-C4F6-6FB9-95F7F5D0E0C4________________________________________________'", Lang));
 
 Strings.Insert("BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange",
-	NStr("en='BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)';
-		|ru='СписаниеСРасчетногоСчета Дт (R3021B_CashInTransitIncoming) Кт (R3010B_CashOnHand) (Обмен валют)';
-		|tr='BankaÖdemesi DR (R3021B_NakliyeHalindekiNakitGelen) CR (R3010B_ElindekiNakit) (Döviz bozdurma)'", Lang));
+	NStr("en='37164626-9262-6A38-8161-1A625548ABA1____________________________________________________'", Lang));
 
 Strings.Insert("BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
-	NStr("en='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|ru='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|tr='BankPayment DR (R5022T_Giderler) CR (R3010B_EldekiNakit)'", Lang));
+	NStr("en='31EF64B5-4C81-E08B-BBE9-97A8256BF936___________________'", Lang));
 
 Strings.Insert("BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand",
-	NStr("en='BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)';
-		|ru='BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)';
-		|tr='BankaÖdemesi DR (R9510B_MaaşÖdemesi) CR (R3010B_EldenNakit)'", Lang));
+	NStr("en='9F137865-8AAE-49A3-30C1-19F0C01DE3E8________________________'", Lang));
 
 Strings.Insert("BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
-	NStr("en='BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)';
-		|ru='BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)';
-		|tr='BankaÖdemesi DR (R3027B_PersonelAvansı) CR (R3010B_EldenNakit)'", Lang));
+	NStr("en='B941D19F-B05A-97C1-10A6-668E389B8166______________________________'", Lang));
 
 Strings.Insert("BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
-	NStr("en='BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
-		|ru='BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
-		|tr='BankaÖdemeFişi Borç (R5015B_DiğerPartnerİşlemleri) Alacak (R5021T_Gelirler)'", Lang));
+	NStr("en='668AF088-9E82-2F19-9016-6FA6713051CD__________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
-	NStr("en='CashPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)';
-		|ru='РасходныйКассовыйОрдер Дт (R3021B_CashInTransitIncoming) Кт (R3010B_CashOnHand) (Перевод наличных)';
-		|tr='NakitÖdeme DR (R3021B_NakliyeHalindekiNakitGelen) CR (R3010B_ElindekiNakit) (Nakit transferi)'", Lang));
+	NStr("en='80020829-B528-3E71-17A3-3EA4AD559314________________________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand",
-	NStr("en='CashPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)';
-		|ru='CashPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)';
-		|tr='NakitÖdeme DR (R5015B_DiğerOrtaklarİşlemleri) CR (R3010B_EldenNakit)'", Lang));
+	NStr("en='139DC35D-652C-3C9D-D49A-A71683431FA7____________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
-	NStr("en='CashPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
-		|ru='CashPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
-		|tr='NakitÖdemeFişi Borç (R5015B_DiğerPartnerİşlemleri) Alacak (R5021T_Gelirler)'", Lang));
+	NStr("en='995808F8-9B17-48B6-60FE-E565FFE33F42__________________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
-	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)';
-		|ru='ПоступлениеНаРасчетныйСчет Дт (R3010B_CashOnHand) Кт (R3021B_CashInTransitIncoming) (Перевод наличных)';
-		|tr='BankaMakbuzu DR (R3010B_ElindekiNakit) CR (R3021B_NakliyeHalindekiNakitGelen) (Nakit transferi)'", Lang));
+	NStr("en='E1D06307-7E8D-DE23-3B5D-D44B00F132E6________________________________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange",
-	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)';
-		|ru='ПоступлениеНаРасчетныйСчет Дт (R3010B_CashOnHand) Кт (R3021B_CashInTransitIncoming) (Обмен валют)';
-		|tr='BankaMakbuzu DR (R3010B_ElindekiNakit) CR (R3021B_NakliyeHalindekiNakitGelen) (Döviz bozdurma)'", Lang));
+	NStr("en='C6CAD88F-E620-631E-ECE2-2307960C8A84____________________________________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues",
-	NStr("en='BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)';
-		|ru='ПоступлениеНаРасчетныйСчет Дт (R3021B_CashInTransit) Кт (R5021T_Revenues)';
-		|tr='BankaMakbuzu DR (R3021B_NakliyeHalindekiNakit) CR (R5021T_Gelirler)'", Lang));
+	NStr("en='96B4A7E0-15FC-C1BD-D13B-B0D03958574A______________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
-	NStr("en='BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)';
-		|ru='ПоступлениеНаРасчетныйСчет Дт (R5022T_Expenses) Кт (R3021B_CashInTransit)';
-		|tr='BankaMakbuzu DR (R5022T_Giderler) CR (R3021B_NakliyeHalindekiNakit)'", Lang));
+	NStr("en='AF468973-372A-4FA1-1760-0BC6FA978A2E______________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions",
-	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)';
-		|ru='BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)';
-		|tr='BankaTahsilatı DR (R3010B_EldenNakit) CR (R5015B_DiğerOrtaklarİşlemleri)'", Lang));
+	NStr("en='3C1685D1-EDEE-0619-9887-7ADEEF8069E7____________________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues",
-	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)';
-		|ru='BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)';
-		|tr='BankaTahsilatı DR (R3010B_EldenNakit) CR (R5021_Gelirler)'", Lang));
+	NStr("en='035344C9-DC6D-F602-2C21-17D5685317C8__________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
-	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)';
-		|ru='Банковское поступление DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)';
-		|tr='BankaTahsilatı DR (R3010B_ElindekiNakit) CR (R9510B_MaaşÖdemesi)'", Lang));
+	NStr("en='6D153D7D-88FA-F22F-FF10-03D47325C14E________________________'", Lang));
 
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
-	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)';
-		|ru='ПриходныйКассовыйОрдер Дт (R3010B_CashOnHand) Кт (R3021B_CashInTransitIncoming) (Перемещение ДС)';
-		|tr='NakitMakbuzu DR (R3010B_ElindekiNakit) CR (R3021B_NakliyeHalindekiNakitGelen) (Nakit transferi)'", Lang));
+	NStr("en='D7F13B54-C0C8-D2AF-F132-258C22D9B903________________________________________________'", Lang));
 
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions",
-	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)';
-		|ru='CashReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)';
-		|tr='NakitTahsilatı DR (R3010B_EldenNakit) CR (R5015B_DiğerOrtaklarİşlemleri)'", Lang));
+	NStr("en='EE0DB7A7-5EAD-CF1E-E060-0374F72B6851____________________________________'", Lang));
 
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
-	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)';
-		|ru='Поступление наличных DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment) ';
-		|tr='NakitTahsilat DR (R3010B_ElindekiNakit) CR (R9510B_MaaşÖdemesi) '", Lang));
+	NStr("en='E7BF8AA9-5A7F-1FA9-999D-D15A2FE012CA________________________'", Lang));
 
 Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual",
-	NStr("en='Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)';
-		|ru='Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)';
-		|tr='Bordro Borç (R5022T_Giderler) Alacak (R9510B_MaaşÖdemesi) (Tahakkuk)'", Lang));
+	NStr("en='EB2600C7-2FE0-1D70-0AD6-629FF963E555____________________________'", Lang));
 	
 Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes",
-	NStr("en='Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)';
-		|ru='Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)';
-		|tr='Bordro Borç (R9510B_MaaşÖdemesi) Alacak (R5015B_DiğerOrtaklarİşlemleri) (Vergiler)'", Lang));
+	NStr("en='6D16A8AF-CEE0-83F2-286D-D010DC5EB3AB___________________________________________'", Lang));
 
 Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes",
-	NStr("en='Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)';
-		|ru='Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)';
-		|tr='Bordro Borç (R5022T_Giderler) Alacak (R5015B_DiğerOrtaklarİşlemleri) (Vergiler)'", Lang));
+	NStr("en='D7DAA285-1EB0-5B53-3E75-5496CBEBF3BE______________________________________'", Lang));
 	
 Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue",
-	NStr("en='Payroll DR (R9510B_SalaryPayment) CR (R5021T_Revenues) (Deduction Is Revenue)';
-		|ru='Payroll DR (R9510B_SalaryPayment) CR (R5021T_Revenues) (Deduction Is Revenue)';
-		|tr='Bordro Borç (R9510B_MaaşÖdemesi) Alacak (R5021T_Gelirler) (Kesinti Gelirdir)'", Lang));
+	NStr("en='9B559F7F-E68D-1173-3075-5C0E0E002521_________________________________________'", Lang));
 	
 Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue",
-	NStr("en='Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)';
-		|ru='Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)';
-		|tr='Bordro Borç (R5022T_Giderler) Alacak (R9510B_MaaşÖdemesi) (Kesinti Gelir Değildir)'", Lang));
+	NStr("en='3C754268-175B-C567-7DD7-719FB2B4D99D_____________________________________________'", Lang));
 	
 Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance",
-	NStr("en='Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)';
-		|ru='Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)';
-		|tr='Bordro Borç (R9510B_MaaşÖdemesi) Alacak (R3027B_ÇalışanAvansı)'", Lang));
+	NStr("en='A10C8AEC-53E2-D045-5BD6-6029F48259C3_____________________________'", Lang));
 
 Strings.Insert("DebitCreditNote_R5020B_PartnersBalance",
-	NStr("en='DebitCreditNote (R5020B_PartnersBalance)';
-		|ru='DebitCreditNote (R5020B_PartnersBalance)';
-		|tr='BorçAlacak Dekontu (R5020B_OrtaklarBakiyesi)'", Lang));
+	NStr("en='22B66A4B-8FFC-4389-97FC-C2A1DE9CF08D____'", Lang));
 
 Strings.Insert("DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset",
-	NStr("en='DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)';
-		|ru='DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)';
-		|tr='BorçAlacak Dekontu DR (R2020B_MüşterilerdenAvanslar) CR (R2021B_Müşteriİşlemleri) (Mahsup)'", Lang));
+	NStr("en='92CD2A6F-9E9A-46FE-E412-2EA2A4B77948________________________________________________________'", Lang));
 
 Strings.Insert("DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset",
-	NStr("en='DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)';
-		|ru='DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)';
-		|tr='BorçAlacak Dekontu DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar) (Mahsup)'", Lang));
+	NStr("en='D4E8D5BE-F9A8-176A-A2DB-B66B14756714__________________________________________________'", Lang));
 
 Strings.Insert("DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues",
-	NStr("en='DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)';
-		|ru='ДебетоваяКредитоваяНота Дт (R5020B_PartnersBalance) Кт (R5021_Revenues)';
-		|tr='Borç Alacak Dekontu DR (R5020B_PartnersBalance) CR (R5021_Revenues) '", Lang));
+	NStr("en='C3DB5B29-3EBB-F465-52B1-1A8A122A2BB9___________________________'", Lang));
 
 Strings.Insert("DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance",
-	NStr("en='DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)';
-		|ru='ДебетоваяКредитоваяНота Дт (R5022T_Expenses) Кт (R5020B_PartnersBalance)';
-		|tr='Borç Alacak Dekontu DR (R5022T_Expenses) CR (R5020B_PartnersBalance) '", Lang));
+	NStr("en='A9D68555-8D15-3FBD-DCCA-A4345B5F3043____________________________'", Lang));
 
 Strings.Insert("ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses",
-	NStr("en='ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)';
-		|ru='ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)';
-		|tr='ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)'", Lang));
+	NStr("en='FCA4D443-ABC6-7884-4EF1-17BC73E36083_________________________________'", Lang));
 
 Strings.Insert("RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues",
-	NStr("en='RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)';
-		|ru='RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)';
-		|tr='RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)'", Lang));
+	NStr("en='077D0A3A-00C8-00DC-C445-5BA0114262DA_________________________________'", Lang));
 
 Strings.Insert("ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses",
-	NStr("en='ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)';
-		|ru='ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)';
-		|tr='ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)'", Lang));
+	NStr("en='6686EE96-3E6F-F0E1-1401-1EDCE5D16053_________________________________'", Lang));
 	
 Strings.Insert("RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues",
-	NStr("en='RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)';
-		|ru='RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)';
-		|tr='RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)'", Lang));
+	NStr("en='98D3E7DD-F64D-5454-40F5-5E32CE0798B8_________________________________'", Lang));
 	
 Strings.Insert("EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance",
-	NStr("en='EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)';
-		|ru='EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)';
-		|tr='EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'", Lang));
+	NStr("en='D1FB5BA8-4E2E-0807-72CA-A5A43AA410F1____________________________________'", Lang));
 	
 Strings.Insert("EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance",
-	NStr("en='EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)';
-		|ru='EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)';
-		|tr='EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)'", Lang));
+	NStr("en='D1D1FC81-D741-FC4E-E5AE-E1017688ECE3_______________________________________________'", Lang));
 
 Strings.Insert("EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance",
-	NStr("en='EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)';
-		|ru='АвансСотрудника Дт (R1040B_TaxesOutgoing) Кт (R3027B_EmployeeCashAdvance)';
-		|tr='ÇalışanAvansı DR (R1040B_VergiGiderleri) CR (R3027B_ÇalışanAvansı)'", Lang));
+	NStr("en='2C13789B-9577-E88F-F58E-E3EDDA78AB98_________________________________________'", Lang));
 
 Strings.Insert("SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
-	NStr("en='SalesReturn DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|ru='SalesReturn DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|tr='SalesReturn DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+	NStr("en='4E03C877-87E7-6039-90B7-7A1BB2811D4E___________________________________________'", Lang));
 
 Strings.Insert("SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions",
-	NStr("en='SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)';
-		|ru='SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)';
-		|tr='SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)'", Lang));
+	NStr("en='3F416D58-66DE-44D1-1DA5-5A387305E650______________________________'", Lang));
 
 Strings.Insert("SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions",
-	NStr("en='SalesReturn DR (R1040B_TaxesOutgoing) CR (R2021B_CustomersTransactions)';
-		|ru='Возврат продажи ДР (R1040B_TaxesOutgoing) КР (R2021B_CustomersTransactions)';
-		|tr='Satışİadesi DR (R1040B_GidenVergiler) CR (R2021B_Müşteriİşlemleri) '", Lang));
+	NStr("en='9BC36768-E0F4-FC9A-ACF6-6E6D28CA9941___________________________________'", Lang));
 
 Strings.Insert("SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory",
-	NStr("en='SalesReturn DR (R5022T_Expenses) CR (R4050B_StockInventory)';
-		|ru='SalesReturn DR (R5022T_Expenses) CR (R4050B_StockInventory)';
-		|tr='SalesReturn DR (R5022T_Expenses) CR (R4050B_StockInventory)'", Lang));
+	NStr("en='ED2D5A6B-7B12-C424-4612-2F5E05CDF420_______________________'", Lang));
 
 Strings.Insert("PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions",
-	NStr("en='PurchaseReturn DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)';
-		|ru='PurchaseReturn DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)';
-		|tr='PurchaseReturn DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'", Lang));
+	NStr("en='663166A7-AC75-73C9-9AF0-02317119A052________________________________________'", Lang));
 
 Strings.Insert("PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory",
-	NStr("en='PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)';
-		|ru='PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)';
-		|tr='PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)'", Lang));
+	NStr("en='AEA1ED4F-AADB-9C31-1603-33D967B0C5DB_____________________________________'", Lang));
 
 Strings.Insert("PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming",
-	NStr("en='PurchaseReturn DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming)';
-		|ru='Возврат покупки ДР (R1021B_VendorsTransactions) КР (R2040B_TaxesIncoming)';
-		|tr='Satınalmaİadesi DR (R1021B_Tedarikçiİşlemleri) CR (R2040B_GelenVergiler) '", Lang));
+	NStr("en='F4C24365-574F-4AC1-12F0-0480FCEDEFE0____________________________________'", Lang));
 
 Strings.Insert("TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing",
-	NStr("en='TaxesOperation DR (R2040B_TaxesIncoming) CR (R1040B_TaxesOutgoing)';
-		|ru='Операция с налогами ДР (R2040B_TaxesIncoming) КР (R1040B_TaxesOutgoing)';
-		|tr='VergiOperasyonu DR (R2040B_GelenVergiler) CR (R1040B_GidenVergiler) '", Lang));
+	NStr("en='88CCB8B0-4E51-2CD6-62AB-B0C61DF26627______________________________'", Lang));
 
 Strings.Insert("TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions",
-	NStr("en='TaxesOperation DR (R2040B_TaxesIncoming) CR (R5015B_OtherPartnersTransactions)';
-		|ru='Операция с налогами ДР (R2040B_TaxesIncoming) КР (R5015B_OtherPartnersTransactions)';
-		|tr='VergiOperasyonu DR (R2040B_GelenVergiler) CR (R5015B_DiğerOrtakİşlemleri) '", Lang));
+	NStr("en='BC146481-8029-60E3-3BC1-192B33C3FCAD__________________________________________'", Lang));
 
 Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing",
-	NStr("en='TaxesOperation DR (R5015B_OtherPartnersTransactions) CR (R1040B_TaxesOutgoing)';
-		|ru='Операция с налогами ДР (R5015B_OtherPartnersTransactions) КР (R1040B_TaxesOutgoing)';
-		|tr='VergiOperasyonu DR (R5015B_DiğerOrtakİşlemleri) CR (R1040B_GidenVergiler)'", Lang));
+	NStr("en='818F7E93-391A-1C55-58B6-6D2BBD8B0C0A__________________________________________'", Lang));
 
 Strings.Insert("ExternalAccountingOperation",
-	NStr("en='External accounting operation';
-		|ru='Внешние бух. операции';
-		|tr='Dış muhasebe kaydı'", Lang));
+	NStr("en='AB515055-37D2-92AC-CBD1-1F5E983DD679'", Lang));
 
 Strings.Insert("AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses",
-	NStr("en='AdditionalCostAllocation DR (R4050B_StockInventory) CR (R5022T_Expenses)';
-		|ru='Дополнительное распределение затрат DR (R4050B_StockInventory) CR (R5022T_Expenses) ';
-		|tr='Ek Maliyet Dağılımı DR (R4050B_StokEnvanteri) CR (R5022T_Giderler)  '", Lang));
+	NStr("en='379F4416-88BE-8F24-4552-25A3E263C2F5____________________________________'", Lang));
 
 Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory",
-	NStr("en='AdditionalRevenueAllocation DR (R5021T_Revenues) CR (R4050B_StockInventory)';
-		|ru='Дополнительное распределение доходов DR (R5021T_Revenues) CR (R4050B_StockInventory)';
-		|tr='Ek Gelir Dağılımı DR (R5021T_Gelirler) CR (R4050B_StokEnvanteri)'", Lang));
+	NStr("en='6DB4AD48-6F96-6793-3B81-1AF9DC753685_______________________________________'", Lang));
 
 Strings.Insert("WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
-	NStr("en='WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|ru='WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|tr='SerbestMeslekMakbuzu DR (R1021B_TedarikçiKayıtları) CR (R1020B_TedarikçiAvansları)'", Lang));
+	NStr("en='0C6302AE-C08A-78D1-1616-61C0559F72FA_______________________________________________'", Lang));
 
 Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
-	NStr("en='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
-		|ru='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
-		|tr='SerbestMeslekMakbuzu DR (R5022T_Giderler) CR (R1021B_TedarikçiKayıtları)'", Lang));
+	NStr("en='C578DB4D-E6E6-B5D2-2EA9-98EA960FB794______________________________________'", Lang));
 
 Strings.Insert("WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
-	NStr("en='WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
-		|ru='WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
-		|tr='SerbestMeslekMakbuzu DR (R1040B_VergiÇıkan) CR (R1021B_TedarikçiKayıtları)'", Lang));
+	NStr("en='7ED76772-1022-F4D7-780E-E9261F5E1933___________________________________________'", Lang));
 
 Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
-	NStr("en='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
-		|ru='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
-		|tr='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'", Lang));
+	NStr("en='FCB4DC5E-B925-6E0B-BFE0-076BEC2DD616____________________________________________'", Lang));
 
 Strings.Insert("FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
-	NStr("en='FixedAssetRevaluation DR (R8510B BookValueOfFixedAsset) CR (R5021T Revenues)';
-		|ru='Переоценка основных средств Дт (R8510B BookValueOfFixedAsset) Кт (R5021T Revenues)';
-		|tr='Sabit Varlık Yeniden Değerlemesi Borç (R8510B Sabit Varlığın Defter Değeri) Alacak (R5021T Gelirler)'", Lang));
+	NStr("en='365B9CCF-8372-6528-8896-601A0E3225D9________________________________________'", Lang));
 
 Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
-	NStr("en='FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)';
-		|ru='Переоценка основных средств Дт (R5022T Expenses) Кт (R8510B BookValueOfFixedAsset)';
-		|tr='Sabit Varlık Yeniden Değerlemesi Borç (R5022T Giderleri) Alacak (R8510B Sabit Varlığın Defter Değeri)'", Lang));
+	NStr("en='D2A4435B-6740-046A-A17C-C3E192AB541B________________________________________'", Lang));
 
 Strings.Insert("IncomingExchRateAdjustmentInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
-	NStr("en='IncomingExchRateAdjustmentInvoice DR (R1040B TaxesOutgoing) CR (R1021B VendorsTransactions)';
-		|ru='Корректировка обменного курса входящего счета DR (R1040B TaxesOutgoing) CR (R1021B VendorsTransactions)';
-		|tr='Gelen Döviz Kuru Ayarlaması Fatura DR (R1040B Vergiler Giden) CR (R1021B Satıcı İşlemleri)'", Lang));
+	NStr("en='75336E69-0462-D4E0-0B96-632BAB5E0322_______________________________________________________'", Lang));
 
 Strings.Insert("IncomingExchRateAdjustmentInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
-	NStr("en='IncomingExchRateAdjustmentInvoice DR (R5022T Expenses) CR (R1021B VendorsTransactions)';
-		|ru='Корректировка обменного курса входящего счета DR (R5022T Expenses) CR (R1021B VendorsTransactions)';
-		|tr='Gelen Döviz Kuru Ayarlama Faturası DR (R5022T Giderleri) CR (R1021B Satıcı İşlemleri)'", Lang));
+	NStr("en='B4D0330C-3959-3014-46CA-A4EE1B7CFB90__________________________________________________'", Lang));
 
 Strings.Insert("OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
-	NStr("en='OutgoingExchRateAdjustmentInvoice DR (R2021B CustomersTransactions) CR (R2040B TaxesIncoming)';
-		|ru='Корректировка обменного курса исходящего счета DR (R2021B CustomersTransactions) CR (R2040B TaxesIncoming)';
-		|tr='Giden Döviz Kuru Ayarlaması Fatura DR (R2021B Müşteriler İşlemler) CR (R2040B Vergiler Gelen)'", Lang));
+	NStr("en='FEAEB1E5-0013-B4B1-15F9-9ED0BA034B3C_________________________________________________________'", Lang));
 
 Strings.Insert("OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
-	NStr("en='OutgoingExchRateAdjustmentInvoice (DR R2021B CustomersTransactions) (CR R5021T_Revenues)';
-		|ru='Корректировка обменного курса исходящего счета (DR R2021B CustomersTransactions) (CR R5021T_Revenues)';
-		|tr='Giden Döviz Kuru Ayarlama Faturası (DR R2021B Müşteriler İşlemler) (CR R5021T_Gelirler)'", Lang));
+	NStr("en='D47B4215-AF07-E21A-ABA1-1669029F6A53____________________________________________________'", Lang));
 	
-Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External accounting operation exchange report';
-	|ru='Отчет по обменам внешних бухгалтерских операци';
-	|tr='Dış muhaseb evrakları veri alış veriş raporu'", Lang));
+Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='1A8FBFCD-9091-5DC5-5D0A-A8FC64E1B626_________'", Lang));
 
 #EndRegion
 
 #Region InternalCommands
-	Strings.Insert("InternalCommands_SetNotActive", NStr("en='Set ""Not active""';
-		|ru='Установить ""Неактивный""';
-		|tr='""Aktif Olmayan"" Ayarla'", Lang));
-	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en='Set ""Active""';
-		|ru='Установить ""Активный""';
-		|tr='""Aktif"" Ayarla'", Lang));
-	Strings.Insert("InternalCommands_ShowNotActive", NStr("en='Show all items';
-		|ru='Показать все позиции';
-		|tr='Tüm Öğeleri Göster'", Lang));
-	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en='Show only active items';
-		|ru='Показать только активные позиции';
-		|tr='Sadece Aktif Öğeleri Göster'", Lang));
-	Strings.Insert("InternalCommands_ShowNumerator", NStr("en='Show numerator';
-		|ru='Показать нумератор';
-		|tr='Numaratör göster'", Lang));
-	Strings.Insert("InternalCommands_ShowNumerator_Check", NStr("en='Hide numerator';
-		|ru='Скрыть нумератор';
-		|tr='Numaratör gizle'", Lang));
-	Strings.Insert("InternalCommands_EditQuantity", NStr("en='Edit quantity';
-		|ru='Ввод количества';
-		|tr='Miktar düzeltme'", Lang));
+	Strings.Insert("InternalCommands_SetNotActive", NStr("en='657545D3-D162-833D-D1DE-E28CB2E44290'", Lang));
+	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en='D465012D-432D-EDAD-D922-2CB12214E7C7'", Lang));
+	Strings.Insert("InternalCommands_ShowNotActive", NStr("en='5794DDBB-45DF-68A1-1B12-2081E43B6E15'", Lang));
+	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en='412150AF-E4DF-AE64-404F-FB8725BBA403'", Lang));
+	Strings.Insert("InternalCommands_ShowNumerator", NStr("en='E46ED8E9-819A-D0C3-33DA-A1FD89140FCA'", Lang));
+	Strings.Insert("InternalCommands_ShowNumerator_Check", NStr("en='88D6E317-4FF1-170F-F522-2FF88BB02FF1'", Lang));
+	Strings.Insert("InternalCommands_EditQuantity", NStr("en='B7D3262E-7F8E-DA0B-B6E9-97ADD7CC6925'", Lang));
 #EndRegion
 	
 #Region FormulaEditor
-	Strings.Insert("FormulaEditor_Delimiters", NStr("en='Delimiters';
-		|ru='Разделители';
-		|tr='Ayraçlar'", Lang));
+	Strings.Insert("FormulaEditor_Delimiters", NStr("en='2EDC6CDD-23DE-AED6-6124-4EAC45AA2400'", Lang));
 	
-	Strings.Insert("FormulaEditor_Space", NStr("en='Space';
-		|ru='Пробел';
-		|tr='Boşluk'", Lang));
-	Strings.Insert("FormulaEditor_Operators", NStr("en='Operators';
-		|ru='Операторы';
-		|tr='Operatörler'", Lang));
+	Strings.Insert("FormulaEditor_Space", NStr("en='859FB859-0DFF-4683-383E-EFEC670F7ED0'", Lang));
+	Strings.Insert("FormulaEditor_Operators", NStr("en='5B768A89-F056-0EB7-7193-367FB8831D7D'", Lang));
 	
-	Strings.Insert("FormulaEditor_LogicalOperatorsAndConstants", NStr("en='Logical operators and constants';
-		|ru='Логические операторы и константы';
-		|tr='Mantıksal operatörler ve sabitler'", Lang));
+	Strings.Insert("FormulaEditor_LogicalOperatorsAndConstants", NStr("en='BDF9683D-068F-21A1-1D94-4FC8BEA35F9C'", Lang));
 	
-	Strings.Insert("FormulaEditor_AND", NStr("en='AND';
-		|ru='И';
-		|tr='VE'", Lang));
-	Strings.Insert("FormulaEditor_OR", NStr("en='OR';
-		|ru='ИЛИ';
-		|tr='VEYA'", Lang));
-	Strings.Insert("FormulaEditor_NOT", NStr("en='NOT';
-		|ru='НЕ';
-		|tr='DEĞİL'", Lang));
-	Strings.Insert("FormulaEditor_TRUE", NStr("en='TRUE';
-		|ru='ИСТИНА';
-		|tr='DOĞRU'", Lang));
-	Strings.Insert("FormulaEditor_FALSE", NStr("en='FALSE';
-		|ru='ЛОЖЬ';
-		|tr='YANLIŞ'", Lang));
+	Strings.Insert("FormulaEditor_AND", NStr("en='572A41CC-F34D-3C1C-C2CD-DBA0A8295AA0'", Lang));
+	Strings.Insert("FormulaEditor_OR", NStr("en='56D43312-F637-D666-6708-83604ECC4FAA'", Lang));
+	Strings.Insert("FormulaEditor_NOT", NStr("en='51EA6C8A-B57D-8A98-855A-AE1937561E45'", Lang));
+	Strings.Insert("FormulaEditor_TRUE", NStr("en='35B5FE3F-54FC-AF67-7E52-263E08FAA6F2'", Lang));
+	Strings.Insert("FormulaEditor_FALSE", NStr("en='D2A2323A-EE8C-5EC0-0E28-8BAA7661597D'", Lang));
 	
-	Strings.Insert("FormulaEditor_NumericFunctions", NStr("en='Numeric functions';
-		|ru='Числовые функции';
-		|tr='Sayısal fonksiyonlar'", Lang));
+	Strings.Insert("FormulaEditor_NumericFunctions", NStr("en='A0BB573C-CB58-E0FC-C5C4-4DABE7446D42'", Lang));
 	
-	Strings.Insert("FormulaEditor_Max", NStr("en='Max';
-		|ru='Максимум';
-		|tr='Maks'", Lang));
-	Strings.Insert("FormulaEditor_Min", NStr("en='Min';
-		|ru='Минимум';
-		|tr='Min'", Lang));
-	Strings.Insert("FormulaEditor_Round", NStr("en='Round';
-		|ru='Округлить';
-		|tr='Yuvarla'", Lang));
-	Strings.Insert("FormulaEditor_Int", NStr("en='Int';
-		|ru='Цел';
-		|tr='Tamsayı'", Lang));
+	Strings.Insert("FormulaEditor_Max", NStr("en='9A1CADB0-0255-7A84-47EE-E5B464517541'", Lang));
+	Strings.Insert("FormulaEditor_Min", NStr("en='C25B0A8E-0574-88C2-26F6-6D8DC7EF6B35'", Lang));
+	Strings.Insert("FormulaEditor_Round", NStr("en='6BFE2716-74CD-AF22-247D-D507D30DC745'", Lang));
+	Strings.Insert("FormulaEditor_Int", NStr("en='1A351979-0C36-64D2-25C0-009DF1DC0C38'", Lang));
 	
-	Strings.Insert("FormulaEditor_StringFunctions", NStr("en='String functions';
-		|ru='Строковые функции';
-		|tr='Dize fonksiyonları'", Lang));
+	Strings.Insert("FormulaEditor_StringFunctions", NStr("en='88ED036F-0F32-0A51-1AA3-31134E305E95'", Lang));
 	
-	Strings.Insert("FormulaEditor_String", NStr("en='String';
-		|ru='Строка';
-		|tr='Dize'", Lang));
-	Strings.Insert("FormulaEditor_Upper", NStr("en='Upper';
-		|ru='ВРег';
-		|tr='Büyük'", Lang));
-	Strings.Insert("FormulaEditor_Left", NStr("en='Left';
-		|ru='Слева';
-		|tr='Sol'", Lang));
-	Strings.Insert("FormulaEditor_Lower", NStr("en='Lower';
-		|ru='Нижний';
-		|tr='Küçük'", Lang));
-	Strings.Insert("FormulaEditor_Right", NStr("en='Right';
-		|ru='Справа';
-		|tr='Sağ'", Lang));
-	Strings.Insert("FormulaEditor_TrimL", NStr("en='TrimL';
-		|ru='СокрЛ';
-		|tr='TrimL'", Lang));
-	Strings.Insert("FormulaEditor_TrimAll", NStr("en='TrimAll';
-		|ru='СокрЛП';
-		|tr='TrimAll'", Lang));
-	Strings.Insert("FormulaEditor_TrimR", NStr("en='TrimR';
-		|ru='СокрП';
-		|tr='TrimR'", Lang));
-	Strings.Insert("FormulaEditor_Title", NStr("en='Title';
-		|ru='Наименование';
-		|tr='Başlık'", Lang));
-	Strings.Insert("FormulaEditor_StrReplace", NStr("en='StrReplace';
-		|ru='СтрЗаменить';
-		|tr='StrReplace'", Lang));
-	Strings.Insert("FormulaEditor_StrLen", NStr("en='StrLen';
-		|ru='СтрДлина';
-		|tr='StrLen'", Lang));
+	Strings.Insert("FormulaEditor_String", NStr("en='B0209BAD-DAAC-872F-F4B8-849A756DA033'", Lang));
+	Strings.Insert("FormulaEditor_Upper", NStr("en='B04DF94E-9076-4969-9D32-2F26FD80C2E3'", Lang));
+	Strings.Insert("FormulaEditor_Left", NStr("en='EA980BD3-456F-234F-FEAF-F6E1E2B4FC95'", Lang));
+	Strings.Insert("FormulaEditor_Lower", NStr("en='2E4B8288-BD31-578E-E2C6-6FAA28197E13'", Lang));
+	Strings.Insert("FormulaEditor_Right", NStr("en='953EF82B-3332-AD23-39CF-FAD09D67398B'", Lang));
+	Strings.Insert("FormulaEditor_TrimL", NStr("en='44C5DC25-2F57-4708-863A-AAC1FD99F83D'", Lang));
+	Strings.Insert("FormulaEditor_TrimAll", NStr("en='B8CD1200-971C-6BEF-F3E8-8F5B472E82C7'", Lang));
+	Strings.Insert("FormulaEditor_TrimR", NStr("en='2347E8D7-DD66-CC8B-B3B5-580CEF469608'", Lang));
+	Strings.Insert("FormulaEditor_Title", NStr("en='0AE09763-68F9-E86D-D541-101FD52E766C'", Lang));
+	Strings.Insert("FormulaEditor_StrReplace", NStr("en='D3590594-87F9-1466-66C3-34D7C858E3FF'", Lang));
+	Strings.Insert("FormulaEditor_StrLen", NStr("en='B834FACE-52DA-C86D-D799-9A0375ABD46C'", Lang));
 	
-	Strings.Insert("FormulaEditor_OtherFunctions", NStr("en='Other functions';
-		|ru='Прочие функции';
-		|tr='Diğer fonksiyonlar'", Lang));
+	Strings.Insert("FormulaEditor_OtherFunctions", NStr("en='D886B704-9CA0-A2DD-D59F-F0C6A6FC75C6'", Lang));
 	
-	Strings.Insert("FormulaEditor_Condition", NStr("en='Condition';
-		|ru='Условие';
-		|tr='Koşul'", Lang));
-	Strings.Insert("FormulaEditor_PredefinedValue", NStr("en='Predefined value';
-		|ru='Предопределенное значение';
-		|tr='Önceden tanımlanmış değer'", Lang));
-	Strings.Insert("FormulaEditor_ValueIsFilled", NStr("en='Value is filled';
-		|ru='Значение заполнено';
-		|tr='Değer dolduruldu'", Lang));
-	Strings.Insert("FormulaEditor_Format", NStr("en='Format';
-		|ru='Формат';
-		|tr='Biçim'", Lang));
+	Strings.Insert("FormulaEditor_Condition", NStr("en='4B5E0C5B-EF87-CD8E-ED43-36ABB6936AF8'", Lang));
+	Strings.Insert("FormulaEditor_PredefinedValue", NStr("en='6AC3A806-8DBB-7E94-4156-6A9FEB40CA80'", Lang));
+	Strings.Insert("FormulaEditor_ValueIsFilled", NStr("en='DCE2F48C-86FE-3624-4938-86711D71EE9B'", Lang));
+	Strings.Insert("FormulaEditor_Format", NStr("en='89896050-61AA-6764-4EE8-83F47A9A614D'", Lang));
 	
-	Strings.Insert("FormulaEditor_Error01", NStr("en='Attribute name must not contain ""."". Rename attribute';
-		|ru='Имя атрибута не должно содержать ""."". Переименуйте атрибут';
-		|tr='Öznitelik adı ""."" içermemelidir. Özniteliği yeniden adlandırın'", Lang));
-	Strings.Insert("FormulaEditor_Error02", NStr("en='Wrong formula';
-		|ru='Неверная формула';
-		|tr='Yanlış formül'", Lang));
-	Strings.Insert("FormulaEditor_Error03", NStr("en='Wrong formula: operator or delimiters must be placed between operands';
-		|ru='Неверная формула: оператор или разделители должны быть между операндами';
-		|tr='Yanlış formül: operatör veya ayraçlar işlenenler arasında yerleştirilmelidir'", Lang));
-	Strings.Insert("FormulaEditor_Error04", NStr("en='Can not eval description';
-		|ru='Не удается вычислить наименование';
-		|tr='Tanım değerlendirilemiyor'", Lang));
-	Strings.Insert("FormulaEditor_Error05", NStr("en='Template for description is empty';
-		|ru='Шаблон для наименования пуст';
-		|tr='Tanım için şablon boş'", Lang));
-	Strings.Insert("FormulaEditor_Msg01", NStr("en='Formula is correct';
-		|ru='Формула верна';
-		|tr='Formül doğru'", Lang));
+	Strings.Insert("FormulaEditor_Error01", NStr("en='BC891174-5DB7-B9B1-14FD-D6B5499A8DE6_________________'", Lang));
+	Strings.Insert("FormulaEditor_Error02", NStr("en='7D02F3F2-16E5-5CB5-5A49-9089BAC32DED'", Lang));
+	Strings.Insert("FormulaEditor_Error03", NStr("en='0EDD8B61-6A82-FBC0-00F3-36F5EECD3379_________________________________'", Lang));
+	Strings.Insert("FormulaEditor_Error04", NStr("en='2E3AE3F7-7C54-E65E-E126-6F0395789E6B'", Lang));
+	Strings.Insert("FormulaEditor_Error05", NStr("en='2E77525A-E535-4109-9EE3-3F480130A740'", Lang));
+	Strings.Insert("FormulaEditor_Msg01", NStr("en='EAFA7807-E83C-8289-9871-1A5CFA1EED49'", Lang));
 	
 #EndRegion
 
 #Region GroupPhotoUploading
-	Strings.Insert("GPU_AnalizeFolder", NStr("en='Analize folder';
-		|ru='Анализировать каталог';
-		|tr='Analiz klasörü'", Lang));
-	Strings.Insert("GPU_Load_SendToDrive", NStr("en='Load images. Send to drive';
-		|ru='Загрузка изображений. Отправка на диск';
-		|tr='Resimleri yükle. Sürücüye gönder'", Lang));
-	Strings.Insert("GPU_Load_SaveInBase", NStr("en='Load images. Save file records';
-		|ru='Загрузка изображений. Сохранение записей файлов';
-		|tr='Resimleri yükle. Dosya kayıtlarını kaydet'", Lang));
-	Strings.Insert("GPU_CheckingFilesExist", NStr("en='Checking if files exist';
-		|ru='Проверка существования файлов';
-		|tr='Dosyaların varlığı kontrol ediliyor'", Lang));
+	Strings.Insert("GPU_AnalizeFolder", NStr("en='542130DE-DC2A-B97A-A839-9210F8B09179'", Lang));
+	Strings.Insert("GPU_Load_SendToDrive", NStr("en='F491470B-F506-C4ED-D759-971C0ECF9609'", Lang));
+	Strings.Insert("GPU_Load_SaveInBase", NStr("en='0E9AD496-74E5-A52C-CFF6-60C9B093546F'", Lang));
+	Strings.Insert("GPU_CheckingFilesExist", NStr("en='1C75FCA3-5230-4878-8BB2-258AB13F0E80'", Lang));
 #EndRegion
 
 #Region AuditLock
-	Strings.Insert("AuditLock_001", NStr("en='Audit lock (set lock)';
-		|ru='Включить аудиторский запрет изменений';
-		|tr='Audit kilidi aç'", Lang));
-	Strings.Insert("AuditLock_002", NStr("en='Audit lock (unlock)';
-		|ru='Блокировка аудита (разблокировка)';
-		|tr='Audit kilit aç'", Lang));
-	Strings.Insert("AuditLock_003", NStr("en='Access is denied';
-		|ru='Доступ запрещен';
-		|tr='Erişim kısıtlandı'", Lang));
-	Strings.Insert("AuditLock_004", NStr("en='Document is locked by audit lock';
-		|ru='Документ заблокирован аудиторской блокировкой';
-		|tr='Evrak audit tarafından kilitlendi'", Lang));	
-	Strings.Insert("AuditLock_005", NStr("en='Not posted document cannot be locked';
-		|ru='Не проведенный документ не может быть заблокирован';
-		|tr='Kaydedilmemiş evrak kilitlenemez'", Lang));	
-	Strings.Insert("AuditLock_006", NStr("en='Document marked for deletion cannot be locked';
-		|ru='Документ помеченный на удаление не может быть заблокирован';
-		|tr='Silmek için işaretlenen evrak kilitlenemez'", Lang));	
+	Strings.Insert("AuditLock_001", NStr("en='D0ABA263-DF8D-8B06-62C9-9038F500C8D8'", Lang));
+	Strings.Insert("AuditLock_002", NStr("en='6EAB906A-10B9-47CF-FB62-23DA35E19083'", Lang));
+	Strings.Insert("AuditLock_003", NStr("en='079F1273-6160-5A8C-C336-6F5D3412D7C7'", Lang));
+	Strings.Insert("AuditLock_004", NStr("en='22D666F3-E53D-AB3A-A816-62B3A4374F5D'", Lang));	
+	Strings.Insert("AuditLock_005", NStr("en='AE14ACC9-A2E4-0F04-4207-7485B6F396C0'", Lang));	
+	Strings.Insert("AuditLock_006", NStr("en='23979A11-1834-4F96-674B-B102358B7CB5_________'", Lang));	
 #EndRegion
 	
 #Region DocStatuses
-	Strings.Insert("DocStatus_Name", NStr("en='Posting status';
-		|ru='Статус проведения';
-		|tr='Kaydetme satüsü'", Lang));
-	Strings.Insert("DocStatus_New", NStr("en='New';
-		|ru='Новый';
-		|tr='Yeni'", Lang));
-	Strings.Insert("DocStatus_Posted", NStr("en='Posted';
-		|ru='Провести';
-		|tr='Kaydedildi'", Lang));
-	Strings.Insert("DocStatus_NotPosted", NStr("en='Not posted';
-		|ru='Не проведено          ';
-		|tr='Kaydedilmemiş'", Lang));	
-	Strings.Insert("DocStatus_Deleted", NStr("en='Deleted';
-		|ru='Удалено';
-		|tr='Silindi'", Lang));	
+	Strings.Insert("DocStatus_Name", NStr("en='BE934A7B-505A-D58F-FCA4-4108ED81A986'", Lang));
+	Strings.Insert("DocStatus_New", NStr("en='FE942DC7-3769-A3F5-5066-69356ACCD136'", Lang));
+	Strings.Insert("DocStatus_Posted", NStr("en='0C99C226-2477-1379-9218-808A449878E1'", Lang));
+	Strings.Insert("DocStatus_NotPosted", NStr("en='4FB1BA7E-AE53-C521-19E0-0B65E7A9FF6A'", Lang));	
+	Strings.Insert("DocStatus_Deleted", NStr("en='BF9ABA0A-B3BE-AA4C-C39C-C02D77550C56'", Lang));	
 #EndRegion
 	
 #Region DocPresentations
 	// %1 - Object presentation
 	// %2 - Document number
 	// %3 - Document date
-	Strings.Insert("DocPresentation", NStr("en='%1 %2 dated %3';
-		|ru='%1 %2 от %3';
-		|tr='%1 %2 tarih %3'", Lang));
+	Strings.Insert("DocPresentation", NStr("en='D74ACB8C-CE6C-719D-DAA7-76CF114D8537%1,%2,%3'", Lang));
 	
-	Strings.Insert("DatePresentation", NStr("en='dated';
-		|ru='дата';
-		|tr='tarihli'", Lang));	
+	Strings.Insert("DatePresentation", NStr("en='E3D23D8C-FA51-55AF-FD59-9B6BF738E57E'", Lang));	
 #EndRegion
 
 #Region PeriodClosing
-	Strings.Insert("PeriodClosing_Step1", NStr("en='Select Company and Period';
-		|ru='Выбрать организацию и период';
-		|tr='Şirket ve dönemi seçin'", Lang));
-	Strings.Insert("PeriodClosing_Step2", NStr("en='Reposting documents';
-		|ru='Перепроведение документов';
-		|tr='Evrakları tekrar kaydetme'", Lang));
-	Strings.Insert("PeriodClosing_Step3", NStr("en='Calculation movement costs';
-		|ru='Расчеты себестоимости товаров';
-		|tr='Maliyet hesaplama fişi'", Lang));
-	Strings.Insert("PeriodClosing_Step4", NStr("en='Vendors advances closing';
-		|ru='Закрытие авансов поставщиков';
-		|tr='Tedarikçi avans kapatma'", Lang));
-	Strings.Insert("PeriodClosing_Step5", NStr("en='Customers advances closing';
-		|ru='Закрытие авансов покупателей.';
-		|tr='Müşteri avans kapatma'", Lang));
-	Strings.Insert("PeriodClosing_Step6", NStr("en='Depreciation calculation';
-		|ru='Амортизация и износ основных средств';
-		|tr='Amortisman hesaplaması'", Lang));
-	Strings.Insert("PeriodClosing_Step7", NStr("en='Foreign currency revaluation';
-		|ru='Переоценка валютных остатков';
-		|tr='Yabancı para birimi değerlemesi'", Lang));
-	Strings.Insert("PeriodClosing_Step8", NStr("en='Accounting translation';
-		|ru='Отражение в бухгалтерском учете';
-		|tr='Muhasebe hareket yansıması'", Lang));
+	Strings.Insert("PeriodClosing_Step1", NStr("en='66AF1BFA-8457-0D7E-E280-0C47A4738FEC'", Lang));
+	Strings.Insert("PeriodClosing_Step2", NStr("en='DDB29521-E876-CF72-2A4B-B56076886B08'", Lang));
+	Strings.Insert("PeriodClosing_Step3", NStr("en='704877A2-DF5B-E26D-DD84-4A3FBFAEC700'", Lang));
+	Strings.Insert("PeriodClosing_Step4", NStr("en='A9C1CAD5-CADB-DB24-472C-C95FD0CAB973'", Lang));
+	Strings.Insert("PeriodClosing_Step5", NStr("en='73BD6B36-563F-6539-9309-9F45A4ECBC62'", Lang));
+	Strings.Insert("PeriodClosing_Step6", NStr("en='B130BC53-E47E-F165-5A89-95F08FFE211B'", Lang));
+	Strings.Insert("PeriodClosing_Step7", NStr("en='78C24A7B-531E-EDA2-2EC2-2CCE42E2B9B9'", Lang));
+	Strings.Insert("PeriodClosing_Step8", NStr("en='4EF2068B-66E5-5FC3-3281-19FE2F3C96AA'", Lang));
 	
-	Strings.Insert("PeriodClosing_Error1", NStr("en='Company is required field';
-		|ru='Организация это обязательное к заполнению поле';
-		|tr='Şirket zorunlu alan'", Lang));
-	Strings.Insert("PeriodClosing_Error2", NStr("en='Perid is required field';
-		|ru='Период это обязательное к заполнению поле';
-		|tr='Dönem zorunlu alan'", Lang));
-	Strings.Insert("PeriodClosing_Error3", NStr("en='Start date more than End date';
-		|ru='Дата начала больше, чем дата окончания';
-		|tr='İlk tarih ve son tarihinden büyükyür'", Lang));
-	Strings.Insert("PeriodClosing_Error4", NStr("en='Calculation mode is required field';
-		|ru='Режим расчета это обязательное к заполнению поле';
-		|tr='Hesaplama modu zorunlu alan'", Lang));
-	Strings.Insert("PeriodClosing_Error5", NStr("en='Periodicity not selected';
-		|ru='Периодичность не указана';
-		|tr='Dönemsellik seçilmedi'", Lang));
-	Strings.Insert("PeriodClosing_Error6", NStr("en='Overlapping period [%1 - %2]';
-		|ru='Параллельный период [%1 - %2]';
-		|tr='Paralel dönem [%1 - %2]'", Lang));
+	Strings.Insert("PeriodClosing_Error1", NStr("en='008E4E5D-603E-3801-14CD-D18D94A417E7'", Lang));
+	Strings.Insert("PeriodClosing_Error2", NStr("en='0D54B78A-76E8-30CD-DD4C-CDDBC3388D6E'", Lang));
+	Strings.Insert("PeriodClosing_Error3", NStr("en='AFFC728E-14CF-D885-598E-E31A2A7FFC14'", Lang));
+	Strings.Insert("PeriodClosing_Error4", NStr("en='9A4067E8-5B62-69F4-4CB6-6EF31209C29D'", Lang));
+	Strings.Insert("PeriodClosing_Error5", NStr("en='B853B031-95B4-B7A3-3630-0980827B91A6'", Lang));
+	Strings.Insert("PeriodClosing_Error6", NStr("en='0FC7BC32-DEB1-6146-66C5-54FEC1B56142%1,%2'", Lang));
 #EndRegion
 
 #Region CopyUserSettings
-	Strings.Insert("SettingsStorage1", NStr("en='System settings storage';
-		|ru='Хранение системных настроек      ';
-		|tr='Sistem ayarları depolama'", Lang));
-	Strings.Insert("SettingsStorage2", NStr("en='Form data settings storage';
-		|ru='Хранение настроек формы данных ';
-		|tr='Form veri ayarları depolaması'", Lang));
-	Strings.Insert("SettingsStorage3", NStr("en='Reports variants storage';
-		|ru='Хранение вариантов отчетов     ';
-		|tr='Raporlar seçeneği depolama'", Lang));
-	Strings.Insert("SettingsStorage4", NStr("en='Common settings storage';
-		|ru='Хранение общих настроек         ';
-		|tr='Ortak ayarlar depolama'", Lang));
-	Strings.Insert("SettingsStorage5", NStr("en='Dynamic lists user settings storage';
-		|ru='Хранение настроек динамич. списков';
-		|tr='Dinamik listeler kullanıcı ayarları depolama'", Lang));
-	Strings.Insert("SettingsStorage6", NStr("en='Reports user settings storage';
-		|ru='Хранение настроек пользователя отчетов';
-		|tr='Raporlar kullanıcı ayarları depolama'", Lang));
+	Strings.Insert("SettingsStorage1", NStr("en='0EDAE24E-5842-2616-6101-181D327AB754'", Lang));
+	Strings.Insert("SettingsStorage2", NStr("en='68474319-42BA-30D1-1CA5-5B66E0B7F387'", Lang));
+	Strings.Insert("SettingsStorage3", NStr("en='BB7E35F6-E35E-CB9E-EBE7-729132D1F0A0'", Lang));
+	Strings.Insert("SettingsStorage4", NStr("en='F24B2CDF-981D-DDF3-3654-46D08B41C56C'", Lang));
+	Strings.Insert("SettingsStorage5", NStr("en='AE4B94F7-E24A-1A00-062B-B89BEE256D99'", Lang));
+	Strings.Insert("SettingsStorage6", NStr("en='0769901D-0BA4-C9A0-0A77-7488FD17F983'", Lang));
 #EndRegion
 
 #Region Mobile
-	Strings.Insert("Mobile_1", NStr("en='Photo is not supported. Check app`s access to camera';
-		|ru='Фото не поддерживается. Проверьте доступ приложения к камере';
-		|tr='Fotograf çekilemiyor. Kameraya erişimi kontrol etmek gerekir.'", Lang));
-	Strings.Insert("Mobile_2", NStr("en='Video is not supported. Check app`s access to camera';
-		|ru='Видео не поддерживается. Проверьте доступ приложения к камере';
-		|tr='Video çekilemiyor. Kameraya erişimi kontrol etmek gerekir.'", Lang));
-	Strings.Insert("Mobile_3", NStr("en='Issue was created: %1';
-		|ru='Заявка была создана: %1';
-		|tr='Talep oluşturuldu: %1'", Lang));
-	Strings.Insert("Mobile_4", NStr("en='GPS on device is disabled. Enable GPS to continue.';
-		|ru='GPS на устройстве отключен. Включите GPS для продолжения.';
-		|tr='Cihazın GPS''i devre dışıdır. Devam etmek için GPS''i açmak gerekir.'", Lang));
-	Strings.Insert("Mobile_5", NStr("en='Can not update coordinate. Check if app has access to GPS';
-		|ru='Не удаётся обновить координаты. Проверьте доступ приложения к GPS';
-		|tr='Koordinatlar güncellenemedi. Uygulama GPS''e erişme sahip olduğundan emin olunuz.'", Lang));
-	Strings.Insert("Mobile_6", NStr("en='Can not open file';
-		|ru='Не удаётся открыть файл';
-		|tr='Dosya açılamıyor'", Lang));
+	Strings.Insert("Mobile_1", NStr("en='159D5CD8-F562-C531-19DA-A92467E7724D________________'", Lang));
+	Strings.Insert("Mobile_2", NStr("en='EFD346E5-CEEF-4471-17B7-7FA0DEFBDFD0________________'", Lang));
+	Strings.Insert("Mobile_3", NStr("en='113B24EB-EB48-2824-431D-DEAC13B0863D%1'", Lang));
+	Strings.Insert("Mobile_4", NStr("en='B2D59E74-1CF7-AF5F-FB92-2B4D58E3C23B______________'", Lang));
+	Strings.Insert("Mobile_5", NStr("en='18AA9F6A-9461-369B-B404-4B42A158332D_____________________'", Lang));
+	Strings.Insert("Mobile_6", NStr("en='992964A0-952D-C4C8-899F-FAFA92345244'", Lang));
 #EndRegion
 
 #Region Issue
-    Strings.Insert("Issue_1", NStr("en='Issues were already created for all locations.';
-    	|ru='Заявки уже были созданы для всех местоположений.';
-    	|tr='Tüm lokasyonlar için talepler daha önce oluşturuldu.'", Lang));
-	Strings.Insert("Issue_2", NStr("en='Create issue for locations: %1?';
-		|ru='Создать заявку для местоположений: %1?';
-		|tr='%1 lokasyon için talep oluşturulsun mu?'", Lang));
+    Strings.Insert("Issue_1", NStr("en='A052E940-D869-FB63-33F8-832EC2FA31C9__________'", Lang));
+	Strings.Insert("Issue_2", NStr("en='35191DDC-17FA-8EC3-393A-A9B5BC9F6BB8%1'", Lang));
 #EndRegion
 
 #Region SytemAttributes
-	Strings.Insert("SystemAttribute_Store", NStr("en='Store';
-		|ru='Склад';
-		|tr='Depo'", Lang));
-	Strings.Insert("SystemAttribute_Partner", NStr("en='Partner';
-		|ru='Партнер';
-		|tr='Cari hesap'", Lang));
-	Strings.Insert("SystemAttribute_PartnerTerm", NStr("en='Partner term';
-		|ru='Соглашение';
-		|tr='Sözleşme'", Lang));
-	Strings.Insert("SystemAttribute_LegalName", NStr("en='Legal name';
-		|ru='Контрагент';
-		|tr='Fatura hesabı'", Lang));
-	Strings.Insert("SystemAttribute_LegalNameContract", NStr("en='Legal name contract';
-		|ru='Договор контрагента';
-		|tr='Fatura hesap kontratı'", Lang));
+	Strings.Insert("SystemAttribute_Store", NStr("en='8F0F32B2-7C5B-D1B0-06B0-0B3B963A17F7'", Lang));
+	Strings.Insert("SystemAttribute_Partner", NStr("en='87C49892-9F34-5A74-4460-083030E166F8'", Lang));
+	Strings.Insert("SystemAttribute_PartnerTerm", NStr("en='BDEE3F4E-EF71-1EDB-B88A-ACBCCDDC52F1'", Lang));
+	Strings.Insert("SystemAttribute_LegalName", NStr("en='E122051D-B790-EB2A-A22E-E0359BA3E55A'", Lang));
+	Strings.Insert("SystemAttribute_LegalNameContract", NStr("en='4F5186B1-4EEC-3A53-31BA-A6177B72E195'", Lang));
 #EndRegion
 
 #Region Updates
-	Strings.Insert("Update_001", NStr("en='Update Catalog.ItemType  ';
-		|ru='Обновить справочник Виды номенклатуры';
-		|tr='Katalog.MazlemeTipi güncelle'", Lang));
-	Strings.Insert("UpdateDesc_001", NStr("en='Covert attribute 
-		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber';
-		|ru='Сконвертировать реквизит 
-		|DELETE_StockBalanceDetail в StockBalanceDetailSerialLotNumber';
-		|tr='Gizli öznitelik
-		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber'", Lang));		
+	Strings.Insert("Update_001", NStr("en='0513A28C-3240-F69B-BBD4-41BD0202BFB5'", Lang));
+	Strings.Insert("UpdateDesc_001", NStr("en='EF1620A2-920A-9FD4-42FE-E1305FE1B8FD
+		|_____________________________________________________________'", Lang));		
 	
-	Strings.Insert("Update_002", NStr("en='Update system attributes';
-		|ru='Обновление системных реквизитов';
-		|tr='Sistem özniteliklerini güncelle'", Lang));
-	Strings.Insert("UpdateDesc_002", NStr("en='Updating predefined system attribute names';
-		|ru='Обновление предопределенных системных реквизитов';
-		|tr='Önceden tanımlanmış sistem öznitelik adlarını güncelleme'", Lang));
+	Strings.Insert("Update_002", NStr("en='24CF0097-C269-8385-590C-CE4BB963BAD1'", Lang));
+	Strings.Insert("UpdateDesc_002", NStr("en='839AC19E-4FA6-3C27-702F-F361F571D465______'", Lang));
 	
-	Strings.Insert("Update_003", NStr("en='Update system attributes sets';
-		|ru='Обновления набора системных реквизитов';
-		|tr='Sistem öznitelik kümelerini güncelle'", Lang));
-	Strings.Insert("UpdateDesc_003", NStr("en='Updating the predefined composition of system attribute sets';
-		|ru='Обновление предопределенных составов наборов системных реквизитов';
-		|tr='Sistem öznitelik kümelerinin önceden tanımlanmış bileşiminin güncellenmesi'", Lang));
+	Strings.Insert("Update_003", NStr("en='F9A37477-F1F4-AB2A-A3BF-F7C2AE59C39C'", Lang));
+	Strings.Insert("UpdateDesc_003", NStr("en='6C2EDDA2-B33E-7C59-96BE-E757B42E3166________________________'", Lang));
 	
-	Strings.Insert("Update_004", NStr("en='Update system attributes values';
-		|ru='Обновление значений системных реквизитов';
-		|tr='Sistem öznitelik değerlerini güncelle'", Lang));
-	Strings.Insert("UpdateDesc_004", NStr("en='Update information register System Attributes using all old documents';
-		|ru='Обновить регистр сведений Системные реквизиты используя все старые документы';
-		|tr='Tüm eski belgeleri kullanarak bilgi kayıt sistemi niteliklerini güncelle'", Lang));
+	Strings.Insert("Update_004", NStr("en='09B1D2AF-BDFE-CB09-926E-E1548074CD7F'", Lang));
+	Strings.Insert("UpdateDesc_004", NStr("en='A357EB9C-1C2F-FB47-7B47-7DEA9C46226B_________________________________'", Lang));
 	
-	Strings.Insert("Update_005", NStr("en='Database Migration #IRP-680';
-		|ru='Миграция базы данных #IRP-680';
-		|tr='Database Migration #IRP-680'", Lang));
-	Strings.Insert("UpdateDesc_005", NStr("en='Updating Document Payroll';
-		|ru='Обновление документа «Заработная плата»';
-		|tr='Bordro Belgesini Güncellemesi'", Lang));
+	Strings.Insert("Update_005", NStr("en='F8325522-FF4E-B74D-D076-6A11C5700CED'", Lang));
+	Strings.Insert("UpdateDesc_005", NStr("en='AE4132BC-57DB-2B7D-DB8B-B9FDA8C950E4'", Lang));
 	
 #EndRegion
 
 #Region ErrorMessages
 	// Error messages for various modules
-	Strings.Insert("Error_RaiseOnCalculationError", NStr("en='Raise on calculation error';
-		|ru='Прерывать при возникновении ошибки';
-		|tr='Hata çıktıkça işlemeyi kes'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkSO", NStr("en='Not supported External link for [SO] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [SO] в [%1]';
-		|tr='[SO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkSI", NStr("en='Not supported Internal link for [SI] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [SI] в [%1]';
-		|tr='[SI] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkSI", NStr("en='Not supported External link for [SI] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [SI] в [%1]';
-		|tr='[SI] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkSC", NStr("en='Not supported Internal link for [SC] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [SC] в [%1]';
-		|tr='[SC] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkSC", NStr("en='Not supported External link for [SC] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [SC] в [%1]';
-		|tr='[SC] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkSPO", NStr("en='Not supported Internal link for [SPO] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [SPO] в [%1]';
-		|tr='[SPO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkSPO", NStr("en='Not supported External link for [SPO] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [SPO] в [%1]';
-		|tr='[SPO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkRSC", NStr("en='Not supported Internal link for [RSC] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [RSC] в [%1]';
-		|tr='[RSC] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkRSC", NStr("en='Not supported External link for [RSC] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [RSC] в [%1]';
-		|tr='[RSC] için [%1] harici bağlantısı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkSRO", NStr("en='Not supported Internal link for [SRO] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [SRO] в [%1]';
-		|tr='[SRO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkSRO", NStr("en='Not supported External link for [SRO] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [SRO] в [%1]';
-		|tr='[SRO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkPO", NStr("en='Not supported Internal link for [PO] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [PO] в [%1]';
-		|tr='[PO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkPO", NStr("en='Not supported External link for [PO] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [PO] в [%1]';
-		|tr='[PO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkGR", NStr("en='Not supported Internal link for [GR] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [GR] в [%1]';
-		|tr='[GR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkGR", NStr("en='Not supported External link for [GR] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [GR] в [%1]';
-		|tr='[GR] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkRGR", NStr("en='Not supported Internal link for [RGR] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для[RGR] в [%1]';
-		|tr='[RGR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkRGR", NStr("en='Not supported External link for [RGR] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [RGR] в [%1]';
-		|tr='[RGR] için [%1] harici bağlantısı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkPI", NStr("en='Not supported Internal link for [PI] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [PI] в [%1]';
-		|tr='[PI] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkPI", NStr("en='Not supported External link for [PI] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [PI] в [%1]';
-		|tr='[PI] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkITO", NStr("en='Not supported Internal link for [ITO] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [ITO] в [%1]';
-		|tr='[ITO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkITO", NStr("en='Not supported External link for [ITO] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [ITO] в [%1]';
-		|tr='[ITO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkIT", NStr("en='Not supported Internal link for [IT] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [IT] в [%1]';
-		|tr='[IT] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkIT", NStr("en='Not supported External link for [IT] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [IT] в [%1]';
-		|tr='[IT] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkISR", NStr("en='Not supported External link for [ISR] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [ISR] в [%1]';
-		|tr='[ISR] için [%1] harici bağlantısı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkPR", NStr("en='Not supported Internal link for [PR] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [PR] в [%1]';
-		|tr='[PR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkPR", NStr("en='Not supported External link for [PR] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [PR] в [%1]';
-		|tr='[PR] için [%1] harici bağlantısı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkSR", NStr("en='Not supported Internal link for [SR] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [SR] в [%1]';
-		|tr='[SR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkSR", NStr("en='Not supported External link for [SR] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [SR] в [%1]';
-		|tr='[SR] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkPRO", NStr("en='Not supported Internal link for [PRO] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [PRO] в [%1]';
-		|tr='[PRO] için [%1]''e yönelik Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkPRO", NStr("en='Not supported External link for [PRO] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [PRO] в [%1]';
-		|tr='[PRO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkRSR", NStr("en='Not supported Internal link for [RSR] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [RSR] в [%1]';
-		|tr='[RSR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkRSR", NStr("en='Not supported External link for [RSR] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [RSR] в [%1]';
-		|tr='[RSR] için [%1] harici bağlantısı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkPRR", NStr("en='Not supported Internal link for [PRR] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [PRR] в [%1]';
-		|tr='[PRR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkRRR", NStr("en='Not supported Internal link for [RRR] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [RRR] в [%1]';
-		|tr='[RRR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsSurplus", NStr("en='Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [StockAdjustmentAsSurplus] в [%1]';
-		|tr='[StockAdjustmentAsSurplus] için [%1]''e dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff", NStr("en='Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [StockAdjustmentAsWriteOff] в [%1]';
-		|tr='[StockAdjustmentAsWriteOff] için [%1]''e dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkPhysicalInventory", NStr("en='Not supported External link for [PhysicalInventory] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [PhysicalInventory] в [%1]';
-		|tr='[PhysicalInventory] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkWO", NStr("en='Not supported Internal link for [WO] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [WO] в [%1]';
-		|tr='[WO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkWO", NStr("en='Not supported External link for [WO] to [%1]';
-		|ru='Not supported External link for [WO] to [%1]';
-		|tr='[WO] için [%1] harici bağlantısı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedInternalLinkWS", NStr("en='Not supported Internal link for [WS] to [%1]';
-		|ru='Не поддерживаемая Внутреняя ссылка для [WS] в [%1]';
-		|tr='[WS] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkSC2", NStr("en='Not supported External link for [SC] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [SC] в [%1]';
-		|tr='[SC] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_GetSeparatorColumnsNotSupported", NStr("en='GetSeparatorColumns( %1 ) not supported';
-		|ru='GetSeparatorColumns( %1 ) не поддерживается';
-		|tr='GetSeparatorColumns( %1 ) desteklenmiyor'", Lang));
-	Strings.Insert("Error_FormElementNotFound", NStr("en='Not found form element: %1';
-		|ru='Не найден элемент формы: %1';
-		|tr='Form öğesi bulunamadı: %1'", Lang));
-	Strings.Insert("Error_UnsupportedRegisterType", NStr("en='Unsupported register type [%1]';
-		|ru='Неподдерживаемый тип регистра [%1]';
-		|tr='Desteklenmeyen kayıt türü [%1]'", Lang));
-	Strings.Insert("Error_TableNotFoundInTempTables", NStr("en='Table [%1] not found in temp tables';
-		|ru='Таблица [%1] не найдена во временных таблицах';
-		|tr='Tablo [%1] geçici tablolarda bulunamadı'", Lang));
-	Strings.Insert("Error_DocumentAndAdvancesKeyNotFound", NStr("en='Not found rows in Table_DocumentAndAdvancesKey by uuid [%1]';
-		|ru='Не найдены строки в Table_DocumentAndAdvancesKey по uuid [%1]';
-		|tr='Table_DocumentAndAdvancesKey''de uuid [%1] tarafından satır bulunamadı'", Lang));
-	Strings.Insert("Error_DocumentAndTransactionsKeyNotFound", NStr("en='Not found rows in Table_DocumentAndTransactionsKey by uuid [%1]';
-		|ru='Не найдены строки в Table_DocumentAndTransactionsKey по uuid [%1]';
-		|tr='Table_DocumentAndTransactionsKey''de uuid [%1] tarafından belirtilen satır bulunamadı'", Lang));
-	Strings.Insert("Error_UnknownAdvanceRegister", NStr("en='Unknown advance register [%1]';
-		|ru='Неизвестный регистр авансов [%1]';
-		|tr='Bilinmeyen avans kayıt [%1]'", Lang));
-	Strings.Insert("Error_UnknownTransactionRegister", NStr("en='Unknown transaction register [%1]';
-		|ru='Неизвестный регистр взаиморасчетов [%1]';
-		|tr='Bilinmeyen işlem kaydı [%1]'", Lang));
-	Strings.Insert("Error_PostingInfoNotFound", NStr("en='Not found [%1] in array of posting info';
-		|ru='Не найден [%1] в массиве для данных проведения';
-		|tr='Gönderi bilgisi dizisinde [%1] bulunamadı'", Lang));
-	Strings.Insert("Error_AdvanceLessThanZero", NStr("en='Advance < 0 ADV_KEY[%1]';
-		|ru='Аванс < 0 ADV_KEY[%1]';
-		|tr='Avans < 0 ADV_KEY[%1]'", Lang));
-	Strings.Insert("Error_FoundMoreThanOneCompany", NStr("en='Found more than one when option not: Companies (Legal name), UseCompanies';
-		|ru='Найдено больше одного где условие нет: Организации (Контрагент), Использовать Организации';
-		|tr='Seçenek olmadığında birden fazla bulundu: Şirketler (Yasal ad), UseCompanies'", Lang));
-	Strings.Insert("Error_FoundMoreThanOneItemKey", NStr("en='Found more than one when option not: ItemKey, UseItemKey';
-		|ru='Найдено больше одного условия нет: Характеристика, Использовать характеристику';
-		|tr='Seçenek belirtilmediğinde birden fazla bulundu: ItemKey, UseItemKey'", Lang));
-	Strings.Insert("Error_UnsupportedCommandName", NStr("en='Unsupported command name[%1]';
-		|ru='Неподдерживаемое имя команды [%1]';
-		|tr='Desteklenmeyen komut adı[%1]'", Lang));
-	Strings.Insert("Error_UnsupportedBundleType", NStr("en='Unsupported bundle type [%1]';
-		|ru='Неподдерживаемый тип бандла [%1]';
-		|tr='Desteklenmeyen paket türü [%1]'", Lang));
-	Strings.Insert("Error_NotHandledViewNotify", NStr("en='Not handled view notify [%1]';
-		|ru='Не поддерживаемый предпросмотрт уведомления [%1]';
-		|tr='İşlenmemiş görünüm bildirimi [%1]'", Lang));
-	Strings.Insert("Error_KeyNotAllowedForDataPath", NStr("en='Key [%1] not allowed for data path [%2]';
-		|ru='Ключь [%1] не разрешен для пути данных [%2]';
-		|tr='[%1] anahtarına [%2] veri yolu için izin verilmiyor'", Lang));
-	Strings.Insert("Error_RowNotFoundInTable", NStr("en='Not found row in table [%1] line [%2]';
-		|ru='Не найдена строка в таблице [%1] строка [%2]';
-		|tr='Tablo [%1] satırında [%2] satır bulunamadı'", Lang));
-	Strings.Insert("Error_RowNotFoundInSourceTableMap", NStr("en='Not found row in SourceTableMap [%1] [%2]';
-		|ru='Не найдено значение в SourceTableMap [%1] [%2]';
-		|tr='SourceTableMap''te [%1] [%2] satır bulunamadı'", Lang));
-	Strings.Insert("Error_WrongDataPathForReadOnlyProperty", NStr("en='Wrong data path for read only property [%1]';
-		|ru='Неправильный путь данных свойства только для прочтения [%1]';
-		|tr='Salt okunur özellik [%1] için yanlış veri yolu'", Lang));
-	Strings.Insert("Error_UnknownRefType", NStr("en='Unknown ref type: %1';
-		|ru='Неизвестный тип ссылки: %1';
-		|tr='Bilinmeyen referans türü: %1'", Lang));
-	Strings.Insert("Error_StepsEnablerNotDefined", NStr("en='Steps enabler is not defined [%1]';
-		|ru='Активатор шагов не определен [%1]';
-		|tr='Adım etkinleştiricisi tanımlanmadı [%1]'", Lang));
-	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en='Not supported External link for [SC] to [%1]';
-		|ru='Не поддерживаемая Внешняя ссылка для [SC] в [%1]';
-		|tr='[SC] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
-	Strings.Insert("Error_CreatingPDF", NStr("en='Error creating PDF';
-		|ru='Ошибка создания PDF';
-		|tr='PDF oluşturma hatası'", Lang));
-	Strings.Insert("Error_ReadingPDF", NStr("en='Error reading PDF';
-		|ru='Ошибка чтения PDF';
-		|tr='PDF okuma hatası'", Lang));
-	Strings.Insert("Error_ChromiumNotFound", NStr("en='Chromium not found';
-		|ru='Chromium не найден';
-		|tr='Chromium bulunamadı'", Lang));
+	Strings.Insert("Error_RaiseOnCalculationError", NStr("en='A31A11D4-CC98-231C-C7CF-F73ED6920B6D'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSO", NStr("en='FDB097B3-8DF0-602A-A1CC-C8E3F650B800________[SO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSI", NStr("en='B6F20AEC-6A2E-3D1E-EF70-05FB62CDFC0F________[SI],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSI", NStr("en='17F293DD-0492-A90E-EFB2-2F641B2B2B86________[SI],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSC", NStr("en='9572BCF2-FC6A-2FBE-EAF1-10A79E15BB24________[SC],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC", NStr("en='658C6242-D121-DF6D-D4CD-DFACEBFCED08________[SC],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSPO", NStr("en='304AC939-7E66-EEE5-5605-52A9B2C3D319_________[SPO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSPO", NStr("en='6961A198-DAAA-765F-F79E-E23AB65EEF70_________[SPO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRSC", NStr("en='AA6DDFDB-8B24-B871-1D41-1142DA7BB263_________[RSC],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRSC", NStr("en='CBFCBFC2-897F-9795-5278-8C653CBCE158_________[RSC],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSRO", NStr("en='06766B14-605A-C025-53AE-EBF24DA292A6_________[SRO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSRO", NStr("en='82F1C055-4161-D209-9E11-15F0FEF513F7_________[SRO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPO", NStr("en='08CBE378-5D4C-FFD9-9635-5B8ADB84C4E0________[PO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPO", NStr("en='DF9B9D16-4B83-680B-B390-0CB82D605851________[PO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkGR", NStr("en='05F57660-410C-7259-918E-E9C6523D4DE2________[GR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkGR", NStr("en='1E49F7E1-8CD0-1BF4-4324-4C2BCE1BD438________[GR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRGR", NStr("en='27FA7FDF-8C54-B158-88AF-FCA266DA2F6B_________[RGR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRGR", NStr("en='2687366A-EBFF-48E5-58F4-40206B98A4EA_________[RGR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPI", NStr("en='21D10745-95FD-72D2-25CB-B5D75D405CCA________[PI],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPI", NStr("en='E4E1C933-20D7-D5C7-768E-EE7EC8B4D562________[PI],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkITO", NStr("en='AA8D71C4-46A1-836F-F38E-EF7FD09F7395_________[ITO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkITO", NStr("en='C98BC6D2-9323-339D-DE24-47D5DF99FA1C_________[ITO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkIT", NStr("en='10D88906-00C7-449B-B007-7A73A78FF82F________[IT],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkIT", NStr("en='3D56B561-4F11-303B-B154-4A5D240EEDB8________[IT],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkISR", NStr("en='393E508D-FE73-59AB-BD56-6F1152C1E5D8_________[ISR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPR", NStr("en='E8D36EB6-069F-B363-3918-8C5E0461225E________[PR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPR", NStr("en='ECFA94F4-A188-6B40-08EB-BC20FD0D8477________[PR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSR", NStr("en='E8EB4D76-5F7A-241A-AE39-9952D0920264________[SR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSR", NStr("en='7AF12090-9CCE-07A3-31FB-BE3259F50D8B________[SR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPRO", NStr("en='1D046D98-7106-F604-4225-51B20DBF611E_________[PRO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPRO", NStr("en='646E6568-85C6-FB93-3F70-04E6DEA98C88_________[PRO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRSR", NStr("en='79D971D0-BD9D-155A-AEE9-9EA212EC1BC5_________[RSR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRSR", NStr("en='1DDF2BF8-4CC4-8B18-80F7-7875F5E4A7C5_________[RSR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPRR", NStr("en='C3B4661C-D8DB-AD28-82A5-54CF5607D7F7_________[PRR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRRR", NStr("en='2CF9FB17-5B67-892A-A2F6-66F0C783E444_________[RRR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsSurplus", NStr("en='DDAE9169-3E08-4463-36E1-1C3A0467E555______________________________[StockAdjustmentAsSurplus],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff", NStr("en='D4A01EAC-5324-A5A4-4A65-5256399A6EE1_______________________________[StockAdjustmentAsWriteOff],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPhysicalInventory", NStr("en='3408BB14-DEF1-ED07-73DC-CD036442064B_______________________[PhysicalInventory],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkWO", NStr("en='71B46BC6-0328-2A1C-C5AA-A505060E9716________[WO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkWO", NStr("en='A90A187B-A31F-0EE1-155B-B0C0F1C17711________[WO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkWS", NStr("en='4E0682E1-A0A8-892C-C038-87DBB820EC76________[WS],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC2", NStr("en='658C6242-D121-DF6D-D4CD-DFACEBFCED08________[SC],%1'", Lang));
+	Strings.Insert("Error_GetSeparatorColumnsNotSupported", NStr("en='0CB4B23A-A35A-B37B-B6C8-89DF66152CBA___%1'", Lang));
+	Strings.Insert("Error_FormElementNotFound", NStr("en='3BB7E85B-AE33-AE4E-E8D9-974A26E63BCB%1'", Lang));
+	Strings.Insert("Error_UnsupportedRegisterType", NStr("en='85160C3A-BF1F-DDA9-90FE-E67FACDA5616%1'", Lang));
+	Strings.Insert("Error_TableNotFoundInTempTables", NStr("en='DAD7D07A-9460-69D7-727F-F9817E38CB5B%1'", Lang));
+	Strings.Insert("Error_DocumentAndAdvancesKeyNotFound", NStr("en='C6AE5926-6742-B268-8BF4-4E545D809F61_______________________%1'", Lang));
+	Strings.Insert("Error_DocumentAndTransactionsKeyNotFound", NStr("en='AA0908FF-D075-1133-30C5-5734A948D0F5___________________________%1'", Lang));
+	Strings.Insert("Error_UnknownAdvanceRegister", NStr("en='15531BF6-5F86-59CD-D392-2DD5577E9782%1'", Lang));
+	Strings.Insert("Error_UnknownTransactionRegister", NStr("en='7727ABB2-ED4A-176C-C1BA-A01DB98868BF%1'", Lang));
+	Strings.Insert("Error_PostingInfoNotFound", NStr("en='9E653E33-8FE7-C807-7259-94E4EE8E032E___%1'", Lang));
+	Strings.Insert("Error_AdvanceLessThanZero", NStr("en='B8CD97A3-876E-48F6-657E-E3446FC5F5F1%1'", Lang));
+	Strings.Insert("Error_FoundMoreThanOneCompany", NStr("en='319EB992-16F2-7187-7CE4-4757EC457BC2_____________________________________'", Lang));
+	Strings.Insert("Error_FoundMoreThanOneItemKey", NStr("en='0589CD3D-4E9E-3A9A-A51A-A6EBE095CAE0____________________'", Lang));
+	Strings.Insert("Error_UnsupportedCommandName", NStr("en='2AC2F7B7-BFA5-534B-BA25-5F50C958B7DE%1'", Lang));
+	Strings.Insert("Error_UnsupportedBundleType", NStr("en='747B372B-262A-63C6-6652-25A19234912B%1'", Lang));
+	Strings.Insert("Error_NotHandledViewNotify", NStr("en='FA31553E-C6D0-FB15-59DD-D0899A7FB7FF%1'", Lang));
+	Strings.Insert("Error_KeyNotAllowedForDataPath", NStr("en='CFFBD274-D724-458B-B357-7A02B06B17EE___%1,%2'", Lang));
+	Strings.Insert("Error_RowNotFoundInTable", NStr("en='D384C182-67EC-9939-9ED7-795F7EF96213_%1,%2'", Lang));
+	Strings.Insert("Error_RowNotFoundInSourceTableMap", NStr("en='EE239C89-5526-2AE9-9AC1-198D28FCC646_____%1,%2'", Lang));
+	Strings.Insert("Error_WrongDataPathForReadOnlyProperty", NStr("en='AB38FD25-5783-DE36-6FB4-4744BB6D3F3A_______%1'", Lang));
+	Strings.Insert("Error_UnknownRefType", NStr("en='9F414EE7-8E32-4BF3-3EE2-29E7ADF1B38C%1'", Lang));
+	Strings.Insert("Error_StepsEnablerNotDefined", NStr("en='887814AD-E107-B93F-FE20-09C100EA4459%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en='658C6242-D121-DF6D-D4CD-DFACEBFCED08________[SC],%1'", Lang));
+	Strings.Insert("Error_CreatingPDF", NStr("en='FD9AB00E-1A91-1F87-7CC0-014701DC3830'", Lang));
+	Strings.Insert("Error_ReadingPDF", NStr("en='E5958973-6EDD-3B59-9B61-1C4CCEADEF7E'", Lang));
+	Strings.Insert("Error_ChromiumNotFound", NStr("en='76F94251-BFD9-8349-9E23-318DE5A25B68'", Lang));
+	Strings.Insert("Error_TableNotSupportedInBuilder", NStr("en='266137E0-151D-74ED-D9D8-824A2644BA5C______%1'", Lang));
 #EndRegion
 
 #Region Tasks
-    Strings.Insert("Task_Result_Execution", NStr("en='Done';
-		|ru='Завершено';
-		|tr='Tamamlandı'", Lang));
-	Strings.Insert("Task_Result_Execution_Not", NStr("en='Not done';
-		|ru='Не выполнен';
-		|tr='Yapılmadı'", Lang));
-    Strings.Insert("Task_Result_Verification", NStr("en='Success';
-		|ru='Успешно';
-		|tr='Başarılı'", Lang));
-	Strings.Insert("Task_Result_Verification_Not", NStr("en='Failure';
-		|ru='Сбой';
-		|tr='Başarısız'", Lang));
-    Strings.Insert("Task_Result_Confirmation", NStr("en='Confirmed';
-    	|ru='Подтвержден';
-    	|tr='Onaylandı'", Lang));
-	Strings.Insert("Task_Result_Confirmation_Not", NStr("en='Rejected';
-		|ru='Отклонен';
-		|tr='Reddedildi'", Lang));
+    Strings.Insert("Task_Result_Execution", NStr("en='807FB5AE-34C6-44DE-EA92-24F5987DFE40'", Lang));
+	Strings.Insert("Task_Result_Execution_Not", NStr("en='DB192549-6C44-1CD0-0AC2-225DA2AB5F42'", Lang));
+    Strings.Insert("Task_Result_Verification", NStr("en='05DFDF96-ED3A-86C2-2113-308BD08F51E2'", Lang));
+	Strings.Insert("Task_Result_Verification_Not", NStr("en='1F9F38DC-61BB-49CA-A7B5-52D40FD4C7C0'", Lang));
+    Strings.Insert("Task_Result_Confirmation", NStr("en='1DD708B4-32E8-8DFD-DCA3-3E0833468641'", Lang));
+	Strings.Insert("Task_Result_Confirmation_Not", NStr("en='21382191-489F-6F26-67CE-E2DCEA68B256'", Lang));
 #EndRegion
 
 #Region SecureStorage
-	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en='It can be stored only Structure type';
-		|ru='Только тип Структура может храниться';
-		|tr='Sadece Yapı türü saklanabilir'", Lang));
+	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en='791F723C-EF5B-D8CF-F587-73FA6BF37CF4'", Lang));
 #EndRegion
 
 #Region Dashboard
-	Strings.Insert("Dashboard_01", NStr("en='Sales amount';
-		|ru='Сумма продаж';
-		|tr='Satış tutarı'", Lang));
-	Strings.Insert("Dashboard_02", NStr("en='Average bill';
-		|ru='Средний счет';
-		|tr='Ortalama fiş tutarı'", Lang));
-	Strings.Insert("Dashboard_03", NStr("en='Sales return percentage';
-		|ru='Процент возврата продаж';
-		|tr='Satış iade yüzdesi'", Lang));	
-	Strings.Insert("Dashboard_04", NStr("en='Cash Balance';
-		|ru='Кассовый остаток';
-		|tr='Nakit Bakiyesi'", Lang));
-	Strings.Insert("Dashboard_05", NStr("en='Payments from clients';
-		|ru='Платежи от клиентов';
-		|tr='Müşterilerden gelen ödemeler'", Lang));
-	Strings.Insert("Dashboard_06", NStr("en='Payments to suppliers';
-		|ru='Платежи поставщикам';
-		|tr='Tedarikçilere yapılan ödemeler'", Lang));
-	Strings.Insert("Dashboard_07", NStr("en='AP/AR Balance';
-		|ru='Баланс кредиторской/дебиторской задолженности';
-		|tr='Borç/Alacak Bakiyesi'", Lang));
-	Strings.Insert("Dashboard_08", NStr("en='Stock Balance';
-		|ru='Остаток на складе';
-		|tr='Stok Bakiyesi'", Lang));
-	Strings.Insert("Dashboard_09", NStr("en='Volume of purchases';
-		|ru='Объем закупок';
-		|tr='Satın alma hacmi'", Lang));
+	Strings.Insert("Dashboard_01", NStr("en='D105BE57-7E21-3811-1145-52DC35B97C07'", Lang));
+	Strings.Insert("Dashboard_02", NStr("en='6928314A-56A5-63C3-3B9E-E9321ADD6FCF'", Lang));
+	Strings.Insert("Dashboard_03", NStr("en='35114F5A-6E7D-E6B0-088F-F14126F61EF8'", Lang));	
+	Strings.Insert("Dashboard_04", NStr("en='5400DE0B-EF2B-8559-950B-B6D1F3A2C8C6'", Lang));
+	Strings.Insert("Dashboard_05", NStr("en='E29B0D64-688D-A4A3-3ED5-59D5E9C1F59C'", Lang));
+	Strings.Insert("Dashboard_06", NStr("en='F05EC226-53FE-9256-6982-2D216712CEFD'", Lang));
+	Strings.Insert("Dashboard_07", NStr("en='B7356E25-A9F4-E656-6C6D-D9003720C5BE'", Lang));
+	Strings.Insert("Dashboard_08", NStr("en='B4E6F485-737E-AFCD-DBE2-2D1CB267FA3D'", Lang));
+	Strings.Insert("Dashboard_09", NStr("en='AB07E63B-5804-32E0-0E5B-BDD0C2FC7490'", Lang));
 
 #EndRegion
 

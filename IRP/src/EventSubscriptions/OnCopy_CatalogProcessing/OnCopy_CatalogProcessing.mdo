@@ -2,16 +2,8 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="58c9e776-d6d2-4049-bda0-e742deb817a6">
  <name>OnCopy_CatalogProcessing</name>
  <synonym>
-  <key>tr</key>
-  <value>Yeni kart listesi kopyalama işlerken</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>При обработке копирования справочника</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>On copy catalog processing</value>
+  <value>E9A3657A-B967-8F0C-CED9-9AF4F7D31FEF</value>
  </synonym>
  <source>
   <types>CatalogObject</types>

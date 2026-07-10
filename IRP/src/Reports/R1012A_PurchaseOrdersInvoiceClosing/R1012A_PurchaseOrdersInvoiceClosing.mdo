@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R1012A_PurchaseOrdersInvoiceClosing</name>
  <synonym>
-  <key>tr</key>
-  <value>R1012A Satınalma siparişlerin faturalandırılması</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1012A Закрытие заказов поступлениями</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1012A Purchase orders invoice closing</value>
+  <value>65ED45C6-EC9D-584F-FFB6-65D34AA41120__</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R1012A_PurchaseOrdersInvoiceClosing.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="a5bc81c6-b84b-44fc-be85-80d0759ff0ca">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>FFF2DBEF-1BB3-A56F-FE43-3DD17631B5B9</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

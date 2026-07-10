@@ -11,16 +11,8 @@
  </producedTypes>
  <name>CreditLimits</name>
  <synonym>
-  <key>tr</key>
-  <value>Kredi limitleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Лимиты по взаиморасчетам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Credit limits</value>
+  <value>F42AFBBF-0F18-43C5-5796-6242CD0C8A9B</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -29,16 +21,8 @@
  <resources uuid="f24dcf13-3edc-49f3-bd5e-f951e7498a45">
   <name>LimitAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Limit tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Суммовые лимиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Limit amount</value>
+   <value>A098CB8E-27B8-61A0-0DFB-B76ECBA6C053</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -52,16 +36,8 @@
  <dimensions uuid="32548aab-cb95-41be-ad43-1fc17f307085">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>8766366A-4D0A-9189-99E0-070BE2EC6511</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -78,16 +54,8 @@
  <dimensions uuid="ab59e33e-8bc4-4225-8aee-5186e5bca817">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency movement type</value>
+   <value>13B3C900-D956-A648-89DB-BD62E7356A84</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>

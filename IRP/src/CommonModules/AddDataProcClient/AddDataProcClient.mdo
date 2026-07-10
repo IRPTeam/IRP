@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="db835167-53c4-4fba-a461-b0a8398c12d6">
  <name>AddDataProcClient</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek veri işlemci istemci</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Внешние обработки клиент</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Add data proc client</value>
+  <value>F79201CE-7C38-8D1E-EABE-E0A903D905FD</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

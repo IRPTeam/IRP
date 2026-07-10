@@ -9,16 +9,8 @@
  </producedTypes>
  <name>SourceOfOrigins</name>
  <synonym>
-  <key>tr</key>
-  <value>Envanter menşeileri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Источники происхождения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Source of origins</value>
+  <value>D55806A3-FB28-4EB1-1E18-8874A2A10861</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.SourceOfOrigins.StandardAttribute.Code</inputByString>
@@ -84,16 +76,8 @@
   <dataHistory>Use</dataHistory>
   <name>Description</name>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşei</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Источник происхождения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source of origin</value>
+   <value>699FB698-0BB8-D372-2CDA-A39E5A77890D</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
@@ -145,16 +129,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Envanter menşei</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Источник происхождения</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Source of origin</value>
+  <value>3437F691-1649-99B9-9128-82F982300F44</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
@@ -176,16 +152,8 @@
  <attributes uuid="b99a35df-7e7e-475f-a3b0-419399797c9e">
   <name>CustomProductID</name>
   <synonym>
-   <key>tr</key>
-   <value>Gümrük kodu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Артикул покупателя</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Custom product ID</value>
+   <value>4235580A-40A2-2A2A-A7BB-BD1FFF098CD0</value>
   </synonym>
   <type>
    <types>String</types>
@@ -202,16 +170,8 @@
  <attributes uuid="6c83ade2-9ad7-4357-810f-7f3e92ae876a">
   <name>CustomDeclarationID</name>
   <synonym>
-   <key>tr</key>
-   <value>Gümrük beyanname kodu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер ГТД</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Custom declaration ID</value>
+   <value>4FFF4A63-2A4D-BE94-41F9-9712601E208F</value>
   </synonym>
   <type>
    <types>String</types>
@@ -228,16 +188,8 @@
  <attributes uuid="2626b414-081e-45c1-b227-529ff8b298d8">
   <name>CountryOfOrigin</name>
   <synonym>
-   <key>tr</key>
-   <value>Menşei ülke</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Страна происхождения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Country of origin</value>
+   <value>AF3221CD-5DFB-48C7-739E-E2F8A7BCB57C</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -251,16 +203,8 @@
  <attributes uuid="263f3055-6b37-42ad-bdb7-22a3198efc48">
   <name>SourceOfOriginOwner</name>
   <synonym>
-   <key>tr</key>
-   <value>Sahip</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Владелец</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Owner</value>
+   <value>EB12CC2D-6A5C-BCE4-4CDA-AB51A4BDA36F</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -277,16 +221,8 @@
  <attributes uuid="f1d861c5-d344-44ee-8056-dd616c514b95">
   <name>BatchBalanceDetail</name>
   <synonym>
-   <key>tr</key>
-   <value>Parti bakiye detayları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид учета партий товаров</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Batch balance detail</value>
+   <value>FBB2C151-945D-D78B-BA43-3AD9CE424923</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -300,16 +236,8 @@
  <attributes uuid="b9358737-33be-4413-90c5-0d7c86a3f7d0">
   <name>Inactive</name>
   <synonym>
-   <key>tr</key>
-   <value>Aktif değil</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Неактивная</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Inactive</value>
+   <value>57E03B13-25C9-C330-0BDE-E45DE55108B2</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -323,16 +251,8 @@
  <attributes uuid="bb7e1834-9777-4527-a129-815a9da23cc2">
   <name>StockBalanceDetail</name>
   <synonym>
-   <key>tr</key>
-   <value>Stok bakiye detayları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид учета товаров по складам</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Stock balance detail</value>
+   <value>6C2C1735-17A1-4668-88B6-6EEA4AC16D3C</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -350,16 +270,8 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>5B6706B4-8917-1D46-61DC-CF79A53BDD09</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -372,16 +284,8 @@
   <attributes uuid="60c734f3-09e8-43fc-97e8-23167029a7d4">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>F3870213-FE42-6E40-082C-C2D4C43F10B3</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -394,16 +298,8 @@
   <attributes uuid="63a1a400-7733-448a-8156-09c2c8a80467">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>0724028A-2880-50B9-9DD6-64AC3B7E211E</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -420,16 +316,8 @@
   <attributes uuid="1d2fed51-1924-4aea-8c45-06193823c97f">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Текстовая строка</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Search literal</value>
+    <value>EAF61933-FEA0-AC5C-C950-043A31A3FA49</value>
    </synonym>
    <type>
     <types>String</types>
@@ -446,16 +334,8 @@
  <forms uuid="02988437-4f00-4a12-86ad-1b1aa3254039">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>B778D24B-386F-DBED-DFE6-68CABBA4F7FB</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -463,16 +343,8 @@
  <forms uuid="97cf9534-12d1-41b8-82ba-bf3224a31269">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>AF907985-4BE9-09A4-4EF0-06D05574E278</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -480,16 +352,8 @@
  <forms uuid="4fc31d6a-02f4-426e-bbd0-3e4fd5c87c96">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>A1551E17-4DB3-E661-143C-CA6F888251AC</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -497,16 +361,8 @@
  <forms uuid="3c07ea65-c8c0-4293-abf6-4abff10c8a58">
   <name>EditSourceOfOrigins</name>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşei değiştir</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Изменить источник происхождения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Edit source of origins</value>
+   <value>93BD2ED2-36CE-C684-4B26-61D77D8F75CF</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -514,16 +370,8 @@
  <forms uuid="b1730add-db77-484e-98bc-e387781acd24">
   <name>GroupForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма группы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group form</value>
+   <value>29FE001D-7C35-C988-80E0-06472448C51A</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -531,16 +379,8 @@
  <forms uuid="6c4fdc5c-7917-4a2b-9146-460d7869efdd">
   <name>GroupChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Группа форм выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Group choice form</value>
+   <value>270402D0-F5A0-ED77-7456-64B466C0D358</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

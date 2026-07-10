@@ -6,16 +6,8 @@
  </producedTypes>
  <name>AgreementDocuments</name>
  <synonym>
-  <key>tr</key>
-  <value>Sözleşme belgeleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документы соглашения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Agreement documents</value>
+  <value>87DB5E4F-5355-04B6-6EEB-B3C3D980DE6C</value>
  </synonym>
  <type>
   <types>CatalogRef.Agreements</types>
@@ -70,16 +62,8 @@
  <forms uuid="52936619-769a-400b-914a-934344296fd9">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>A30FD66E-8EF2-A43B-BAAE-E76B348C8E6D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

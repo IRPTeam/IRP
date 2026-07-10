@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseSimpleBatch</name>
  <synonym>
-  <key>tr</key>
-  <value>Temel parti kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать простую партию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use simple batch</value>
+  <value>59F7117D-DA71-1C34-4F5B-B373A880C012</value>
  </synonym>
  <type>
   <types>Boolean</types>

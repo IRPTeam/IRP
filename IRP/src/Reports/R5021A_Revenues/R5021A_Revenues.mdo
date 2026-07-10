@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R5021A_Revenues</name>
  <synonym>
-  <key>tr</key>
-  <value>R5021A Gelirler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R5021A Отчет по доходам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R5021A Revenues</value>
+  <value>B5264018-82A4-406B-BEE6-6188B89D72AB</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R5021A_Revenues.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="891eeb52-de41-489b-8529-cadc3c49cb35">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>E5A64F3A-128F-287E-E0DD-D7F96F70F4BD</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

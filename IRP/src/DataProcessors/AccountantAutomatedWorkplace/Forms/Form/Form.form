@@ -189,16 +189,8 @@
     <textEdit>true</textEdit>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tüm evraklar</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Все документы</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>All documents</value>
+      <value>E9989995-53C2-8DF9-965F-F121812F6D1C</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>All</value>
@@ -251,16 +243,8 @@
     <textEdit>true</textEdit>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tüm</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Все</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>All</value>
+      <value>0142D48E-81B7-1641-1D61-12EBCEF9D8EC</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>0</value>
@@ -268,16 +252,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Kilitli</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Заблокировано</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Locked</value>
+      <value>F76D2601-D667-6602-2ABD-D1EE67E29373</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>1</value>
@@ -285,16 +261,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Kilidi Açıldı</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Не заблокированные</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Unlocked</value>
+      <value>0AE834D3-B16B-DD5F-F30A-A1DAC0E8FD7C</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>
@@ -347,16 +315,8 @@
     <textEdit>true</textEdit>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tüm</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Все</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>All</value>
+      <value>08C5AC08-88F5-D8CC-C2D9-9EADDBE85D94</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>0</value>
@@ -364,16 +324,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Dosyalarla</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Имеющие файлы</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>With files</value>
+      <value>CEE02F7E-9459-4227-7726-699C7B28D6C8</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>1</value>
@@ -381,16 +333,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Dosya yok</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Нет файла</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>No file</value>
+      <value>E2F6359F-6E21-450C-C507-7DC8133130ED</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>
@@ -443,16 +387,8 @@
     <textEdit>true</textEdit>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Filtresiz</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Отключить отбор</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>No filter</value>
+      <value>85C984B1-9E31-82E2-287F-F8D4A9B4DEAB</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>0</value>
@@ -460,16 +396,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tüm açık görevler</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Все открытые задачи</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>All open tasks</value>
+      <value>29445203-92E0-9C3F-FF4D-D940EDCA44A6</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>1</value>
@@ -477,16 +405,8 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Sadece benim görevlerim</value>
-     </presentation>
-     <presentation>
-      <key>ru</key>
-      <value>Только мои задачи</value>
-     </presentation>
-     <presentation>
       <key>en</key>
-      <value>Only my tasks</value>
+      <value>D7397882-60A4-AF44-4642-2494CA811B68</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>
@@ -535,16 +455,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Filtreler grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа фильтров  </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of filters</value>
+   <value>ABDECB1C-01A7-F0E7-78F4-48D0629078BA</value>
   </title>
   <extendedTooltip>
    <name>GroupFiltersExtendedTooltip</name>
@@ -1173,16 +1085,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Belge listesi form grubu</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа формы скиска документов</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Document list form group</value>
+       <value>960B4B3B-1135-78B8-8D77-73E2A4E7EB97</value>
       </title>
       <extendedTooltip>
        <name>DocumentListFormGroupExtendedTooltip</name>
@@ -1325,16 +1229,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup sol</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группировка по левому краю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group left</value>
+    <value>2C1F6D7C-4E49-7594-4C97-74F86A53AA75</value>
    </title>
    <width>40</width>
    <extendedTooltip>
@@ -1425,16 +1321,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>JE Komutları</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Команды БухОпераций</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Commands JE</value>
+       <value>B3639514-B81D-9CF3-3791-1BE33A3C3D8B</value>
       </title>
       <extendedTooltip>
        <name>GroupCommandsJEExtendedTooltip</name>
@@ -1504,16 +1392,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Rapor</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Отчет</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Report</value>
+      <value>CB536406-62D8-9736-6910-07F12D8B4F6E</value>
      </title>
      <extendedTooltip>
       <name>GroupReportExtendedTooltip</name>
@@ -1544,16 +1424,8 @@
         <name>NoFileLabel</name>
         <id>72</id>
         <title>
-         <key>tr</key>
-         <value>Dosya yok</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Нет файла</value>
-        </title>
-        <title>
          <key>en</key>
-         <value>No file</value>
+         <value>8537D88A-9CB8-8900-0AFA-AA911CC30292</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1621,11 +1493,6 @@
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:PDFDocumentFieldExtInfo">
          <viewStatusAddition>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-           <common>true</common>
-          </userVisible>
           <name>PDFPreviewViewStatus</name>
           <id>135</id>
           <extendedTooltip>
@@ -1706,16 +1573,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>İlk sayfa</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Первая страница</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>First page</value>
+        <value>ED4E3AC6-5C66-1E00-09F6-6D9F8F17BCC8</value>
        </title>
        <extendedTooltip>
         <name>FirstPageExtendedTooltip</name>
@@ -1739,16 +1598,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Dosya grubu</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Группа файлов</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group of files</value>
+       <value>FD72129D-64AE-0544-4A75-5735B232A93E</value>
       </title>
       <extendedTooltip>
        <name>PagesFilesExtendedTooltip</name>
@@ -1776,16 +1627,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Dosyalar</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Файлы</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Files</value>
+      <value>4561AE8C-730D-49D6-63FB-B4477353B057</value>
      </title>
      <extendedTooltip>
       <name>GroupFilesExtendedTooltip</name>
@@ -1964,16 +1807,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup mesajı</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Группа сообщения</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Group message</value>
+        <value>99BC9E8F-EA7F-477D-D3DD-D78A9267E1AD</value>
        </title>
        <extendedTooltip>
         <name>GroupMessageExtendedTooltip</name>
@@ -2056,16 +1891,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup sohbeti gönder</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Отправить в Групповой чат</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Group chat send</value>
+       <value>333934BA-420E-7C16-66E8-8E1D43FE0734</value>
       </title>
       <height>1</height>
       <extendedTooltip>
@@ -2095,28 +1922,12 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Sohbet</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Чат</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Chat</value>
+      <value>0A8D2AB3-86E0-4AE2-2CE4-4546F8B9C7FC</value>
      </title>
-     <toolTip>
-      <key>tr</key>
-      <value>Grup sohbeti</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Групповой чат</value>
-     </toolTip>
      <toolTip>
       <key>en</key>
-      <value>Group chat</value>
+      <value>73BA0EF1-F507-181B-B780-06E8496612C2</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupChatExtendedTooltip</name>
@@ -2486,16 +2297,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Geçmiş</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>История статусов</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>History</value>
+      <value>CFFCC1DA-112E-16D3-3CE8-832F36856ACB</value>
      </title>
      <extendedTooltip>
       <name>GroupHistoryExtendedTooltip</name>
@@ -2522,28 +2325,12 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup sayfalar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Группа страницы</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group pages</value>
+     <value>2FBD32D2-EDD6-2AE3-310A-A36EC113A57A</value>
     </title>
-    <toolTip>
-     <key>tr</key>
-     <value>Grup sayfalar</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Группа страницы</value>
-    </toolTip>
     <toolTip>
      <key>en</key>
-     <value>Group pages</value>
+     <value>2FE087F1-7550-180D-D22A-A93FCBBF688A</value>
     </toolTip>
     <extendedTooltip>
      <name>GroupPagesExtendedTooltip</name>
@@ -2567,16 +2354,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sağ)</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группировка по правому краю</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group right</value>
+    <value>7B5632C6-B342-3FB4-43DE-E3DBF336B4DB</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -2604,16 +2383,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main</value>
+   <value>B00B5030-FDDF-60E2-288D-D6359C4DABC3</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -2675,16 +2446,8 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Период</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Period</value>
+   <value>D32B9FD3-2C2B-F577-717C-CCCEBD43FD1F</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2703,16 +2466,8 @@
  <attributes>
   <name>DocumentType</name>
   <title>
-   <key>tr</key>
-   <value>Evrak tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип документа</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document type</value>
+   <value>44625634-918C-DC34-4D65-529FC5CF0B30</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2732,16 +2487,8 @@
  <attributes>
   <name>LockType</name>
   <title>
-   <key>tr</key>
-   <value>Kilitle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Блокировка        </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Lock</value>
+   <value>B260AF24-D26B-E8B6-60EB-BF848BBAF325</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2764,16 +2511,8 @@
  <attributes>
   <name>FilesType</name>
   <title>
-   <key>tr</key>
-   <value>Dosyalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Файлы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Files</value>
+   <value>2FA0BDEA-1B3A-5FFE-E34A-A42A7A8570E6</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2796,16 +2535,8 @@
  <attributes>
   <name>DocumentList</name>
   <title>
-   <key>tr</key>
-   <value>Belge listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список документов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document list</value>
+   <value>0BBDE0ED-ACD2-9654-480E-EDDEDB8E101D</value>
   </title>
   <id>6</id>
   <valueType>
@@ -2913,16 +2644,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dosyalar</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Файлы</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Files</value>
+       <value>259F3501-672E-465C-C470-0764C6C9B370</value>
       </content>
      </localValue>
     </title>
@@ -2937,16 +2660,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Görevi tekrarla</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Повторить задачу</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Repeat task</value>
+       <value>5E904970-68D8-12C2-2B9A-A3BD743AD5FF</value>
       </content>
      </localValue>
     </title>
@@ -2961,16 +2676,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Görevleri var</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Имеет задачи</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Has tasks</value>
+       <value>54D19255-E5C5-B513-3194-48A19D7B6D3E</value>
       </content>
      </localValue>
     </title>
@@ -2985,16 +2692,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Benim görevim</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Моя задача</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is my task</value>
+       <value>A874C0E1-94C4-01D0-058B-B2C293272ED3</value>
       </content>
      </localValue>
     </title>
@@ -3005,16 +2704,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Mahsup fişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Бухгалтерская операция</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Journal entry</value>
+       <value>72C0D084-2970-DA03-36C0-0800CB35DE9B</value>
       </content>
      </localValue>
     </title>
@@ -3053,16 +2744,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kilitli</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Заблокировано</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Locked</value>
+       <value>BDAF41FB-F708-3082-2DFE-EE2F0EE6980C</value>
       </content>
      </localValue>
     </title>
@@ -3073,16 +2756,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dosya mevcut değil</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Файл не существует</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>File not exist</value>
+       <value>EBFAB6AF-F631-1C31-1340-0E33BA6C61DD</value>
       </content>
      </localValue>
     </title>
@@ -3093,16 +2768,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tekrar görevi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Повторная задача</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Is repeat task</value>
+       <value>63DAAB33-5B4C-C4AF-FC61-10E6E3679499</value>
       </content>
      </localValue>
     </title>
@@ -3113,16 +2780,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Görev simgesi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Значок задачи</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Task icon</value>
+       <value>65FF03BB-07B1-7F07-78B4-4365AE1E7E69</value>
       </content>
      </localValue>
     </title>
@@ -3137,16 +2796,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Benim görevim</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Моя задача</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>My task</value>
+       <value>96E32011-B750-E68C-C8E5-51BC711D3462</value>
       </content>
      </localValue>
     </title>
@@ -3168,16 +2819,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Geçerli kullanıcı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Текущий пользователь</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Current user</value>
+       <value>D5540CA7-B27D-9B10-0AC1-1080E87D9FB3</value>
       </content>
      </localValue>
     </title>
@@ -3192,16 +2835,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Uygulayıcı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Исполнитель</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Performer</value>
+       <value>DA7A9338-EB51-DE44-4410-043B7EB67775</value>
       </content>
      </localValue>
     </title>
@@ -3215,16 +2850,8 @@ GROUP BY
  <attributes>
   <name>AccountingReport</name>
   <title>
-   <key>tr</key>
-   <value>Muhasebe raporu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Бухгалтерский отчет</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Accounting report</value>
+   <value>AD2E273B-5CE6-B5FD-D2E4-4954AE2A04A5</value>
   </title>
   <id>7</id>
   <valueType>
@@ -3242,16 +2869,8 @@ GROUP BY
  <attributes>
   <name>InfoUpdated</name>
   <title>
-   <key>tr</key>
-   <value>Bilgi güncellendi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновленная информация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Info updated</value>
+   <value>B51990AD-A018-F1D7-7357-786168FA3F0B</value>
   </title>
   <id>8</id>
   <valueType>
@@ -3267,16 +2886,8 @@ GROUP BY
  <attributes>
   <name>CurrentDocument</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli evrak</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущий документ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current document</value>
+   <value>1D2823FD-FFEB-2F5B-B1C4-4A3E5A53F684</value>
   </title>
   <id>9</id>
   <valueType>
@@ -3292,16 +2903,8 @@ GROUP BY
  <attributes>
   <name>FileTable</name>
   <title>
-   <key>tr</key>
-   <value>Dosya tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица файлов     </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>File table</value>
+   <value>42DBD585-1F34-0AEF-F78B-B73A1E08D32F</value>
   </title>
   <id>10</id>
   <valueType>
@@ -3316,16 +2919,8 @@ GROUP BY
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
-    <value>REf</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Ref</value>
+    <value>924BB7B4-EADE-170C-C8B9-9047D6DFDC8E</value>
    </title>
    <id>11</id>
    <valueType>
@@ -3341,16 +2936,8 @@ GROUP BY
   <columns>
    <name>isPDF</name>
    <title>
-    <key>tr</key>
-    <value>bu PDF</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Это PDF</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is PDF</value>
+    <value>37142EE2-7FAE-0BFB-B05C-C39BED1C9B4C</value>
    </title>
    <id>12</id>
    <valueType>
@@ -3366,16 +2953,8 @@ GROUP BY
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Name</value>
+    <value>6ACFEC9A-E6D9-9B9C-CD12-264A79E4764C</value>
    </title>
    <id>14</id>
    <valueType>
@@ -3393,16 +2972,8 @@ GROUP BY
  <attributes>
   <name>ImagePreview</name>
   <title>
-   <key>tr</key>
-   <value>Resim önizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предпросмотр изображения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Image preview</value>
+   <value>F0F91E4B-3444-5227-77C8-82A617AF91F3</value>
   </title>
   <id>15</id>
   <valueType>
@@ -3419,16 +2990,8 @@ GROUP BY
  <attributes>
   <name>PDFPreview</name>
   <title>
-   <key>tr</key>
-   <value>PDF önizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предпросмотр PDF</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>PDF Preview</value>
+   <value>5C2B08A8-20DB-98E8-8F50-027862F4110D</value>
   </title>
   <id>16</id>
   <valueType>
@@ -3444,16 +3007,8 @@ GROUP BY
  <attributes>
   <name>LedgerType</name>
   <title>
-   <key>tr</key>
-   <value>Defter tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ledger type</value>
+   <value>1D701B4B-EF10-FF5B-BCBF-FEF98E5C4995</value>
   </title>
   <id>17</id>
   <valueType>
@@ -3473,16 +3028,8 @@ GROUP BY
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Организация</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Company</value>
+   <value>98CC7CF0-C472-8A46-64CF-FE5FFE29F3FC</value>
   </title>
   <id>18</id>
   <valueType>
@@ -3501,16 +3048,8 @@ GROUP BY
  <attributes>
   <name>Chat</name>
   <title>
-   <key>tr</key>
-   <value>Sohbet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Чат</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Chat</value>
+   <value>85C69F55-815F-63C7-7491-1B4A08EB05BB</value>
   </title>
   <id>19</id>
   <valueType>
@@ -3527,16 +3066,8 @@ GROUP BY
  <attributes>
   <name>NewMessage</name>
   <title>
-   <key>tr</key>
-   <value>Yeni mesaj</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Новой сообщение</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>New message</value>
+   <value>834F79AB-B6A8-F908-825A-A942CE7BA1BB</value>
   </title>
   <id>20</id>
   <valueType>
@@ -3553,16 +3084,8 @@ GROUP BY
  <attributes>
   <name>ChatAttachedFiles</name>
   <title>
-   <key>tr</key>
-   <value>Sohbet ekli dosyalar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Прикрепленные файлы чата</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Chat attached files</value>
+   <value>4CD54BA6-CCA3-DE17-7FF3-3838EEBE3E14</value>
   </title>
   <id>21</id>
   <valueType>
@@ -3581,16 +3104,8 @@ GROUP BY
  <attributes>
   <name>HistoryVersionTable</name>
   <title>
-   <key>tr</key>
-   <value>Geçmiş sürüm tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица версий истории</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>History version table</value>
+   <value>742037BC-3E03-A0A3-3219-9350CCB5E2D3</value>
   </title>
   <id>22</id>
   <valueType>
@@ -3605,16 +3120,8 @@ GROUP BY
   <columns>
    <name>VersionNumber</name>
    <title>
-    <key>tr</key>
-    <value>Sürüm numarası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Номер версии</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Version number</value>
+    <value>80A97D19-CE55-E960-039F-F6582C2BE823</value>
    </title>
    <id>23</id>
    <valueType>
@@ -3633,16 +3140,8 @@ GROUP BY
   <columns>
    <name>UserName</name>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı tanımı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Имя пользователя</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>User name</value>
+    <value>2DFF86C5-AD60-3613-360E-ED4ABEAEA22F</value>
    </title>
    <id>24</id>
    <valueType>
@@ -3659,16 +3158,8 @@ GROUP BY
   <columns>
    <name>Date</name>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дата</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Date</value>
+    <value>B9D42DF7-571B-12BE-E719-9B65FD0F5EC2</value>
    </title>
    <id>25</id>
    <valueType>
@@ -3685,16 +3176,8 @@ GROUP BY
   <columns>
    <name>DataChangeType</name>
    <title>
-    <key>tr</key>
-    <value>Veri değişikliği türü</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип изменения данных</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Data change type</value>
+    <value>3807C31A-7BA0-D722-2329-9EC1F75D15F2</value>
    </title>
    <id>26</id>
    <valueType>
@@ -3711,16 +3194,8 @@ GROUP BY
   <columns>
    <name>IsImportant</name>
    <title>
-    <key>tr</key>
-    <value>Önemlidir</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Важно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Is important</value>
+    <value>D91E618D-D384-00DF-F168-8C3B82047DE3</value>
    </title>
    <id>32</id>
    <valueType>
@@ -3737,16 +3212,8 @@ GROUP BY
  <attributes>
   <name>HistoryReport</name>
   <title>
-   <key>tr</key>
-   <value>Tarih raporu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Хронолонический отчет</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>History report</value>
+   <value>0E1DBCE0-D61D-7685-5098-8D974D87F4CD</value>
   </title>
   <id>27</id>
   <valueType>
@@ -3763,16 +3230,8 @@ GROUP BY
  <attributes>
   <name>TasksType</name>
   <title>
-   <key>tr</key>
-   <value>İşler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Задачи</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Tasks</value>
+   <value>9F21F188-6BBA-7D94-48AD-DE3324ACA8D8</value>
   </title>
   <id>28</id>
   <valueType>
@@ -3793,16 +3252,8 @@ GROUP BY
  <attributes>
   <name>FilesCount</name>
   <title>
-   <key>tr</key>
-   <value>Dosya sayısı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество файлов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Files count</value>
+   <value>F02C3DD4-1FB0-4BE7-7C3E-E88DBF1FE82A</value>
   </title>
   <id>29</id>
   <valueType>
@@ -3821,16 +3272,8 @@ GROUP BY
  <attributes>
   <name>ChatCount</name>
   <title>
-   <key>tr</key>
-   <value>Sohbet sayısı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество чатов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Chat count</value>
+   <value>10F1D5A8-ADD5-5E18-8DE4-4AE8CD4A328B</value>
   </title>
   <id>30</id>
   <valueType>
@@ -3849,16 +3292,8 @@ GROUP BY
  <attributes>
   <name>HistoryCount</name>
   <title>
-   <key>tr</key>
-   <value>Tarih sayımı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>История подсчета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>History count</value>
+   <value>7A1C3E09-E339-3413-30A5-553F886F552C</value>
   </title>
   <id>31</id>
   <valueType>
@@ -3877,16 +3312,8 @@ GROUP BY
  <attributes>
   <name>ShowExchangeError</name>
   <title>
-   <key>tr</key>
-   <value>Veri alışveriş hatasını göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать ошибку обмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show exchange error</value>
+   <value>B892AE6F-5CF5-B9D5-5D27-7AB9377B2FCE</value>
   </title>
   <id>33</id>
   <valueType>
@@ -3902,16 +3329,8 @@ GROUP BY
  <formCommands>
   <name>FindDocuments</name>
   <title>
-   <key>tr</key>
-   <value>Ara</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Найти</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Find</value>
+   <value>BE68FC4F-EDD5-1372-219A-AC0E97D0F6DE</value>
   </title>
   <id>1</id>
   <use>
@@ -3931,16 +3350,8 @@ GROUP BY
  <formCommands>
   <name>Lock</name>
   <title>
-   <key>tr</key>
-   <value>Kilitle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Блокировка        </value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Lock</value>
+   <value>DC07CA4C-FE1C-74DE-E559-9E18B6697CD3</value>
   </title>
   <id>2</id>
   <use>
@@ -3960,16 +3371,8 @@ GROUP BY
  <formCommands>
   <name>Unlock</name>
   <title>
-   <key>tr</key>
-   <value>Kilit aç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разблокировать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unlock</value>
+   <value>AB0D9F12-A408-A465-598B-BAEDCCE0986F</value>
   </title>
   <id>3</id>
   <use>
@@ -3989,16 +3392,8 @@ GROUP BY
  <formCommands>
   <name>RefreshJE</name>
   <title>
-   <key>tr</key>
-   <value>MK güncelle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить БухОперацию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Refresh JE</value>
+   <value>3891C5A6-0128-05A7-7596-6500E13D40EF</value>
   </title>
   <id>4</id>
   <use>
@@ -4019,16 +3414,8 @@ GROUP BY
  <formCommands>
   <name>OpenJE</name>
   <title>
-   <key>tr</key>
-   <value>MK aç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Открыть БухОперацию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Open JE</value>
+   <value>9099DC6A-671A-C404-4842-25851546B109</value>
   </title>
   <id>5</id>
   <use>
@@ -4049,29 +3436,13 @@ GROUP BY
  <formCommands>
   <name>OpenSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları aç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Открыть настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Open settings</value>
+   <value>8EAC9B34-4DF5-3B8E-E4CF-FA1DC54BF2BF</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Ayarları aç</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Открыть настройки</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Open settings</value>
+   <value>05A182E6-3773-8C55-5D50-096C65B3ABFF</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -4090,16 +3461,8 @@ GROUP BY
  <formCommands>
   <name>SendMessage</name>
   <title>
-   <key>tr</key>
-   <value>Gönder</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отправить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Send</value>
+   <value>3AC9152D-0019-0D8B-B1FA-AE3AAFFDB83C</value>
   </title>
   <id>7</id>
   <use>
@@ -4116,16 +3479,8 @@ GROUP BY
  <formCommands>
   <name>AttachChatFiles</name>
   <title>
-   <key>tr</key>
-   <value>Sohbet dosyalarını ekle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Прикрепить файлы чата</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Attach chat files</value>
+   <value>6C67E429-29EC-2AAB-B736-68D0365D9CC4</value>
   </title>
   <id>8</id>
   <use>

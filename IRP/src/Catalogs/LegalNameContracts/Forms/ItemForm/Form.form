@@ -169,16 +169,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Tarihler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Даты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Dates</value>
+   <value>8AB7DCE8-C712-7222-228D-DFC81AB01296</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -315,16 +307,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Numaratör grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа нумерации</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of numerator</value>
+   <value>7D463A0D-4CEE-C321-15CC-C0608D41C853</value>
   </title>
   <extendedTooltip>
    <name>GroupNumeratorExtendedTooltip</name>
@@ -548,29 +532,13 @@
  <formCommands>
   <name>SetNewNumber</name>
   <title>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Set new number</value>
+   <value>339DCC53-11B0-D2FE-E9FD-D45052086E6C</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Yeni numara ata</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Установить новый номер</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Set new number</value>
+   <value>35EE6E33-CDBE-29FB-BC9D-DB609A67F860</value>
   </toolTip>
   <use>
    <common>true</common>

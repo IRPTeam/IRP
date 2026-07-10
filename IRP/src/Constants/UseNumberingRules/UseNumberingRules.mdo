@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseNumberingRules</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Numaralandırma kuralları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать правила нумерации</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use numbering rules</value>
+  <value>74F39B3C-7A02-1C2B-B95B-B7439189D82D</value>
  </synonym>
  <type>
   <types>Boolean</types>

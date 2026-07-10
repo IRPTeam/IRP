@@ -292,16 +292,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Gider</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Расход</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Expense</value>
+    <value>330102F9-E4BC-55FC-C3EB-B6A2AC5C0429</value>
    </title>
    <extendedTooltip>
     <name>GroupExpenseExtendedTooltip</name>
@@ -454,16 +446,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Gelir</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Доход</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Revenue</value>
+    <value>779310A0-A80C-BF41-1F01-13345BDF4308</value>
    </title>
    <extendedTooltip>
     <name>GroupRevenueExtendedTooltip</name>
@@ -493,16 +477,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Detaylar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Аналитика учета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Analytics</value>
+   <value>25914EE0-323F-AB51-10AB-B7C2C1F00BA7</value>
   </title>
   <extendedTooltip>
    <name>GroupAnalyticsExtendedTooltip</name>

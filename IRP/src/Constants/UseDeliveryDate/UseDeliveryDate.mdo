@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseDeliveryDate</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Teslim tarihi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать дату доставки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use delivery date</value>
+  <value>F9933170-94B8-5BBF-F68B-B8CDA28B589C</value>
  </synonym>
  <type>
   <types>Boolean</types>

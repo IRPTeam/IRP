@@ -2,16 +2,8 @@
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dcc37b19-9ad3-47ad-a07f-b665fb7774c6">
  <name>OpenReport_R4010A_StockBalance</name>
  <synonym>
-  <key>tr</key>
-  <value>R4010A Stok bakiyesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4010A Ведомость по товарам на складах</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4010A Stock balance</value>
+  <value>2605330C-587C-24B2-277F-F2CF8AE0C548</value>
  </synonym>
  <group>NavigationPanelOrdinary</group>
  <representation>Auto</representation>

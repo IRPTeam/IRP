@@ -6,32 +6,16 @@
  </producedTypes>
  <name>F0011_InventoryBook</name>
  <synonym>
-  <key>tr</key>
-  <value>Inventory book</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Инвентарная книга</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Inventory book</value>
+  <value>D4CF8EDE-B32C-2A5C-C1C6-62C07BB835E9</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.F0011_InventoryBook.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="137d2f62-1f7e-406d-904e-d9095c522193">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>0D9FB60A-6D5F-6770-084D-D15E9BBD6DB7</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

@@ -12,16 +12,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup satır parçası buton üst</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа части строки кнопка верх</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group row parts button top</value>
+    <value>FA384E14-577B-4FFF-F02D-D0A356F004F2</value>
    </title>
    <extendedTooltip>
     <name>GroupRowPartsButtonTopExtendedTooltip</name>
@@ -51,16 +43,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup satır parçası buton alt</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Группа части строки кнопка низ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Group row parts button bottom</value>
+    <value>EC435BD0-C59D-49D7-7791-1574586966F8</value>
    </title>
    <extendedTooltip>
     <name>GroupRowPartsButtonBottomExtendedTooltip</name>
@@ -87,16 +71,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satır çarşası buton grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа кнопок частей строк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Row parts button group</value>
+   <value>BFF6594B-73F5-1CD8-87AE-E2F9EFF5DD53</value>
   </title>
   <height>4</height>
   <horizontalStretch>true</horizontalStretch>
@@ -133,16 +109,8 @@
    <name>TypeConstant</name>
    <id>159</id>
    <title>
-    <key>tr</key>
-    <value>Sabit</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Константа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Costant</value>
+    <value>80E415FC-11D9-92A3-3246-6E0D1AC29A9C</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -177,16 +145,8 @@
      <name>ChangeExpressionType</name>
     </handlers>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Sabit değer</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
-     <key>ru</key>
-     <value>Константа</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
      <key>en</key>
-     <value>Constant</value>
+     <value>2A2DFA17-DAA1-A92F-F8AB-B2EEA86253E8</value>
     </nonselectedPictureText>
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
@@ -204,16 +164,8 @@
    <name>TypeVariable</name>
    <id>162</id>
    <title>
-    <key>tr</key>
-    <value>Değişken</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Переменная</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Variable</value>
+    <value>D35AD926-68B8-1B49-9363-38BFD5E0FD4E</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -248,16 +200,8 @@
      <name>ChangeExpressionType</name>
     </handlers>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Değişken</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
-     <key>ru</key>
-     <value>Переменная</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
      <key>en</key>
-     <value>Variable</value>
+     <value>0222F814-915F-7072-2F35-55B408B73877</value>
     </nonselectedPictureText>
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
@@ -275,16 +219,8 @@
    <name>TypeManual</name>
    <id>165</id>
    <title>
-    <key>tr</key>
-    <value>Manuel</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вручную</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Manual</value>
+    <value>46CDDE2E-27ED-6644-4C67-7D1795B1A09F</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -319,16 +255,8 @@
      <name>ChangeExpressionType</name>
     </handlers>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Hesapla</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
-     <key>ru</key>
-     <value>Рассчитать</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
      <key>en</key>
-     <value>Calculate</value>
+     <value>3D684CDD-7297-D4CA-AE7D-D48052BC4F64</value>
     </nonselectedPictureText>
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
@@ -346,16 +274,8 @@
    <name>TypeAnyText</name>
    <id>183</id>
    <title>
-    <key>tr</key>
-    <value>Herhangi bir metin</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Любой текст</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Any text</value>
+    <value>773CC576-17DD-A62D-DC6E-EE22F2110E1E</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -390,16 +310,8 @@
      <name>ChangeExpressionType</name>
     </handlers>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Herhangi bir metin</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
-     <key>ru</key>
-     <value>Любой текст</value>
-    </nonselectedPictureText>
-    <nonselectedPictureText>
      <key>en</key>
-     <value>Any text</value>
+     <value>C81F5963-79D3-D79F-F593-36C0FBC305A0</value>
     </nonselectedPictureText>
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
@@ -419,16 +331,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Değer tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид представления</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Expression type</value>
+   <value>B244E5A2-D507-B4DD-DAC8-87D050284281</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <groupHorizontalAlign>Center</groupHorizontalAlign>
@@ -542,16 +446,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup RegExp kontrol</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа RegExp проверка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group RegExp check</value>
+   <value>E59E84A9-6703-FD77-7DEC-C2EE2B9FC042</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <groupVerticalAlign>Center</groupVerticalAlign>
@@ -633,16 +529,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ön izleme</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Предварительный просмотр</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Preview</value>
+    <value>645C9882-FFBA-2092-2BC2-2A4A31839D82</value>
    </title>
    <extendedTooltip>
     <name>PagePreviewExtendedTooltip</name>
@@ -862,16 +750,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Satırlar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Rows</value>
+    <value>E134C3D2-587D-134E-E3D7-76853D42A73F</value>
    </title>
    <extendedTooltip>
     <name>PageTableTestRowsExtendedTooltip</name>
@@ -1262,16 +1142,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Satır parçası</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Части строки</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Row parts</value>
+    <value>DC1F65FB-D6E6-8D6E-E497-75EFFEF5DF8F</value>
    </title>
    <extendedTooltip>
     <name>PageRowPartsExtendedTooltip</name>
@@ -1295,16 +1167,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Rows</value>
+   <value>4F821B79-E76F-C477-7416-6D42BF82E04D</value>
   </title>
   <extendedTooltip>
    <name>PageTestRowsExtendedTooltip</name>
@@ -1389,16 +1253,8 @@
  <attributes>
   <name>TestRexExpStrings</name>
   <title>
-   <key>tr</key>
-   <value>RexExp satırları test et</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тестировать RefExp строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Test rex exp strings</value>
+   <value>0FC646B6-C074-23EE-E728-857A296F270B</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1416,16 +1272,8 @@
   <columns>
    <name>Row</name>
    <title>
-    <key>tr</key>
-    <value>Satır</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Строка</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Row</value>
+    <value>D1DE919F-E08C-5C4C-C454-41BA85FCA89D</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1443,16 +1291,8 @@
  <attributes>
   <name>RegExp</name>
   <title>
-   <key>tr</key>
-   <value>RegExp</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Регулярные выражения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Reg exp</value>
+   <value>8364664A-EC7D-BBB0-0E52-232A490FD563</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1469,16 +1309,8 @@
  <attributes>
   <name>HTMLRegExpTestRowsAnalyze</name>
   <title>
-   <key>tr</key>
-   <value>HTML RegExp test satırlar analiz</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>HTML RegExp анализ тестрования строк</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>HTMLReg exp test rows analyze</value>
+   <value>6ABF9A0C-7204-E65C-CA5E-E17D27332A17</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1495,16 +1327,8 @@
  <formCommands>
   <name>FillTestRows</name>
   <title>
-   <key>tr</key>
-   <value>Test satır doldur</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заполнить тестовые строки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fill test rows</value>
+   <value>96308714-124C-31B3-3E02-2A658F0B2E4F</value>
   </title>
   <id>1</id>
   <use>
@@ -1520,16 +1344,8 @@
  <formCommands>
   <name>UpdateRegExp</name>
   <title>
-   <key>tr</key>
-   <value>RegExp değiştir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Обновить RegExp</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Update RegExp</value>
+   <value>2F7384D8-AA1C-2268-8569-9232364ED237</value>
   </title>
   <id>2</id>
   <use>
@@ -1549,16 +1365,8 @@
  <formCommands>
   <name>Done</name>
   <title>
-   <key>tr</key>
-   <value>Tamamlandı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Завершено</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Done</value>
+   <value>D98F9CA8-FC1B-AA4C-C70A-AE4AF5AA83EB</value>
   </title>
   <id>3</id>
   <use>

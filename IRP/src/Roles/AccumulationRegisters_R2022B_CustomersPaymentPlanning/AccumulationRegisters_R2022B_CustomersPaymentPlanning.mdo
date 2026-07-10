@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b9f4f60a-0d92-42a6-8e73-7215d44a5946">
  <name>AccumulationRegisters_R2022B_CustomersPaymentPlanning</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R2022B MüşteriÖdemePlanlaması</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R2022B ПланированиеПлатежейКлиентов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R2022B CustomersPaymentPlanning</value>
+  <value>7F1B5440-E9FD-FFA9-9FF4-40E951C796BB_________________</value>
  </synonym>
 </mdclass:Role>

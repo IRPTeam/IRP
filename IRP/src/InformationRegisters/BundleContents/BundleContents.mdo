@@ -11,46 +11,22 @@
  </producedTypes>
  <name>BundleContents</name>
  <synonym>
-  <key>tr</key>
-  <value>Paket içeriği</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Содержимое наборов номенклатуры</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Bundles content</value>
+  <value>51E02301-7A45-E8FB-B803-3F0CD80DAC85</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
  <writeMode>RecorderSubordinate</writeMode>
  <dataLockControlMode>Managed</dataLockControlMode>
  <listPresentation>
-  <key>tr</key>
-  <value>Paket içeriği</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Содержимое наборов номенклатуры</value>
- </listPresentation>
- <listPresentation>
   <key>en</key>
-  <value>Bundles content</value>
+  <value>3256E740-ED82-76E0-055D-D88DADE185EC</value>
  </listPresentation>
  <resources uuid="619bc356-6709-4982-a405-5f6d402386f0">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>75B7CB53-52A7-8BB4-4411-18EC99ACA683</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -64,16 +40,8 @@
  <dimensions uuid="bb1aa1dd-5b75-484d-8983-1bc93df50d92">
   <name>ItemKeyBundle</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant takımı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Набор характеристик</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key bundle</value>
+   <value>BDA23078-D217-A9E3-3E08-814E48B336CA</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -88,16 +56,8 @@
  <dimensions uuid="dcaf2058-e605-4077-852a-2bc66faabee3">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>0AAF0860-55CF-D1DE-EA4B-B01A66015D48</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

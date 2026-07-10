@@ -11,56 +11,24 @@
  </producedTypes>
  <name>UserSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı varsayılan ayarları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Пользовательские настройки по умолчанию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>User defaults settings</value>
+  <value>233B5D9B-15FD-7C04-46B8-83B61C08401A</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Kullanıcı varsayılan ayarı</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Пользовательские настройки по умолчанию</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>User default settings</value>
+  <value>CBA676B4-9F01-BD7E-E4D1-1246132A4341</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Kullanıcı varsayılan ayarları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Пользовательские настройки по умолчанию</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>User defaults settings</value>
+  <value>A0FA3E46-67D5-EFA7-7D32-2E4D9E0BB8D7</value>
  </listPresentation>
  <resources uuid="67edf6ff-8a5a-403b-a302-278d9d6f3338">
   <name>KindOfAttribute</name>
   <synonym>
-   <key>tr</key>
-   <value>Öznitellik türü</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид реквизита</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Kind of attribute</value>
+   <value>C92A7B3B-BBEC-540C-C7DA-AA314965FB21</value>
   </synonym>
   <type>
    <types>EnumRef.KindsOfAttributes</types>
@@ -74,16 +42,8 @@
  <resources uuid="b5c5bfb2-6b37-4783-9ef4-b0487f3aa19a">
   <name>Value</name>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Значение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Value</value>
+   <value>95DF6ED0-C242-F27D-D60D-D526C41405C7</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -104,23 +64,13 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </resources>
  <dimensions uuid="294152d5-e325-4588-8b43-c7a9e643bcb0">
   <name>UserOrGroup</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı veya grup</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Пользователь или группа пользователей</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User or group</value>
+   <value>5A066F09-AA1D-878B-B34A-AFFB1F43C71E</value>
   </synonym>
   <type>
    <types>CatalogRef.UserGroups</types>
@@ -137,16 +87,8 @@
  <dimensions uuid="439dca42-68f6-4b1b-81e8-0b869833b22e">
   <name>MetadataObject</name>
   <synonym>
-   <key>tr</key>
-   <value>Üstveri nesnesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Объект метаданных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Metadata object</value>
+   <value>22AC2F22-C431-B117-70FE-EBBA9617AEC8</value>
   </synonym>
   <type>
    <types>String</types>
@@ -158,24 +100,14 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="fa6d600a-4784-4609-a589-55d3b69b8c8e">
   <name>AttributeName</name>
   <synonym>
-   <key>tr</key>
-   <value>Alan ismi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Наименование реквизита</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Attribute name</value>
+   <value>567BB90B-2D6C-D6DD-D259-9E1EA300D942</value>
   </synonym>
   <type>
    <types>String</types>
@@ -187,9 +119,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
 </mdclass:InformationRegister>

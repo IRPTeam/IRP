@@ -108,16 +108,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup kodu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа код</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group code</value>
+   <value>55E19187-77F5-CD8B-B436-624341B34338</value>
   </title>
   <extendedTooltip>
    <name>GroupCodeExtendedTooltip</name>
@@ -217,16 +209,8 @@
  <attributes>
   <name>PhoneNumber</name>
   <title>
-   <key>tr</key>
-   <value>Telefon numarası</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номер телефона</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Phone number</value>
+   <value>AB7B2EC1-E3C8-1AD8-84C0-030C63E82EB4</value>
   </title>
   <id>1</id>
   <valueType>
@@ -245,16 +229,8 @@
  <attributes>
   <name>SendedSMSCode</name>
   <title>
-   <key>tr</key>
-   <value>Gönderilen kod</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отправленный код</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Sended code</value>
+   <value>E6AF7CDB-16F7-2893-3BEF-F8796D3E8DBE</value>
   </title>
   <id>2</id>
   <valueType>
@@ -273,16 +249,8 @@
  <attributes>
   <name>SendedDate</name>
   <title>
-   <key>tr</key>
-   <value>Gönderim tarihi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дата отправки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Sended date</value>
+   <value>2D5E79AE-2F35-3A0B-B82E-E0890AD55C4A</value>
   </title>
   <id>4</id>
   <valueType>
@@ -299,16 +267,8 @@
  <attributes>
   <name>Code</name>
   <title>
-   <key>tr</key>
-   <value>Kod</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Код</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Code</value>
+   <value>94F04854-40D0-B1E0-09AA-A519B975C9DB</value>
   </title>
   <id>5</id>
   <valueType>
@@ -327,16 +287,8 @@
  <attributes>
   <name>IntegrationSettings</name>
   <title>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Интеграционные настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Integration settings</value>
+   <value>06D4A844-D59F-9D0A-AE5C-C5C54057C14E</value>
   </title>
   <id>6</id>
   <valueType>
@@ -352,16 +304,8 @@
  <attributes>
   <name>PredefinedText</name>
   <title>
-   <key>tr</key>
-   <value>Önceden tanımlanmış metin</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предопределенный текст</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Predefined text</value>
+   <value>2899AEE2-10A8-61B8-8ACC-CDA5ABB7FEF4</value>
   </title>
   <id>7</id>
   <valueType>
@@ -378,16 +322,8 @@
  <formCommands>
   <name>RetryToSend</name>
   <title>
-   <key>tr</key>
-   <value>Yeniden dene</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Повторить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Retry</value>
+   <value>B5632E74-A36F-AE85-52A4-4217B9E593EE</value>
   </title>
   <id>1</id>
   <use>
@@ -407,16 +343,8 @@
  <formCommands>
   <name>ShowCode</name>
   <title>
-   <key>tr</key>
-   <value>Kodu göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать код</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show code</value>
+   <value>EAEBFB27-DE34-5238-85ED-DD11FEFB5828</value>
   </title>
   <id>2</id>
   <use>

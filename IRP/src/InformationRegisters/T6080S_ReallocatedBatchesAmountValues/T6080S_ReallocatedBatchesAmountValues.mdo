@@ -11,16 +11,8 @@
  </producedTypes>
  <name>T6080S_ReallocatedBatchesAmountValues</name>
  <synonym>
-  <key>tr</key>
-  <value>T6080 Tranfer edilen malzeme partilerin tutar değerleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T6080 Значения сумм перемещенных партий товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T6080 Reallocated batches amount values</value>
+  <value>4176AF82-DC60-0F2D-D3F6-603C928F2FC8___</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +22,8 @@
  <resources uuid="e3f0555f-181c-4db5-bf98-288829598617">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>2F68A169-A705-975F-F64D-D4F6B8465B00</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -53,16 +37,8 @@
  <resources uuid="a3175003-5d67-4333-b65e-54612d9f684d">
   <name>InvoiceAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Инвойсная стоимость сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Invoice amount</value>
+   <value>84E01DD9-31C4-C348-8DBB-B0ADB9E2761D</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -76,16 +52,8 @@
  <resources uuid="71546a51-546f-47fd-88a1-92ccf2a98366">
   <name>InvoiceTaxAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura vergi tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма налогов инвойсной стоимости</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Invoice tax amount</value>
+   <value>DF43FCD3-4397-3456-6C5A-AE986D00DC95</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -99,16 +67,8 @@
  <resources uuid="f03631d7-fd3d-4257-9e0d-e85db96d9a8e">
   <name>IndirectCostAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Dolaylı maliyet tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма косвенных расходов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Indirect cost amount</value>
+   <value>C18AB5B1-32D4-4A57-7F81-184D612CE8D0</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -122,16 +82,8 @@
  <resources uuid="3f740ada-09f7-4178-a32d-7248042f344f">
   <name>IndirectCostTaxAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Dolaylı maliyet vergi tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма налогов косвенных расходов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Indirect cost tax amount</value>
+   <value>393394B6-F58D-0198-8D50-063E2ED3167B</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -145,16 +97,8 @@
  <resources uuid="021080c6-a3f7-488f-8f4b-a4f2a355a121">
   <name>ExtraCostAmountByRatio</name>
   <synonym>
-   <key>tr</key>
-   <value>Orana göre ek maliyet miktarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Доп. стоимость по коефф.</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Extra cost amount by ratio</value>
+   <value>FEECC7BF-7C02-61A9-9FA2-253332465AA0</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -168,16 +112,8 @@
  <resources uuid="9e18bfac-0fda-496e-9796-2de65d3bdf7e">
   <name>ExtraCostTaxAmountByRatio</name>
   <synonym>
-   <key>tr</key>
-   <value>Oranla ek maliyet vergi tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма налогов доп. стоимости по коефф.</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Extra cost tax amount by ratio</value>
+   <value>1E687583-318B-A68C-C099-90CBFF0ACC25</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -191,16 +127,8 @@
  <resources uuid="17d27021-1583-4b1c-a5b2-c23b3f366374">
   <name>ExtraDirectCostAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Ekstra doğrudan maliyet tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма косвенной стоимости</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Extra direct cost amount</value>
+   <value>CB2E6C66-7FB2-FCDB-BF62-2157AC54E25E</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -214,16 +142,8 @@
  <resources uuid="9033008e-7631-4de0-9f8b-6e5f7f6c142a">
   <name>ExtraDirectCostTaxAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek doğrudan maliyet vergi miktarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма налоговой прямой стоимости</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Extra direct cost tax amount</value>
+   <value>F6C4931D-F55C-045A-AF35-5BAAEC6DE719</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -237,16 +157,8 @@
  <resources uuid="6a955596-4430-4915-8f34-64279d2036ce">
   <name>AllocatedCostAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tahsis edilen maliyet miktarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма доп. расходов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Allocated cost amount</value>
+   <value>32555C45-9F04-F1FB-B6AF-FCD973BCD951</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -260,16 +172,8 @@
  <resources uuid="06fa9860-6b9e-412b-aa78-2266e16c5077">
   <name>AllocatedCostTaxAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Ayrılan maliyet vergi miktarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма налогов доп. расходов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Allocated cost tax amount</value>
+   <value>89EB251A-8869-62FC-C701-1D4E6D594DB2</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -283,16 +187,8 @@
  <resources uuid="c1422fc7-3c16-4560-a21b-b104bf548368">
   <name>AllocatedRevenueAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Dağıtılan gelir miktarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма доп. доходов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Allocated revenue amount</value>
+   <value>1FD87EAE-755E-FDFA-AD87-7DA6D838C9D6</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -306,16 +202,8 @@
  <resources uuid="67df82b7-03fb-411b-8aea-1fb235852c2e">
   <name>AllocatedRevenueTaxAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Ayrılan gelir vergisi tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма налогов доп. доходов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Allocated revenue tax amount</value>
+   <value>9134F930-4EF3-9805-5F67-7BC98A7BA7B2</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -329,16 +217,8 @@
  <resources uuid="aa57e914-6af8-4ed9-ad4c-7c1fe59378bd">
   <name>PreliminaryQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Ön miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Предварительное количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Preliminary quantity</value>
+   <value>A7E4573E-6B17-B413-3339-9E1B0F670BD2</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -351,16 +231,8 @@
  <resources uuid="a9169198-9f4f-4344-acb0-7671287aa2f1">
   <name>PreliminaryAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Ön tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Предварительная сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Preliminary amount</value>
+   <value>EB2CF5FE-7E07-EBF4-4DCE-EE42BBB29A9B</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -373,16 +245,8 @@
  <resources uuid="67d06eb8-730c-46cf-88e4-4f67b36fb43f">
   <name>PreliminaryTaxAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Ön vergi tutarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Предварительная сумма налога</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Preliminary tax amount</value>
+   <value>D3C19B63-36D6-4F0E-E393-361C0E71E326</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -395,16 +259,8 @@
  <dimensions uuid="5cd8efa9-c3a5-4d58-a217-89b3ce627e4f">
   <name>OutgoingDocument</name>
   <synonym>
-   <key>tr</key>
-   <value>Çıkış evrakı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Исходящий документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Outgoing document</value>
+   <value>2FA1DAC8-F829-89E9-9584-48B037C81FC5</value>
   </synonym>
   <type>
    <types>DocumentRef.BatchReallocateOutgoing</types>
@@ -420,16 +276,8 @@
  <dimensions uuid="9597e956-d3f5-4669-8f17-853cf7554755">
   <name>IncomingDocument</name>
   <synonym>
-   <key>tr</key>
-   <value>Gelen evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Входящий документ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Incoming document</value>
+   <value>90DB2E25-FB25-8C23-31AC-C43FC8F7DDCC</value>
   </synonym>
   <type>
    <types>DocumentRef.BatchReallocateIncoming</types>
@@ -445,16 +293,8 @@
  <dimensions uuid="7216dd47-3b77-4051-a393-5cd735e090bb">
   <name>BatchKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Parti anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ партии</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Batch key</value>
+   <value>DCCB3364-016A-2886-6EEE-E95644490278</value>
   </synonym>
   <type>
    <types>CatalogRef.BatchKeys</types>

@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ff97fa76-b09c-47ee-b9e8-79bbdebbf10e">
  <name>OldReports</name>
  <synonym>
-  <key>tr</key>
-  <value>Eski raporlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Старые отчеты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Old reports</value>
+  <value>65FFAA92-D193-E7FE-E6E2-20A525DA8A3D</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <content>Report.A0010_TrialBalance</content>

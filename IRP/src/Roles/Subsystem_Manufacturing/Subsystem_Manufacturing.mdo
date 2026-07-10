@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="55a49c5a-1153-4faa-9a32-fe5a9e472186">
  <name>Subsystem_Manufacturing</name>
  <synonym>
-  <key>tr</key>
-  <value>Alt sistem Üretim</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Подсистема Производство</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Subsystem Manufacturing</value>
+  <value>002B3D99-E617-C585-5070-039167016605</value>
  </synonym>
 </mdclass:Role>

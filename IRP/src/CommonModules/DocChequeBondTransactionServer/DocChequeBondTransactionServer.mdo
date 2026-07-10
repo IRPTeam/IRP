@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="02d8325b-cc38-4856-b7db-e95caa02ceaf">
  <name>DocChequeBondTransactionServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak çek/senet bordrosu server</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ операция по чекам и долговым обязательствам сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc cheque bond transaction server</value>
+  <value>2653CA33-D66C-8DF5-5978-835897D953C1</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

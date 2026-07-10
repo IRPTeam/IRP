@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Evrak seç</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Выбрать документ</value>
- </title>
- <title>
   <key>en</key>
-  <value>Select document</value>
+  <value>8B50E37A-AEF0-3A48-81EB-B1B196598990</value>
  </title>
  <items xsi:type="form:Table">
   <name>RevenueValueTable</name>
@@ -279,16 +271,8 @@
  <attributes>
   <name>RevenueValueTable</name>
   <title>
-   <key>tr</key>
-   <value>Gelir değer tablosu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Таблица дохода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Revenue value table</value>
+   <value>15324E3E-0922-0575-5404-468367DFFC9C</value>
   </title>
   <id>1</id>
   <valueType>
@@ -303,16 +287,8 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Документ</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document</value>
+    <value>8052D90B-DB3A-E93A-A2DF-FCD3F48005DE</value>
    </title>
    <id>2</id>
    <valueType>
@@ -329,16 +305,8 @@
   <columns>
    <name>Currency</name>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>2E0B48F6-EFD2-3AC6-62A9-91C21FFF6A6A</value>
    </title>
    <id>5</id>
    <valueType>
@@ -354,16 +322,8 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Сумма</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Amount</value>
+    <value>18A38D5B-231E-4856-6CA0-085F28288E14</value>
    </title>
    <id>6</id>
    <valueType>

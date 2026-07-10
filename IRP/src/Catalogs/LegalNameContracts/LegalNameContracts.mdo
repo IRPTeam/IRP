@@ -9,16 +9,8 @@
  </producedTypes>
  <name>LegalNameContracts</name>
  <synonym>
-  <key>tr</key>
-  <value>Fatura hesap kontratları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Договора контрагентов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Legal name contracts</value>
+  <value>E548945A-7778-6487-73B9-955C026BCCA8</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.LegalNameContracts.StandardAttribute.Code</inputByString>
@@ -136,16 +128,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Fatura hesap kontratı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Договор контрагента</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Legal name contract</value>
+  <value>DF9D2512-EBE4-9041-1AF0-024E15147997</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -164,16 +148,8 @@
  <attributes uuid="9ce2c4ca-3159-47b3-bb19-fb85e8acb098">
   <name>BeginDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Начало периода</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Begin date</value>
+   <value>9B7F4949-FA89-E6E3-33A0-01AB7EE985AB</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -190,16 +166,8 @@
  <attributes uuid="1739d44f-0f31-4710-b5fe-fb9d991d1411">
   <name>EndDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş tarih</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Конец периода</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>End date</value>
+   <value>5D94292D-77A3-58E0-076B-B566C2178FC8</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -216,16 +184,8 @@
  <attributes uuid="9f2f084b-f226-4c00-b341-aa1a93636bc2">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>F3F070B4-0516-2D88-8E74-45161E0A040B</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -246,16 +206,8 @@
  <attributes uuid="b4950f6d-cca2-4723-8d0c-d409695e6ab8">
   <name>PartnerBankAccount</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap banka hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Банковский счет партнера</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner bank account</value>
+   <value>3DDA3CED-233D-FFA4-47F2-22AADCCA363A</value>
   </synonym>
   <type>
    <types>CatalogRef.PartnersBankAccounts</types>
@@ -269,16 +221,8 @@
  <attributes uuid="80efeeb2-3a26-472c-865c-42201e5c2337">
   <name>ContractNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Kontrat numarası</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Номер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Contract number</value>
+   <value>7FDC99CB-7C13-05C3-3979-9BF861F7833D</value>
   </synonym>
   <type>
    <types>String</types>
@@ -295,16 +239,8 @@
  <attributes uuid="f060323b-1daa-44c0-ab35-35c503f2394a">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>22438745-3F38-4CC4-4DB5-5E693DF1318C</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -318,16 +254,8 @@
  <attributes uuid="18a3bd7b-cc5a-4f32-8b68-a6b6b949ba80">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>A7483643-60A8-2FB5-5D5E-E826C5C1BBCA</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -346,30 +274,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>6EE6B8FD-C280-90BD-D842-2985870394A3</value>
   </synonym>
   <attributes uuid="0a566b61-3111-4f64-850b-089c7cd8e5ed">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Свойство</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>4362DC03-3A0D-2E69-9C55-5C96776DF0A5</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -382,16 +294,8 @@
   <attributes uuid="0f20c8db-29ce-4ed3-a9b4-28569095bdd4">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>20EE4FC4-6472-5A35-54FF-FC9620398E08</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -409,16 +313,8 @@
  <forms uuid="0f7d7d42-e7fd-4d8e-b2fc-c15596f88d13">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>ADC55CDD-3034-03AF-FD76-6E6C3B511874</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -426,16 +322,8 @@
  <forms uuid="3f943910-7cac-4461-bb70-c7fb99a66629">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>5CEBBC8B-089B-14CB-B46A-AB4CAE970021</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -443,16 +331,8 @@
  <forms uuid="ebd25ed4-769d-42b7-a38d-f05e4d9b9383">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>ABE3B25A-1DDF-8D24-4CF6-6AA8D39BDEA9</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

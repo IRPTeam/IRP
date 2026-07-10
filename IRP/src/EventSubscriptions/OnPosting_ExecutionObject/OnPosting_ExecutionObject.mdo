@@ -2,16 +2,8 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="29982315-5405-452b-8190-19e6bcd974dc">
  <name>OnPosting_ExecutionObject</name>
  <synonym>
-  <key>tr</key>
-  <value>Yürütme nesnesini kaydederken</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>При проведении объекта исполнения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>On posting execution object</value>
+  <value>CD9D41F0-A930-3651-1E8A-AAF18D1424BD</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

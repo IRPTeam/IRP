@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R1010A_PurchaseOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>R1010A Satınalma siparişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R1010A Заказы поставщикам</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R1010A Purchase orders</value>
+  <value>67AB8C96-6D39-5B80-0B2C-C37BA52F603F</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R1010A_PurchaseOrders.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="0c807e9c-ca48-4052-923d-9328e7d3b013">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>0C410E2F-BA77-DC61-1648-8CA02F016AAA</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

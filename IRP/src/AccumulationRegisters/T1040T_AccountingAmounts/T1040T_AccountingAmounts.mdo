@@ -10,16 +10,8 @@
  </producedTypes>
  <name>T1040T_AccountingAmounts</name>
  <synonym>
-  <key>tr</key>
-  <value>T1040 Muhasebe tutarlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T1040 Бухгалтерские суммы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T1040 Accounting amounts</value>
+  <value>70F0131F-5325-C7DD-DE6D-D1E5A7EAE8C2</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="8e353ff0-2691-4d62-becd-0b69fd727960">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>99DD7AA8-B9F4-5B05-5EAB-B36EE4B1F08C</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +33,8 @@
  <resources uuid="5055414a-44f8-4256-85cd-d4e31ddf91db">
   <name>DrCurrencyAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Bç dövizli tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма в валюте Дт</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Dr currency amount</value>
+   <value>35ABE148-D679-DAF3-3B3F-FFB7998B8897</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +46,8 @@
  <resources uuid="6f9fcdd3-f291-4e43-9ed8-948734ce60d6">
   <name>CrCurrencyAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Ak dövizli tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма в валюте Кт</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cr currency amount</value>
+   <value>82CAD8CD-657A-E0C8-8F10-072EFE413F04</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -91,16 +59,8 @@
  <attributes uuid="993d0d55-3bed-4827-9b07-70608ec7a544">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отложенный расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Deferred calculation</value>
+   <value>B10ECA81-C644-6E90-0E89-9BF2B83E1AC4</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -112,16 +72,8 @@
  <attributes uuid="6cfbf7eb-73f1-452a-8325-015f3d55427e">
   <name>AdvancesClosing</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap avans kapaması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Закрытие авансов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Advances closing</value>
+   <value>5BBD0A8C-46EC-E49A-A664-428D6C6567D9</value>
   </synonym>
   <type>
    <types>DocumentRef.VendorsAdvancesClosing</types>
@@ -134,16 +86,8 @@
  <dimensions uuid="9093ee6d-cb6a-461c-b215-2ab1e8364f21">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row key</value>
+   <value>380DFF3E-7853-3CA0-0FE9-99038A566666</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -157,16 +101,8 @@
  <dimensions uuid="a817cb17-da92-444c-bd6e-2183c689605f">
   <name>Operation</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Операция</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Operation</value>
+   <value>BBF1BC2A-85B2-9F4E-EE63-3A1E3FDF6A35</value>
   </synonym>
   <type>
    <types>CatalogRef.AccountingOperations</types>
@@ -180,16 +116,8 @@
  <dimensions uuid="62abf51f-e8b4-44d1-bea1-42604ed988e1">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>BCB4D463-9EE5-9F40-0D46-61D761DCE0B6</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -203,16 +131,8 @@
  <dimensions uuid="47952fb3-5cef-409b-a504-c3964084edb6">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>227D032E-7306-F406-63D4-4174540598FD</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -225,16 +145,8 @@
  <dimensions uuid="761642fc-2a73-4f78-be0b-e514af4fc441">
   <name>RevaluatedCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>Değerlenen döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Переоцениваемая валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Revaluated currency</value>
+   <value>D1D652A7-2212-35F0-08CC-CC494783407F</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -247,16 +159,8 @@
  <dimensions uuid="5f25c63c-0a60-4547-940f-0ba12fec32b2">
   <name>DrCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>Borç döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта Дт</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Dr currency</value>
+   <value>3D2AA624-950C-DAA7-782F-FE882C7A7D2A</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -269,16 +173,8 @@
  <dimensions uuid="b5d3e3cb-365c-4b9f-9045-ce3c5d664d1b">
   <name>CrCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>Alacak dövizi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта Кт</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Cr currency</value>
+   <value>D939CFA4-0874-30D2-2676-6983229C6F17</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

@@ -331,16 +331,8 @@
  <formCommands>
   <name>ShowDocument</name>
   <title>
-   <key>tr</key>
-   <value>Belgeyi göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать документ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show document</value>
+   <value>B949D4CC-0DBB-4E54-437F-F0EC2B6ABBF1</value>
   </title>
   <id>1</id>
   <use>

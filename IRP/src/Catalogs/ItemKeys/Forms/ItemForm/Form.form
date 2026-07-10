@@ -297,16 +297,8 @@
        <radioButtonsType>Tumbler</radioButtonsType>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Kendi çekimiz</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>Собственная</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>Own</value>
+         <value>881CE223-0CEE-55F6-6FEF-FD69FFDA4791</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>Own</value>
@@ -314,16 +306,8 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Üst öğeden al</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>Унаследованная</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>Inherit</value>
+         <value>6E4EBBD5-B116-6438-84A4-4504D62D530B</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>Inherit</value>
@@ -474,16 +458,8 @@
        <radioButtonsType>Tumbler</radioButtonsType>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Kendi çekimiz</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>Собственная</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>Own</value>
+         <value>9E21FB00-6BD0-2A85-5746-618DF9631207</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>Own</value>
@@ -491,16 +467,8 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Üst öğeden al</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>Унаследованная</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>Inherit</value>
+         <value>25D7E5B3-7C21-DBE8-8272-2A027F098C1B</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>Inherit</value>
@@ -514,16 +482,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup paketleme birimi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа ед.изм. упаковки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group of Package unit</value>
+      <value>AD355BAF-8C57-E1CE-EB82-239CC95D3B76</value>
      </title>
      <extendedTooltip>
       <name>GroupPackageUnitExtendedTooltip</name>
@@ -900,16 +860,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Boyutlar</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Измерения</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Dimensions</value>
+     <value>56B5867B-6BBB-0A31-11C8-8BB4AFA857E9</value>
     </title>
     <extendedTooltip>
      <name>GroupDimensionsExtendedTooltip</name>
@@ -926,16 +878,8 @@
      <group>Vertical</group>
      <behavior>Collapsible</behavior>
      <collapsedRepresentationTitle>
-      <key>tr</key>
-      <value>Boyutlar</value>
-     </collapsedRepresentationTitle>
-     <collapsedRepresentationTitle>
-      <key>ru</key>
-      <value>Измерения</value>
-     </collapsedRepresentationTitle>
-     <collapsedRepresentationTitle>
       <key>en</key>
-      <value>Dimensions</value>
+      <value>26D108A4-3D7B-B2BC-C1F0-0D2164C538D3</value>
      </collapsedRepresentationTitle>
      <collapsed>true</collapsed>
      <representation>WeakSeparation</representation>
@@ -995,16 +939,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ağırlık bilgisi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Информация о весе</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Weight information</value>
+     <value>EC792B76-88B6-AB4A-A866-6DA4EF36B415</value>
     </title>
     <extendedTooltip>
      <name>GroupWeightInformationExtendedTooltip</name>
@@ -1021,16 +957,8 @@
      <group>HorizontalIfPossible</group>
      <behavior>Collapsible</behavior>
      <collapsedRepresentationTitle>
-      <key>tr</key>
-      <value>Ağırlık bilgisi</value>
-     </collapsedRepresentationTitle>
-     <collapsedRepresentationTitle>
-      <key>ru</key>
-      <value>Информация о весе</value>
-     </collapsedRepresentationTitle>
-     <collapsedRepresentationTitle>
       <key>en</key>
-      <value>Weight information</value>
+      <value>119E68E3-99CA-1AB2-2F1F-FA689CC33344</value>
      </collapsedRepresentationTitle>
      <collapsed>true</collapsed>
      <representation>WeakSeparation</representation>
@@ -1431,16 +1359,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Fiyatları etkileyen MD5</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>MD5 влияния на цену</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Affect pricing MD5</value>
+     <value>33C0786C-C4B8-BBD7-7255-507C6E261EA9</value>
     </title>
     <extendedTooltip>
      <name>GroupAffectPricingMD5ExtendedTooltip</name>
@@ -1508,16 +1428,8 @@
       <radioButtonsType>Tumbler</radioButtonsType>
       <choiceList>
        <presentation>
-        <key>tr</key>
-        <value>Kendi çekimiz</value>
-       </presentation>
-       <presentation>
-        <key>ru</key>
-        <value>Собственные</value>
-       </presentation>
-       <presentation>
         <key>en</key>
-        <value>Own</value>
+        <value>69733F41-3E15-0F65-5532-2D122CAE053B</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>Own</value>
@@ -1525,16 +1437,8 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>tr</key>
-        <value>Üst öğeden al</value>
-       </presentation>
-       <presentation>
-        <key>ru</key>
-        <value>Унаследованная</value>
-       </presentation>
-       <presentation>
         <key>en</key>
-        <value>Inherit</value>
+        <value>2AA51CDA-EFB8-BA1C-C66F-F8EAAF7488C5</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>Inherit</value>
@@ -1994,16 +1898,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Gönderenler bilgisi</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Информация о кометенте</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Consignors info</value>
+     <value>B182333C-A709-84CA-A34C-CC38BFFCC341</value>
     </title>
     <extendedTooltip>
      <name>GroupConsignorsInfoExtendedTooltip</name>
@@ -2020,16 +1916,8 @@
      <group>Vertical</group>
      <behavior>Collapsible</behavior>
      <collapsedRepresentationTitle>
-      <key>tr</key>
-      <value>Gönderenler bilgisi</value>
-     </collapsedRepresentationTitle>
-     <collapsedRepresentationTitle>
-      <key>ru</key>
-      <value>Информация о грузоотправителях</value>
-     </collapsedRepresentationTitle>
-     <collapsedRepresentationTitle>
       <key>en</key>
-      <value>Consignors info</value>
+      <value>75CFB450-D7D9-B1D6-6742-29B5C8D404AF</value>
      </collapsedRepresentationTitle>
      <collapsed>true</collapsed>
      <representation>WeakSeparation</representation>
@@ -2278,16 +2166,8 @@
  <attributes>
   <name>SpecificationMode</name>
   <title>
-   <key>tr</key>
-   <value>Ürün reçetesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Спецификация товара</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Specification</value>
+   <value>0506186F-C819-322A-A81F-F69DD465BA64</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2304,16 +2184,8 @@
  <attributes>
   <name>ItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вид номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item type</value>
+   <value>346AADEC-3EC2-0A74-4759-9C0DE8BAA984</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2329,16 +2201,8 @@
  <attributes>
   <name>InheritUnit</name>
   <title>
-   <key>tr</key>
-   <value>Bağlı birim</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Унаследованная единица измерения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Inherit unit</value>
+   <value>9B21D951-3002-6636-61BC-C6342476979F</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2354,16 +2218,8 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Просмотр изображений HTML</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Picture view HTML</value>
+   <value>5D711CBF-74D7-B4BB-B051-1897DDC39749</value>
   </title>
   <id>6</id>
   <valueType>
@@ -2380,16 +2236,8 @@
  <attributes>
   <name>AddAttributeViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Ek özellik görünümü HTML</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отображение дополнительного реквизита в HTML поле</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Additional attribute view HTML</value>
+   <value>7F4BE305-42A0-4EBF-F385-587A9353A606</value>
   </title>
   <id>7</id>
   <valueType>
@@ -2406,16 +2254,8 @@
  <attributes>
   <name>ConsignorInfoMode</name>
   <title>
-   <key>tr</key>
-   <value>Komisyoncu bilgi modu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Режим информации комитента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Consignor info mode</value>
+   <value>EC94F1BA-0918-6265-5FBE-E5E189AA4DA7</value>
   </title>
   <id>8</id>
   <valueType>
@@ -2432,16 +2272,8 @@
  <attributes>
   <name>InheritConsignorsInfo</name>
   <title>
-   <key>tr</key>
-   <value>Gönderen bilgilerini devral</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наследовать информацию комитента</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Inherit consignors info</value>
+   <value>F3DB06E3-2043-BE53-3BB1-13B11D7174A5</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2456,16 +2288,8 @@
   <columns>
    <name>Company</name>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>0AF35132-7FDB-B94E-E774-42DC9F91ADFC</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2481,16 +2305,8 @@
   <columns>
    <name>Consignor</name>
    <title>
-    <key>tr</key>
-    <value>Konsiyeye veren</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Комитент</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Consignor</value>
+    <value>B8B45AD7-0960-069C-C646-693DD30F06C8</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2507,16 +2323,8 @@
  <attributes>
   <name>PackageUnitMode</name>
   <title>
-   <key>tr</key>
-   <value>Paketleme birim modu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Режим ед.изм. упаковки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Package unit mode</value>
+   <value>905753CF-9780-C5A2-20F0-0A5106D1A6C6</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2534,16 +2342,8 @@
  <attributes>
   <name>InheritPackageUnit</name>
   <title>
-   <key>tr</key>
-   <value>Bağlı paketleme birimi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Унаследованная ед.изм. упаковки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Inherit package unit</value>
+   <value>BE61687F-CE8C-2CB9-9E4C-C30A90B2778B</value>
   </title>
   <id>13</id>
   <valueType>

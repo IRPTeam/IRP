@@ -10,16 +10,8 @@
  </producedTypes>
  <name>DELETE_R3040B_WithholdingTax</name>
  <synonym>
-  <key>tr</key>
-  <value>DELETE_R3040 Withholding tax</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>DELETE_R3040 Withholding tax</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>DELETE_R3040 Withholding tax</value>
+  <value>2FFF28B0-34B7-7A2D-D41F-F69FF3E5724E</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="498d4e4c-f0cc-4140-8193-236b4e1d8b0d">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>99FA560A-C6B0-5EC5-5BD5-5EF36D94FCEB</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="d023096d-1f2b-4121-8e6e-b3bdd66b2d13">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>BE41AD70-1BA4-EC5B-B99C-CE2979D2CD61</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="da016552-4e01-44a8-9095-1dc870465347">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>7C366853-FC8F-C027-715F-F21DB54BE7F4</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="178d4cf1-31d9-4759-9e19-9fd114437600">
   <name>Tax</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налог</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax</value>
+   <value>93020CBD-4BCF-9F52-2705-52BDD4CE3257</value>
   </synonym>
   <type>
    <types>CatalogRef.Taxes</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="482e4cc5-b280-40ba-9de3-03bd2bf168ed">
   <name>TaxRate</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi oranı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Налоговая ставка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Tax rate</value>
+   <value>D4FCC43A-4FBE-5622-27CC-C87F4F032776</value>
   </synonym>
   <type>
    <types>CatalogRef.TaxRates</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="3ec139d9-9037-4ff8-be71-919f1123e642">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>07AD1960-8A8C-9F5A-AE87-7CE0359FC15C</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -158,16 +102,8 @@
  <dimensions uuid="81a5c6f8-9451-4d02-9f46-f007318d2578">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>1553BB02-28AE-93DB-BDEA-A87628FAA35C</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -180,16 +116,8 @@
  <dimensions uuid="55bff1bc-dcfa-4504-88a3-224a27766593">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction currency</value>
+   <value>78260069-BE8E-05FD-D8EC-C866BA28DEFD</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

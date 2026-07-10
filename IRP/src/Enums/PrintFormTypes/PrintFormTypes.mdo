@@ -7,16 +7,8 @@
  </producedTypes>
  <name>PrintFormTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Yazdırma formu tipleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы печатных форм</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Print form types</value>
+  <value>2A2B8658-CAB3-28E3-3974-4446AC61B86F</value>
  </synonym>
  <standardAttributes>
   <dataHistory>Use</dataHistory>
@@ -39,31 +31,15 @@
  <enumValues uuid="68550154-23c9-45ef-a711-6afa74cc7149">
   <name>TXT</name>
   <synonym>
-   <key>tr</key>
-   <value>TXT</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>TXT</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>TXT</value>
+   <value>A07DED07-2AA2-2E9B-B1F4-402AF78CEE99</value>
   </synonym>
  </enumValues>
  <enumValues uuid="f8e6140c-a8c4-4e2e-a905-23ad9db5ba18">
   <name>MXL</name>
   <synonym>
-   <key>tr</key>
-   <value>MXL</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>MXL</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>MXL</value>
+   <value>898C1146-F979-173D-DED8-86ED72E4B1DE</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

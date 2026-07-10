@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseBundling</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Malzeme takım/setleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать наборы товаров (бандлы)</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use bundling</value>
+  <value>5491C8CB-8FF2-570E-ED5A-A898A3F8F1CB</value>
  </synonym>
  <type>
   <types>Boolean</types>

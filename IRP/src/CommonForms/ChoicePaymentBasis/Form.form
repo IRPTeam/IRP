@@ -367,28 +367,12 @@
     <autoMaxHeight>true</autoMaxHeight>
     <wrap>true</wrap>
     <format>
-     <key>tr</key>
-     <value>NFD=2</value>
-    </format>
-    <format>
-     <key>ru</key>
-     <value>NFD=2</value>
-    </format>
-    <format>
      <key>en</key>
-     <value>NFD=2</value>
+     <value>E99E7B99-46B8-2F96-6423-3556BA001ED6</value>
     </format>
-    <editFormat>
-     <key>tr</key>
-     <value>NFD=2</value>
-    </editFormat>
-    <editFormat>
-     <key>ru</key>
-     <value>NFD=2</value>
-    </editFormat>
     <editFormat>
      <key>en</key>
-     <value>NFD=2</value>
+     <value>6FF5641A-17C3-46E1-1552-2C95CF534E81</value>
     </editFormat>
     <chooseType>true</chooseType>
     <typeDomainEnabled>true</typeDomainEnabled>
@@ -543,16 +527,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List</value>
+   <value>B80ABA21-4BE1-6175-5E65-5B2C56EC9CB4</value>
   </title>
   <id>1</id>
   <valueType>
@@ -935,16 +911,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Evrak</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Документ</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Document</value>
+       <value>737F2F8A-EC6E-F950-005B-BDD5C23097DB</value>
       </content>
      </localValue>
     </title>
@@ -959,16 +927,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sözleşme</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Соглашение</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Partner term</value>
+       <value>E40A8873-86CE-680D-D6BC-C5A6BD1EC300</value>
       </content>
      </localValue>
     </title>
@@ -998,16 +958,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Perakende satış fişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Розничные чеки - Продажа</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Retail sales receipt</value>
+       <value>2EF40199-3F3C-4D90-0B4D-D9CCA437B05D</value>
       </content>
      </localValue>
     </title>
@@ -1021,16 +973,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Alacak dekontu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Кредит-нота</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Credit note</value>
+       <value>8CEF4EAD-2F6B-9DA4-42CF-FAB7141B5B67</value>
       </content>
      </localValue>
     </title>
@@ -1044,16 +988,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Satın alma faturası</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Поступление товаров и услуг</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Purchase invoice</value>
+       <value>D1DA87DE-8BFC-28DD-D05C-C8EC2FF0C96D</value>
       </content>
      </localValue>
     </title>
@@ -1067,16 +1003,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Finansal transfer siparişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Заявка на перемещение денежных средств</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Cash transfer order</value>
+       <value>73E2C6A0-7ACA-6D24-4362-2E26D257CF2C</value>
       </content>
      </localValue>
     </title>
@@ -1090,16 +1018,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Serbest meslek makbuzu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Акт (услуги) с удержанным налогом</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Withholding tax invoice</value>
+       <value>62796056-FA1B-C906-6FFB-B0EBD728BE08</value>
       </content>
      </localValue>
     </title>
@@ -1113,16 +1033,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Borç dekontu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Дебет-нота</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Debit note</value>
+       <value>31E6ADFC-1A22-5AC4-4424-489043B4401B</value>
       </content>
      </localValue>
     </title>
@@ -1136,16 +1048,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Satış faturası</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Реализация товаров и услуг</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sales invoice</value>
+       <value>CFC2DEF5-FFC4-A12B-BCEA-A65763135145</value>
       </content>
      </localValue>
     </title>
@@ -1159,16 +1063,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Konsiyeye verene satış raporu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отчет комитенту о продажах</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sales report to consignor</value>
+       <value>9B3F0DDC-0FCB-AE04-4E60-0DBE2A8DA62E</value>
       </content>
      </localValue>
     </title>
@@ -1182,16 +1078,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Cari hesap</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Партнер</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Partner</value>
+       <value>B01777BE-48C2-63E9-9AD6-600F202737DA</value>
       </content>
      </localValue>
     </title>
@@ -1205,16 +1093,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Alım iadesi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Возврат поставщику</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Purchase return</value>
+       <value>EA238AAD-1C04-EB66-6390-014B58188342</value>
       </content>
      </localValue>
     </title>
@@ -1228,16 +1108,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şirket</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Организация</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Company</value>
+       <value>EFBB54E3-953C-F2AD-DA3E-EF623431B895</value>
       </content>
      </localValue>
     </title>
@@ -1251,16 +1123,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Satış iadesi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Возврат товаров от покупателя</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sales return</value>
+       <value>D3444C54-CF4C-B5B7-7D59-9B34A851A438</value>
       </content>
      </localValue>
     </title>
@@ -1274,16 +1138,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Perakende iade fişi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Розничные чеки - Возврат</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Retail return receipt</value>
+       <value>3D00B2C0-A521-C6E5-55DA-A9AFB4C2D562</value>
       </content>
      </localValue>
     </title>
@@ -1297,16 +1153,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Konsiyeye alandan satış raporu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Отчеты комиссионера о продажах</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Sales report from trade agent</value>
+       <value>0000CDA6-CA03-D751-1C31-1EEE1356F8EB</value>
       </content>
      </localValue>
     </title>
@@ -1320,16 +1168,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Fatura hesabı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Контрагент</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Legal name</value>
+       <value>140554CF-53DB-0BD4-4ED0-01567471372B</value>
       </content>
      </localValue>
     </title>
@@ -1343,16 +1183,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şube</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Структурное подразделение</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Branch</value>
+       <value>D24DC919-071B-4DCC-C4FB-BE0B124A553E</value>
       </content>
      </localValue>
     </title>
@@ -1366,16 +1198,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açılış kaydı - konsinye</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Начальные остатки по торговому агенту</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Opening entry trade agent</value>
+       <value>51802216-CC91-232C-C704-474FB635E832</value>
       </content>
      </localValue>
     </title>
@@ -1389,16 +1213,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açılış kaydı - konsiyeye veren</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Начальные остатки по комиссионеру</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Opening entry consignor</value>
+       <value>9B6ACCA3-C7FC-02BA-A219-99BC27118A92</value>
       </content>
      </localValue>
     </title>
@@ -1412,16 +1228,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açılış kaydı - borç hesabı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Начальные остатки по кредиторской задолженности</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Opening entry account payable</value>
+       <value>05294D4E-CFAC-7EBB-B69D-DCC61099EFCE</value>
       </content>
      </localValue>
     </title>
@@ -1435,16 +1243,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Period</value>
+       <value>90052746-96BD-E301-1C52-221781F3CA15</value>
       </content>
      </localValue>
     </title>
@@ -1458,16 +1258,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sözleşme</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Соглашение</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Agreement</value>
+       <value>CB55CBDD-438A-F795-5330-0362F594BE50</value>
       </content>
      </localValue>
     </title>
@@ -1481,16 +1273,8 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Açılış kaydı - alacak hesabı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Начальные остатки по дебиторской задолженности</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Opening entry account receivable</value>
+       <value>D970111F-2C1D-D36A-A2E4-4B26AC092231</value>
       </content>
      </localValue>
     </title>
@@ -1506,16 +1290,8 @@ FROM
  <attributes>
   <name>ShowAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать все</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show all</value>
+   <value>EEBE2B2D-68E5-65A5-5631-11596F790D0B</value>
   </title>
   <id>2</id>
   <valueType>

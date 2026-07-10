@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="336cefd5-db9f-4906-937b-02ea410ffe0d">
  <name>Subsystem_Incidents</name>
  <synonym>
-  <key>tr</key>
-  <value>'Talepler" alt sistemi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Подсистема "Инциденты"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Subsystem "Incidents"</value>
+  <value>2D32D353-9CD6-0FF9-989E-E6A7E6D8519F</value>
  </synonym>
 </mdclass:Role>

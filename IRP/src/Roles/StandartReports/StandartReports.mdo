@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d1a3dcf6-e6db-4b27-a62b-34d82a17557d">
  <name>StandartReports</name>
  <synonym>
-  <key>tr</key>
-  <value>Standart raporlar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типовые отчеты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Standart reports</value>
+  <value>D9FD0B79-CE95-C06B-B165-547A8AA0BBE4</value>
  </synonym>
 </mdclass:Role>

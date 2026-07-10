@@ -144,16 +144,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Başlık</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заголовок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Header</value>
+   <value>A987B75E-8BA4-6BCB-BC01-15B9053660D8</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -560,16 +552,8 @@
  <attributes>
   <name>RetailCustomer</name>
   <title>
-   <key>tr</key>
-   <value>Perakende müşteri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Розничный покупатель</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Retail customer</value>
+   <value>E3E3D751-D8F1-D4C4-4C7E-E2E720FBF513</value>
   </title>
   <id>1</id>
   <valueType>
@@ -585,16 +569,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>9A002257-A5C7-3678-8FD9-99405A7F0A40</value>
   </title>
   <id>2</id>
   <valueType>
@@ -610,16 +586,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List</value>
+   <value>E8853346-420A-0ABA-A354-4B53ACA23D8F</value>
   </title>
   <id>3</id>
   <valueType>
@@ -693,16 +661,8 @@ HAVING
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tarih</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Дата</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Date</value>
+       <value>FC417229-238A-F61F-F325-50A49A3DE1C3</value>
       </content>
      </localValue>
     </title>
@@ -717,16 +677,8 @@ HAVING
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Fiskal veri</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Фискальные данные</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Fiscal data</value>
+       <value>1BB65D71-32CF-7EB2-2208-8C402FD1CE4F</value>
       </content>
      </localValue>
     </title>
@@ -750,16 +702,8 @@ HAVING
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem başı</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Начало периода</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Begin of period</value>
+       <value>B37A59DA-6E3E-4C06-637C-CFC8A983FD10</value>
       </content>
      </localValue>
     </title>
@@ -774,16 +718,8 @@ HAVING
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem sonu</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Конец периода</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>End of period</value>
+       <value>ADBD6572-382D-83A0-0145-5A7DD543A44B</value>
       </content>
      </localValue>
     </title>
@@ -799,16 +735,8 @@ HAVING
  <attributes>
   <name>FiscalNumber</name>
   <title>
-   <key>tr</key>
-   <value>Fiskal numara</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Фискальный номер</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Fiscal number</value>
+   <value>3B605633-5AA6-7BE2-210B-BA911C5DFE06</value>
   </title>
   <id>4</id>
   <valueType>
@@ -825,16 +753,8 @@ HAVING
  <formCommands>
   <name>Choose</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Choose</value>
+   <value>AF6B4535-6281-BA90-0710-0CB716A865A7</value>
   </title>
   <id>1</id>
   <use>

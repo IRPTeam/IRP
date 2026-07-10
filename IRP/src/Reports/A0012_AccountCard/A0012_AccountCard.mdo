@@ -6,32 +6,16 @@
  </producedTypes>
  <name>A0012_AccountCard</name>
  <synonym>
-  <key>tr</key>
-  <value>A0012 Hesap muavini</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>A0012 Карточка счета</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>A0012 Account card</value>
+  <value>B423132F-B7E4-4033-3196-694B568C3958</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.A0012_AccountCard.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="a0904545-c662-43c3-9302-2e81973f7a62">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>02802FC6-5AD0-FF1F-FA93-3C5AAE7A2307</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

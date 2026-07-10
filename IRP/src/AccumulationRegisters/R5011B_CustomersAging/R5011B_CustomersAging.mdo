@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R5011B_CustomersAging</name>
  <synonym>
-  <key>tr</key>
-  <value>R5011 Müşteriler yaşlandırma</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R5011 Отсрочка оплат клиентов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R5011 Customers aging</value>
+  <value>29C6BE23-D04C-EE66-6C77-730FA8D77B99</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="965441c7-840c-4688-8755-1648df4bc25a">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>105C897D-E779-66CF-F01B-BD179E1804B8</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +32,8 @@
  <attributes uuid="dfce274b-b52e-4d5b-a5be-79816f85b550">
   <name>AgingClosing</name>
   <synonym>
-   <key>tr</key>
-   <value>Yaşlandırma kapanışı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Закрытие отсрочек оплат</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Aging closing</value>
+   <value>C57BCA01-1366-2331-1138-863D55293612</value>
   </synonym>
   <type>
    <types>DocumentRef.CustomersAdvancesClosing</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="d69e7da8-45e4-4882-97ae-eddbc6e36abd">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>6ADB1A8C-C50B-B61F-F38C-C631F51B819D</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="84e2d15b-52fd-4d72-8a86-1be298641988">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>A5D446E1-2E92-EC0E-EA98-8341BE0AC3DA</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="ec98bf53-0162-4c2a-8ab4-dc9676c99b9a">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Currency</value>
+   <value>817A5547-476E-443D-D0E5-5B2E006D97DA</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="f3d28975-9411-4cc7-b374-b25a2762b845">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Agreement</value>
+   <value>DFB34832-4F76-1F70-0205-575E38651914</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -158,16 +102,8 @@
  <dimensions uuid="f87446a6-4761-4112-b56e-b4091785b3f0">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>E74308A1-4C09-85B3-3258-849E47C637E1</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -180,16 +116,8 @@
  <dimensions uuid="0a827974-b319-44d4-ba9e-da7698392e9d">
   <name>Invoice</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Инвойс</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Invoice</value>
+   <value>BC564CB2-A5F2-AE46-63D0-0579D16E4512</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -209,16 +137,8 @@
  <dimensions uuid="1a7aaf2f-3dea-4bd1-97ca-6df51ce20a71">
   <name>PaymentDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата оплаты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Payment date</value>
+   <value>2F94E0BC-AF81-2084-47FF-F725B49975EF</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -234,16 +154,8 @@
  <dimensions uuid="1a229a06-bf28-4e63-adeb-9e018a892e68">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Multi currency movement type</value>
+   <value>4FDD9619-81A2-0A52-2843-366A8C978859</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -256,16 +168,8 @@
  <dimensions uuid="d5f45b28-d562-4fd9-a80c-eb8354925057">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта транзакции</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Transaction currency</value>
+   <value>309AD0B9-DD49-43D7-75DB-B183AC827299</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

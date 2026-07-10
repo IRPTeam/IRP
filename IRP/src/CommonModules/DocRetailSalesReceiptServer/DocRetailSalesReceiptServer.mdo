@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="55d5d858-6206-4863-9239-010c8749faf6">
  <name>DocRetailSalesReceiptServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge perakende satış fişi sunucu</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ реализация розничному покупателю сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc retail sales receipt server</value>
+  <value>3CEB7D1F-9261-AB1E-EEE3-37CFE76D1E87</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

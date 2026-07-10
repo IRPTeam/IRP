@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ae4468e9-41f1-4724-9778-18beae96b6fc">
  <name>UseVariableStore</name>
  <synonym>
-  <key>tr</key>
-  <value>Değişken depo kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать разные склады в линковке</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use variable store</value>
+  <value>16C7B34B-BBDD-0ADE-E2D6-65AB5FF4F3D9</value>
  </synonym>
  <location>Constant.UseVariableStore</location>
  <privilegedGetMode>true</privilegedGetMode>

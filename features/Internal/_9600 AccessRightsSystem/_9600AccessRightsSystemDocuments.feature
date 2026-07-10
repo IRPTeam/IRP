@@ -50,17 +50,12 @@ Scenario: 960000 preparation (access rights system documents)
 	And I select current line in "List" table
 	And I finish line editing in "Users" table
 	* Fill ObjectAccess table
-		When filling Access key in the AccessGroups		
+		When filling Access key in the AccessGroups	
+		// And in the table "ObjectAccess" I click the button named "ObjectAccessAdd"
+		// And I select "Store" exact value from "Access key" drop-down list in "ObjectAccess" table
+		// And I set "Modify" checkbox in "ObjectAccess" table
+		// And I finish line editing in "ObjectAccess" table
 	And I click "Save and close" button
-	// * Check ObjectAccess register
-	// 	Given I open hyperlink "e1cib/list/InformationRegister.T9101A_ObjectAccessRegisters"
-	// 	And "List" table contains "ObjectAccessRegister" template lines by template
-	// * Check catalog Object access keys
-	// 	Given I open hyperlink "e1cib/list/Catalog.ObjectAccessKeys"
-	// 	And "List" table is equal to "ObjectAccessKeys" by template
-	// * Check catalog Object access keys
-	// 	Given I open hyperlink "e1cib/list/InformationRegister.T9100A_ObjectAccessMap"
-	// 	And "List" table is equal to "ObjectAccessMap" by template
 	And I close all client application windows
 
 Scenario: 960001 check preparation

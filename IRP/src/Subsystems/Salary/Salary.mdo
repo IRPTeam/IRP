@@ -2,16 +2,8 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5a8812ab-5923-4b5d-a3d1-1a253c67ecf6">
  <name>Salary</name>
  <synonym>
-  <key>tr</key>
-  <value>Maaş</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Зарплата</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Salary</value>
+  <value>B30905CE-B3E7-C9F2-2666-611DAD35A151</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

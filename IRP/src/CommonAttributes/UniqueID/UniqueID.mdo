@@ -2,16 +2,8 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ce79f278-358a-4562-8392-ca85ee472e6d">
  <name>UniqueID</name>
  <synonym>
-  <key>tr</key>
-  <value>Unique ID</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Уникальный ID</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Unique ID</value>
+  <value>AD245B90-3C6A-965F-F6F0-09EA64DF9532</value>
  </synonym>
  <type>
   <types>String</types>
@@ -22,9 +14,7 @@
  <minValue xsi:type="core:UndefinedValue"/>
  <maxValue xsi:type="core:UndefinedValue"/>
  <dataHistory>Use</dataHistory>
- <fillValue xsi:type="core:StringValue">
-  <value/>
- </fillValue>
+ <fillValue xsi:type="core:StringValue"/>
  <content>
   <metadata>Document.BatchReallocateOutgoing</metadata>
   <use>Use</use>
@@ -95,6 +85,10 @@
  </content>
  <content>
   <metadata>Document.ChequeBondTransaction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Storno</metadata>
   <use>Use</use>
  </content>
  <content>

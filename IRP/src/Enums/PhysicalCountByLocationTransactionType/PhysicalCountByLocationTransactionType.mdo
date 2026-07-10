@@ -7,47 +7,23 @@
  </producedTypes>
  <name>PhysicalCountByLocationTransactionType</name>
  <synonym>
-  <key>tr</key>
-  <value>Konum bazında fiziksel sayım işlem türü</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип транзакции по учету локаций</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Physical count by location transaction type</value>
+  <value>7D38D694-88EB-CCF6-6260-00985490AE0E_______</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="52c5069b-cbbd-4a7c-afcf-7674c7893aef">
   <name>PhysicalInventory</name>
   <synonym>
-   <key>tr</key>
-   <value>Sayım fişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Инвентаризация товаров</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Physical inventory</value>
+   <value>2604E6FB-A0A2-B42A-AD20-034D2729BEC3</value>
   </synonym>
  </enumValues>
  <enumValues uuid="3c5491d7-0ee8-47a0-80a5-c88b031e056e">
   <name>Package</name>
   <synonym>
-   <key>tr</key>
-   <value>Paket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Упаковка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Package</value>
+   <value>403DB65A-8403-09CC-C7EB-B8A6829EC427</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

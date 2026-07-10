@@ -2,18 +2,9 @@
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c99a6167-ea2f-4b22-a8ed-7aaeac5cd19b">
  <name>OpenAccountingRecords</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe kayıtları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Бухгалтерские проводки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Accounting records</value>
+  <value>412BD1B4-FF5F-0EF3-317F-F9AEFE72C1B8</value>
  </synonym>
  <group>NavigationPanelImportant</group>
- <commandParameterType/>
  <representation>Auto</representation>
 </mdclass:CommonCommand>

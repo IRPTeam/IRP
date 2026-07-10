@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R4016B_InternalSupplyRequestOrdering</name>
  <synonym>
-  <key>tr</key>
-  <value>R4016 İç talep siparişlerin tedarik siparişler ile kapatma</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4016 Заказы заявок на обеспечение товара</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4016 Ordering of internal supply requests</value>
+  <value>EC590ED0-FF1A-B599-9464-4364ECF22420______</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="e072d3d4-f259-42af-8e77-7710ba576789">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>6A3FCA2C-7536-D1BB-B617-7F72C73B2330</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="488f41e7-c854-486a-92b6-d29950c51a22">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>BB3D713A-2CAD-B263-3006-6F83F64F7609</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="c15164b1-39e0-4ab4-909b-0fa6f064ca55">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>A6D4A4E7-E74C-8CB4-4C16-6F975E88BC96</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="4b57f533-eabb-4c76-bb8d-25e9cfaa9db9">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>C69AC733-F606-6C2B-B06D-DF4D89AF92B1</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="09ee1f8f-b3b9-4e88-a482-7e2da0e17fc1">
   <name>InternalSupplyRequest</name>
   <synonym>
-   <key>tr</key>
-   <value>İç talep siparişi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заявка на обеспечение товара</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Internal supply request</value>
+   <value>DE6F2F43-26C5-B5CE-EAE4-4EA921AD3A5C</value>
   </synonym>
   <type>
    <types>DocumentRef.InternalSupplyRequest</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="a224b1fe-3258-4ae6-98f1-aa762ab89c20">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>FC978FBD-F99A-2A3E-E558-8411C61BDA65</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

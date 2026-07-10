@@ -9,16 +9,8 @@
  </producedTypes>
  <name>ED_ExchangePlan</name>
  <synonym>
-  <key>tr</key>
-  <value>Dışarı aktarma Veri alış veriş planı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>План обмена экспортными данными</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Export Data Exchange plan</value>
+  <value>B1467335-9193-D3C5-5D50-039FF1F1608F</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>ExchangePlan.ED_ExchangePlan.StandardAttribute.Code</inputByString>
@@ -28,28 +20,12 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Dışarı aktarma Veri alış veriş planı</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>План обмена экспортными данными</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Export Data Exchange plan</value>
+  <value>D72CE21E-0877-1575-5677-74B1D6083BC5</value>
  </objectPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Dışarı aktarma Veri alış veriş planları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Планы обмена экспортными данными</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Export Data Exchange plans</value>
+  <value>ACA8C4D6-5866-E300-0E9E-ED2D9BEB2EA4</value>
  </listPresentation>
  <codeLength>9</codeLength>
  <codeAllowedLength>Variable</codeAllowedLength>

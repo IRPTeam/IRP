@@ -10,16 +10,8 @@
  </producedTypes>
  <name>DELETE_R8010B_TradeAgentInventory</name>
  <synonym>
-  <key>tr</key>
-  <value>R8010 Konsinyeye verilen stoklar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R8010 Товары отданные на комиссию</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R8010 Trade agent inventory</value>
+  <value>D401BD43-3853-D2A5-52EE-E74242BD2CCF</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="c23121fe-60e5-4721-8d4e-2fd37577d6f5">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Quantity</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>4AAD2F72-50F8-D437-7D79-96A21D4B3203</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="7a850de9-fa58-4400-9eb1-e93a0f19d15d">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>4AC07CEE-D507-A437-7BB9-9A1E56F976B0</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="88f0731b-ba97-47da-8e9b-241fd6215238">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>F2A53215-D502-F2A5-5885-587EA7506BE5</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="1f6c8f96-39b2-4b7e-8735-ed120ff760e4">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>A7CBDB6D-60EF-F9AF-F603-3213892393D3</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="e61f5d77-7ffb-4557-9543-4d26d04a1690">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Соглашение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Agreement</value>
+   <value>AF5BC486-ACC1-C97B-BBC7-7C11367E2972</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="69fabe4c-18ed-4839-a750-b35840721267">
   <name>LegalName</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Контрагент</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Legal name</value>
+   <value>644E6059-7D3F-FC0F-F1E1-14C1AC93C97E</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>

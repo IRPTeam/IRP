@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typeItem</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip malzeme</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип номенклатура</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type item</value>
+  <value>3271892F-3B08-567A-A29E-EE106F63A815</value>
  </synonym>
  <type>
   <types>CatalogRef.Items</types>

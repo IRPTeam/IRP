@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4828159c-de8f-4415-a985-717b10d48128">
  <name>UseAging</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Cari hesap yaşlandırma</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать отсрочку оплат партнеров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use aging</value>
+  <value>83E6E10D-94E1-5E9B-B322-25254BAAECAB</value>
  </synonym>
  <location>Constant.UseAging</location>
  <privilegedGetMode>true</privilegedGetMode>

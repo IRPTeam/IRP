@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d3095a81-8ba2-406b-b74c-6fdccddfa42f">
  <name>AdditionalDocumentTableControlReuse</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek belge tablosu kontrolü yeniden kullanımı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Дополнительный контроль таблиц документа переиспользование</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Additional document table control reuse</value>
+  <value>9C3A33F3-4AF6-EAB6-662B-B9E873D7A6C0___</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

@@ -155,16 +155,8 @@
    <name>StartOf</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Период</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Period</value>
+    <value>73A13433-FB4F-347D-DB4D-DDF4D72346EC</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -250,16 +242,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Genel ayarlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Основные настройки</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Main settings</value>
+   <value>4B0F54CA-B2A6-97D8-80FC-C1F0BA7F8B96</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -332,16 +316,8 @@
    <name>DocumentType</name>
    <id>50</id>
    <title>
-    <key>tr</key>
-    <value>Evrak tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип документа</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Document type</value>
+    <value>1D742AC0-A7C0-57F0-094D-D70117686F3A</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -426,16 +402,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ek veri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дополнительный данные</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Additional data</value>
+   <value>74FC73CD-C4BE-098F-F2C3-3C8322EFD7DF</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -540,16 +508,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Manual</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вручную</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Manual</value>
+   <value>A254A328-8A74-1C01-1EF0-01BDEBF709C2</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -827,16 +787,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Hizmet</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отчеты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Service</value>
+   <value>02DB4BB9-E2F7-7229-96C3-39A5B2C60579</value>
   </title>
   <extendedTooltip>
    <name>GroupServiceExtendedTooltip</name>

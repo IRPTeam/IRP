@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>İcmaller</value>
- </title>
- <title>
-  <key>ru</key>
-  <value>Кассовая книга</value>
- </title>
- <title>
   <key>en</key>
-  <value>Cash statements</value>
+  <value>69057070-744F-0C3E-E39C-C920485CD194</value>
  </title>
  <items xsi:type="form:Table">
   <name>List</name>
@@ -117,16 +109,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Liste grup numara</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Список группа номер</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>List group number</value>
+    <value>95A96592-8788-AF88-86A0-0685D64C309E</value>
    </title>
    <extendedTooltip>
     <name>ListGroupNumberExtendedTooltip</name>
@@ -554,16 +538,8 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>List</value>
+   <value>A62E85CB-87B5-EF5F-FA06-6D319D12B4D6</value>
   </title>
   <id>1</id>
   <valueType>
@@ -622,16 +598,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tutar</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Сумма</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Amount</value>
+       <value>8D4A1184-9A5E-FF98-8858-8BED54663F04</value>
       </content>
      </localValue>
     </title>
@@ -642,16 +610,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Tutar bakiyesi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Сумма остатка</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Amount Balance</value>
+       <value>D885AE01-1315-FB5F-F1DD-DB1F897A8BFD</value>
       </content>
      </localValue>
     </title>
@@ -662,16 +622,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Komisyon</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Сумма комиссии</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Commission</value>
+       <value>FC3FC743-F791-B485-52B8-86412270DEC7</value>
       </content>
      </localValue>
     </title>
@@ -813,16 +765,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Период</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Period</value>
+       <value>B1F06626-EF7C-E5C3-3998-8BFF4AD14BA4</value>
       </content>
      </localValue>
     </title>
@@ -837,16 +781,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şirket</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Организация</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Company</value>
+       <value>2C1C5C9A-4DA3-2BB4-413C-CF598DF0C3D6</value>
       </content>
      </localValue>
     </title>
@@ -861,16 +797,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Hesap</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Касса/банк</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Account</value>
+       <value>AE324F7E-81BE-06FA-A033-35C11AB51324</value>
       </content>
      </localValue>
     </title>
@@ -885,16 +813,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Alıcı kasa/banka</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Касса/банк получатель</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Receipting account</value>
+       <value>6285A5EE-EA2D-ADA5-50DE-E98D9C3897BE</value>
       </content>
      </localValue>
     </title>
@@ -909,16 +829,8 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Makbuz veren şube</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Структурное подразделение получатель</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Receipting branch</value>
+       <value>FB30156C-B349-E713-3A5D-D06362AE54C5</value>
       </content>
      </localValue>
     </title>

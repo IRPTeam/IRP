@@ -11,16 +11,8 @@
  </producedTypes>
  <name>DashboardSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Gösterge paneli ayarları</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Настройки панели мониторинга</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Dashboard settings</value>
+  <value>8B4C6961-B92E-1B7C-CDC9-99C8ACC011CF</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -29,16 +21,8 @@
  <resources uuid="db96fce0-250a-48a5-889a-8497c9754292">
   <name>Settings</name>
   <synonym>
-   <key>tr</key>
-   <value>Ayarlar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Настройки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Settings</value>
+   <value>C20D6710-D35C-9FBE-E130-0433FC60C13D</value>
   </synonym>
   <type>
    <types>String</types>
@@ -53,16 +37,8 @@
  <dimensions uuid="2100bc1a-9211-4a15-b3a9-fb611aac1a75">
   <name>User</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Пользователь</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>User</value>
+   <value>BC84F2AC-DD6A-EB7A-A81B-BF5C395B6509</value>
   </synonym>
   <type>
    <types>CatalogRef.UserGroups</types>
@@ -78,16 +54,8 @@
  <forms uuid="9929c0c7-a4f8-4668-a16d-b97c305db623">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>7325C644-3003-D67C-C205-5B2364E83F12</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

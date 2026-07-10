@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b8d5647a-abcd-4496-9c81-ed75f1d605d7">
  <name>WorkstationServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Çalışma yeri server</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Рабочее место сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Workstation server</value>
+  <value>296A761C-9BB3-DD7C-C96C-CB67DA1829DF</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

@@ -7,47 +7,23 @@
  </producedTypes>
  <name>PLSectionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Kâr/Zarar (PL) bölüm türleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Типы аналитик P&amp;L</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>PLSection types</value>
+  <value>1102FC0E-C27D-7536-6128-8F81A9F1D960</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="7ccc7675-7da8-4e54-9f60-4e4d5f6e38b4">
   <name>DataSelection</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri seçimi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Выборка данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Data selection</value>
+   <value>7FA066D8-511C-4EC5-591D-D46AB26C63D7</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4933d08e-d0c9-4906-a083-4ab13b8654ac">
   <name>Calculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Alacak/Borç muhasebesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расчет</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Calculation</value>
+   <value>6227AAD1-E2F8-4B05-58A4-45C636B36276</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

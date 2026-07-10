@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2f2f8c2a-5b21-4ab9-a316-3603d8c9e6e9">
  <name>AccumulationRegisters_R2006T_Certificates</name>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R2006T Sertifikalar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>РегистрыНакопления R2006T Сертификаты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>AccumulationRegisters R2006T Certificates</value>
+  <value>9C5FC691-6B1F-C777-7022-25045C073FDC_____</value>
  </synonym>
 </mdclass:Role>

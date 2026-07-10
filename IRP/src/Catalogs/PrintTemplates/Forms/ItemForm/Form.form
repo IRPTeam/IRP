@@ -233,16 +233,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup şablon tablo araç çubuğu</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Панель команд шаблонов</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Group template spreadsheet command bar</value>
+     <value>8E551EB1-94C1-7657-7902-252F47C52F77__</value>
     </title>
     <extendedTooltip>
      <name>GroupTemplateSpreadsheetCommandBarExtendedTooltip</name>
@@ -417,16 +409,8 @@
       <radioButtonsType>Tumbler</radioButtonsType>
       <choiceList>
        <presentation>
-        <key>tr</key>
-        <value>düzeltildi</value>
-       </presentation>
-       <presentation>
-        <key>ru</key>
-        <value>фиксированная</value>
-       </presentation>
-       <presentation>
         <key>en</key>
-        <value>fixed</value>
+        <value>9F70262B-95AF-5FC3-3CA5-5AEB6AA4F27C</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>fixed</value>
@@ -434,16 +418,8 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>tr</key>
-        <value>serbest</value>
-       </presentation>
-       <presentation>
-        <key>ru</key>
-        <value>произвольная</value>
-       </presentation>
-       <presentation>
         <key>en</key>
-        <value>free</value>
+        <value>416921C3-22F7-24CB-BBAD-D9330E4D2AF9</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>free</value>
@@ -719,16 +695,8 @@
  <attributes>
   <name>TemplateSpreadsheet</name>
   <title>
-   <key>tr</key>
-   <value>Şablon tablo</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Template spreadsheet</value>
+   <value>6A0ACDD3-D8BD-404B-B25A-ACAD1D84D9C8</value>
   </title>
   <id>2</id>
   <valueType>
@@ -746,16 +714,8 @@
  <attributes>
   <name>AvailableFields</name>
   <title>
-   <key>tr</key>
-   <value>Ulaşılabilir alanlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Доступные поля</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Available fields</value>
+   <value>D0FFBAC8-D7B2-0809-94CE-E7D617EFEC07</value>
   </title>
   <id>3</id>
   <valueType>
@@ -771,16 +731,8 @@
  <attributes>
   <name>LabelsInRow</name>
   <title>
-   <key>tr</key>
-   <value>Satırda etiket sayısı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество шаблонов в строке</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Labels in row</value>
+   <value>18F6F1B5-3067-0071-1190-05BC7C4DDCCC</value>
   </title>
   <id>4</id>
   <valueType>
@@ -802,16 +754,8 @@
  <attributes>
   <name>LabelsInColumn</name>
   <title>
-   <key>tr</key>
-   <value>Sütunda etiket sayısı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество шаблонов в столбце</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Labels in column</value>
+   <value>4725125C-B333-F8B1-1C37-7EF133EC05C0</value>
   </title>
   <id>5</id>
   <valueType>
@@ -833,16 +777,8 @@
  <attributes>
   <name>PasteFieldAs</name>
   <title>
-   <key>tr</key>
-   <value>Yazdır nesne tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Вставка полей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Paste field as</value>
+   <value>A7832EBD-A41B-0399-9D08-8393D34252F0</value>
   </title>
   <id>6</id>
   <valueType>
@@ -861,16 +797,8 @@
  <attributes>
   <name>DataSource</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak veri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Источник данных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Data source</value>
+   <value>722B54C7-507A-DAF0-0C7E-EDA29A5E43A8</value>
   </title>
   <id>8</id>
   <valueType>
@@ -889,16 +817,8 @@
  <formCommands>
   <name>GetDefault</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan getir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>По умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Get default</value>
+   <value>69A42505-2835-5EC6-6761-1CAE85163C75</value>
   </title>
   <id>2</id>
   <use>

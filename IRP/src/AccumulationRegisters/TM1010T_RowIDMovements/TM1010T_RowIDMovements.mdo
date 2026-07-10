@@ -10,16 +10,8 @@
  </producedTypes>
  <name>TM1010T_RowIDMovements</name>
  <synonym>
-  <key>tr</key>
-  <value>TM1010T Row ID hareketleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>TM1010T Движения по ID строк</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>TM1010T Row ID movements</value>
+  <value>EC53283F-F770-52F5-5469-906E9A850403</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -61,16 +53,8 @@
  <resources uuid="80ef17bf-27c9-4029-86c9-9dd3f319bd25">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>5F37CC8D-82EF-DFB5-542C-CAAB99F77AA0</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -82,16 +66,8 @@
  <dimensions uuid="682499e2-cb07-4e91-abc5-dd9ac5df263f">
   <name>RowRef</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır Ref</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ссылка строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row ref</value>
+   <value>6858FF19-0C1A-E19A-A474-46048B50A3ED</value>
   </synonym>
   <type>
    <types>CatalogRef.RowIDs</types>
@@ -105,16 +81,8 @@
  <dimensions uuid="2fcd1ad9-2bd9-4861-ac75-aac78abffc9e">
   <name>RowID</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır ID</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>ID Строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row ID</value>
+   <value>018BAC4F-4C8B-D8DA-A013-3F95F61B4D01</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -127,16 +95,8 @@
  <dimensions uuid="cf1dd54a-8ac5-49ea-9122-691eb2cfb1d8">
   <name>Step</name>
   <synonym>
-   <key>tr</key>
-   <value>Adım</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаг</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Step</value>
+   <value>4746576B-45E9-49DA-AD03-34965410465B</value>
   </synonym>
   <type>
    <types>CatalogRef.MovementRules</types>
@@ -149,16 +109,8 @@
  <dimensions uuid="db3d8c54-43b8-4d2c-9cbf-cb00d3647d52">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основание</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis</value>
+   <value>1B6D0F6C-FDDA-5192-2697-7E69FFA0E934</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -171,16 +123,8 @@
  <dimensions uuid="2cc728f6-24e5-41f0-b735-30e246f6f691">
   <name>BasisKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak anahtar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ документа основания</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Basis key</value>
+   <value>7FA7886A-6BB9-7CB3-393B-B66B20490338</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>

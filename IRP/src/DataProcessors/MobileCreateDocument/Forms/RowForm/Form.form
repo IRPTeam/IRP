@@ -185,16 +185,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>SeriLot Numarası grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа Серии номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group of SerialLot Number</value>
+   <value>10219551-5935-3B9C-C661-1B2A02F278B1</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -265,16 +257,8 @@
    <id>10</id>
    <displayImportance>VeryHigh</displayImportance>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Текущее</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Current</value>
+    <value>CAC3F811-7052-E66B-B478-830D70D38471</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -344,16 +328,8 @@
    <id>16</id>
    <displayImportance>VeryHigh</displayImportance>
    <title>
-    <key>tr</key>
-    <value>Sen okut</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Отсканировано</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>You scan</value>
+    <value>85E4E032-8D1B-34E2-29B5-5FB19B3C3552</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -463,16 +439,8 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>0B8594C7-C702-B6BA-ACBF-F766C5C29737</value>
   </title>
   <id>1</id>
   <valueType>
@@ -488,16 +456,8 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item key</value>
+   <value>1D928471-7DAF-576D-D331-111DE03943E0</value>
   </title>
   <id>2</id>
   <valueType>
@@ -513,16 +473,8 @@
  <attributes>
   <name>QuantityAtDocument</name>
   <title>
-   <key>tr</key>
-   <value>Evrak</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Документ</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Document</value>
+   <value>CF7B9415-6231-2FAE-E56F-FE33B83FDCF1</value>
   </title>
   <id>3</id>
   <valueType>
@@ -538,16 +490,8 @@
  <attributes>
   <name>ScannedQuantity</name>
   <title>
-   <key>tr</key>
-   <value>Okutulan miktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отсканированное количество</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Scanned quantity</value>
+   <value>17C4A804-6032-C120-031D-D3520AF96845</value>
   </title>
   <id>4</id>
   <valueType>
@@ -563,16 +507,8 @@
  <attributes>
   <name>CurrentQuantity</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli miktar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Текущее количество</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Current quantity</value>
+   <value>8D61106D-C691-2FD4-4150-0FB75E77751D</value>
   </title>
   <id>5</id>
   <valueType>
@@ -588,16 +524,8 @@
  <attributes>
   <name>Diff</name>
   <title>
-   <key>tr</key>
-   <value>Fark</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разница</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Diff</value>
+   <value>E32C6112-6450-A262-2D73-3D9B032A3758</value>
   </title>
   <id>6</id>
   <valueType>
@@ -613,16 +541,8 @@
  <attributes>
   <name>Unit</name>
   <title>
-   <key>tr</key>
-   <value>Birim</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Unit</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Unit</value>
+   <value>7DEDE8B5-921C-652C-C296-617AE95B48C6</value>
   </title>
   <id>7</id>
   <valueType>
@@ -638,16 +558,8 @@
  <attributes>
   <name>ParamsData</name>
   <title>
-   <key>tr</key>
-   <value>Parametreler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Параметры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Params data</value>
+   <value>AFD9BB96-5053-A64A-ADB5-5D9DC17322A5</value>
   </title>
   <id>9</id>
   <valueType/>
@@ -661,16 +573,8 @@
  <attributes>
   <name>SerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Серия номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Serial lot number</value>
+   <value>4E95CE7E-AA32-139B-B42D-DC17AEA8A65D</value>
   </title>
   <id>10</id>
   <valueType>
@@ -686,16 +590,8 @@
  <attributes>
   <name>NeedSerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numarası gerekiyor</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Необходима серия номенклатуры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Need serial lot number</value>
+   <value>6B17685F-FA4C-52C7-7D14-48DE06FA3A45</value>
   </title>
   <id>11</id>
   <valueType>

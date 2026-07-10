@@ -2,16 +2,8 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1dc2a9ca-2fd0-4317-ae25-de8b9f2a5e16">
  <name>DocProductionCostsAllocationServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Üretim maliyetlerinin dağıtım sunucusu belgesi</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ распределение производственных затрат сервер</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Doc production costs allocation server</value>
+  <value>AAE0796D-36D4-5352-2AA0-0FC364AE3F6F__</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

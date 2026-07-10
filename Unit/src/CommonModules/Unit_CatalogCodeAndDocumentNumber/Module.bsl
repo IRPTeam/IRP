@@ -87,6 +87,7 @@ Function GetExclude_Documents_Numerator()
 	ArrayOfExcluded.Add("Document.Labeling");
 	ArrayOfExcluded.Add("Document.ManualRegisterEntry");
 	ArrayOfExcluded.Add("Document.VisitorCounter");
+	ArrayOfExcluded.Add("Document.Storno");
 	Return ArrayOfExcluded;
 EndFunction
 

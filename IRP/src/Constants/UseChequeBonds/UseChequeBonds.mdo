@@ -7,16 +7,8 @@
  </producedTypes>
  <name>UseChequeBonds</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Çek/senetler</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать чеки/долговые обязательства</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use cheque bonds</value>
+  <value>A78138B1-923F-FB96-6ABF-F00B108E7B47</value>
  </synonym>
  <type>
   <types>Boolean</types>

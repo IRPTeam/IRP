@@ -5,16 +5,8 @@
  </producedTypes>
  <name>typePresentation</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip görünüm</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Тип представление</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Type presentation</value>
+  <value>B1A5B767-859D-C65C-CF21-12DF9311D54B</value>
  </synonym>
  <type>
   <types>CatalogManager.ItemTypes</types>

@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R4021B_StockTransferOrdersReceipt</name>
  <synonym>
-  <key>tr</key>
-  <value>R4021 Depo transfer fişlerin girişleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R4021 Приход по заказам на перемещение товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R4021 Receipt of stock transfer orders</value>
+  <value>EAE1A5F6-BCF6-08CC-CCC8-8AFEEAAF2000__</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +19,8 @@
  <resources uuid="9081a084-5c7e-4a05-b6fd-16712850b760">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Quantity</value>
+   <value>F493154E-36C0-8AC2-2450-0F33E0CE3B08</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +32,8 @@
  <dimensions uuid="891218fd-b08d-4ec1-b468-b4079c8f00f7">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Склад</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>20DBF4BD-EF2D-0509-93D5-5E228DBED881</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="c66c73db-7337-4f22-8cf4-65e6ce293422">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>DC50779E-F83A-7BAF-F01D-D320C562C84B</value>
   </synonym>
   <type>
    <types>DocumentRef.InventoryTransferOrder</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="c7510d96-502e-4b33-9d3c-62cdc83c05cc">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>CE13B7A5-0C65-85D8-853D-D3CF1A41614B</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="9d512164-3ecc-4906-bdda-252bf6a3babc">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключ строки</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Row key</value>
+   <value>9D398D66-9475-A500-027D-D6CC7CA4C017</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>

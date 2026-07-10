@@ -9,16 +9,8 @@
  </producedTypes>
  <name>Files</name>
  <synonym>
-  <key>tr</key>
-  <value>Dosyalar</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Файлы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Files</value>
+  <value>D31F6CEA-CD2B-9A42-2F73-34E31EF2274A</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Files.StandardAttribute.Description</inputByString>
@@ -86,16 +78,8 @@
   <dataHistory>Use</dataHistory>
   <name>Description</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya ismi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Имя файла</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>File name</value>
+   <value>948A7324-9B89-80D1-1B3A-A5038E30077D</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
@@ -147,16 +131,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Dosya</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Файл</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>File</value>
+  <value>08ECFD1B-878A-2ABE-EF53-34A3B6A895F3</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -173,16 +149,8 @@
  <attributes uuid="f84fa69a-be6e-49dc-afd6-34a2bb4a575c">
   <name>Volume</name>
   <synonym>
-   <key>tr</key>
-   <value>Hacim</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Объем</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Volume</value>
+   <value>960F0EF4-808A-DB7E-E74F-F09179AADCA2</value>
   </synonym>
   <type>
    <types>CatalogRef.FileStorageVolumes</types>
@@ -196,16 +164,8 @@
  <attributes uuid="19fb2c1f-49ea-4c03-8845-fe6dfbfb38fa">
   <name>URI</name>
   <synonym>
-   <key>tr</key>
-   <value>URI</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>URI</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>URI</value>
+   <value>563FD861-8DDD-AB76-664E-E896B794C5E6</value>
   </synonym>
   <type>
    <types>String</types>
@@ -215,9 +175,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -225,16 +183,8 @@
  <attributes uuid="6b017ef5-8d7b-43f8-91c8-bdbb25d5a199">
   <name>FileID</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya ID</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>ID файла</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>File ID</value>
+   <value>3B533EDF-2459-F92E-E8BD-DBFF15939D52</value>
   </synonym>
   <type>
    <types>String</types>
@@ -244,9 +194,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -254,16 +202,8 @@
  <attributes uuid="6957f794-f457-40bc-af0e-7cb74f846324">
   <name>Height</name>
   <synonym>
-   <key>tr</key>
-   <value>Yükseklik</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Высота</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Height</value>
+   <value>1E857F90-3463-C17F-FF5A-AC9A8002F39D</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -280,16 +220,8 @@
  <attributes uuid="490e46f4-700f-4da5-a969-eeeb484d2743">
   <name>Width</name>
   <synonym>
-   <key>tr</key>
-   <value>Genişlik</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ширина</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Width</value>
+   <value>F6FE58AB-D852-E5AB-BEDC-C61B64A15D6A</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -306,16 +238,8 @@
  <attributes uuid="3888808e-e394-46f4-918a-67302339e6ab">
   <name>SizeBytes</name>
   <synonym>
-   <key>tr</key>
-   <value>Boyut</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Размер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Size</value>
+   <value>64FEDCDD-6393-8C7B-B907-7646E274D45A</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -332,16 +256,8 @@
  <attributes uuid="d781f0b4-e76f-423f-96fb-92822515db13">
   <name>Extension</name>
   <synonym>
-   <key>tr</key>
-   <value>Uzantı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Расширение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Extension</value>
+   <value>6408FFD3-1C4A-2105-5170-03B25E933A63</value>
   </synonym>
   <type>
    <types>String</types>
@@ -351,25 +267,15 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="a73b3a9a-bec7-4894-b3e9-2cb9311be883">
   <name>MD5</name>
   <synonym>
-   <key>tr</key>
-   <value>MD5</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>MD5</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>MD5</value>
+   <value>B229C6EF-6AAB-1969-9439-998FA1E01FB3</value>
   </synonym>
   <type>
    <types>String</types>
@@ -379,9 +285,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -389,16 +293,8 @@
  <attributes uuid="00f6585a-15e0-44c6-aab6-20b264d2d167">
   <name>Preview</name>
   <synonym>
-   <key>tr</key>
-   <value>Önizleme</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Предварительный просмотр</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Preview</value>
+   <value>526C6985-9402-58FB-B637-7EF070DD1A7C</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -412,16 +308,8 @@
  <attributes uuid="42380b59-961e-49cd-9b4f-5be9dc30c4c7">
   <name>isPreviewSet</name>
   <synonym>
-   <key>tr</key>
-   <value>Önizleme ayarlandı</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Использовать предварительный просмотр</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is preview set</value>
+   <value>1486389A-5AA2-52D3-38A4-4EA5823B72D7</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -435,16 +323,8 @@
  <attributes uuid="84823959-5bb9-479f-b626-60b7769b0054">
   <name>isDraft</name>
   <synonym>
-   <key>tr</key>
-   <value>Bu taslak</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Это черновик</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Is draft</value>
+   <value>26E0E22F-AAC7-AB82-25DF-FF490262AF0E</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -458,16 +338,8 @@
  <attributes uuid="4bcde2a3-a739-4017-a10a-4208f1f6678f">
   <name>PrintFormName</name>
   <synonym>
-   <key>tr</key>
-   <value>Çıktı form ismi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Наименование печатной формы</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Print form name</value>
+   <value>F698AB2D-1E9B-6DAB-B21C-C859DCB87B6D</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -485,30 +357,14 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дополнительные реквизиты</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Additional attributes</value>
+   <value>341AE5F8-6A27-4EBB-B4BF-F80D0526CF9F</value>
   </synonym>
   <attributes uuid="082a6a63-683b-4e72-af34-cb70e3a2fb37">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Характеристика</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Property</value>
+    <value>EB953367-F59E-F14F-F25B-B92D930F97FA</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -521,16 +377,8 @@
   <attributes uuid="9fc4e04d-5850-401d-8409-8c64e1b59a2b">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Значение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Value</value>
+    <value>5198F451-341D-5BB1-1F5D-D2209C122309</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -548,16 +396,8 @@
  <forms uuid="b27620a5-4be9-4e90-a4bb-21f2ff08b08a">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>F52456EE-B033-4435-54FF-F04C3A2DE9D4</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -565,16 +405,8 @@
  <forms uuid="0698c185-374c-4e43-b3c4-20fc2fb27cd6">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>40DC8F22-A8A2-3148-8F36-6DECFC33EAE1</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -582,16 +414,8 @@
  <forms uuid="696d92ce-a427-44bc-8336-39c11a0e1906">
   <name>DeleteFiles</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosyaları sil</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Удаление файлов</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Delete files</value>
+   <value>E017A850-9141-0996-6856-6DB339671A02</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

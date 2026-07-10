@@ -453,16 +453,8 @@
       <width>15</width>
       <height>6</height>
       <nonselectedPictureText>
-       <key>tr</key>
-       <value>Buraya sürükle bırak</value>
-      </nonselectedPictureText>
-      <nonselectedPictureText>
-       <key>ru</key>
-       <value>Перетащить сюда</value>
-      </nonselectedPictureText>
-      <nonselectedPictureText>
        <key>en</key>
-       <value>Drag &amp;&amp; drop here</value>
+       <value>E3ECB11C-73FD-98BE-EC66-6A3C44EF3C97</value>
       </nonselectedPictureText>
       <enableStartDrag>true</enableStartDrag>
       <enableDrag>true</enableDrag>
@@ -479,16 +471,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Yükle</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Загрузить</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Upload</value>
+     <value>2FE6F8E3-2CDE-8F26-6D25-505F7E089C85</value>
     </title>
     <extendedTooltip>
      <name>GroupFilesExtendedTooltip</name>
@@ -589,11 +573,6 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:PDFDocumentFieldExtInfo">
       <viewStatusAddition>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <name>PDFPreviewViewStatus</name>
        <id>67</id>
        <extendedTooltip>
@@ -631,28 +610,12 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ön izleme</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Предварительный просмотр</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Preview</value>
+     <value>C8C582CE-9898-DD47-79B5-52F9A5C4FD65</value>
     </title>
-    <toolTip>
-     <key>tr</key>
-     <value>Sayfa önizle</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Предпросмотр страницы</value>
-    </toolTip>
     <toolTip>
      <key>en</key>
-     <value>Page preview</value>
+     <value>918BF3F1-388E-244A-A9C9-95A48C00E241</value>
     </toolTip>
     <extendedTooltip>
      <name>PagePreviewExtendedTooltip</name>
@@ -676,28 +639,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sayfalar üst</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Верх страницы     </value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Pages top</value>
+    <value>8843090F-7AD2-CA41-1CEB-BD7E90802F18</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Sayfalar üst</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Верх страницы     </value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Pages top</value>
+    <value>087C1512-E2E4-F1CF-F429-9A6ADE2881A4</value>
    </toolTip>
    <extendedTooltip>
     <name>PagesTopExtendedTooltip</name>
@@ -721,16 +668,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа основная</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group main</value>
+   <value>1B6D1862-3CD1-0FCB-BA1B-B20DA91375A8</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -772,16 +711,8 @@
  <attributes>
   <name>FileList</name>
   <title>
-   <key>tr</key>
-   <value>Dosya listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Список файлов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>File list</value>
+   <value>F2103074-DAA5-26C9-9F3C-C98424A763AF</value>
   </title>
   <id>1</id>
   <valueType>
@@ -841,16 +772,8 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sahip</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Владелец</value>
-      </content>
-      <content>
        <key>en</key>
-       <value>Owner</value>
+       <value>90D5EB67-75CD-D373-3DB0-05362200C05B</value>
       </content>
      </localValue>
     </title>
@@ -865,16 +788,8 @@ WHERE
  <attributes>
   <name>Owner</name>
   <title>
-   <key>tr</key>
-   <value>Sahip</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Владелец</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Owner</value>
+   <value>2383BD93-AED2-1888-8AB0-0F54637390C2</value>
   </title>
   <id>2</id>
   <valueType>
@@ -890,16 +805,8 @@ WHERE
  <attributes>
   <name>Download</name>
   <title>
-   <key>tr</key>
-   <value>İndir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скачать</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Download</value>
+   <value>3106A7B9-556A-D91D-D034-4AD9080B5643</value>
   </title>
   <id>3</id>
   <valueType>
@@ -916,16 +823,8 @@ WHERE
  <attributes>
   <name>Upload</name>
   <title>
-   <key>tr</key>
-   <value>Yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Upload</value>
+   <value>4B2D6644-9DB4-DD68-885A-A2977BBD8D11</value>
   </title>
   <id>4</id>
   <valueType>
@@ -942,16 +841,8 @@ WHERE
  <attributes>
   <name>DefaultFilesStorageVolume</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan dosya depolama yeri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Том хранения файлов по умолчанию</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Default files storage volume</value>
+   <value>2CB2ACD3-B445-8BC0-0274-4F2459641FE4</value>
   </title>
   <id>5</id>
   <valueType>
@@ -967,16 +858,8 @@ WHERE
  <attributes>
   <name>ImagePreview</name>
   <title>
-   <key>tr</key>
-   <value>Resim önizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предпросмотр изображения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Image preview</value>
+   <value>65AD61A6-1E7C-5EE1-1392-2FE44E8FDD48</value>
   </title>
   <id>6</id>
   <valueType>
@@ -993,16 +876,8 @@ WHERE
  <attributes>
   <name>PDFPreview</name>
   <title>
-   <key>tr</key>
-   <value>PDF önizle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Предпросмотр PDF</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>PDF Preview</value>
+   <value>F69DF5B2-5C75-DABC-C2D3-3B6AD96E4E3E</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1018,16 +893,8 @@ WHERE
  <formCommands>
   <name>DownloadFile</name>
   <title>
-   <key>tr</key>
-   <value>Dosya indir</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Скачать файл</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Download file</value>
+   <value>DDA03BAA-E8DF-A392-2741-19D56553ED60</value>
   </title>
   <id>1</id>
   <use>
@@ -1043,16 +910,8 @@ WHERE
  <formCommands>
   <name>DeleteFiles</name>
   <title>
-   <key>tr</key>
-   <value>Dosyaları sil</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Удаление файлов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Delete files</value>
+   <value>DEAF5387-D559-ACC6-6FE6-6AFD7F8D2D95</value>
   </title>
   <id>2</id>
   <use>

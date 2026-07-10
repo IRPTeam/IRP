@@ -17,16 +17,8 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Geçerli evrak</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Текущий документ</v8:content>
-					</v8:item>
-					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Current document</v8:content>
+						<v8:content>66FBE798-C90D-89C6-6E60-0699F8B68E88</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

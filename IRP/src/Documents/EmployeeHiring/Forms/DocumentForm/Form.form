@@ -13,16 +13,8 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>310</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа декораций рисунок свернутой шапки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <value>B5DCA550-65DE-F851-1AB0-047DF05F7044____</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -62,16 +54,8 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>313</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>BBE14591-A741-9544-469B-BE1C9C727490</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -173,16 +157,8 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>321</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Пожалуйста, заполните документ</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Please, fill the document</value>
+      <value>8EB13259-2586-CE5C-CFA1-19916081F24E</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -719,16 +695,8 @@
        <equalElementsWidth>true</equalElementsWidth>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Pozisyona göre</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>По должности</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>By position</value>
+         <value>74B1C37A-D6CC-F8B2-236A-A0C3CDB982DA</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>ByPosition</value>
@@ -736,16 +704,8 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Kişisel</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>Личное</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>Personal</value>
+         <value>0A177B63-0A67-0718-8B1B-B27F43CDC31B</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>Personal</value>
@@ -807,16 +767,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Pozisyona göre maaş</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Зарплата по должности</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Salary by position</value>
+        <value>4F2298D6-99FA-5193-3954-4758C304B52A</value>
        </title>
        <extendedTooltip>
         <name>GroupSalaryByPositionExtendedTooltip</name>
@@ -884,16 +836,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Kişisel maaş</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Личная зарплата</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Personal salary</value>
+        <value>BAAFC9E5-03BB-7B8A-AB4E-E9657BA2A872</value>
        </title>
        <extendedTooltip>
         <name>GroupPerosnalSalaryExtendedTooltip</name>
@@ -917,16 +861,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Maaş miktarı</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Сумма зарплаты</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Salary amount</value>
+       <value>80A39AF7-6C35-A6D5-5FBE-E7FC8C49C12A</value>
       </title>
       <extendedTooltip>
        <name>GroupSalaryAmountExtendedTooltip</name>
@@ -949,16 +885,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Maaş tipi</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Тип зарплаты</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Salary type</value>
+      <value>D2048E71-6FD9-F2A5-5D75-5C4DCC659DB3</value>
      </title>
      <extendedTooltip>
       <name>GroupSalaryTypeExtendedTooltip</name>
@@ -1023,16 +951,8 @@
        <equalElementsWidth>true</equalElementsWidth>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Şirkete göre</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>По компании</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>By company</value>
+         <value>C7C12213-7F60-CE96-66AF-F99F3EBFE4C3</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>ByCompany</value>
@@ -1040,16 +960,8 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Kişisel</value>
-        </presentation>
-        <presentation>
-         <key>ru</key>
-         <value>Личный</value>
-        </presentation>
-        <presentation>
          <key>en</key>
-         <value>Personal</value>
+         <value>C9BAC856-51F5-052D-D54D-D2E6365F35F3</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>Personal</value>
@@ -1109,16 +1021,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup izin günleri</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа лимита отпусков</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group of vacation limit</value>
+      <value>6510758F-2D04-E944-42E0-02A035852D85</value>
      </title>
      <extendedTooltip>
       <name>GroupVacationLimitExtendedTooltip</name>
@@ -1146,16 +1050,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Maaş</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Зарплата</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Salary</value>
+     <value>52F6CFAB-2CC6-7D02-2A71-16B442DA9FB5</value>
     </title>
     <extendedTooltip>
      <name>GroupSalaryValueExtendedTooltip</name>
@@ -1184,16 +1080,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Çalışan işe alım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Найм сотрудника</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Employee hiring</value>
+    <value>0C8BAF55-DA69-C720-0431-12CBEE1351A9</value>
    </title>
    <extendedTooltip>
     <name>GroupEmployeeHiringExtendedTooltip</name>
@@ -1220,16 +1108,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ek özellikler</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительные реквизиты</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Additional attributes</value>
+    <value>138ABF14-C8BE-E30D-D923-372B2D82FE64</value>
    </title>
    <extendedTooltip>
     <name>GroupAddAttributesExtendedTooltip</name>
@@ -1343,16 +1223,8 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ek olarak</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Дополнительно</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>More</value>
+     <value>C299D617-D442-BB0A-A722-219748DC2AD9</value>
     </title>
     <extendedTooltip>
      <name>GroupMoreExtendedTooltip</name>
@@ -1462,16 +1334,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Дополнительно</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Other</value>
+    <value>BB90DE0F-C05D-8B49-9CA4-4ADFCF0C50DE</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -1495,16 +1359,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Страницы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Pages</value>
+   <value>72175542-10C5-43A3-323C-CB5AF4A5DD7B</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -1678,16 +1534,8 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Комментарий</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Comment</value>
+   <value>21C0B92B-4E3B-E8E9-9EE2-2F7950B85B8C</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1704,16 +1552,8 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа элементов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Group items</value>
+   <value>9376DB8A-A000-2A2F-F695-585C739270AC</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1732,16 +1572,8 @@
  <attributes>
   <name>SalaryType</name>
   <title>
-   <key>tr</key>
-   <value>Maaş tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип зарплаты</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Salary type</value>
+   <value>C6173AB0-78C9-EEA0-0C7E-E5822A2A794C</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1758,16 +1590,8 @@
  <attributes>
   <name>VacationDays</name>
   <title>
-   <key>tr</key>
-   <value>İzin günleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дней отпуска</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Vacation days</value>
+   <value>7786167D-89AA-B003-3FA4-4CB6CB029E1B</value>
   </title>
   <id>12</id>
   <valueType>
@@ -1787,16 +1611,8 @@
  <attributes>
   <name>VacationDaysType</name>
   <title>
-   <key>tr</key>
-   <value>İzin günleri</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дней отпуска</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Vacation days</value>
+   <value>03308734-C92F-B43B-B6DD-DB6EA90489D8</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1815,16 +1631,8 @@
  <attributes>
   <name>VacationDaysCompany</name>
   <title>
-   <key>tr</key>
-   <value>İzin günleri (şirket)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Дней отпуска (организация)</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Vacation days (company)</value>
+   <value>DF26609A-1807-0DDD-DBF9-926B735F6BEC</value>
   </title>
   <id>14</id>
   <valueType>
@@ -1844,16 +1652,8 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать row key</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show row key</value>
+   <value>95D8845E-3966-B015-5892-2EA2D7664700</value>
   </title>
   <id>9</id>
   <use>
@@ -1872,16 +1672,8 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать скрытые таблицы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show hidden tables</value>
+   <value>F207DB1C-220F-1F1C-CA78-8436CB3C8A6E</value>
   </title>
   <id>15</id>
   <use>

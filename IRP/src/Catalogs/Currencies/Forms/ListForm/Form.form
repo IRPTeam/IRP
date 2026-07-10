@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>F67B7EEF-1F05-C2F5-563A-A4967E6D9BA9</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -58,16 +50,8 @@
    <name>NumericCode</name>
    <id>27</id>
    <title>
-    <key>tr</key>
-    <value>Sayısal kod</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Цифровой код</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Numeric code</value>
+    <value>BB8ED5FC-4E83-CF4F-FCA6-6B678C9334BF</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -150,16 +134,8 @@
    <name>Description</name>
    <id>21</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>E8300399-DC64-0E6E-ED2F-F96236434067</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -474,16 +450,8 @@ FROM
  <formCommands>
   <name>Integrations</name>
   <title>
-   <key>tr</key>
-   <value>Entegrasyonlar</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Интеграции</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Integrations</value>
+   <value>367E4890-908A-5E4F-FBC0-0F18733CCC96</value>
   </title>
   <id>1</id>
   <use>
@@ -499,16 +467,8 @@ FROM
  <formCommands>
   <name>LoadCurrency</name>
   <title>
-   <key>tr</key>
-   <value>Döviz yükle</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить валюту</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Load currency</value>
+   <value>1940960E-65DE-1332-2189-940CB4D20440</value>
   </title>
   <id>2</id>
   <use>

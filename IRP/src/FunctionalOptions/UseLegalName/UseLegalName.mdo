@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6b1aae34-0cca-4040-ad31-1ce0613ea0b2">
  <name>UseLegalName</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Fatura hesabı</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать - Контрагентов</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use legal name</value>
+  <value>83B20C46-BF9B-EBBB-B296-6A570E038413</value>
  </synonym>
  <location>Constant.UseLegalName</location>
  <privilegedGetMode>true</privilegedGetMode>

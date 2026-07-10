@@ -6,32 +6,16 @@
  </producedTypes>
  <name>R3027A_CashAdvance</name>
  <synonym>
-  <key>tr</key>
-  <value>R3027A Nakit avans</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R3027A Подотчет сотрудников</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R3027A Cash advance</value>
+  <value>78F47DFC-B93A-1343-351B-BDFFB869E738</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R3027A_CashAdvance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="2a355629-ffa2-4173-82ca-9422c8836987">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Основная схема компоновки данных</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Main data composition schema</value>
+   <value>21733299-E498-4EEE-EF64-4489A9401B13</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

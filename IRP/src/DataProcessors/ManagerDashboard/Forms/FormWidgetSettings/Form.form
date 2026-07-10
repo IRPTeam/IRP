@@ -194,16 +194,8 @@
       <name>LastPeriodCount</name>
       <id>10</id>
       <title>
-       <key>tr</key>
-       <value>Barkod sayısı</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Количество</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Count</value>
+       <value>A93639A7-5615-7360-0C38-80F6B4A36EDA</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -302,28 +294,12 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Son dönemi gruplandır</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа (последний период)</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Group last period</value>
+      <value>413827B0-62C4-874B-B037-7D4100503115</value>
      </title>
-     <toolTip>
-      <key>tr</key>
-      <value>Son dönemi gruplandır</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Группа (последний период)</value>
-     </toolTip>
      <toolTip>
       <key>en</key>
-      <value>Group last period</value>
+      <value>7424F99C-B0CF-2F05-5131-10EBCE447411</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupLastPeriodExtendedTooltip</name>
@@ -442,16 +418,8 @@
       <name>ComparePeriodCount</name>
       <id>23</id>
       <title>
-       <key>tr</key>
-       <value>ile karşılaştır</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Сравнить с</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Compare with</value>
+       <value>388F3A85-F565-573E-E072-285B3BF403C1</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -501,16 +469,8 @@
       <name>Decoration1</name>
       <id>28</id>
       <title>
-       <key>tr</key>
-       <value>Aynı önceki dönemler</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>те же предыдущие периоды</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>same previous periods</value>
+       <value>0EE9DB74-01C8-861B-B6EF-F0786497F1A7</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -570,28 +530,12 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Dönem ayarı</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Настройки периода</value>
-    </title>
-    <title>
      <key>en</key>
-     <value>Period settings</value>
+     <value>811E7C7C-90CF-E2BF-FF02-2DB41AB03DB8</value>
     </title>
-    <toolTip>
-     <key>tr</key>
-     <value>Dönemi gruplandır</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Группа период</value>
-    </toolTip>
     <toolTip>
      <key>en</key>
-     <value>Group period</value>
+     <value>2694331B-4F92-8BDE-E2C0-0AD0C753552D</value>
     </toolTip>
     <extendedTooltip>
      <name>GroupPeriodExtendedTooltip</name>
@@ -1192,16 +1136,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Parti</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Серии</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Series</value>
+       <value>1E7B6A19-2264-2260-0546-6F490EC69554</value>
       </title>
       <extendedTooltip>
        <name>Group7ExtendedTooltip</name>
@@ -1368,16 +1304,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Detaylar</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Дополнительно</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Details</value>
+        <value>27290EC4-D732-3B4B-B56B-B532395ACEE5</value>
        </title>
        <extendedTooltip>
         <name>Group9ExtendedTooltip</name>
@@ -1539,16 +1467,8 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Görünüm</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Специальные предложения</value>
-       </title>
-       <title>
         <key>en</key>
-        <value>Presentation</value>
+        <value>4A587F25-ECF5-819B-B1BB-BFFE1644ACE2</value>
        </title>
        <extendedTooltip>
         <name>Group10ExtendedTooltip</name>
@@ -1577,16 +1497,8 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Eylem seçenekleri</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Параметры</value>
-      </title>
-      <title>
        <key>en</key>
-       <value>Options</value>
+       <value>BDFBF1FC-32AA-EAB4-44C3-32332E804E9E</value>
       </title>
       <extendedTooltip>
        <name>Group8ExtendedTooltip</name>
@@ -1616,16 +1528,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Ayarlar</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Настройки</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Settings</value>
+      <value>DF700BCA-5E6C-3FB4-4286-6C61212D4171</value>
      </title>
      <extendedTooltip>
       <name>Group5ExtendedTooltip</name>
@@ -1725,16 +1629,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grafik seçenekleri</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Параметры диаграммы</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Chart options</value>
+      <value>FB7A7549-16F8-BB6A-AD7E-E8C27EECD184</value>
      </title>
      <extendedTooltip>
       <name>Group11ExtendedTooltip</name>
@@ -2010,16 +1906,8 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Diğer</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Прочее</value>
-     </title>
-     <title>
       <key>en</key>
-      <value>Other</value>
+      <value>E7AA6C36-CEE4-B3A9-9E2B-B0865E37B5D3</value>
      </title>
      <extendedTooltip>
       <name>Group6ExtendedTooltip</name>
@@ -2064,28 +1952,12 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Parti</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Серии</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Series</value>
+    <value>B8300358-55A3-DE40-08BE-E6913706F8AF</value>
    </title>
-   <toolTip>
-    <key>tr</key>
-    <value>Serileri gruplandır</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Группа (серии)</value>
-   </toolTip>
    <toolTip>
     <key>en</key>
-    <value>Group series</value>
+    <value>43F34219-2604-78A2-22E3-3B78DD09EEB4</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupSeriesExtendedTooltip</name>
@@ -2219,16 +2091,8 @@
  <attributes>
   <name>WidgetType</name>
   <title>
-   <key>tr</key>
-   <value>Ekran aracı tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип виджета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Widget type</value>
+   <value>A9307911-9295-D2CC-C478-81FEE00BF3C3</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2245,16 +2109,8 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Период</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Period</value>
+   <value>8FA0A1DC-1B8A-AAD6-6810-04E1B1B43809</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2271,16 +2127,8 @@
  <attributes>
   <name>ChartType</name>
   <title>
-   <key>tr</key>
-   <value>Chart type</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип диаграммы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Chart type</value>
+   <value>6946C1F8-8C08-ED3B-B19C-CF15027B4569</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2297,16 +2145,8 @@
  <attributes>
   <name>LastPeriodCount</name>
   <title>
-   <key>tr</key>
-   <value>Son dönem sayı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество последних периодов</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Last period count</value>
+   <value>E4DC8727-94B8-A6ED-DA49-9B89321D4064</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2325,16 +2165,8 @@
  <attributes>
   <name>LastPeriodType</name>
   <title>
-   <key>tr</key>
-   <value>Son dönem türü</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип последнего периода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Last period type</value>
+   <value>5BD9C29C-C950-F23C-CB63-3F29BA05E8A5</value>
   </title>
   <id>6</id>
   <valueType>
@@ -2351,16 +2183,8 @@
  <attributes>
   <name>Periodicity</name>
   <title>
-   <key>tr</key>
-   <value>Dönem tipi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Периодичность</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Periodicity</value>
+   <value>CFE1D0D6-C0DD-D509-9B2E-ED045C769BA8</value>
   </title>
   <id>7</id>
   <valueType>
@@ -2377,16 +2201,8 @@
  <attributes>
   <name>ComparePeriodCount</name>
   <title>
-   <key>tr</key>
-   <value>Dönem karşılaştır sayı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Количество периодов для сравнения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Compare period count</value>
+   <value>388ED155-D073-A70D-D5CF-F24A4650A2B6</value>
   </title>
   <id>8</id>
   <valueType>
@@ -2405,16 +2221,8 @@
  <attributes>
   <name>PeriodPresentation</name>
   <title>
-   <key>tr</key>
-   <value>Dönem sunumu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отображение периода</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Period presentation</value>
+   <value>966A8174-9533-F79B-B3A1-100928326F90</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2431,16 +2239,8 @@
  <attributes>
   <name>Series</name>
   <title>
-   <key>tr</key>
-   <value>Parti</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Серии</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Series</value>
+   <value>46AC9B95-1AD3-BFEE-EF6E-E67635D5D53D</value>
   </title>
   <id>10</id>
   <valueType>
@@ -2455,16 +2255,8 @@
   <columns>
    <name>Title</name>
    <title>
-    <key>tr</key>
-    <value>Başlık</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Title</value>
+    <value>E7A5796D-1F78-E740-0297-74C8C80DB7D6</value>
    </title>
    <id>1</id>
    <valueType>
@@ -2482,16 +2274,8 @@
   <columns>
    <name>Company</name>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Организация</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Company</value>
+    <value>224739FF-9837-3DF2-2DE1-14CD53684293</value>
    </title>
    <id>2</id>
    <valueType>
@@ -2507,16 +2291,8 @@
   <columns>
    <name>CurrencyMovementType</name>
    <title>
-    <key>tr</key>
-    <value>Çoklu döviz hareket tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Вид мультивалютной аналитики</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency movement type</value>
+    <value>D0BD0631-B3E3-594F-F14C-CCFF7E4A58AF</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2532,16 +2308,8 @@
   <columns>
    <name>Branch</name>
    <title>
-    <key>tr</key>
-    <value>Şube</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Структурное подразделение</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Branch</value>
+    <value>FF6C340A-D94E-C177-7CE0-04942BA53DC2</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2557,16 +2325,8 @@
   <columns>
    <name>Store</name>
    <title>
-    <key>tr</key>
-    <value>Depo</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Склад</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Store</value>
+    <value>D5E5E9C6-81F0-40CE-E545-5012A4E093ED</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2582,16 +2342,8 @@
   <columns>
    <name>Currency</name>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Валюта</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Currency</value>
+    <value>65D55ABB-5FC3-4522-289E-E98C455E3EAC</value>
    </title>
    <id>23</id>
    <valueType>
@@ -2607,16 +2359,8 @@
   <columns>
    <name>FinancialMovementType</name>
    <title>
-    <key>tr</key>
-    <value>Finans hareket tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Статья ДДС</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Financial movement type</value>
+    <value>6500BD70-A370-15FD-DEC9-94A6E339A4B9</value>
    </title>
    <id>24</id>
    <valueType>
@@ -2632,16 +2376,8 @@
   <columns>
    <name>Account</name>
    <title>
-    <key>tr</key>
-    <value>Hesap</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Банковский счет</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Account</value>
+    <value>54B86319-C435-1615-5893-3684C6FCC457</value>
    </title>
    <id>25</id>
    <valueType>
@@ -2657,16 +2393,8 @@
   <columns>
    <name>DebtType</name>
    <title>
-    <key>tr</key>
-    <value>Borç tipi</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Тип задолженности</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Debt type</value>
+    <value>336A7BB4-B284-C5AA-AEB6-6974E807ED3C</value>
    </title>
    <id>26</id>
    <valueType>
@@ -2683,16 +2411,8 @@
  <attributes>
   <name>AvailableParameters</name>
   <title>
-   <key>tr</key>
-   <value>Kullanılabilir parametreler</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Доступные параметры</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Available parameters</value>
+   <value>2607CA8F-D471-296A-AB74-45C0ACCF44B0</value>
   </title>
   <id>11</id>
   <valueType>
@@ -2707,16 +2427,8 @@
   <columns>
    <name>ParameterName</name>
    <title>
-    <key>tr</key>
-    <value>Parametre tanımı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование параметра</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Parameter name</value>
+    <value>BB5A4C6A-D184-8F45-58C4-4254CBCA0171</value>
    </title>
    <id>1</id>
    <valueType>
@@ -2734,16 +2446,8 @@
  <attributes>
   <name>IndicatorName</name>
   <title>
-   <key>tr</key>
-   <value>Göstergenin ismi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование индикатора</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Indicator name</value>
+   <value>93889FC0-9B1B-F00A-AFE6-6E09FF7817CF</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2760,16 +2464,8 @@
  <attributes>
   <name>WidgetID</name>
   <title>
-   <key>tr</key>
-   <value>Ekran aracı ID</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Идентификатор виджета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Widget ID</value>
+   <value>8665A44D-33CD-65C2-2A14-4E189500500E</value>
   </title>
   <id>13</id>
   <valueType>
@@ -2786,16 +2482,8 @@
  <attributes>
   <name>WidgetName</name>
   <title>
-   <key>tr</key>
-   <value>Araç adı</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Наименование виджета</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Widget name</value>
+   <value>3D2B0A5F-083F-52CD-D538-806C02357200</value>
   </title>
   <id>14</id>
   <valueType>
@@ -2812,16 +2500,8 @@
  <attributes>
   <name>Options_Icon</name>
   <title>
-   <key>tr</key>
-   <value>Simge</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Иконка</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Icon</value>
+   <value>E9E79264-6AA5-A35A-AAC2-21632976E6CA</value>
   </title>
   <id>15</id>
   <valueType>
@@ -2838,16 +2518,8 @@
  <attributes>
   <name>Options_Color</name>
   <title>
-   <key>tr</key>
-   <value>Renk</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Цвет</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Color</value>
+   <value>786C9E02-713A-C36E-E867-7B58C855BA02</value>
   </title>
   <id>16</id>
   <valueType>
@@ -2864,16 +2536,8 @@
  <attributes>
   <name>Options_DetailsType</name>
   <title>
-   <key>tr</key>
-   <value>Detay türü</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Тип подробностей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Details type</value>
+   <value>6236E950-32E4-9718-82E5-5C1C7FAFF472</value>
   </title>
   <id>17</id>
   <valueType>
@@ -2890,16 +2554,8 @@
  <attributes>
   <name>Options_ModalTitle</name>
   <title>
-   <key>tr</key>
-   <value>Modal başlık</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Заголовок модального окна</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Modal title</value>
+   <value>BB2FC990-2E14-33DD-DB66-6EED72580C8C</value>
   </title>
   <id>18</id>
   <valueType>
@@ -2916,16 +2572,8 @@
  <attributes>
   <name>Options_ModalIcon</name>
   <title>
-   <key>tr</key>
-   <value>Modal simge</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Иконка модального окна</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Modal icon</value>
+   <value>AE7C4B2A-5597-292E-E973-357220391408</value>
   </title>
   <id>19</id>
   <valueType>
@@ -2942,16 +2590,8 @@
  <attributes>
   <name>Options_Width</name>
   <title>
-   <key>tr</key>
-   <value>Genişlik</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ширина</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Width</value>
+   <value>9D455B05-7D1B-720A-A391-1412CD47A205</value>
   </title>
   <id>20</id>
   <valueType>
@@ -2968,16 +2608,8 @@
  <attributes>
   <name>Options_TimeLineDateFormat</name>
   <title>
-   <key>tr</key>
-   <value>Zaman çizelgesi tarih biçimi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Формат даты временной шкалы</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Time line date format</value>
+   <value>0314F8F1-BA40-6E05-588B-B201941A6567</value>
   </title>
   <id>21</id>
   <valueType>
@@ -2994,16 +2626,8 @@
  <attributes>
   <name>ChartOptions_ShowPoint</name>
   <title>
-   <key>tr</key>
-   <value>Noktaları göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать точку</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show point</value>
+   <value>68DA5E91-6865-632B-B5D4-4F95A75207BA</value>
   </title>
   <id>22</id>
   <valueType>
@@ -3019,16 +2643,8 @@
  <attributes>
   <name>ChartOptions_ValueDivider</name>
   <title>
-   <key>tr</key>
-   <value>Değer bölücü</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Разделитель значений</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Value divider</value>
+   <value>9B214071-9FF9-0D50-05A1-1D20290E98CD</value>
   </title>
   <id>27</id>
   <valueType>
@@ -3047,29 +2663,13 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Ок</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Ok</value>
+   <value>A1A7C0C8-5DC8-F5F8-8132-284685E02780</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tamam</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Ок</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Ok</value>
+   <value>113F85D5-5A66-12EE-E29F-FACAB2F21C99</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3084,29 +2684,13 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отмена</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Cancel</value>
+   <value>2F46A9AB-B937-C2AA-A0DA-A47721B82EB6</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>İptal</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Отмена</value>
-  </toolTip>
-  <toolTip>
    <key>en</key>
-   <value>Cancel</value>
+   <value>149ED40B-F7C3-8D8E-E3F5-538EFEB220EC</value>
   </toolTip>
   <use>
    <common>true</common>

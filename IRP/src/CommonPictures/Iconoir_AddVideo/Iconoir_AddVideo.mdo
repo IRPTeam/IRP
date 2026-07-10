@@ -2,15 +2,7 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8e522de4-fd97-4b97-9b42-22ac2ff11e19">
  <name>Iconoir_AddVideo</name>
  <synonym>
-  <key>tr</key>
-  <value>Video ekle</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Iconoir добавить видео</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Iconoir add video</value>
+  <value>CDF73ADB-4A29-02CF-F3B3-3D31CFA3435E</value>
  </synonym>
 </mdclass:CommonPicture>

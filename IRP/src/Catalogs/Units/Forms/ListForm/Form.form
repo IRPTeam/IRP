@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>User settings group</value>
+   <value>947AADC6-F1D2-D3C9-9CAB-BCA0FF43BA45</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -98,16 +90,8 @@
    <name>Description</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Наименование</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Description</value>
+    <value>765D348A-6540-6394-49EF-F911C25BD6FA</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -409,16 +393,8 @@ WHERE
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Номенклатура</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Item</value>
+   <value>5C42D294-DD92-39BF-FFE1-182D8CF38744</value>
   </title>
   <id>2</id>
   <valueType>
@@ -434,16 +410,8 @@ WHERE
  <formCommands>
   <name>ShowAllUnits</name>
   <title>
-   <key>tr</key>
-   <value>Tüm birimleri göster</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показать все единицы измерения</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Show all units</value>
+   <value>C742884A-D305-CA83-3960-0E4647803E7C</value>
   </title>
   <id>1</id>
   <use>

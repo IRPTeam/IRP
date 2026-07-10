@@ -6,32 +6,16 @@
  </producedTypes>
  <name>DownloadAttachedFiles</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek dosyaları indir</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Загрузить прикрепленные файлы</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Download attached files</value>
+  <value>14DCC2B7-AD39-B906-6308-88B82BACC658</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.DownloadAttachedFiles.Form.Form</defaultForm>
  <forms uuid="3b30d8bd-5a7f-4ab7-a03a-a5599caf8a16">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
-   <value>Form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Form</value>
+   <value>F18E0CB4-497D-1B3B-BE70-0FD94BAD6611</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

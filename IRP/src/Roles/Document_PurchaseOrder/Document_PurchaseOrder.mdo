@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6bff5b06-a0ad-41ab-a3f6-d128ee66f5fd">
  <name>Document_PurchaseOrder</name>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Satınalma siparişi"</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Документ "Заказ на покупку"</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Document "Purchase order"</value>
+  <value>FD0F9B13-7FA8-AE31-13D2-2C14323C9D03</value>
  </synonym>
 </mdclass:Role>

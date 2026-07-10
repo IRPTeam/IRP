@@ -259,16 +259,8 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kullanıcılar</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Пользователи</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Users</value>
+    <value>DE26E3D1-7123-984E-E77D-D751EC641852</value>
    </title>
    <extendedTooltip>
     <name>GroupUsersExtendedTooltip</name>
@@ -362,16 +354,8 @@
  <attributes>
   <name>UsersList</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı listesi</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Перечень пользователей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Users list</value>
+   <value>C9FF7617-044C-4221-1994-4AD8192E1F32</value>
   </title>
   <id>3</id>
   <valueType>
@@ -386,16 +370,8 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Использовать</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>Use</value>
+    <value>BE814CBA-C449-A03F-FAED-D444E3F84B7D</value>
    </title>
    <id>6</id>
    <valueType>
@@ -411,16 +387,8 @@
   <columns>
    <name>User</name>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Пользователь</value>
-   </title>
-   <title>
     <key>en</key>
-    <value>User</value>
+    <value>763857E4-87D5-F38B-B1EE-EB2C842304EC</value>
    </title>
    <id>7</id>
    <valueType>
@@ -437,16 +405,8 @@
  <formCommands>
   <name>SaveShare</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet (paylaş)</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Сохранить (поделиться)</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Save (share)</value>
+   <value>4432260B-AD9E-5C10-0336-6190A63AB1BE</value>
   </title>
   <id>1</id>
   <use>
@@ -462,16 +422,8 @@
  <formCommands>
   <name>CheckAllUsers</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcıları kontrol edin</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Выбрать всех пользователей</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Check all users</value>
+   <value>D9378977-8D8B-FDE9-90BE-E5AE078E3674</value>
   </title>
   <id>2</id>
   <use>
@@ -490,16 +442,8 @@
  <formCommands>
   <name>UncheckAllUsers</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcıların işaretini kaldırın</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Отменить для всех выбранных</value>
-  </title>
-  <title>
    <key>en</key>
-   <value>Uncheck all users</value>
+   <value>E71F98E0-36B0-0A06-65BD-D162390DC410</value>
   </title>
   <id>3</id>
   <use>

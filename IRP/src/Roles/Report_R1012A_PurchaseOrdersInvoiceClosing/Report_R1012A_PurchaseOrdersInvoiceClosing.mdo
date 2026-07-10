@@ -2,15 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4781f74f-5d36-4b18-9688-a104322cfeb1">
  <name>Report_R1012A_PurchaseOrdersInvoiceClosing</name>
  <synonym>
-  <key>tr</key>
-  <value>R1012A Satınalma siparişlerin faturalandırılması</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Отчет R1012A_ЗакрытиеСчетовПоЗаказамНаПокупку</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Report R1012A_PurchaseOrdersInvoiceClosing</value>
+  <value>171F0DE6-E0D6-168B-B2F8-881D4D259779______</value>
  </synonym>
 </mdclass:Role>

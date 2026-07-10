@@ -2,16 +2,8 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="79656dea-656f-46b7-a433-a55c6a8833f7">
  <name>UsePurchase</name>
  <synonym>
-  <key>tr</key>
-  <value>Satın alma modülü kullan</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Использовать Закупки</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Use purchase</value>
+  <value>A77EC7D6-119A-F9F7-7893-330BE19D39B2</value>
  </synonym>
  <location>Constant.UsePurchase</location>
  <privilegedGetMode>true</privilegedGetMode>

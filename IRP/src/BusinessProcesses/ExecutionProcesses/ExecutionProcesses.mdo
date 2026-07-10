@@ -10,16 +10,8 @@
  </producedTypes>
  <name>ExecutionProcesses</name>
  <synonym>
-  <key>tr</key>
-  <value>Görev süreçleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Процессы исполнения</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Execution processes</value>
+  <value>A0F04794-979B-F207-7F9F-F3C6E2671873</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>BusinessProcess.ExecutionProcesses.StandardAttribute.Number</inputByString>
@@ -64,16 +56,8 @@
   <dataHistory>Use</dataHistory>
   <name>Date</name>
   <synonym>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Начало периода</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Start date</value>
+   <value>47C81311-379F-B733-3695-5461D37F22F1</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
@@ -93,16 +77,8 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>İşlem süreci</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Процесс исполнения</value>
- </objectPresentation>
- <objectPresentation>
   <key>en</key>
-  <value>Execution process</value>
+  <value>5AE5C251-A075-5E41-16B4-4C68C5CA9EF0</value>
  </objectPresentation>
  <editType>InDialog</editType>
  <defaultObjectForm>BusinessProcess.ExecutionProcesses.Form.ItemForm</defaultObjectForm>
@@ -117,16 +93,8 @@
  <attributes uuid="1bf21f90-39c8-4def-b9df-7fc749a48c79">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Template</value>
+   <value>392DEC92-C239-0093-30D1-113563233686</value>
   </synonym>
   <type>
    <types>CatalogRef.ExecutionTemplates</types>
@@ -139,16 +107,8 @@
  <attributes uuid="4d686fee-5590-42e7-accb-5e8ea1c2cafe">
   <name>ExecutionObject</name>
   <synonym>
-   <key>tr</key>
-   <value>İşlem nesnesi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Объект исполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Execution object</value>
+   <value>2769DB09-A4DD-0AEF-FD85-5BCEA6451F60</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -163,16 +123,8 @@
  <attributes uuid="3796ae94-cb35-4e22-ba21-fddd2e6d0308">
   <name>CompletionDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Gerçekleştirme tarihi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата выполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Completion date</value>
+   <value>374FF59E-0E51-B514-4489-923E1BCED9CF</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -187,16 +139,8 @@
  <attributes uuid="ef3964a4-4371-4eb1-b0dd-50033d139ba0">
   <name>Canceled</name>
   <synonym>
-   <key>tr</key>
-   <value>İptal edildi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отменен</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Canceled</value>
+   <value>BB637688-7FAA-D636-6895-52CC792685DE</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -213,30 +157,14 @@
   </producedTypes>
   <name>ExecutionStages</name>
   <synonym>
-   <key>tr</key>
-   <value>Uygulama aşamaları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Этапы исполнения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Execution stages</value>
+   <value>9E3DAD46-9B16-F631-1469-90371F5EEC09</value>
   </synonym>
   <attributes uuid="9c2edb88-baf9-4455-80d2-9c9e2889308f">
    <name>StageID</name>
    <synonym>
-    <key>tr</key>
-    <value>Aşama kimliği</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Идентификатор этапа</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Stage ID</value>
+    <value>348775B5-216C-2473-39FF-FD97A1BB90B2</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -248,16 +176,8 @@
   <attributes uuid="9f6c2009-2845-414c-b123-71972738cd8b">
    <name>Description_en</name>
    <synonym>
-    <key>tr</key>
-    <value>EN</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Наименование (en)</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>ENG</value>
+    <value>ED1FB99A-143A-FE3C-C9DF-FF07DE54BFED</value>
    </synonym>
    <type>
     <types>DefinedType.typeDescription</types>
@@ -270,16 +190,8 @@
   <attributes uuid="3eda047c-b16e-4288-b024-88c7eb43d860">
    <name>Description_hash</name>
    <synonym>
-    <key>tr</key>
-    <value>Hash</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>HASH</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>HASH</value>
+    <value>992FC9D4-73BE-DBFC-C55B-B992AA6261A0</value>
    </synonym>
    <type>
     <types>DefinedType.typeDescription</types>
@@ -292,16 +204,8 @@
   <attributes uuid="b7b2c384-2d6e-467d-be82-a0fc048b7a8d">
    <name>Description_ru</name>
    <synonym>
-    <key>tr</key>
-    <value>RU</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Наименование (ru)</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>RU</value>
+    <value>64A5FE01-340A-3219-976E-EDA516D5886D</value>
    </synonym>
    <type>
     <types>DefinedType.typeDescription</types>
@@ -314,16 +218,8 @@
   <attributes uuid="356276bb-9eb5-4072-9bb7-31a51ed68d54">
    <name>Description_tr</name>
    <synonym>
-    <key>tr</key>
-    <value>TR</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>TR</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>TR</value>
+    <value>7C51F5F3-0F69-4CFB-B351-1B8BA66AD2A5</value>
    </synonym>
    <type>
     <types>DefinedType.typeDescription</types>
@@ -336,16 +232,8 @@
   <attributes uuid="9c03bca7-970b-4bcd-9926-fcbc43224a9d">
    <name>TasksStartTogether</name>
    <synonym>
-    <key>tr</key>
-    <value>Görevler birlikte başlar</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Задачи начинаются вместе</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Tasks start together</value>
+    <value>6398D462-480C-2185-5530-0D97774DD99B</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -358,16 +246,8 @@
   <attributes uuid="c1ea1fcd-1c39-421c-9043-f9d3d56181d2">
    <name>TasksResult</name>
    <synonym>
-    <key>tr</key>
-    <value>Görev sonucu</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Результат задач</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Tasks result</value>
+    <value>E159C060-3573-F880-0455-55E58C4F02DF</value>
    </synonym>
    <type>
     <types>EnumRef.TaskResults</types>
@@ -380,16 +260,8 @@
   <attributes uuid="2b202fa4-d88c-4c83-9a5f-de15085f6e70">
    <name>TasksFailAction</name>
    <synonym>
-    <key>tr</key>
-    <value>Başarısız Görevler eylemi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Задачи не выполняются</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Tasks fail action</value>
+    <value>B709FBA4-1DEE-B4B6-6988-83BEC55EE8BE</value>
    </synonym>
    <type>
     <types>EnumRef.TaskFailActions</types>
@@ -407,30 +279,14 @@
   </producedTypes>
   <name>StagesTasks</name>
   <synonym>
-   <key>tr</key>
-   <value>Aşamalı görevler</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Этапы задач</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Stages tasks</value>
+   <value>30F359B7-F475-4B6D-D69F-F8B75EB57036</value>
   </synonym>
   <attributes uuid="7e35f9ce-97e8-4dd5-8f1d-232c5c15cff6">
    <name>StageID</name>
    <synonym>
-    <key>tr</key>
-    <value>Aşama kimliği</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Идентификатор этапа</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Stage ID</value>
+    <value>C74877B9-CE86-51BA-ACDB-B9E5E6500953</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -442,16 +298,8 @@
   <attributes uuid="56eadd19-335e-4dcd-9754-e2b707487285">
    <name>TaskID</name>
    <synonym>
-    <key>tr</key>
-    <value>Task ID</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Идентификатор задачи</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Task ID</value>
+    <value>CC8DC5CA-F898-1622-23B6-615F875A60D6</value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -463,16 +311,8 @@
   <attributes uuid="3b5ea075-b1b3-41a5-8910-f4045185bc9f">
    <name>Description_en</name>
    <synonym>
-    <key>tr</key>
-    <value>EN</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Наименование (en)</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>ENG</value>
+    <value>CB8B0813-4FF7-90F7-79BD-D6232AE699B0</value>
    </synonym>
    <type>
     <types>DefinedType.typeDescription</types>
@@ -485,16 +325,8 @@
   <attributes uuid="1d3906ec-4b4c-400f-a966-4af5a549ba52">
    <name>Description_hash</name>
    <synonym>
-    <key>tr</key>
-    <value>Hash</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>HASH</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>HASH</value>
+    <value>D80D85A6-F09C-1556-6804-4A9CDE1812C7</value>
    </synonym>
    <type>
     <types>DefinedType.typeDescription</types>
@@ -507,16 +339,8 @@
   <attributes uuid="e5f28c1f-ffee-4931-881a-0665c3ceee3c">
    <name>Description_ru</name>
    <synonym>
-    <key>tr</key>
-    <value>RU</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Наименование (ru)</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>RU</value>
+    <value>23B901E4-5B18-FB31-1B8B-B5BFE5B4B1DD</value>
    </synonym>
    <type>
     <types>DefinedType.typeDescription</types>
@@ -529,16 +353,8 @@
   <attributes uuid="2e9761c2-5ac9-4dc1-9e1e-b7397c6417ef">
    <name>Description_tr</name>
    <synonym>
-    <key>tr</key>
-    <value>TR</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>TR</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>TR</value>
+    <value>0D3EB888-013D-834F-F663-3D45F8653D8A</value>
    </synonym>
    <type>
     <types>DefinedType.typeDescription</types>
@@ -551,16 +367,8 @@
   <attributes uuid="d01e76b8-3c2f-4cd5-8333-35196bc8a1cd">
    <name>Executor</name>
    <synonym>
-    <key>tr</key>
-    <value>Sorumlu</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Исполнитель</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Executor</value>
+    <value>81F789DF-8FC7-1DFC-C2D0-0AA1536AC390</value>
    </synonym>
    <type>
     <types>CatalogRef.Users</types>
@@ -573,16 +381,8 @@
   <attributes uuid="3a5f9050-ea7c-460d-a66a-f378f29f7e02">
    <name>UserGroup</name>
    <synonym>
-    <key>tr</key>
-    <value>Kullanıcı grubu</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Группа пользователей</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>User group</value>
+    <value>7091ED3D-5D1C-C960-0F29-947E1F8C702B</value>
    </synonym>
    <type>
     <types>CatalogRef.UserGroups</types>
@@ -595,16 +395,8 @@
   <attributes uuid="dc9a3728-2ffb-4418-8286-9a9a8c2c53a1">
    <name>Position</name>
    <synonym>
-    <key>tr</key>
-    <value>Pozisyon</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Должность</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Position</value>
+    <value>5A3698CC-F763-3CB8-83FA-A077F786445C</value>
    </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
@@ -617,16 +409,8 @@
   <attributes uuid="c7075173-f392-4818-89d2-f397f0cea00a">
    <name>Branch</name>
    <synonym>
-    <key>tr</key>
-    <value>Şube</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Структурное подразделение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Branch</value>
+    <value>188EDBD4-9BFF-C71C-CBE0-00C41AAF8143</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -639,16 +423,8 @@
   <attributes uuid="4f94db57-bb0d-442d-be61-b5b0ec61fafa">
    <name>ProfitLossCenter</name>
    <synonym>
-    <key>tr</key>
-    <value>Kar/Zarar merkezi</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Центр прибылей/убытков</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Profit loss center</value>
+    <value>5B6A55FE-6C9F-0C2C-C5CC-CAE9D0CF218C</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -661,16 +437,8 @@
   <attributes uuid="efe6f975-194f-461e-bf74-b4db097d40f9">
    <name>Detailing</name>
    <synonym>
-    <key>tr</key>
-    <value>Detaylandırma</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Детализация</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Detailing</value>
+    <value>20FF9F23-81AD-447F-F7EA-AA67257EC889</value>
    </synonym>
    <type>
     <types>String</types>
@@ -684,16 +452,8 @@
   <attributes uuid="28fc20b4-7a1d-4e25-82a1-bdb39d9d0278">
    <name>TaskType</name>
    <synonym>
-    <key>tr</key>
-    <value>Görev tür</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Тип задачи</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Task type</value>
+    <value>0F832248-E373-281B-B2DE-E22A55130405</value>
    </synonym>
    <type>
     <types>EnumRef.TaskTypes</types>
@@ -706,16 +466,8 @@
   <attributes uuid="66b2e957-a8f3-46b6-b4b6-235e50270c2f">
    <name>AutoExecuteOnStartup</name>
    <synonym>
-    <key>tr</key>
-    <value>Otomatik yürütme</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Автоматическое выполнение</value>
-   </synonym>
-   <synonym>
     <key>en</key>
-    <value>Auto-execute</value>
+    <value>F1A1DE27-4698-305D-D4EE-E8DA463CFCC5</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -729,16 +481,8 @@
  <forms uuid="d1bab740-fb0c-4ee5-bffa-159ea8c976d1">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>084A52E2-F8E4-D925-5B2A-A0068370C159</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -746,16 +490,8 @@
  <forms uuid="71a510f9-669d-4725-908b-65046cd3940d">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>285EB882-B873-EDCA-A58F-F4B87ED9F500</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -763,16 +499,8 @@
  <templates uuid="0e52e40f-a5e6-4425-8b7d-98f6f7cab9a5">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Template</value>
+   <value>77710DDD-02C0-6A06-6395-5152211B2FD4</value>
   </synonym>
  </templates>
 </mdclass:BusinessProcess>

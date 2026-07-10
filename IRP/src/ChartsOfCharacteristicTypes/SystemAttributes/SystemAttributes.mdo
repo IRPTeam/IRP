@@ -10,16 +10,8 @@
  </producedTypes>
  <name>SystemAttributes</name>
  <synonym>
-  <key>tr</key>
-  <value>Sistem nitelikleri</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Системные атрибуты</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>System attributes</value>
+  <value>2DCCA02F-4012-765B-B6AA-A131153EDA2A</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -76,16 +68,8 @@
  <forms uuid="980f2f04-db90-4ad8-a025-3638adcbc0dc">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма элемента</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item form</value>
+   <value>275878CE-BC26-4389-9709-9394A332C315</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -93,16 +77,8 @@
  <forms uuid="a35d5257-b0b0-4868-9810-bca04071b967">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма списка</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>List form</value>
+   <value>25424102-D1E8-E837-72ED-D41ACB930D7B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -110,16 +86,8 @@
  <forms uuid="a246c2f5-3d29-4d0e-a6f7-4b23c06aa27e">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма выбора</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Choice form</value>
+   <value>2A1088A3-2E34-3BDE-E53B-BC00C8F52CF1</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

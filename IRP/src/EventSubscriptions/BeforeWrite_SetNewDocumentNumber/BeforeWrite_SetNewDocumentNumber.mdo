@@ -2,16 +2,8 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b47cd8ec-2c41-4815-ac84-72a1a67af18b">
  <name>BeforeWrite_SetNewDocumentNumber</name>
  <synonym>
-  <key>tr</key>
-  <value>Saklamadan önce yeni evrak numarası belirtle</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Перез записью установить новый номер документа</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>Before write set new document number</value>
+  <value>6F7EC1A3-5D80-C013-30C6-6BE6787030D3</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

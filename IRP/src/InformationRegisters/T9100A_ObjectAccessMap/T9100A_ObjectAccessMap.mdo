@@ -11,56 +11,24 @@
  </producedTypes>
  <name>T9100A_ObjectAccessMap</name>
  <synonym>
-  <key>tr</key>
-  <value>T9100A Nesne erişim haritası</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>T9100A Сопоставление доступа к объекту</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>T9100A Object access map</value>
+  <value>18920949-82C9-C366-6A44-4ED5CE46CF92</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>T9100A Nesne erişim haritası</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>T9100A Сопоставление доступа к объекту</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
-  <value>T9100A Object access map</value>
+  <value>CE3D98CA-49EB-DB05-5C63-395C686BEBDC</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>T9100A Nesne erişim haritaları</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>T9100A Сопоставления доступов к объектам</value>
- </listPresentation>
  <listPresentation>
   <key>en</key>
-  <value>T9100A Object access maps</value>
+  <value>01BDBE17-2BAE-0762-2EB4-4F96CEFE891E</value>
  </listPresentation>
  <resources uuid="2ad68611-af0a-4917-ba1e-28b5a9a945b3">
   <name>ObjectAccessKeys</name>
   <synonym>
-   <key>tr</key>
-   <value>Nesne erişim anahtarları</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ключи доступа объекта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Object access keys</value>
+   <value>F46B81AA-1A15-5010-0BA6-6CFB0E7B6104</value>
   </synonym>
   <type>
    <types>CatalogRef.ObjectAccessKeys</types>
@@ -74,16 +42,8 @@
  <dimensions uuid="4f4a6a0a-fd8e-43a7-b7a0-fc4da94c2bb1">
   <name>ObjectRef</name>
   <synonym>
-   <key>tr</key>
-   <value>Nesne ref</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Ссылка объекта</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Object ref</value>
+   <value>1E3FE2FF-BE7C-C74C-CE44-49E419581CCF</value>
   </synonym>
   <type>
    <types>AnyRef</types>

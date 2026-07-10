@@ -10,16 +10,8 @@
  </producedTypes>
  <name>R9610T_ShipmentPlaning</name>
  <synonym>
-  <key>tr</key>
-  <value>R9610 Sevk planlama</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>R9610 Планирование отгрузок товаров</value>
- </synonym>
- <synonym>
   <key>en</key>
-  <value>R9610 Shipment planing</value>
+  <value>115BDA0E-F9D7-076A-AB02-2966D9DF635C</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +20,8 @@
  <resources uuid="1448d80e-2c9a-4a94-8d11-f4de3d80b41c">
   <name>PlannedQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Planlanan miktar</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Запланированное количество</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Planned quantity</value>
+   <value>99AF774C-0C8E-65C0-0C90-0BD9E53E919C</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +33,8 @@
  <resources uuid="89f46536-f37b-43dc-b3eb-cf59fd50ddaf">
   <name>ShippedQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Sevk adedi</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>В расходном ордере</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Shipped quantity</value>
+   <value>DFFA7D5C-374E-1EFA-A992-2C2759686AB0</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -70,16 +46,8 @@
  <dimensions uuid="ff8c31ec-3785-41a7-ad7c-7694b74fe240">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Company</value>
+   <value>CE04A559-D7BA-B4DF-F490-00BB2D49A88E</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -92,16 +60,8 @@
  <dimensions uuid="500c33f4-1ad4-49a1-b315-300d27619d42">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Branch</value>
+   <value>D01FCCC6-9F5E-A639-95BF-FF9330ECE4C7</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -114,16 +74,8 @@
  <dimensions uuid="265193d3-38b3-4995-9ace-cf6fddd7dc3d">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Partner</value>
+   <value>926AB489-8B70-0120-09ED-DDC682A24928</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -136,16 +88,8 @@
  <dimensions uuid="12026662-0250-4fc3-905a-f1303763aa31">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Магазин</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Store</value>
+   <value>314CD06B-E51C-703B-BDBC-C3DA37C55794</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -158,16 +102,8 @@
  <dimensions uuid="15409b47-e31d-4ebf-8f2c-f8621a0cce1a">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Item key</value>
+   <value>E4FB6116-0619-F253-3977-73AEEDA09913</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -180,16 +116,8 @@
  <dimensions uuid="981526cd-ec07-4f30-a31e-a02c0712752c">
   <name>SourceOfOrigin</name>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşei</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Источник происхождения</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Source of origin</value>
+   <value>496B02C3-3071-FFA5-57D3-3978AC1CFFEF</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>
@@ -202,16 +130,8 @@
  <dimensions uuid="e31771d3-c1b1-4a22-be8c-3295e22bcabe">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Порядок</value>
-  </synonym>
-  <synonym>
    <key>en</key>
-   <value>Order</value>
+   <value>61B12A92-4D86-2C08-8E65-5CB3D8D3C25E</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesOrder</types>

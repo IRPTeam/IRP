@@ -103,7 +103,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>61583059-3F5E-A26A-A1B6-6C8AAEF43D72</v8:content>
+							<v8:content>#</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -114,7 +114,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>87DE1430-2374-BFF9-9B21-1C42310DB311</v8:content>
+							<v8:content>Stages / Tasks / Executor</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -125,7 +125,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>B49C9772-18D3-E7B4-449B-B11AAC64C9AC</v8:content>
+							<v8:content>Date / Time</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -136,7 +136,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>155E30B4-527D-FF6E-E686-6FF9FC198985</v8:content>
+							<v8:content>Result</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -147,7 +147,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>4C5C78CE-C516-0B69-98B6-61E94CB98FBE</v8:content>
+							<v8:content>Comment</v8:content>
 						</v8:item>
 					</tl>
 				</c>

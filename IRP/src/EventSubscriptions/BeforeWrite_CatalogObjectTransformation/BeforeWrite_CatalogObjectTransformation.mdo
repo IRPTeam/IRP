@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="058fcb46-ed2a-4b10-a548-0ebc8e46d8dd">
- <name>BeforeWrite_CatalogObjectTransformation</name>
- <synonym>
-  <key>en</key>
-  <value>EE636AC5-542C-0130-0F23-3FE7A71CC903______</value>
- </synonym>
- <source>
-  <types>CatalogObject</types>
- </source>
- <event>BeforeWrite</event>
- <handler>CommonModule.TransformObjects.BeforeWrite_CatalogObjectTransformation</handler>
+  <name>BeforeWrite_CatalogObjectTransformation</name>
+  <synonym>
+    <key>en</key>
+    <value>Before write catalog object transformation</value>
+  </synonym>
+  <source>
+    <types>CatalogObject</types>
+  </source>
+  <event>BeforeWrite</event>
+  <handler>CommonModule.TransformObjects.BeforeWrite_CatalogObjectTransformation</handler>
 </mdclass:EventSubscription>

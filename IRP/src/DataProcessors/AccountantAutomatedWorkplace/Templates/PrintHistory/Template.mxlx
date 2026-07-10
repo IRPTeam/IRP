@@ -75,7 +75,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>B725C11E-84FD-C576-6BD6-675C4A16A4C5</v8:content>
+							<v8:content>Attributes</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -97,7 +97,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>99DA9C3F-F86F-4E0F-F4D4-4AE8FC22F7A1</v8:content>
+							<v8:content>Name</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -113,7 +113,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>5EDF79EC-3581-3733-33A6-638ECE79EAC9</v8:content>
+							<v8:content>Value (before / after)</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -179,7 +179,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>35DD5244-B07D-158E-EB27-77D988243E53</v8:content>
+							<v8:content>#</v8:content>
 						</v8:item>
 					</tl>
 				</c>

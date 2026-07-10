@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3300192a-93b7-40ba-88ee-1df330e5f084">
- <producedTypes>
-  <refType typeId="3f775feb-5a15-48ce-9ef4-ffad0ad805a0" valueTypeId="09a5c2f1-69c1-458f-8462-ab650da6f9b4"/>
-  <listType typeId="2235de53-e4d9-4bbd-ab0b-ca2a8496ec8c" valueTypeId="3ccbf4f0-72e2-4d95-af49-7c96225fbfcb"/>
-  <managerType typeId="5fdae669-8ddb-4b53-b37e-5325fb4fe1be" valueTypeId="5fad2f2c-14b1-4d59-a51e-25ff3bc16293"/>
- </producedTypes>
- <name>ManualOfferTypes</name>
- <synonym>
-  <key>en</key>
-  <value>78869162-E5BA-B592-2471-1F4E4926A1AE</value>
- </synonym>
- <quickChoice>true</quickChoice>
- <choiceMode>BothWays</choiceMode>
- <enumValues uuid="1b6bf3af-cc7e-4bd0-8f8f-d3c2835919e2">
-  <name>Amount</name>
+  <producedTypes>
+    <refType typeId="3f775feb-5a15-48ce-9ef4-ffad0ad805a0" valueTypeId="09a5c2f1-69c1-458f-8462-ab650da6f9b4"/>
+    <listType typeId="2235de53-e4d9-4bbd-ab0b-ca2a8496ec8c" valueTypeId="3ccbf4f0-72e2-4d95-af49-7c96225fbfcb"/>
+    <managerType typeId="5fdae669-8ddb-4b53-b37e-5325fb4fe1be" valueTypeId="5fad2f2c-14b1-4d59-a51e-25ff3bc16293"/>
+  </producedTypes>
+  <name>ManualOfferTypes</name>
   <synonym>
-   <key>en</key>
-   <value>9EA8B0FC-9FE0-7DA2-2DB7-7D6C9EE9B65A</value>
+    <key>en</key>
+    <value>Manual offer types</value>
   </synonym>
- </enumValues>
- <enumValues uuid="f1dbe00b-0277-4e80-9644-cb31a8032941">
-  <name>Percent</name>
-  <synonym>
-   <key>en</key>
-   <value>71C4D39B-3FEE-87E2-2F39-9A32C4E919D0</value>
-  </synonym>
- </enumValues>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="1b6bf3af-cc7e-4bd0-8f8f-d3c2835919e2">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="f1dbe00b-0277-4e80-9644-cb31a8032941">
+    <name>Percent</name>
+    <synonym>
+      <key>en</key>
+      <value>Percent</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

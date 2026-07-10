@@ -1,365 +1,365 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ed3d9ad2-ffcc-49c3-a0fa-3da46b9dbff0">
- <producedTypes>
-  <objectType typeId="a1b96145-f15d-40be-8563-bab5cb0a8bbb" valueTypeId="1891b840-9079-44e1-9837-2b06bbfbd992"/>
-  <refType typeId="e8a70ae0-5355-454d-b41b-26a0e1d78773" valueTypeId="1eedff18-5815-497f-8bb3-2b5eb59260b6"/>
-  <selectionType typeId="ab8a878f-b361-4e85-bcb5-715fbfad51d4" valueTypeId="0dfc84eb-65f4-4d27-860f-5fb2f4df97fa"/>
-  <listType typeId="6eccaa12-5f41-4df0-b8d8-35d619ba8ffc" valueTypeId="ff422506-a6de-4eb9-8e54-5befc6243574"/>
-  <managerType typeId="35c36f12-c4bc-4d0e-bf55-4640a135913c" valueTypeId="db83c51b-0fb4-45d9-9f6d-e96545913c60"/>
- </producedTypes>
- <name>NumeratorGroups</name>
- <synonym>
-  <key>en</key>
-  <value>B81C9569-7CB2-FC5B-BD00-0B8A4634CB04</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
- <createOnInput>Use</createOnInput>
- <dataLockControlMode>Managed</dataLockControlMode>
- <fullTextSearch>Use</fullTextSearch>
- <levelCount>2</levelCount>
- <foldersOnTop>true</foldersOnTop>
- <codeLength>12</codeLength>
- <codeAllowedLength>Variable</codeAllowedLength>
- <checkUnique>true</checkUnique>
- <autonumbering>true</autonumbering>
- <defaultPresentation>AsDescription</defaultPresentation>
- <editType>InDialog</editType>
- <choiceMode>BothWays</choiceMode>
- <defaultObjectForm>Catalog.NumeratorGroups.Form.ItemForm</defaultObjectForm>
- <defaultListForm>Catalog.NumeratorGroups.Form.ListForm</defaultListForm>
- <defaultChoiceForm>Catalog.NumeratorGroups.Form.ChoiceForm</defaultChoiceForm>
- <attributes uuid="f346e238-85fc-41d9-8cc2-fdc33b4d7e26">
-  <name>BasicRule</name>
-  <synonym>
-   <key>en</key>
-   <value>6DE5F037-D40A-ADCE-E1A5-52938BB32236</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.NumeratorBasicRules</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="64a19c42-f5b0-4dbe-b969-ee9733ce7e4a">
-  <name>BeginDate</name>
-  <synonym>
-   <key>en</key>
-   <value>7472DCE8-6AB8-D294-4968-8C82A1292C7A</value>
-  </synonym>
-  <type>
-   <types>Date</types>
-   <dateQualifiers>
-    <dateFractions>Date</dateFractions>
-   </dateQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="4ec95725-bfb0-4932-838b-c1a36ca2b2e2">
-  <name>EndDate</name>
-  <synonym>
-   <key>en</key>
-   <value>B2CAA324-B6FB-33EA-A9D0-0403F1120BE1</value>
-  </synonym>
-  <type>
-   <types>Date</types>
-   <dateQualifiers>
-    <dateFractions>Date</dateFractions>
-   </dateQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="ddabfcb7-6290-4429-b357-ccf15173bdff">
-  <name>ByDefault</name>
-  <synonym>
-   <key>en</key>
-   <value>EB0C4BA2-2640-20FE-E808-8A63401095DC</value>
-  </synonym>
-  <type>
-   <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="7b2010aa-55e4-4991-8061-a60834181154">
-  <name>NumberingPeriod</name>
-  <synonym>
-   <key>en</key>
-   <value>370EF976-EB05-A797-7942-283A5ADE98C0</value>
-  </synonym>
-  <type>
-   <types>EnumRef.NumberingPeriods</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:ReferenceValue">
-   <value>Enum.NumberingPeriods.EnumValue.NoPeriod</value>
-  </fillValue>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="497b742a-0641-4d0e-8971-915a1e9ce719">
-  <name>NumberTemplate</name>
-  <synonym>
-   <key>en</key>
-   <value>D57F763E-378F-3B71-13E9-90EB933B9C7E</value>
-  </synonym>
-  <type>
-   <types>String</types>
-   <stringQualifiers>
-    <length>100</length>
-   </stringQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="d83cf392-d979-441f-b6a6-e7213f0f2a0c">
-  <name>StartNumber</name>
-  <synonym>
-   <key>en</key>
-   <value>BD5A45B9-8F94-7781-11A4-48DA75007BCC</value>
-  </synonym>
-  <type>
-   <types>Number</types>
-   <numberQualifiers>
-    <precision>10</precision>
-    <nonNegative>true</nonNegative>
-   </numberQualifiers>
-  </type>
-  <minValue xsi:type="core:StringValue">
-   <value>1</value>
-  </minValue>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:NumberValue">
-   <value>1</value>
-  </fillValue>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="0b6c4532-eca8-4492-a8f1-beeb5ff4f048">
-  <name>TotalLength</name>
-  <synonym>
-   <key>en</key>
-   <value>C0516176-76E8-1A74-4688-84C48ACEB5A0</value>
-  </synonym>
-  <type>
-   <types>Number</types>
-   <numberQualifiers>
-    <precision>3</precision>
-    <nonNegative>true</nonNegative>
-   </numberQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:NumberValue">
-   <value>12</value>
-  </fillValue>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="905b1814-748f-4edf-9206-851d95baed25">
-  <name>WithoutLeadingZeros</name>
-  <synonym>
-   <key>en</key>
-   <value>C308F3C3-0797-B4A0-091F-FE841890AB77</value>
-  </synonym>
-  <type>
-   <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="bbecdb02-69f5-47f0-b46f-434dabc18d9f">
-  <name>UniquenessControl</name>
-  <synonym>
-   <key>en</key>
-   <value>97711F3F-3773-D7B3-3EE4-40FA52E986B1</value>
-  </synonym>
-  <type>
-   <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="6ad3f9b8-ecb0-4cc1-beda-16694fea0808">
-  <name>AllowedManualEditing</name>
-  <synonym>
-   <key>en</key>
-   <value>58995175-955B-BFC8-8FE3-3FB1820616BE</value>
-  </synonym>
-  <type>
-   <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <tabularSections uuid="05e78981-f83e-434f-86bb-bc1810e4054c">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ed3d9ad2-ffcc-49c3-a0fa-3da46b9dbff0">
   <producedTypes>
-   <objectType typeId="782dbce7-5171-4277-8a4f-93ab0912916a" valueTypeId="92c4b858-d0bf-4efb-ab77-46193c275892"/>
-   <rowType typeId="ac4e9234-1030-4980-9eaa-938d023a9123" valueTypeId="7a97a3cc-e7c3-490b-8b94-13eaf1108297"/>
+    <objectType typeId="a1b96145-f15d-40be-8563-bab5cb0a8bbb" valueTypeId="1891b840-9079-44e1-9837-2b06bbfbd992"/>
+    <refType typeId="e8a70ae0-5355-454d-b41b-26a0e1d78773" valueTypeId="1eedff18-5815-497f-8bb3-2b5eb59260b6"/>
+    <selectionType typeId="ab8a878f-b361-4e85-bcb5-715fbfad51d4" valueTypeId="0dfc84eb-65f4-4d27-860f-5fb2f4df97fa"/>
+    <listType typeId="6eccaa12-5f41-4df0-b8d8-35d619ba8ffc" valueTypeId="ff422506-a6de-4eb9-8e54-5befc6243574"/>
+    <managerType typeId="35c36f12-c4bc-4d0e-bf55-4640a135913c" valueTypeId="db83c51b-0fb4-45d9-9f6d-e96545913c60"/>
   </producedTypes>
-  <name>Documents</name>
+  <name>NumeratorGroups</name>
   <synonym>
-   <key>en</key>
-   <value>4896C82B-0B5E-EDC6-6AA0-02D0E2198E48</value>
-  </synonym>
-  <attributes uuid="599e4363-5b37-486c-8775-b72d22d9ac6c">
-   <name>Document</name>
-   <synonym>
     <key>en</key>
-    <value>22764457-48BC-C5F5-593F-FC5519AC7F75</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.ConfigurationMetadata</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <choiceParameters>
-    <name>TypeFilter</name>
-    <value xsi:type="core:ReferenceValue">
-     <value>Catalog.ConfigurationMetadata.Documents</value>
-    </value>
-   </choiceParameters>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="d39229ce-7115-4370-9bd7-6b5be28c3f51">
-   <name>NumberName</name>
-   <synonym>
-    <key>en</key>
-    <value>E544CE71-BAB9-F5A5-52CC-C65EAB21101B</value>
-   </synonym>
-   <type>
-    <types>String</types>
-    <stringQualifiers>
-     <length>50</length>
-    </stringQualifiers>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
- </tabularSections>
- <tabularSections uuid="63a961e9-a8b8-43f6-a8d2-0a36fd39f986">
-  <producedTypes>
-   <objectType typeId="e41ecdfe-e445-400a-b741-1ae32e4d528f" valueTypeId="5c273c45-7c18-443c-9715-1b2389269bbd"/>
-   <rowType typeId="a3190d30-63f0-48b5-b3bb-6c98a49bff64" valueTypeId="9212b940-f17e-4b3c-8db1-76b28e36e26f"/>
-  </producedTypes>
-  <name>Catalogs</name>
-  <synonym>
-   <key>en</key>
-   <value>39794389-615E-BA30-0423-382E69FB21B4</value>
+    <value>Numerator groups</value>
   </synonym>
-  <attributes uuid="d43d698a-0804-4f80-8356-9019b86de996">
-   <name>Catalog</name>
-   <synonym>
-    <key>en</key>
-    <value>E427E263-E48A-35AC-C95F-F7053BFA60B7</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.ConfigurationMetadata</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <fillChecking>ShowError</fillChecking>
-   <choiceParameters>
-    <name>TypeFilter</name>
-    <value xsi:type="core:ReferenceValue">
-     <value>Catalog.ConfigurationMetadata.Catalogs</value>
-    </value>
-   </choiceParameters>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.NumeratorGroups.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.NumeratorGroups.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.NumeratorGroups.Form.ChoiceForm</defaultChoiceForm>
+  <attributes uuid="f346e238-85fc-41d9-8cc2-fdc33b4d7e26">
+    <name>BasicRule</name>
+    <synonym>
+      <key>en</key>
+      <value>Basic rule</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.NumeratorBasicRules</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="31abc440-40fd-4c64-b6c5-7d5c2c64b14a">
-   <name>NumberName</name>
-   <synonym>
-    <key>en</key>
-    <value>0E689E80-FD90-F1CF-FB25-52B9406E7687</value>
-   </synonym>
-   <type>
-    <types>String</types>
-    <stringQualifiers>
-     <length>50</length>
-    </stringQualifiers>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <fillChecking>ShowError</fillChecking>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
+  <attributes uuid="64a19c42-f5b0-4dbe-b969-ee9733ce7e4a">
+    <name>BeginDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Begin date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="ac3324c1-ec14-4e11-b8ce-d5e0ff86f3eb">
-   <name>DateName</name>
-   <synonym>
-    <key>en</key>
-    <value>52832E07-537F-A3CF-F3E8-843F23FDC948</value>
-   </synonym>
-   <type>
-    <types>String</types>
-    <stringQualifiers>
-     <length>50</length>
-    </stringQualifiers>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
+  <attributes uuid="4ec95725-bfb0-4932-838b-c1a36ca2b2e2">
+    <name>EndDate</name>
+    <synonym>
+      <key>en</key>
+      <value>End date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
- </tabularSections>
- <forms uuid="7606d065-d154-4e8c-9c85-3b9d65b6c947">
-  <name>ItemForm</name>
-  <synonym>
-   <key>en</key>
-   <value>637B359A-7E89-EC3E-E241-11248FC675FB</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
- <forms uuid="a4281941-8726-4c72-8c63-add8c3d04846">
-  <name>ListForm</name>
-  <synonym>
-   <key>en</key>
-   <value>BB818386-1335-C177-7DD0-0684DEE1C520</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
- <forms uuid="6d88fe4d-131f-4c8c-82b6-afca151a1cce">
-  <name>ChoiceForm</name>
-  <synonym>
-   <key>en</key>
-   <value>C83880E5-99FC-973D-D4B9-9BE0CFD93B0A</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
+  <attributes uuid="ddabfcb7-6290-4429-b357-ccf15173bdff">
+    <name>ByDefault</name>
+    <synonym>
+      <key>en</key>
+      <value>By default</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7b2010aa-55e4-4991-8061-a60834181154">
+    <name>NumberingPeriod</name>
+    <synonym>
+      <key>en</key>
+      <value>Numbering period</value>
+    </synonym>
+    <type>
+      <types>EnumRef.NumberingPeriods</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.NumberingPeriods.EnumValue.NoPeriod</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="497b742a-0641-4d0e-8971-915a1e9ce719">
+    <name>NumberTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Number template</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>100</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d83cf392-d979-441f-b6a6-e7213f0f2a0c">
+    <name>StartNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Start number</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:StringValue">
+      <value>1</value>
+    </minValue>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:NumberValue">
+      <value>1</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="0b6c4532-eca8-4492-a8f1-beeb5ff4f048">
+    <name>TotalLength</name>
+    <synonym>
+      <key>en</key>
+      <value>Total length</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:NumberValue">
+      <value>12</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="905b1814-748f-4edf-9206-851d95baed25">
+    <name>WithoutLeadingZeros</name>
+    <synonym>
+      <key>en</key>
+      <value>Without leading zeros</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="bbecdb02-69f5-47f0-b46f-434dabc18d9f">
+    <name>UniquenessControl</name>
+    <synonym>
+      <key>en</key>
+      <value>Uniqueness control</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6ad3f9b8-ecb0-4cc1-beda-16694fea0808">
+    <name>AllowedManualEditing</name>
+    <synonym>
+      <key>en</key>
+      <value>Allowed manual editing</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="05e78981-f83e-434f-86bb-bc1810e4054c">
+    <producedTypes>
+      <objectType typeId="782dbce7-5171-4277-8a4f-93ab0912916a" valueTypeId="92c4b858-d0bf-4efb-ab77-46193c275892"/>
+      <rowType typeId="ac4e9234-1030-4980-9eaa-938d023a9123" valueTypeId="7a97a3cc-e7c3-490b-8b94-13eaf1108297"/>
+    </producedTypes>
+    <name>Documents</name>
+    <synonym>
+      <key>en</key>
+      <value>Documents</value>
+    </synonym>
+    <attributes uuid="599e4363-5b37-486c-8775-b72d22d9ac6c">
+      <name>Document</name>
+      <synonym>
+        <key>en</key>
+        <value>Document</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ConfigurationMetadata</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>TypeFilter</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Catalog.ConfigurationMetadata.Documents</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d39229ce-7115-4370-9bd7-6b5be28c3f51">
+      <name>NumberName</name>
+      <synonym>
+        <key>en</key>
+        <value>Number attribute name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="63a961e9-a8b8-43f6-a8d2-0a36fd39f986">
+    <producedTypes>
+      <objectType typeId="e41ecdfe-e445-400a-b741-1ae32e4d528f" valueTypeId="5c273c45-7c18-443c-9715-1b2389269bbd"/>
+      <rowType typeId="a3190d30-63f0-48b5-b3bb-6c98a49bff64" valueTypeId="9212b940-f17e-4b3c-8db1-76b28e36e26f"/>
+    </producedTypes>
+    <name>Catalogs</name>
+    <synonym>
+      <key>en</key>
+      <value>Catalogs</value>
+    </synonym>
+    <attributes uuid="d43d698a-0804-4f80-8356-9019b86de996">
+      <name>Catalog</name>
+      <synonym>
+        <key>en</key>
+        <value>Catalog</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ConfigurationMetadata</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>TypeFilter</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Catalog.ConfigurationMetadata.Catalogs</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="31abc440-40fd-4c64-b6c5-7d5c2c64b14a">
+      <name>NumberName</name>
+      <synonym>
+        <key>en</key>
+        <value>Number attribute name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ac3324c1-ec14-4e11-b8ce-d5e0ff86f3eb">
+      <name>DateName</name>
+      <synonym>
+        <key>en</key>
+        <value>Date attribute name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="7606d065-d154-4e8c-9c85-3b9d65b6c947">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a4281941-8726-4c72-8c63-add8c3d04846">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="6d88fe4d-131f-4c8c-82b6-afca151a1cce">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3cd92008-54ac-40f3-8cdf-068605ac90a8">
- <producedTypes>
-  <objectType typeId="64152c0c-46d2-4ab5-b689-85eb84395184" valueTypeId="cee40d8a-c6b1-4b8b-8d8b-cba527d2a235"/>
-  <managerType typeId="7c5d348b-2bd6-4295-a237-88be3dde465a" valueTypeId="e47a5114-1304-4ed6-8930-a4462da14fd1"/>
- </producedTypes>
- <name>R2012A_SalesOrdersInvoiceClosing</name>
- <synonym>
-  <key>en</key>
-  <value>3CB209DE-F69A-80A6-6BCA-AC53210709B8</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <mainDataCompositionSchema>Report.R2012A_SalesOrdersInvoiceClosing.Template.MainDataCompositionSchema</mainDataCompositionSchema>
- <templates uuid="171e9ff5-8a42-4a43-ab17-c97bc3c8862e">
-  <name>MainDataCompositionSchema</name>
+  <producedTypes>
+    <objectType typeId="64152c0c-46d2-4ab5-b689-85eb84395184" valueTypeId="cee40d8a-c6b1-4b8b-8d8b-cba527d2a235"/>
+    <managerType typeId="7c5d348b-2bd6-4295-a237-88be3dde465a" valueTypeId="e47a5114-1304-4ed6-8930-a4462da14fd1"/>
+  </producedTypes>
+  <name>R2012A_SalesOrdersInvoiceClosing</name>
   <synonym>
-   <key>en</key>
-   <value>C98D71CA-FADF-1CCA-ADB2-225EA686ADD7</value>
+    <key>en</key>
+    <value>R2012A Sales orders invoice closing</value>
   </synonym>
-  <templateType>DataCompositionSchema</templateType>
- </templates>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.R2012A_SalesOrdersInvoiceClosing.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="171e9ff5-8a42-4a43-ab17-c97bc3c8862e">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
 </mdclass:Report>

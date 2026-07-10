@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b09239ad-2eef-4343-8279-3baaf4c79d3a">
- <name>Report_R1200_VendorsAging</name>
- <synonym>
-  <key>en</key>
-  <value>0A8FC7C2-7337-A69E-E269-9F106A20F369</value>
- </synonym>
+  <name>Report_R1200_VendorsAging</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R1200_VendorsAging</value>
+  </synonym>
 </mdclass:Role>

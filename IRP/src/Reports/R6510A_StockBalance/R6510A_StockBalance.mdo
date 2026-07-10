@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9b6c8f86-6b47-434a-ba04-dc88a9b991e3">
- <producedTypes>
-  <objectType typeId="9207b416-34f9-4766-a15f-59f343171d24" valueTypeId="6e4efbcc-e265-4cd8-946a-15c19fbe39b0"/>
-  <managerType typeId="818fce1a-623b-4af0-9bf6-d3d60ac507bd" valueTypeId="40bae80f-31f3-4330-be0a-981ef97d6d0e"/>
- </producedTypes>
- <name>R6510A_StockBalance</name>
- <synonym>
-  <key>en</key>
-  <value>8431128A-14F3-4A56-6F8D-D1E70F36DC1D</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <mainDataCompositionSchema>Report.R6510A_StockBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
- <templates uuid="c104551f-ac2f-41eb-8070-d733615cb210">
-  <name>MainDataCompositionSchema</name>
+  <producedTypes>
+    <objectType typeId="9207b416-34f9-4766-a15f-59f343171d24" valueTypeId="6e4efbcc-e265-4cd8-946a-15c19fbe39b0"/>
+    <managerType typeId="818fce1a-623b-4af0-9bf6-d3d60ac507bd" valueTypeId="40bae80f-31f3-4330-be0a-981ef97d6d0e"/>
+  </producedTypes>
+  <name>R6510A_StockBalance</name>
   <synonym>
-   <key>en</key>
-   <value>6FD5A9D8-48C7-2314-48AB-B3847910B7F1</value>
+    <key>en</key>
+    <value>R6510A Stock balance</value>
   </synonym>
-  <templateType>DataCompositionSchema</templateType>
- </templates>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.R6510A_StockBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="c104551f-ac2f-41eb-8070-d733615cb210">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
 </mdclass:Report>

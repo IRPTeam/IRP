@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8e522de4-fd97-4b97-9b42-22ac2ff11e19">
- <name>Iconoir_AddVideo</name>
- <synonym>
-  <key>en</key>
-  <value>CDF73ADB-4A29-02CF-F3B3-3D31CFA3435E</value>
- </synonym>
+  <name>Iconoir_AddVideo</name>
+  <synonym>
+    <key>en</key>
+    <value>Iconoir add video</value>
+  </synonym>
 </mdclass:CommonPicture>

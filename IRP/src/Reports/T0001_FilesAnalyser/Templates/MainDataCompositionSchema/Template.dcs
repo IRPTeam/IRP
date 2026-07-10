@@ -34,7 +34,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>23CEC55A-0FBE-A609-9654-4634261FF576</v8:content>
+					<v8:content>Owner type</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -47,7 +47,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>533CE242-1371-0272-203E-E97494FC338C</v8:content>
+					<v8:content>Mb</v8:content>
 				</v8:item>
 			</title>
 			<valueType>

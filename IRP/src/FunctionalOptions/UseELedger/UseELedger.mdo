@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="88af146c-11f1-4c33-a2d6-a64fc2e67f1a">
- <name>UseELedger</name>
- <synonym>
-  <key>en</key>
-  <value>8B0B4436-EA57-FEAC-C0BF-FDBB17BD25E0</value>
- </synonym>
- <location>Constant.UseELedger</location>
- <privilegedGetMode>true</privilegedGetMode>
- <content>InformationRegister.T9070S_ELedgerDetailComments</content>
- <content>Subsystem.Accounting.Subsystem.ELedger</content>
- <content>Document.ELedgerRegistry</content>
- <content>Catalog.Companies.Attribute.BatchID</content>
- <content>Catalog.Companies.Attribute.EntityID</content>
- <content>Catalog.LedgerTypes.Attribute.ELedgerLocalizationCode</content>
- <content>Catalog.ConfigurationMetadata.Attribute.ELedgerShortDescription</content>
- <content>Catalog.ConfigurationMetadata.Attribute.ELedgerLongDescription</content>
+  <name>UseELedger</name>
+  <synonym>
+    <key>en</key>
+    <value>Use eLedger</value>
+  </synonym>
+  <location>Constant.UseELedger</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>InformationRegister.T9070S_ELedgerDetailComments</content>
+  <content>Subsystem.Accounting.Subsystem.ELedger</content>
+  <content>Document.ELedgerRegistry</content>
+  <content>Catalog.Companies.Attribute.BatchID</content>
+  <content>Catalog.Companies.Attribute.EntityID</content>
+  <content>Catalog.LedgerTypes.Attribute.ELedgerLocalizationCode</content>
+  <content>Catalog.ConfigurationMetadata.Attribute.ELedgerShortDescription</content>
+  <content>Catalog.ConfigurationMetadata.Attribute.ELedgerLongDescription</content>
 </mdclass:FunctionalOption>

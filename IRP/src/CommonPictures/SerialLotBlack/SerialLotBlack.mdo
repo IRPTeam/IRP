@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2671e50a-11f9-4f61-b1dc-63d3b507c401">
- <name>SerialLotBlack</name>
- <synonym>
-  <key>en</key>
-  <value>D409AC52-D6B8-ED2F-F27B-BB50CA0BD204</value>
- </synonym>
+  <name>SerialLotBlack</name>
+  <synonym>
+    <key>en</key>
+    <value>Serial lot black</value>
+  </synonym>
 </mdclass:CommonPicture>

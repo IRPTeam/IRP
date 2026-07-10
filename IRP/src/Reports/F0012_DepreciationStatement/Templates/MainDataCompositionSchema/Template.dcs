@@ -63,7 +63,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>1E7094F5-BB0B-BEDB-B119-9860C2A6C184</v8:content>
+					<v8:content>Initial cost</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -72,7 +72,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>AA18B1A3-64C7-9FA9-9874-425AA0FC43A0</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -101,7 +101,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>0DA3F158-F0D5-99C3-30B0-047C73A76BEF</v8:content>
+							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -127,7 +127,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>A0662239-D754-3CCA-A213-30983FB80592</v8:content>
+					<v8:content>Commissioning date</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -136,7 +136,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>0DA3F158-F0D5-99C3-30B0-047C73A76BEF</v8:content>
+							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -169,7 +169,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>AA18B1A3-64C7-9FA9-9874-425AA0FC43A0</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -197,7 +197,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>6458937E-0E82-8989-99B2-2F28B491007B</v8:content>
+					<v8:content>Opening balance</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -211,7 +211,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>AA18B1A3-64C7-9FA9-9874-425AA0FC43A0</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -227,7 +227,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>93D5AA3A-96EC-E177-71EB-B65BBCE514AA</v8:content>
+					<v8:content>Closing balance</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -241,7 +241,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>AA18B1A3-64C7-9FA9-9874-425AA0FC43A0</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -257,7 +257,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>D1A9363D-FCCA-94F0-0EDA-A08C3CABD42D</v8:content>
+					<v8:content>Inventory number</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -267,7 +267,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>E93F3B6E-5587-3E26-6979-9470FDBF5FBF</v8:content>
+					<v8:content>Depreciation rate</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -326,7 +326,7 @@ WHERE
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>20236EE7-1EBF-B20B-BDE1-1A5E171158EA</v8:content>
+				<v8:content>Company</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -353,7 +353,7 @@ WHERE
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>1C45924B-1C1B-4F46-6155-5C5DDD34783A</v8:content>
+				<v8:content>End date</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -372,7 +372,7 @@ WHERE
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>A66A5853-A1B1-0914-4511-1F1CAB39CEFD</v8:content>
+				<v8:content>Start date</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -391,7 +391,7 @@ WHERE
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>AC29F6A5-A871-FFF9-973B-B136C9B09185</v8:content>
+				<v8:content>Period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -415,14 +415,14 @@ WHERE
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>BCE7DAC7-2D3C-D7B1-1B09-9D489B8BCA8C</v8:content>
+							<v8:content>Receipt</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>0F6A8541-3F89-C30C-C87B-BF12894C2A11</v8:content>
+								<v8:content>Doc date, number</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -430,7 +430,7 @@ WHERE
 							<dcsset:lwsTitle>
 								<v8:item>
 									<v8:lang>en</v8:lang>
-									<v8:content/>
+									<v8:content> </v8:content>
 								</v8:item>
 							</dcsset:lwsTitle>
 						</dcsset:item>
@@ -439,7 +439,7 @@ WHERE
 							<dcsset:lwsTitle>
 								<v8:item>
 									<v8:lang>en</v8:lang>
-									<v8:content/>
+									<v8:content> </v8:content>
 								</v8:item>
 							</dcsset:lwsTitle>
 						</dcsset:item>

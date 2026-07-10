@@ -1,95 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:ChartOfCharacteristicTypes xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0ea43208-037e-49a3-a7e1-1b39a2eda198">
- <producedTypes>
-  <objectType typeId="0762261d-1c82-4832-bf64-01c4345c10c3" valueTypeId="6ede2f91-025e-4d79-86ff-78975cda467d"/>
-  <refType typeId="32a9b113-51b5-4cb6-8934-06a745d42be4" valueTypeId="1934ed22-b3f4-4f64-a070-c87a12766e1a"/>
-  <selectionType typeId="2f4601dd-5091-43fa-9fff-5e75689686db" valueTypeId="a8eda0da-92dd-40f1-8d6d-331799038f3d"/>
-  <listType typeId="3c01ebe8-d1e4-4866-a26f-c2b59cc04939" valueTypeId="c3fe9808-ecea-4ec8-a17b-20a1895b8d2d"/>
-  <managerType typeId="e3bc652c-eeae-4429-a467-5bd562ce242f" valueTypeId="9f88670d-ca2b-418e-b6c4-d102d5462afe"/>
-  <containerType typeId="b3d4b121-c512-4b98-8803-62ce89859815" valueTypeId="7a7f7309-5f35-431a-a411-21aa917e4275"/>
- </producedTypes>
- <name>SystemAttributes</name>
- <synonym>
-  <key>en</key>
-  <value>2DCCA02F-4012-765B-B6AA-A131153EDA2A</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
- <createOnInput>DontUse</createOnInput>
- <dataLockControlMode>Managed</dataLockControlMode>
- <fullTextSearch>Use</fullTextSearch>
- <type>
-  <types>CatalogRef.Companies</types>
-  <types>CatalogRef.LegalNameContracts</types>
-  <types>CatalogRef.Partners</types>
-  <types>CatalogRef.Agreements</types>
-  <types>CatalogRef.Stores</types>
- </type>
- <foldersOnTop>true</foldersOnTop>
- <codeAllowedLength>Variable</codeAllowedLength>
- <defaultPresentation>AsDescription</defaultPresentation>
- <predefined>
-  <items id="d93915eb-3c72-427e-9b5d-fd8b04beed3c">
-   <name>Store</name>
-   <type>
-    <types>CatalogRef.Stores</types>
-   </type>
-  </items>
-  <items id="8040f5d5-f2be-4356-a670-2140c759ac70">
-   <name>Partner</name>
-   <type>
-    <types>CatalogRef.Partners</types>
-   </type>
-  </items>
-  <items id="a18b16cb-9374-461e-89dd-43b7a2a8e6ad">
-   <name>PartnerTerm</name>
-   <type>
-    <types>CatalogRef.Agreements</types>
-   </type>
-  </items>
-  <items id="1c35ce2d-a5b3-403c-935d-77cc5a89aa24">
-   <name>LegalName</name>
-   <type>
+  <producedTypes>
+    <objectType typeId="0762261d-1c82-4832-bf64-01c4345c10c3" valueTypeId="6ede2f91-025e-4d79-86ff-78975cda467d"/>
+    <refType typeId="32a9b113-51b5-4cb6-8934-06a745d42be4" valueTypeId="1934ed22-b3f4-4f64-a070-c87a12766e1a"/>
+    <selectionType typeId="2f4601dd-5091-43fa-9fff-5e75689686db" valueTypeId="a8eda0da-92dd-40f1-8d6d-331799038f3d"/>
+    <listType typeId="3c01ebe8-d1e4-4866-a26f-c2b59cc04939" valueTypeId="c3fe9808-ecea-4ec8-a17b-20a1895b8d2d"/>
+    <managerType typeId="e3bc652c-eeae-4429-a467-5bd562ce242f" valueTypeId="9f88670d-ca2b-418e-b6c4-d102d5462afe"/>
+    <containerType typeId="b3d4b121-c512-4b98-8803-62ce89859815" valueTypeId="7a7f7309-5f35-431a-a411-21aa917e4275"/>
+  </producedTypes>
+  <name>SystemAttributes</name>
+  <synonym>
+    <key>en</key>
+    <value>System attributes</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <type>
     <types>CatalogRef.Companies</types>
-   </type>
-  </items>
-  <items id="e69564a3-2abe-414e-8961-fffe8bc69018">
-   <name>LegalNameContract</name>
-   <type>
     <types>CatalogRef.LegalNameContracts</types>
-   </type>
-  </items>
- </predefined>
- <editType>InDialog</editType>
- <choiceMode>BothWays</choiceMode>
- <defaultObjectForm>ChartOfCharacteristicTypes.SystemAttributes.Form.ItemForm</defaultObjectForm>
- <defaultListForm>ChartOfCharacteristicTypes.SystemAttributes.Form.ListForm</defaultListForm>
- <defaultChoiceForm>ChartOfCharacteristicTypes.SystemAttributes.Form.ChoiceForm</defaultChoiceForm>
- <forms uuid="980f2f04-db90-4ad8-a025-3638adcbc0dc">
-  <name>ItemForm</name>
-  <synonym>
-   <key>en</key>
-   <value>275878CE-BC26-4389-9709-9394A332C315</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
- <forms uuid="a35d5257-b0b0-4868-9810-bca04071b967">
-  <name>ListForm</name>
-  <synonym>
-   <key>en</key>
-   <value>25424102-D1E8-E837-72ED-D41ACB930D7B</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
- <forms uuid="a246c2f5-3d29-4d0e-a6f7-4b23c06aa27e">
-  <name>ChoiceForm</name>
-  <synonym>
-   <key>en</key>
-   <value>2A1088A3-2E34-3BDE-E53B-BC00C8F52CF1</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
+    <types>CatalogRef.Partners</types>
+    <types>CatalogRef.Agreements</types>
+    <types>CatalogRef.Stores</types>
+  </type>
+  <foldersOnTop>true</foldersOnTop>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined>
+    <items id="d93915eb-3c72-427e-9b5d-fd8b04beed3c">
+      <name>Store</name>
+      <type>
+        <types>CatalogRef.Stores</types>
+      </type>
+    </items>
+    <items id="8040f5d5-f2be-4356-a670-2140c759ac70">
+      <name>Partner</name>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+    </items>
+    <items id="a18b16cb-9374-461e-89dd-43b7a2a8e6ad">
+      <name>PartnerTerm</name>
+      <type>
+        <types>CatalogRef.Agreements</types>
+      </type>
+    </items>
+    <items id="1c35ce2d-a5b3-403c-935d-77cc5a89aa24">
+      <name>LegalName</name>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+    </items>
+    <items id="e69564a3-2abe-414e-8961-fffe8bc69018">
+      <name>LegalNameContract</name>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
+      </type>
+    </items>
+  </predefined>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>ChartOfCharacteristicTypes.SystemAttributes.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>ChartOfCharacteristicTypes.SystemAttributes.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>ChartOfCharacteristicTypes.SystemAttributes.Form.ChoiceForm</defaultChoiceForm>
+  <forms uuid="980f2f04-db90-4ad8-a025-3638adcbc0dc">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a35d5257-b0b0-4868-9810-bca04071b967">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a246c2f5-3d29-4d0e-a6f7-4b23c06aa27e">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:ChartOfCharacteristicTypes>

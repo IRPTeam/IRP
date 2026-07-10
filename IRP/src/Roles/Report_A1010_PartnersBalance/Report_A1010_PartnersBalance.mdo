@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3a30ce33-3fbe-4eb3-b761-4ccfcda60b6e">
- <name>Report_A1010_PartnersBalance</name>
- <synonym>
-  <key>en</key>
-  <value>8284235B-C1CA-9F1B-B077-709C9FD69E18</value>
- </synonym>
+  <name>Report_A1010_PartnersBalance</name>
+  <synonym>
+    <key>en</key>
+    <value>Report A1010_PartnersBalance</value>
+  </synonym>
 </mdclass:Role>

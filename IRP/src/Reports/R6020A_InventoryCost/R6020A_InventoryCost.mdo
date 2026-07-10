@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="de15ef92-27fb-4b56-a512-4b008d429f68">
- <producedTypes>
-  <objectType typeId="0539b44a-3101-42c5-8da1-934f43e2a9a4" valueTypeId="62fa3349-c70c-4122-b94f-1675c193c48f"/>
-  <managerType typeId="a45d1a4f-a7d3-499c-bdd7-8b302460ce9e" valueTypeId="ea1a02fe-4582-4b9f-881f-a2415fbdb618"/>
- </producedTypes>
- <name>R6020A_InventoryCost</name>
- <synonym>
-  <key>en</key>
-  <value>50536FE1-44BF-7B12-2086-6C9D9D5C83E0</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <mainDataCompositionSchema>Report.R6020A_InventoryCost.Template.MainDataCompositionSchema</mainDataCompositionSchema>
- <templates uuid="76b6f605-1d16-4f13-b8c8-adf02d9a58d6">
-  <name>MainDataCompositionSchema</name>
+  <producedTypes>
+    <objectType typeId="0539b44a-3101-42c5-8da1-934f43e2a9a4" valueTypeId="62fa3349-c70c-4122-b94f-1675c193c48f"/>
+    <managerType typeId="a45d1a4f-a7d3-499c-bdd7-8b302460ce9e" valueTypeId="ea1a02fe-4582-4b9f-881f-a2415fbdb618"/>
+  </producedTypes>
+  <name>R6020A_InventoryCost</name>
   <synonym>
-   <key>en</key>
-   <value>1E4BAB59-E10F-69B0-06C1-16D2A25ADFAF</value>
+    <key>en</key>
+    <value>R6020A Inventory cost</value>
   </synonym>
-  <templateType>DataCompositionSchema</templateType>
- </templates>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.R6020A_InventoryCost.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="76b6f605-1d16-4f13-b8c8-adf02d9a58d6">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
 </mdclass:Report>

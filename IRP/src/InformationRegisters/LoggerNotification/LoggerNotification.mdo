@@ -1,187 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="dbe47595-62ab-40ee-b2d7-aa9abea79f6b">
- <producedTypes>
-  <selectionType typeId="c793f2ab-c651-4a45-9db7-7c95ec1b2428" valueTypeId="df43b884-cadf-436a-b7ff-d77ca8b21fb1"/>
-  <listType typeId="d1d0234e-56ab-476c-b1cb-34a55cd7f843" valueTypeId="08667eee-310f-43a7-be70-f93742ef3c6a"/>
-  <managerType typeId="09140cba-c0a4-4072-afd9-9ed7cd0d0870" valueTypeId="9f1f018c-210f-49c9-9210-d6e4236cddfe"/>
-  <recordSetType typeId="f638d0f8-6171-4a25-bc81-120b95228064" valueTypeId="592ff260-247c-4c02-b3df-5d9db0428226"/>
-  <recordKeyType typeId="74764512-ff70-4d09-9227-67beb3e1b111" valueTypeId="7bae1682-cfa7-4ee9-8d10-86c721bccc8e"/>
-  <recordType typeId="4ff023d3-7d87-410b-a3a4-8c113992dc0a" valueTypeId="ebafdf40-ff00-40de-865a-b8bb3a3aa295"/>
-  <recordManagerType typeId="ae0ddd2c-daec-4888-90ec-15d402986f36" valueTypeId="64b35af5-a93f-4d92-a58f-ef49e14bb12a"/>
- </producedTypes>
- <name>LoggerNotification</name>
- <synonym>
-  <key>en</key>
-  <value>ED564C59-0004-5107-7349-914FB2FC75A5</value>
- </synonym>
- <editType>InDialog</editType>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>Active</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>LineNumber</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>Recorder</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>Period</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <dataLockControlMode>Managed</dataLockControlMode>
- <resources uuid="b3f29712-fdf4-47e6-a37d-57dbdc85b1ee">
-  <name>SendEmail</name>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dbe47595-62ab-40ee-b2d7-aa9abea79f6b">
+  <producedTypes>
+    <selectionType typeId="c793f2ab-c651-4a45-9db7-7c95ec1b2428" valueTypeId="df43b884-cadf-436a-b7ff-d77ca8b21fb1"/>
+    <listType typeId="d1d0234e-56ab-476c-b1cb-34a55cd7f843" valueTypeId="08667eee-310f-43a7-be70-f93742ef3c6a"/>
+    <managerType typeId="09140cba-c0a4-4072-afd9-9ed7cd0d0870" valueTypeId="9f1f018c-210f-49c9-9210-d6e4236cddfe"/>
+    <recordSetType typeId="f638d0f8-6171-4a25-bc81-120b95228064" valueTypeId="592ff260-247c-4c02-b3df-5d9db0428226"/>
+    <recordKeyType typeId="74764512-ff70-4d09-9227-67beb3e1b111" valueTypeId="7bae1682-cfa7-4ee9-8d10-86c721bccc8e"/>
+    <recordType typeId="4ff023d3-7d87-410b-a3a4-8c113992dc0a" valueTypeId="ebafdf40-ff00-40de-865a-b8bb3a3aa295"/>
+    <recordManagerType typeId="ae0ddd2c-daec-4888-90ec-15d402986f36" valueTypeId="64b35af5-a93f-4d92-a58f-ef49e14bb12a"/>
+  </producedTypes>
+  <name>LoggerNotification</name>
   <synonym>
-   <key>en</key>
-   <value>C0AC7820-5A9E-3CD9-97B6-660811C17CF6</value>
+    <key>en</key>
+    <value>Logger notification</value>
   </synonym>
-  <comment>Need to send email to user</comment>
-  <type>
-   <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
- </resources>
- <resources uuid="7352440b-e6dc-48aa-8299-b045d1929df1">
-  <name>Sended</name>
-  <synonym>
-   <key>en</key>
-   <value>46CCC26F-BF27-B675-54A0-0F7B0D23C393</value>
-  </synonym>
-  <comment>Email was sended</comment>
-  <type>
-   <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
- </resources>
- <resources uuid="f66a3d6f-fedc-4d3a-970e-85186d4001cc">
-  <name>UserRead</name>
-  <synonym>
-   <key>en</key>
-   <value>A04DF37D-3EF9-FDCC-C7FB-B286E5E5DD62</value>
-  </synonym>
-  <comment>User read email or message</comment>
-  <type>
-   <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
- </resources>
- <resources uuid="7c8d95fa-e744-4a04-8ad5-2a1c48fd5837">
-  <name>WaitForOpenRef</name>
-  <synonym>
-   <key>en</key>
-   <value>7FFE42CE-72AE-7D2F-FD3E-EBEEA8FA7C4B</value>
-  </synonym>
-  <comment>Wait until user open ref</comment>
-  <type>
-   <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
- </resources>
- <resources uuid="518a44ef-5fab-4874-baf3-6c2ff64df03b">
-  <name>RefOpened</name>
-  <synonym>
-   <key>en</key>
-   <value>59F84397-E808-CEEE-E91F-FFEA71F06899</value>
-  </synonym>
-  <comment>User open ref</comment>
-  <type>
-   <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
- </resources>
- <dimensions uuid="0830cea0-ff2f-4b20-ab46-4dbfa77b4f51">
-  <name>NotifyID</name>
-  <synonym>
-   <key>en</key>
-   <value>23355E59-7D16-5A5F-F331-164A25A72E15</value>
-  </synonym>
-  <type>
-   <types>String</types>
-   <stringQualifiers>
-    <length>36</length>
-   </stringQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="d52fdcf0-7732-4071-ba49-9505e44aa22c">
-  <name>User</name>
-  <synonym>
-   <key>en</key>
-   <value>CB1C08D4-E5D9-D2A6-67E6-63D76365A3FD</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Users</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <denyIncompleteValues>true</denyIncompleteValues>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="17eb7d56-be7d-43cd-a603-88b6265ffb33">
-  <name>Basis</name>
-  <synonym>
-   <key>en</key>
-   <value>DD63BDE4-2323-BED4-4A93-3943ED4FD6C8</value>
-  </synonym>
-  <type>
-   <types>AnyRef</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <denyIncompleteValues>true</denyIncompleteValues>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillFromFillingValue>true</fillFromFillingValue>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <master>true</master>
-  <mainFilter>true</mainFilter>
- </dimensions>
+  <editType>InDialog</editType>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Active</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>LineNumber</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Recorder</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Period</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="b3f29712-fdf4-47e6-a37d-57dbdc85b1ee">
+    <name>SendEmail</name>
+    <synonym>
+      <key>en</key>
+      <value>Send email</value>
+    </synonym>
+    <comment>Need to send email to user</comment>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="7352440b-e6dc-48aa-8299-b045d1929df1">
+    <name>Sended</name>
+    <synonym>
+      <key>en</key>
+      <value>Sended</value>
+    </synonym>
+    <comment>Email was sended</comment>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="f66a3d6f-fedc-4d3a-970e-85186d4001cc">
+    <name>UserRead</name>
+    <synonym>
+      <key>en</key>
+      <value>User read</value>
+    </synonym>
+    <comment>User read email or message</comment>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="7c8d95fa-e744-4a04-8ad5-2a1c48fd5837">
+    <name>WaitForOpenRef</name>
+    <synonym>
+      <key>en</key>
+      <value>Wait for open ref</value>
+    </synonym>
+    <comment>Wait until user open ref</comment>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="518a44ef-5fab-4874-baf3-6c2ff64df03b">
+    <name>RefOpened</name>
+    <synonym>
+      <key>en</key>
+      <value>Ref opened</value>
+    </synonym>
+    <comment>User open ref</comment>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="0830cea0-ff2f-4b20-ab46-4dbfa77b4f51">
+    <name>NotifyID</name>
+    <synonym>
+      <key>en</key>
+      <value>Notify ID</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>36</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="d52fdcf0-7732-4071-ba49-9505e44aa22c">
+    <name>User</name>
+    <synonym>
+      <key>en</key>
+      <value>User</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="17eb7d56-be7d-43cd-a603-88b6265ffb33">
+    <name>Basis</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis</value>
+    </synonym>
+    <type>
+      <types>AnyRef</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4f6aa703-e96f-4372-b022-6f264eec4460">
- <name>UseSimpleBatch</name>
- <synonym>
-  <key>en</key>
-  <value>B3083C0B-25D4-0B1A-A094-414F162E30FD</value>
- </synonym>
- <location>Constant.UseSimpleBatch</location>
- <privilegedGetMode>true</privilegedGetMode>
- <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.SimpleBatch</content>
- <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SimpleBatch</content>
- <content>AccumulationRegister.R6025B_SimpleBatch</content>
- <content>Document.SalesReturn.TabularSection.ItemList.Attribute.SimpleBatch</content>
- <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.SimpleBatch</content>
- <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.SimpleBatch</content>
- <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.SimpleBatch</content>
- <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.SimpleBatch</content>
- <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.SimpleBatch</content>
- <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.SimpleBatch</content>
- <content>Catalog.SimpleBatch</content>
- <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SimpleBatch</content>
- <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.Amount</content>
- <content>DataProcessor.SimpleBatchSequence</content>
+  <name>UseSimpleBatch</name>
+  <synonym>
+    <key>en</key>
+    <value>Use simple batch</value>
+  </synonym>
+  <location>Constant.UseSimpleBatch</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.SimpleBatch</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>AccumulationRegister.R6025B_SimpleBatch</content>
+  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>Catalog.SimpleBatch</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.Amount</content>
+  <content>DataProcessor.SimpleBatchSequence</content>
 </mdclass:FunctionalOption>

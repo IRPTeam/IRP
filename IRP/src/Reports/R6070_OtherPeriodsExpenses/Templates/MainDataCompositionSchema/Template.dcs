@@ -148,7 +148,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>6DF46053-1E51-D7B9-9755-51468A418E40</v8:content>
+					<v8:content>Item</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -215,7 +215,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>121ABCFA-79C9-F599-954E-E2766BC3FAA6</v8:content>
+				<v8:content>Begin of period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -233,7 +233,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>03AF3F0B-08ED-F3CB-B0E6-696DE2699474</v8:content>
+				<v8:content>End of period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -251,7 +251,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>2CB950FB-B38A-E5DC-C325-551B68EA2F55</v8:content>
+				<v8:content>Period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

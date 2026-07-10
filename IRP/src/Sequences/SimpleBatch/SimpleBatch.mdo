@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Sequence xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="26837ede-304c-40d8-82a5-b2147599ab50">
- <producedTypes>
-  <recordType typeId="3c5ec221-a724-4d04-8e7f-e76a0c6a7fb2" valueTypeId="8973cc41-6ba9-49ff-8299-7e2d18ad575e"/>
-  <managerType typeId="2418e616-36b2-4e78-84f2-dc4330eb9c2b" valueTypeId="08fb6133-6514-4561-8adc-6f3bc105a6c6"/>
-  <recordSetType typeId="c9208edb-846e-4f8a-b927-1e87792ea140" valueTypeId="bccad76a-ec98-459c-8944-388b5871d865"/>
- </producedTypes>
- <name>SimpleBatch</name>
- <synonym>
-  <key>en</key>
-  <value>D6156D43-B85E-043A-A973-3A7C3125D1DB</value>
- </synonym>
- <moveBoundaryOnPosting>DontMove</moveBoundaryOnPosting>
- <documents>Document.PurchaseReturn</documents>
- <documents>Document.SalesInvoice</documents>
- <documents>Document.SalesReturn</documents>
- <documents>Document.ShipmentConfirmation</documents>
- <documents>Document.StockAdjustmentAsWriteOff</documents>
- <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
- <dataLockControlMode>Managed</dataLockControlMode>
- <dimensions uuid="36798efe-f04a-4f25-91e8-95ec4c2897c0">
+  <producedTypes>
+    <recordType typeId="3c5ec221-a724-4d04-8e7f-e76a0c6a7fb2" valueTypeId="8973cc41-6ba9-49ff-8299-7e2d18ad575e"/>
+    <managerType typeId="2418e616-36b2-4e78-84f2-dc4330eb9c2b" valueTypeId="08fb6133-6514-4561-8adc-6f3bc105a6c6"/>
+    <recordSetType typeId="c9208edb-846e-4f8a-b927-1e87792ea140" valueTypeId="bccad76a-ec98-459c-8944-388b5871d865"/>
+  </producedTypes>
   <name>SimpleBatch</name>
   <synonym>
-   <key>en</key>
-   <value>34D69653-5B24-E3C6-62BA-AA982B40811F</value>
+    <key>en</key>
+    <value>Simple batch</value>
   </synonym>
-  <type>
-   <types>CatalogRef.SimpleBatch</types>
-  </type>
-  <documentMap>Document.PurchaseReturn.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
-  <documentMap>Document.SalesInvoice.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
-  <documentMap>Document.SalesReturn.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
-  <documentMap>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
-  <documentMap>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
-  <registerRecordsMap>AccumulationRegister.R6025B_SimpleBatch.Dimension.SimpleBatch</registerRecordsMap>
- </dimensions>
+  <moveBoundaryOnPosting>DontMove</moveBoundaryOnPosting>
+  <documents>Document.PurchaseReturn</documents>
+  <documents>Document.SalesInvoice</documents>
+  <documents>Document.SalesReturn</documents>
+  <documents>Document.ShipmentConfirmation</documents>
+  <documents>Document.StockAdjustmentAsWriteOff</documents>
+  <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <dimensions uuid="36798efe-f04a-4f25-91e8-95ec4c2897c0">
+    <name>SimpleBatch</name>
+    <synonym>
+      <key>en</key>
+      <value>Simple batch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SimpleBatch</types>
+    </type>
+    <documentMap>Document.PurchaseReturn.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
+    <documentMap>Document.SalesInvoice.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
+    <documentMap>Document.SalesReturn.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
+    <documentMap>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
+    <documentMap>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
+    <registerRecordsMap>AccumulationRegister.R6025B_SimpleBatch.Dimension.SimpleBatch</registerRecordsMap>
+  </dimensions>
 </mdclass:Sequence>

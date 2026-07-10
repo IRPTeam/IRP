@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c7406d22-bae6-4a8a-91fc-cde2d4b7627f">
- <name>Report_R2011A_SalesOrdersShipment</name>
- <synonym>
-  <key>en</key>
-  <value>50F0F80C-8736-60F4-4054-40C1796557F6</value>
- </synonym>
+  <name>Report_R2011A_SalesOrdersShipment</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R2011A_SalesOrdersShipment</value>
+  </synonym>
 </mdclass:Role>

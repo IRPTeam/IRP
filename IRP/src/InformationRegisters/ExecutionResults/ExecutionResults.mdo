@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="23bb42c1-8a82-4617-a1fe-14d701fcb2b1">
- <producedTypes>
-  <selectionType typeId="fad733ea-1ef2-487f-91de-764a6a44d0af" valueTypeId="a7086914-8333-4c80-9012-3ff7ff06da31"/>
-  <listType typeId="c99bacbd-e27f-40c9-84fc-5dfc2ef2f59f" valueTypeId="47739610-818c-4142-9008-e53409b86d86"/>
-  <managerType typeId="b580924e-14b3-4b3c-b79b-6c69917cd8ac" valueTypeId="62248f0f-b850-4c7d-92be-10935e066716"/>
-  <recordSetType typeId="601ee869-33f5-491e-a06b-842d5e285312" valueTypeId="280fd9f6-f1a5-4752-8d98-5ad4217e63b3"/>
-  <recordKeyType typeId="fa1bf20c-9300-4f8a-9dba-a6d507c55686" valueTypeId="975941a6-5f42-42e1-a255-54273a0ad808"/>
-  <recordType typeId="7dac1d6c-567a-4f55-92a7-8942dd483e49" valueTypeId="433ec024-d4e6-4746-9262-0ffa39030e2e"/>
-  <recordManagerType typeId="eddb59b4-3fa3-4ea8-ab01-c41bfc9be7e4" valueTypeId="cf17e090-c429-424f-9286-1437151941bb"/>
- </producedTypes>
- <name>ExecutionResults</name>
- <synonym>
-  <key>en</key>
-  <value>45F0935C-323E-E0F1-157D-DADDFEA4C500</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <editType>InDialog</editType>
- <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
- <dataLockControlMode>Managed</dataLockControlMode>
- <resources uuid="d4bcda21-5a7d-4738-8230-7052d2b064b6">
-  <name>Process</name>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="23bb42c1-8a82-4617-a1fe-14d701fcb2b1">
+  <producedTypes>
+    <selectionType typeId="fad733ea-1ef2-487f-91de-764a6a44d0af" valueTypeId="a7086914-8333-4c80-9012-3ff7ff06da31"/>
+    <listType typeId="c99bacbd-e27f-40c9-84fc-5dfc2ef2f59f" valueTypeId="47739610-818c-4142-9008-e53409b86d86"/>
+    <managerType typeId="b580924e-14b3-4b3c-b79b-6c69917cd8ac" valueTypeId="62248f0f-b850-4c7d-92be-10935e066716"/>
+    <recordSetType typeId="601ee869-33f5-491e-a06b-842d5e285312" valueTypeId="280fd9f6-f1a5-4752-8d98-5ad4217e63b3"/>
+    <recordKeyType typeId="fa1bf20c-9300-4f8a-9dba-a6d507c55686" valueTypeId="975941a6-5f42-42e1-a255-54273a0ad808"/>
+    <recordType typeId="7dac1d6c-567a-4f55-92a7-8942dd483e49" valueTypeId="433ec024-d4e6-4746-9262-0ffa39030e2e"/>
+    <recordManagerType typeId="eddb59b4-3fa3-4ea8-ab01-c41bfc9be7e4" valueTypeId="cf17e090-c429-424f-9286-1437151941bb"/>
+  </producedTypes>
+  <name>ExecutionResults</name>
   <synonym>
-   <key>en</key>
-   <value>58B3432B-2656-8376-65DA-AE5374413D21</value>
+    <key>en</key>
+    <value>Execution results</value>
   </synonym>
-  <type>
-   <types>BusinessProcessRef.ExecutionProcesses</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
- </resources>
- <dimensions uuid="be6ff5fa-41f6-41bb-8ac3-fdfdfbcf1c48">
-  <name>ExecutionObject</name>
-  <synonym>
-   <key>en</key>
-   <value>1ACF802F-1892-1B7C-C2E2-2A478F09D9E2</value>
-  </synonym>
-  <type>
-   <types>DocumentRef</types>
-   <types>CatalogRef</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <denyIncompleteValues>true</denyIncompleteValues>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="3461ad48-4e47-459d-ba44-e576c179a7db">
-  <name>Result</name>
-  <synonym>
-   <key>en</key>
-   <value>23FA52EA-4642-C57F-F9CE-E1D671262137</value>
-  </synonym>
-  <type>
-   <types>EnumRef.TaskResults</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <denyIncompleteValues>true</denyIncompleteValues>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="d4bcda21-5a7d-4738-8230-7052d2b064b6">
+    <name>Process</name>
+    <synonym>
+      <key>en</key>
+      <value>Process</value>
+    </synonym>
+    <type>
+      <types>BusinessProcessRef.ExecutionProcesses</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="be6ff5fa-41f6-41bb-8ac3-fdfdfbcf1c48">
+    <name>ExecutionObject</name>
+    <synonym>
+      <key>en</key>
+      <value>Execution object</value>
+    </synonym>
+    <type>
+      <types>DocumentRef</types>
+      <types>CatalogRef</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="3461ad48-4e47-459d-ba44-e576c179a7db">
+    <name>Result</name>
+    <synonym>
+      <key>en</key>
+      <value>Result</value>
+    </synonym>
+    <type>
+      <types>EnumRef.TaskResults</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

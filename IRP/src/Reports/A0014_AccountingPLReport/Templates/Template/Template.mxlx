@@ -71,7 +71,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>A2D0A0B6-1EE2-06DF-F8E8-8A0A818A2BEB</v8:content>
+							<v8:content>Gross Sales</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -94,7 +94,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>8F4B6E41-F611-374E-E0F8-8289C63ED489</v8:content>
+							<v8:content>Sales Returns &amp; Discounts</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -117,7 +117,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>52A3E408-B284-38D8-8457-713A357646D1</v8:content>
+							<v8:content>Net Sales</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -140,7 +140,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>3A6F0D6D-B33C-AAFB-B1D5-5CE3CBFFE14E</v8:content>
+							<v8:content>Cost of Goods Sold (COGS)</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -163,7 +163,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>8CD0E63C-5DCF-5785-587C-C01FFD53E990</v8:content>
+							<v8:content>Gross Profit</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -186,7 +186,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E7CBAF3E-BAB9-07F6-641C-C7BD9106F1B7</v8:content>
+							<v8:content>Selling &amp; Distribution Expenses</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -209,7 +209,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>B52B8CED-7547-BE53-3D69-9EF8421F5EAD</v8:content>
+							<v8:content>Marketing Expenses</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -232,7 +232,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>85AD0EAF-1CAE-9CEE-E741-152E22219D15</v8:content>
+							<v8:content>General &amp; Administrative Expenses</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -255,7 +255,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>02B1A702-D939-8BA2-2A26-66371ECED384</v8:content>
+							<v8:content>Research &amp; Development (R&amp;D)</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -278,7 +278,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>218969A5-314B-1C68-8AD4-478CEDFCA6CA___</v8:content>
+							<v8:content>Other Operating Income / Expenses (Net)</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -301,7 +301,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>A9C11379-081B-4C30-0AB5-5F1D9963FBE1</v8:content>
+							<v8:content>EBITDA</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -324,7 +324,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>B7D076DD-1F7B-1C62-2D55-5CFE8DCF3978</v8:content>
+							<v8:content>Depreciation &amp; Amortization</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -347,7 +347,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>279AA27F-AD47-5B5C-C1BC-C789D1313751</v8:content>
+							<v8:content>EBIT (Operating Profit)</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -370,7 +370,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>C2513847-E69D-1E8F-F44D-D37E50E6BC14</v8:content>
+							<v8:content>Financial Income / Expenses (Net)</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -393,7 +393,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DCC24A2D-09B0-A37E-ED26-6F6A0C22A5E0</v8:content>
+							<v8:content>Profit Before Tax (EBT)</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -416,7 +416,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>79B35724-B8FE-B874-410D-D0AA927AE1E4</v8:content>
+							<v8:content>Income Tax</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -439,7 +439,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>83A2DFAE-D7A0-5164-4515-573591C610DB</v8:content>
+							<v8:content>Net Profit</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -462,7 +462,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>B5B91F50-F6F9-E74D-D2F9-94AA6EC60063</v8:content>
+							<v8:content>Unmapped GL Accounts</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -503,7 +503,7 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>47D38B46-BE03-ED9A-AC66-6AC2B869739E</v8:content>
+				<v8:content>NFD=2</v8:content>
 			</v8:item>
 		</format>
 	</format>

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="35c322e9-7c8a-4cb5-9976-68b54ba7eaa0">
- <name>Report_R401A_FreeStocks</name>
- <synonym>
-  <key>en</key>
-  <value>2D8C0F97-8FA4-793C-CAAB-BF4092C5851E</value>
- </synonym>
+  <name>Report_R401A_FreeStocks</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R401A_FreeStocks</value>
+  </synonym>
 </mdclass:Role>

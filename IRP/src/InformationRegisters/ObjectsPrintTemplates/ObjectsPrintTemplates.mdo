@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="68db54b0-1737-4bab-99fa-ded646ef42b0">
- <producedTypes>
-  <selectionType typeId="80e7cf78-54ec-4715-b228-6454ce2fa8fa" valueTypeId="3f8247d3-fd9c-44c2-b9e8-276185ea3b49"/>
-  <listType typeId="972cd54b-9389-4bf2-a4b8-770553a03586" valueTypeId="d9c07417-87a7-441f-86cb-23994eeb3a86"/>
-  <managerType typeId="eef11394-0e06-4c6c-9281-08f371c95218" valueTypeId="eba119d9-aa24-4c3d-a260-da55e5e20e2d"/>
-  <recordSetType typeId="af2ff6d2-5ef7-462c-a894-c8eebe8d682d" valueTypeId="3018ae82-b0c4-48c0-a08c-ad4d09228808"/>
-  <recordKeyType typeId="74c616d9-aa0c-4641-894a-7b6167e0cc97" valueTypeId="74cf0e38-e813-48b2-9b6d-3ab6253a743c"/>
-  <recordType typeId="a47f6866-9f83-417a-bdb5-c3a8686a6349" valueTypeId="8512687c-26ff-4371-83d1-bfb8eb66e78c"/>
-  <recordManagerType typeId="9fbdc188-8660-4b03-802e-e6e4d461df6a" valueTypeId="b38d0ad7-7fc6-45d1-991b-f0124dc30b8b"/>
- </producedTypes>
- <name>ObjectsPrintTemplates</name>
- <synonym>
-  <key>en</key>
-  <value>CFCC9F7D-ABF4-1FD2-2EB7-747C84EE7719</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <editType>InDialog</editType>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>Active</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>LineNumber</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>Recorder</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>Period</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <dataLockControlMode>Managed</dataLockControlMode>
- <dimensions uuid="e1a33bb5-2a40-4cb6-8ea0-24a1d7136b65">
-  <name>Object</name>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68db54b0-1737-4bab-99fa-ded646ef42b0">
+  <producedTypes>
+    <selectionType typeId="80e7cf78-54ec-4715-b228-6454ce2fa8fa" valueTypeId="3f8247d3-fd9c-44c2-b9e8-276185ea3b49"/>
+    <listType typeId="972cd54b-9389-4bf2-a4b8-770553a03586" valueTypeId="d9c07417-87a7-441f-86cb-23994eeb3a86"/>
+    <managerType typeId="eef11394-0e06-4c6c-9281-08f371c95218" valueTypeId="eba119d9-aa24-4c3d-a260-da55e5e20e2d"/>
+    <recordSetType typeId="af2ff6d2-5ef7-462c-a894-c8eebe8d682d" valueTypeId="3018ae82-b0c4-48c0-a08c-ad4d09228808"/>
+    <recordKeyType typeId="74c616d9-aa0c-4641-894a-7b6167e0cc97" valueTypeId="74cf0e38-e813-48b2-9b6d-3ab6253a743c"/>
+    <recordType typeId="a47f6866-9f83-417a-bdb5-c3a8686a6349" valueTypeId="8512687c-26ff-4371-83d1-bfb8eb66e78c"/>
+    <recordManagerType typeId="9fbdc188-8660-4b03-802e-e6e4d461df6a" valueTypeId="b38d0ad7-7fc6-45d1-991b-f0124dc30b8b"/>
+  </producedTypes>
+  <name>ObjectsPrintTemplates</name>
   <synonym>
-   <key>en</key>
-   <value>38578BA4-10F0-A17B-B95F-F47A6B1CE3EA</value>
+    <key>en</key>
+    <value>Objects print templates</value>
   </synonym>
-  <type>
-   <types>CatalogRef.ConfigurationMetadata</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <denyIncompleteValues>true</denyIncompleteValues>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="233e96fb-3a12-44b0-8929-dcf70e747574">
-  <name>PrintTemplate</name>
-  <synonym>
-   <key>en</key>
-   <value>EA8A5FC7-84DE-48AA-AFD3-38FE14687EB7</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.PrintFormTemplates</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <denyIncompleteValues>true</denyIncompleteValues>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Active</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>LineNumber</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Recorder</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Period</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <dimensions uuid="e1a33bb5-2a40-4cb6-8ea0-24a1d7136b65">
+    <name>Object</name>
+    <synonym>
+      <key>en</key>
+      <value>Object</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ConfigurationMetadata</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="233e96fb-3a12-44b0-8929-dcf70e747574">
+    <name>PrintTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Print template</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PrintFormTemplates</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

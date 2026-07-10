@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bbeb8bd0-d007-4912-922c-95fbf3fc5609">
- <name>AdminAccessToSecureStorage</name>
- <synonym>
-  <key>en</key>
-  <value>2FFBFB88-B8BF-05F4-43A4-4E0A470F09DF</value>
- </synonym>
+  <name>AdminAccessToSecureStorage</name>
+  <synonym>
+    <key>en</key>
+    <value>Admin access to secure storage</value>
+  </synonym>
 </mdclass:Role>

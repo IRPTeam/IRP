@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="26c6900b-cd1b-4a7d-85c9-390512bb4ef3">
- <name>OpenReport_R3027A_CashAdvance</name>
- <synonym>
-  <key>en</key>
-  <value>2A9A94FA-87F8-592C-CDB0-0DDC70219420</value>
- </synonym>
- <group>NavigationPanelOrdinary</group>
- <representation>Auto</representation>
+  <name>OpenReport_R3027A_CashAdvance</name>
+  <synonym>
+    <key>en</key>
+    <value>R3027A Cash advance</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
 </mdclass:CommonCommand>

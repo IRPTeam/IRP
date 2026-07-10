@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6661a314-c96e-437b-85d6-d20ee51477dd">
- <name>LoggerServerCall</name>
- <synonym>
-  <key>en</key>
-  <value>C12D08DF-8D87-AC5F-FA8A-A5FA8BA1CF9E</value>
- </synonym>
- <server>true</server>
- <serverCall>true</serverCall>
+  <name>LoggerServerCall</name>
+  <synonym>
+    <key>en</key>
+    <value>Log</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
 </mdclass:CommonModule>

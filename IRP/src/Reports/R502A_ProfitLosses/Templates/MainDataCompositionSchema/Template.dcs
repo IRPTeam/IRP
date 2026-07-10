@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>1B8AA5FD-1811-5774-4BD9-9838FFD7C429</v8:content>
+					<v8:content>Company</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -45,7 +45,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>019BC3E0-7FD2-C878-85EB-BC9E4B98898B</v8:content>
+					<v8:content>Multi currency movement type</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -58,7 +58,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>65DF086B-3DE2-20D9-985F-F506735510D1</v8:content>
+					<v8:content>Additional analytic</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -71,7 +71,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>42B4FB6F-B33F-B6F7-7B6C-C8D7B4B02387</v8:content>
+					<v8:content>Expense type</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -87,7 +87,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>6DF824EA-6A58-A256-6FD7-75DC972FFB4A</v8:content>
+					<v8:content>Item key</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -103,7 +103,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>B016BDFC-44A0-B856-6126-602657AF6354</v8:content>
+					<v8:content>Currency</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -119,7 +119,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>7E6E131E-016E-F8E6-641C-CC5252CF5987</v8:content>
+					<v8:content>Branch</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -132,7 +132,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>3DBFCF2D-5684-39B9-9D4E-E7F6FB3DE361</v8:content>
+					<v8:content>Revenue/Cost center</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -145,7 +145,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>C63E729A-D89F-2C36-6F0E-E974B128F2B5</v8:content>
+					<v8:content>Fixed asset</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -161,7 +161,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>257C2463-31DB-CE39-90F3-3B955316F01E</v8:content>
+					<v8:content>Ledger type</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -177,7 +177,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>B23D8AB2-3666-2C06-69E3-376F61E03B3E</v8:content>
+					<v8:content>Expenses</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -186,7 +186,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E1873464-9AA5-DDED-D8B8-8902957692B3</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -202,7 +202,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>1A6DB6BA-5649-EBE7-7EE7-7AB8CD478A4E</v8:content>
+					<v8:content>Revenue with taxes</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -211,7 +211,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E1873464-9AA5-DDED-D8B8-8902957692B3</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -227,7 +227,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>A17CA435-A4DA-9A7A-AE2D-DF1BFFEF7A23</v8:content>
+					<v8:content>Revenue</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -236,7 +236,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E1873464-9AA5-DDED-D8B8-8902957692B3</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -252,7 +252,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>EE6853DB-F729-FBD9-9A25-53D1D99A96A2</v8:content>
+					<v8:content>Revenue type</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -262,7 +262,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>5041B98C-96FA-0200-01D2-29C6872AB701</v8:content>
+					<v8:content>Expenses with taxes</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -271,7 +271,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E1873464-9AA5-DDED-D8B8-8902957692B3</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -287,7 +287,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>C7E0F5D9-561F-AAAA-A3E5-58B32EF766AA</v8:content>
+					<v8:content>Gross revenue with taxes</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -296,7 +296,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E1873464-9AA5-DDED-D8B8-8902957692B3</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -316,7 +316,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>CA5984F4-FB65-54B8-8901-12DA252CA9E1</v8:content>
+					<v8:content>Gross revenue</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -325,7 +325,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E1873464-9AA5-DDED-D8B8-8902957692B3</v8:content>
+							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -345,7 +345,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>C49E6FC1-9C9F-B9C3-3BA3-32352A9BD722</v8:content>
+					<v8:content>Expense revenue type</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -358,7 +358,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>2C861D43-91CE-D3A7-7A04-44B0DF1D8320</v8:content>
+					<v8:content>Period, second</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -372,7 +372,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>C6AEB4C2-1697-D03A-AD5B-B503B6755B51</v8:content>
+					<v8:content>Period, month</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -385,7 +385,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>4F8EF5EC-0B34-7B0C-C1B4-4AE27C5B1D4C</v8:content>
+							<v8:content>DF=yyyy.MM</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -397,7 +397,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>F1B40515-F9F7-BD46-6454-41C55C647B64</v8:content>
+					<v8:content>Recorder</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -411,7 +411,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>82F980D9-F53B-06E4-4D7B-B1E3B17E5FE6</v8:content>
+					<v8:content>Movement type</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -501,7 +501,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>6478E781-369D-EC67-70E3-34CDA5E833D9</v8:content>
+				<v8:content>Begin of period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -519,7 +519,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>1DDB5277-759A-4296-60B2-2B321C9BD2E6</v8:content>
+				<v8:content>End of period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -537,7 +537,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>180A0C4C-9011-1FD4-41CF-F7166895348E</v8:content>
+				<v8:content>Period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

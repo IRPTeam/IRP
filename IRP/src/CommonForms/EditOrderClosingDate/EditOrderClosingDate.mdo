@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e80f0cf5-ce28-47a3-a72a-3b1d2ba24fc7">
- <name>EditOrderClosingDate</name>
- <synonym>
-  <key>en</key>
-  <value>F49EFAE5-3838-402C-C67D-DE1A4998DDEF</value>
- </synonym>
- <usePurposes>PersonalComputer</usePurposes>
- <usePurposes>MobileDevice</usePurposes>
+  <name>EditOrderClosingDate</name>
+  <synonym>
+    <key>en</key>
+    <value>Edit order closing date</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

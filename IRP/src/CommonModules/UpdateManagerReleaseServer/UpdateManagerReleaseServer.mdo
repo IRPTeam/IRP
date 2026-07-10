@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bfe965d9-3100-40be-85c0-be1f0cdd8afe">
- <name>UpdateManagerReleaseServer</name>
- <synonym>
-  <key>en</key>
-  <value>BD16A791-3CC9-1180-0741-1210052CCAFC</value>
- </synonym>
- <server>true</server>
- <serverCall>true</serverCall>
+  <name>UpdateManagerReleaseServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Update manager release server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
 </mdclass:CommonModule>

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="347eb4e7-a0fe-4ccc-98be-a7a89aa1b7cf">
- <name>Report_R6020A_InventoryCost</name>
- <synonym>
-  <key>en</key>
-  <value>838CFEEC-B783-7CF9-97B7-7C750F48D419</value>
- </synonym>
+  <name>Report_R6020A_InventoryCost</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R6020A_InventoryCost</value>
+  </synonym>
 </mdclass:Role>

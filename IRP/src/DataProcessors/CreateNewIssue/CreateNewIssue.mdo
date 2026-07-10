@@ -1,155 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="dd0cbb24-f880-4d3e-ba46-07d15962bbba">
- <producedTypes>
-  <objectType typeId="9dc28395-3671-4bc4-89cd-e3f10f6e7467" valueTypeId="b1cd4231-ee1b-4511-9242-1d05d023f9f7"/>
-  <managerType typeId="098f1c87-1b9a-45f8-a1bd-d39ccf63700c" valueTypeId="a217abd0-0d82-4a1e-b72f-58cfccdea4b4"/>
- </producedTypes>
- <name>CreateNewIssue</name>
- <synonym>
-  <key>en</key>
-  <value>19D470FC-1997-E3EC-CBA3-300785999867</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <defaultForm>DataProcessor.CreateNewIssue.Form.Form</defaultForm>
- <attributes uuid="d2638087-21dc-447e-8893-bfc9157840ee">
-  <name>Country</name>
+<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dd0cbb24-f880-4d3e-ba46-07d15962bbba">
+  <producedTypes>
+    <objectType typeId="9dc28395-3671-4bc4-89cd-e3f10f6e7467" valueTypeId="b1cd4231-ee1b-4511-9242-1d05d023f9f7"/>
+    <managerType typeId="098f1c87-1b9a-45f8-a1bd-d39ccf63700c" valueTypeId="a217abd0-0d82-4a1e-b72f-58cfccdea4b4"/>
+  </producedTypes>
+  <name>CreateNewIssue</name>
   <synonym>
-   <key>en</key>
-   <value>3EA7B2AB-548C-C337-7DC4-4C775D6E3616</value>
+    <key>en</key>
+    <value>Create new issue</value>
   </synonym>
-  <type>
-   <types>CatalogRef.Countries</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
- </attributes>
- <attributes uuid="0b3f0ee9-000b-4bd4-a9d2-bd6e914251d8">
-  <name>City</name>
-  <synonym>
-   <key>en</key>
-   <value>A8B7B36B-3D1D-E72A-ADA8-888DDA562D55</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Cities</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
-  <choiceParameterLinks>
-   <name>Filter.Owner</name>
-   <field>DataProcessor.CreateNewIssue.Attribute.Country</field>
-  </choiceParameterLinks>
- </attributes>
- <attributes uuid="4d64ce96-cefb-458a-905b-97964bf1de72">
-  <name>Location</name>
-  <synonym>
-   <key>en</key>
-   <value>2CE1F0BF-0F83-101B-BA41-147992133FEB</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.ObjectLocations</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
-  <choiceParameterLinks>
-   <name>Filter.City</name>
-   <field>DataProcessor.CreateNewIssue.Attribute.City</field>
-  </choiceParameterLinks>
- </attributes>
- <attributes uuid="803b4c17-2822-474b-8a6a-cab04c984795">
-  <name>IssueType</name>
-  <synonym>
-   <key>en</key>
-   <value>7AF6C6D4-CA83-F612-2DCB-BBB5BCE64A6F</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.IssueTypes</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
- </attributes>
- <attributes uuid="ec1e7177-96c3-4a03-abca-e3be5471a58c">
-  <name>Comment</name>
-  <synonym>
-   <key>en</key>
-   <value>F58EA23D-215D-EDA8-8323-30D3DE640E16</value>
-  </synonym>
-  <type>
-   <types>String</types>
-   <stringQualifiers/>
-  </type>
-  <multiLine>true</multiLine>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
- </attributes>
- <attributes uuid="0f5d1358-4694-41ec-9417-512da620afa4">
-  <name>DueDate</name>
-  <synonym>
-   <key>en</key>
-   <value>DC3045F7-1694-18CF-F12C-C79F34A37194</value>
-  </synonym>
-  <type>
-   <types>Date</types>
-   <dateQualifiers/>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </attributes>
- <attributes uuid="5046415d-f384-434b-b04c-bead7536e2ec">
-  <name>Author</name>
-  <synonym>
-   <key>en</key>
-   <value>E05BFDB2-9DBC-0D29-9C5B-B01BE36D22E2</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Users</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </attributes>
- <attributes uuid="7f976e55-a567-4f32-88d1-35299f663c8e">
-  <name>Latitude</name>
-  <synonym>
-   <key>en</key>
-   <value>8A49E4CA-B376-2205-5C43-3E982947FF6C</value>
-  </synonym>
-  <type>
-   <types>Number</types>
-   <numberQualifiers>
-    <precision>8</precision>
-    <scale>5</scale>
-   </numberQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </attributes>
- <attributes uuid="45d1792d-1adb-4a62-b597-4e838d20222f">
-  <name>Longitude</name>
-  <synonym>
-   <key>en</key>
-   <value>AC005120-9765-8ABE-EEF1-1A81E6519502</value>
-  </synonym>
-  <type>
-   <types>Number</types>
-   <numberQualifiers>
-    <precision>8</precision>
-    <scale>5</scale>
-   </numberQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </attributes>
- <forms uuid="ae6e9f5c-9341-486a-a069-3d219e0a4786">
-  <name>Form</name>
-  <synonym>
-   <key>en</key>
-   <value>5F204210-125B-987C-C5B4-484D9760D332</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.CreateNewIssue.Form.Form</defaultForm>
+  <attributes uuid="d2638087-21dc-447e-8893-bfc9157840ee">
+    <name>Country</name>
+    <synonym>
+      <key>en</key>
+      <value>Country</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Countries</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+  </attributes>
+  <attributes uuid="0b3f0ee9-000b-4bd4-a9d2-bd6e914251d8">
+    <name>City</name>
+    <synonym>
+      <key>en</key>
+      <value>City</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Cities</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <field>DataProcessor.CreateNewIssue.Attribute.Country</field>
+    </choiceParameterLinks>
+  </attributes>
+  <attributes uuid="4d64ce96-cefb-458a-905b-97964bf1de72">
+    <name>Location</name>
+    <synonym>
+      <key>en</key>
+      <value>Location</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ObjectLocations</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.City</name>
+      <field>DataProcessor.CreateNewIssue.Attribute.City</field>
+    </choiceParameterLinks>
+  </attributes>
+  <attributes uuid="803b4c17-2822-474b-8a6a-cab04c984795">
+    <name>IssueType</name>
+    <synonym>
+      <key>en</key>
+      <value>Issue type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IssueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+  </attributes>
+  <attributes uuid="ec1e7177-96c3-4a03-abca-e3be5471a58c">
+    <name>Comment</name>
+    <synonym>
+      <key>en</key>
+      <value>Comment</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <multiLine>true</multiLine>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+  </attributes>
+  <attributes uuid="0f5d1358-4694-41ec-9417-512da620afa4">
+    <name>DueDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Due date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="5046415d-f384-434b-b04c-bead7536e2ec">
+    <name>Author</name>
+    <synonym>
+      <key>en</key>
+      <value>Author</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="7f976e55-a567-4f32-88d1-35299f663c8e">
+    <name>Latitude</name>
+    <synonym>
+      <key>en</key>
+      <value>Latitude</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>8</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="45d1792d-1adb-4a62-b597-4e838d20222f">
+    <name>Longitude</name>
+    <synonym>
+      <key>en</key>
+      <value>Longitude</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>8</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <forms uuid="ae6e9f5c-9341-486a-a069-3d219e0a4786">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

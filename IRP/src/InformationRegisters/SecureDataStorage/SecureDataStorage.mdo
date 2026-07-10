@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d42ab9af-cd0b-4235-b401-6020d1189c71">
- <producedTypes>
-  <selectionType typeId="42f0f10b-d585-44b5-a2fd-54109d8c06c7" valueTypeId="8c1daba2-6958-4a15-b221-819abe51a5a7"/>
-  <listType typeId="441a9c68-b8e8-4d7c-aaba-16a5db211a51" valueTypeId="921cda4e-d647-4419-ac53-b7c9492df508"/>
-  <managerType typeId="ad83252d-7b78-49e0-ac55-fb7ac9e33821" valueTypeId="ecc7b717-5b78-40f6-bc97-69e0b5e9a825"/>
-  <recordSetType typeId="a520c2c8-3c21-4ef4-acf0-9cd48b7f775e" valueTypeId="182c1677-7cb0-408d-92c6-a9f3bed267be"/>
-  <recordKeyType typeId="58a306d5-bbb0-4ade-8b79-6b8ac7c7d07d" valueTypeId="c2b89895-6344-47c7-9960-a8b361283e06"/>
-  <recordType typeId="53d88a42-b3a2-4700-b986-27f876bc3ea9" valueTypeId="32e8c73d-bf5a-43bd-88e5-9800c82d679e"/>
-  <recordManagerType typeId="869c7d4f-0712-40d2-b480-78584cdb0a9d" valueTypeId="c59c3b35-f115-43e7-90c1-9513960d4b18"/>
- </producedTypes>
- <name>SecureDataStorage</name>
- <synonym>
-  <key>en</key>
-  <value>5F4B21F9-0FB9-89D6-6170-06215BBB13F2</value>
- </synonym>
- <editType>InDialog</editType>
- <dataLockControlMode>Managed</dataLockControlMode>
- <recordPresentation>
-  <key>en</key>
-  <value>C0F3E318-0C53-B848-8596-6121BEE0B6C6</value>
- </recordPresentation>
- <resources uuid="f056bd39-d1bc-4c36-9916-977dd69e278f">
-  <name>Data</name>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d42ab9af-cd0b-4235-b401-6020d1189c71">
+  <producedTypes>
+    <selectionType typeId="42f0f10b-d585-44b5-a2fd-54109d8c06c7" valueTypeId="8c1daba2-6958-4a15-b221-819abe51a5a7"/>
+    <listType typeId="441a9c68-b8e8-4d7c-aaba-16a5db211a51" valueTypeId="921cda4e-d647-4419-ac53-b7c9492df508"/>
+    <managerType typeId="ad83252d-7b78-49e0-ac55-fb7ac9e33821" valueTypeId="ecc7b717-5b78-40f6-bc97-69e0b5e9a825"/>
+    <recordSetType typeId="a520c2c8-3c21-4ef4-acf0-9cd48b7f775e" valueTypeId="182c1677-7cb0-408d-92c6-a9f3bed267be"/>
+    <recordKeyType typeId="58a306d5-bbb0-4ade-8b79-6b8ac7c7d07d" valueTypeId="c2b89895-6344-47c7-9960-a8b361283e06"/>
+    <recordType typeId="53d88a42-b3a2-4700-b986-27f876bc3ea9" valueTypeId="32e8c73d-bf5a-43bd-88e5-9800c82d679e"/>
+    <recordManagerType typeId="869c7d4f-0712-40d2-b480-78584cdb0a9d" valueTypeId="c59c3b35-f115-43e7-90c1-9513960d4b18"/>
+  </producedTypes>
+  <name>SecureDataStorage</name>
   <synonym>
-   <key>en</key>
-   <value>FFD21C86-E12E-734E-ED86-6D638D5F38D4</value>
+    <key>en</key>
+    <value>Secure data storage</value>
   </synonym>
-  <type>
-   <types>ValueStorage</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
- </resources>
- <dimensions uuid="14c2319c-4731-4710-ade0-23122a6f8a3e">
-  <name>Owner</name>
-  <synonym>
-   <key>en</key>
-   <value>C8FC1B58-D538-B9DB-BA3F-F731DAEE41BE</value>
-  </synonym>
-  <type>
-   <types>String</types>
-   <types>ExchangePlanRef</types>
-   <types>CatalogRef</types>
-   <stringQualifiers>
-    <length>256</length>
-   </stringQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Secure data storage</value>
+  </recordPresentation>
+  <resources uuid="f056bd39-d1bc-4c36-9916-977dd69e278f">
+    <name>Data</name>
+    <synonym>
+      <key>en</key>
+      <value>Data</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="14c2319c-4731-4710-ade0-23122a6f8a3e">
+    <name>Owner</name>
+    <synonym>
+      <key>en</key>
+      <value>Owner</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <types>ExchangePlanRef</types>
+      <types>CatalogRef</types>
+      <stringQualifiers>
+        <length>256</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

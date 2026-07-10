@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ebc97d9a-4197-44f3-b58b-3bcaa3280c8b">
- <name>Report_S1001L_VendorsPrices</name>
- <synonym>
-  <key>en</key>
-  <value>6632AFCD-5E33-C12D-DCB5-544C86774974</value>
- </synonym>
+  <name>Report_S1001L_VendorsPrices</name>
+  <synonym>
+    <key>en</key>
+    <value>Report S1001L_VendorsPrices</value>
+  </synonym>
 </mdclass:Role>

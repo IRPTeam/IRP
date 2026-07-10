@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ee6168f2-04ca-4b91-9611-ad66497aa53b">
- <name>Report_R6021_BatchBalanceSimple</name>
- <synonym>
-  <key>en</key>
-  <value>E8F105BC-8AFB-F0FA-A6E4-4AE97304026C</value>
- </synonym>
+  <name>Report_R6021_BatchBalanceSimple</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R6021_BatchBalanceSimple</value>
+  </synonym>
 </mdclass:Role>

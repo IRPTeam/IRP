@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7b1dcb25-fe4a-4b93-a3a4-9194f64e4451">
- <producedTypes>
-  <objectType typeId="d4fb2af3-d3bb-4d03-a1c7-2ebaf9b3bf5b" valueTypeId="6e693506-480a-45f8-abf6-741d4ee1bf52"/>
-  <managerType typeId="a114f051-a8b7-4e73-bd8a-a9ee0a589596" valueTypeId="e218eb73-a58e-4fa5-89d4-77ba226d9f35"/>
- </producedTypes>
- <name>F0010_FixedAssetsTransferCost</name>
- <synonym>
-  <key>en</key>
-  <value>471BA4A3-BA96-7E62-2225-558902AA49C8</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <mainDataCompositionSchema>Report.F0010_FixedAssetsTransferCost.Template.MainDataCompositionSchema</mainDataCompositionSchema>
- <templates uuid="d73b7b54-6c26-4e4c-8095-9945927d3d3d">
-  <name>MainDataCompositionSchema</name>
+  <producedTypes>
+    <objectType typeId="d4fb2af3-d3bb-4d03-a1c7-2ebaf9b3bf5b" valueTypeId="6e693506-480a-45f8-abf6-741d4ee1bf52"/>
+    <managerType typeId="a114f051-a8b7-4e73-bd8a-a9ee0a589596" valueTypeId="e218eb73-a58e-4fa5-89d4-77ba226d9f35"/>
+  </producedTypes>
+  <name>F0010_FixedAssetsTransferCost</name>
   <synonym>
-   <key>en</key>
-   <value>C34C83DB-C049-3E36-6761-18A58718217E</value>
+    <key>en</key>
+    <value>Fixed assets transfer cost</value>
   </synonym>
-  <templateType>DataCompositionSchema</templateType>
- </templates>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.F0010_FixedAssetsTransferCost.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="d73b7b54-6c26-4e4c-8095-9945927d3d3d">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
 </mdclass:Report>

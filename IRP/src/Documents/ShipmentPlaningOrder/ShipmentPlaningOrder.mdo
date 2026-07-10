@@ -1,702 +1,702 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a3d063cd-7acc-4432-a362-14c22492abac">
- <producedTypes>
-  <objectType typeId="7f6c3a98-001f-42ec-9fcc-1b7f4cbdeec7" valueTypeId="e7abb9bf-71da-44d7-b324-e13b344a740e"/>
-  <refType typeId="b6228d29-91a5-47b1-8aaf-e79dc837683a" valueTypeId="b98f70b1-8ddc-4a7e-8b91-3b3950bd8aed"/>
-  <selectionType typeId="9dfb4cac-2020-49ab-8325-cc2977cfe245" valueTypeId="838cb379-01e1-4804-8bcb-2dbaa47b2428"/>
-  <listType typeId="206caf75-e3ac-4bbf-b6bf-6fff2f411cf2" valueTypeId="92d35345-5ad1-41d7-938c-9d3c0e6ebfea"/>
-  <managerType typeId="e82edf83-cea8-4601-9b75-4d079feb8cba" valueTypeId="763a06ce-b804-453e-8607-1cef45e0674a"/>
- </producedTypes>
- <name>ShipmentPlaningOrder</name>
- <synonym>
-  <key>en</key>
-  <value>F3472F38-A46F-3D2D-D5C5-5860474593DC</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <inputByString>Document.ShipmentPlaningOrder.StandardAttribute.Number</inputByString>
- <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
- <characteristics>
-  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-  <typesFilterValue xsi:type="core:ReferenceValue">
-   <value>Catalog.AddAttributeAndPropertySets.Document_ShipmentPlaningOrder</value>
-  </typesFilterValue>
-  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-  <characteristicValues>Document.ShipmentPlaningOrder.TabularSection.AddAttributes</characteristicValues>
-  <objectField>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-  <typeField>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
-  <valueField>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesOrderField>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
- </characteristics>
- <characteristics>
-  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-  <typesFilterValue xsi:type="core:ReferenceValue">
-   <value>Catalog.AddAttributeAndPropertySets.Document_ShipmentPlaningOrder</value>
-  </typesFilterValue>
-  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
- </characteristics>
- <characteristics>
-  <characteristicTypes>Catalog.SystemAttributesSets.TabularSection.Attributes</characteristicTypes>
-  <keyField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Attribute</keyField>
-  <typesFilterField>Catalog.SystemAttributesSets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-  <typesFilterValue xsi:type="core:ReferenceValue">
-   <value>Catalog.SystemAttributesSets.Document_ShipmentPlaningOrder</value>
-  </typesFilterValue>
-  <multipleValuesUseField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-  <characteristicValues>InformationRegister.SystemAttributes</characteristicValues>
-  <objectField>InformationRegister.SystemAttributes.Dimension.Object</objectField>
-  <typeField>InformationRegister.SystemAttributes.Dimension.Property</typeField>
-  <valueField>InformationRegister.SystemAttributes.Resource.Value</valueField>
-  <multipleValuesKeyField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesKeyField>
-  <multipleValuesOrderField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesOrderField>
- </characteristics>
- <createOnInput>DontUse</createOnInput>
- <dataLockControlMode>Managed</dataLockControlMode>
- <fullTextSearch>Use</fullTextSearch>
- <objectPresentation>
-  <key>en</key>
-  <value>38F2CB69-718E-F251-1A58-817C694590D4</value>
- </objectPresentation>
- <listPresentation>
-  <key>en</key>
-  <value>C88BFF90-18A2-638F-F382-2F470A1CDF3B</value>
- </listPresentation>
- <numberLength>12</numberLength>
- <numberAllowedLength>Variable</numberAllowedLength>
- <checkUnique>true</checkUnique>
- <autonumbering>true</autonumbering>
- <defaultObjectForm>Document.ShipmentPlaningOrder.Form.DocumentForm</defaultObjectForm>
- <defaultListForm>Document.ShipmentPlaningOrder.Form.ListForm</defaultListForm>
- <defaultChoiceForm>Document.ShipmentPlaningOrder.Form.ChoiceForm</defaultChoiceForm>
- <realTimePosting>Deny</realTimePosting>
- <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
- <registerRecords>AccumulationRegister.R9610T_ShipmentPlaning</registerRecords>
- <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
- <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
- <postInPrivilegedMode>true</postInPrivilegedMode>
- <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
- <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
- <attributes uuid="20c98691-278e-407c-9e7c-824662086607">
-  <name>Company</name>
-  <synonym>
-   <key>en</key>
-   <value>A5235539-75CE-DAFF-FA03-3AEF04C8130F</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Companies</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="fe85d430-7966-46ac-9565-a189ba9c4530">
-  <name>LegalName</name>
-  <synonym>
-   <key>en</key>
-   <value>792B3265-7CB2-5AC5-5EA3-3B9EC4ECEE88</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Companies</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="40054731-9fdb-4b2d-8eba-8478d2af455d">
-  <name>Partner</name>
-  <synonym>
-   <key>en</key>
-   <value>29C4193C-DA6C-2F74-43F7-731FC8AA3E0E</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Partners</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="1e8f7ee8-569e-499a-a45d-3359fcaafa1d">
-  <name>ShipmentStartDate</name>
-  <synonym>
-   <key>en</key>
-   <value>B013EFE7-260C-C5AA-A2E1-18F880032993</value>
-  </synonym>
-  <type>
-   <types>Date</types>
-   <dateQualifiers>
-    <dateFractions>Date</dateFractions>
-   </dateQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="25e99cc7-c347-44d3-8c51-803cd486d304">
-  <name>ShipmentEndDate</name>
-  <synonym>
-   <key>en</key>
-   <value>160F2285-BE6B-24FF-F3B8-87EE711DB303</value>
-  </synonym>
-  <type>
-   <types>Date</types>
-   <dateQualifiers>
-    <dateFractions>Date</dateFractions>
-   </dateQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <forms uuid="c6df3520-3917-4ca5-9a6b-7350ef91e343">
-  <name>DocumentForm</name>
-  <synonym>
-   <key>en</key>
-   <value>2436FB2C-1B53-6D6C-CC7E-EB232570BA56</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
- <forms uuid="d2c1a1bb-8f8b-4bdd-a74c-28acb22cfc3f">
-  <name>ListForm</name>
-  <synonym>
-   <key>en</key>
-   <value>071122EB-A677-28C7-74D2-2BE5766C26AF</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
- <forms uuid="d129e0d7-e696-4d92-83a7-e8893fe73f52">
-  <name>ChoiceForm</name>
-  <synonym>
-   <key>en</key>
-   <value>ED58E9DF-8B2F-FF64-44EA-A8147D1633B0</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
- <tabularSections uuid="ace20862-0cc6-4ebf-a9b8-2ef6fd9e80ca">
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a3d063cd-7acc-4432-a362-14c22492abac">
   <producedTypes>
-   <objectType typeId="9e7b1044-fcd9-452f-bc2a-b4a9e20de033" valueTypeId="e3491e3b-9323-4d69-9757-931f15786392"/>
-   <rowType typeId="d3417a95-3a0a-4f86-b27a-a5a8f6bba8af" valueTypeId="0c54febc-cbde-4b0b-b14a-cd0b2ec7fdeb"/>
+    <objectType typeId="7f6c3a98-001f-42ec-9fcc-1b7f4cbdeec7" valueTypeId="e7abb9bf-71da-44d7-b324-e13b344a740e"/>
+    <refType typeId="b6228d29-91a5-47b1-8aaf-e79dc837683a" valueTypeId="b98f70b1-8ddc-4a7e-8b91-3b3950bd8aed"/>
+    <selectionType typeId="9dfb4cac-2020-49ab-8325-cc2977cfe245" valueTypeId="838cb379-01e1-4804-8bcb-2dbaa47b2428"/>
+    <listType typeId="206caf75-e3ac-4bbf-b6bf-6fff2f411cf2" valueTypeId="92d35345-5ad1-41d7-938c-9d3c0e6ebfea"/>
+    <managerType typeId="e82edf83-cea8-4601-9b75-4d079feb8cba" valueTypeId="763a06ce-b804-453e-8607-1cef45e0674a"/>
   </producedTypes>
-  <name>ItemList</name>
+  <name>ShipmentPlaningOrder</name>
   <synonym>
-   <key>en</key>
-   <value>5A53C50C-3CE2-9C25-5964-4E12DC135716</value>
+    <key>en</key>
+    <value>Shipment planing order</value>
   </synonym>
-  <attributes uuid="26ae1e5c-3e2f-497e-9102-acfc52f97e97">
-   <name>Key</name>
-   <synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.ShipmentPlaningOrder.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_ShipmentPlaningOrder</value>
+    </typesFilterValue>
+    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+    <characteristicValues>Document.ShipmentPlaningOrder.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesOrderField>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_ShipmentPlaningOrder</value>
+    </typesFilterValue>
+    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.SystemAttributesSets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.SystemAttributesSets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.SystemAttributesSets.Document_ShipmentPlaningOrder</value>
+    </typesFilterValue>
+    <multipleValuesUseField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+    <characteristicValues>InformationRegister.SystemAttributes</characteristicValues>
+    <objectField>InformationRegister.SystemAttributes.Dimension.Object</objectField>
+    <typeField>InformationRegister.SystemAttributes.Dimension.Property</typeField>
+    <valueField>InformationRegister.SystemAttributes.Resource.Value</valueField>
+    <multipleValuesKeyField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesKeyField>
+    <multipleValuesOrderField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesOrderField>
+  </characteristics>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
     <key>en</key>
-    <value>B1226B0E-0AED-199B-B71B-B5B83C67E2B7</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeRowID</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="132c007f-823a-49f0-ae26-5ec1479f1780">
-   <name>Item</name>
-   <synonym>
+    <value>Shipment planing order</value>
+  </objectPresentation>
+  <listPresentation>
     <key>en</key>
-    <value>F3CB3728-9977-25F2-2219-93BF30AAB22B</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.Items</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <fillChecking>ShowError</fillChecking>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
+    <value>Shipment planing orders</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.ShipmentPlaningOrder.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.ShipmentPlaningOrder.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.ShipmentPlaningOrder.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R9610T_ShipmentPlaning</registerRecords>
+  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="20c98691-278e-407c-9e7c-824662086607">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="766d5428-03f6-4de7-9355-d108ad3042e1">
-   <name>ItemKey</name>
-   <synonym>
-    <key>en</key>
-    <value>C231DA36-76F4-C9D8-8B78-825FB8C2E162</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.ItemKeys</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <fillChecking>ShowError</fillChecking>
-   <choiceParameterLinks>
-    <name>Filter.Item</name>
-    <changeMode>DontChange</changeMode>
-    <field>Document.ShipmentPlaningOrder.TabularSection.ItemList.Attribute.Item</field>
-   </choiceParameterLinks>
-   <dataHistory>Use</dataHistory>
+  <attributes uuid="fe85d430-7966-46ac-9565-a189ba9c4530">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="776d54ce-746a-4002-b510-21e6ad2e8f33">
-   <name>Store</name>
-   <synonym>
-    <key>en</key>
-    <value>BF090FCD-93CC-87B2-29E0-0A952A2BDBDA</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.Stores</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <fillChecking>ShowError</fillChecking>
-   <choiceParameterLinks>
-    <name>Filter.Company</name>
-    <changeMode>DontChange</changeMode>
-    <field>Document.ShipmentPlaningOrder.Attribute.Company</field>
-   </choiceParameterLinks>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
+  <attributes uuid="40054731-9fdb-4b2d-8eba-8478d2af455d">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="eab9c1f1-2b52-4bae-bfbe-3b15ce006b86">
-   <name>Unit</name>
-   <synonym>
-    <key>en</key>
-    <value>8ED3399C-0B12-5F9D-D706-6070962F426D</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.Units</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <choiceParameterLinks>
-    <name>Filter.Item</name>
-    <changeMode>DontChange</changeMode>
-    <field>Document.ShipmentPlaningOrder.TabularSection.ItemList.Attribute.Item</field>
-   </choiceParameterLinks>
-   <dataHistory>Use</dataHistory>
+  <attributes uuid="1e8f7ee8-569e-499a-a45d-3359fcaafa1d">
+    <name>ShipmentStartDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment start date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="12637ad6-0af1-47b4-8d66-ae7740b42073">
-   <name>Quantity</name>
-   <synonym>
-    <key>en</key>
-    <value>7C3A33E4-4B23-CD8A-AFFD-D2838606796C</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeQuantity</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
+  <attributes uuid="25e99cc7-c347-44d3-8c51-803cd486d304">
+    <name>ShipmentEndDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment end date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="4acf2126-477c-4e13-92b3-05aee75de261">
-   <name>ShipmentBasis</name>
-   <synonym>
-    <key>en</key>
-    <value>88F336A8-0C8C-E436-6CA0-0A6512F2BAB9</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeShipmentBasis</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <quickChoice>DontUse</quickChoice>
-   <createOnInput>DontUse</createOnInput>
-   <dataHistory>Use</dataHistory>
-   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  </attributes>
-  <attributes uuid="cb7032ce-8731-47ba-a816-c51516c9c52c">
-   <name>QuantityInBaseUnit</name>
-   <synonym>
-    <key>en</key>
-    <value>CF873A20-4AB0-6FC7-7BE8-8E98112E1724</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeQuantity</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="e736905e-5033-455a-bd1b-e538e09d9f21">
-   <name>SalesOrder</name>
-   <synonym>
-    <key>en</key>
-    <value>0BB8878D-F590-123C-CE2A-A2CBFAC9C793</value>
-   </synonym>
-   <type>
-    <types>DocumentRef.SalesOrder</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="c94e4a57-2aa0-491a-9397-4453642d3d41">
-   <name>QuantityIsFixed</name>
-   <synonym>
-    <key>en</key>
-    <value>A1F243EC-F3DA-5F15-5A4B-B1C823B3E420</value>
-   </synonym>
-   <type>
-    <types>Boolean</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="107535b1-fd65-4ace-915c-7d8a2bb853ee">
-   <name>UseSerialLotNumber</name>
-   <synonym>
-    <key>en</key>
-    <value>F6F192AE-C279-0392-2316-693C4A4A2A9A</value>
-   </synonym>
-   <type>
-    <types>Boolean</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
- </tabularSections>
- <tabularSections uuid="428f015d-205b-41e1-974b-4b9e7813775b">
-  <producedTypes>
-   <objectType typeId="00ae5dc6-96e0-49f9-9b2a-8101af269e74" valueTypeId="cd67d246-edd3-43c9-81d3-6ad746180079"/>
-   <rowType typeId="217f0b78-7b6e-4377-b43c-65c70c28c8c4" valueTypeId="a0acbadf-6274-44d0-b5ee-0db6e6435b71"/>
-  </producedTypes>
-  <name>AddAttributes</name>
-  <synonym>
-   <key>en</key>
-   <value>5096BE50-80DE-623F-F918-80518DD01C77</value>
-  </synonym>
-  <attributes uuid="d4c228a8-7cb8-4aa0-a499-8fc4e51a62aa">
-   <name>Property</name>
-   <synonym>
-    <key>en</key>
-    <value>66CB33E4-EE54-3F1B-B84F-F2FAD55F76C0</value>
-   </synonym>
-   <type>
-    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="58252f7f-87d6-45b4-b754-bca71ecda6e3">
-   <name>Value</name>
-   <synonym>
-    <key>en</key>
-    <value>88050D65-ABC1-2879-9100-0CDDBD213260</value>
-   </synonym>
-   <type>
-    <types>Characteristic.AddAttributeAndProperty</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <choiceParameterLinks>
-    <name>Filter.Owner</name>
-    <field>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.Attribute.Property</field>
-   </choiceParameterLinks>
-   <dataHistory>Use</dataHistory>
-  </attributes>
- </tabularSections>
- <tabularSections uuid="09df5be1-1cce-4a70-8b54-3c687cc3fb21">
-  <producedTypes>
-   <objectType typeId="c75e9b53-2dfe-457f-851c-b95e53ead764" valueTypeId="1ec8ace6-7d49-43d0-8b76-8231ab5fc89b"/>
-   <rowType typeId="28225408-857a-4d7b-8b23-b8605e7d2b7c" valueTypeId="7db67d5c-6120-4770-bbd5-0d841fde9dae"/>
-  </producedTypes>
-  <name>RowIDInfo</name>
-  <synonym>
-   <key>en</key>
-   <value>F09C787E-D19D-09B5-5EAD-D9C4D7D9D21A</value>
-  </synonym>
-  <standardAttributes>
-   <dataHistory>Use</dataHistory>
-   <name>LineNumber</name>
-   <fillValue xsi:type="core:UndefinedValue"/>
-   <fullTextSearch>Use</fullTextSearch>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <attributes uuid="28db58c1-c8a4-447e-900b-f2239a422800">
-   <name>Key</name>
-   <synonym>
-    <key>en</key>
-    <value>3199301A-777D-BDEF-FCD7-7DBFEF8C9B01</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeRowID</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="844d79f8-b330-4735-a6c9-640b6c843a79">
-   <name>RowID</name>
-   <synonym>
-    <key>en</key>
-    <value>D30985EB-7DDB-EACA-A697-7214E7E2CDCA</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeRowID</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="cabf62cf-ec56-48c4-a951-ecb5b7e9cb7a">
-   <name>Quantity</name>
-   <synonym>
-    <key>en</key>
-    <value>63BFCB2F-66F8-41FA-A839-9691518E5F41</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeQuantity</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <fillChecking>ShowError</fillChecking>
-   <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="b022ac2f-0444-4689-a1c5-b0e451dc6a97">
-   <name>Basis</name>
-   <synonym>
-    <key>en</key>
-    <value>B33A25E0-F8B3-7F3F-FBC8-8C651AF1F7C8</value>
-   </synonym>
-   <type>
-    <types>DocumentRef</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="d56880fd-1a14-4075-bc6f-c262fdbaa9c5">
-   <name>CurrentStep</name>
-   <synonym>
-    <key>en</key>
-    <value>8E87FA13-65BA-8A85-5BFC-C63931B89A11</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.MovementRules</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <createOnInput>Use</createOnInput>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="4cbaee62-79e1-4b56-a8c6-d482b8e3109c">
-   <name>NextStep</name>
-   <synonym>
-    <key>en</key>
-    <value>2C12EF34-D7B2-894A-A5CB-BB2C24CBBD9B</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.MovementRules</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="e4eb9d08-501f-44b7-91a8-ca0693dbc036">
-   <name>RowRef</name>
-   <synonym>
-    <key>en</key>
-    <value>259CBA07-DE17-4207-7A9E-E6610E7C5611</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.RowIDs</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="d5d26505-22be-4215-abd2-31321310778b">
-   <name>BasisKey</name>
-   <synonym>
-    <key>en</key>
-    <value>2C1A60B4-73B3-BB1E-E1CA-A8FA9C36D73E</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeRowID</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-  </attributes>
- </tabularSections>
- <tabularSections uuid="855f92dc-b44d-4c9c-be82-0242d2a7db49">
-  <producedTypes>
-   <objectType typeId="dcc6efed-ffed-41fe-bab0-e279c6653ab0" valueTypeId="ffa2f4e6-9ef9-4705-a5a7-fc84b55b7465"/>
-   <rowType typeId="913726d3-476d-4379-badc-fe84433b7caf" valueTypeId="ed95fbd3-5efd-4f5a-ab91-6817aa9bd574"/>
-  </producedTypes>
-  <name>SerialLotNumbers</name>
-  <synonym>
-   <key>en</key>
-   <value>43922658-1845-4B38-80B0-008796ED7B99</value>
-  </synonym>
-  <attributes uuid="b67da9be-8003-423f-956c-221068a5fffa">
-   <name>Key</name>
-   <synonym>
-    <key>en</key>
-    <value>F7AE3543-80A6-28EB-B8AA-A8CFFDE502FE</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeRowID</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="a23a9c76-1fed-4311-b010-4ab82b04ab1b">
-   <name>SerialLotNumber</name>
-   <synonym>
-    <key>en</key>
-    <value>B0EF06DD-582F-03F4-4A89-9994405CCE5B</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.SerialLotNumbers</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="ab2b8bd7-f6d7-4d01-a293-6452218ca30f">
-   <name>Quantity</name>
-   <synonym>
-    <key>en</key>
-    <value>56D3788B-E78E-6FBA-A09C-C2E881B8914D</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeQuantity</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
- </tabularSections>
- <tabularSections uuid="36920006-03b9-4332-873e-7c00f2abc496">
-  <producedTypes>
-   <objectType typeId="bca5ad0d-4412-4a66-b569-870b7839ecd8" valueTypeId="236934ea-cc41-4ac8-a749-cffea547e6cb"/>
-   <rowType typeId="0b81f5ff-17d1-4bff-a18b-1571ccd44cef" valueTypeId="cab136e5-3112-4cff-8c7e-2cb039ce5ae9"/>
-  </producedTypes>
-  <name>SourceOfOrigins</name>
-  <synonym>
-   <key>en</key>
-   <value>B1F79C0E-537A-A2C1-1ABF-FB0EA56B5313</value>
-  </synonym>
-  <attributes uuid="ddb6d348-f36d-4ab2-a52f-1b4e8ed5f646">
-   <name>Key</name>
-   <synonym>
-    <key>en</key>
-    <value>897283C3-EC92-2E33-33A2-290B771A3C8C</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeRowID</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="f09d11c3-f6f1-4646-a968-eb5dc9a03dfb">
-   <name>SerialLotNumber</name>
-   <synonym>
-    <key>en</key>
-    <value>B687EF8E-4EE2-209C-C49C-CFB843F73F01</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.SerialLotNumbers</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="396cd3ea-0e67-46ef-b930-9861dd3eb778">
-   <name>SourceOfOrigin</name>
-   <synonym>
-    <key>en</key>
-    <value>223E398B-6FE0-A7BD-DFC4-4E38ED42DDD7</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.SourceOfOrigins</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="5f05fa6e-e350-43cb-ba11-d4892f3e73d9">
-   <name>Quantity</name>
-   <synonym>
-    <key>en</key>
-    <value>73171225-67A0-984B-B0F9-92F0054FDA5F</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeQuantity</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
- </tabularSections>
- <templates uuid="fbb7bb01-c338-484a-b8dd-adad60775b5c">
-  <name>ShipmentPlaningOrderPrint</name>
-  <synonym>
-   <key>en</key>
-   <value>4E8D0AF4-066D-2CB9-9691-18193A6167F7</value>
-  </synonym>
- </templates>
- <commands uuid="9cd170c4-3ecb-4807-9123-8b2f5b1520a2">
-  <name>Generate</name>
-  <synonym>
-   <key>en</key>
-   <value>E188518F-3FCF-A976-603D-D7A73F1638FB</value>
-  </synonym>
-  <group>FormCommandBarCreateBasedOn</group>
-  <commandParameterType>
-   <types>DocumentRef.SalesOrder</types>
-  </commandParameterType>
-  <parameterUseMode>Multiple</parameterUseMode>
-  <representation>Auto</representation>
- </commands>
- <commands uuid="fdbb37f1-8815-4806-b882-c7adfbda296d">
-  <name>ShipmentPlaningOrderPrint</name>
-  <synonym>
-   <key>en</key>
-   <value>33DC6C88-7FEC-4D5E-E53A-A01C34C1D132</value>
-  </synonym>
-  <group>CommandGroup.Print</group>
-  <commandParameterType>
-   <types>DocumentRef.ShipmentPlaningOrder</types>
-  </commandParameterType>
-  <parameterUseMode>Multiple</parameterUseMode>
-  <representation>Auto</representation>
- </commands>
+  <forms uuid="c6df3520-3917-4ca5-9a6b-7350ef91e343">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="d2c1a1bb-8f8b-4bdd-a74c-28acb22cfc3f">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="d129e0d7-e696-4d92-83a7-e8893fe73f52">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="ace20862-0cc6-4ebf-a9b8-2ef6fd9e80ca">
+    <producedTypes>
+      <objectType typeId="9e7b1044-fcd9-452f-bc2a-b4a9e20de033" valueTypeId="e3491e3b-9323-4d69-9757-931f15786392"/>
+      <rowType typeId="d3417a95-3a0a-4f86-b27a-a5a8f6bba8af" valueTypeId="0c54febc-cbde-4b0b-b14a-cd0b2ec7fdeb"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="26ae1e5c-3e2f-497e-9102-acfc52f97e97">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="132c007f-823a-49f0-ae26-5ec1479f1780">
+      <name>Item</name>
+      <synonym>
+        <key>en</key>
+        <value>Item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Items</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="766d5428-03f6-4de7-9355-d108ad3042e1">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.ShipmentPlaningOrder.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="776d54ce-746a-4002-b510-21e6ad2e8f33">
+      <name>Store</name>
+      <synonym>
+        <key>en</key>
+        <value>Store</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Stores</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.ShipmentPlaningOrder.Attribute.Company</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="eab9c1f1-2b52-4bae-bfbe-3b15ce006b86">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.ShipmentPlaningOrder.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="12637ad6-0af1-47b4-8d66-ae7740b42073">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="4acf2126-477c-4e13-92b3-05aee75de261">
+      <name>ShipmentBasis</name>
+      <synonym>
+        <key>en</key>
+        <value>Shipment basis</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeShipmentBasis</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <quickChoice>DontUse</quickChoice>
+      <createOnInput>DontUse</createOnInput>
+      <dataHistory>Use</dataHistory>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+    </attributes>
+    <attributes uuid="cb7032ce-8731-47ba-a816-c51516c9c52c">
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Stock quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="e736905e-5033-455a-bd1b-e538e09d9f21">
+      <name>SalesOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c94e4a57-2aa0-491a-9397-4453642d3d41">
+      <name>QuantityIsFixed</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity is fixed</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="107535b1-fd65-4ace-915c-7d8a2bb853ee">
+      <name>UseSerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Use serial lot number</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="428f015d-205b-41e1-974b-4b9e7813775b">
+    <producedTypes>
+      <objectType typeId="00ae5dc6-96e0-49f9-9b2a-8101af269e74" valueTypeId="cd67d246-edd3-43c9-81d3-6ad746180079"/>
+      <rowType typeId="217f0b78-7b6e-4377-b43c-65c70c28c8c4" valueTypeId="a0acbadf-6274-44d0-b5ee-0db6e6435b71"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="d4c228a8-7cb8-4aa0-a499-8fc4e51a62aa">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="58252f7f-87d6-45b4-b754-bca71ecda6e3">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.ShipmentPlaningOrder.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="09df5be1-1cce-4a70-8b54-3c687cc3fb21">
+    <producedTypes>
+      <objectType typeId="c75e9b53-2dfe-457f-851c-b95e53ead764" valueTypeId="1ec8ace6-7d49-43d0-8b76-8231ab5fc89b"/>
+      <rowType typeId="28225408-857a-4d7b-8b23-b8605e7d2b7c" valueTypeId="7db67d5c-6120-4770-bbd5-0d841fde9dae"/>
+    </producedTypes>
+    <name>RowIDInfo</name>
+    <synonym>
+      <key>en</key>
+      <value>Row IDInfo</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="28db58c1-c8a4-447e-900b-f2239a422800">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="844d79f8-b330-4735-a6c9-640b6c843a79">
+      <name>RowID</name>
+      <synonym>
+        <key>en</key>
+        <value>Row ID</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="cabf62cf-ec56-48c4-a951-ecb5b7e9cb7a">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="b022ac2f-0444-4689-a1c5-b0e451dc6a97">
+      <name>Basis</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis</value>
+      </synonym>
+      <type>
+        <types>DocumentRef</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d56880fd-1a14-4075-bc6f-c262fdbaa9c5">
+      <name>CurrentStep</name>
+      <synonym>
+        <key>en</key>
+        <value>Current step</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.MovementRules</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <createOnInput>Use</createOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4cbaee62-79e1-4b56-a8c6-d482b8e3109c">
+      <name>NextStep</name>
+      <synonym>
+        <key>en</key>
+        <value>Next step</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.MovementRules</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e4eb9d08-501f-44b7-91a8-ca0693dbc036">
+      <name>RowRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Row ref</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.RowIDs</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d5d26505-22be-4215-abd2-31321310778b">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="855f92dc-b44d-4c9c-be82-0242d2a7db49">
+    <producedTypes>
+      <objectType typeId="dcc6efed-ffed-41fe-bab0-e279c6653ab0" valueTypeId="ffa2f4e6-9ef9-4705-a5a7-fc84b55b7465"/>
+      <rowType typeId="913726d3-476d-4379-badc-fe84433b7caf" valueTypeId="ed95fbd3-5efd-4f5a-ab91-6817aa9bd574"/>
+    </producedTypes>
+    <name>SerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot numbers</value>
+    </synonym>
+    <attributes uuid="b67da9be-8003-423f-956c-221068a5fffa">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a23a9c76-1fed-4311-b010-4ab82b04ab1b">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ab2b8bd7-f6d7-4d01-a293-6452218ca30f">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="36920006-03b9-4332-873e-7c00f2abc496">
+    <producedTypes>
+      <objectType typeId="bca5ad0d-4412-4a66-b569-870b7839ecd8" valueTypeId="236934ea-cc41-4ac8-a749-cffea547e6cb"/>
+      <rowType typeId="0b81f5ff-17d1-4bff-a18b-1571ccd44cef" valueTypeId="cab136e5-3112-4cff-8c7e-2cb039ce5ae9"/>
+    </producedTypes>
+    <name>SourceOfOrigins</name>
+    <synonym>
+      <key>en</key>
+      <value>Source of origins</value>
+    </synonym>
+    <attributes uuid="ddb6d348-f36d-4ab2-a52f-1b4e8ed5f646">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f09d11c3-f6f1-4646-a968-eb5dc9a03dfb">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="396cd3ea-0e67-46ef-b930-9861dd3eb778">
+      <name>SourceOfOrigin</name>
+      <synonym>
+        <key>en</key>
+        <value>Source of origin</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SourceOfOrigins</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5f05fa6e-e350-43cb-ba11-d4892f3e73d9">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <templates uuid="fbb7bb01-c338-484a-b8dd-adad60775b5c">
+    <name>ShipmentPlaningOrderPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment planing order</value>
+    </synonym>
+  </templates>
+  <commands uuid="9cd170c4-3ecb-4807-9123-8b2f5b1520a2">
+    <name>Generate</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment planing order</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.SalesOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="fdbb37f1-8815-4806-b882-c7adfbda296d">
+    <name>ShipmentPlaningOrderPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment planing order</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.ShipmentPlaningOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

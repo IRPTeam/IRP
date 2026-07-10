@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3c71dd8b-7069-4ba6-bf27-128a2d4a759c">
- <name>Report_R3027A_CashAdvance</name>
- <synonym>
-  <key>en</key>
-  <value>26F81371-5C5F-4F2F-F6B5-50D7132E8DF7</value>
- </synonym>
+  <name>Report_R3027A_CashAdvance</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R3027A_CashAdvance</value>
+  </synonym>
 </mdclass:Role>

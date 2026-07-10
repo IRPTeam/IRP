@@ -26,7 +26,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>92310160-7739-6441-1147-718C8164CAD7</v8:content>
+							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -108,7 +108,7 @@ ORDER BY
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>A2E8E315-B2B7-34D7-7021-114F86BF0F00</v8:content>
+				<v8:content>Vendor prices</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">

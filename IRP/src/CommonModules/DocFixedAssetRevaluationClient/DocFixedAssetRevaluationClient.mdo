@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fb91d574-06ac-4547-8378-626c2e8e9672">
- <name>DocFixedAssetRevaluationClient</name>
- <synonym>
-  <key>en</key>
-  <value>09C453E8-D35B-B380-00C8-8ACDE5670CDD</value>
- </synonym>
- <clientManagedApplication>true</clientManagedApplication>
- <clientOrdinaryApplication>true</clientOrdinaryApplication>
+  <name>DocFixedAssetRevaluationClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc fixed asset revaluation client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

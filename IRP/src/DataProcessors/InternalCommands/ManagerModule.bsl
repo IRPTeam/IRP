@@ -793,7 +793,7 @@ Procedure AuditLock_OnInitialization(CommandName, CommandParameters, Cancel, Add
 		NewColumn.HeaderPicture = CommandPicture; 
 		//@skip-check property-return-type
 		NewColumn.ValuesPicture = CommandPicture;
-		NewColumn.ToolTip = NStr("en='B80AC6E4-9910-9D56-6DD7-7036C7066C77'");
+		NewColumn.ToolTip = NStr("en = 'Audit lock'");
 		
 		Cancel = True;
 		

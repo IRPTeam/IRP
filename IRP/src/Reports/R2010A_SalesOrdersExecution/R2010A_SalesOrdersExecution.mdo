@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cc15c698-e0d4-47b3-aa89-6e24e7855047">
- <producedTypes>
-  <objectType typeId="96a15980-1160-4d65-a557-3dc1aee68769" valueTypeId="351e0c59-0b9b-45dc-8440-e67c3a788547"/>
-  <managerType typeId="b4447bd7-cacf-4467-8db1-31395378e9ee" valueTypeId="93da6f09-baf4-4169-855c-5dea6dea4e44"/>
- </producedTypes>
- <name>R2010A_SalesOrdersExecution</name>
- <synonym>
-  <key>en</key>
-  <value>1913C370-5C55-3046-6676-6C9D24D21989</value>
- </synonym>
- <useStandardCommands>true</useStandardCommands>
- <mainDataCompositionSchema>Report.R2010A_SalesOrdersExecution.Template.MainDataCompositionSchema</mainDataCompositionSchema>
- <templates uuid="c029b098-0e50-42f1-90e4-e28b13ce5d5e">
-  <name>MainDataCompositionSchema</name>
+  <producedTypes>
+    <objectType typeId="96a15980-1160-4d65-a557-3dc1aee68769" valueTypeId="351e0c59-0b9b-45dc-8440-e67c3a788547"/>
+    <managerType typeId="b4447bd7-cacf-4467-8db1-31395378e9ee" valueTypeId="93da6f09-baf4-4169-855c-5dea6dea4e44"/>
+  </producedTypes>
+  <name>R2010A_SalesOrdersExecution</name>
   <synonym>
-   <key>en</key>
-   <value>BABB7E1F-F685-2010-0E79-9FBB7AF102F7</value>
+    <key>en</key>
+    <value>R2010A Sales orders execution</value>
   </synonym>
-  <templateType>DataCompositionSchema</templateType>
- </templates>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.R2010A_SalesOrdersExecution.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="c029b098-0e50-42f1-90e4-e28b13ce5d5e">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
 </mdclass:Report>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="89dea5ac-2455-46cd-b598-aebfec5193c5">
- <name>Document_FixedAssetRevaluation</name>
- <synonym>
-  <key>en</key>
-  <value>2221B0BF-DD7F-5300-0F58-81133CB6AEF3</value>
- </synonym>
+  <name>Document_FixedAssetRevaluation</name>
+  <synonym>
+    <key>en</key>
+    <value>Document &quot;Fixed asset revaluation&quot;</value>
+  </synonym>
 </mdclass:Role>

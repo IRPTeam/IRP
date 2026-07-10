@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e8f4d2a1-3b5c-4d7e-9f8a-1c2d3e4f5a6b">
- <name>SimpleBatchCostCalculationServer</name>
- <synonym>
-  <key>en</key>
-  <value>C632D759-6040-D024-443B-BCF6F2884CED</value>
- </synonym>
- <server>true</server>
+  <name>SimpleBatchCostCalculationServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Simple batch cost calculation server</value>
+  </synonym>
+  <server>true</server>
 </mdclass:CommonModule>

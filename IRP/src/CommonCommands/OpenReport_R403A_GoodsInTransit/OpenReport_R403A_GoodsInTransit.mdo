@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0e8e2533-01a4-4860-865c-5979ce23c738">
- <name>OpenReport_R403A_GoodsInTransit</name>
- <synonym>
-  <key>en</key>
-  <value>406B605B-E0D7-8B92-2FC9-9F0FA3412588</value>
- </synonym>
- <group>NavigationPanelOrdinary</group>
- <representation>Auto</representation>
+  <name>OpenReport_R403A_GoodsInTransit</name>
+  <synonym>
+    <key>en</key>
+    <value>R403A Goods in transit</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
 </mdclass:CommonCommand>

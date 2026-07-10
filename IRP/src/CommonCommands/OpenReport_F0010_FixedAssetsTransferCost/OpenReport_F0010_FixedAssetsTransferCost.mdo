@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="77fbc304-7e5c-4582-9957-0d91706ca1c9">
- <name>OpenReport_F0010_FixedAssetsTransferCost</name>
- <synonym>
-  <key>en</key>
-  <value>C669A120-BF81-B4C7-7B72-2FA6B02B7A50</value>
- </synonym>
- <group>NavigationPanelOrdinary</group>
- <representation>Auto</representation>
+  <name>OpenReport_F0010_FixedAssetsTransferCost</name>
+  <synonym>
+    <key>en</key>
+    <value>F0010 Fixed assets transfer cost</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
 </mdclass:CommonCommand>

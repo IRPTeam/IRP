@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="def2644e-a770-404c-80ad-5d94cd32cafa">
- <name>ChoicePaymentBasis</name>
- <synonym>
-  <key>en</key>
-  <value>FA97B1B0-984C-92F2-2FC2-265D05D19553</value>
- </synonym>
- <usePurposes>PersonalComputer</usePurposes>
- <usePurposes>MobileDevice</usePurposes>
+  <name>ChoicePaymentBasis</name>
+  <synonym>
+    <key>en</key>
+    <value>Choice payment basis</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

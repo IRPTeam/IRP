@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2a261723-668e-4c8d-b9cc-3df7ff1d6247">
- <name>LinkUnlinkBasisDocument</name>
- <synonym>
-  <key>en</key>
-  <value>7B9A1CB3-CF5F-9B00-0C6A-A28F350E3C19</value>
- </synonym>
+  <name>LinkUnlinkBasisDocument</name>
+  <synonym>
+    <key>en</key>
+    <value>Link unlink basis document</value>
+  </synonym>
 </mdclass:CommonPicture>

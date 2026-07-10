@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="21eec9cd-d315-4a20-8adf-472f76c8d16b">
- <name>OpenReport_R3010A_CashOnHand</name>
- <synonym>
-  <key>en</key>
-  <value>7900C3D0-66D5-0F5E-E059-9E6FAB757468</value>
- </synonym>
- <group>NavigationPanelOrdinary</group>
- <representation>Auto</representation>
+  <name>OpenReport_R3010A_CashOnHand</name>
+  <synonym>
+    <key>en</key>
+    <value>R3010A Cash on hand</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
 </mdclass:CommonCommand>

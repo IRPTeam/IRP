@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>02B22D21-F9F6-91FD-D956-62D6D217C367</v8:content>
+					<v8:content>Store</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -25,7 +25,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>408FC068-8142-097C-C92A-A48A36B42BC9</v8:content>
+					<v8:content>Basis</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -38,7 +38,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>CB228C5E-2F47-DE54-4635-5A66F69033D6</v8:content>
+					<v8:content>Item</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -48,7 +48,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>599102DB-7266-9C04-47DA-A4BB53AA504A</v8:content>
+					<v8:content>Item key</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -61,7 +61,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>9E89BF87-9C5D-23BA-A30E-E0301A923A5D</v8:content>
+					<v8:content>Quantity surplus</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -70,7 +70,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>C89F197D-0621-E4FD-D1FB-B68995187613</v8:content>
+							<v8:content>NFD=3</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -86,7 +86,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>F687259C-EB05-3A9F-FC59-9CCFD81A42CA</v8:content>
+					<v8:content>Quantity write off</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -95,7 +95,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>C89F197D-0621-E4FD-D1FB-B68995187613</v8:content>
+							<v8:content>NFD=3</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -111,7 +111,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>05051F7C-2104-1948-8CA4-49F2706B6CA5</v8:content>
+					<v8:content>Quantity total</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -120,7 +120,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>C89F197D-0621-E4FD-D1FB-B68995187613</v8:content>
+							<v8:content>NFD=3</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -163,7 +163,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>628B5CC2-6003-CC9D-DD15-580A8BDCEF5E</v8:content>
+							<v8:content>DF=MM.yyyy</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -217,7 +217,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>F3457CDB-F67C-EA15-5C35-534721571F87</v8:content>
+				<v8:content>Begin of period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -235,7 +235,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>D8834EBB-8385-C76B-BFAF-FD038CA50C1C</v8:content>
+				<v8:content>End of period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -253,7 +253,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>91E8065C-084B-3703-3D09-92E0E81BDBB4</v8:content>
+				<v8:content>Report period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

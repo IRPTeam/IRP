@@ -104,7 +104,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E71B29AF-C3DE-AC49-930B-B4B94CAB7769[Project]</v8:content>
+							<v8:content>Project "[Project]"</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -139,7 +139,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>D2DBC163-A236-9EDD-DC02-2D77120C58A5</v8:content>
+							<v8:content>Issue type</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -168,7 +168,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>8D8A656C-9F09-C483-3278-8C7646EFE65F</v8:content>
+							<v8:content>Start date</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -192,7 +192,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>280AB66F-5173-4F9C-C33C-CBBD2F237730</v8:content>
+							<v8:content>Due date</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -216,7 +216,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>A310F62D-8E52-1286-6CA9-94BF87950E55</v8:content>
+							<v8:content>Job description</v8:content>
 						</v8:item>
 					</tl>
 				</c>

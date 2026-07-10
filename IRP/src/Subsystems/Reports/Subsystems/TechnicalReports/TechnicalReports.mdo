@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cd02a701-eff0-4957-96b5-abee66cfccc1">
- <name>TechnicalReports</name>
- <synonym>
-  <key>en</key>
-  <value>1A21DBEF-F868-6E92-2F91-10C8E38D92A4</value>
- </synonym>
- <includeHelpInContents>true</includeHelpInContents>
- <includeInCommandInterface>true</includeInCommandInterface>
- <parentSubsystem>Subsystem.Reports</parentSubsystem>
+  <name>TechnicalReports</name>
+  <synonym>
+    <key>en</key>
+    <value>Technical reports</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

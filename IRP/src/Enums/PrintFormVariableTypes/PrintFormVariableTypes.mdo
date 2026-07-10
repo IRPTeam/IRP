@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Enum xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="05a4a18c-c1a0-4dd4-9393-001c02dffb04">
- <producedTypes>
-  <refType typeId="ffdbbf9f-1b9d-42ab-b6bb-e84255a6df7e" valueTypeId="c5261fb3-0e2a-442e-bcc3-9d84fc256802"/>
-  <listType typeId="93e44ed2-7b4e-4781-8fe3-2a228fb149e3" valueTypeId="687ee9d5-3cf7-4596-b436-1919862a91e5"/>
-  <managerType typeId="50c61b6e-b97e-4bc3-b8ca-185de19f84d9" valueTypeId="4d022e29-ad14-4bbd-a8c1-49bb8bae3146"/>
- </producedTypes>
- <name>PrintFormVariableTypes</name>
- <synonym>
-  <key>en</key>
-  <value>0A268168-D2FA-4453-3DC1-14F3F9A758DE</value>
- </synonym>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>Order</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <standardAttributes>
-  <dataHistory>Use</dataHistory>
-  <name>Ref</name>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
- </standardAttributes>
- <quickChoice>true</quickChoice>
- <choiceMode>BothWays</choiceMode>
- <enumValues uuid="cff0b67d-dff1-4367-b986-b25619a8ef40">
-  <name>XMLStyle</name>
+<mdclass:Enum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="05a4a18c-c1a0-4dd4-9393-001c02dffb04">
+  <producedTypes>
+    <refType typeId="ffdbbf9f-1b9d-42ab-b6bb-e84255a6df7e" valueTypeId="c5261fb3-0e2a-442e-bcc3-9d84fc256802"/>
+    <listType typeId="93e44ed2-7b4e-4781-8fe3-2a228fb149e3" valueTypeId="687ee9d5-3cf7-4596-b436-1919862a91e5"/>
+    <managerType typeId="50c61b6e-b97e-4bc3-b8ca-185de19f84d9" valueTypeId="4d022e29-ad14-4bbd-a8c1-49bb8bae3146"/>
+  </producedTypes>
+  <name>PrintFormVariableTypes</name>
   <synonym>
-   <key>en</key>
-   <value>C355209C-DA2B-749C-C8B7-79C354B8ADE9</value>
+    <key>en</key>
+    <value>Print form variable types</value>
   </synonym>
- </enumValues>
- <enumValues uuid="7479a285-62f2-4db8-a984-d3f0fda71bf3">
-  <name>WikiStyle</name>
-  <synonym>
-   <key>en</key>
-   <value>E37CE9F4-4099-D85A-AB01-11AE228EF0A9</value>
-  </synonym>
- </enumValues>
- <enumValues uuid="50d07ffc-da72-4bb9-bd4a-574f8eb9b5be">
-  <name>CurlyBrace</name>
-  <synonym>
-   <key>en</key>
-   <value>6B833FE4-9352-4D9E-EB7D-D0ED1BBC3130</value>
-  </synonym>
- </enumValues>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Order</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Ref</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="cff0b67d-dff1-4367-b986-b25619a8ef40">
+    <name>XMLStyle</name>
+    <synonym>
+      <key>en</key>
+      <value>&lt;XML style></value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="7479a285-62f2-4db8-a984-d3f0fda71bf3">
+    <name>WikiStyle</name>
+    <synonym>
+      <key>en</key>
+      <value>[Wiki style]</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="50d07ffc-da72-4bb9-bd4a-574f8eb9b5be">
+    <name>CurlyBrace</name>
+    <synonym>
+      <key>en</key>
+      <value>{Curly brace}</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

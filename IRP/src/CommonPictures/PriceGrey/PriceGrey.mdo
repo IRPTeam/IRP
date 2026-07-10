@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3d9bdd30-2705-4ffc-a35a-94b5f16f464e">
- <name>PriceGrey</name>
- <synonym>
-  <key>en</key>
-  <value>5936B4E6-985E-4A91-1162-2A6E2475FF5E</value>
- </synonym>
+  <name>PriceGrey</name>
+  <synonym>
+    <key>en</key>
+    <value>Price grey</value>
+  </synonym>
 </mdclass:CommonPicture>

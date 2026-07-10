@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dd6457d1-3a04-4133-8d40-a7d841182644">
- <name>DontCalculateRow</name>
- <synonym>
-  <key>en</key>
-  <value>C77C1FB5-9BC6-1B75-5E1E-EA8A45CD2D02</value>
- </synonym>
+  <name>DontCalculateRow</name>
+  <synonym>
+    <key>en</key>
+    <value>Dont calculate row</value>
+  </synonym>
 </mdclass:CommonPicture>

@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0ae8e2fd-33bd-4e3b-8fe6-5a1fbeeb2a96">
- <name>BusinessProcesses</name>
- <synonym>
-  <key>en</key>
-  <value>51C05166-41A9-666B-BF22-2B6C28156181</value>
- </synonym>
- <includeHelpInContents>true</includeHelpInContents>
- <includeInCommandInterface>true</includeInCommandInterface>
- <picture xsi:type="core:PictureRef">
-  <picture>StdPicture.BusinessProcess</picture>
- </picture>
- <content>FunctionalOption.UseBusinessProcess</content>
- <content>Task.ExecutorTasks</content>
- <content>InformationRegister.TaskExecutors</content>
- <content>BusinessProcess.ExecutionProcesses</content>
- <content>Catalog.ExecutionTemplates</content>
- <content>Enum.AutostartProcessTypes</content>
- <content>Enum.TaskFailActions</content>
- <content>Enum.TaskTypes</content>
- <content>InformationRegister.ExecutionResults</content>
- <content>Enum.TaskResults</content>
- <content>InformationRegister.ExecutionProcessStatus</content>
- <content>EventSubscription.OnWrite_ExecutionObject</content>
- <content>EventSubscription.OnPosting_ExecutionObject</content>
- <content>CommonPicture.IconCollection10_Tasks</content>
- <parentSubsystem>Subsystem.Settings</parentSubsystem>
+<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0ae8e2fd-33bd-4e3b-8fe6-5a1fbeeb2a96">
+  <name>BusinessProcesses</name>
+  <synonym>
+    <key>en</key>
+    <value>Business processes</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <picture xsi:type="core:PictureRef">
+    <picture>StdPicture.BusinessProcess</picture>
+  </picture>
+  <content>FunctionalOption.UseBusinessProcess</content>
+  <content>Task.ExecutorTasks</content>
+  <content>InformationRegister.TaskExecutors</content>
+  <content>BusinessProcess.ExecutionProcesses</content>
+  <content>Catalog.ExecutionTemplates</content>
+  <content>Enum.AutostartProcessTypes</content>
+  <content>Enum.TaskFailActions</content>
+  <content>Enum.TaskTypes</content>
+  <content>InformationRegister.ExecutionResults</content>
+  <content>Enum.TaskResults</content>
+  <content>InformationRegister.ExecutionProcessStatus</content>
+  <content>EventSubscription.OnWrite_ExecutionObject</content>
+  <content>EventSubscription.OnPosting_ExecutionObject</content>
+  <content>CommonPicture.IconCollection10_Tasks</content>
+  <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

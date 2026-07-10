@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5af9c925-acad-42ac-9977-89cb5989c389">
- <producedTypes>
-  <managerType typeId="550843d9-b71a-4005-96d5-598e20fdb365" valueTypeId="4aa62cce-14d7-4006-9b46-101b0eba00f8"/>
-  <valueManagerType typeId="50c56246-2cf9-44a1-b01b-1d477696af2c" valueTypeId="f9667f77-c3ea-4318-a6ee-5f6764eff6eb"/>
-  <valueKeyType typeId="dd02733f-1da8-458e-935d-87acf1cd75b9" valueTypeId="111201d3-320b-418a-a93d-8a3b2647489f"/>
- </producedTypes>
- <name>LastReleaseNumber</name>
- <synonym>
-  <key>en</key>
-  <value>E1F7B27F-8D98-AEF9-96DE-EF342D1BFB3D</value>
- </synonym>
- <type>
-  <types>String</types>
-  <stringQualifiers>
-   <length>50</length>
-  </stringQualifiers>
- </type>
- <useStandardCommands>true</useStandardCommands>
- <minValue xsi:type="core:UndefinedValue"/>
- <maxValue xsi:type="core:UndefinedValue"/>
- <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5af9c925-acad-42ac-9977-89cb5989c389">
+  <producedTypes>
+    <managerType typeId="550843d9-b71a-4005-96d5-598e20fdb365" valueTypeId="4aa62cce-14d7-4006-9b46-101b0eba00f8"/>
+    <valueManagerType typeId="50c56246-2cf9-44a1-b01b-1d477696af2c" valueTypeId="f9667f77-c3ea-4318-a6ee-5f6764eff6eb"/>
+    <valueKeyType typeId="dd02733f-1da8-458e-935d-87acf1cd75b9" valueTypeId="111201d3-320b-418a-a93d-8a3b2647489f"/>
+  </producedTypes>
+  <name>LastReleaseNumber</name>
+  <synonym>
+    <key>en</key>
+    <value>Last release number</value>
+  </synonym>
+  <type>
+    <types>String</types>
+    <stringQualifiers>
+      <length>50</length>
+    </stringQualifiers>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

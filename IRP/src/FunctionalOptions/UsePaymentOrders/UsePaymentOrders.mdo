@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6529700f-5c69-4d20-b4c3-2d92a18ae1f6">
- <name>UsePaymentOrders</name>
- <synonym>
-  <key>en</key>
-  <value>F767E23F-282B-B9B1-1572-27D492F3DC76</value>
- </synonym>
- <location>Constant.UsePaymentOrders</location>
- <privilegedGetMode>true</privilegedGetMode>
- <content>Document.MoneyTransfer.Attribute.CashTransferOrder</content>
- <content>Document.IncomingPaymentOrder</content>
- <content>Document.CashTransferOrder</content>
- <content>Document.OutgoingPaymentOrder</content>
+  <name>UsePaymentOrders</name>
+  <synonym>
+    <key>en</key>
+    <value>Use payment orders</value>
+  </synonym>
+  <location>Constant.UsePaymentOrders</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>Document.MoneyTransfer.Attribute.CashTransferOrder</content>
+  <content>Document.IncomingPaymentOrder</content>
+  <content>Document.CashTransferOrder</content>
+  <content>Document.OutgoingPaymentOrder</content>
 </mdclass:FunctionalOption>

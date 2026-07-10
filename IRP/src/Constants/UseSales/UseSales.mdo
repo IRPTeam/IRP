@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="32c6171e-45f5-4cdc-a662-ae9cb7d9287a">
- <producedTypes>
-  <managerType typeId="7f1bd379-3f2c-4f12-acff-690b1c6ffa91" valueTypeId="f73ccfe2-ab23-43f5-96c9-41d12ba80103"/>
-  <valueManagerType typeId="6e6b062a-de30-4f77-a750-a7fd8c2c920b" valueTypeId="7091b631-1cf4-4957-af14-b276b36c6643"/>
-  <valueKeyType typeId="1dbd0373-1c21-42d1-8d24-e1be8c496ccb" valueTypeId="f34d550e-a46f-411b-b9fe-b82ec9517bf7"/>
- </producedTypes>
- <name>UseSales</name>
- <synonym>
-  <key>en</key>
-  <value>618608B1-0864-AAA4-4DFF-FD0561957852</value>
- </synonym>
- <type>
-  <types>Boolean</types>
- </type>
- <useStandardCommands>true</useStandardCommands>
- <minValue xsi:type="core:UndefinedValue"/>
- <maxValue xsi:type="core:UndefinedValue"/>
- <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="32c6171e-45f5-4cdc-a662-ae9cb7d9287a">
+  <producedTypes>
+    <managerType typeId="7f1bd379-3f2c-4f12-acff-690b1c6ffa91" valueTypeId="f73ccfe2-ab23-43f5-96c9-41d12ba80103"/>
+    <valueManagerType typeId="6e6b062a-de30-4f77-a750-a7fd8c2c920b" valueTypeId="7091b631-1cf4-4957-af14-b276b36c6643"/>
+    <valueKeyType typeId="1dbd0373-1c21-42d1-8d24-e1be8c496ccb" valueTypeId="f34d550e-a46f-411b-b9fe-b82ec9517bf7"/>
+  </producedTypes>
+  <name>UseSales</name>
+  <synonym>
+    <key>en</key>
+    <value>Use sales</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

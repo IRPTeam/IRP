@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>F3539E40-15EA-611A-A83A-AA7B4D4ACC14</v8:content>
+					<v8:content>Store</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -25,7 +25,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>FC4F2250-CAEC-B4CD-D913-3B06F1397D98</v8:content>
+					<v8:content>Stock</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -34,7 +34,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E50153B6-4652-5D1A-A0A7-7D70EED399B7</v8:content>
+							<v8:content>NFD=3</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -54,7 +54,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>9F62D596-3BBC-8673-3604-4B6E5E641B3F</v8:content>
+					<v8:content>Item key</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -67,7 +67,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>E2C5EBD5-DA9A-EB38-8A91-1CF9F232DE59</v8:content>
+					<v8:content>Free stock</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -76,7 +76,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>E50153B6-4652-5D1A-A0A7-7D70EED399B7</v8:content>
+							<v8:content>NFD=3</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -96,7 +96,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>6094E35B-97FB-7AFB-B182-2ABED25552FD</v8:content>
+					<v8:content>Item</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -142,7 +142,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>6C7FA3C6-F45B-9D5C-C750-0D6EBF6C9FFE</v8:content>
+				<v8:content>Period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

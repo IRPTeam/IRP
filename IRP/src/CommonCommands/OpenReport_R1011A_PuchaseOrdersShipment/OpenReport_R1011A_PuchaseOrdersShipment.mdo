@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="40e421b9-d353-47d1-98a5-3d2fc42c461b">
- <name>OpenReport_R1011A_PuchaseOrdersShipment</name>
- <synonym>
-  <key>en</key>
-  <value>A2281D93-52FC-DB49-9FF7-7EFD7B922453</value>
- </synonym>
- <group>NavigationPanelOrdinary</group>
- <representation>Auto</representation>
+  <name>OpenReport_R1011A_PuchaseOrdersShipment</name>
+  <synonym>
+    <key>en</key>
+    <value>R1011A Puchase orders shipment</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
 </mdclass:CommonCommand>

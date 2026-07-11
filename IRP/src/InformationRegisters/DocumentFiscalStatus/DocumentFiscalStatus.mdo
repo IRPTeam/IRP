@@ -190,4 +190,16 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <commands uuid="18f65952-1573-4bac-bbcf-010aa255e984">
+    <name>FiscalStatus</name>
+    <synonym>
+      <key>en</key>
+      <value>Fiscal status</value>
+    </synonym>
+    <group>FormNavigationPanelGoTo</group>
+    <commandParameterType>
+      <types>DocumentRef.RetailSalesReceipt</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:InformationRegister>

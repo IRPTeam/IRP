@@ -10,4 +10,5 @@
   <content>Catalog.EquipmentDrivers</content>
   <content>Catalog.Workstations</content>
   <content>Catalog.Hardware</content>
+  <content>InformationRegister.DocumentFiscalStatus.Command.FiscalStatus</content>
 </mdclass:FunctionalOption>

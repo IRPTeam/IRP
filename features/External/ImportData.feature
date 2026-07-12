@@ -36,7 +36,7 @@ Scenario: Create catalog AccessGroups objects
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615'  | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270995'   |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c614'  | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270996'   |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615'  | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270997'   |
-//		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c616'  | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b327099a'   |
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c616'  | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b327099a'   |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327098d'  | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270998'   |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327098d'  | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270999'   |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327098d'  | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b327099a'   |
@@ -69,7 +69,7 @@ Scenario: Create catalog AccessProfiles objects
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270991' | 'RunThickClient'             | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270991' | 'RunThinClient'              | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270991' | 'RunWebClient'               | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' | 'FullAccessNoAdminFunctions' | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' | 'FullAccess'                 | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' | 'BasicRole'                  | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b327098e' | 'FullAccessOnlyRead'         | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270992' | 'RunMobileClient'            | 'IRP'           |

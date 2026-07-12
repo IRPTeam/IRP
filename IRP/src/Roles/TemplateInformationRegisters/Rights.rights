@@ -1604,6 +1604,20 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T2018S_FixedOffsetOfAdvances</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.LoggerNotification</name>
 		<right>
 			<name>Read</name>

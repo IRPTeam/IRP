@@ -14476,6 +14476,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T2018S_FixedOffsetOfAdvances</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.EmployeeFiring</name>
 		<right>
 			<name>Read</name>

@@ -244,24 +244,12 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 			
 		// invoices
 		If _Is_Invoice Then
-			Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
-			
-//			If Is.RSR Then
-//				Records_InDocument = GetRecordsInDocument_TM1010T_RSR(Source);
-//				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
-//				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);
-//			EndIf;
+			Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode);			
 		EndIf;
 		
 		// returns
 		If _Is_Return Then
 			Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode);
-//			If Is.RRR Then
-//				Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
-//				ItemList_InDocument = GetItemListInDocument_RRR(Source);
-//				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
-//				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
-//			EndIf;
 		EndIf;
 	EndIf;
 	
@@ -306,20 +294,7 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	
 	If Not Cancel And (Is.RSR Or Is.RRR Or Is.SI Or Is.SR) Then
 		Source.RegisterRecords.TM1010T_RowIDMovements.Clear();
-		Source.RegisterRecords.TM1010T_RowIDMovements.Write();
-	
-//		If Is.RSR Then
-//			Records_InDocument = GetRecordsInDocument_TM1010T_RSR(Source);
-//			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
-//			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);
-//		EndIf;
-
-//		If Is.RRR Then
-//			Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
-//			ItemList_InDocument = GetItemListInDocument_RRR(Source);
-//			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
-//			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
-//		EndIf;		
+		Source.RegisterRecords.TM1010T_RowIDMovements.Write();	
 	EndIf;
 	
 	If Not Cancel Then
@@ -559,100 +534,6 @@ Procedure CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocumen
 		Cancel = True;
 	EndIf;
 EndProcedure
-
-//Procedure CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting)
-//	If Not LinkedRowsIntegrityIsEnable() Then
-//		Return;
-//	EndIf;
-//	
-//	If Not Cancel And Not AccumulationRegisters.TM1010T_RowIDMovements.CheckBalance(Source.Ref, ItemList_InDocument,
-//		Records_InDocument, Records_Exists, RecordType, Unposting) Then											
-//		Cancel = True;
-//	EndIf;
-//EndProcedure
-
-//Function GetRecordsExists_TM1010T(Source, RecordType)
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	CASE
-//	|		WHEN TM1010T_RowIDMovements.Quantity < 0
-//	|			THEN -TM1010T_RowIDMovements.Quantity
-//	|		ELSE TM1010T_RowIDMovements.Quantity
-//	|	END AS Quantity,
-//	|	*
-//	|FROM
-//	|	AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
-//	|WHERE
-//	|	TM1010T_RowIDMovements.Recorder = &Ref
-//	|	AND CASE
-//	|		WHEN &IsExpense
-//	|			THEN TM1010T_RowIDMovements.Quantity < 0
-//	|		ELSE TM1010T_RowIDMovements.Quantity > 0
-//	|	END";
-//	Query.SetParameter("Ref", Source.Ref);
-//	Query.SetParameter("IsExpense", RecordType = AccumulationRecordType.Expense);
-//	QueryTable = Query.Execute().Unload();
-//	Return QueryTable;
-//EndFunction
-
-//Function GetRecordsInDocument_TM1010T_RRR(Source)
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	RowIDInfo.CurrentStep AS Step,
-//	|	*
-//	|FROM
-//	|	Document.%1.RowIDInfo AS RowIDInfo
-//	|WHERE
-//	|	RowIDInfo.Ref = &Ref
-//	|	AND NOT RowIDInfo.Basis.Ref IS NULL";
-//	Query.Text = StrTemplate(Query.Text, Source.Metadata().Name);
-//	Query.SetParameter("Ref", Source.Ref);
-//	QueryTable = Query.Execute().Unload();
-//	Return QueryTable;
-//EndFunction
-
-//Function GetRecordsInDocument_TM1010T_RSR(Source)
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	VALUE(Catalog.MovementRules.RRR_RGR) AS Step,
-//	|	RowIDInfo.Key AS BasisKey,
-//	|	RowIDInfo.Ref AS Basis,
-//	|	*
-//	|FROM
-//	|	Document.%1.RowIDInfo AS RowIDInfo
-//	|WHERE
-//	|	RowIDInfo.Ref = &Ref";
-//	Query.Text = StrTemplate(Query.Text, Source.Metadata().Name);
-//	Query.SetParameter("Ref", Source.Ref);
-//	QueryTable = Query.Execute().Unload();
-//	Return QueryTable;
-//EndFunction
-
-//Function GetItemListInDocument_RRR(Source)
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	ItemList.Key AS Key,
-//	|	ItemList.LineNumber AS LineNumber,
-//	|	ItemList.ItemKey AS ItemKey
-//	|FROM
-//	|	Document.%1.ItemList AS ItemList
-//	|		INNER JOIN Document.%1.RowIDInfo AS RowIDInfo
-//	|		ON ItemList.Key = RowIDInfo.Key
-//	|		AND ItemList.Ref = &Ref
-//	|		AND RowIDInfo.Ref = &Ref
-//	|		AND NOT RowIDInfo.Basis.Ref IS NULL
-//	|WHERE
-//	|	ItemList.Ref = &Ref
-//	|	AND RowIDInfo.Ref = &Ref";
-//	Query.Text = StrTemplate(Query.Text, Source.Metadata().Name);
-//	Query.SetParameter("Ref", Source.Ref);
-//	QueryTable = Query.Execute().Unload();
-//	Return QueryTable;
-//EndFunction	
 
 Function GetRowIDWithLineNumbers(Source)
 	Query = New Query();

@@ -654,13 +654,6 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	|		and 
 	|		(not &UseCurrencyJoin or RecordSet.Currency = CurrencyTable.CurrencyFrom)
 	|		
-//	|		ON CASE
-//	|			WHEN &UseKey
-//	|				THEN RecordSet.Key = CurrencyTable.Key
-//	|			ELSE TRUE
-//	|		END
-//	|		AND 
-//	|		CASE WHEN &UseCurrencyJoin THEN RecordSet.Currency = CurrencyTable.CurrencyFrom ELSE TRUE END
 	|WHERE
 	|	NOT CurrencyTable.MovementType IS NULL
 	|	AND CASE

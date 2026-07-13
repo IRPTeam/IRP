@@ -648,13 +648,19 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	|FROM
 	|	RecordSet AS RecordSet
 	|		LEFT JOIN CurrencyTable AS CurrencyTable
-	|		ON CASE
-	|			WHEN &UseKey
-	|				THEN RecordSet.Key = CurrencyTable.Key
-	|			ELSE TRUE
-	|		END
-	|		AND 
-	|		CASE WHEN &UseCurrencyJoin THEN RecordSet.Currency = CurrencyTable.CurrencyFrom ELSE TRUE END
+	|
+	|		on
+	|		(not &UseKey Or RecordSet.Key = CurrencyTable.Key)
+	|		and 
+	|		(not &UseCurrencyJoin or RecordSet.Currency = CurrencyTable.CurrencyFrom)
+	|		
+//	|		ON CASE
+//	|			WHEN &UseKey
+//	|				THEN RecordSet.Key = CurrencyTable.Key
+//	|			ELSE TRUE
+//	|		END
+//	|		AND 
+//	|		CASE WHEN &UseCurrencyJoin THEN RecordSet.Currency = CurrencyTable.CurrencyFrom ELSE TRUE END
 	|WHERE
 	|	NOT CurrencyTable.MovementType IS NULL
 	|	AND CASE
@@ -708,6 +714,7 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|DROP RecordSet";
+
 	If Not UseKey And Table.Columns.Find("Key") = Undefined Then
 		Table.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	EndIf;

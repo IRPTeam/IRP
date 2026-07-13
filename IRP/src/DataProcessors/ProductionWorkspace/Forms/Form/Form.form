@@ -553,6 +553,7 @@
             <name>ProductionPlusInventoryTransfer</name>
             <id>58</id>
             <visible>true</visible>
+            <enabled>false</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
@@ -612,6 +613,7 @@
             <name>InventoryTransfer</name>
             <id>56</id>
             <visible>true</visible>
+            <enabled>false</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
@@ -671,6 +673,7 @@
             <name>Productions</name>
             <id>54</id>
             <visible>true</visible>
+            <enabled>false</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>

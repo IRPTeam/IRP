@@ -45,9 +45,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
+      <fillValue xsi:type="core:StringValue"/>
     </attributes>
     <attributes uuid="76244813-8a18-4c1a-8c9f-4a1f8cce9fc0">
       <name>MovementsCount</name>

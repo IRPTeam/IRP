@@ -6,6 +6,5 @@
     <value>Employee</value>
   </synonym>
   <group>NavigationPanelImportant</group>
-  <commandParameterType/>
   <representation>Auto</representation>
 </mdclass:CommonCommand>

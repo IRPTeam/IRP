@@ -71,7 +71,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
-		* Load PO
+		# Load PO
 		When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 		When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
 		When Create document InternalSupplyRequest objects (check movements)
@@ -84,7 +84,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 				| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"     |
-		* Load GR
+		# Load GR
 		When Create document GoodsReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"     |
@@ -95,7 +95,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 				| "Documents.GoodsReceipt.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);"     |
-		* Load PI
+		# Load PI
 		When Create document PurchaseInvoice objects (test advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |

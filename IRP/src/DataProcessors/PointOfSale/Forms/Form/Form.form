@@ -1650,6 +1650,7 @@
               <name>HTMLDate</name>
               <id>956</id>
               <visible>true</visible>
+              <enabled>false</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
@@ -4881,6 +4882,7 @@
         <name>WorkstationCashAccount</name>
         <id>1167</id>
         <visible>true</visible>
+        <enabled>false</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>

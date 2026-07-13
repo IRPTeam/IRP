@@ -2782,7 +2782,7 @@
       </items>
       <items xsi:type="form:FormGroup">
         <name>GroupDate</name>
-        <id>552</id>
+        <id>557</id>
         <items xsi:type="form:FormField">
           <name>Date</name>
           <id>4</id>
@@ -2829,7 +2829,7 @@
         </items>
         <items xsi:type="form:Decoration">
           <name>EditDate</name>
-          <id>549</id>
+          <id>559</id>
           <title>
             <key>en</key>
             <value>Edit date</value>
@@ -2841,7 +2841,7 @@
           </userVisible>
           <extendedTooltip>
             <name>EditDateExtendedTooltip</name>
-            <id>551</id>
+            <id>561</id>
             <type>Label</type>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -2851,7 +2851,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>EditDateContextMenu</name>
-            <id>550</id>
+            <id>560</id>
             <autoFill>true</autoFill>
           </contextMenu>
           <type>Label</type>
@@ -2877,7 +2877,7 @@
         </title>
         <extendedTooltip>
           <name>GroupDateExtendedTooltip</name>
-          <id>553</id>
+          <id>558</id>
           <type>Label</type>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>

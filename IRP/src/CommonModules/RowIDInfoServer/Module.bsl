@@ -2017,11 +2017,11 @@ Procedure WriteRowIDCatalog(Source, Obj)
 	
 	Hash = GetMD5RowIDs(Obj);
 	
-	If Not Obj.Hash = Hash Then
+	If Obj.Hash <> Hash Then
 		Obj.Hash = Hash;
 		Obj.Write();
-		WriteRowIDStampRegister(Source, Obj);
 	EndIf;
+	WriteRowIDStampRegister(Source, Obj);
 EndProcedure
 
 Procedure WriteRowIDStampRegister(Source, Obj)

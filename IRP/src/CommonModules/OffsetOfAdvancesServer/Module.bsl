@@ -826,7 +826,18 @@ Procedure DistributeTransactionToAdvance(Parameters,
 EndProcedure
 
 Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances, Records_OffsetAging)
-	For Each Row In Records_OffsetOfAdvances Do
+	Records_OffsetOfAdvancesCopy = Records_OffsetOfAdvances.Copy();
+	Records_OffsetOfAdvancesCopy.GroupBy("Company, 
+		|Branch, 
+		|Currency, 
+		|Partner, 
+		|LegalName, 
+		|Agreement, 
+		|TransactionOrder, 
+		|TransactionProject,
+		|TransactionDocument", "Amount");
+	
+	For Each Row In Records_OffsetOfAdvancesCopy Do
 		If Not ValueIsFilled(Row.TransactionDocument) Then
 			Continue;
 		EndIf;

@@ -1297,7 +1297,7 @@ Function RecalculateExpression(Params) Export
 				EndIf;
 			EndDo;
 		Else
-                        Raise R().WrongExternalFunctionType;
+			Raise R().WrongExternalFunctionType;
 		EndIf;
 		ResultInfo.Result = Result;
 	Except

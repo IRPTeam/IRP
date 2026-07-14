@@ -2520,7 +2520,7 @@
     <name>Run</name>
     <title>
       <key>en</key>
-      <value>Run</value>
+      <value>Debug</value>
     </title>
     <id>1</id>
     <use>

@@ -692,6 +692,25 @@ Procedure DistributeTransactionToAdvance(Parameters,
 		                                 NeedWriteTransactions, FixedAmounts, IsFixed)
 
 	Query = New Query();
+//	Query.Text =
+//	"SELECT
+//	|	AdvancesBalance.Company,
+//	|	AdvancesBalance.Branch,
+//	|	AdvancesBalance.Currency,
+//	|	AdvancesBalance.Partner,
+//	|	AdvancesBalance.LegalName,
+//	|	AdvancesBalance.Agreement,
+//	|	AdvancesBalance.Order,
+//	|	AdvancesBalance.Project,
+//	|	AdvancesBalance.AmountBalance AS AdvanceAmount
+//	|FROM
+//	|	AccumulationRegister.TM1020B_AdvancesKey.Balance(&TransactionBoundary, 
+//	|		Company = &Company
+//	|	AND Branch = &Branch
+//	|	AND Currency = &Currency
+//	|	AND Partner = &Partner
+//	|	AND LegalName = &LegalName) AS AdvancesBalance";
+
 	Query.Text =
 	"SELECT
 	|	AdvancesBalance.Company,
@@ -702,14 +721,25 @@ Procedure DistributeTransactionToAdvance(Parameters,
 	|	AdvancesBalance.Agreement,
 	|	AdvancesBalance.Order,
 	|	AdvancesBalance.Project,
-	|	AdvancesBalance.AmountBalance AS AdvanceAmount
+	|	AdvancesBalance.AmountBalance AS AdvanceAmount,
+	|	CASE
+	|		WHEN AdvancesBalance.Order = &TransactionOrder
+	|			THEN 0
+	|		ELSE 1
+	|	END AS OrderMatchPriority
 	|FROM
-	|	AccumulationRegister.TM1020B_AdvancesKey.Balance(&TransactionBoundary, 
-	|		Company = &Company
-	|	AND Branch = &Branch
-	|	AND Currency = &Currency
-	|	AND Partner = &Partner
-	|	AND LegalName = &LegalName) AS AdvancesBalance";
+	|	AccumulationRegister.TM1020B_AdvancesKey.Balance(
+	|			&TransactionBoundary,
+	|			Company = &Company
+	|				AND Branch = &Branch
+	|				AND Currency = &Currency
+	|				AND Partner = &Partner
+	|				AND LegalName = &LegalName) AS AdvancesBalance
+	|
+	|ORDER BY
+	|	OrderMatchPriority,
+	|	AdvancesBalance.Order";
+	Query.SetParameter("TransactionOrder", TransactionRecordData.Order);
 
 	Point = New PointInTime(PointInTime.Date, Parameters.Object.Ref);
 	Boundary = New Boundary(Point, BoundaryType.Including);

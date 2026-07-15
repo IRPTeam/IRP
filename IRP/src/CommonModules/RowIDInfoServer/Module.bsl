@@ -202,6 +202,11 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		If Tables.Property("TM1010B_RowIDMovements") Then
 			Source.RegisterRecords.TM1010B_RowIDMovements.Load(Tables.TM1010B_RowIDMovements);
 			Source.RegisterRecords.TM1010B_RowIDMovements.Write();
+			
+			ItemList_InDocument = GetRowIDWithLineNumbers(Source.Basis);
+			Records_InDocument = GetRecordsInDocument(Source.Basis).TM1010B_RowIDMovements;
+			Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Basis.Ref);
+			CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, False);
 		EndIf;
 		
 		If Tables.Property("TM1010T_RowIDMovements") Then

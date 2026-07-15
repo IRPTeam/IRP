@@ -14627,7 +14627,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	LockLinkedRows(Object, Form);
 EndProcedure
 
-Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable) Export
+Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable, CheckInternalLinks = True) Export
 	If Not LinkedRowsIntegrityIsEnable() Then
 		Return;
 	EndIf;
@@ -14739,124 +14739,126 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	EndIf;
 	
 	// check internal links
-	Query = New Query();
-	Query.TempTablesManager = TempTablesManager;
-	Query.Text =
-	"SELECT
-	|	BasisesTable.RowID,
-	|	BasisesTable.RowRef,
-	|	BasisesTable.Basis,
-	|	BasisesTable.BasisKey,
-	|	BasisesTable.CurrentStep,
-	|	BasisesTable.ItemKey,
-	|	BasisesTable.Item,
-	|	BasisesTable.Store
-	|INTO BasisesTable
-	|FROM
-	|	&BasisesTable AS BasisesTable
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	MIN(RowIDInfo.Key) AS Key,
-	|	RowIDInfo.RowID,
-	|	RowIDInfo.RowRef,
-	|	RowIDInfo.Basis,
-	|	RowIDInfo.BasisKey,
-	|	RowIDInfo.CurrentStep
-	|INTO RowIDInfoGrouped
-	|FROM
-	|	RowIDInfo AS RowIDInfo
-	|WHERE
-	|	RowIDInfo.CurrentStep <> VALUE(Catalog.MovementRules.EmptyRef)
-	|GROUP BY
-	|	RowIDInfo.Basis,
-	|	RowIDInfo.BasisKey,
-	|	RowIDInfo.CurrentStep,
-	|	RowIDInfo.RowID,
-	|	RowIDInfo.RowRef
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	RowIDInfoGrouped.Key,
-	|	RowIDInfoGrouped.RowID,
-	|	RowIDInfoGrouped.RowRef,
-	|	RowIDInfoGrouped.Basis,
-	|	RowIDInfoGrouped.BasisKey,
-	|	RowIDInfoGrouped.CurrentStep,
-	|	ItemList.ItemKey,
-	|	ItemList.Item,
-	|	ItemList.Store
-	|INTO RowIDInfoFull
-	|FROM
-	|	RowIDInfoGrouped AS RowIDInfoGrouped
-	|		LEFT JOIN ItemList AS ItemList
-	|		ON RowIDInfoGrouped.Key = ItemList.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	RowIDInfoFull.Key
-	|INTO WrongLinkedRows
-	|FROM
-	|	RowIDInfoFull AS RowIDInfoFull
-	|		LEFT JOIN BasisesTable AS BasisesTable
-	|		ON RowIDInfoFull.RowID = BasisesTable.RowID
-	|		AND RowIDInfoFull.RowRef = BasisesTable.RowRef
-	|		AND RowIDInfoFull.Basis = BasisesTable.Basis
-	|		AND RowIDInfoFull.BasisKey = BasisesTable.BasisKey
-	|		AND RowIDInfoFull.CurrentStep = BasisesTable.CurrentStep
-	|		AND CASE
-	|			WHEN RowIDInfoFull.RowRef.IsVariableItemKey
-	|				THEN RowIDInfoFull.Item = BasisesTable.Item
-	|			ELSE RowIDInfoFull.ItemKey = BasisesTable.ItemKey
-	|		END
-	|		AND CASE
-	|			WHEN &Filter_Store
-	|				THEN CASE
-	|					WHEN RowIDInfoFull.RowRef.IsVariableStore
-	|						THEN TRUE
-	|					ELSE CASE
-	|						WHEN RowIDInfoFull.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-	|							THEN RowIDInfoFull.Store = BasisesTable.Store
-	|						ELSE TRUE
-	|					END
-	|				END
-	|			ELSE TRUE
-	|		END
-	|WHERE
-	|	BasisesTable.RowID IS NULL
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemList.ItemKey,
-	|	ItemList.LineNumber
-	|FROM
-	|	ItemList AS ItemList
-	|		INNER JOIN WrongLinkedRows AS WrongLinkedRows
-	|		ON ItemList.Key = WrongLinkedRows.Key"; 
-
-	BasisesTable = GetBasises(Object.Ref, LinkedFilter);
-	Query.SetParameter("BasisesTable", BasisesTable);
-
-	Is = Is(Object);
-	If Is.RRR Or Is.SR Or Is.PO Or Is.PI Or Is.SC Or Is.SI Then
-		Query.SetParameter("Filter_Store", False);
-	Else
-		Query.SetParameter("Filter_Store", True);
+	If CheckInternalLinks Then
+		Query = New Query();
+		Query.TempTablesManager = TempTablesManager;
+		Query.Text =
+		"SELECT
+		|	BasisesTable.RowID,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.ItemKey,
+		|	BasisesTable.Item,
+		|	BasisesTable.Store
+		|INTO BasisesTable
+		|FROM
+		|	&BasisesTable AS BasisesTable
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	MIN(RowIDInfo.Key) AS Key,
+		|	RowIDInfo.RowID,
+		|	RowIDInfo.RowRef,
+		|	RowIDInfo.Basis,
+		|	RowIDInfo.BasisKey,
+		|	RowIDInfo.CurrentStep
+		|INTO RowIDInfoGrouped
+		|FROM
+		|	RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.CurrentStep <> VALUE(Catalog.MovementRules.EmptyRef)
+		|GROUP BY
+		|	RowIDInfo.Basis,
+		|	RowIDInfo.BasisKey,
+		|	RowIDInfo.CurrentStep,
+		|	RowIDInfo.RowID,
+		|	RowIDInfo.RowRef
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	RowIDInfoGrouped.Key,
+		|	RowIDInfoGrouped.RowID,
+		|	RowIDInfoGrouped.RowRef,
+		|	RowIDInfoGrouped.Basis,
+		|	RowIDInfoGrouped.BasisKey,
+		|	RowIDInfoGrouped.CurrentStep,
+		|	ItemList.ItemKey,
+		|	ItemList.Item,
+		|	ItemList.Store
+		|INTO RowIDInfoFull
+		|FROM
+		|	RowIDInfoGrouped AS RowIDInfoGrouped
+		|		LEFT JOIN ItemList AS ItemList
+		|		ON RowIDInfoGrouped.Key = ItemList.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	RowIDInfoFull.Key
+		|INTO WrongLinkedRows
+		|FROM
+		|	RowIDInfoFull AS RowIDInfoFull
+		|		LEFT JOIN BasisesTable AS BasisesTable
+		|		ON RowIDInfoFull.RowID = BasisesTable.RowID
+		|		AND RowIDInfoFull.RowRef = BasisesTable.RowRef
+		|		AND RowIDInfoFull.Basis = BasisesTable.Basis
+		|		AND RowIDInfoFull.BasisKey = BasisesTable.BasisKey
+		|		AND RowIDInfoFull.CurrentStep = BasisesTable.CurrentStep
+		|		AND CASE
+		|			WHEN RowIDInfoFull.RowRef.IsVariableItemKey
+		|				THEN RowIDInfoFull.Item = BasisesTable.Item
+		|			ELSE RowIDInfoFull.ItemKey = BasisesTable.ItemKey
+		|		END
+		|		AND CASE
+		|			WHEN &Filter_Store
+		|				THEN CASE
+		|					WHEN RowIDInfoFull.RowRef.IsVariableStore
+		|						THEN TRUE
+		|					ELSE CASE
+		|						WHEN RowIDInfoFull.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+		|							THEN RowIDInfoFull.Store = BasisesTable.Store
+		|						ELSE TRUE
+		|					END
+		|				END
+		|			ELSE TRUE
+		|		END
+		|WHERE
+		|	BasisesTable.RowID IS NULL
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.ItemKey,
+		|	ItemList.LineNumber
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN WrongLinkedRows AS WrongLinkedRows
+		|		ON ItemList.Key = WrongLinkedRows.Key"; 
+	
+		BasisesTable = GetBasises(Object.Ref, LinkedFilter);
+		Query.SetParameter("BasisesTable", BasisesTable);
+	
+		Is = Is(Object);
+		If Is.RRR Or Is.SR Or Is.PO Or Is.PI Or Is.SC Or Is.SI Then
+			Query.SetParameter("Filter_Store", False);
+		Else
+			Query.SetParameter("Filter_Store", True);
+		EndIf;
+		
+		QueryResult = Query.Execute();
+		QueryTable = QueryResult.Unload();
+		
+		For Each Row In QueryTable Do
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_097, 
+				Row.LineNumber, Row.ItemKey.Item, Row.ItemKey),
+					"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].IsInternalLinked", Object);
+		EndDo;
 	EndIf;
-	
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	
-	For Each Row In QueryTable Do
-		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_097, 
-			Row.LineNumber, Row.ItemKey.Item, Row.ItemKey),
-				"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].IsInternalLinked", Object);
-	EndDo;
 EndProcedure
 
 #EndRegion

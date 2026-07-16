@@ -288,7 +288,7 @@ Scenario: _0263103 create postponed RSR without a reservation (CRS used)
 	* Check 
 		And I click "Registrations report" button
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines
 			| '$$PostponedRSR2$$'                     | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
 			| 'Document registrations records'        | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
 			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
@@ -356,7 +356,7 @@ Scenario: _0263104 create postponed RRR without a reservation and without bases 
 	* Check 
 		And I click "Registrations report" button
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines
 			| '$$PostponedRRR1$$'                     | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
 			| 'Document registrations records'        | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
 			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |

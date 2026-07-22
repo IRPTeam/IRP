@@ -115,9 +115,6 @@
     "configuration-mobile-application-urls": {
       "enabled": false
     },
-    "module-unused-local-variable": {
-      "enabled": false
-    },
     "bsl-legacy-check-dynamic-feature-access": {
       "enabled": false
     },
@@ -128,9 +125,6 @@
       "enabled": false
     },
     "graphical-scheme-legacy-check-split-to-join-connections": {
-      "enabled": false
-    },
-    "mdo-name-length": {
       "enabled": false
     },
     "graphical-scheme-legacy-check-for-switch-event-handler": {
@@ -151,13 +145,7 @@
     "typed-value-adding-to-untyped-collection": {
       "enabled": false
     },
-    "method-isinrole-role-exist": {
-      "enabled": false
-    },
     "right-start-external-connection": {
-      "enabled": false
-    },
-    "doc-comment-use-minus": {
       "enabled": false
     },
     "property-return-type": {
@@ -176,9 +164,6 @@
       "enabled": false
     },
     "right-exclusive-mode": {
-      "enabled": false
-    },
-    "module-unused-method": {
       "enabled": false
     },
     "graphical-scheme-legacy-check-for-path-to-completion": {
@@ -244,19 +229,10 @@
     "structure-consructor-value-type": {
       "enabled": false
     },
-    "doc-comment-parameter-in-description-suggestion": {
-      "enabled": false
-    },
     "doc-comment-export-function-return-section": {
       "enabled": false
     },
-    "doc-comment-complex-type-with-link": {
-      "enabled": false
-    },
     "doc-comment-parameter-section": {
-      "enabled": false
-    },
-    "extension-method-prefix": {
       "enabled": false
     },
     "bsl-legacy-check-deprecated-method": {
@@ -403,9 +379,6 @@
     "use-non-recommended-method": {
       "enabled": false
     },
-    "module-region-empty": {
-      "enabled": false
-    },
     "mdo-scheduled-job-description": {
       "enabled": false
     },
@@ -421,16 +394,10 @@
     "bsl-legacy-check-is-appropriate-ctor": {
       "enabled": false
     },
-    "module-empty-method": {
-      "enabled": false
-    },
     "bsl-legacy-check-region-preprocessor": {
       "enabled": false
     },
     "right-data-administration": {
-      "enabled": false
-    },
-    "change-and-validate-instead-of-around": {
       "enabled": false
     },
     "bsl-legacy-check-pragma-for-unused-method": {
@@ -458,9 +425,6 @@
       "enabled": false
     },
     "scheduled-job-periodicity-too-short": {
-      "enabled": false
-    },
-    "doc-comment-ref-link": {
       "enabled": false
     },
     "md-legacy-check-table": {
@@ -502,16 +466,10 @@
     "form-named-element-name": {
       "enabled": false
     },
-    "extension-variable-prefix": {
-      "enabled": false
-    },
     "right-delete": {
       "enabled": false
     },
     "common-module-name-global": {
-      "enabled": false
-    },
-    "notify-description-to-server-procedure": {
       "enabled": false
     },
     "form-invalid-item-id": {
@@ -568,13 +526,7 @@
     "export-procedure-missing-comment": {
       "enabled": false
     },
-    "doc-comment-procedure-return-section": {
-      "enabled": false
-    },
     "public-method-caching": {
-      "enabled": false
-    },
-    "bsl-canonical-pragma": {
       "enabled": false
     },
     "bsl-legacy-check-for-empty-method-environments": {
@@ -623,12 +575,6 @@
       "enabled": false
     },
     "form-legacy-emf-check": {
-      "enabled": false
-    },
-    "doc-comment-field-name": {
-      "enabled": false
-    },
-    "doc-comment-field-in-description-suggestion": {
       "enabled": false
     },
     "right-active-users": {
@@ -682,9 +628,6 @@
     "common-module-name-server-call-cached": {
       "enabled": false
     },
-    "doc-comment-type": {
-      "enabled": false
-    },
     "method-optional-parameter-before-required": {
       "enabled": false
     },
@@ -695,9 +638,6 @@
       "enabled": false
     },
     "reading-attribute-from-database": {
-      "enabled": false
-    },
-    "bsl-nstr-string-literal-format": {
       "enabled": false
     },
     "bsl-legacy-check-method-annotations": {

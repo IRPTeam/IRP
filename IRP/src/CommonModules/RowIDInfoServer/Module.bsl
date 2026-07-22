@@ -15254,7 +15254,7 @@ Function GetFieldsToLock(Object, Form)
 	EndIf;
 		
 	FieldsToLock_InternalLinkedDocs = GetFieldsToLock_InternalLinkedDocs(Object, Form.InternalLinkedDocs.UnloadValues());
-	FieldsToLock_AlwaysReadonly = GetFieldsToLock_AlwaysReadonly(Object);
+	FieldsToLock_AlwaysReadonly = GetFieldsToLock_AlwaysReadonly(Object.Ref);
 	
 	AllFields_Header = New ValueTable();
 	AllFields_Header.Columns.Add("FieldName");

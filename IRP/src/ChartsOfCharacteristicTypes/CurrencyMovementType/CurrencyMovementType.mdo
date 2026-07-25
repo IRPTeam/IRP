@@ -49,6 +49,7 @@
     </items>
   </predefined>
   <editType>BothWays</editType>
+  <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <defaultObjectForm>ChartOfCharacteristicTypes.CurrencyMovementType.Form.ItemForm</defaultObjectForm>

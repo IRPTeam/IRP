@@ -114,7 +114,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.R1011A_PuchaseOrdersShipment</name>
+		<name>Report.R1011A_PurchaseOrdersShipment</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>

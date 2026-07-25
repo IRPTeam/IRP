@@ -22,7 +22,25 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		CreateStep(R().PeriodClosing_Step8 , 7);
 	EndIf;
 	
+	PeriodicityChoiceList = New ValueList();
+	PeriodicityChoiceList.Add("Everyday", R().PeriodClosing_PeriodicityChoiceList_Everyday);
+	PeriodicityChoiceList.Add("Monthly", R().PeriodClosing_PeriodicityChoiceList_Monthly);
+	PeriodicityChoiceList.Add("ByPeriod", R().PeriodClosing_PeriodicityChoiceList_ByPeriod);
+	
+	For Each ListItem In PeriodicityChoiceList Do
+		Items.Step_2_Periodicity.ChoiceList.Add(ListItem.Value, ListItem.Presentation);
+		Items.Step_3_Periodicity.ChoiceList.Add(ListItem.Value, ListItem.Presentation);
+		Items.Step_4_Periodicity.ChoiceList.Add(ListItem.Value, ListItem.Presentation);
+		Items.Step_5_Periodicity.ChoiceList.Add(ListItem.Value, ListItem.Presentation);
+		Items.Step_6_Periodicity.ChoiceList.Add(ListItem.Value, ListItem.Presentation);
+	EndDo;
+	
 	ThisObject.UpdatePause = 5;
+EndProcedure
+
+&AtServer
+Procedure CreatePeriodicityChoiceList(StepNumber)
+	
 EndProcedure
 
 &AtClient
@@ -167,7 +185,7 @@ EndProcedure
 &AtClient
 Procedure StepParameterOnChange(Item)
 	SetStepStatus_NotValid(Object, ThisObject);
-	SetVisibilityAvailability(Object, ThisObject);	
+	SetVisibilityAvailability(Object, ThisObject, Item);	
 EndProcedure
 
 &AtClient
@@ -186,7 +204,7 @@ Procedure ClearJobs(Command)
 EndProcedure
 
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form)
+Procedure SetVisibilityAvailability(Object, Form, TargetItem = Undefined)
 	CurrentStepInProgress  = (Form.StepsInfo[Form.CurrentStep].Status = "InProgress");
 	CurrentStepValid       = (Form.StepsInfo[Form.CurrentStep].Status = "Valid");
 	CurrentStepSkipped     = (Form.StepsInfo[Form.CurrentStep].Status = "Skip");
@@ -291,6 +309,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 			And Not CurrentStepInProgress And Not CurrentStepIsScheduled
 	EndIf;
 	
+	If  BegOfDay(BegOfMonth(Form.Period.StartDate)) = BegOfDay(Form.Period.StartDate) And
+		EndOfDay(EndOfMonth(Form.Period.EndDate)) = EndOfDay(Form.Period.EndDate) Then
+		AddMonthlyPeriodicity(Object, Form, 2, TargetItem);
+		AddMonthlyPeriodicity(Object, Form, 3, TargetItem);
+		AddMonthlyPeriodicity(Object, Form, 4, TargetItem);
+		AddMonthlyPeriodicity(Object, Form, 5, TargetItem);
+		AddMonthlyPeriodicity(Object, Form, 6, TargetItem);
+	Else
+		RemoveMonthlyPeriodicity(Object, Form, 2);
+		RemoveMonthlyPeriodicity(Object, Form, 3);
+		RemoveMonthlyPeriodicity(Object, Form, 4);
+		RemoveMonthlyPeriodicity(Object, Form, 5);
+		RemoveMonthlyPeriodicity(Object, Form, 6);
+	EndIf;	
+	
 	ContainValidationErrors = False;
 	For Each Row In Form.ValidationErrors Do
 		If Row.StepNumber = Form.CurrentStep Then
@@ -301,6 +334,31 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.GroupValidationErrors.Visible = ContainValidationErrors;
 EndProcedure
+
+&AtClientAtServerNoContext
+Procedure RemoveMonthlyPeriodicity(Object, Form, StepNumber)
+	ItemName = StrTemplate("Step_%1_Periodicity", StepNumber); 
+	If Form[ItemName] = "Monthly" Then
+		Form[ItemName] = "ByPeriod";
+	EndIf;
+	_MonthlyItem = Form.Items[ItemName].ChoiceList.FindByValue("Monthly");
+	If _MonthlyItem <> Undefined Then
+		Form.Items[ItemName].ChoiceList.Delete(_MonthlyItem);
+	EndIf;	
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure AddMonthlyPeriodicity(Object, Form, StepNumber, TargetItem)
+	ItemName = StrTemplate("Step_%1_Periodicity", StepNumber);
+	_MonthlyItem = Form.Items[ItemName].ChoiceList.FindByValue("Monthly");
+	If _MonthlyItem = Undefined Then
+		Form.Items[ItemName].ChoiceList.Insert(1, "Monthly", R().PeriodClosing_PeriodicityChoiceList_Monthly);
+	EndIf;
+	If TargetItem <> Undefined and TargetItem = Form.Items.Period Then
+		Form[ItemName] = "Monthly";
+	EndIf;		
+EndProcedure
+
 
 #EndRegion
 

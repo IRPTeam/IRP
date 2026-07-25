@@ -37,4 +37,13 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not ThisObject.CalculationMode = Enums.CalculationMode.LandedCostBatchReallocate Then
 		CheckedAttributes.Add("Company");
 	EndIf;
+	
+	ArrayOfErrors = PeriodClosingServer.GetOverlappingPeriods(ThisObject.Company, 
+		ThisObject.BeginDate, 
+		ThisObject.EndDate, 
+		"CalculationMovementCosts", "BeginDate", "EndDate", ThisObject.Ref);
+	For Each Error In ArrayOfErrors Do
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(Error.Msg, "BeginDate", ThisObject);
+	EndDo;	
 EndProcedure

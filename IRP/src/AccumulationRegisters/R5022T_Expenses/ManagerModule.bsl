@@ -109,48 +109,46 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 		
 		RecordSet = CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(QuerySelection.Document);
-		
-		ExpenseTable = RecordSet.Unload();
-		ExpenseTable.Columns.Delete(ExpenseTable.Columns.PointInTime);
-		ExpenseTable.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-		
+
 		QuerySelectionDetails = QuerySelection.Select();
 		While QuerySelectionDetails.Next() Do
-			NewRow = ExpenseTable.Add();
-			FillPropertyValues(NewRow, QuerySelectionDetails);
-			NewRow.Recorder = QuerySelection.Document;
-			NewRow.Period   = QuerySelectionDetails.Period;
-			NewRow.CalculationMovementCost = QuerySelectionDetails.CalculationMovementCosts;
+			NewRecord = RecordSet.Add();
+			FillPropertyValues(NewRecord, QuerySelectionDetails);
+			NewRecord.Recorder = QuerySelection.Document;
+			NewRecord.Period   = QuerySelectionDetails.Period;
+			NewRecord.CalculationMovementCost = QuerySelectionDetails.CalculationMovementCosts;
 		EndDo;
+		
+		Parameters = New Structure();
+		Parameters.Insert("Object", QuerySelection.Document);
+		Parameters.Insert("PostingByRef", True);
+		Parameters.Insert("Metadata", QuerySelection.Document.Metadata());
+		Parameters.Insert("PostingDataTables", New Map());
+		
+		RecordsTable = RecordSet.Unload();
+		RecordsTable.Columns.Delete("PointIntime");
+		
+		RegMetadata = Metadata.AccumulationRegisters.R5022T_Expenses;
+		PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, RegMetadata.Name, RecordsTable);
+		Parameters.PostingDataTables[RegMetadata].WriteInTransaction = False;
 	
-		// Currency calculation
+		CurrenciesTableParams = New Structure();
+		CurrenciesTableParams.Insert("Ref"            , Parameters.Object);
+		CurrenciesTableParams.Insert("Date"           , Parameters.Object.Date);
+		CurrenciesTableParams.Insert("Company"        , Parameters.Object.Company);
+		CurrenciesTableParams.Insert("Currency"       , Parameters.Object.Company.LandedCostCurrencyMovementType.Currency);
+		CurrenciesTableParams.Insert("Agreement"      , Undefined);
+		CurrenciesTableParams.Insert("RowKey"         , "");
+		CurrenciesTableParams.Insert("DocumentAmount" , 0);
+		CurrenciesTableParams.Insert("Currencies"     , New Array());
 		
-		CurrenciesParameters = New Structure();
-
-		PostingDataTables = New Map();
+		CurrenciesTable = Parameters.Object.Currencies.UnloadColumns();
+		CurrenciesServer.UpdateCurrencyTable(CurrenciesTableParams, CurrenciesTable);
+		CurrenciesServer.PreparePostingDataTables(Parameters, CurrenciesTable);
+		CurrenciesServer.ExcludePostingDataTable(Parameters, RegMetadata);
 		
-		ExpenseTableSettings = PostingServer.PostingTableSettings(ExpenseTable, RecordSet);
-		PostingDataTables.Insert(RecordSet.Metadata(), ExpenseTableSettings);
-		
-		ArrayOfPostingInfo = New Array();
-		For Each DataTable In PostingDataTables Do
-			ArrayOfPostingInfo.Add(DataTable);
-		EndDo;
-		CurrenciesParameters.Insert("Object", QuerySelection.Document);
-		CurrenciesParameters.Insert("Metadata", QuerySelection.Document.Metadata());
-		CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
-		CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
-
-		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
-			If ItemOfPostingInfo.Key = Metadata.AccumulationRegisters.R5022T_Expenses Then
-				RecordSet.Read();
-				For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
-					FillPropertyValues(RecordSet.Add(), RowPostingInfo);
-				EndDo;
-				RecordSet.SetActive(True);
-				RecordSet.Write();
-			EndIf;			
-		EndDo;
+		RecordSet.Load(Parameters.PostingDataTables[RegMetadata].PrepareTable);
+		RecordSet.Write();
 	EndDo;
 EndProcedure
 

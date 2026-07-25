@@ -599,7 +599,7 @@ EndFunction
 
 #EndRegion
 
-Function GetOverlappingPeriods(Company, StartDate, EndDate, DocumentName, StartDateFieldName, EndDateFieldName)
+Function GetOverlappingPeriods(Company, StartDate, EndDate, DocumentName, StartDateFieldName, EndDateFieldName) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT

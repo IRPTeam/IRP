@@ -101,7 +101,9 @@ Scenario: _999901 filling in demo data base
 	When Create catalog AccessProfiles objects(DemoDB)
 	When Create catalog UserGroups objects(DemoDB)
 	When Create catalog Users objects(DemoDB)
+	When Configure dashboard(DemoDB)
 	When Create catalog CashStatementStatuses objects(DemoDB)
+	When Create document OpeningEntry objects(DemoDB)
 	When Create document BankPayment objects(DemoDB)
 	When Create document BankReceipt objects(DemoDB)
 	When Create document CashPayment objects(DemoDB)
@@ -162,7 +164,7 @@ Scenario: _999901 filling in demo data base
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseReturn.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
+			| "Documents.PurchaseReturn.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
@@ -234,7 +236,7 @@ Scenario: _999901 filling in demo data base
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
+			| "Documents.SalesOrder.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
@@ -265,6 +267,11 @@ Scenario: _999901 filling in demo data base
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 	 		And Delay "3"
+	* Posting OpeningEntry
+			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
 	* Posting BankReceipt
 			Given I open hyperlink "e1cib/list/Document.BankReceipt"
 			Then I select all lines of "List" table
@@ -395,6 +402,10 @@ Scenario: _999901 filling in demo data base
 		And I input "File_\"D__IRPDB\"_" text in "Connection string" field of "ConnectionSettings" table
 		And I finish line editing in "ConnectionSettings" table
 		And I click "Save and close" button
+		And Delay 10
+		And I click "Refresh" button
+		And Delay 5
+		And I click "Refresh" button		
 	And I close all client application windows
 
 

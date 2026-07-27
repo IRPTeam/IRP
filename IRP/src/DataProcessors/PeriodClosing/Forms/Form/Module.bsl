@@ -5,21 +5,35 @@ Var StopEventHandling;
 #Region FormEvents
 
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)	
-	CreateStep(R().PeriodClosing_Step1 , 0, , True);
-	CreateStep(R().PeriodClosing_Step2 , 1);
-	CreateStep(R().PeriodClosing_Step3 , 2);
-	CreateStep(R().PeriodClosing_Step4 , 3);
-	CreateStep(R().PeriodClosing_Step5 , 4);
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	StepNumber = 0;
+		
+	CreateStep(R().PeriodClosing_Step1 , StepNumber, , True);
+	StepNumber = StepNumber + 1;
+	
+	CreateStep(R().PeriodClosing_Step2 , StepNumber);
+	StepNumber = StepNumber + 1;
+	
+	CreateStep(R().PeriodClosing_Step3 , StepNumber);
+	StepNumber = StepNumber + 1;
+	
+	CreateStep(R().PeriodClosing_Step4 , StepNumber);
+	StepNumber = StepNumber + 1;
+	
+	CreateStep(R().PeriodClosing_Step5 , StepNumber);
+	StepNumber = StepNumber + 1;
 	
 	If FOServer.IsUseFixedAssets() Then
-		CreateStep(R().PeriodClosing_Step6 , 5);
+		CreateStep(R().PeriodClosing_Step6 , StepNumber);
+		StepNumber = StepNumber + 1;
 	EndIf;
 	
-	CreateStep(R().PeriodClosing_Step7 , 6);
+	CreateStep(R().PeriodClosing_Step7 , StepNumber);
+	StepNumber = StepNumber + 1;
 	
 	If FOServer.IsUseAccounting() Then
-		CreateStep(R().PeriodClosing_Step8 , 7);
+		CreateStep(R().PeriodClosing_Step8 , StepNumber);
+		StepNumber = StepNumber + 1;
 	EndIf;
 	
 	PeriodicityChoiceList = New ValueList();

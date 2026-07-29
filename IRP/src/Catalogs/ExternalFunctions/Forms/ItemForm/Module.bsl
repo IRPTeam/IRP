@@ -60,8 +60,16 @@ EndProcedure
 #Region EvalAndExecute
 
 &AtClient
-Procedure Run(Command)
+Async Procedure Run(Command)
+	
+	If Not Object.Ref.IsEmpty() And CommonFunctionsServer.GetRefAttribute(Object.Ref, "isSchedulerSet") = True Then
+		If Await DoQueryBoxAsync(R().InfoMessage_RunJobCode, QuestionDialogMode.YesNo) <> DialogReturnCode.Yes Then
+			Return;
+		EndIf;
+	EndIf;
+	
 	RunAtServer();
+	
 EndProcedure
 
 &AtServer

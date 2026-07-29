@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="21a46289-d2fc-4536-b226-17bc862b4c87">
+  <producedTypes>
+    <managerType typeId="96db353e-3ba3-44d7-9805-832e1023e539" valueTypeId="7900464e-cd30-4497-aeba-c7157a70e6d7"/>
+    <valueManagerType typeId="7f70473f-ec5e-4376-bc2a-579dc7a571f0" valueTypeId="860d6b01-b37d-4f32-8cec-bd1e6645f7b1"/>
+    <valueKeyType typeId="a1a10603-1c96-40c3-b471-38491c697d53" valueTypeId="a600e0e8-e2d3-4dfd-ba42-b9ce1a54c9b6"/>
+  </producedTypes>
+  <name>UseSavedPrintForms</name>
+  <synonym>
+    <key>en</key>
+    <value>Use saved print forms</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

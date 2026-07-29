@@ -119,6 +119,7 @@ Function GetFOGroups() Export
 	FOList.Add("UseIncidents");
 	FOList.Add("UseIntegrations");
 	FOList.Add("UseJobQueueForExternalFunctions");
+	FOList.Add("UseSavedPrintForms");
 	FOList.Add("UseMobile");
 	FOList.Add("UseBusinessProcess");
 	FOList.Add("UseLockDataModification");
@@ -528,6 +529,10 @@ EndFunction
 
 Function IsUseInventory() Export
 	Return GetFunctionalOption("UseInventory");
+EndFunction
+
+Function IsUseSavedPrintForms() Export
+	Return GetFunctionalOption("UseSavedPrintForms");
 EndFunction
 
 #EndRegion

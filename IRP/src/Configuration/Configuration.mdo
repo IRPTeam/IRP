@@ -1109,6 +1109,7 @@
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseManualOffers</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSavedPrintForms</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1292,6 +1293,7 @@
   <constants>Constant.UseVariableStore</constants>
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.UseManualOffers</constants>
+  <constants>Constant.UseSavedPrintForms</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1732,6 +1734,8 @@
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
+  <dataProcessors>DataProcessor.FindAndReplace</dataProcessors>
+  <dataProcessors>DataProcessor.RowIDInspector</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
   <dataProcessors>DataProcessor.CopyUserSettings</dataProcessors>
   <dataProcessors>DataProcessor.CreateNewIssue</dataProcessors>
@@ -1877,6 +1881,7 @@
   <informationRegisters>InformationRegister.DashboardSettings</informationRegisters>
   <informationRegisters>InformationRegister.RowIDStamps</informationRegisters>
   <informationRegisters>InformationRegister.T2018S_FixedOffsetOfAdvances</informationRegisters>
+  <informationRegisters>InformationRegister.SavedPrintForms</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

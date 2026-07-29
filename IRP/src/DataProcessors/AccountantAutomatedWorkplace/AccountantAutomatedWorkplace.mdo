@@ -29,6 +29,15 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="a47d39f8-5fc3-4764-b090-68b4326d263b">
+    <name>DoumentTypeChoiseForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Doument type choise form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <templates uuid="9a464875-de5c-4ced-88a9-89e6a5472f87">
     <name>PrintFormJE</name>
     <synonym>

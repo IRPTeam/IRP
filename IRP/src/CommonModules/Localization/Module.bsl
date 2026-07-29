@@ -1005,10 +1005,6 @@
 // * Error_UnknownRefType - String - 
 // * Error_StepsEnablerNotDefined - String - 
 // * Error_UnsupportedExternalLinkSC3 - String - 
-// * Error_CreatingPDF - String -
-// * Error_ReadingPDF - String -
-// * Error_ChromiumNotFound - String -
-// * Error_TableNotSupportedInBuilder - String -
 // * Task_Result_Execution - String - 
 // * Task_Result_Execution_Not - String - 
 // * Task_Result_Verification - String - 
@@ -1989,6 +1985,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_032", NStr("en = 'Do you want to create new legal name?'", Lang));
 	Strings.Insert("QuestionToUser_033", NStr("en = 'Do you want to create new partner term?'", Lang));
 	Strings.Insert("QuestionToUser_034", NStr("en = 'Storno already exists. Open existing document?'", Lang));
+	Strings.Insert("QuestionToUser_035", NStr("en = 'Do you want to delete the saved version?'", Lang));
 		
 #EndRegion
 
@@ -2865,7 +2862,6 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("Error_CreatingPDF", NStr("en = 'Error creating PDF'", Lang));
 	Strings.Insert("Error_ReadingPDF", NStr("en = 'Error reading PDF'", Lang));
 	Strings.Insert("Error_ChromiumNotFound", NStr("en = 'Chromium not found'", Lang));
-	Strings.Insert("Error_TableNotSupportedInBuilder", NStr("en = 'Table [%1] is not supported in Builder API'", Lang));
 #EndRegion
 
 #Region Tasks

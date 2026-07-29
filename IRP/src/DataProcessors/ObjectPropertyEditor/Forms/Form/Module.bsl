@@ -18,9 +18,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		If Not TypeRecord = Undefined Then
 			ThisObject["ObjectType"] = TypeKey;
 			SetTablesList(ThisObject);
-			If Not IsBlankString(GetObjectTable(ThisObject)) Then
+			If Not IsBlankString(ThisObject.ObjectTable) Then
 				SetNewTable();
-				SetRefsToFilter(RefsList, ThisObject.DataSettingsComposer);
+				SetRefsToFilter(RefsList, ThisObject.DataSettingsComposerHeader);
 				LoadTableData(True);
 			EndIf;
 		EndIf;
@@ -38,9 +38,9 @@ Procedure ObjectTypeOnChange(Item)
 	Items.ObjectTable.ChoiceList.Clear();
 	ThisObject.ObjectTable = "";
 	
-	If Not GetObjectType(ThisObject) = Undefined Then
+	If GetObjectType(ThisObject) <> Undefined Then
 		SetTablesList(ThisObject);
-		If Not IsBlankString(GetObjectTable(ThisObject)) Then
+		If Not IsBlankString(ThisObject.ObjectTable) Then
 			SetNewTable();
 		EndIf;
 	EndIf;
@@ -155,7 +155,7 @@ EndProcedure
 
 &AtClient
 Procedure Refresh(Command)
-	If Not GetObjectType(ThisObject) = Undefined And Not IsBlankString(GetObjectTable(ThisObject)) Then
+	If GetObjectType(ThisObject) <> Undefined And Not IsBlankString(ThisObject.ObjectTable) Then
 		LoadTableData();
 	EndIf;
 	//@skip-warning
@@ -164,7 +164,7 @@ EndProcedure
 
 &AtClient
 Procedure Save(Command)
-	If Not GetObjectType(ThisObject) = Undefined And Not IsBlankString(GetObjectTable(ThisObject)) Then
+	If Not GetObjectType(ThisObject) = Undefined And Not IsBlankString(ThisObject.ObjectTable) Then
 		SaveAtServer();
 		LoadTableData();
 		NotifyChanged(GetObjectType(ThisObject));
@@ -432,9 +432,9 @@ EndProcedure
 Procedure FieldSettingsEnd(Result, AddInfo) Export
 	
 	If Result = True Then
-		OldTable = GetObjectTable(ThisObject);
+		OldTable = ThisObject.ObjectTable;
 		SetTablesList(ThisObject, True);
-		If Not OldTable = GetObjectTable(ThisObject) Then
+		If Not OldTable = ThisObject.ObjectTable Then
 			SetNewTable();
 		EndIf;
 		SetPropertyAvailability();
@@ -580,15 +580,17 @@ EndProcedure
 // * ForcedWriting - Boolean - Forced writing (DataExchange.Load = True)
 &AtClientAtServerNoContext
 Function GetFormCash(Form)
-	FormCash = Form["FormDataCash"]; // Structure, Undefined
-	If Not FormCash = Undefined Then
+	FormCash = Form["FormDataCash"];
+	If FormCash <> Undefined Then
 		Return FormCash;
 	EndIf;
 	
 	FormCash = New Structure;
 	FormCash.Insert("ObjectTables", New Map);
 	FormCash.Insert("SchemaAddress", "");
+	FormCash.Insert("SchemaAddressHeader", "");
 	FormCash.Insert("ColumnsData", New Structure);
+	FormCash.Insert("ColumnsDataHeader", New Structure);
 	FormCash.Insert("CountConditionalAppearance", 0);
 	FormCash.Insert("CountNewConditionalAppearance", 0);
 	FormCash.Insert("ConstraintName", "");
@@ -616,20 +618,6 @@ Function GetObjectType(Form)
 	Return ObjectType;
 EndFunction
 
-// Get object table.
-// 
-// Parameters:
-//  Form - ClientApplicationForm - Form
-// 
-// Returns:
-//  String - Get object table
-&AtClientAtServerNoContext
-Function GetObjectTable(Form)
-	OT_String = "ObjectTable";
-	ObjectTable = Form[OT_String]; // String
-	Return ObjectTable;
-EndFunction
-
 // Get name of ref' table.
 // 
 // Parameters:
@@ -640,7 +628,7 @@ EndFunction
 &AtClientAtServerNoContext
 Function GetRefTableName(Form)
 	
-	CurrentTable = GetObjectTable(Form);
+	CurrentTable = Form.ObjectTable;
 	
 	If StrStartsWith(CurrentTable, "TS_Hidden") Then
 		Return Mid(CurrentTable, 10);
@@ -802,11 +790,11 @@ EndProcedure
 &AtServer
 Procedure SetNewTable()
 	SetPropertiesConstraint(ThisObject);
-	If StrStartsWith(GetObjectTable(ThisObject), "TS_") Then
+	If StrStartsWith(ThisObject.ObjectTable, "TS_") Then
 		ThisObject.isTableMode = True;
 		SetTableSettings(ThisObject);
 		SetSourceSettingsForTable(ThisObject);
-	ElsIf StrStartsWith(GetObjectTable(ThisObject), "InfoReg_") Then
+	ElsIf StrStartsWith(ThisObject.ObjectTable, "InfoReg_") Then
 		ThisObject.isTableMode = False;
 		SetTableSettings(ThisObject);
 		SetSourceSettings(ThisObject);
@@ -821,7 +809,7 @@ EndProcedure
 &AtServerNoContext
 Procedure SetPropertiesConstraint(Form)
 	FormCash = GetFormCash(Form);
-	FormCash.ConstraintName = GetConstraintName(GetObjectType(Form), GetObjectTable(Form)); 
+	FormCash.ConstraintName = GetConstraintName(GetObjectType(Form), Form.ObjectTable); 
 EndProcedure	
 	
 // Set source settings.
@@ -830,42 +818,32 @@ EndProcedure
 //  Form - ClientApplicationForm - Form
 &AtServerNoContext
 Procedure SetSourceSettings(Form)
-	
-	DCSchema = GetDCSchema(Form);
-		
-	SchemaAddress = PutToTempStorage(DCSchema, Form.UUID);
-  	
-  	AvailableSettingsSource = New DataCompositionAvailableSettingsSource(SchemaAddress);
-	
-	FormCash = GetFormCash(Form);
-	FormCash.SchemaAddress = SchemaAddress; 
-    
-    DSC_String = "DataSettingsComposer";
-    DataSettingsComposer = Form[DSC_String]; // DataCompositionSettingsComposer
-	DataSettingsComposer.Initialize(AvailableSettingsSource);
-    DataSettingsComposer.LoadSettings(DCSchema.DefaultSettings);
-    
-	SelectionItems = DataSettingsComposer.Settings.Selection.Items;
-	SelectionItems.Clear();
-	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
-	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Constraint");
-	AdditionalSourceSettingsProcessing(Form, DataSettingsComposer);
-	
-    DataSettingsComposer.Settings.Structure.Clear();
-    DetailGroup = DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
-	DetailGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));
-    
+	_SetSourceSettings(Form, GetDCSchema(Form), Form.DataSettingsComposer, "SchemaAddress", "ColumnsData");
+	_SetSourceSettings(Form, GetDCSchemaByRef(Form), Form.DataSettingsComposerHeader, "SchemaAddressHeader", "ColumnsDataHeader");
 EndProcedure
 
 &AtServerNoContext
-Procedure AdditionalSourceSettingsProcessing(Form, DataSettingsComposer)
+Procedure _SetSourceSettings(Form, _DCSchema, _DataSettingsComposer, _SchemaAddressName, _ColumnsDataName)
 	
-	SelectionItems = DataSettingsComposer.Settings.Selection.Items;
-	ColumnsData = GetFormCash(Form).ColumnsData;
+	SchemaAddress = PutToTempStorage(_DCSchema, Form.UUID);
+  	AvailableSettingsSource = New DataCompositionAvailableSettingsSource(SchemaAddress);
 	
-	For Each ColumnKeyValue In ColumnsData Do
+	//DataSettingsComposer = Form.DataSettingsComposer;
+	_DataSettingsComposer.Initialize(AvailableSettingsSource);
+    _DataSettingsComposer.LoadSettings(_DCSchema.DefaultSettings);
+    
+	FormCash = GetFormCash(Form);
+	FormCash[_SchemaAddressName] = SchemaAddress;
+     
+	SelectionItems = _DataSettingsComposer.Settings.Selection.Items;
+	SelectionItems.Clear();
+	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
+	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Constraint");
+	
+	SelectionItems = _DataSettingsComposer.Settings.Selection.Items;
+	For Each ColumnKeyValue In FormCash[_ColumnsDataName] Do
 		SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField(ColumnKeyValue.Key);
-		QueryParameter = DataSettingsComposer.Settings.DataParameters.Items.Find(ColumnKeyValue.Key);
+		QueryParameter = _DataSettingsComposer.Settings.DataParameters.Items.Find(ColumnKeyValue.Key);
 		If QueryParameter <> Undefined Then
 			//@skip-check property-return-type, statement-type-change
 			QueryParameter.Value = ColumnKeyValue.Value.Ref;
@@ -873,6 +851,9 @@ Procedure AdditionalSourceSettingsProcessing(Form, DataSettingsComposer)
 		EndIf;
 	EndDo;
 	
+    _DataSettingsComposer.Settings.Structure.Clear();
+    DetailGroup = _DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
+	DetailGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));    
 EndProcedure
 
 // Get DCSchema.
@@ -885,12 +866,10 @@ EndProcedure
 &AtServerNoContext
 Function GetDCSchema(Form)
 
-	If GetObjectTable(Form) = "Ref" Then
+	If Form.ObjectTable = "Ref" Then
 		Return GetDCSchemaByRef(Form);
 	EndIf;
-	
-	Table_String = GetObjectTable(Form); // String
-	
+		
 	FormCash = GetFormCash(Form);
 	 
 	MetaObject = Metadata.FindByType(GetObjectType(Form));
@@ -906,13 +885,13 @@ Function GetDCSchema(Form)
 	DataSet.Name = "DataSet";
 	DataSet.DataSource = "DataSources";
 	
-	If StrStartsWith(Table_String, "InfoReg_") Then
-		RegName = Mid(Table_String, 9);
-		MasterDimension = GetRegisterMasterDimension(Table_String);
+	If StrStartsWith(Form.ObjectTable, "InfoReg_") Then
+		RegName = Mid(Form.ObjectTable, 9);
+		MasterDimension = GetRegisterMasterDimension(Form.ObjectTable);
 		SourceTable = "InformationRegister." + RegName;  
 	Else
 		MasterDimension = "Ref";
-		SourceTable = RootTable + "." + Table_String;
+		SourceTable = RootTable + "." + Form.ObjectTable;
 	EndIf;
 	
 	PropertiesText = "";
@@ -922,11 +901,11 @@ Function GetDCSchema(Form)
 		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
 		If FieldDescription.isCollection Then
 			PropertiesText = PropertiesText + "
-			|	, " + PropertyTable + "." + Table_String + ".(Ref as Ref, Value as Value, Property as Property) As " + ColumnKeyValue.Key;
+			|	, " + PropertyTable + "." + Form.ObjectTable + ".(Ref as Ref, Value as Value, Property as Property) As " + ColumnKeyValue.Key;
 			SourcesText = SourcesText + "
 			|LEFT JOIN " + RootTable + " AS " + PropertyTable + "
-			|ON (Table.Ref = " + PropertyTable + "." + Table_String + "." + MasterDimension + ")
-			|	AND (" + PropertyTable + "." + Table_String + ".Property = &" + ColumnKeyValue.Key + ")";
+			|ON (Table.Ref = " + PropertyTable + "." + Form.ObjectTable + "." + MasterDimension + ")
+			|	AND (" + PropertyTable + "." + Form.ObjectTable + ".Property = &" + ColumnKeyValue.Key + ")";
 		Else
 			PropertiesText = PropertiesText + "
 			|	, " + PropertyTable + ".Value" + " As " + ColumnKeyValue.Key;
@@ -996,7 +975,7 @@ Procedure SetTableSettings(Form)
 	
 	Form.PropertiesTable.Clear();
 	
-	CurrentTable = GetObjectTable(Form);
+	CurrentTable = Form.ObjectTable;
 	If CurrentTable = "Ref" Then
 		ColumnsData = GetColumnsDataByRef(Form);
 	ElsIf StrStartsWith(CurrentTable, "TS_") Then
@@ -1624,7 +1603,7 @@ Procedure LoadNewColumns(Form)
 	ColumnsData = New Structure;
 	
 	TS_String = "TabularSections";
-	Table_String = GetObjectTable(Form); // String
+	Table_String = Form.ObjectTable;
 	
 	MetaObject = Metadata.FindByType(GetObjectType(Form));
 	MetaCharacteristics = MetaObject["Characteristics"]; // CharacteristicsDescriptions
@@ -1774,22 +1753,24 @@ Procedure LoadNewColumns(Form)
 EndProcedure
 
 &AtServer
-Procedure LoadTableData(Marked = False)
-	
-	Ref_String = "Ref";
-	Object_String = "Object";
-	Object_LineNumber = "LineNumber";
-	Constraint_String = "Constraint";
-	Table_String = GetObjectTable(ThisObject);
-	
-	ColumnsData = GetFormCash(ThisObject).ColumnsData;
-	SchemaAddress = GetFormCash(ThisObject).SchemaAddress;
-	Schema = GetFromTempStorage(SchemaAddress); // DataCompositionSchema
-	
+Procedure LoadTableData(Marked = False)	
+	_FormDataCahe = GetFormCash(ThisObject);
 	TemplateComposer = New DataCompositionTemplateComposer;
+	
+	_Settings = ThisObject.DataSettingsComposer.GetSettings(); 
+	_SettingsHeader = ThisObject.DataSettingsComposerHeader.GetSettings();
+	
+	For Each Row In _SettingsHeader.Filter.Items Do
+		NewFilterItem = _Settings.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		NewFilterItem.LeftValue = New DataCompositionField("Ref." + StrReplace(Row.LeftValue, "Field_", ""));
+		NewFilterItem.RightValue = Row.RightValue;
+		NewFilterItem.ComparisonType = Row.ComparisonType;
+		NewFilterItem.Use = Row.Use;
+	EndDo;
+	
 	DataCompositionTemplate = TemplateComposer.Execute(
-		Schema, 
-		ThisObject.DataSettingsComposer.GetSettings(), , , 
+		GetFromTempStorage(_FormDataCahe.SchemaAddress), 
+		_Settings, , , 
 		Type("DataCompositionValueCollectionTemplateGenerator"));
 	
 	DataCompositionProcessor = New DataCompositionProcessor;
@@ -1802,55 +1783,34 @@ Procedure LoadTableData(Marked = False)
 	
 	ThisObject.PropertiesTable.Clear();
 	For Each RowData In DataTable Do
-		TableRecord = ThisObject.PropertiesTable.Add();
-		TableRecord.Marked = Marked;
-		DataRef = RowData[Ref_String]; // AnyRef
-		ConstraintRef = RowData[Constraint_String]; // AnyRef
-		TableRecord[Object_String] = DataRef;
-		TableRecord[Constraint_String] = ConstraintRef;
+		NewRow = ThisObject.PropertiesTable.Add();
+		NewRow.Marked = Marked;
+		NewRow.Object = RowData.Ref;
+		NewRow.Constraint = RowData.Constraint;
 		If ThisObject.isTableMode Then
-			LineNumber = RowData[Object_LineNumber]; // Number
-			TableRecord[Object_LineNumber] = LineNumber;
+			NewRow.LineNumber = RowData.LineNumber;
 		EndIf;
-		For Each ColumndKeyValue In ColumnsData Do
-			ColumnName = ColumndKeyValue.Key; // String
-			ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+		
+		For Each ColumndKeyValue In _FormDataCahe.ColumnsData Do
+			ColumnName = ColumndKeyValue.Key;
+			ColumnDescription = ColumndKeyValue.Value;
 			If ColumnDescription.isCollection Then
-				ValueListResult = New ValueList(); // ValueList of Arbitrary, Undefined
-				//@skip-check dynamic-access-method-not-found
-				ValueRows = DataRef[Table_String].FindRows(New Structure("Property", ColumnDescription.Ref)); // Array
+				ValueListResult = New ValueList();
+				ValueRows = RowData.Ref[ThisObject.ObjectTable].FindRows(New Structure("Property", ColumnDescription.Ref)); // Array
 				For Each ValueRow In ValueRows Do
-					//@skip-check property-return-type
 					ValueListResult.Add(ValueRow.Value);
 				EndDo;
-				TableRecord[ColumnName] = ValueListResult;
+				NewRow[ColumnName] = ValueListResult;
 			Else
-				TableRecord[ColumnName] = ReadPropertyValueFromTableRow(ColumnName, RowData, ColumnDescription);
+				NewRow[ColumnName] = RowData[ColumnName];
 			EndIf;
-			TableRecord[ColumnName + "_old"] = TableRecord[ColumnName];
+			NewRow[ColumnName + "_old"] = NewRow[ColumnName];
 		EndDo;
-		CheckRowModified(ThisObject, TableRecord);
+		CheckRowModified(ThisObject, NewRow);
 	EndDo;
-	
 	LoadConstraints();
-	
 	SetPropertyAvailability();
-	
 EndProcedure
-
-// Read property value from table row.
-// 
-// Parameters:
-//  ColumnName - String - Column name
-//  RowData - ValueTableRow - Row data
-//  ColumnDescription - See GetFieldDescription
-// 
-// Returns:
-//  Undefined
-&AtServer
-Function ReadPropertyValueFromTableRow(ColumnName, RowData, ColumnDescription)
-	Return RowData[ColumnName];
-EndFunction
 
 &AtServer
 Procedure LoadConstraints()
@@ -1867,7 +1827,7 @@ Procedure LoadConstraints()
 	
 	ConstraintTree = GetConstraintTree(
 		GetObjectType(ThisObject), 
-		GetObjectTable(ThisObject),
+		ThisObject.ObjectTable,
 		ThisObject.PropertiesTable.Unload(, "Constraint").UnloadColumn(0));
 		
 	If ConstraintTree = Undefined Then
@@ -1993,7 +1953,7 @@ Procedure SaveAtServer()
 	
 	For Each ObjectItem In ObjectsArray Do
 		
-		If GetObjectTable(ThisObject) = "Ref" And FormCash.UpdateRelatedFieldsWhenWriting Then
+		If ThisObject.ObjectTable = "Ref" And FormCash.UpdateRelatedFieldsWhenWriting Then
 			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
 			ObjectLineRow = LineNumberRows[0];
 			
@@ -2016,7 +1976,7 @@ Procedure SaveAtServer()
 				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo), , , ObjectLineRow.Object);
 			EndTry;
 			
-		ElsIf GetObjectTable(ThisObject) = "Ref" And Not FormCash.UpdateRelatedFieldsWhenWriting Then
+		ElsIf ThisObject.ObjectTable = "Ref" And Not FormCash.UpdateRelatedFieldsWhenWriting Then
 			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
 			ObjectLineRow = LineNumberRows[0];
 			
@@ -2040,7 +2000,7 @@ Procedure SaveAtServer()
 				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo), , , ModifiedObject.Ref);
 			EndTry;
 				
-		ElsIf StrStartsWith(GetObjectTable(ThisObject), "TS_") And FormCash.UpdateRelatedFieldsWhenWriting Then
+		ElsIf StrStartsWith(ThisObject.ObjectTable, "TS_") And FormCash.UpdateRelatedFieldsWhenWriting Then
 			
 			ModifiedObj = BuilderAPI.Initialize(ObjectItem, , , CurrentTable); // See BuilderAPI.CreateWrapper
 			ModifiedTable = ModifiedObj.Object[CurrentTable]; // TabularSection
@@ -2066,7 +2026,7 @@ Procedure SaveAtServer()
 				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo), , , ObjectLineRow.Object);
 			EndTry;
 				
-		ElsIf StrStartsWith(GetObjectTable(ThisObject), "TS_") And Not FormCash.UpdateRelatedFieldsWhenWriting Then
+		ElsIf StrStartsWith(ThisObject.ObjectTable, "TS_") And Not FormCash.UpdateRelatedFieldsWhenWriting Then
 			ModifiedObject = ObjectItem.GetObject();
 			ModifiedTable  = ModifiedObject[CurrentTable]; // TabularSection
 			
@@ -2092,8 +2052,8 @@ Procedure SaveAtServer()
 				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo), , , ModifiedObject.Ref);
 			EndTry;
 
-		ElsIf StrStartsWith(GetObjectTable(ThisObject), "InfoReg_") Then
-			Table_String = GetObjectTable(ThisObject);
+		ElsIf StrStartsWith(ThisObject.ObjectTable, "InfoReg_") Then
+			Table_String = ThisObject.ObjectTable;
 			RegName = Mid(Table_String, 9);
 			MasterDimension = GetRegisterMasterDimension(Table_String);
 			

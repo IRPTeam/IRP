@@ -1305,6 +1305,13 @@
     <name>UserFilters</name>
     <valueType/>
   </parameters>
+  <parameters>
+    <name>UserVariantKey</name>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

@@ -7,18 +7,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocumentList.Parameters.Items[0].Value = SessionParameters.CurrentUser;
 	DocumentList.Parameters.Items[0].Use = True;
 	
-	FillDocumentTypeList();
-	
-	SetVisible();
-
-EndProcedure
-
-&AtServer
-Procedure BeforeLoadDataFromSettingsAtServer(Settings)
-	
-	If Settings.Count() Then
-		FillDocumentTypeList(Settings);
-	EndIf;
+	ReadVisibility();
 
 EndProcedure
 
@@ -37,6 +26,7 @@ Procedure Lock(Command)
 	ChangedDocs = LockAtServer();
 	For Each Doc In ChangedDocs Do
 		NotifyChanged(Doc);
+		Notify("DataChanged", Doc);
 	EndDo;
 EndProcedure
 
@@ -45,16 +35,17 @@ Procedure Unlock(Command)
 	ChangedDocs = UnlockAtServer();
 	For Each Doc In ChangedDocs Do
 		NotifyChanged(Doc);
+		Notify("DataChanged", Doc);
 	EndDo;
 EndProcedure
 
 &AtClient
 Procedure RefreshJE(Command)
-	If Items.DocumentList.CurrentData = Undefined Then
-		RefreshJEAtServer(Undefined);
-	Else
-		RefreshJEAtServer(Items.DocumentList.CurrentData.JournalEntry);
+	JournalEntry = Undefined;
+	If Items.DocumentList.CurrentData <> Undefined Then
+		JournalEntry = Items.DocumentList.CurrentData.JournalEntry;
 	EndIf;
+	AccountingReport = GetJournalReport(JournalEntry);
 EndProcedure
 
 &AtClient
@@ -69,16 +60,15 @@ EndProcedure
 
 &AtClient
 Procedure OpenSettings(Command)
-	
-	OpenForm("DataProcessor.AccountantAutomatedWorkplace.Form.FormSettings", , ThisObject, ,,, New CallbackDescription("OpenSettingsFinish", ThisObject), FormWindowOpeningMode.LockWholeInterface);
-	
+	OpenForm("DataProcessor.AccountantAutomatedWorkplace.Form.FormSettings",, 
+		ThisObject,,,, 
+		New CallbackDescription("OpenSettingsFinish", ThisObject), 
+		FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient
 Procedure OpenSettingsFinish(Result, AddInfo) Export
-	
-	SetVisible();
-	
+	ReadVisibility();
 EndProcedure
 
 &AtClient
@@ -97,10 +87,40 @@ EndProcedure
 
 &AtClient
 Procedure FilterOnChange(Item)
-	Items.FindDocuments.BackColor = New Color(255, 255, 153);
-	If Item = Items.Period Or Item = Items.Company Or Item = Items.LedgerType Then
-		FillDocumentTypeList();
+	//Items.FindDocuments.BackColor = New Color(255, 255, 153);
+EndProcedure
+
+&AtClient
+Procedure DocumentTypeStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	Callback = New CallbackDescription("DoumentTypeChoiseEnd", ThisObject);
+	FormParameters = New Structure();
+	Settings = New Structure();
+	Settings.Insert("StartDate"  , ThisObject.Period.StartDate);
+	Settings.Insert("EndDate"    , ThisObject.Period.EndDate);
+	Settings.Insert("Company"    , ThisObject.Company);
+	Settings.Insert("LedgerType" , ThisObject.LedgerType);
+	FormParameters.Insert("Settings", Settings);
+	SelectedDocumentTypes = New Array();
+	For Each Row In ThisObject.DocumentType Do
+		SelectedDocumentTypes.Add(Row.Value);
+	EndDo;
+	FormParameters.Insert("SelectedDocumentTypes", SelectedDocumentTypes);
+	
+	OpenForm("DataProcessor.AccountantAutomatedWorkplace.Form.DoumentTypeChoiseForm", 
+		FormParameters, ThisObject, , , , Callback, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure DoumentTypeChoiseEnd(Result, Params) Export
+	If Result = Undefined Then
+		Return;
 	EndIf;
+	
+	ThisObject.DocumentType.Clear();
+	For Each Row In Result.SelectedDocumentTypes Do
+		ThisObject.DocumentType.Add(Row.Value, Row.Presentation);
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -108,21 +128,19 @@ Procedure DocumentListOnActivateRow(Item)
 	
 	If Items.DocumentList.CurrentData <> Undefined Then
 		If CurrentDocument <> Items.DocumentList.CurrentData.Document Then
-			LoadDocumentInfo(
+			DocumentInfo = GetDocumentInfo(
 				Items.DocumentList.CurrentData.Document, 
-				Items.DocumentList.CurrentData.JournalEntry);
-			SetCurrentPageAtClient();
+				Items.DocumentList.CurrentData.JournalEntry,
+				VisibleSettings);
+			SetDocumentInfoAtClient(DocumentInfo);
+			CurrentDocument = Items.DocumentList.CurrentData.Document;
 		EndIf;
 	ElsIf Not InfoUpdated Then
-		LoadDocumentInfo(Undefined, Undefined);
-		SetCurrentPageAtClient();
+		DocumentInfo = GetDocumentInfo(Undefined, Undefined, VisibleSettings);
+		SetDocumentInfoAtClient(DocumentInfo);
+		InfoUpdated = True;
 	EndIf;
 
-EndProcedure
-
-&AtClient
-Procedure GroupFilesOnCurrentPageChange(Item, CurrentPage)
-	SetCurrentPageAtClient();
 EndProcedure
 
 &AtClient
@@ -163,12 +181,55 @@ Procedure HistoryVersionTableOnActivateRow(Item)
 
 EndProcedure
 
+&AtClient
+Procedure ShowFilePreviewOnChange(Item)
+	Items.FilePreviewPages.Visible = ShowFilePreview;
+	FileTableOnActivateRow(Item);
+EndProcedure
+
+&AtClient
+Procedure FileTableOnActivateRow(Item)
+	
+//	Items.NoFilePage.Visible = True;
+//	Items.PDFPage.Visible = False;
+//	Items.ImagePage.Visible = False;
+	
+	Items.FilePreviewPages.CurrentPage = Items.NoFilePage;
+	
+	If Not ShowFilePreview Then
+		Return;
+	EndIf;
+	
+	If Items.FileTable.CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If Items.FileTable.CurrentData.isPDF Then
+		PictureViewerClient.SetPDFForView(Items.FileTable.CurrentData.Ref, PDFPreview);
+//		Items.NoFilePage.Visible = False;
+//		Items.PDFPage.Visible = True;
+		Items.FilePreviewPages.CurrentPage = Items.PDFPage;
+	Else
+		PictureParameters = PictureViewerServer.CreatePictureParameters(Items.FileTable.CurrentData.Ref);
+		ImagePreview = PictureViewerClient.GetPictureURL(PictureParameters);
+//		Items.NoFilePage.Visible = False;
+//		Items.ImagePage.Visible = True;
+		Items.FilePreviewPages.CurrentPage = Items.ImagePage;
+	EndIf;
+
+EndProcedure
+
+&AtClient
+Procedure FileTableSelection(Item, RowSelected, Field, StandardProcessing)
+	//TODO: Insert the handler content
+EndProcedure
+
 #EndRegion
 
 #Region Private
 
 &AtServer
-Procedure SetVisible()
+Procedure ReadVisibility()
 	
 	VisibleSettings = DataProcessors.AccountantAutomatedWorkplace.GetSettings();
 
@@ -197,13 +258,10 @@ Procedure SetListFilterAtServer()
 		DynamicListAPI.AddFilter(QuerySchemaAPI, "Registry.Date Between &StartDate AND &EndDate");
 	EndIf;
 	If Not Company.IsEmpty() Then
-		DynamicListAPI.AddFilter(QuerySchemaAPI, "JournalEntry.Company = &Company");
+		DynamicListAPI.AddFilter(QuerySchemaAPI, "Registry.Document.Company = &Company");
 	EndIf;
 	If Not LedgerType.IsEmpty() Then
 		DynamicListAPI.AddFilter(QuerySchemaAPI, "JournalEntry.LedgerType = &LedgerType");
-	EndIf;
-	If Not IsBlankString(DocumentType) And DocumentType <> "All" Then
-		DynamicListAPI.AddFilter(QuerySchemaAPI, "Registry.Document Refs Document." + DocumentType);
 	EndIf;
 	If LockType = 1 Then
 		DynamicListAPI.AddFilter(QuerySchemaAPI, "Not AuditLock.Document IS NULL");
@@ -220,6 +278,9 @@ Procedure SetListFilterAtServer()
 	ElsIf TasksType = 2 Then
 		DynamicListAPI.AddFilter(QuerySchemaAPI, "DocTasks.MyTask = TRUE");
 	EndIf;
+	If ThisObject.DocumentType.Count() > 0 Then
+		DynamicListAPI.AddFilter(QuerySchemaAPI, "ValueType(Registry.Document) in (&ArrayOfDocumentTypes)");
+	EndIf;
 	
 	DynamicListAPI.Set(QuerySchemaAPI);
 	
@@ -232,6 +293,13 @@ Procedure SetListFilterAtServer()
 	EndIf;
 	If Not LedgerType.IsEmpty() Then
 		DocumentList.Parameters.SetParameterValue("LedgerType", LedgerType);
+	EndIf;
+	If ThisObject.DocumentType.Count() > 0 Then
+		ArrayOfDocumentTypes = New Array();
+		For Each Row In ThisObject.DocumentType Do
+			ArrayOfDocumentTypes.Add(Type("DocumentRef." + Row.Value));
+		EndDo;
+		DocumentList.Parameters.SetParameterValue("ArrayOfDocumentTypes", ArrayOfDocumentTypes);
 	EndIf;
 
 	InfoUpdated = False;
@@ -271,23 +339,53 @@ Function UnlockAtServer()
 	
 EndFunction
 
-&AtServer
-Procedure LoadDocumentInfo(DocumentRef, JournalEntryRef)
-	RefreshJEAtServer(JournalEntryRef);
-	RefreshFilesAtServer(DocumentRef);
-	RefreshChatAtServer(DocumentRef);
-	RefreshHistoryAtServer(DocumentRef);
-	CurrentDocument = DocumentRef;
-	InfoUpdated = True;
-EndProcedure
-
-&AtServer
-Procedure RefreshJEAtServer(JournalEntryRef)
+// Load document info.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef, Undefined - Document ref
+//  JournalEntryRef - DocumentRef.JournalEntry, Undefined - Journal entry ref
+//  VisibleSettings - See DataProcessors.AccountantAutomatedWorkplace.GetSettings
+// 
+// Returns:
+//  Structure - Load document info:
+// * JournalEntry - Undefined - 
+// * Files - Array - 
+// * ChatInfo - See GetChatInfo 
+// * HistoryTable - Array - 
+&AtServerNoContext
+Function GetDocumentInfo(DocumentRef, JournalEntryRef, VisibleSettings)
+	Result = New Structure;
+	Result.Insert("JournalEntry", Undefined);
+	Result.Insert("Files", New Array);
+	Result.Insert("ChatInfo", Undefined);
+	Result.Insert("HistoryTable", New Array);
 	
-	AccountingReport = New SpreadsheetDocument();
+	If VisibleSettings.Panel_GroupReport Then
+		Result.JournalEntry = GetJournalReport(JournalEntryRef);
+	EndIf;
+	
+	If VisibleSettings.Panel_GroupFiles Then
+		Result.Files = GetDocumentFiles(DocumentRef);
+	EndIf;
+	
+	If VisibleSettings.Panel_GroupChat Then
+		Result.ChatInfo = GetChatInfo(DocumentRef);
+	EndIf;
+	
+	If VisibleSettings.Panel_GroupHistory Then
+		Result.HistoryTable = GetDocumentHistory(DocumentRef);
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+&AtServerNoContext
+Function GetJournalReport(JournalEntryRef)
+	
+	Result = New SpreadsheetDocument();
 	
 	Template = DataProcessors.AccountantAutomatedWorkplace.GetTemplate("PrintFormJE");
-	AccountingReport.Put(Template.GetArea("Header"));
+	Result.Put(Template.GetArea("Header"));
 	
 	Query = New Query;
 	Query.SetParameter("DocumentRef", JournalEntryRef);
@@ -319,40 +417,44 @@ Procedure RefreshJEAtServer(JournalEntryRef)
 	While QuerySelection.Next() Do
 		Row = Template.GetArea("Row");
 		Row.Parameters.Fill(QuerySelection);
-		AccountingReport.Put(Row);
+		Result.Put(Row);
 	EndDo;
 	
-EndProcedure
+	Return Result;
+	
+EndFunction
 
-&AtServer
-Procedure RefreshFilesAtServer(DocumentRef)
+// Get file description.
+// 
+// Returns:
+//  Structure - Get file description:
+// * Ref - CatalogRef.Files - 
+// * Name - String - 
+// * isPDF - Boolean - 
+&AtClientAtServerNoContext
+Function GetFileDescription()
+	FileDescription = New Structure;
+	FileDescription.Insert("Ref", PredefinedValue("Catalog.Files.EmptyRef"));
+	FileDescription.Insert("Name", "");
+	FileDescription.Insert("isPDF", False);
+	Return FileDescription;
+EndFunction
+
+// Get document files.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef, Undefined - Document ref
+// 
+// Returns:
+//  Array of See GetFileDescription - Get document files 
+&AtServerNoContext
+Function GetDocumentFiles(DocumentRef)
 	
-	FileTable.Clear();
-	FilesCount = 0;
-	
-	Items.PagesFiles.CurrentPage = Items.FirstPage;
-	
-	Items.NoFileLabel.Visible = False;
-	Items.PDFPreview.Visible = False;
-	Items.ImagePreview.Visible = False;
+	Result = New Array; // Array of See GetFileDescription
 	
 	If DocumentRef = Undefined Then
-		Items.NoFileLabel.Visible = True;
-		Return;
+		Return Result;
 	EndIf;
-	
-	ForDelete = New Array;
-	For Each PageItem In Items.PagesFiles.ChildItems Do
-		If PageItem <> Items.FirstPage Then
-			For Each ChildItem In PageItem.ChildItems Do
-				ForDelete.Add(ChildItem);
-			EndDo;
-			ForDelete.Add(PageItem);
-		EndIf;
-	EndDo;
-	For Each DeletedItem In ForDelete Do
-		Items.Delete(DeletedItem);
-	EndDo;
 	
 	Query = New Query;
 	Query.SetParameter("DocumentRef", DocumentRef);
@@ -369,80 +471,141 @@ Procedure RefreshFilesAtServer(DocumentRef)
 	QuerySelection = Query.Execute().Select();
 	While QuerySelection.Next() Do
 		If Not StrCompare(QuerySelection.Extension, "pdf") Then
-			FileRecord = FileTable.Add();
+			FileRecord = GetFileDescription();
 			FileRecord.Ref = QuerySelection.File;
 			FileRecord.Name = QuerySelection.Name;
 			FileRecord.isPDF = True;
+			Result.Add(FileRecord);
 		ElsIf PictureViewerServer.isImage(QuerySelection.Extension) Then
-			FileRecord = FileTable.Add();
+			FileRecord = GetFileDescription();
 			FileRecord.Ref = QuerySelection.File;
 			FileRecord.Name = QuerySelection.Name;
 			FileRecord.isPDF = False;
-		EndIf;
-	EndDo;
-	FilesCount = FileTable.Count();
-	
-	If FileTable.Count() = 0 Then
-		Items.NoFileLabel.Visible = True;
-		Items.FirstPage.Title = Items.NoFileLabel.Title;
-		Return;
-	EndIf;
-	
-	For Each FileRecord In FileTable Do
-		FileIndex = Format(FileTable.IndexOf(FileRecord), "NZ=; NG=;");
-		If FileIndex = "0" Then
-			If FileRecord.isPDF Then
-				Items.PDFPreview.Visible = True;
-			Else
-				Items.ImagePreview.Visible = True;
-			EndIf;
-			Items.FirstPage.Title = FileRecord.Name;
-		Else
-			NewPage = Items.Add("Page_"+FileIndex, Type("FormGroup"), Items.PagesFiles);
-			NewPage.Type = FormGroupType.Page;
-			NewPage.Title = FileRecord.Name;
-			If FileRecord.isPDF Then
-				NewItem = Items.Add("PDF_"+FileIndex, Type("FormField"), NewPage);
-				NewItem.Type = FormFieldType.PDFDocumentField;
-				NewItem.DataPath = "PDFPreview";
-			Else
-				NewItem = Items.Add("IMG_"+FileIndex, Type("FormField"), NewPage);
-				NewItem.Type = FormFieldType.PictureField;
-				NewItem.DataPath = "ImagePreview";
-				NewItem.PictureSize = PictureSize.Proportionally;
-			EndIf;
-			NewItem.TitleLocation = FormItemTitleLocation.None;
-			NewItem.AutoMaxWidth = False;
+			Result.Add(FileRecord);
 		EndIf;
 	EndDo;
 	
-EndProcedure
+	Return Result;
+	
+EndFunction
 
-&AtServer
-Procedure RefreshHistoryAtServer(DocumentRef)
+// Get history item.
+// 
+// Returns:
+//  Structure - Get history item:
+// * VersionNumber - Number - 
+// * UserName - String - 
+// * Date - Date - 
+// * DataChangeType - String - 
+// * IsImportant - Boolean - 
+&AtClientAtServerNoContext
+Function GetHistoryItem()
+	Result = New Structure;
+	Result.Insert("VersionNumber", 0); 
+	Result.Insert("UserName", ""); 
+	Result.Insert("Date", Date(1,1,1)); 
+	Result.Insert("DataChangeType", ""); 
+	Result.Insert("IsImportant", False); 
+	Return Result;
+EndFunction
 	
-	HistoryVersionTable.Clear();
-	HistoryReport.Clear();
-	HistoryCount = 0;
+// Get document history.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef, Undefined - Document ref
+// 
+// Returns:
+//  Array of See GetHistoryItem - Get document history 
+&AtServerNoContext
+Function GetDocumentHistory(DocumentRef)
+	
+	Result = New Array; // Array of See GetHistoryItem
 	
 	If Not ValueIsFilled(DocumentRef) Then
+		Return Result;
+	EndIf;
+	
+	SetPrivilegedMode(True);
+	
+	ImportantTableAttributes = 
+		CatConfigurationMetadataServer.GetCustomizedAttributesByObject(DocumentRef).Important;
+	
+	Try
+		DataHistory.UpdateHistory();
+		HistoryTable = DataHistory.SelectVersions(New Structure("Data", DocumentRef),, "VersionNumber");
+		For Each HistoryRow In HistoryTable Do
+			NewVersion = GetHistoryItem();
+			FillPropertyValues(NewVersion, HistoryRow);
+			CheckImportantAttributesInVersion(DocumentRef, NewVersion, ImportantTableAttributes);
+			Result.Add(NewVersion);
+		EndDo;
+	Except
+		// don't have permission to read history
+	EndTry;
+	
+	Return Result;
+	
+EndFunction
+
+&AtServerNoContext
+Procedure CheckImportantAttributesInVersion(DocumentRef, NewVersion, ImportantTableAttributes)
+	
+	If NewVersion.DataChangeType = "Add" OR NewVersion.VersionNumber = 1 Then
 		Return;
 	EndIf;
 	
-	DataHistory.UpdateHistory();
-	HistoryTable = DataHistory.SelectVersions(New Structure("Data", DocumentRef),, "VersionNumber");
-	For Each HistoryRow In HistoryTable Do
-		NewVersion = HistoryVersionTable.Add();
-		FillPropertyValues(NewVersion, HistoryRow);
+	VersionDifference = DataHistory.GetVersionDifferences(DocumentRef, NewVersion.VersionNumber);
+	
+	Tables = New Structure;
+	Attributes = New Structure;
+	For Each VersionDifferenceItem In VersionDifference Do
+		If TypeOf(VersionDifferenceItem.Value) = Type("FixedStructure") Then
+			Attributes.Insert(VersionDifferenceItem.Key, VersionDifferenceItem.Value);
+		ElsIf TypeOf(VersionDifferenceItem.Value) = Type("FixedArray") Then
+			Tables.Insert(VersionDifferenceItem.Key, VersionDifferenceItem.Value);
+		EndIf;
 	EndDo;
-	HistoryCount = HistoryVersionTable.Count();
+	
+	ImportantAttributes = ImportantTableAttributes.Get(""); // Array of String
+	If Attributes.Count() Then
+		For Each AttributKeyValue In Attributes Do
+			If ImportantAttributes <> Undefined And ImportantAttributes.Find(AttributKeyValue.Key) <> Undefined Then
+				NewVersion.IsImportant = True;
+				Return;
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	For Each TableKeyValue In Tables Do
+		If TableKeyValue.Value.Count() = 0 Then
+			Continue;
+		EndIf;
+		ImportantAttributes = ImportantTableAttributes.Get(TableKeyValue.Key); // Array of String
+		For Each FieldKeyValue In TableKeyValue.Value[0].Fields Do
+			If ImportantAttributes <> Undefined And ImportantAttributes.Find(FieldKeyValue.Key) <> Undefined Then
+				NewVersion.IsImportant = True;
+				Return;
+			EndIf;
+		EndDo;
+	EndDo;
 	
 EndProcedure
 
-&AtServer
-Procedure RefreshChatAtServer(DocumentRef)
+// Get chat info.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef, Undefined - Document ref
+// 
+// Returns:
+//  Structure - Get chat info:
+// * Count - Number - 
+// * HTML - String - 
+&AtServerNoContext
+Function GetChatInfo(DocumentRef)
 	
-	ChatCount = 0;
+	Result = New Structure;
+	Result.Insert("Count", 0);
+	Result.Insert("HTML", "");
 	
 	Query = New Query;
 	Query.SetParameter("Basis", DocumentRef);
@@ -467,7 +630,7 @@ Procedure RefreshChatAtServer(DocumentRef)
 	|	Logger.TimeStamp";
 	ChatMessages = Query.Execute().Unload();	
 	Data = CommonFunctionsServer.TableToStructure(ChatMessages);
-	ChatCount = Data.Count();
+	Result.Count = Data.Count();
 	
 	Query.Text =
 	"SELECT
@@ -524,107 +687,54 @@ Procedure RefreshChatAtServer(DocumentRef)
 	ChatHTML = StrReplace(Template, "#MessageArray#", JSON);
 	ChatHTML = StrReplace(ChatHTML, "#LocalCode#", StrReplace(GetInfoBaseRegionalSettings().LocaleCode, "_", "-"));
 	
-	If Not ChatHTML = Chat Then
-		Chat = ChatHTML;
-	EndIf;
+	Result.HTML = ChatHTML;
 	
-	Items.ChatAttachedFiles.Visible = (ChatAttachedFiles.Count() > 0);
-EndProcedure
+	Return Result;
+	
+//	If Not ChatHTML = Chat Then
+//		Chat = ChatHTML;
+//	EndIf;
+//	
+//	Items.ChatAttachedFiles.Visible = (ChatAttachedFiles.Count() > 0);
+EndFunction
 
+// Set document info at client.
+// 
+// Parameters:
+//  DocumentInfo - See GetDocumentInfo
 &AtClient
-Procedure SetCurrentPageAtClient()
+Procedure SetDocumentInfoAtClient(DocumentInfo)
 	
-	If Items.PagesFiles.CurrentPage = Undefined Then
-		Items.PagesFiles.CurrentPage = Items.FirstPage
+	If VisibleSettings.Panel_GroupReport Then
+		AccountingReport = DocumentInfo.JournalEntry;
 	EndIf;
 	
-	If FileTable.Count() = 0 Then
-		Return;
+	FilesCount = 0;
+	FileTable.Clear();
+	If VisibleSettings.Panel_GroupFiles Then
+		For Each FileDescription In DocumentInfo.Files Do
+			FillPropertyValues(FileTable.Add(), FileDescription);
+		EndDo;
+		FilesCount = FileTable.Count();
 	EndIf;
 	
-	If Items.PagesFiles.CurrentPage = Items.FirstPage Then
-		FileRecord = FileTable.Get(0);
-	Else
-		FileIndex = Number(StrReplace(Items.PagesFiles.CurrentPage.Name, "Page_", ""));
-		FileRecord = FileTable.Get(FileIndex);
+	ChatAttachedFiles.Clear();
+	Items.ChatAttachedFiles.Visible = False;
+	If VisibleSettings.Panel_GroupChat Then
+		Chat = DocumentInfo.ChatInfo.HTML;
+		ChatCount = DocumentInfo.ChatInfo.Count;
 	EndIf;
 	
-	If FileRecord.isPDF Then
-		PictureViewerClient.SetPDFForView(FileRecord.Ref, PDFPreview);
-	Else
-		PictureParameters = PictureViewerServer.CreatePictureParameters(FileRecord.Ref);
-		ImagePreview = PictureViewerClient.GetPictureURL(PictureParameters);
+	HistoryCount = 0;
+	HistoryVersionTable.Clear();
+	HistoryReport = New SpreadsheetDocument();
+	If VisibleSettings.Panel_GroupHistory Then
+		For Each HistoryItem In DocumentInfo.HistoryTable Do
+			FillPropertyValues(HistoryVersionTable.Add(), HistoryItem);
+		EndDo;
+		HistoryCount = HistoryVersionTable.Count();
 	EndIf;
 	
-EndProcedure
-
-&AtServer
-Procedure FillDocumentTypeList(Settings=Undefined)
-	
-	Items.DocumentType.ChoiceList.Clear();	
-	
-	PeriodFilter = Undefined;
-	CompanyFilter = Undefined;
-	LedgerTypeFilter = Undefined;
-	
-	If Settings <> Undefined Then
-		PeriodFilter = Settings.Get("Period");
-		CompanyFilter = Settings.Get("Company");
-		LedgerTypeFilter = Settings.Get("Ledger");
-	EndIf;
-	If PeriodFilter = Undefined Then
-		PeriodFilter = Period;
-	EndIf;
-	If CompanyFilter = Undefined Then
-		CompanyFilter = Company;
-	EndIf;
-	If LedgerTypeFilter = Undefined Then
-		LedgerTypeFilter = LedgerType;
-	EndIf;
-	
-	Query = New Query;
-	Query.Text =
-	"SELECT DISTINCT
-	|	VALUETYPE(Document) AS DocumentType
-	|FROM
-	|	InformationRegister.PostedDocumentsRegistry
-	|		LEFT JOIN Document.JournalEntry AS JournalEntry
-	|		ON Document = JournalEntry.Basis
-	|		AND NOT JournalEntry.DeletionMark
-	|WHERE
-	|	Document.Date BETWEEN &StartDate AND &EndDate
-	|	AND JournalEntry.Company = &Company
-	|	AND JournalEntry.LedgerType = &LedgerType";
-	
-	If Period.EndDate > Date(1,1,1) Then
-		Query.SetParameter("StartDate", PeriodFilter.StartDate);
-		Query.SetParameter("EndDate", PeriodFilter.EndDate);
-	ElsIf Period.StartDate > Date(1,1,1) Then
-		Query.SetParameter("StartDate", PeriodFilter.StartDate);
-		Query.Text = StrReplace(Query.Text, "Document.Date BETWEEN &StartDate AND &EndDate", "Document.Date >= &StartDate");
-	Else
-		Query.Text = StrReplace(Query.Text, "Document.Date BETWEEN &StartDate AND &EndDate", "TRUE");
-	EndIf;
-	If Not Company.IsEmpty() Then
-		Query.SetParameter("Company", CompanyFilter);
-	Else
-		Query.Text = StrReplace(Query.Text, "JournalEntry.Company = &Company", "TRUE");
-	EndIf;
-	If Not LedgerType.IsEmpty() Then
-		Query.SetParameter("LedgerType", LedgerTypeFilter);
-	Else
- 		Query.Text = StrReplace(Query.Text, "JournalEntry.LedgerType = &LedgerType", "TRUE");
-	EndIf;
-	
-	QuerySelection = Query.Execute().Select();
-	While QuerySelection.Next() Do
-		DocMetadata = Metadata.FindByType(QuerySelection.DocumentType);
-		Items.DocumentType.ChoiceList.Add(DocMetadata.Name, DocMetadata.Synonym);
-	EndDo;
-	Items.DocumentType.ChoiceList.SortByPresentation();
-	
-	Items.DocumentType.ChoiceList.Insert(0, "All", "<" + R().Form_033 + ">");
-
 EndProcedure
 
 &AtClient
@@ -679,7 +789,9 @@ Procedure SendMessageAtServer()
 	NewMessage = "";
 	ChatAttachedFiles.Clear();
 	
-	RefreshChatAtServer(CurrentDocument);
+	ChatInfo = GetChatInfo(CurrentDocument);
+	Chat = ChatInfo.HTML;
+	ChatCount = ChatInfo.Count;
 	
 EndProcedure	
 
@@ -720,7 +832,9 @@ Procedure ReadVersionDifference(VersionNumber)
 	Tables = New Structure;
 	Attributes = New Structure;
 	
-	AttributeNames = Catalogs.ConfigurationMetadata.GetAttributeNamesByObject(CurrentDocument);
+	AttributeNames = CatConfigurationMetadataServer.GetAttributeNamesByObject(CurrentDocument);
+	ImportantTableAttributes = 
+		CatConfigurationMetadataServer.GetCustomizedAttributesByObject(CurrentDocument).Important;
 	
 	VersionDifference = DataHistory.GetVersionDifferences(CurrentDocument, VersionNumber);
 	For Each VersionDifferenceItem In VersionDifference Do
@@ -734,6 +848,7 @@ Procedure ReadVersionDifference(VersionNumber)
 	Template = DataProcessors.AccountantAutomatedWorkplace.GetTemplate("PrintHistory");
 	
 	If Attributes.Count() Then
+		ImportantAttributes = ImportantTableAttributes.Get(""); // Array of String
 	    HistoryReport.Put(Template.GetArea("AttributeHeader"));
 		For Each AttributKeyValue In Attributes Do
 			AttributeName = AttributeNames.Attributes.Get(AttributKeyValue.Key);
@@ -769,6 +884,9 @@ Procedure ReadVersionDifference(VersionNumber)
 			Row.Parameters.Name = AttributeName;
 			Row.Parameters.ValueBefore = AttributeValueOld;
 			Row.Parameters.ValueAfter = AttributeValueNew;
+			If ImportantAttributes <> Undefined And ImportantAttributes.Find(AttributKeyValue.Key) <> Undefined Then
+				Row.Area(1, 1, 1, 4).TextColor = WebColors.Red;
+			EndIf;
 			HistoryReport.Put(Row);
 		EndDo;
 	EndIf;
@@ -778,6 +896,7 @@ Procedure ReadVersionDifference(VersionNumber)
 			Continue;
 		EndIf;
 		
+		ImportantAttributes = ImportantTableAttributes.Get(TableKeyValue.Key); // Array of String
 		TableAttributeNames = AttributeNames.Tables.Get(TableKeyValue.Key);
 		
 		If TableAttributeNames = Undefined Then
@@ -845,6 +964,10 @@ Procedure ReadVersionDifference(VersionNumber)
 				FieldRow = Template.GetArea("FieldRow");
 				FieldRow.Parameters.ValueBefore = FieldValueOld;
 				FieldRow.Parameters.ValueAfter = FieldValue;
+				If ImportantAttributes <> Undefined And ImportantAttributes.Find(FieldKeyValue.Key) <> Undefined Then
+					FieldRow.Area(1, 1, 1, 2).TextColor = WebColors.Red;
+				EndIf;
+				
 				TableRow.Join(FieldRow);
 			EndDo;
 			

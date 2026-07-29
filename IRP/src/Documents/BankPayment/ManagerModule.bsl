@@ -584,7 +584,8 @@ Function R5011B_CustomersAging()
 		|FROM
 		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		|WHERE
-		|	OffsetOfAging.Document = &Ref";
+		|	OffsetOfAging.Document = &Ref
+		|	and OffsetOfAging.Recorder refs Document.CustomersAdvancesClosing";
 EndFunction
 
 Function B1040B_AgingKey()

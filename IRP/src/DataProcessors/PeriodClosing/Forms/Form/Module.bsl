@@ -198,6 +198,11 @@ EndProcedure
 
 &AtClient
 Procedure StepParameterOnChange(Item)
+	If ThisObject.Step_2_ForAllCompanies Then
+		ThisObject.Step_2_CalculationMode = PredefinedValue("Enum.CalculationMode.LandedCostBatchReallocate");
+	Else
+		ThisObject.Step_2_CalculationMode = PredefinedValue("Enum.CalculationMode.LandedCost");
+	EndIf;
 	SetStepStatus_NotValid(Object, ThisObject);
 	SetVisibilityAvailability(Object, ThisObject, Item);	
 EndProcedure

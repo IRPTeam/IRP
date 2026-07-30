@@ -5317,9 +5317,6 @@
     <edit>
       <common>true</common>
     </edit>
-    <settingsSavedData xsi:type="form:DataPath">
-      <segments>Step_2_CalculationMode</segments>
-    </settingsSavedData>
   </attributes>
   <attributes>
     <name>Step_2_ForAllCompanies</name>
@@ -5337,9 +5334,6 @@
     <edit>
       <common>true</common>
     </edit>
-    <settingsSavedData xsi:type="form:DataPath">
-      <segments>Step_2_ForAllCompanies</segments>
-    </settingsSavedData>
   </attributes>
   <attributes>
     <name>Step_3_DontOffsetEmptyProjects</name>

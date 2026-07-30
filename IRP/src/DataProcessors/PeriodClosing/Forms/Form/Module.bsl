@@ -49,12 +49,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.Step_6_Periodicity.ChoiceList.Add(ListItem.Value, ListItem.Presentation);
 	EndDo;
 	
-	ThisObject.UpdatePause = 5;
-EndProcedure
-
-&AtServer
-Procedure CreatePeriodicityChoiceList(StepNumber)
+	If Not FOServer.IsUseBatchReallocate() Then
+		ThisObject.Items.Step_2_ForAllCompanies.ReadOnly = True;
+	EndIf;	
+	ThisObject.Step_2_ForAllCompanies = False;
+	ThisObject.Step_2_CalculationMode = PredefinedValue("Enum.CalculationMode.LandedCost");
 	
+	ThisObject.UpdatePause = 5;
 EndProcedure
 
 &AtClient

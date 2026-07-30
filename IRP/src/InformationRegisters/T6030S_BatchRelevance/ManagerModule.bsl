@@ -1,5 +1,9 @@
 
 Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
+	If Not FOServer.IsUseBatchRelevance() Then
+		Return;
+	EndIf;
+	
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -158,6 +162,10 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 EndProcedure
 
 Procedure BatchRelevance_Restore(Company, EndPeriod) Export
+	If Not FOServer.IsUseBatchRelevance() Then
+		Return;
+	EndIf;
+	
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -261,6 +269,10 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 EndProcedure
 
 Procedure BatchRelevance_Reset(Company, BeginPeriod) Export
+	If Not FOServer.IsUseBatchRelevance() Then
+		Return;
+	EndIf;
+	
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -350,6 +362,10 @@ Procedure BatchRelevance_Reset(Company, BeginPeriod) Export
 EndProcedure
 
 Procedure BatchRelevance_Clear(Company, EndPeriod) Export
+	If Not FOServer.IsUseBatchRelevance() Then
+		Return;
+	EndIf;
+	
 	Query = New Query;
 	Query.Text =
 	"SELECT

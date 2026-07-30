@@ -1,4 +1,10 @@
 
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If Not FOServer.IsUseBatchReallocate() Then
+		ThisObject.CalculationMode = Enums.CalculationMode.LandedCost;
+	EndIf;
+EndProcedure
+
 Procedure Posting(Cancel, PostingMode)
 	ClearSelfRecords(Cancel);
 		
@@ -38,3 +44,5 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		CheckedAttributes.Add("Company");
 	EndIf;
 EndProcedure
+
+

@@ -737,10 +737,16 @@ Scenario: _9760002 period closing processor blocks recalculation over an existin
 		And I click the button named "Select"
 	* Whole months - the Monthly periodicity is selected automatically
 		Then the form attribute named "Step_2_Periodicity" became equal to "Monthly"
-	* Go to the Calculation movement costs step and fill the calculation mode
+	* Go to the Calculation movement costs step - the calculation mode is auto-filled
+	# Since IRP-835 the Calculation mode field is read-only: any step parameter change
+	# (including the Company/Period selection above) sets it to Landed cost, and the
+	# For all companies switcher flips it to Landed cost (batch reallocate)
 		And I click the button named "FormNextStep"
 		And I click the button named "FormNextStep"
-		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+	# The switcher is a saved form setting - normalize it so a restored True from an earlier
+	# scenario cannot leave the batch-reallocate mode (remove is an idempotent setter)
+		And I remove checkbox named "Step_2_ForAllCompanies"
+		Then the form attribute named "Step_2_CalculationMode" became equal to "Landed cost"
 	* The validation blocks the recalculation over the existing document
 		And "ValidationErrors" table contains lines
 			| 'Error description'                              | 'Ref'                                                      |
@@ -750,6 +756,9 @@ Scenario: _9760002 period closing processor blocks recalculation over an existin
 		And "ValidationErrors" table contains lines
 			| 'Error description'                              | 'Ref'                                                      |
 			| 'Overlapping period [01.01.2023 - 31.01.2023]'   | 'Calculation movement costs 1 dated 31.01.2023 12:00:00'   |
+	* Restore the per-company mode - the switcher is a saved form setting and would leak into the next scenarios
+		And I remove checkbox named "Step_2_ForAllCompanies"
+		Then the form attribute named "Step_2_CalculationMode" became equal to "Landed cost"
 	And I close all client application windows
 
 Scenario: _9760003 partial months force the By period periodicity and the step runs without errors
@@ -789,7 +798,10 @@ Scenario: _9760003 partial months force the By period periodicity and the step r
 	* Skip the Reposting documents step - RunStep requires all previous steps to be valid or skipped
 		And I click the button named "SkipStep"
 		And I click the button named "FormNextStep"
-		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+	# The switcher is a saved form setting - normalize it so a restored True from an earlier
+	# scenario cannot leave the batch-reallocate mode (remove is an idempotent setter)
+		And I remove checkbox named "Step_2_ForAllCompanies"
+		Then the form attribute named "Step_2_CalculationMode" became equal to "Landed cost"
 	* Monthly cannot be selected manually for a partial-months period - it is removed from the choice list
 	# The radio group is visible on this step. The wrapper tolerates the failing click; the value
 	# check below is the real assert: if Monthly were still selectable, the click would succeed
@@ -831,10 +843,13 @@ Scenario: _9760004 Run all steps over a free month creates the documents of ever
 		And I input "01.09.2026" text in the field named "DateBegin"
 		And I input "30.09.2026" text in the field named "DateEnd"
 		And I click the button named "Select"
-	* Fill the calculation mode on the Calculation movement costs step
+	* The calculation mode on the Calculation movement costs step is auto-filled
 		And I click the button named "FormNextStep"
 		And I click the button named "FormNextStep"
-		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+	# The switcher is a saved form setting - normalize it so a restored True from an earlier
+	# scenario cannot leave the batch-reallocate mode (remove is an idempotent setter)
+		And I remove checkbox named "Step_2_ForAllCompanies"
+		Then the form attribute named "Step_2_CalculationMode" became equal to "Landed cost"
 	* Run all steps from the first page
 		And I click the button named "FormPrevStep"
 		And I click the button named "FormPrevStep"
@@ -888,7 +903,10 @@ Scenario: _9760005 Monthly periodicity creates one calculation document per whol
 		And I click the button named "FormNextStep"
 		And I click the button named "SkipStep"
 		And I click the button named "FormNextStep"
-		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+	# The switcher is a saved form setting - normalize it so a restored True from an earlier
+	# scenario cannot leave the batch-reallocate mode (remove is an idempotent setter)
+		And I remove checkbox named "Step_2_ForAllCompanies"
+		Then the form attribute named "Step_2_CalculationMode" became equal to "Landed cost"
 		And I click the button named "RunStep"
 		And Delay 30
 		And I click the button named "FormUpdateStatuses"
@@ -922,7 +940,8 @@ Scenario: _9760006 Everyday periodicity creates one calculation document per day
 		And I click the button named "SkipStep"
 		And I click the button named "FormNextStep"
 		And I change "Step_2_Periodicity" radio button value to "Everyday"
-		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I remove checkbox named "Step_2_ForAllCompanies"
+		Then the form attribute named "Step_2_CalculationMode" became equal to "Landed cost"
 		And I click the button named "RunStep"
 		And Delay 30
 		And I click the button named "FormUpdateStatuses"

@@ -502,6 +502,8 @@
 // * InfoMessage_031 - String - 
 // * InfoMessage_032 - String - 
 // * InfoMessage_033 - String - 
+// * InfoMessage_StartJob - String - 
+// * InfoMessage_RunJobCode - String - 
 // * InfoMessage_034 - String - 
 // * InfoMessage_035 - String - 
 // * InfoMessage_036 - String - 
@@ -1916,6 +1918,9 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_031", NStr("en = 'Do you want to continue job?'", Lang));
 	Strings.Insert("InfoMessage_032", NStr("en = 'Do you want to pause job?'", Lang));
 	Strings.Insert("InfoMessage_033", NStr("en = 'Do you want to stop job?'", Lang));
+	
+	Strings.Insert("InfoMessage_StartJob", NStr("en = 'Do you want to start job?'", Lang));
+	Strings.Insert("InfoMessage_RunJobCode", NStr("en = 'Do you want to execute code when there is a scheduled task?'", Lang));
 	
 	Strings.Insert("InfoMessage_034", NStr("en = 'Time zone not changed'", Lang));
 	Strings.Insert("InfoMessage_035", NStr("en = 'Time zone changed to %1'", Lang));

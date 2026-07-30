@@ -1258,6 +1258,21 @@ Function RecalculateExpression(Params) Export
 	
 	ResultInfo = RecalculateExpressionResult();
 	
+	If Params.Property("JobKey") And Params.JobKey <> "" Then
+		CurrentJob = GetCurrentInfoBaseSession().GetBackgroundJob();
+	    Jobs = BackgroundJobs.GetBackgroundJobs(New Structure("Key", Params.JobKey));
+	    For Each ChekedJob In Jobs Do
+	    	If ChekedJob = CurrentJob Then
+	    		Continue;
+	    	EndIf;
+		    If ChekedJob.State = BackgroundJobState.Active Then
+				ResultInfo.isError = True;
+				ResultInfo.Description = R().BgJ_Title_001;
+		        Return ResultInfo;
+		    EndIf;
+	    EndDo;
+	EndIf;
+	
 	Try
 		Result = Undefined;
 		If Params.SafeMode Then
@@ -1282,7 +1297,7 @@ Function RecalculateExpression(Params) Export
 				EndIf;
 			EndDo;
 		Else
-                        Raise R().WrongExternalFunctionType;
+			Raise R().WrongExternalFunctionType;
 		EndIf;
 		ResultInfo.Result = Result;
 	Except
@@ -1353,6 +1368,7 @@ EndProcedure
 // * Job - CatalogRef.ExternalFunctions -
 // * AddInfo - Structure -
 // * Type - EnumRef.ExternalFunctionType -
+// * JobKey - String -
 Function GetRecalculateExpressionParams(ExternalFunction = Undefined) Export
 	
 	Structure = New Structure;
@@ -1371,12 +1387,15 @@ Function GetRecalculateExpressionParams(ExternalFunction = Undefined) Export
 	Structure.Insert("AddInfo", New Structure);
 	Structure.Insert("Type", Enums.ExternalFunctionType.Eval);
 	
+	Structure.Insert("JobKey", "");
+	
 	If Not ExternalFunction = Undefined Then
 		Structure.SafeMode = ExternalFunction.SafeModeIsOn;
 		Structure.Expression = ExternalFunction.ExternalCode;
 		Structure.Job = ExternalFunction.Ref;
 		Structure.Type = ExternalFunction.ExternalFunctionType;
 		Structure.RegExp = ExternalFunction.RegExp;
+		Structure.JobKey = String(ExternalFunction.Ref.UUID());
 		
 		MatchStr = New Map;
 		For Each Row In ExternalFunction.ResultMatches Do

@@ -435,4 +435,21 @@
       <picture>StdPicture.AppearanceCrossIcon</picture>
     </picture>
   </commands>
+  <commands uuid="4c09d46c-c2fc-4b12-bb57-e1dae7f6a0aa">
+    <name>StartJob</name>
+    <synonym>
+      <key>en</key>
+      <value>Start now</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>CatalogRef.ExternalFunctions</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <modifiesData>true</modifiesData>
+    <representation>PictureAndText</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.BusinessProcessStart</picture>
+    </picture>
+  </commands>
 </mdclass:Catalog>

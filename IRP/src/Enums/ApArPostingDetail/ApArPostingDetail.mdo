@@ -23,14 +23,14 @@
     <name>ByAgreements</name>
     <synonym>
       <key>en</key>
-      <value>By agreements</value>
+      <value>By partner terms</value>
     </synonym>
   </enumValues>
   <enumValues uuid="00f7900f-7042-46d4-bf2d-5203c676461a">
     <name>ByStandardAgreement</name>
     <synonym>
       <key>en</key>
-      <value>By standard agreement</value>
+      <value>By standard partner terms</value>
     </synonym>
   </enumValues>
 </mdclass:Enum>

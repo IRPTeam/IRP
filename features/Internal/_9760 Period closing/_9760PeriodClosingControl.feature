@@ -808,8 +808,16 @@ Scenario: _9760003 partial months force the By period periodicity and the step r
 	# and the value check would fail.
 		When I Check the steps for Exception
 			| 'And I change "Step_2_Periodicity" radio button value to "Monthly"'    |
-	# On the visible radio group the attribute reads as the presentation "By period"
-		Then the form attribute named "Step_2_Periodicity" became equal to "By period"
+	# Reading the VISIBLE radio group is VA-version-dependent (1.2.042 on CI returns the raw
+	# value "ByPeriod", 1.2.043 returns the presentation "By period"), and the "became equal"
+	# step has no wildcard support. Go back to the first page where the radio is hidden -
+	# there both versions return the raw value. If Monthly had been selected by the click
+	# above, this would read "Monthly" and fail.
+		And I click the button named "FormPrevStep"
+		And I click the button named "FormPrevStep"
+		Then the form attribute named "Step_2_Periodicity" became equal to "ByPeriod"
+		And I click the button named "FormNextStep"
+		And I click the button named "FormNextStep"
 		And I click the button named "RunStep"
 		And Delay 20
 		And I click the button named "FormUpdateStatuses"

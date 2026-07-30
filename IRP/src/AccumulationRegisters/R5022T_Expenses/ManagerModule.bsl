@@ -110,6 +110,19 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 		RecordSet = CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(QuerySelection.Document);
 
+		RecordSet.Read();
+		ArrayForDelete = New Array();
+		For Each Record In RecordSet Do
+			If ValueIsFilled(Record.CalculationMovementCost) Or 
+					Record.CurrencyMovementType <> ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
+				ArrayForDelete.Add(Record);
+			EndIf;
+		EndDo;
+		
+		For Each ItemForDelete In ArrayForDelete Do
+			RecordSet.Delete(ItemForDelete);
+		EndDo;
+
 		QuerySelectionDetails = QuerySelection.Select();
 		While QuerySelectionDetails.Next() Do
 			NewRecord = RecordSet.Add();

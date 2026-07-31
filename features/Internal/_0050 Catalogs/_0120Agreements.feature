@@ -598,7 +598,7 @@ Scenario: _012012 create Partner term for other partners
 	* Creating and checking customer Partner term Basic Partner terms, TRY
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Other"
-		Then the form attribute named "ApArPostingDetail" became equal to "By agreements"
+		Then the form attribute named "ApArPostingDetail" became equal to "By partner terms"
 		And I expand "Agreement info" group
 		And I expand "Price settings" group
 		And I expand "Store and delivery" group

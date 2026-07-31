@@ -291,7 +291,7 @@ Scenario: _010010 check auto create Legal name and Company and Partner term
 		* Check partner term
 			And form attributes have values:
 				| 'Name'                            | 'Value'                   | 'HowToSearch' |
-				| 'ApArPostingDetail'               | "By agreements"           | ''            |
+				| 'ApArPostingDetail'               | "By partner terms"        | ''            |
 				| 'Kind'                            | "Regular"                 | ''            |
 				| 'LegalName'                       | "Test partner 11"         | ''            |
 				| 'Partner'                         | "Test partner 11"         | ''            |

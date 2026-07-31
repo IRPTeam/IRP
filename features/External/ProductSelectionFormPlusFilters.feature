@@ -1618,11 +1618,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 			| Description     |
 			| Main Company    |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Type'            |
-			| 'TRY'        | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
 			| Description          |
@@ -1652,11 +1648,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 			| Description     |
 			| Main Company    |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Type'            |
-			| 'TRY'        | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
 			| Description          |

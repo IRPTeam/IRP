@@ -89,11 +89,7 @@ Scenario: _0154100 preparation ( filling documents)
 				| 'Description'      |
 				| 'Main Company'     |
 			And I select current line in "List" table
-			And I click Select button of "Multi currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Source'          | 'Type'             |
-				| 'TRY'         | 'Forex Seling'    | 'Partner term'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Multi currency movement type" drop-down list
 			And I expand "Agreement info" group
 			And I expand "Price settings" group
 			And I expand "Store and delivery" group
@@ -135,11 +131,7 @@ Scenario: _0154100 preparation ( filling documents)
 				| 'Description'      |
 				| 'Main Company'     |
 			And I select current line in "List" table
-			And I click Select button of "Multi currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Source'          | 'Type'             |
-				| 'TRY'         | 'Forex Seling'    | 'Partner term'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Multi currency movement type" drop-down list
 			And I expand "Agreement info" group
 			And I expand "Price settings" group
 			And I expand "Store and delivery" group

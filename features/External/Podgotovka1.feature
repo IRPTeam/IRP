@@ -776,11 +776,7 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click Select button of "Multi currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Type'             |
-				| 'USD'         | 'Partner term'     |
-			And I select current line in "List" table
+			And I select "USD" exact value from "Multi currency movement type" drop-down list
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| Description     |

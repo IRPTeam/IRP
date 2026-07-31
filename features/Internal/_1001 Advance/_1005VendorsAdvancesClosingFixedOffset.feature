@@ -87,6 +87,16 @@ Scenario: _1005000 preparation (vendors advances closing fixed offset)
 			| "Documents.CashPayment.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(22).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Unpost advance closings covering 11-12.02.2021 (left posted by _1002) - the overlapping-period control would block posting the pinned closing over them
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		And I go to line in "List" table
+			| 'Date'          |
+			| '11.02.2021'    |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1'         |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
 
 Scenario: _10050001 check preparation

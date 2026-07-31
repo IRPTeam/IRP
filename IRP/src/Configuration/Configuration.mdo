@@ -878,7 +878,6 @@
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.InternalCommandsClient</commonModules>
   <commonModules>CommonModule.InternalCommandsServer</commonModules>
-  <commonModules>CommonModule.LandedCostServer</commonModules>
   <commonModules>CommonModule.LandedCostServer2</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
@@ -1109,6 +1108,9 @@
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseManualOffers</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBatchRelevance</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAdvanceRelevance</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBatchReallocate</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1292,6 +1294,9 @@
   <constants>Constant.UseVariableStore</constants>
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.UseManualOffers</constants>
+  <constants>Constant.UseBatchRelevance</constants>
+  <constants>Constant.UseAdvanceRelevance</constants>
+  <constants>Constant.UseBatchReallocate</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

@@ -107,6 +107,16 @@ Scenario: _1004000 preparation (customers advances closing fixed offset)
 	* Second advance key for bug 1 - copy of Cash receipt 6 with Order filled
 		And I execute 1C:Enterprise script at server
 			| "Doc = Documents.CashReceipt.FindByNumber(6).GetObject().Copy(); Doc.Date = Date(2021,1,27,20,0,0); Doc.PaymentList[0].Order = Documents.SalesOrder.FindByNumber(1); Doc.Write(DocumentWriteMode.Posting);"    |
+	* Unpost advance closings covering 27-28.01.2021 (left posted by _1003) - the overlapping-period control would block posting the pinned closing over them
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I go to line in "List" table
+			| 'Date'          |
+			| '27.01.2021'    |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '9'         |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
 
 Scenario: _10040001 check preparation

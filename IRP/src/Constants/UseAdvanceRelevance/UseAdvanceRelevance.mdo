@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2dd7b23b-b020-419f-b7f2-6d64f9ba1e45">
+  <producedTypes>
+    <managerType typeId="9c86981f-fdb2-4256-8d12-6a5d70e0d961" valueTypeId="bb175abc-ba3e-4c35-929d-27f39c7112a4"/>
+    <valueManagerType typeId="444b9da7-1ea5-47a7-8f0d-2253fa6636b8" valueTypeId="a41c768b-4e3f-48cd-b9f8-de99c69b9cc2"/>
+    <valueKeyType typeId="554f69c2-9f50-4581-b6de-340dc2ab776d" valueTypeId="8c33f56c-d96c-4af6-a7bb-8ddbca2970d8"/>
+  </producedTypes>
+  <name>UseAdvanceRelevance</name>
+  <synonym>
+    <key>en</key>
+    <value>Use advance relevance</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

@@ -2758,6 +2758,10 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("PeriodClosing_Error4", NStr("en = 'Calculation mode is required field'", Lang));
 	Strings.Insert("PeriodClosing_Error5", NStr("en = 'Periodicity not selected'", Lang));
 	Strings.Insert("PeriodClosing_Error6", NStr("en = 'Overlapping period [%1 - %2]'", Lang));
+	
+	Strings.Insert("PeriodClosing_PeriodicityChoiceList_Everyday", NStr("en = 'Everyday'", Lang));
+	Strings.Insert("PeriodClosing_PeriodicityChoiceList_Monthly", NStr("en = 'Monthly'", Lang));
+	Strings.Insert("PeriodClosing_PeriodicityChoiceList_ByPeriod", NStr("en = 'By period'", Lang));	
 #EndRegion
 
 #Region CopyUserSettings

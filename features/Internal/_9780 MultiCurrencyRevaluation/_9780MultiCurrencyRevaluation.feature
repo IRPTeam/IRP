@@ -78,7 +78,11 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
 		And I move to "Currencies" tab
 		And in the table "Currencies" I click the button named "CurrenciesAdd"
-		And I select "Reporting currency Euro" exact value from "Movement type" drop-down list in "Currencies" table
+		Then "Multi currency movement types" window is opened
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Reporting currency Euro' |
+		And I select current line in "List" table
 		And I finish line editing in "Currencies" table
 		And I click the button named "FormWriteAndClose"		
 	* Workstation

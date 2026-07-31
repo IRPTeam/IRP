@@ -2062,7 +2062,7 @@ Scenario: settings for Company (commission trade)
 		And I select current line in "List" table
 		And I move to "Currencies" tab
 		And in the table "Currencies" I click the button named "CurrenciesAdd"
-		And I click choice button of "Movement type" attribute in "Currencies" table
+		Then "Multi currency movement types" window is opened
 		And I go to line in "List" table
 			| 'Description'       |
 			| 'Local currency'    |

@@ -155,7 +155,7 @@ Scenario: _3510003 check clearing the values ​​of Tax types and Multi curren
 		And I set checkbox "Our Company"
 		* Filling in Multi currency movement type
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
-				And I click choice button of "Movement type" attribute in "Currencies" table
+				Then "Multi currency movement types" window is opened
 				And I go to line in "List" table
 					| 'Currency'                        | 'Deferred calculation'                        | 'Description'                               | 'Source'                              | 'Type'                              |
 					| 'USD'                             | 'No'                                          | 'Reporting currency'                        | 'Forex Seling'                        | 'Reporting'                         |

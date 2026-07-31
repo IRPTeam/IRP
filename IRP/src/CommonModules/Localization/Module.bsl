@@ -1810,6 +1810,15 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_192",   NStr("en = 'Document date [%1] less than Basis date [%2]'", Lang));
 	Strings.Insert("Error_193",   NStr("en = 'Basis document [%1] not posted'", Lang));
 	
+	Strings.Insert("Error_194",   NStr("en = 'From days [%1] more than to days[%2]'", Lang));
+	Strings.Insert("Error_195",   NStr("en = 'Gap with the previous period was detected'", Lang));
+	Strings.Insert("Error_196",   NStr("en = 'Overlap with the previous period was detected'", Lang));
+	Strings.Insert("Error_197",   NStr("en = 'Last line should contain 0 in to days'", Lang));
+	Strings.Insert("Error_198",   NStr("en = 'From days and to days cannot be equal to zero'", Lang));
+	Strings.Insert("Error_199",   NStr("en = 'From days and to days cannot be equal'", Lang));
+	
+	
+	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
 	// manufacturing errors

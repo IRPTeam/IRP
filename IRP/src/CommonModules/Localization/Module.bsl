@@ -1814,6 +1814,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_195",   NStr("en = 'Gap with the previous period was detected'", Lang));
 	Strings.Insert("Error_196",   NStr("en = 'Overlap with the previous period was detected'", Lang));
 	Strings.Insert("Error_197",   NStr("en = 'Last line should contain 0 in to days'", Lang));
+	Strings.Insert("Error_198",   NStr("en = 'From days and to days cannot be equal to zero'", Lang));
+	Strings.Insert("Error_199",   NStr("en = 'From days and to days cannot be equal'", Lang));
 	
 	
 	

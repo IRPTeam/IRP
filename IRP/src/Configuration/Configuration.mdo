@@ -541,7 +541,7 @@
   <roles>Role.Report_R1001_Purchases</roles>
   <roles>Role.Report_R1001A_Purchases</roles>
   <roles>Role.Report_R1010A_PurchaseOrders</roles>
-  <roles>Role.Report_R1011A_PuchaseOrdersShipment</roles>
+  <roles>Role.Report_R1011A_PurchaseOrdersShipment</roles>
   <roles>Role.Report_R1012A_PurchaseOrdersInvoiceClosing</roles>
   <roles>Role.Report_R1031A_ReceiptInvoicingBalance</roles>
   <roles>Role.Report_R1031B_ReceiptInvoicingMovements</roles>
@@ -1170,7 +1170,7 @@
   <commonCommands>CommonCommand.OpenReport_R1001A_Purchases</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R2001A_Sales</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R1010A_PurchaseOrders</commonCommands>
-  <commonCommands>CommonCommand.OpenReport_R1011A_PuchaseOrdersShipment</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1011A_PurchaseOrdersShipment</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R1012A_PurchaseOrdersInvoiceClosing</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R1031A_ReceiptInvoicingBalance</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R1031B_ReceiptInvoicingMovements</commonCommands>
@@ -1682,7 +1682,7 @@
   <reports>Report.R1001_Purchases</reports>
   <reports>Report.R1001A_Purchases</reports>
   <reports>Report.R1010A_PurchaseOrders</reports>
-  <reports>Report.R1011A_PuchaseOrdersShipment</reports>
+  <reports>Report.R1011A_PurchaseOrdersShipment</reports>
   <reports>Report.R1012A_PurchaseOrdersInvoiceClosing</reports>
   <reports>Report.R1031A_ReceiptInvoicingBalance</reports>
   <reports>Report.R1031B_ReceiptInvoicingMovements</reports>

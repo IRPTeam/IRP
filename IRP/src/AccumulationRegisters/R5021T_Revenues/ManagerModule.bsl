@@ -67,18 +67,14 @@ Procedure Revenues_LoadRecords(CalculationMovementCostRef) Export
 		RecordSet = CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(QuerySelection.Document);
 		
+		ArrayForSaveRecords = New Array();
 		RecordSet.Read();
-		ArrayForDelete = New Array();
 		For Each Record In RecordSet Do
-			If ValueIsFilled(Record.CalculationMovementCost) Or 
-					Record.CurrencyMovementType <> ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
-				ArrayForDelete.Add(Record);
+			If Not ValueIsFilled(Record.CalculationMovementCost) Then
+				ArrayForSaveRecords.Add(Record);
 			EndIf;
 		EndDo;
-		
-		For Each ItemForDelete In ArrayForDelete Do
-			RecordSet.Delete(ItemForDelete);
-		EndDo;
+		RecordSet.Clear();
 		
 		QuerySelectionDetails = QuerySelection.Select();
 		While QuerySelectionDetails.Next() Do
@@ -118,6 +114,9 @@ Procedure Revenues_LoadRecords(CalculationMovementCostRef) Export
 		CurrenciesServer.ExcludePostingDataTable(Parameters, RegMetadata);
 		
 		RecordSet.Load(Parameters.PostingDataTables[RegMetadata].PrepareTable);
+		For Each Record In ArrayForSaveRecords Do
+			FillPropertyValues(RecordSet.Add(), Record);
+		EndDo;
 		RecordSet.Write();
 	EndDo;
 EndProcedure

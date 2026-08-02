@@ -39,12 +39,12 @@
   <content>Document.InternalSupplyRequest</content>
   <content>Report.R401A_FreeStocks</content>
   <content>Report.R1010A_PurchaseOrders</content>
-  <content>Report.R1011A_PuchaseOrdersShipment</content>
+  <content>Report.R1011A_PurchaseOrdersShipment</content>
   <content>Report.R1012A_PurchaseOrdersInvoiceClosing</content>
   <content>Report.R4011B_FreeStockMovements</content>
   <content>Report.R4012A_StockReservation</content>
   <content>CommonCommand.OpenReport_R1010A_PurchaseOrders</content>
-  <content>CommonCommand.OpenReport_R1011A_PuchaseOrdersShipment</content>
+  <content>CommonCommand.OpenReport_R1011A_PurchaseOrdersShipment</content>
   <content>CommonCommand.OpenReport_R1012A_PurchaseOrdersInvoiceClosing</content>
   <content>CommonCommand.OpenReport_R401A_FreeStocks</content>
   <content>CommonCommand.OpenReport_R4011B_FreeStockMovements</content>

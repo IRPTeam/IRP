@@ -69,11 +69,60 @@ Scenario: _1000000 preparation (payment terms)
 		And I close all client application windows
 	* Load customers advance closing document
 		When Create document CustomersAdvancesClosing objects (without branch)
-	* Post all customers advance closing
-		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"	
+	* Post fixture customers advance closings one by one
+	# The closing left posted by _1000CreditLimit must stay unposted: its current-date period overlaps
+	# closing 4 and the overlapping-period control would block posting closing 4. So no blanket "post all" here.
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"	
-		And in the table "List" I click the button named "ListContextMenuPost"		
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '3'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '4'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '5'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '6'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '9'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '10'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '11'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '12'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '13'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '14'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '17'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '18'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay 5
 		And I close all client application windows
 	* Load Opening entry, Bank receipt

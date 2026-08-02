@@ -1544,12 +1544,7 @@ Scenario:  _0154143 change payment term in POS
 			And I expand "Price settings" group
 			And I expand "Store and delivery" group
 			And I input "Retail partner term 2" text in "ENG" field
-			And I click Select button of "Multi currency movement type" field
-			Then "Multi currency movement types" window is opened
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'TRY'             |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Multi currency movement type" drop-down list
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Description'              |

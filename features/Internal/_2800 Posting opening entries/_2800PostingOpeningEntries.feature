@@ -564,11 +564,7 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 			And I change "Type" radio button value to "Vendor"
 			And I input "DFC Vendor by Partner terms" text in the field named "Description_en"
 			And I input "01.12.2019" text in "Date" field
-			And I click Select button of "Multi currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Description'    | 'Source'          | 'Type'             |
-				| 'TRY'         | 'TRY'            | 'Forex Seling'    | 'Partner term'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Multi currency movement type" drop-down list
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Currency'    | 'Description'          |
@@ -650,11 +646,7 @@ Scenario: _400005 opening entry Customers transactions by partner terms (custome
 			And I change "Type" radio button value to "Customer"
 			And I input "DFC Customer by Partner terms" text in the field named "Description_en"
 			And I input "01.12.2019" text in "Date" field
-			And I click Select button of "Multi currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Description'    | 'Source'          | 'Type'             |
-				| 'TRY'         | 'TRY'            | 'Forex Seling'    | 'Partner term'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Multi currency movement type" drop-down list
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Description'           |

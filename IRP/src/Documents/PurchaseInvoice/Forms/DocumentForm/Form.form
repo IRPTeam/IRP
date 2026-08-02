@@ -4224,7 +4224,7 @@
         <name>GroupNumerator</name>
         <id>1085</id>
         <items xsi:type="form:FormField">
-          <name>DocumentNumber1</name>
+          <name>DocumentNumber</name>
           <id>1087</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -4235,7 +4235,7 @@
             <segments>Object.DocumentNumber</segments>
           </dataPath>
           <extendedTooltip>
-            <name>DocumentNumber1ExtendedTooltip</name>
+            <name>DocumentNumberExtendedTooltip</name>
             <id>1089</id>
             <type>Label</type>
             <autoMaxWidth>true</autoMaxWidth>
@@ -4245,7 +4245,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DocumentNumber1ContextMenu</name>
+            <name>DocumentNumberContextMenu</name>
             <id>1088</id>
             <autoFill>true</autoFill>
           </contextMenu>
@@ -4605,46 +4605,6 @@
         <contextMenu>
           <name>MovementTypeContextMenu</name>
           <id>793</id>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>DocumentNumber</name>
-        <id>1074</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.DocumentNumber</segments>
-        </dataPath>
-        <extendedTooltip>
-          <name>DocumentNumberExtendedTooltip</name>
-          <id>1076</id>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>DocumentNumberContextMenu</name>
-          <id>1075</id>
           <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>

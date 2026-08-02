@@ -9,7 +9,7 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>CommonCommand.OpenReport_R1001A_Purchases</content>
   <content>CommonCommand.OpenReport_R1010A_PurchaseOrders</content>
-  <content>CommonCommand.OpenReport_R1011A_PuchaseOrdersShipment</content>
+  <content>CommonCommand.OpenReport_R1011A_PurchaseOrdersShipment</content>
   <content>CommonCommand.OpenReport_R1012A_PurchaseOrdersInvoiceClosing</content>
   <content>CommonCommand.OpenReport_R1031B_ReceiptInvoicingMovements</content>
   <content>CommonCommand.OpenReport_R1031A_ReceiptInvoicingBalance</content>

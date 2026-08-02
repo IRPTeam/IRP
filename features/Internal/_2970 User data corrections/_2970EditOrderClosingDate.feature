@@ -145,9 +145,11 @@ Scenario: _2970003 check new date earlier than basis SalesOrder is blocked by li
 		And I click the hyperlink named "EditDate"
 		And I input "01.01.2023" text in the field named "Date"
 		And I click the button named "Save"
-	* Check the save is rejected and the form stays opened
-		And I click "Post" button
+	* Check the save is rejected with the linked rows control message
+	# Do not assert the "Edit order closing date" window by title: after the rejected save
+	# the form window reports an EMPTY title, so the title search never finds it
 		When TestClient log message contains "Wrong linked row" string
+		And I close current window
 	* Check SalesInvoice date is not changed
 		Then the editing text of form attribute named "Date" became equal to "$$SIDateBefore2970003$$"
 	And I close all client application windows
@@ -286,9 +288,13 @@ Scenario: _2970005 check stock stays consistent when Edit date moves closing ove
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button	
 		And I input "03.01.2022" text in the field named "Date"
+	# Commit the date change and let the async "Update item list info" dialog appear
+	# BEFORE the If-check - otherwise it pops up later and intercepts the ItemList steps
+		And I move to the next attribute
+		And Delay 2
 		If "Update item list info" window is opened Then
 			And I click "Uncheck all" button
-			And I click "OK" button	
+			And I click "OK" button
 		And I go to line in "ItemList" table
 			| 'Item key'    |
 			| 'S/Color 1'   |
@@ -558,9 +564,10 @@ Scenario: _2970009 check closing date shift is rolled back when the document wri
 		And I click "Ok" button	
 		And I input "25.01.2022" text in the field named "Date"
 		And I move to the next attribute
+		And Delay 2
 		If "Update item list info" window is opened Then
 			And I click "Uncheck all" button
-			And I click "OK" button	
+			And I click "OK" button
 		And I click the button named "FormPost"
 		And I wait "Number" field will be filled in "30" seconds
 		Then user message window does not contain messages
@@ -587,9 +594,11 @@ Scenario: _2970009 check closing date shift is rolled back when the document wri
 		And I input "01.02.2022" text in the field named "Date"
 		And I click the button named "Save"
 	* Check the save is rejected by the child document date control
-		Then there are lines in TestClient message log
-			|'Line No. [1] [Item with item key S/Color 1] RowID movements remaining: 4 . Required: 6 . Lacking: 2 .'|
-			|'{CommonForm.EditOrderClosingDate.Form(61)}: Error calling context method (Write): Failed to post "Sales invoice 22 dated 01.02.2022 00:00:00"!'|				
+	# The rejection is the child-date check Error_186 raised by CheckFilling BEFORE the write,
+	# so no "Failed to post" message appears. Do not put {...} module references into expected
+	# texts - VA evaluates curly braces as expressions and crashes on them
+		When TestClient log message contains "Document date [01.02.2022 00:00:00] greater than date" string
+		When TestClient log message contains "in [Sales return" string
 		And I close current window
 	* Check SI-1 date is not changed
 		Then the editing text of form attribute named "Date" became equal to "$$SIDateBefore2970009$$"

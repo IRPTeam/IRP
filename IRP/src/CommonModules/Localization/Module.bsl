@@ -502,6 +502,8 @@
 // * InfoMessage_031 - String - 
 // * InfoMessage_032 - String - 
 // * InfoMessage_033 - String - 
+// * InfoMessage_StartJob - String - 
+// * InfoMessage_RunJobCode - String - 
 // * InfoMessage_034 - String - 
 // * InfoMessage_035 - String - 
 // * InfoMessage_036 - String - 
@@ -1808,6 +1810,15 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_192",   NStr("en = 'Document date [%1] less than Basis date [%2]'", Lang));
 	Strings.Insert("Error_193",   NStr("en = 'Basis document [%1] not posted'", Lang));
 	
+	Strings.Insert("Error_194",   NStr("en = 'From days [%1] more than to days[%2]'", Lang));
+	Strings.Insert("Error_195",   NStr("en = 'Gap with the previous period was detected'", Lang));
+	Strings.Insert("Error_196",   NStr("en = 'Overlap with the previous period was detected'", Lang));
+	Strings.Insert("Error_197",   NStr("en = 'Last line should contain 0 in to days'", Lang));
+	Strings.Insert("Error_198",   NStr("en = 'From days and to days cannot be equal to zero'", Lang));
+	Strings.Insert("Error_199",   NStr("en = 'From days and to days cannot be equal'", Lang));
+	
+	
+	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
 	// manufacturing errors
@@ -1916,6 +1927,9 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_031", NStr("en = 'Do you want to continue job?'", Lang));
 	Strings.Insert("InfoMessage_032", NStr("en = 'Do you want to pause job?'", Lang));
 	Strings.Insert("InfoMessage_033", NStr("en = 'Do you want to stop job?'", Lang));
+	
+	Strings.Insert("InfoMessage_StartJob", NStr("en = 'Do you want to start job?'", Lang));
+	Strings.Insert("InfoMessage_RunJobCode", NStr("en = 'Do you want to execute code when there is a scheduled task?'", Lang));
 	
 	Strings.Insert("InfoMessage_034", NStr("en = 'Time zone not changed'", Lang));
 	Strings.Insert("InfoMessage_035", NStr("en = 'Time zone changed to %1'", Lang));
@@ -2744,6 +2758,10 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("PeriodClosing_Error4", NStr("en = 'Calculation mode is required field'", Lang));
 	Strings.Insert("PeriodClosing_Error5", NStr("en = 'Periodicity not selected'", Lang));
 	Strings.Insert("PeriodClosing_Error6", NStr("en = 'Overlapping period [%1 - %2]'", Lang));
+	
+	Strings.Insert("PeriodClosing_PeriodicityChoiceList_Everyday", NStr("en = 'Everyday'", Lang));
+	Strings.Insert("PeriodClosing_PeriodicityChoiceList_Monthly", NStr("en = 'Monthly'", Lang));
+	Strings.Insert("PeriodClosing_PeriodicityChoiceList_ByPeriod", NStr("en = 'By period'", Lang));	
 #EndRegion
 
 #Region CopyUserSettings

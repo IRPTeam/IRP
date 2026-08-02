@@ -541,7 +541,7 @@
   <roles>Role.Report_R1001_Purchases</roles>
   <roles>Role.Report_R1001A_Purchases</roles>
   <roles>Role.Report_R1010A_PurchaseOrders</roles>
-  <roles>Role.Report_R1011A_PuchaseOrdersShipment</roles>
+  <roles>Role.Report_R1011A_PurchaseOrdersShipment</roles>
   <roles>Role.Report_R1012A_PurchaseOrdersInvoiceClosing</roles>
   <roles>Role.Report_R1031A_ReceiptInvoicingBalance</roles>
   <roles>Role.Report_R1031B_ReceiptInvoicingMovements</roles>
@@ -878,7 +878,6 @@
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.InternalCommandsClient</commonModules>
   <commonModules>CommonModule.InternalCommandsServer</commonModules>
-  <commonModules>CommonModule.LandedCostServer</commonModules>
   <commonModules>CommonModule.LandedCostServer2</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
@@ -1109,6 +1108,9 @@
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseManualOffers</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBatchRelevance</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAdvanceRelevance</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBatchReallocate</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1170,7 +1172,7 @@
   <commonCommands>CommonCommand.OpenReport_R1001A_Purchases</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R2001A_Sales</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R1010A_PurchaseOrders</commonCommands>
-  <commonCommands>CommonCommand.OpenReport_R1011A_PuchaseOrdersShipment</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1011A_PurchaseOrdersShipment</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R1012A_PurchaseOrdersInvoiceClosing</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R1031A_ReceiptInvoicingBalance</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R1031B_ReceiptInvoicingMovements</commonCommands>
@@ -1292,6 +1294,9 @@
   <constants>Constant.UseVariableStore</constants>
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.UseManualOffers</constants>
+  <constants>Constant.UseBatchRelevance</constants>
+  <constants>Constant.UseAdvanceRelevance</constants>
+  <constants>Constant.UseBatchReallocate</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1682,7 +1687,7 @@
   <reports>Report.R1001_Purchases</reports>
   <reports>Report.R1001A_Purchases</reports>
   <reports>Report.R1010A_PurchaseOrders</reports>
-  <reports>Report.R1011A_PuchaseOrdersShipment</reports>
+  <reports>Report.R1011A_PurchaseOrdersShipment</reports>
   <reports>Report.R1012A_PurchaseOrdersInvoiceClosing</reports>
   <reports>Report.R1031A_ReceiptInvoicingBalance</reports>
   <reports>Report.R1031B_ReceiptInvoicingMovements</reports>

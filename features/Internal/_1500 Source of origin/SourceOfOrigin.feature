@@ -69,11 +69,7 @@ Scenario: _150041 preparation
 			And I select current line in "List" table
 			And I select "Company" exact value from the drop-down list named "Type"
 			And I move to "Landed cost" tab
-			And I click Select button of "Currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Deferred calculation'    | 'Description'       | 'Source'          | 'Type'      |
-				| 'TRY'         | 'No'                      | 'Local currency'    | 'Forex Seling'    | 'Legal'     |
-			And I select current line in "List" table
+			And I select "Local currency" exact value from "Currency movement type" drop-down list
 			Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 			And I click "Save and close" button
 			And I wait "Main Company (Company) *" window closing in 20 seconds
@@ -84,11 +80,7 @@ Scenario: _150041 preparation
 			And I select current line in "List" table
 			And I select "Company" exact value from the drop-down list named "Type"
 			And I move to "Landed cost" tab
-			And I click Select button of "Currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Deferred calculation'    | 'Description'       | 'Source'          | 'Type'      |
-				| 'TRY'         | 'No'                      | 'Local currency'    | 'Forex Seling'    | 'Legal'     |
-			And I select current line in "List" table
+			And I select "Local currency" exact value from "Currency movement type" drop-down list
 			Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 			And I click "Save and close" button
 			And I wait "Second Company (Company) *" window closing in 20 seconds

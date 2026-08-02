@@ -641,7 +641,7 @@ Scenario: _0960020 check Partner Term by Partner filtering in Employee cash adva
 			| 'FilterCompanyUse' | "Yes"          | ''            |			
 		And "List" table became equal
 			| 'Code' | 'Description'                      | 'Kind'    | 'Type'  | 'AP/AR posting detail' |
-			| '401'  | 'Sofia Borisova cash advance, TRY' | 'Regular' | 'Other' | 'By agreements'        |
+			| '401'  | 'Sofia Borisova cash advance, TRY' | 'Regular' | 'Other' | 'By partner terms'        |
 		And I close current window
 	* Change Partner
 		And I click Choice button of the field named "Partner"
@@ -666,7 +666,7 @@ Scenario: _0960020 check Partner Term by Partner filtering in Employee cash adva
 			| 'FilterCompanyUse' | "Yes"          | ''            |			
 		And "List" table became equal
 			| 'Code' | 'Description'                       | 'Kind'    | 'Type'  | 'AP/AR posting detail' |
-			| '400'  | 'Alexander Orlov cash advance, USD' | 'Regular' | 'Other' | 'By agreements'        |
+			| '400'  | 'Alexander Orlov cash advance, USD' | 'Regular' | 'Other' | 'By partner terms'        |
 		And I select current line in "List" table			
 	And I close all client application windows					
 							

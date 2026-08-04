@@ -1253,7 +1253,13 @@ EndFunction
 
 Function UseRegister(Name) Export
 	// Delete CashInTransit
-	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_";
+	Result = Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_";
+	If Upper(Name) = Upper("T1040T_AccountingAmounts") Or Upper(Name) = Upper("T1050T_AccountingQuantities") Then
+		If Not FOServer.IsUseAccounting() Then
+			Return False;
+		EndIf;
+	EndIf;
+	Return Result; 
 EndFunction
 
 Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export

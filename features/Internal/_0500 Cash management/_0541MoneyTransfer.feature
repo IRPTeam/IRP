@@ -64,11 +64,7 @@ Scenario: _054101 filling Money transfer (same currency and account type)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Sender and Send amount (cash account)
 		And I click Select button of "Sender" field
 		And "List" table contains lines
@@ -150,11 +146,7 @@ Scenario: _054102 filling Money transfer (different currency and account type)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Sender and Send amount (cash account)
 		And I click Select button of "Sender" field
 		And I go to line in "List" table

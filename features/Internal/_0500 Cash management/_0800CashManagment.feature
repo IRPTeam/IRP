@@ -64,21 +64,13 @@ Scenario: _0800001 check preparation
 Scenario: _080001 create Incoming payment order
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Account" field
 	And I go to line in "List" table
 		| Description         |
 		| Bank account, USD   |
 	And I select current line in "List" table
-	And I click Select button of "Currency" field
-	And I go to line in "List" table
-		| Code  | Description       |
-		| USD   | American dollar   |
-	And I select current line in "List" table
+	And I select "American dollar" exact value from "Currency" drop-down list
 	And I click Select button of "Planning period" field
 	And I go to line in "List" table
 		| 'Description'               |
@@ -173,21 +165,13 @@ Scenario: _080005 create Bank receipt based on Incoming payment order
 Scenario: _080006 create Outgoing payment order
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Account" field
 	And I go to line in "List" table
 		| 'Description'         |
 		| 'Bank account, TRY'   |
 	And I select current line in "List" table
-	And I click Select button of "Currency" field
-	And I go to line in "List" table
-		| 'Code'   |
-		| 'TRY'    |
-	And I select current line in "List" table
+	And I select "TRY" exact value from "Currency" drop-down list
 	And I click Select button of "Planning period" field
 	And I go to line in "List" table
 		| 'Description'               |

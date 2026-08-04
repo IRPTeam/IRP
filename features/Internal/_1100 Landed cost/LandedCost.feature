@@ -268,11 +268,7 @@ Scenario: _002 creating Calculation movement costs
 	* Calculation movement costs for Main company (01/08-15/08)
 		Then "Calculations movement costs" window is opened
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I input "01.08.2021" text in "Begin date" field
 		And I input "17.08.2021" text in "End date" field
 		And I input "01.08.2021 01:00:00" text in "Date" field
@@ -285,11 +281,7 @@ Scenario: _002 creating Calculation movement costs
 		And Delay 10
 	* Calculation movement costs for Second company
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I input "01.08.2021" text in "Begin date" field
 		And I input "20.08.2021" text in "End date" field
 		And I input "01.08.2021 01:00:02" text in "Date" field
@@ -339,11 +331,7 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 				| 'Description'                  |
 				| 'DFC Vendor by agreements'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -504,11 +492,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 				| 'Description'     |
 				| 'DFC'             |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description'                  |
@@ -593,11 +577,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Store 04'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second company'    |
-		And I select current line in "List" table
+		And I select "Second company" exact value from "Company" drop-down list
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -632,11 +612,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main company'    |
-		And I select current line in "List" table
+		And I select "Main company" exact value from "Company" drop-down list
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -809,11 +785,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		Then "Calculations movement costs" window is opened
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I input "18.08.2021" text in "Begin date" field
 		And I input "20.08.2021" text in "End date" field
 		And I input "18.08.2021 11:56:51" text in "Date" field
@@ -850,11 +822,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Store 04'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second company'    |
-		And I select current line in "List" table
+		And I select "Second company" exact value from "Company" drop-down list
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -893,11 +861,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main company'    |
-		And I select current line in "List" table
+		And I select "Main company" exact value from "Company" drop-down list
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    | 'Unit'    |
 			| 'Boots'   | 'Boots/S-8'   | 'pcs'     |
@@ -1150,11 +1114,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Description'    |
 			| 'Store 06'       |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second company'    |
-		And I select current line in "List" table
+		And I select "Second company" exact value from "Company" drop-down list
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №3 and Сhecking the report (Shirt/36/Red)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -1187,11 +1147,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Description'    |
 			| 'Store 02'       |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main company'    |
-		And I select current line in "List" table
+		And I select "Main company" exact value from "Company" drop-down list
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
@@ -1236,11 +1192,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Description'    |
 			| 'Store 02'       |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main company'    |
-		And I select current line in "List" table
+		And I select "Main company" exact value from "Company" drop-down list
 		And I go to line in "ItemList" table
 			| 'Item'     |
 			| 'Shirt'    |
@@ -1594,11 +1546,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Main Company'   | '3'        | 'Store 03'    |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -1671,11 +1619,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Second Company'   | '3'        | 'Store 03'    |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I select current line in "ItemList" table
 		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table	
@@ -1716,11 +1660,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Creating Bundle (Set)
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1795,11 +1735,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Creating UnBundle (Set)
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1854,11 +1790,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Creating one more Bundle (Set)
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1995,11 +1927,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Creating Unbandling of purchased Bundle
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2204,11 +2132,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 				| 'Description'             |
 				| 'Retail partner term'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table

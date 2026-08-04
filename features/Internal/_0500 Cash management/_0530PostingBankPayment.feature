@@ -231,16 +231,8 @@ Scenario: _0530011 create Bank payment (independently)
 		* Select transaction type
 			And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 		* Filling in the details of the document
-			And I click Select button of "Currency" field
-			And I go to line in "List" table
-				| Code    | Description      |
-				| TRY     | Turkish lira     |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Turkish lira" exact value from "Currency" drop-down list
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| Description           |
@@ -310,17 +302,8 @@ Scenario: _0530011 create Bank payment (independently)
 		And I click the button named "FormCreate"
 		* Filling in the details of the document
 			And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
-			And I click Select button of "Currency" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Code    | Description         |
-				| USD     | American dollar     |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "American dollar" exact value from "Currency" drop-down list
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| Description           |
@@ -381,17 +364,8 @@ Scenario: _0530011 create Bank payment (independently)
 		And I click the button named "FormCreate"
 		* Filling in the details of the document
 			And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
-			And I click Select button of "Currency" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Code    | Description     |
-				| EUR     | Euro            |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Euro" exact value from "Currency" drop-down list
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| Description           |
@@ -581,16 +555,8 @@ Scenario: _053019 try post Bank payment with empty amount
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    | Description      |
-			| TRY     | Turkish lira     |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description      |
-			| Main Company     |
-		And I select current line in "List" table
+		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description           |

@@ -32,11 +32,7 @@ Scenario: _005022 filling in the "Partners bank account" catalog
 		And I input "Банковский счет партнера" text in "RU" field
 		And I click "Ok" button
 		And I input "56788888888888689" text in "Number" field
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Euro'           |
-		And I select current line in "List" table
+		And I select "Euro" exact value from "Currency" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |

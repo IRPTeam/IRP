@@ -108,11 +108,7 @@ Scenario: _1005002 add fixed offset row prompts to write unsaved document
 		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "12.02.2021 23:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "11.02.2021" text in "Begin of period" field
 		And I input "12.02.2021" text in "End of period" field

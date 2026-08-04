@@ -347,11 +347,7 @@ Scenario: _1000000 preparation (credit limit)
 	* Create CustomersAdvancesClosing
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I input current date in the field named "EndOfPeriod"
 		And I input current date in the field named "BeginOfPeriod"
 		And I click "Post and close" button
@@ -422,11 +418,7 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 		And I move to "Payments" tab
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'     |
@@ -579,11 +571,7 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 		And I move to "Payments" tab
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'     |

@@ -522,11 +522,7 @@ Scenario: _2016 materials and production at one company, sales at another compan
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| Description    |

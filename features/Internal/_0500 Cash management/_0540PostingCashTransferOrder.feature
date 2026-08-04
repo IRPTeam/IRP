@@ -51,11 +51,7 @@ Scenario: _0540001 check preparation
 Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Bank accounts in the same currency)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
@@ -220,11 +216,7 @@ Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer or
 Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Bank accounts in the different currency)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
@@ -353,11 +345,7 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank account in the same currency)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
@@ -489,11 +477,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 Scenario: _054007 create Cash transfer order from bank account to Cash account (in the same currency)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
@@ -596,11 +580,7 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange in parts (exchange rate has increased)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
@@ -756,11 +736,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange in parts (exchange rate has decreased)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
@@ -895,11 +871,7 @@ Scenario: _054011 check input Description in the document Cash Transfer Order
 Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
@@ -1013,11 +985,7 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And I click the button named "FormCreate"
 		* Filling in basic details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Sender" field
 			And I go to line in "List" table
 				| Description           |
@@ -1053,11 +1021,7 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And I click the button named "FormCreate"
 		* Filling in basic details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Sender" field
 			And I go to line in "List" table
 				| Description      |

@@ -60,11 +60,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 		And I click the button named "FormCreate"
 		And I select "Return to vendor" exact value from "Transaction type" drop-down list
 	* Filling in main info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -227,11 +223,7 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I click the button named "FormCreate"
 	* Filling in main info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |

@@ -70,11 +70,7 @@ Scenario: _400001 opening entry account balance
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the tabular part account balance
 		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
 		And I click choice button of "Account" attribute in "AccountBalance" table
@@ -203,11 +199,7 @@ Scenario: _400002 opening entry inventory balance
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the tabular part Inventory
 		And I move to "Inventory" tab
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -454,11 +446,7 @@ Scenario: _400003 opening entry advance balance
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400003$$" variable
 		And I delete "$$OpeningEntry400003$$" variable
@@ -535,11 +523,7 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in Account payable
 		* Filling in partner and Legal name
 			And I move to "Account payable" tab
@@ -617,11 +601,7 @@ Scenario: _400005 opening entry Customers transactions by partner terms (custome
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in Account receivable
 		* Filling in partner and Legal name
 			And I move to "Account receivable" tab
@@ -700,11 +680,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the tabular part Account Balance
 		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
 		And I click choice button of "Account" attribute in "AccountBalance" table
@@ -878,11 +854,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in AP by documents first string
 		And I move to "Account payable" tab
 		And I move to the tab named "GroupAccountPayableByDocuments"
@@ -1105,11 +1077,7 @@ Scenario: _400010 check filling price and sum in the OpeningEntry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Amount calculation
 		And I move to "Inventory" tab
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -1203,11 +1171,7 @@ Scenario: _400012 create OpeningEntry (employee cash advance)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Employee cash advance tab
 		And I move to "Employee cash advance" tab
 		* Add first line
@@ -1293,11 +1257,7 @@ Scenario: _400013 create OpeningEntry (salary payment)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Salary payment
 		And I move to "Salary payment" tab
 		* Add first line
@@ -1371,11 +1331,7 @@ Scenario: _400014 create OpeningEntry (advance from retail customer)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling advance from retail customer
 		And I move to "Advance from retail customers" tab
 		* Add first line
@@ -1447,11 +1403,7 @@ Scenario: _400019 create OpeningEntry (cash in transit)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling cash in transit tab
 		And I move to "Cash in transit" tab
 		And in the table "CashInTransit" I click the button named "CashInTransitAdd"
@@ -1517,11 +1469,7 @@ Scenario: _400020 create OpeningEntry (account payble other and account receivab
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Account payble (other)
 		And I move to "Account payable (other)" tab
 		And in the table "AccountPayableOther" I click the button named "AccountPayableOtherAdd"
@@ -1572,11 +1520,7 @@ Scenario: _400023 create OpeningEntry (employee)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Salary payment
 		And I move to "Employee" tab
 		* Add first line

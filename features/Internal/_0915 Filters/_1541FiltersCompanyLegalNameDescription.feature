@@ -588,11 +588,7 @@ Scenario: _028050 check the filter by Company when selecting cash/bank in Cash e
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
 	* Check the filter by Company when selecting cash register/bank
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And "List" table does not contain lines
 			| 'Description'     |

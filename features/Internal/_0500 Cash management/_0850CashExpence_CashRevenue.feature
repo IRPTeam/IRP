@@ -62,11 +62,7 @@ Scenario: _085001 check tax calculation in the document Cash revenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -107,11 +103,7 @@ Scenario: _085002 check Cash revenue creation
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -157,11 +149,7 @@ Scenario: _085003 check the unavailability of currency selection in Cash revenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Description'          |
@@ -177,11 +165,7 @@ Scenario: _085004 check the availability of currency selection in Cash revenue (
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Description'     |
@@ -199,11 +183,7 @@ Scenario: _085005 check tax calculation in the document Cash expense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -237,11 +217,7 @@ Scenario: _085006 check Cash expense creation
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -292,11 +268,7 @@ Scenario: _085007 check the unavailability of currency selection in Cash expense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Description'          |
@@ -313,11 +285,7 @@ Scenario: _085008 check the availability of currency selection in Cash revenue (
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Description'     |
@@ -364,11 +332,7 @@ Scenario: _085015 check Cash expense (Other company expense)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Other company expense" exact value from "Transaction type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Other company" field
 		And I go to line in "List" table
 			| 'Description'       |
@@ -467,11 +431,7 @@ Scenario: _085016 check Cash revenue (Other company revenue)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Other company revenue" exact value from "Transaction type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Other company" field
 		And I go to line in "List" table
 			| 'Description'       |
@@ -570,11 +530,7 @@ Scenario: _085017 check Cash expense (Other company salary)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Salary payment" exact value from "Transaction type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Other company" field
 		And I go to line in "List" table
 			| 'Description'       |

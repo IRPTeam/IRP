@@ -69,11 +69,7 @@ Scenario: _005013 filling in the "Companies" catalog
 				Then "Multi currency movement types" window is opened
 				And I click the button named "FormCreate"
 				And I input "Local currency" text in the field named "Description_en"
-				And I click Select button of "Currency" field
-				And I go to line in "List" table
-					| 'Code'     | 'Description'       |
-					| 'TRY'      | 'Turkish lira'      |
-				And I select current line in "List" table
+				And I select "Turkish lira" exact value from "Currency" drop-down list
 				And I click Select button of "Source" field
 				And I go to line in "List" table
 					| 'Description'       |
@@ -88,12 +84,7 @@ Scenario: _005013 filling in the "Companies" catalog
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
 				Then "Multi currency movement types" window is opened
 				And I click the button named "FormCreate"
-				And I click Select button of "Currency" field
-				And I go to line in "List" table
-					| 'Code'     | 'Description'          |
-					| 'USD'      | 'American dollar'      |
-				And I activate "Description" field in "List" table
-				And I select current line in "List" table
+				And I select "American dollar" exact value from "Currency" drop-down list
 				And I click Select button of "Source" field
 				And I go to line in "List" table
 					| 'Description'       |
@@ -107,12 +98,7 @@ Scenario: _005013 filling in the "Companies" catalog
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
 				Then "Multi currency movement types" window is opened
 				And I click the button named "FormCreate"
-				And I click Select button of "Currency" field
-				And I go to line in "List" table
-					| 'Code'     | 'Description'          |
-					| 'USD'      | 'American dollar'      |
-				And I activate "Description" field in "List" table
-				And I select current line in "List" table
+				And I select "American dollar" exact value from "Currency" drop-down list
 				And I click Select button of "Source" field
 				And I go to line in "List" table
 					| 'Description'       |

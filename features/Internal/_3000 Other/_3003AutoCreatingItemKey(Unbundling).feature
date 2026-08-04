@@ -138,11 +138,7 @@ Scenario: _300302 create Unbundling and check creation item key
 	* Filling the document header Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description        |
-			| Main Company TR    |
-		And I select current line in "List" table
+		And I select "Main Company TR" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| Description       |
@@ -182,11 +178,7 @@ Scenario: _300302 create Unbundling and check creation item key
 		* Create one more Unbundling
 			Given I open hyperlink "e1cib/list/Document.Unbundling"
 			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description         |
-				| Main Company TR     |
-			And I select current line in "List" table
+			And I select "Main Company TR" exact value from "Company" drop-down list
 			And I click Select button of "Item bundle" field
 			And I go to line in "List" table
 				| Description        |

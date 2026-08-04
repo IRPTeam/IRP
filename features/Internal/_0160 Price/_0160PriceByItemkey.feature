@@ -721,11 +721,7 @@ Scenario: _016010 check dependent prices calculation
 		And I input "Dependent Price New" text in the field named "Description_en"
 		And I input "Dependent Price New TR" text in the field named "Description_tr"
 		And I click "Ok" button
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Choice button of the field named "Source"
 		And I go to line in "List" table
 			| 'Description'     |

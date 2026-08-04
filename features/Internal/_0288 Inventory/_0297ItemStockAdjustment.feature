@@ -34,11 +34,7 @@ Scenario: _0297001 create Item stock adjustment
 	Given I open hyperlink 'e1cib/list/Document.ItemStockAdjustment'
 	And I click the button named "FormCreate"
 	* Filling in Company and Store
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -95,18 +91,10 @@ Scenario: _0297001 create Item stock adjustment
 		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Change Company
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Second Company"
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value does not contain "*   Company: Second Company   Store: Store 02   " text
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value does not contain "*   Company: Main Company   Store: Store 02   " text
 	* Post

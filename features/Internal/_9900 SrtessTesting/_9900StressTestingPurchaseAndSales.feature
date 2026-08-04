@@ -86,16 +86,8 @@ Scenario: _9900007 change Sales invoice (1000 strings)
 		| '1'        |
 	And I select current line in "List" table
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'      |
-		| 'Second Company'   |
-	And I select current line in "List" table
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table	
+	And I select "Second Company" exact value from "Company" drop-down list
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I close all client application windows
 
 
@@ -152,16 +144,8 @@ Scenario: _9900012 change Sales invoice (100 strings)
 		| '2'        |
 	And I select current line in "List" table
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'      |
-		| 'Second Company'   |
-	And I select current line in "List" table
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table	
+	And I select "Second Company" exact value from "Company" drop-down list
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I close all client application windows
 
 
@@ -219,16 +203,8 @@ Scenario: _9900032 change Purchase invoice (1000 strings)
 		| '1'        |
 	And I select current line in "List" table
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'      |
-		| 'Second Company'   |
-	And I select current line in "List" table
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table	
+	And I select "Second Company" exact value from "Company" drop-down list
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I close all client application windows
 
 
@@ -287,16 +263,8 @@ Scenario: _9900043 change Purchase invoice (100 strings)
 		| '2'        |
 	And I select current line in "List" table
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'      |
-		| 'Second Company'   |
-	And I select current line in "List" table
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table	
+	And I select "Second Company" exact value from "Company" drop-down list
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I close all client application windows
 
 

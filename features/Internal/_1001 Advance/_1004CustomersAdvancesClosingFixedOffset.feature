@@ -128,11 +128,7 @@ Scenario: _1004002 add fixed offset row prompts to write unsaved document
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "13.01.2021 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "13.01.2021" text in "Begin of period" field
 		And I input "13.01.2021" text in "End of period" field
@@ -224,11 +220,7 @@ Scenario: _1004004 create closing with a pinned invoice (SI 2)
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "29.01.2021 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "27.01.2021" text in "Begin of period" field
 		And I input "28.01.2021" text in "End of period" field

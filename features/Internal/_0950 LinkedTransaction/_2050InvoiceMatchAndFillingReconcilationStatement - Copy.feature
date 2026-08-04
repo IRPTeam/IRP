@@ -115,11 +115,7 @@ Scenario: _2050001 preparation
 		And I click the button named "FormCreate"
 		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 		* Filling in the details of the document
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| Description           |
@@ -153,11 +149,7 @@ Scenario: _2050001 preparation
 		And I click the button named "FormCreate"
 		And I select "Payment from customer" exact value from "Transaction type" drop-down list
 		* Filling in the details of the document
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| Description           |
@@ -190,16 +182,8 @@ Scenario: _2050001 preparation
 		And I click the button named "FormCreate"
 		And I select "Payment from customer" exact value from "Transaction type" drop-down list
 		* Filling in the details of the document
-			And I click Select button of "Currency" field
-			And I go to line in "List" table
-				| Code    | Description      |
-				| TRY     | Turkish lira     |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Turkish lira" exact value from "Currency" drop-down list
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
 				| Description      |
@@ -249,16 +233,8 @@ Scenario: _2050001 preparation
 		And I click the button named "FormCreate"
 		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 		* Filling in the details of the document
-			And I click Select button of "Currency" field
-			And I go to line in "List" table
-				| Code    | Description      |
-				| TRY     | Turkish lira     |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Turkish lira" exact value from "Currency" drop-down list
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
 				| Description      |
@@ -310,19 +286,11 @@ Scenario: 2050002 check filling in Reconcilation statement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		And I click the button named "FormCreate"
 	* Fill in a document header
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "Turkish lira" exact value from "Currency" drop-down list
 		And I click Select button of "Begin period" field
 		And I input "01.03.2020" text in "Begin period" field		
 		And I input end of the current month date in "End period" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |

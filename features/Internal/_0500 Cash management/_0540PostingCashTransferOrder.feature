@@ -59,11 +59,7 @@ Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 			| Cash desk №1    |
 		And I select current line in "List" table
 		And I input "500,00" text in "Send amount" field
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Send currency" drop-down list
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
@@ -71,12 +67,7 @@ Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "500,00" text in "Receive amount" field
-		And I click Select button of "Receive currency" field
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
+		And I select "USD" exact value from "Receive currency" drop-down list
 	* Filling Send period and Receive period
 		And I click Select button of "Send period" field
 		And I go to line in "List" table
@@ -224,11 +215,7 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "200,00" text in "Send amount" field
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Send currency" drop-down list
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
@@ -236,12 +223,7 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 			| Cash desk №1    |
 		And I select current line in "List" table
 		And I input "1150,00" text in "Receive amount" field
-		And I click Select button of "Receive currency" field
-		And I go to line in "List" table
-			| Code   | Description     |
-			| TRY    | Turkish lira    |
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Receive currency" drop-down list
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
 			| 'Description'     |
@@ -352,11 +334,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			| Description     |
 			| Cash desk №1    |
 		And I select current line in "List" table
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Send currency" drop-down list
 		And I input "500,00" text in "Send amount" field
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
@@ -492,12 +470,7 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 			| Cash desk №1    |
 		And I select current line in "List" table
 		And I input "100,00" text in "Receive amount" field
-		And I click Select button of "Receive currency" field
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
+		And I select "USD" exact value from "Receive currency" drop-down list
 	* Filling Send period and Receive period
 		And I click Select button of "Send period" field
 		And I go to line in "List" table
@@ -588,11 +561,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "1150,00" text in "Send amount" field
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| Code   | Description     |
-			| TRY    | Turkish lira    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Send currency" drop-down list
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
@@ -600,12 +569,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "175,00" text in "Receive amount" field
-		And I click Select button of "Receive currency" field
-		And I go to line in "List" table
-			| Code    |
-			| EUR     |
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
+		And I select "EUR" exact value from "Receive currency" drop-down list
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
 			| 'Description'     |
@@ -744,11 +708,7 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "1315,00" text in "Send amount" field
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| Code   | Description     |
-			| TRY    | Turkish lira    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Send currency" drop-down list
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
@@ -756,12 +716,7 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "200,00" text in "Receive amount" field
-		And I click Select button of "Receive currency" field
-		And I go to line in "List" table
-			| Code    |
-			| EUR     |
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
+		And I select "EUR" exact value from "Receive currency" drop-down list
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
 			| 'Description'     |
@@ -997,11 +952,7 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 				| Description      |
 				| Cash desk №2     |
 			And I select current line in "List" table
-			And I click Select button of "Receive currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'         |
-				| 'USD'     | 'American dollar'     |
-			And I select current line in "List" table
+			And I select "USD" exact value from "Receive currency" drop-down list
 			And I input "200,00" text in "Receive amount" field
 		* Check the message output and that the document was not created
 			And I click the button named "FormPost"
@@ -1027,11 +978,7 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 				| Description      |
 				| Cash desk №2     |
 			And I select current line in "List" table
-			And I click Select button of "Send currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'         |
-				| 'USD'     | 'American dollar'     |
-			And I select current line in "List" table
+			And I select "USD" exact value from "Send currency" drop-down list
 			And I input "20,00" text in "Send amount" field
 			And I click Select button of "Receiver" field
 			And I go to line in "List" table

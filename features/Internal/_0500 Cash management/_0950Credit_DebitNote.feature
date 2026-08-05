@@ -500,7 +500,7 @@ Scenario: _095006 check Reconcilation statement
 			| 'Description'      |
 			| 'Company Maxim'    |
 		And I select current line in "List" table
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		Then "Reconciliation statement (create) *" window is opened
 		And I input "01.01.2020" text in "Begin period" field
 		And I input end of the current month date in "End period" field

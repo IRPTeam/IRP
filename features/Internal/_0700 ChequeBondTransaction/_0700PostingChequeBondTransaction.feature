@@ -557,7 +557,7 @@ Scenario: _2020031 check filter under valid agreements depending on the date of 
 			Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 			And I click the button named "FormCreate"
 		* Filling in basic details
-			And I select "Turkish lira" exact value from "Currency" drop-down list
+			And I select "TRY" exact value from "Currency" drop-down list
 			And I select "Main Company" exact value from "Company" drop-down list
 		* Adding cheques to the table part
 			And in the table "ChequeBonds" I click the button named "ChequeBondsAdd"

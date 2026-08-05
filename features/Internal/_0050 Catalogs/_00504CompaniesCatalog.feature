@@ -69,7 +69,7 @@ Scenario: _005013 filling in the "Companies" catalog
 				Then "Multi currency movement types" window is opened
 				And I click the button named "FormCreate"
 				And I input "Local currency" text in the field named "Description_en"
-				And I select "Turkish lira" exact value from "Currency" drop-down list
+				And I select "TRY" exact value from "Currency" drop-down list
 				And I click Select button of "Source" field
 				And I go to line in "List" table
 					| 'Description'       |
@@ -84,7 +84,7 @@ Scenario: _005013 filling in the "Companies" catalog
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
 				Then "Multi currency movement types" window is opened
 				And I click the button named "FormCreate"
-				And I select "American dollar" exact value from "Currency" drop-down list
+				And I select "USD" exact value from "Currency" drop-down list
 				And I click Select button of "Source" field
 				And I go to line in "List" table
 					| 'Description'       |
@@ -98,7 +98,7 @@ Scenario: _005013 filling in the "Companies" catalog
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
 				Then "Multi currency movement types" window is opened
 				And I click the button named "FormCreate"
-				And I select "American dollar" exact value from "Currency" drop-down list
+				And I select "USD" exact value from "Currency" drop-down list
 				And I click Select button of "Source" field
 				And I go to line in "List" table
 					| 'Description'       |

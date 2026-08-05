@@ -77,7 +77,7 @@ Scenario: _0851002 create Expense accruals (without PI and empty basis)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -121,7 +121,7 @@ Scenario: _0851003 create Expense accruals (without PI, Void)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -179,7 +179,7 @@ Scenario: _0851004 create Expense accruals (without PI, Reverse)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -230,7 +230,7 @@ Scenario: _0851005 check selection form for Expense accruals
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -252,7 +252,7 @@ Scenario: _0851006 create Expense accruals (other period expense)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -298,7 +298,7 @@ Scenario: _0851006 create Expense accruals (other period expense)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -350,7 +350,7 @@ Scenario: _0851007 create Revenue accruals (without SI and empty basis)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -394,7 +394,7 @@ Scenario: _0851008 create Revenue accruals (without SI, Void)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -452,7 +452,7 @@ Scenario: _0851009 create Revenue accruals (without SI, Reverse)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -503,7 +503,7 @@ Scenario: _0851010 check selection form for Revenue accruals
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -525,7 +525,7 @@ Scenario: _0851011 create Revenue accruals (other period expense)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -571,7 +571,7 @@ Scenario: _0851011 create Revenue accruals (other period expense)
 		And I click the button named "FormCreate"
 	* Filling in company and account
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |

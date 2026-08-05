@@ -789,12 +789,9 @@ Scenario: check the filter by Company
 			| Description    |
 			| Kalipso        |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -812,12 +809,9 @@ Scenario: check the filter by Company
 Scenario: check the filter by Company  in the inventory transfer
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -835,12 +829,9 @@ Scenario: check the filter by Company  in the inventory transfer
 Scenario: check the filter by Company  in the Shipment cinfirmation and Goods receipt
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -863,12 +854,9 @@ Scenario: check the filter by Company (Ferron)
 			| Description    |
 			| Ferron BP      |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -887,12 +875,9 @@ Scenario: check the filter by Company (Ferron)
 Scenario: check the filter by my own company
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -910,12 +895,9 @@ Scenario: check the filter by my own company
 Scenario: check the filter by my own company in Cash expence/Cash revenue
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -933,12 +915,9 @@ Scenario: check the filter by my own company in Cash expence/Cash revenue
 Scenario: check the filter by my own company in Reconcilation statement
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -958,12 +937,9 @@ Scenario: check the filter by my own company in Reconcilation statement
 Scenario: check the filter by my own company in Opening entry/Item stock adjustment
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 

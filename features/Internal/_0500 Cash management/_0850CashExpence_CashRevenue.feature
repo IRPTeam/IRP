@@ -333,11 +333,7 @@ Scenario: _085015 check Cash expense (Other company expense)
 	* Filling in company and account
 		And I select "Other company expense" exact value from "Transaction type" drop-down list
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I click Select button of "Other company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Other company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'     |
@@ -432,11 +428,7 @@ Scenario: _085016 check Cash revenue (Other company revenue)
 	* Filling in company and account
 		And I select "Other company revenue" exact value from "Transaction type" drop-down list
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I click Select button of "Other company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Other company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'     |
@@ -531,11 +523,7 @@ Scenario: _085017 check Cash expense (Other company salary)
 	* Filling in company and account
 		And I select "Salary payment" exact value from "Transaction type" drop-down list
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I click Select button of "Other company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Other company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'     |

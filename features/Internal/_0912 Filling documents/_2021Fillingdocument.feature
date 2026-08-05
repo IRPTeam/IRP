@@ -164,11 +164,7 @@ Scenario: _0154100 preparation ( filling documents)
 						| Cash desk №1       |
 					And I select current line in "List" table
 					And I input "400,00" text in "Send amount" field
-					And I click Select button of "Send currency" field
-					And I go to line in "List" table
-						| Code      | Description           |
-						| USD       | American dollar       |
-					And I select current line in "List" table
+					And I select "USD" exact value from "Send currency" drop-down list
 				* Filling Receiver and Receive amount
 					And I click Select button of "Receiver" field
 					And I go to line in "List" table
@@ -176,12 +172,7 @@ Scenario: _0154100 preparation ( filling documents)
 						| Cash desk №2       |
 					And I select current line in "List" table
 					And I input "400,00" text in "Receive amount" field
-					And I click Select button of "Receive currency" field
-					And I go to line in "List" table
-						| Code      | Description           |
-						| USD       | American dollar       |
-					And I activate "Description" field in "List" table
-					And I select current line in "List" table
+					And I select "USD" exact value from "Receive currency" drop-down list
 				* Filling Movement type
 					And I click Select button of "Send financial movement type" field
 					And I go to line in "List" table
@@ -221,11 +212,7 @@ Scenario: _0154100 preparation ( filling documents)
 						| Cash desk №2       |
 					And I select current line in "List" table
 					And I input "210,00" text in "Send amount" field
-					And I click Select button of "Send currency" field
-					And I go to line in "List" table
-						| Code      | Description           |
-						| USD       | American dollar       |
-					And I select current line in "List" table
+					And I select "USD" exact value from "Send currency" drop-down list
 				* Filling Receiver and Receive amount
 					And I click Select button of "Receiver" field
 					And I go to line in "List" table
@@ -233,12 +220,7 @@ Scenario: _0154100 preparation ( filling documents)
 						| Cash desk №1       |
 					And I select current line in "List" table
 					And I input "1200,00" text in "Receive amount" field
-					And I click Select button of "Receive currency" field
-					And I go to line in "List" table
-						| Code      | Description        |
-						| TRY       | Turkish lira       |
-					And I activate "Description" field in "List" table
-					And I select current line in "List" table
+					And I select "TRY" exact value from "Receive currency" drop-down list
 					And I click Select button of "Cash advance holder" field
 					And I go to line in "List" table
 						| 'Description'       |
@@ -3325,11 +3307,7 @@ Scenario: _0154115 check filling in and refilling Cash transfer order
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Send currency" drop-down list
 		And I input "100,00" text in "Send amount" field
 		And I move to the next attribute
 		And the editing text of form attribute named "ReceiveAmount" became equal to "100,00"
@@ -3353,21 +3331,13 @@ Scenario: _0154115 check filling in and refilling Cash transfer order
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Send currency" drop-down list
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Select button of "Receive currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Receive currency" drop-down list
 		Then the form attribute named "CashAdvanceHolder" became equal to ""
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
@@ -3402,22 +3372,14 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Select button of "Send currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Send currency" drop-down list
 			And I input "100,00" text in "Send amount" field
 			And I click Select button of "Receiver" field
 			And I go to line in "List" table
 				| 'Description'      |
 				| 'Cash desk №1'     |
 			And I select current line in "List" table
-			And I click Select button of "Receive currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Receive currency" drop-down list
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
 			And I click the button named "FormPost"
@@ -3434,11 +3396,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Select button of "Send currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Send currency" drop-down list
 			And I input "100,00" text in "Send amount" field
 			And I click Select button of "Receiver" field
 			And I go to line in "List" table
@@ -3461,11 +3419,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Select button of "Receive currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Receive currency" drop-down list
 			And I input "100,00" text in "Send amount" field
 			And I click Select button of "Sender" field
 			And I go to line in "List" table
@@ -4140,7 +4094,7 @@ Scenario: _0154122 check filling in and refilling Reconcilation statement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		And I click the button named "FormCreate"
 	* Filling in basic details
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Begin period" field
 		And I input "01.01.2020" text in "Begin period" field
 		And I input "01.01.2029" text in "End period" field
@@ -4191,7 +4145,7 @@ Scenario: _0154122 check filling in and refilling Reconcilation statement
 		And in the table "Transactions" I click "Fill" button
 		Then the number of "Transactions" table lines is "равно" 0
 	* Check refilling when re-selecting a legal name (partner previous)
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
 			| 'Description'                 |

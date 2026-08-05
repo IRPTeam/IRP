@@ -237,7 +237,7 @@ Scenario: _0500011 create Cash receipt (independently)
 		* Filling in the details of the document
 			And I select "Payment from customer" exact value from "Transaction type" drop-down list
 			And I select "Main Company" exact value from "Company" drop-down list
-			And I select "Turkish lira" exact value from "Currency" drop-down list
+			And I select "TRY" exact value from "Currency" drop-down list
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
 				| Description      |
@@ -371,7 +371,7 @@ Scenario: _0500011 create Cash receipt (independently)
 				| Description      |
 				| Cash desk №2     |
 			And I select current line in "List" table
-			And I select "Euro" exact value from "Currency" drop-down list
+			And I select "EUR" exact value from "Currency" drop-down list
 		And I click the button named "PaymentListAdd"
 		* Filling in a partner in a tabular part
 			And I activate "Partner" field in "PaymentList" table
@@ -425,7 +425,7 @@ Scenario: _0500012 check form for select basis document
 		* Filling in the details of the document
 			And I select "Payment from customer" exact value from "Transaction type" drop-down list
 			And I select "Main Company" exact value from "Company" drop-down list
-			And I select "Turkish lira" exact value from "Currency" drop-down list
+			And I select "TRY" exact value from "Currency" drop-down list
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
 				| Description      |

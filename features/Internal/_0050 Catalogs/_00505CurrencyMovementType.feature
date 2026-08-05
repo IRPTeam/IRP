@@ -26,7 +26,7 @@ Scenario: _005017 creation Movement Type for Partner term currencies
 	* Create currency for Partner terms - TRY
 		And I click the button named "FormCreate"
 		And I input "TRY" text in the field named "Description_en"
-		And I select "Turkish lira" exact value from "Currency" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Source" field
 		And I go to line in "List" table
 			| 'Description'     |

@@ -70,7 +70,7 @@ Scenario: _080001 create Incoming payment order
 		| Description         |
 		| Bank account, USD   |
 	And I select current line in "List" table
-	And I select "American dollar" exact value from "Currency" drop-down list
+	And I select "USD" exact value from "Currency" drop-down list
 	And I click Select button of "Planning period" field
 	And I go to line in "List" table
 		| 'Description'               |

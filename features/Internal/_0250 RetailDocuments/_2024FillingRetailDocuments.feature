@@ -1717,11 +1717,7 @@ Scenario:  _0154149 create Cash statement
 			| 'Description'     |
 			| 'Transit Main'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click "Save and close" button		
 	* Create Cash statement statuses
 		* Done

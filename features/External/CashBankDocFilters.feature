@@ -385,11 +385,7 @@ Scenario: check the choice of currency in the bank payment document if the curre
 	And I select current line in "List" table
 	Then the form attribute named "Currency" became equal to "TRY"
 	* Change currency from lira to USD
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 	* Check that the document currency is the lira
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "Account" became equal to ""
@@ -406,11 +402,7 @@ Scenario: check the choice of currency in the cash payment document if the curre
 	And I select current line in "List" table
 	Then the form attribute named "Currency" became equal to "TRY"
 	* Change currency from lira to USD
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 	* Check that the currency of the document has become USD while the Cash account field has cleared
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "CashAccount" became equal to ""
@@ -432,11 +424,7 @@ Scenario: create a temporary cash desk Cash account No. 4 with a strictly fixed 
 		| Main Company   |
 	And I select current line in "List" table
 	And I change the radio button named "CurrencyType" value to "Fixed"
-	And I click Choice button of the field named "Currency"
-	And I go to line in "List" table
-		| Code  | Description    |
-		| TRY   | Turkish lira   |
-	And I select current line in "List" table
+	And I select "TRY" exact value from the drop-down list named "Currency"
 	And I click the button named "FormWriteAndClose"
 	And Delay 5
 	Then I check for the "CashAccounts" catalog element with the "Description_en" "Cash desk №4"  

@@ -232,11 +232,7 @@ Scenario: _0970006 create Cash receipt (cash transfer)
 			| 'Description'  |
 			| 'Cash desk №1' |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 		And I click Choice button of the field named "Branch"
 		And I go to line in "List" table

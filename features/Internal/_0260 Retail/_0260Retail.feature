@@ -759,11 +759,7 @@ Scenario: _0260137 return advance payment (cash)
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "PaymentListAdd"
 		And I activate "Retail customer" field in "PaymentList" table
 		And I select current line in "PaymentList" table

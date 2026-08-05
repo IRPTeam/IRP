@@ -161,11 +161,7 @@ Scenario: _0293002 create Work sheet based on Work order without SO (link, unlin
 		And I delete "$$WorkSheet1$$" variable
 		And I save the value of "Number" field as "$$NumberWorkSheet1$$"
 		And I save the window as "$$WorkSheet1$$"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "FormPostAndClose"		
 				
 					
@@ -197,11 +193,7 @@ Scenario: _0293002 create Work sheet based on SO
 		And I delete "$$WorkSheet2$$" variable
 		And I save the value of "Number" field as "$$NumberWorkSheet2$$"
 		And I save the window as "$$WorkSheet2$$"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "FormPostAndClose"		
 						
 					
@@ -240,11 +232,7 @@ Scenario: _0293003 create Work sheet based on WO with SO
 			| '5'   | 'Include to work cost'   | 'Material 2'   | 'Material 2'   | 'Material 2'       | 'pcs'          | '2'                | 'Store 01'   | 'Material 2'   | 'pcs'    | '2'           |
 	
 		Then the form attribute named "Branch" became equal to "Front office"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table	
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberWorkSheet3$$" variable
@@ -367,11 +355,7 @@ Scenario: _0293004 create Work sheet without bases document
 			| 'Description'    |
 			| 'Workshop 1'     |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberWorkSheet4$$" variable

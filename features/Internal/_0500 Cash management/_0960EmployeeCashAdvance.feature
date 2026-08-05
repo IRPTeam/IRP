@@ -127,11 +127,7 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 			| 'Description'     |
 			| 'Cash desk №1'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I select "Approved" exact value from the drop-down list named "Status"
 		And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 	* Filling tabular part
@@ -415,11 +411,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 				| 'Description'  |
 				| 'Cash desk №1' |
 			And I select current line in "List" table
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| 'Code' |
-				| 'USD'  |
-			And I select current line in "List" table
+			And I select "USD" exact value from the drop-down list named "Currency"
 			And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 		* Filling tabular part
 			And I click the button named "PaymentListAdd"

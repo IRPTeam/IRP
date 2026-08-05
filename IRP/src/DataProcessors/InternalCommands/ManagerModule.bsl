@@ -390,7 +390,7 @@ Procedure ShowNumerator_OnInitialization(CommandName, CommandParameters, Cancel,
 		RuleRef = CommandParameters.MainAttribute.NumeratorRules; // CatalogRef.NumeratorGroups
 		If Not ValueIsFilled(RuleRef) Then
 			RuleRef = NumberingRulesServer.GetNumeratorGroupForDocument(
-				CommandParameters.ObjectFullName, CommonFunctionsServer.GetCurrentSessionDate());
+				CommandParameters.ObjectFullName, CommandParameters.MainAttribute);
 		EndIf;
 		
 		NumeratorDescription = NumberingRulesServer.FillNumeratorDescription(RuleRef);

@@ -253,11 +253,7 @@ Scenario: _0293004 create Work sheet without bases document
 			| 'Kalipso'        |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"		
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Filling works tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table

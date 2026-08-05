@@ -118,11 +118,7 @@ Scenario: _2008 create production cost allocation (not direct cost)
 	* Create Production cost allocation
 		Given I open hyperlink "e1cib/list/Document.ProductionCostsAllocation"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I input current date in "Begin date" field
 		And I input current date in "End date" field
 	* Fill duration
@@ -149,11 +145,7 @@ Scenario: _2008 create production cost allocation (not direct cost)
 			| 'Expense'        |
 		And I select current line in "List" table
 		And I activate "Currency" field in "ProductionCostsList" table
-		And I click choice button of "Currency" attribute in "ProductionCostsList" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "ProductionCostsList" table
 		And I finish line editing in "ProductionCostsList" table
 		And I activate field named "ProductionCostsListAmount" in "ProductionCostsList" table
 		And I select current line in "ProductionCostsList" table
@@ -173,8 +165,7 @@ Scenario: _2008 create production cost allocation (not direct cost)
 			| 'Description'    |
 			| 'Delivery'       |
 		And I select current line in "List" table
-		And I click choice button of "Currency" attribute in "ProductionCostsList" table
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "ProductionCostsList" table
 		And I activate field named "ProductionCostsListAmount" in "ProductionCostsList" table
 		And I input "2 000,00" text in the field named "ProductionCostsListAmount" of "ProductionCostsList" table
 		And I finish line editing in "ProductionCostsList" table
@@ -206,11 +197,7 @@ Scenario: _2010 create Calculation movement costs (batch realocate)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click the button named "FormCreate"
 	* Fill and post
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
 		And I input current date in "Begin date" field
 		And I input current date in "End date" field
@@ -273,11 +260,7 @@ Scenario: _2014 transfer of production (check landed cost)
 		* Create first IT
 			Given I open hyperlink "e1cib/list/Document.InventoryTransfer"		
 			And I click the button named "FormCreate"
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from the drop-down list named "Company"
 			And I activate field named "ItemListLineNumber" in "ItemList" table
 			And I click Select button of "Store sender" field
 			And I go to line in "List" table
@@ -309,11 +292,7 @@ Scenario: _2014 transfer of production (check landed cost)
 		* Create second IT
 			Given I open hyperlink "e1cib/list/Document.InventoryTransfer"		
 			And I click the button named "FormCreate"
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from the drop-down list named "Company"
 			And I activate field named "ItemListLineNumber" in "ItemList" table
 			And I click Select button of "Store sender" field
 			And I go to line in "List" table
@@ -571,11 +550,7 @@ Scenario: _2020 check filling extra direct cost from bill of material
 	* Create production
 		Given I open hyperlink "e1cib/list/Document.Production"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select from "Business unit" drop-down list by "Production store 05" string
 		And I select from the drop-down list named "Item" by "Product" string
 		And I move to the next attribute

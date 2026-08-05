@@ -1,4 +1,4 @@
-#language: en
+0#language: en
 @tree
 @Positive
 @ChequeBondTransaction
@@ -116,11 +116,7 @@ Scenario: _0700002 create Cheque bond transaction (AP-AR by agreement), receipt 
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
 	* Filling Company, Currency and Branch
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I move to "Other" tab
 		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Branch"
@@ -238,11 +234,7 @@ Scenario: _0700003 create Cheque bond transaction (AP-AR by agreement), payed st
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
 	* Filling Company, Currency and Branch
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I move to "Other" tab
 		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Branch"
@@ -376,11 +368,7 @@ Scenario: _0700023 check partner term auto filling in the ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
 	* Filling Company, Currency and Branch
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I move to "Other" tab
 		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Branch"

@@ -708,11 +708,8 @@ Scenario: check the filter by Legal name
 		And Delay 2
 		And I input "Company Ferron BP" text in "Legal name" field
 		And Delay 2
-		And I click Select button of "Company" field
-		And "List" table does not contain lines
-			| Description          |
-			| Company Ferron BP    |
-		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			| 'And I select "Company Ferron BP" exact value from "Company" drop-down list' |
 		When I Check the steps for Exception
 			| 'Then the form attribute named "LegalName" became equal to 'Company Ferron BP''    |
 	And I close all client application windows
@@ -737,11 +734,8 @@ Scenario: check the filter by Legal name (Ferron)
 		And Delay 2
 		And I input "Company Kalipso" text in "Legal name" field
 		And Delay 2
-		And I click Select button of "Company" field
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
 		When I Check the steps for Exception
 			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
 	And I close all client application windows
@@ -765,11 +759,8 @@ Scenario: check the filter by Legal name (Ferron) in Goods receipt and Shipment 
 		And Delay 2
 		And I input "Company Kalipso" text in "Legal name" field
 		And Delay 2
-		And I click Select button of "Company" field
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
 		When I Check the steps for Exception
 			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
 	* Check the automatic completion of the Legal name if the partner has only one
@@ -1004,10 +995,8 @@ Scenario: check the filter by customers in the sales documents
 	And Delay 2
 	And I input "Alexander Orlov" text in "Partner" field
 	And Delay 2
-	And I click Select button of "Company" field
-	And "List" table does not contain lines
-			| Description        |
-			| Alexander Orlov    |
+	When I Check the steps for Exception
+		| 'And I select "Alexander Orlov" exact value from "Company" drop-down list' |
 	And I select current line in "List" table
 	When I Check the steps for Exception
 		| 'Then the form attribute named "Partner" became equal to 'Alexander Orlov''   |
@@ -1032,10 +1021,8 @@ Scenario: check the filter by vendors in the purchase documents
 	And Delay 2
 	And I input "Kalipso" text in "Partner" field
 	And Delay 2
-	And I click Select button of "Company" field
-	And "List" table does not contain lines
-			| Description    |
-			| Kalipso        |
+	When I Check the steps for Exception
+		| 'And I select "Kalipso" exact value from "Company" drop-down list' |
 	And I select current line in "List" table
 	When I Check the steps for Exception
 		| 'Then the form attribute named "Partner" became equal to 'Kalipso''   |

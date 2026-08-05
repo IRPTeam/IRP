@@ -334,8 +334,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I click "Create" button
 		And I input "Partner account 1" text in "ENG" field
 		And I input "56788999000" text in the field named "Number"
-		And I click Choice button of the field named "Currency"
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I select from the drop-down list named "Partner" by "kalipso" string
 		And I select from "Legal entity" drop-down list by "kalipso" string	
 		And I input "Bank 1" text in "Bank name" field
@@ -382,8 +381,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I click "Create" button
 		And I input "Partner account 1" text in "ENG" field
 		And I input "56788999001" text in the field named "Number"
-		And I click Choice button of the field named "Currency"
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I select from the drop-down list named "Partner" by "ferron" string
 		And I select from "Legal entity" drop-down list by "ferron" string	
 		And I input "Bank 1" text in "Bank name" field

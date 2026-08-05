@@ -67,11 +67,7 @@ Scenario: _0960005 create Outgoing payment order (employee cash advance, from ba
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And I click "Create" button
 	* Filling OPO
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -117,11 +113,7 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And I click "Create" button
 	* Filling OPO
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -250,11 +242,7 @@ Scenario: _0960015 create document Employee cash advance (own expense, paymentcu
 	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 	And I click "Create" button
 	* Filling header
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description'      |
@@ -300,11 +288,7 @@ Scenario: _0960016 create document Employee cash advance (purchase, paymentcurre
 	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 	And I click "Create" button
 	* Filling header
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description'       |
@@ -354,11 +338,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click "Create" button
 		* Filling BP
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'Main Company'    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from the drop-down list named "Company"
 			And I click Choice button of the field named "Account"
 			And I go to line in "List" table
 				| 'Currency'   | 'Description'          |
@@ -401,11 +381,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click "Create" button
 		* Filling CP
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'Main Company'    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from the drop-down list named "Company"
 			And I click Choice button of the field named "CashAccount"
 			And I go to line in "List" table
 				| 'Description'  |
@@ -450,11 +426,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 		And I click "Create" button
 		* Filling header
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'Main Company'    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from the drop-down list named "Company"
 			And I click Choice button of the field named "Partner"
 			And I go to line in "List" table
 				| 'Description'       |
@@ -520,11 +492,7 @@ Scenario: _0960019 create document Bank payment/Employee cash advance (purchase,
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click "Create" button
 		* Filling BP
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'Main Company'    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from the drop-down list named "Company"
 			And I click Choice button of the field named "Account"
 			And I go to line in "List" table
 				| 'Currency'   | 'Description'          |
@@ -568,11 +536,7 @@ Scenario: _0960019 create document Bank payment/Employee cash advance (purchase,
 		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 		And I click "Create" button
 		* Filling header
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'Main Company'    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from the drop-down list named "Company"
 			And I click Choice button of the field named "Partner"
 			And I go to line in "List" table
 				| 'Description'       |

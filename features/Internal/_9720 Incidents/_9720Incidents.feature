@@ -222,11 +222,7 @@ Scenario: _972004 create WorkOrder
 		| 'Description' |
 		| 'Vendor 6'    |
 	And I click the button named "FormChoose"
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| "Description"   |
-		| "Own company 1" |
-	And I click the button named "FormChoose"
+	And I select "Own company 1" exact value from the drop-down list named "Company"
 * Filling Worker
 	And I move to the tab named "GroupWorkers"
 	And in the table "Workers" I click the button named "WorkersAdd"
@@ -275,11 +271,7 @@ Scenario: _972005 create WorkSheet
 		| "Vendor 6"    |
 	And I click the button named "FormChoose"
 	Then the form attribute named "LegalName" became equal to "Vendor 6"
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| "Description"   |
-		| "Own company 1" |
-	And I click the button named "FormChoose"
+	And I select "Own company 1" exact value from the drop-down list named "Company"
 * Filling work details
 	And I move to the tab named "GroupWorkers"
 	And in the table "Workers" I click the button named "WorkersAdd"
@@ -300,11 +292,7 @@ Scenario: _972005 create WorkSheet
 	And I input "5,000" text in the field named "WorkersQuantity" of "Workers" table
 	And I finish line editing in "Workers" table
 	And I move to the tab named "GroupOther"
-	And I click Choice button of the field named "Currency"
-	And I go to line in "List" table
-		| 'Description' |
-		| 'TRY '        |
-	And I click the button named "FormChoose"
+	And I select "TRY" exact value from the drop-down list named "Currency"
 	And in the table "IssueList" I click the button named "IssueListAdd"
 	And I click choice button of the attribute named "IssueListIssue" in "IssueList" table
 	And I go to line in "List" table
@@ -432,11 +420,7 @@ Scenario: _972008 create WorkOrder within Project
 		| 'Description' |
 		| 'Vendor 6'    |
 	And I click the button named "FormChoose"
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| "Description"   |
-		| "Own company 1" |
-	And I click the button named "FormChoose"
+	And I select "Own company 1" exact value from the drop-down list named "Company"
 * Filling Worker
 	And I move to the tab named "GroupWorkers"
 	And in the table "Workers" I click the button named "WorkersAdd"

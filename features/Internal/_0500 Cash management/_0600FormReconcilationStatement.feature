@@ -69,11 +69,7 @@ Scenario: _060006 check auto filling Reconcilation statement (currency and trans
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And I click the button named "FormCreate"
 	* Select Company and Partner
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description' |

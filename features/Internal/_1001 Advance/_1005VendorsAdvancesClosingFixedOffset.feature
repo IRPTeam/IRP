@@ -1,4 +1,4 @@
-#language: en
+0#language: en
 @tree
 @Positive
 @Advance
@@ -140,11 +140,7 @@ Scenario: _1005003 fill and save a fixed offset row to the register
 		And I select current line in "List" table
 	* Add and fill a fixed offset row (document is already saved -> no prompt)
 		And in the table "FixedOffsetOfAdvances" I click the button named "FixedOffsetOfAdvancesAdd"
-		And I click choice button of "Currency" attribute in "FixedOffsetOfAdvances" table
-		And I go to line in "List" table
-			| 'Code'   |
-			| 'TRY'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "FixedOffsetOfAdvances" table
 		And I activate "Partner" field in "FixedOffsetOfAdvances" table
 		And I click choice button of "Partner" attribute in "FixedOffsetOfAdvances" table
 		And I go to line in "List" table

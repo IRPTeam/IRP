@@ -538,8 +538,7 @@ Scenario: _017101 check input item key by line in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		Then "Stores" window is opened
 		And I select current line in "List" table
@@ -579,8 +578,7 @@ Scenario: _017102 check for the creation of the missing item key from the Purcha
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		Then "Stores" window is opened
 		And I select current line in "List" table
@@ -641,8 +639,7 @@ Scenario: _017105 filter when selecting item key in the purchase order document
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		Then "Stores" window is opened
 		And I select current line in "List" table

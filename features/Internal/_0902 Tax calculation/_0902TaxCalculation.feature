@@ -831,11 +831,7 @@ Scenario: _090216 check tax in the BP (depend of transaction type)
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And I click the button named "FormCreate"
 	* Filling main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |
@@ -872,11 +868,7 @@ Scenario: _090217 check tax in the CP (depend of transaction type)
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And I click the button named "FormCreate"
 	* Filling main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -913,11 +905,7 @@ Scenario: _090218 check tax in the CR (depend of transaction type)
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I click the button named "FormCreate"
 	* Filling main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -954,11 +942,7 @@ Scenario: _090219 check tax in the BR (depend of transaction type)
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And I click the button named "FormCreate"
 	* Filling main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |
@@ -995,11 +979,7 @@ Scenario: _090220 check tax in the CE (depend of transaction type)
 	Given I open hyperlink "e1cib/list/Document.CashExpense"
 	And I click the button named "FormCreate"
 	* Filling main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |
@@ -1028,11 +1008,7 @@ Scenario: _090221 check tax in the CR (depend of transaction type)
 	Given I open hyperlink "e1cib/list/Document.CashRevenue"
 	And I click the button named "FormCreate"
 	* Filling main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |

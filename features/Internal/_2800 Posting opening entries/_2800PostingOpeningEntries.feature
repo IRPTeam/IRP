@@ -79,11 +79,7 @@ Scenario: _400001 opening entry account balance
 			| Cash desk №1    |
 		And I select current line in "List" table
 		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
-		And I click choice button of "Currency" attribute in "AccountBalance" table
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "AccountBalance" table
 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
 		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
@@ -94,11 +90,7 @@ Scenario: _400001 opening entry account balance
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
-		And I click choice button of "Currency" attribute in "AccountBalance" table
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list in "AccountBalance" table
 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
 		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
@@ -109,11 +101,7 @@ Scenario: _400001 opening entry account balance
 			| Cash desk №3    |
 		And I select current line in "List" table
 		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
-		And I click choice button of "Currency" attribute in "AccountBalance" table
-		And I go to line in "List" table
-			| Code   | Description    |
-			| EUR    | Euro           |
-		And I select current line in "List" table
+		And I select "EUR" exact value from "Currency" drop-down list in "AccountBalance" table
 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
 		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
@@ -563,12 +551,7 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 		* Filling in amount and currency
 			And I activate "Currency" field in "AccountPayableByAgreements" table
 			And I select current line in "AccountPayableByAgreements" table
-			And I click choice button of "Currency" attribute in "AccountPayableByAgreements" table
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AccountPayableByAgreements" table
 			And I activate "Amount" field in "AccountPayableByAgreements" table
 			And I input "100,00" text in "Amount" field of "AccountPayableByAgreements" table
 			And I finish line editing in "AccountPayableByAgreements" table
@@ -641,12 +624,7 @@ Scenario: _400005 opening entry Customers transactions by partner terms (custome
 		* Filling in amount and currency
 			And I activate "Currency" field in "AccountReceivableByAgreements" table
 			And I select current line in "AccountReceivableByAgreements" table
-			And I click choice button of "Currency" attribute in "AccountReceivableByAgreements" table
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AccountReceivableByAgreements" table
 			And I activate "Amount" field in "AccountReceivableByAgreements" table
 			And I input "100,00" text in "Amount" field of "AccountReceivableByAgreements" table
 			And I finish line editing in "AccountReceivableByAgreements" table
@@ -689,11 +667,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
-		And I click choice button of "Currency" attribute in "AccountBalance" table
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list in "AccountBalance" table
 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
 		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
@@ -785,12 +759,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		* Filling in amount and currency
 			And I activate "Currency" field in "AccountPayableByAgreements" table
 			And I select current line in "AccountPayableByAgreements" table
-			And I click choice button of "Currency" attribute in "AccountPayableByAgreements" table
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AccountPayableByAgreements" table
 			And I activate "Amount" field in "AccountPayableByAgreements" table
 			And I input "111,00" text in "Amount" field of "AccountPayableByAgreements" table
 			And I finish line editing in "AccountPayableByAgreements" table
@@ -817,12 +786,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		* Filling in amount and currency
 			And I activate "Currency" field in "AccountReceivableByAgreements" table
 			And I select current line in "AccountReceivableByAgreements" table
-			And I click choice button of "Currency" attribute in "AccountReceivableByAgreements" table
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AccountReceivableByAgreements" table
 			And I activate "Amount" field in "AccountReceivableByAgreements" table
 			And I input "151,00" text in "Amount" field of "AccountReceivableByAgreements" table
 			And I finish line editing in "AccountReceivableByAgreements" table
@@ -1270,11 +1234,7 @@ Scenario: _400013 create OpeningEntry (salary payment)
 				| 'Arina Brown'     |
 			And I select current line in "List" table
 			And I activate "Currency" field in "SalaryPayment" table
-			And I click choice button of "Currency" attribute in "SalaryPayment" table
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "SalaryPayment" table
 			And I activate "Amount" field in "SalaryPayment" table
 			And I input "1 000,00" text in "Amount" field of "SalaryPayment" table
 			And I finish line editing in "SalaryPayment" table
@@ -1288,11 +1248,7 @@ Scenario: _400013 create OpeningEntry (salary payment)
 				| 'David Romanov'     |
 			And I select current line in "List" table
 			And I activate "Currency" field in "SalaryPayment" table
-			And I click choice button of "Currency" attribute in "SalaryPayment" table
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "SalaryPayment" table
 			And I activate "Amount" field in "SalaryPayment" table
 			And I input "2 000,00" text in "Amount" field of "SalaryPayment" table
 			And I finish line editing in "SalaryPayment" table
@@ -1344,11 +1300,7 @@ Scenario: _400014 create OpeningEntry (advance from retail customer)
 				| 'Daniel Smith'     |
 			And I select current line in "List" table
 			And I activate "Currency" field in "AdvanceFromRetailCustomers" table
-			And I click choice button of "Currency" attribute in "AdvanceFromRetailCustomers" table
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AdvanceFromRetailCustomers" table
 			And I activate "Amount" field in "AdvanceFromRetailCustomers" table
 			And I input "1 000,00" text in "Amount" field of "AdvanceFromRetailCustomers" table
 			And I finish line editing in "AdvanceFromRetailCustomers" table
@@ -1362,11 +1314,7 @@ Scenario: _400014 create OpeningEntry (advance from retail customer)
 				| 'Sam Jons'        |
 			And I select current line in "List" table
 			And I activate "Currency" field in "AdvanceFromRetailCustomers" table
-			And I click choice button of "Currency" attribute in "AdvanceFromRetailCustomers" table
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AdvanceFromRetailCustomers" table
 			And I activate "Amount" field in "AdvanceFromRetailCustomers" table
 			And I input "1 000,00" text in "Amount" field of "AdvanceFromRetailCustomers" table
 			And I finish line editing in "AdvanceFromRetailCustomers" table

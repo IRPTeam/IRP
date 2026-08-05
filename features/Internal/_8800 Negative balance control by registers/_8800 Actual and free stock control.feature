@@ -2426,11 +2426,7 @@ Scenario:_880051 check remaining stock control in the Work Sheet
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Add first work
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
@@ -2493,11 +2489,7 @@ Scenario:_880051 check remaining stock control in the Work Sheet
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Add first work
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
@@ -2568,11 +2560,7 @@ Scenario:_880052 check remaining stock control in the Work Order
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
 			| 'Description'                         |
@@ -3010,11 +2998,7 @@ Scenario:_880083 check stock control in the IT (Store sender does not use stock 
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click the button named "FormCreate"
 		* Filling main info
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from the drop-down list named "Company"
 			And I activate field named "ItemListLineNumber" in "ItemList" table
 			And I click Select button of "Store sender" field
 			And I go to line in "List" table
@@ -3072,11 +3056,7 @@ Scenario:_880083 check stock control in the IT (Store sender does not use stock 
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click the button named "FormCreate"
 		* Filling main info
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from the drop-down list named "Company"
 			And I activate field named "ItemListLineNumber" in "ItemList" table
 			And I click Select button of "Store sender" field
 			And I go to line in "List" table

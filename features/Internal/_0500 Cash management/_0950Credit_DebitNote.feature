@@ -244,11 +244,7 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 			| 'Description'           |
 			| 'Partner term Maxim'    |
 		And I select current line in "List" table
-		And I click choice button of "Currency" attribute in "Transactions" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "Transactions" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -315,11 +311,7 @@ Scenario: _095003 create document Credit Note (increase in debt to the vendor)
 			| 'Description'           |
 			| 'Partner term Maxim'    |
 		And I select current line in "List" table
-		And I click choice button of "Currency" attribute in "Transactions" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "Transactions" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -386,11 +378,7 @@ Scenario: _095004 create document Credit Note (write off customers debts)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click choice button of "Currency" attribute in "Transactions" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "Transactions" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -456,11 +444,7 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click choice button of "Currency" attribute in "Transactions" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "Transactions" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'    |

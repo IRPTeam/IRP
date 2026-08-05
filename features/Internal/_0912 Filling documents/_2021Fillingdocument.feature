@@ -1,4 +1,4 @@
-﻿#language: en
+00﻿#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -2338,11 +2338,7 @@ Scenario: _0154108 total amount calculation in Cash receipt
 	* Open form Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -2601,11 +2597,7 @@ Scenario: _0154110 total amount calculation in Bank receipt
 	* Open form Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |
@@ -2870,11 +2862,7 @@ Scenario: _0154112 total amount calculation in Cash payment
 	* Open form Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -3134,11 +3122,7 @@ Scenario: _0154114 total amount calculation in Bank payment
 	* Open form Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |
@@ -7928,12 +7912,7 @@ Scenario: _0154187 check edit currency in the StockAdjustmentAsSurplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"	
 		And I click the button named "FormCreate"	
 	* Filling
-		And I click Choice button of the field named "Company"
-		Then "Companies" window is opened
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
@@ -8009,12 +7988,7 @@ Scenario: _0154188 check edit currency in the StockAdjustmentAsWriteOff
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"	
 		And I click the button named "FormCreate"	
 	* Filling
-		And I click Choice button of the field named "Company"
-		Then "Companies" window is opened
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
@@ -8397,11 +8371,7 @@ Scenario: _0154190 check filling in and refilling Work sheet
 		* Check filling in legal name after re-selection partner
 			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 	* Add works and materials
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
 		And in the table "ItemList" I click the button named "ItemListAdd"

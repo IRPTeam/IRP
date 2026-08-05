@@ -12,18 +12,16 @@ Background:
 Scenario: check the filter by own company
 	And I click the button named "FormCreate"
 	* Check the filter by own company
-		And I click Select button of "Company" field
-		And "List" table became equal
-		| Description    |
-		| Main Company   |
-		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		And Delay 2
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
 		And I input "Company Kalipso" text in "Company" field
 		And Delay 2
-		And I click Select button of "Currency" field
+		And I move to the next attribute
 		Then "Companies" window is opened
 		And "List" table does not contain lines
 			| Description        |
@@ -36,11 +34,9 @@ Scenario: check the filter by own company
 Scenario: check the filter by own company in the Cash transfer order
 	And I click the button named "FormCreate"
 	* Check the filter by own company
-		And I click Select button of "Company" field
-		And "List" table became equal
-		| Description    |
-		| Main Company   |
-		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		And Delay 2
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
@@ -59,8 +55,7 @@ Scenario: check the filter by own company in the Cash transfer order
 
 Scenario: check the filter for bank accounts (cash account selection is not available) + filling in currency from a bank account
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I click the button named "FormChoose"
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Check the filter by bank account
 		And I click Select button of "Account" field
 		And I save number of "List" table lines as "QS"
@@ -94,7 +89,7 @@ Scenario: check the filter for bank accounts (cash account selection is not avai
 		And Delay 2
 		And I input "Cash desk №1" text in "Account" field
 		And Delay 2
-		And I click Select button of "Currency" field
+		And I move to the next attribute
 		And "List" table does not contain lines
 			| Description     |
 			| Cash desk №1    |
@@ -106,8 +101,7 @@ Scenario: check the filter for bank accounts (cash account selection is not avai
 Scenario: check the filter by cash account (bank account selection is not available)
 	And I click the button named "FormCreate"
 	* Check the filter by bank account
-		And I click Select button of "Company" field
-		And I click the button named "FormChoose"
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I save number of "List" table lines as "QS"
 		Then "QS" variable is equal to 4
@@ -126,7 +120,7 @@ Scenario: check the filter by cash account (bank account selection is not availa
 		And Delay 2
 		And I input "Bank account, TRY" text in "Cash account" field
 		And Delay 2
-		And I click Select button of "Currency" field
+		And I move to the next attribute
 		And "List" table does not contain lines
 			| Description          |
 			| Bank account, TRY    |
@@ -376,8 +370,7 @@ Scenario: check the choice of the type of document-basis in the documents of rec
 	
 Scenario: check the choice of currency in the bank payment document if the currency is indicated in the account
 # in this case you cannot change the currency (documents: Bank payment, Bank receipt)
-	And I click Select button of "Company" field
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Account" field
 	And I go to line in "List" table
 			| Description          |
@@ -393,8 +386,7 @@ Scenario: check the choice of currency in the bank payment document if the curre
 
 Scenario: check the choice of currency in the cash payment document if the currency is indicated in the account
 # in this case you cannot change the currency (documents: Cash payment, Cash receipt)
-	And I click Select button of "Company" field
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Cash account" field
 	And I go to line in "List" table
 			| Description     |

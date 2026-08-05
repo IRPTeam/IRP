@@ -748,11 +748,7 @@ Scenario: _0260137 return advance payment (cash)
 	* Create Cash payment (customer advance)
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"	
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
@@ -791,11 +787,7 @@ Scenario: _0260138 return advance payment (card)
 	* Create Bank payment (customer advance)
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"	
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table

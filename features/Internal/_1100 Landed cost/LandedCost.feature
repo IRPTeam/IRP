@@ -2268,11 +2268,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click the button named "FormCreate"
 		And I input "18.09.2022 00:00:00" text in the field named "Date"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Landed cost" exact value from "Calculation mode" drop-down list
 		And I input "18.09.2022" text in "Begin date" field
 		And I input "18.09.2022" text in "End date" field
@@ -2345,11 +2341,7 @@ Scenario: _028 check landed cost by materials
 	* Create CalculationMovementCosts
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
 		And I input "22.09.2022" text in "Begin date" field
 		And I input "26.09.2022" text in "End date" field

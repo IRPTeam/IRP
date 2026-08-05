@@ -526,8 +526,7 @@ Given I open hyperlink "e1cib/list/Document.CashPayment"
 And I click the button named "FormCreate"
 * Filling in the details of the document
 	And I select "Return to customer" exact value from "Transaction type" drop-down list
-	And I click Select button of "Company" field
-	And I click the button named "FormChoose"
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Cash account" field
 	And I go to line in "List" table
 			| Description      |

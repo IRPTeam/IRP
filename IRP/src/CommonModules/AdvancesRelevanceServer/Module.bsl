@@ -1,5 +1,9 @@
 
 Procedure Clear(DocRef, Company, EndOfPeriod) Export
+	If Not FOServer.IsUseAdvanceRelevance() Then
+		Return;
+	EndIf;
+	
 	If TypeOf(DocRef) = Type("DocumentRef.VendorsAdvancesClosing") Then
 		RelevanceRegisterName = "T2016S_VendorsAdvancesRelevance";
 	ElsIf TypeOf(DocRef) = Type("DocumentRef.CustomersAdvancesClosing") Then
@@ -21,6 +25,10 @@ Procedure Clear(DocRef, Company, EndOfPeriod) Export
 EndProcedure
 
 Procedure Restore(DocRef, Company, EndOfPeriod) Export
+	If Not FOServer.IsUseAdvanceRelevance() Then
+		Return;
+	EndIf;
+
 	If TypeOf(DocRef) = Type("DocumentRef.VendorsAdvancesClosing") Then
 		RelevanceRegisterName = "T2016S_VendorsAdvancesRelevance";
 		DocumentName = "VendorsAdvancesClosing";
@@ -44,6 +52,10 @@ Procedure Restore(DocRef, Company, EndOfPeriod) Export
 EndProcedure
 
 Procedure Reset(DocRef, Company, BeginOfPeriod) Export
+	If Not FOServer.IsUseAdvanceRelevance() Then
+		Return;
+	EndIf;
+
 	If TypeOf(DocRef) = Type("DocumentRef.VendorsAdvancesClosing") Then
 		RelevanceRegisterName = "T2016S_VendorsAdvancesRelevance";
 		DocumentName = "VendorsAdvancesClosing";
@@ -67,6 +79,10 @@ Procedure Reset(DocRef, Company, BeginOfPeriod) Export
 EndProcedure
 
 Procedure SetBound_Advances(DocObject, Records, RegisterMetadata) Export
+	If Not FOServer.IsUseAdvanceRelevance() Then
+		Return;
+	EndIf;
+
 	QueryText = GetQueryText_Advances();
 	AccReg = Metadata.AccumulationRegisters;
 	If RegisterMetadata = AccReg.R1020B_AdvancesToVendors Then
@@ -93,6 +109,10 @@ Procedure SetBound_Advances(DocObject, Records, RegisterMetadata) Export
 EndProcedure
 
 Procedure SetBound_Transactions(DocObject, Records, RegisterMetadata) Export
+	If Not FOServer.IsUseAdvanceRelevance() Then
+		Return;
+	EndIf;
+
 	QueryText = GetQueryText_Transactions();
 	AccReg = Metadata.AccumulationRegisters;
 	If RegisterMetadata = AccReg.R1021B_VendorsTransactions Then
@@ -119,6 +139,10 @@ Procedure SetBound_Transactions(DocObject, Records, RegisterMetadata) Export
 EndProcedure
 
 Procedure SetBound_Aging(DocObject, Records, RegisterMetadata) Export
+	If Not FOServer.IsUseAdvanceRelevance() Then
+		Return;
+	EndIf;
+
 	QueryText = GetQueryText_Aging();
 	AccReg = Metadata.AccumulationRegisters;
 	If RegisterMetadata = AccReg.R5012B_VendorsAging Then

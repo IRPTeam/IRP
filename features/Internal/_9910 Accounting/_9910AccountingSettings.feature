@@ -658,12 +658,7 @@ Scenario: _0991003 create ledger type
 	* Create new element			
 		And I click the button named "FormCreate"
 		And I input "Manager analitics" text in "ENG" field
-		And I click Select button of "Currency movement type" field
-		Then "Multi currency movement types" window is opened
-		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'         | 'Source'          | 'Type'  |
-			| 'TRY'      | 'No'                   | 'Legal currency, TRY' | 'Currency rate 1' | 'Legal' |
-		And I select current line in "List" table
+		And I select "Legal currency, TRY" exact value from "Currency movement type" drop-down list
 		And I click Choice button of the field named "LedgerTypeVariant"
 		And I click "Create" button
 		And I input "Manager analitics" text in "ENG" field

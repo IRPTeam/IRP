@@ -599,54 +599,28 @@ EndFunction
 
 #EndRegion
 
-Function GetOverlappingPeriods(Company, StartDate, EndDate, DocumentName, StartDateFieldName, EndDateFieldName)
+Function GetOverlappingPeriods(Company, StartDate, EndDate, DocumentName, StartDateFieldName, EndDateFieldName, Ref = Undefined) Export
 	Query = New Query();
 	Query.Text = 
-	"SELECT
+	"Select
 	|	Doc.Ref AS Ref,
 	|	Doc.%2 AS StartDate,
 	|	Doc.%3 AS EndDate
-	|FROM
+	|from
 	|	Document.%1 AS Doc
-	|WHERE
+	|where 
 	|	Doc.Posted
-	|	AND Doc.Company = &Company
-	|	AND Doc.%2 < &StartDate
-	|	AND (Doc.%3 BETWEEN &StartDate AND &EndDate)
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	Doc.Ref AS Ref,
-	|	Doc.%2,
-	|	Doc.%3
-	|FROM
-	|	Document.%1 AS Doc
-	|WHERE
-	|	Doc.Posted
-	|	AND Doc.Company = &Company
-	|	AND Doc.%3 > &EndDate
-	|	AND (Doc.%2 BETWEEN &StartDate AND &EndDate)
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	Doc.Ref AS Ref,
-	|	Doc.%2,
-	|	Doc.%3
-	|FROM
-	|	Document.%1 AS Doc
-	|WHERE
-	|	Doc.Posted
-	|	AND Doc.Company = &Company
-	|	AND Doc.%3 > &EndDate
-	|	AND Doc.%2 < &StartDate";
+	|	and Doc.Ref <> &Ref 
+	|	and Doc.%2 <= &EndDate
+	|	and Doc.%3 >= &StartDate 
+	|	and (Doc.Company = &Company OR &Company = Value(Catalog.Companies.EmptyRef))";
 	
 	Query.Text = StrTemplate(Query.Text, DocumentName, StartDateFieldName, EndDateFieldName);
 	
 	Query.SetParameter("StartDate", StartDate);
 	Query.SetParameter("EndDate"  , EndDate);
 	Query.SetParameter("Company"  , Company);
+	Query.SetParameter("Ref"      , Ref);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

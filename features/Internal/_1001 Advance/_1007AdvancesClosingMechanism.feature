@@ -79,11 +79,10 @@ Scenario: _10070001 check preparation
 	When check preparation
 
 Scenario: _1007002 second closing with an overlapping period must not offset the same advance twice
-	# M1: advance Bank receipt 61 (1 000) is closed by the January closing against Sales invoice 61 (2 500).
+	# M1 (IRP-826): advance Bank receipt 61 (1 000) is closed by the January closing against Sales invoice 61 (2 500).
 	# A second closing with period 01.01.2022-28.02.2022 covers January again.
-	# WITH THE BUG: it posts silently and offsets the same advance once more (advance -1 000,
-	# the invoice debt understated by 1 000). CORRECT: posting is forbidden, or no
-	# repeated offset happens.
+	# The overlapping-period control must reject its posting ("Overlapping period" message),
+	# so the same advance is never offset twice.
 	* Close January 2022 (Bank receipt 61 -> Sales invoice 61)
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
@@ -111,7 +110,7 @@ Scenario: _1007002 second closing with an overlapping period must not offset the
 			| 'Recorder'                                    | 'Multi currency movement type' | 'Basis'                                       | 'Amount'    | 'Customers advances closing'                                                        |
 			| 'Sales invoice 61 dated 15.01.2022 12:00:00'  | 'Local currency'               | 'Sales invoice 61 dated 15.01.2022 12:00:00'  | '1 000,00'  | 'Customers advance closing $$NumberClosingJan2022$$ dated 31.01.2022 12:00:00'      |
 		And I close all client application windows
-	* Post the second closing with a period that overlaps January (currently posts silently)
+	* Post the second closing with a period that overlaps January - the control must reject it
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "28.02.2022 12:00:00" text in "Date" field
@@ -129,13 +128,17 @@ Scenario: _1007002 second closing with an overlapping period must not offset the
 			| 'Distribution department'   |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
-		And I delete "$$NumberClosingFeb2022$$" variable
-		And I save the value of "Number" field as "$$NumberClosingFeb2022$$"
-		And I click "Post and close" button
-	* XFAIL until the overlapping-periods bug is fixed - the advance must not be offset twice
-		When I Check the steps for Exception
-			| 'And Check the January 2022 advance is not offset again by the overlapping closing'    |
-	And I close all client application windows
+		Given Recent TestClient message contains "Overlapping period*" string by template
+		And I close all client application windows
+	* The rejected closing was not even written - so the January advance cannot be offset twice
+	# The filling check fires before the write: the overlapping document must not exist at all.
+	# The 01.01-28.02 period pair is unique to the rejected document (the adjacent February
+	# closing of _1007006 is 01.02-28.02).
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And "List" table does not contain lines
+			| 'Begin of period'   | 'End of period'   |
+			| '01.01.2022'        | '28.02.2022'      |
+		And I close all client application windows
 
 Scenario: _1007003 order-bound advance closes its order invoice, free advance closes the other
 	# M2: advance Bank receipt 63 is bound to Sales order 61, advance Bank receipt 62 is free.
@@ -232,3 +235,135 @@ Scenario: _1007004 advance is offset within one agreement even when the contract
 			| 'Sales invoice 64 dated 10.05.2022 12:00:00'  | 'Reporting currency'           | 'USD'      | 'Ferron BP'  | 'Offset mechanism contracts, TRY'   | 'Sales invoice 64 dated 10.05.2022 12:00:00'  | '136,96'   | 'Customers advance closing $$NumberClosingMay2022$$ dated 31.05.2022 12:00:00'      |
 			| 'Sales invoice 64 dated 10.05.2022 12:00:00'  | 'en description is empty'      | 'TRY'      | 'Ferron BP'  | 'Offset mechanism contracts, TRY'   | 'Sales invoice 64 dated 10.05.2022 12:00:00'  | '800,00'   | 'Customers advance closing $$NumberClosingMay2022$$ dated 31.05.2022 12:00:00'      |
 	And I close all client application windows
+
+Scenario: _1007005 same period for another company is allowed, duplicate for the same company is blocked
+	# IRP-826: the overlapping-period control compares periods within one company only.
+	# January 2022 is already closed for Main Company (_1007002). The same period for
+	# Second Company must post; a second closing for Second Company over it must be rejected
+	# (which also proves the first one was posted - the control only sees posted documents).
+	* Close January 2022 for Second Company - allowed in parallel with Main Company
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I click the button named "FormCreate"
+		And I input "31.01.2022 13:00:00" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Second Company'   |
+		And I select current line in "List" table
+		And I click Select button of "Begin of period" field
+		And I input "01.01.2022" text in "Begin of period" field
+		And I input "31.01.2022" text in "End of period" field
+		And I click "Post and close" button
+	* The document window closed - the cross-company posting really succeeded
+	# Guard against a false green: if the control wrongly blocked another company, the rejection
+	# message in the next block would still appear (from the Main Company closing) and mask it.
+		Then "Customers advances closing" window is opened
+		And I close all client application windows
+	* Duplicate closing for Second Company over the same period is rejected
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I click the button named "FormCreate"
+		And I input "31.01.2022 14:00:00" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Second Company'   |
+		And I select current line in "List" table
+		And I click Select button of "Begin of period" field
+		And I input "01.01.2022" text in "Begin of period" field
+		And I input "31.01.2022" text in "End of period" field
+		And I click the button named "FormPost"
+		Given Recent TestClient message contains "Overlapping period*" string by template
+		And I close all client application windows
+
+Scenario: _1007006 repost of the same closing is allowed, adjacent period posts, nested period is blocked
+	# IRP-826: the control must ignore the document itself on repost, must allow a strictly
+	# adjacent period, and must reject a period nested inside an already closed one.
+	* Repost the January closing - the control must not block the document itself
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number'                    |
+			| '$$NumberClosingJan2022$$'  |
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* The January offset is intact after the repost
+	# No "close all windows" before this check on purpose: if the control wrongly blocked the
+	# repost, the modal error window would make the next step fail instead of being swallowed.
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
+		And "List" table contains lines
+			| 'Recorder'                                    | 'Multi currency movement type' | 'Basis'                                       | 'Amount'    | 'Customers advances closing'                                                        |
+			| 'Sales invoice 61 dated 15.01.2022 12:00:00'  | 'Local currency'               | 'Sales invoice 61 dated 15.01.2022 12:00:00'  | '1 000,00'  | 'Customers advance closing $$NumberClosingJan2022$$ dated 31.01.2022 12:00:00'      |
+		And I close all client application windows
+	* Close the adjacent February 2022 for Main Company - no overlap with January
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I click the button named "FormCreate"
+		And I input "28.02.2022 15:00:00" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Main Company'   |
+		And I select current line in "List" table
+		And I click Select button of "Begin of period" field
+		And I input "01.02.2022" text in "Begin of period" field
+		And I input "28.02.2022" text in "End of period" field
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Distribution department'   |
+		And I select current line in "List" table
+		And I click "Post and close" button
+	* The document window closed - the adjacent-period posting really succeeded
+		Then "Customers advances closing" window is opened
+		And I close all client application windows
+	* A period nested inside the closed February is rejected
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I click the button named "FormCreate"
+		And I input "20.02.2022 12:00:00" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Main Company'   |
+		And I select current line in "List" table
+		And I click Select button of "Begin of period" field
+		And I input "10.02.2022" text in "Begin of period" field
+		And I input "20.02.2022" text in "End of period" field
+		And I click the button named "FormPost"
+		Given Recent TestClient message contains "Overlapping period*" string by template
+		And I close all client application windows
+
+Scenario: _1007007 vendors closing is covered by the same overlapping-period control
+	# IRP-826: the same control works for Vendors advances closing.
+	* Close June 2022 for vendors - posts over a free period
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		And I click the button named "FormCreate"
+		And I input "30.06.2022 12:00:00" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Main Company'   |
+		And I select current line in "List" table
+		And I click Select button of "Begin of period" field
+		And I input "01.06.2022" text in "Begin of period" field
+		And I input "30.06.2022" text in "End of period" field
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Front office'   |
+		And I select current line in "List" table
+		And I click "Post and close" button
+	* The document window closed - the vendors posting really succeeded
+		Then "Vendors advances closing" window is opened
+		And I close all client application windows
+	* The same vendors period again is rejected
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		And I click the button named "FormCreate"
+		And I input "30.06.2022 14:00:00" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Main Company'   |
+		And I select current line in "List" table
+		And I click Select button of "Begin of period" field
+		And I input "01.06.2022" text in "Begin of period" field
+		And I input "30.06.2022" text in "End of period" field
+		And I click the button named "FormPost"
+		Given Recent TestClient message contains "Overlapping period*" string by template
+		And I close all client application windows

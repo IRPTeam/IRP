@@ -171,7 +171,7 @@ Scenario: _0050235 control of Multicurrency movement type (Partnerterms)
 		And I click "Yes" button
 		Then the form attribute named "CurrencyMovementType" became equal to ""
 	* Create partner term (only 1 Partner term currency)
-		And I click Select button of "Multi currency movement type" field
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CurrencyMovementType"
 		And I go to line in "List" table
 			| "Currency" | "Deferred calculation" | "Description" | "Type"         |
 			| "EUR"      | "No"                   | "EUR"         | "Partner term" |
@@ -204,7 +204,7 @@ Scenario: _0050235 control of Multicurrency movement type (Partnerterms)
 		And I close current window
 		If "1C:Enterprise" window is opened Then
 			And I click "No" button	
-		And I click Select button of "Multi currency movement type" field
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CurrencyMovementType"
 		And I go to line in "List" table
 			| "Currency" | "Deferred calculation" | "Description" | "Type"         |
 			| "EUR"      | "No"                   | "EUR"         | "Partner term" |

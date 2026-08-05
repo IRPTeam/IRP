@@ -153,7 +153,7 @@ Scenario: _0700002 create Cheque bond transaction (AP-AR by agreement), receipt 
 		And I click choice button of "Agreement" attribute in "ChequeBonds" table
 		And I go to line in "List" table
 			| 'AP/AR posting detail'   | 'Description'                   | 'Kind'       |
-			| 'By agreements'          | 'DFC Vendor by Partner terms'   | 'Regular'    |
+			| 'By partner terms'          | 'DFC Vendor by Partner terms'   | 'Regular'    |
 		And I select current line in "List" table
 		And I activate "Account" field in "ChequeBonds" table
 		And I select current line in "ChequeBonds" table
@@ -195,7 +195,7 @@ Scenario: _0700002 create Cheque bond transaction (AP-AR by agreement), receipt 
 		And I click choice button of "Agreement" attribute in "ChequeBonds" table
 		And I go to line in "List" table
 			| 'AP/AR posting detail'   | 'Description'                     | 'Kind'       |
-			| 'By agreements'          | 'DFC Customer by Partner terms'   | 'Regular'    |
+			| 'By partner terms'          | 'DFC Customer by Partner terms'   | 'Regular'    |
 		And I select current line in "List" table
 		And I activate "Account" field in "ChequeBonds" table
 		And I select current line in "ChequeBonds" table
@@ -283,7 +283,7 @@ Scenario: _0700003 create Cheque bond transaction (AP-AR by agreement), payed st
 		And I click choice button of "Agreement" attribute in "ChequeBonds" table
 		And I go to line in "List" table
 			| 'AP/AR posting detail'   | 'Description'                   | 'Kind'       |
-			| 'By agreements'          | 'DFC Vendor by Partner terms'   | 'Regular'    |
+			| 'By partner terms'          | 'DFC Vendor by Partner terms'   | 'Regular'    |
 		And I select current line in "List" table
 		And I activate "Account" field in "ChequeBonds" table
 		And I select current line in "ChequeBonds" table
@@ -333,7 +333,7 @@ Scenario: _0700003 create Cheque bond transaction (AP-AR by agreement), payed st
 		And I click choice button of "Agreement" attribute in "ChequeBonds" table
 		And I go to line in "List" table
 			| 'AP/AR posting detail'   | 'Description'                     | 'Kind'       |
-			| 'By agreements'          | 'DFC Customer by Partner terms'   | 'Regular'    |
+			| 'By partner terms'          | 'DFC Customer by Partner terms'   | 'Regular'    |
 		And I select current line in "List" table
 		And I activate "Account" field in "ChequeBonds" table
 		And I select current line in "ChequeBonds" table

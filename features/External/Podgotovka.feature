@@ -2013,11 +2013,7 @@ Scenario: settings for Main Company (commission trade)
 	* Main Company
 		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Description'       |
-			| 'TRY'        | 'Local currency'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
@@ -2036,11 +2032,7 @@ Scenario: settings for Company (commission trade)
 	* Main Company
 		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Description'       |
-			| 'TRY'        | 'Local currency'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
@@ -2061,11 +2053,7 @@ Scenario: settings for Company (commission trade)
 			| 'Second Company partner'    |
 		And I select current line in "List" table
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Description'       |
-			| 'TRY'        | 'Local currency'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
@@ -2074,7 +2062,7 @@ Scenario: settings for Company (commission trade)
 		And I select current line in "List" table
 		And I move to "Currencies" tab
 		And in the table "Currencies" I click the button named "CurrenciesAdd"
-		And I click choice button of "Movement type" attribute in "Currencies" table
+		Then "Multi currency movement types" window is opened
 		And I go to line in "List" table
 			| 'Description'       |
 			| 'Local currency'    |

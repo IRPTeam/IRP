@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dec8222f-1bf3-426d-9f3c-8df1dc0ec8e2">
+  <producedTypes>
+    <managerType typeId="87cf321c-c626-4245-899a-5e5ea7ee582b" valueTypeId="2697220d-ea04-4f2a-a15c-1cbccf7ba99b"/>
+    <valueManagerType typeId="b2cfd8b6-48fe-49ae-8224-064ea522baaf" valueTypeId="8dac35e4-fba1-47c7-b504-027fb9854178"/>
+    <valueKeyType typeId="b1f6579d-dbf9-44dd-b9d4-41d3c030e467" valueTypeId="7e808a0f-1bef-4129-bbda-5bdd6a9c9846"/>
+  </producedTypes>
+  <name>UseBatchReallocate</name>
+  <synonym>
+    <key>en</key>
+    <value>Use batch reallocate</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

@@ -185,11 +185,7 @@ Scenario:_880005 check remaining stock control in the Sales order
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -346,11 +342,7 @@ Scenario:_880008 check remaining stock control in the Sales invoice (without SO)
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -478,11 +470,7 @@ Scenario:_880009 check remaining stock control serial lot numbers in the Sales i
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -586,11 +574,7 @@ Scenario:_880009 check remaining stock control serial lot numbers in the Sales i
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -685,11 +669,7 @@ Scenario:_880011 check remaining stock control in the Retail sales receipt
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -844,11 +824,7 @@ Scenario:_880012 check remaining stock control serial lot numbers in the Retail 
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -956,11 +932,7 @@ Scenario:_880014 check remaining stock control in the Bundling
 				| 'Description'     |
 				| 'pcs'             |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -1082,11 +1054,7 @@ Scenario:_880017 check remaining stock control in the Stock adjustment as write 
 		* Create Stock adjustment as write off
 			Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 			And I click the button named "FormCreate"	
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -1245,11 +1213,7 @@ Scenario:_880018 check remaining stock control serial lot number in the Stock ad
 		* Create Stock adjustment as write off
 			Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 			And I click the button named "FormCreate"	
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -1369,11 +1333,7 @@ Scenario:_880020 check remaining stock control in the Purchase return
 				| 'Description'                 |
 				| 'Partner term vendor DFC'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -1472,11 +1432,7 @@ Scenario:_880021 check remaining stock control in the Purchase return
 			| 'Description'                |
 			| 'Partner term vendor DFC'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1566,11 +1522,7 @@ Scenario:_880022 check remaining stock control in the shipment confirmation
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 			And I click the button named "FormCreate"	
 			And I select "Sales" exact value from "Transaction type" drop-down list
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -1680,11 +1632,7 @@ Scenario:_880023 check remaining stock control serial lot number in the shipment
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"	
 		And I select "Sales" exact value from "Transaction type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1822,11 +1770,7 @@ Scenario:_880032 check remaining stock control when unpost/change Unbundling
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1899,11 +1843,7 @@ Scenario:_880032 check remaining stock control when unpost/change Unbundling
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2951,11 +2891,7 @@ Scenario:_880080 set/remove checkbox Negative stock control from store and check
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |

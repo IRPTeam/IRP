@@ -99,11 +99,7 @@ Scenario:_800021 check serial lot number control in the Sales invoice
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -188,11 +184,7 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |

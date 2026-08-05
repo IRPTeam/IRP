@@ -55,11 +55,7 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 Scenario: _060005 availability of Currency, Begin and End period field in Reconcilation statement
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And I click the button named "FormCreate"
-	And I click Select button of "Currency" field
-	And I go to line in "List" table
-		| 'Code'  | 'Description'    |
-		| 'TRY'   | 'Turkish lira'   |
-	And I select current line in "List" table
+	And I select "TRY" exact value from "Currency" drop-down list
 	And I click Select button of "Begin period" field
 	And I input "01.09.2019" text in "Begin period" field
 	And I input "30.09.2019" text in "End period" field

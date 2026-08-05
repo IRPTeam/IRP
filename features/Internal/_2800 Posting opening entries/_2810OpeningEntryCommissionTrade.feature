@@ -85,11 +85,7 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click the button named "FormCreate"
 		* Filling in company info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in the tabular part Inventory
 			* First item (without serial lot number)
 				And I move to "Inventory" tab
@@ -196,11 +192,7 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click the button named "FormCreate"
 		* Filling in company info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I move to "Shipment to trade agent" tab
 		* Filling in trade agent info 
 			And I move to "Shipment to trade agent" tab			
@@ -289,11 +281,7 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click the button named "FormCreate"
 		* Filling in company info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I move to "Shipment to trade agent" tab
 		* Filling in trade agent info 
 			And I click Select button of "Trade agent" field
@@ -413,11 +401,7 @@ Scenario: _410013 create Opening entry receipt from consignor
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click the button named "FormCreate"
 		* Filling in company info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in trade agent info 
 			And I move to "Receipt from consignor" tab			
 			And I click Select button of "Consignor" field

@@ -60,12 +60,7 @@ Scenario: _016501 create document Internal Supply Request
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description    |
@@ -136,11 +131,9 @@ Scenario: _016503 check the Company filter in the Internal Supply Request docume
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I click the button named "FormCreate"
 	* Check the visual filter by Company
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check filter by Company when inpute by string
 		And I input "Company Kalipso" text in "Company" field
@@ -167,12 +160,7 @@ Scenario: _016504 check display of the title of the collapsible group when creat
 		And I click "Yes" button
 		And I input "215" text in "Number" field
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description    |

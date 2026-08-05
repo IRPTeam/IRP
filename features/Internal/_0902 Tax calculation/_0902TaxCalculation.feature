@@ -304,11 +304,7 @@ Scenario: _090206 priority tax rate check on the example of Sales order
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check the tax rate for Item key Bag ODS
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -359,11 +355,7 @@ Scenario: _090208 check tax in the SO (depend of transaction type)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select transaction type
 		And I select "Retail sales" exact value from "Transaction type" drop-down list
 	* Add items
@@ -425,11 +417,7 @@ Scenario: _090209 check tax in the SI (depend of transaction type)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select transaction type
 		And I select "Sales" exact value from "Transaction type" drop-down list
 	* Add items
@@ -487,11 +475,7 @@ Scenario: _090210 check tax in the PI (depend of transaction type)
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select transaction type
 		And I select "Purchase" exact value from "Transaction type" drop-down list
 	* Add items
@@ -554,11 +538,7 @@ Scenario: _090211 check tax in the PO (depend of transaction type)
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select transaction type
 		And I select "Purchase" exact value from "Transaction type" drop-down list
 	* Add items
@@ -621,11 +601,7 @@ Scenario: _090212 check tax in the SRO(depend of transaction type)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select transaction type
 		And I select "Return from customer" exact value from "Transaction type" drop-down list
 	* Add items
@@ -682,11 +658,7 @@ Scenario: _090213 check tax in the SR (depend of transaction type)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select transaction type
 		And I select "Return from customer" exact value from "Transaction type" drop-down list
 	* Add items
@@ -743,11 +715,7 @@ Scenario: _090214 check tax in the PRO(depend of transaction type)
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select transaction type
 		And I select "Return to vendor" exact value from "Transaction type" drop-down list
 	* Add items
@@ -810,11 +778,7 @@ Scenario: _090215 check tax in the PR (depend of transaction type)
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select transaction type
 		And I select "Return to vendor" exact value from "Transaction type" drop-down list
 	* Add items
@@ -1108,11 +1072,7 @@ Scenario: _090222 check tax in the RSR(without transaction type)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add items
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -1160,11 +1120,7 @@ Scenario: _090226 fill tax exemption reason in the RSR
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add items
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -1222,11 +1178,7 @@ Scenario: _090227 fill tax exemption reason in the PR
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add items
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -1278,11 +1230,7 @@ Scenario: _090228 fill tax exemption reason in the Sales invoice
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add items
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -1324,11 +1272,7 @@ Scenario: _090229 fill tax exemption reason in the Debit note
 	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	And I click the button named "FormCreate"
 	* Filling in the details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add partner
 		And in the table "Transactions" I click "Add" button
 		And I activate "Partner" field in "Transactions" table
@@ -1366,11 +1310,7 @@ Scenario: _090230 fill tax exemption reason in the Credit note
 	Given I open hyperlink "e1cib/list/Document.CreditNote"
 	And I click the button named "FormCreate"
 	* Filling in the details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add partner
 		And in the table "Transactions" I click "Add" button
 		And I activate "Partner" field in "Transactions" table
@@ -1475,11 +1415,7 @@ Scenario: _090225 check tax deactivation
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table

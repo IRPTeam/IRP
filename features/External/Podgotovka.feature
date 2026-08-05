@@ -426,11 +426,7 @@ Scenario: create PurchaseOrder017003
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I click the button named "FormCreate"
 		* Filling in the details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor information
 			And I click Select button of "Partner" field
@@ -721,11 +717,7 @@ Scenario: create InventoryTransferOrder020001
 				| 'Store 02'        |
 			And I select current line in "List" table
 			And I select "Approved" exact value from "Status" drop-down list
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in items table
 			And I move to "Item list" tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -786,11 +778,7 @@ Scenario: create InventoryTransferOrder020004
 			| 'Store 03'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in items table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -834,11 +822,7 @@ Scenario: create InventoryTransferOrder020007
 			| 'Store 01'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in items table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -882,11 +866,7 @@ Scenario: create InventoryTransferOrder020010
 			| 'Store 04'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in items table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1334,11 +1314,7 @@ Scenario: create InventoryTransfer021030
 		| Description   |
 		| Store 03      |
 	And I select current line in "List" table
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I move to "Items" tab
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
@@ -2097,11 +2073,7 @@ Scenario: set True value to the constant Use source of origin
 
 
 Scenario: check filter by transaction type in CR/BR 
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'      |
-			| 'Main Company'     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I select "Payment from customer" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
 		And I click the button named "PaymentListAdd"
@@ -2147,11 +2119,7 @@ Scenario: check filter by transaction type in CR/BR
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 
 Scenario: check filter by transaction type in CP/BP 
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'      |
-			| 'Main Company'     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I select "Payment to the vendor" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
 		And I click the button named "PaymentListAdd"

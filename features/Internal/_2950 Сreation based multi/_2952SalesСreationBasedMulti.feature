@@ -659,11 +659,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 				| 'Description'     |
@@ -773,11 +769,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 				| 'Description'     |

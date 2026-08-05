@@ -515,11 +515,7 @@ Scenario: _01541362 create RSR using form link/unlink (different company, store,
 			| 'Description'                |
 			| 'Distribution department'    |
 		And I select current line in "List" table	
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 	* Select items from basis documents
 		And I move to "Item list" tab		
 		And I click the button named "AddBasisDocuments"
@@ -2232,11 +2228,7 @@ Scenario:  _0154149 create Cash statement
 	* Create Cash Statement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Status" field
 		And I go to line in "List" table
 			| 'Description'   |
@@ -2371,11 +2363,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'            |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2391,11 +2379,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 		Then the form attribute named "Agreement" became equal to "Partner term NDB"
 	* Check filling in Company from Partner term
 		* Change company in Retail sales receipt
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -2507,11 +2491,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'Serial lot numbers'    | 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Offers amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| ''                      | '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | ''                 | '1,000'       | 'pcs'     | 'No'                    | '61,02'         | '338,98'        | '400,00'          | 'Store 01'     |
 				| ''                      | '350,00'    | 'Shirt'       | '18%'    | '38/Black'     | ''                 | '2,000'       | 'pcs'     | 'No'                    | '106,78'        | '593,22'        | '700,00'          | 'Store 01'     |
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
@@ -2718,11 +2698,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 		Then the form attribute named "Agreement" became equal to "Partner term NDB"
 	* Check filling in Company from Partner term
 		* Change company in Retail sales receipt
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -2834,11 +2810,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'Serial lot numbers'    | 'Price'     | 'Detail'    | 'Item'        | 'VAT'    | 'Item key'     | 'Offers amount'    | 'Quantity'    | 'Price type'           | 'Unit'    | 'Revenue type'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'       | 'Profit loss center'    | 'Additional analytic'     |
 				| ''                      | '400,00'    | ''          | 'Trousers'    | '18%'    | '38/Yellow'    | ''                 | '1,000'       | 'Basic Price Types'    | 'pcs'     | ''                | 'No'                    | '61,02'         | '338,98'        | '400,00'          | 'Store 01'    | 'Shop 01'               | ''                        |
 				| ''                      | '350,00'    | ''          | 'Shirt'       | '18%'    | '38/Black'     | ''                 | '2,000'       | 'Basic Price Types'    | 'pcs'     | ''                | 'No'                    | '106,78'        | '593,22'        | '700,00'          | 'Store 01'    | 'Shop 01'               | ''                        |
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
@@ -3153,11 +3125,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			| 'Description'            |
 			| 'Retail partner term'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"		
 		And I move to "Item list" tab
@@ -3346,11 +3314,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			| 'Description'            |
 			| 'Retail partner term'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"		
 		And I move to "Item list" tab
@@ -3516,11 +3480,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			| 'Description'            |
 			| 'Retail partner term'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
@@ -3642,11 +3602,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			| 'Description'            |
 			| 'Retail partner term'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			

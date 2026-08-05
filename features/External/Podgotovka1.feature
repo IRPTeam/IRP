@@ -129,11 +129,7 @@ Scenario: creating a Purchase Order document
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in vendor's info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -664,11 +660,7 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -734,11 +726,7 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 		* Create Goods receipt
 			And I click the button named "FormDocumentGoodsReceiptGenerate"
 			And I click "Ok" button
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click the button named "FormPostAndClose"
 			And I wait "Goods receipt (create)" window closing in 20 seconds
 			And I close all client application windows
@@ -766,11 +754,7 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 			And I expand "Price settings" group
 			And I expand "Store and delivery" group
 			And I input "234" text in "Number" field
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main company     |
-			And I select current line in "List" table
+			And I select "Main company" exact value from "Company" drop-down list
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| Description     |
@@ -868,11 +852,7 @@ Scenario: create the first test PO for a test on the creation mechanism based on
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -963,11 +943,7 @@ Scenario: create the second test PO for a test on the creation mechanism based o
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -1020,11 +996,7 @@ Scenario: create the first test SO for a test on the creation mechanism based on
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -1115,11 +1087,7 @@ Scenario: create the second test SO for a test on the creation mechanism based o
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -1229,11 +1197,7 @@ Scenario: create a Purchase Order document
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in vendor's info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table

@@ -624,11 +624,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 				| Description     |
 				| Store 02        |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description        |
-				| Second Company     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
@@ -1547,11 +1543,7 @@ Scenario: _090317 create Goods receipt for several Purchase order with different
 				| Description     |
 				| Store 02        |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description        |
-				| Second Company     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			And I move to "Other" tab
 			And I expand "More" group
 			And I go to line in "ItemList" table

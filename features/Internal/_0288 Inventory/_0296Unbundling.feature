@@ -54,11 +54,7 @@ Scenario: _029601 create Unbundling on a product with a specification (specifica
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Dress/A-8, all item keys were created in advance
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| Description    |
@@ -101,11 +97,7 @@ Scenario: _029604 create Unbundling on a product with a specification (specifica
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Boots/S-8, all item keys were created in advance
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| Description    |
@@ -150,11 +142,7 @@ Scenario: _029610 create Unbundling (+check movements) for bundl which was creat
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Bundle Dress+Shirt
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| 'Description'               |
@@ -206,11 +194,7 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 	* Create Unbundling for item Dress+Trousers
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| 'Description'               |
@@ -255,11 +239,7 @@ Scenario: _029612 create Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| Description          |

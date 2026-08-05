@@ -202,11 +202,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 				| 'Description'     |
 				| 'Store 03'        |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Check the default status "Wait"
 			Then the form attribute named "Status" became equal to "Wait"
 		* Filling in items table
@@ -305,11 +301,7 @@ Scenario: _020014 create ITO based on Internal supply request
 			Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 			And I click the button named "FormCreate"
 		* Filling in the main details of the document
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Store sender" field
 			And I go to line in "List" table
 				| 'Description'     |

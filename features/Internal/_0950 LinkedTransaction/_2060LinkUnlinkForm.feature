@@ -251,11 +251,7 @@ Scenario: _2060002 check link/unlink form in the SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -469,11 +465,7 @@ Scenario: _2060003 check auto link button in the SI
 			| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -589,11 +581,7 @@ Scenario: _2060004 check button not calculate rows
 			| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -708,11 +696,7 @@ Scenario: _20600031 check Link unlink basis documents form
 			| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -827,11 +811,7 @@ Scenario: _2060004 check link/unlink form in the SRO
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -992,11 +972,7 @@ Scenario: _2060005 check link/unlink form in the SR
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -1159,11 +1135,7 @@ Scenario: _2060006 check link/unlink form in the RRR
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -1303,11 +1275,7 @@ Scenario: _2060007 select items from basis documents in the PI
 			| 'Partner term vendor DFC'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -1339,11 +1307,7 @@ Scenario: _2060008 check link/unlink form in the PRO
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I click "List" button
 		And I go to line in "List" table
@@ -1502,11 +1466,7 @@ Scenario: _2060009 check link/unlink form in the PR
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I click "List" button
 		And I go to line in "List" table
@@ -1680,11 +1640,7 @@ Scenario: _2060010 select items from basis documents in the SI
 			| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -1715,11 +1671,7 @@ Scenario: _2060013 check link/unlink form in the SC (return based on GR)
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
 		And I select "Return to vendor" exact value from "Transaction type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -1838,11 +1790,7 @@ Scenario: _2060014 check link/unlink form in the GR (return based on SC)
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
 		And I select "Return from customer" exact value from "Transaction type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -1976,11 +1924,7 @@ Scenario: _2060015 check form select items from basis documents in the SI
 			| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -2072,11 +2016,7 @@ Scenario: _2060027 check price in the SI when link document with different price
 			| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -2172,11 +2112,7 @@ Scenario: _2060016 check price in the PI when link document with different price
 			| 'Partner term vendor DFC'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -2272,11 +2208,7 @@ Scenario: _2060017 check link form in the SI with 3 lines with the same items
 			| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -2415,11 +2347,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 			| 'Vendor Ferron, TRY'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table		
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -2523,11 +2451,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 				| 'Partner term vendor DFC'     |
 			And I select current line in "List" table
 			And I activate field named "ItemListLineNumber" in "ItemList" table		
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' | 
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description' |
@@ -2663,11 +2587,7 @@ Scenario: _2060020 check button Show quantity in base unit in the Link form
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -3186,11 +3106,7 @@ Scenario: _2060029 check link/unlink form in the SO - SI - SC (use variable item
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -3466,11 +3382,7 @@ Scenario: _2060030 check link/unlink form in the SO - SC - SI (use variable item
 	* Filling in the main details of the document
 		And I select "Sales" exact value from "Transaction type" drop-down list
 		And I activate field named "ItemListLineNumber" in "ItemList" table	
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -3700,11 +3612,7 @@ Scenario: _2060031 check link/unlink form in the PO - PI - GR (use variable item
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -3969,11 +3877,7 @@ Scenario: _2060032 check link/unlink form in the PO - GR - PI (use variable item
 	* Filling in the main details of the document
 		And I select "Purchase" exact value from "Transaction type" drop-down list
 		And I activate field named "ItemListLineNumber" in "ItemList" table	
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -4198,11 +4102,7 @@ Scenario: _2060033 check link/unlink form in the SO - SI - SC (use variable stor
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I click "List" button
 		And I go to line in "List" table
@@ -4449,11 +4349,7 @@ Scenario: _2060034 check link/unlink form in the SO - SC - SI (use variable stor
 	* Filling in the main details of the document
 		And I select "Sales" exact value from "Transaction type" drop-down list
 		And I activate field named "ItemListLineNumber" in "ItemList" table	
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -4667,11 +4563,7 @@ Scenario: _2060035 check link/unlink form in the PO - PI - GR (use variable stor
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I click "List" button
 		And I go to line in "List" table
@@ -4910,11 +4802,7 @@ Scenario: _2060036 check link/unlink form in the PO - GR - PI (use variable stor
 	* Filling in the main details of the document
 		And I select "Purchase" exact value from "Transaction type" drop-down list
 		And I activate field named "ItemListLineNumber" in "ItemList" table	
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |

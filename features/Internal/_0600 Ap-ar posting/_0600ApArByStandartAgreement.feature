@@ -115,11 +115,7 @@ Scenario: _060003 create Cash receipt with the type of settlements under standar
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 		* Select company
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in the details of the document
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
@@ -164,11 +160,7 @@ Scenario: _0600031 create Bank receipt with the type of settlements under standa
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 		* Select company
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in the details of the document
 			And I click Select button of "Account" field
 			And I go to line in "List" table
@@ -263,11 +255,7 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
 		* Select company
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in the details of the document
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
@@ -325,11 +313,7 @@ Scenario: _060008 create Bank payment with the type of settlements under standar
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
 		* Select company
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in the details of the document
 			And I click Select button of "Account" field
 			And I go to line in "List" table

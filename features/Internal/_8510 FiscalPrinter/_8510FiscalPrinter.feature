@@ -2281,11 +2281,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			| 'Description'        |
 			| 'Movement type 1'    |
 		And I select current line in "List" table
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Send currency" drop-down list
 		And I input "11,00" text in "Send amount" field		
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
@@ -2297,11 +2293,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			| 'Description'        |
 			| 'Movement type 1'    |
 		And I select current line in "List" table
-		And I click Select button of "Receive currency" field
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Receive currency" drop-down list
 		And I input "11,00" text in "Receive amount" field	
 		And I click Select button of "Send branch" field
 		And I go to line in "List" table

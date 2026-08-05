@@ -789,12 +789,9 @@ Scenario: check the filter by Company
 			| Description    |
 			| Kalipso        |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -812,12 +809,9 @@ Scenario: check the filter by Company
 Scenario: check the filter by Company  in the inventory transfer
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -835,12 +829,9 @@ Scenario: check the filter by Company  in the inventory transfer
 Scenario: check the filter by Company  in the Shipment cinfirmation and Goods receipt
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -863,12 +854,9 @@ Scenario: check the filter by Company (Ferron)
 			| Description    |
 			| Ferron BP      |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -887,12 +875,9 @@ Scenario: check the filter by Company (Ferron)
 Scenario: check the filter by my own company
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -910,12 +895,9 @@ Scenario: check the filter by my own company
 Scenario: check the filter by my own company in Cash expence/Cash revenue
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -933,12 +915,9 @@ Scenario: check the filter by my own company in Cash expence/Cash revenue
 Scenario: check the filter by my own company in Reconcilation statement
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
@@ -958,12 +937,9 @@ Scenario: check the filter by my own company in Reconcilation statement
 Scenario: check the filter by my own company in Opening entry/Item stock adjustment
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
@@ -977,11 +953,7 @@ Scenario: check the filter by Partner term (by segments + expiration date)
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I click the button named "FormChoose"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner term" field
 		And "List" table became equal
 			| 'Description'                         |
@@ -1081,11 +1053,7 @@ Scenario: check the filter by customer partner terms in the sales documents
 			| Description          |
 			| Company Ferron BP    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner term" field
 		And "List" table does not contain lines
 			| Description           |
@@ -1118,11 +1086,7 @@ Scenario: check the filter by vendor partner terms in the purchase documents
 			| Description          |
 			| Company Ferron BP    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner term" field
 		And "List" table contains lines
 			| Description           |
@@ -1316,11 +1280,7 @@ Scenario: check the display of the header of the collapsible group in sales, pur
 			| Company Ferron BP    |
 		And I select current line in "List" table
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 
 
 Scenario: check the display of the header of the collapsible group in SalesReportFromTradeAgent
@@ -1339,11 +1299,7 @@ Scenario: check the display of the header of the collapsible group in SalesRepor
 			| Trade agent 1    |
 		And I select current line in "List" table
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 
 Scenario: check the display of the header of the collapsible group in SalesReportToConsignor
 	And I click the button named "FormCreate"
@@ -1361,21 +1317,13 @@ Scenario: check the display of the header of the collapsible group in SalesRepor
 			| Consignor 1    |
 		And I select current line in "List" table
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 
 Scenario: check the display of the header of the collapsible group in expence/revenue documents
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is editable Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		If "Accoun" attribute is present on the form Then
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -1399,22 +1347,14 @@ Scenario: check the display of the header of the collapsible group in PhysicalIn
 Scenario: check the display of the header of the collapsible group in OpeningEntry
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 
 
 Scenario: check the display of the header of the collapsible group in inventory transfer
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		If "Store sender" attribute is present on the form Then
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
@@ -1431,11 +1371,7 @@ Scenario: check the display of the header of the collapsible group in inventory 
 Scenario: check the display of the header of the collapsible group in Shipment confirmation, Goods receipt, Bundling/Unbundling
 	And I click the button named "FormCreate"
 	If "Company" attribute is present on the form Then
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Choice button of the field named "Store"
 	And I go to line in "List" table
 		| Description   |
@@ -1498,11 +1434,7 @@ Scenario: check the display of the header of the collapsible group in bank payme
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description          |
@@ -1513,11 +1445,7 @@ Scenario: check the display of the header of the collapsible group in cash recei
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
 			| Code   | Description        |
@@ -1534,11 +1462,7 @@ Scenario: check the display of the header of the collapsible group in cash payme
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
 			| Code   | Description        |
@@ -1555,11 +1479,7 @@ Scenario: check the display of the header of the collapsible group in consolidat
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| Description     |
@@ -1574,11 +1494,7 @@ Scenario: check the display of the header of the collapsible group in planned in
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description     |

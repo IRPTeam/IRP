@@ -696,11 +696,7 @@ Scenario: _9760001 CMC document over an already calculated period is rejected
 	Given I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'      |
-		| 'Own company 2'    |
-	And I select current line in "List" table
+	And I select "Own company 2" exact value from "Company" drop-down list
 	And I select "Landed cost" exact value from "Calculation mode" drop-down list
 	And I input "15.01.2023" text in "Begin date" field
 	And I input "20.01.2023" text in "End date" field

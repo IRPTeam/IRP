@@ -262,11 +262,7 @@ Scenario: _9059 checking that Production planning correction should be a later d
 	* Create Production planning correction independently
 		Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
 			| 'Description'            |
@@ -337,11 +333,7 @@ Scenario: _9060 checking that the second Production planning correction must be 
 	* Create one more ProductionPlanningCorrection and check message
 		Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
 			| 'Description'            |
@@ -414,11 +406,7 @@ Scenario: _9062 checking that Production (date) must be later than the Productio
 		Given I open hyperlink "e1cib/list/Document.Production"
 		And I click the button named "FormCreate"
 		* Filling in header info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Business unit" field
 			And I go to line in "List" table
 				| 'Description'             |

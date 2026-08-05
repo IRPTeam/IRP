@@ -1290,3 +1290,15 @@ Procedure SetListFormAppearance(Form)
 		AppearanceField.Use = True;
 	EndIf;
 EndProcedure
+
+Function IsDocument(Val Object) Export
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Ref")
+		And Metadata.Documents.Contains(Object.Ref.Metadata()) Then
+		Return True;
+	Else
+		Return False;
+	EndIf;		
+EndFunction
+	
+	
+	

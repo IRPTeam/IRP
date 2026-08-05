@@ -382,7 +382,7 @@ Procedure LegalNameStartChoice_PartnerFilter(Object, Form, Item, ChoiceData, Sta
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
-	If OpenSettings <> Undefined Then
+	If OpenSettings <> Undefined And DocumentsServer.IsDocument(Object) Then
 		If OpenSettings.Property("ArrayOfFilters") And OpenSettings.ArrayOfFilters <> Undefined Then
 			For Each FilterItem In OpenSettings.ArrayOfFilters Do
 				If Upper(FilterItem.FieldName) = Upper("OurCompany") And FilterItem.Value = True Then

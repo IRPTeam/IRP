@@ -4370,11 +4370,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-		| 'Code'  | 'Description'       |
-		| 'USD'   | 'American dollar'   |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 	* Check the selection by Planing transaction basis
 		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -4447,11 +4443,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 			| 'Description'     |
 			| 'Cash desk №1'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Check the selection by Planing transaction basis
 		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -7595,11 +7587,7 @@ Scenario: _0154182 check price recalculaton in the PO (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -7674,11 +7662,7 @@ Scenario: _0154183 check price recalculaton in the PI (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -7753,11 +7737,7 @@ Scenario: _0154184 check price recalculaton in the SO (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -7832,11 +7812,7 @@ Scenario: _0154185 check price recalculaton in the SI (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -7911,11 +7887,7 @@ Scenario: _0154186 check price recalculaton in the RSR (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -8486,11 +8458,7 @@ Scenario: _0154190 check filling in and refilling Work sheet
 		And I finish line editing in "Materials" table
 	* Currency form
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'        | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'    |

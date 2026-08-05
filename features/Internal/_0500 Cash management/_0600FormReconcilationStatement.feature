@@ -84,11 +84,7 @@ Scenario: _060006 check auto filling Reconcilation statement (currency and trans
 		And the field named "BeginPeriod" is filled
 		And the field named "EndPeriod" is filled
 	* Select another partner with two currency and check filling currency
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code' |
-			| 'EUR'  |
-		And I select current line in "List" table
+		And I select "EUR" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description' |
@@ -96,11 +92,7 @@ Scenario: _060006 check auto filling Reconcilation statement (currency and trans
 		And I select current line in "List" table
 		Then the form attribute named "Currency" became equal to ""	
 	* Select partner that have current currency	
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code' |
-			| 'USD'  |
-		And I select current line in "List" table	
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description' |

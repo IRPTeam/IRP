@@ -128,11 +128,7 @@ Scenario: _060203 create Cash receipt (partner term with Ar details by partner t
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "Currency"
 		* Filling in the tabular part
 			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -311,11 +307,7 @@ Scenario: _060206 create Cash payment (partner term with Ap details by partner t
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "Currency"
 		* Filling in the tabular part
 			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table

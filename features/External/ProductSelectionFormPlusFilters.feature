@@ -1446,11 +1446,7 @@ Scenario: check the display of the header of the collapsible group in cash recei
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| Description     |
@@ -1463,11 +1459,7 @@ Scenario: check the display of the header of the collapsible group in cash payme
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
 		And I select "Main Company" exact value from "Company" drop-down list
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| Description     |
@@ -1500,11 +1492,7 @@ Scenario: check the display of the header of the collapsible group in planned in
 			| Description     |
 			| Cash desk №2    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description     |
-			| TRY    | Turkish lira    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 
 Scenario: create a test partner with one vendor partner term and one customer partner term
 	* Create Partner Kalipso

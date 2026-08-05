@@ -193,11 +193,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 			| 'Description'    |
 			| 'Store 02'       |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table	
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Filling in the tabular part
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -258,11 +254,7 @@ Scenario: _2990003 create Stock adjustment as write off
 			| 'Description'    |
 			| 'Store 02'       |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table	
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Filling in the tabular part
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -434,11 +426,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			| 'Description'             |
 			| 'Logistics department'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table		
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
 			And in the table "ItemList" I click "Add basis documents" button
@@ -540,11 +528,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			| 'Description'    |
 			| 'Store 05'       |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
 			And in the table "ItemList" I click "Add basis documents" button
@@ -587,11 +571,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 				| '#'    | 'Key'                                         | 'Basis'                           | 'Row ID'                              | 'Next step'    | 'Quantity'    | 'Basis key'                           | 'Current step'                     | 'Row ref'                              |
 				| '1'    | '$$Rov1StockAdjustmentAsWriteOff2990007$$'    | '$$PhysicalInventory2990004$$'    | '$$Rov2PhysicalInventory2990004$$'    | ''             | '2,000'       | '$$Rov2PhysicalInventory2990004$$'    | 'Stock adjustment as write off'    | '$$Rov2PhysicalInventory2990004$$'     |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "Currency"
 		* Unlink line and check Row ID info tab
 			And in the table "ItemList" I click "Link unlink basis documents" button
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
@@ -1172,11 +1152,7 @@ Scenario: _2990025 write off product and check update exp count
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I input "16.05.2022 00:00:00" text in the field named "Date"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table	
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click "Post and close" button
 		And I wait "Stock adjustment as write-off * dated * *" window closing in 20 seconds
 	* Open Physical inventory

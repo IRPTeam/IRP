@@ -53,10 +53,9 @@ Procedure SetNewCatalogNumberBeforeWrite(Source, Cancel) Export
 	
 	SetSourceNewNumber(Source);
 	
-	// move to SetNewNumberOnWrite
-	//If Source.NumeratorRules.UniquenessControl Then
-	//	CheckNumberUniqueness(Source, Cancel);
-	//EndIf;
+	If Source.NumeratorRules.UniquenessControl Then
+		CheckNumberUniqueness(Source, Cancel);
+	EndIf;
 	
 EndProcedure
 

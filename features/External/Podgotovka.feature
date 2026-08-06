@@ -1684,7 +1684,14 @@ Scenario: set True value to the constant Use accounting
 		Then "Functional option settings" window is opened
 		And I set checkbox "Use accounting"
 		And I click "Save" button
-		And I close current window				
+		And I close current window
+
+Scenario: set False value to the constant Use accounting
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I remove checkbox "Use accounting"
+		And I click "Save" button
+		And I close current window
 
 Scenario: set True value to the constant Use job queue for external functions
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"

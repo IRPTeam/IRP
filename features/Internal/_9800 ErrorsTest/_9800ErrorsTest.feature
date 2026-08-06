@@ -65,11 +65,7 @@ Scenario: _9801 filling user settings for Sales order
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I click choice button of "Value" attribute in "MetadataTree" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'     | 'Use'    |

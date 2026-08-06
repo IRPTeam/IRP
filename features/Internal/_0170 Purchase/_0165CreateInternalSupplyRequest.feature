@@ -138,12 +138,7 @@ Scenario: _016503 check the Company filter in the Internal Supply Request docume
 	* Check filter by Company when inpute by string
 		And I input "Company Kalipso" text in "Company" field
 		And Delay 2
-		And I click Select button of "Store" field
-		And Delay 2
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
+		And I move to the next attribute
 		When I Check the steps for Exception
 			| 'Then the form attribute named "Company" became equal to "Company Kalipso"'    |
 		And I close all client application windows

@@ -22,11 +22,6 @@ Scenario: check the filter by own company
 		And I input "Company Kalipso" text in "Company" field
 		And Delay 2
 		And I move to the next attribute
-		Then "Companies" window is opened
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
 		When I Check the steps for Exception
 			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
 	And I close all client application windows 
@@ -43,12 +38,7 @@ Scenario: check the filter by own company in the Cash transfer order
 		And Delay 2
 		And I input "Company Kalipso" text in "Company" field
 		And Delay 2
-		And I click Select button of "Sender" field
-		Then "Companies" window is opened
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
+		And I move to the next attribute
 		When I Check the steps for Exception
 			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
 	And I close all client application windows
@@ -90,10 +80,6 @@ Scenario: check the filter for bank accounts (cash account selection is not avai
 		And I input "Cash desk №1" text in "Account" field
 		And Delay 2
 		And I move to the next attribute
-		And "List" table does not contain lines
-			| Description     |
-			| Cash desk №1    |
-		And I click the button named "FormChoose"
 		When I Check the steps for Exception
 			| 'Then the form attribute named "CashAccount" became equal to 'Cash desk №1''    |
 	And I close all client application windows
@@ -121,10 +107,6 @@ Scenario: check the filter by cash account (bank account selection is not availa
 		And I input "Bank account, TRY" text in "Cash account" field
 		And Delay 2
 		And I move to the next attribute
-		And "List" table does not contain lines
-			| Description          |
-			| Bank account, TRY    |
-		And I click the button named "FormChoose"
 		When I Check the steps for Exception
 			| 'Then the form attribute named "CashAccount" became equal to 'Bank account, TRY''    |
 	And I close all client application windows

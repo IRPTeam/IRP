@@ -754,7 +754,11 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 			And I expand "Price settings" group
 			And I expand "Store and delivery" group
 			And I input "234" text in "Number" field
-			And I select "Main company" exact value from "Company" drop-down list
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| Description     |
+				| Main company    |
+			And I select current line in "List" table
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| Description     |

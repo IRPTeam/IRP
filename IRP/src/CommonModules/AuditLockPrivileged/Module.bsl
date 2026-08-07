@@ -107,10 +107,11 @@ EndFunction
 // 
 // Parameters:
 //  Source - DocumentObject - Source
+//  WriteMode - DocumentWriteMode - Write mode
 // 
 // Returns:
 //  Boolean - Document attributes changed
-Function DocumentAttributesChanged(Source)
+Function DocumentAttributesChanged(Source, WriteMode)
 	
 	If Source.Ref.IsEmpty() Then
 		Return False;
@@ -151,6 +152,11 @@ Function DocumentAttributesChanged(Source)
 	EndDo;
 	
 	ChangedAttributes = New Array();
+	
+	If SourceCopy.Posted And WriteMode = DocumentWriteMode.UndoPosting 
+			OR Not SourceCopy.Posted And WriteMode = DocumentWriteMode.Posting Then
+		ChangedAttributes.Add(R().DocStatus_Posted);
+	EndIf;
 	
 	For Each AttributeKV In AllAttributes.Attributes Do
 		AttributeName = AttributeKV.Key;
@@ -196,7 +202,7 @@ EndFunction
 
 Procedure BeforeWrite_AuditLockBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
 	If FOServer.IsUseNotAuditAttributes() Then
-		If DocumentAttributesChanged(Source) Then
+		If DocumentAttributesChanged(Source, WriteMode) Then
 			Cancel = True;
 		EndIf;
 	Else

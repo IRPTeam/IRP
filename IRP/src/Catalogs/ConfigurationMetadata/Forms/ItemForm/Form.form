@@ -1118,6 +1118,7 @@
       <edit>
         <common>true</common>
       </edit>
+      <functionalOptions>FunctionalOption.UseNotAuditAttributes</functionalOptions>
     </columns>
     <columns>
       <name>ReadOnly</name>

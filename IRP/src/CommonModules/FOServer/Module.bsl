@@ -123,6 +123,7 @@ Function GetFOGroups() Export
 	FOList.Add("UseMobile");
 	FOList.Add("UseBusinessProcess");
 	FOList.Add("UseLockDataModification");
+	FOList.Add("UseNotAuditAttributes");
 	FOList.Add("UseManufacturing");
 	FOList.Add("UseMessaging");
 	FOList.Add("UseFixedAssets");
@@ -547,6 +548,10 @@ EndFunction
 
 Function IsUseBatchReallocate() Export
 	Return GetFunctionalOption("UseBatchReallocate");
+EndFunction
+
+Function IsUseNotAuditAttributes() Export
+	Return GetFunctionalOption("UseNotAuditAttributes");
 EndFunction
 
 #EndRegion

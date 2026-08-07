@@ -1112,6 +1112,7 @@
   <functionalOptions>FunctionalOption.UseBatchRelevance</functionalOptions>
   <functionalOptions>FunctionalOption.UseAdvanceRelevance</functionalOptions>
   <functionalOptions>FunctionalOption.UseBatchReallocate</functionalOptions>
+  <functionalOptions>FunctionalOption.UseNotAuditAttributes</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1299,6 +1300,7 @@
   <constants>Constant.UseBatchRelevance</constants>
   <constants>Constant.UseAdvanceRelevance</constants>
   <constants>Constant.UseBatchReallocate</constants>
+  <constants>Constant.UseNotAuditAttributes</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

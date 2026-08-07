@@ -103,16 +103,6 @@ Function DocumentIsLocked(DocRef) Export
 	Return False;
 EndFunction	
 
-#EndRegion
-
-#Region Events
-
-Procedure BeforeWrite_AuditLockBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
-	If DocumentAttributesChanged(Source) Then
-		Cancel = True;
-	EndIf;
-EndProcedure
-
 // Document attributes changed.
 // 
 // Parameters:
@@ -141,9 +131,14 @@ Function DocumentAttributesChanged(Source)
 		Return False;
 	EndIf;
 		
-	FullCheck = True;
 	AllAttributes = CatConfigurationMetadataServer.GetAttributeNamesByObject(Source);
 	NotAuditAttributes = CatConfigurationMetadataServer.GetCustomizedAttributesByObject(Source).NotAudit;
+	If NotAuditAttributes.Count() = 0 Then
+		// full control and changes not allowed
+		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_004);
+		Return True;
+	EndIf;
+	
 	For Each TableKV In NotAuditAttributes Do
 		TableName = TableKV.Key;
 		For Each AttributeName In TableKV.Value Do
@@ -152,7 +147,6 @@ Function DocumentAttributesChanged(Source)
 			Else
 				AllAttributes.Tables[TableName].Attributes.Delete(AttributeName);
 			EndIf;
-			FullCheck = False;
 		EndDo;
 	EndDo;
 	
@@ -187,15 +181,29 @@ Function DocumentAttributesChanged(Source)
 
 	If ChangedAttributes.Count() > 0 Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_004);
-		If Not FullCheck Then
-			CommonFunctionsClientServer.ShowUsersMessage(
-				StrTemplate(R().SDR_AuditLockChangedAttributes, StrConcat(ChangedAttributes, ", ")));
-		EndIf;
+		CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().AuditLock_007, StrConcat(ChangedAttributes, ", ")));
 		Return True;
 	EndIf;
 
 	Return False;
 	
 EndFunction
+
+#EndRegion
+
+#Region Events
+
+Procedure BeforeWrite_AuditLockBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
+	If FOServer.IsUseNotAuditAttributes() Then
+		If DocumentAttributesChanged(Source) Then
+			Cancel = True;
+		EndIf;
+	Else
+		If DocumentIsLocked(Source.Ref) Then
+			Cancel = True;
+		EndIf;
+	EndIf;
+EndProcedure
 
 #EndRegion

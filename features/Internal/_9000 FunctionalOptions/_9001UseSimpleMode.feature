@@ -159,7 +159,7 @@ Scenario: _900006 create Cash account
 		And I click the button named "FormCreate"
 		And I input "Cash 1" text in "ENG" field
 		And I change the radio button named "CurrencyType" value to "Fixed"
-		And I select "TRY" exact value from the drop-down list named "Currency"
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I click "Save and close" button
 	* Check creation
 		And "List" table became equal

@@ -442,6 +442,13 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, Ar
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
+	Else
+		For Each FilterItem In ArrayOfFilters Do
+			If Upper(FilterItem.FieldName) = Upper("OurCompany") And FilterItem.Value = True Then
+				StandardProcessing = True;
+				Return;
+			EndIf;
+		EndDo;
 	EndIf;
 
 	If AdditionalParameters = Undefined Then

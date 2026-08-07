@@ -86,7 +86,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'     | 'Use'    |
@@ -122,7 +126,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'     | 'Use'    |
@@ -158,7 +166,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Second Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Second Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -184,7 +196,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Second Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Second Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -220,13 +236,21 @@ Scenario: _200001 customize the CI user settings
 			| 'Group name'   | 'Use'    |
 			| 'Company'      | 'No'     |
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
 			| 'Currency'     | 'No'     |
 		And I select current line in "MetadataTree" table
-		And I select "TRY" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Code'   | 'Description'     |
+			| 'TRY'    | 'Turkish lira'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Bank receipt
 		And I go to line in "MetadataTree" table
 			| 'Group name'      |
@@ -247,13 +271,21 @@ Scenario: _200001 customize the CI user settings
 			| 'Group name'   | 'Use'    |
 			| 'Company'      | 'No'     |
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
 			| 'Currency'     | 'No'     |
 		And I select current line in "MetadataTree" table
-		And I select "USD" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Code'   | 'Description'        |
+			| 'USD'    | 'American dollar'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Bundling
 		And I go to line in "MetadataTree" table
 			| 'Group name'    |
@@ -295,7 +327,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -328,7 +364,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Purchase return
 		And I go to line in "MetadataTree" table
 		| 'Group name'        |
@@ -339,7 +379,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Second Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Second Company'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Purchase return order
 		And I go to line in "MetadataTree" table
 			| 'Group name'               |
@@ -350,7 +394,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Second Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Second Company'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Sales return order
 		And I go to line in "MetadataTree" table
 			| 'Group name'            |
@@ -361,7 +409,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Second Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Second Company'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Sales return
 		And I go to line in "MetadataTree" table
 			| 'Group name'      |
@@ -372,7 +424,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Second Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Second Company'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Reconciliation statement
 		And I go to line in "MetadataTree" table
 			| 'Group name'                  |
@@ -383,7 +439,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Second Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Second Company'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Cash payment
 		And I go to line in "MetadataTree" table
 		| 'Group name'     |
@@ -444,7 +504,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Group name'   | 'Use'    |
 			| 'Company'      | 'No'     |
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -467,7 +531,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -489,7 +557,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -512,7 +584,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Second Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Second Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -544,7 +620,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -606,7 +686,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Group name'   | 'Use'    |
 			| 'Company'      | 'No'     |
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'                  |
@@ -640,7 +724,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Group name'   | 'Use'    |
 			| 'Company'      | 'No'     |
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Shipment confirmation
 		And I go to line in "MetadataTree" table
 			| 'Group name'               |
@@ -650,7 +738,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -674,7 +766,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -696,7 +792,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -717,7 +817,11 @@ Scenario: _200001 customize the CI user settings
 			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Sales order closing
 		And I go to line in "MetadataTree" table
@@ -782,7 +886,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -806,7 +914,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -862,7 +974,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -886,7 +1002,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -910,7 +1030,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -934,7 +1058,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -958,7 +1086,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -982,7 +1114,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -990,7 +1126,11 @@ Scenario: _200001 customize the CI user settings
 		And I activate "Group name" field in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "TRY" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Turkish lira'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -1014,7 +1154,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |
@@ -1038,7 +1182,11 @@ Scenario: _200001 customize the CI user settings
 		And I select current line in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I select "Main Company" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |

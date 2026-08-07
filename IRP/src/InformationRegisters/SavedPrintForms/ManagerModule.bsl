@@ -13,6 +13,7 @@ EndFunction
 #EndRegion
 
 Procedure SaveToSavedPrintForms(SourceRef, TemplateName, PrintFormTemplate, Result) Export
+	SetPrivilegedMode(True);
 	Record = CreateRecordManager();
 	Record.Source = SourceRef;
 	Record.TemplateName = TemplateName;
@@ -45,6 +46,7 @@ Function GetSavedPrintForm(SourceRef, TemplateName, PrintFormTemplate) Export
 EndFunction
 
 Procedure ClearSavedPrintForms(SourceRef, TemplateName, PrintFormTemplate) Export
+	SetPrivilegedMode(True);
 	RecordSet = CreateRecordSet();
 	RecordSet.Filter.Source.Set(SourceRef);
 	RecordSet.Filter.TemplateName.Set(TemplateName);

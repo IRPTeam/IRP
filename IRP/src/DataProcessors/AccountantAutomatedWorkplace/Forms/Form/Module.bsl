@@ -107,7 +107,7 @@ Procedure DocumentTypeStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProc
 	EndDo;
 	FormParameters.Insert("SelectedDocumentTypes", SelectedDocumentTypes);
 	
-	OpenForm("DataProcessor.AccountantAutomatedWorkplace.Form.DoumentTypeChoiseForm", 
+	OpenForm("DataProcessor.AccountantAutomatedWorkplace.Form.DocumentTypeChoiseForm", 
 		FormParameters, ThisObject, , , , Callback, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

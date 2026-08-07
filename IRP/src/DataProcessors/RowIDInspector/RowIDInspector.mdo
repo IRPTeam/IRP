@@ -21,7 +21,7 @@
     <usePurposes>MobileDevice</usePurposes>
   </forms>
   <commands uuid="4eb2d87d-1fb8-4cf5-ad1d-0086347f3f45">
-    <name>RowIDInspcetor</name>
+    <name>RowIDInspector</name>
     <synonym>
       <key>en</key>
       <value>Row ID Inspector</value>

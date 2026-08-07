@@ -26,6 +26,10 @@ Procedure SetNewDocumentNumberBeforeWrite(Source, Cancel, WriteMode, PostingMode
 	
 	SetSourceNewNumber(Source);
 	
+	If Source.NumeratorRules.UniquenessControl Then
+		CheckNumberUniqueness(Source, Cancel);
+	EndIf;
+	
 EndProcedure
 
 Procedure SetNewCatalogNumberBeforeWrite(Source, Cancel) Export

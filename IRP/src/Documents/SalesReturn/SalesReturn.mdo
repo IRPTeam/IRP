@@ -205,7 +205,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <choiceParameters>
-	<name>Filter.OurCompany</name>
+      <name>Filter.OurCompany</name>
       <value xsi:type="core:BooleanValue">
         <value>true</value>
       </value>
@@ -217,8 +217,8 @@
     <choiceParameters>
       <name>Filter.NotActive</name>
       <value xsi:type="core:BooleanValue"/>
-	</choiceParameters>
-	<quickChoice>Use</quickChoice>
+    </choiceParameters>
+    <quickChoice>Use</quickChoice>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -599,6 +599,7 @@
         <changeMode>DontChange</changeMode>
         <field>Document.SalesReturn.TabularSection.ItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <quickChoice>Use</quickChoice>
       <createOnInput>DontUse</createOnInput>
     </attributes>
     <attributes uuid="f8fe3457-e614-4967-8729-c97e6723b28e">

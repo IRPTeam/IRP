@@ -709,6 +709,7 @@
         <changeMode>DontChange</changeMode>
         <field>Document.SalesOrder.TabularSection.ItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <quickChoice>Use</quickChoice>
       <createOnInput>DontUse</createOnInput>
     </attributes>
     <attributes uuid="8650489f-d008-4667-a48d-29cf0653de40">

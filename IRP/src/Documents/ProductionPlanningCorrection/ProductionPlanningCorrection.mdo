@@ -86,7 +86,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <choiceParameters>
-	<name>Filter.OurCompany</name>
+      <name>Filter.OurCompany</name>
       <value xsi:type="core:BooleanValue">
         <value>true</value>
       </value>
@@ -98,8 +98,8 @@
     <choiceParameters>
       <name>Filter.NotActive</name>
       <value xsi:type="core:BooleanValue"/>
-	</choiceParameters>
-	<quickChoice>Use</quickChoice>
+    </choiceParameters>
+    <quickChoice>Use</quickChoice>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -294,6 +294,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <quickChoice>Use</quickChoice>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -608,6 +609,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <quickChoice>Use</quickChoice>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

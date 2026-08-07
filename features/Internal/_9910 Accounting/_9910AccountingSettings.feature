@@ -4222,7 +4222,9 @@ Scenario: _0991230 check accountant automated workplace
 		And I input "24.02.2023" text in the field named "DateBegin"
 		And I input "30.03.2024" text in the field named "DateEnd"
 		And I click the button named "Select"
-		And I select "<Show all>" exact value from "Document type" drop-down list
+		And I click Choice button of the field named "DocumentType"
+		And I click "Check all" button
+		And I click "Ok" button
 		And I select from the drop-down list named "Company" by "Own company 2" string
 		And I select "All" exact value from "Lock" drop-down list
 		And I select "All" exact value from the drop-down list named "FilesType"	
@@ -4291,7 +4293,13 @@ Scenario: _0991230 check accountant automated workplace
 		And I select from the drop-down list named "LedgerType" by "Basic LTV" string
 		And I click "Find" button
 	* Check filter by document type
-		And I select from "Document type" drop-down list by "Sales invoice" string
+		And I click Choice button of the field named "DocumentType"
+		And I click "Uncheck all" button
+		And I go to line in "DocumentTypeTable" table
+			| 'Document name' |
+			| 'Sales invoice' |
+		And I set checkbox named "DocumentTypeTableUse" in "DocumentTypeTable" table
+		And I click "Ok" button
 		And I click "Find" button
 		And "DocumentList" table contains lines
 			| 'Document'                                                  | 'Files' |

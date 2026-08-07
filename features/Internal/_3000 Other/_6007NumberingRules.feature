@@ -168,12 +168,16 @@ Scenario: _607702 check numeration for catalog (partner term)
 
 Scenario: _607703 check manual editing for numerator
 	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	And I click "Create" button
-	And I select from the drop-down list named "Company" by "Main Company" string
-	When I Check the steps for Exception
-		| 'And I input "4545566" text in "Document number" field'    |
-		
+	* Create SI with manually entered number
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "4545566" text in the field named "DocumentNumber"
+	* Manually entered number is replaced by the numerator on write
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "72630018"
+	And I close all client application windows
+
 
 Scenario: _607704 check uniqueness control for documents
 	And I close all client application windows

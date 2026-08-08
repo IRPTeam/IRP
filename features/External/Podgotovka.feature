@@ -732,8 +732,7 @@ Scenario: create InventoryTransferOrder020001
 				| 'Item key'     |
 				| 'M/White'      |
 			And I select current line in "List" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I click the button named "FormChoose"
+			And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 			And I move to the next attribute
 			And I input "50,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -750,8 +749,7 @@ Scenario: create InventoryTransferOrder020001
 				| 'S/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I click the button named "FormChoose"
+			And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 			And I move to the next attribute
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -794,8 +792,7 @@ Scenario: create InventoryTransferOrder020004
 			| 'L/Green'     |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And I move to the next attribute
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -838,8 +835,7 @@ Scenario: create InventoryTransferOrder020007
 			| 'L/Green'     |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And I move to the next attribute
 		And I input "17,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -882,8 +878,7 @@ Scenario: create InventoryTransferOrder020010
 			| '36/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And I move to the next attribute
 		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -1329,8 +1324,7 @@ Scenario: create InventoryTransfer021030
 		| 'L/Green'    |
 	And I select current line in "List" table
 	And I activate "Unit" field in "ItemList" table
-	And I click choice button of "Unit" attribute in "ItemList" table
-	And I select current line in "List" table
+	And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 	And I activate "Quantity" field in "ItemList" table
 	And I input "3,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table

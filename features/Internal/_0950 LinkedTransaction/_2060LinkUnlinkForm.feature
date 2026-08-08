@@ -378,11 +378,7 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 02' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Boots (12 pcs)' |
-		And I select current line in "List" table
+		And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
@@ -931,11 +927,7 @@ Scenario: _2060004 check link/unlink form in the SRO
 			| 'Boots' | '37/18SD'  | '2,000' | 'Store 01' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Boots (12 pcs)' |
-		And I select current line in "List" table
+		And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
@@ -1092,11 +1084,7 @@ Scenario: _2060005 check link/unlink form in the SR
 			| 'Boots' | '37/18SD'  | '2,000' | 'Store 01' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Boots (12 pcs)' |
-		And I select current line in "List" table
+		And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'      | 'Current step' |
@@ -1418,11 +1406,7 @@ Scenario: _2060008 check link/unlink form in the PRO
 			| 'Boots' | '36/18SD'  | '2,000' | 'Store 02' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs' |
-		And I select current line in "List" table
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
 			| 'Boots' | '36/18SD'  | '2,000'    | 'Store 02' |
@@ -1577,11 +1561,7 @@ Scenario: _2060009 check link/unlink form in the PR
 			| 'Boots' | '36/18SD'  | '2,000' | 'Store 02' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs' |
-		And I select current line in "List" table
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
 			| 'Boots' | '36/18SD'  | '2,000'    | 'Store 02' |
@@ -2631,12 +2611,7 @@ Scenario: _2060020 check button Show quantity in base unit in the Link form
 		And I activate "Quantity" field in "ItemList" table
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Boots (12 pcs)' |
-		And I activate field named "Description" in "List" table
-		And I select current line in "List" table
+		And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -2655,12 +2630,7 @@ Scenario: _2060020 check button Show quantity in base unit in the Link form
 		And I activate "Quantity" field in "ItemList" table
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'box Dress (8 pcs)' |
-		And I activate field named "Description" in "List" table
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 	* Check button Show quantity in base unit in the Link form
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Show quantity in basis unit"

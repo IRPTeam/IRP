@@ -844,11 +844,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 				| 'Item'          | 'Item key'     |
 				| 'High shoes'    | '37/19SD'      |
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'                |
-				| 'High shoes box (8 pcs)'     |
-			And I select current line in "List" table
+			And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I select current line in "ItemList" table
@@ -1210,11 +1206,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				| 'Item'          | 'Item key'     |
 				| 'High shoes'    | '37/19SD'      |
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'                |
-				| 'High shoes box (8 pcs)'     |
-			And I select current line in "List" table
+			And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I select current line in "ItemList" table
@@ -7951,11 +7943,7 @@ Scenario: _0154187 check edit currency in the StockAdjustmentAsSurplus
 		And I input "100,00" text in "Total amount" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Change unit
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 	* Check
 		And "ItemList" table became equal
 			| '#'   | 'Revenue type'   | 'Total amount' | 'Item'    | 'Basis document'   | 'Item key'   | 'Profit loss center'        | 'Physical inventory'   | 'Serial lot numbers'   | 'Unit'                | 'Quantity'    |
@@ -8025,11 +8013,7 @@ Scenario: _0154188 check edit currency in the StockAdjustmentAsWriteOff
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Change unit
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 	* Check
 		And "ItemList" table became equal
 			| '#'   | 'Expense type'   | 'Item'    | 'Basis document'   | 'Item key'   | 'Profit loss center'        | 'Physical inventory'   | 'Serial lot numbers'   | 'Unit'                | 'Quantity'    |

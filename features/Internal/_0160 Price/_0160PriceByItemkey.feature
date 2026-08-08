@@ -341,11 +341,7 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
-		And I click choice button of "Unit" attribute in "ItemKeyList" table
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Boots (12 pcs)'    |
-		And I select current line in "List" table		
+		And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemKeyList" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "7 000,00" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
@@ -1097,11 +1093,7 @@ Scenario: _016013 check price calculation in the documents (price by unit, Add b
 		* By box
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'       | 'Item key'    | 'Price type'           | 'Quantity'    | 'Unit'               |
 				| 'Boots'    | '7 000,00'    | '36/18SD'     | 'Basic Price Types'    | '1,000'       | 'Boots (12 pcs)'     |

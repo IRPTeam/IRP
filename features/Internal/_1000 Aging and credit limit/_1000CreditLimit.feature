@@ -139,11 +139,7 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Boots'    | '36/18SD'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme
 			And I move to "Other" tab
@@ -215,11 +211,7 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Boots'    | '36/18SD'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
@@ -291,11 +283,7 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Boots'    | '36/18SD'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			And I delete "$$SalesOrder20400014$$" variable

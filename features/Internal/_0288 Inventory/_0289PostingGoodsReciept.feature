@@ -387,11 +387,7 @@ Scenario: _028930 check link/unlink form in the GR
 			| 'Boots'   | '36/18SD'    | '2,000'      | 'Store 02'    |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs'            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And "RowIDInfo" table contains lines
 			| 'Basis'                                            | 'Next step'   | 'Quantity'    |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08'   | ''            | '10,000'      |

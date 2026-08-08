@@ -149,11 +149,7 @@ Scenario: _300302 create Unbundling and check creation item key
 			| 'Item key'                       |
 			| 'Chewing gum TR/Chewing gum2'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
-			| Description    |
-			| adet           |
-		And I select current line in "List" table
+		And I select "adet" exact value from the drop-down list named "Unit"
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -189,11 +185,7 @@ Scenario: _300302 create Unbundling and check creation item key
 				| 'Item key'                        |
 				| 'Chewing gum TR/Chewing gum2'     |
 			And I select current line in "List" table
-			And I click Choice button of the field named "Unit"
-			And I go to line in "List" table
-				| Description     |
-				| adet            |
-			And I select current line in "List" table
+			And I select "adet" exact value from the drop-down list named "Unit"
 			And I input "2,000" text in the field named "Quantity"
 			And I click Select button of "Store" field
 			And I go to line in "List" table

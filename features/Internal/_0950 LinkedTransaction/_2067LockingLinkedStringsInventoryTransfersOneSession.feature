@@ -813,11 +813,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 			And I finish line editing in "ItemList" table
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'                |
-				| 'High shoes box (8 pcs)'     |
-			And I select current line in "List" table
+			And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		* Link
 			And I go to line in "ItemList" table
 				| '#'    | 'Item'    | 'Item key'    | 'Quantity'    | 'Store'       | 'Unit'     |
@@ -896,11 +892,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 			And I finish line editing in "ItemList" table
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'                |
-				| 'High shoes box (8 pcs)'     |
-			And I select current line in "List" table
+			And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		* Link
 			And I go to line in "ItemList" table
 				| '#'    | 'Item'    | 'Item key'    | 'Quantity'    | 'Store'       | 'Unit'     |

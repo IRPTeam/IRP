@@ -796,11 +796,7 @@ Scenario: _2066011 change quantity in the linked string in the PI, GR after PI, 
 			| "Quantity" | "Row presentation" | "Unit"           |
 			| "2,250"    | "Boots (37/18SD)"  | "Boots (12 pcs)" |
 		And I input "1,000" text in "Quantity" field of "BasisesTree" table
-		And I click choice button of "Unit" attribute in "BasisesTree" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs'            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from "Unit" drop-down list in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		Then there are lines in TestClient message log
@@ -818,11 +814,7 @@ Scenario: _2066011 change quantity in the linked string in the PI, GR after PI, 
 			| "Quantity" | "Row presentation" | "Unit"           |
 			| "2,250"    | "Boots (37/18SD)"  | "Boots (12 pcs)" |
 		And I input "28,000" text in "Quantity" field of "BasisesTree" table
-		And I click choice button of "Unit" attribute in "BasisesTree" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs'            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from "Unit" drop-down list in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And "ItemList" table contains lines

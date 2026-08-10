@@ -220,8 +220,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I click the button named "FormChoose"
+			And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 			And I move to the next attribute
 			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table

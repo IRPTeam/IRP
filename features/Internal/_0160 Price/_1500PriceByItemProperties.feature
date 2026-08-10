@@ -227,11 +227,7 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I move to the next attribute
 	And I input "6000,00" text in "Price" field of "ItemList" table
 	And I select current line in "ItemList" table
-	And I click choice button of "Unit" attribute in "ItemList" table
-	And I go to line in "List" table
-		| 'Description'      |
-		| 'Boots (12 pcs)'   |
-	And I select current line in "List" table	
+	And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
@@ -251,11 +247,7 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I move to the next attribute
 	And I input "700,00" text in "Price" field of "ItemList" table
 	And I select current line in "ItemList" table
-	And I click choice button of "Unit" attribute in "ItemList" table
-	And I go to line in "List" table
-		| 'Description'   |
-		| 'pcs'           |
-	And I select current line in "List" table	
+	And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
 	And I delete "$$PriceListBasicPriceByItems150002$$" variable
@@ -515,11 +507,7 @@ Scenario: _1500041 check price calculation in the documents (price by item, unit
 		* By box
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'       | 'Item key'    | 'Price type'           | 'Quantity'    | 'Unit'               |
 				| 'Boots'    | '6 000,00'    | '36/18SD'     | 'Basic Price Types'    | '1,000'       | 'Boots (12 pcs)'     |

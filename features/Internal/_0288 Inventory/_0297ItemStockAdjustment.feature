@@ -62,11 +62,7 @@ Scenario: _0297001 create Item stock adjustment
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "2,000" text in "Quantity" field of "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table		
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table

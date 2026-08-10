@@ -871,11 +871,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Item'    | 'Item key'    |
 			| 'Boots'   | '39/18SD'     |
 		And I select current line in "List" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Boots (12 pcs)'    |
-		And I select current line in "List" table		
+		And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
@@ -1672,8 +1668,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "5,000" text in the field named "Quantity"
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -1752,8 +1747,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Сhewing gum/Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And in the table "ItemList" I click "By bundle content" button
 		And "ItemList" table became equal
 			| 'Item'          | 'Quantity'   | 'Item key'      | 'Unit'    |
@@ -1802,8 +1796,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "10,000" text in the field named "Quantity"
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -1944,8 +1937,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Skittles + Сhewing gum/Skittles + Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "12,000" text in the field named "Quantity"
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And in the table "ItemList" I click "By specification" button		
 		And I go to line in "ItemList" table
 			| 'Item'          | 'Item key'      | 'Quantity'   | 'Unit'    |

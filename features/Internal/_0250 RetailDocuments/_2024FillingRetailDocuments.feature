@@ -2653,19 +2653,9 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'Dont calculate row'    | 'Item'     | 'Item key'    | 'Net amount'    | 'Price'     | 'Quantity'    | 'Store'       | 'Tax amount'    | 'Total amount'    | 'Unit'    | 'VAT'     |
 				| 'No'                    | 'Dress'    | 'L/Green'     | '550,00'        | '550,00'    | '1,000'       | 'Store 01'    | '99,00'         | '649,00'          | 'pcs'     | '18%'     |
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And "List" table does not contain lines
-				| 'Description'     |
-				| 'box (8 pcs)'     |
-			And "List" table contains lines
-				| 'Description'           |
-				| 'pcs'                   |
-				| 'box Dress (8 pcs)'     |
-			Then the number of "List" table lines is "равно" "2"
-			And I go to line in "List" table
-				| 'Description'           |
-				| 'box Dress (8 pcs)'     |
-			And I select current line in "List" table
+			When I Check the steps for Exception
+				| 'And I select "box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table' |
+			And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Item'     | 'Item key'    | 'Dont calculate row'    | 'Quantity'    | 'Unit'                 | 'Tax amount'    | 'Price'       | 'VAT'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| 'Dress'    | 'L/Green'     | 'No'                    | '1,000'       | 'box Dress (8 pcs)'    | '792,00'        | '4 400,00'    | '18%'    | '4 400,00'      | '5 192,00'        | 'Store 01'     |
@@ -3008,19 +2998,9 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'Profit loss center'    | 'Dont calculate row'    | 'Item'     | 'Item key'    | 'Net amount'    | 'Price'     | 'Price type'           | 'Quantity'    | 'Store'       | 'Tax amount'    | 'Total amount'    | 'Unit'    | 'VAT'     |
 				| 'Shop 01'               | 'No'                    | 'Dress'    | 'L/Green'     | '550,00'        | '550,00'    | 'Basic Price Types'    | '1,000'       | 'Store 01'    | '99,00'         | '649,00'          | 'pcs'     | '18%'     |
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And "List" table does not contain lines
-				| 'Description'     |
-				| 'box (8 pcs)'     |
-			And "List" table contains lines
-				| 'Description'           |
-				| 'pcs'                   |
-				| 'box Dress (8 pcs)'     |
-			Then the number of "List" table lines is "равно" "2"
-			And I go to line in "List" table
-				| 'Description'           |
-				| 'box Dress (8 pcs)'     |
-			And I select current line in "List" table
+			When I Check the steps for Exception
+				| 'And I select "box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table' |
+			And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Profit loss center'    | 'Price type'                 | 'Item'     | 'Item key'    | 'Dont calculate row'    | 'Quantity'    | 'Unit'                 | 'Tax amount'    | 'Price'       | 'VAT'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| 'Shop 01'               | 'Basic Price Types'          | 'Shirt'    | '38/Black'    | 'No'                    | '2,000'       | 'pcs'                  | ''              | '350,00'      | '0%'     | '700,00'        | '700,00'          | 'Store 01'     |

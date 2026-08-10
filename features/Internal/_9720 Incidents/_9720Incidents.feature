@@ -233,11 +233,7 @@ Scenario: _972004 create WorkOrder
 		| 'Description' |
 		| 'Employee 1'  |
 	And I click the button named "FormChoose"
-	And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-	And I go to line in "List" table
-		| "Description" |
-		| "hours"       |
-	And I click the button named "FormChoose"
+	And I select "hours" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 	And I activate field named "WorkersQuantity" in "Workers" table
 	And I input "5,000" text in the field named "WorkersQuantity" of "Workers" table
 	And I finish line editing in "Workers" table
@@ -283,11 +279,7 @@ Scenario: _972005 create WorkSheet
 		| 'Employee 1'  |
 	And I click the button named "FormChoose"
 	And I activate field named "WorkersUnit" in "Workers" table
-	And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-	And I go to line in "List" table
-		| "Description" |
-		| "hours"       |
-	And I click the button named "FormChoose"
+	And I select "hours" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 	And I activate field named "WorkersQuantity" in "Workers" table
 	And I input "5,000" text in the field named "WorkersQuantity" of "Workers" table
 	And I finish line editing in "Workers" table
@@ -431,11 +423,7 @@ Scenario: _972008 create WorkOrder within Project
 		| 'Description' |
 		| 'Employee 1'  |
 	And I click the button named "FormChoose"
-	And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-	And I go to line in "List" table
-		| "Description" |
-		| "hours"       |
-	And I click the button named "FormChoose"
+	And I select "hours" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 	And I activate field named "WorkersQuantity" in "Workers" table
 	And I input "5,000" text in the field named "WorkersQuantity" of "Workers" table
 	And I finish line editing in "Workers" table

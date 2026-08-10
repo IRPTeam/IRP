@@ -926,11 +926,7 @@ Scenario:_800014 check remaining stock control in the Bundling
 				| 'Description'       |
 				| 'Scarf + Dress'     |
 			And I select current line in "List" table
-			And I click Select button of "Unit" field
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'pcs'             |
-			And I select current line in "List" table
+			And I select "pcs" exact value from "Unit" drop-down list
 			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table

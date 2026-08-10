@@ -1564,8 +1564,6 @@ Scenario: _0260160 check RSR changing if Consolidated retail sales is unpost
 			And I close current window
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I close current window
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I close current window
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I close current window	
 			And I click choice button of "Store" attribute in "ItemList" table	
@@ -1613,8 +1611,6 @@ Scenario: _0260162 check RRR changing if Consolidated retail sales is unpost
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I close current window
 			And I click choice button of "Item key" attribute in "ItemList" table
-			And I close current window
-			And I click choice button of "Unit" attribute in "ItemList" table
 			And I close current window
 			And I click choice button of "Store" attribute in "ItemList" table	
 			And I close current window						

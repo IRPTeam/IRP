@@ -238,6 +238,64 @@
         <horizontalAlign>Left</horizontalAlign>
       </extInfo>
     </items>
+    <items xsi:type="form:FormField">
+      <name>PrintSource</name>
+      <id>220</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>PrintSource</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <handlers>
+        <event>OnChange</event>
+        <name>PrintSourceOnChange</name>
+      </handlers>
+      <extendedTooltip>
+        <name>PrintSourceExtendedTooltip</name>
+        <id>222</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>PrintSourceContextMenu</name>
+        <id>221</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>RadioButtonField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+        <radioButtonsType>Tumbler</radioButtonsType>
+        <choiceList>
+          <presentation>
+            <key>en</key>
+            <value>From document</value>
+          </presentation>
+          <value xsi:type="core:StringValue">
+            <value>FromDocument</value>
+          </value>
+        </choiceList>
+        <choiceList>
+          <presentation>
+            <key>en</key>
+            <value>From history</value>
+          </presentation>
+          <value xsi:type="core:StringValue">
+            <value>FromHistory</value>
+          </value>
+        </choiceList>
+      </extInfo>
+    </items>
     <items xsi:type="form:FormGroup">
       <name>Model</name>
       <id>190</id>
@@ -1992,6 +2050,41 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>IsSavedPrintForm</name>
+      <title>
+        <key>en</key>
+        <value>Is saved print form</value>
+      </title>
+      <id>18</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+      <functionalOptions>FunctionalOption.UseSavedPrintForms</functionalOptions>
+    </columns>
+    <columns>
+      <name>TemplateRef</name>
+      <title>
+        <key>en</key>
+        <value>Template ref</value>
+      </title>
+      <id>19</id>
+      <valueType>
+        <types>CatalogRef.PrintFormTemplates</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>LayoutLang</name>
@@ -2048,6 +2141,43 @@
     <edit>
       <common>true</common>
     </edit>
+  </attributes>
+  <attributes>
+    <name>PrintSource</name>
+    <title>
+      <key>en</key>
+      <value>Print source</value>
+    </title>
+    <id>17</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <functionalOptions>FunctionalOption.UseSavedPrintForms</functionalOptions>
+  </attributes>
+  <attributes>
+    <name>UseSavedPrintForms</name>
+    <title>
+      <key>en</key>
+      <value>Use saved print forms</value>
+    </title>
+    <id>20</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <functionalOptions>FunctionalOption.UseSavedPrintForms</functionalOptions>
   </attributes>
   <formCommands>
     <name>EditResult</name>

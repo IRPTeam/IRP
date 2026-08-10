@@ -47,6 +47,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	SerialLotNumbersServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
 	
 	InternalCommandsServer.CreateCommands(Form, Object, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
+	CatConfigurationMetadataServer.ApplyCustomizedAttributesToForm(Form, ObjectMetdata.FullName());
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Author") Then
 		Form.Items.Author.ReadOnly = UserSettingsServer.AllDocuments_AdditionalSettings_DisableChangeAuthor();
@@ -59,6 +60,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
+	ObjectMetdata = Object.Ref.Metadata();
+	InternalCommandsServer.RefreshCommands(Form, Object, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
 	Return;
 EndProcedure
 

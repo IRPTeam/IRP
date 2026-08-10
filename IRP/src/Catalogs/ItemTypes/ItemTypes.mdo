@@ -317,9 +317,7 @@
     </synonym>
     <type>
       <types>String</types>
-      <stringQualifiers>
-        <length>1024</length>
-      </stringQualifiers>
+      <stringQualifiers/>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

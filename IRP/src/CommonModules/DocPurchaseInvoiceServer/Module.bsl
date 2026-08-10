@@ -24,6 +24,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
+	DocumentsServer.OnReadAtServer(Object, Form, CurrentObject);
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;

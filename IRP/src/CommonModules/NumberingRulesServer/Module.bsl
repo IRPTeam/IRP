@@ -21,7 +21,7 @@ Procedure SetNewDocumentNumberBeforeWrite(Source, Cancel, WriteMode, PostingMode
 	EndIf;
 	
 	If Source.NumeratorRules.IsEmpty() Then
-		Source.NumeratorRules = GetNumeratorGroupForDocument(Source.Metadata().FullName(), Source.Date);
+		Source.NumeratorRules = GetNumeratorGroupForDocument(Source.Metadata().FullName(), Source);
 	EndIf;
 	
 	SetSourceNewNumber(Source);
@@ -78,6 +78,39 @@ Procedure SetSourceNewNumber(Source) Export
 
 EndProcedure
 	
+Procedure SetNewNumberOnWrite(Source, Cancel) Export
+	
+	If Source.DataExchange.Load = True Then
+		Return;
+	EndIf;
+	
+	If Source.AdditionalProperties.Property("WithoutUniquenessControl") Then
+		Return;
+	EndIf;
+	
+	If Constants.UseNumberingRules.Get() = False Then
+		Return;
+	EndIf;
+	
+	ContentItem = Metadata.CommonAttributes.NumeratorRules.Content.Find(Source.Metadata());
+	If ContentItem = Undefined Or ContentItem.Use <> Metadata.ObjectProperties.CommonAttributeUse.Use Then
+		Return;
+	EndIf;
+	
+	If Source.NumeratorRules.UniquenessControl Then
+		CheckNumberUniqueness(Source, Cancel);
+	ElsIf Source.Metadata() = Metadata.Catalogs.Agreements 
+			And Source.Type <> Enums.AgreementTypes.Vendor 
+			And Source.NumeratorRules.IsEmpty() Then
+		// find NumeratorRules for control
+		Source.NumeratorRules = GetNumeratorGroupForCatalog(Source.Metadata().FullName(), Source);
+		If Not Source.NumeratorRules.IsEmpty() And Source.NumeratorRules.UniquenessControl Then
+			CheckNumberUniqueness(Source, Cancel);
+		EndIf;
+	EndIf;
+
+EndProcedure
+
 #EndRegion
 
 #Region NumberTemplate
@@ -443,11 +476,18 @@ Function GetNumeratorGroupForCatalog(CatalogName, CatalogObject) Export
 	
 	DateDefault = "Date";
 	
+	Company = Undefined;
+	HasCompany = CatConfigurationMetadataServer.CheckAttributeExists(ConfigurationMetadata, "Company");
+	If HasCompany Then
+		Company = CatalogObject.Company;
+	EndIf;
+	
 	Query = New Query;
 	Query.Text =
 	"SELECT
 	|	NumeratorGroupsCatalogs.Ref AS Ref,
 	|	NumeratorGroupsCatalogs.DateName,
+	|	NumeratorGroupsCatalogs.Ref.Company AS Company,
 	|	NumeratorGroupsCatalogs.Ref.BeginDate AS BeginDate,
 	|	NumeratorGroupsCatalogs.Ref.EndDate AS EndDate,
 	|	NumeratorGroupsCatalogs.Ref.ByDefault AS ByDefault
@@ -456,12 +496,20 @@ Function GetNumeratorGroupForCatalog(CatalogName, CatalogObject) Export
 	|WHERE
 	|	NumeratorGroupsCatalogs.Catalog = &Catalog
 	|	AND NOT NumeratorGroupsCatalogs.Ref.DeletionMark
+	|	AND (NumeratorGroupsCatalogs.Ref.Company IN (&Companies) OR &HasCompany = FALSE)
 	|
 	|ORDER BY
+	|	Ref.Company DESC, 	
 	|	ByDefault DESC,
 	|	Ref DESC";
 	
 	Query.SetParameter("Catalog", ConfigurationMetadata);
+
+	Companies = New Array;
+	Companies.Add(Company);
+	Companies.Add(Catalogs.Companies.EmptyRef());
+	Query.SetParameter("Companies", Companies);
+	Query.SetParameter("HasCompany", HasCompany);
 	
 	QuerySelection = Query.Execute().Select();
 	While QuerySelection.Next() Do
@@ -481,21 +529,28 @@ EndFunction
 // 
 // Parameters:
 //  DocumentName - String - Document name
-//  Date - Date - Date
+//  DocumentObject - DocumentObject - Document object
 // 
 // Returns:
 //  CatalogRef.NumeratorGroups - Get numerator group for document
-Function GetNumeratorGroupForDocument(DocumentName, Date) Export
+Function GetNumeratorGroupForDocument(DocumentName, DocumentObject) Export
 	
 	ConfigurationMetadata = CatConfigurationMetadataServer.GetConfigurationMetadataItemByFullName(DocumentName);
 	If ConfigurationMetadata = Undefined Then
 		Return Catalogs.NumeratorGroups.EmptyRef();
 	EndIf;
 	
+	Company = Undefined;
+	HasCompany = CatConfigurationMetadataServer.CheckAttributeExists(ConfigurationMetadata, "Company");
+	If HasCompany Then
+		Company = DocumentObject.Company;
+	EndIf;
+
 	Query = New Query;
 	Query.Text =
 	"SELECT
 	|	NumeratorGroupsDocuments.Ref AS Ref,
+	|	NumeratorGroupsDocuments.Ref.Company AS Company,
 	|	NumeratorGroupsDocuments.Ref.ByDefault AS ByDefault
 	|FROM
 	|	Catalog.NumeratorGroups.Documents AS NumeratorGroupsDocuments
@@ -506,13 +561,21 @@ Function GetNumeratorGroupForDocument(DocumentName, Date) Export
 	|	OR NumeratorGroupsDocuments.Ref.BeginDate = DATETIME(1, 1, 1))
 	|	AND (NumeratorGroupsDocuments.Ref.EndDate >= &Date
 	|	OR NumeratorGroupsDocuments.Ref.EndDate = DATETIME(1, 1, 1))
+	|	AND (NumeratorGroupsDocuments.Ref.Company IN (&Companies) OR &HasCompany = FALSE)
 	|
 	|ORDER BY
+	|	Ref.Company DESC,
 	|	ByDefault DESC,
 	|	Ref DESC";
 	
-	Query.SetParameter("Date", Date);
+	Query.SetParameter("Date", DocumentObject.Date);
 	Query.SetParameter("Document", ConfigurationMetadata);
+
+	Companies = New Array;
+	Companies.Add(Company);
+	Companies.Add(Catalogs.Companies.EmptyRef());
+	Query.SetParameter("Companies", Companies);
+	Query.SetParameter("HasCompany", HasCompany);
 	
 	QuerySelection = Query.Execute().Select();
 	If QuerySelection.Next() Then
@@ -595,7 +658,7 @@ Procedure CheckNumberUniqueness(Source, Cancel)
 	|FROM "+TableName+" AS Table
 	|WHERE
 	|	Table.Ref <> &Ref
-	|	AND Table.NumeratorRules = &Numerator
+	//|	AND Table.NumeratorRules = &Numerator
 	|	AND Table."+NumberName+" = &DocNumber";
 	
 	For Each MetadataRow In Source.NumeratorRules.Documents Do
@@ -614,8 +677,9 @@ Procedure CheckNumberUniqueness(Source, Cancel)
 		|SELECT Ref
 		|FROM " + RowTableName + "
 		|WHERE
-		|	NumeratorRules = &Numerator
-		|	AND " + NumberName + " = &DocNumber";
+		//|	NumeratorRules = &Numerator
+		//|	AND 
+		|" + NumberName + " = &DocNumber";
 	EndDo;
 	
 	For Each MetadataRow In Source.NumeratorRules.Catalogs Do
@@ -634,8 +698,9 @@ Procedure CheckNumberUniqueness(Source, Cancel)
 		|SELECT Ref
 		|FROM " + RowTableName + "
 		|WHERE
-		|	NumeratorRules = &Numerator
-		|	AND " + NumberName + " = &DocNumber";
+		//|	NumeratorRules = &Numerator
+		//|	AND 
+		|" + NumberName + " = &DocNumber";
 	EndDo;
 	
 	QuerySelection = Query.Execute().Select();

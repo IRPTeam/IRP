@@ -1,9 +1,9 @@
 ﻿#language: en
 @tree
 @Positive
-@AccountingFOOff
+@FunctionalOptionsOff
 
-Functionality: check that no accounting records are made when the accounting functional option is off
+Functionality: check that documents make no records in registers hidden by disabled functional options
 
 
 Variables:
@@ -13,11 +13,15 @@ Background:
 		Given I open new TestClient session or connect the existing one
 
 
-Scenario: _991100 preparation (accounting functional option off)
+Scenario: _902000 preparation (post documents with functional options off)
 When set True value to the constant
+When set False value to the constant UseSimpleMode
 When set True value to the constant Use consolidated retail sales
 When set True value to the constant Use commission trading
 When set False value to the constant Use accounting
+When set False value to the constant Use batch relevance
+When set False value to the constant Use advance relevance
+When set False value to the constant Use batch reallocate
 When set True value to the constant Use salary
 When set True value to the constant Use retail orders
 When set True value to the constant Use fixed assets
@@ -535,11 +539,11 @@ And I close all client application windows
 	When set True value to the constant Use accounting
 
 
-Scenario: _991101 check preparation
+Scenario: _902001 check preparation
 	When check preparation
 
 
-Scenario: _991102 check Sales invoice (without advance offset) has no movements by the Register "T1040 Accounting amounts"
+Scenario: _902002 check Sales invoice (without advance offset) has no movements by the Register "T1040 Accounting amounts"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
@@ -555,7 +559,7 @@ Scenario: _991102 check Sales invoice (without advance offset) has no movements 
 	And I close all client application windows
 
 
-Scenario: _991103 check Sales invoice has no movements by the Register "T1050 Accounting quantities"
+Scenario: _902003 check Sales invoice has no movements by the Register "T1050 Accounting quantities"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
@@ -571,7 +575,7 @@ Scenario: _991103 check Sales invoice has no movements by the Register "T1050 Ac
 	And I close all client application windows
 
 
-Scenario: _991104 check Sales invoice (with advance offset) has no movements by the Register "T1040 Accounting amounts"
+Scenario: _902004 check Sales invoice (with advance offset) has no movements by the Register "T1040 Accounting amounts"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
@@ -587,7 +591,7 @@ Scenario: _991104 check Sales invoice (with advance offset) has no movements by 
 	And I close all client application windows
 
 
-Scenario: _991105 check Money transfer (currency exchange) has no movements by the Register "T1040 Accounting amounts"
+Scenario: _902005 check Money transfer (currency exchange) has no movements by the Register "T1040 Accounting amounts"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 	And I go to line in "List" table
@@ -603,7 +607,7 @@ Scenario: _991105 check Money transfer (currency exchange) has no movements by t
 	And I close all client application windows
 
 
-Scenario: _991106 check Bank receipt has no movements by the Register "T1040 Accounting amounts"
+Scenario: _902006 check Bank receipt has no movements by the Register "T1040 Accounting amounts"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And I go to line in "List" table
@@ -619,7 +623,7 @@ Scenario: _991106 check Bank receipt has no movements by the Register "T1040 Acc
 	And I close all client application windows
 
 
-Scenario: _991107 check Bank payment has no movements by the Register "T1040 Accounting amounts"
+Scenario: _902007 check Bank payment has no movements by the Register "T1040 Accounting amounts"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And I go to line in "List" table
@@ -635,7 +639,7 @@ Scenario: _991107 check Bank payment has no movements by the Register "T1040 Acc
 	And I close all client application windows
 
 
-Scenario: _991108 check Cash payment has no movements by the Register "T1040 Accounting amounts"
+Scenario: _902008 check Cash payment has no movements by the Register "T1040 Accounting amounts"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And I go to line in "List" table
@@ -651,7 +655,7 @@ Scenario: _991108 check Cash payment has no movements by the Register "T1040 Acc
 	And I close all client application windows
 
 
-Scenario: _991109 check Cash receipt has no movements by the Register "T1040 Accounting amounts"
+Scenario: _902009 check Cash receipt has no movements by the Register "T1040 Accounting amounts"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I go to line in "List" table
@@ -667,7 +671,7 @@ Scenario: _991109 check Cash receipt has no movements by the Register "T1040 Acc
 	And I close all client application windows
 
 
-Scenario: _991110 check Sales return has no movements by the Register "T1040 Accounting amounts"
+Scenario: _902010 check Sales return has no movements by the Register "T1040 Accounting amounts"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	And I go to line in "List" table
@@ -683,7 +687,7 @@ Scenario: _991110 check Sales return has no movements by the Register "T1040 Acc
 	And I close all client application windows
 
 
-Scenario: _991111 check Sales invoice still has movements by the Register "R2001 Sales"
+Scenario: _902011 check Sales invoice still has movements by the Register "R2001 Sales"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
@@ -696,6 +700,133 @@ Scenario: _991111 check Sales invoice still has movements by the Register "R2001
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
 			| 'Register  "R2001 Sales"' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' |
+	And I close all client application windows
+
+
+Scenario: _902012 check no records in the Register "T6030S Batch relevance" when Use batch relevance is off
+	And I close all client application windows
+	* Turn the option on to make the register visible, the documents were posted while it was off
+		When set True value to the constant Use batch relevance
+	* The register is empty
+		Given I open hyperlink "e1cib/list/InformationRegister.T6030S_BatchRelevance"
+		Then the number of "List" table lines is "равно" "0"
+	* Restore the option state for the following scenarios
+		When set False value to the constant Use batch relevance
+	And I close all client application windows
+
+
+Scenario: _902013 check no records in the advances relevance registers when Use advance relevance is off
+	And I close all client application windows
+	* Turn the option on to make the registers visible, the documents were posted while it was off
+		When set True value to the constant Use advance relevance
+	* Vendors advances relevance is empty
+		Given I open hyperlink "e1cib/list/InformationRegister.T2016S_VendorsAdvancesRelevance"
+		Then the number of "List" table lines is "равно" "0"
+	* Customers advances relevance is empty
+		Given I open hyperlink "e1cib/list/InformationRegister.T2017S_CustomersAdvancesRelevance"
+		Then the number of "List" table lines is "равно" "0"
+	* Restore the option state for the following scenarios
+		When set False value to the constant Use advance relevance
+	And I close all client application windows
+
+
+Scenario: _902014 check Calculation mode is locked in Calculation movement costs when Use batch reallocate is off
+	And I close all client application windows
+	* Create a new Calculation movement costs document
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+	* Calculation mode is filled with Landed cost and cannot be changed
+		Then the form attribute named "CalculationMode" became equal to "Landed cost"
+		When I Check the steps for Exception
+			| 'And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list' |
+	And I close all client application windows
+
+
+Scenario: _902015 check Calculation mode is editable in Calculation movement costs when Use batch reallocate is on
+	And I close all client application windows
+	* Turn the option on
+		When set True value to the constant Use batch reallocate
+	* Calculation mode can be switched to batch reallocate
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
+		Then the form attribute named "CalculationMode" became equal to "Landed cost (batch reallocate)"
+	* Restore the option state for the following scenarios
+		And I close all client application windows
+		When set False value to the constant Use batch reallocate
+	And I close all client application windows
+
+
+Scenario: _902016 check the whole database has no records in the accounting registers
+	And I close all client application windows
+	* Turn the option on to make the accounting registers visible, all documents were posted while it was off
+		When set True value to the constant Use accounting
+	* No document of any kind wrote accounting amounts
+		Given I open hyperlink "e1cib/list/AccumulationRegister.T1040T_AccountingAmounts"
+		Then the number of "List" table lines is "равно" "0"
+	* No document of any kind wrote accounting quantities
+		Given I open hyperlink "e1cib/list/AccumulationRegister.T1050T_AccountingQuantities"
+		Then the number of "List" table lines is "равно" "0"
+	* Journal entries were not created either
+		Given I open hyperlink "e1cib/list/Document.JournalEntry"
+		Then the number of "List" table lines is "равно" "0"
+	* Restore the option state for the following scenarios
+		When set False value to the constant Use accounting
+	And I close all client application windows
+
+
+Scenario: _902017 check accounting records appear again after the functional option is turned on
+	And I close all client application windows
+	* Turn accounting on and repost a Bank payment
+		When set True value to the constant Use accounting
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay 5
+	* The document wrote accounting records this time
+		And I click "Registrations report info" button
+		And I select "T1040 Accounting amounts" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines
+			| 'Register  "T1040 Accounting amounts"' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' |
+		And I close all client application windows
+	* Turn accounting off again and repost the document to clean the records
+		When set False value to the constant Use accounting
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay 5
+	And I close all client application windows
+
+
+Scenario: _902018 check batch relevance records appear again after the functional option is turned on
+	And I close all client application windows
+	* Turn the option on and recalculate the cost, this is what fills batch relevance
+		When set True value to the constant Use batch relevance
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay 10
+	* The register is filled again
+		Given I open hyperlink "e1cib/list/InformationRegister.T6030S_BatchRelevance"
+		Then the number of "List" table lines is "больше" "0"
+	* Restore the option state for the following scenarios
+		When set False value to the constant Use batch relevance
+	And I close all client application windows
+
+
+Scenario: _902019 check "for all companies" is locked in Period closing when Use batch reallocate is off
+	And I close all client application windows
+	* Open the period closing data processor
+		Given I open hyperlink "e1cib/app/DataProcessor.PeriodClosing"
+	* The "for all companies" flag cannot be changed
+		When I Check the steps for Exception
+			| 'And I set checkbox named "Step_2_ForAllCompanies"' |
 	And I close all client application windows
 
 

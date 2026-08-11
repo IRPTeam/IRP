@@ -19,11 +19,11 @@ Scenario: check the filter by own company
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows 
 
 Scenario: check the filter by own company in the Cash transfer order
@@ -36,11 +36,11 @@ Scenario: check the filter by own company in the Cash transfer order
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter for bank accounts (cash account selection is not available) + filling in currency from a bank account

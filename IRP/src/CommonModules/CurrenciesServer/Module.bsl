@@ -240,8 +240,11 @@ Procedure _PreparePostingDataTables(Parameters, CurrencyTable, IsOffsetOfAdvance
 			EndIf;		
 		Else
 			
-			If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5022T_Expenses 
-				Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5021T_Revenues Then
+			If (ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5022T_Expenses 
+				Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5021T_Revenues) 
+				and (TypeOf(Parameters.Object.Ref) = Type("DocumentRef.SalesInvoice") 
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.PurchaseInvoice")) Then
+					
 				PrepareTable_Own = PrepareTable.CopyColumns();
 				PrepareTable_CMC = PrepareTable.CopyColumns();
 				For Each Row In PrepareTable Do

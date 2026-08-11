@@ -706,11 +706,15 @@ Scenario: check the filter by Legal name
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Ferron BP" text in "Legal name" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Ferron BP''    |
+		And I input "Company Ferron BP" text in the field named "LegalName"
+		And the drop-down list of the form does not contain values
+			| 'Company Ferron BP' |
+		And I click Choice button of the field named "LegalName"
+		And I go to line in "List" table
+			| Description        |
+			| Company Kalipso |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 	And I close all client application windows
 
 Scenario: check the filter by Legal name (Ferron)
@@ -731,11 +735,15 @@ Scenario: check the filter by Legal name (Ferron)
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Legal name" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "LegalName"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I click Choice button of the field named "LegalName"
+		And I go to line in "List" table
+			| Description        |
+			| Company Ferron BP |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	And I close all client application windows
 
 Scenario: check the filter by Legal name (Ferron) in Goods receipt and Shipment confirmation
@@ -755,11 +763,15 @@ Scenario: check the filter by Legal name (Ferron) in Goods receipt and Shipment 
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Legal name" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "LegalName"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I click Choice button of the field named "LegalName"
+		And I go to line in "List" table
+			| Description        |
+			| Company Ferron BP |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	* Check the automatic completion of the Legal name if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -783,11 +795,11 @@ Scenario: check the filter by Company
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter by Company  in the inventory transfer
@@ -799,11 +811,11 @@ Scenario: check the filter by Company  in the inventory transfer
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter by Company  in the Shipment cinfirmation and Goods receipt
@@ -815,11 +827,11 @@ Scenario: check the filter by Company  in the Shipment cinfirmation and Goods re
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 		And I close all client application windows
 
 Scenario: check the filter by Company (Ferron)
@@ -836,11 +848,11 @@ Scenario: check the filter by Company (Ferron)
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 
@@ -853,11 +865,11 @@ Scenario: check the filter by my own company
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter by my own company in Cash expence/Cash revenue
@@ -869,11 +881,11 @@ Scenario: check the filter by my own company in Cash expence/Cash revenue
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter by my own company in Reconcilation statement
@@ -885,11 +897,11 @@ Scenario: check the filter by my own company in Reconcilation statement
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 
@@ -930,7 +942,10 @@ Scenario: check the filter by Partner term (by segments + expiration date)
 		And Delay 2
 		And I input "Sale autum, TRY" text in "Partner term" field
 		And Delay 2
-		And I move to the next attribute
+		And I click Select button of "Partner" field
+		And "List" table does not contain lines
+			| Description        |
+			| Sale autum, TRY    |
 		And I go to line in "List" table
 			| Description                  |
 			| Personal Partner terms, $    |
@@ -959,12 +974,15 @@ Scenario: check the filter by customers in the sales documents
 	And I select current line in "List" table
 * Check the filter by string input
 	And Delay 2
-	And I input "Alexander Orlov" text in "Partner" field
-	And Delay 2
-		And I move to the next attribute
+	And I input "Alexander Orlov" text in the field named "Partner"
+	And the drop-down list of the form does not contain values
+		| 'Alexander Orlov' |
+	And I click Choice button of the field named "Partner"
+	And I go to line in "List" table
+		| Description        |
+		| Ferron BP |
 	And I select current line in "List" table
-	When I Check the steps for Exception
-		| 'Then the form attribute named "Partner" became equal to 'Alexander Orlov''   |
+	Then the form attribute named "Partner" became equal to "Ferron BP"
 And I close all client application windows
 
 Scenario: check the filter by vendors in the purchase documents
@@ -984,12 +1002,15 @@ Scenario: check the filter by vendors in the purchase documents
 	And I select current line in "List" table
 * Check the filter by string input
 	And Delay 2
-	And I input "Kalipso" text in "Partner" field
-	And Delay 2
-		And I move to the next attribute
+	And I input "Kalipso" text in the field named "Partner"
+	And the drop-down list of the form does not contain values
+		| 'Kalipso' |
+	And I click Choice button of the field named "Partner"
+	And I go to line in "List" table
+		| Description        |
+		| Ferron BP |
 	And I select current line in "List" table
-	When I Check the steps for Exception
-		| 'Then the form attribute named "Partner" became equal to 'Kalipso''   |
+	Then the form attribute named "Partner" became equal to "Ferron BP"
 And I close all client application windows
 
 Scenario: check the filter by customer partner terms in the sales documents
@@ -1016,7 +1037,10 @@ Scenario: check the filter by customer partner terms in the sales documents
 		And Delay 2
 		And I input "Vendor Ferron, TRY" text in "Partner term" field
 		And Delay 2
-		And I move to the next attribute
+		And I click Select button of "Partner" field
+		And "List" table does not contain lines
+			| Description           |
+			| Vendor Ferron, TRY    |
 		And I select current line in "List" table
 		When I Check the steps for Exception
 		| 'Then the form attribute named "Agreement" became equal to 'Vendor Ferron, TRY''   |
@@ -1048,7 +1072,10 @@ Scenario: check the filter by vendor partner terms in the purchase documents
 		And Delay 2
 		And I input "Basic Partner terms, TRY" text in "Partner term" field
 		And Delay 2
-		And I move to the next attribute
+		And I click Select button of "Partner" field
+		And "List" table does not contain lines
+			| Description                 |
+			| Basic Partner terms, TRY    |
 		And I select current line in "List" table
 		When I Check the steps for Exception
 		| 'Then the form attribute named "Agreement" became equal to 'Basic Partner terms, TRY''   |

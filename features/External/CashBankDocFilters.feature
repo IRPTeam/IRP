@@ -19,11 +19,11 @@ Scenario: check the filter by own company
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows 
 
 Scenario: check the filter by own company in the Cash transfer order
@@ -36,11 +36,11 @@ Scenario: check the filter by own company in the Cash transfer order
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter for bank accounts (cash account selection is not available) + filling in currency from a bank account
@@ -78,10 +78,14 @@ Scenario: check the filter for bank accounts (cash account selection is not avai
 	* Check the filter by string input
 		And Delay 2
 		And I input "Cash desk №1" text in "Account" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "CashAccount" became equal to 'Cash desk №1''    |
+		And the drop-down list of the form does not contain values
+			| 'Cash desk №1' |
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| Description       |
+			| Bank account, TRY |
+		And I select current line in "List" table
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
 	And I close all client application windows
 
 Scenario: check the filter by cash account (bank account selection is not available)
@@ -105,10 +109,14 @@ Scenario: check the filter by cash account (bank account selection is not availa
 	* Check the filter by string input
 		And Delay 2
 		And I input "Bank account, TRY" text in "Cash account" field
-		And Delay 2
-		And I move to the next attribute
-		When I Check the steps for Exception
-			| 'Then the form attribute named "CashAccount" became equal to 'Bank account, TRY''    |
+		And the drop-down list of the form does not contain values
+			| 'Bank account, TRY' |
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| Description       |
+			| Cash desk №1 |
+		And I select current line in "List" table
+		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
 	And I close all client application windows
 
 Scenario: check filling in Description

@@ -360,7 +360,11 @@ Scenario: _604717 change main attributes (ObjectPropertyEditor)
 			| 'No'          | 'D18001'  | 'Bags'      | 'No'     | 'Bag'    | 'pcs'  |
 		And I activate "Unit" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
-		And I select "box (8 pcs)" exact value from "Unit" drop-down list in "PropertiesTable" table
+		And I click choice button of "Unit" attribute in "PropertiesTable" table
+		And I go to line in "List" table
+			| 'Code'   | 'Description'   |
+			| '4'      | 'box (8 pcs)'   |
+		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
 		And I go to line in "PropertiesTable" table
 			| 'Is modified'   | 'Item ID'   | 'Item type'   | 'Marked'   | 'Object'   | 'Unit'    |

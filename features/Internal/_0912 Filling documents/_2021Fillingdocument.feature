@@ -397,21 +397,11 @@ Scenario: _01541002 check filters in the PI list form
 		And I click "Finish editing" button
 	* Check filter
 		And I set checkbox named "SettingsComposerUserSettingsItem4Use"
-		And I click Choice button of the field named "SettingsComposerUserSettingsItem4Value"
-		Then "Currencies" window is opened
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "SettingsComposerUserSettingsItem4Value"
 		And "List" table became equal
 			| 'Partner'     | 'Amount'     | 'Currency'    |
 			| 'Ferron BP'   | '4 000,00'   | 'USD'         |
-		And I click Choice button of the field named "SettingsComposerUserSettingsItem4Value"
-		Then "Currencies" window is opened
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "SettingsComposerUserSettingsItem4Value"
 		And "List" table became equal
 			| 'Partner'     | 'Amount'      | 'Currency'    |
 			| 'Ferron BP'   | '13 000,00'   | 'TRY'         |
@@ -3621,11 +3611,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Description'    |
 			| 'Software'       |
 		And I select current line in "List" table
-		And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "PaymentListCurrency" in "PaymentList" table
 		And I activate "VAT" field in "PaymentList" table
 		And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
@@ -3647,11 +3633,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I go to line in "PaymentList" table
 			| 'Net amount'   | 'Profit loss center'   | 'Expense type'   | 'Currency'   | 'VAT'   | 'Tax amount'   | 'Total amount'    |
 			| '200,00'       | 'Front office'         | 'Software'       | 'TRY'        | '18%'   | '36,00'        | '236,00'          |
-		And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "PaymentListCurrency" in "PaymentList" table
 		And I go to line in "PaymentList" table
 			| 'Net amount'   | 'Profit loss center'   | 'Expense type'   | 'Currency'   | 'VAT'   | 'Tax amount'   | 'Total amount'    |
 			| '200,00'       | 'Front office'         | 'Software'       | 'USD'        | '18%'   | '36,00'        | '236,00'          |

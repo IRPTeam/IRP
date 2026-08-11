@@ -1546,8 +1546,6 @@ Scenario: _0260160 check RSR changing if Consolidated retail sales is unpost
 			And I close current window
 			And I click Choice button of the field named "Agreement"
 			And I close current window	
-			And I click Choice button of the field named "Company"
-			And I close current window
 			And I click Choice button of the field named "RetailCustomer"
 			And I close current window
 			And I click Choice button of the field named "Partner"
@@ -1594,8 +1592,6 @@ Scenario: _0260162 check RRR changing if Consolidated retail sales is unpost
 			And I close current window
 			And I click Choice button of the field named "Agreement"
 			And I close current window	
-			And I click Choice button of the field named "Company"
-			And I close current window
 			And I click Choice button of the field named "RetailCustomer"
 			And I close current window
 			And I click Choice button of the field named "Partner"

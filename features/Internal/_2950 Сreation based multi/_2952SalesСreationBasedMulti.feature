@@ -551,12 +551,7 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 				| Store 02        |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Select button of "Company" field
-		Then "Companies" window is opened
-		And I go to line in "List" table
-				| Description        |
-				| Second Company     |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 	And I click the button named "FormPostAndClose"
 * Create second test SO 337
 	When create the second test SO for a test on the creation mechanism based on

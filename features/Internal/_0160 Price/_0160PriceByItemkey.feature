@@ -1021,12 +1021,9 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 			| 'Input price'   | 'Item'    | 'Item key'   | 'Input unit'   | 'Price'    |
 			| ''              | 'Dress'   | 'XL/Green'   | 'pcs'          | ''         |
 	* Check Price calculation when change input price
+		And I activate field named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
-		And I click choice button of the attribute named "ItemKeyListInputUnit" in "ItemKeyList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from the drop-down list named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I move to the next attribute
 		And I activate field named "ItemKeyListInputPrice" in "ItemKeyList" table
@@ -1048,11 +1045,7 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 	* Check Price calculation when change Input unit
 		And I activate field named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
-		And I click choice button of the attribute named "ItemKeyListInputUnit" in "ItemKeyList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs'            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And "ItemKeyList" table became equal
 			| '#'   | 'Input price'   | 'Item'    | 'Item key'   | 'Input unit'   | 'Price'     |

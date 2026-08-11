@@ -1021,6 +1021,7 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 			| 'Input price'   | 'Item'    | 'Item key'   | 'Input unit'   | 'Price'    |
 			| ''              | 'Dress'   | 'XL/Green'   | 'pcs'          | ''         |
 	* Check Price calculation when change input price
+		And I activate field named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
 		And I select "box Dress (8 pcs)" exact value from the drop-down list named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table

@@ -1816,6 +1816,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_197",   NStr("en = 'Last line should contain 0 in to days'", Lang));
 	Strings.Insert("Error_198",   NStr("en = 'From days and to days cannot be equal to zero'", Lang));
 	Strings.Insert("Error_199",   NStr("en = 'From days and to days cannot be equal'", Lang));
+	Strings.Insert("Error_200",   NStr("en = 'Not set currency rate: from [%1] to [%2] source [%3]'", Lang));
 	
 	
 	

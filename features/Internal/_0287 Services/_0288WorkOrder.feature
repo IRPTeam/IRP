@@ -165,11 +165,7 @@ Scenario: _029201 create work order
 				| 'Alexander Orlov'     |
 			And I select current line in "List" table
 			And I activate field named "WorkersUnit" in "Workers" table
-			And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'hour'            |
-			And I select current line in "List" table
+			And I select "hour" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 			And I activate field named "WorkersQuantity" in "Workers" table
 			And I input "2,000" text in the field named "WorkersQuantity" of "Workers" table
 			And I finish line editing in "Workers" table
@@ -181,11 +177,7 @@ Scenario: _029201 create work order
 				| 'David Romanov'     |
 			And I select current line in "List" table
 			And I activate field named "WorkersUnit" in "Workers" table
-			And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'hour'            |
-			And I select current line in "List" table
+			And I select "hour" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 			And I activate field named "WorkersQuantity" in "Workers" table
 			And I input "2,500" text in the field named "WorkersQuantity" of "Workers" table
 			And I finish line editing in "Workers" table

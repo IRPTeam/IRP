@@ -1,4 +1,4 @@
-#language: en
+0#language: en
 @tree
 @Positive
 @Advance
@@ -108,11 +108,7 @@ Scenario: _1005002 add fixed offset row prompts to write unsaved document
 		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "12.02.2021 23:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "11.02.2021" text in "Begin of period" field
 		And I input "12.02.2021" text in "End of period" field
@@ -144,11 +140,7 @@ Scenario: _1005003 fill and save a fixed offset row to the register
 		And I select current line in "List" table
 	* Add and fill a fixed offset row (document is already saved -> no prompt)
 		And in the table "FixedOffsetOfAdvances" I click the button named "FixedOffsetOfAdvancesAdd"
-		And I click choice button of "Currency" attribute in "FixedOffsetOfAdvances" table
-		And I go to line in "List" table
-			| 'Code'   |
-			| 'TRY'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "FixedOffsetOfAdvances" table
 		And I activate "Partner" field in "FixedOffsetOfAdvances" table
 		And I click choice button of "Partner" attribute in "FixedOffsetOfAdvances" table
 		And I go to line in "List" table

@@ -145,6 +145,7 @@
     </items>
   </predefined>
   <editType>InDialog</editType>
+  <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Currencies.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.Currencies.Form.ListForm</defaultListForm>

@@ -54,11 +54,7 @@ Scenario: _029601 create Unbundling on a product with a specification (specifica
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Dress/A-8, all item keys were created in advance
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| Description    |
@@ -69,11 +65,7 @@ Scenario: _029601 create Unbundling on a product with a specification (specifica
 			| Item    | Item key     |
 			| Dress   | Dress/A-8    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
-			| Description    |
-			| pcs            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -101,11 +93,7 @@ Scenario: _029604 create Unbundling on a product with a specification (specifica
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Boots/S-8, all item keys were created in advance
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| Description    |
@@ -116,11 +104,7 @@ Scenario: _029604 create Unbundling on a product with a specification (specifica
 			| Item    | Item key     |
 			| Boots   | Boots/S-8    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
-			| Description    |
-			| pcs            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -150,11 +134,7 @@ Scenario: _029610 create Unbundling (+check movements) for bundl which was creat
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Bundle Dress+Shirt
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| 'Description'               |
@@ -165,11 +145,7 @@ Scenario: _029610 create Unbundling (+check movements) for bundl which was creat
 			| 'Item'                     | 'Item key'                                       |
 			| 'Skittles + Chewing gum'   | 'Skittles + Chewing gum/Skittles+Chewing gum'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
-			| Description    |
-			| pcs            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -206,11 +182,7 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 	* Create Unbundling for item Dress+Trousers
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| 'Description'               |
@@ -221,11 +193,7 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 			| 'Item'                     | 'Item key'                                       |
 			| 'Skittles + Chewing gum'   | 'Skittles + Chewing gum/Skittles+Chewing gum'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
-			| Description    |
-			| pcs            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -255,11 +223,7 @@ Scenario: _029612 create Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| Description          |
@@ -270,11 +234,7 @@ Scenario: _029612 create Unbundling
 			| Item                | Item key                         |
 			| Bound Dress+Shirt   | Bound Dress+Shirt/Dress+Shirt    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
-			| Description    |
-			| pcs            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table

@@ -208,6 +208,16 @@ Procedure ItemListUnitOnChange(Item)
 	DocStockCorrectionClient.ItemListUnitOnChange(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure ItemListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);		
+EndProcedure
+
 #EndRegion
 
 #EndRegion

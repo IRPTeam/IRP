@@ -1293,3 +1293,45 @@ Procedure SetListFormAppearance(Form)
 		AppearanceField.Use = True;
 	EndIf;
 EndProcedure
+
+Function IsDocument(Val Object) Export
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Ref")
+		And Metadata.Documents.Contains(Object.Ref.Metadata()) Then
+		Return True;
+	Else
+		Return False;
+	EndIf;		
+EndFunction
+	
+Procedure SetFilterForUnit(Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Items.Unit AS Unit
+	|FROM
+	|	Catalog.Items AS Items
+	|WHERE
+	|	Items.Ref = &Item
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Units.Ref AS Unit
+	|FROM
+	|	Catalog.Units AS Units
+	|WHERE
+	|	Units.Item = &Item
+	|	AND NOT Units.Item = VALUE(Catalog.Units.EmptyRef)";
+	
+	Query.SetParameter("Item", Item);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	ChoiceData = New ValueList();
+	While QuerySelection.Next() Do
+		ChoiceData.Add(QuerySelection.Unit);
+	EndDo;
+EndProcedure
+
+	
+	

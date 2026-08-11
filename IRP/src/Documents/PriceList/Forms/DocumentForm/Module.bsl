@@ -161,6 +161,26 @@ Procedure PriceKeyListInputUnitOnChange(Item)
 	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
 EndProcedure
 
+&AtClient
+Procedure PriceKeyListInputUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.PriceKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);	
+EndProcedure
+
+&AtClient
+Procedure PriceKeyListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.PriceKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);	
+EndProcedure
+
 #EndRegion
 
 #Region ItemKeyList
@@ -233,6 +253,26 @@ Procedure ItemKeyListInputUnitOnChange(Item)
 	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
 EndProcedure
 
+&AtClient
+Procedure ItemKeyListInputUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);		
+EndProcedure
+
+&AtClient
+Procedure ItemKeyListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);		
+EndProcedure
+
 #EndRegion
 
 #Region ItemList
@@ -275,6 +315,26 @@ Procedure ItemListInputUnitOnChange(Item)
 		Return;
 	EndIf;
 	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
+&AtClient
+Procedure ItemListInputUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 #EndRegion

@@ -242,6 +242,12 @@ Procedure UnitOnChange(Item)
 	DocProductionClient.UnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure UnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	DocumentsServer.SetFilterForUnit(Object.Item, ChoiceData, StandardProcessing);	
+EndProcedure
+
 #EndRegion
 
 #Region BILL_OF_MATERIALS
@@ -310,6 +316,16 @@ EndProcedure
 &AtClient
 Procedure MaterialsUnitOnChange(Item)
 	DocProductionClient.MaterialsUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure MaterialsUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.Materials.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);	
 EndProcedure
 
 #EndRegion

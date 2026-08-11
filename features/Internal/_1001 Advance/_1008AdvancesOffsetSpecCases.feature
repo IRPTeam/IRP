@@ -97,11 +97,7 @@ Scenario: _1008002 overpayment stays hanging on the payment and is not turned in
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "31.07.2022 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.07.2022" text in "Begin of period" field
 		And I input "31.07.2022" text in "End of period" field
@@ -148,11 +144,7 @@ Scenario: _1008003 return on a fully paid invoice is moved to an advance by Debi
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "30.09.2022 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.09.2022" text in "Begin of period" field
 		And I input "30.09.2022" text in "End of period" field
@@ -206,11 +198,7 @@ Scenario: _1008004 payment in local currency under a USD settlement agreement - 
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "30.11.2022 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.11.2022" text in "Begin of period" field
 		And I input "30.11.2022" text in "End of period" field

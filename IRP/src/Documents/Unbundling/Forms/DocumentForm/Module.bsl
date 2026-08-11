@@ -186,6 +186,12 @@ Procedure UnitOnChange(Item)
 	DocUnbundlingClient.UnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure UnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	DocumentsServer.SetFilterForUnit(ThisObject.ItemBundle, ChoiceData, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_LIST
@@ -262,6 +268,16 @@ EndProcedure
 &AtClient
 Procedure ItemListUnitOnChange(Item)
 	DocUnbundlingClient.ItemListUnitOnChange(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ItemListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);	
 EndProcedure
 
 #EndRegion

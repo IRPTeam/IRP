@@ -210,6 +210,16 @@ Procedure ProductionsUnitOnChange(Item)
 	DocProductionPlanningClient.ProductionsUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ProductionsUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.Productions.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);		
+EndProcedure
+
 #EndRegion
 
 #Region QUANTITY

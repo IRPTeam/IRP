@@ -125,11 +125,7 @@ Scenario: _029103 create a Purchase order for service
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Filling in Company and Status
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I select "Approved" exact value from "Status" drop-down list
 	* Filling in vendor information
 		And I click Select button of "Partner" field
@@ -240,11 +236,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor information
 			And I click Select button of "Partner" field
 			And I go to line in "List" table

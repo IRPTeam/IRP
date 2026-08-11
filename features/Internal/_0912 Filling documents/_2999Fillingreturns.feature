@@ -76,11 +76,7 @@ Scenario: _299901 check filling in and refilling Sales return order
 		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term Customer"
 	* Check filling in Company from Partner term
 		* Change company in Sales return order
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"			
@@ -145,11 +141,7 @@ Scenario: _299901 check filling in and refilling Sales return order
 		And "ItemList" table contains lines
 			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Tax amount'   | 'Quantity'   | 'Unit'   | 'Net amount'   | 'Total amount'   | 'Store'       |
 			| '500,00'   | 'Trousers'   | '*'     | '38/Yellow'   | '*'            | '1,000'      | 'pcs'    | '*'            | '*'              | 'Store 02'    |
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		If "ItemList" table does not contain "VAT" column Then
 	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
 		And I go to line in "ItemList" table
@@ -197,11 +189,7 @@ Scenario: _299902 check filling in and refilling Sales return
 		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term Customer"
 	* Check filling in Company from Partner term
 		* Change company in Sales return order
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -274,11 +262,7 @@ Scenario: _299902 check filling in and refilling Sales return
 		And "ItemList" table contains lines
 			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Tax amount'   | 'Quantity'   | 'Unit'   | 'Net amount'   | 'Total amount'   | 'Store'       |
 			| '400,00'   | 'Trousers'   | '*'     | '38/Yellow'   | '*'            | '1,000'      | 'pcs'    | '*'            | '*'              | 'Store 01'    |
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		If "ItemList" table does not contain "VAT" column Then
 	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
 		And I go to line in "ItemList" table
@@ -325,11 +309,7 @@ Scenario: _299903 check filling in and refilling Purchase return order
 		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term (Veritas)"
 	* Check filling in Company from Partner term
 		* Change company in Purchase return order
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -403,11 +383,7 @@ Scenario: _299903 check filling in and refilling Purchase return order
 		And "ItemList" table contains lines
 			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Tax amount'   | 'Quantity'   | 'Unit'   | 'Net amount'   | 'Total amount'   | 'Store'       |
 			| '400,00'   | 'Trousers'   | '*'     | '38/Yellow'   | '*'            | '1,000'      | 'pcs'    | '*'            | '*'              | 'Store 03'    |
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		If "ItemList" table does not contain "VAT" column Then
 	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
 		And I go to line in "ItemList" table
@@ -454,11 +430,7 @@ Scenario: _299904 check filling in and refilling Purchase return
 		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term (Veritas)"
 	* Check filling in Company from Partner term
 		* Change company in Purchase return
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -531,11 +503,7 @@ Scenario: _299904 check filling in and refilling Purchase return
 		And "ItemList" table contains lines
 			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Tax amount'   | 'Quantity'   | 'Unit'   | 'Net amount'   | 'Total amount'   | 'Store'       |
 			| '400,00'   | 'Trousers'   | '*'     | '38/Yellow'   | '*'            | '1,000'      | 'pcs'    | '*'            | '*'              | 'Store 03'    |
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		If "ItemList" table does not contain "VAT" column Then
 	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
 		And I go to line in "ItemList" table

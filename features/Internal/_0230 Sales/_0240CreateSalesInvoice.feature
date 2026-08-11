@@ -472,11 +472,7 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Dress'   | 'XS/Blue'    | '10,000'     | 'Store 02'    |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And "RowIDInfo" table contains lines
 			| 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
 			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '80,000'   | 'SI&SC'        |
@@ -587,11 +583,7 @@ Scenario: _024006 create SI based on 2 SO with SC
 			| 'Item'    | 'Item key'   | 'Price'    | 'Quantity'   | 'Unit'    |
 			| 'Dress'   | 'XS/Blue'    | '500,00'   | '2,000'      | 'pcs'     |
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I click "Show row key" button
 		And "RowIDInfo" table became equal
 			| 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |

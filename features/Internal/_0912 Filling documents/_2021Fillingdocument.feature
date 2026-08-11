@@ -1,4 +1,4 @@
-﻿#language: en
+00﻿#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -156,11 +156,7 @@ Scenario: _0154100 preparation ( filling documents)
 				| "Number"                                  |
 				| "$$NumberCashTransferOrder01541001$$"     |
 				And I click the button named "FormCreate"
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| Description       |
-					| Main Company      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 				* Filling Sender and Send amount
 					And I click Select button of "Sender" field
 					And I go to line in "List" table
@@ -168,11 +164,7 @@ Scenario: _0154100 preparation ( filling documents)
 						| Cash desk №1       |
 					And I select current line in "List" table
 					And I input "400,00" text in "Send amount" field
-					And I click Select button of "Send currency" field
-					And I go to line in "List" table
-						| Code      | Description           |
-						| USD       | American dollar       |
-					And I select current line in "List" table
+					And I select "USD" exact value from "Send currency" drop-down list
 				* Filling Receiver and Receive amount
 					And I click Select button of "Receiver" field
 					And I go to line in "List" table
@@ -180,12 +172,7 @@ Scenario: _0154100 preparation ( filling documents)
 						| Cash desk №2       |
 					And I select current line in "List" table
 					And I input "400,00" text in "Receive amount" field
-					And I click Select button of "Receive currency" field
-					And I go to line in "List" table
-						| Code      | Description           |
-						| USD       | American dollar       |
-					And I activate "Description" field in "List" table
-					And I select current line in "List" table
+					And I select "USD" exact value from "Receive currency" drop-down list
 				* Filling Movement type
 					And I click Select button of "Send financial movement type" field
 					And I go to line in "List" table
@@ -217,11 +204,7 @@ Scenario: _0154100 preparation ( filling documents)
 				| "Number"                                  |
 				| "$$NumberCashTransferOrder01541002$$"     |
 				And I click the button named "FormCreate"
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| Description       |
-					| Main Company      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 				* Filling Sender and Send amount
 					And I click Select button of "Sender" field
 					And I go to line in "List" table
@@ -229,11 +212,7 @@ Scenario: _0154100 preparation ( filling documents)
 						| Cash desk №2       |
 					And I select current line in "List" table
 					And I input "210,00" text in "Send amount" field
-					And I click Select button of "Send currency" field
-					And I go to line in "List" table
-						| Code      | Description           |
-						| USD       | American dollar       |
-					And I select current line in "List" table
+					And I select "USD" exact value from "Send currency" drop-down list
 				* Filling Receiver and Receive amount
 					And I click Select button of "Receiver" field
 					And I go to line in "List" table
@@ -241,12 +220,7 @@ Scenario: _0154100 preparation ( filling documents)
 						| Cash desk №1       |
 					And I select current line in "List" table
 					And I input "1200,00" text in "Receive amount" field
-					And I click Select button of "Receive currency" field
-					And I go to line in "List" table
-						| Code      | Description        |
-						| TRY       | Turkish lira       |
-					And I activate "Description" field in "List" table
-					And I select current line in "List" table
+					And I select "TRY" exact value from "Receive currency" drop-down list
 					And I click Select button of "Cash advance holder" field
 					And I go to line in "List" table
 						| 'Description'       |
@@ -284,11 +258,7 @@ Scenario: _0154100 preparation ( filling documents)
 				| "$$NumberCashTransferOrder01541003$$"     |
 				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 				And I click the button named "FormCreate"
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| Description       |
-					| Main Company      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 				* Filling Sender and Send amount
 					And I click Select button of "Sender" field
 					And I go to line in "List" table
@@ -336,11 +306,7 @@ Scenario: _0154100 preparation ( filling documents)
 					| "$$NumberCashTransferOrder01541004$$"      |
 					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 					And I click the button named "FormCreate"
-					And I click Select button of "Company" field
-					And I go to line in "List" table
-						| Description        |
-						| Main Company       |
-					And I select current line in "List" table
+					And I select "Main Company" exact value from "Company" drop-down list
 					* Filling Sender and Send amount
 						And I click Select button of "Sender" field
 						And I go to line in "List" table
@@ -431,21 +397,11 @@ Scenario: _01541002 check filters in the PI list form
 		And I click "Finish editing" button
 	* Check filter
 		And I set checkbox named "SettingsComposerUserSettingsItem4Use"
-		And I click Choice button of the field named "SettingsComposerUserSettingsItem4Value"
-		Then "Currencies" window is opened
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "SettingsComposerUserSettingsItem4Value"
 		And "List" table became equal
 			| 'Partner'     | 'Amount'     | 'Currency'    |
 			| 'Ferron BP'   | '4 000,00'   | 'USD'         |
-		And I click Choice button of the field named "SettingsComposerUserSettingsItem4Value"
-		Then "Currencies" window is opened
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "SettingsComposerUserSettingsItem4Value"
 		And "List" table became equal
 			| 'Partner'     | 'Amount'      | 'Currency'    |
 			| 'Ferron BP'   | '13 000,00'   | 'TRY'         |
@@ -478,11 +434,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 		Then the form attribute named "Agreement" became equal to "Partner term NDB"
 	* Check filling in Company from Partner term
 		* Change company in Sales order
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -596,11 +548,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Tax amount' | 'Quantity' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'   | '38/Yellow' | 'Stock'              | '*'          | '1,000'    | 'pcs'  | '*'          | '*'            | 'Store 01' |
 				| '350,00' | 'Shirt'    | '*'   | '38/Black'  | 'Stock'              | '*'          | '2,000'    | 'pcs'  | '*'          | '*'            | 'Store 01' |
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
@@ -886,11 +834,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 				| 'Item'          | 'Item key'     |
 				| 'High shoes'    | '37/19SD'      |
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'                |
-				| 'High shoes box (8 pcs)'     |
-			And I select current line in "List" table
+			And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I select current line in "ItemList" table
@@ -949,11 +893,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 		Then the form attribute named "Agreement" became equal to "Partner term NDB"
 	* Check filling in Company from Partner term
 		* Change company in Sales order
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -1063,11 +1003,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Quantity' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'   | '38/Yellow' | '*'          | '1,000'    | 'pcs'  | '*'          | '*'            | 'Store 01' |
 				| '350,00' | 'Shirt'    | '*'   | '38/Black'  | '*'          | '2,000'    | 'pcs'  | '*'          | '*'            | 'Store 01' |
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
@@ -1260,11 +1196,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				| 'Item'          | 'Item key'     |
 				| 'High shoes'    | '37/19SD'      |
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'                |
-				| 'High shoes box (8 pcs)'     |
-			And I select current line in "List" table
+			And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I select current line in "ItemList" table
@@ -1452,11 +1384,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 			| 'NDB'            |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company NDB"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'            |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -1466,11 +1394,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 		Then the form attribute named "Agreement" became equal to "Partner term vendor NDB"
 	* Check filling in Company from Partner term
 		* Change company in the Purchase order
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"			
@@ -1591,11 +1515,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Tax amount'    | 'Quantity'    | 'Unit'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '400,00'    | 'Trousers'    | '*'      | '38/Yellow'    | '*'             | '1,000'       | 'pcs'     | '*'             | '*'               | 'Store 03'     |
 				| '350,00'    | 'Shirt'       | '*'      | '38/Black'     | '*'             | '2,000'       | 'pcs'     | '*'             | '*'               | 'Store 03'     |
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
@@ -1879,11 +1799,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 		Then the form attribute named "Agreement" became equal to "Partner term vendor NDB"
 	* Check filling in Company from Partner term
 		* Change company in the Purchase invoice
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -2001,11 +1917,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Tax amount'    | 'Quantity'    | 'Unit'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '400,00'    | 'Trousers'    | '*'      | '38/Yellow'    | '*'             | '1,000'       | 'pcs'     | '*'             | '*'               | 'Store 03'     |
 				| '350,00'    | 'Shirt'       | '*'      | '38/Black'     | '*'             | '2,000'       | 'pcs'     | '*'             | '*'               | 'Store 03'     |
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
@@ -2205,17 +2117,9 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		And I select "Payment from customer" exact value from "Transaction type" drop-down list
 	* Check filling in company
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in currency before select cash account
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
 	* Check filling in cash account (multicurrency)
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
@@ -2230,11 +2134,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I select current line in "List" table
 		Then the form attribute named "Currency" became equal to "TRY"
 	* Check currency re-selection and clearing the "Cash / Bank accounts" field if the currency is fixed at the cash account
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
 		Then the form attribute named "CashAccount" became equal to ""
 	* Select a multi-currency cash account and checking that the Currency field will not be cleared
 		And I click Select button of "Cash account" field
@@ -2243,11 +2143,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| Cash desk №1    |
 		And I select current line in "List" table
 		Then the form attribute named "Currency" became equal to "USD"
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
 		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -2424,11 +2320,7 @@ Scenario: _0154108 total amount calculation in Cash receipt
 	* Open form Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -2497,17 +2389,9 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		And I select "Payment from customer" exact value from "Transaction type" drop-down list
 	* Check filling in company
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in currencies before select an account
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
 	* Bank account selection and check of Currency field refilling
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -2516,11 +2400,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And I select current line in "List" table
 		Then the form attribute named "Currency" became equal to "TRY"
 	* Check currency re-selection and clearing the "Account" field
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
 		Then the form attribute named "Account" became equal to ""
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -2699,11 +2579,7 @@ Scenario: _0154110 total amount calculation in Bank receipt
 	* Open form Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |
@@ -2776,17 +2652,9 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 	* Check filling in company
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in currency before select cash account
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
 	* Check filling in cash account (multicurrency)
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
@@ -2801,11 +2669,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I select current line in "List" table
 		Then the form attribute named "Currency" became equal to "TRY"
 	* Check currency re-selection and clearing the "Cash / Bank accounts" field if the currency is fixed at the cash account
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
 		Then the form attribute named "CashAccount" became equal to ""
 	* Select a multi-currency cash account and checking that the Currency field will not be cleared
 		And I click Select button of "Cash account" field
@@ -2814,11 +2678,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| Cash desk №1    |
 		And I select current line in "List" table
 		Then the form attribute named "Currency" became equal to "USD"
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
 		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -2984,11 +2844,7 @@ Scenario: _0154112 total amount calculation in Cash payment
 	* Open form Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -3064,17 +2920,9 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 	* Check filling in company
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in currency before selecting a bank account
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
 	* Bank account selection and check of Currency field refilling
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -3083,11 +2931,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I select current line in "List" table
 		Then the form attribute named "Currency" became equal to "TRY"
 	* Check currency re-selection and clearing the "Account" field in case of a fixed currency
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
 		Then the form attribute named "Account" became equal to ""
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -3260,11 +3104,7 @@ Scenario: _0154114 total amount calculation in Bank payment
 	* Open form Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |
@@ -3400,11 +3240,7 @@ Scenario: _0154115 check filling in and refilling Cash transfer order
 	* Open form Cash transfer order
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in currency when selecting a bank/cash account with fixed currency
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
@@ -3437,11 +3273,7 @@ Scenario: _0154115 check filling in and refilling Cash transfer order
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Send currency" drop-down list
 		And I input "100,00" text in "Send amount" field
 		And I move to the next attribute
 		And the editing text of form attribute named "ReceiveAmount" became equal to "100,00"
@@ -3465,21 +3297,13 @@ Scenario: _0154115 check filling in and refilling Cash transfer order
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Send currency" drop-down list
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Select button of "Receive currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Receive currency" drop-down list
 		Then the form attribute named "CashAdvanceHolder" became equal to ""
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
@@ -3507,33 +3331,21 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 		* Open form Cash transfer order
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling data
 			And I click Select button of "Sender" field
 			And I go to line in "List" table
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Select button of "Send currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Send currency" drop-down list
 			And I input "100,00" text in "Send amount" field
 			And I click Select button of "Receiver" field
 			And I go to line in "List" table
 				| 'Description'      |
 				| 'Cash desk №1'     |
 			And I select current line in "List" table
-			And I click Select button of "Receive currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Receive currency" drop-down list
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
 			And I click the button named "FormPost"
@@ -3543,22 +3355,14 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 		* Open form Cash transfer order
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling data
 			And I click Select button of "Sender" field
 			And I go to line in "List" table
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Select button of "Send currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Send currency" drop-down list
 			And I input "100,00" text in "Send amount" field
 			And I click Select button of "Receiver" field
 			And I go to line in "List" table
@@ -3574,22 +3378,14 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 		* Open form Cash transfer order
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling data
 			And I click Select button of "Receiver" field
 			And I go to line in "List" table
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Select button of "Receive currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Receive currency" drop-down list
 			And I input "100,00" text in "Send amount" field
 			And I click Select button of "Sender" field
 			And I go to line in "List" table
@@ -3605,11 +3401,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 		* Open form Cash transfer order
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling data
 			And I click Select button of "Receiver" field
 			And I go to line in "List" table
@@ -3635,22 +3427,14 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
 	* Filter check by Account depending on the company
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And "List" table does not contain lines
 			| 'Description'    | 'Currency'    |
 			| 'Cash desk №1'   | ''            |
 			| 'Cash desk №2'   | ''            |
 		And I close current window
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And "List" table contains lines
 			| 'Description'         | 'Currency'    |
@@ -3782,11 +3566,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Net amount'   | 'Profit loss center'   | 'Expense type'   | 'Currency'   | 'VAT'   | 'Tax amount'   | 'Total amount'    |
 			| '200,00'       | 'Front office'         | 'Software'       | 'USD'        | '18%'   | '38,00'        | '238,00'          |
 	* Change the company (without taxes) and check to delete the VAT column
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		Then "Update item list info" window is opened
 		Then the form attribute named "TaxRates" became equal to "Yes"
 		And I click "OK" button					
@@ -3794,11 +3574,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'VAT'  | 'Tax amount'   |
 			| '18%'  | '38,00'        |
 	* Change the company to the one with taxes and check the form by currency
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click "OK" button	
 		* Exchange rate change in the form by currency
 			And I click the button named "EditCurrencies"
@@ -3835,11 +3611,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Description'    |
 			| 'Software'       |
 		And I select current line in "List" table
-		And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "PaymentListCurrency" in "PaymentList" table
 		And I activate "VAT" field in "PaymentList" table
 		And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
@@ -3861,11 +3633,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I go to line in "PaymentList" table
 			| 'Net amount'   | 'Profit loss center'   | 'Expense type'   | 'Currency'   | 'VAT'   | 'Tax amount'   | 'Total amount'    |
 			| '200,00'       | 'Front office'         | 'Software'       | 'TRY'        | '18%'   | '36,00'        | '236,00'          |
-		And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "PaymentListCurrency" in "PaymentList" table
 		And I go to line in "PaymentList" table
 			| 'Net amount'   | 'Profit loss center'   | 'Expense type'   | 'Currency'   | 'VAT'   | 'Tax amount'   | 'Total amount'    |
 			| '200,00'       | 'Front office'         | 'Software'       | 'USD'        | '18%'   | '36,00'        | '236,00'          |
@@ -3910,22 +3678,14 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
 	* Filter check by Account depending on the company
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And "List" table does not contain lines
 			| 'Description'    | 'Currency'    |
 			| 'Cash desk №1'   | ''            |
 			| 'Cash desk №2'   | ''            |
 		And I close current window
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And "List" table contains lines
 			| 'Description'         | 'Currency'    |
@@ -4049,11 +3809,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 			| 'Net amount'   | 'Profit loss center'   | 'Revenue type'   | 'Currency'   | 'VAT'   | 'Tax amount'   | 'Total amount'    |
 			| '200,00'       | 'Front office'         | 'Software'       | 'USD'        | '18%'   | '38,00'        | '238,00'          |
 	* Change the company (without taxes) and check to delete the VAT column
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		Then "Update item list info" window is opened
 		Then the form attribute named "TaxRates" became equal to "Yes"
 		And I click "OK" button		
@@ -4061,11 +3817,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 			| 'VAT'  | 'Tax amount'   |
 			| '18%'  | '38,00'        |
 	* Check the manually tax rate correction
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click "OK" button
 		And I activate "VAT" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -4097,21 +3849,13 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document CashReceipt
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| Description     |
 			| Cash desk №2    |
 		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 	* Fillin in Partner, Legal name and Partner term
 		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
@@ -4154,21 +3898,13 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document CashPayment
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| Description     |
 			| Cash desk №2    |
 		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I select "Return to customer" exact value from "Transaction type" drop-down list
 	* Fillin in Partner, Legal name and Partner term
 		And I click the button named "PaymentListAdd"
@@ -4211,21 +3947,13 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document CashReceipt
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description          |
 			| Bank account, TRY    |
 		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 	* Fillin in Partner, Legal name and Partner term
 		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
@@ -4271,21 +3999,13 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document BankPayment
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description          |
 			| Bank account, TRY    |
 		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I select "Return to customer" exact value from "Transaction type" drop-down list
 	* Fillin in Partner, Legal name and Partner term
 		And I click the button named "PaymentListAdd"
@@ -4332,19 +4052,11 @@ Scenario: _0154122 check filling in and refilling Reconcilation statement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		And I click the button named "FormCreate"
 	* Filling in basic details
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Begin period" field
 		And I input "01.01.2020" text in "Begin period" field
 		And I input "01.01.2029" text in "End period" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -4381,39 +4093,23 @@ Scenario: _0154122 check filling in and refilling Reconcilation statement
 			| '$$PurchaseInvoice29604$$'   | '13 000,00'   | ''         |
 		And I click the button named "FormPost"
 	* Check refilling when re-selecting a currency
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'USD'     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table does not contain lines
 			| 'Document'                  | 'Credit'     | 'Debit'    |
 			| '$$PurchaseInvoice2004$$'   | '4 000,00'   | ''         |
 	* Check refilling at company re-selection
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And in the table "Transactions" I click "Fill" button
 		Then the number of "Transactions" table lines is "равно" 0
 	* Check refilling when re-selecting a legal name (partner previous)
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
 			| 'Description'                 |
 			| 'Second Company Ferron BP'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And While the number of "Transactions" table lines "больше" 0 Then
 		And I click the button named "FormPost"
 		And I close all client application windows
@@ -4426,11 +4122,7 @@ Scenario: _0154123 filling in Transit account from Account when exchanging curre
 		And I click the button named "FormCreate"
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Check filling in Transit account 
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Description'          |
@@ -4453,11 +4145,7 @@ Scenario: _0154124 filling in Transit account from Account when exchanging curre
 		And I click the button named "FormCreate"
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Check filling in Transit account 
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -4480,11 +4168,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		And I click the button named "FormCreate"
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -4563,11 +4247,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		And I click the button named "FormCreate"
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -4642,21 +4322,13 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		And I click the button named "FormCreate"
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-		| 'Code'  | 'Description'       |
-		| 'USD'   | 'American dollar'   |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 	* Check the selection by Planing transaction basis
 		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -4723,21 +4395,13 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		And I click the button named "FormCreate"
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Cash desk №1'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Check the selection by Planing transaction basis
 		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -4803,11 +4467,7 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		And I click the button named "FormCreate"
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'            |
@@ -4878,11 +4538,7 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 		And I click the button named "FormCreate"
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -4960,11 +4616,7 @@ Scenario: _053014 check the display of details on the form Bank payment with the
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
 		And form attribute named "TransitAccount" is available
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |
@@ -4986,11 +4638,7 @@ Scenario: _0154131 check currency form in  Bank Receipt
 			Given I open hyperlink "e1cib/list/Document.BankReceipt"
 			And I click the button named "FormCreate"
 			And I select "Payment from customer" exact value from "Transaction type" drop-down list
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Bank account selection and check of Currency field refilling
 			And I click Select button of "Account" field
 			And I go to line in "List" table
@@ -5103,11 +4751,7 @@ Scenario: _0154132 check currency form in Incoming payment order
 		* Filling the document header
 			Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Bank account selection and check of Currency field refilling
 			And I click Select button of "Account" field
 			And I go to line in "List" table
@@ -5212,11 +4856,7 @@ Scenario: _0154133 check currency form in Outgoing payment order
 		* Filling the document header
 			Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Bank account selection and check of Currency field refilling
 			And I click Select button of "Account" field
 			And I go to line in "List" table
@@ -5459,11 +5099,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 			| 'Description'                |
 			| 'Partner term vendor NDB'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -5638,11 +5274,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 			| 'Description'                |
 			| 'Partner term vendor NDB'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -5820,11 +5452,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 			| 'Description'                |
 			| 'Partner term vendor NDB'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -5986,11 +5614,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 			| 'Description'                |
 			| 'Partner term vendor NDB'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -6145,11 +5769,7 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'            |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -6165,11 +5785,7 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And in the table "ItemList" I click the button named "ItemListAdd"	
@@ -6338,11 +5954,7 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And in the table "ItemList" I click the button named "ItemListAdd"	
@@ -6515,11 +6127,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"		
 		And I move to "Item list" tab
@@ -6685,11 +6293,7 @@ Scenario: _0154157 check function DontCalculateRow in the Sales return order
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"		
 		And I move to "Item list" tab
@@ -6864,11 +6468,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			| 'Description'                |
 			| 'Partner term vendor NDB'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in item and item key
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7060,11 +6660,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 			| 'Description'                |
 			| 'Partner term vendor NDB'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in item and item key
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7183,11 +6779,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 			| 'Description'                |
 			| 'Partner term vendor NDB'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in item and item key
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7306,11 +6898,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 			| 'Description'                |
 			| 'Partner term vendor NDB'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in item and item key
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7430,11 +7018,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
@@ -7556,11 +7140,7 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
@@ -7681,11 +7261,7 @@ Scenario: _0154167 check tax rate recalculation when change partner term (Purcha
 			| 'Description'    |
 			| 'Vendor, USD'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"
 	* Check tax rate recalculation
@@ -7752,11 +7328,7 @@ Scenario: _0154168 check tax rate recalculation when change partner term (Purcha
 			| 'Description'    |
 			| 'Vendor, USD'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"
 	* Check tax rate recalculation
@@ -7824,11 +7396,7 @@ Scenario: _0154170 select Partner items in the PO
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select partner items
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Partner item" attribute in "ItemList" table
@@ -7869,11 +7437,7 @@ Scenario: _0154171 select Partner items in the SO
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Select partner items
 		And in the table "ItemList" I click the button named "ItemListAdd"	
 		And I click choice button of "Partner item" attribute in "ItemList" table
@@ -7961,11 +7525,7 @@ Scenario: _0154182 check price recalculaton in the PO (depend of currency)
 			| 'Description'                |
 			| 'Partner term vendor DFC'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -7985,11 +7545,7 @@ Scenario: _0154182 check price recalculaton in the PO (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -8044,11 +7600,7 @@ Scenario: _0154183 check price recalculaton in the PI (depend of currency)
 			| 'Description'                |
 			| 'Partner term vendor DFC'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -8068,11 +7620,7 @@ Scenario: _0154183 check price recalculaton in the PI (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -8127,11 +7675,7 @@ Scenario: _0154184 check price recalculaton in the SO (depend of currency)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -8151,11 +7695,7 @@ Scenario: _0154184 check price recalculaton in the SO (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -8210,11 +7750,7 @@ Scenario: _0154185 check price recalculaton in the SI (depend of currency)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -8234,11 +7770,7 @@ Scenario: _0154185 check price recalculaton in the SI (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -8293,11 +7825,7 @@ Scenario: _0154186 check price recalculaton in the RSR (depend of currency)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Add item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -8317,11 +7845,7 @@ Scenario: _0154186 check price recalculaton in the RSR (depend of currency)
 			| 'XS/Blue'    | 'Basic Price Types'   | 'Dress'   | '520,00'    |
 	* Change document currency and check price recalculaton
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
 			| 'Item key'   | 'Price type'          | 'Item'    | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
@@ -8362,12 +7886,7 @@ Scenario: _0154187 check edit currency in the StockAdjustmentAsSurplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"	
 		And I click the button named "FormCreate"	
 	* Filling
-		And I click Choice button of the field named "Company"
-		Then "Companies" window is opened
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
@@ -8406,11 +7925,7 @@ Scenario: _0154187 check edit currency in the StockAdjustmentAsSurplus
 		And I input "100,00" text in "Total amount" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Change unit
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 	* Check
 		And "ItemList" table became equal
 			| '#'   | 'Revenue type'   | 'Total amount' | 'Item'    | 'Basis document'   | 'Item key'   | 'Profit loss center'        | 'Physical inventory'   | 'Serial lot numbers'   | 'Unit'                | 'Quantity'    |
@@ -8443,12 +7958,7 @@ Scenario: _0154188 check edit currency in the StockAdjustmentAsWriteOff
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"	
 		And I click the button named "FormCreate"	
 	* Filling
-		And I click Choice button of the field named "Company"
-		Then "Companies" window is opened
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
@@ -8485,11 +7995,7 @@ Scenario: _0154188 check edit currency in the StockAdjustmentAsWriteOff
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Change unit
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 	* Check
 		And "ItemList" table became equal
 			| '#'   | 'Expense type'   | 'Item'    | 'Basis document'   | 'Item key'   | 'Profit loss center'        | 'Physical inventory'   | 'Serial lot numbers'   | 'Unit'                | 'Quantity'    |
@@ -8537,11 +8043,7 @@ Scenario: _0154189 check filling in and refilling Work order
 		Then the form attribute named "Agreement" became equal to "Partner term NDB"
 	* Check filling in Company from Partner term
 		* Change company in Sales order
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -8631,11 +8133,7 @@ Scenario: _0154189 check filling in and refilling Work order
 				| 'Delivery'    | 'Basic Price Types'    | 'Delivery'    | ''                     | 'pcs'     | 'No'                    | '16,78'         | '1,000'       | '110,00'    | '18%'    | ''                 | '93,22'         | '110,00'          | ''                |
 				| 'Assembly'    | 'Basic Price Types'    | 'Assembly'    | 'Assembly'             | 'pcs'     | 'No'                    | '36,61'         | '2,000'       | '120,00'    | '18%'    | ''                 | '203,39'        | '240,00'          | ''                |
 	* Check the re-drawing of the form for taxes at company re-selection.
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
@@ -8839,11 +8337,7 @@ Scenario: _0154190 check filling in and refilling Work sheet
 		* Check filling in legal name after re-selection partner
 			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 	* Add works and materials
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -8900,11 +8394,7 @@ Scenario: _0154190 check filling in and refilling Work sheet
 		And I finish line editing in "Materials" table
 	* Currency form
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'        | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'    |
@@ -8947,11 +8437,7 @@ Scenario: _0154191 check filter by Company when select partner term
 			| 'Description'    |
 			| 'Kalipso'        |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'        |
-			| 'Second Company'     |
-		And I select current line in "List" table	
+		And I select "Second Company" exact value from "Company" drop-down list
 	* Check filter by company for partner term
 		And I click Select button of "Partner term" field
 		Then the number of "List" table lines is "равно" 0
@@ -9033,11 +8519,7 @@ Scenario: _0154197 check auto filling partner term in the CR (filter by Company)
 	* Open CR creation form
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'        |
-			| 'Second Company'     |
-		And I select current line in "List" table	
+		And I select "Second Company" exact value from "Company" drop-down list
 	* Check filter by company for partner term
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
@@ -9051,11 +8533,7 @@ Scenario: _0154198 check auto filling partner term in the CP (filter by Company)
 	* Open CP creation form
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'        |
-			| 'Second Company'     |
-		And I select current line in "List" table	
+		And I select "Second Company" exact value from "Company" drop-down list
 	* Check filter by company for partner term
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
@@ -9069,11 +8547,7 @@ Scenario: _0154199 check auto filling partner term in the BP (filter by Company)
 	* Open BP creation form
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'        |
-			| 'Second Company'     |
-		And I select current line in "List" table	
+		And I select "Second Company" exact value from "Company" drop-down list
 	* Check filter by company for partner term
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
@@ -9087,11 +8561,7 @@ Scenario: _0154200 check auto filling partner term in the BR (filter by Company)
 	* Open BR creation form
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'        |
-			| 'Second Company'     |
-		And I select current line in "List" table	
+		And I select "Second Company" exact value from "Company" drop-down list
 	* Check filter by company for partner term
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table

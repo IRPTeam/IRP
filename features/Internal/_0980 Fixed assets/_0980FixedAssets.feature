@@ -435,11 +435,7 @@ Scenario: _9800030 create Fixed Assets Transfer
 	Given I open hyperlink "e1cib/list/Document.FixedAssetTransfer"
 	And I click the button named "FormCreate"
 * Filling main details
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
-	And I click the button named "FormChoose"
+	And I select "Main Company" exact value from the drop-down list named "Company"
 	And I click Choice button of the field named "FixedAsset"
 	And I go to line in "List" table
 		| 'Description'      |
@@ -493,11 +489,7 @@ Scenario: _9800031 create Modernization Of Fixed Asset
 	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
 	And I click the button named "FormCreate"
 * Filling main details
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
-	And I click the button named "FormChoose"
+	And I select "Main Company" exact value from the drop-down list named "Company"
 	And I click Choice button of the field named "FixedAsset"
 	And I go to line in "List" table
 		| 'Description'       |
@@ -553,11 +545,7 @@ Scenario: _9800032 create Decommissioning Of Fixed Asset
 	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
 	And I click the button named "FormCreate"
 * Filling main details
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
-	And I click the button named "FormChoose"
+	And I select "Main Company" exact value from the drop-down list named "Company"
 	And I click Choice button of the field named "FixedAsset"
 	And I go to line in "List" table
 		| 'Description'      |

@@ -90,11 +90,7 @@ Scenario: _2070002 check locking header in the SO with linked documents (several
 			| 'Store 03'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 	* Check locking
 		And I click "Save" button

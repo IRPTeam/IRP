@@ -548,6 +548,8 @@
         <autoMaxHeight>true</autoMaxHeight>
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
+        <scale>100</scale>
+        <currentPageNumber>1</currentPageNumber>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">

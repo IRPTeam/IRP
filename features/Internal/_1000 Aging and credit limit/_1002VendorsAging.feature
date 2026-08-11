@@ -189,22 +189,14 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
 		* Select company
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in the details of the document
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "Currency"
 		* Filling in the tabular part
 			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -279,11 +271,7 @@ Scenario: _1002015 create Bank payment and check Aging register movements
 			Given I open hyperlink "e1cib/list/Document.BankPayment"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Account" field
 				And I go to line in "List" table
@@ -362,11 +350,7 @@ Scenario: _1002020 create Credit note and check Aging register movements
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the basis document for debt write-offs
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
@@ -450,11 +434,7 @@ Scenario: _1020030 create Debit note and check Aging register movements
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the basis document for debt write-offs
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
@@ -533,11 +513,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			Given I open hyperlink "e1cib/list/Document.BankPayment"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Account" field
 				And I go to line in "List" table
@@ -566,11 +542,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			Given I open hyperlink "e1cib/list/Document.CashPayment"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Cash account" field
 				And I go to line in "List" table
@@ -600,11 +572,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			Given I open hyperlink "e1cib/list/Document.BankPayment"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Account" field
 				And I go to line in "List" table
@@ -664,11 +632,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			Given I open hyperlink "e1cib/list/Document.CashPayment"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Cash account" field
 				And I go to line in "List" table

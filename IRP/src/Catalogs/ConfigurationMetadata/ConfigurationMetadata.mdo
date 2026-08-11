@@ -281,6 +281,218 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <tabularSections uuid="715a4a5b-09df-4ba6-b2e7-a016c6a33979">
+    <producedTypes>
+      <objectType typeId="3144acf7-d0bf-4659-8e06-11f4cd623d4a" valueTypeId="abeb7ac1-708b-46c5-882b-8842a7b5c3a9"/>
+      <rowType typeId="1e6fdf85-442c-47a0-bd7e-450ef2f67cda" valueTypeId="e0206387-3061-4074-a3bb-c03e9ec3ed28"/>
+    </producedTypes>
+    <name>ImportantAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Important attributes</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="9a3f05b4-2010-452e-bdaa-4c63329f2898">
+      <name>TabularName</name>
+      <synonym>
+        <key>en</key>
+        <value>Tabular name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="dab31fa6-85ce-4046-9fbf-4e30ef82496a">
+      <name>AttributeName</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="d00237d6-20e2-4fa2-9e03-1d5d6329c5ba">
+    <producedTypes>
+      <objectType typeId="175a2039-01fc-4008-96e6-66b38e1354ef" valueTypeId="ade89f54-616a-4a4f-b699-fc20e65fa955"/>
+      <rowType typeId="49303dae-7054-4d45-b699-2542fc5dfb85" valueTypeId="2ab9b0b1-718d-4918-a667-73f41f4e1a85"/>
+    </producedTypes>
+    <name>NotAuditAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Not audit attributes</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="a0782733-b5de-4052-a6d9-33e005b8d5e0">
+      <name>TabularName</name>
+      <synonym>
+        <key>en</key>
+        <value>Tabular name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f4435a20-ebdb-4fed-94db-c6d28ce5f338">
+      <name>AttributeName</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="1b844e46-d9b4-458c-af42-271693de59db">
+    <producedTypes>
+      <objectType typeId="5ca29126-8788-402c-af8e-cfe72b28329e" valueTypeId="f4d39025-c414-43d1-ad8b-ef9b0f27c6a2"/>
+      <rowType typeId="fb7c7c4b-2629-468f-ab16-2eae1d3c53d1" valueTypeId="84930d43-52ad-4f5c-8010-199c3abdab73"/>
+    </producedTypes>
+    <name>ReadOnlyAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Read only attributes</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="d9e66d6d-46c8-4490-8ef0-de608aba2634">
+      <name>TabularName</name>
+      <synonym>
+        <key>en</key>
+        <value>Tabular name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5bcb8e8c-5af2-4647-afc6-9f5e004678da">
+      <name>AttributeName</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="6ed2de3b-81e6-43ac-8fca-fbb41261c1c1">
+    <producedTypes>
+      <objectType typeId="f301d95d-4877-4964-8a17-53c4bf5fc1dd" valueTypeId="c87b5743-77ea-42c1-b7ec-952a5fb40518"/>
+      <rowType typeId="4a0e0a73-b4db-4fec-84d7-fd52d0328dc3" valueTypeId="4a570fc9-8246-4819-913f-63bc5bdaae67"/>
+    </producedTypes>
+    <name>HiddenAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Hidden attributes</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="804c86e1-5113-42c7-bc65-910f16639f6c">
+      <name>TabularName</name>
+      <synonym>
+        <key>en</key>
+        <value>Tabular name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ed6463e7-2f40-4b43-a49d-d5cb147a8976">
+      <name>AttributeName</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="360b8f17-2d37-4d3a-9a8f-384daa8e706f">
     <name>ItemForm</name>
     <synonym>

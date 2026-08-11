@@ -138,11 +138,7 @@ Scenario: _300302 create Unbundling and check creation item key
 	* Filling the document header Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description        |
-			| Main Company TR    |
-		And I select current line in "List" table
+		And I select "Main Company TR" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| Description       |
@@ -153,11 +149,7 @@ Scenario: _300302 create Unbundling and check creation item key
 			| 'Item key'                       |
 			| 'Chewing gum TR/Chewing gum2'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
-			| Description    |
-			| adet           |
-		And I select current line in "List" table
+		And I select "adet" exact value from the drop-down list named "Unit"
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -182,11 +174,7 @@ Scenario: _300302 create Unbundling and check creation item key
 		* Create one more Unbundling
 			Given I open hyperlink "e1cib/list/Document.Unbundling"
 			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description         |
-				| Main Company TR     |
-			And I select current line in "List" table
+			And I select "Main Company TR" exact value from "Company" drop-down list
 			And I click Select button of "Item bundle" field
 			And I go to line in "List" table
 				| Description        |
@@ -197,11 +185,7 @@ Scenario: _300302 create Unbundling and check creation item key
 				| 'Item key'                        |
 				| 'Chewing gum TR/Chewing gum2'     |
 			And I select current line in "List" table
-			And I click Choice button of the field named "Unit"
-			And I go to line in "List" table
-				| Description     |
-				| adet            |
-			And I select current line in "List" table
+			And I select "adet" exact value from the drop-down list named "Unit"
 			And I input "2,000" text in the field named "Quantity"
 			And I click Select button of "Store" field
 			And I go to line in "List" table

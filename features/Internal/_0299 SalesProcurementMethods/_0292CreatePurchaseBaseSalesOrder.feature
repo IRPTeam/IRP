@@ -196,11 +196,7 @@ Scenario: _029201 create Purchase order based on Sales order
 			| 'High shoes'   | '37/19SD'     |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'               |
-			| 'High shoes box (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I activate "Price" field in "ItemList" table

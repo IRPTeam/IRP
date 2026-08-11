@@ -1,4 +1,4 @@
-#language: en
+0#language: en
 @tree
 @Positive
 @ChequeBondTransaction
@@ -116,17 +116,9 @@ Scenario: _0700002 create Cheque bond transaction (AP-AR by agreement), receipt 
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
 	* Filling Company, Currency and Branch
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Branch"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -242,17 +234,9 @@ Scenario: _0700003 create Cheque bond transaction (AP-AR by agreement), payed st
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
 	* Filling Company, Currency and Branch
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Branch"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -384,17 +368,9 @@ Scenario: _0700023 check partner term auto filling in the ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
 	* Filling Company, Currency and Branch
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I move to "Other" tab
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Branch"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -444,16 +420,8 @@ Scenario: _2020025 check filter by cheque in the form of Cheque bonds selection 
 		And I click the button named "FormCreate"
 	* Select currency USD and check that no cheques are in the selection list with TRY currency
 		* Select currency
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| 'Code'    | 'Description'         |
-				| 'USD'     | 'American dollar'     |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "USD" exact value from the drop-down list named "Currency"
+			And I select "Main Company" exact value from "Company" drop-down list
 			And in the table "ChequeBonds" I click "Pickup cheques" button
 		* Check that there are no checks in the selection form
 			And I change "ChequeBondType" radio button value to "Partner"
@@ -463,11 +431,7 @@ Scenario: _2020025 check filter by cheque in the form of Cheque bonds selection 
 			And I close "Cheque bonds" window
 	* Check that cheques with TRY currency are displayed in the selection form after re-selection and divide the cheques into Partners/Own
 		* Select currency
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "Currency"
 		* Check that receipts are displayed in the selection form
 			And in the table "ChequeBonds" I click "Pickup cheques" button
 			And I change "ChequeBondType" radio button value to "Partner"
@@ -493,16 +457,8 @@ Scenario: _2020028 not displaying checks marked for deletion in the selection fo
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
 	* Select currency TRY
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
+		And I select "Main Company" exact value from "Company" drop-down list
 		And in the table "ChequeBonds" I click "Pickup cheques" button
 	* Check that a cheque marked for deletion is not displayed in the selection list
 		And I change "ChequeBondType" radio button value to "Partner"
@@ -519,11 +475,7 @@ Scenario: _2020030 check the selection of status checks in the Cheque bonds sele
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
 	* Select currency TRY
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And in the table "ChequeBonds" I click "Pickup cheques" button
 	* Status check
 		Then "Cheque bonds" window is opened
@@ -565,16 +517,8 @@ Scenario: _2020031 check filter under valid agreements depending on the date of 
 			Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 			And I click the button named "FormCreate"
 		* Filling in basic details
-			And I click Select button of "Currency" field
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Adding cheques to the table part
 			And in the table "ChequeBonds" I click the button named "ChequeBondsAdd"
 			And I click choice button of "Cheque" attribute in "ChequeBonds" table

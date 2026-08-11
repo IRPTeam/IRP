@@ -132,11 +132,7 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 	* Create Calculation movement costs
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
 		And I input "30.05.2022" text in "Begin date" field
 		And I input "30.05.2022" text in "End date" field

@@ -172,6 +172,52 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="7bfa0ead-18f0-4985-b2af-b4f77ea66ad5">
+    <name>UsePrintInformations</name>
+    <synonym>
+      <key>en</key>
+      <value>Use print informations</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="aaf196ed-18b5-423a-b8f9-99020befc23c">
+    <name>PrintInfoPath</name>
+    <synonym>
+      <key>en</key>
+      <value>Print info path</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="522fc342-6dfd-4002-9816-c65b9b6e3573">
+    <name>LimitedAccess</name>
+    <synonym>
+      <key>en</key>
+      <value>Limited access</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="275e9f33-9f22-4b1b-8dba-01bec67e6c71">
     <producedTypes>
       <objectType typeId="214c0a4c-5a2d-4995-a3e6-17b11f138ed5" valueTypeId="58a0e5a5-e2a8-479a-97a4-29633466482e"/>
@@ -339,6 +385,53 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="d0fb9370-da8c-4515-a5b5-489596ff43c0">
+      <name>HideEmpty</name>
+      <synonym>
+        <key>en</key>
+        <value>Hide empty</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="3f83f409-d2f5-4f50-98e5-237b90e27920">
+    <producedTypes>
+      <objectType typeId="2dd5feea-e775-4d1a-a866-2285b907c354" valueTypeId="b5a469ec-6e86-408e-a3ae-ade109bdba7b"/>
+      <rowType typeId="f7863708-2265-4ff9-9316-e9db1e4a990d" valueTypeId="ef86eb55-8efc-4e37-af32-b32be4f6344e"/>
+    </producedTypes>
+    <name>AccessGroups</name>
+    <synonym>
+      <key>en</key>
+      <value>Access groups</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="5be7c6e6-75e6-4739-8e0c-8f26f8d6559a">
+      <name>Group</name>
+      <synonym>
+        <key>en</key>
+        <value>Group</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.AccessGroups</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <forms uuid="c3393446-ebf8-4c0e-aacd-ba60eab7d262">

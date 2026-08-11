@@ -206,7 +206,7 @@ Function DescriptionRefLocalization(Ref, LocalizationCode = Undefined) Export
 	EndIf;
 	
 	Result = CommonFunctionsServer.GetRefAttribute(Ref, LocalizationDescription);
-	If Result = "" Then
+	If Result = "" And LocalizationDescription <> "Description_en" Then
 		Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_en");
 	EndIf;
 	Return Result;

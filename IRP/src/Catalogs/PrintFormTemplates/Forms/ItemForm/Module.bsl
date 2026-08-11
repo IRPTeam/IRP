@@ -86,7 +86,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	
 	If EventName = "FormulaIsReady" Then
 		
-		If Items.Pages.CurrentPage = Items.PageTables Then
+		If Source = "_PrintInfoPath" Then
+			
+			Object.PrintInfoPath = Parameter;
+			
+		ElsIf Items.DataPages.CurrentPage = Items.PageTables Then
 			
 			CurrentRow = Items.Tables.CurrentData;
 			If CurrentRow = Undefined Then
@@ -95,7 +99,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 				CurrentRow.Expression = Parameter;
 			EndIf;
 			
-		ElsIf Items.Pages.CurrentPage = Items.PageParameters Then
+		ElsIf Items.DataPages.CurrentPage = Items.PageParameters Then
 			
 			CurrentRow = Items.Parameters.CurrentData;
 			If CurrentRow = Undefined Then
@@ -125,6 +129,11 @@ Procedure UseTablesOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure UsePrintInformationsOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
 Procedure PrintFormTypeOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
@@ -132,6 +141,11 @@ EndProcedure
 &AtClient
 Procedure PrintFormVariableTypeOnChange(Item)
 	RefreshParameters(Undefined);
+EndProcedure
+
+&AtClient
+Procedure LimitedAccessOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -185,6 +199,8 @@ Procedure RefreshParameters(Command)
 		ExpractParametersFromTemplateTXT();
 	ElsIf  Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.MXL") Then
 		ExpractParametersFromTemplateMXL();
+	ElsIf  Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.FormattedText") Then
+		ExpractParametersFromTemplateFormattedText();
 	EndIf;
 EndProcedure
 
@@ -301,6 +317,56 @@ Procedure RemoveFromTable(Command)
 	
 EndProcedure
 
+&AtClient
+Procedure OpenPrintInfoPath(Command)
+	
+	OpenForm("Catalog.PrintFormTemplates.Form.FormulaEditingParameter", 
+		New Structure("Name, Expression", "_PrintInfoPath", Object.PrintInfoPath), 
+		ThisObject, ,,,, FormWindowOpeningMode.LockOwnerWindow);
+	
+EndProcedure
+
+&AtClient
+Procedure AddParameters(Command)
+	UpdateParametersListForInsert();
+	If ParametersListForInsert.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	ShowChooseFromList(
+		New CallbackDescription("AddParametersChoiceEnd", ThisObject), ParametersListForInsert);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandActionWithServerContext(Command) Export
+	InternalCommandActionWithServerContextAtServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure InternalCommandActionWithServerContextAtServer(CommandName)
+	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+EndProcedure
+
 #EndRegion
 
 #Region Private
@@ -312,38 +378,61 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.TemplatePages.CurrentPage = Form.Items.PageTXT;
 	ElsIf Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.MXL") Then
 		Form.Items.TemplatePages.CurrentPage = Form.Items.PageMXL;
+	ElsIf Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.FormattedText") Then
+		Form.Items.TemplatePages.CurrentPage = Form.Items.PageFormattedText;
 	EndIf;
 	
 	If Form.EditingMode Then
 		Form.Items.EditTXT.Visible = False;
 		Form.Items.SaveTXT.Visible = True;
+		Form.Items.AddParametersTXT.Visible = True;
 		Form.Items.TemplateTXT.ReadOnly = False;
 		Form.Items.TemplateTXT.BackColor = WebColors.MintCream;
 		
 		Form.Items.EditMXL.Visible = False;
 		Form.Items.SaveMXL.Visible = True;
+		Form.Items.AddParametersMXL.Visible = True;
 		Form.Items.TemplateMXL.Edit = True;
 		Form.Items.TemplateMXL.ShowGrid = True;
 		Form.Items.TemplateMXL.ShowHeaders = True;
 		Form.Items.TemplateMXL.BorderColor = WebColors.Red;
+		
+		Form.Items.EditFT.Visible = False;
+		Form.Items.SaveFT.Visible = True;
+		Form.Items.AddParametersFT.Visible = True;
+		Form.Items.TemplateFT.ReadOnly = False;
+		Form.Items.TemplateFT.BackColor = WebColors.MintCream;
 	Else
 		Form.Items.EditTXT.Visible = True;
 		Form.Items.SaveTXT.Visible = False;
+		Form.Items.AddParametersTXT.Visible = False;
 		Form.Items.TemplateTXT.ReadOnly = True;
 		Form.Items.TemplateTXT.BackColor = WebColors.GhostWhite;
 		
 		Form.Items.EditMXL.Visible = True;
 		Form.Items.SaveMXL.Visible = False;
+		Form.Items.AddParametersMXL.Visible = False;
 		Form.Items.TemplateMXL.Edit = False;
 		Form.Items.TemplateMXL.ShowGrid = False;
 		Form.Items.TemplateMXL.ShowHeaders = False;
 		Form.Items.TemplateMXL.BorderColor = WebColors.Black;
+		
+		Form.Items.EditFT.Visible = True;
+		Form.Items.SaveFT.Visible = False;
+		Form.Items.AddParametersFT.Visible = False;
+		Form.Items.TemplateFT.ReadOnly = True;
+		Form.Items.TemplateFT.BackColor = WebColors.GhostWhite;
 	EndIf;
 	
 	Form.Items.PageTables.Visible = Object.UseTables;
 	Form.Items.ParametersTable.Visible = Object.UseTables;
 	Form.Items.ParametersTablesGroup.Visible = Object.UseTables;
 	Form.Items.ParametersContextMenuTableGroup.Visible = Object.UseTables;
+
+	Form.Items.PrintInfoPath.Visible = Object.UsePrintInformations;
+	Form.Items.OpenPrintInfoPath.Visible = Object.UsePrintInformations;
+	
+	Form.Items.PageAccess.Visible = Object.LimitedAccess;
 
 EndProcedure
 
@@ -365,6 +454,13 @@ Procedure LoadTemplateData()
 			TemplateMXL = New SpreadsheetDocument();
 		EndIf;
 		
+	ElsIf Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.FormattedText") Then
+		If TypeOf(TemplateData) = Type("FormattedDocument") Then
+			TemplateFormattedText = TemplateData;
+		Else
+			TemplateFormattedText = New FormattedDocument();
+		EndIf;
+		
 	EndIf;
 	 
 EndProcedure
@@ -377,6 +473,9 @@ Procedure SaveTemplateData(RealObject)
 		
 	ElsIf Object.PrintFormType = Enums.PrintFormTypes.MXL Then
 		RealObject.Template = New ValueStorage(TemplateMXL);
+		
+	ElsIf Object.PrintFormType = Enums.PrintFormTypes.FormattedText Then
+		RealObject.Template = New ValueStorage(TemplateFormattedText);
 		
 	EndIf;
 	 
@@ -416,6 +515,8 @@ Procedure SaveObjectsForPrinting(CurrentObject)
 	EndDo;
 	
 	ObjectRecords.Write(True);
+	
+	InternalCommandsServer.SetSessionParameters();
 	
 EndProcedure
 
@@ -477,6 +578,9 @@ Procedure ExpractParametersFromTemplateTXT()
 	EndIf;
 	
 	For Each FindResult In FindResults Do
+		If Object.UsePrintInformations And StrFind(FindResult.Value, "PrintInfo.") > 0 Then
+			Continue;
+		EndIf;
 		TextTag = TrimAll(FindResult.Value);
 		ParameterRows = Object.Parameters.FindRows(New Structure("Name", TextTag));
 		If ParameterRows.Count() = 0 Then
@@ -521,6 +625,47 @@ Procedure ExpractParametersFromTemplateMXL()
 	EndIf;
 	
 	For Each FindResult In FindResults Do
+		If Object.UsePrintInformations And StrFind(FindResult.Value, "PrintInfo.") > 0 Then
+			Continue;
+		EndIf;
+		TextTag = TrimAll(FindResult.Value);
+		ParameterRows = Object.Parameters.FindRows(New Structure("Name", TextTag));
+		If ParameterRows.Count() = 0 Then
+			Object.Parameters.Add().Name = TextTag;
+		Else
+			For Each ParameterRow In ParameterRows Do
+				ParameterRow.ToDelete = False;
+			EndDo;
+		EndIf;
+	EndDo;
+	
+	Object.Parameters.Sort("Name, Table");
+	 
+EndProcedure
+
+&AtServer
+Procedure ExpractParametersFromTemplateFormattedText()
+	
+	For Each ParameterRow In Object.Parameters Do
+		ParameterRow.ToDelete = True;
+	EndDo;
+	
+	PlaneText = TemplateFormattedText.GetText();
+	
+	If Object.PrintFormVariableType = Enums.PrintFormVariableTypes.XMLStyle Then
+		FindResults = StrFindAllByRegularExpression(PlaneText, "<[^>]*?>");
+	ElsIf Object.PrintFormVariableType = Enums.PrintFormVariableTypes.WikiStyle Then
+		FindResults = StrFindAllByRegularExpression(PlaneText, "\[[^\]]*?\]");
+	ElsIf Object.PrintFormVariableType = Enums.PrintFormVariableTypes.CurlyBrace Then
+		FindResults = StrFindAllByRegularExpression(PlaneText, "\{[^\}]*?\}");
+	Else
+		FindResults = New Array();
+	EndIf;
+	
+	For Each FindResult In FindResults Do
+		If Object.UsePrintInformations And StrFind(FindResult.Value, "PrintInfo.") > 0 Then
+			Continue;
+		EndIf;
 		TextTag = TrimAll(FindResult.Value);
 		ParameterRows = Object.Parameters.FindRows(New Structure("Name", TextTag));
 		If ParameterRows.Count() = 0 Then
@@ -559,34 +704,55 @@ Procedure ChooseTableEnd(ChoosenTable, Action) Export
 	
 EndProcedure
 
-#EndRegion
+&AtClient
+Procedure UpdateParametersListForInsert()
 
-#Region COMMANDS
+	ParametersListForInsert.Clear();
+	
+	TagBegin = "";
+	TagEnd = "";
+	If Object.PrintFormVariableType = PredefinedValue("Enum.PrintFormVariableTypes.XMLStyle") Then
+		TagBegin = "<";
+		TagEnd = ">";
+	ElsIf Object.PrintFormVariableType = PredefinedValue("Enum.PrintFormVariableTypes.WikiStyle") Then
+		TagBegin = "[";
+		TagEnd = "]";
+	ElsIf Object.PrintFormVariableType = PredefinedValue("Enum.PrintFormVariableTypes.CurlyBrace") Then
+		TagBegin = "{";
+		TagEnd = "}";
+	EndIf;
+	
+	If Object.UsePrintInformations Then
+		ParametersListForInsert.Add(TagBegin + "PrintInfo.Text" + TagEnd);
+		ParametersListForInsert.Add(TagBegin + "PrintInfo.Logo" + TagEnd);
+		ParametersListForInsert.Add(TagBegin + "PrintInfo.Seal" + TagEnd);
+	EndIf;
+	
+	For Each Parameter In Object.Parameters Do
+		If Not Parameter.ToDelete And Not IsBlankString(Parameter.Name) 
+				And ParametersListForInsert.FindByValue(Parameter.Name) = Undefined Then
+			ParametersListForInsert.Add(Parameter.Name);
+		EndIf;
+	EndDo;
+	
+EndProcedure	
 
 &AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-&AtClient
-Procedure InternalCommandAction(Command) Export
-	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
-EndProcedure
-
-&AtClient
-Procedure InternalCommandActionWithServerContext(Command) Export
-	InternalCommandActionWithServerContextAtServer(Command.Name);
-EndProcedure
-
-&AtServer
-Procedure InternalCommandActionWithServerContextAtServer(CommandName)
-	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+Procedure AddParametersChoiceEnd(Result, AddInfo) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	NewParam = Result.Value;
+	
+	If Items.TemplatePages.CurrentPage = Items.PageTXT Then
+		TemplateTXT = TemplateTXT + NewParam;
+	ElsIf Items.TemplatePages.CurrentPage = Items.PageMXL Then
+		Items.TemplateMXL.CurrentArea.Text = NewParam; 
+	ElsIf Items.TemplatePages.CurrentPage = Items.PageFormattedText Then
+		TemplateFormattedText.Add(NewParam, Type("FormattedDocumentText"));
+	EndIf;
+	
 EndProcedure
 
 #EndRegion

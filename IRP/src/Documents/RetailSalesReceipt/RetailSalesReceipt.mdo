@@ -179,6 +179,21 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.OurCompany</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <choiceParameters>
+      <name>Filter.DeletionMark</name>
+      <value xsi:type="core:BooleanValue"/>
+    </choiceParameters>
+    <choiceParameters>
+      <name>Filter.NotActive</name>
+      <value xsi:type="core:BooleanValue"/>
+    </choiceParameters>
+    <quickChoice>Use</quickChoice>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -623,6 +638,7 @@
         <changeMode>DontChange</changeMode>
         <field>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <quickChoice>Use</quickChoice>
       <createOnInput>DontUse</createOnInput>
     </attributes>
     <attributes uuid="ad22100c-333e-448a-9167-6e24b9081582">

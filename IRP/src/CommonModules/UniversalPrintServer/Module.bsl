@@ -9,13 +9,15 @@
 // 
 // Returns:
 //  Structure - Init print param:
-// * SpreadsheetDoc - SpreadsheetDocument -
-// * RefDocument - DocumentRef 
-// * CountCopy - Number -
-// * NameTemplate - String -
-// * BuilderLayout - Boolean -
-// * LayoutLang - String -
-// * DataLang - String -
+// * SpreadsheetDoc - SpreadsheetDocument - 
+// * RefDocument - DocumentRef - 
+// * CountCopy - Number - 
+// * NameTemplate - String - 
+// * BuilderLayout - Boolean - 
+// * LayoutLang - String - 
+// * DataLang - String - 
+// * IsSavedPrintForm - Boolean - 
+// * TemplateRef - Undefined - 
 Function InitPrintParam(Ref, Val LayoutLang = Undefined, Val DataLang = Undefined) Export
 	If LayoutLang = Undefined Then
 		LayoutLang = LocalizationReuse.GetInterfaceLocalizationCode();
@@ -31,6 +33,8 @@ Function InitPrintParam(Ref, Val LayoutLang = Undefined, Val DataLang = Undefine
 	Param.Insert("BuilderLayout", False);
 	Param.Insert("LayoutLang", LayoutLang);
 	Param.Insert("DataLang", DataLang);
+	Param.Insert("IsSavedPrintForm", False);
+	Param.Insert("TemplateRef", Undefined);
 	Return  Param; 
 EndFunction
 

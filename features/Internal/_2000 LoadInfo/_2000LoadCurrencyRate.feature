@@ -95,12 +95,7 @@ Scenario: _020000 preparation (Loadinfo)
 			And I select current line in "List" table
 			And I click "Settings" button
 			Then "Settings" window is opened
-			And I click Select button of "Currency from" field
-			And I go to line in "List" table
-				| 'Description'         |
-				| 'Ukraine Hryvnia'     |
-			And I activate "Description" field in "List" table
-			And I select current line in "List" table
+			And I select "UAH" exact value from "Currency from" drop-down list
 			And I click "Ok" button
 			And I click "Save and close" button
 		* Filling in the setting for currency rate loading from tcmb.gov.tr
@@ -115,11 +110,7 @@ Scenario: _020000 preparation (Loadinfo)
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "Settings" button
-			And I click Select button of "Currency from" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency from" drop-down list
 			And I select "Banknote Buying" exact value from "Download rate type" drop-down list
 			And I input "#KeyTcmbGovTr#" text in "Key" field
 			And I click "Ok" button
@@ -135,11 +126,7 @@ Scenario: _020000 preparation (Loadinfo)
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "Settings" button
-			And I click Select button of "Currency from" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency from" drop-down list
 			And I select "Banknote Selling" exact value from "Download rate type" drop-down list
 			And I input "#KeyTcmbGovTr#" text in "Key" field
 			And I click "Ok" button

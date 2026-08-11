@@ -220,6 +220,20 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="c4f6ed2f-a60c-4b26-8146-18cbbb2a7ac7">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <createOnInput>DontUse</createOnInput>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
   <tabularSections uuid="05e78981-f83e-434f-86bb-bc1810e4054c">
     <producedTypes>
       <objectType typeId="782dbce7-5171-4277-8a4f-93ab0912916a" valueTypeId="92c4b858-d0bf-4efb-ab77-46193c275892"/>

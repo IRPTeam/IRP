@@ -306,6 +306,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseSavedPrintForms</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.AppliedDatabaseUpdates</name>
 		<right>
 			<name>Read</name>
@@ -346,6 +353,13 @@
 	</object>
 	<object>
 		<name>Constant.UseAdditionalTableControlDocument</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseNotAuditAttributes</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

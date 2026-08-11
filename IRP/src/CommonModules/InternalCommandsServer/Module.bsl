@@ -184,6 +184,77 @@ Procedure RunCommandAction(Val FullCommandName, Form, MainAttribute, Targets, Ad
 	
 EndProcedure
 
+// Refresh commands.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
+//  ObjectFullName - String - Object full name
+//  FormType - EnumRef.FormTypes - Form type
+//  AddInfo - Undefined - Add info
+Procedure RefreshCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo = Undefined) Export
+	
+	ExceptionsArray = New Array; // Array of String
+	ExceptionsArray.Add("DataProcessor.PointOfSale.Form.Form");
+	If ExceptionsArray.Find(Form.FormName) <> Undefined Then
+		Return;
+	EndIf;
+	
+	CommandArray = New Array; // Array of See GetCommandDescription
+	For Each ContentItem In SessionParameters.InternalCommands Do // See GetCommandDescription
+		If Not CheckByFunctionalOptions(ContentItem) Then
+			Continue;
+		EndIf;
+		If FormType = Enums.FormTypes.ObjectForm And Not ContentItem.UsingObjectForm Then
+			Continue;
+		ElsIf FormType = Enums.FormTypes.ListForm And Not ContentItem.UsingListForm Then
+			Continue;
+		ElsIf FormType = Enums.FormTypes.ChoiceForm And Not ContentItem.UsingChoiceForm Then
+			Continue;
+		EndIf;
+		If ContentItem.Targets.Find(ObjectFullName) <> Undefined Then
+			CommandArray.Add(ContentItem);
+		EndIf;
+	EndDo;
+	
+	For Each Command In CommandArray Do
+		TablesArray = New Array; // Array of String
+		If Command.ForTables Then
+			TableNames = StrSplit(Command.SpecificTables, ",");
+			For Each TableName In TableNames Do
+				If Form.Items.Find(TrimAll(TableName)) <> Undefined Then
+					TablesArray.Add(TrimAll(TableName));
+				EndIf;
+			EndDo;
+		Else
+			TablesArray.Add("");
+		EndIf;
+		If TablesArray.Count() = 0 Then
+			Continue;
+		EndIf;
+		
+		For Each TableName In TablesArray Do
+			CommandName = "InternalCommand_" + ?(TableName="", "", TableName + "_") + Command.Name;
+			CommandButton = Form.Items.Find(CommandName); // FormButton
+			If CommandButton = Undefined Then
+				Continue;
+			EndIf;
+			
+			If Command.HasActionRefresh Then
+				IntenalCommandsParams = New Structure;
+				IntenalCommandsParams.Insert("CommandDescription", Command);
+				IntenalCommandsParams.Insert("Form", Form);
+				IntenalCommandsParams.Insert("MainAttribute", MainAttribute);
+				IntenalCommandsParams.Insert("ObjectFullName", ObjectFullName);
+				IntenalCommandsParams.Insert("FormType", FormType);
+				IntenalCommandsParams.Insert("CommandButton", CommandButton);
+				DataProcessors.InternalCommands.OnCommandRefresh(Command.Name, IntenalCommandsParams, AddInfo);
+			EndIf;
+		EndDo;
+	EndDo;
+	
+EndProcedure
+
 #EndRegion
 
 #Region Internal
@@ -212,6 +283,7 @@ EndProcedure
 // * HasActionOnCommandCreate - Boolean - 
 // * HasActionBeforeRunning - Boolean - 
 // * HasActionAfterRunning - Boolean - 
+// * HasActionRefresh - Boolean - 
 // * UsingObjectForm - Boolean - 
 // * UsingListForm - Boolean - 
 // * UsingChoiceForm - Boolean - 
@@ -249,6 +321,7 @@ Function GetCommandDescription() Export
 	CommandDescription.Insert("HasActionOnCommandCreate", False);
 	CommandDescription.Insert("HasActionBeforeRunning", False);
 	CommandDescription.Insert("HasActionAfterRunning", False);
+	CommandDescription.Insert("HasActionRefresh", False);
 	
 	CommandDescription.Insert("UsingObjectForm", False);
 	CommandDescription.Insert("UsingListForm", False);
@@ -325,6 +398,22 @@ EndProcedure
 //  * FormType - EnumRef.FormTypes - Form type
 //  AddInfo - Undefined - Add info
 Procedure OnCommandCreate(CommandName, CommandParameters, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
+// On command refresh.
+// 
+// Parameters:
+// 	CommandName - String - Command name
+// 	CommandParameters - Structure - Command parameters:
+//  * CommandButton - FormButton - Command button
+//  * CommandDescription - See InternalCommandsServer.GetCommandDescription
+//  * Form - ClientApplicationForm - Form
+//  * MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
+//  * ObjectFullName - String - Object full name
+//  * FormType - EnumRef.FormTypes - Form type
+//  AddInfo - Undefined - Add info
+Procedure OnCommandRefresh(CommandName, CommandParameters, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 

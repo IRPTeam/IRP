@@ -736,9 +736,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>PriceKeyListUnitStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
+            <quickChoice>true</quickChoice>
             <autoMarkIncomplete>true</autoMarkIncomplete>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
@@ -746,7 +751,7 @@
             <choiceParameterLinks>
               <name>Filter.Item</name>
               <datapath xsi:type="form:DataPath">
-                <segments>Items.ItemKeyList.CurrentData.Item</segments>
+                <segments>Items.PriceKeyList.CurrentData.Item</segments>
               </datapath>
             </choiceParameterLinks>
           </extInfo>
@@ -787,9 +792,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>PriceKeyListInputUnitStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
+            <quickChoice>true</quickChoice>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
@@ -1123,6 +1133,10 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemKeyListUnitStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -1167,6 +1181,10 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemKeyListInputUnitStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -1573,6 +1591,10 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemListUnitStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -1617,6 +1639,10 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemListInputUnitStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>

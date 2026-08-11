@@ -66,16 +66,8 @@ Scenario: _006101 filling in exchange rates in registers
 		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
 	* Filling the lira to euro rate
 		And I click the button named "FormCreate"
-		And I click Select button of "Currency from" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
-		And I click Select button of "Currency to" field
-		And I go to line in "List" table
-			| Code    |
-			| EUR     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency from" drop-down list
+		And I select "EUR" exact value from "Currency to" drop-down list
 		And I click Select button of "Source" field
 		And I go to line in "List" table
 			| Description     |
@@ -87,16 +79,8 @@ Scenario: _006101 filling in exchange rates in registers
 		And I click "Save and close" button
 	* Filling the lira to USD rate
 		And I click the button named "FormCreate"
-		And I click Select button of "Currency from" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
-		And I click Select button of "Currency to" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency from" drop-down list
+		And I select "USD" exact value from "Currency to" drop-down list
 		And I click Select button of "Source" field
 		And I go to line in "List" table
 			| Description     |
@@ -108,16 +92,8 @@ Scenario: _006101 filling in exchange rates in registers
 		And I click "Save and close" button
 	* Filling the lira to lira rate
 		And I click the button named "FormCreate"
-		And I click Select button of "Currency from" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
-		And I click Select button of "Currency to" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency from" drop-down list
+		And I select "TRY" exact value from "Currency to" drop-down list
 		And I click Select button of "Source" field
 		And I go to line in "List" table
 			| Description     |
@@ -129,16 +105,8 @@ Scenario: _006101 filling in exchange rates in registers
 		And I click "Save and close" button
 	* Filling the USD to euro rate
 		And I click the button named "FormCreate"
-		And I click Select button of "Currency from" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
-		And I click Select button of "Currency to" field
-		And I go to line in "List" table
-			| Code    |
-			| EUR     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency from" drop-down list
+		And I select "EUR" exact value from "Currency to" drop-down list
 		And I click Select button of "Source" field
 		And I go to line in "List" table
 			| Description     |
@@ -150,16 +118,8 @@ Scenario: _006101 filling in exchange rates in registers
 		And I click "Save and close" button
 	* Filling the USD to lira rate
 		And I click the button named "FormCreate"
-		And I click Select button of "Currency from" field
-		And I go to line in "List" table
-			| Code    |
-			| USD     |
-		And I select current line in "List" table
-		And I click Select button of "Currency to" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency from" drop-down list
+		And I select "TRY" exact value from "Currency to" drop-down list
 		And I click Select button of "Source" field
 		And I go to line in "List" table
 			| Description     |

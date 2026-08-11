@@ -524,11 +524,7 @@ Scenario: _201010 сheck filling of the bundle of store and company in the SO
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -548,11 +544,7 @@ Scenario: _201010 сheck filling of the bundle of store and company in the SO
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -616,11 +608,7 @@ Scenario: _201011 сheck filling of the bundle of store and company in the SI
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -640,11 +628,7 @@ Scenario: _201011 сheck filling of the bundle of store and company in the SI
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -709,11 +693,7 @@ Scenario: _201012 сheck filling of the bundle of store and company in the PO
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -734,11 +714,7 @@ Scenario: _201012 сheck filling of the bundle of store and company in the PO
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -802,11 +778,7 @@ Scenario: _201013 сheck filling of the bundle of store and company in the PI
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -826,11 +798,7 @@ Scenario: _201013 сheck filling of the bundle of store and company in the PI
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -879,11 +847,7 @@ Scenario: _201014 сheck filling of the bundle of store and company in the Bundl
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -903,11 +867,7 @@ Scenario: _201014 сheck filling of the bundle of store and company in the Bundl
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -949,11 +909,7 @@ Scenario: _201015 сheck filling of the bundle of store and company in the Unbun
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -973,11 +929,7 @@ Scenario: _201015 сheck filling of the bundle of store and company in the Unbun
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1018,11 +970,7 @@ Scenario: _201016 сheck filling of the bundle of store and company in the GR
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1039,11 +987,7 @@ Scenario: _201016 сheck filling of the bundle of store and company in the GR
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1085,11 +1029,7 @@ Scenario: _201017 сheck filling of the bundle of store and company in the SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1106,11 +1046,7 @@ Scenario: _201017 сheck filling of the bundle of store and company in the SC
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1167,11 +1103,7 @@ Scenario: _201018 сheck filling of the bundle of store and company in the SRO
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1191,11 +1123,7 @@ Scenario: _201018 сheck filling of the bundle of store and company in the SRO
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1260,11 +1188,7 @@ Scenario: _201019 сheck filling of the bundle of store and company in the SR
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1284,11 +1208,7 @@ Scenario: _201019 сheck filling of the bundle of store and company in the SR
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1353,11 +1273,7 @@ Scenario: _201020 сheck filling of the bundle of store and company in the PRO
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1378,11 +1294,7 @@ Scenario: _201020 сheck filling of the bundle of store and company in the PRO
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1447,11 +1359,7 @@ Scenario: _201021 сheck filling of the bundle of store and company in the PR
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1472,11 +1380,7 @@ Scenario: _201021 сheck filling of the bundle of store and company in the PR
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1525,11 +1429,7 @@ Scenario: _201022 сheck filling of the bundle of store and company in the ISR
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1550,11 +1450,7 @@ Scenario: _201022 сheck filling of the bundle of store and company in the ISR
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1596,11 +1492,7 @@ Scenario: _201023 сheck filling of the bundle of store and company in the ITO
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores sender choise form
 		And I click Choice button of the field named "StoreSender"
 		And "List" table contains lines
@@ -1640,11 +1532,7 @@ Scenario: _201023 сheck filling of the bundle of store and company in the ITO
 			| 'Main Company'   | 'Store 06'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "StoreSender"
 		And "List" table contains lines
@@ -1686,11 +1574,7 @@ Scenario: _201024 сheck filling of the bundle of store and company in the IT
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores sender choise form
 		And I click Choice button of the field named "StoreSender"
 		And "List" table contains lines
@@ -1730,11 +1614,7 @@ Scenario: _201024 сheck filling of the bundle of store and company in the IT
 			| 'Main Company'   | 'Store 06'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "StoreSender"
 		And "List" table contains lines
@@ -1776,11 +1656,7 @@ Scenario: _201025 сheck filling of the bundle of store and company in the Item 
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1801,11 +1677,7 @@ Scenario: _201025 сheck filling of the bundle of store and company in the Item 
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -1847,11 +1719,7 @@ Scenario: _201026 сheck filling of the bundle of store and company in the Openi
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Select store
 		And I activate field named "InventoryLineNumber" in "Inventory" table
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -1892,11 +1760,7 @@ Scenario: _201026 сheck filling of the bundle of store and company in the Openi
 				| 'Main Company'    | 'Store 07'        |
 			And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I click "Post" button
 		Then there are lines in TestClient message log
 			| 'Store [Store 07] in row [1] does not match company [Second Company]'    |
@@ -1909,11 +1773,7 @@ Scenario: _201027 сheck filling of the bundle of store and company in the Plann
 		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Select button of "Store (incoming)" field
 		And "List" table contains lines
@@ -1934,11 +1794,7 @@ Scenario: _201027 сheck filling of the bundle of store and company in the Plann
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Select button of "Store (incoming)" field
 		And "List" table contains lines
@@ -1981,11 +1837,7 @@ Scenario: _201028 сheck filling of the bundle of store and company in the Produ
 		Given I open hyperlink "e1cib/list/Document.Production"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Select button of "Store production" field
 		And "List" table contains lines
@@ -2006,11 +1858,7 @@ Scenario: _201028 сheck filling of the bundle of store and company in the Produ
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Select button of "Store production" field
 		And "List" table contains lines
@@ -2054,11 +1902,7 @@ Scenario: _201029 сheck filling of the bundle of store and company in the RSR
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -2078,11 +1922,7 @@ Scenario: _201029 сheck filling of the bundle of store and company in the RSR
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -2146,11 +1986,7 @@ Scenario: _201030 сheck filling of the bundle of store and company in the RRR
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -2170,11 +2006,7 @@ Scenario: _201030 сheck filling of the bundle of store and company in the RRR
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -2223,11 +2055,7 @@ Scenario: _201031 сheck filling of the bundle of store and company in the Stock
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -2248,11 +2076,7 @@ Scenario: _201031 сheck filling of the bundle of store and company in the Stock
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -2294,11 +2118,7 @@ Scenario: _201031 сheck filling of the bundle of store and company in the Stock
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -2319,11 +2139,7 @@ Scenario: _201031 сheck filling of the bundle of store and company in the Stock
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Change Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
 		And "List" table contains lines
@@ -2365,11 +2181,7 @@ Scenario: _201032 сheck filling of the bundle of store and company in the Work 
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Add items and materials
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -2412,11 +2224,7 @@ Scenario: _201032 сheck filling of the bundle of store and company in the Work 
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Chenge company	
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table	
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I click "Post" button
 		Then there are lines in TestClient message log
 			| 'Store [Store 07] in row [1] does not match company [Second Company]'    |
@@ -2429,11 +2237,7 @@ Scenario: _201033 сheck filling of the bundle of store and company in the Work 
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I click "Create" button
 	* Select company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Add items and materials
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -2476,11 +2280,7 @@ Scenario: _201033 сheck filling of the bundle of store and company in the Work 
 			| 'Main Company'   | 'Store 07'       |
 		And I select current line in "List" table
 	* Chenge company	
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table	
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I click "Post" button
 		Then there are lines in TestClient message log
 			| 'Store [Store 07] in row [1] does not match company [Second Company]'    |

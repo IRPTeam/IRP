@@ -416,6 +416,624 @@
         </titleDataPath>
       </extInfo>
     </items>
+    <items xsi:type="form:FormGroup">
+      <name>PageAttributes</name>
+      <id>64</id>
+      <items xsi:type="form:FormGroup">
+        <name>AttributesAccessPages</name>
+        <id>66</id>
+        <items xsi:type="form:FormGroup">
+          <name>PageAccessToEdit</name>
+          <id>68</id>
+          <items xsi:type="form:Table">
+            <name>AccessToEditAttributesTree</name>
+            <id>70</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>AccessToEditAttributesTree</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <items xsi:type="form:FormField">
+              <name>AccessToEditAttributesTreeMark</name>
+              <id>92</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>AccessToEditAttributesTree.Mark</segments>
+              </dataPath>
+              <titleLocation>None</titleLocation>
+              <extendedTooltip>
+                <name>AccessToEditAttributesTreeMarkExtendedTooltip</name>
+                <id>94</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToEditAttributesTreeMarkContextMenu</name>
+                <id>93</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>CheckBoxField</type>
+              <editMode>EnterOnInput</editMode>
+              <showInHeader>true</showInHeader>
+              <headerPicture xsi:type="core:PictureRef">
+                <picture>StdPicture.CheckAll</picture>
+              </headerPicture>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>AccessToEditAttributesTreeDescription</name>
+              <id>83</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>AccessToEditAttributesTree.Description</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>AccessToEditAttributesTreeDescriptionExtendedTooltip</name>
+                <id>85</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToEditAttributesTreeDescriptionContextMenu</name>
+                <id>84</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>InputField</type>
+              <readOnly>true</readOnly>
+              <editMode>EnterOnInput</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:InputFieldExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <wrap>true</wrap>
+                <chooseType>true</chooseType>
+                <typeDomainEnabled>true</typeDomainEnabled>
+                <textEdit>true</textEdit>
+              </extInfo>
+            </items>
+            <autoCommandBar>
+              <name>AccessToEditAttributesTreeCommandBar</name>
+              <id>71</id>
+              <items xsi:type="form:Button">
+                <name>AccessToEditAttributesTreeSelectAllToEdit</name>
+                <id>122</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>AccessToEditAttributesTreeSelectAllToEditExtendedTooltip</name>
+                  <id>123</id>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <commandName>Form.Command.SelectAllToEdit</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
+              <items xsi:type="form:Button">
+                <name>AccessToEditAttributesTreeUnselectAllToEdit</name>
+                <id>126</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>AccessToEditAttributesTreeUnselectAllToEditExtendedTooltip</name>
+                  <id>127</id>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <commandName>Form.Command.UnselectAllToEdit</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
+              <horizontalAlign>Left</horizontalAlign>
+              <autoFill>true</autoFill>
+            </autoCommandBar>
+            <searchStringAddition>
+              <name>AccessToEditAttributesTreeSearchString</name>
+              <id>74</id>
+              <extendedTooltip>
+                <name>AccessToEditAttributesTreeSearchStringExtendedTooltip</name>
+                <id>76</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToEditAttributesTreeSearchStringContextMenu</name>
+                <id>75</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <source>AccessToEditAttributesTree</source>
+              <extInfo xsi:type="form:SearchStringAdditionExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+              </extInfo>
+            </searchStringAddition>
+            <viewStatusAddition>
+              <name>AccessToEditAttributesTreeViewStatus</name>
+              <id>80</id>
+              <extendedTooltip>
+                <name>AccessToEditAttributesTreeViewStatusExtendedTooltip</name>
+                <id>82</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToEditAttributesTreeViewStatusContextMenu</name>
+                <id>81</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>ViewStatusAddition</type>
+              <source>AccessToEditAttributesTree</source>
+              <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+              </extInfo>
+            </viewStatusAddition>
+            <searchControlAddition>
+              <name>AccessToEditAttributesTreeSearchControl</name>
+              <id>77</id>
+              <extendedTooltip>
+                <name>AccessToEditAttributesTreeSearchControlExtendedTooltip</name>
+                <id>79</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToEditAttributesTreeSearchControlContextMenu</name>
+                <id>78</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>SearchControlAddition</type>
+              <source>AccessToEditAttributesTree</source>
+              <extInfo xsi:type="form:SearchControlAdditionExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+              </extInfo>
+            </searchControlAddition>
+            <extendedTooltip>
+              <name>AccessToEditAttributesTreeExtendedTooltip</name>
+              <id>73</id>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>AccessToEditAttributesTreeContextMenu</name>
+              <id>72</id>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <representation>Tree</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <autoMaxRowsCount>true</autoMaxRowsCount>
+            <selectionMode>MultiRow</selectionMode>
+            <header>true</header>
+            <headerHeight>1</headerHeight>
+            <footerHeight>1</footerHeight>
+            <horizontalScrollBar>AutoUse</horizontalScrollBar>
+            <verticalScrollBar>AutoUse</verticalScrollBar>
+            <horizontalLines>true</horizontalLines>
+            <verticalLines>true</verticalLines>
+            <autoInsertNewRow>true</autoInsertNewRow>
+            <searchOnInput>Auto</searchOnInput>
+            <initialListView>Auto</initialListView>
+            <horizontalStretch>true</horizontalStretch>
+            <verticalStretch>true</verticalStretch>
+            <enableStartDrag>true</enableStartDrag>
+            <enableDrag>true</enableDrag>
+            <fileDragMode>AsFileRef</fileDragMode>
+          </items>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <title>
+            <key>en</key>
+            <value>Access to edit</value>
+          </title>
+          <extendedTooltip>
+            <name>PageAccessToEditExtendedTooltip</name>
+            <id>69</id>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>Page</type>
+          <extInfo xsi:type="form:PageGroupExtInfo">
+            <group>Vertical</group>
+            <showTitle>true</showTitle>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormGroup">
+          <name>PageAccessToView</name>
+          <id>95</id>
+          <items xsi:type="form:Table">
+            <name>AccessToViewAttributesTree</name>
+            <id>97</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>AccessToViewAttributesTree</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <items xsi:type="form:FormField">
+              <name>AccessToViewAttributesTreeMark</name>
+              <id>119</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>AccessToViewAttributesTree.Mark</segments>
+              </dataPath>
+              <titleLocation>None</titleLocation>
+              <extendedTooltip>
+                <name>AccessToViewAttributesTreeMarkExtendedTooltip</name>
+                <id>121</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToViewAttributesTreeMarkContextMenu</name>
+                <id>120</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>CheckBoxField</type>
+              <editMode>EnterOnInput</editMode>
+              <showInHeader>true</showInHeader>
+              <headerPicture xsi:type="core:PictureRef">
+                <picture>StdPicture.CheckAll</picture>
+              </headerPicture>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>AccessToViewAttributesTreeDescription</name>
+              <id>110</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>AccessToViewAttributesTree.Description</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>AccessToViewAttributesTreeDescriptionExtendedTooltip</name>
+                <id>112</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToViewAttributesTreeDescriptionContextMenu</name>
+                <id>111</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>InputField</type>
+              <readOnly>true</readOnly>
+              <editMode>EnterOnInput</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:InputFieldExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <wrap>true</wrap>
+                <chooseType>true</chooseType>
+                <typeDomainEnabled>true</typeDomainEnabled>
+                <textEdit>true</textEdit>
+              </extInfo>
+            </items>
+            <autoCommandBar>
+              <name>AccessToViewAttributesTreeCommandBar</name>
+              <id>98</id>
+              <items xsi:type="form:Button">
+                <name>AccessToViewAttributesTreeSelectAllToView</name>
+                <id>124</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>AccessToViewAttributesTreeSelectAllToViewExtendedTooltip</name>
+                  <id>125</id>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <commandName>Form.Command.SelectAllToView</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
+              <items xsi:type="form:Button">
+                <name>AccessToViewAttributesTreeUnselectAllToView</name>
+                <id>128</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>AccessToViewAttributesTreeUnselectAllToViewExtendedTooltip</name>
+                  <id>129</id>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <commandName>Form.Command.UnselectAllToView</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
+              <horizontalAlign>Left</horizontalAlign>
+              <autoFill>true</autoFill>
+            </autoCommandBar>
+            <searchStringAddition>
+              <name>AccessToViewAttributesTreeSearchString</name>
+              <id>101</id>
+              <extendedTooltip>
+                <name>AccessToViewAttributesTreeSearchStringExtendedTooltip</name>
+                <id>103</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToViewAttributesTreeSearchStringContextMenu</name>
+                <id>102</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <source>AccessToViewAttributesTree</source>
+              <extInfo xsi:type="form:SearchStringAdditionExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+              </extInfo>
+            </searchStringAddition>
+            <viewStatusAddition>
+              <name>AccessToViewAttributesTreeViewStatus</name>
+              <id>107</id>
+              <extendedTooltip>
+                <name>AccessToViewAttributesTreeViewStatusExtendedTooltip</name>
+                <id>109</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToViewAttributesTreeViewStatusContextMenu</name>
+                <id>108</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>ViewStatusAddition</type>
+              <source>AccessToViewAttributesTree</source>
+              <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+              </extInfo>
+            </viewStatusAddition>
+            <searchControlAddition>
+              <name>AccessToViewAttributesTreeSearchControl</name>
+              <id>104</id>
+              <extendedTooltip>
+                <name>AccessToViewAttributesTreeSearchControlExtendedTooltip</name>
+                <id>106</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>AccessToViewAttributesTreeSearchControlContextMenu</name>
+                <id>105</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>SearchControlAddition</type>
+              <source>AccessToViewAttributesTree</source>
+              <extInfo xsi:type="form:SearchControlAdditionExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+              </extInfo>
+            </searchControlAddition>
+            <extendedTooltip>
+              <name>AccessToViewAttributesTreeExtendedTooltip</name>
+              <id>100</id>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>AccessToViewAttributesTreeContextMenu</name>
+              <id>99</id>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <representation>Tree</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <autoMaxRowsCount>true</autoMaxRowsCount>
+            <selectionMode>MultiRow</selectionMode>
+            <header>true</header>
+            <headerHeight>1</headerHeight>
+            <footerHeight>1</footerHeight>
+            <horizontalScrollBar>AutoUse</horizontalScrollBar>
+            <verticalScrollBar>AutoUse</verticalScrollBar>
+            <horizontalLines>true</horizontalLines>
+            <verticalLines>true</verticalLines>
+            <autoInsertNewRow>true</autoInsertNewRow>
+            <searchOnInput>Auto</searchOnInput>
+            <initialListView>Auto</initialListView>
+            <horizontalStretch>true</horizontalStretch>
+            <verticalStretch>true</verticalStretch>
+            <enableStartDrag>true</enableStartDrag>
+            <enableDrag>true</enableDrag>
+            <fileDragMode>AsFileRef</fileDragMode>
+          </items>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <title>
+            <key>en</key>
+            <value>Access to view</value>
+          </title>
+          <extendedTooltip>
+            <name>PageAccessToViewExtendedTooltip</name>
+            <id>96</id>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>Page</type>
+          <extInfo xsi:type="form:PageGroupExtInfo">
+            <group>Vertical</group>
+            <showTitle>true</showTitle>
+          </extInfo>
+        </items>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <title>
+          <key>en</key>
+          <value>Attributes access pages</value>
+        </title>
+        <extendedTooltip>
+          <name>AttributesAccessPagesExtendedTooltip</name>
+          <id>67</id>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <type>Pages</type>
+        <extInfo xsi:type="form:PagesGroupExtInfo">
+          <pagesRepresentation>Auto</pagesRepresentation>
+          <currentRowUse>Auto</currentRowUse>
+        </extInfo>
+      </items>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <title>
+        <key>en</key>
+        <value>Attributes</value>
+      </title>
+      <extendedTooltip>
+        <name>PageAttributesExtendedTooltip</name>
+        <id>65</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <type>Page</type>
+      <extInfo xsi:type="form:PageGroupExtInfo">
+        <group>Vertical</group>
+        <showTitle>true</showTitle>
+      </extInfo>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -450,6 +1068,10 @@
   <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
   </handlers>
   <handlers>
     <event>OnCreateAtServer</event>
@@ -596,6 +1218,224 @@
       </edit>
     </columns>
   </attributes>
+  <attributes>
+    <name>AccessToEditAttributesTree</name>
+    <title>
+      <key>en</key>
+      <value>Access to edit attributes tree</value>
+    </title>
+    <id>8</id>
+    <valueType>
+      <types>ValueTree</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>Description</name>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
+      <id>5</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers/>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>TabularName</name>
+      <title>
+        <key>en</key>
+        <value>Tabular name</value>
+      </title>
+      <id>6</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>AttributeName</name>
+      <title>
+        <key>en</key>
+        <value>Attribute name</value>
+      </title>
+      <id>7</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Mark</name>
+      <title>
+        <key>en</key>
+        <value>Mark</value>
+      </title>
+      <id>8</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>MetadataRef</name>
+      <title>
+        <key>en</key>
+        <value>Metadata ref</value>
+      </title>
+      <id>10</id>
+      <valueType>
+        <types>CatalogRef.ConfigurationMetadata</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
+  <attributes>
+    <name>AccessToViewAttributesTree</name>
+    <title>
+      <key>en</key>
+      <value>Access to view attributes tree</value>
+    </title>
+    <id>9</id>
+    <valueType>
+      <types>ValueTree</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>Description</name>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
+      <id>5</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers/>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>TabularName</name>
+      <title>
+        <key>en</key>
+        <value>Tabular name</value>
+      </title>
+      <id>6</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>AttributeName</name>
+      <title>
+        <key>en</key>
+        <value>Attribute name</value>
+      </title>
+      <id>7</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Mark</name>
+      <title>
+        <key>en</key>
+        <value>Mark</value>
+      </title>
+      <id>8</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>MetadataRef</name>
+      <title>
+        <key>en</key>
+        <value>Metadata ref</value>
+      </title>
+      <id>11</id>
+      <valueType>
+        <types>CatalogRef.ConfigurationMetadata</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
   <formCommands>
     <name>UpdateRoles</name>
     <title>
@@ -615,6 +1455,86 @@
       </handler>
     </action>
     <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SelectAllToEdit</name>
+    <title>
+      <key>en</key>
+      <value>Select all to edit</value>
+    </title>
+    <id>2</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.CheckAll</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SelectAllToEdit</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SelectAllToView</name>
+    <title>
+      <key>en</key>
+      <value>Select all to view</value>
+    </title>
+    <id>3</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.CheckAll</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SelectAllToView</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UnselectAllToEdit</name>
+    <title>
+      <key>en</key>
+      <value>Unselect all to edit</value>
+    </title>
+    <id>4</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.UncheckAll</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UnselectAllToEdit</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UnselectAllToView</name>
+    <title>
+      <key>en</key>
+      <value>Unselect all to view</value>
+    </title>
+    <id>5</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.UncheckAll</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UnselectAllToView</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

@@ -1028,6 +1028,13 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.SavedPrintForms</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T8510S_FixedAssetsInfo.Dimension.FixedAsset</name>
 		<right>
 			<name>Edit</name>

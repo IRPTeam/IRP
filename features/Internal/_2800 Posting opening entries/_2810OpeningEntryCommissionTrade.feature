@@ -441,11 +441,7 @@ Scenario: _410013 create Opening entry receipt from consignor
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ReceiptFromConsignor" table
 			And I input "50,000" text in "Quantity" field of "ReceiptFromConsignor" table
-			And I click choice button of the attribute named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'     |
-				| 'TRY'     | 'Turkish lira'    |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
 			And I activate "Price" field in "ReceiptFromConsignor" table
 			And I input "50,00" text in "Quantity" field of "ReceiptFromConsignor" table	
 			And I input "50,000" text in "Price" field of "ReceiptFromConsignor" table
@@ -480,11 +476,7 @@ Scenario: _410013 create Opening entry receipt from consignor
 				| 'Owner'    | 'Serial number'     |
 				| 'PZU'      | '8908899877'        |
 			And I select current line in "List" table
-			And I click choice button of the attribute named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'     |
-				| 'TRY'     | 'Turkish lira'    |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
 			And I activate "Price" field in "ReceiptFromConsignor" table
 			And I input "50,000" text in "Price" field of "ReceiptFromConsignor" table	
 			And I input "533,90" text in "Amount tax" field of "ReceiptFromConsignor" table		

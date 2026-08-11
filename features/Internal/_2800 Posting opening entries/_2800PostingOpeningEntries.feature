@@ -448,12 +448,7 @@ Scenario: _400003 opening entry advance balance
 			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
-		And I click choice button of the attribute named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
 		And I activate field named "AdvanceFromCustomersAmount" in "AdvanceFromCustomers" table
 		And I input "100,00" text in the field named "AdvanceFromCustomersAmount" of "AdvanceFromCustomers" table
 		And I finish line editing in "AdvanceFromCustomers" table
@@ -479,11 +474,7 @@ Scenario: _400003 opening entry advance balance
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I activate field named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
-		And I click choice button of the attribute named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
 		And I activate field named "AdvanceToSuppliersAmount" in "AdvanceToSuppliers" table
 		And I input "100,00" text in the field named "AdvanceToSuppliersAmount" of "AdvanceToSuppliers" table
 		And I finish line editing in "AdvanceToSuppliers" table
@@ -700,12 +691,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
-		And I click choice button of the attribute named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
 		And I activate field named "AdvanceFromCustomersAmount" in "AdvanceFromCustomers" table
 		And I input "525,00" text in the field named "AdvanceFromCustomersAmount" of "AdvanceFromCustomers" table
 		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "AdvanceFromCustomers" table
@@ -727,11 +713,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I activate field named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
-		And I click choice button of the attribute named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
 		And I activate field named "AdvanceToSuppliersAmount" in "AdvanceToSuppliers" table
 		And I input "811,00" text in the field named "AdvanceToSuppliersAmount" of "AdvanceToSuppliers" table
 		And I select "Vendor Ferron, TRY" from "Partner term" drop-down list by string in "AdvanceToSuppliers" table
@@ -838,11 +820,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I select current line in "List" table
 		And I select current line in "AccountPayableByDocuments" table
 		And I activate field named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
-		And I click choice button of the attribute named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
 		And I input "100,00" text in the field named "AccountPayableByDocumentsAmount" of "AccountPayableByDocuments" table
 		And I finish line editing in "AccountPayableByDocuments" table
 	* Filling in payment terms for first string
@@ -871,13 +849,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
-		And I click choice button of the attribute named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
-		Then "Currencies" window is opened
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Euro'           |
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
+		And I select "EUR" exact value from the drop-down list named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
 		And I activate field named "AccountPayableByDocumentsAmount" in "AccountPayableByDocuments" table
 		And I input "200,00" text in the field named "AccountPayableByDocumentsAmount" of "AccountPayableByDocuments" table
 		And I finish line editing in "AccountPayableByDocuments" table
@@ -930,11 +902,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 			| 'Partner term DFC'    |
 		And I select current line in "List" table
 		And I activate field named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
-		And I click choice button of the attribute named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
 		And I input "200,00" text in the field named "AccountReceivableByDocumentsAmount" of "AccountReceivableByDocuments" table
 		And I finish line editing in "AccountReceivableByDocuments" table
 	* Filling in payment terms for first string
@@ -962,11 +930,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
-		And I click choice button of the attribute named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
 		And I activate field named "AccountReceivableByDocumentsAmount" in "AccountReceivableByDocuments" table
 		And I input "100,00" text in the field named "AccountReceivableByDocumentsAmount" of "AccountReceivableByDocuments" table
 		And I finish line editing in "AccountReceivableByDocuments" table

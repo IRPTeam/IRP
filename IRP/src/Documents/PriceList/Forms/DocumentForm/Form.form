@@ -751,7 +751,7 @@
             <choiceParameterLinks>
               <name>Filter.Item</name>
               <datapath xsi:type="form:DataPath">
-                <segments>Items.ItemKeyList.CurrentData.Item</segments>
+                <segments>Items.PriceKeyList.CurrentData.Item</segments>
               </datapath>
             </choiceParameterLinks>
           </extInfo>

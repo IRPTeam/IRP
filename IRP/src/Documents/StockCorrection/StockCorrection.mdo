@@ -1,354 +1,546 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0049f2f6-d3f0-4b13-a7f6-f0d4e984fa42">
-  <producedTypes>
-    <objectType typeId="3a133bd2-8a10-4642-8f22-ad87a38c7ac5" valueTypeId="244672bb-8997-42e5-9971-7edd371929f8"/>
-    <refType typeId="f374f6a3-8a99-4c59-9579-40719f45f7b5" valueTypeId="418fcb10-514b-4090-afb1-972f0df03ccc"/>
-    <selectionType typeId="ff56a7d7-acba-4228-a350-9ff3214af8f3" valueTypeId="2eb671d5-edfb-432e-aafa-78d76bbeb035"/>
-    <listType typeId="3d97a4da-4781-423d-a39d-ff9c59091d12" valueTypeId="8fc2be3a-df80-48eb-ba8c-d01a98a9a5c3"/>
-    <managerType typeId="8ea3987a-0732-405a-aa1c-c1cfc2b0dd01" valueTypeId="8ffbf6ab-6356-4415-9e18-c40b7e33c16c"/>
-  </producedTypes>
-  <name>StockCorrection</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0049f2f6-d3f0-4b13-a7f6-f0d4e984fa42">
+ <producedTypes>
+  <objectType typeId="3a133bd2-8a10-4642-8f22-ad87a38c7ac5" valueTypeId="244672bb-8997-42e5-9971-7edd371929f8"/>
+  <refType typeId="f374f6a3-8a99-4c59-9579-40719f45f7b5" valueTypeId="418fcb10-514b-4090-afb1-972f0df03ccc"/>
+  <selectionType typeId="ff56a7d7-acba-4228-a350-9ff3214af8f3" valueTypeId="2eb671d5-edfb-432e-aafa-78d76bbeb035"/>
+  <listType typeId="3d97a4da-4781-423d-a39d-ff9c59091d12" valueTypeId="8fc2be3a-df80-48eb-ba8c-d01a98a9a5c3"/>
+  <managerType typeId="8ea3987a-0732-405a-aa1c-c1cfc2b0dd01" valueTypeId="8ffbf6ab-6356-4415-9e18-c40b7e33c16c"/>
+ </producedTypes>
+ <name>StockCorrection</name>
+ <synonym>
+  <key>tr</key>
+  <value>Stok düzeltme fişi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Корректировка складских остатков</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Stock correction</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.StockCorrection.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_StockCorrection</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.StockCorrection.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.StockCorrection.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.StockCorrection.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.StockCorrection.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesOrderField>Document.StockCorrection.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_StockCorrection</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Stok düzeltme fişi</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Корректировка складских остатков</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Stock correction</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Stok düzeltme fişleri</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Корректировки складских остатков</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Stock corrections</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.StockCorrection.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.StockCorrection.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.StockCorrection.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+ <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="feae69bb-029e-47c4-b8ba-b1cc5d682e2a">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Stock correction</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.StockCorrection.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_StockCorrection</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.StockCorrection.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.StockCorrection.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.StockCorrection.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.StockCorrection.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesOrderField>Document.StockCorrection.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_StockCorrection</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.NotActive</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <quickChoice>Use</quickChoice>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0a1a2be0-a999-4b26-bcac-a09dfce8ec76">
+  <name>Store</name>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Магазин</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <changeMode>DontChange</changeMode>
+   <field>Document.StockCorrection.Attribute.Company</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="2e38cf3a-7165-433d-a757-c4f6c54e215d">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="97622f7c-3e6f-4c2c-a023-e068b2f55ad0">
+  <name>ListForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="9ca8f75f-2efb-4886-b615-209c0ccfaac8">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="6fbe8db2-e573-497e-ae92-3f95b2c9ce46">
+  <producedTypes>
+   <objectType typeId="bec46004-9619-4a65-ac9f-d68e33814d06" valueTypeId="00cbafe8-aa51-4964-a779-d3b1fcd4f221"/>
+   <rowType typeId="64758d64-b7d5-435f-9dc1-200806008b12" valueTypeId="abb87a45-7f78-4894-b4ac-92edb1939341"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Товары</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item list</value>
+  </synonym>
+  <attributes uuid="44eae37b-de0c-4d0f-baf6-989c4e1a01a8">
+   <name>Key</name>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Stock correction</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>Key</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="92175ad3-e7a1-4c6f-98d9-42f2c9ebe276">
+   <name>Item</name>
+   <synonym>
+    <key>tr</key>
+    <value>Malzeme</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Номенклатура</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Stock corrections</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.StockCorrection.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.StockCorrection.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.StockCorrection.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
-  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
-  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="feae69bb-029e-47c4-b8ba-b1cc5d682e2a">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Item</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="0a1a2be0-a999-4b26-bcac-a09dfce8ec76">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.Company</name>
-      <changeMode>DontChange</changeMode>
-      <field>Document.StockCorrection.Attribute.Company</field>
-    </choiceParameterLinks>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="494875c0-2740-45f9-8839-eb515071d4cb">
+   <name>ItemKey</name>
+   <synonym>
+    <key>tr</key>
+    <value>Varyant</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Item key</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.StockCorrection.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <forms uuid="2e38cf3a-7165-433d-a757-c4f6c54e215d">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="97622f7c-3e6f-4c2c-a023-e068b2f55ad0">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="9ca8f75f-2efb-4886-b615-209c0ccfaac8">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="6fbe8db2-e573-497e-ae92-3f95b2c9ce46">
-    <producedTypes>
-      <objectType typeId="bec46004-9619-4a65-ac9f-d68e33814d06" valueTypeId="00cbafe8-aa51-4964-a779-d3b1fcd4f221"/>
-      <rowType typeId="64758d64-b7d5-435f-9dc1-200806008b12" valueTypeId="abb87a45-7f78-4894-b4ac-92edb1939341"/>
-    </producedTypes>
-    <name>ItemList</name>
-    <synonym>
-      <key>en</key>
-      <value>Item list</value>
-    </synonym>
-    <attributes uuid="44eae37b-de0c-4d0f-baf6-989c4e1a01a8">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="92175ad3-e7a1-4c6f-98d9-42f2c9ebe276">
-      <name>Item</name>
-      <synonym>
-        <key>en</key>
-        <value>Item</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Items</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="494875c0-2740-45f9-8839-eb515071d4cb">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameterLinks>
-        <name>Filter.Item</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.StockCorrection.TabularSection.ItemList.Attribute.Item</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f7079471-31e8-44a0-8557-4e8d8d6d3e35">
-      <name>Unit</name>
-      <synonym>
-        <key>en</key>
-        <value>Unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameterLinks>
-        <name>Filter.Item</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.StockCorrection.TabularSection.ItemList.Attribute.Item</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="fbc3f717-c9f4-4a9e-84b6-89c3d54fb4e3">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="dd482f87-640b-4164-ad42-f1512d2b7934">
-      <name>QuantityInBaseUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Stock quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="2a6d0007-d65f-4557-a919-6518f98e7e34">
-      <name>UseSerialLotNumber</name>
-      <synonym>
-        <key>en</key>
-        <value>Use serial lot number</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="1b905474-4803-4cc3-baa3-c559d7738df1">
-      <name>QuantityIsFixed</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity is fixed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="768e3382-6de8-435a-a5cf-ad89c3f76e72">
-      <name>SourceOfOriginFrom</name>
-      <synonym>
-        <key>en</key>
-        <value>Source of origin (from)</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SourceOfOrigins</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameterLinks>
-        <name>Filter.SourceOfOriginOwner</name>
-        <field>Document.StockCorrection.TabularSection.ItemList.Attribute.ItemKey</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9a3d6d84-b692-4bb3-ae6f-3a730c52f3b7">
-      <name>SourceOfOriginTo</name>
-      <synonym>
-        <key>en</key>
-        <value>Source of origin (to)</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SourceOfOrigins</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameterLinks>
-        <name>Filter.SourceOfOriginOwner</name>
-        <field>Document.StockCorrection.TabularSection.ItemList.Attribute.ItemKey</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="bf183b41-f140-4701-b533-c15c5bf0bd6d">
-    <producedTypes>
-      <objectType typeId="e376f56a-fcb8-4bc0-a15f-4f6bac53f7fc" valueTypeId="0054d732-2db1-46c3-aa83-d4506443868c"/>
-      <rowType typeId="b865dd6f-88cf-42f6-8cff-14464a77a370" valueTypeId="7b43c8dc-c617-4ed2-b89d-e36d61943ab2"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="366dcfcb-a03b-4449-a8cc-92128635532f">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="ca7c2000-9881-4522-9d1d-dbcf16230848">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.StockCorrection.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
+  <attributes uuid="f7079471-31e8-44a0-8557-4e8d8d6d3e35">
+   <name>Unit</name>
+   <synonym>
+    <key>tr</key>
+    <value>Unit</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Unit</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Unit</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.StockCorrection.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <quickChoice>Use</quickChoice>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="fbc3f717-c9f4-4a9e-84b6-89c3d54fb4e3">
+   <name>Quantity</name>
+   <synonym>
+    <key>tr</key>
+    <value>Quantity</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Quantity</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="dd482f87-640b-4164-ad42-f1512d2b7934">
+   <name>QuantityInBaseUnit</name>
+   <synonym>
+    <key>tr</key>
+    <value>Stok miktarı</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество остатков</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Stock quantity</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2a6d0007-d65f-4557-a919-6518f98e7e34">
+   <name>UseSerialLotNumber</name>
+   <synonym>
+    <key>tr</key>
+    <value>Seri/lot numaraları kullan</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ведется учет по сериям номенклатуры</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Use serial lot number</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1b905474-4803-4cc3-baa3-c559d7738df1">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>tr</key>
+    <value>Miktar sabitlendi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество исправлено</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="768e3382-6de8-435a-a5cf-ad89c3f76e72">
+   <name>SourceOfOriginFrom</name>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei (çıkış)</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Источник происхождения (отправитель)</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Source of origin (from)</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SourceOfOrigins</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.SourceOfOriginOwner</name>
+    <field>Document.StockCorrection.TabularSection.ItemList.Attribute.ItemKey</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9a3d6d84-b692-4bb3-ae6f-3a730c52f3b7">
+   <name>SourceOfOriginTo</name>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei (giriş)</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Источник происхождения (получатель)</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Source of origin (to)</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SourceOfOrigins</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.SourceOfOriginOwner</name>
+    <field>Document.StockCorrection.TabularSection.ItemList.Attribute.ItemKey</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="bf183b41-f140-4701-b533-c15c5bf0bd6d">
+  <producedTypes>
+   <objectType typeId="e376f56a-fcb8-4bc0-a15f-4f6bac53f7fc" valueTypeId="0054d732-2db1-46c3-aa83-d4506443868c"/>
+   <rowType typeId="b865dd6f-88cf-42f6-8cff-14464a77a370" valueTypeId="7b43c8dc-c617-4ed2-b89d-e36d61943ab2"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <attributes uuid="366dcfcb-a03b-4449-a8cc-92128635532f">
+   <name>Property</name>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ca7c2000-9881-4522-9d1d-dbcf16230848">
+   <name>Value</name>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.StockCorrection.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
 </mdclass:Document>

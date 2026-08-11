@@ -1,43 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bc9f0244-8b95-49c2-88e9-f4c877990a2c">
-  <producedTypes>
-    <refType typeId="1e77f978-a7d9-4a60-abe9-59527b7074bb" valueTypeId="c3023ead-86cd-4350-97a7-18bbf760b3a7"/>
-    <listType typeId="55999c65-062f-4575-bfbe-cedf30a6abab" valueTypeId="eaf4556a-9cb3-4280-82e3-c24bd1169282"/>
-    <managerType typeId="4938281a-896d-4de1-8283-221dd9e4fca9" valueTypeId="72b24fcd-f972-46c6-b125-1dab999af32c"/>
-  </producedTypes>
-  <name>TaskResults</name>
+ <producedTypes>
+  <refType typeId="1e77f978-a7d9-4a60-abe9-59527b7074bb" valueTypeId="c3023ead-86cd-4350-97a7-18bbf760b3a7"/>
+  <listType typeId="55999c65-062f-4575-bfbe-cedf30a6abab" valueTypeId="eaf4556a-9cb3-4280-82e3-c24bd1169282"/>
+  <managerType typeId="4938281a-896d-4de1-8283-221dd9e4fca9" valueTypeId="72b24fcd-f972-46c6-b125-1dab999af32c"/>
+ </producedTypes>
+ <name>TaskResults</name>
+ <synonym>
+  <key>tr</key>
+  <value>Görev sonuçları</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Результаты задачи</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Task results</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="c4c3633b-6907-44cb-9284-fbc4168698cb">
+  <name>Executed</name>
   <synonym>
-    <key>en</key>
-    <value>Task results</value>
+   <key>tr</key>
+   <value>Yürütüldü</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="c4c3633b-6907-44cb-9284-fbc4168698cb">
-    <name>Executed</name>
-    <synonym>
-      <key>en</key>
-      <value>Executed</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="8004f8ad-4e44-4de6-9efa-7cc907cafe62">
-    <name>Verified</name>
-    <synonym>
-      <key>en</key>
-      <value>Verified</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="85cdda64-aaf7-4b86-b845-5347559719ad">
-    <name>Confirmed</name>
-    <synonym>
-      <key>en</key>
-      <value>Confirmed</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="41a92b5a-a21d-4c71-b3ac-fd89f3256f24">
-    <name>Canceled</name>
-    <synonym>
-      <key>en</key>
-      <value>Canceled</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>ru</key>
+   <value>Выполнен</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Executed</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="8004f8ad-4e44-4de6-9efa-7cc907cafe62">
+  <name>Verified</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kontrol edildi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проверен</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Verified</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="85cdda64-aaf7-4b86-b845-5347559719ad">
+  <name>Confirmed</name>
+  <synonym>
+   <key>tr</key>
+   <value>Onaylandı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Подтвержден</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Confirmed</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="41a92b5a-a21d-4c71-b3ac-fd89f3256f24">
+  <name>Canceled</name>
+  <synonym>
+   <key>tr</key>
+   <value>İptal edildi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отменен</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Canceled</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

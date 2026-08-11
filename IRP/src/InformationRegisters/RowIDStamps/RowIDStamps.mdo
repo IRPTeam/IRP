@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="77600ebe-4660-4efc-b652-b30fdaed57bb">
+ <producedTypes>
+  <selectionType typeId="32daac85-6aa9-44e4-b3b9-60b48e21ecc1" valueTypeId="43114d01-5823-476b-a7c2-338ed859cad6"/>
+  <listType typeId="c0c04bda-e5a2-47ed-a540-ecea8afbdf46" valueTypeId="90a71cc4-a656-4a31-b1f9-00e223b340f4"/>
+  <managerType typeId="375c9475-2c4d-4946-bb4e-5eeb0490054b" valueTypeId="2d35c39a-76f5-4660-b7c4-a0a8d6c54f92"/>
+  <recordSetType typeId="103d661b-b9c1-45c8-9dee-0661a5522218" valueTypeId="3e5de52d-4cd0-4a21-94db-e9fda0bef4a4"/>
+  <recordKeyType typeId="f440f14f-4fcb-4d30-8e3b-a061b69218f2" valueTypeId="cadcecab-6ecf-431b-9e4d-0079ec80765f"/>
+  <recordType typeId="67f8e867-a73f-41ff-a31b-15dc2111143b" valueTypeId="09087578-46b8-40d8-befb-db9be3339cee"/>
+  <recordManagerType typeId="fc09848f-3321-4b15-aae7-90d6eac03277" valueTypeId="9a5c56a5-82e0-4580-9bc7-001f6847cc3f"/>
+ </producedTypes>
+ <name>RowIDStamps</name>
+ <synonym>
+  <key>tr</key>
+  <value>Row IDStamps</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Метки идентификаторов строк</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Row IDStamps</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="5efbade4-fc16-4aa6-9594-b154eb8c6653">
+  <name>Value</name>
+  <synonym>
+   <key>tr</key>
+   <value>Değer</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Значение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Value</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+   <types>AnyRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="02e080de-627f-4a4a-8bd4-6cd7d23170f5">
+  <name>RowRef</name>
+  <synonym>
+   <key>tr</key>
+   <value>Satır Ref</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ссылка строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row ref</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.RowIDs</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="c5fdcbb4-5e82-4296-b99a-73929e46cae0">
+  <name>Attribute</name>
+  <synonym>
+   <key>tr</key>
+   <value>Alan</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Реквизит</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Attribute</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+</mdclass:InformationRegister>

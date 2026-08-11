@@ -10,6 +10,14 @@
 			<dataPath>OpeningBalance</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Açılış bakiyesi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Начальный остаток</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Opening balance</v8:content>
 				</v8:item>
@@ -18,6 +26,14 @@
 		<field xsi:type="DataSetFieldFolder">
 			<dataPath>Receipt</dataPath>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Gelen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Приход</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Receipt</v8:content>
@@ -28,6 +44,14 @@
 			<dataPath>Expense</dataPath>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Çıkan</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Расход</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Expense</v8:content>
 				</v8:item>
@@ -36,6 +60,14 @@
 		<field xsi:type="DataSetFieldFolder">
 			<dataPath>ClosingBalance</dataPath>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kapanış bakiyesi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Конечный остаток</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Closing balance</v8:content>
@@ -46,6 +78,14 @@
 			<dataPath>OpeningBalance.QuantityOpeningBalance</dataPath>
 			<field>QuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Quantity</v8:content>
@@ -62,6 +102,14 @@
 			<field>QuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Quantity</v8:content>
 				</v8:item>
@@ -71,6 +119,14 @@
 			<dataPath>ClosingBalance.QuantityClosingBalance</dataPath>
 			<field>QuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Quantity</v8:content>
@@ -94,6 +150,14 @@
 			<dataPath>Recorder</dataPath>
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İşlem evrakı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Документ</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Recorder</v8:content>
@@ -137,6 +201,14 @@
 			<field>QuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Quantity</v8:content>
 				</v8:item>
@@ -178,6 +250,14 @@
 			<field>InvoiceAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Инвойсная стоимость сумма</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Invoice amount</v8:content>
 				</v8:item>
@@ -193,6 +273,14 @@
 			<field>InvoiceAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Инвойсная стоимость сумма</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Invoice amount</v8:content>
 				</v8:item>
@@ -203,6 +291,14 @@
 			<field>InvoiceAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Инвойсная стоимость сумма</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Invoice amount</v8:content>
 				</v8:item>
@@ -212,6 +308,14 @@
 			<dataPath>ClosingBalance.InvoiceAmountClosingBalance</dataPath>
 			<field>InvoiceAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Инвойсная стоимость сумма</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Invoice amount</v8:content>
@@ -228,6 +332,14 @@
 			<field>InvoiceTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов инвойсной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Invoice tax amount</v8:content>
 				</v8:item>
@@ -243,6 +355,14 @@
 			<field>InvoiceTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов инвойсной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Invoice tax amount</v8:content>
 				</v8:item>
@@ -253,6 +373,14 @@
 			<field>InvoiceTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов инвойсной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Invoice tax amount</v8:content>
 				</v8:item>
@@ -262,6 +390,14 @@
 			<dataPath>ClosingBalance.InvoiceTaxAmountClosingBalance</dataPath>
 			<field>InvoiceTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов инвойсной стоимости</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Invoice tax amount</v8:content>
@@ -278,6 +414,14 @@
 			<field>IndirectCostAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Indirect cost amount</v8:content>
 				</v8:item>
@@ -293,6 +437,14 @@
 			<field>IndirectCostAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Indirect cost amount</v8:content>
 				</v8:item>
@@ -303,6 +455,14 @@
 			<field>IndirectCostAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Indirect cost amount</v8:content>
 				</v8:item>
@@ -312,6 +472,14 @@
 			<dataPath>ClosingBalance.IndirectCostAmountClosingBalance</dataPath>
 			<field>IndirectCostAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенных расходов</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Indirect cost amount</v8:content>
@@ -328,6 +496,14 @@
 			<field>IndirectCostTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Indirect cost tax amount</v8:content>
 				</v8:item>
@@ -343,6 +519,14 @@
 			<field>IndirectCostTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Indirect cost tax amount</v8:content>
 				</v8:item>
@@ -353,6 +537,14 @@
 			<field>IndirectCostTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Indirect cost tax amount</v8:content>
 				</v8:item>
@@ -362,6 +554,14 @@
 			<dataPath>ClosingBalance.IndirectCostTaxAmountClosingBalance</dataPath>
 			<field>IndirectCostTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов косвенных расходов</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Indirect cost tax amount</v8:content>
@@ -378,6 +578,14 @@
 			<field>ExtraCostAmountByRatioOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Orana göre ek maliyet miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Доп. стоимость по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra cost amount by ratio</v8:content>
 				</v8:item>
@@ -393,6 +601,14 @@
 			<field>ExtraCostAmountByRatioReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Orana göre ek maliyet miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Доп. стоимость по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra cost amount by ratio</v8:content>
 				</v8:item>
@@ -403,6 +619,14 @@
 			<field>ExtraCostAmountByRatioExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Orana göre ek maliyet miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Доп. стоимость по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra cost amount by ratio</v8:content>
 				</v8:item>
@@ -412,6 +636,14 @@
 			<dataPath>ClosingBalance.ExtraCostAmountByRatioClosingBalance</dataPath>
 			<field>ExtraCostAmountByRatioClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Orana göre ek maliyet miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Доп. стоимость по коефф.</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra cost amount by ratio</v8:content>
@@ -428,6 +660,14 @@
 			<field>ExtraCostTaxAmountByRatioOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Oranla ek maliyet vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. стоимости по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra cost tax amount by ratio</v8:content>
 				</v8:item>
@@ -443,6 +683,14 @@
 			<field>ExtraCostTaxAmountByRatioReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Oranla ek maliyet vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. стоимости по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra cost tax amount by ratio</v8:content>
 				</v8:item>
@@ -453,6 +701,14 @@
 			<field>ExtraCostTaxAmountByRatioExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Oranla ek maliyet vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. стоимости по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra cost tax amount by ratio</v8:content>
 				</v8:item>
@@ -462,6 +718,14 @@
 			<dataPath>ClosingBalance.ExtraCostTaxAmountByRatioClosingBalance</dataPath>
 			<field>ExtraCostTaxAmountByRatioClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Oranla ek maliyet vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. стоимости по коефф.</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra cost tax amount by ratio</v8:content>
@@ -478,6 +742,14 @@
 			<field>ExtraDirectCostAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ekstra doğrudan maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra direct cost amount</v8:content>
 				</v8:item>
@@ -493,6 +765,14 @@
 			<field>ExtraDirectCostAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ekstra doğrudan maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra direct cost amount</v8:content>
 				</v8:item>
@@ -503,6 +783,14 @@
 			<field>ExtraDirectCostAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ekstra doğrudan maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra direct cost amount</v8:content>
 				</v8:item>
@@ -512,6 +800,14 @@
 			<dataPath>ClosingBalance.ExtraDirectCostAmountClosingBalance</dataPath>
 			<field>ExtraDirectCostAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ekstra doğrudan maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенной стоимости</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra direct cost amount</v8:content>
@@ -528,6 +824,14 @@
 			<field>ExtraDirectCostTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ek doğrudan maliyet vergi miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налоговой прямой стоимости</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra direct cost tax amount</v8:content>
 				</v8:item>
@@ -543,6 +847,14 @@
 			<field>ExtraDirectCostTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ek doğrudan maliyet vergi miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налоговой прямой стоимости</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra direct cost tax amount</v8:content>
 				</v8:item>
@@ -553,6 +865,14 @@
 			<field>ExtraDirectCostTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ek doğrudan maliyet vergi miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налоговой прямой стоимости</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra direct cost tax amount</v8:content>
 				</v8:item>
@@ -562,6 +882,14 @@
 			<dataPath>ClosingBalance.ExtraDirectCostTaxAmountClosingBalance</dataPath>
 			<field>ExtraDirectCostTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ek doğrudan maliyet vergi miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налоговой прямой стоимости</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Extra direct cost tax amount</v8:content>
@@ -578,6 +906,14 @@
 			<field>AllocatedCostAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tahsis edilen maliyet miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated cost amount</v8:content>
 				</v8:item>
@@ -593,6 +929,14 @@
 			<field>AllocatedCostAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tahsis edilen maliyet miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated cost amount</v8:content>
 				</v8:item>
@@ -603,6 +947,14 @@
 			<field>AllocatedCostAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tahsis edilen maliyet miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated cost amount</v8:content>
 				</v8:item>
@@ -612,6 +964,14 @@
 			<dataPath>ClosingBalance.AllocatedCostAmountClosingBalance</dataPath>
 			<field>AllocatedCostAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tahsis edilen maliyet miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. расходов</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated cost amount</v8:content>
@@ -628,6 +988,14 @@
 			<field>AllocatedCostTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan maliyet vergi miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated cost tax amount</v8:content>
 				</v8:item>
@@ -643,6 +1011,14 @@
 			<field>AllocatedCostTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan maliyet vergi miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated cost tax amount</v8:content>
 				</v8:item>
@@ -653,6 +1029,14 @@
 			<field>AllocatedCostTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan maliyet vergi miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated cost tax amount</v8:content>
 				</v8:item>
@@ -662,6 +1046,14 @@
 			<dataPath>ClosingBalance.AllocatedCostTaxAmountClosingBalance</dataPath>
 			<field>AllocatedCostTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan maliyet vergi miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. расходов</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated cost tax amount</v8:content>
@@ -678,6 +1070,14 @@
 			<field>AllocatedRevenueAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dağıtılan gelir miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated revenue amount</v8:content>
 				</v8:item>
@@ -693,6 +1093,14 @@
 			<field>AllocatedRevenueAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dağıtılan gelir miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated revenue amount</v8:content>
 				</v8:item>
@@ -703,6 +1111,14 @@
 			<field>AllocatedRevenueAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dağıtılan gelir miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated revenue amount</v8:content>
 				</v8:item>
@@ -712,6 +1128,14 @@
 			<dataPath>ClosingBalance.AllocatedRevenueAmountClosingBalance</dataPath>
 			<field>AllocatedRevenueAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dağıtılan gelir miktarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. доходов</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated revenue amount</v8:content>
@@ -728,6 +1152,14 @@
 			<field>AllocatedRevenueTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan gelir vergisi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated revenue tax amount</v8:content>
 				</v8:item>
@@ -743,6 +1175,14 @@
 			<field>AllocatedRevenueTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan gelir vergisi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated revenue tax amount</v8:content>
 				</v8:item>
@@ -753,6 +1193,14 @@
 			<field>AllocatedRevenueTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan gelir vergisi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated revenue tax amount</v8:content>
 				</v8:item>
@@ -762,6 +1210,14 @@
 			<dataPath>ClosingBalance.AllocatedRevenueTaxAmountClosingBalance</dataPath>
 			<field>AllocatedRevenueTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan gelir vergisi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. доходов</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Allocated revenue tax amount</v8:content>
@@ -778,6 +1234,14 @@
 			<field>TotalAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam tutar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Итого</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total amount</v8:content>
 				</v8:item>
@@ -793,6 +1257,14 @@
 			<field>TotalAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam tutar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Итого</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total amount</v8:content>
 				</v8:item>
@@ -803,6 +1275,14 @@
 			<field>TotalAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam tutar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Итого</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total amount</v8:content>
 				</v8:item>
@@ -812,6 +1292,14 @@
 			<dataPath>ClosingBalance.TotalAmountClosingBalance</dataPath>
 			<field>TotalAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam tutar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Итого</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total amount</v8:content>
@@ -828,6 +1316,14 @@
 			<field>TotalNetAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam net tutar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма без налогов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total net amount</v8:content>
 				</v8:item>
@@ -843,6 +1339,14 @@
 			<field>TotalNetAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam net tutar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма без налогов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total net amount</v8:content>
 				</v8:item>
@@ -853,6 +1357,14 @@
 			<field>TotalNetAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam net tutar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма без налогов</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total net amount</v8:content>
 				</v8:item>
@@ -862,6 +1374,14 @@
 			<dataPath>ClosingBalance.TotalNetAmountClosingBalance</dataPath>
 			<field>TotalNetAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam net tutar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма без налогов</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total net amount</v8:content>
@@ -878,6 +1398,14 @@
 			<field>TotalTaxAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налоги</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total tax amount</v8:content>
 				</v8:item>
@@ -893,6 +1421,14 @@
 			<field>TotalTaxAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налоги</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total tax amount</v8:content>
 				</v8:item>
@@ -903,6 +1439,14 @@
 			<field>TotalTaxAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налоги</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total tax amount</v8:content>
 				</v8:item>
@@ -912,6 +1456,14 @@
 			<dataPath>ClosingBalance.TotalTaxAmountClosingBalance</dataPath>
 			<field>TotalTaxAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam vergi tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налоги</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total tax amount</v8:content>
@@ -928,6 +1480,14 @@
 			<field>TotalCostAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Общая сумма затрат</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total cost amount</v8:content>
 				</v8:item>
@@ -943,6 +1503,14 @@
 			<field>TotalCostAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Общая сумма затрат</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total cost amount</v8:content>
 				</v8:item>
@@ -953,6 +1521,14 @@
 			<field>TotalCostAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Общая сумма затрат</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total cost amount</v8:content>
 				</v8:item>
@@ -962,6 +1538,14 @@
 			<dataPath>ClosingBalance.TotalCostAmountClosingBalance</dataPath>
 			<field>TotalCostAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam maliyet tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Общая сумма затрат</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Total cost amount</v8:content>
@@ -1340,6 +1924,14 @@ FROM
 		<name>ReportPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Период</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Period</v8:content>
 			</v8:item>
@@ -1353,6 +1945,14 @@ FROM
 	<parameter>
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem başı</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Начало периода</v8:content>
+			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Begin of period</v8:content>
@@ -1372,6 +1972,14 @@ FROM
 	<parameter>
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem sonu</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Конец периода</v8:content>
+			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>End of period</v8:content>
@@ -1405,6 +2013,14 @@ FROM
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
 					<dcsset:field>ItemKey.Item</dcsset:field>
 					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Malzeme</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Номенклатура</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Item</v8:content>
@@ -1498,6 +2114,14 @@ FROM
 					<dcscor:value xsi:nil="true"/>
 					<dcsset:userSettingID>1e634332-dfe8-4d37-8343-fbcf96c36697</dcsset:userSettingID>
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Период</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Period</v8:content>

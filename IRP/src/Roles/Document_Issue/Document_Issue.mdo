@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="21912a26-6b25-4c71-bb88-332755145d2a">
-  <name>Document_Issue</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Issue&quot;</value>
-  </synonym>
+ <name>Document_Issue</name>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak "Talep"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ "Проблема"</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Document "Issue"</value>
+ </synonym>
 </mdclass:Role>

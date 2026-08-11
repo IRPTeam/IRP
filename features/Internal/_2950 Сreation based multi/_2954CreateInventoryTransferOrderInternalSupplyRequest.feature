@@ -59,12 +59,7 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I click "Yes" button
 			And I input "295" text in "Number" field
 		* Filling in basic details
-			And I click Select button of "Company" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| Description     |
@@ -127,12 +122,7 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I click "Yes" button
 			And I input "296" text in "Number" field
 		* Filling in basic details
-			And I click Select button of "Company" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| Description     |
@@ -195,12 +185,7 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I click "Yes" button
 			And I input "297" text in "Number" field
 		* Filling in basic details
-			And I click Select button of "Company" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| Description     |

@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3275817c-3b72-4765-9cbd-a1713bce71c9">
-  <producedTypes>
-    <objectType typeId="cbab5d08-3642-42ad-ad45-d75b1865e768" valueTypeId="b8983852-f0cf-43d9-ab91-1ecee4f91556"/>
-    <managerType typeId="8d93b036-2cc4-4867-998e-7a0a6dbda020" valueTypeId="491a85cc-5d2d-4b9d-8030-0c007d90fabd"/>
-  </producedTypes>
-  <name>R4011B_FreeStockMovements</name>
+ <producedTypes>
+  <objectType typeId="cbab5d08-3642-42ad-ad45-d75b1865e768" valueTypeId="b8983852-f0cf-43d9-ab91-1ecee4f91556"/>
+  <managerType typeId="8d93b036-2cc4-4867-998e-7a0a6dbda020" valueTypeId="491a85cc-5d2d-4b9d-8030-0c007d90fabd"/>
+ </producedTypes>
+ <name>R4011B_FreeStockMovements</name>
+ <synonym>
+  <key>tr</key>
+  <value>R4011B Serbest stok hareketleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R4011B Движения свободных остатков</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R4011B Free stock movements</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R4011B_FreeStockMovements.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="a78081bb-f8ca-4277-b548-249ad6beac18">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R4011B Free stock movements</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R4011B_FreeStockMovements.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="a78081bb-f8ca-4277-b548-249ad6beac18">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

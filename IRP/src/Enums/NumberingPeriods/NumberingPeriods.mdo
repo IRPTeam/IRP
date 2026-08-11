@@ -1,50 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="71850fb5-baad-4289-98b5-f1e6303311ae">
-  <producedTypes>
-    <refType typeId="4932113b-e99b-4b25-96d3-acceda7847ff" valueTypeId="9bbda96d-3ca7-453f-8f42-72dccfe9fd2b"/>
-    <listType typeId="79d7550d-72e5-44ee-bd97-2e082ae71637" valueTypeId="be6fae2c-bea3-464d-ad7e-0aa2f7eb8ec1"/>
-    <managerType typeId="4df088b1-08dc-42fe-87b4-06c2a3968068" valueTypeId="4d5cc4fe-a4de-40fc-ac4c-c1d3d8d93dbe"/>
-  </producedTypes>
-  <name>NumberingPeriods</name>
+ <producedTypes>
+  <refType typeId="4932113b-e99b-4b25-96d3-acceda7847ff" valueTypeId="9bbda96d-3ca7-453f-8f42-72dccfe9fd2b"/>
+  <listType typeId="79d7550d-72e5-44ee-bd97-2e082ae71637" valueTypeId="be6fae2c-bea3-464d-ad7e-0aa2f7eb8ec1"/>
+  <managerType typeId="4df088b1-08dc-42fe-87b4-06c2a3968068" valueTypeId="4d5cc4fe-a4de-40fc-ac4c-c1d3d8d93dbe"/>
+ </producedTypes>
+ <name>NumberingPeriods</name>
+ <synonym>
+  <key>tr</key>
+  <value>Numaralandırma dönemleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Периоды нумерации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Numbering periods</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="164ffda1-5b38-4987-8816-c266d8b57d64">
+  <name>NoPeriod</name>
   <synonym>
-    <key>en</key>
-    <value>Numbering periods</value>
+   <key>tr</key>
+   <value>Dönem yok</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="164ffda1-5b38-4987-8816-c266d8b57d64">
-    <name>NoPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>No period</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="8b9fc439-2a49-45cd-bf89-908c5168b427">
-    <name>Year</name>
-    <synonym>
-      <key>en</key>
-      <value>Year</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="179ac2a8-94e9-4e1c-8c73-ea6c8707a972">
-    <name>Quarter</name>
-    <synonym>
-      <key>en</key>
-      <value>Quarter</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="619654c8-c988-4e02-ab94-5421bee3cbb4">
-    <name>Month</name>
-    <synonym>
-      <key>en</key>
-      <value>Month</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="107433a9-0f1d-4702-869f-572c50169440">
-    <name>Week</name>
-    <synonym>
-      <key>en</key>
-      <value>Week</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>ru</key>
+   <value>Без периода</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>No period</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="8b9fc439-2a49-45cd-bf89-908c5168b427">
+  <name>Year</name>
+  <synonym>
+   <key>tr</key>
+   <value>Yıl</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Год</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Year</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="179ac2a8-94e9-4e1c-8c73-ea6c8707a972">
+  <name>Quarter</name>
+  <synonym>
+   <key>tr</key>
+   <value>Çeyrek</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Квартал</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quarter</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="619654c8-c988-4e02-ab94-5421bee3cbb4">
+  <name>Month</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ay</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Месяц</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Month</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="107433a9-0f1d-4702-869f-572c50169440">
+  <name>Week</name>
+  <synonym>
+   <key>tr</key>
+   <value>Hafta</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Неделя</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Week</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,29 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dee5e6f6-3337-42b3-bdea-667ebd2208ad">
-  <producedTypes>
-    <refType typeId="9503c02e-5881-459a-97f9-d87ecf28c2bd" valueTypeId="b20a5714-1369-464a-bd4c-aa5d5d942477"/>
-    <listType typeId="73a5a888-2ec0-45cd-afce-d4c747b7809a" valueTypeId="2fde13af-84c8-419a-afc0-081863a0b0d4"/>
-    <managerType typeId="cf7ce3a5-215f-4339-bb8a-a6acd66e6c2b" valueTypeId="648e3a8a-c045-42e5-b3b9-794719b0fbad"/>
-  </producedTypes>
-  <name>TaskFailActions</name>
+ <producedTypes>
+  <refType typeId="9503c02e-5881-459a-97f9-d87ecf28c2bd" valueTypeId="b20a5714-1369-464a-bd4c-aa5d5d942477"/>
+  <listType typeId="73a5a888-2ec0-45cd-afce-d4c747b7809a" valueTypeId="2fde13af-84c8-419a-afc0-081863a0b0d4"/>
+  <managerType typeId="cf7ce3a5-215f-4339-bb8a-a6acd66e6c2b" valueTypeId="648e3a8a-c045-42e5-b3b9-794719b0fbad"/>
+ </producedTypes>
+ <name>TaskFailActions</name>
+ <synonym>
+  <key>tr</key>
+  <value>Görev başarısızlığı eylemleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Действия при сбое задачи</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Task fail actions</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="2f3609d4-a555-474d-93c4-18a2c36f3d26">
+  <name>RestartProcess</name>
   <synonym>
-    <key>en</key>
-    <value>Task fail actions</value>
+   <key>tr</key>
+   <value>Yeniden başlatma işlemi</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="2f3609d4-a555-474d-93c4-18a2c36f3d26">
-    <name>RestartProcess</name>
-    <synonym>
-      <key>en</key>
-      <value>Restart process</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="1899405b-d629-4d69-9812-6796046d437b">
-    <name>RestartStage</name>
-    <synonym>
-      <key>en</key>
-      <value>Restart stage</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>ru</key>
+   <value>Перезапустить процесс</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Restart process</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="1899405b-d629-4d69-9812-6796046d437b">
+  <name>RestartStage</name>
+  <synonym>
+   <key>tr</key>
+   <value>Yeniden başlatma aşaması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Стадия перезапуска</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Restart stage</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

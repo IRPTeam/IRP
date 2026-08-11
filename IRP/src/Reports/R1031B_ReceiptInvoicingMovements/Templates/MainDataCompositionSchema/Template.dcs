@@ -11,6 +11,14 @@
 			<field>QuantityExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Çıkan</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Расход</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Expense</v8:content>
 				</v8:item>
@@ -19,6 +27,14 @@
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=3</v8:content>
@@ -35,6 +51,14 @@
 			<dataPath>Company</dataPath>
 			<field>Company</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Şirket</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Организация</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Company</v8:content>
@@ -64,6 +88,14 @@
 			<field>Basis</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kaynak evrak</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Документ основания</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Basis</v8:content>
 				</v8:item>
@@ -77,6 +109,14 @@
 			<field>QuantityReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Gelen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Приход</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Receipt</v8:content>
 				</v8:item>
@@ -85,6 +125,14 @@
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=3</v8:content>
@@ -102,6 +150,14 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item</v8:content>
 				</v8:item>
@@ -111,6 +167,14 @@
 			<dataPath>QuantityClosingBalance</dataPath>
 			<field>QuantityClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kapanış bakiyesi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Конечный остаток</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Closing balance</v8:content>
@@ -125,6 +189,14 @@
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=3</v8:content>
@@ -146,6 +218,14 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Характеристика</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item key</v8:content>
 				</v8:item>
@@ -158,6 +238,14 @@
 			<dataPath>QuantityOpeningBalance</dataPath>
 			<field>QuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Açılış bakiyesi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Начальный остаток</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Opening balance</v8:content>
@@ -172,6 +260,14 @@
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=3</v8:content>
@@ -193,6 +289,14 @@
 			<field>SecondPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Periyot, saniye</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Период, второй</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Period, second</v8:content>
 				</v8:item>
@@ -206,6 +310,14 @@
 			<dataPath>Recorder</dataPath>
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İşlem evrakı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Документ</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Recorder</v8:content>
@@ -221,6 +333,14 @@
 			<field>Branch</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Şube</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Структурное подразделение</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Branch</v8:content>
 				</v8:item>
@@ -230,6 +350,14 @@
 			<dataPath>Store</dataPath>
 			<field>Store</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Depo</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Store</v8:content>
@@ -271,6 +399,14 @@ FROM
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem başı</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Начало периода</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Begin of period</v8:content>
 			</v8:item>
@@ -287,6 +423,14 @@ FROM
 	<parameter>
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem sonu</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Конец периода</v8:content>
+			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>End of period</v8:content>

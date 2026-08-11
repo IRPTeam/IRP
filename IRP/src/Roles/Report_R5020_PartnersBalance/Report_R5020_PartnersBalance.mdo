@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6351b2d5-29bc-46b1-837b-2b05051c4320">
-  <name>Report_R5020_PartnersBalance</name>
-  <synonym>
-    <key>en</key>
-    <value>Report R5020_PartnersBalance</value>
-  </synonym>
+ <name>Report_R5020_PartnersBalance</name>
+ <synonym>
+  <key>tr</key>
+  <value>R5020 Cari hesap hareketleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R5020_БалансПартнеров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R5020_PartnersBalance</value>
+ </synonym>
 </mdclass:Role>

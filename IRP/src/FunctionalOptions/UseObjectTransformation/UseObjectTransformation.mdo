@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1463b298-7639-4a07-91a3-f5c35756849b">
-  <name>UseObjectTransformation</name>
-  <synonym>
-    <key>en</key>
-    <value>Use object transformation</value>
-  </synonym>
-  <location>Constant.UseObjectTransformation</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>InformationRegister.TranformedObjectsLink</content>
-  <content>Subsystem.Settings.Subsystem.ObjectTransformation</content>
-  <content>Catalog.TransformationRules</content>
+ <name>UseObjectTransformation</name>
+ <synonym>
+  <key>tr</key>
+  <value>Nesne dönüşümünü kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать преобразования объектов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use object transformation</value>
+ </synonym>
+ <location>Constant.UseObjectTransformation</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>InformationRegister.TranformedObjectsLink</content>
+ <content>Subsystem.Settings.Subsystem.ObjectTransformation</content>
+ <content>Catalog.TransformationRules</content>
 </mdclass:FunctionalOption>

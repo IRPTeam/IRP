@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="30e8a77f-6cb3-415b-9820-afbe0bc2e3f8">
-  <producedTypes>
-    <objectType typeId="c9536db3-320b-4f52-88e3-6e17d32c01bf" valueTypeId="912f0d91-7861-4d84-a14e-e748b9318355"/>
-    <managerType typeId="09f351c1-78d3-4325-9b73-10fb42664213" valueTypeId="f3d1d565-fcdc-4b1f-956d-f6ff824ce100"/>
-  </producedTypes>
-  <name>R1010A_PurchaseOrders</name>
+ <producedTypes>
+  <objectType typeId="c9536db3-320b-4f52-88e3-6e17d32c01bf" valueTypeId="912f0d91-7861-4d84-a14e-e748b9318355"/>
+  <managerType typeId="09f351c1-78d3-4325-9b73-10fb42664213" valueTypeId="f3d1d565-fcdc-4b1f-956d-f6ff824ce100"/>
+ </producedTypes>
+ <name>R1010A_PurchaseOrders</name>
+ <synonym>
+  <key>tr</key>
+  <value>R1010A Satınalma siparişleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R1010A Заказы поставщикам</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R1010A Purchase orders</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R1010A_PurchaseOrders.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="0c807e9c-ca48-4052-923d-9328e7d3b013">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R1010A Purchase orders</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R1010A_PurchaseOrders.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="0c807e9c-ca48-4052-923d-9328e7d3b013">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

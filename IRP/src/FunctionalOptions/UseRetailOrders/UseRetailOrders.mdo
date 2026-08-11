@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c349591c-0509-4497-b92d-ee7f15b4bb48">
-  <name>UseRetailOrders</name>
-  <synonym>
-    <key>en</key>
-    <value>Use retail orders</value>
-  </synonym>
-  <location>Constant.UseRetailOrders</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.SalesOrder.Attribute.TransactionType</content>
-  <content>Report.R4011B_FreeStockMovements</content>
-  <content>Report.R4012A_StockReservation</content>
-  <content>Report.R401A_FreeStocks</content>
-  <content>CommonCommand.OpenReport_R401A_FreeStocks</content>
-  <content>CommonCommand.OpenReport_R4011B_FreeStockMovements</content>
-  <content>CommonCommand.OpenReport_R4012A_StockReservation</content>
+ <name>UseRetailOrders</name>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanmak - Perakende müşteri siparişleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать - заказы розничных покупателей</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use retail orders</value>
+ </synonym>
+ <location>Constant.UseRetailOrders</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.SalesOrder.Attribute.TransactionType</content>
+ <content>Report.R4011B_FreeStockMovements</content>
+ <content>Report.R4012A_StockReservation</content>
+ <content>Report.R401A_FreeStocks</content>
+ <content>CommonCommand.OpenReport_R401A_FreeStocks</content>
+ <content>CommonCommand.OpenReport_R4011B_FreeStockMovements</content>
+ <content>CommonCommand.OpenReport_R4012A_StockReservation</content>
 </mdclass:FunctionalOption>

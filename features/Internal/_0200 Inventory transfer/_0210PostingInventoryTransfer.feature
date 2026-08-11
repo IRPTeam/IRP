@@ -318,11 +318,7 @@ Scenario: _021024 create document Inventory Transfer (without ITO)
 		| Description   |
 		| Store 02      |
 	And I select current line in "List" table
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I move to "Items" tab
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
@@ -337,8 +333,7 @@ Scenario: _021024 create document Inventory Transfer (without ITO)
 		| 'S/Yellow'   |
 	And I select current line in "List" table
 	And I activate "Unit" field in "ItemList" table
-	And I click choice button of "Unit" attribute in "ItemList" table
-	And I select current line in "List" table
+	And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 	And I activate "Quantity" field in "ItemList" table
 	And I input "7,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
@@ -450,11 +445,7 @@ Scenario: _02104809 create IT using form link/unlink
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click the button named "FormCreate"
 	* Filling in the details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -575,11 +566,7 @@ Scenario: _02104809 create IT using form link/unlink
 			| 'Dress'   | 'L/Green'     |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table	
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I click "Post" button
 		And "RowIDInfo" table contains lines
 			| 'Basis'                                                   | 'Next step'   | 'Quantity'   | 'Current step'    |

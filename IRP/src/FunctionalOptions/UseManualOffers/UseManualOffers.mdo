@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2f89125e-13bc-48f8-bc2f-721d2246069c">
-  <name>UseManualOffers</name>
-  <synonym>
-    <key>en</key>
-    <value>Use manual offers</value>
-  </synonym>
-  <location>Constant.UseManualOffers</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferAmount</content>
-  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferPercent</content>
-  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferType</content>
-  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferType</content>
-  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferAmount</content>
-  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferPercent</content>
+ <name>UseManualOffers</name>
+ <synonym>
+  <key>tr</key>
+  <value>Manuel indirimleri kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать ручные скидки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use manual offers</value>
+ </synonym>
+ <location>Constant.UseManualOffers</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferAmount</content>
+ <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferPercent</content>
+ <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferType</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferType</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferAmount</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferPercent</content>
 </mdclass:FunctionalOption>

@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e904e72d-5ab1-438b-be20-af788863e236">
-  <name>Report_R3010_CashOnHand</name>
-  <synonym>
-    <key>en</key>
-    <value>Report R3010_CashOnHand</value>
-  </synonym>
+ <name>Report_R3010_CashOnHand</name>
+ <synonym>
+  <key>tr</key>
+  <value>R3010 Kasa/banka raporu</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R3010_ДенежныеСредстваВКассе</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R3010_CashOnHand</value>
+ </synonym>
 </mdclass:Role>

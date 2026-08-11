@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c6c3ebe6-680f-42fe-9c68-cc36f943f4c2">
+ <producedTypes>
+  <objectType typeId="c580f49c-a318-4a7e-96f7-49eca354d5b3" valueTypeId="da537a10-f1ea-46b5-aa64-4576b2222879"/>
+  <managerType typeId="0160f425-5706-4b7e-b2b3-e080fde3442e" valueTypeId="87607d5c-1be7-4cc5-ab88-ca3ccc8c8b71"/>
+ </producedTypes>
+ <name>FindAndReplace</name>
+ <synonym>
+  <key>tr</key>
+  <value>Bul ve değiştir</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Find and replace</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Find and replace</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.FindAndReplace.Form.Form</defaultForm>
+ <forms uuid="abcffb0f-f8eb-4d49-9ac8-0252373fc501">
+  <name>Form</name>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:DataProcessor>

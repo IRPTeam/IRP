@@ -92,7 +92,16 @@ Function GetPrintResults(Refs, AddInfo = Undefined)
 	For Each ObjectRef In Refs Do
 		ObjectParam = UniversalPrintServer.InitPrintParam(ObjectRef);
 		ObjectParam.NameTemplate = CommandDescription.Title;
-		ObjectParam.SpreadsheetDoc = Catalogs.PrintFormTemplates.GetPrintForm(TemplateRef, ObjectRef, True);
+		ObjectParam.TemplateRef = ThisObject.TemplateRef;
+		
+		SavedPrintForm = InformationRegisters.SavedPrintForms.GetSavedPrintForm(ObjectRef, "", ThisObject.TemplateRef);
+		If SavedPrintForm = Undefined Then
+			ObjectParam.SpreadsheetDoc = Catalogs.PrintFormTemplates.GetPrintForm(TemplateRef, ObjectRef, True);
+		Else
+			ObjectParam.SpreadsheetDoc = SavedPrintForm;
+			ObjectParam.IsSavedPrintForm = True;
+		EndIf;
+		
 		Results.Add(ObjectParam);
 	EndDo;
 	

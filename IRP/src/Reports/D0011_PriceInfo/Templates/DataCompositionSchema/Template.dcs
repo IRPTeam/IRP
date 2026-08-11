@@ -11,6 +11,14 @@
 			<field>PriceType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fiyat tipi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Тип цен</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Price type</v8:content>
 				</v8:item>
@@ -23,6 +31,14 @@
 			<dataPath>Price</dataPath>
 			<field>Price</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fiyat</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Цена</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Price</v8:content>
@@ -37,6 +53,14 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item</v8:content>
 				</v8:item>
@@ -50,6 +74,14 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Характеристика</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item Key</v8:content>
 				</v8:item>
@@ -62,6 +94,14 @@
 			<dataPath>PriceDefinitionType</dataPath>
 			<field>PriceDefinitionType</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fiyat tanımı türü</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Тип цены</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Price definition type</v8:content>
@@ -80,6 +120,14 @@
 			<field>PriceDefinitionReason</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fiyat tanımı nedeni</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Комментарий</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Price definition reason</v8:content>
 				</v8:item>
@@ -95,6 +143,14 @@
 			<field>IsPriority</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Önceliklidir</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Приоритетнее</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Is priority</v8:content>
 				</v8:item>
@@ -107,6 +163,14 @@
 			<dataPath>PriceDefinitionReasonString</dataPath>
 			<field>PriceDefinitionReasonString</field>
 			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fiyat belirleme sebep satırı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Строка комментария по цене</v8:content>
+				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Price definition reason string</v8:content>
@@ -139,6 +203,14 @@
 	<parameter>
 		<name>PricePeriod</name>
 		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Fiyat dönemi</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Период цен</v8:content>
+			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Price period</v8:content>
@@ -335,6 +407,14 @@
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Fiyat</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Цена</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Price</v8:content>
 							</v8:item>
@@ -404,6 +484,14 @@
 				<dcsat:tableCell>
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Sebep</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Комментарий</v8:content>
+							</v8:item>
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Reason</v8:content>
@@ -836,6 +924,14 @@
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Malzeme</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Номенклатура</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Item</v8:content>
 							</v8:item>
@@ -879,6 +975,14 @@
 				<dcsat:tableCell>
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Varyant</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Характеристика</v8:content>
+							</v8:item>
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Item Key</v8:content>
@@ -967,6 +1071,14 @@
 				<dcsat:tableCell>
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tarih</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Цены на</v8:content>
+							</v8:item>
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Prices on </v8:content>
@@ -1185,6 +1297,14 @@
 		<dcsset:name>PriceInfo</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Fiyat bilgisi</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Цены</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Price info</v8:content>
 			</v8:item>
@@ -1330,6 +1450,14 @@
 						<dcscor:parameter>Title</dcscor:parameter>
 						<dcscor:value xsi:type="v8:LocalStringType">
 							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Geçerli fiyatlar</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Актуальные цены</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Actual prices</v8:content>
 							</v8:item>
@@ -1464,6 +1592,14 @@
 					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 						<dcscor:parameter>Title</dcscor:parameter>
 						<dcscor:value xsi:type="v8:LocalStringType">
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tüm fiyatlar</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Все установленный цены</v8:content>
+							</v8:item>
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>All prices</v8:content>

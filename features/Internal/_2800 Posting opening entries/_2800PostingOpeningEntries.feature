@@ -70,11 +70,7 @@ Scenario: _400001 opening entry account balance
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the tabular part account balance
 		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
 		And I click choice button of "Account" attribute in "AccountBalance" table
@@ -83,11 +79,7 @@ Scenario: _400001 opening entry account balance
 			| Cash desk №1    |
 		And I select current line in "List" table
 		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
-		And I click choice button of "Currency" attribute in "AccountBalance" table
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "AccountBalance" table
 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
 		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
@@ -98,11 +90,7 @@ Scenario: _400001 opening entry account balance
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
-		And I click choice button of "Currency" attribute in "AccountBalance" table
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list in "AccountBalance" table
 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
 		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
@@ -113,11 +101,7 @@ Scenario: _400001 opening entry account balance
 			| Cash desk №3    |
 		And I select current line in "List" table
 		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
-		And I click choice button of "Currency" attribute in "AccountBalance" table
-		And I go to line in "List" table
-			| Code   | Description    |
-			| EUR    | Euro           |
-		And I select current line in "List" table
+		And I select "EUR" exact value from "Currency" drop-down list in "AccountBalance" table
 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
 		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
@@ -203,11 +187,7 @@ Scenario: _400002 opening entry inventory balance
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the tabular part Inventory
 		And I move to "Inventory" tab
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -454,11 +434,7 @@ Scenario: _400003 opening entry advance balance
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400003$$" variable
 		And I delete "$$OpeningEntry400003$$" variable
@@ -472,12 +448,7 @@ Scenario: _400003 opening entry advance balance
 			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
-		And I click choice button of the attribute named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
 		And I activate field named "AdvanceFromCustomersAmount" in "AdvanceFromCustomers" table
 		And I input "100,00" text in the field named "AdvanceFromCustomersAmount" of "AdvanceFromCustomers" table
 		And I finish line editing in "AdvanceFromCustomers" table
@@ -503,11 +474,7 @@ Scenario: _400003 opening entry advance balance
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I activate field named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
-		And I click choice button of the attribute named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
 		And I activate field named "AdvanceToSuppliersAmount" in "AdvanceToSuppliers" table
 		And I input "100,00" text in the field named "AdvanceToSuppliersAmount" of "AdvanceToSuppliers" table
 		And I finish line editing in "AdvanceToSuppliers" table
@@ -535,11 +502,7 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in Account payable
 		* Filling in partner and Legal name
 			And I move to "Account payable" tab
@@ -564,11 +527,7 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 			And I change "Type" radio button value to "Vendor"
 			And I input "DFC Vendor by Partner terms" text in the field named "Description_en"
 			And I input "01.12.2019" text in "Date" field
-			And I click Select button of "Multi currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Description'    | 'Source'          | 'Type'             |
-				| 'TRY'         | 'TRY'            | 'Forex Seling'    | 'Partner term'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Multi currency movement type" drop-down list
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Currency'    | 'Description'          |
@@ -583,12 +542,7 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 		* Filling in amount and currency
 			And I activate "Currency" field in "AccountPayableByAgreements" table
 			And I select current line in "AccountPayableByAgreements" table
-			And I click choice button of "Currency" attribute in "AccountPayableByAgreements" table
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AccountPayableByAgreements" table
 			And I activate "Amount" field in "AccountPayableByAgreements" table
 			And I input "100,00" text in "Amount" field of "AccountPayableByAgreements" table
 			And I finish line editing in "AccountPayableByAgreements" table
@@ -621,11 +575,7 @@ Scenario: _400005 opening entry Customers transactions by partner terms (custome
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in Account receivable
 		* Filling in partner and Legal name
 			And I move to "Account receivable" tab
@@ -650,11 +600,7 @@ Scenario: _400005 opening entry Customers transactions by partner terms (custome
 			And I change "Type" radio button value to "Customer"
 			And I input "DFC Customer by Partner terms" text in the field named "Description_en"
 			And I input "01.12.2019" text in "Date" field
-			And I click Select button of "Multi currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Description'    | 'Source'          | 'Type'             |
-				| 'TRY'         | 'TRY'            | 'Forex Seling'    | 'Partner term'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Multi currency movement type" drop-down list
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Description'           |
@@ -669,12 +615,7 @@ Scenario: _400005 opening entry Customers transactions by partner terms (custome
 		* Filling in amount and currency
 			And I activate "Currency" field in "AccountReceivableByAgreements" table
 			And I select current line in "AccountReceivableByAgreements" table
-			And I click choice button of "Currency" attribute in "AccountReceivableByAgreements" table
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AccountReceivableByAgreements" table
 			And I activate "Amount" field in "AccountReceivableByAgreements" table
 			And I input "100,00" text in "Amount" field of "AccountReceivableByAgreements" table
 			And I finish line editing in "AccountReceivableByAgreements" table
@@ -708,11 +649,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the tabular part Account Balance
 		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
 		And I click choice button of "Account" attribute in "AccountBalance" table
@@ -721,11 +658,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 			| Cash desk №2    |
 		And I select current line in "List" table
 		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
-		And I click choice button of "Currency" attribute in "AccountBalance" table
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list in "AccountBalance" table
 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
 		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
@@ -758,12 +691,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
-		And I click choice button of the attribute named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
 		And I activate field named "AdvanceFromCustomersAmount" in "AdvanceFromCustomers" table
 		And I input "525,00" text in the field named "AdvanceFromCustomersAmount" of "AdvanceFromCustomers" table
 		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "AdvanceFromCustomers" table
@@ -785,11 +713,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I activate field named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
-		And I click choice button of the attribute named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
 		And I activate field named "AdvanceToSuppliersAmount" in "AdvanceToSuppliers" table
 		And I input "811,00" text in the field named "AdvanceToSuppliersAmount" of "AdvanceToSuppliers" table
 		And I select "Vendor Ferron, TRY" from "Partner term" drop-down list by string in "AdvanceToSuppliers" table
@@ -817,12 +741,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		* Filling in amount and currency
 			And I activate "Currency" field in "AccountPayableByAgreements" table
 			And I select current line in "AccountPayableByAgreements" table
-			And I click choice button of "Currency" attribute in "AccountPayableByAgreements" table
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AccountPayableByAgreements" table
 			And I activate "Amount" field in "AccountPayableByAgreements" table
 			And I input "111,00" text in "Amount" field of "AccountPayableByAgreements" table
 			And I finish line editing in "AccountPayableByAgreements" table
@@ -849,12 +768,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		* Filling in amount and currency
 			And I activate "Currency" field in "AccountReceivableByAgreements" table
 			And I select current line in "AccountReceivableByAgreements" table
-			And I click choice button of "Currency" attribute in "AccountReceivableByAgreements" table
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'      |
-				| 'TRY'     | 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AccountReceivableByAgreements" table
 			And I activate "Amount" field in "AccountReceivableByAgreements" table
 			And I input "151,00" text in "Amount" field of "AccountReceivableByAgreements" table
 			And I finish line editing in "AccountReceivableByAgreements" table
@@ -886,11 +800,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in AP by documents first string
 		And I move to "Account payable" tab
 		And I move to the tab named "GroupAccountPayableByDocuments"
@@ -910,11 +820,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I select current line in "List" table
 		And I select current line in "AccountPayableByDocuments" table
 		And I activate field named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
-		And I click choice button of the attribute named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
 		And I input "100,00" text in the field named "AccountPayableByDocumentsAmount" of "AccountPayableByDocuments" table
 		And I finish line editing in "AccountPayableByDocuments" table
 	* Filling in payment terms for first string
@@ -943,13 +849,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
-		And I click choice button of the attribute named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
-		Then "Currencies" window is opened
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Euro'           |
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
+		And I select "EUR" exact value from the drop-down list named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
 		And I activate field named "AccountPayableByDocumentsAmount" in "AccountPayableByDocuments" table
 		And I input "200,00" text in the field named "AccountPayableByDocumentsAmount" of "AccountPayableByDocuments" table
 		And I finish line editing in "AccountPayableByDocuments" table
@@ -1002,11 +902,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 			| 'Partner term DFC'    |
 		And I select current line in "List" table
 		And I activate field named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
-		And I click choice button of the attribute named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| 'TRY'    | 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
 		And I input "200,00" text in the field named "AccountReceivableByDocumentsAmount" of "AccountReceivableByDocuments" table
 		And I finish line editing in "AccountReceivableByDocuments" table
 	* Filling in payment terms for first string
@@ -1034,11 +930,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
-		And I click choice button of the attribute named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
 		And I activate field named "AccountReceivableByDocumentsAmount" in "AccountReceivableByDocuments" table
 		And I input "100,00" text in the field named "AccountReceivableByDocumentsAmount" of "AccountReceivableByDocuments" table
 		And I finish line editing in "AccountReceivableByDocuments" table
@@ -1113,11 +1005,7 @@ Scenario: _400010 check filling price and sum in the OpeningEntry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Amount calculation
 		And I move to "Inventory" tab
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -1211,11 +1099,7 @@ Scenario: _400012 create OpeningEntry (employee cash advance)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Employee cash advance tab
 		And I move to "Employee cash advance" tab
 		* Add first line
@@ -1301,11 +1185,7 @@ Scenario: _400013 create OpeningEntry (salary payment)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Salary payment
 		And I move to "Salary payment" tab
 		* Add first line
@@ -1318,11 +1198,7 @@ Scenario: _400013 create OpeningEntry (salary payment)
 				| 'Arina Brown'     |
 			And I select current line in "List" table
 			And I activate "Currency" field in "SalaryPayment" table
-			And I click choice button of "Currency" attribute in "SalaryPayment" table
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "SalaryPayment" table
 			And I activate "Amount" field in "SalaryPayment" table
 			And I input "1 000,00" text in "Amount" field of "SalaryPayment" table
 			And I finish line editing in "SalaryPayment" table
@@ -1336,11 +1212,7 @@ Scenario: _400013 create OpeningEntry (salary payment)
 				| 'David Romanov'     |
 			And I select current line in "List" table
 			And I activate "Currency" field in "SalaryPayment" table
-			And I click choice button of "Currency" attribute in "SalaryPayment" table
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "SalaryPayment" table
 			And I activate "Amount" field in "SalaryPayment" table
 			And I input "2 000,00" text in "Amount" field of "SalaryPayment" table
 			And I finish line editing in "SalaryPayment" table
@@ -1379,11 +1251,7 @@ Scenario: _400014 create OpeningEntry (advance from retail customer)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling advance from retail customer
 		And I move to "Advance from retail customers" tab
 		* Add first line
@@ -1396,11 +1264,7 @@ Scenario: _400014 create OpeningEntry (advance from retail customer)
 				| 'Daniel Smith'     |
 			And I select current line in "List" table
 			And I activate "Currency" field in "AdvanceFromRetailCustomers" table
-			And I click choice button of "Currency" attribute in "AdvanceFromRetailCustomers" table
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AdvanceFromRetailCustomers" table
 			And I activate "Amount" field in "AdvanceFromRetailCustomers" table
 			And I input "1 000,00" text in "Amount" field of "AdvanceFromRetailCustomers" table
 			And I finish line editing in "AdvanceFromRetailCustomers" table
@@ -1414,11 +1278,7 @@ Scenario: _400014 create OpeningEntry (advance from retail customer)
 				| 'Sam Jons'        |
 			And I select current line in "List" table
 			And I activate "Currency" field in "AdvanceFromRetailCustomers" table
-			And I click choice button of "Currency" attribute in "AdvanceFromRetailCustomers" table
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list in "AdvanceFromRetailCustomers" table
 			And I activate "Amount" field in "AdvanceFromRetailCustomers" table
 			And I input "1 000,00" text in "Amount" field of "AdvanceFromRetailCustomers" table
 			And I finish line editing in "AdvanceFromRetailCustomers" table
@@ -1455,11 +1315,7 @@ Scenario: _400019 create OpeningEntry (cash in transit)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling cash in transit tab
 		And I move to "Cash in transit" tab
 		And in the table "CashInTransit" I click the button named "CashInTransitAdd"
@@ -1525,11 +1381,7 @@ Scenario: _400020 create OpeningEntry (account payble other and account receivab
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Account payble (other)
 		And I move to "Account payable (other)" tab
 		And in the table "AccountPayableOther" I click the button named "AccountPayableOtherAdd"
@@ -1580,11 +1432,7 @@ Scenario: _400023 create OpeningEntry (employee)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling Salary payment
 		And I move to "Employee" tab
 		* Add first line

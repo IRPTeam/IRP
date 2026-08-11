@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="24109c94-42b7-4df6-953e-44f0c33551bf">
-  <name>ChoiceTransactionBasis</name>
-  <synonym>
-    <key>en</key>
-    <value>Choice transaction basis</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>ChoiceTransactionBasis</name>
+ <synonym>
+  <key>tr</key>
+  <value>Ödeme kaynak evrağını seçiniz</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Выбор документа-основания</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Choice transaction basis</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a6e86fae-5bd6-49e4-ab3e-4c2391bc7821">
-  <name>Report_R8510B_BookValueOfFixedAsset</name>
-  <synonym>
-    <key>en</key>
-    <value>Report R8510B_BookValueOfFixedAsset</value>
-  </synonym>
+ <name>Report_R8510B_BookValueOfFixedAsset</name>
+ <synonym>
+  <key>tr</key>
+  <value>R8510B Sabit Kıymet Defter Değeri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R8510B_БалансоваяСтоимостьОС</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R8510B_BookValueOfFixedAsset</value>
+ </synonym>
 </mdclass:Role>

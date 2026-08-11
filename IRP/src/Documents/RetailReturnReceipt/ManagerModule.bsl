@@ -500,6 +500,18 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 		And Not AccReg.R3010B_CashOnHand.CheckBalance(Ref, Current_R3010B_CashOnHand, Exists_R3010B_CashOnHand, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+	
+	Current_R2001T_Sales = PostingServer.GetQueryTableByName("R2001T_Sales", Parameters);
+	Exists_R2001T_Sales = PostingServer.GetQueryTableByName("Exists_R2001T_Sales", Parameters);
+	
+	If Not Cancel
+		And Not AccReg.R2001T_Sales.CheckBalance(Ref, 
+			LineNumberAndItemKeyFromItemList,
+			Current_R2001T_Sales, 
+			Exists_R2001T_Sales, 
+			AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -538,6 +550,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	QueryArray.Add(PostingServer.Exists_R3010B_CashOnHand());
+	QueryArray.Add(PostingServer.Exists_R2001T_Sales());
 	Return QueryArray;
 EndFunction
 

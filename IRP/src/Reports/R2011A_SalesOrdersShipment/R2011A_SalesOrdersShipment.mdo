@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b8ec58b2-511f-4434-96e8-3342811dfebe">
-  <producedTypes>
-    <objectType typeId="b424a27d-58ec-4498-af55-09458f272876" valueTypeId="04f237a7-3b7e-40e2-ac0f-6ef737703fcd"/>
-    <managerType typeId="8c340380-a872-4bed-8bc0-4e0e068d7e60" valueTypeId="bd6cece2-404d-4ebe-a89b-01f5c71a25b4"/>
-  </producedTypes>
-  <name>R2011A_SalesOrdersShipment</name>
+ <producedTypes>
+  <objectType typeId="b424a27d-58ec-4498-af55-09458f272876" valueTypeId="04f237a7-3b7e-40e2-ac0f-6ef737703fcd"/>
+  <managerType typeId="8c340380-a872-4bed-8bc0-4e0e068d7e60" valueTypeId="bd6cece2-404d-4ebe-a89b-01f5c71a25b4"/>
+ </producedTypes>
+ <name>R2011A_SalesOrdersShipment</name>
+ <synonym>
+  <key>tr</key>
+  <value>R2011A Satış siparişlerin sevkiyatı</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R2011A Отгрузка заказов покупателей</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R2011A Sales orders shipment</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R2011A_SalesOrdersShipment.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="3d7f34d4-aa00-42ea-8063-e3a62c2c70ed">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R2011A Sales orders shipment</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R2011A_SalesOrdersShipment.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="3d7f34d4-aa00-42ea-8063-e3a62c2c70ed">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

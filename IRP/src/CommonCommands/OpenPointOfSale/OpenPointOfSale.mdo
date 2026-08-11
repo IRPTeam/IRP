@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0f775325-b372-4a52-9175-b32cae98c723">
-  <name>OpenPointOfSale</name>
-  <synonym>
-    <key>en</key>
-    <value>Point of sale</value>
-  </synonym>
-  <group>NavigationPanelImportant</group>
-  <representation>Auto</representation>
+ <name>OpenPointOfSale</name>
+ <synonym>
+  <key>tr</key>
+  <value>Satış ekranı</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Рабочее место кассира</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Point of sale</value>
+ </synonym>
+ <group>NavigationPanelImportant</group>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

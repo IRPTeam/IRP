@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2c94ce72-3e59-46ba-b7e2-3c014e37df7a">
-  <producedTypes>
-    <objectType typeId="03dafe17-10e4-4b30-9365-4cf0bcfe0b17" valueTypeId="9dda6425-f0b3-417d-ad79-36f0662bd0a6"/>
-    <managerType typeId="599b2d1b-1fa9-4f3a-9b72-887838f39ebc" valueTypeId="a903695d-b0dc-4590-8dcd-49c38c005954"/>
-  </producedTypes>
-  <name>R4012A_StockReservation</name>
+ <producedTypes>
+  <objectType typeId="03dafe17-10e4-4b30-9365-4cf0bcfe0b17" valueTypeId="9dda6425-f0b3-417d-ad79-36f0662bd0a6"/>
+  <managerType typeId="599b2d1b-1fa9-4f3a-9b72-887838f39ebc" valueTypeId="a903695d-b0dc-4590-8dcd-49c38c005954"/>
+ </producedTypes>
+ <name>R4012A_StockReservation</name>
+ <synonym>
+  <key>tr</key>
+  <value>R4012A Stok rezervasyonu</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R4012A Резервы товаров на складах</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R4012A Stock reservation</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R4012A_StockReservation.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="54948984-ece9-455a-8c7d-555d3312cd74">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R4012A Stock reservation</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R4012A_StockReservation.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="54948984-ece9-455a-8c7d-555d3312cd74">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

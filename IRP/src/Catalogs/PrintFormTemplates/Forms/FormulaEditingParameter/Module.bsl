@@ -5,11 +5,14 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
-	ThisObject.Title = Parameters.Name;
-	If Not IsBlankString(Parameters.Table) Then
-		ThisObject.Title = ThisObject.Title + " (" + Parameters.Table + ")";
+	If Not StrStartsWith(Parameters.Name, "_") Then
+		ThisObject.Title = Parameters.Name;
+		If Not IsBlankString(Parameters.Table) Then
+			ThisObject.Title = ThisObject.Title + " (" + Parameters.Table + ")";
+		EndIf;
 	EndIf;
 	
+	ThisObject.ParameterName = Parameters.Name;
 	ThisObject.TableName = Parameters.Table;
 	If IsBlankString(ThisObject.TableName) Then
 		Items.InsertCurrentRow.Visible = False;
@@ -57,7 +60,7 @@ EndProcedure
 
 &AtClient
 Procedure Save(Command)
-	Notify("FormulaIsReady", ThisObject.FormulaText);
+	Notify("FormulaIsReady", ThisObject.FormulaText, ThisObject.ParameterName);
 	Close();
 EndProcedure
 

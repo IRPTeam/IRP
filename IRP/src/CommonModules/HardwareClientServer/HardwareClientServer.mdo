@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c6044ec3-8fe8-4d3f-96cd-61f8f8af01d0">
-  <name>HardwareClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Hardware client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>HardwareClientServer</name>
+ <synonym>
+  <key>tr</key>
+  <value>Donanım istemci sunucu</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Аппаратный клиент-сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Hardware client server</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

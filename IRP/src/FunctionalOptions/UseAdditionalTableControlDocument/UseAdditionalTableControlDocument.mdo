@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1f9c91f3-e3c0-4e06-b9ba-da1c473089b3">
-  <name>UseAdditionalTableControlDocument</name>
-  <synonym>
-    <key>en</key>
-    <value>Use additional table control document</value>
-  </synonym>
-  <location>Constant.UseAdditionalTableControlDocument</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>DataProcessor.FixDocumentProblems</content>
-  <content>Report.D0012_AdditionalDocumentTablesCheck</content>
-  <content>CommonForm.AdditionalTableControlSettings</content>
-  <content>Constant.AdditionalTableControlExceptions</content>
+ <name>UseAdditionalTableControlDocument</name>
+ <synonym>
+  <key>tr</key>
+  <value>Ek tablo kontrol belgesi kullanın</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать дополнительный контроль табличных частей добкументов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use additional table control document</value>
+ </synonym>
+ <location>Constant.UseAdditionalTableControlDocument</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>DataProcessor.FixDocumentProblems</content>
+ <content>Report.D0012_AdditionalDocumentTablesCheck</content>
+ <content>CommonForm.AdditionalTableControlSettings</content>
+ <content>Constant.AdditionalTableControlExceptions</content>
 </mdclass:FunctionalOption>

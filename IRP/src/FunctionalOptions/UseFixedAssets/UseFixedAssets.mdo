@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bba64df0-feb9-459e-8164-8babbbce55e8">
-  <name>UseFixedAssets</name>
-  <synonym>
-    <key>en</key>
-    <value>Use fixed assets</value>
-  </synonym>
-  <location>Constant.UseFixedAssets</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Subsystem.FixedAssets</content>
-  <content>Enum.FixedAssetTypes</content>
-  <content>Document.CommissioningOfFixedAsset</content>
-  <content>Catalog.FixedAssetsLedgerTypes</content>
-  <content>Document.DecommissioningOfFixedAsset</content>
-  <content>Document.FixedAssetTransfer</content>
-  <content>InformationRegister.T8515S_FixedAssetsLocation</content>
-  <content>Catalog.FixedAssets</content>
-  <content>Catalog.DepreciationSchedules</content>
-  <content>Document.ModernizationOfFixedAsset</content>
-  <content>Document.CalculationMovementCosts</content>
-  <content>Report.F0010_FixedAssetsTransferCost</content>
-  <content>Report.F0011_InventoryBook</content>
-  <content>Report.F0012_DepreciationStatement</content>
-  <content>Document.FixedAssetRevaluation</content>
-  <content>Document.DepreciationCalculation</content>
-  <content>Report.R8510B_BookValueOfFixedAsset</content>
+ <name>UseFixedAssets</name>
+ <synonym>
+  <key>tr</key>
+  <value>Sabit kıymetleri kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать Основеые средства</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use fixed assets</value>
+ </synonym>
+ <location>Constant.UseFixedAssets</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Subsystem.FixedAssets</content>
+ <content>Enum.FixedAssetTypes</content>
+ <content>Document.CommissioningOfFixedAsset</content>
+ <content>Catalog.FixedAssetsLedgerTypes</content>
+ <content>Document.DecommissioningOfFixedAsset</content>
+ <content>Document.FixedAssetTransfer</content>
+ <content>InformationRegister.T8515S_FixedAssetsLocation</content>
+ <content>Catalog.FixedAssets</content>
+ <content>Catalog.DepreciationSchedules</content>
+ <content>Document.ModernizationOfFixedAsset</content>
+ <content>Document.CalculationMovementCosts</content>
+ <content>Report.F0010_FixedAssetsTransferCost</content>
+ <content>Report.F0011_InventoryBook</content>
+ <content>Report.F0012_DepreciationStatement</content>
+ <content>Document.FixedAssetRevaluation</content>
+ <content>Document.DepreciationCalculation</content>
+ <content>Report.R8510B_BookValueOfFixedAsset</content>
 </mdclass:FunctionalOption>

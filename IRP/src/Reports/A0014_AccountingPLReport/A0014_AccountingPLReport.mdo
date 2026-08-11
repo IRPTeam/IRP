@@ -1,30 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4e771ee1-2e92-4d82-8331-6124b4188ba1">
-  <producedTypes>
-    <objectType typeId="639f05e3-3759-4183-97d7-57564f723ead" valueTypeId="3095b2b7-93cb-4cf0-b51d-30184ac9aa90"/>
-    <managerType typeId="27fffca8-b388-4a69-ae95-08c7790984fe" valueTypeId="a9c17d69-2630-425b-9034-7e84466a9860"/>
-  </producedTypes>
-  <name>A0014_AccountingPLReport</name>
+ <producedTypes>
+  <objectType typeId="639f05e3-3759-4183-97d7-57564f723ead" valueTypeId="3095b2b7-93cb-4cf0-b51d-30184ac9aa90"/>
+  <managerType typeId="27fffca8-b388-4a69-ae95-08c7790984fe" valueTypeId="a9c17d69-2630-425b-9034-7e84466a9860"/>
+ </producedTypes>
+ <name>A0014_AccountingPLReport</name>
+ <synonym>
+  <key>tr</key>
+  <value>Kâr/Zarar Raporu (P&amp;L)</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>P&amp;L Report</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>P&amp;L Report</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>Report.A0014_AccountingPLReport.Form.ReportForm</defaultForm>
+ <forms uuid="468aa8b8-3f03-4104-b64a-2726c6de0eb3">
+  <name>ReportForm</name>
   <synonym>
-    <key>en</key>
-    <value>P&amp;L Report</value>
+   <key>tr</key>
+   <value>Rapor formu</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>Report.A0014_AccountingPLReport.Form.ReportForm</defaultForm>
-  <forms uuid="468aa8b8-3f03-4104-b64a-2726c6de0eb3">
-    <name>ReportForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Report form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="a51ad0ac-2920-43f8-8137-7f47621cc4cc">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Форма отчета</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Report form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="a51ad0ac-2920-43f8-8137-7f47621cc4cc">
+  <name>Template</name>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+ </templates>
 </mdclass:Report>

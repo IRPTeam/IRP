@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0177d6b8-24c6-4d39-9035-4b411d8a0f84">
-  <name>Report_A0010_TrialBalance</name>
-  <synonym>
-    <key>en</key>
-    <value>Report A0010_TrialBalance</value>
-  </synonym>
+ <name>Report_A0010_TrialBalance</name>
+ <synonym>
+  <key>tr</key>
+  <value>A0010 Genel mizan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет A0010_ОборотноСальдоваяВедомость</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report A0010_TrialBalance</value>
+ </synonym>
 </mdclass:Role>

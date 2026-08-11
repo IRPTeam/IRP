@@ -66,14 +66,10 @@ Scenario: _005013 filling in the "Companies" catalog
 			And I move to "Currencies" tab
 			* Creation and addition of Local currency
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
-				And I click choice button of "Movement type" attribute in "Currencies" table
+				Then "Multi currency movement types" window is opened
 				And I click the button named "FormCreate"
 				And I input "Local currency" text in the field named "Description_en"
-				And I click Select button of "Currency" field
-				And I go to line in "List" table
-					| 'Code'     | 'Description'       |
-					| 'TRY'      | 'Turkish lira'      |
-				And I select current line in "List" table
+				And I select "TRY" exact value from "Currency" drop-down list
 				And I click Select button of "Source" field
 				And I go to line in "List" table
 					| 'Description'       |
@@ -86,14 +82,9 @@ Scenario: _005013 filling in the "Companies" catalog
 				And I finish line editing in "Currencies" table
 			* Creation and addition of Reporting currency
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
-				And I click choice button of "Movement type" attribute in "Currencies" table
+				Then "Multi currency movement types" window is opened
 				And I click the button named "FormCreate"
-				And I click Select button of "Currency" field
-				And I go to line in "List" table
-					| 'Code'     | 'Description'          |
-					| 'USD'      | 'American dollar'      |
-				And I activate "Description" field in "List" table
-				And I select current line in "List" table
+				And I select "USD" exact value from "Currency" drop-down list
 				And I click Select button of "Source" field
 				And I go to line in "List" table
 					| 'Description'       |
@@ -105,14 +96,9 @@ Scenario: _005013 filling in the "Companies" catalog
 				And I click the button named "FormChoose"
 			* Creation and addition of Budgeting currency
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
-				And I click choice button of "Movement type" attribute in "Currencies" table
+				Then "Multi currency movement types" window is opened
 				And I click the button named "FormCreate"
-				And I click Select button of "Currency" field
-				And I go to line in "List" table
-					| 'Code'     | 'Description'          |
-					| 'USD'      | 'American dollar'      |
-				And I activate "Description" field in "List" table
-				And I select current line in "List" table
+				And I select "USD" exact value from "Currency" drop-down list
 				And I click Select button of "Source" field
 				And I go to line in "List" table
 					| 'Description'       |

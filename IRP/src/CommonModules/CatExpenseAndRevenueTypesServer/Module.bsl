@@ -11,6 +11,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 EndProcedure
 
 Function GetExpenseType(Company, ItemKey) Export
+	If Not ValueIsFilled(ItemKey) Then
+		Return Undefined;
+	EndIf;
 	Filter = InformationRegisters.ExpenseRevenueTypeSettings.GetFilter();
 	Filter.Company  = Company;
 	Filter.ItemKey  = ItemKey;
@@ -21,6 +24,9 @@ Function GetExpenseType(Company, ItemKey) Export
 EndFunction
 
 Function GetRevenueType(Company, ItemKey) Export
+	If Not ValueIsFilled(ItemKey) Then
+		Return Undefined;
+	EndIf;
 	Filter = InformationRegisters.ExpenseRevenueTypeSettings.GetFilter();
 	Filter.Company  = Company;
 	Filter.ItemKey  = ItemKey;

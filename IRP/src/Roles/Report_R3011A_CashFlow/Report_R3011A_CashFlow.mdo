@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6f7f4ea9-ff3f-4625-b938-f21579cceef4">
-  <name>Report_R3011A_CashFlow</name>
-  <synonym>
-    <key>en</key>
-    <value>Report R3011A_CashFlow</value>
-  </synonym>
+ <name>Report_R3011A_CashFlow</name>
+ <synonym>
+  <key>tr</key>
+  <value>R3011A Nakit akışı</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R3011A_ДенежныеПотоки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R3011A_CashFlow</value>
+ </synonym>
 </mdclass:Role>

@@ -72,11 +72,7 @@ Scenario: _2990000 preparation (product inventory)
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click the button named "FormCreate"
 		* Filling in company info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in the tabular part Inventory
 			And I move to "Inventory" tab
 			And in the table "Inventory" I click the button named "InventoryAdd"
@@ -191,21 +187,13 @@ Scenario: _2990002 create Stock adjustment as surplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I click the button named "FormCreate"
 	* Filling the document header
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'Store 02'       |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table	
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Filling in the tabular part
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -246,11 +234,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -264,21 +248,13 @@ Scenario: _2990003 create Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click the button named "FormCreate"
 	* Filling the document header
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'Store 02'       |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table	
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Filling in the tabular part
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -319,11 +295,7 @@ Scenario: _2990003 create Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -442,11 +414,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I click the button named "FormCreate"
 	* Create a document StockAdjustmentAsSurplus and check filling in
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -458,11 +426,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			| 'Description'             |
 			| 'Logistics department'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table		
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
 			And in the table "ItemList" I click "Add basis documents" button
@@ -558,21 +522,13 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click the button named "FormCreate"
 	* Create a document StockAdjustmentAsSurplus and check filling in
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'Store 05'       |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
 			And in the table "ItemList" I click "Add basis documents" button
@@ -615,11 +571,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 				| '#'    | 'Key'                                         | 'Basis'                           | 'Row ID'                              | 'Next step'    | 'Quantity'    | 'Basis key'                           | 'Current step'                     | 'Row ref'                              |
 				| '1'    | '$$Rov1StockAdjustmentAsWriteOff2990007$$'    | '$$PhysicalInventory2990004$$'    | '$$Rov2PhysicalInventory2990004$$'    | ''             | '2,000'       | '$$Rov2PhysicalInventory2990004$$'    | 'Stock adjustment as write off'    | '$$Rov2PhysicalInventory2990004$$'     |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Turkish lira'     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "Currency"
 		* Unlink line and check Row ID info tab
 			And in the table "ItemList" I click "Link unlink basis documents" button
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
@@ -1172,11 +1124,7 @@ Scenario: _2990025 write off product and check update exp count
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click the button named "FormCreate"
 	* Create a document StockAdjustmentAsSurplus and check filling in
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1204,11 +1152,7 @@ Scenario: _2990025 write off product and check update exp count
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I input "16.05.2022 00:00:00" text in the field named "Date"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table	
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click "Post and close" button
 		And I wait "Stock adjustment as write-off * dated * *" window closing in 20 seconds
 	* Open Physical inventory
@@ -1546,11 +1490,7 @@ Scenario: _2990055 check filling price and sum in the Stock adjustment as surplu
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"		
 		And I click the button named "FormCreate"
 	* Filling in company info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description    |

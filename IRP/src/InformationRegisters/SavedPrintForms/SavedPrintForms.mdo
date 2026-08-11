@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="80214afd-fe66-4260-977e-62fe75b3400e">
+ <producedTypes>
+  <selectionType typeId="b797e925-d5f0-4e2e-b420-e6624f2849c7" valueTypeId="9c3fcc3b-04ff-4bed-abea-05bf4d37f4d0"/>
+  <listType typeId="0ae582c8-9afc-4365-88b0-12e257756961" valueTypeId="ef630505-d181-40d3-81ca-f98cab1c76ea"/>
+  <managerType typeId="cd7ba412-c2d6-4e67-bba4-b8729e6ef8be" valueTypeId="1b2d00ad-1920-49fa-a3ff-2627b8426af9"/>
+  <recordSetType typeId="856dd7ca-ed74-43a0-bbe4-20a464df2ac7" valueTypeId="78dffc10-1c7d-48bc-827e-fce408348973"/>
+  <recordKeyType typeId="47746ed0-ade9-4e42-8c34-4519a3125741" valueTypeId="697c284c-994c-4344-917b-4ab42dab92a1"/>
+  <recordType typeId="684c69af-c61d-4238-8d34-540e92d1724e" valueTypeId="88f0d49d-12fb-4887-a5c9-3e6736b70793"/>
+  <recordManagerType typeId="6d409b92-4d06-4f55-aa1f-7dae0e4fa0e5" valueTypeId="a6b98490-ccb1-40a0-a263-26fb7ba89e02"/>
+ </producedTypes>
+ <name>SavedPrintForms</name>
+ <synonym>
+  <key>tr</key>
+  <value>Kaydedilen çıktı formları</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Saved print forms</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Saved print forms</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Active</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>LineNumber</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Recorder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Period</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="3271092d-0785-48ad-b282-f9e90b399f58">
+  <name>PrintForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Çıktı form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Печатная форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print form</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <attributes uuid="aab84547-827e-4ba1-8642-b242839b2532">
+  <name>CreateDate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Oluşturulma tarihi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата создания</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Create date</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="c4ae387c-6d45-4627-9e26-b4d2c1946a4a">
+  <name>Source</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Источник</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Source</value>
+  </synonym>
+  <type>
+   <types>AnyRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="5271d680-afd4-48a8-b350-d459fc547ec8">
+  <name>TemplateName</name>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon adı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Имя шаблона</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Template name</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>250</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="33c4f193-1e82-40ae-90ed-3517e160fd0c">
+  <name>PrintFormTemplate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Çıktı formu şablonu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Print form template</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print form template</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PrintFormTemplates</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+</mdclass:InformationRegister>

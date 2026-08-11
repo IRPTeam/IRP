@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9fc4dbc6-46bc-4978-afec-ebc5914f56da">
-  <name>DocWithholdingTaxInvoiceServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc withholding tax invoice server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocWithholdingTaxInvoiceServer</name>
+ <synonym>
+  <key>tr</key>
+  <value>Belge serbest meslek makbuzu sunucu</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Док Акт (услуги) с удержанным налогом сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc withholding tax invoice server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

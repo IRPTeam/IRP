@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5a8812ab-5923-4b5d-a3d1-1a253c67ecf6">
-  <name>Salary</name>
-  <synonym>
-    <key>en</key>
-    <value>Salary</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Salary</picture>
-  </picture>
-  <content>Document.Payroll</content>
-  <content>Document.TimeSheet</content>
-  <content>CommonCommand.OpenPartnersEmployee</content>
-  <content>Document.AdditionalAccrual</content>
-  <content>Document.AdditionalDeduction</content>
-  <content>AccumulationRegister.R9541T_VacationUsage</content>
-  <content>Document.CalculationDeservedVacations</content>
-  <content>Report.R9510A_Salary</content>
-  <content>Report.R3027A_CashAdvance</content>
-  <subsystems>Settings</subsystems>
-  <subsystems>Catalogs</subsystems>
-  <subsystems>PersonnelRecords</subsystems>
-  <subsystems>Other</subsystems>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5a8812ab-5923-4b5d-a3d1-1a253c67ecf6">
+ <name>Salary</name>
+ <synonym>
+  <key>tr</key>
+  <value>Maaş</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Зарплата</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Salary</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Salary</picture>
+ </picture>
+ <content>Document.Payroll</content>
+ <content>Document.TimeSheet</content>
+ <content>CommonCommand.OpenPartnersEmployee</content>
+ <content>Document.AdditionalAccrual</content>
+ <content>Document.AdditionalDeduction</content>
+ <content>AccumulationRegister.R9541T_VacationUsage</content>
+ <content>Document.CalculationDeservedVacations</content>
+ <content>Report.R9510A_Salary</content>
+ <content>Report.R3027A_CashAdvance</content>
+ <subsystems>Settings</subsystems>
+ <subsystems>Catalogs</subsystems>
+ <subsystems>PersonnelRecords</subsystems>
+ <subsystems>Other</subsystems>
 </mdclass:Subsystem>

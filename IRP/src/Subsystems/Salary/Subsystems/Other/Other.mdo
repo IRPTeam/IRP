@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="35608e78-9a59-4870-98c7-9f788ba1b4ef">
-  <name>Other</name>
-  <synonym>
-    <key>en</key>
-    <value>Other</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.AdditionalAccrual</content>
-  <content>Document.AdditionalDeduction</content>
-  <content>Document.CalculationDeservedVacations</content>
-  <content>Document.TimeSheet</content>
-  <parentSubsystem>Subsystem.Salary</parentSubsystem>
+ <name>Other</name>
+ <synonym>
+  <key>tr</key>
+  <value>Diğer</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Прочее</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Other</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.AdditionalAccrual</content>
+ <content>Document.AdditionalDeduction</content>
+ <content>Document.CalculationDeservedVacations</content>
+ <content>Document.TimeSheet</content>
+ <parentSubsystem>Subsystem.Salary</parentSubsystem>
 </mdclass:Subsystem>

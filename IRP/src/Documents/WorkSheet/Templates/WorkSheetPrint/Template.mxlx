@@ -114,6 +114,14 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Çalışma tutanağı [Number] [Date]</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Лист учета рабочего времени [Number] [Date]</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Work sheet [Number] [Date]</v8:content>
 						</v8:item>
@@ -152,6 +160,14 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Şirket:</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Организация:</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Company:</v8:content>
 						</v8:item>
@@ -175,6 +191,14 @@
 				<c>
 					<f>8</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Cari hesap:</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Партнер:</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Partner:</v8:content>
@@ -207,6 +231,14 @@
 					<f>11</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>#</v8:content>
 						</v8:item>
@@ -217,6 +249,14 @@
 				<c>
 					<f>12</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Malzeme</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Номенклатура</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Item</v8:content>
@@ -229,6 +269,14 @@
 					<f>13</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Varyant</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Характеристика</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Item key</v8:content>
 						</v8:item>
@@ -240,6 +288,14 @@
 					<f>14</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Miktar</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Количество</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Quantity</v8:content>
 						</v8:item>
@@ -250,6 +306,14 @@
 				<c>
 					<f>14</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Birim</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Unit</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Unit</v8:content>
@@ -311,6 +375,14 @@
 					<f>18</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Döviz:</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Валюты:</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Currency:</v8:content>
 						</v8:item>
@@ -339,6 +411,14 @@
 				<c>
 					<f>20</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Sorumlu:</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ответственный:</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Manager:</v8:content>

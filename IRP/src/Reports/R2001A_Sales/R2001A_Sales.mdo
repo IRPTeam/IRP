@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bc619040-e7a4-4078-98cd-f50cf2241644">
-  <producedTypes>
-    <objectType typeId="3276090a-c558-4324-a8a9-c5e54d0df1e3" valueTypeId="ab08ed67-6300-4890-95e6-61ae97404a00"/>
-    <managerType typeId="e7aa7aae-b49c-4363-aa93-6c20bbf9359c" valueTypeId="679aa738-025d-4071-9c6e-13e4d8fbd226"/>
-  </producedTypes>
-  <name>R2001A_Sales</name>
+ <producedTypes>
+  <objectType typeId="3276090a-c558-4324-a8a9-c5e54d0df1e3" valueTypeId="ab08ed67-6300-4890-95e6-61ae97404a00"/>
+  <managerType typeId="e7aa7aae-b49c-4363-aa93-6c20bbf9359c" valueTypeId="679aa738-025d-4071-9c6e-13e4d8fbd226"/>
+ </producedTypes>
+ <name>R2001A_Sales</name>
+ <synonym>
+  <key>tr</key>
+  <value>R2001A Satışlar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R2001A Продажи</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R2001A Sales</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R2001A_Sales.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="75bd9ff0-de23-43c5-8540-28f2b0516bf6">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R2001A Sales</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R2001A_Sales.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="75bd9ff0-de23-43c5-8540-28f2b0516bf6">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

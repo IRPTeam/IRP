@@ -47,6 +47,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	SerialLotNumbersServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
 	
 	InternalCommandsServer.CreateCommands(Form, Object, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
+	CatConfigurationMetadataServer.ApplyCustomizedAttributesToForm(Form, ObjectMetdata.FullName());
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Author") Then
 		Form.Items.Author.ReadOnly = UserSettingsServer.AllDocuments_AdditionalSettings_DisableChangeAuthor();
@@ -59,6 +60,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
+	ObjectMetdata = Object.Ref.Metadata();
+	InternalCommandsServer.RefreshCommands(Form, Object, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
 	Return;
 EndProcedure
 
@@ -1290,3 +1293,45 @@ Procedure SetListFormAppearance(Form)
 		AppearanceField.Use = True;
 	EndIf;
 EndProcedure
+
+Function IsDocument(Val Object) Export
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Ref")
+		And Metadata.Documents.Contains(Object.Ref.Metadata()) Then
+		Return True;
+	Else
+		Return False;
+	EndIf;		
+EndFunction
+	
+Procedure SetFilterForUnit(Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Items.Unit AS Unit
+	|FROM
+	|	Catalog.Items AS Items
+	|WHERE
+	|	Items.Ref = &Item
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Units.Ref AS Unit
+	|FROM
+	|	Catalog.Units AS Units
+	|WHERE
+	|	Units.Item = &Item
+	|	AND NOT Units.Item = VALUE(Catalog.Units.EmptyRef)";
+	
+	Query.SetParameter("Item", Item);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	ChoiceData = New ValueList();
+	While QuerySelection.Next() Do
+		ChoiceData.Add(QuerySelection.Unit);
+	EndDo;
+EndProcedure
+
+	
+	

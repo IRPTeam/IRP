@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ac85d9a2-adb0-4905-bc15-38ba2bffc337">
-  <name>Document_PhysicalInventory</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Physical inventory&quot;</value>
-  </synonym>
+ <name>Document_PhysicalInventory</name>
+ <synonym>
+  <key>tr</key>
+  <value>Belge "Fiziksel envanter"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ "Инвентаризация физических запасов"</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Document "Physical inventory"</value>
+ </synonym>
 </mdclass:Role>

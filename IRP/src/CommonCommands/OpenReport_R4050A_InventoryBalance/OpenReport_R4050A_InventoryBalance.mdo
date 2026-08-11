@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0b404e40-8308-4ee8-8f03-645763e82d38">
-  <name>OpenReport_R4050A_InventoryBalance</name>
-  <synonym>
-    <key>en</key>
-    <value>R4050A Inventory balance</value>
-  </synonym>
-  <group>NavigationPanelOrdinary</group>
-  <representation>Auto</representation>
+ <name>OpenReport_R4050A_InventoryBalance</name>
+ <synonym>
+  <key>tr</key>
+  <value>R4050A Stok bakiyesi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R4050A Ведомость по товарам организации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R4050A Inventory balance</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

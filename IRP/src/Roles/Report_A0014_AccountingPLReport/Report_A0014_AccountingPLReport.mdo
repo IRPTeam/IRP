@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6ced77e5-14fe-4238-a44e-c637e1ea4d77">
-  <name>Report_A0014_AccountingPLReport</name>
-  <synonym>
-    <key>en</key>
-    <value>Report A0014_AccountingPLReport</value>
-  </synonym>
+ <name>Report_A0014_AccountingPLReport</name>
+ <synonym>
+  <key>tr</key>
+  <value>Rapor A0014_MuhasebeKarZararRaporu</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет A0014_ОтчетПрибылиИУбытков</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report A0014_AccountingPLReport</value>
+ </synonym>
 </mdclass:Role>

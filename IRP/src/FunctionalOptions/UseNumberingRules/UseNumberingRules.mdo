@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="73d13e25-508a-456e-bcfd-af14fc533280">
-  <name>UseNumberingRules</name>
-  <synonym>
-    <key>en</key>
-    <value>Use numbering rules</value>
-  </synonym>
-  <location>Constant.UseNumberingRules</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.NumeratorGroups</content>
-  <content>InformationRegister.NumeratorCounters</content>
-  <content>Catalog.NumeratorBasicRules</content>
-  <content>CommonAttribute.NumeratorRules</content>
+ <name>UseNumberingRules</name>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanmak - Numaralandırma kuralları</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать правила нумерации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use numbering rules</value>
+ </synonym>
+ <location>Constant.UseNumberingRules</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.NumeratorGroups</content>
+ <content>InformationRegister.NumeratorCounters</content>
+ <content>Catalog.NumeratorBasicRules</content>
+ <content>CommonAttribute.NumeratorRules</content>
 </mdclass:FunctionalOption>

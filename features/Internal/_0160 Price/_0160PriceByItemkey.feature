@@ -341,11 +341,7 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
-		And I click choice button of "Unit" attribute in "ItemKeyList" table
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Boots (12 pcs)'    |
-		And I select current line in "List" table		
+		And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemKeyList" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "7 000,00" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
@@ -721,11 +717,7 @@ Scenario: _016010 check dependent prices calculation
 		And I input "Dependent Price New" text in the field named "Description_en"
 		And I input "Dependent Price New TR" text in the field named "Description_tr"
 		And I click "Ok" button
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Choice button of the field named "Source"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -1029,12 +1021,9 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 			| 'Input price'   | 'Item'    | 'Item key'   | 'Input unit'   | 'Price'    |
 			| ''              | 'Dress'   | 'XL/Green'   | 'pcs'          | ''         |
 	* Check Price calculation when change input price
+		And I activate field named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
-		And I click choice button of the attribute named "ItemKeyListInputUnit" in "ItemKeyList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from the drop-down list named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I move to the next attribute
 		And I activate field named "ItemKeyListInputPrice" in "ItemKeyList" table
@@ -1056,11 +1045,7 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 	* Check Price calculation when change Input unit
 		And I activate field named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
-		And I click choice button of the attribute named "ItemKeyListInputUnit" in "ItemKeyList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs'            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And "ItemKeyList" table became equal
 			| '#'   | 'Input price'   | 'Item'    | 'Item key'   | 'Input unit'   | 'Price'     |
@@ -1101,11 +1086,7 @@ Scenario: _016013 check price calculation in the documents (price by unit, Add b
 		* By box
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'       | 'Item key'    | 'Price type'           | 'Quantity'    | 'Unit'               |
 				| 'Boots'    | '7 000,00'    | '36/18SD'     | 'Basic Price Types'    | '1,000'       | 'Boots (12 pcs)'     |

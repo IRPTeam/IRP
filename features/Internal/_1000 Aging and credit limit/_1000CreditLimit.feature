@@ -139,11 +139,7 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Boots'    | '36/18SD'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme
 			And I move to "Other" tab
@@ -215,11 +211,7 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Boots'    | '36/18SD'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
@@ -291,11 +283,7 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Boots'    | '36/18SD'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			And I delete "$$SalesOrder20400014$$" variable
@@ -347,11 +335,7 @@ Scenario: _1000000 preparation (credit limit)
 	* Create CustomersAdvancesClosing
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I input current date in the field named "EndOfPeriod"
 		And I input current date in the field named "BeginOfPeriod"
 		And I click "Post and close" button
@@ -422,21 +406,13 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 		And I move to "Payments" tab
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Cash desk №1'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -579,21 +555,13 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 		And I move to "Payments" tab
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Cash desk №1'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table

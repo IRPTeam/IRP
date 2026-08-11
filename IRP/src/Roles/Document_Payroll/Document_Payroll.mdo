@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4ce2bbeb-1b79-45d9-a033-d60be6b47210">
-  <name>Document_Payroll</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Payroll&quot;</value>
-  </synonym>
+ <name>Document_Payroll</name>
+ <synonym>
+  <key>tr</key>
+  <value>Belge "Maaş Bordrosu"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ "Расчетная ведомость"</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Document "Payroll"</value>
+ </synonym>
 </mdclass:Role>

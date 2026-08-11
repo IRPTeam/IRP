@@ -12,55 +12,40 @@ Background:
 Scenario: check the filter by own company
 	And I click the button named "FormCreate"
 	* Check the filter by own company
-		And I click Select button of "Company" field
-		And "List" table became equal
-		| Description    |
-		| Main Company   |
-		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		And Delay 2
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Currency" field
-		Then "Companies" window is opened
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows 
 
 Scenario: check the filter by own company in the Cash transfer order
 	And I click the button named "FormCreate"
 	* Check the filter by own company
-		And I click Select button of "Company" field
-		And "List" table became equal
-		| Description    |
-		| Main Company   |
-		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		And Delay 2
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Sender" field
-		Then "Companies" window is opened
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter for bank accounts (cash account selection is not available) + filling in currency from a bank account
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I click the button named "FormChoose"
+	And I select "Main Company" exact value from "Company" drop-down list
 	* Check the filter by bank account
 		And I click Select button of "Account" field
 		And I save number of "List" table lines as "QS"
@@ -93,21 +78,20 @@ Scenario: check the filter for bank accounts (cash account selection is not avai
 	* Check the filter by string input
 		And Delay 2
 		And I input "Cash desk №1" text in "Account" field
-		And Delay 2
-		And I click Select button of "Currency" field
-		And "List" table does not contain lines
-			| Description     |
-			| Cash desk №1    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "CashAccount" became equal to 'Cash desk №1''    |
+		And the drop-down list of the form does not contain values
+			| 'Cash desk №1' |
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| Description       |
+			| Bank account, TRY |
+		And I select current line in "List" table
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
 	And I close all client application windows
 
 Scenario: check the filter by cash account (bank account selection is not available)
 	And I click the button named "FormCreate"
 	* Check the filter by bank account
-		And I click Select button of "Company" field
-		And I click the button named "FormChoose"
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I save number of "List" table lines as "QS"
 		Then "QS" variable is equal to 4
@@ -125,14 +109,14 @@ Scenario: check the filter by cash account (bank account selection is not availa
 	* Check the filter by string input
 		And Delay 2
 		And I input "Bank account, TRY" text in "Cash account" field
-		And Delay 2
-		And I click Select button of "Currency" field
-		And "List" table does not contain lines
-			| Description          |
-			| Bank account, TRY    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "CashAccount" became equal to 'Bank account, TRY''    |
+		And the drop-down list of the form does not contain values
+			| 'Bank account, TRY' |
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| Description       |
+			| Cash desk №1 |
+		And I select current line in "List" table
+		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
 	And I close all client application windows
 
 Scenario: check filling in Description
@@ -376,8 +360,7 @@ Scenario: check the choice of the type of document-basis in the documents of rec
 	
 Scenario: check the choice of currency in the bank payment document if the currency is indicated in the account
 # in this case you cannot change the currency (documents: Bank payment, Bank receipt)
-	And I click Select button of "Company" field
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Account" field
 	And I go to line in "List" table
 			| Description          |
@@ -385,11 +368,7 @@ Scenario: check the choice of currency in the bank payment document if the curre
 	And I select current line in "List" table
 	Then the form attribute named "Currency" became equal to "TRY"
 	* Change currency from lira to USD
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 	* Check that the document currency is the lira
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "Account" became equal to ""
@@ -397,8 +376,7 @@ Scenario: check the choice of currency in the bank payment document if the curre
 
 Scenario: check the choice of currency in the cash payment document if the currency is indicated in the account
 # in this case you cannot change the currency (documents: Cash payment, Cash receipt)
-	And I click Select button of "Company" field
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Cash account" field
 	And I go to line in "List" table
 			| Description     |
@@ -406,11 +384,7 @@ Scenario: check the choice of currency in the cash payment document if the curre
 	And I select current line in "List" table
 	Then the form attribute named "Currency" became equal to "TRY"
 	* Change currency from lira to USD
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 	* Check that the currency of the document has become USD while the Cash account field has cleared
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "CashAccount" became equal to ""
@@ -432,11 +406,7 @@ Scenario: create a temporary cash desk Cash account No. 4 with a strictly fixed 
 		| Main Company   |
 	And I select current line in "List" table
 	And I change the radio button named "CurrencyType" value to "Fixed"
-	And I click Choice button of the field named "Currency"
-	And I go to line in "List" table
-		| Code  | Description    |
-		| TRY   | Turkish lira   |
-	And I select current line in "List" table
+	And I select "TRY" exact value from the drop-down list named "Currency"
 	And I click the button named "FormWriteAndClose"
 	And Delay 5
 	Then I check for the "CashAccounts" catalog element with the "Description_en" "Cash desk №4"  

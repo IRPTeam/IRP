@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ae5bb6e3-32dd-473f-ba99-51ffd9e87c84">
+ <producedTypes>
+  <objectType typeId="3bf7afbd-0370-42ce-846e-460f5024a7ac" valueTypeId="dfd43c67-453e-4ef1-a908-69446f272b9b"/>
+  <managerType typeId="2e9a5aa1-32db-46e2-9cda-4229e45de9d3" valueTypeId="3a7a51d1-e1f3-4068-85fe-09a4102acdfa"/>
+ </producedTypes>
+ <name>RowIDInspector</name>
+ <synonym>
+  <key>tr</key>
+  <value>Row ID denetimi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Row ID Inspector</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Row ID Inspector</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.RowIDInspector.Form.Form</defaultForm>
+ <forms uuid="0208c6a4-0fa0-47d7-b568-9820b91b805e">
+  <name>Form</name>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="4eb2d87d-1fb8-4cf5-ad1d-0086347f3f45">
+  <name>RowIDInspector</name>
+  <synonym>
+   <key>tr</key>
+   <value>Row ID denetimci</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Row ID Inspector</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row ID Inspector</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
+</mdclass:DataProcessor>

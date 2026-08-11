@@ -1,85 +1,173 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0a7db1dd-cb35-45f2-b376-63ea12051807">
-  <producedTypes>
-    <refType typeId="eae0dd6a-10ac-48f4-b382-9f5d71176f43" valueTypeId="44b4edaa-cd6d-49e0-9a5b-01fe2ca7e05a"/>
-    <listType typeId="29c7191a-f6ff-4007-beeb-8b3c4a81dfc5" valueTypeId="816aea1f-ab9f-40b9-8c86-5a68808c46ff"/>
-    <managerType typeId="b4b52cfd-5280-4a3d-9865-540152aed1db" valueTypeId="16a25d9c-56dd-47ca-9c73-857e94e02093"/>
-  </producedTypes>
-  <name>IntegrationType</name>
+ <producedTypes>
+  <refType typeId="eae0dd6a-10ac-48f4-b382-9f5d71176f43" valueTypeId="44b4edaa-cd6d-49e0-9a5b-01fe2ca7e05a"/>
+  <listType typeId="29c7191a-f6ff-4007-beeb-8b3c4a81dfc5" valueTypeId="816aea1f-ab9f-40b9-8c86-5a68808c46ff"/>
+  <managerType typeId="b4b52cfd-5280-4a3d-9865-540152aed1db" valueTypeId="16a25d9c-56dd-47ca-9c73-857e94e02093"/>
+ </producedTypes>
+ <name>IntegrationType</name>
+ <synonym>
+  <key>tr</key>
+  <value>Entegrasyon tipi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Тип интеграции</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Integration type</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="674271c9-6555-4945-a116-81627a9b7321">
+  <name>Other</name>
   <synonym>
-    <key>en</key>
-    <value>Integration type</value>
+   <key>tr</key>
+   <value>Diğer</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="674271c9-6555-4945-a116-81627a9b7321">
-    <name>Other</name>
-    <synonym>
-      <key>en</key>
-      <value>Other</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b42a3939-5881-4535-a85d-0d8406134e0b">
-    <name>CurrencyRates</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency rates</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f154ff0d-7105-422b-bf50-054de6238e83">
-    <name>FileStorage</name>
-    <synonym>
-      <key>en</key>
-      <value>File storage</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ca0d76ed-ccb7-4f3f-ac27-fff09e19facb">
-    <name>LocalFileStorage</name>
-    <synonym>
-      <key>en</key>
-      <value>Local file storage</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="01d8ba4c-e1e7-4c4b-8f88-49dd92b8029b">
-    <name>Email</name>
-    <synonym>
-      <key>en</key>
-      <value>Email</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="2705b4b5-f98b-4274-9ab6-0145c1d50a8d">
-    <name>ClientBank</name>
-    <synonym>
-      <key>en</key>
-      <value>Client bank</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="6b85d29f-e2ba-4a50-bc04-be179628bb6e">
-    <name>SMSProvider</name>
-    <synonym>
-      <key>en</key>
-      <value>SMS provider</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="95a80b3a-57fe-4cb5-9de1-76e407620220">
-    <name>Equipment</name>
-    <synonym>
-      <key>en</key>
-      <value>Equipment</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="cb7b990a-99f7-4969-a757-b0e63a17e95e">
-    <name>VisitorCounter</name>
-    <synonym>
-      <key>en</key>
-      <value>Visitor counter</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="d8d76565-9bac-4ff5-b5db-7beb763f1a84">
-    <name>AccountingService</name>
-    <synonym>
-      <key>en</key>
-      <value>Accounting service</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительно</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Other</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b42a3939-5881-4535-a85d-0d8406134e0b">
+  <name>CurrencyRates</name>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz kurları</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Курсы валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency rates</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f154ff0d-7105-422b-bf50-054de6238e83">
+  <name>FileStorage</name>
+  <synonym>
+   <key>tr</key>
+   <value>Dosya depolama</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Файловое хранилище</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>File storage</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ca0d76ed-ccb7-4f3f-ac27-fff09e19facb">
+  <name>LocalFileStorage</name>
+  <synonym>
+   <key>tr</key>
+   <value>Lokal dosya depolama yeri</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Локальное файловое хранилище</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Local file storage</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="01d8ba4c-e1e7-4c4b-8f88-49dd92b8029b">
+  <name>Email</name>
+  <synonym>
+   <key>tr</key>
+   <value>E-posta</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Email</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Email</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="2705b4b5-f98b-4274-9ab6-0145c1d50a8d">
+  <name>ClientBank</name>
+  <synonym>
+   <key>tr</key>
+   <value>Banka entegrasyonu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Клиент банк</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Client bank</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="6b85d29f-e2ba-4a50-bc04-be179628bb6e">
+  <name>SMSProvider</name>
+  <synonym>
+   <key>tr</key>
+   <value>SMS sağlayıcısı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Провайдер SMS</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>SMS provider</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="95a80b3a-57fe-4cb5-9de1-76e407620220">
+  <name>Equipment</name>
+  <synonym>
+   <key>tr</key>
+   <value>Donanımlar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Оборудование</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Equipment</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="cb7b990a-99f7-4969-a757-b0e63a17e95e">
+  <name>VisitorCounter</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ziyaretçi sayacı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Счетчик посетителей</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Visitor counter</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="d8d76565-9bac-4ff5-b5db-7beb763f1a84">
+  <name>AccountingService</name>
+  <synonym>
+   <key>tr</key>
+   <value>Muhasebe servisi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сервис бухгалтерии</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Accounting service</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b743591e-8204-4cd1-90f5-139ee101f084">
+ <name>UseAdvanceRelevance</name>
+ <synonym>
+  <key>tr</key>
+  <value>Use advance relevance</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать актуальность авансов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use advance relevance</value>
+ </synonym>
+ <location>Constant.UseAdvanceRelevance</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>InformationRegister.T2016S_VendorsAdvancesRelevance</content>
+ <content>InformationRegister.T2017S_CustomersAdvancesRelevance</content>
+</mdclass:FunctionalOption>

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="94100865-4629-4766-a4b1-bf122434924f">
-  <name>PDFFunctionsClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>PDF functions client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>PDFFunctionsClientServer</name>
+ <synonym>
+  <key>tr</key>
+  <value>PDF fonksiyonları client server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Функции PDF клиент сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>PDF functions client server</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

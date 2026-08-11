@@ -114,6 +114,14 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Depo transfer siparişi [Number] [Date]</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Заказ на перемещение товаров [Number] [Date]</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Inventory transfer order [Number] [Date]</v8:content>
 						</v8:item>
@@ -152,6 +160,14 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Şirket:</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Организация:</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Company:</v8:content>
 						</v8:item>
@@ -175,6 +191,14 @@
 				<c>
 					<f>10</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Gönderen depo:</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Отправитель магазина:</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Store sender:</v8:content>
@@ -230,6 +254,14 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Alıcı depo:</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Получатель магазина:</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Store receiver:</v8:content>
 						</v8:item>
@@ -261,6 +293,14 @@
 					<f>12</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>#</v8:content>
 						</v8:item>
@@ -271,6 +311,14 @@
 				<c>
 					<f>13</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Malzeme</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Номенклатура</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Item</v8:content>
@@ -283,6 +331,14 @@
 					<f>14</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Varyant</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Характеристика</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Item key</v8:content>
 						</v8:item>
@@ -294,6 +350,14 @@
 					<f>15</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Miktar</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Количество</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Quantity</v8:content>
 						</v8:item>
@@ -304,6 +368,14 @@
 				<c>
 					<f>15</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Birim</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ед. изм.</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Unit</v8:content>
@@ -364,6 +436,14 @@
 				<c>
 					<f>19</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Sorumlu:</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ответственный:</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Manager:</v8:content>

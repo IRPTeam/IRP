@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2bcaf8ab-32cc-4635-bcae-9ffad0333224">
-  <name>UseSales</name>
-  <synonym>
-    <key>en</key>
-    <value>Use sales</value>
-  </synonym>
-  <location>Constant.UseSales</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>CommonCommand.OpenPartnersCustomer</content>
-  <content>Catalog.PartnersBankAccounts</content>
-  <content>Catalog.PriceTypes</content>
-  <content>Subsystem.SalesAR</content>
-  <content>Document.PriceList</content>
-  <content>Report.D2001_Sales</content>
-  <content>Document.SalesReportFromTradeAgent</content>
-  <content>Report.A1010_PartnersBalance</content>
-  <content>Document.SalesReportToConsignor</content>
-  <content>Document.SalesReturn</content>
-  <content>Document.CustomersAdvancesClosing</content>
-  <content>Report.R2001_Sales</content>
-  <content>Document.SalesInvoice</content>
-  <content>AccumulationRegister.R2001T_Sales</content>
-  <content>AccumulationRegister.R2021B_CustomersTransactions</content>
-  <content>AccumulationRegister.R2022B_CustomersPaymentPlanning</content>
-  <content>AccumulationRegister.R5020B_PartnersBalance</content>
-  <content>AccumulationRegister.R2020B_AdvancesFromCustomers</content>
-  <content>AccumulationRegister.R2002T_SalesReturns</content>
-  <content>AccumulationRegister.R5011B_CustomersAging</content>
-  <content>Report.R2001A_Sales</content>
-  <content>Report.D4011_FreeStocks</content>
-  <content>Report.D4012_StockReservation</content>
-  <content>Report.M1010A_PriceList</content>
-  <content>Report.R4050A_InventoryBalance</content>
-  <content>Report.R5020_PartnersBalance</content>
-  <content>Report.R5020A_PartnersBalance</content>
-  <content>CommonCommand.OpenReport_R2001A_Sales</content>
-  <content>CommonCommand.OpenReport_R5020A_PartnersBalance</content>
-  <content>CommonCommand.OpenReport_M1010A_PriceList</content>
-  <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
+ <name>UseSales</name>
+ <synonym>
+  <key>tr</key>
+  <value>Satış modülü kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать Продажи</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use sales</value>
+ </synonym>
+ <location>Constant.UseSales</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>CommonCommand.OpenPartnersCustomer</content>
+ <content>Catalog.PartnersBankAccounts</content>
+ <content>Catalog.PriceTypes</content>
+ <content>Subsystem.SalesAR</content>
+ <content>Document.PriceList</content>
+ <content>Report.D2001_Sales</content>
+ <content>Document.SalesReportFromTradeAgent</content>
+ <content>Report.A1010_PartnersBalance</content>
+ <content>Document.SalesReportToConsignor</content>
+ <content>Document.SalesReturn</content>
+ <content>Document.CustomersAdvancesClosing</content>
+ <content>Report.R2001_Sales</content>
+ <content>Document.SalesInvoice</content>
+ <content>AccumulationRegister.R2001T_Sales</content>
+ <content>AccumulationRegister.R2021B_CustomersTransactions</content>
+ <content>AccumulationRegister.R2022B_CustomersPaymentPlanning</content>
+ <content>AccumulationRegister.R5020B_PartnersBalance</content>
+ <content>AccumulationRegister.R2020B_AdvancesFromCustomers</content>
+ <content>AccumulationRegister.R2002T_SalesReturns</content>
+ <content>AccumulationRegister.R5011B_CustomersAging</content>
+ <content>Report.R2001A_Sales</content>
+ <content>Report.D4011_FreeStocks</content>
+ <content>Report.D4012_StockReservation</content>
+ <content>Report.M1010A_PriceList</content>
+ <content>Report.R4050A_InventoryBalance</content>
+ <content>Report.R5020_PartnersBalance</content>
+ <content>Report.R5020A_PartnersBalance</content>
+ <content>CommonCommand.OpenReport_R2001A_Sales</content>
+ <content>CommonCommand.OpenReport_R5020A_PartnersBalance</content>
+ <content>CommonCommand.OpenReport_M1010A_PriceList</content>
+ <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
 </mdclass:FunctionalOption>

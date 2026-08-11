@@ -215,11 +215,7 @@ Scenario: _028905 create document Goods Receipt based on Inventory transfer
 			Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 			And I click the button named "FormCreate"
 		* Filling in the main details of the document
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -283,11 +279,7 @@ Scenario: _028930 check link/unlink form in the GR
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -395,11 +387,7 @@ Scenario: _028930 check link/unlink form in the GR
 			| 'Boots'   | '36/18SD'    | '2,000'      | 'Store 02'    |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs'            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And "RowIDInfo" table contains lines
 			| 'Basis'                                            | 'Next step'   | 'Quantity'    |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08'   | ''            | '10,000'      |
@@ -462,11 +450,7 @@ Scenario: _028931 check link/unlink form in the GR (Sales return)
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |

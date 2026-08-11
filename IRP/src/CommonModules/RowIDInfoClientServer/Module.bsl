@@ -98,6 +98,14 @@ Function GetLinkedDocumentsFilter_PO(Object) Export
 	Return Filter;
 EndFunction
 
+Function GetLinkedDocumentsFilter_SO(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company"          , Object.Company);
+	Filter.Insert("Branch"           , Object.Branch);
+	Filter.Insert("Ref"              , Object.Ref);
+	Return Filter;
+EndFunction
+
 Function GetLinkedDocumentsFilter_PI(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"                  , Object.Company);

@@ -36,18 +36,13 @@ Scenario: _029501 create Bundling (Store does not use Shipment confirmation and 
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Item bundle" field
 	And I go to line in "List" table
 		| 'Description'     |
 		| 'Scarf + Dress'   |
 	And I select current line in "List" table
-	And I click Choice button of the field named "Unit"
-	And I select current line in "List" table
+	And I select "pcs" exact value from the drop-down list named "Unit"
 	And I click Select button of "Store" field
 	And I go to line in "List" table
 		| 'Description'   |
@@ -107,18 +102,13 @@ Scenario: _029507 create Bundling ( Store use Shipment confirmation and Goods re
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And I click the button named "FormCreate"
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Item bundle" field
 	And I go to line in "List" table
 		| 'Description'     |
 		| 'Scarf + Dress'   |
 	And I select current line in "List" table
-	And I click Choice button of the field named "Unit"
-	And I select current line in "List" table
+	And I select "pcs" exact value from the drop-down list named "Unit"
 	And I click Select button of "Store" field
 	And I go to line in "List" table
 		| 'Description'   |
@@ -204,18 +194,13 @@ Scenario: _029516 checking duplicate specifications when creating the same bundl
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| 'Description'      |
 			| 'Scarf + Dress'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -270,21 +255,13 @@ Scenario: _029518 creating a bundle of 2 different properties + one repeating of
 	* Create bundle
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| 'Description'      |
 			| 'Scarf + Dress'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
-			| Description    |
-			| pcs            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -394,18 +371,13 @@ Scenario: _029519 create Bundling (Store use Goods receipt, does not use Shipmen
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| 'Description'               |
 			| 'Skittles + Chewing gum'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -465,18 +437,13 @@ Scenario: _029520 create Bundling (Store use Shipment confirmation, does not use
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| 'Description'               |
 			| 'Skittles + Chewing gum'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |

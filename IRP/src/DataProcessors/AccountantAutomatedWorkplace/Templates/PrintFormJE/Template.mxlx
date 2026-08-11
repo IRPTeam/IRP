@@ -87,6 +87,14 @@
 					<f>4</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Hesap Borç </v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Счет Дт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Account Dr</v8:content>
 						</v8:item>
@@ -97,6 +105,14 @@
 				<c>
 					<f>5</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Borç kırılım</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Субконто Дт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Ext. Dim. Debit</v8:content>
@@ -109,6 +125,14 @@
 					<f>5</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dt tutarı</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сумма Дт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Dr amount</v8:content>
 						</v8:item>
@@ -119,6 +143,14 @@
 				<c>
 					<f>5</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Hesap Alacak </v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Счет Кт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Account Cr</v8:content>
@@ -131,6 +163,14 @@
 					<f>6</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Alacak kırılım</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Субконто Кт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Ext. Dim. Credit</v8:content>
 						</v8:item>
@@ -142,6 +182,14 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Ct tutarı</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сумма Кт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Cr amount</v8:content>
 						</v8:item>
@@ -152,6 +200,14 @@
 				<c>
 					<f>8</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Tutar</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сумма</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Amount</v8:content>
@@ -181,6 +237,16 @@
 					<f>11</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>[CurrencyAmountDr]
+[CurrencyDr]</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>[CurrencyAmountDr]
+[CurrencyDr]</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>[CurrencyAmountDr]
 [CurrencyDr]</v8:content>
@@ -204,6 +270,16 @@
 				<c>
 					<f>13</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>[CurrencyAmountCr]
+[CurrencyCr]</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>[CurrencyAmountCr]
+[CurrencyCr]</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>[CurrencyAmountCr]
@@ -240,6 +316,16 @@
 					<f>11</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>[CurrencyAmountDr]
+[CurrencyDr]</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>[CurrencyAmountDr]
+[CurrencyDr]</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>[CurrencyAmountDr]
 [CurrencyDr]</v8:content>
@@ -263,6 +349,16 @@
 				<c>
 					<f>13</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>[CurrencyAmountCr]
+[CurrencyCr]</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>[CurrencyAmountCr]
+[CurrencyCr]</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>[CurrencyAmountCr]

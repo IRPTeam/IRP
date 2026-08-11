@@ -69,11 +69,60 @@ Scenario: _1000000 preparation (payment terms)
 		And I close all client application windows
 	* Load customers advance closing document
 		When Create document CustomersAdvancesClosing objects (without branch)
-	* Post all customers advance closing
-		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"	
+	* Post fixture customers advance closings one by one
+	# The closing left posted by _1000CreditLimit must stay unposted: its current-date period overlaps
+	# closing 4 and the overlapping-period control would block posting closing 4. So no blanket "post all" here.
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"	
-		And in the table "List" I click the button named "ListContextMenuPost"		
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '3'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '4'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '5'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '6'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '9'         |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '10'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '11'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '12'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '13'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '14'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '17'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '18'        |
+		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay 5
 		And I close all client application windows
 	* Load Opening entry, Bank receipt
@@ -246,22 +295,14 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 		* Select company
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in the details of the document
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
 				| 'Description'      |
 				| 'Cash desk №2'     |
 			And I select current line in "List" table
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| 'Code'     |
-				| 'TRY'      |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "Currency"
 		* Filling in the tabular part
 			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -341,11 +382,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 			Given I open hyperlink "e1cib/list/Document.BankReceipt"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| Description       |
-					| Main Company      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Account" field
 				And I go to line in "List" table
@@ -432,10 +469,13 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | '1'           | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Local currency'               | 'TRY'                  | '550,00' | 'Customers advance closing 4*' |
 				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | '2'           | 'Main Company' | ''       | 'USD'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Reporting currency'           | 'TRY'                  | '94,16'  | 'Customers advance closing 4*' |
 				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | '3'           | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'en description is empty'      | 'TRY'                  | '550,00' | 'Customers advance closing 4*' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | '1'           | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Local currency'               | 'TRY'                  | '450,00' | 'Customers advance closing 4*' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | '2'           | 'Main Company' | ''       | 'USD'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Reporting currency'           | 'TRY'                  | '77,04'  | 'Customers advance closing 4*' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | '3'           | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'en description is empty'      | 'TRY'                  | '450,00' | 'Customers advance closing 4*' |		
-			Then the number of "List" table lines is "равно" "12"
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | '1'           | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Local currency'               | 'TRY'                  | '200,00' | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | '2'           | 'Main Company' | ''       | 'USD'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Reporting currency'           | 'TRY'                  | '34,24'  | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | '3'           | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Local currency'               | 'TRY'                  | '250,00' | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | '4'           | 'Main Company' | ''       | 'USD'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Reporting currency'           | 'TRY'                  | '42,80'  | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | '5'           | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'en description is empty'      | 'TRY'                  | '200,00' | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | '6'           | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'en description is empty'      | 'TRY'                  | '250,00' | 'Customers advance closing 4*' |
+			Then the number of "List" table lines is "равно" "15"
 			And I close all client application windows
 
 
@@ -444,11 +484,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the basis document for debt write-offs
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
@@ -511,13 +547,16 @@ Scenario: _1000020 create Credit note and check Aging register movements
 				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Local currency'               | 'TRY'                  | '550,00' | 'Customers advance closing 4*' |
 				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'Main Company' | ''       | 'USD'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Reporting currency'           | 'TRY'                  | '94,16'  | 'Customers advance closing 4*' |
 				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'en description is empty'      | 'TRY'                  | '550,00' | 'Customers advance closing 4*' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Local currency'               | 'TRY'                  | '450,00' | 'Customers advance closing 4*' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'Main Company' | ''       | 'USD'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Reporting currency'           | 'TRY'                  | '77,04'  | 'Customers advance closing 4*' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'en description is empty'      | 'TRY'                  | '450,00' | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Local currency'               | 'TRY'                  | '200,00' | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'Main Company' | ''       | 'USD'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Reporting currency'           | 'TRY'                  | '34,24'  | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Local currency'               | 'TRY'                  | '250,00' | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'Main Company' | ''       | 'USD'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Reporting currency'           | 'TRY'                  | '42,80'  | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'en description is empty'      | 'TRY'                  | '200,00' | 'Customers advance closing 4*' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'en description is empty'      | 'TRY'                  | '250,00' | 'Customers advance closing 4*' |
 				| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Local currency'               | 'TRY'                  | '100,00' | 'Customers advance closing 4*' |
 				| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'Main Company' | ''       | 'USD'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Reporting currency'           | 'TRY'                  | '17,12'  | 'Customers advance closing 4*' |
 				| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'en description is empty'      | 'TRY'                  | '100,00' | 'Customers advance closing 4*' |
-			Then the number of "List" table lines is "равно" "15"
+			Then the number of "List" table lines is "равно" "18"
 	And I close all client application windows
 			
 
@@ -526,11 +565,7 @@ Scenario: _1000030 create Debit note and check Aging register movements (with ba
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in the basis document for debt write-offs
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
@@ -595,14 +630,15 @@ Scenario: _1000030 create Debit note and check Aging register movements (with ba
 			| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                             |
 			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                             |
 			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advance closing 4*' |
-			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
+			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '200,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
+			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '250,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
 			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
 			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'USD'      | 'Main Company' | ''       | 'Kalipso' | '17,12'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
 			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
 			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                             |
 			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'USD'      | 'Main Company' | ''       | 'Kalipso' | '8,56'   | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                             |
 			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                             |
-		Then the number of "List" table lines is "равно" "18"
+		Then the number of "List" table lines is "равно" "21"
 	And I close all client application windows
 				
 Scenario: _1000050 check the offset of Sales invoice advance (type of settlement by documents)
@@ -611,11 +647,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			Given I open hyperlink "e1cib/list/Document.BankReceipt"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| Description       |
-					| Main Company      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Account" field
 				And I go to line in "List" table
@@ -644,11 +676,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			Given I open hyperlink "e1cib/list/Document.CashReceipt"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Cash account" field
 				And I go to line in "List" table
@@ -678,11 +706,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			Given I open hyperlink "e1cib/list/Document.BankReceipt"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| Description       |
-					| Main Company      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Account" field
 				And I go to line in "List" table
@@ -740,11 +764,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			Given I open hyperlink "e1cib/list/Document.CashReceipt"
 			And I click the button named "FormCreate"
 			* Select company
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| Description       |
-					| Main Company      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 			* Filling in the details of the document
 				And I click Select button of "Cash account" field
 				And I go to line in "List" table
@@ -819,7 +839,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date' | 'Aging closing'                |
 				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | ''                             |
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | ''                             |
-				| '$$SalesInvoice024016$$'  | 'USD'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advance closing 4*' |
+				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advance closing 4*' |
 			And I close all client application windows	
 
 Scenario: _1000055 check Aging sum when delete row from SI

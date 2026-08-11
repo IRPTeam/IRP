@@ -1,383 +1,607 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0c03dfc5-6581-47c1-aa3a-343bdf65e687">
-  <producedTypes>
-    <selectionType typeId="e285a7c9-ae79-4698-86f0-37ab937abef4" valueTypeId="1c9b5a05-8dfe-4e26-86db-5cc75f514266"/>
-    <listType typeId="6cf494d9-a355-4bf8-975e-40991b443178" valueTypeId="5e960201-55e8-492e-bf9e-a13561d99b76"/>
-    <managerType typeId="34c6db0b-a422-4c16-9780-d78338cad8ed" valueTypeId="3b74f708-243e-45c5-a06d-88044c015c19"/>
-    <recordSetType typeId="f0ca865a-dbad-4339-8892-addd3f364e39" valueTypeId="40ed8289-9b4c-465f-af27-ff18ef7eb97b"/>
-    <recordKeyType typeId="53ae6222-0534-4fe0-b9eb-12085665c626" valueTypeId="ef0dab42-af87-44f6-9440-eda31495be44"/>
-    <recordType typeId="f7c0842f-f5ce-4631-8e3d-0abe5cbb82cb" valueTypeId="bb75f43a-3cc9-4ea3-9bf1-72ddfd24fe4f"/>
-  </producedTypes>
-  <name>R6060T_CostOfGoodsSold</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0c03dfc5-6581-47c1-aa3a-343bdf65e687">
+ <producedTypes>
+  <selectionType typeId="e285a7c9-ae79-4698-86f0-37ab937abef4" valueTypeId="1c9b5a05-8dfe-4e26-86db-5cc75f514266"/>
+  <listType typeId="6cf494d9-a355-4bf8-975e-40991b443178" valueTypeId="5e960201-55e8-492e-bf9e-a13561d99b76"/>
+  <managerType typeId="34c6db0b-a422-4c16-9780-d78338cad8ed" valueTypeId="3b74f708-243e-45c5-a06d-88044c015c19"/>
+  <recordSetType typeId="f0ca865a-dbad-4339-8892-addd3f364e39" valueTypeId="40ed8289-9b4c-465f-af27-ff18ef7eb97b"/>
+  <recordKeyType typeId="53ae6222-0534-4fe0-b9eb-12085665c626" valueTypeId="ef0dab42-af87-44f6-9440-eda31495be44"/>
+  <recordType typeId="f7c0842f-f5ce-4631-8e3d-0abe5cbb82cb" valueTypeId="bb75f43a-3cc9-4ea3-9bf1-72ddfd24fe4f"/>
+ </producedTypes>
+ <name>R6060T_CostOfGoodsSold</name>
+ <synonym>
+  <key>tr</key>
+  <value>R6060 Satılan malın maliyeti</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R6060 Себестоимость реализованный товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R6060 Cost of goods sold</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="14ed000e-e1af-46c7-bdc0-a376975ec56a">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R6060 Cost of goods sold</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="14ed000e-e1af-46c7-bdc0-a376975ec56a">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="3aa260eb-3056-464e-be3c-a18188fd80ca">
-    <name>InvoiceAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Invoice amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="3a1a5009-aac8-45c5-bf0b-c561d71974ad">
-    <name>InvoiceTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Invoice tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="12ca2c7b-349f-4784-98d7-fc27c5952a7d">
-    <name>IndirectCostAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Indirect cost amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="71d3becc-6bac-4be2-9ad3-dad6e2185745">
-    <name>IndirectCostTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Indirect cost tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="f9102d56-0140-4400-b342-cc48d2a30367">
-    <name>ExtraCostAmountByRatio</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra cost amount by ratio</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="e62b4391-d105-473a-a771-a40a2cbbb28c">
-    <name>ExtraCostTaxAmountByRatio</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra cost tax amount by ratio</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="a6836b9c-a53d-44ee-a5d8-390a79359222">
-    <name>ExtraDirectCostAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra direct cost amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="7253ad33-1fe3-46ff-b6c0-4a5e742cd8f5">
-    <name>ExtraDirectCostTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra direct cost tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="fd96dbbd-cfbe-4af0-a19f-255e1494e023">
-    <name>AllocatedCostAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Allocated cost amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="848ed1fc-8edb-4d07-a546-000703f6a3b3">
-    <name>AllocatedCostTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Allocated cost tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="9a3a9598-cc8e-4838-a450-d7a31e8e55d7">
-    <name>AllocatedRevenueAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Allocated revenue amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="72691861-9735-471b-b808-27a10f3d3b3c">
-    <name>AllocatedRevenueTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Allocated revenue tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="3401dda5-30d0-4ff4-bb21-eca685d8e050">
-    <name>TotalAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Total amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="3f432477-9cbc-40ce-a315-8cd0da17c90d">
-    <name>TotalNetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Total net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="0f7edb72-de01-4509-bbed-67b4e0b1bcdf">
-    <name>TotalTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Total tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="eb9aeaff-e684-4121-8025-65c23cbc43da">
-    <name>PreliminaryQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Preliminary quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="c53abd51-de78-428a-ad59-c3776fe9493e">
-    <name>PreliminaryAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Preliminary amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="b22614b2-e4a6-46df-954d-c7334c052801">
-    <name>PreliminaryTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Preliminary tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="8c8f1709-0dba-4082-93ce-434a813d07a5">
-    <name>CalculationMovementCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Calculation movement cost</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CalculationMovementCosts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="5c48e7a3-82fb-4588-9270-b1b099fc48ab">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="c117283c-59d6-4360-acc3-483cb10613a2">
-    <name>SalesInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales invoice</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.SalesReportFromTradeAgent</types>
-      <types>DocumentRef.RetailReturnReceipt</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.SalesReportToConsignor</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="df76f4b8-573e-4d0f-9ea5-ba71141b07f3">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="3dbeef2f-0811-484a-8eba-8c6431469f40">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="56b9c017-f8cf-4c59-a0ac-358d10b2931c">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="9b478231-9537-4c15-a728-2ed9ffc2587d">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="5ed1afde-f92b-466a-b828-c3593c4bbed2">
-    <name>SourceOfOrigin</name>
-    <synonym>
-      <key>en</key>
-      <value>Source of origin</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SourceOfOrigins</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Количество</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="3aa260eb-3056-464e-be3c-a18188fd80ca">
+  <name>InvoiceAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura tutarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Инвойсная стоимость сумма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Invoice amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="3a1a5009-aac8-45c5-bf0b-c561d71974ad">
+  <name>InvoiceTaxAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura vergi tutarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налогов инвойсной стоимости</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Invoice tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="12ca2c7b-349f-4784-98d7-fc27c5952a7d">
+  <name>IndirectCostAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Dolaylı maliyet tutarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма косвенных расходов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Indirect cost amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="71d3becc-6bac-4be2-9ad3-dad6e2185745">
+  <name>IndirectCostTaxAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Dolaylı maliyet vergi tutarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налогов косвенных расходов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Indirect cost tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="f9102d56-0140-4400-b342-cc48d2a30367">
+  <name>ExtraCostAmountByRatio</name>
+  <synonym>
+   <key>tr</key>
+   <value>Orana göre ek maliyet miktarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Доп. стоимость по коефф.</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Extra cost amount by ratio</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="e62b4391-d105-473a-a771-a40a2cbbb28c">
+  <name>ExtraCostTaxAmountByRatio</name>
+  <synonym>
+   <key>tr</key>
+   <value>Oranla ek maliyet vergi tutarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налогов доп. стоимости по коефф.</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Extra cost tax amount by ratio</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="a6836b9c-a53d-44ee-a5d8-390a79359222">
+  <name>ExtraDirectCostAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ekstra doğrudan maliyet tutarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма косвенной стоимости</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Extra direct cost amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="7253ad33-1fe3-46ff-b6c0-4a5e742cd8f5">
+  <name>ExtraDirectCostTaxAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ek doğrudan maliyet vergi miktarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налоговой прямой стоимости</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Extra direct cost tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="fd96dbbd-cfbe-4af0-a19f-255e1494e023">
+  <name>AllocatedCostAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Tahsis edilen maliyet miktarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доп. расходов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Allocated cost amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="848ed1fc-8edb-4d07-a546-000703f6a3b3">
+  <name>AllocatedCostTaxAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ayrılan maliyet vergi miktarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налогов доп. расходов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Allocated cost tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="9a3a9598-cc8e-4838-a450-d7a31e8e55d7">
+  <name>AllocatedRevenueAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Dağıtılan gelir miktarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доп. доходов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Allocated revenue amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="72691861-9735-471b-b808-27a10f3d3b3c">
+  <name>AllocatedRevenueTaxAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ayrılan gelir vergisi tutarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налогов доп. доходов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Allocated revenue tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="3401dda5-30d0-4ff4-bb21-eca685d8e050">
+  <name>TotalAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Toplam tutar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Итого</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Total amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="3f432477-9cbc-40ce-a315-8cd0da17c90d">
+  <name>TotalNetAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Toplam net tutar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма без налогов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Total net amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="0f7edb72-de01-4509-bbed-67b4e0b1bcdf">
+  <name>TotalTaxAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Toplam vergi tutarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Налоги</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Total tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="eb9aeaff-e684-4121-8025-65c23cbc43da">
+  <name>PreliminaryQuantity</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ön miktar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Предварительное количество</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Preliminary quantity</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="c53abd51-de78-428a-ad59-c3776fe9493e">
+  <name>PreliminaryAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ön tutar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Предварительная сумма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Preliminary amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="b22614b2-e4a6-46df-954d-c7334c052801">
+  <name>PreliminaryTaxAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ön vergi tutarı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Предварительная сумма налога</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Preliminary tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="8c8f1709-0dba-4082-93ce-434a813d07a5">
+  <name>CalculationMovementCost</name>
+  <synonym>
+   <key>tr</key>
+   <value>Maliyet hesaplama fişi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Расчет себестоимости товаров</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Calculation movement cost</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.CalculationMovementCosts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="5c48e7a3-82fb-4588-9270-b1b099fc48ab">
+  <name>Company</name>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="c117283c-59d6-4360-acc3-483cb10613a2">
+  <name>SalesInvoice</name>
+  <synonym>
+   <key>tr</key>
+   <value>Satış faturası</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Реализация товаров и услуг</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Sales invoice</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.SalesReportFromTradeAgent</types>
+   <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.SalesReturn</types>
+   <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.SalesReportToConsignor</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="df76f4b8-573e-4d0f-9ea5-ba71141b07f3">
+  <name>ItemKey</name>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="3dbeef2f-0811-484a-8eba-8c6431469f40">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency movement type</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="56b9c017-f8cf-4c59-a0ac-358d10b2931c">
+  <name>Currency</name>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="9b478231-9537-4c15-a728-2ed9ffc2587d">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Серия номенклатуры</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Serial lot number</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="5ed1afde-f92b-466a-b828-c3593c4bbed2">
+  <name>SourceOfOrigin</name>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Источник происхождения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Source of origin</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SourceOfOrigins</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

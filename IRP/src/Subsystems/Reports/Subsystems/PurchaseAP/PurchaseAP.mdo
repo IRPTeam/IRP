@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3dd5df2a-a2dc-4a7d-ab73-316b9ec4b305">
-  <name>PurchaseAP</name>
-  <synonym>
-    <key>en</key>
-    <value>Purchase  - A/P</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>CommonCommand.OpenReport_R1001A_Purchases</content>
-  <content>CommonCommand.OpenReport_R1010A_PurchaseOrders</content>
-  <content>CommonCommand.OpenReport_R1011A_PuchaseOrdersShipment</content>
-  <content>CommonCommand.OpenReport_R1012A_PurchaseOrdersInvoiceClosing</content>
-  <content>CommonCommand.OpenReport_R1031B_ReceiptInvoicingMovements</content>
-  <content>CommonCommand.OpenReport_R1031A_ReceiptInvoicingBalance</content>
-  <content>CommonCommand.OpenReport_R5020A_PartnersBalance</content>
-  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+ <name>PurchaseAP</name>
+ <synonym>
+  <key>tr</key>
+  <value>Alımlar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Закупки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Purchase  - A/P</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>CommonCommand.OpenReport_R1001A_Purchases</content>
+ <content>CommonCommand.OpenReport_R1010A_PurchaseOrders</content>
+ <content>CommonCommand.OpenReport_R1011A_PurchaseOrdersShipment</content>
+ <content>CommonCommand.OpenReport_R1012A_PurchaseOrdersInvoiceClosing</content>
+ <content>CommonCommand.OpenReport_R1031B_ReceiptInvoicingMovements</content>
+ <content>CommonCommand.OpenReport_R1031A_ReceiptInvoicingBalance</content>
+ <content>CommonCommand.OpenReport_R5020A_PartnersBalance</content>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

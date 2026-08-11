@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7ad45d98-0bc8-4a4b-8d85-2f124614b350">
-  <name>OpenReport_A0010_TrialBalance</name>
-  <synonym>
-    <key>en</key>
-    <value>A0010 Trial balance</value>
-  </synonym>
-  <group>NavigationPanelOrdinary</group>
-  <representation>Auto</representation>
+ <name>OpenReport_A0010_TrialBalance</name>
+ <synonym>
+  <key>tr</key>
+  <value>A0010 Genel mizan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>A0010 Оборотно сальдовая ведомость</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>A0010 Trial balance</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

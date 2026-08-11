@@ -1,310 +1,470 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="30b84b3d-94b9-48d4-acbf-5b30fe5d0df5">
-  <producedTypes>
-    <objectType typeId="c6b625c6-0087-440a-a7cf-316cc8d8b137" valueTypeId="e9ede54a-d8fe-41a2-8df9-8cebe92d76c6"/>
-    <refType typeId="6b6caf07-c227-4842-b456-c71aeee43d13" valueTypeId="fd06b24e-6a83-46d9-80ee-cf1809972d0b"/>
-    <selectionType typeId="388ae3c6-9a64-405e-b85a-19834e90fa54" valueTypeId="257f9313-5ac5-4770-84cd-08afdfb4f7c3"/>
-    <listType typeId="105cf17f-f6e5-4415-9ffb-0269ee386bfb" valueTypeId="1e0e6b75-948e-40e8-b198-14495d4ab7ce"/>
-    <managerType typeId="a7b77c35-6962-4d36-b205-1c0454e2eb40" valueTypeId="96b53d12-e2c3-429c-a67e-b288700cc5ce"/>
-  </producedTypes>
-  <name>TransformationRules</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="30b84b3d-94b9-48d4-acbf-5b30fe5d0df5">
+ <producedTypes>
+  <objectType typeId="c6b625c6-0087-440a-a7cf-316cc8d8b137" valueTypeId="e9ede54a-d8fe-41a2-8df9-8cebe92d76c6"/>
+  <refType typeId="6b6caf07-c227-4842-b456-c71aeee43d13" valueTypeId="fd06b24e-6a83-46d9-80ee-cf1809972d0b"/>
+  <selectionType typeId="388ae3c6-9a64-405e-b85a-19834e90fa54" valueTypeId="257f9313-5ac5-4770-84cd-08afdfb4f7c3"/>
+  <listType typeId="105cf17f-f6e5-4415-9ffb-0269ee386bfb" valueTypeId="1e0e6b75-948e-40e8-b198-14495d4ab7ce"/>
+  <managerType typeId="a7b77c35-6962-4d36-b205-1c0454e2eb40" valueTypeId="96b53d12-e2c3-429c-a67e-b288700cc5ce"/>
+ </producedTypes>
+ <name>TransformationRules</name>
+ <synonym>
+  <key>tr</key>
+  <value>Dönüşüm kuralları</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Правила трансформации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Transformation rules</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.TransformationRules.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.TransformationRules.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.TransformationRules.Form.ItemForm</defaultObjectForm>
+ <attributes uuid="c4387bc1-bbda-46e6-8131-a95e9389a074">
+  <name>SourceType</name>
   <synonym>
-    <key>en</key>
-    <value>Transformation rules</value>
+   <key>tr</key>
+   <value>Kaynak tür</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.TransformationRules.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.TransformationRules.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>ru</key>
+   <value>Тип источника</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Source type</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ConfigurationMetadata</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.TransformationRules.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="c4387bc1-bbda-46e6-8131-a95e9389a074">
-    <name>SourceType</name>
-    <synonym>
-      <key>en</key>
-      <value>Source type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ConfigurationMetadata</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b809bd3a-7f9f-43fb-9244-d9462e28b010">
+  <name>TargetType</name>
+  <synonym>
+   <key>tr</key>
+   <value>Hedef tür</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Целевой тип</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Target type</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ConfigurationMetadata</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="51f5d169-6616-4380-b223-cdb9ac0033f3">
+  <name>SourceCondition</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak koşul</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Условие источника</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Source condition</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="d1f8f7f7-e39f-47ee-9263-cbea22c650f2">
+  <name>AutoTransform</name>
+  <synonym>
+   <key>tr</key>
+   <value>Otomatik dönüşüm</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Автотрансформация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Auto transform</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="073be237-c76d-4774-9ea2-c76c9535f363">
+  <name>UpdateLinkedTarget</name>
+  <synonym>
+   <key>tr</key>
+   <value>Bağlantılı hedefi güncelle</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Обновить связанный целевой объект</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Update linked target</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="aa561300-73d7-41af-a192-3c05cbc0206b">
+  <producedTypes>
+   <objectType typeId="7566924c-8e84-409b-b861-c9bf103e2b53" valueTypeId="007d5152-4b6d-43bb-8900-9103b4546360"/>
+   <rowType typeId="6d63dd0e-029f-47e2-ae29-62d0f98923b6" valueTypeId="b57f9751-7792-4ded-ad22-83908d45d166"/>
+  </producedTypes>
+  <name>Mapping</name>
+  <synonym>
+   <key>tr</key>
+   <value>Veri eşleme</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сопоставление</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Mapping</value>
+  </synonym>
+  <attributes uuid="de9b6a77-a716-467e-af0d-b2239bb0089d">
+   <name>SourceAttribute</name>
+   <synonym>
+    <key>tr</key>
+    <value>Kaynak özniteliği</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Атрибут источника</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Source attribute</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="b809bd3a-7f9f-43fb-9244-d9462e28b010">
-    <name>TargetType</name>
-    <synonym>
-      <key>en</key>
-      <value>Target type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ConfigurationMetadata</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="bd1946c4-b226-4fa8-a7cf-41ef40c474be">
+   <name>TargetAttribute</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hedef niteliği</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Целевой атрибут</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Target attribute</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="51f5d169-6616-4380-b223-cdb9ac0033f3">
-    <name>SourceCondition</name>
-    <synonym>
-      <key>en</key>
-      <value>Source condition</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="39e50f5c-b5de-43b7-9622-9678025aab13">
+   <name>Copy</name>
+   <synonym>
+    <key>tr</key>
+    <value>Kopyala</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Копировать</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Copy</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="d1f8f7f7-e39f-47ee-9263-cbea22c650f2">
-    <name>AutoTransform</name>
-    <synonym>
-      <key>en</key>
-      <value>Auto transform</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="76b4b615-fcf3-401e-8fd3-b43e8011d0f9">
+   <name>LockTargetAttribute</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hedef niteliğini kilitle</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Заблокировать целевой атрибут</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Lock target attribute</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="073be237-c76d-4774-9ea2-c76c9535f363">
-    <name>UpdateLinkedTarget</name>
-    <synonym>
-      <key>en</key>
-      <value>Update linked target</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="029d4989-fe1b-4409-934f-ffa6ad6824b0">
+   <name>EvalTargetAttribute</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hedef niteliğini değerlendir</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вычислить целевой атрибут</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Eval target attribute</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <toolTip>
+    <key>tr</key>
+    <value>"Kaynak"ın Referans olarak ve "KaynakSatırı"nın kaynaktan geçerli satır olarak kullanılabileceği bazı kodları değerlendirin</value>
+   </toolTip>
+   <toolTip>
+    <key>ru</key>
+    <value>Выполнить код, где можно использовать "Source" как Ref, и "SourceRow" как текущую строку из источника</value>
+   </toolTip>
+   <toolTip>
+    <key>en</key>
+    <value>Eval some code where can be used "Source" as Ref, And "SourceRow" as current row from source</value>
+   </toolTip>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="aa561300-73d7-41af-a192-3c05cbc0206b">
-    <producedTypes>
-      <objectType typeId="7566924c-8e84-409b-b861-c9bf103e2b53" valueTypeId="007d5152-4b6d-43bb-8900-9103b4546360"/>
-      <rowType typeId="6d63dd0e-029f-47e2-ae29-62d0f98923b6" valueTypeId="b57f9751-7792-4ded-ad22-83908d45d166"/>
-    </producedTypes>
-    <name>Mapping</name>
-    <synonym>
-      <key>en</key>
-      <value>Mapping</value>
-    </synonym>
-    <attributes uuid="de9b6a77-a716-467e-af0d-b2239bb0089d">
-      <name>SourceAttribute</name>
-      <synonym>
-        <key>en</key>
-        <value>Source attribute</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="bd1946c4-b226-4fa8-a7cf-41ef40c474be">
-      <name>TargetAttribute</name>
-      <synonym>
-        <key>en</key>
-        <value>Target attribute</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="39e50f5c-b5de-43b7-9622-9678025aab13">
-      <name>Copy</name>
-      <synonym>
-        <key>en</key>
-        <value>Copy</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="76b4b615-fcf3-401e-8fd3-b43e8011d0f9">
-      <name>LockTargetAttribute</name>
-      <synonym>
-        <key>en</key>
-        <value>Lock target attribute</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="029d4989-fe1b-4409-934f-ffa6ad6824b0">
-      <name>EvalTargetAttribute</name>
-      <synonym>
-        <key>en</key>
-        <value>Eval target attribute</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <toolTip>
-        <key>en</key>
-        <value>Eval some code where can be used &quot;Source&quot; as Ref, And &quot;SourceRow&quot; as current row from source</value>
-      </toolTip>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="83204934-4b23-4532-b4ff-c70a61cac580">
-      <name>MustBeFilled</name>
-      <synonym>
-        <key>en</key>
-        <value>Must be filled</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5e98473e-2d9f-4345-8697-4a2e401764f9">
-      <name>SourceType</name>
-      <synonym>
-        <key>en</key>
-        <value>Source type</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="12afd658-1968-4d44-9a35-03bdd3d3a248">
-      <name>TargetType</name>
-      <synonym>
-        <key>en</key>
-        <value>Target type</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="b50ff9e9-9025-4cd6-abfd-910b55f8e5e7">
-      <name>DefaultValue</name>
-      <synonym>
-        <key>en</key>
-        <value>Default value</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-        <types>String</types>
-        <types>Date</types>
-        <types>Number</types>
-        <types>AnyRef</types>
-        <numberQualifiers>
-          <precision>15</precision>
-          <scale>5</scale>
-        </numberQualifiers>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-        <dateQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <quickChoice>DontUse</quickChoice>
-      <createOnInput>DontUse</createOnInput>
-      <dataHistory>Use</dataHistory>
-      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9481afd5-4a80-4678-b5d6-6d31d7b397a3">
-      <name>SortingIndex</name>
-      <synonym>
-        <key>en</key>
-        <value>Sorting index</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>50</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7dc52d58-4a75-410c-8952-591ea56dec26">
-      <name>LinkedByRule</name>
-      <synonym>
-        <key>en</key>
-        <value>Linked by rule</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.TransformationRules</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="04612d3a-a8c0-42d2-bed3-67be3728f9bd">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="83204934-4b23-4532-b4ff-c70a61cac580">
+   <name>MustBeFilled</name>
+   <synonym>
+    <key>tr</key>
+    <value>Doldurulması gerekir</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Должно быть заполнено</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Must be filled</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5e98473e-2d9f-4345-8697-4a2e401764f9">
+   <name>SourceType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Kaynak tür</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип источника</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Source type</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="12afd658-1968-4d44-9a35-03bdd3d3a248">
+   <name>TargetType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hedef tür</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Целевой тип</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Target type</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b50ff9e9-9025-4cd6-abfd-910b55f8e5e7">
+   <name>DefaultValue</name>
+   <synonym>
+    <key>tr</key>
+    <value>Varsayılan değer</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение по умолчанию</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Default value</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+    <types>String</types>
+    <types>Date</types>
+    <types>Number</types>
+    <types>AnyRef</types>
+    <numberQualifiers>
+     <precision>15</precision>
+     <scale>5</scale>
+    </numberQualifiers>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+    <dateQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <quickChoice>DontUse</quickChoice>
+   <createOnInput>DontUse</createOnInput>
+   <dataHistory>Use</dataHistory>
+   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9481afd5-4a80-4678-b5d6-6d31d7b397a3">
+   <name>SortingIndex</name>
+   <synonym>
+    <key>tr</key>
+    <value>Sıralama dizini</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Индекс сортировки</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Sorting index</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>50</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7dc52d58-4a75-410c-8952-591ea56dec26">
+   <name>LinkedByRule</name>
+   <synonym>
+    <key>tr</key>
+    <value>Kuralla bağlı</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Связано правилом</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Linked by rule</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TransformationRules</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="04612d3a-a8c0-42d2-bed3-67be3728f9bd">
+  <name>ItemForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

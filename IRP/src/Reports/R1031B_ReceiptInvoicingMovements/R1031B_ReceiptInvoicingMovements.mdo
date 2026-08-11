@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d6724f66-ab8a-4dbe-a9c3-d31d2dfa6ad8">
-  <producedTypes>
-    <objectType typeId="39168a87-f65a-4c68-a7ec-f431c4df1d4d" valueTypeId="d685b242-1f12-47dd-92fe-71d3bdf75153"/>
-    <managerType typeId="c09ac937-e585-45c1-9bd1-db6dd790c422" valueTypeId="be28a70c-ad39-4118-94e3-99fb1beaafe6"/>
-  </producedTypes>
-  <name>R1031B_ReceiptInvoicingMovements</name>
+ <producedTypes>
+  <objectType typeId="39168a87-f65a-4c68-a7ec-f431c4df1d4d" valueTypeId="d685b242-1f12-47dd-92fe-71d3bdf75153"/>
+  <managerType typeId="c09ac937-e585-45c1-9bd1-db6dd790c422" valueTypeId="be28a70c-ad39-4118-94e3-99fb1beaafe6"/>
+ </producedTypes>
+ <name>R1031B_ReceiptInvoicingMovements</name>
+ <synonym>
+  <key>tr</key>
+  <value>R1031B Gelen faturaların hareketleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R1031A Ожидающие закрытия поступления</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R1031B Receipt invoicing movements</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R1031B_ReceiptInvoicingMovements.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="a47e72c5-c006-4cc0-98da-6cdd9ddf50d1">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R1031B Receipt invoicing movements</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R1031B_ReceiptInvoicingMovements.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="a47e72c5-c006-4cc0-98da-6cdd9ddf50d1">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

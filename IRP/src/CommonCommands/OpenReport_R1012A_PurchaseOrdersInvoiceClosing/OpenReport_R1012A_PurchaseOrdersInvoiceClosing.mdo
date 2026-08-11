@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="85e9deda-ae3b-4be8-b781-bbb251553b15">
-  <name>OpenReport_R1012A_PurchaseOrdersInvoiceClosing</name>
-  <synonym>
-    <key>en</key>
-    <value>R1012A Purchase orders invoice closing</value>
-  </synonym>
-  <group>NavigationPanelOrdinary</group>
-  <representation>Auto</representation>
+ <name>OpenReport_R1012A_PurchaseOrdersInvoiceClosing</name>
+ <synonym>
+  <key>tr</key>
+  <value>R1012A Satınalma siparişlerin faturalandırılması</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R1012A Закрытие заказов поступлениями</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R1012A Purchase orders invoice closing</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

@@ -396,3 +396,86 @@ Scenario: _2068020 delete Physical inventory with linked strings (one session)
 			| 'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 0 . Lacking: 5 .'      |
 			| 'Line No. [2] [Dress Dress/A-8] RowID movements remaining: 3 . Required: 0 . Lacking: 3 .'    |
 		And I close all client application windows
+
+
+# A Physical inventory row whose Difference is ZERO (counted = expected) must be
+# inert in the RowID mechanism: it issues NO TM1010B quota and is offered to NEITHER
+# Stock adjustment (surplus nor write-off). Only the non-zero rows travel further.
+# "User can edit quantity" lets the test set Exp./Phys. counts explicitly, so the
+# differences (0 / +5 / -6) do not depend on the current stock of the base.
+Scenario: _2068021 a zero-difference Physical inventory row issues no RowID quota and is not offered to adjustments
+	And I close all client application windows
+	* Create Physical inventory (Store 04, status Done - the RowID gate, Comment LT2068-21)
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Store" by "Store 04" string
+		And I select from the drop-down list named "Status" by "Done" string
+		And I click the hyperlink named "Comment"
+		And I input "LT2068-21" text in the field named "Text"
+		And I click "OK" button
+		And I set checkbox named "RuleEditQuantity"
+	* Add rows: Dress XS/Blue stays with zero counts (Difference 0), Dress M/White counted 5 (Difference +5)
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListPhysCount" in "ItemList" table
+		And I input "5,000" text in the field named "ItemListPhysCount" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* The expected counts stay empty (0): XS/Blue difference is 0, M/White difference is +5
+		Then "ItemList" table became equal
+			| 'Item key' | 'Exp. count' | 'Phys. count' | 'Difference' |
+			| 'XS/Blue'  | ''           | ''            | ''           |
+			| 'M/White'  | ''           | '5,000'       | '5,000'      |
+	* Post the Physical inventory
+		And I click the button named "FormPost"
+		And I wait "Number" field will be filled in "30" seconds
+		And I delete "$$LT2068_21_PI$$" variable
+		And I save the window as "$$LT2068_21_PI$$"
+	* TM1010B: a quota ONLY for the +5 row - the zero-difference row issues nothing
+		And I click "Registrations report" button
+		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '*'                                    | ''            | ''       | ''          | ''           | ''       | ''      | ''      | ''          |
+			| 'Document registrations records'       | ''            | ''       | ''          | ''           | ''       | ''      | ''      | ''          |
+			| 'Register  "TM1010B Row ID movements"' | ''            | ''       | ''          | ''           | ''       | ''      | ''      | ''          |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''       | ''      | ''      | ''          |
+			| ''                                     | ''            | ''       | 'Quantity'  | 'Row ref'    | 'Row ID' | 'Step'  | 'Basis' | 'Basis key' |
+			| ''                                     | 'Receipt'     | '*'      | '5'         | '*'          | '*'      | '*'     | '*'     | '*'         |
+		And I close current window
+	* The surplus adjustment is offered ONLY the +5 row (no zero-difference row)
+		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerate"
+		And I click "Ok" button
+		Then "ItemList" table became equal
+			| 'Item key' | 'Quantity' |
+			| 'M/White'  | '5,000'    |
+		And I close current window
+	* The write-off adjustment gets NOTHING at all: the linked-rows picker is EMPTY
+		When in opened panel I select "$$LT2068_21_PI$$"
+		And I click the button named "FormDocumentStockAdjustmentAsWriteOffGenerate"
+		Then "Add linked document rows" window is opened
+		Then the number of "BasisesTree" table lines is "equal" "0"
+		And I click the button named "FormCancel"
+		And I close all client application windows

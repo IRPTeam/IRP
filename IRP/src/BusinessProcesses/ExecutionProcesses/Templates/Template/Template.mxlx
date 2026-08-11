@@ -102,6 +102,14 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>#</v8:content>
 						</v8:item>
@@ -112,6 +120,14 @@
 				<c>
 					<f>7</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Aşamalar / Görevler / Yürütücü</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Этапы / Задачи / Исполнитель</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Stages / Tasks / Executor</v8:content>
@@ -124,6 +140,14 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Tarih / Saat</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Дата / Время</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Date / Time</v8:content>
 						</v8:item>
@@ -135,6 +159,14 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Sonuç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Результат</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Result</v8:content>
 						</v8:item>
@@ -145,6 +177,14 @@
 				<c>
 					<f>8</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açıklama</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Комментарий</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Comment</v8:content>

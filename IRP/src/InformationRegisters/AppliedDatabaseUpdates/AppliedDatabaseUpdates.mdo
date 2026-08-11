@@ -1,75 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="224a7ab6-2a0a-4aa3-9036-9dee7f207420">
-  <producedTypes>
-    <selectionType typeId="bbd7892f-d738-4c2d-8296-d5038765be3d" valueTypeId="7375dc96-1a6d-4372-91fd-239a8766f121"/>
-    <listType typeId="625a11bd-f7ca-4cef-8883-c45e221271fe" valueTypeId="afa40d6a-053f-4d81-b296-462ddb60f0ff"/>
-    <managerType typeId="df904298-b807-4371-bad0-81bb5bfdbc9b" valueTypeId="ce9de07c-6e3a-4f39-b07b-55ba440e4336"/>
-    <recordSetType typeId="ef278f4a-07a0-4bb2-b235-f970329f1434" valueTypeId="600b1632-01b6-4c0a-b897-1957aa75e292"/>
-    <recordKeyType typeId="e09fa201-8e01-4c7d-9a7e-ac2664391fdd" valueTypeId="ed198ca3-04af-4b58-bb63-cd7690b53390"/>
-    <recordType typeId="4bf0c604-72a1-4c46-bcea-2b1d88073803" valueTypeId="8e49458c-6fb3-4c8a-b516-53cbe9ad4856"/>
-    <recordManagerType typeId="ddb53e2d-1bc5-4ca9-9970-501af268ce74" valueTypeId="8e357b99-bd57-4417-b22b-dcc7066ba3d6"/>
-  </producedTypes>
-  <name>AppliedDatabaseUpdates</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="224a7ab6-2a0a-4aa3-9036-9dee7f207420">
+ <producedTypes>
+  <selectionType typeId="bbd7892f-d738-4c2d-8296-d5038765be3d" valueTypeId="7375dc96-1a6d-4372-91fd-239a8766f121"/>
+  <listType typeId="625a11bd-f7ca-4cef-8883-c45e221271fe" valueTypeId="afa40d6a-053f-4d81-b296-462ddb60f0ff"/>
+  <managerType typeId="df904298-b807-4371-bad0-81bb5bfdbc9b" valueTypeId="ce9de07c-6e3a-4f39-b07b-55ba440e4336"/>
+  <recordSetType typeId="ef278f4a-07a0-4bb2-b235-f970329f1434" valueTypeId="600b1632-01b6-4c0a-b897-1957aa75e292"/>
+  <recordKeyType typeId="e09fa201-8e01-4c7d-9a7e-ac2664391fdd" valueTypeId="ed198ca3-04af-4b58-bb63-cd7690b53390"/>
+  <recordType typeId="4bf0c604-72a1-4c46-bcea-2b1d88073803" valueTypeId="8e49458c-6fb3-4c8a-b516-53cbe9ad4856"/>
+  <recordManagerType typeId="ddb53e2d-1bc5-4ca9-9970-501af268ce74" valueTypeId="8e357b99-bd57-4417-b22b-dcc7066ba3d6"/>
+ </producedTypes>
+ <name>AppliedDatabaseUpdates</name>
+ <synonym>
+  <key>tr</key>
+  <value>Uygulanan veritabanı güncellemeleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Установленные обновления базы данных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Applied database updates</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <dimensions uuid="e9a7762e-5196-4407-a586-66beaa0b9691">
+  <name>UpdateMethod</name>
   <synonym>
-    <key>en</key>
-    <value>Applied database updates</value>
+   <key>tr</key>
+   <value>Güncelleme yöntemi</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <dimensions uuid="e9a7762e-5196-4407-a586-66beaa0b9691">
-    <name>UpdateMethod</name>
-    <synonym>
-      <key>en</key>
-      <value>Update method</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>150</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="5a6f5f57-0e9e-4237-b48f-dc4f7ad8c0a0">
-    <name>AppliedDate</name>
-    <synonym>
-      <key>en</key>
-      <value>Applied date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="74f5e996-b91c-4292-a350-56f387e5f4a3">
-    <name>ReleaseNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Release number</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Метод обновления</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Update method</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>150</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="5a6f5f57-0e9e-4237-b48f-dc4f7ad8c0a0">
+  <name>AppliedDate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Uygulanan tarih</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата установки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Applied date</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="74f5e996-b91c-4292-a350-56f387e5f4a3">
+  <name>ReleaseNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Sürüm numarası</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номер релиза</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Release number</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

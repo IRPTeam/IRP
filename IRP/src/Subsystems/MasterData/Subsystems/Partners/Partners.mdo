@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="715d8fca-169d-40bb-8da8-cbebc8d9b9a6">
-  <name>Partners</name>
-  <synonym>
-    <key>en</key>
-    <value>Partners</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.Partners</content>
-  <content>Catalog.Agreements</content>
-  <content>Catalog.LegalNameContracts</content>
-  <content>Catalog.PartnersBankAccounts</content>
-  <content>Catalog.PartnerSegments</content>
-  <content>CommonCommand.OpenLegalNames</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>Partners</name>
+ <synonym>
+  <key>tr</key>
+  <value>Cari hesaplar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Партнеры</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Partners</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.Partners</content>
+ <content>Catalog.Agreements</content>
+ <content>Catalog.LegalNameContracts</content>
+ <content>Catalog.PartnersBankAccounts</content>
+ <content>Catalog.PartnerSegments</content>
+ <content>CommonCommand.OpenLegalNames</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

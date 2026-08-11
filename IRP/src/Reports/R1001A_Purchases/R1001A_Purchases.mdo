@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3646e04b-09d7-46a9-9a77-48cd399b6b8c">
-  <producedTypes>
-    <objectType typeId="94772445-734e-409d-b18a-571ed9b37aa9" valueTypeId="11f897c3-3b3d-4d23-bad3-d4d61292f38e"/>
-    <managerType typeId="5784fb6d-b977-498b-8520-688151e21947" valueTypeId="6878ce9f-8ffb-486f-860e-045aca03713b"/>
-  </producedTypes>
-  <name>R1001A_Purchases</name>
+ <producedTypes>
+  <objectType typeId="94772445-734e-409d-b18a-571ed9b37aa9" valueTypeId="11f897c3-3b3d-4d23-bad3-d4d61292f38e"/>
+  <managerType typeId="5784fb6d-b977-498b-8520-688151e21947" valueTypeId="6878ce9f-8ffb-486f-860e-045aca03713b"/>
+ </producedTypes>
+ <name>R1001A_Purchases</name>
+ <synonym>
+  <key>tr</key>
+  <value>R1001A Alımlar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R1001A Закупки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R1001A Purchases</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R1001A_Purchases.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="b33aedc6-be8a-44b0-be74-966f291a2376">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R1001A Purchases</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R1001A_Purchases.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="b33aedc6-be8a-44b0-be74-966f291a2376">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

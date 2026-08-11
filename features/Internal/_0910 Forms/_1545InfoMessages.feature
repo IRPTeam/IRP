@@ -276,11 +276,7 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		* Filling in the necessary details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
@@ -361,11 +357,7 @@ Scenario: _154512 message when trying to re-create Purchase invoice based on Pur
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		* Filling in the necessary details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
@@ -425,11 +417,7 @@ Scenario: _154514 message when trying to re-create Goods receipt based on Purcha
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		* Filling in the necessary details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
@@ -812,12 +800,7 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I click the button named "FormCreate"
 		* Filling in the details of the document
-			And I click Select button of "Company" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| Description     |
@@ -1374,11 +1357,7 @@ Scenario: _015456 notification when trying to post a Sales order without filling
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |

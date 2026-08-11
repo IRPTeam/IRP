@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c9b4f1b0-d115-4ef9-8f1b-533ea90c61f1">
-  <producedTypes>
-    <objectType typeId="6e307490-968d-4b3e-848b-a628fa49c2da" valueTypeId="17364562-0512-4d70-921f-308b1d1b63a2"/>
-    <managerType typeId="5aa1db70-a665-4043-a428-fe1ea294a742" valueTypeId="436e5057-8a3b-48c5-9467-8b0ea0fc8c88"/>
-  </producedTypes>
-  <name>M1010A_PriceList</name>
+ <producedTypes>
+  <objectType typeId="6e307490-968d-4b3e-848b-a628fa49c2da" valueTypeId="17364562-0512-4d70-921f-308b1d1b63a2"/>
+  <managerType typeId="5aa1db70-a665-4043-a428-fe1ea294a742" valueTypeId="436e5057-8a3b-48c5-9467-8b0ea0fc8c88"/>
+ </producedTypes>
+ <name>M1010A_PriceList</name>
+ <synonym>
+  <key>tr</key>
+  <value>M1010A Fiyat listesi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>M1010A Прайс лист</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>M1010A Price list</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.M1010A_PriceList.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="b45471be-e1fe-4d99-acfc-c6e282ae917c">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>M1010A Price list</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.M1010A_PriceList.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="b45471be-e1fe-4d99-acfc-c6e282ae917c">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

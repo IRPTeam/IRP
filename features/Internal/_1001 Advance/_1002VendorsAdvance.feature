@@ -71,7 +71,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
-		* Load PO
+		# Load PO
 		When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 		When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
 		When Create document InternalSupplyRequest objects (check movements)
@@ -84,7 +84,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 				| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"     |
-		* Load GR
+		# Load GR
 		When Create document GoodsReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"     |
@@ -95,7 +95,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 				| "Documents.GoodsReceipt.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);"     |
-		* Load PI
+		# Load PI
 		When Create document PurchaseInvoice objects (test advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -158,11 +158,7 @@ Scenario: _1002002 create VendorsAdvancesClosing
 	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 	And I click the button named "FormCreate"
 	And I input "11.02.2021 12:00:00" text in "Date" field
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Begin of period" field
 	And I input "11.02.2021" text in "Begin of period" field
 	And I input "11.02.2021" text in "End of period" field
@@ -181,11 +177,7 @@ Scenario: _1002002 create VendorsAdvancesClosing
 	And I click "Post and close" button
 	And I click the button named "FormCreate"
 	And I input "15.03.2021 12:00:00" text in "Date" field
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Select button of "Begin of period" field
 	And I input "15.03.2021" text in "Begin of period" field
 	And I input "15.03.2021" text in "End of period" field

@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="241c5138-b259-4cae-8701-bd8dfd6032ad">
-  <name>UseGroupEditingProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Use group editing properties</value>
-  </synonym>
+ <name>UseGroupEditingProperties</name>
+ <synonym>
+  <key>tr</key>
+  <value>Grup düzenleme özelliklerini kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать групповую обработку реквизитов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use group editing properties</value>
+ </synonym>
 </mdclass:Role>

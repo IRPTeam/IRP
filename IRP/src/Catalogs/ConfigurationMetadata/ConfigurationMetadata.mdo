@@ -1,311 +1,731 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="863c380c-7c02-49e0-a73e-4227917bb70e">
-  <producedTypes>
-    <objectType typeId="88d55be2-d648-4786-aae9-26b24d8afd75" valueTypeId="b7bdea0c-a275-4e3b-b6c7-d51797946d8a"/>
-    <refType typeId="b6b98229-e5c1-46f9-b68f-a9d7a818e653" valueTypeId="a7d8a7f2-c551-4f41-8d2e-bdd569acfa64"/>
-    <selectionType typeId="2b3d0dae-6f94-4ff0-901e-3a3a29c11f1e" valueTypeId="a8952618-fbd9-429b-a163-92bd2466a572"/>
-    <listType typeId="8bec9175-d625-4a25-88a9-b2eb8ff18674" valueTypeId="3325ec36-0420-4aaf-a6ec-4efda8fd1cd4"/>
-    <managerType typeId="9e722420-669b-4d10-ab5e-76e6e054a3ef" valueTypeId="379862f5-f952-4fd1-ac75-17c07823ca69"/>
-  </producedTypes>
-  <name>ConfigurationMetadata</name>
-  <synonym>
-    <key>en</key>
-    <value>Configuration metadata</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <synonym>
-      <key>en</key>
-      <value>Parent</value>
-    </synonym>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="863c380c-7c02-49e0-a73e-4227917bb70e">
+ <producedTypes>
+  <objectType typeId="88d55be2-d648-4786-aae9-26b24d8afd75" valueTypeId="b7bdea0c-a275-4e3b-b6c7-d51797946d8a"/>
+  <refType typeId="b6b98229-e5c1-46f9-b68f-a9d7a818e653" valueTypeId="a7d8a7f2-c551-4f41-8d2e-bdd569acfa64"/>
+  <selectionType typeId="2b3d0dae-6f94-4ff0-901e-3a3a29c11f1e" valueTypeId="a8952618-fbd9-429b-a163-92bd2466a572"/>
+  <listType typeId="8bec9175-d625-4a25-88a9-b2eb8ff18674" valueTypeId="3325ec36-0420-4aaf-a6ec-4efda8fd1cd4"/>
+  <managerType typeId="9e722420-669b-4d10-ab5e-76e6e054a3ef" valueTypeId="379862f5-f952-4fd1-ac75-17c07823ca69"/>
+ </producedTypes>
+ <name>ConfigurationMetadata</name>
+ <synonym>
+  <key>tr</key>
+  <value>Konfigürasyon anaverisi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Метаданные конфигурации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Configuration metadata</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <synonym>
+   <key>tr</key>
+   <value>Üst öğe</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Родитель</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Parent</value>
+  </synonym>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Konfigürasyon anaverisi</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Метаданные конфигурации</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Configuration metadata</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <hierarchyType>HierarchyOfItems</hierarchyType>
+ <limitLevelCount>true</limitLevelCount>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>64</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="e913d420-ffbd-4366-9f1b-2c2b42de0fb7">
+   <name>Catalogs</name>
+   <description>Catalogs</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="79e6dfcb-53cf-49be-b1ef-032948cacd0c">
+   <name>Documents</name>
+   <description>Documents</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="35c8b407-96be-4355-87d0-9be6a1c66c9c">
+   <name>Reports</name>
+   <description>Reports</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="98da3047-c361-4bad-9e87-e34a4cfaefa9">
+   <name>DataProcessors</name>
+   <description>Data processors</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.ConfigurationMetadata.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.ConfigurationMetadata.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.ConfigurationMetadata.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
+  <name>Extension</name>
+  <synonym>
+   <key>tr</key>
+   <value>Uzantı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Расширение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Extension</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Extensions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="4c5116b9-b786-40fc-bf62-ca9f303ca025">
+  <name>CheckDescriptionDuplicate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Tanım duplike kontrolü</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Поверить задвоенность наименования</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Check description duplicate</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e487cc9a-c41a-4fc0-955b-32afd191113e">
+  <name>CheckDescriptionFilling</name>
+  <synonym>
+   <key>tr</key>
+   <value>Tanım duplike kontrolü</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проверка заполнения наименования</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Check description filling</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a9819821-f441-4740-ab99-d97309248954">
+  <name>ObjectName</name>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne ismi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Наименование объекта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Object name</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>64</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f7c954dd-436d-4983-9d86-4147f0e39cf5">
+  <name>ObjectFullName</name>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne ful tanımı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Полное наименование объекта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Object full name</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>128</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b783a657-e3df-405d-a2c8-90579272608b">
+  <name>Unused</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanım dışı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Не используется</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Unused</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="becf012c-3698-4ca1-9ef7-503faf0c8828">
+  <name>ELedgerShortDescription</name>
+  <synonym>
+   <key>tr</key>
+   <value>eDefter kısa açıklaması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>eLedger краткое наименование</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>eLedger short description</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>20</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="290afce7-5a11-4082-b9e2-388abd787855">
+  <name>ELedgerLongDescription</name>
+  <synonym>
+   <key>tr</key>
+   <value>eDefter tam açıklaması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>eLedger полное наименование</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>eLedger long description</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>20</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="715a4a5b-09df-4ba6-b2e7-a016c6a33979">
+  <producedTypes>
+   <objectType typeId="3144acf7-d0bf-4659-8e06-11f4cd623d4a" valueTypeId="abeb7ac1-708b-46c5-882b-8842a7b5c3a9"/>
+   <rowType typeId="1e6fdf85-442c-47a0-bd7e-450ef2f67cda" valueTypeId="e0206387-3061-4074-a3bb-c03e9ec3ed28"/>
+  </producedTypes>
+  <name>ImportantAttributes</name>
+  <synonym>
+   <key>tr</key>
+   <value>Önemli öznitelikler</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Important attributes</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Important attributes</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <attributes uuid="9a3f05b4-2010-452e-bdaa-4c63329f2898">
+   <name>TabularName</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tabular name</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Tabular name</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Configuration metadata</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
-  <limitLevelCount>true</limitLevelCount>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>64</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="e913d420-ffbd-4366-9f1b-2c2b42de0fb7">
-      <name>Catalogs</name>
-      <description>Catalogs</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="79e6dfcb-53cf-49be-b1ef-032948cacd0c">
-      <name>Documents</name>
-      <description>Documents</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="35c8b407-96be-4355-87d0-9be6a1c66c9c">
-      <name>Reports</name>
-      <description>Reports</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="98da3047-c361-4bad-9e87-e34a4cfaefa9">
-      <name>DataProcessors</name>
-      <description>Data processors</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.ConfigurationMetadata.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.ConfigurationMetadata.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.ConfigurationMetadata.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
-    <name>Extension</name>
-    <synonym>
-      <key>en</key>
-      <value>Extension</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Extensions</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Tabular name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="4c5116b9-b786-40fc-bf62-ca9f303ca025">
-    <name>CheckDescriptionDuplicate</name>
-    <synonym>
-      <key>en</key>
-      <value>Check description duplicate</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="dab31fa6-85ce-4046-9fbf-4e30ef82496a">
+   <name>AttributeName</name>
+   <synonym>
+    <key>tr</key>
+    <value>Alan ismi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Наименование реквизита</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Attribute name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="e487cc9a-c41a-4fc0-955b-32afd191113e">
-    <name>CheckDescriptionFilling</name>
-    <synonym>
-      <key>en</key>
-      <value>Check description filling</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="d00237d6-20e2-4fa2-9e03-1d5d6329c5ba">
+  <producedTypes>
+   <objectType typeId="175a2039-01fc-4008-96e6-66b38e1354ef" valueTypeId="ade89f54-616a-4a4f-b699-fc20e65fa955"/>
+   <rowType typeId="49303dae-7054-4d45-b699-2542fc5dfb85" valueTypeId="2ab9b0b1-718d-4918-a667-73f41f4e1a85"/>
+  </producedTypes>
+  <name>NotAuditAttributes</name>
+  <synonym>
+   <key>tr</key>
+   <value>Not audit attributes</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Not audit attributes</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Not audit attributes</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <attributes uuid="a0782733-b5de-4052-a6d9-33e005b8d5e0">
+   <name>TabularName</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tabular name</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Tabular name</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Tabular name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="a9819821-f441-4740-ab99-d97309248954">
-    <name>ObjectName</name>
-    <synonym>
-      <key>en</key>
-      <value>Object name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>64</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="f4435a20-ebdb-4fed-94db-c6d28ce5f338">
+   <name>AttributeName</name>
+   <synonym>
+    <key>tr</key>
+    <value>Alan ismi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Наименование реквизита</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Attribute name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="f7c954dd-436d-4983-9d86-4147f0e39cf5">
-    <name>ObjectFullName</name>
-    <synonym>
-      <key>en</key>
-      <value>Object full name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>128</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="1b844e46-d9b4-458c-af42-271693de59db">
+  <producedTypes>
+   <objectType typeId="5ca29126-8788-402c-af8e-cfe72b28329e" valueTypeId="f4d39025-c414-43d1-ad8b-ef9b0f27c6a2"/>
+   <rowType typeId="fb7c7c4b-2629-468f-ab16-2eae1d3c53d1" valueTypeId="84930d43-52ad-4f5c-8010-199c3abdab73"/>
+  </producedTypes>
+  <name>ReadOnlyAttributes</name>
+  <synonym>
+   <key>tr</key>
+   <value>Read only attributes</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Read only attributes</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Read only attributes</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <attributes uuid="d9e66d6d-46c8-4490-8ef0-de608aba2634">
+   <name>TabularName</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tabular name</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Tabular name</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Tabular name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="b783a657-e3df-405d-a2c8-90579272608b">
-    <name>Unused</name>
-    <synonym>
-      <key>en</key>
-      <value>Unused</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="5bcb8e8c-5af2-4647-afc6-9f5e004678da">
+   <name>AttributeName</name>
+   <synonym>
+    <key>tr</key>
+    <value>Alan ismi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Наименование реквизита</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Attribute name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="becf012c-3698-4ca1-9ef7-503faf0c8828">
-    <name>ELedgerShortDescription</name>
-    <synonym>
-      <key>en</key>
-      <value>eLedger short description</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>20</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="6ed2de3b-81e6-43ac-8fca-fbb41261c1c1">
+  <producedTypes>
+   <objectType typeId="f301d95d-4877-4964-8a17-53c4bf5fc1dd" valueTypeId="c87b5743-77ea-42c1-b7ec-952a5fb40518"/>
+   <rowType typeId="4a0e0a73-b4db-4fec-84d7-fd52d0328dc3" valueTypeId="4a570fc9-8246-4819-913f-63bc5bdaae67"/>
+  </producedTypes>
+  <name>HiddenAttributes</name>
+  <synonym>
+   <key>tr</key>
+   <value>Hidden attributes</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Hidden attributes</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Hidden attributes</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <attributes uuid="804c86e1-5113-42c7-bc65-910f16639f6c">
+   <name>TabularName</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tabular name</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Tabular name</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Tabular name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="290afce7-5a11-4082-b9e2-388abd787855">
-    <name>ELedgerLongDescription</name>
-    <synonym>
-      <key>en</key>
-      <value>eLedger long description</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>20</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="ed6463e7-2f40-4b43-a49d-d5cb147a8976">
+   <name>AttributeName</name>
+   <synonym>
+    <key>tr</key>
+    <value>Alan ismi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Наименование реквизита</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Attribute name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <forms uuid="360b8f17-2d37-4d3a-9a8f-384daa8e706f">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e0eaab55-a0e3-4730-98df-0377c61e508d">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ad08c952-4184-444e-9914-1b358edb882e">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="360b8f17-2d37-4d3a-9a8f-384daa8e706f">
+  <name>ItemForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e0eaab55-a0e3-4730-98df-0377c61e508d">
+  <name>ListForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ad08c952-4184-444e-9914-1b358edb882e">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

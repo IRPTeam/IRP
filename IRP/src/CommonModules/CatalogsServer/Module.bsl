@@ -49,6 +49,7 @@ Procedure OnCreateAtServerObject(Form, MainAttribute, Cancel, StandardProcessing
 	
 	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ObjectForm);
 	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ObjectForm);
+	CatConfigurationMetadataServer.ApplyCustomizedAttributesToForm(Form, CatalogFullName);
 	
 	If Form.Items.Find("Code") <> Undefined And Not ThisIsEditingException(CatalogFullName) Then
 		NumberEditingAvailable = SessionParametersServer.GetSessionParameter("NumberEditingAvailable"); // Boolean

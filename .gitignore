@@ -1,3 +1,4 @@
 *.prefs
 *.cset
 *.launch
+.mcp.json

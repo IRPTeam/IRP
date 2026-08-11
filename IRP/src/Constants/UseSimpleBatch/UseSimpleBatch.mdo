@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7b532ae6-e131-4057-92f8-d28da69efa3f">
-  <producedTypes>
-    <managerType typeId="c0f70f72-a197-41d1-8a15-c8760f8843db" valueTypeId="0c5216c0-73eb-4d96-960c-794febc005cc"/>
-    <valueManagerType typeId="eadfebcb-e110-4e05-ba98-435237a3a844" valueTypeId="e62c5e52-f1c9-4544-b872-ce0b8890e69f"/>
-    <valueKeyType typeId="39ce4d62-ddae-4ffd-98f8-fe73df207d43" valueTypeId="894ed169-60f1-4719-9b71-a7a8ef6c9119"/>
-  </producedTypes>
-  <name>UseSimpleBatch</name>
-  <synonym>
-    <key>en</key>
-    <value>Use simple batch</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7b532ae6-e131-4057-92f8-d28da69efa3f">
+ <producedTypes>
+  <managerType typeId="c0f70f72-a197-41d1-8a15-c8760f8843db" valueTypeId="0c5216c0-73eb-4d96-960c-794febc005cc"/>
+  <valueManagerType typeId="eadfebcb-e110-4e05-ba98-435237a3a844" valueTypeId="e62c5e52-f1c9-4544-b872-ce0b8890e69f"/>
+  <valueKeyType typeId="39ce4d62-ddae-4ffd-98f8-fe73df207d43" valueTypeId="894ed169-60f1-4719-9b71-a7a8ef6c9119"/>
+ </producedTypes>
+ <name>UseSimpleBatch</name>
+ <synonym>
+  <key>tr</key>
+  <value>Temel parti kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать простую партию</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use simple batch</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d8fd64c1-228f-4d61-abaa-505658531ae0">
-  <producedTypes>
-    <objectType typeId="c9c64a91-bd43-4e84-ae8a-858262ba71d7" valueTypeId="680c220b-af81-4283-a29d-38d362d32a08"/>
-    <managerType typeId="6730fb59-9a91-47a0-85c4-189e439f2564" valueTypeId="5d9cd072-1698-40c9-8abc-caae7b233bc8"/>
-  </producedTypes>
-  <name>R5020A_PartnersBalance</name>
+ <producedTypes>
+  <objectType typeId="c9c64a91-bd43-4e84-ae8a-858262ba71d7" valueTypeId="680c220b-af81-4283-a29d-38d362d32a08"/>
+  <managerType typeId="6730fb59-9a91-47a0-85c4-189e439f2564" valueTypeId="5d9cd072-1698-40c9-8abc-caae7b233bc8"/>
+ </producedTypes>
+ <name>R5020A_PartnersBalance</name>
+ <synonym>
+  <key>tr</key>
+  <value>R5020A Cari hesap bakiyesi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R5020A Взаиморасчеты с партнерами</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R5020A Partners balance</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R5020A_PartnersBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="ea14a840-a554-49eb-b409-d9b38f67a203">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R5020A Partners balance</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R5020A_PartnersBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="ea14a840-a554-49eb-b409-d9b38f67a203">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

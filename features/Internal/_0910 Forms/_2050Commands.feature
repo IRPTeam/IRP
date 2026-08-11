@@ -84,11 +84,7 @@ Scenario: _0205001 preparation (commands)
 					| 'Description'            |
 					| 'Company Ferron BP'      |
 				And I select current line in "List" table
-				And I click Select button of "Company" field
-				And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-				And I select current line in "List" table
+				And I select "Main Company" exact value from "Company" drop-down list
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'             |

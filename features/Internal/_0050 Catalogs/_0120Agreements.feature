@@ -174,11 +174,7 @@ Scenario: _012004 create common Partner term
 				| 'Description'      |
 				| 'Main Company'     |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'   | 'Type'            |
-			| 'TRY'           | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
 				| 'Description'           |
@@ -219,11 +215,7 @@ Scenario: _012004 create common Partner term
 				| 'Description'      |
 				| 'Main Company'     |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'   | 'Type'            |
-			| 'USD'           | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
 				| 'Description'           |
@@ -267,11 +259,7 @@ Scenario: _012004 create common Partner term
 		And I input "m" text in "Multi currency movement type" field
 		And I select from "Multi currency movement type" drop-down list by "try" string
 		And I move to the next attribute		
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'   | 'Type'            |
-			| 'TRY'           | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Price type" field
 		Then "Price types" window is opened
 		And I go to line in "List" table
@@ -316,11 +304,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 				| 'Description'      |
 				| 'Main Company'     |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'   | 'Type'            |
-			| 'USD'           | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Price type" field
 		Then "Price types" window is opened
 		And I go to line in "List" table
@@ -350,8 +334,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I click "Create" button
 		And I input "Partner account 1" text in "ENG" field
 		And I input "56788999000" text in the field named "Number"
-		And I click Choice button of the field named "Currency"
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I select from the drop-down list named "Partner" by "kalipso" string
 		And I select from "Legal entity" drop-down list by "kalipso" string	
 		And I input "Bank 1" text in "Bank name" field
@@ -376,11 +359,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 				| 'Description'      |
 				| 'Main Company'     |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'   | 'Type'            |
-			| 'TRY'           | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
 				| Description           |
@@ -402,8 +381,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I click "Create" button
 		And I input "Partner account 1" text in "ENG" field
 		And I input "56788999001" text in the field named "Number"
-		And I click Choice button of the field named "Currency"
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I select from the drop-down list named "Partner" by "ferron" string
 		And I select from "Legal entity" drop-down list by "ferron" string	
 		And I input "Bank 1" text in "Bank name" field
@@ -427,11 +405,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'   | 'Type'            |
-			| 'USD'           | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
 			| Description          |
@@ -472,11 +446,7 @@ Scenario: _012007 create common Partner term with Item Segment
 				| 'Description'      |
 				| 'Main Company'     |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'   | 'Type'            |
-			| 'EUR'           | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "EUR" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
 				| 'Description'           |
@@ -566,11 +536,7 @@ Scenario: _012011 check auto filling manual price type and description in the pa
 				| 'Description'      |
 				| 'Main Company'     |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'   | 'Type'            |
-			| 'TRY'           | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Multi currency movement type" drop-down list
 		And I click Select button of "Partner segment" field
 		And I go to line in "List" table
 				| 'Description'     |
@@ -598,7 +564,7 @@ Scenario: _012012 create Partner term for other partners
 	* Creating and checking customer Partner term Basic Partner terms, TRY
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Other"
-		Then the form attribute named "ApArPostingDetail" became equal to "By agreements"
+		Then the form attribute named "ApArPostingDetail" became equal to "By partner terms"
 		And I expand "Agreement info" group
 		And I expand "Price settings" group
 		And I expand "Store and delivery" group
@@ -609,11 +575,7 @@ Scenario: _012012 create Partner term for other partners
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'   | 'Type'            |
-			| 'TRY'           | 'Partner term'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Multi currency movement type" drop-down list
 		And I input "01.11.2022" text in "Start using" field
 		And Delay 3
 		And I click Open button of the field named "Description_en"

@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="516094c4-fd6e-41a5-adc5-d9946c48f7d3">
-  <producedTypes>
-    <objectType typeId="4b6cf9c0-b57f-45f6-9b04-ab8673029a6f" valueTypeId="ca0dd791-8062-4480-b11a-52753a13e80f"/>
-    <managerType typeId="3827f7b3-4463-4b05-a1cd-1376030f5617" valueTypeId="bad5211f-0315-4c7a-86f8-fb854df9224b"/>
-  </producedTypes>
-  <name>R5021A_Revenues</name>
+ <producedTypes>
+  <objectType typeId="4b6cf9c0-b57f-45f6-9b04-ab8673029a6f" valueTypeId="ca0dd791-8062-4480-b11a-52753a13e80f"/>
+  <managerType typeId="3827f7b3-4463-4b05-a1cd-1376030f5617" valueTypeId="bad5211f-0315-4c7a-86f8-fb854df9224b"/>
+ </producedTypes>
+ <name>R5021A_Revenues</name>
+ <synonym>
+  <key>tr</key>
+  <value>R5021A Gelirler</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R5021A Отчет по доходам</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R5021A Revenues</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R5021A_Revenues.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="891eeb52-de41-489b-8529-cadc3c49cb35">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R5021A Revenues</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R5021A_Revenues.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="891eeb52-de41-489b-8529-cadc3c49cb35">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

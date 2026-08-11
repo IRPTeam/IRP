@@ -1,52 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Enum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="05a4a18c-c1a0-4dd4-9393-001c02dffb04">
-  <producedTypes>
-    <refType typeId="ffdbbf9f-1b9d-42ab-b6bb-e84255a6df7e" valueTypeId="c5261fb3-0e2a-442e-bcc3-9d84fc256802"/>
-    <listType typeId="93e44ed2-7b4e-4781-8fe3-2a228fb149e3" valueTypeId="687ee9d5-3cf7-4596-b436-1919862a91e5"/>
-    <managerType typeId="50c61b6e-b97e-4bc3-b8ca-185de19f84d9" valueTypeId="4d022e29-ad14-4bbd-a8c1-49bb8bae3146"/>
-  </producedTypes>
-  <name>PrintFormVariableTypes</name>
+<mdclass:Enum xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="05a4a18c-c1a0-4dd4-9393-001c02dffb04">
+ <producedTypes>
+  <refType typeId="ffdbbf9f-1b9d-42ab-b6bb-e84255a6df7e" valueTypeId="c5261fb3-0e2a-442e-bcc3-9d84fc256802"/>
+  <listType typeId="93e44ed2-7b4e-4781-8fe3-2a228fb149e3" valueTypeId="687ee9d5-3cf7-4596-b436-1919862a91e5"/>
+  <managerType typeId="50c61b6e-b97e-4bc3-b8ca-185de19f84d9" valueTypeId="4d022e29-ad14-4bbd-a8c1-49bb8bae3146"/>
+ </producedTypes>
+ <name>PrintFormVariableTypes</name>
+ <synonym>
+  <key>tr</key>
+  <value>Yazdırma formu değişken türleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Печатная форма типов переменных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Print form variable types</value>
+ </synonym>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Order</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="cff0b67d-dff1-4367-b986-b25619a8ef40">
+  <name>XMLStyle</name>
   <synonym>
-    <key>en</key>
-    <value>Print form variable types</value>
+   <key>tr</key>
+   <value>&lt;XML stili&gt;</value>
   </synonym>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Order</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="cff0b67d-dff1-4367-b986-b25619a8ef40">
-    <name>XMLStyle</name>
-    <synonym>
-      <key>en</key>
-      <value>&lt;XML style></value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7479a285-62f2-4db8-a984-d3f0fda71bf3">
-    <name>WikiStyle</name>
-    <synonym>
-      <key>en</key>
-      <value>[Wiki style]</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="50d07ffc-da72-4bb9-bd4a-574f8eb9b5be">
-    <name>CurlyBrace</name>
-    <synonym>
-      <key>en</key>
-      <value>{Curly brace}</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>ru</key>
+   <value>&lt;Стиль XML&gt;</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>&lt;XML style&gt;</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="7479a285-62f2-4db8-a984-d3f0fda71bf3">
+  <name>WikiStyle</name>
+  <synonym>
+   <key>tr</key>
+   <value>[Wiki stili]</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>[Стиль Wiki]</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>[Wiki style]</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="50d07ffc-da72-4bb9-bd4a-574f8eb9b5be">
+  <name>CurlyBrace</name>
+  <synonym>
+   <key>tr</key>
+   <value>{Çengelli parantez}</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>{Фигурная скобка}</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>{Curly brace}</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

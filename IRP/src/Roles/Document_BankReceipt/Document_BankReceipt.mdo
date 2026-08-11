@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1de8be47-5de8-4145-ba7b-e73cc1bd03aa">
-  <name>Document_BankReceipt</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Bank receipt&quot;</value>
-  </synonym>
+ <name>Document_BankReceipt</name>
+ <synonym>
+  <key>tr</key>
+  <value>Belge "Banka makbuzu"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ "Банковский приход"</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Document "Bank receipt"</value>
+ </synonym>
 </mdclass:Role>

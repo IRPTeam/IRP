@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="411a2fa6-ace0-4405-8b29-9fe94932dbe5">
-  <name>PriceManagment</name>
-  <synonym>
-    <key>en</key>
-    <value>Price managment</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.PriceList</content>
-  <content>Catalog.PriceTypes</content>
-  <content>Catalog.SpecialOffers</content>
-  <content>Catalog.SpecialOfferRules</content>
-  <content>Catalog.SpecialOfferTypes</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>PriceManagment</name>
+ <synonym>
+  <key>tr</key>
+  <value>Fiyat yönetimi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Управление ценами</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Price managment</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.PriceList</content>
+ <content>Catalog.PriceTypes</content>
+ <content>Catalog.SpecialOffers</content>
+ <content>Catalog.SpecialOfferRules</content>
+ <content>Catalog.SpecialOfferTypes</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

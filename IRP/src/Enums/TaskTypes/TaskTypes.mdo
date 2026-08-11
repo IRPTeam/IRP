@@ -1,36 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d269482b-6aaa-401f-acaa-22ab1d869d77">
-  <producedTypes>
-    <refType typeId="c7239a3c-e93e-4ea6-bd3f-263dbe3bc63a" valueTypeId="17b2245e-0c32-445c-b840-a37f065040d8"/>
-    <listType typeId="c792ed8a-a9d1-4461-8f98-31fea9c1c3b7" valueTypeId="f145568a-512e-4994-a9bd-8cf2b4f7ec6a"/>
-    <managerType typeId="a91bd3ae-0c09-4ec6-8730-3043aa52e296" valueTypeId="7cce5d58-15da-4d90-bd82-1d6315eea39f"/>
-  </producedTypes>
-  <name>TaskTypes</name>
+ <producedTypes>
+  <refType typeId="c7239a3c-e93e-4ea6-bd3f-263dbe3bc63a" valueTypeId="17b2245e-0c32-445c-b840-a37f065040d8"/>
+  <listType typeId="c792ed8a-a9d1-4461-8f98-31fea9c1c3b7" valueTypeId="f145568a-512e-4994-a9bd-8cf2b4f7ec6a"/>
+  <managerType typeId="a91bd3ae-0c09-4ec6-8730-3043aa52e296" valueTypeId="7cce5d58-15da-4d90-bd82-1d6315eea39f"/>
+ </producedTypes>
+ <name>TaskTypes</name>
+ <synonym>
+  <key>tr</key>
+  <value>Görev türleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Типы задач</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Task types</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="99e73db8-05df-4a87-8637-e67d41e9432d">
+  <name>Execution</name>
   <synonym>
-    <key>en</key>
-    <value>Task types</value>
+   <key>tr</key>
+   <value>Gerçekleştirme</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="99e73db8-05df-4a87-8637-e67d41e9432d">
-    <name>Execution</name>
-    <synonym>
-      <key>en</key>
-      <value>Execution</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b7aeb004-19e0-46da-94d4-60b9d2ba7ff6">
-    <name>Verification</name>
-    <synonym>
-      <key>en</key>
-      <value>Verification</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="5c9b9f3e-2db3-479c-aef3-904ae5b0883a">
-    <name>Confirmation</name>
-    <synonym>
-      <key>en</key>
-      <value>Confirmation</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>ru</key>
+   <value>Исполнение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Execution</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b7aeb004-19e0-46da-94d4-60b9d2ba7ff6">
+  <name>Verification</name>
+  <synonym>
+   <key>tr</key>
+   <value>Doğrulama</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проверка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Verification</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="5c9b9f3e-2db3-479c-aef3-904ae5b0883a">
+  <name>Confirmation</name>
+  <synonym>
+   <key>tr</key>
+   <value>Onay</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Подтверждение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Confirmation</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

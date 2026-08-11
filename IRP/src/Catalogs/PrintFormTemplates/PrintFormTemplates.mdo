@@ -1,389 +1,698 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="128a793f-326f-4896-aadc-9f1f1054e48b">
-  <producedTypes>
-    <objectType typeId="adeabb0d-b399-4a55-a872-5a5a709af5e2" valueTypeId="c09b2e96-1393-4590-b33b-25a52be8bc1c"/>
-    <refType typeId="cb15b522-35d6-432c-aecc-933b8dacb2b5" valueTypeId="ba30a040-9943-4e6d-afcf-d57e7439c1e1"/>
-    <selectionType typeId="e40d060b-61bf-41df-a0b5-a65d7fd47350" valueTypeId="454e7492-e1e7-4ce0-932c-a31cce4a1626"/>
-    <listType typeId="43cc0721-4547-4763-b4b4-29c389c86418" valueTypeId="ee7d4c8b-75db-4f26-a698-d4cf23b24a85"/>
-    <managerType typeId="3082076f-5cb5-427c-a5b7-765a42370c98" valueTypeId="e94dddd1-a7b6-463d-8d67-65f624c0ae4e"/>
-  </producedTypes>
-  <name>PrintFormTemplates</name>
-  <synonym>
-    <key>en</key>
-    <value>Print form templates</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.PrintFormTemplates.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="128a793f-326f-4896-aadc-9f1f1054e48b">
+ <producedTypes>
+  <objectType typeId="adeabb0d-b399-4a55-a872-5a5a709af5e2" valueTypeId="c09b2e96-1393-4590-b33b-25a52be8bc1c"/>
+  <refType typeId="cb15b522-35d6-432c-aecc-933b8dacb2b5" valueTypeId="ba30a040-9943-4e6d-afcf-d57e7439c1e1"/>
+  <selectionType typeId="e40d060b-61bf-41df-a0b5-a65d7fd47350" valueTypeId="454e7492-e1e7-4ce0-932c-a31cce4a1626"/>
+  <listType typeId="43cc0721-4547-4763-b4b4-29c389c86418" valueTypeId="ee7d4c8b-75db-4f26-a698-d4cf23b24a85"/>
+  <managerType typeId="3082076f-5cb5-427c-a5b7-765a42370c98" valueTypeId="e94dddd1-a7b6-463d-8d67-65f624c0ae4e"/>
+ </producedTypes>
+ <name>PrintFormTemplates</name>
+ <synonym>
+  <key>tr</key>
+  <value>Form şablonlarını yazdır</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Печатная форма шаблонов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Print form templates</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.PrintFormTemplates.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PrintFormTemplates.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PrintFormTemplates.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PrintFormTemplates.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="2a0b0325-437e-40ca-a76d-bd68308232d6">
-    <name>PrintFormType</name>
-    <synonym>
-      <key>en</key>
-      <value>Print form type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.PrintFormTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.PrintFormTypes.EnumValue.TXT</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PrintFormTemplates.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PrintFormTemplates.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PrintFormTemplates.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="2a0b0325-437e-40ca-a76d-bd68308232d6">
+  <name>PrintFormType</name>
+  <synonym>
+   <key>tr</key>
+   <value>Yazdırma formu tipi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип формы печати</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print form type</value>
+  </synonym>
+  <type>
+   <types>EnumRef.PrintFormTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:ReferenceValue">
+   <value>Enum.PrintFormTypes.EnumValue.TXT</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="72e14f64-fb6d-4a0f-82bd-861aeb24f2bb">
+  <name>PrintFormVariableType</name>
+  <synonym>
+   <key>tr</key>
+   <value>Yazdırma formu değişken türü</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Печатная форма типов переменных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print form variable type</value>
+  </synonym>
+  <type>
+   <types>EnumRef.PrintFormVariableTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:ReferenceValue">
+   <value>Enum.PrintFormVariableTypes.EnumValue.XMLStyle</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="456fd220-b424-43a0-a07e-5237d6a65799">
+  <name>Template</name>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="92384732-ecce-4aae-be49-95564888376b">
+  <name>UseTables</name>
+  <synonym>
+   <key>tr</key>
+   <value>Tabloları kullan</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Использовать таблицы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Use tables</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7bfa0ead-18f0-4985-b2af-b4f77ea66ad5">
+  <name>UsePrintInformations</name>
+  <synonym>
+   <key>tr</key>
+   <value>Use print informations</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Use print informations</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Use print informations</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="aaf196ed-18b5-423a-b8f9-99020befc23c">
+  <name>PrintInfoPath</name>
+  <synonym>
+   <key>tr</key>
+   <value>Print info path</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Print info path</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print info path</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="522fc342-6dfd-4002-9816-c65b9b6e3573">
+  <name>LimitedAccess</name>
+  <synonym>
+   <key>tr</key>
+   <value>Limited access</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Limited access</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Limited access</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="275e9f33-9f22-4b1b-8dba-01bec67e6c71">
+  <producedTypes>
+   <objectType typeId="214c0a4c-5a2d-4995-a3e6-17b11f138ed5" valueTypeId="58a0e5a5-e2a8-479a-97a4-29633466482e"/>
+   <rowType typeId="a67e6978-cc61-44ae-9fb1-4a5d6295370e" valueTypeId="487d67c9-f509-45a3-be3f-fe4bf7025ef9"/>
+  </producedTypes>
+  <name>Tables</name>
+  <synonym>
+   <key>tr</key>
+   <value>Tablolar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Таблицы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tables</value>
+  </synonym>
+  <attributes uuid="3882bfeb-8def-4958-9d68-e61c01254095">
+   <name>Name</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ad</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Имя</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="72e14f64-fb6d-4a0f-82bd-861aeb24f2bb">
-    <name>PrintFormVariableType</name>
-    <synonym>
-      <key>en</key>
-      <value>Print form variable type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.PrintFormVariableTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.PrintFormVariableTypes.EnumValue.XMLStyle</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="7aa8c28f-fbb0-4ebf-8348-f69deb860124">
+   <name>Expression</name>
+   <synonym>
+    <key>tr</key>
+    <value>İfade</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Выражение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Expression</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="456fd220-b424-43a0-a07e-5237d6a65799">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="69d61933-6e64-407a-baf6-3714f1e77c2d">
+   <name>RepeatingArea</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tekrarlanan alan</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Повторяющаяся зона</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Repeating area</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="92384732-ecce-4aae-be49-95564888376b">
-    <name>UseTables</name>
-    <synonym>
-      <key>en</key>
-      <value>Use tables</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="a0758ce6-d644-4a48-99de-3f4306f5fca0">
+   <name>LineStart</name>
+   <synonym>
+    <key>tr</key>
+    <value>Satır başı</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Начало строки</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Line start</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+     <nonNegative>true</nonNegative>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="275e9f33-9f22-4b1b-8dba-01bec67e6c71">
-    <producedTypes>
-      <objectType typeId="214c0a4c-5a2d-4995-a3e6-17b11f138ed5" valueTypeId="58a0e5a5-e2a8-479a-97a4-29633466482e"/>
-      <rowType typeId="a67e6978-cc61-44ae-9fb1-4a5d6295370e" valueTypeId="487d67c9-f509-45a3-be3f-fe4bf7025ef9"/>
-    </producedTypes>
-    <name>Tables</name>
-    <synonym>
-      <key>en</key>
-      <value>Tables</value>
-    </synonym>
-    <attributes uuid="3882bfeb-8def-4958-9d68-e61c01254095">
-      <name>Name</name>
-      <synonym>
-        <key>en</key>
-        <value>Name</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7aa8c28f-fbb0-4ebf-8348-f69deb860124">
-      <name>Expression</name>
-      <synonym>
-        <key>en</key>
-        <value>Expression</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="69d61933-6e64-407a-baf6-3714f1e77c2d">
-      <name>RepeatingArea</name>
-      <synonym>
-        <key>en</key>
-        <value>Repeating area</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a0758ce6-d644-4a48-99de-3f4306f5fca0">
-      <name>LineStart</name>
-      <synonym>
-        <key>en</key>
-        <value>Line start</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-          <nonNegative>true</nonNegative>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="39d0c30e-1e5a-440a-9082-b1701eafe396">
-      <name>LineEnd</name>
-      <synonym>
-        <key>en</key>
-        <value>Line end</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-          <nonNegative>true</nonNegative>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="7e50c18d-e86d-497c-8308-dd9936160f28">
-    <producedTypes>
-      <objectType typeId="558b4ae1-a0c3-4a40-ac6a-ce5a229900bb" valueTypeId="eaccd904-4a41-4944-a584-94c1b30011e5"/>
-      <rowType typeId="25f6eeeb-dde4-46eb-8849-460de86737d9" valueTypeId="6a774886-ec3c-4093-803a-898114390624"/>
-    </producedTypes>
-    <name>Parameters</name>
-    <synonym>
-      <key>en</key>
-      <value>Parameters</value>
-    </synonym>
-    <standardAttributes>
-      <dataHistory>Use</dataHistory>
-      <name>LineNumber</name>
-      <fillValue xsi:type="core:UndefinedValue"/>
-      <fullTextSearch>Use</fullTextSearch>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </standardAttributes>
-    <attributes uuid="3687f605-148d-43cf-b3c0-8850bcf01836">
-      <name>Name</name>
-      <synonym>
-        <key>en</key>
-        <value>Name</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="1182fd87-d527-48ba-9946-c6ae3f427682">
-      <name>Table</name>
-      <synonym>
-        <key>en</key>
-        <value>Table</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="bc61b1cc-e86c-469d-b726-d1dbb73d82b8">
-      <name>Expression</name>
-      <synonym>
-        <key>en</key>
-        <value>Expression</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7a17a8c1-9881-4c4f-b84b-cceb953d6ecc">
-      <name>ToDelete</name>
-      <synonym>
-        <key>en</key>
-        <value>To delete</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <forms uuid="c3393446-ebf8-4c0e-aacd-ba60eab7d262">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ddf178e5-cbc7-4c82-a980-5f0fc0b058f8">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="4545e209-61a6-4c47-a4f7-dd6c79ef9932">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5173aaef-1ef1-4a7c-a975-a7cfe208e2b3">
-    <name>FormulaEditingTable</name>
-    <synonym>
-      <key>en</key>
-      <value>Formula editing table</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="0523a6c0-7e09-4f1c-a3af-4534d09d6cd0">
-    <name>FormulaEditingParameter</name>
-    <synonym>
-      <key>en</key>
-      <value>Formula editing parameter</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="39d0c30e-1e5a-440a-9082-b1701eafe396">
+   <name>LineEnd</name>
+   <synonym>
+    <key>tr</key>
+    <value>Satır sonu</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Конец строки</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Line end</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+     <nonNegative>true</nonNegative>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="7e50c18d-e86d-497c-8308-dd9936160f28">
+  <producedTypes>
+   <objectType typeId="558b4ae1-a0c3-4a40-ac6a-ce5a229900bb" valueTypeId="eaccd904-4a41-4944-a584-94c1b30011e5"/>
+   <rowType typeId="25f6eeeb-dde4-46eb-8849-460de86737d9" valueTypeId="6a774886-ec3c-4093-803a-898114390624"/>
+  </producedTypes>
+  <name>Parameters</name>
+  <synonym>
+   <key>tr</key>
+   <value>Parametreler</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Параметры</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Parameters</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <attributes uuid="3687f605-148d-43cf-b3c0-8850bcf01836">
+   <name>Name</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ad</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Имя</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Name</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1182fd87-d527-48ba-9946-c6ae3f427682">
+   <name>Table</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tablo</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Таблица</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Table</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="bc61b1cc-e86c-469d-b726-d1dbb73d82b8">
+   <name>Expression</name>
+   <synonym>
+    <key>tr</key>
+    <value>İfade</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Выражение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Expression</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7a17a8c1-9881-4c4f-b84b-cceb953d6ecc">
+   <name>ToDelete</name>
+   <synonym>
+    <key>tr</key>
+    <value>Silmek için</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Для удаления</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>To delete</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d0fb9370-da8c-4515-a5b5-489596ff43c0">
+   <name>HideEmpty</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hide empty</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Hide empty</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Hide empty</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="3f83f409-d2f5-4f50-98e5-237b90e27920">
+  <producedTypes>
+   <objectType typeId="2dd5feea-e775-4d1a-a866-2285b907c354" valueTypeId="b5a469ec-6e86-408e-a3ae-ade109bdba7b"/>
+   <rowType typeId="f7863708-2265-4ff9-9316-e9db1e4a990d" valueTypeId="ef86eb55-8efc-4e37-af32-b32be4f6344e"/>
+  </producedTypes>
+  <name>AccessGroups</name>
+  <synonym>
+   <key>tr</key>
+   <value>Erişim grupları</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Группы доступа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Access groups</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <attributes uuid="5be7c6e6-75e6-4739-8e0c-8f26f8d6559a">
+   <name>Group</name>
+   <synonym>
+    <key>tr</key>
+    <value>Gruplama</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Группа</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Group</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.AccessGroups</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="c3393446-ebf8-4c0e-aacd-ba60eab7d262">
+  <name>ItemForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ddf178e5-cbc7-4c82-a980-5f0fc0b058f8">
+  <name>ListForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="4545e209-61a6-4c47-a4f7-dd6c79ef9932">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5173aaef-1ef1-4a7c-a975-a7cfe208e2b3">
+  <name>FormulaEditingTable</name>
+  <synonym>
+   <key>tr</key>
+   <value>Formül düzenleme tablosu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Таблица изменения формулы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Formula editing table</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="0523a6c0-7e09-4f1c-a3af-4534d09d6cd0">
+  <name>FormulaEditingParameter</name>
+  <synonym>
+   <key>tr</key>
+   <value>Formül düzenleme parametresi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Параметры изменения формулы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Formula editing parameter</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

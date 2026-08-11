@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b1e0fb9c-ee12-4ed3-b10c-2d58ec260a11">
-  <name>Report_D2001_Sales</name>
-  <synonym>
-    <key>en</key>
-    <value>Report D2001_Sales</value>
-  </synonym>
+ <name>Report_D2001_Sales</name>
+ <synonym>
+  <key>tr</key>
+  <value>D2001 Satışlar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет D2001_Продажи</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report D2001_Sales</value>
+ </synonym>
 </mdclass:Role>

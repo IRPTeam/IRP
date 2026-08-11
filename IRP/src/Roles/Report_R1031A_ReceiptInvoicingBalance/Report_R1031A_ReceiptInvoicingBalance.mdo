@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="125f4343-dc80-4544-bc3d-060b60922bf1">
-  <name>Report_R1031A_ReceiptInvoicingBalance</name>
-  <synonym>
-    <key>en</key>
-    <value>Report R1031A_ReceiptInvoicingBalance</value>
-  </synonym>
+ <name>Report_R1031A_ReceiptInvoicingBalance</name>
+ <synonym>
+  <key>tr</key>
+  <value>R1031A Gelen fatura bakiyesi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R1031A_БалансПоступленийИСчетов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R1031A_ReceiptInvoicingBalance</value>
+ </synonym>
 </mdclass:Role>

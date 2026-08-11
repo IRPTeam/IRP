@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7431c75c-3571-4986-8a9b-a9e296aea714">
-  <name>UseRetail</name>
-  <synonym>
-    <key>en</key>
-    <value>Use retail</value>
-  </synonym>
-  <location>Constant.UseRetail</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>DataProcessor.PointOfSale</content>
-  <content>Document.CashStatement</content>
-  <content>Catalog.CashStatementStatuses</content>
-  <content>Catalog.PaymentTerminals</content>
-  <content>Catalog.RetailCustomers</content>
-  <content>Document.RetailReturnReceipt</content>
-  <content>AccumulationRegister.R2050T_RetailSales</content>
-  <content>Document.RetailSalesReceipt</content>
-  <content>InformationRegister.RetailWorkers</content>
-  <content>AccumulationRegister.R3050T_PosCashBalances</content>
-  <content>Catalog.BankTerms</content>
-  <content>InformationRegister.BranchBankTerms</content>
-  <content>Catalog.PaymentTypes</content>
-  <content>Enum.PaymentTypes</content>
-  <content>Document.RetailShipmentConfirmation</content>
-  <content>Document.RetailGoodsReceipt</content>
-  <content>Subsystem.Retail</content>
-  <content>Subsystem.Retail.Subsystem.VisitorCounter</content>
-  <content>Document.VisitorCounter</content>
-  <content>Document.RetailReceiptCorrection</content>
-  <content>Report.M1010A_PriceList</content>
-  <content>Report.R4050A_InventoryBalance</content>
-  <content>CommonCommand.OpenReport_M1010A_PriceList</content>
-  <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
+ <name>UseRetail</name>
+ <synonym>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Perakende</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать розничный модуль</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use retail</value>
+ </synonym>
+ <location>Constant.UseRetail</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>DataProcessor.PointOfSale</content>
+ <content>Document.CashStatement</content>
+ <content>Catalog.CashStatementStatuses</content>
+ <content>Catalog.PaymentTerminals</content>
+ <content>Catalog.RetailCustomers</content>
+ <content>Document.RetailReturnReceipt</content>
+ <content>AccumulationRegister.R2050T_RetailSales</content>
+ <content>Document.RetailSalesReceipt</content>
+ <content>InformationRegister.RetailWorkers</content>
+ <content>AccumulationRegister.R3050T_PosCashBalances</content>
+ <content>Catalog.BankTerms</content>
+ <content>InformationRegister.BranchBankTerms</content>
+ <content>Catalog.PaymentTypes</content>
+ <content>Enum.PaymentTypes</content>
+ <content>Document.RetailShipmentConfirmation</content>
+ <content>Document.RetailGoodsReceipt</content>
+ <content>Subsystem.Retail</content>
+ <content>Subsystem.Retail.Subsystem.VisitorCounter</content>
+ <content>Document.VisitorCounter</content>
+ <content>Document.RetailReceiptCorrection</content>
+ <content>Report.M1010A_PriceList</content>
+ <content>Report.R4050A_InventoryBalance</content>
+ <content>CommonCommand.OpenReport_M1010A_PriceList</content>
+ <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
 </mdclass:FunctionalOption>

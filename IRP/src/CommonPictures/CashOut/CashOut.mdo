@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="00525d0d-dd3f-4b88-8b86-4b8a7254dc70">
-  <name>CashOut</name>
-  <synonym>
-    <key>en</key>
-    <value>Cash out</value>
-  </synonym>
+ <name>CashOut</name>
+ <synonym>
+  <key>tr</key>
+  <value>Nakit çıkışı</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Изъятие</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cash out</value>
+ </synonym>
 </mdclass:CommonPicture>

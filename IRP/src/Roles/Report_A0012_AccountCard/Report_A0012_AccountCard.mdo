@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="23f9b568-ec76-47d7-8c3b-eddcb3697a3e">
-  <name>Report_A0012_AccountCard</name>
-  <synonym>
-    <key>en</key>
-    <value>Report A0012_AccountCard</value>
-  </synonym>
+ <name>Report_A0012_AccountCard</name>
+ <synonym>
+  <key>tr</key>
+  <value>A0012 Hesap muavini</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет A0012_КарточкаСчета</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report A0012_AccountCard</value>
+ </synonym>
 </mdclass:Role>

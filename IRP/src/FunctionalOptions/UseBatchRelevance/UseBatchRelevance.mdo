@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="51679d27-46b8-49e7-8842-ad9957b6fa8c">
+ <name>UseBatchRelevance</name>
+ <synonym>
+  <key>tr</key>
+  <value>Use batch relevance</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать актуальность партий</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use batch relevance</value>
+ </synonym>
+ <location>Constant.UseBatchRelevance</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>InformationRegister.T6030S_BatchRelevance</content>
+</mdclass:FunctionalOption>

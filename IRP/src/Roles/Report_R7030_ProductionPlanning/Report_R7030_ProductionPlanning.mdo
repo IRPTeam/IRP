@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4c57347a-056f-4790-b087-41938b7ad32e">
-  <name>Report_R7030_ProductionPlanning</name>
-  <synonym>
-    <key>en</key>
-    <value>Report R7030_ProductionPlanning</value>
-  </synonym>
+ <name>Report_R7030_ProductionPlanning</name>
+ <synonym>
+  <key>tr</key>
+  <value>R7030 Üretim planlama</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R7030_ПроизводственноеПланирование</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R7030_ProductionPlanning</value>
+ </synonym>
 </mdclass:Role>

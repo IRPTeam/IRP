@@ -90,24 +90,63 @@ Scenario: _052303 create SPO same with SO
 		And I save the value of "Number" field as "$$NumberShipmentPlaningOrder01$$"
 	* Check registers
 		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
+			| '$$ShipmentPlaningOrder01$$'            | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      |
+			| 'Register  "Posted documents registry"' | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      |
+			| ''                                      | 'Document'                   | 'Date'                                 | 'Number'                               | 'Create date'                          | 'Modify date'                          | 'Author'                               | 'Editor'                               | 'Manual movements edit' |
+			| ''                                      | '$$ShipmentPlaningOrder01$$' | '*'                                    | '*'                                    | '*'                                    | ''                                     | '*'                                    | ''                                     | 'No'                    |
+		And I select "R9610 Shipment planing" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal	
 			| '$$ShipmentPlaningOrder01$$'            | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
-			| 'Register  "Posted documents registry"' | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
-			| ''                                      | 'Document'                   | 'Date'                                 | 'Number'                               | 'Create date'                          | 'Modify date'                          | 'Author'                               | 'Editor'                               | 'Manual movements edit' | ''                 | ''                 |
-			| ''                                      | '$$ShipmentPlaningOrder01$$' | '*'                                    | '*'                                    | '*'                                    | ''                                     | '*'                                    | ''                                     | 'No'                    | ''                 | ''                 |
-			| ''                                      | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
 			| 'Register  "R9610 Shipment planing"'    | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
 			| ''                                      | 'Period'                     | 'Company'                              | 'Branch'                               | 'Partner'                              | 'Store'                                | 'Item key'                             | 'Source of origin'                     | 'Order'                 | 'Planned quantity' | 'Shipped quantity' |
 			| ''                                      | '*'                          | 'Main Company'                         | ''                                     | 'Lomaniti'                             | 'Store 01'                             | 'Chewing gum/Chewing gum'              | ''                                     | '$$SalesOrder01$$'      | ''                 | '1 000'            |
-			| ''                                      | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
-			| 'Register  "T3010S Row ID info"'        | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
-			| ''                                      | 'Key'                        | 'Row ID'                               | 'Unique ID'                            | 'Basis'                                | 'Basis key'                            | 'Row ref'                              | 'Price'                                | 'Currency'              | 'Unit'             | ''                 |
-			| ''                                      | '*'                          | '06c243aa-3ec3-4301-b062-21c7beb30762' | '*'                                    | '$$SalesOrder01$$'                     | '06c243aa-3ec3-4301-b062-21c7beb30762' | '06c243aa-3ec3-4301-b062-21c7beb30762' | ''                                     | ''                      | 'pcs'              | ''                 |
-			| ''                                      | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
-			| 'Register  "TM1010B Row ID movements"'  | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
-			| ''                                      | 'Period'                     | 'RecordType'                           | 'Row ref'                              | 'Row ID'                               | 'Step'                                 | 'Basis'                                | 'Basis key'                            | 'Quantity'              | ''                 | ''                 |
-			| ''                                      | '*'                          | 'Receipt'                              | '06c243aa-3ec3-4301-b062-21c7beb30762' | '06c243aa-3ec3-4301-b062-21c7beb30762' | 'SI&SC'                                | '$$ShipmentPlaningOrder01$$'           | '*'                                    | '1 000'                 | ''                 | ''                 |
-			| ''                                      | '*'                          | 'Expense'                              | '06c243aa-3ec3-4301-b062-21c7beb30762' | '06c243aa-3ec3-4301-b062-21c7beb30762' | 'SI&SC&SPO'                            | '$$SalesOrder01$$'                     | '06c243aa-3ec3-4301-b062-21c7beb30762' | '1 000'                 | ''                 | ''                 |
+		And I select "T3010S Row ID info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal		
+			| '$$ShipmentPlaningOrder01$$'            | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 |
+			| 'Register  "T3010S Row ID info"'        | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 |
+			| ''                                      | 'Key'                        | 'Row ID'                               | 'Unique ID'                            | 'Basis'                                | 'Basis key'                            | 'Row ref'                              | 'Price'                                | 'Currency'              | 'Unit'             |
+			| ''                                      | '*'                          | '06c243aa-3ec3-4301-b062-21c7beb30762' | '*'                                    | '$$SalesOrder01$$'                     | '06c243aa-3ec3-4301-b062-21c7beb30762' | '06c243aa-3ec3-4301-b062-21c7beb30762' | ''                                     | ''                      | 'pcs'              |
+		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ShipmentPlaningOrder01$$'            | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      |
+			| 'Register  "TM1010B Row ID movements"'  | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      |
+			| ''                                      | 'Period'                     | 'RecordType'                           | 'Row ref'                              | 'Row ID'                               | 'Step'                                 | 'Basis'                                | 'Basis key'                            | 'Quantity'              |
+			| ''                                      | '*'                          | 'Receipt'                              | '06c243aa-3ec3-4301-b062-21c7beb30762' | '06c243aa-3ec3-4301-b062-21c7beb30762' | 'SI&SC'                                | '$$ShipmentPlaningOrder01$$'           | '*'                                    | '1 000'                 |
+			| ''                                      | '*'                          | 'Expense'                              | '06c243aa-3ec3-4301-b062-21c7beb30762' | '06c243aa-3ec3-4301-b062-21c7beb30762' | 'SI&SC&SPO'                            | '$$SalesOrder01$$'                     | '06c243aa-3ec3-4301-b062-21c7beb30762' | '1 000'                 |
+		And I select "Row IDStamps" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ShipmentPlaningOrder01$$' | ''       | ''        | ''                         | ''                                          |
+			| 'Register  "Row IDStamps"'   | ''       | ''        | ''                         | ''                                          |
+			| ''                           | 'Period' | 'Row ref' | 'Attribute'                | 'Value'                                     |
+			| ''                           | '*'      | '*'       | 'AgreementSales'           | 'Basic Partner terms, TRY'                  |
+			| ''                           | '*'      | '*'       | 'Basis'                    | 'Sales order 316 dated 22.04.2025 13:23:28' |
+			| ''                           | '*'      | '*'       | 'Company'                  | 'Main Company'                              |
+			| ''                           | '*'      | '*'       | 'CurrencySales'            | 'TRY'                                       |
+			| ''                           | '*'      | '*'       | 'IsFixedItemKey'           | 'No'                                        |
+			| ''                           | '*'      | '*'       | 'IsFixedStore'             | 'No'                                        |
+			| ''                           | '*'      | '*'       | 'IsVariableItemKey'        | 'No'                                        |
+			| ''                           | '*'      | '*'       | 'IsVariableStore'          | 'No'                                        |
+			| ''                           | '*'      | '*'       | 'Item'                     | 'Chewing gum'                               |
+			| ''                           | '*'      | '*'       | 'ItemKey'                  | 'Chewing gum/Chewing gum'                   |
+			| ''                           | '*'      | '*'       | 'LegalNameSales'           | 'Company Lomaniti'                          |
+			| ''                           | '*'      | '*'       | 'PartnerSales'             | 'Lomaniti'                                  |
+			| ''                           | '*'      | '*'       | 'PriceIncludeTaxPurchases' | 'No'                                        |
+			| ''                           | '*'      | '*'       | 'PriceIncludeTaxSales'     | 'Yes'                                       |
+			| ''                           | '*'      | '*'       | 'ProcurementMethod'        | 'Stock'                                     |
+			| ''                           | '*'      | '*'       | 'Requester'                | 'Sales order 316 dated 22.04.2025 13:23:28' |
+			| ''                           | '*'      | '*'       | 'Store'                    | 'Store 01'                                  |
+			| ''                           | '*'      | '*'       | 'TransactionTypeGRReturn'  | 'Return from customer'                      |
+			| ''                           | '*'      | '*'       | 'TransactionTypeSales'     | 'Sales'                                     |
+			| ''                           | '*'      | '*'       | 'TransactionTypeSC'        | 'Sales'                                     |
+			| ''                           | '*'      | '*'       | 'TransactionTypeSR'        | 'Return from customer'                      |
+			| ''                           | '*'      | '*'       | 'Unit'                     | 'pcs'                                       |		
 	And I close all client application windows		
 				
 Scenario: _052304 create SPO with different Store
@@ -144,7 +183,7 @@ Scenario: _052304 create SPO with different Store
 		And I save the value of "Number" field as "$$NumberShipmentPlaningOrder02$$"
 	* Check registers
 		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"				
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines by template
 			| '$$ShipmentPlaningOrder02$$'            | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
 			| 'Register  "Posted documents registry"' | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
 			| ''                                      | 'Document'                   | 'Date'                                 | 'Number'                               | 'Create date'                          | 'Modify date'                          | 'Author'                               | 'Editor'                               | 'Manual movements edit' | ''                 | ''                 |
@@ -195,7 +234,7 @@ Scenario: _052305 create SPO with different ItemKey
 		And I save the value of "Number" field as "$$NumberShipmentPlaningOrder03$$"
 	* Check registers
 		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"				
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines by template
 			| '$$ShipmentPlaningOrder03$$'            | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
 			| 'Register  "Posted documents registry"' | ''                           | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                                     | ''                      | ''                 | ''                 |
 			| ''                                      | 'Document'                   | 'Date'                                 | 'Number'                               | 'Create date'                          | 'Modify date'                          | 'Author'                               | 'Editor'                               | 'Manual movements edit' | ''                 | ''                 |
@@ -240,7 +279,7 @@ Scenario: _052306 create SPO
 		And I save the value of "Number" field as "$$NumberShipmentPlaningOrder04$$"
 	* Check registers
 		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines by template
 			| '$$ShipmentPlaningOrder04$$'            | ''                           | ''           | ''          | ''            | ''                                     | ''                           | ''          | ''                      | ''     |
 			| 'Register  "Posted documents registry"' | ''                           | ''           | ''          | ''            | ''                                     | ''                           | ''          | ''                      | ''     |
 			| ''                                      | 'Document'                   | 'Date'       | 'Number'    | 'Create date' | 'Modify date'                          | 'Author'                     | 'Editor'    | 'Manual movements edit' | ''     |

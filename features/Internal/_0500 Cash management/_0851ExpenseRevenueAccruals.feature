@@ -76,16 +76,8 @@ Scenario: _0851002 create Expense accruals (without PI and empty basis)
 		Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -128,16 +120,8 @@ Scenario: _0851003 create Expense accruals (without PI, Void)
 		Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -194,16 +178,8 @@ Scenario: _0851004 create Expense accruals (without PI, Reverse)
 		Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -253,16 +229,8 @@ Scenario: _0851005 check selection form for Expense accruals
 		Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -283,16 +251,8 @@ Scenario: _0851006 create Expense accruals (other period expense)
 		Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -337,16 +297,8 @@ Scenario: _0851006 create Expense accruals (other period expense)
 	* Create one more ExpenseAccrual for the same PI
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -397,16 +349,8 @@ Scenario: _0851007 create Revenue accruals (without SI and empty basis)
 		Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -449,16 +393,8 @@ Scenario: _0851008 create Revenue accruals (without SI, Void)
 		Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -515,16 +451,8 @@ Scenario: _0851009 create Revenue accruals (without SI, Reverse)
 		Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -574,16 +502,8 @@ Scenario: _0851010 check selection form for Revenue accruals
 		Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -604,16 +524,8 @@ Scenario: _0851011 create Revenue accruals (other period expense)
 		Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -658,16 +570,8 @@ Scenario: _0851011 create Revenue accruals (other period expense)
 	* Create one more RevenueAccrual for the same PI
 		And I click the button named "FormCreate"
 	* Filling in company and account
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |

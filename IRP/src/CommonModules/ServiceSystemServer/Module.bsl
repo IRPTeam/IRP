@@ -372,8 +372,8 @@ EndFunction
 //  * ExternalFunction - CatalogRef.ExternalFunctions - External function
 //  * Period - Date - Period
 Procedure RunJobExternalFunctions(JobStructure) Export
-	Params = CommonFunctionsServer.GetRecalculateExpressionParams(JobStructure.ExternalFunction);
 	
+	Params = CommonFunctionsServer.GetRecalculateExpressionParams(JobStructure.ExternalFunction);
 	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
 	
 	Job = GetJobRecordInQueue(JobStructure);
@@ -506,6 +506,64 @@ Procedure ContinueOrPauseSchedulerJob(ExternalFunction, Pause = True) Export
 		JobRecord.Status = Enums.JobStatus.Active;
 		Job.Write();
 	EndIf;
+EndProcedure
+
+// Start scheduler job.
+// 
+// Parameters:
+//  ExternalFunction - CatalogRef.ExternalFunctions - External function
+Procedure StartSchedulerJob(ExternalFunction) Export
+	
+	Query = New Query;
+	Query.SetParameter("ExternalFunction", ExternalFunction);
+	Query.Text =
+	"SELECT
+	|	JobQueueSliceLast.Job AS Job,
+	|	JobQueueSliceLast.Period AS Period,
+	|	JobQueueSliceLast.Status AS Status
+	|FROM
+	|	InformationRegister.JobQueue.SliceLast(, Job = &ExternalFunction) AS JobQueueSliceLast";
+	
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check property-return-type
+	If QuerySelection.Next() 
+			And QuerySelection.Status <> Enums.JobStatus.Completed
+			And QuerySelection.Status <> Enums.JobStatus.Failed
+			And QuerySelection.Status <> Enums.JobStatus.Canceled Then
+				
+		If QuerySelection.Status = Enums.JobStatus.Active Then
+			Return;
+		EndIf;
+		
+		JobStructure = New Structure;
+		JobStructure.Insert("ExternalFunction", ExternalFunction);
+		JobStructure.Insert("Period", QuerySelection.Period);
+		Job = GetJobRecordInQueue(JobStructure);
+		JobRecord = Job[0];
+	Else
+		JobDate	= CommonFunctionsServer.GetCurrentSessionDate();
+		JobStructure = New Structure;
+		JobStructure.Insert("ExternalFunction", ExternalFunction);
+		JobStructure.Insert("Period", JobDate);
+		Job = InformationRegisters.JobQueue.CreateRecordSet();
+		Job.Filter.Job.Set(ExternalFunction);
+		Job.Filter.Period.Set(JobDate);
+		JobRecord = Job.Add();
+		JobRecord.Job = ExternalFunction;
+		JobRecord.Period = JobDate;
+	EndIf;
+	
+	JobRecord.Start = CommonFunctionsServer.GetCurrentSessionDate();
+	JobRecord.Status = Enums.JobStatus.Active;
+	
+	ParamArray = New Array; // Array Of Structure
+	ParamArray.Add(JobStructure);
+	JobInfo = BackgroundJobs.Execute("ServiceSystemServer.RunJobExternalFunctions",
+			ParamArray, String(ExternalFunction.UUID()), ExternalFunction.Description);
+	JobRecord.JobID = JobInfo.UUID;
+	Job.Write();
+
 EndProcedure
 
 #EndRegion

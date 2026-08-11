@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ecc9dbe3-2f80-4e86-94e7-3351103b4349">
-  <name>DocumentUnposted</name>
-  <synonym>
-    <key>en</key>
-    <value>Document unposted</value>
-  </synonym>
+ <name>DocumentUnposted</name>
+ <synonym>
+  <key>tr</key>
+  <value>Belge kaydı kaldırıldı</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ не проведен</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Document unposted</value>
+ </synonym>
 </mdclass:CommonPicture>

@@ -1,60 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1b6a45ba-50a7-48ce-9552-035371f109e3">
-  <producedTypes>
-    <selectionType typeId="3c9f59c3-19aa-4031-a8a1-79eef95bfd31" valueTypeId="5b64b2b2-82a8-4761-80fc-61c2a5550ef7"/>
-    <listType typeId="8d9de27b-88d9-4808-95f2-d97e5b22bd09" valueTypeId="8d62b8e5-e14b-4a24-bd33-bab0d07b4b15"/>
-    <managerType typeId="f8c3f235-6042-4e5c-b6ab-ecc4d9161c58" valueTypeId="1e341c04-3c04-4f11-8606-ca4447a4075e"/>
-    <recordSetType typeId="52b2ea25-c9ee-4e88-82bc-ab52a4da1e78" valueTypeId="38a5fefe-a1fa-4711-9151-967c9e0a1ed6"/>
-    <recordKeyType typeId="c91b80aa-5383-4f20-82ac-f6fabb386442" valueTypeId="215e473c-3355-457e-bc39-5936fb4802e1"/>
-    <recordType typeId="97c7553d-4036-42d6-b2af-2c883b7f8ae9" valueTypeId="9c7b2322-8815-4161-9705-9d719b65c4c4"/>
-  </producedTypes>
-  <name>R6025B_SimpleBatch</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="1b6a45ba-50a7-48ce-9552-035371f109e3">
+ <producedTypes>
+  <selectionType typeId="3c9f59c3-19aa-4031-a8a1-79eef95bfd31" valueTypeId="5b64b2b2-82a8-4761-80fc-61c2a5550ef7"/>
+  <listType typeId="8d9de27b-88d9-4808-95f2-d97e5b22bd09" valueTypeId="8d62b8e5-e14b-4a24-bd33-bab0d07b4b15"/>
+  <managerType typeId="f8c3f235-6042-4e5c-b6ab-ecc4d9161c58" valueTypeId="1e341c04-3c04-4f11-8606-ca4447a4075e"/>
+  <recordSetType typeId="52b2ea25-c9ee-4e88-82bc-ab52a4da1e78" valueTypeId="38a5fefe-a1fa-4711-9151-967c9e0a1ed6"/>
+  <recordKeyType typeId="c91b80aa-5383-4f20-82ac-f6fabb386442" valueTypeId="215e473c-3355-457e-bc39-5936fb4802e1"/>
+  <recordType typeId="97c7553d-4036-42d6-b2af-2c883b7f8ae9" valueTypeId="9c7b2322-8815-4161-9705-9d719b65c4c4"/>
+ </producedTypes>
+ <name>R6025B_SimpleBatch</name>
+ <synonym>
+  <key>tr</key>
+  <value>R6025 Temel parti</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R6025 Простая партия</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R6025 Simple batch</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="868df77f-2a66-4b43-951d-61c5796f9f33">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R6025 Simple batch</value>
+   <key>tr</key>
+   <value>Quantity</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="868df77f-2a66-4b43-951d-61c5796f9f33">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="f1a58f8d-dc50-41db-89a0-9e0bdc67f4e4">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="f6e9d799-7423-4e89-b8fe-380c5a939718">
-    <name>SimpleBatch</name>
-    <synonym>
-      <key>en</key>
-      <value>Simple batch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SimpleBatch</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Количество</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="f1a58f8d-dc50-41db-89a0-9e0bdc67f4e4">
+  <name>Amount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="f6e9d799-7423-4e89-b8fe-380c5a939718">
+  <name>SimpleBatch</name>
+  <synonym>
+   <key>tr</key>
+   <value>Temel parti</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Простая партия</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Simple batch</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SimpleBatch</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

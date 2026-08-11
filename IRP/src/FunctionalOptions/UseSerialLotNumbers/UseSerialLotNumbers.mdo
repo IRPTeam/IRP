@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="681b70b4-c761-43f9-a9d5-eb7abc88301e">
-  <name>UseSerialLotNumbers</name>
-  <synonym>
-    <key>en</key>
-    <value>Use serial lot numbers</value>
-  </synonym>
-  <location>Constant.UseSerialLotNumbers</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.SerialLotNumbers</content>
-  <content>AccumulationRegister.R2050T_RetailSales.Dimension.SerialLotNumber</content>
-  <content>InformationRegister.Barcodes.Resource.SerialLotNumber</content>
-  <content>Enum.SerialNumberTypes</content>
-  <content>Enum.SerialNumbersOwner</content>
-  <content>AccumulationRegister.R4014B_SerialLotNumber.Dimension.SerialLotNumber</content>
-  <content>AccumulationRegister.R4014B_SerialLotNumber</content>
-  <content>Catalog.ItemTypes.Attribute.UseSerialLotNumber</content>
-  <content>Catalog.ItemTypes.TabularSection.RegExpSerialLotNumbersRules</content>
-  <content>DataProcessor.CreateSerialLotNumbers</content>
-  <content>InformationRegister.T6060S_BatchCostAllocationInfo.Dimension.SerialLotNumber</content>
-  <content>Document.AdditionalRevenueAllocation.TabularSection.AllocationResult.Attribute.SerialLotNumber</content>
-  <content>Document.AdditionalCostAllocation.TabularSection.AllocationResult.Attribute.SerialLotNumber</content>
-  <content>InformationRegister.T6070S_BatchRevenueAllocationInfo.Dimension.SerialLotNumber</content>
-  <content>Catalog.ItemTypes.Attribute.BatchBalanceDetailSerialLotNumber</content>
-  <content>Catalog.ItemTypes.Attribute.StockBalanceDetailSerialLotNumber</content>
-  <content>AccumulationRegister.R4010B_ActualStocks.Dimension.SerialLotNumber</content>
+ <name>UseSerialLotNumbers</name>
+ <synonym>
+  <key>tr</key>
+  <value>Seri lotu kullanmak</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать серийные номера</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use serial lot numbers</value>
+ </synonym>
+ <location>Constant.UseSerialLotNumbers</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.SerialLotNumbers</content>
+ <content>AccumulationRegister.R2050T_RetailSales.Dimension.SerialLotNumber</content>
+ <content>InformationRegister.Barcodes.Resource.SerialLotNumber</content>
+ <content>Enum.SerialNumberTypes</content>
+ <content>Enum.SerialNumbersOwner</content>
+ <content>AccumulationRegister.R4014B_SerialLotNumber.Dimension.SerialLotNumber</content>
+ <content>AccumulationRegister.R4014B_SerialLotNumber</content>
+ <content>Catalog.ItemTypes.Attribute.UseSerialLotNumber</content>
+ <content>Catalog.ItemTypes.TabularSection.RegExpSerialLotNumbersRules</content>
+ <content>DataProcessor.CreateSerialLotNumbers</content>
+ <content>InformationRegister.T6060S_BatchCostAllocationInfo.Dimension.SerialLotNumber</content>
+ <content>Document.AdditionalRevenueAllocation.TabularSection.AllocationResult.Attribute.SerialLotNumber</content>
+ <content>Document.AdditionalCostAllocation.TabularSection.AllocationResult.Attribute.SerialLotNumber</content>
+ <content>InformationRegister.T6070S_BatchRevenueAllocationInfo.Dimension.SerialLotNumber</content>
+ <content>Catalog.ItemTypes.Attribute.BatchBalanceDetailSerialLotNumber</content>
+ <content>Catalog.ItemTypes.Attribute.StockBalanceDetailSerialLotNumber</content>
+ <content>AccumulationRegister.R4010B_ActualStocks.Dimension.SerialLotNumber</content>
 </mdclass:FunctionalOption>

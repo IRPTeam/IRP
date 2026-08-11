@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0450e8b8-04c6-423d-8a88-82fc09935d98">
-  <name>Report_R403A_GoodsInTransit</name>
-  <synonym>
-    <key>en</key>
-    <value>Report R403A_GoodsInTransit</value>
-  </synonym>
+ <name>Report_R403A_GoodsInTransit</name>
+ <synonym>
+  <key>tr</key>
+  <value>R403A Yoldaki mallar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R403A_ТоварыВПути</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R403A_GoodsInTransit</value>
+ </synonym>
 </mdclass:Role>

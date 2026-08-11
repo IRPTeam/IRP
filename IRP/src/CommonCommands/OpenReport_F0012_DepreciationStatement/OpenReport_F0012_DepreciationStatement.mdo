@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="adcd04eb-7ce5-4d4c-9ade-a30b153bcc84">
-  <name>OpenReport_F0012_DepreciationStatement</name>
-  <synonym>
-    <key>en</key>
-    <value>F0012 Depreciation statement</value>
-  </synonym>
-  <group>NavigationPanelOrdinary</group>
-  <representation>Auto</representation>
+ <name>OpenReport_F0012_DepreciationStatement</name>
+ <synonym>
+  <key>tr</key>
+  <value>F0012 Sabit kıymet amortisman raporu</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>F0012 Отчет амортизации ОС</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>F0012 Depreciation statement</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

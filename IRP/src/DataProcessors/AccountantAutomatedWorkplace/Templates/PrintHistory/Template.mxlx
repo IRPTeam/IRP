@@ -74,6 +74,14 @@
 					<f>3</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Ek alanlar</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Реквизиты</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Attributes</v8:content>
 						</v8:item>
@@ -96,6 +104,14 @@
 					<f>4</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Ad</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Имя</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Name</v8:content>
 						</v8:item>
@@ -111,6 +127,14 @@
 				<c>
 					<f>6</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Değer (önce / sonra)</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Значение (до / после)</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Value (before / after)</v8:content>
@@ -177,6 +201,14 @@
 				<c>
 					<f>6</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>#</v8:content>

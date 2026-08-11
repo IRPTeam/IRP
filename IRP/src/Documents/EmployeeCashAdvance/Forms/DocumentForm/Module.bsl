@@ -95,12 +95,12 @@ EndProcedure
 
 &AtClient
 Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocumentsClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocEmployeeCashAdvanceClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-	DocumentsClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocEmployeeCashAdvanceClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -370,7 +370,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

@@ -1,46 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9185c05f-5116-4e56-ad25-96339d059773">
-  <producedTypes>
-    <objectType typeId="9b4f7b43-8326-4db0-b790-fd3ed85fefd6" valueTypeId="d2f4d1ab-a7eb-459f-81c2-0e45b210f51e"/>
-    <managerType typeId="1d00021b-52e4-41af-bba0-112f26a4d83c" valueTypeId="8adc1709-f28b-482e-805d-4f07ca61a2f7"/>
-  </producedTypes>
-  <name>AccountantAutomatedWorkplace</name>
+ <producedTypes>
+  <objectType typeId="9b4f7b43-8326-4db0-b790-fd3ed85fefd6" valueTypeId="d2f4d1ab-a7eb-459f-81c2-0e45b210f51e"/>
+  <managerType typeId="1d00021b-52e4-41af-bba0-112f26a4d83c" valueTypeId="8adc1709-f28b-482e-805d-4f07ca61a2f7"/>
+ </producedTypes>
+ <name>AccountantAutomatedWorkplace</name>
+ <synonym>
+  <key>tr</key>
+  <value>Muhasebe evrak kontrolü</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Рабочее место бухгалтера</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Accountant automated workplace</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.AccountantAutomatedWorkplace.Form.Form</defaultForm>
+ <forms uuid="71d8e93a-790e-4048-a361-20baced5750e">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Accountant automated workplace</value>
+   <key>tr</key>
+   <value>Form</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.AccountantAutomatedWorkplace.Form.Form</defaultForm>
-  <forms uuid="71d8e93a-790e-4048-a361-20baced5750e">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="a1e23f2b-9784-40fc-8224-7de356fd37ff">
-    <name>FormSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>Form settings</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="9a464875-de5c-4ced-88a9-89e6a5472f87">
-    <name>PrintFormJE</name>
-    <synonym>
-      <key>en</key>
-      <value>Print form JE</value>
-    </synonym>
-  </templates>
-  <templates uuid="b0a0c4c9-a97d-4981-9d27-134ab0a27239">
-    <name>PrintHistory</name>
-    <synonym>
-      <key>en</key>
-      <value>Print history</value>
-    </synonym>
-  </templates>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a1e23f2b-9784-40fc-8224-7de356fd37ff">
+  <name>FormSettings</name>
+  <synonym>
+   <key>tr</key>
+   <value>Form ayarları</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Настройки формы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form settings</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a47d39f8-5fc3-4764-b090-68b4326d263b">
+  <name>DocumentTypeChoiseForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak türü seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Document type choise form</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document type choise form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="9a464875-de5c-4ced-88a9-89e6a5472f87">
+  <name>PrintFormJE</name>
+  <synonym>
+   <key>tr</key>
+   <value>MK'dan yazdır</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Печатная форма БухОперации</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print form JE</value>
+  </synonym>
+ </templates>
+ <templates uuid="b0a0c4c9-a97d-4981-9d27-134ab0a27239">
+  <name>PrintHistory</name>
+  <synonym>
+   <key>tr</key>
+   <value>Yazdırma geçmişi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>История печати</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print history</value>
+  </synonym>
+ </templates>
 </mdclass:DataProcessor>

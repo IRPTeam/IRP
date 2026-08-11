@@ -19,6 +19,14 @@
 				<Name>Start</Name>
 				<Title>
 					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Başlat</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Начало</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Start</v8:content>
 					</v8:item>
@@ -92,6 +100,14 @@
 				<Name>Completion</Name>
 				<Title>
 					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Tamamlama</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Выполнение</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Completion</v8:content>
 					</v8:item>
@@ -124,6 +140,14 @@
 			<Properties>
 				<Name>CheckTasksCompleted</Name>
 				<Title>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Tamamlanan görevleri kontrol edin</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Проверить выполненные задачи</v8:content>
+					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Check completed tasks</v8:content>
@@ -159,6 +183,14 @@
 			<Properties>
 				<Name>Line2</Name>
 				<Title>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Satış işlemi KDV'ye tabi değildir</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Нет</v8:content>
+					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>No</v8:content>
@@ -206,6 +238,14 @@
 			<Properties>
 				<Name>Line3</Name>
 				<Title>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>İçe aktar</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Да</v8:content>
+					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Yes</v8:content>
@@ -260,6 +300,14 @@
 			<Properties>
 				<Name>CompleteTasks</Name>
 				<Title>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Görevleri tamamla</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Выполненные задачи</v8:content>
+					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Complete tasks</v8:content>

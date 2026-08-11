@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e61089ba-2edd-44a8-86cc-b6489d5a90b6">
-  <name>DocOutgoingExchRateAdjustmentInvoiceServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc outgoing exch rate adjustment invoice server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocOutgoingExchRateAdjustmentInvoiceServer</name>
+ <synonym>
+  <key>tr</key>
+  <value>Belge giden döviz kuru ayarlama fatura server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ корректировки обменного курса исходящего счета сервера</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc outgoing exch rate adjustment invoice server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

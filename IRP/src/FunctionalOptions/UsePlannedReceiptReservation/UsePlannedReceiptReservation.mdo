@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3f3bbe52-ed88-4082-b53c-35e9182b6d40">
-  <name>UsePlannedReceiptReservation</name>
-  <synonym>
-    <key>en</key>
-    <value>Use planned receipt reservation</value>
-  </synonym>
-  <location>Constant.UsePlannedReceiptReservation</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.PlannedReceiptReservation</content>
-  <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ReservationDate</content>
-  <content>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</content>
-  <content>Report.R401A_FreeStocks</content>
-  <content>Report.R4012A_StockReservation</content>
-  <content>CommonCommand.OpenReport_R401A_FreeStocks</content>
-  <content>CommonCommand.OpenReport_R4011B_FreeStockMovements</content>
-  <content>CommonCommand.OpenReport_R4012A_StockReservation</content>
+ <name>UsePlannedReceiptReservation</name>
+ <synonym>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Planlanan stok giriş rezervi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать резерв запланированного прихода товара</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use planned receipt reservation</value>
+ </synonym>
+ <location>Constant.UsePlannedReceiptReservation</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.PlannedReceiptReservation</content>
+ <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ReservationDate</content>
+ <content>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</content>
+ <content>Report.R401A_FreeStocks</content>
+ <content>Report.R4012A_StockReservation</content>
+ <content>CommonCommand.OpenReport_R401A_FreeStocks</content>
+ <content>CommonCommand.OpenReport_R4011B_FreeStockMovements</content>
+ <content>CommonCommand.OpenReport_R4012A_StockReservation</content>
 </mdclass:FunctionalOption>

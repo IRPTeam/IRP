@@ -7,7 +7,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
-Procedure UploadDrag(Item, DragParameters, StandardProcessing)
+Async Procedure UploadDrag(Item, DragParameters, StandardProcessing)
 	StandardProcessing = False;
 	FileArray = New Array();
 	If TypeOf(DragParameters.Value) = Type("Array") Then

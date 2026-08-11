@@ -78,7 +78,7 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
 		And I move to "Currencies" tab
 		And in the table "Currencies" I click the button named "CurrenciesAdd"
-		And I click choice button of "Movement type" attribute in "Currencies" table
+		Then "Multi currency movement types" window is opened
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Reporting currency Euro' |
@@ -229,11 +229,7 @@ Scenario: _0978003 check foreign currency revaluation
 		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
 		And I click "Create" button
 		And I input "11.02.2023 23:59:59" text in the field named "Date"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Select button of "(Expense) Type" field
 		And I go to line in "List" table
 			| 'Description'    |

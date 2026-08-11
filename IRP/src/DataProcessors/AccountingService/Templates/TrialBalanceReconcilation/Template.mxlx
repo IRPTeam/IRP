@@ -171,6 +171,14 @@
 					<f>17</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Mizan karşılaştırma [Period]</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сверка оборотно сальдовой ведомости [Period]</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Trial balance reconcilation [Period]</v8:content>
 						</v8:item>
@@ -193,6 +201,14 @@
 					<f>18</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Hesap</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Банковский счет</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Account</v8:content>
 						</v8:item>
@@ -204,6 +220,14 @@
 				<c>
 					<f>19</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Delta</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Разница</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Delta</v8:content>
@@ -241,6 +265,14 @@
 					<f>21</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>IRP</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>IRP</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>IRP</v8:content>
 						</v8:item>
@@ -276,6 +308,14 @@
 				<c>
 					<f>23</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Muhasebe</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>БУХ</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>ACC</v8:content>
@@ -324,6 +364,14 @@
 					<f>26</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açılış bakiyesi Borç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Начальный остаток Дт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Open balance Dt</v8:content>
 						</v8:item>
@@ -335,6 +383,14 @@
 					<f>26</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açılış bakiyesi Alacak</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сальдо на начало Кт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Open balance Cr</v8:content>
 						</v8:item>
@@ -345,6 +401,14 @@
 				<c>
 					<f>26</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem içi hareketler Borç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Оборот Дт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Turnovers Dt</v8:content>
@@ -357,6 +421,14 @@
 					<f>26</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem içi hareketler Alacak</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Оборот Кт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Turnovers Cr</v8:content>
 						</v8:item>
@@ -367,6 +439,14 @@
 				<c>
 					<f>26</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapanış bakiyesi Borç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Конечный остаток Кт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Closing balance Dt</v8:content>
@@ -379,6 +459,14 @@
 					<f>26</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapanış bakiyesi Alacak</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Конечный остаток Кт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Closing balance Cr</v8:content>
 						</v8:item>
@@ -389,6 +477,14 @@
 				<c>
 					<f>27</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açılış bakiyesi Borç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Начальный остаток Дт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Open balance Dt</v8:content>
@@ -401,6 +497,14 @@
 					<f>27</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açılış bakiyesi Alacak</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сальдо на начало Кт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Open balance Cr</v8:content>
 						</v8:item>
@@ -411,6 +515,14 @@
 				<c>
 					<f>27</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem içi hareketler Borç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Оборот Дт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Turnovers dt</v8:content>
@@ -423,6 +535,14 @@
 					<f>27</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem içi hareketler Alacak</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Оборот Кт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Turnovers Cr</v8:content>
 						</v8:item>
@@ -434,6 +554,14 @@
 					<f>27</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapanış bakiyesi Borç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Конечный остаток Кт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Closing balance Dt</v8:content>
 						</v8:item>
@@ -444,6 +572,14 @@
 				<c>
 					<f>27</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapanış bakiyesi Alacak</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Конечный остаток Кт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Closing balance Cr</v8:content>
@@ -456,6 +592,14 @@
 					<f>28</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açılış bakiyesi Borç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Начальный остаток Дт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Open balance Dt</v8:content>
 						</v8:item>
@@ -466,6 +610,14 @@
 				<c>
 					<f>28</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açılış bakiyesi Alacak</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сальдо на начало Кт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Open balance Cr</v8:content>
@@ -478,6 +630,14 @@
 					<f>28</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem içi hareketler Borç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Оборот Дт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Turnovers Dt</v8:content>
 						</v8:item>
@@ -488,6 +648,14 @@
 				<c>
 					<f>28</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem içi hareketler Alacak</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Оборот Кт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Turnovers Cr</v8:content>
@@ -500,6 +668,14 @@
 					<f>28</f>
 					<tl>
 						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapanış bakiyesi Borç</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Конечный остаток Кт</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Closing balance Dt</v8:content>
 						</v8:item>
@@ -510,6 +686,14 @@
 				<c>
 					<f>28</f>
 					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapanış bakiyesi Alacak</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Конечный остаток Кт</v8:content>
+						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Closing balance Cr</v8:content>
@@ -1409,6 +1593,14 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
@@ -1431,6 +1623,14 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
@@ -1445,6 +1645,14 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
@@ -1458,6 +1666,14 @@
 		<backColor xmlns:d3p1="http://v8.1c.ru/8.1/data/ui/colors/web">d3p1:Gainsboro</backColor>
 		<fillType>Parameter</fillType>
 		<format>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
@@ -1473,6 +1689,14 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
@@ -1486,6 +1710,14 @@
 		<backColor xmlns:d3p1="http://v8.1c.ru/8.1/data/ui/colors/web">d3p1:Gainsboro</backColor>
 		<fillType>Parameter</fillType>
 		<format>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
@@ -1501,6 +1733,14 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
@@ -1514,6 +1754,14 @@
 		<backColor xmlns:d3p1="http://v8.1c.ru/8.1/data/ui/colors/web">d3p1:Cream</backColor>
 		<fillType>Parameter</fillType>
 		<format>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
@@ -1529,6 +1777,14 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
@@ -1543,6 +1799,14 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
@@ -1556,6 +1820,14 @@
 		<backColor xmlns:d3p1="http://v8.1c.ru/8.1/data/ui/colors/web">d3p1:Cream</backColor>
 		<fillType>Parameter</fillType>
 		<format>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
@@ -1574,6 +1846,14 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
@@ -1592,6 +1872,14 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
@@ -1603,6 +1891,14 @@
 		<backColor xmlns:d3p1="http://v8.1c.ru/8.1/data/ui/colors/web">d3p1:Cream</backColor>
 		<fillType>Parameter</fillType>
 		<format>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>

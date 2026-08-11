@@ -1,1101 +1,1676 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9d030403-6eef-4a13-ad3d-34980b839089">
-  <producedTypes>
-    <objectType typeId="19dbff02-7e5c-487e-b41c-5540703e92db" valueTypeId="49c06201-bc62-4ee8-8ee7-1ce5a740d007"/>
-    <refType typeId="6c51e304-20e9-4b45-81d8-156ec3733fb6" valueTypeId="e60173dd-2ee1-4ca5-80fd-3334ed0868d1"/>
-    <selectionType typeId="208bfe24-7185-492e-acb4-b2ea9c6a61d8" valueTypeId="70a0e635-a3d8-41bb-8d63-d15cc113f626"/>
-    <listType typeId="f8fdcc8c-4a4f-4c46-966d-b2bf8d801bb7" valueTypeId="6201a9cd-2521-46e7-bdf9-4f9576bcefad"/>
-    <managerType typeId="47a6b450-7b5e-4d00-995c-4535560304dd" valueTypeId="adbe26e1-37ca-416b-8856-6db05035e1c7"/>
-  </producedTypes>
-  <name>Payroll</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="9d030403-6eef-4a13-ad3d-34980b839089">
+ <producedTypes>
+  <objectType typeId="19dbff02-7e5c-487e-b41c-5540703e92db" valueTypeId="49c06201-bc62-4ee8-8ee7-1ce5a740d007"/>
+  <refType typeId="6c51e304-20e9-4b45-81d8-156ec3733fb6" valueTypeId="e60173dd-2ee1-4ca5-80fd-3334ed0868d1"/>
+  <selectionType typeId="208bfe24-7185-492e-acb4-b2ea9c6a61d8" valueTypeId="70a0e635-a3d8-41bb-8d63-d15cc113f626"/>
+  <listType typeId="f8fdcc8c-4a4f-4c46-966d-b2bf8d801bb7" valueTypeId="6201a9cd-2521-46e7-bdf9-4f9576bcefad"/>
+  <managerType typeId="47a6b450-7b5e-4d00-995c-4535560304dd" valueTypeId="adbe26e1-37ca-416b-8856-6db05035e1c7"/>
+ </producedTypes>
+ <name>Payroll</name>
+ <synonym>
+  <key>tr</key>
+  <value>Maaş Bordrosu</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Расчет зарплаты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Payroll</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.Payroll.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_Payroll</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_Payroll</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.Payroll.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.Payroll.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.Payroll.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Maaş Bordrosu</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Начисление зарплаты</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Payroll</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Maaş bordroları</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Начисления зарплаты</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Payrolls</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.Payroll.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.Payroll.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.Payroll.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+ <registerRecords>AccumulationRegister.R9555T_PaidSickLeaves</registerRecords>
+ <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
+ <registerRecords>AccumulationRegister.R9545T_PaidVacations</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
+ <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="44ae3f9e-ed49-4dd4-8925-5303cf9773ab">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Payroll</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.Payroll.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_Payroll</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_Payroll</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.Payroll.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.Payroll.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.Payroll.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.NotActive</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <quickChoice>Use</quickChoice>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Payroll</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Payrolls</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.Payroll.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.Payroll.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.Payroll.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
-  <registerRecords>AccumulationRegister.R9555T_PaidSickLeaves</registerRecords>
-  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
-  <registerRecords>AccumulationRegister.R9545T_PaidVacations</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
-  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
-  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
-  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a0c835a4-2ba0-4618-82a0-b683222b1288">
+  <name>Currency</name>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9057bd0d-51c3-4b7d-bb1a-3d41873fae28">
+  <name>BeginDate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Başlangıç tarihi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата начала</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Begin date</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="71de79fc-ff59-4383-bca8-3a3235a33de4">
+  <name>EndDate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Bitiş tarihi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата окончания</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>End date</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="730b4cfd-31e1-466c-8de4-675dc88ae02f">
+  <name>PaymentPeriod</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme periyodu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Период оплат</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Payment period</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PlanningPeriods</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsSalary</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c325072d-dd2e-49e2-bf9f-c0176567cfe7">
+  <name>DELETE_CalculationType</name>
+  <synonym>
+   <key>tr</key>
+   <value>SİLİNECEK hesaplama tipi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>УДАЛЕНО Вариант оплаты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>DELETE calculation type</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SalaryCalculationType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="31737c6d-0c18-498c-b04a-53ddefd184ba">
+  <name>DELETE_Partner</name>
+  <synonym>
+   <key>tr</key>
+   <value>DELETE Cari hesap</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>УДАЛИТЬ Партнера</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>DELETE partner</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="44ae3f9e-ed49-4dd4-8925-5303cf9773ab">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.OurCompany</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <choiceParameters>
-      <name>Filter.DeletionMark</name>
-      <value xsi:type="core:BooleanValue"/>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="141c8f5c-9da9-4c22-ad8f-3c5f2f2fb678">
+  <name>DELETE_LegalName</name>
+  <synonym>
+   <key>tr</key>
+   <value>SİLİNECEK Fatura hesabı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>УДАЛИТЬ Контрагента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>DELETE legal name</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ </attributes>
+ <attributes uuid="3d7d97bd-63ac-428a-a46b-8a8c99fc07b3">
+  <name>DELETE_Agreement</name>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner term</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ </attributes>
+ <forms uuid="c312c302-5825-4231-84ed-c654c3d208be">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="0516fb22-c739-4d07-822a-27cfd7cf28e7">
+  <name>ListForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="51060481-9e33-4304-8698-0d0dcc16e5be">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="27f4c134-6c63-492a-b7ab-a10879643b43">
+  <name>ChoiceByAccrualForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Birikim formuna göre seçim</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Выбор по форме начисления</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice by accrual form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="620c301b-ee29-4fea-a13d-56de0a2551f4">
+  <producedTypes>
+   <objectType typeId="5bea51a3-84ef-426d-bdb5-acddf42dab53" valueTypeId="de169bc1-84d9-4078-a5db-ac3c69e28431"/>
+   <rowType typeId="7426fe49-5b20-4f58-ae9b-d6fa661315fb" valueTypeId="7731e137-bfce-49e8-8414-67f8a5fd5401"/>
+  </producedTypes>
+  <name>AccrualList</name>
+  <synonym>
+   <key>tr</key>
+   <value>Tahakkuk listesi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Список начислений</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Accrual list</value>
+  </synonym>
+  <attributes uuid="e200e073-c6f8-407b-aea8-b41878b6950b">
+   <name>Key</name>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="a0c835a4-2ba0-4618-82a0-b683222b1288">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="8dc769e0-9897-4920-98d1-bef1f3a734bf">
+   <name>Employee</name>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Employee</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="9057bd0d-51c3-4b7d-bb1a-3d41873fae28">
-    <name>BeginDate</name>
-    <synonym>
-      <key>en</key>
-      <value>Begin date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="96690e49-b1de-4a7c-bd53-e55b275b4fa7">
+   <name>Position</name>
+   <synonym>
+    <key>tr</key>
+    <value>Pozisyon</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Должность</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Position</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.EmployeePositions</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="71de79fc-ff59-4383-bca8-3a3235a33de4">
-    <name>EndDate</name>
-    <synonym>
-      <key>en</key>
-      <value>End date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="d8945317-b62b-401c-998f-3c3dfefc7cf2">
+   <name>AccrualType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tahakkuk türü</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип начисления</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Accrual type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.AccrualAndDeductionTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameters>
+    <name>Filter.Type</name>
+    <value xsi:type="core:ReferenceValue">
+     <value>Enum.PayrollTypes.EnumValue.Accrual</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="730b4cfd-31e1-466c-8de4-675dc88ae02f">
-    <name>PaymentPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment period</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PlanningPeriods</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.IsSalary</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="03073d4c-ff35-4ee4-adca-f4a8c65eaac4">
+   <name>ExpenseType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Gider tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья затрат</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Expense type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="c325072d-dd2e-49e2-bf9f-c0176567cfe7">
-    <name>DELETE_CalculationType</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE calculation type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SalaryCalculationType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="8b84c8d2-131c-4d55-813c-dd627074ec41">
+   <name>ProfitLossCenter</name>
+   <synonym>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр прибылей/убытков</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Profit loss center</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="31737c6d-0c18-498c-b04a-53ddefd184ba">
-    <name>DELETE_Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="5cdf2ee5-355d-4bbf-ac80-c597cddeeded">
+   <name>Amount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <markNegatives>true</markNegatives>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="141c8f5c-9da9-4c22-ad8f-3c5f2f2fb678">
-    <name>DELETE_LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="420fc6e2-8c3d-46f0-bad5-dd69a7e9bc01">
+   <name>TotalVacationDays</name>
+   <synonym>
+    <key>tr</key>
+    <value>Toplam tatil günleri</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Всего дней отпуска</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Total vacation days</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="3d7d97bd-63ac-428a-a46b-8a8c99fc07b3">
-    <name>DELETE_Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner term</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="e8aa3cc1-be49-4172-9760-0e681a72fff8">
+   <name>PaidVacationDays</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ücretli izin günleri</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Оплачиваемые дни отпуска</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Paid vacation days</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <forms uuid="c312c302-5825-4231-84ed-c654c3d208be">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="0516fb22-c739-4d07-822a-27cfd7cf28e7">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="51060481-9e33-4304-8698-0d0dcc16e5be">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="27f4c134-6c63-492a-b7ab-a10879643b43">
-    <name>ChoiceByAccrualForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice by accrual form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="620c301b-ee29-4fea-a13d-56de0a2551f4">
-    <producedTypes>
-      <objectType typeId="5bea51a3-84ef-426d-bdb5-acddf42dab53" valueTypeId="de169bc1-84d9-4078-a5db-ac3c69e28431"/>
-      <rowType typeId="7426fe49-5b20-4f58-ae9b-d6fa661315fb" valueTypeId="7731e137-bfce-49e8-8414-67f8a5fd5401"/>
-    </producedTypes>
-    <name>AccrualList</name>
-    <synonym>
-      <key>en</key>
-      <value>Accrual list</value>
-    </synonym>
-    <attributes uuid="e200e073-c6f8-407b-aea8-b41878b6950b">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="8dc769e0-9897-4920-98d1-bef1f3a734bf">
-      <name>Employee</name>
-      <synonym>
-        <key>en</key>
-        <value>Employee</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.Employee</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="96690e49-b1de-4a7c-bd53-e55b275b4fa7">
-      <name>Position</name>
-      <synonym>
-        <key>en</key>
-        <value>Position</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.EmployeePositions</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d8945317-b62b-401c-998f-3c3dfefc7cf2">
-      <name>AccrualType</name>
-      <synonym>
-        <key>en</key>
-        <value>Accrual type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.AccrualAndDeductionTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.Type</name>
-        <value xsi:type="core:ReferenceValue">
-          <value>Enum.PayrollTypes.EnumValue.Accrual</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="03073d4c-ff35-4ee4-adca-f4a8c65eaac4">
-      <name>ExpenseType</name>
-      <synonym>
-        <key>en</key>
-        <value>Expense type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExpenseAndRevenueTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="8b84c8d2-131c-4d55-813c-dd627074ec41">
-      <name>ProfitLossCenter</name>
-      <synonym>
-        <key>en</key>
-        <value>Profit loss center</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5cdf2ee5-355d-4bbf-ac80-c597cddeeded">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <markNegatives>true</markNegatives>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="420fc6e2-8c3d-46f0-bad5-dd69a7e9bc01">
-      <name>TotalVacationDays</name>
-      <synonym>
-        <key>en</key>
-        <value>Total vacation days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e8aa3cc1-be49-4172-9760-0e681a72fff8">
-      <name>PaidVacationDays</name>
-      <synonym>
-        <key>en</key>
-        <value>Paid vacation days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6ef1845c-de6f-41cc-83ae-8713878f4ac6">
-      <name>TotalSickLeaveDays</name>
-      <synonym>
-        <key>en</key>
-        <value>Total sick leave days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="dcf40b0d-b877-4a18-9cba-713564d0ebe6">
-      <name>PaidSickLeaveDays</name>
-      <synonym>
-        <key>en</key>
-        <value>Paid sick leave days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ceab11d7-5324-4c2e-a6c6-bdc914763444">
-      <name>CalculationType</name>
-      <synonym>
-        <key>en</key>
-        <value>Calculation type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SalaryCalculationType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="98112b54-d37e-4a9c-ac1e-a4bff099ba4f">
-    <producedTypes>
-      <objectType typeId="d068463c-0197-4ae9-8c0e-aca431b34fd2" valueTypeId="cd7fe306-9834-44cf-8462-a02af46bb790"/>
-      <rowType typeId="923cfd09-b9f7-4692-9d12-cad462588e50" valueTypeId="a7a93fa4-c3fb-415a-9f78-3ef93b6e741e"/>
-    </producedTypes>
-    <name>DeductionList</name>
-    <synonym>
-      <key>en</key>
-      <value>Deduction list</value>
-    </synonym>
-    <attributes uuid="037105e7-89d4-4782-96b5-97d710b723cc">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="1fde43e2-4985-4c1e-bbd0-793214e57215">
-      <name>Employee</name>
-      <synonym>
-        <key>en</key>
-        <value>Employee</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.Employee</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5537197b-3ca9-4f01-8676-4cbea3bdb01d">
-      <name>Position</name>
-      <synonym>
-        <key>en</key>
-        <value>Position</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.EmployeePositions</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="36ba1deb-989e-426f-ad16-9c5f3a176d48">
-      <name>DeductionType</name>
-      <synonym>
-        <key>en</key>
-        <value>Deduction type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.AccrualAndDeductionTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.Type</name>
-        <value xsi:type="core:ReferenceValue">
-          <value>Enum.PayrollTypes.EnumValue.Deduction</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="45b4a893-dea6-4756-bef3-ebcdfe1a25ac">
-      <name>ExpenseType</name>
-      <synonym>
-        <key>en</key>
-        <value>Expense type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExpenseAndRevenueTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9317431d-5278-4456-aafd-cff831d4044c">
-      <name>ProfitLossCenter</name>
-      <synonym>
-        <key>en</key>
-        <value>Profit loss center</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6e7e4490-25eb-4411-809e-a4539cb283ba">
-      <name>IsRevenue</name>
-      <synonym>
-        <key>en</key>
-        <value>Is revenue</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a69bfbb2-9f72-4ff7-898f-932fadab68f7">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <markNegatives>true</markNegatives>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a2fa8d16-b163-4a54-88f2-1c0d2bad0531">
-      <name>CalculationType</name>
-      <synonym>
-        <key>en</key>
-        <value>Calculation type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SalaryCalculationType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="44b0b978-8ddc-40ae-98c2-60bdacb0be71">
-    <producedTypes>
-      <objectType typeId="118dabc1-75de-438f-a191-e179185dcb4c" valueTypeId="6015a20f-b373-466a-abeb-fb134d19ed67"/>
-      <rowType typeId="3f5dc04e-acf9-41bf-859a-5736e535416e" valueTypeId="efb58da6-1170-4eea-9945-a0cfed641c98"/>
-    </producedTypes>
-    <name>CashAdvanceDeductionList</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash advance deduction list</value>
-    </synonym>
-    <attributes uuid="d9978904-846e-46ef-b219-fbcfd38d4364">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="477e2e13-bca0-4668-b2f7-48a14a4629f9">
-      <name>Employee</name>
-      <synonym>
-        <key>en</key>
-        <value>Employee</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.Employee</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6ad7ab39-7411-4cd6-8d68-28e2d561b8fc">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <markNegatives>true</markNegatives>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a07ec2c4-5644-4598-b7ee-c671dc1dfb57">
-      <name>Agreement</name>
-      <synonym>
-        <key>en</key>
-        <value>Agreement</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Agreements</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Partner</name>
-        <field>Document.Payroll.TabularSection.CashAdvanceDeductionList.Attribute.Employee</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="93c6446b-81fb-4131-b2f4-21d2e84af920">
-      <name>CalculationType</name>
-      <synonym>
-        <key>en</key>
-        <value>Calculation type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SalaryCalculationType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="7f818f9e-0994-4007-9df6-b21bc9e4d7b3">
-    <producedTypes>
-      <objectType typeId="ccc1e75b-b592-49cf-ac49-4d852aa934ae" valueTypeId="01dd8eb0-e4a1-434e-a2bf-8cb52429f256"/>
-      <rowType typeId="895897ee-603c-4f85-b71f-e159607d02ce" valueTypeId="29c51da0-3e2a-4b69-9915-98929a2deaa8"/>
-    </producedTypes>
-    <name>Currencies</name>
-    <synonym>
-      <key>en</key>
-      <value>Currencies</value>
-    </synonym>
-    <attributes uuid="c7ecabe3-3b45-473e-bc28-ca06e723b300">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="837045b4-47d1-46c0-b3fd-19af8d7f913c">
-      <name>CurrencyFrom</name>
-      <synonym>
-        <key>en</key>
-        <value>Currency from</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Currencies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="13c9982e-7aca-4997-adc6-d5a04ba48650">
-      <name>Rate</name>
-      <synonym>
-        <key>en</key>
-        <value>Rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="13a8c852-9203-4834-96ec-8c1d9b869d10">
-      <name>ReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Reverse rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="49ad3c64-85dc-4278-ae34-f978b96ba37b">
-      <name>ShowReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Show reverse rate</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6ddfff2c-c52e-40e2-b448-ff3c9631d83e">
-      <name>Multiplicity</name>
-      <synonym>
-        <key>en</key>
-        <value>Multiplicity</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d05c73ab-6762-49e1-9d1c-489df415ec55">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6dec039e-d92b-409c-add7-7f65414b56a2">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="948800df-e7f5-4987-a978-200b8fc5bf84">
-      <name>IsFixed</name>
-      <synonym>
-        <key>en</key>
-        <value>Is fixed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="5c673b16-c5dd-401a-87e2-3d0c24b0571c">
-    <producedTypes>
-      <objectType typeId="124759b6-ecdc-4f73-81b2-d34329ebff73" valueTypeId="967c051c-2c1b-4f4f-965d-21cae3ed8e89"/>
-      <rowType typeId="354fcd48-bdf2-45e9-b14a-4e5a3109759d" valueTypeId="710a54ee-d09a-43c2-a5ab-ae5cb8521370"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="17e56ddf-f907-45ac-b525-2e3fadfdedd7">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="96e0ec92-0484-4d61-82a5-fe0aed4447db">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.Payroll.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="c57912b1-a4d5-42c5-9294-238aee410ac8">
-    <producedTypes>
-      <objectType typeId="ebff1522-e6fa-4aed-8123-ddbbccae43a1" valueTypeId="37adcc9a-79b8-47f9-95a8-b9708f6f14b8"/>
-      <rowType typeId="e6d0144c-745d-48dc-89d7-50210a5b73a5" valueTypeId="b90aa939-ab5e-43c7-b086-772f926f6295"/>
-    </producedTypes>
-    <name>SalaryTaxList</name>
-    <synonym>
-      <key>en</key>
-      <value>Salary tax list</value>
-    </synonym>
-    <attributes uuid="a4299dbf-5b53-4dff-abf7-8a8da9e564e3">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="afd09390-63a7-45ba-ba51-bc308e25b63e">
-      <name>Employee</name>
-      <synonym>
-        <key>en</key>
-        <value>Employee</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.Employee</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="0f741364-caba-4615-8956-d32e33908330">
-      <name>Tax</name>
-      <synonym>
-        <key>en</key>
-        <value>Tax</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Taxes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.Kind</name>
-        <value xsi:type="core:ReferenceValue">
-          <value>Enum.TaxKind.EnumValue.Salary</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e1e98146-ed58-42e1-a4a3-787c8910ad9e">
-      <name>ExpenseType</name>
-      <synonym>
-        <key>en</key>
-        <value>Expense type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExpenseAndRevenueTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="789d7571-bfdf-40fa-a58d-07105cc42e89">
-      <name>ProfitLossCenter</name>
-      <synonym>
-        <key>en</key>
-        <value>Profit loss center</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="37a1c852-6e58-4c7e-bb9e-51c49ff8e096">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="598f28d0-698d-40a4-b34f-b8a588aabcb3">
-      <name>CalculationType</name>
-      <synonym>
-        <key>en</key>
-        <value>Calculation type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SalaryCalculationType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a055139e-3466-42ad-8f5d-464bcb8116a5">
-      <name>Agreement</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner term</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Agreements</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6101e6a6-c30f-467c-a331-60d15a488869">
-      <name>TakeAccountFromTaxes</name>
-      <synonym>
-        <key>en</key>
-        <value>Take account from taxes</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6c6d7562-08dc-4219-a159-8e2615614c2c">
-      <name>Partner</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3260ebf2-72c1-4a5e-b834-ddaa15ac075d">
-      <name>LegalName</name>
-      <synonym>
-        <key>en</key>
-        <value>Legal name</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Companies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+  <attributes uuid="6ef1845c-de6f-41cc-83ae-8713878f4ac6">
+   <name>TotalSickLeaveDays</name>
+   <synonym>
+    <key>tr</key>
+    <value>Toplam raporlu izin günleri</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Всего больничных дней</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Total sick leave days</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="dcf40b0d-b877-4a18-9cba-713564d0ebe6">
+   <name>PaidSickLeaveDays</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ücretli hastalık izni günleri</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Оплачиваемые больничные дни</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Paid sick leave days</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ceab11d7-5324-4c2e-a6c6-bdc914763444">
+   <name>CalculationType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hesaplama tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вариант оплаты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Calculation type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="98112b54-d37e-4a9c-ac1e-a4bff099ba4f">
+  <producedTypes>
+   <objectType typeId="d068463c-0197-4ae9-8c0e-aca431b34fd2" valueTypeId="cd7fe306-9834-44cf-8462-a02af46bb790"/>
+   <rowType typeId="923cfd09-b9f7-4692-9d12-cad462588e50" valueTypeId="a7a93fa4-c3fb-415a-9f78-3ef93b6e741e"/>
+  </producedTypes>
+  <name>DeductionList</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kesinti listesi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Список удержаний</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Deduction list</value>
+  </synonym>
+  <attributes uuid="037105e7-89d4-4782-96b5-97d710b723cc">
+   <name>Key</name>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1fde43e2-4985-4c1e-bbd0-793214e57215">
+   <name>Employee</name>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Employee</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5537197b-3ca9-4f01-8676-4cbea3bdb01d">
+   <name>Position</name>
+   <synonym>
+    <key>tr</key>
+    <value>Pozisyon</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Должность</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Position</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.EmployeePositions</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="36ba1deb-989e-426f-ad16-9c5f3a176d48">
+   <name>DeductionType</name>
+   <synonym>
+    <key>tr</key>
+    <value>İndirim türü</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип удержания</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Deduction type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.AccrualAndDeductionTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameters>
+    <name>Filter.Type</name>
+    <value xsi:type="core:ReferenceValue">
+     <value>Enum.PayrollTypes.EnumValue.Deduction</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="45b4a893-dea6-4756-bef3-ebcdfe1a25ac">
+   <name>ExpenseType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Gider tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья затрат</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Expense type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9317431d-5278-4456-aafd-cff831d4044c">
+   <name>ProfitLossCenter</name>
+   <synonym>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр прибылей/убытков</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Profit loss center</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6e7e4490-25eb-4411-809e-a4539cb283ba">
+   <name>IsRevenue</name>
+   <synonym>
+    <key>tr</key>
+    <value>Gelir tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Это статья доходов</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is revenue</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a69bfbb2-9f72-4ff7-898f-932fadab68f7">
+   <name>Amount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <markNegatives>true</markNegatives>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a2fa8d16-b163-4a54-88f2-1c0d2bad0531">
+   <name>CalculationType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hesaplama tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вариант оплаты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Calculation type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="44b0b978-8ddc-40ae-98c2-60bdacb0be71">
+  <producedTypes>
+   <objectType typeId="118dabc1-75de-438f-a191-e179185dcb4c" valueTypeId="6015a20f-b373-466a-abeb-fb134d19ed67"/>
+   <rowType typeId="3f5dc04e-acf9-41bf-859a-5736e535416e" valueTypeId="efb58da6-1170-4eea-9945-a0cfed641c98"/>
+  </producedTypes>
+  <name>CashAdvanceDeductionList</name>
+  <synonym>
+   <key>tr</key>
+   <value>Avans kesinti listesi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Удержание аванса наличными список</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Cash advance deduction list</value>
+  </synonym>
+  <attributes uuid="d9978904-846e-46ef-b219-fbcfd38d4364">
+   <name>Key</name>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="477e2e13-bca0-4668-b2f7-48a14a4629f9">
+   <name>Employee</name>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Employee</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6ad7ab39-7411-4cd6-8d68-28e2d561b8fc">
+   <name>Amount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <markNegatives>true</markNegatives>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a07ec2c4-5644-4598-b7ee-c671dc1dfb57">
+   <name>Agreement</name>
+   <synonym>
+    <key>tr</key>
+    <value>Sözleşme</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Соглашение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Agreement</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Agreements</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Partner</name>
+    <field>Document.Payroll.TabularSection.CashAdvanceDeductionList.Attribute.Employee</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="93c6446b-81fb-4131-b2f4-21d2e84af920">
+   <name>CalculationType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hesaplama tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вариант оплаты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Calculation type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="7f818f9e-0994-4007-9df6-b21bc9e4d7b3">
+  <producedTypes>
+   <objectType typeId="ccc1e75b-b592-49cf-ac49-4d852aa934ae" valueTypeId="01dd8eb0-e4a1-434e-a2bf-8cb52429f256"/>
+   <rowType typeId="895897ee-603c-4f85-b71f-e159607d02ce" valueTypeId="29c51da0-3e2a-4b69-9915-98929a2deaa8"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>tr</key>
+   <value>Dövizler</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currencies</value>
+  </synonym>
+  <attributes uuid="c7ecabe3-3b45-473e-bc28-ca06e723b300">
+   <name>Key</name>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="837045b4-47d1-46c0-b3fd-19af8d7f913c">
+   <name>CurrencyFrom</name>
+   <synonym>
+    <key>tr</key>
+    <value>Dövizden</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>С валюты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Currency from</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="13c9982e-7aca-4997-adc6-d5a04ba48650">
+   <name>Rate</name>
+   <synonym>
+    <key>tr</key>
+    <value>Oran</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ставка</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Rate</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="13a8c852-9203-4834-96ec-8c1d9b869d10">
+   <name>ReverseRate</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Reverse rate</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="49ad3c64-85dc-4278-ae34-f978b96ba37b">
+   <name>ShowReverseRate</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur göster</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Показать обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Show reverse rate</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6ddfff2c-c52e-40e2-b448-ff3c9631d83e">
+   <name>Multiplicity</name>
+   <synonym>
+    <key>tr</key>
+    <value>Çarpan</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Кратность</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Multiplicity</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d05c73ab-6762-49e1-9d1c-489df415ec55">
+   <name>MovementType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hareket tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья движених денежных средств</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Movement type</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6dec039e-d92b-409c-add7-7f65414b56a2">
+   <name>Amount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="948800df-e7f5-4987-a978-200b8fc5bf84">
+   <name>IsFixed</name>
+   <synonym>
+    <key>tr</key>
+    <value>Sabittir</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Фиксированный</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is fixed</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="5c673b16-c5dd-401a-87e2-3d0c24b0571c">
+  <producedTypes>
+   <objectType typeId="124759b6-ecdc-4f73-81b2-d34329ebff73" valueTypeId="967c051c-2c1b-4f4f-965d-21cae3ed8e89"/>
+   <rowType typeId="354fcd48-bdf2-45e9-b14a-4e5a3109759d" valueTypeId="710a54ee-d09a-43c2-a5ab-ae5cb8521370"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <attributes uuid="17e56ddf-f907-45ac-b525-2e3fadfdedd7">
+   <name>Property</name>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="96e0ec92-0484-4d61-82a5-fe0aed4447db">
+   <name>Value</name>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.Payroll.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="c57912b1-a4d5-42c5-9294-238aee410ac8">
+  <producedTypes>
+   <objectType typeId="ebff1522-e6fa-4aed-8123-ddbbccae43a1" valueTypeId="37adcc9a-79b8-47f9-95a8-b9708f6f14b8"/>
+   <rowType typeId="e6d0144c-745d-48dc-89d7-50210a5b73a5" valueTypeId="b90aa939-ab5e-43c7-b086-772f926f6295"/>
+  </producedTypes>
+  <name>SalaryTaxList</name>
+  <synonym>
+   <key>tr</key>
+   <value>Maaş vergiler listesi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Список налогов на зарплату</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Salary tax list</value>
+  </synonym>
+  <attributes uuid="a4299dbf-5b53-4dff-abf7-8a8da9e564e3">
+   <name>Key</name>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="afd09390-63a7-45ba-ba51-bc308e25b63e">
+   <name>Employee</name>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Employee</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0f741364-caba-4615-8956-d32e33908330">
+   <name>Tax</name>
+   <synonym>
+    <key>tr</key>
+    <value>Vergi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Налог</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Tax</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Taxes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameters>
+    <name>Filter.Kind</name>
+    <value xsi:type="core:ReferenceValue">
+     <value>Enum.TaxKind.EnumValue.Salary</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e1e98146-ed58-42e1-a4a3-787c8910ad9e">
+   <name>ExpenseType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Gider tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья затрат</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Expense type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="789d7571-bfdf-40fa-a58d-07105cc42e89">
+   <name>ProfitLossCenter</name>
+   <synonym>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр прибылей/убытков</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Profit loss center</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="37a1c852-6e58-4c7e-bb9e-51c49ff8e096">
+   <name>Amount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="598f28d0-698d-40a4-b34f-b8a588aabcb3">
+   <name>CalculationType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hesaplama tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вариант оплаты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Calculation type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a055139e-3466-42ad-8f5d-464bcb8116a5">
+   <name>Agreement</name>
+   <synonym>
+    <key>tr</key>
+    <value>Sözleşme</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Соглашение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Partner term</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Agreements</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6101e6a6-c30f-467c-a331-60d15a488869">
+   <name>TakeAccountFromTaxes</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hesapları vergilerden al</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Использовать счет из налога</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Take account from taxes</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6c6d7562-08dc-4219-a159-8e2615614c2c">
+   <name>Partner</name>
+   <synonym>
+    <key>tr</key>
+    <value>Cari hesap</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Партнер</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Partner</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="3260ebf2-72c1-4a5e-b834-ddaa15ac075d">
+   <name>LegalName</name>
+   <synonym>
+    <key>tr</key>
+    <value>Fatura hesabı</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Контрагент</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Legal name</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
 </mdclass:Document>

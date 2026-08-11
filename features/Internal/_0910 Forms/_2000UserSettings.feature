@@ -1096,11 +1096,7 @@ Scenario: _200001 customize the CI user settings
 		And I activate "Group name" field in "MetadataTree" table
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
-		And I click choice button of "Value" attribute in "MetadataTree" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Value" drop-down list in "MetadataTree" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use'    |

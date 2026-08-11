@@ -195,7 +195,11 @@ Scenario: _5005 create IT from Production Workspace (product)
 			| 'Копыта на стремянки Класс 20х20, черный'    |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
-		And I select "pcs" exact value from the drop-down list named "Unit"
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'pcs'            |
+		And I select current line in "List" table
 		And "PlanningPresentation" table contains lines
 			| 'Planning period'   | 'Left to produce'   | 'Production planning'                                |
 			| 'First month'       | '680,000'           | 'Production planning 1 dated 29.04.2022 09:40:47'    |

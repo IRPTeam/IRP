@@ -1204,60 +1204,90 @@ EndFunction
 Function R1012B_PurchaseOrdersInvoiceClosing()
 	Return 
 		"SELECT
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Key AS Key,
+		|	RowIDInfo.Quantity AS Quantity
+		|INTO tmpRowID
+		|FROM
+		|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.Period AS Period,
-		|	ItemList.Company AS Company,
-		|	ItemList.Branch AS Branch,
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.PurchaseOrder AS Order,
-		|	ItemList.Currency AS Currency,
-		|	ItemList.OrderItemKey AS ItemKey,
-		|	ItemList.RowKey AS RowKey,
-		|	ItemList.Quantity AS Quantity,
-		|	ItemList.Amount AS Amount,
-		|	ItemList.NetAmount AS NetAmount
-		|INTO R1012B_PurchaseOrdersInvoiceClosing
+		|	ItemList.Ref.Currency AS Currency,
+		|	tmpRowID.RowID AS RowID,
+		|	ItemList.ItemKey AS ItemKey,
+		|	tmpRowID.Quantity AS Quantity,
+		|	ItemList.TotalAmount / ItemList.Quantity * tmpRowID.Quantity AS Amount,
+		|	ItemList.NetAmount / ItemList.Quantity * tmpRowID.Quantity AS NetAmount
+		|	into R1012B_PurchaseOrdersInvoiceClosing
 		|FROM
-		|	OrderItemList AS ItemList
-		|WHERE
-		|	ItemList.PurchaseOrderExists
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.PurchaseOrder,
-		|	ItemList.Currency,
-		|	ItemList.ItemKey,
-		|	ItemList.RowKey,
-		|	ItemList.Quantity,
-		|	ItemList.Amount,
-		|	ItemList.NetAmount
-		|FROM
-		|	OrderItemList AS ItemList
-		|WHERE
-		|	ItemList.PurchaseOrderExists
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.PurchaseOrder,
-		|	ItemList.Currency,
-		|	ItemList.ItemKey,
-		|	ItemList.RowKey,
-		|	ItemList.Quantity,
-		|	ItemList.Amount,
-		|	ItemList.NetAmount
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	ItemList.PurchaseOrderExists";
+		|	tmpRowID AS tmpRowID
+		|		INNER JOIN Document.PurchaseInvoice.ItemList AS ItemList
+		|		ON ItemList.Key = tmpRowID.Key
+		|		AND NOT ItemList.PurchaseOrder.Ref IS NULL";
+//		"SELECT
+//		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+//		|	ItemList.Period AS Period,
+//		|	ItemList.Company AS Company,
+//		|	ItemList.Branch AS Branch,
+//		|	ItemList.PurchaseOrder AS Order,
+//		|	ItemList.Currency AS Currency,
+//		|	ItemList.OrderItemKey AS ItemKey,
+//		|	ItemList.RowKey AS RowKey,
+//		|	ItemList.Quantity AS Quantity,
+//		|	ItemList.Amount AS Amount,
+//		|	ItemList.NetAmount AS NetAmount
+//		|INTO R1012B_PurchaseOrdersInvoiceClosing
+//		|FROM
+//		|	OrderItemList AS ItemList
+//		|WHERE
+//		|	ItemList.PurchaseOrderExists
+//		|
+//		|UNION ALL
+//		|
+//		|SELECT
+//		|	VALUE(AccumulationRecordType.Receipt),
+//		|	ItemList.Period,
+//		|	ItemList.Company,
+//		|	ItemList.Branch,
+//		|	ItemList.PurchaseOrder,
+//		|	ItemList.Currency,
+//		|	ItemList.ItemKey,
+//		|	ItemList.RowKey,
+//		|	ItemList.Quantity,
+//		|	ItemList.Amount,
+//		|	ItemList.NetAmount
+//		|FROM
+//		|	OrderItemList AS ItemList
+//		|WHERE
+//		|	ItemList.PurchaseOrderExists
+//		|
+//		|UNION ALL
+//		|
+//		|SELECT
+//		|	VALUE(AccumulationRecordType.Expense),
+//		|	ItemList.Period,
+//		|	ItemList.Company,
+//		|	ItemList.Branch,
+//		|	ItemList.PurchaseOrder,
+//		|	ItemList.Currency,
+//		|	ItemList.ItemKey,
+//		|	ItemList.RowKey,
+//		|	ItemList.Quantity,
+//		|	ItemList.Amount,
+//		|	ItemList.NetAmount
+//		|FROM
+//		|	ItemList AS ItemList
+//		|WHERE
+//		|	ItemList.PurchaseOrderExists";
 EndFunction
 
 Function R1020B_AdvancesToVendors()

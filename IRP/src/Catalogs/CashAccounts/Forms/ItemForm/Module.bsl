@@ -40,7 +40,8 @@ EndProcedure
 &AtServer
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	If ThisObject.CurrencyType = "Fixed" And Not ValueIsFilled(Object.Currency) Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_047, "Currency"), "Object.Currency");
+		FieldName = ThisObject.Metadata().Attributes.Currency.Synonym;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_047, FieldName), "Object.Currency");
 	EndIf;
 EndProcedure
 

@@ -360,11 +360,7 @@ Scenario: _0155267 create Retail SC (link form)
 		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"		
 		And I click the button named "FormCreate"
 	* Filling main details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Retail customer" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -538,11 +534,7 @@ Scenario: _0155270 create Retail GR	(link)
 		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"		
 		And I click the button named "FormCreate"
 	* Filling main details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Retail customer" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -658,11 +650,7 @@ Scenario: _0155272 create RSC - RGR - RSR transaction type (pickup), without ret
 		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"		
 		And I click the button named "FormCreate"
 		* Filling main details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Retail customer" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -727,11 +715,7 @@ Scenario: _0155272 create RSC - RGR - RSR transaction type (pickup), without ret
 		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"		
 		And I click the button named "FormCreate"
 		* Filling main details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Retail customer" field
 			And I go to line in "List" table
 				| 'Description'     |

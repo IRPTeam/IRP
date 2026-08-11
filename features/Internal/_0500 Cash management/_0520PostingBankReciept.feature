@@ -246,17 +246,8 @@ Scenario: _052001 create Bank receipt (independently)
 		And I click the button named "FormCreate"
 		* Filling in the details of the document
 			And I select "Payment from customer" exact value from "Transaction type" drop-down list
-			And I click Select button of "Currency" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Code    | Description      |
-				| TRY     | Turkish lira     |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Currency" drop-down list
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| Description           |
@@ -325,17 +316,8 @@ Scenario: _052001 create Bank receipt (independently)
 		And I click the button named "FormCreate"
 		* Filling in the details of the document
 			And I select "Payment from customer" exact value from "Transaction type" drop-down list
-			And I click Select button of "Currency" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Code    | Description         |
-				| USD     | American dollar     |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "USD" exact value from "Currency" drop-down list
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| Description           |
@@ -397,17 +379,8 @@ Scenario: _052001 create Bank receipt (independently)
 		And I click the button named "FormCreate"
 		* Filling in the details of the document
 			And I select "Payment from customer" exact value from "Transaction type" drop-down list
-			And I click Select button of "Currency" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Code    | Description     |
-				| EUR     | Euro            |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "EUR" exact value from "Currency" drop-down list
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| Description           |
@@ -691,17 +664,8 @@ Scenario: _052017 create Bank receipt with Cash statement (Transfer from POS wit
 	And I click the button named "FormCreate"
 	And I select "Transfer from POS" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		And I click Select button of "Currency" field
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description          |
@@ -765,17 +729,8 @@ Scenario: _052017 create Bank receipt with Cash statement (Transfer from POS wit
 		And I click the button named "FormCreate"
 		And I select "Transfer from POS" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		And I click Select button of "Currency" field
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description          |
@@ -874,16 +829,8 @@ Scenario: _052019 try post Bank receipt with empty amount
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		And I select "Payment from customer" exact value from "Transaction type" drop-down list
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    | Description      |
-			| TRY     | Turkish lira     |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description      |
-			| Main Company     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description           |

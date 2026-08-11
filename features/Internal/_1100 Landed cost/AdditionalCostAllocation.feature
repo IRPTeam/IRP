@@ -436,11 +436,7 @@ Scenario: _048 create additional cost allocation (documents, by quantity)
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 		And I click the button named "FormCreate"
 	* Filling document
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By documents" exact value from "Allocation mode" drop-down list
 		And I select "By quantity" exact value from "Allocation method" drop-down list
 		And in the table "CostDocuments" I click "Add" button
@@ -539,11 +535,7 @@ Scenario: _049 create additional cost allocation (documents, By amount)
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 		And I click the button named "FormCreate"
 	* Filling document
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By documents" exact value from "Allocation mode" drop-down list
 		And I select "By amount" exact value from "Allocation method" drop-down list
 		And in the table "CostDocuments" I click "Add" button
@@ -590,11 +582,7 @@ Scenario: _050 create additional cost allocation (documents, By weight)
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 		And I click the button named "FormCreate"
 	* Filling document
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By documents" exact value from "Allocation mode" drop-down list
 		And I select "By weight" exact value from "Allocation method" drop-down list
 		And in the table "CostDocuments" I click "Add" button
@@ -641,11 +629,7 @@ Scenario: _051 create additional cost allocation (row, by amount)
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 		And I click the button named "FormCreate"
 	* Filling document
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By rows" exact value from "Allocation mode" drop-down list
 		And I select "By amount" exact value from "Allocation method" drop-down list
 		* Select cost
@@ -787,11 +771,7 @@ Scenario: _068 create additional revenue allocation (documents, by quantity)
 		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 		And I click the button named "FormCreate"
 	* Filling document
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By documents" exact value from "Allocation mode" drop-down list
 		And I select "By quantity" exact value from "Allocation method" drop-down list
 		And in the table "RevenueDocuments" I click "Add" button
@@ -883,11 +863,7 @@ Scenario: _069 create additional revenue allocation (documents, By amount)
 		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 		And I click the button named "FormCreate"
 	* Filling document
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By documents" exact value from "Allocation mode" drop-down list
 		And I select "By amount" exact value from "Allocation method" drop-down list
 		And in the table "RevenueDocuments" I click "Add" button
@@ -934,11 +910,7 @@ Scenario: _070 create additional revenue allocation (documents, By weight)
 		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 		And I click the button named "FormCreate"
 	* Filling document
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By documents" exact value from "Allocation mode" drop-down list
 		And I select "By weight" exact value from "Allocation method" drop-down list
 		And in the table "RevenueDocuments" I click "Add" button
@@ -985,11 +957,7 @@ Scenario: _071 create additional revenue allocation (row, by amount)
 		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 		And I click the button named "FormCreate"
 	* Filling document
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By rows" exact value from "Allocation mode" drop-down list
 		And I select "By amount" exact value from "Allocation method" drop-down list
 		* Select cost
@@ -1263,11 +1231,7 @@ Scenario: _094 select invoice by line in the additional cost allocation
 	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 	* Create new 
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By documents" exact value from "Allocation mode" drop-down list
 		And I select "By quantity" exact value from "Allocation method" drop-down list
 		And in the table "CostDocuments" I click the button named "CostDocumentsAdd"
@@ -1292,11 +1256,7 @@ Scenario: _095 select invoice by line in the additional revenue allocation
 	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 	* Create new 
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "By documents" exact value from "Allocation mode" drop-down list
 		And I select "By quantity" exact value from "Allocation method" drop-down list
 		And in the table "RevenueDocuments" I click the button named "RevenueDocumentsAdd"

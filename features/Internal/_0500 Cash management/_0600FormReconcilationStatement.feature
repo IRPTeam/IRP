@@ -55,11 +55,7 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 Scenario: _060005 availability of Currency, Begin and End period field in Reconcilation statement
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And I click the button named "FormCreate"
-	And I click Select button of "Currency" field
-	And I go to line in "List" table
-		| 'Code'  | 'Description'    |
-		| 'TRY'   | 'Turkish lira'   |
-	And I select current line in "List" table
+	And I select "TRY" exact value from "Currency" drop-down list
 	And I click Select button of "Begin period" field
 	And I input "01.09.2019" text in "Begin period" field
 	And I input "30.09.2019" text in "End period" field
@@ -73,11 +69,7 @@ Scenario: _060006 check auto filling Reconcilation statement (currency and trans
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And I click the button named "FormCreate"
 	* Select Company and Partner
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description' |
@@ -88,11 +80,7 @@ Scenario: _060006 check auto filling Reconcilation statement (currency and trans
 		And the field named "BeginPeriod" is filled
 		And the field named "EndPeriod" is filled
 	* Select another partner with two currency and check filling currency
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code' |
-			| 'EUR'  |
-		And I select current line in "List" table
+		And I select "EUR" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description' |
@@ -100,11 +88,7 @@ Scenario: _060006 check auto filling Reconcilation statement (currency and trans
 		And I select current line in "List" table
 		Then the form attribute named "Currency" became equal to ""	
 	* Select partner that have current currency	
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code' |
-			| 'USD'  |
-		And I select current line in "List" table	
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description' |

@@ -198,6 +198,11 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>Document.PriceList.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
+      <quickChoice>Use</quickChoice>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -231,6 +236,7 @@
         <name>Filter.Item</name>
         <field>Document.PriceList.TabularSection.ItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <quickChoice>Use</quickChoice>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -322,6 +328,7 @@
         <name>Filter.Item</name>
         <field>Document.PriceList.TabularSection.ItemKeyList.Attribute.Item</field>
       </choiceParameterLinks>
+      <quickChoice>Use</quickChoice>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -355,6 +362,7 @@
         <name>Filter.Item</name>
         <field>Document.PriceList.TabularSection.ItemKeyList.Attribute.Item</field>
       </choiceParameterLinks>
+      <quickChoice>Use</quickChoice>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

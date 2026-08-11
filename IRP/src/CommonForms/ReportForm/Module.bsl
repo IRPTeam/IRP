@@ -6,12 +6,16 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.IsDetailProcessing = Parameters.IsDetailProcessing;
 	ThisObject.IsUserFilter = Parameters.IsUserFilter;
 	ThisObject.UserFilters = CommonFunctionsServer.SerializeXMLUseXDTO(Parameters.UserFilters);
+	If Not IsBlankString(Parameters.UserVariantKey) Then
+		CurrentVariantKey = Parameters.UserVariantKey;
+	EndIf;
 	ReportFullName = ReportName(ThisObject);
 	ExternalCommandsServer.CreateCommands(ThisObject, ReportFullName, Enums.FormTypes.ObjectForm);
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
+	
 	If ThisObject.IsDetailProcessing Then
 		ThisObject.VariantModified = False;
 		ComposeResult();

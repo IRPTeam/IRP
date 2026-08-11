@@ -87,11 +87,7 @@ Scenario: _1007002 second closing with an overlapping period must not offset the
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "31.01.2022 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.01.2022" text in "Begin of period" field
 		And I input "31.01.2022" text in "End of period" field
@@ -114,11 +110,7 @@ Scenario: _1007002 second closing with an overlapping period must not offset the
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "28.02.2022 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.01.2022" text in "Begin of period" field
 		And I input "28.02.2022" text in "End of period" field
@@ -152,11 +144,7 @@ Scenario: _1007003 order-bound advance closes its order invoice, free advance cl
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "31.03.2022 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.03.2022" text in "Begin of period" field
 		And I input "31.03.2022" text in "End of period" field
@@ -193,11 +181,7 @@ Scenario: _1007004 advance is offset within one agreement even when the contract
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "31.05.2022 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.05.2022" text in "Begin of period" field
 		And I input "31.05.2022" text in "End of period" field
@@ -245,11 +229,7 @@ Scenario: _1007005 same period for another company is allowed, duplicate for the
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "31.01.2022 13:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'      |
-			| 'Second Company'   |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.01.2022" text in "Begin of period" field
 		And I input "31.01.2022" text in "End of period" field
@@ -263,11 +243,7 @@ Scenario: _1007005 same period for another company is allowed, duplicate for the
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "31.01.2022 14:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'      |
-			| 'Second Company'   |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.01.2022" text in "Begin of period" field
 		And I input "31.01.2022" text in "End of period" field
@@ -296,11 +272,7 @@ Scenario: _1007006 repost of the same closing is allowed, adjacent period posts,
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "28.02.2022 15:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.02.2022" text in "Begin of period" field
 		And I input "28.02.2022" text in "End of period" field
@@ -317,11 +289,7 @@ Scenario: _1007006 repost of the same closing is allowed, adjacent period posts,
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "20.02.2022 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "10.02.2022" text in "Begin of period" field
 		And I input "20.02.2022" text in "End of period" field
@@ -335,11 +303,7 @@ Scenario: _1007007 vendors closing is covered by the same overlapping-period con
 		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "30.06.2022 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.06.2022" text in "Begin of period" field
 		And I input "30.06.2022" text in "End of period" field
@@ -356,11 +320,7 @@ Scenario: _1007007 vendors closing is covered by the same overlapping-period con
 		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "30.06.2022 14:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "01.06.2022" text in "Begin of period" field
 		And I input "30.06.2022" text in "End of period" field

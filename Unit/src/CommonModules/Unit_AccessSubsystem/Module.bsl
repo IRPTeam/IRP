@@ -456,7 +456,7 @@ Function InformationRegisters() Export
 		Try
 			InformationRegisters[MetaObj.Name].GetAccessKey();
 		Except
-			ArrayOfErrors.Add("GetAccessKey error:" + MetaObj.FullName());
+			ArrayOfErrors.Add("GetAccessKey error: " + MetaObj.FullName());
 			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
 			ArrayOfErrors.Add("--------------------------");
 			ArrayOfErrors.Add();
@@ -467,13 +467,13 @@ Function InformationRegisters() Export
 		If HasDimensions Then
 			ReadResult = AccessParameters("Read", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
 			If Not ReadResult.Accessibility Then
-				ArrayOfErrors.Add("Set Read access to Role TemplateInformationRegisters:" + MetaObj.FullName());
+				ArrayOfErrors.Add("Set Read access to Role TemplateInformationRegisters: " + MetaObj.FullName());
 				ArrayOfErrors.Add("--------------------------");
 			EndIf;
 			
 			ReadResult = AccessParameters("Update", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
 			If ReadResult.Accessibility Then
-				ArrayOfErrors.Add("Remove Update access from Role TemplateInformationRegisters:" + MetaObj.FullName());
+				ArrayOfErrors.Add("Remove Update access from Role TemplateInformationRegisters: " + MetaObj.FullName());
 				ArrayOfErrors.Add("--------------------------");
 			EndIf;
 		EndIf; 
@@ -483,7 +483,7 @@ Function InformationRegisters() Export
 		Try
 			Query.Execute();
 		Except
-			ArrayOfErrors.Add("Can't select data. Check template in Role. Error:" + MetaObj.FullName());
+			ArrayOfErrors.Add("Can't select data. Check template in Role. Error: " + MetaObj.FullName());
 			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
 			ArrayOfErrors.Add("--------------------------");
 			ArrayOfErrors.Add();

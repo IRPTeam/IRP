@@ -44,11 +44,7 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 			| Main Company    |
 		And I select current line in "List" table
 		And I change the radio button named "CurrencyType" value to "Fixed"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| 'USD'    | 'American dollar'    |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I click the button named "FormWrite"
 		* Check data save
 			Then the form attribute named "Type" became equal to "Cash"
@@ -102,11 +98,7 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 			| Description     |
 			| Main Company    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description     |
-			| TRY    | Turkish lira    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I set checkbox "Is IBAN"
 		And I select from "Bank country" drop-down list by "Turkey" string
 		And I input "24667788" text in "Bank identifier code" field
@@ -180,11 +172,7 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 			| Description      |
 			| Main Company     |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description     |
-			| TRY    | Turkish lira    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I input "1120000000" text in "Number" field
 		And I click the button named "FormWrite"
 		Then the form attribute named "Type" became equal to "POS"

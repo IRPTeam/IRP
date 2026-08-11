@@ -128,11 +128,7 @@ Scenario: _1004002 add fixed offset row prompts to write unsaved document
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "13.01.2021 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "13.01.2021" text in "Begin of period" field
 		And I input "13.01.2021" text in "End of period" field
@@ -167,11 +163,7 @@ Scenario: _1004003 fill and save a fixed offset row to the register
 		# list filter by CurrentData.Partner hides segment agreements with an empty partner
 		# ('Basic Partner terms, TRY'). With an empty Partner the filter shows exactly those.
 		And in the table "FixedOffsetOfAdvances" I click the button named "FixedOffsetOfAdvancesAdd"
-		And I click choice button of "Currency" attribute in "FixedOffsetOfAdvances" table
-		And I go to line in "List" table
-			| 'Code'          |
-			| 'TRY'           |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "FixedOffsetOfAdvances" table
 		And I activate "Agreement" field in "FixedOffsetOfAdvances" table
 		And I click choice button of "Agreement" attribute in "FixedOffsetOfAdvances" table
 		And I go to line in "List" table
@@ -224,11 +216,7 @@ Scenario: _1004004 create closing with a pinned invoice (SI 2)
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I click the button named "FormCreate"
 		And I input "29.01.2021 12:00:00" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Begin of period" field
 		And I input "27.01.2021" text in "Begin of period" field
 		And I input "28.01.2021" text in "End of period" field
@@ -241,11 +229,7 @@ Scenario: _1004004 create closing with a pinned invoice (SI 2)
 	* Add the pin row: Ferron BP, TRY, Sales invoice 2, Amount 500
 		# IMPORTANT (bug 7): Agreement is selected BEFORE Partner - see the comment in _1004003.
 		And in the table "FixedOffsetOfAdvances" I click the button named "FixedOffsetOfAdvancesAdd"
-		And I click choice button of "Currency" attribute in "FixedOffsetOfAdvances" table
-		And I go to line in "List" table
-			| 'Code'          |
-			| 'TRY'           |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "FixedOffsetOfAdvances" table
 		And I activate "Agreement" field in "FixedOffsetOfAdvances" table
 		And I click choice button of "Agreement" attribute in "FixedOffsetOfAdvances" table
 		And I go to line in "List" table
@@ -336,11 +320,7 @@ Scenario: _1004008 BUG 8 repro - duplicate pin rows must not crash Save fixed of
 		And I select current line in "List" table
 	* Add two identical rows (Lomaniti, TRY)
 		And in the table "FixedOffsetOfAdvances" I click the button named "FixedOffsetOfAdvancesAdd"
-		And I click choice button of "Currency" attribute in "FixedOffsetOfAdvances" table
-		And I go to line in "List" table
-			| 'Code'          |
-			| 'TRY'           |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "FixedOffsetOfAdvances" table
 		And I activate "Partner" field in "FixedOffsetOfAdvances" table
 		And I click choice button of "Partner" attribute in "FixedOffsetOfAdvances" table
 		And I go to line in "List" table
@@ -349,11 +329,7 @@ Scenario: _1004008 BUG 8 repro - duplicate pin rows must not crash Save fixed of
 		And I select current line in "List" table
 		And I finish line editing in "FixedOffsetOfAdvances" table
 		And in the table "FixedOffsetOfAdvances" I click the button named "FixedOffsetOfAdvancesAdd"
-		And I click choice button of "Currency" attribute in "FixedOffsetOfAdvances" table
-		And I go to line in "List" table
-			| 'Code'          |
-			| 'TRY'           |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "FixedOffsetOfAdvances" table
 		And I activate "Partner" field in "FixedOffsetOfAdvances" table
 		And I click choice button of "Partner" attribute in "FixedOffsetOfAdvances" table
 		And I go to line in "List" table

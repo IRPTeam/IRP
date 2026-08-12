@@ -411,6 +411,10 @@ Scenario: _106 duplicate calculation for overlapping period is refused (case 30 
 		And I click the button named "FormCreate"
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I input "206" text in "Number" field
+		If "1C:Enterprise" window is opened Then
+			And I click "Yes" button
+			And I input "206" text in "Number" field
 		And I input "01.02.2025" text in "Begin date" field
 		And I input "15.02.2025" text in "End date" field
 		And I click the button named "FormPost"
@@ -419,7 +423,9 @@ Scenario: _106 duplicate calculation for overlapping period is refused (case 30 
 	* The rejected document was not even written - the filling check fires before the write
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
-		Then the number of "List" table lines is "equal" 2
+		And "List" table does not contain lines
+			| 'Number'  |
+			| '206'     |
 	And I close all client application windows
 
 

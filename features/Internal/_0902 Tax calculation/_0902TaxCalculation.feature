@@ -1324,7 +1324,7 @@ Scenario: _090231 check Withholding Tax calculation
 	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
 	And I click the button named "FormCreate"
 	* Filling in the details
-		And I click Select button of "Partner" field
+		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Ferron BP'    |

@@ -1746,6 +1746,21 @@ Scenario: set False value to the constant Use batch reallocate
 		And I click "Save" button
 		And I close current window
 
+Scenario: set True value to the constant Use preliminary stock
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I set checkbox "Use shipment and receipt planing orders"
+		And I set checkbox "  -  Use preliminary stock"
+		And I click "Save" button
+		And I close current window
+
+Scenario: set False value to the constant Use preliminary stock
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I remove checkbox "  -  Use preliminary stock"
+		And I click "Save" button
+		And I close current window
+
 
 Scenario: add VAExtension
 	Given I open hyperlink "e1cib/list/Catalog.Extensions"

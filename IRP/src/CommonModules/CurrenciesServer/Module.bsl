@@ -243,7 +243,9 @@ Procedure _PreparePostingDataTables(Parameters, CurrencyTable, IsOffsetOfAdvance
 			If (ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5022T_Expenses 
 				Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5021T_Revenues) 
 				and (TypeOf(Parameters.Object.Ref) = Type("DocumentRef.SalesInvoice") 
-				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.PurchaseInvoice")) Then
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.PurchaseInvoice")
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.RetailSalesReceipt")
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.WorkSheet")) Then
 					
 				PrepareTable_Own = PrepareTable.CopyColumns();
 				PrepareTable_CMC = PrepareTable.CopyColumns();
@@ -269,7 +271,8 @@ Procedure _PreparePostingDataTables(Parameters, CurrencyTable, IsOffsetOfAdvance
 				NewCurrencyTable = Parameters.Object.Currencies.UnloadColumns();
 				UpdateCurrencyTable(CurrenciesTableParams, NewCurrencyTable);
 				TempTablesManager_CMC = PutCurrencyTableToTempTablesManager(Parameters, NewCurrencyTable);				
-				Table_CMC = ExpandTable(TempTablesManager_CMC, PrepareTable_CMC, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+				Table_CMC = ExpandTable(TempTablesManager_CMC, PrepareTable_CMC, UseAgreementMovementType, UseCurrencyJoin,
+					?(TypeOf(Parameters.Object.Ref) = Type("DocumentRef.WorkSheet"), False, UseKey));
 				
 				Table = Table_Own.CopyColumns();
 				For Each Row In Table_Own Do

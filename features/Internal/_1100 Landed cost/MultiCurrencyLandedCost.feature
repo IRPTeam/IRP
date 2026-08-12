@@ -66,8 +66,11 @@ Scenario: _100 test data (multi currency landed cost)
 		When Create catalog ItemKeys objects (MC)
 	* Enable preliminary stock
 		And I set "True" value to the constant "UsePreliminaryStock"
-	* Allow manual numbers
+	* Classic numbering so that manual document numbers stay editable
+		And I set "False" value to the constant "UseNumberingRules"
+	* Allow manual numbers - force the OnChange so the session parameter is refreshed even if the box already looks checked
 		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I remove checkbox "Number editing available"
 		And I set checkbox "Number editing available"
 		And I close "System settings" window
 	And I close all client application windows
@@ -79,6 +82,11 @@ Scenario: _1001 check preparation (multi currency landed cost)
 
 Scenario: _102 preliminary receipt and multi currency sales (case 14, 33)
 	And I close all client application windows
+	* Enable manual numbers for this scenario - the session parameter does not survive across scenario boundaries
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I remove checkbox "Number editing available"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 	* Create Goods receipt 251 with preliminary amount 196 USD for 7 pcs
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
@@ -99,11 +107,7 @@ Scenario: _102 preliminary receipt and multi currency sales (case 14, 33)
 		And I change "Is prelim." checkbox in "ItemList" table
 		And I input "196" text in "Amount (prelim.)" field of "ItemList" table
 		And I activate field named "ItemListCurrency" in "ItemList" table
-		And I click choice button of the attribute named "ItemListCurrency" in "ItemList" table
-		And I go to line in "List" table
-			| 'Code'  |
-			| 'USD'   |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "ItemListCurrency" in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "251" text in "Number" field
 		If "1C:Enterprise" window is opened Then
@@ -124,11 +128,12 @@ Scenario: _102 preliminary receipt and multi currency sales (case 14, 33)
 			| 'Description'  |
 			| 'Store 07'     |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'  |
-			| 'USD'   |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
+		And I move to the next attribute
+		If "Update item list info" window is opened Then
+			And I click "Uncheck all" button
+			And I click "OK" button
+		Then the form attribute named "Currency" became equal to "USD"
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -158,11 +163,12 @@ Scenario: _102 preliminary receipt and multi currency sales (case 14, 33)
 			| 'Description'  |
 			| 'Store 07'     |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'  |
-			| 'TRY'   |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
+		And I move to the next attribute
+		If "Update item list info" window is opened Then
+			And I click "Uncheck all" button
+			And I click "OK" button
+		Then the form attribute named "Currency" became equal to "TRY"
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -229,6 +235,11 @@ Scenario: _102 preliminary receipt and multi currency sales (case 14, 33)
 
 Scenario: _103 purchase invoice in USD with service generated from preliminary receipt (case 31 baseline)
 	And I close all client application windows
+	* Enable manual numbers for this scenario - the session parameter does not survive across scenario boundaries
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I remove checkbox "Number editing available"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 	* Generate Purchase invoice from Goods receipt 251
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -246,11 +257,12 @@ Scenario: _103 purchase invoice in USD with service generated from preliminary r
 			And I click "Uncheck all" button
 			And I click "OK" button
 	* Switch to USD and set actual price 30
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'  |
-			| 'USD'   |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
+		And I move to the next attribute
+		If "Update item list info" window is opened Then
+			And I click "Uncheck all" button
+			And I click "OK" button
+		Then the form attribute named "Currency" became equal to "USD"
 		If "Update item list info" window is opened Then
 			And I click "Uncheck all" button
 			And I click "OK" button
@@ -301,6 +313,11 @@ Scenario: _103 purchase invoice in USD with service generated from preliminary r
 
 Scenario: _104 calculation for second half writes correction and keeps own service rows (case 31, 34, 18)
 	And I close all client application windows
+	* Enable manual numbers for this scenario - the session parameter does not survive across scenario boundaries
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I remove checkbox "Number editing available"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 	* Create Calculation movement costs 202 (16.02-28.02.2025)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click the button named "FormCreate"
@@ -406,6 +423,11 @@ Scenario: _105 reposting CMC, FX purchase invoice and FX sales invoice keeps all
 
 Scenario: _106 duplicate calculation for overlapping period is refused (case 30 interactive control)
 	And I close all client application windows
+	* Enable manual numbers for this scenario - the session parameter does not survive across scenario boundaries
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I remove checkbox "Number editing available"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 	* Try to create Calculation movement costs copy for 01.02-15.02.2025
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click the button named "FormCreate"
@@ -431,14 +453,15 @@ Scenario: _106 duplicate calculation for overlapping period is refused (case 30 
 
 Scenario: _107 write-off and worksheet consume batches with RowID (case 38 baseline)
 	And I close all client application windows
+	* Enable manual numbers for this scenario - the session parameter does not survive across scenario boundaries
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I remove checkbox "Number editing available"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 	* Create Purchase invoice 255 in TRY for MC Item B (10 x 1000 TRY)
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'   |
-			| 'Main Company'  |
-		And I select current line in "List" table
+		And I select from the drop-down list named "Company" by "Main Company" string
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -482,11 +505,7 @@ Scenario: _107 write-off and worksheet consume batches with RowID (case 38 basel
 	* Create Stock adjustment as write-off 256 (2 pcs MC Item B)
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'   |
-			| 'Main Company'  |
-		And I select current line in "List" table
+		And I select from the drop-down list named "Company" by "Main Company" string
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'  |
@@ -524,11 +543,7 @@ Scenario: _107 write-off and worksheet consume batches with RowID (case 38 basel
 	* Create Work sheet 257 with material MC Item B (2 pcs)
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'   |
-			| 'Main Company'  |
-		And I select current line in "List" table
+		And I select from the drop-down list named "Company" by "Main Company" string
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description'  |
@@ -542,11 +557,12 @@ Scenario: _107 write-off and worksheet consume batches with RowID (case 38 basel
 			| 'MC Work'      |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'  |
-			| 'TRY'   |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
+		And I move to the next attribute
+		If "Update item list info" window is opened Then
+			And I click "Uncheck all" button
+			And I click "OK" button
+		Then the form attribute named "Currency" became equal to "TRY"
 		And I move to "Materials" tab
 		And in the table "Materials" I click the button named "MaterialsAdd"
 		And I activate field named "MaterialsItem" in "Materials" table
@@ -674,6 +690,11 @@ Scenario: _109 reposting worksheet keeps the currency fan (case 38, RED until fi
 
 Scenario: _110 revenue correction for cheaper invoice keeps service rows (case 32)
 	And I close all client application windows
+	* Enable manual numbers for this scenario - the session parameter does not survive across scenario boundaries
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I remove checkbox "Number editing available"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 	* Create Goods receipt 258 with preliminary amount 140 USD for 5 pcs MC Item C
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
@@ -694,11 +715,7 @@ Scenario: _110 revenue correction for cheaper invoice keeps service rows (case 3
 		And I change "Is prelim." checkbox in "ItemList" table
 		And I input "140" text in "Amount (prelim.)" field of "ItemList" table
 		And I activate field named "ItemListCurrency" in "ItemList" table
-		And I click choice button of the attribute named "ItemListCurrency" in "ItemList" table
-		And I go to line in "List" table
-			| 'Code'  |
-			| 'USD'   |
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "ItemListCurrency" in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "258" text in "Number" field
 		If "1C:Enterprise" window is opened Then
@@ -719,11 +736,12 @@ Scenario: _110 revenue correction for cheaper invoice keeps service rows (case 3
 			| 'Description'  |
 			| 'Store 07'     |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'  |
-			| 'USD'   |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
+		And I move to the next attribute
+		If "Update item list info" window is opened Then
+			And I click "Uncheck all" button
+			And I click "OK" button
+		Then the form attribute named "Currency" became equal to "USD"
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -788,11 +806,12 @@ Scenario: _110 revenue correction for cheaper invoice keeps service rows (case 3
 		If "Update item list info" window is opened Then
 			And I click "Uncheck all" button
 			And I click "OK" button
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'  |
-			| 'USD'   |
-		And I select current line in "List" table
+		And I select "USD" exact value from "Currency" drop-down list
+		And I move to the next attribute
+		If "Update item list info" window is opened Then
+			And I click "Uncheck all" button
+			And I click "OK" button
+		Then the form attribute named "Currency" became equal to "USD"
 		If "Update item list info" window is opened Then
 			And I click "Uncheck all" button
 			And I click "OK" button

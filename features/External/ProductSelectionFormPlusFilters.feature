@@ -706,15 +706,15 @@ Scenario: check the filter by Legal name
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Ferron BP" text in "Legal name" field
-		And Delay 2
-		And I click Select button of "Company" field
-		And "List" table does not contain lines
-			| Description          |
-			| Company Ferron BP    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Ferron BP''    |
+		And I input "Company Ferron BP" text in the field named "LegalName"
+		And the drop-down list of the form does not contain values
+			| 'Company Ferron BP' |
+		And I click Choice button of the field named "LegalName"
+		And I go to line in "List" table
+			| Description        |
+			| Company Kalipso |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 	And I close all client application windows
 
 Scenario: check the filter by Legal name (Ferron)
@@ -735,15 +735,15 @@ Scenario: check the filter by Legal name (Ferron)
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Legal name" field
-		And Delay 2
-		And I click Select button of "Company" field
-		And "List" table does not contain lines
+		And I input "Company Kalipso" text in the field named "LegalName"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I click Choice button of the field named "LegalName"
+		And I go to line in "List" table
 			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+			| Company Ferron BP |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	And I close all client application windows
 
 Scenario: check the filter by Legal name (Ferron) in Goods receipt and Shipment confirmation
@@ -763,15 +763,15 @@ Scenario: check the filter by Legal name (Ferron) in Goods receipt and Shipment 
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Legal name" field
-		And Delay 2
-		And I click Select button of "Company" field
-		And "List" table does not contain lines
+		And I input "Company Kalipso" text in the field named "LegalName"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I click Choice button of the field named "LegalName"
+		And I go to line in "List" table
 			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+			| Company Ferron BP |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	* Check the automatic completion of the Legal name if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -789,70 +789,49 @@ Scenario: check the filter by Company
 			| Description    |
 			| Kalipso        |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Partner" field
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter by Company  in the inventory transfer
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Store Sender" field
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter by Company  in the Shipment cinfirmation and Goods receipt
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Store" field
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 		And I close all client application windows
 
 Scenario: check the filter by Company (Ferron)
@@ -863,94 +842,66 @@ Scenario: check the filter by Company (Ferron)
 			| Description    |
 			| Ferron BP      |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Partner" field
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 
 Scenario: check the filter by my own company
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Partner" field
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter by my own company in Cash expence/Cash revenue
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Account" field
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 Scenario: check the filter by my own company in Reconcilation statement
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check the filter by string input
 		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Legal name" field
-		And "List" table does not contain lines
-			| Description        |
-			| Company Kalipso    |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			| 'Then the form attribute named "LegalName" became equal to 'Company Kalipso''    |
+		And I input "Company Kalipso" text in the field named "Company"
+		And the drop-down list of the form does not contain values
+			| 'Company Kalipso' |
+		And I select "Main Company" exact value from the drop-down list named "Company"
+		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
 
@@ -958,12 +909,9 @@ Scenario: check the filter by my own company in Reconcilation statement
 Scenario: check the filter by my own company in Opening entry/Item stock adjustment
 	And I click the button named "FormCreate"
 	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'       |
-			| 'Main Company'      |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I select "Company Kalipso" exact value from "Company" drop-down list' |
+		And I select "Main Company" exact value from "Company" drop-down list
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
@@ -977,11 +925,7 @@ Scenario: check the filter by Partner term (by segments + expiration date)
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I click the button named "FormChoose"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner term" field
 		And "List" table became equal
 			| 'Description'                         |
@@ -1030,15 +974,15 @@ Scenario: check the filter by customers in the sales documents
 	And I select current line in "List" table
 * Check the filter by string input
 	And Delay 2
-	And I input "Alexander Orlov" text in "Partner" field
-	And Delay 2
-	And I click Select button of "Company" field
-	And "List" table does not contain lines
-			| Description        |
-			| Alexander Orlov    |
+	And I input "Alexander Orlov" text in the field named "Partner"
+	And the drop-down list of the form does not contain values
+		| 'Alexander Orlov' |
+	And I click Choice button of the field named "Partner"
+	And I go to line in "List" table
+		| Description        |
+		| Ferron BP |
 	And I select current line in "List" table
-	When I Check the steps for Exception
-		| 'Then the form attribute named "Partner" became equal to 'Alexander Orlov''   |
+	Then the form attribute named "Partner" became equal to "Ferron BP"
 And I close all client application windows
 
 Scenario: check the filter by vendors in the purchase documents
@@ -1058,15 +1002,15 @@ Scenario: check the filter by vendors in the purchase documents
 	And I select current line in "List" table
 * Check the filter by string input
 	And Delay 2
-	And I input "Kalipso" text in "Partner" field
-	And Delay 2
-	And I click Select button of "Company" field
-	And "List" table does not contain lines
-			| Description    |
-			| Kalipso        |
+	And I input "Kalipso" text in the field named "Partner"
+	And the drop-down list of the form does not contain values
+		| 'Kalipso' |
+	And I click Choice button of the field named "Partner"
+	And I go to line in "List" table
+		| Description        |
+		| Ferron BP |
 	And I select current line in "List" table
-	When I Check the steps for Exception
-		| 'Then the form attribute named "Partner" became equal to 'Kalipso''   |
+	Then the form attribute named "Partner" became equal to "Ferron BP"
 And I close all client application windows
 
 Scenario: check the filter by customer partner terms in the sales documents
@@ -1081,11 +1025,7 @@ Scenario: check the filter by customer partner terms in the sales documents
 			| Description          |
 			| Company Ferron BP    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner term" field
 		And "List" table does not contain lines
 			| Description           |
@@ -1118,11 +1058,7 @@ Scenario: check the filter by vendor partner terms in the purchase documents
 			| Description          |
 			| Company Ferron BP    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner term" field
 		And "List" table contains lines
 			| Description           |
@@ -1316,11 +1252,7 @@ Scenario: check the display of the header of the collapsible group in sales, pur
 			| Company Ferron BP    |
 		And I select current line in "List" table
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 
 
 Scenario: check the display of the header of the collapsible group in SalesReportFromTradeAgent
@@ -1339,11 +1271,7 @@ Scenario: check the display of the header of the collapsible group in SalesRepor
 			| Trade agent 1    |
 		And I select current line in "List" table
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 
 Scenario: check the display of the header of the collapsible group in SalesReportToConsignor
 	And I click the button named "FormCreate"
@@ -1361,21 +1289,13 @@ Scenario: check the display of the header of the collapsible group in SalesRepor
 			| Consignor 1    |
 		And I select current line in "List" table
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 
 Scenario: check the display of the header of the collapsible group in expence/revenue documents
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is editable Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		If "Accoun" attribute is present on the form Then
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -1399,22 +1319,14 @@ Scenario: check the display of the header of the collapsible group in PhysicalIn
 Scenario: check the display of the header of the collapsible group in OpeningEntry
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 
 
 Scenario: check the display of the header of the collapsible group in inventory transfer
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		If "Store sender" attribute is present on the form Then
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
@@ -1431,11 +1343,7 @@ Scenario: check the display of the header of the collapsible group in inventory 
 Scenario: check the display of the header of the collapsible group in Shipment confirmation, Goods receipt, Bundling/Unbundling
 	And I click the button named "FormCreate"
 	If "Company" attribute is present on the form Then
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I click Choice button of the field named "Store"
 	And I go to line in "List" table
 		| Description   |
@@ -1498,11 +1406,7 @@ Scenario: check the display of the header of the collapsible group in bank payme
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description          |
@@ -1513,16 +1417,8 @@ Scenario: check the display of the header of the collapsible group in cash recei
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| Description     |
@@ -1534,16 +1430,8 @@ Scenario: check the display of the header of the collapsible group in cash payme
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description        |
-			| USD    | American dollar    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| Description     |
@@ -1555,11 +1443,7 @@ Scenario: check the display of the header of the collapsible group in consolidat
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| Description     |
@@ -1574,21 +1458,13 @@ Scenario: check the display of the header of the collapsible group in planned in
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
 		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| Description     |
 			| Cash desk №2    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| Code   | Description     |
-			| TRY    | Turkish lira    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 
 Scenario: create a test partner with one vendor partner term and one customer partner term
 	* Create Partner Kalipso

@@ -109,6 +109,21 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.OurCompany</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <choiceParameters>
+      <name>Filter.DeletionMark</name>
+      <value xsi:type="core:BooleanValue"/>
+    </choiceParameters>
+    <choiceParameters>
+      <name>Filter.NotActive</name>
+      <value xsi:type="core:BooleanValue"/>
+    </choiceParameters>
+    <quickChoice>Use</quickChoice>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -248,6 +263,7 @@
         <changeMode>DontChange</changeMode>
         <field>Document.DecommissioningOfFixedAsset.TabularSection.ItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <quickChoice>Use</quickChoice>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="930e9657-4acd-4098-94d8-539f4855d36e">

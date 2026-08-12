@@ -251,7 +251,7 @@ EndFunction
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

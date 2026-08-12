@@ -376,11 +376,7 @@ Scenario: _028810 create document Shipment confirmation based on Inventory trans
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 			And I click the button named "FormCreate"
 		* Filling in the main details of the document
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -450,11 +446,7 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 			And I click the button named "FormCreate"
 		* Filling in the main details of the document
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -549,11 +541,7 @@ Scenario: _028830 check link/unlink form in the SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description    |
@@ -671,11 +659,7 @@ Scenario: _028830 check link/unlink form in the SC
 			| 'Boots'   | '37/18SD'    | '2,000'      | 'Store 02'    |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Boots (12 pcs)'    |
-		And I select current line in "List" table
+		And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Basis'                                         | 'Next step'   | 'Quantity'   | 'Current step'    |
 			| '1'   | 'Sales invoice 103 dated 05.03.2021 12:59:44'   | ''            | '8,000'      | 'SC'              |
@@ -688,11 +672,7 @@ Scenario: _028831 check link/unlink form in the SC (Purchase return)
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |

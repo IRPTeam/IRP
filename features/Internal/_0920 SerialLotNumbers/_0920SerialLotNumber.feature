@@ -137,11 +137,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Description'            |
 			| 'Retail partner term'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'   |
@@ -614,11 +610,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'   |
@@ -1004,11 +996,7 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1115,11 +1103,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1315,11 +1299,7 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1421,11 +1401,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1671,11 +1647,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 	* Create Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'     |
@@ -1820,11 +1792,7 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 	* Create stock adjustment as surplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1901,11 +1869,7 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 		When I Check the steps for Exception
 								| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
 	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'    |
-			| 'TRY'    | 'Turkish lira'   |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsSurplus092009$$" variable
 		And I delete "$$NumberStockAdjustmentAsSurplus092009$$" variable
@@ -1931,11 +1895,7 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 	* Create stock adjustment as surplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2004,11 +1964,7 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
 		And I click "Ok" button
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'    |
-			| 'TRY'    | 'Turkish lira'   |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsSurplus0920091$$" variable
@@ -2144,11 +2100,7 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 	* Create stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2225,11 +2177,7 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 		When I Check the steps for Exception
 								| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
 	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'    |
-			| 'TRY'    | 'Turkish lira'   |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsWriteOff092010$$" variable
 		And I delete "$$NumberStockAdjustmentAsWriteOff092010$$" variable
@@ -2255,11 +2203,7 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 	* Create stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2329,11 +2273,7 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 		And I finish line editing in "SerialLotNumbers" table
 		And I click "Ok" button
 	* Post Stock adjustment as write off and check movements in the register Register  "R4014 Serial lot numbers"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'    |
-			| 'TRY'    | 'Turkish lira'   |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsWriteOff09200101$$" variable
 		And I delete "$$NumberStockAdjustmentAsWriteOff09200101$$" variable
@@ -2466,11 +2406,7 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 	* Create Item stock adjustment
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2557,11 +2493,7 @@ Scenario: _092015 check serial lot number in the Shipment confirmation
 	* Create Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2640,11 +2572,7 @@ Scenario: _092016 check serial lot number in the Goods receipt
 	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2722,11 +2650,7 @@ Scenario: _092007 check serial lot number in the Inventory transfer
 	* Create Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -3820,11 +3744,7 @@ Scenario: _092064 check unique serial lot number settings
 				| 'Description'             |
 				| 'Retail partner term'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |

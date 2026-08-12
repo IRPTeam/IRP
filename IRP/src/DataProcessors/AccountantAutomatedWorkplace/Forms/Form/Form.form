@@ -180,10 +180,13 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
+        <handlers>
+          <event>StartChoice</event>
+          <name>DocumentTypeStartChoice</name>
+        </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
-        <listChoiceMode>true</listChoiceMode>
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
@@ -1414,12 +1417,223 @@
         <items xsi:type="form:FormGroup">
           <name>GroupFiles</name>
           <id>152</id>
+          <items xsi:type="form:FormField">
+            <name>ShowFilePreview</name>
+            <id>251</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>ShowFilePreview</segments>
+            </dataPath>
+            <titleLocation>Right</titleLocation>
+            <handlers>
+              <event>OnChange</event>
+              <name>ShowFilePreviewOnChange</name>
+            </handlers>
+            <extendedTooltip>
+              <name>ShowFilePreviewExtendedTooltip</name>
+              <id>253</id>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ShowFilePreviewContextMenu</name>
+              <id>252</id>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>CheckBoxField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+          </items>
+          <items xsi:type="form:Table">
+            <name>FileTable</name>
+            <id>229</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>FileTable</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <items xsi:type="form:FormField">
+              <name>FileTableName</name>
+              <id>248</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>FileTable.Name</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>FileTableNameExtendedTooltip</name>
+                <id>250</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>FileTableNameContextMenu</name>
+                <id>249</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>InputField</type>
+              <editMode>EnterOnInput</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:InputFieldExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <wrap>true</wrap>
+                <chooseType>true</chooseType>
+                <typeDomainEnabled>true</typeDomainEnabled>
+                <textEdit>true</textEdit>
+              </extInfo>
+            </items>
+            <autoCommandBar>
+              <name>FileTableCommandBar</name>
+              <id>230</id>
+              <horizontalAlign>Left</horizontalAlign>
+            </autoCommandBar>
+            <handlers>
+              <event>Selection</event>
+              <name>FileTableSelection</name>
+            </handlers>
+            <handlers>
+              <event>OnActivateRow</event>
+              <name>FileTableOnActivateRow</name>
+            </handlers>
+            <searchStringAddition>
+              <name>FileTableSearchString</name>
+              <id>233</id>
+              <extendedTooltip>
+                <name>FileTableSearchStringExtendedTooltip</name>
+                <id>235</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>FileTableSearchStringContextMenu</name>
+                <id>234</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <source>FileTable</source>
+              <extInfo xsi:type="form:SearchStringAdditionExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+              </extInfo>
+            </searchStringAddition>
+            <viewStatusAddition>
+              <name>FileTableViewStatus</name>
+              <id>239</id>
+              <extendedTooltip>
+                <name>FileTableViewStatusExtendedTooltip</name>
+                <id>241</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>FileTableViewStatusContextMenu</name>
+                <id>240</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>ViewStatusAddition</type>
+              <source>FileTable</source>
+              <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+              </extInfo>
+            </viewStatusAddition>
+            <searchControlAddition>
+              <name>FileTableSearchControl</name>
+              <id>236</id>
+              <extendedTooltip>
+                <name>FileTableSearchControlExtendedTooltip</name>
+                <id>238</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>FileTableSearchControlContextMenu</name>
+                <id>237</id>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>SearchControlAddition</type>
+              <source>FileTable</source>
+              <extInfo xsi:type="form:SearchControlAdditionExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+              </extInfo>
+            </searchControlAddition>
+            <extendedTooltip>
+              <name>FileTableExtendedTooltip</name>
+              <id>232</id>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>FileTableContextMenu</name>
+              <id>231</id>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <readOnly>true</readOnly>
+            <autoMaxWidth>true</autoMaxWidth>
+            <heightInTableRows>3</heightInTableRows>
+            <autoMaxRowsCount>true</autoMaxRowsCount>
+            <selectionMode>MultiRow</selectionMode>
+            <header>true</header>
+            <headerHeight>1</headerHeight>
+            <footerHeight>1</footerHeight>
+            <horizontalScrollBar>AutoUse</horizontalScrollBar>
+            <verticalScrollBar>AutoUse</verticalScrollBar>
+            <horizontalLines>true</horizontalLines>
+            <verticalLines>true</verticalLines>
+            <autoInsertNewRow>true</autoInsertNewRow>
+            <searchOnInput>Auto</searchOnInput>
+            <initialListView>Auto</initialListView>
+            <horizontalStretch>true</horizontalStretch>
+            <verticalStretch>true</verticalStretch>
+            <enableStartDrag>true</enableStartDrag>
+            <enableDrag>true</enableDrag>
+            <fileDragMode>AsFileRef</fileDragMode>
+            <rowFilter xsi:type="core:UndefinedValue"/>
+          </items>
           <items xsi:type="form:FormGroup">
-            <name>PagesFiles</name>
-            <id>68</id>
+            <name>FilePreviewPages</name>
+            <id>254</id>
             <items xsi:type="form:FormGroup">
-              <name>FirstPage</name>
-              <id>70</id>
+              <name>NoFilePage</name>
+              <id>256</id>
               <items xsi:type="form:Decoration">
                 <name>NoFileLabel</name>
                 <id>72</id>
@@ -1459,6 +1673,34 @@
                   <verticalAlign>Center</verticalAlign>
                 </extInfo>
               </items>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <title>
+                <key>en</key>
+                <value>No file</value>
+              </title>
+              <extendedTooltip>
+                <name>NoFilePageExtendedTooltip</name>
+                <id>257</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>Page</type>
+              <extInfo xsi:type="form:PageGroupExtInfo">
+                <group>Vertical</group>
+                <showTitle>true</showTitle>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormGroup">
+              <name>PDFPage</name>
+              <id>258</id>
               <items xsi:type="form:FormField">
                 <name>PDFPreview</name>
                 <id>132</id>
@@ -1521,8 +1763,38 @@
                   <autoMaxHeight>true</autoMaxHeight>
                   <horizontalStretch>true</horizontalStretch>
                   <verticalStretch>true</verticalStretch>
+                  <scale>100</scale>
+                  <currentPageNumber>1</currentPageNumber>
                 </extInfo>
               </items>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <title>
+                <key>en</key>
+                <value>PDF</value>
+              </title>
+              <extendedTooltip>
+                <name>PDFPageExtendedTooltip</name>
+                <id>259</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>Page</type>
+              <extInfo xsi:type="form:PageGroupExtInfo">
+                <group>Vertical</group>
+                <showTitle>true</showTitle>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormGroup">
+              <name>ImagePage</name>
+              <id>260</id>
               <items xsi:type="form:FormField">
                 <name>ImagePreview</name>
                 <id>140</id>
@@ -1556,6 +1828,7 @@
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
                 <showInFooter>true</showInFooter>
                 <extInfo xsi:type="form:ImageFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
                   <autoMaxHeight>true</autoMaxHeight>
                   <horizontalStretch>true</horizontalStretch>
                   <verticalStretch>true</verticalStretch>
@@ -1567,6 +1840,60 @@
                   <fileDragMode>AsFileRef</fileDragMode>
                 </extInfo>
               </items>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <title>
+                <key>en</key>
+                <value>Image</value>
+              </title>
+              <extendedTooltip>
+                <name>ImagePageExtendedTooltip</name>
+                <id>261</id>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>Page</type>
+              <extInfo xsi:type="form:PageGroupExtInfo">
+                <group>Vertical</group>
+                <showTitle>true</showTitle>
+              </extInfo>
+            </items>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <title>
+              <key>en</key>
+              <value>File preview pages</value>
+            </title>
+            <extendedTooltip>
+              <name>FilePreviewPagesExtendedTooltip</name>
+              <id>255</id>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>Pages</type>
+            <extInfo xsi:type="form:PagesGroupExtInfo">
+              <currentRowUse>Auto</currentRowUse>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormGroup">
+            <name>PagesFiles</name>
+            <id>68</id>
+            <items xsi:type="form:FormGroup">
+              <name>FirstPage</name>
+              <id>70</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -1642,7 +1969,7 @@
           </extendedTooltip>
           <type>Page</type>
           <extInfo xsi:type="form:PageGroupExtInfo">
-            <group>HorizontalIfPossible</group>
+            <group>Vertical</group>
             <showTitle>true</showTitle>
             <titleDataPath xsi:type="form:DataPath">
               <segments>FilesCount</segments>
@@ -2471,8 +2798,7 @@
     </title>
     <id>3</id>
     <valueType>
-      <types>String</types>
-      <stringQualifiers/>
+      <types>ValueList</types>
     </valueType>
     <view>
       <common>true</common>
@@ -2483,6 +2809,14 @@
     <settingsSavedData xsi:type="form:DataPath">
       <segments>DocumentType</segments>
     </settingsSavedData>
+    <extInfo xsi:type="form:ValueListExtInfo">
+      <itemValueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>120</length>
+        </stringQualifiers>
+      </itemValueType>
+    </extInfo>
   </attributes>
   <attributes>
     <name>LockType</name>
@@ -2556,7 +2890,7 @@
 	Registry.Document AS Document,
 	Registry.Date AS Date,
 	Registry.Number AS Number,
-	JournalEntry.Company AS Company,
+	Registry.Document.Company AS Company,
 	JournalEntry.LedgerType AS LedgerType,
 	Registry.CreateDate AS CreateDate,
 	Registry.ModifyDate AS ModifyDate,
@@ -2571,7 +2905,7 @@
 	ISNULL(DocTasks.RepeatTask, FALSE) AS isRepeatTask,
 	CASE
 		WHEN MAX(ISNULL(DocTasks.RepeatTask, FALSE))
-				AND MAX(ISNULL(DocTasks.MyTask, FALSE))
+		AND MAX(ISNULL(DocTasks.MyTask, FALSE))
 			THEN 3
 		WHEN MAX(ISNULL(DocTasks.MyTask, FALSE))
 			THEN 0
@@ -2589,24 +2923,23 @@ FROM
 		ON Registry.Document = AuditLock.Document
 		LEFT JOIN Document.JournalEntry AS JournalEntry
 		ON Registry.Document = JournalEntry.Basis
-			AND (NOT JournalEntry.DeletionMark)
+		AND NOT JournalEntry.DeletionMark
 		LEFT JOIN (SELECT
 			ExecutorTasks.ExecutionObject AS ExecutionObject,
 			MAX(ExecutorTasks.CurrentExecutor = &amp;CurrentUser
-					OR NOT TasksByExecutive.Ref IS NULL) AS MyTask,
+			OR NOT TasksByExecutive.Ref IS NULL) AS MyTask,
 			MAX(NOT OldTasks.Ref IS NULL) AS RepeatTask
 		FROM
 			Task.ExecutorTasks AS ExecutorTasks
 				LEFT JOIN Task.ExecutorTasks AS OldTasks
 				ON ExecutorTasks.ExecutionObject = OldTasks.ExecutionObject
-					AND ExecutorTasks.CurrentExecutor = OldTasks.CurrentExecutor
-					AND ExecutorTasks.Ref &lt;> OldTasks.Ref
-					AND (NOT OldTasks.DeletionMark)
-				LEFT JOIN Task.ExecutorTasks.TasksByExecutive(&amp;CurrentUser, ) AS TasksByExecutive
+				AND ExecutorTasks.CurrentExecutor = OldTasks.CurrentExecutor
+				AND ExecutorTasks.Ref &lt;> OldTasks.Ref
+				AND NOT OldTasks.DeletionMark
+				LEFT JOIN Task.ExecutorTasks.TasksByExecutive(&amp;CurrentUser,) AS TasksByExecutive
 				ON ExecutorTasks.Ref = TasksByExecutive.Ref
 		WHERE
 			NOT ExecutorTasks.Executed
-		
 		GROUP BY
 			ExecutorTasks.ExecutionObject) AS DocTasks
 		ON Registry.Document = DocTasks.ExecutionObject
@@ -2620,7 +2953,6 @@ FROM
 		ON Registry.Document = ExecutedTasks.ExecutionObject
 WHERE
 	FALSE
-
 GROUP BY
 	Registry.Document,
 	Registry.Date,
@@ -2629,10 +2961,10 @@ GROUP BY
 	Registry.ModifyDate,
 	Registry.Author,
 	Registry.Editor,
-	JournalEntry.Company,
 	JournalEntry.LedgerType,
 	ISNULL(DocTasks.MyTask, FALSE),
-	ISNULL(DocTasks.RepeatTask, FALSE)</queryText>
+	ISNULL(DocTasks.RepeatTask, FALSE),
+	Registry.Document.Company</queryText>
       <mainTable>InformationRegister.PostedDocumentsRegistry</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
@@ -2649,10 +2981,6 @@ GROUP BY
             </content>
           </localValue>
         </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ManualMovementsEdit</dataPath>
-        <field>ManualMovementsEdit</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>RepeatTask</dataPath>
@@ -2809,6 +3137,10 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Active</dataPath>
         <field>Active</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ManualMovementsEdit</dataPath>
+        <field>ManualMovementsEdit</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Recorder</dataPath>
@@ -3316,6 +3648,38 @@ GROUP BY
       <value>Show exchange error</value>
     </title>
     <id>33</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>VisibleSettings</name>
+    <title>
+      <key>en</key>
+      <value>Visible settings</value>
+    </title>
+    <id>34</id>
+    <valueType/>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>ShowFilePreview</name>
+    <title>
+      <key>en</key>
+      <value>Show file preview</value>
+    </title>
+    <id>35</id>
     <valueType>
       <types>Boolean</types>
     </valueType>

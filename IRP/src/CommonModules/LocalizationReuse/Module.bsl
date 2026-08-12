@@ -113,19 +113,25 @@ EndFunction
  
 // Metadata languages.
 // 
+// Parameters:
+//  UseSynonym - Boolean - Use synonym
+// 
 // Returns:
 //  Structure - Metadata languages:
-//  * Key - String - Lang code
-//  * Value - String - Lang description
-Function MetadataLanguages() Export
+// * Key - String - Lang code
+// * Value - String - Lang description
+Function MetadataLanguages(UseSynonym = False) Export
 	Result = New Structure;
 	For Each It In Metadata.Languages Do
 		If It.Name = "HASH" Then
 			Continue;			
 		EndIf;
-		Result.Insert(It.LanguageCode, It.Name);
+		If UseSynonym = True Then
+			Result.Insert(It.LanguageCode, It.Synonym);
+		Else
+			Result.Insert(It.LanguageCode, It.Name);
+		EndIf;
 	EndDo;
-	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction
 
@@ -220,7 +226,7 @@ Function GetInterfaceLocalizations() Export
 	
 	InterfaceLocalizations = New Array; // Array of Structure
 	
-	Languages = MetadataLanguages();
+	Languages = MetadataLanguages(True);
 	For Each LangKeyValue In Languages Do
 		Language = New Structure;
 		Language.Insert("LanguageCode", Lower(LangKeyValue.Key));

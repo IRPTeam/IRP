@@ -263,6 +263,7 @@
         <changeMode>DontChange</changeMode>
         <field>Document.PhysicalInventory.TabularSection.ItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <quickChoice>Use</quickChoice>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

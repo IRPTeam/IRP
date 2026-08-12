@@ -45,11 +45,7 @@ Scenario: _3001000 preparation
 				| "$$NumberPurchaseInvoice30010001$$"     |
 				And I click the button named "FormCreate"
 				* Filling in details
-					And I click Select button of "Company" field
-					And I go to line in "List" table
-						| Description        |
-						| Main Company       |
-					And I select current line in "List" table
+					And I select "Main Company" exact value from "Company" drop-down list
 					And I click Select button of "Partner" field
 					And I go to line in "List" table
 						| 'Description'       |
@@ -172,11 +168,7 @@ Scenario: _3001000 preparation
 				| "$$NumberPurchaseInvoice30010002$$"     |
 				And I click the button named "FormCreate"
 				* Filling in details
-					And I click Select button of "Company" field
-					And I go to line in "List" table
-						| Description        |
-						| Main Company       |
-					And I select current line in "List" table
+					And I select "Main Company" exact value from "Company" drop-down list
 					And I click Select button of "Partner" field
 					And I go to line in "List" table
 						| 'Description'       |
@@ -255,11 +247,7 @@ Scenario: _3001001 check the form of selection of items in the document StockAdj
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click the button named "FormCreate"
 	* Filling the document header
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -275,11 +263,7 @@ Scenario: _3001002 check the form of selection of items in the document StockAdj
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I click the button named "FormCreate"
 	* Filling the document header
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -322,11 +306,7 @@ Scenario: 3001005 check the form Pick Up items Inventory Transfer Order
 			| 'Description'    |
 			| 'Store 06'       |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check the form of selection items
 		When check the product selection form in InventoryTransferOrder/InventoryTransfer
 	And I close all client application windows
@@ -347,11 +327,7 @@ Scenario: 3001006 check the form Pick Up items Inventory Transfer
 			| 'Description'    |
 			| 'Store 06'       |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check the form of selection items
 		When check the product selection form in InventoryTransferOrder/InventoryTransfer
 	And I close all client application windows
@@ -366,11 +342,7 @@ Scenario: 3001007 check the form Pick Up items Internal supply request
 			| 'Description'    |
 			| 'Store 05'       |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Check the form of selection items
 		When check the product selection form in StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
 	And I close all client application windows

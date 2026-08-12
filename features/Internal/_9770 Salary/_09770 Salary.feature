@@ -690,11 +690,7 @@ Scenario: _097712 create TimeSheet (for Shop 01)
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"
 		And I click the button named "FormCreate"
 	* Filling main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Period"
 		And I input "01.11.2023" text in the field named "DateBegin"
 		And I input "30.11.2023" text in the field named "DateEnd"
@@ -751,11 +747,7 @@ Scenario: _097713 check work time changes in TimeSheet (for Distribution departm
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"
 		And I click the button named "FormCreate"
 	* Filling main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Period"
 		And I input "01.11.2023" text in the field named "DateBegin"
 		And I input "30.11.2023" text in the field named "DateEnd"

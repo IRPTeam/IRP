@@ -116,11 +116,7 @@ Scenario:_8923002 check cash on hand control in the CashPayment (cash account wi
 			And I select from the drop-down list named "Company" by "Main Company" string
 			And I select from "Cash account" drop-down list by "Cash desk №1" string
 			And I activate field named "PaymentListPartner" in "PaymentList" table
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| "Description"  |
-				| "Turkish lira" |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "Currency"
 			And I click the button named "PaymentListAdd"
 			And I select "dfc" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 			And I activate field named "PaymentListAgreement" in "PaymentList" table
@@ -163,11 +159,7 @@ Scenario:_8923003 check cash on hand control in the CashPayment (without negativ
 			And I click "Create" button
 			And I select from the drop-down list named "Company" by "Main Company" string
 			And I select from "Cash account" drop-down list by "Cash desk №2" string
-			And I click Choice button of the field named "Currency"
-			And I go to line in "List" table
-				| "Description"  |
-				| "Turkish lira" |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "Currency"
 			And I activate field named "PaymentListPartner" in "PaymentList" table
 			And I click the button named "PaymentListAdd"
 			And I select "dfc" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table

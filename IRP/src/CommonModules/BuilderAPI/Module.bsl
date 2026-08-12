@@ -476,11 +476,6 @@ Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False, RowKey = "
 	Rows.Add(NewRow);
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-	// delete after testing
-	//If ControllerClientServer_V2.IsFullTransferTabularSection(Parameters, TableName) 
-	//		OR ControllerClientServer_V2.IsFullLoadTabularSection(Parameters, TableName) Then
-	//	Raise StrTemplate(R().Error_TableNotSupportedInBuilder, TableName);
-	//EndIf;
 	ControllerClientServer_V2.AddNewRow(TableName, Parameters);
 	If KeyFieldExists Then
 		NewRow = WrapperTable.FindRows(New Structure("Key", NewRow.Key))[0];

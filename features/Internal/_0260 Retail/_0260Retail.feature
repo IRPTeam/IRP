@@ -748,22 +748,14 @@ Scenario: _0260137 return advance payment (cash)
 	* Create Cash payment (customer advance)
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"	
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Cash desk №2'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "PaymentListAdd"
 		And I activate "Retail customer" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -795,11 +787,7 @@ Scenario: _0260138 return advance payment (card)
 	* Create Bank payment (customer advance)
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"	
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -1558,8 +1546,6 @@ Scenario: _0260160 check RSR changing if Consolidated retail sales is unpost
 			And I close current window
 			And I click Choice button of the field named "Agreement"
 			And I close current window	
-			And I click Choice button of the field named "Company"
-			And I close current window
 			And I click Choice button of the field named "RetailCustomer"
 			And I close current window
 			And I click Choice button of the field named "Partner"
@@ -1575,8 +1561,6 @@ Scenario: _0260160 check RSR changing if Consolidated retail sales is unpost
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I close current window
 			And I click choice button of "Item key" attribute in "ItemList" table
-			And I close current window
-			And I click choice button of "Unit" attribute in "ItemList" table
 			And I close current window
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I close current window	
@@ -1608,8 +1592,6 @@ Scenario: _0260162 check RRR changing if Consolidated retail sales is unpost
 			And I close current window
 			And I click Choice button of the field named "Agreement"
 			And I close current window	
-			And I click Choice button of the field named "Company"
-			And I close current window
 			And I click Choice button of the field named "RetailCustomer"
 			And I close current window
 			And I click Choice button of the field named "Partner"
@@ -1625,8 +1607,6 @@ Scenario: _0260162 check RRR changing if Consolidated retail sales is unpost
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I close current window
 			And I click choice button of "Item key" attribute in "ItemList" table
-			And I close current window
-			And I click choice button of "Unit" attribute in "ItemList" table
 			And I close current window
 			And I click choice button of "Store" attribute in "ItemList" table	
 			And I close current window						

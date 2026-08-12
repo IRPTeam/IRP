@@ -151,6 +151,140 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="ad2565e5-6693-488b-9917-1c3dcf8ea031">
+    <producedTypes>
+      <objectType typeId="7083da9e-0a9b-4323-b439-040d83bb53ae" valueTypeId="f79b5d4f-1a5d-425d-9581-7555e2996389"/>
+      <rowType typeId="2f2a0814-4a71-42fd-8e1b-0d11f1598464" valueTypeId="808cbbd6-f1ba-4dfd-bead-5e60ebb8f90a"/>
+    </producedTypes>
+    <name>AccessToEditAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Access to edit attributes</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="d37866ea-67df-4bb2-a26e-a6360bb4da47">
+      <name>MetadataRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Metadata ref</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ConfigurationMetadata</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="26b36229-d26e-4e8f-84f1-60b0846ba53c">
+      <name>TabularName</name>
+      <synonym>
+        <key>en</key>
+        <value>Tabular name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f0e607c8-d1d7-45ce-8c11-fa07e446915d">
+      <name>AttributeName</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="db6b0bef-b4b7-4254-a309-58a0180adcbb">
+    <producedTypes>
+      <objectType typeId="4c93ea21-a5f4-4763-858b-62908746f87b" valueTypeId="2ab52e1b-a518-4547-8d8e-c06373542c57"/>
+      <rowType typeId="886b4a0a-c794-4f45-be07-c93d3e54f937" valueTypeId="a6e8e13c-96c2-4cfb-9b71-ccb4be395c70"/>
+    </producedTypes>
+    <name>AccessToViewAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Access to view attributes</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="bc04da5f-de98-4411-b3b8-198b914f2f14">
+      <name>MetadataRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Metadata ref</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ConfigurationMetadata</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="63a3b8a1-2d15-43f5-abaf-27d06be59013">
+      <name>TabularName</name>
+      <synonym>
+        <key>en</key>
+        <value>Tabular name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ec3cc244-6cbf-402a-931a-732b377464a6">
+      <name>AttributeName</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="4d529441-1543-47ab-85c3-3005a7f0ac76">
     <name>ItemForm</name>
     <synonym>

@@ -549,11 +549,7 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'Dress'   | 'M/White'    | '4,000'      | 'Store 01'    |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I click "Post" button
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Basis'                                         | 'Next step'     | 'Quantity'   | 'Current step'    |

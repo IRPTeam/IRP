@@ -111,11 +111,7 @@ Scenario: _3050 create production planning correction and check it movements (qu
 	* Create document
 		And In the command interface I select "Manufacturing" "Production planning corrections"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
 			| 'Description'              |
@@ -391,11 +387,7 @@ Scenario: _3060 create production planning correction and check it movements (ch
 	* Create document
 		And In the command interface I select "Manufacturing" "Production planning corrections"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
 			| 'Description'              |
@@ -622,11 +614,7 @@ Scenario: _3070 create second production planning correction and check it moveme
 	* Create document
 		And In the command interface I select "Manufacturing" "Production planning corrections"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
 			| 'Description'              |

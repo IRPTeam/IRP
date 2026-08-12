@@ -413,6 +413,16 @@ Procedure ItemListUnitOnChange(Item)
 	DocPurchaseOrderClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);	
+EndProcedure
+
 #EndRegion
 
 #Region QUANTITY
@@ -961,7 +971,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

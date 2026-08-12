@@ -763,11 +763,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 	* Create SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I select "Inventory transfer" exact value from "Transaction type" drop-down list
 		And I activate field named "ItemListLineNumber" in "ItemList" table
@@ -817,11 +813,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 			And I finish line editing in "ItemList" table
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'                |
-				| 'High shoes box (8 pcs)'     |
-			And I select current line in "List" table
+			And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		* Link
 			And I go to line in "ItemList" table
 				| '#'    | 'Item'    | 'Item key'    | 'Quantity'    | 'Store'       | 'Unit'     |
@@ -850,11 +842,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 	* Create GR
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I select "Inventory transfer" exact value from "Transaction type" drop-down list
 		And I activate field named "ItemListLineNumber" in "ItemList" table
@@ -904,11 +892,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 			And I finish line editing in "ItemList" table
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'                |
-				| 'High shoes box (8 pcs)'     |
-			And I select current line in "List" table
+			And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		* Link
 			And I go to line in "ItemList" table
 				| '#'    | 'Item'    | 'Item key'    | 'Quantity'    | 'Store'       | 'Unit'     |

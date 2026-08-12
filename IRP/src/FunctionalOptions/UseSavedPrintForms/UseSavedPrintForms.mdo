@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d8cbb829-3bca-473b-b8d8-1958411e34d4">
+  <name>UseSavedPrintForms</name>
+  <synonym>
+    <key>en</key>
+    <value>Use saved print forms</value>
+  </synonym>
+  <location>Constant.UseSavedPrintForms</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>InformationRegister.SavedPrintForms</content>
+</mdclass:FunctionalOption>

@@ -1849,11 +1849,7 @@ Scenario: _0850028 check acquiring in BR
 	* Create BR
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"	
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Payment from customer by POS" exact value from "Transaction type" drop-down list
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
@@ -2196,11 +2192,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate" 
 		And I select "Cash in" exact value from "Transaction type" drop-down list
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'     |
@@ -2266,11 +2258,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 	* Create money transfer (cash out)
 		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I click the button named "FormCreate" 
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
 			| 'Description'     |
@@ -2281,11 +2269,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			| 'Description'        |
 			| 'Movement type 1'    |
 		And I select current line in "List" table
-		And I click Select button of "Send currency" field
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Send currency" drop-down list
 		And I input "11,00" text in "Send amount" field		
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
@@ -2297,11 +2281,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			| 'Description'        |
 			| 'Movement type 1'    |
 		And I select current line in "List" table
-		And I click Select button of "Receive currency" field
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Receive currency" drop-down list
 		And I input "11,00" text in "Receive amount" field	
 		And I click Select button of "Send branch" field
 		And I go to line in "List" table

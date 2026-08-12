@@ -42,4 +42,11 @@
       <value>MXL</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="9cf73cd5-abca-433e-9dcf-3cccf8c552c3">
+    <name>FormattedText</name>
+    <synonym>
+      <key>en</key>
+      <value>Formatted text</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

@@ -285,6 +285,9 @@ EndProcedure
 
 &AtClient
 Procedure DocumentsTreeSelection(Item, RowSelected, Field, StandardProcessing)
+	If Upper(Field.Name) = Upper("DocumentsTreeQuantity") Then
+		Return;
+	EndIf;
 	StandardProcessing = False;
 	_OpenBasisDocument();
 EndProcedure

@@ -218,11 +218,7 @@ Scenario: _207002 copy additional attribute values when create document
 	* Create test Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main company'    |
-		And I select current line in "List" table
+		And I select "Main company" exact value from "Company" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency'   | 'Description'          |

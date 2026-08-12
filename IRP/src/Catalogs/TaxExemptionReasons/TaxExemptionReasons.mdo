@@ -98,6 +98,7 @@
   <descriptionLength>150</descriptionLength>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
@@ -191,6 +192,10 @@
       <key>ru</key>
       <value>Item form</value>
     </synonym>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -198,6 +203,10 @@
     <name>ListForm</name>
     <synonym>
       <key>ru</key>
+      <value>List form</value>
+    </synonym>
+    <synonym>
+      <key>en</key>
       <value>List form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>

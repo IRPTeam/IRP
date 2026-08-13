@@ -635,6 +635,7 @@ Scenario: Create chart of characteristic types CurrencyMovementType objects
 		| 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf128cde918b4'  | 'False'         | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857'  | 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859'  | 'Enum.CurrencyType.Reporting'  | 'False'                | 'Reporting currency Euro'| ''                  | ''                | ''                 |
 
 
+
 Scenario: Create catalog Currencies objects
 
 	And I check or create catalog "Currencies" objects:

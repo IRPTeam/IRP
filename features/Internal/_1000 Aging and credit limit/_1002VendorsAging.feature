@@ -345,6 +345,46 @@ Scenario: _1002015 create Bank payment and check Aging register movements
 			And I close all client application windows
 
 
+Scenario: _1002016 check reposting Bank payment after vendors advances closing writes no Customers aging
+	And I close all client application windows
+	* Repost the Bank payment that was offset by the vendors advances closing
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberBankPayment1002015$$'     |
+		And I select current line in "List" table
+		And I click the button named "FormPost"
+		And Delay 5
+		And I click the button named "FormPostAndClose"
+		And I close all client application windows
+	* The payment to a vendor must not produce customers aging rows
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberBankPayment1002015$$'     |
+		And I click "Registrations report" button
+		And I select "R5011 Customers aging" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R5011 Customers aging"'     |
+	And I close all client application windows
+
+
+Scenario: _1002017 check the vendors aging register keeps the offset rows after reposting
+	And I close all client application windows
+	* The offset rows of the reposted payment survived in the register
+		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+		And "List" table contains lines
+			| 'Period'                           | 'Recorder'                     | 'Currency'    | 'Company'         | 'Branch'    | 'Partner'      | 'Amount'      | 'Agreement'             | 'Invoice'                      | 'Payment date'                                | 'Aging closing'                   |
+			| '$$DateBankPayment1002015$$'       | '$$BankPayment1002015$$'       | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '200,00'      | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging$$'     | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | 'Vendors advances closing 4*'     |
+	* The customers aging register has no rows of this payment at all
+		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
+		And "List" table does not contain lines
+			| 'Recorder'                     |
+			| '$$BankPayment1002015$$'       |
+	And I close all client application windows
+
+
 Scenario: _1002020 create Credit note and check Aging register movements
 	* Create document
 		Given I open hyperlink "e1cib/list/Document.CreditNote"

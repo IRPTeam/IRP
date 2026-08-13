@@ -11563,7 +11563,6 @@ EndFunction
 
 Function GetFieldsToLock_AlwaysReadonly_ISR()
 	Result = New Structure("Header, ItemList");
-	Result.ItemList = "";
 	Return Result;
 EndFunction
 

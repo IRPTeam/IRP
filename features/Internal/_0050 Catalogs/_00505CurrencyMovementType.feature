@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CompanyCatalogs
@@ -38,4 +38,33 @@ Scenario: _005017 creation Movement Type for Partner term currencies
 		And "List" table contains lines
 		| 'Description'  | 'Type'          | 'Currency'  | 'Source'        | 'Deferred calculation'   |
 		| 'TRY'          | 'Partner term'  | 'TRY'       | 'Forex Seling'  | 'No'                     |
+
+
+Scenario: _005018 check the required fields of Movement Type for Partner term currencies
+	And I close all client application windows
+	* Open charts of characteristic types - Currency movement
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CurrencyMovementType"
+	* Try to save a new item with the description only
+		And I click the button named "FormCreate"
+		And I input "Required fields check" text in the field named "Description_en"
+		And I click "Save" button
+	* All three attributes are reported as required
+		Then I wait that in user messages the "\"Currency\" is a required field" substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Source\" is a required field" substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Type\" is a required field" substring will appear in 5 seconds
+	And I close all client application windows
+
+
+Scenario: _005020 check that predefined Movement Types are saved with empty Currency, Source and Type
+	And I close all client application windows
+	* Get a reference to the predefined item SettlementCurrency
+		And I execute 1C:Enterprise script at server
+			| 'Объект.ЗначениеНаСервере = GetURL(ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);' |
+		And I save 'Объект.ЗначениеНаСервере' in 'RefSettlementCurrency' variable
+	* The predefined item is saved even though the required attributes are empty
+		Given I open hyperlink "$RefSettlementCurrency$"
+		And I save form header as 'PredefinedItemFormTitle' variable
+		And I click "Save and close" button
+		Then I wait "$PredefinedItemFormTitle$" window closing in 10 seconds
+	And I close all client application windows
 		

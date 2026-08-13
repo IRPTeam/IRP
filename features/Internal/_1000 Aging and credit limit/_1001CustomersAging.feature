@@ -479,6 +479,29 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 			And I close all client application windows
 
 
+Scenario: _1000017 check reposting Cash receipt after customers advances closing keeps all its aging rows
+	And I close all client application windows
+	* Repost the Cash receipt that was offset by the customers advances closing
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'                         |
+			| '$$NumberCashReceipt1000009$$'   |
+		And I select current line in "List" table
+		And I click the button named "FormPost"
+		And Delay 5
+		And I click the button named "FormPostAndClose"
+		And I close all client application windows
+	* All three aging rows of the receipt survived the reposting, each still linked to the closing
+		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
+		And Delay 5
+		And "List" table contains lines
+			| 'Recorder'                | 'Line number' | 'Amount' | 'Aging closing'                |
+			| '$$CashReceipt1000009$$'  | '1'           | '550,00' | 'Customers advance closing 4*' |
+			| '$$CashReceipt1000009$$'  | '2'           | '94,16'  | 'Customers advance closing 4*' |
+			| '$$CashReceipt1000009$$'  | '3'           | '550,00' | 'Customers advance closing 4*' |
+	And I close all client application windows
+
+
 Scenario: _1000020 create Credit note and check Aging register movements
 	* Create document
 		Given I open hyperlink "e1cib/list/Document.CreditNote"

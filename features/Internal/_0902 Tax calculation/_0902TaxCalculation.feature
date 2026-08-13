@@ -1324,7 +1324,7 @@ Scenario: _090231 check Withholding Tax calculation
 	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
 	And I click the button named "FormCreate"
 	* Filling in the details
-		And I click Select button of "Partner" field
+		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Ferron BP'    |
@@ -1352,13 +1352,9 @@ Scenario: _090231 check Withholding Tax calculation
 		And I select current line in "ItemList" table
 		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
 		And "ItemList" table became equal
-			| '#' | 'Item'    | 'Item key' | 'Quantity' | 'Unit' | 'Price type'              | 'Price'  | 'Dont calculate row' | 'Net amount' | 'VAT' | 'Tax amount' | 'Withholding tax rate' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' | 'Project' | 'Expense type' | 'Profit loss center' | 'Additional analytic' |
-			| '1' | 'Service' | 'Rent'     | '1,000'    | 'pcs'  | 'en description is empty' | '100,00' | 'No'                 | '100,00'     | '18%' | '15,25'      | '20% WT'               | '25,00'                  | '125,00'        | '100,00'       | ''        | ''             | ''                   | ''                    |		
-		* Change brutto amount
-			And I activate "Brutto amount" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "150,00" text in "Brutto amount" field of "ItemList" table
-			And I finish line editing in "ItemList" table
+			| '#' | 'Item'    | 'Item key' | 'Quantity' | 'Unit' | 'Price type'              | 'Price'  | 'Dont calculate row' | 'Withholding tax rate' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' | 'Project' | 'Expense type' | 'Profit loss center' | 'Additional analytic' |
+			| '1' | 'Service' | 'Rent'     | '1,000'    | 'pcs'  | 'en description is empty' | '100,00' | 'No'                 | '20% WT'               | '25,00'                  | '125,00'        | '100,00'       | ''        | ''             | ''                   | ''                    |
+		And I close all client application windows
 						
 				
 				

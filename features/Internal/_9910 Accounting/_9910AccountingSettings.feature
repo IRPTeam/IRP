@@ -529,6 +529,19 @@ Scenario: _099100 preparation
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+	* Enable eLedger and set the localization code of the ledger type
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I set checkbox "  -  Use eLedger"
+		And I click "Save" button
+		And I close "Functional option settings" window
+		Given I open hyperlink "e1cib/list/Catalog.LedgerTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic LTV'   |
+		And I select current line in "List" table
+		And I select "Turkish" exact value from "eLedger localization code" drop-down list
+		And I click "Save and close" button
 	And I close all client application windows
 							
 	
@@ -4454,3 +4467,62 @@ Scenario: _0991250 check PL report
 
 					
 				
+
+
+Scenario: _0991300 create eLedger registry for February 2023 and assign sequental numbers
+	And I close all client application windows
+	* Create the registry for Own company 2 and February 2023
+	Given I open hyperlink "e1cib/list/Document.ELedgerRegistry"
+	And I click the button named "FormCreate"
+	And I select "Own company 2" exact value from "Company" drop-down list
+	And I click Select button of "Ledger type" field
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Basic LTV'   |
+	And I select current line in "List" table
+	And I click Select button of "Period" field
+	And I input "01.02.2023" text in the field named "DateBegin"
+	And I input "28.02.2023" text in the field named "DateEnd"
+	And I click "Select" button
+	And I click the button named "FormPost"
+	And I wait "Number" field will be filled in "30" seconds
+	* Assign the sequental numbers
+	And in the table "JournalEntryList" I click the button named "SetNumbers"
+	* Every February journal entry of the company is numbered without gaps
+	And "JournalEntryList" table contains lines
+		| 'Journal entry'                                       | 'Sequental number' | 'Ledger type' | 'Company'       |
+		| 'JE Bank payment 17 dated 02.02.2023 15:00:00'        | '1'                | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Money transfer 1 dated 10.02.2023 12:00:00'       | '2'                | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Purchase invoice 1 dated 24.02.2023 10:04:33'     | '3'                | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Sales invoice 1 dated 24.02.2023 10:14:47'        | '4'                | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Bank receipt 1 dated 24.02.2023 10:49:55'         | '5'                | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Cash payment 1 dated 24.02.2023 10:50:30'         | '6'                | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Bank payment 1 dated 24.02.2023 10:51:48'         | '7'                | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Cash expense 1 dated 24.02.2023 10:52:43'         | '8'                | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Cash revenue 1 dated 24.02.2023 10:53:15'         | '9'                | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Bank payment 2 dated 24.02.2023 11:00:05'         | '10'               | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Bank receipt 2 dated 24.02.2023 11:01:13'         | '11'               | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Credit note 1 dated 24.02.2023 11:02:48'          | '12'               | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Debit note 1 dated 24.02.2023 11:03:25'           | '13'               | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Purchase return 1 dated 24.02.2023 17:01:27'      | '14'               | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Bank receipt 7 dated 25.02.2023 12:00:00'         | '15'               | 'Basic LTV'   | 'Own company 2' |
+		| 'JE Retail sales receipt 1 dated 25.02.2023 15:00:00' | '16'               | 'Basic LTV'   | 'Own company 2' |
+	Then the number of "JournalEntryList" table lines is "equal" "16"
+
+# IRP-868: GetMainAccount ignored the AccountType parameter, so a credit account
+# without a parent (9100) was reported with the DEBIT account of the same record.
+# Rows 39/40 and 45/46 below are the ones named in the ticket.
+Scenario: _0991301 check exported CSV reports each side with its own main account
+	And I close all client application windows
+	* Open the registry of February 2023
+	Given I open hyperlink "e1cib/list/Document.ELedgerRegistry"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	And I select current line in "List" table
+	* Export and compare the produced file with the reference one stored next to this feature
+	And I delete "$$ELedgerReference$$" variable
+	And I save "ELedgerFebruary2023.csv" file content to the variable "ELedgerReference"
+	And I click the button named "FormDocumentELedgerRegistryExportToCSV"
+	Then "eLedger" window is opened
+	Then the form attribute named "TextDocument" became equal to "$ELedgerReference$"

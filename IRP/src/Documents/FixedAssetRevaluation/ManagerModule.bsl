@@ -451,7 +451,7 @@ Function T1040T_AccountingAmounts()
 		|	Calculations.Period,
 		|	Calculations.Key AS RowKey,
 		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
-		|	Calculations.Amount AS Amount,
+		|	-Calculations.Amount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|FROM

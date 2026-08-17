@@ -1843,7 +1843,7 @@ Function Strings(Lang) Export
 #EndRegion
 
 #Region FixedAsset
-	Strings.Insert("Error_FixedAsset_01", NStr("en = 'Depreciation calculation is already exist [%1]'", Lang));
+	Strings.Insert("Error_FixedAsset_01", NStr("en = 'Depreciation calculation is already exists [%1]'", Lang));
 #EndRegion
 
 #Region LandedCost

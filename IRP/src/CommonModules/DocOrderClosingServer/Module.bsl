@@ -241,7 +241,7 @@ Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
 EndFunction
 
 Procedure RefreshSalesOrderClosing(Object) Export
-	FillingData = GetDataFormSalesOrder(Object.SalesOrder, Object);
+	FillingData = GetDataFromSalesOrder(Object.SalesOrder, Object);
 	RefreshClosing(Object, FillingData, "SalesOrderKey", 
 		"Agreement, Company, LegalName, Partner, SalesOrder, TransactionType");
 EndProcedure

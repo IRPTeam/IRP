@@ -816,7 +816,7 @@ Scenario: _9800038 check control of two Depreciation calculations in one month
 		And I click "No" button
 	And I close all client application windows
 
-Scenario: _9800039 check control of Depreciation calculations in one month for another branch
+Scenario: _9800039 check Depreciation calculation for another branch in the same month is posted without control message
 	And I close all client application windows
 	* Create depreciation calculation for another branch in the month that already has a document
 		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
@@ -827,13 +827,15 @@ Scenario: _9800039 check control of Depreciation calculations in one month for a
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from the drop-down list named "Branch" by "Distribution department" string
 		And in the table "Calculations" I click "Fill calculations" button
-	* Try to post and check the control message
+	* Post and check
 		And I click "Post" button
-		Then I wait that in user messages the "Depreciation calculation is already exist" substring will appear in 20 seconds
-	* Close without saving
-		And I close current window
-		Then "1C:Enterprise" window is opened
-		And I click "No" button
+		Then user message window does not contain messages
+		And I delete "$$NumberDepreciationCalculation4$$" variable
+		And I save the value of "Number" field as "$$NumberDepreciationCalculation4$$"
+		And I click the button named "FormPostAndClose"
+		And "List" table contains lines
+			| 'Number'                             |
+			| '$$NumberDepreciationCalculation4$$' |
 	And I close all client application windows
 
 Scenario: _9800040 check Depreciation calculation for another month is posted without control message

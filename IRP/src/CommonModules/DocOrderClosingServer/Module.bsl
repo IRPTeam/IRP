@@ -136,7 +136,7 @@ Function GetIsClosedSalesOrderInItemList(ArrayOfOrder) Export
 	Return Result;
 EndFunction
 
-Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
+Function GetDataFromSalesOrder(SalesOrder, Object = Undefined) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT

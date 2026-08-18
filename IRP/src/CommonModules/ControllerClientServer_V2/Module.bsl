@@ -6766,9 +6766,47 @@ Procedure SetPaymentTerms(Parameters, Results) Export
 		If Parameters.ChangedData.Get(Binding.DataPath) = Undefined Then
 			Parameters.Cache.Insert(Binding.DataPath, Result.Value.ArrayOfPaymentTerms);
 		EndIf;
-		// data is changed only when Object.PaymentTerms have rows
-		If Parameters.Object.PaymentTerms.Count() Then
+		
+		If Parameters.Object.PaymentTerms.Count() = 0 Then
 			PutToChangedData(Parameters, Binding.DataPath, Undefined, Undefined, Undefined);
+		Else
+			
+			If Result.Value.ArrayOfPaymentTerms.Count() <> Parameters.Object.PaymentTerms.Count() Then
+				PutToChangedData(Parameters, Binding.DataPath, Undefined, Undefined, Undefined);
+			Else
+				
+				ArrayOfCheckedColumns = New Array();
+				ArrayOfCheckedColumns.Add("CalculationType");
+				ArrayOfCheckedColumns.Add("Date");
+				ArrayOfCheckedColumns.Add("DuePeriod");
+				ArrayOfCheckedColumns.Add("ProportionOfPayment");
+				
+				For i = 0 To Result.Value.ArrayOfPaymentTerms.Count() -1 Do
+					IsDiff = False;
+					
+					For Each ChekedColumn In ArrayOfCheckedColumns Do
+						Value1 = Result.Value.ArrayOfPaymentTerms[i][ChekedColumn];
+						Value2 = Parameters.Object.PaymentTerms[i][ChekedColumn];
+						
+						If ChekedColumn = "Date" Then
+							Value1 = BegOfDay(Value1);
+							Value2 = BegOfDay(Value2);
+						EndIf;
+						
+						If Value1 <> Value2 Then
+							PutToChangedData(Parameters, Binding.DataPath, Undefined, Undefined, Undefined);
+							IsDiff = True;
+							Break;
+						EndIf;
+					EndDo;
+					
+					If IsDiff Then
+						Break;
+					EndIf;
+					
+				EndDo;
+			EndIf;
+		
 		EndIf;
 	EndDo;
 EndProcedure

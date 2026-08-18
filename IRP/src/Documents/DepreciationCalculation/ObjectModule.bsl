@@ -52,9 +52,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	|	DepreciationCalculation.Ref <> &Ref
 	|	AND DepreciationCalculation.Company = &Company
 	|	AND DepreciationCalculation.Date BETWEEN BEGINOFPERIOD(&Date, MONTH) AND ENDOFPERIOD(&Date, MONTH)
-	|	AND DepreciationCalculation.Posted";
+	|	AND DepreciationCalculation.Posted
+	|	AND DepreciationCalculation.Branch = &Branch";
 	Query.SetParameter("Ref", ThisObject.Ref);
 	Query.SetParameter("Company", ThisObject.Company);
+	Query.SetParameter("Branch", ThisObject.Branch);
 	Query.SetParameter("Date", ThisObject.Date);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

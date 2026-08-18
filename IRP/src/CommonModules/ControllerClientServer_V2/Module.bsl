@@ -6767,7 +6767,7 @@ Procedure SetPaymentTerms(Parameters, Results) Export
 			Parameters.Cache.Insert(Binding.DataPath, Result.Value.ArrayOfPaymentTerms);
 		EndIf;
 		
-		If Parameters.Object.PaymentTerms.Count() = 0 Then
+		If Parameters.Object.PaymentTerms.Count() = 0 And Result.Value.ArrayOfPaymentTerms.Count() > 1 Then
 			PutToChangedData(Parameters, Binding.DataPath, Undefined, Undefined, Undefined);
 		Else
 			

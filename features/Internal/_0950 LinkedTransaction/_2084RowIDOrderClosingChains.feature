@@ -1,17 +1,10 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @LinkedTransaction
 
-# IRP-775 (PR 2969) extends the RowID split to the invoice-closing registers
-# R1012B_PurchaseOrdersInvoiceClosing and R2012B_SalesOrdersInvoiceClosing, and makes
-# the order-closing filling join the register balance by RowID instead of the order
-# row Key. This file covers the purchase mirror of the sales case and the full
-# procurement chain, where ONE RowID feeds BOTH closing registers - the purchase order
-# closing and the sales order closing must both stay empty once everything is invoiced.
-#
-# DATA ISOLATION (sequential @LinkedTransaction tag): own documents only, Comment
-# marker LT2084-*, scenario-local navigation. Shared catalog loaders are idempotent.
+# IRP-775: purchase mirror of the aggregated-invoice case and the full back-to-back chain -
+# both order closings must stay empty once everything is invoiced. Own documents only (LT2084-*).
 
 Feature: RowID order closing for aggregated purchase rows and procurement chains
 
@@ -60,17 +53,8 @@ Scenario: _20840011 check preparation
 	When check preparation
 
 
-# Purchase mirror of IRP-775: the order holds two identical rows (7 + 1), the goods receipt
-# mirrors them, and the purchase invoice carries a SINGLE aggregated row of 8 linked to BOTH
-# receipt rows. The whole ordered quantity is received and invoiced, so the Purchase order
-# closing must be EMPTY.
-#
-# UI mechanics that this flow depends on (confirmed by a manual walkthrough):
-#  - the order must be Approved before it offers Goods receipt / Purchase invoice,
-#  - the "Add linked document rows" dialog needs its basis tree expanded before Ok,
-#  - the aggregated row is built by deleting the generated rows and adding a fresh one,
-#    then linking both basis rows to it,
-#  - linking resets the row quantity, so it is set again afterwards.
+# Purchase mirror: one invoice row of 8 linked to both receipt rows (7 + 1) - the Purchase
+# order closing must be EMPTY.
 Scenario: _2084002 aggregated purchase invoice row with two links fully closes the purchase order
 	And I close all client application windows
 	* Create PO_LT2084_02 (Ferron BP, Dress XS/Blue, rows 7 + 1)
@@ -130,8 +114,7 @@ Scenario: _2084002 aggregated purchase invoice row with two links fully closes t
 			And I activate field named "ItemListPrice" in "ItemList" table
 			And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
 			And I finish line editing in "ItemList" table
-	* Post the order. Only an Approved order offers a goods receipt and an invoice,
-	* so the status is asserted before posting rather than silently assumed.
+	* Post the order - only an Approved order offers a goods receipt and an invoice
 		Then the form attribute named "Status" became equal to "Approved"
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
@@ -246,12 +229,8 @@ Scenario: _2084002 aggregated purchase invoice row with two links fully closes t
 		And I close all client application windows
 
 
-# Back-to-back chain: the sales order row is procured through a purchase order, so ONE RowID
-# travels SO -> PO -> GR -> PI on the purchase side and SO -> SC -> SI on the sales side,
-# feeding BOTH closing registers - R1012B and R2012B keyed by the same inherited RowID.
-# Once both invoices cover the whole quantity, neither the Purchase order closing nor the
-# Sales order closing may offer anything. In develop the purchase order closing joined the
-# balance by the order row Key, which never matched the inherited RowID of a back-to-back order.
+# Back-to-back chain SO-PO-GR-PI-SC-SI: one RowID feeds both closing registers -
+# neither order closing may offer anything once both invoices are posted.
 Scenario: _2084003 back-to-back chain SO-PO-GR-PI-SC-SI leaves both order closings empty
 	And I close all client application windows
 	* Create and post SO_LT2084_03 (Ferron BP, Dress XS/Blue, 8 pcs, procured by purchase)
@@ -309,6 +288,7 @@ Scenario: _2084003 back-to-back chain SO-PO-GR-PI-SC-SI leaves both order closin
 		Then "ItemList" table contains lines
 			| 'Item key' | 'Quantity' |
 			| 'XS/Blue'  | '8,000'    |
+		Then the number of "ItemList" table lines is "equal" "1"
 		And I go to the first line in "ItemList" table
 		And I select current line in "ItemList" table
 		And I activate field named "ItemListPrice" in "ItemList" table
@@ -330,6 +310,7 @@ Scenario: _2084003 back-to-back chain SO-PO-GR-PI-SC-SI leaves both order closin
 		Then "ItemList" table contains lines
 			| 'Item key' | 'Quantity' |
 			| 'XS/Blue'  | '8,000'    |
+		Then the number of "ItemList" table lines is "equal" "1"
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I wait "Number" field will be filled in "30" seconds
@@ -341,6 +322,7 @@ Scenario: _2084003 back-to-back chain SO-PO-GR-PI-SC-SI leaves both order closin
 		Then "ItemList" table contains lines
 			| 'Item key' | 'Quantity' |
 			| 'XS/Blue'  | '8,000'    |
+		Then the number of "ItemList" table lines is "equal" "1"
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I wait "Number" field will be filled in "30" seconds
@@ -351,6 +333,7 @@ Scenario: _2084003 back-to-back chain SO-PO-GR-PI-SC-SI leaves both order closin
 		Then "ItemList" table contains lines
 			| 'Item key' | 'Quantity' |
 			| 'XS/Blue'  | '8,000'    |
+		Then the number of "ItemList" table lines is "equal" "1"
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I wait "Number" field will be filled in "30" seconds
@@ -360,6 +343,7 @@ Scenario: _2084003 back-to-back chain SO-PO-GR-PI-SC-SI leaves both order closin
 		Then "ItemList" table contains lines
 			| 'Item key' | 'Quantity' |
 			| 'XS/Blue'  | '8,000'    |
+		Then the number of "ItemList" table lines is "equal" "1"
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I wait "Number" field will be filled in "30" seconds

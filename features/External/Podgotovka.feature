@@ -1367,7 +1367,9 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 			| 'Description'                         |
 			| 'Basic Partner terms, without VAT'    |
 			And I select current line in "List" table
-		* Select store 
+			If "Update item list info" window is opened Then
+				And I click "OK" button
+		* Select store
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |

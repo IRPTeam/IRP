@@ -723,19 +723,21 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 Scenario: _1000055 check Aging sum when delete row from PI
 	* Create PI
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice" 
-		And I click the button named "FormCreate" 
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
 		* Filling in customer information
-			And I click Select button of "Partner" field 
-			And I go to line in "List" table 
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 					| 'Description'      |
 					| 'Ferron BP'        |
-			And I select current line in "List" table 
-			And I click Select button of "Partner term" field 
-			And I go to line in "List" table 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 					| 'Description'             |
 					| 'Vendor Ferron, TRY'      |
-			And I select current line in "List" table 
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Select store
 			And I click Select button of "Store" field 
 			And I go to line in "List" table 
@@ -805,20 +807,22 @@ Scenario: _1000056 check aging  date in the PI (created based on GR)
 		And I close all client application windows
 	* Create PO
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder" 
-		And I click the button named "FormCreate" 
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+		And I select "Approved" exact value from the drop-down list named "Status"
 		* Filling in customer information
-			And I click Select button of "Partner" field 
-			And I go to line in "List" table 
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 					| 'Description'      |
 					| 'Ferron BP'        |
-			And I select current line in "List" table 
-			And I click Select button of "Partner term" field 
-			And I go to line in "List" table 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 					| 'Description'             |
 					| 'Vendor Ferron, TRY'      |
-			And I select current line in "List" table 
-			And I select "Approved" exact value from the drop-down list named "Status"	
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Select store
 			And I click Select button of "Store" field 
 			And I go to line in "List" table 
@@ -928,6 +932,8 @@ Scenario: _1200058 check recalculate Aging Amount (PurchaseInvoice)
 			| 'Description' |
 			| 'Vendor Ferron, TRY'     |
 	And I select current line in "List" table
+	Then "Update item list info" window is opened
+	And I click "OK" button
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I activate "Item" field in "ItemList" table
 	And I select current line in "ItemList" table

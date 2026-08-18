@@ -868,28 +868,30 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 Scenario: _1000055 check Aging sum when delete row from SI
 	* Create SI
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice" 
-		And I click the button named "FormCreate" 
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
 		* Filling in customer information
-			And I click Select button of "Partner" field 
-			And I go to line in "List" table 
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 					| 'Description'      |
 					| 'Kalipso'          |
-			And I select current line in "List" table 
-			And I click Select button of "Partner term" field 
-			And I go to line in "List" table 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 					| 'Description'                           |
 					| 'Basic Partner terms, without VAT'      |
-			And I select current line in "List" table 
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Select store
-			And I click Select button of "Store" field 
-			And I go to line in "List" table 
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 					| 'Description'      |
 					| 'Store 01'         |
-			And I select current line in "List" table 
-			And I click Select button of "Legal name" field 
-			And I activate "Description" field in "List" table 
-			And I select current line in "List" table 
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I activate "Description" field in "List" table
+			And I select current line in "List" table
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd" 
 			And I click choice button of "Item" attribute in "ItemList" table 
@@ -949,19 +951,21 @@ Scenario: _1000056 check aging  date in the SI (created based on SC)
 		And I close all client application windows
 	* Create SO
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.SalesOrder" 
-		And I click the button named "FormCreate" 
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 		* Filling in customer information
-			And I click Select button of "Partner" field 
-			And I go to line in "List" table 
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 					| 'Description'      |
 					| 'Kalipso'          |
-			And I select current line in "List" table 
-			And I click Select button of "Partner term" field 
-			And I go to line in "List" table 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 					| 'Description'                           |
 					| 'Basic Partner terms, without VAT'      |
-			And I select current line in "List" table 
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Select store
 			And I click Select button of "Store" field 
 			And I go to line in "List" table 
@@ -1072,6 +1076,8 @@ Scenario: _1000058 check recalculate Aging Amount (SalesInvoice)
 			| 'Description' |
 			| 'Basic Partner terms, TRY'     |
 	And I select current line in "List" table
+	Then "Update item list info" window is opened
+	And I click "OK" button
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I activate "Item" field in "ItemList" table
 	And I select current line in "ItemList" table

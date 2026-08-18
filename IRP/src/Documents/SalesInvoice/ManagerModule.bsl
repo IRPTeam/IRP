@@ -857,8 +857,8 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		|	tmpRowID.RowID AS RowKey,
 		|	ItemList.ItemKey AS ItemKey,
 		|	tmpRowID.Quantity AS Quantity,
-		|	ItemList.TotalAmount / ItemList.Quantity * tmpRowID.Quantity AS Amount,
-		|	ItemList.NetAmount / ItemList.Quantity * tmpRowID.Quantity AS NetAmount
+		|	(ItemList.TotalAmount / ItemList.QuantityInBaseUnit) * tmpRowID.Quantity AS Amount,
+		|	(ItemList.NetAmount / ItemList.QuantityInBaseUnit) * tmpRowID.Quantity AS NetAmount
 		|into R2012B_SalesOrdersInvoiceClosing
 		|FROM
 		|	tmpRowID AS tmpRowID
@@ -866,62 +866,6 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		|		ON ItemList.Key = tmpRowID.Key
 		|		AND NOT ItemList.SalesOrder.Ref IS NULL
 		|		AND ItemList.Ref = &Ref";
-	
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-//		|	ItemList.Period AS Period,
-//		|	ItemList.Company AS Company,
-//		|	ItemList.Branch AS Branch,
-//		|	ItemList.SalesOrder AS Order,
-//		|	ItemList.Currency AS Currency,
-//		|	ItemList.OrderItemKey AS ItemKey,
-//		|	ItemList.RowKey AS RowKey,
-//		|	ItemList.Quantity AS Quantity,
-//		|	ItemList.Amount AS Amount,
-//		|	ItemList.NetAmount AS NetAmount
-//		|INTO R2012B_SalesOrdersInvoiceClosing
-//		|FROM
-//		|	OrderItemList AS ItemList
-//		|WHERE
-//		|	ItemList.SalesOrderExists
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Receipt),
-//		|	ItemList.Period,
-//		|	ItemList.Company,
-//		|	ItemList.Branch,
-//		|	ItemList.SalesOrder,
-//		|	ItemList.Currency,
-//		|	ItemList.ItemKey,
-//		|	ItemList.RowKey,
-//		|	ItemList.Quantity,
-//		|	ItemList.Amount,
-//		|	ItemList.NetAmount
-//		|FROM
-//		|	OrderItemList AS ItemList
-//		|WHERE
-//		|	ItemList.SalesOrderExists
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Expense),
-//		|	ItemList.Period,
-//		|	ItemList.Company,
-//		|	ItemList.Branch,
-//		|	ItemList.SalesOrder,
-//		|	ItemList.Currency,
-//		|	ItemList.ItemKey,
-//		|	ItemList.RowKey,
-//		|	ItemList.Quantity,
-//		|	ItemList.Amount,
-//		|	ItemList.NetAmount
-//		|FROM
-//		|	ItemList AS ItemList
-//		|WHERE
-//		|	ItemList.SalesOrderExists";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()

@@ -178,6 +178,8 @@ Function GetDataFromSalesOrder(SalesOrder, Object = Undefined) Export
 	|	ItemList.ItemKey.Item.Unit AS Unit,
 	|	ItemList.DeliveryDate AS DeliveryDate,
 	|	ItemList.CancelReason AS CancelReason,
+	|	ItemList.SalesPerson AS SalesPerson,
+	|	ItemList.ProcurementMethod AS ProcurementMethod,
 	|	RowIDInfo.QuantityBalance > 0 AS Cancel,
 	|	CASE
 	|		WHEN RowIDInfo.QuantityBalance > 0

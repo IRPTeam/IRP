@@ -1225,8 +1225,8 @@ Function R1012B_PurchaseOrdersInvoiceClosing()
 		|	tmpRowID.RowID AS RowKey,
 		|	ItemList.ItemKey AS ItemKey,
 		|	tmpRowID.Quantity AS Quantity,
-		|	ItemList.TotalAmount / ItemList.Quantity * tmpRowID.Quantity AS Amount,
-		|	ItemList.NetAmount / ItemList.Quantity * tmpRowID.Quantity AS NetAmount
+		|	(ItemList.TotalAmount / ItemList.QuantityInBaseUnit) * tmpRowID.Quantity AS Amount,
+		|	(ItemList.NetAmount / ItemList.QuantityInBaseUnit) * tmpRowID.Quantity AS NetAmount
 		|	into R1012B_PurchaseOrdersInvoiceClosing
 		|FROM
 		|	tmpRowID AS tmpRowID

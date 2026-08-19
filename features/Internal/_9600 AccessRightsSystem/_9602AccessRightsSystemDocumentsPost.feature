@@ -815,7 +815,7 @@ Scenario: 963066 try post DepreciationCalculation (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Depreciation calculation * dated * *" window closing in "5" seconds
 
-Scenario: 963069 try post DepreciationCalculation when the month has a posted document of the inaccessible branch (LimitedAccess)
+Scenario: 963069 post DepreciationCalculation when the month has a posted document of the inaccessible branch (LimitedAccess)
 	And I close all client application windows
 	* Create and post the document of the branch that is not accessible for LimitedAccess
 		And I close TestClient session

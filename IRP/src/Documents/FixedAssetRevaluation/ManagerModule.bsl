@@ -188,7 +188,7 @@ Function R5022T_Expenses()
 		|	Calculations.FixedAsset,
 		|	Calculations.LedgerType,
 		|	Calculations.ExpenseType,
-		|	- Calculations.Amount,
+		|	- Calculations.Amount as Amount,
 		|	&Date AS Period,
 		|	Undefined AS ItemKey,
 		|	Undefined AS AdditionalAnalytic,

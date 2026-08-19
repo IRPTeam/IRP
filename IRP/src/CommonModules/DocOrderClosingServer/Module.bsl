@@ -165,7 +165,7 @@ Function GetDataFromSalesOrder(SalesOrder, Object = Undefined) Export
 	|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(&Boundary, Order = &SalesOrder) AS
 	|			SalesOrdersInvoiceClosing
 	|		ON RowIDInfo.RowID = SalesOrdersInvoiceClosing.RowKey
-	|		AND RowIDInfo.Ref = &SalesOrder
+	|		AND RowIDInfo.Ref = &SalesOrder and RowIDInfo.NextStep <> value(Catalog.MovementRules.PRR)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

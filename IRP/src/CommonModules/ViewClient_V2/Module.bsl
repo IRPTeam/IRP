@@ -456,7 +456,7 @@ Procedure __tmp_CommonDocuments_OnChainComplete(Parameters, IsRetail)
 	EndIf;
 	
 	Changes = IsChangedProperty(Parameters, "PaymentTerms");
-	If Changes.IsChanged Then // refill question PaymentTerms
+	If Changes.IsChanged Then
 		ChangedPoints.Insert("IsChangedPaymentTerms");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
 			"PaymentTerm", R().QuestionToUser_019));

@@ -1842,8 +1842,11 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_MaximumAccessKey", NStr("en = 'Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]'", Lang));
 #EndRegion
 
-#Region LandedCost
+#Region FixedAsset
+	Strings.Insert("Error_FixedAsset_01", NStr("en = 'Depreciation calculation is already exists [%1]'", Lang));
+#EndRegion
 
+#Region LandedCost
 	Strings.Insert("LC_Error_001", NStr("en = 'Can not receipt Batch key by sales return: %1 , Quantity: %2 , Doc: %3'", Lang) + Chars.LF);
 	Strings.Insert("LC_Error_002", NStr("en = 'Can not expense Batch key: %1 , Quantity: %2 , Doc: %3'", Lang) + Chars.LF);
 	Strings.Insert("LC_Error_003", NStr("en = 'Can not receipt Batch key: %1 , Quantity: %2 , Doc: %3'", Lang) + Chars.LF);

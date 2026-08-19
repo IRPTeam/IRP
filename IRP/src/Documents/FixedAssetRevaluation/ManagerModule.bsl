@@ -152,7 +152,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|	Calculations.FixedAsset,
 		|	Calculations.LedgerType,
 		|	Calculations.Schedule,
-		|	Calculations.Amount,
+		|	case when Calculations.Amount < 0 Then - Calculations.Amount else Calculations.Amount end as Amount,
 		|	Calculations.Currency
 		|INTO R8510B_BookValueOfFixedAsset
 		|FROM
@@ -188,13 +188,13 @@ Function R5022T_Expenses()
 		|	Calculations.FixedAsset,
 		|	Calculations.LedgerType,
 		|	Calculations.ExpenseType,
-		|	Calculations.Amount,
+		|	- Calculations.Amount as Amount,
 		|	&Date AS Period,
 		|	Undefined AS ItemKey,
 		|	Undefined AS AdditionalAnalytic,
 		|	Undefined AS Project,
 		|	Calculations.Key,
-		|	Calculations.Amount AS AmountWithTaxes,
+		|	- Calculations.Amount AS AmountWithTaxes,
 		|	Undefined AS AmountCost,
 		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
 		|INTO R5022T_Expenses
@@ -451,7 +451,7 @@ Function T1040T_AccountingAmounts()
 		|	Calculations.Period,
 		|	Calculations.Key AS RowKey,
 		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
-		|	Calculations.Amount AS Amount,
+		|	-Calculations.Amount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|FROM

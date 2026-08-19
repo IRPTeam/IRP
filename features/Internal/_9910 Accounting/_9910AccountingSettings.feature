@@ -219,12 +219,12 @@ Scenario: _099100 preparation
 		Then "Opening entries" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		Then I select all lines of "List" table
@@ -239,22 +239,22 @@ Scenario: _099100 preparation
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting WorkSheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting CashTransferOrder
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting BankReceipt
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -263,12 +263,12 @@ Scenario: _099100 preparation
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "4"
+		And Delay "4"
 	* Posting BankPayment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "4"
+		And Delay "4"
 	* Posting Sales invoice
 		And I execute 1C:Enterprise script at server
 			| "DocObject = Documents.ShipmentConfirmation.FindByNumber(3).GetObject();"    |
@@ -277,7 +277,7 @@ Scenario: _099100 preparation
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "4"
+		And Delay "4"
 	* Posting Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		Then I select all lines of "List" table
@@ -288,80 +288,80 @@ Scenario: _099100 preparation
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting PurchaseReturnOrder
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 		And I close all client application windows
 	* Posting Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting Inventory transfer order
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 		And I close all client application windows
 	* Posting Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting PhysicalInventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting Stock adjustment as surplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting PurchaseOrderClosing
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting SalesOrderClosing
 		When Create document SalesOrderClosing objects (test data base)
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting PlannedReceiptReservation
 		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting CashReceipt
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -373,42 +373,42 @@ Scenario: _099100 preparation
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting CashExpense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting CashRevenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting CreditNote
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting DebitNote
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting ReconciliationStatement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting IncomingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting OutgoingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+		And Delay "3"
 	* Posting ItemStockAdjustment
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 		Then I select all lines of "List" table
@@ -679,7 +679,7 @@ Scenario: _0991003 create ledger type
 		And I delete "$$UniqueIDManagerLT$$" variable
 		And I save the value of the field named "UniqueID" as "$$UniqueIDManagerLT$$"
 		And I click "Save and close" button
-		And I wait "Ledger type variants (create) *" window closing in 20 seconds
+		And I wait "Ledger type variants (create)*" window closing in 20 seconds
 		Then "Ledger type variants" window is opened
 		And I click "Select" button
 		* Filling dates
@@ -813,7 +813,7 @@ Scenario: _0991004 create ledger type variant with account charts code mask
 		And I delete "$$UniqueID$$" variable
 		And I save the value of the field named "UniqueID" as "$$UniqueID$$"
 		And I click "Save and close" button
-		And I wait "Ledger type variants (create) *" window closing in 20 seconds	
+		And I wait "Ledger type variants (create)*" window closing in 20 seconds	
 	* Check
 		And "List" table contains lines
 			| 'Description'                       |
@@ -832,7 +832,7 @@ Scenario: _0991005 change ledger type variant for ledger type
 		And I select from "Ledger type variant" drop-down list by "LTV" string
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And I click "Save and close" button
-		And I wait "Manager analitics (Ledger type) *" window closing in 20 seconds
+		And I wait "Manager analitics (Ledger type)*" window closing in 20 seconds
 
 Scenario: _0991006 create AccountingExtraDimensionTypes - test element 
 	And I close all client application windows
@@ -920,7 +920,7 @@ Scenario: _0991008 create Account charts (Basic) - group and assets account
 		And I select current line in "List" table
 		And I finish line editing in "ExtDimensionTypes" table
 		And I click "Save and close" button
-		And I wait "Account chart (Basic) (create) *" window closing in 20 seconds	
+		And I wait "Account chart (Basic) (create)*" window closing in 20 seconds	
 		* Check 
 			And "List" table contains lines
 				| 'Code'                   | 'Order' | 'Description'           | 'Type' | 'Ext. Dim 2' | 'Q.'  | 'Ext. Dim 3' | 'C.' | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
@@ -4068,7 +4068,7 @@ Scenario: _0991210 edit accounting manualy (document with tabular part)
 			And I click "Ok" button
 			And I click "Post" button
 			When in opened panel I select "JE Purchase invoice 7 dated 05.12.2023 12:00:00"
-			Then "JE Purchase invoice * dated *" window is opened
+			Then "JE Purchase invoice * dated*" window is opened
 			And I click "Save" button
 			And "RegisterRecords" table became equal
 				| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"          | "Operation"                                                                                  | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
@@ -4087,7 +4087,7 @@ Scenario: _0991210 edit accounting manualy (document with tabular part)
 			And I click "Ok" button
 			And I click "Post" button
 			When in opened panel I select "JE Purchase invoice 7 dated 05.12.2023 12:00:00"
-			Then "JE Purchase invoice * dated *" window is opened
+			Then "JE Purchase invoice * dated*" window is opened
 			And I click "Save" button
 			And "RegisterRecords" table became equal
 				| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"          | "Operation"                                                                                  | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
@@ -4382,7 +4382,7 @@ Scenario: _0991230 check accountant automated workplace
 			| ''           | 'Business unit 1'                                         | ''            | ''           | ''                   | ''            | ''       |
 	* Check Open JE
 		And I click "Open JE" button
-		Then "JE Sales invoice * dated *" window is opened
+		Then "JE Sales invoice * dated*" window is opened
 		And I close current window
 	* Check files
 		And I move to "Test pdf 1 page.pdf" tab
@@ -4472,42 +4472,42 @@ Scenario: _0991250 check PL report
 Scenario: _0991300 create eLedger registry for February 2023 and assign sequental numbers
 	And I close all client application windows
 	* Create the registry for Own company 2 and February 2023
-	Given I open hyperlink "e1cib/list/Document.ELedgerRegistry"
-	And I click the button named "FormCreate"
-	And I select "Own company 2" exact value from "Company" drop-down list
-	And I click Select button of "Ledger type" field
-	And I go to line in "List" table
-		| 'Description' |
-		| 'Basic LTV'   |
-	And I select current line in "List" table
-	And I click Select button of "Period" field
-	And I input "01.02.2023" text in the field named "DateBegin"
-	And I input "28.02.2023" text in the field named "DateEnd"
-	And I click "Select" button
-	And I click the button named "FormPost"
-	And I wait "Number" field will be filled in "30" seconds
+		Given I open hyperlink "e1cib/list/Document.ELedgerRegistry"
+		And I click the button named "FormCreate"
+		And I select "Own company 2" exact value from "Company" drop-down list
+		And I click Select button of "Ledger type" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic LTV'   |
+		And I select current line in "List" table
+		And I click Select button of "Period" field
+		And I input "01.02.2023" text in the field named "DateBegin"
+		And I input "28.02.2023" text in the field named "DateEnd"
+		And I click "Select" button
+		And I click the button named "FormPost"
+		And I wait "Number" field will be filled in "30" seconds
 	* Assign the sequental numbers
-	And in the table "JournalEntryList" I click the button named "SetNumbers"
+		And in the table "JournalEntryList" I click the button named "SetNumbers"
 	* Every February journal entry of the company is numbered without gaps
-	And "JournalEntryList" table contains lines
-		| 'Journal entry'                                       | 'Sequental number' | 'Ledger type' | 'Company'       |
-		| 'JE Bank payment 17 dated 02.02.2023 15:00:00'        | '1'                | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Money transfer 1 dated 10.02.2023 12:00:00'       | '2'                | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Purchase invoice 1 dated 24.02.2023 10:04:33'     | '3'                | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Sales invoice 1 dated 24.02.2023 10:14:47'        | '4'                | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Bank receipt 1 dated 24.02.2023 10:49:55'         | '5'                | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Cash payment 1 dated 24.02.2023 10:50:30'         | '6'                | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Bank payment 1 dated 24.02.2023 10:51:48'         | '7'                | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Cash expense 1 dated 24.02.2023 10:52:43'         | '8'                | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Cash revenue 1 dated 24.02.2023 10:53:15'         | '9'                | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Bank payment 2 dated 24.02.2023 11:00:05'         | '10'               | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Bank receipt 2 dated 24.02.2023 11:01:13'         | '11'               | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Credit note 1 dated 24.02.2023 11:02:48'          | '12'               | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Debit note 1 dated 24.02.2023 11:03:25'           | '13'               | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Purchase return 1 dated 24.02.2023 17:01:27'      | '14'               | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Bank receipt 7 dated 25.02.2023 12:00:00'         | '15'               | 'Basic LTV'   | 'Own company 2' |
-		| 'JE Retail sales receipt 1 dated 25.02.2023 15:00:00' | '16'               | 'Basic LTV'   | 'Own company 2' |
-	Then the number of "JournalEntryList" table lines is "equal" "16"
+		And "JournalEntryList" table contains lines
+			| 'Journal entry'                                       | 'Sequental number' | 'Ledger type' | 'Company'       |
+			| 'JE Bank payment 17 dated 02.02.2023 15:00:00'        | '1'                | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Money transfer 1 dated 10.02.2023 12:00:00'       | '2'                | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Purchase invoice 1 dated 24.02.2023 10:04:33'     | '3'                | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Sales invoice 1 dated 24.02.2023 10:14:47'        | '4'                | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Bank receipt 1 dated 24.02.2023 10:49:55'         | '5'                | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Cash payment 1 dated 24.02.2023 10:50:30'         | '6'                | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Bank payment 1 dated 24.02.2023 10:51:48'         | '7'                | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Cash expense 1 dated 24.02.2023 10:52:43'         | '8'                | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Cash revenue 1 dated 24.02.2023 10:53:15'         | '9'                | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Bank payment 2 dated 24.02.2023 11:00:05'         | '10'               | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Bank receipt 2 dated 24.02.2023 11:01:13'         | '11'               | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Credit note 1 dated 24.02.2023 11:02:48'          | '12'               | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Debit note 1 dated 24.02.2023 11:03:25'           | '13'               | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Purchase return 1 dated 24.02.2023 17:01:27'      | '14'               | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Bank receipt 7 dated 25.02.2023 12:00:00'         | '15'               | 'Basic LTV'   | 'Own company 2' |
+			| 'JE Retail sales receipt 1 dated 25.02.2023 15:00:00' | '16'               | 'Basic LTV'   | 'Own company 2' |
+		Then the number of "JournalEntryList" table lines is "equal" "16"
 
 # IRP-868: GetMainAccount ignored the AccountType parameter, so a credit account
 # without a parent (9100) was reported with the DEBIT account of the same record.
@@ -4515,14 +4515,14 @@ Scenario: _0991300 create eLedger registry for February 2023 and assign sequenta
 Scenario: _0991301 check exported CSV reports each side with its own main account
 	And I close all client application windows
 	* Open the registry of February 2023
-	Given I open hyperlink "e1cib/list/Document.ELedgerRegistry"
-	And I go to line in "List" table
-		| 'Number' |
-		| '1'      |
-	And I select current line in "List" table
+		Given I open hyperlink "e1cib/list/Document.ELedgerRegistry"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I select current line in "List" table
 	* Export and compare the produced file with the reference one stored next to this feature
-	And I delete "$$ELedgerReference$$" variable
-	And I save "ELedgerFebruary2023.csv" file content to the variable "ELedgerReference"
-	And I click the button named "FormDocumentELedgerRegistryExportToCSV"
-	Then "eLedger" window is opened
-	Then the form attribute named "TextDocument" became equal to "$ELedgerReference$"
+		And I delete "$$ELedgerReference$$" variable
+		And I save "ELedgerFebruary2023.csv" file content to the variable "ELedgerReference"
+		And I click the button named "FormDocumentELedgerRegistryExportToCSV"
+		Then "eLedger" window is opened
+		Then the form attribute named "TextDocument" became equal to "$ELedgerReference$"

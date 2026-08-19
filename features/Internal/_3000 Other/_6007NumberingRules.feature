@@ -276,6 +276,14 @@ Scenario: _607706 check numbering period Year resets the counter
 		And I input "15.06.2026" text in the field named "Date"
 		And I click "Save" button
 		Then the form attribute named "DocumentNumber" became equal to "00000001"
+		And I close current window
+	* Second PI of the same year continues the counter
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I input "16.06.2026" text in the field named "Date"
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "00000002"
 
 
 Scenario: _607707 check start number of the numerator

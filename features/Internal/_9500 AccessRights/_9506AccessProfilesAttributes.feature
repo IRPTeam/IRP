@@ -64,7 +64,15 @@ Scenario: 950600 preparation (access profiles attributes)
 			| 'Quantity'    |
 		And I set checkbox named "AttributesTreeHidden" in "AttributesTree" table
 		And I finish line editing in "AttributesTree" table
+		And I go to line in "AttributesTree" table
+			| 'Description' |
+			| 'Legal name'  |
+		And I set checkbox named "AttributesTreeReadOnly" in "AttributesTree" table
+		And I finish line editing in "AttributesTree" table
 		And I click "Save and close" button
+	// catalogs are not restricted here on purpose: the configuration metadata catalog
+	// auto-marks all catalog items as unused (confirmed as intended by the product owner),
+	// so per-attribute restrictions apply to documents only
 	And I close all client application windows
 
 
@@ -83,6 +91,11 @@ Scenario: 950601 check read only and hidden attributes on the document form
 		Then in "ItemList" table "Price" attribute is read only
 		When I Check the steps for Exception
 			| 'And I activate "Quantity" field in "ItemList" table' |
+	* The header attribute is read only too
+		// typing into a read only field raises an exception - there is no direct
+		// read-only assertion step for header fields
+		When I Check the steps for Exception
+			| 'And I input "RO probe" text in the field named "LegalName"' |
 	And I close all client application windows
 
 
@@ -104,6 +117,16 @@ Scenario: 950602 check profile exceptions unlock the restricted attributes
 			| 'Quantity'    |
 		And I set checkbox named "AccessToViewAttributesTreeMark" in "AccessToViewAttributesTree" table
 		And I finish line editing in "AccessToViewAttributesTree" table
+		// the profile must carry the Full access role: writing the access group
+		// recalculates the infobase roles of its users from the profiles, and a
+		// role-less profile would strip the last administrator (the platform then
+		// fails the write with an unexpected error dialog)
+		And I move to the tab named "PageRole"
+		And I go to line in "Roles" table
+			| 'Presentation' |
+			| 'Full access'  |
+		And I set checkbox named "RolesUse" in "Roles" table
+		And I finish line editing in "Roles" table
 		And I click "Save and close" button
 	* Grant the profile to the current user through an access group
 		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
@@ -161,4 +184,47 @@ Scenario: 950604 check session starts for an infobase user without a catalog rec
 	* A session of this user starts
 		And I connect "Test" TestClient using "NoCatalogUser" login and "" password
 		And I close "Test" TestClient
+	And I close all client application windows
+
+
+Scenario: 950605 check the external functions scheduled job completes
+	And I close all client application windows
+	// documents the background half of the session parameters defect: the regular
+	// RunExternalFunctions scheduled job runs without a user, so its session has no
+	// Catalog.Users record and the session start dies reading
+	// SessionParameters.CurrentUserAccessGroupList (SessionModule ->
+	// SessionParametersServer:9 -> InternalCommandsServer:10 ->
+	// InternalCommands.ManagerModule:916) - the external functions scheduler is dead
+	* Wait for the next start of the scheduler
+		And Delay 150
+	* The last started job completed without errors
+		And I execute 1C:Enterprise script at server
+			| 'Filter = New Structure("MethodName", "ServiceSystemServer.RunExternalFunctions"); Jobs = BackgroundJobs.GetBackgroundJobs(Filter); Recent = Undefined; For Each Jb In Jobs Do If Jb.Begin >= CurrentDate() - 240 Then If Recent = Undefined Or Jb.Begin > Recent.Begin Then Recent = Jb; EndIf; EndIf; EndDo; If Recent = Undefined Then Raise "Scheduled job RunExternalFunctions did not start within the waiting period"; EndIf; If Recent.ErrorInfo <> Undefined Then Raise BriefErrorDescription(Recent.ErrorInfo); EndIf;' |
+
+Scenario: 950606 remove the metadata restrictions (cleanup)
+	And I close all client application windows
+	// the access rights group runs on one shared base - the restrictions must not leak
+	// into the following features
+	* Uncheck the restrictions
+		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
+		And I go to line in "List" table
+			| "Description"   |
+			| "Sales invoice" |
+		And I select current line in "List" table
+		And I go to line in "AttributesTree" table
+			| 'Description' |
+			| 'Price'       |
+		And I remove checkbox named "AttributesTreeReadOnly" in "AttributesTree" table
+		And I finish line editing in "AttributesTree" table
+		And I go to line in "AttributesTree" table
+			| 'Description' |
+			| 'Quantity'    |
+		And I remove checkbox named "AttributesTreeHidden" in "AttributesTree" table
+		And I finish line editing in "AttributesTree" table
+		And I go to line in "AttributesTree" table
+			| 'Description' |
+			| 'Legal name'  |
+		And I remove checkbox named "AttributesTreeReadOnly" in "AttributesTree" table
+		And I finish line editing in "AttributesTree" table
+		And I click "Save and close" button
 	And I close all client application windows

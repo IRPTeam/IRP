@@ -166,11 +166,16 @@ Scenario: _25013 create and print template with a repeating table area
 		And I close TestClient session
 		Given I open new TestClient session or connect the existing one
 	* Print a Sales order and check the repeated rows
+		// red until fixed: the print form window stays empty for a TXT template with a
+		// repeating table area, while the server assembly is correct - a direct call of
+		// Catalogs.PrintFormTemplates.GetPrintForm returns the expected five rows.
+		// MXL, formatted text and TXT-without-tables templates print fine
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| "Number" |
 			| "1"      |
 		And I click "Table print SO" button
+		And I wait for "Result" spreadsheet document filling for "15" seconds
 		Then "Result" spreadsheet document contains lines
 			| 'Item row.' |
 			| 'Item row.' |
@@ -249,6 +254,10 @@ Scenario: _25016 check saved print form is offered from history
 			| "1"      |
 		And I click the button named "FormDocumentSalesOrderSalesOrderPrint"
 		And I change the radio button named "PrintSource" value to "From history"
+		// red until fixed: switching the print source to the history leaves the Result
+		// spreadsheet empty, while the saved form is present in the register with the
+		// expected content (verified via GetSavedPrintForm) - same UI display root as
+		// the repeating-table template above
 		Then "Result" spreadsheet document contains lines
 			| 'SAVED FORM MARK' |
 	And I close all client application windows
@@ -261,7 +270,18 @@ Scenario: _25018 check print form is rebuilt when the option is off
 		And I remove checkbox "Use saved print forms"
 		And I click "Save" button
 		And I close current window
-	* Change the template body
+	* The saved form is not offered anymore
+		// this is the branch discriminator: with the option on this command opens the saved
+		// form from the history (see _25016); with the option off the history source is gone
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| "Number" |
+			| "1"      |
+		And I click the button named "FormDocumentSalesOrderSalesOrderPrint"
+		And I expect the form element named "PrintSource" to be absent from the form for "10" seconds.
+		And "Result" spreadsheet document does not contain values
+			| 'SAVED FORM MARK' |
+		And I close current window	* Change the template body
 		Given I open hyperlink "e1cib/list/Catalog.PrintFormTemplates"
 		And I go to line in "List" table
 			| 'Description'  |

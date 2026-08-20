@@ -23,21 +23,10 @@ Scenario: _099200 preparation (accountant automated workplace)
 		When Create catalog Agreements objects (test data base)
 		When Create catalog Currencies objects (test data base)
 	* Set important attributes for Purchase invoice
-		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
-		And I go to line in "List" table
-			| "Description" |
-			| "Documents"   |
-		And I move one level down in "List" table
-		And I go to line in "List" table
-			| "Description"      |
-			| "Purchase invoice" |
-		And I select current line in "List" table
-		And I go to line in "AttributesTree" table
-			| 'Description' |
-			| 'Comment'     |
-		And I set checkbox named "AttributesTreeImportant" in "AttributesTree" table
-		And I finish line editing in "AttributesTree" table
-		And I click "Save and close" button
+		// the flag is set at server: hierarchy navigation in the configuration metadata
+		// list is unreliable when the catalog holds items outside the predefined groups
+		And I execute 1C:Enterprise script at server
+			| 'Q = New Query("SELECT Ref FROM Catalog.ConfigurationMetadata WHERE ObjectFullName = ""Document.PurchaseInvoice"""); S = Q.Execute().Select(); While S.Next() Do Obj = S.Ref.GetObject(); If Obj.ImportantAttributes.FindRows(New Structure("AttributeName", "Comment")).Count() = 0 Then R = Obj.ImportantAttributes.Add(); R.AttributeName = "Comment"; Obj.Write(); EndIf; EndDo;' |
 	* Enable data history for Purchase invoice
 		Given I open hyperlink "e1cib/app/DataProcessor.DataHistory"
 		And I go to line in "MetadataTree" table
@@ -171,4 +160,32 @@ Scenario: _099205 check file preview and journal entry refresh
 		And I click the button named "OpenJE"
 		Then "JE Sales invoice * dated*" window is opened
 		And I close current window
+	And I close all client application windows
+
+Scenario: _099206 check document lock and unlock from the workplace
+	And I close all client application windows
+	* Find the document
+		Given I open hyperlink "e1cib/app/DataProcessor.AccountantAutomatedWorkplace"
+		And I click Choice button of the field named "DocumentType"
+		And I click "Check all" button
+		And I click "Ok" button
+		And I select from the drop-down list named "Company" by "Own company 2" string
+		And I select "All" exact value from the drop-down list named "FilesType"
+		And I click "Find" button
+		And I go to line in "DocumentList" table
+			| 'Document'                                     |
+			| 'Purchase invoice 7 dated 05.12.2023 12:00:00' |
+	* Lock the document from the workplace
+		// the Locked column is an icon and is not readable through the table data,
+		// so the lock state is asserted at server
+		And I click the button named "DocumentListLock"
+		And I execute 1C:Enterprise script at server
+			| 'If Not AuditLockPrivileged.LockIsSet(Documents.PurchaseInvoice.FindByNumber("7")) Then Raise "The workplace Lock command did not set the audit lock" EndIf;' |
+	* Unlock the document from the workplace
+		And I go to line in "DocumentList" table
+			| 'Document'                                     |
+			| 'Purchase invoice 7 dated 05.12.2023 12:00:00' |
+		And I click the button named "DocumentListUnlock"
+		And I execute 1C:Enterprise script at server
+			| 'If AuditLockPrivileged.LockIsSet(Documents.PurchaseInvoice.FindByNumber("7")) Then Raise "The workplace Unlock command did not remove the audit lock" EndIf;' |
 	And I close all client application windows

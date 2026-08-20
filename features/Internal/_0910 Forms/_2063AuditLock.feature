@@ -390,6 +390,47 @@ Scenario: _206307 check not audit attribute change passes under the lock
 	And I close all client application windows
 
 
+Scenario: _206309 check changed blocked attributes are listed in the rejection
+	And I close all client application windows
+	// the not audit list is not empty here (Delivery date is registered by _206307),
+	// so the rejection must come from the attribute comparison branch and name
+	// the changed attribute (AuditLock_007), not from the trivial empty-list branch
+	* Change a regular tabular section value - the write is rejected with the attribute name
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "9" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormWrite"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Document is locked by audit lock'|
+		Given Recent TestClient message contains "Changed blocked attributes:*Quantity*" string by template
+	And I close all client application windows
+
+Scenario: _206311 check undo posting of a locked document is rejected
+	And I close all client application windows
+	// the Posted status change is part of the attribute comparison branch:
+	// SourceCopy.Posted + UndoPosting must land in the changed attributes list
+	* Undo posting of the locked document - the write is rejected
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And I select current line in "List" table
+		And I click the button named "FormUndoPosting"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Document is locked by audit lock'|
+		Given Recent TestClient message contains "Changed blocked attributes:*Posted*" string by template
+	And I close all client application windows
+
 Scenario: _206308 check reposting of a locked document without changes is rejected
 	And I close all client application windows
 	// documents the PR2965 defect: with the not audit attributes option on, the attribute
@@ -406,10 +447,46 @@ Scenario: _206308 check reposting of a locked document without changes is reject
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
 			|'Document is locked by audit lock'|
-	* Switch the not audit attributes option back off
+	And I close all client application windows
+
+Scenario: _206312 check deletion mark of a locked document is rejected
+	And I close all client application windows
+	// marking a posted document also undoes its posting, so the rejection comes from
+	// the Posted detection of the comparison branch. The pure DeletionMark comparison
+	// hole (with Date and Number) stays unreachable through the interface: unposted
+	// documents cannot be audit locked at all
+	* Mark the locked document for deletion - the save is rejected
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Document is locked by audit lock'|
+	And I close all client application windows
+
+Scenario: _206310 unlock the document and switch the option off (cleanup)
+	And I close all client application windows
+	// _206308 fails by design until the defect is fixed, so the cleanup must live in its
+	// own scenario - steps after a failed step are never executed
+	* Unlock the document
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And I select current line in "List" table
+		And I click "Audit lock (unlock)" button
+		And I close current window
+	* Remove the deletion mark if the red scenario left it
+		And I execute 1C:Enterprise script at server
+			| 'Obj = Documents.PurchaseInvoice.FindByNumber(12).GetObject(); If Obj.DeletionMark Then Obj.SetDeletionMark(False); EndIf;' |
+	* Switch the not audit attributes option off
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		And I remove checkbox "Use not audit attributes"
 		And I click "Save" button
 		And I close current window
 	And I close all client application windows
-

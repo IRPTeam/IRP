@@ -315,3 +315,101 @@ Scenario: _2063024 try set audit lock for unpost document
 		Then there are lines in TestClient message log
 			|'Not posted document cannot be locked'|
 	And I close all client application windows				
+
+
+Scenario: _206305 check attribute change is rejected with not audit attributes option on
+	And I close all client application windows
+	* Switch the not audit attributes option on
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I set checkbox "Use not audit attributes"
+		And I click "Save" button
+		And I close current window
+	* Lock the document
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And I select current line in "List" table
+		And I click "Audit lock (set lock)" button
+	* Change a regular attribute - the write is rejected
+		And I input "01.02.2021" text in the field named "DeliveryDate"
+		And I click the button named "FormWrite"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Document is locked by audit lock'|
+	And I close all client application windows
+
+
+Scenario: _206306 check tabular section change is rejected with not audit attributes option on
+	And I close all client application windows
+	* Change a row of the item list - the write is rejected
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "7" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormWrite"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Document is locked by audit lock'|
+	And I close all client application windows
+
+
+Scenario: _206307 check not audit attribute change passes under the lock
+	And I close all client application windows
+	* Register the attribute as not audited
+		When auto filling Configuration metadata catalog
+		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
+		And I go to line in "List" table
+			| "Description"      |
+			| "Purchase invoice" |
+		And I select current line in "List" table
+		And I go to line in "AttributesTree" table
+			| 'Description'   |
+			| 'Delivery date' |
+		And I set checkbox named "AttributesTreeNotAudit" in "AttributesTree" table
+		And I finish line editing in "AttributesTree" table
+		And I click "Save and close" button
+	* Change the not audit attribute - the write passes
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And I select current line in "List" table
+		And I input "02.02.2021" text in the field named "DeliveryDate"
+		And I click the button named "FormWrite"
+		When I Check the steps for Exception
+			| 'Then "1C:Enterprise" window is opened' |
+		Then user message window does not contain messages
+	And I close all client application windows
+
+
+Scenario: _206308 check reposting of a locked document without changes is rejected
+	And I close all client application windows
+	// documents the PR2965 defect: with the not audit attributes option on, the attribute
+	// comparison branch does not detect Posted -> Posting (reposting), so an audit-locked
+	// document is silently reposted and its movements are rewritten
+	* Repost the locked document without changing anything - must be rejected
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Document is locked by audit lock'|
+	* Switch the not audit attributes option back off
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I remove checkbox "Use not audit attributes"
+		And I click "Save" button
+		And I close current window
+	And I close all client application windows
+

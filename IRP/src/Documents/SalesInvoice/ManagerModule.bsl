@@ -916,7 +916,8 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		|	Table.NetAmount AS NetAmount
 		|into R2012B_SalesOrdersInvoiceClosing
 		|FROM
-		|	tmpR2012B_SalesOrdersInvoiceClosing as Table";
+		|	tmpR2012B_SalesOrdersInvoiceClosing as Table
+		|WHERE true";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()

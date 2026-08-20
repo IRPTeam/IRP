@@ -115,6 +115,7 @@ Scenario: _2084002 aggregated purchase invoice row with two links fully closes t
 			And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
 			And I finish line editing in "ItemList" table
 	* Post the order - only an Approved order offers a goods receipt and an invoice
+		And I select "Approved" exact value from the drop-down list named "Status"
 		Then the form attribute named "Status" became equal to "Approved"
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
@@ -294,6 +295,7 @@ Scenario: _2084003 back-to-back chain SO-PO-GR-PI-SC-SI leaves both order closin
 		And I activate field named "ItemListPrice" in "ItemList" table
 		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I select "Approved" exact value from the drop-down list named "Status"
 		Then the form attribute named "Status" became equal to "Approved"
 		And I click the button named "FormPost"
 		Then user message window does not contain messages

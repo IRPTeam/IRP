@@ -14302,8 +14302,6 @@ Procedure StepItemListCalculations_Withholding_Tax(Parameters, Chain, WhoIsChang
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do	
 		Options = ModelClientServer_V2.CalculationsWithHoldingTaxOptions();
 		
-		Options.DontCalculateBrutto = False;
-		
 		Options.WhoIsChanged = WhoIsChanged;
 		
 		Options.VatRate              = GetItemListVatRate(Parameters, Row.Key);

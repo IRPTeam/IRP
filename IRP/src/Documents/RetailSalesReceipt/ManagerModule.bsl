@@ -198,8 +198,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	ItemList.NetAmount AS NetAmount
 	|FROM
 	|	Document.RetailSalesReceipt.ItemList AS ItemList
-	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-	|		ON ItemList.Key = TableRowIDInfo.Key
+	|		inner JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key and ItemList.Ref = &Ref
 	|WHERE
 	|	NOT ItemList.SalesOrder.Ref IS NULL
 	|	AND ItemList.Ref.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";

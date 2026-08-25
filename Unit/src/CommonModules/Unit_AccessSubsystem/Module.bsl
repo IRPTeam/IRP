@@ -289,7 +289,6 @@ Function AccumulationRegisters() Export
 	
 	For Each MetaObj In Metadata.AccumulationRegisters Do
 			
-		
 		Try
 			AccumulationRegisters[MetaObj.Name].GetAccessKey();
 		Except
@@ -328,7 +327,6 @@ Function AccumulationRegisters() Export
 		EndTry;
 	EndDo;
 			
-	
 	If ArrayOfErrors.Count() Then
 		Unit_Service.assertFalse(StrConcat(ArrayOfErrors, Chars.LF));
 	EndIf;
@@ -351,7 +349,6 @@ Function GenerateAccumulationRegisters() Export
 		
 		Table = GetAllCase(Data, Keys);
 		
-		
 		DocType = MetaObj.StandardAttributes.Recorder.Type.Types()[0]; // Type
 		MetaDoc = Metadata.FindByType(DocType);
 		DocRef = Documents[MetaDoc.Name].GetRef(New UUID("11111111-1111-1111-1111-111111111111"));
@@ -363,13 +360,11 @@ Function GenerateAccumulationRegisters() Export
 		
 		For Each Row In Table Do
 
-			
 			NewRow = NewReg.Add();
 			NewRow.Recorder = DocRef;
 			NewRow.Period = CurrentDate();
 			FillPropertyValues(NewRow, Row);
 
-			
 			Descr = "";
 			For Each Column In Table.Columns Do
 				Descr = Descr + Column.Name + ": " + Row[Column.Name] + ";";
@@ -524,13 +519,11 @@ Function GenerateInformationRegisters() Export
 			
 			For Each Row In Table Do
 	
-				
 				NewRow = NewReg.Add();
 				NewRow.Recorder = DocRef;
 				NewRow.Period = CurrentDate();
 				FillPropertyValues(NewRow, Row);
 	
-				
 				Descr = "";
 				For Each Column In Table.Columns Do
 					Descr = Descr + Column.Name + ": " + Row[Column.Name] + ";";

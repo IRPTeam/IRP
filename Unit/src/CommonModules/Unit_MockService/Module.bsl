@@ -4,6 +4,10 @@
 
 #Region Info
 
+// Tests.
+// 
+// Returns:
+//  Array of String - Names of the test methods of this module
 Function Tests() Export
 	TestList = New Array;
 	Return TestList;

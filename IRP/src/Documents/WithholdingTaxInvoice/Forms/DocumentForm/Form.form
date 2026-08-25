@@ -1216,6 +1216,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.NetAmount</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListNetAmountOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListNetAmountExtendedTooltip</name>
             <id>165</id>

@@ -411,6 +411,15 @@ EndProcedure
 
 #EndRegion
 
+#Region NET_AMOUNT
+
+&AtClient
+Procedure ItemListNetAmountOnChange(Item)
+	DocWithholdingTaxInvoiceClient.ItemListNetAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region TOTAL_AMOUNT
 
 &AtClient

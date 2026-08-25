@@ -168,6 +168,73 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Key AS Key,
+	|	RowIDInfo.Quantity AS Quantity
+	|INTO tmpRowID
+	|FROM
+	|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.SalesOrder AS Order,
+	|	ItemList.Ref.Currency AS Currency,
+	|	tmpRowID.RowID AS RowKey,
+	|	ItemList.ItemKey AS ItemKey,
+	|	tmpRowID.Quantity AS Quantity,
+	|	ItemList.TotalAmount / ItemList.QuantityInBaseUnit * tmpRowID.Quantity AS Amount,
+	|	ItemList.NetAmount / ItemList.QuantityInBaseUnit * tmpRowID.Quantity AS NetAmount
+	|FROM
+	|	tmpRowID AS tmpRowID
+	|		INNER JOIN Document.SalesInvoice.ItemList AS ItemList
+	|		ON ItemList.Key = tmpRowID.Key
+	|		AND NOT ItemList.SalesOrder.Ref IS NULL
+	|		AND ItemList.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	QueryTable2 = QueryTable.CopyColumns();
+	For Each Row In QueryTable Do
+		OrderItemListRows = Row.Order.ItemList.FindRows(New Structure("Key", Row.RowKey));
+		If OrderItemListRows.Count() > 0 Then
+			OrderItemListRow = OrderItemListRows[0];
+			If OrderItemListRow.ItemKey <> Row.ItemKey Then
+				NewRow2 = QueryTable2.Add();
+				FillPropertyValues(NewRow2, Row);
+				NewRow2.RecordType = AccumulationRecordType.Expense;
+				NewRow2.ItemKey = OrderItemListRow.ItemKey;
+				NewRow3 = QueryTable2.Add();
+				FillPropertyValues(NewRow3, Row);
+				NewRow3.RecordType = AccumulationRecordType.Receipt;
+				NewRow3.ItemKey = Row.ItemKey;				
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	For Each Row In QueryTable2 Do
+		NewRow = QueryTable.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"Select * into tmpR2012B_SalesOrdersInvoiceClosing From &QueryTable as QueryTable";
+	Query.SetParameter("QueryTable", QueryTable);
+	Query.Execute();
+	
 	Return Tables;
 EndFunction
 
@@ -836,60 +903,21 @@ EndFunction
 Function R2012B_SalesOrdersInvoiceClosing()
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.Period AS Period,
-		|	ItemList.Company AS Company,
-		|	ItemList.Branch AS Branch,
-		|	ItemList.SalesOrder AS Order,
-		|	ItemList.Currency AS Currency,
-		|	ItemList.OrderItemKey AS ItemKey,
-		|	ItemList.RowKey AS RowKey,
-		|	ItemList.Quantity AS Quantity,
-		|	ItemList.Amount AS Amount,
-		|	ItemList.NetAmount AS NetAmount
-		|INTO R2012B_SalesOrdersInvoiceClosing
+		|	Table.RecordType AS RecordType,
+		|	Table.Period AS Period,
+		|	Table.Company AS Company,
+		|	Table.Branch AS Branch,
+		|	Table.Order AS Order,
+		|	Table.Currency AS Currency,
+		|	Table.RowKey AS RowKey,
+		|	Table.ItemKey AS ItemKey,
+		|	Table.Quantity AS Quantity,
+		|	Table.Amount AS Amount,
+		|	Table.NetAmount AS NetAmount
+		|into R2012B_SalesOrdersInvoiceClosing
 		|FROM
-		|	OrderItemList AS ItemList
-		|WHERE
-		|	ItemList.SalesOrderExists
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.SalesOrder,
-		|	ItemList.Currency,
-		|	ItemList.ItemKey,
-		|	ItemList.RowKey,
-		|	ItemList.Quantity,
-		|	ItemList.Amount,
-		|	ItemList.NetAmount
-		|FROM
-		|	OrderItemList AS ItemList
-		|WHERE
-		|	ItemList.SalesOrderExists
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.SalesOrder,
-		|	ItemList.Currency,
-		|	ItemList.ItemKey,
-		|	ItemList.RowKey,
-		|	ItemList.Quantity,
-		|	ItemList.Amount,
-		|	ItemList.NetAmount
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	ItemList.SalesOrderExists";
+		|	tmpR2012B_SalesOrdersInvoiceClosing as Table
+		|WHERE true";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()

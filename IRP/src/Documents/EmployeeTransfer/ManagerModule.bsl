@@ -223,21 +223,6 @@ Procedure ClearSelfRecords(Ref)
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
-	
-//	Query = New Query();
-//	Query.Text =
-//	"SELECT
-//	|	Table.EmployeeOrPosition,
-//	|	Table.AccualOrDeductionType,
-//	|	Table.Period
-//	|FROM
-//	|	InformationRegister.T9500S_AccrualAndDeductionValues AS Table
-//	|WHERE
-//	|	Table.CancelDocument = &Document";
-//	Query.SetParameter("Document", Ref);
-//	QueryResult = Query.Execute();
-//	QuerySelection = QueryResult.Select();
-//	
 	While QuerySelection.Next() Do
 		RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
 		RecordSet.Filter.EmployeeOrPosition.Set(QuerySelection.EmployeeOrPosition);
@@ -321,13 +306,6 @@ Procedure WriteSelfRecords(Ref)
 	RecordSet.Filter.Period.Set(Ref.Date);
 	
 	RecordSet.Read();
-//	IsNotActual = False;
-//	For Each Record In RecordSet Do
-//		If Record.Period >= Ref.Date Then
-//			IsNotActual = True;
-//			Break;
-//		EndIf;
-//	EndDo;
 	
 	NewRecord = RecordSet.Add();
 	NewRecord.NotActual = IsNotActual;

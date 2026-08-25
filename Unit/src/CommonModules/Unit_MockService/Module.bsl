@@ -460,8 +460,12 @@ EndFunction
 // * Address - String -
 // * BodyBinary - BinaryData -
 // * BodyString - String -
-// * Headers - FixedMap -
-// * Options - FixedMap -
+// * Headers - FixedMap of KeyAndValue - Headers:
+// ** Key - String -
+// ** Value - String -
+// * Options - FixedMap of KeyAndValue - Options:
+// ** Key - String -
+// ** Value - String -
 Function GetStructureRequest() Export
 	Result = New Structure;
 	Result.Insert("Type", "");
@@ -546,7 +550,9 @@ EndFunction
 // Headers check.
 // 
 // Parameters:
-//  Headers - FixedMap - Headers
+//  Headers - FixedMap of KeyAndValue - Headers:
+//  * Key - String -
+//  * Value - String -
 //  MockData - CatalogRef.Unit_MockServiceData - Mock data
 //  Logs - String - Logs
 // 
@@ -986,7 +992,9 @@ EndFunction
 // Get presentation map.
 // 
 // Parameters:
-//  MapObject - Map - Map object
+//  MapObject - Map of KeyAndValue - Map object:
+//  * Key - String -
+//  * Value - Arbitrary -
 // 
 // Returns:
 //  String - Get presentation map

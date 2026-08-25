@@ -355,7 +355,9 @@ EndProcedure
 //  Structure - Get answer structure:
 // * StatusCode - Number
 // * BodyMD5 - String
-// * Headers - Map
+// * Headers - Map of KeyAndValue - Headers:
+// ** Key - String -
+// ** Value - String -
 &AtServerNoContext
 Function GetAnswerStructure(ReferenceAnswer)
 	

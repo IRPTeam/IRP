@@ -67,7 +67,9 @@ EndProcedure
 // 
 // Parameters:
 //  Body - String, BinaryData, Undefined - Body
-//  Headers - Map - Headers
+//  Headers - Map of KeyAndValue - Headers:
+//  * Key - String -
+//  * Value - String -
 // 
 // Returns:
 //  Structure - Body info:

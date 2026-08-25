@@ -17,6 +17,8 @@ EndFunction
 #Region Test
 
 // @skip-check wrong-string-literal-content
+// Returns:
+//  Undefined - Failures are reported via Unit_Service.assertFalse
 Function CommonFunctionsServer_GetAttributesFromRef() Export
 	ArrayOfErrors = New Array; // Array of String
 
@@ -383,6 +385,8 @@ Function CommonFunctionsClientServer_isBase64Value() Export
 EndFunction
 
 //@skip-check property-return-type
+// Returns:
+//  Undefined - Failures are reported via Unit_Service.assertFalse
 Function SystemAttributesSets_CheckModules() Export
 
 	ArrayOfErrors = New Array(); // Array of String

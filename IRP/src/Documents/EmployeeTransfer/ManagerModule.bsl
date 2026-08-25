@@ -200,20 +200,44 @@ Procedure ClearSelfRecords(Ref)
 		RecordSet.Write();
 	EndDo;
 	
+	
 	Query = New Query();
-	Query.Text =
-	"SELECT
+	Query.Text = 
+	"SELECT TOP 1
 	|	Table.EmployeeOrPosition,
 	|	Table.AccualOrDeductionType,
-	|	Table.Period
+	|	Table.Period AS Period
 	|FROM
 	|	InformationRegister.T9500S_AccrualAndDeductionValues AS Table
 	|WHERE
-	|	Table.CancelDocument = &Document";
-	Query.SetParameter("Document", Ref);
+	|	Table.EmployeeOrPosition = &EmployeeOrPosition
+	|	AND Table.AccualOrDeductionType = &AccualOrDeductionType
+	|	AND Table.Period <= &Period
+	|
+	|ORDER BY
+	|	Period DESC";
+	Query.SetParameter("EmployeeOrPosition", Ref.Employee);
+	Query.SetParameter("AccualOrDeductionType", Ref.FromAccrualType);
+	Query.SetParameter("Period", Ref.Date);
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
+	
+//	Query = New Query();
+//	Query.Text =
+//	"SELECT
+//	|	Table.EmployeeOrPosition,
+//	|	Table.AccualOrDeductionType,
+//	|	Table.Period
+//	|FROM
+//	|	InformationRegister.T9500S_AccrualAndDeductionValues AS Table
+//	|WHERE
+//	|	Table.CancelDocument = &Document";
+//	Query.SetParameter("Document", Ref);
+//	QueryResult = Query.Execute();
+//	QuerySelection = QueryResult.Select();
+//	
 	While QuerySelection.Next() Do
 		RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
 		RecordSet.Filter.EmployeeOrPosition.Set(QuerySelection.EmployeeOrPosition);
@@ -258,8 +282,10 @@ Procedure SetNotActualRecordSet(Ref)
 		
 		RecordSet.Read();
 		For Each Record In RecordSet Do
-			Record.NotActual = True;
-			Record.CancelDocument = Ref;
+			If Not Record.NotActual And Record.Period <= Ref.Date Then
+				Record.NotActual = True;
+				Record.CancelDocument = Ref;
+			EndIf;
 		EndDo;
 		
 		RecordSet.Write();
@@ -267,12 +293,44 @@ Procedure SetNotActualRecordSet(Ref)
 EndProcedure	
 
 Procedure WriteSelfRecords(Ref)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	T9500S_AccrualAndDeductionValues.NotActual
+	|FROM
+	|	InformationRegister.T9500S_AccrualAndDeductionValues AS T9500S_AccrualAndDeductionValues
+	|WHERE
+	|	T9500S_AccrualAndDeductionValues.EmployeeOrPosition = &Employee
+	|	AND T9500S_AccrualAndDeductionValues.AccualOrDeductionType = &AccualType
+	|	AND T9500S_AccrualAndDeductionValues.Period >= &Period
+	|	AND NOT T9500S_AccrualAndDeductionValues.NotActual";
+	Query.SetParameter("Employee", Ref.Employee);
+	Query.SetParameter("AccualType", Ref.ToAccrualType);
+	Query.SetParameter("Period", Ref.Date);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	IsNotActual = False;
+	If QuerySelection.Next() Then
+		IsNotActual = True;
+	EndIf;
 	
 	RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
 	RecordSet.Filter.EmployeeOrPosition.Set(Ref.Employee);
 	RecordSet.Filter.AccualOrDeductionType.Set(Ref.ToAccrualType);
 	RecordSet.Filter.Period.Set(Ref.Date);
+	
+	RecordSet.Read();
+//	IsNotActual = False;
+//	For Each Record In RecordSet Do
+//		If Record.Period >= Ref.Date Then
+//			IsNotActual = True;
+//			Break;
+//		EndIf;
+//	EndDo;
+	
 	NewRecord = RecordSet.Add();
+	NewRecord.NotActual = IsNotActual;
 	
 	NewRecord.Period = Ref.Date;
 	NewRecord.EmployeeOrPosition = Ref.Employee;

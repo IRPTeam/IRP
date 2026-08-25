@@ -132,7 +132,7 @@ EndFunction
 //  See GetStructureRequest
 Function GetStructureRequestByRef(RequestRef) Export
 	
-	RequestStructure = Unit_MockService.GetStructureRequest();
+	RequestStructure = GetStructureRequest();
 	
 	RequestStructure.Type = RequestRef.RequestType; 
 	RequestStructure.Address = RequestRef.ResourceAddress;

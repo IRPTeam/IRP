@@ -17,5 +17,6 @@
     <subsystems>Subsystem.MasterData.Subsystem.Production</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.KeysCatalogs</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.AdditionalControl</subsystems>
+    <subsystems>Subsystem.MasterData.Subsystem.Other</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

@@ -6,5 +6,8 @@
     <subsystems>Subsystem.Reports.Subsystem.Inventory</subsystems>
     <subsystems>Subsystem.Reports.Subsystem.Treasury</subsystems>
     <subsystems>Subsystem.Reports.Subsystem.Salary</subsystems>
+    <subsystems>Subsystem.Reports.Subsystem.TechnicalReports</subsystems>
+    <subsystems>Subsystem.Reports.Subsystem.FixedAssets</subsystems>
+    <subsystems>Subsystem.Reports.Subsystem.Accounting</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

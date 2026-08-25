@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Other
@@ -47,10 +47,17 @@ Scenario: _608700 preparation (find and replace)
 		When Create catalog CancelReturnReasons objects
 		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 		When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
-		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		* Post the orders through the list
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"
+			And I go to line in "List" table
+				| 'Number' |
+				| '1'      |
+			And in the table "List" I click "Post" button
+			And I go to line in "List" table
+				| 'Number' |
+				| '2'      |
+			And in the table "List" I click "Post" button
+			And I close all client application windows
 	And I close all client application windows
 
 

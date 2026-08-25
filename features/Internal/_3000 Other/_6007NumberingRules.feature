@@ -67,13 +67,16 @@ Scenario: _607700 preparation (check numbering rules)
 	When Create document PurchaseInvoice objects
 	* Settings for numerator
 		* ConfigurationMetadata
+			// the catalog is auto filled (it lays the items out flat, so the list rows are
+			// reachable; the Refill metadata button nests them into groups instead)
+			When auto filling Configuration metadata catalog
 			Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
-			And I click "Refill metadata" button
-			And I close current window
-			// the catalog element is activated at server: hierarchy navigation in the list
-			// breaks when another feature has already auto-filled the catalog flat
-			And I execute 1C:Enterprise script at server
-				| 'Q = New Query("SELECT Ref FROM Catalog.ConfigurationMetadata WHERE ObjectFullName = ""Catalog.Agreements"""); S = Q.Execute().Select(); While S.Next() Do Obj = S.Ref.GetObject(); Obj.Unused = False; Obj.Write(); EndDo;' |
+			And I go to line in "List" table
+				| "Description"   |
+				| "Partner terms" |
+			And I select current line in "List" table
+			And I remove checkbox named "Unused"
+			And I click "Save and close" button
 		* NumeratorBasicRules
 			Given I open hyperlink "e1cib/data/Catalog.NumeratorBasicRules?ref=b857ef6bdcc86de611efda2e71ee5283"
 			And I move to the tab named "GroupCatalogPrefixes"

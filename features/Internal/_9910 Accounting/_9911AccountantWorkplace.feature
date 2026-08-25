@@ -23,10 +23,20 @@ Scenario: _099200 preparation (accountant automated workplace)
 		When Create catalog Agreements objects (test data base)
 		When Create catalog Currencies objects (test data base)
 	* Set important attributes for Purchase invoice
-		// the flag is set at server: hierarchy navigation in the configuration metadata
-		// list is unreliable when the catalog holds items outside the predefined groups
-		And I execute 1C:Enterprise script at server
-			| 'Q = New Query("SELECT Ref FROM Catalog.ConfigurationMetadata WHERE ObjectFullName = ""Document.PurchaseInvoice"""); S = Q.Execute().Select(); While S.Next() Do Obj = S.Ref.GetObject(); If Obj.ImportantAttributes.FindRows(New Structure("AttributeName", "Comment")).Count() = 0 Then R = Obj.ImportantAttributes.Add(); R.AttributeName = "Comment"; Obj.Write(); EndIf; EndDo;' |
+		// the catalog is auto filled (it lays the items out flat, so the list rows are
+		// reachable; the Refill metadata button nests them into groups instead)
+		When auto filling Configuration metadata catalog
+		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
+		And I go to line in "List" table
+			| "Description"      |
+			| "Purchase invoice" |
+		And I select current line in "List" table
+		And I go to line in "AttributesTree" table
+			| 'Description' |
+			| 'Comment'     |
+		And I set checkbox named "AttributesTreeImportant" in "AttributesTree" table
+		And I finish line editing in "AttributesTree" table
+		And I click "Save and close" button
 	* Enable data history for Purchase invoice
 		Given I open hyperlink "e1cib/app/DataProcessor.DataHistory"
 		And I go to line in "MetadataTree" table

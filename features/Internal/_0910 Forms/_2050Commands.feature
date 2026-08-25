@@ -5483,42 +5483,41 @@ Scenario: _0205050 check internal commands are built on the document object form
 # rebuilt when the document is reread. The audit lock command is the probe - its
 # title switches between "set lock" and "unlock". The lock is set outside the open
 # form, so only a working refresh can pick it up.
-Scenario: _0205051 check internal commands are refreshed on reread (sales invoice)
+Scenario: _0205051 check internal commands are refreshed on reread (goods receipt)
 	And I close all client application windows
-	And I execute 1C:Enterprise script at server
-		| 'Q = New Query("SELECT TOP 1 Ref FROM Document.SalesInvoice WHERE Posted ORDER BY Number DESC"); S = Q.Execute().Select(); S.Next(); AuditLockPrivileged.UnsetLock(S.Ref);' |
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	And I go to the last line in "List" table
-	And I select current line in "List" table
+	When Create document GoodsReceipt objects (check movements)
+	* The audit lock needs a posted document
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '115'    |
+		And in the table "List" I click "Post" button
+		And I select current line in "List" table
 	* The open form shows the command in the set-lock state
 		When I Check the steps for Exception
 			| 'And I click "Audit lock (unlock)" button' |
 	* Set the lock outside this form and reread - the command state follows
 		And I execute 1C:Enterprise script at server
-			| 'Q = New Query("SELECT TOP 1 Ref FROM Document.SalesInvoice WHERE Posted ORDER BY Number DESC"); S = Q.Execute().Select(); S.Next(); AuditLockPrivileged.SetLock(S.Ref);' |
+			| 'AuditLockPrivileged.SetLock(Documents.GoodsReceipt.FindByNumber("115"));' |
 		And I click the button named "FormReread"
 		And I click "Audit lock (unlock)" button
-		And I execute 1C:Enterprise script at server
-			| 'Q = New Query("SELECT TOP 1 Ref FROM Document.SalesInvoice WHERE Posted ORDER BY Number DESC"); S = Q.Execute().Select(); S.Next(); AuditLockPrivileged.UnsetLock(S.Ref);' |
 	And I close all client application windows
-
 
 # The same refresh on a second of the six documents the PR touched.
 Scenario: _0205052 check internal commands are refreshed on reread (purchase invoice)
 	And I close all client application windows
-	And I execute 1C:Enterprise script at server
-		| 'Obj = Documents.PurchaseInvoice.FindByNumber("115").GetObject(); If Not Obj.Posted Then Obj.Write(DocumentWriteMode.Posting) EndIf; AuditLockPrivileged.UnsetLock(Obj.Ref);' |
-	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-	And I go to line in "List" table
-		| 'Number' |
-		| '115'    |
-	And I select current line in "List" table
+	When Create document PurchaseInvoice objects (check movements)
+	* The audit lock needs a posted document
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '115'    |
+		And in the table "List" I click "Post" button
+		And I select current line in "List" table
 	When I Check the steps for Exception
 		| 'And I click "Audit lock (unlock)" button' |
 	And I execute 1C:Enterprise script at server
 		| 'AuditLockPrivileged.SetLock(Documents.PurchaseInvoice.FindByNumber("115"));' |
 	And I click the button named "FormReread"
 	And I click "Audit lock (unlock)" button
-	And I execute 1C:Enterprise script at server
-		| 'AuditLockPrivileged.UnsetLock(Documents.PurchaseInvoice.FindByNumber("115"));' |
 	And I close all client application windows

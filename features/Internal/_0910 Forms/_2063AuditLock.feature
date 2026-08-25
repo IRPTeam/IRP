@@ -481,9 +481,7 @@ Scenario: _206310 unlock the document and switch the option off (cleanup)
 		And I select current line in "List" table
 		And I click "Audit lock (unlock)" button
 		And I close current window
-	* Remove the deletion mark if the red scenario left it
-		And I execute 1C:Enterprise script at server
-			| 'Obj = Documents.PurchaseInvoice.FindByNumber(12).GetObject(); If Obj.DeletionMark Then Obj.SetDeletionMark(False); EndIf;' |
+
 	* Switch the not audit attributes option off
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		And I remove checkbox "Use not audit attributes"

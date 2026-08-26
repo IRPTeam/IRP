@@ -5501,7 +5501,10 @@ Scenario: _0205051 check internal commands are refreshed on reread (goods receip
 			| 'AuditLockPrivileged.SetLock(Documents.GoodsReceipt.FindByNumber("115"));' |
 		And I click the button named "FormReread"
 		And I click "Audit lock (unlock)" button
-	And I close all client application windows
+	* Clear the history this scenario produced - _2063AuditLock asserts the whole
+	* audit lock history table and there is no interface to delete register records
+		And I execute 1C:Enterprise script at server
+			| 'RS = InformationRegisters.AuditLockHistory.CreateRecordSet(); RS.Filter.Document.Set(Documents.GoodsReceipt.FindByNumber("115")); RS.Write();' |	And I close all client application windows
 
 # The same refresh on a second of the six documents the PR touched.
 Scenario: _0205052 check internal commands are refreshed on reread (purchase invoice)
@@ -5520,4 +5523,7 @@ Scenario: _0205052 check internal commands are refreshed on reread (purchase inv
 		| 'AuditLockPrivileged.SetLock(Documents.PurchaseInvoice.FindByNumber("115"));' |
 	And I click the button named "FormReread"
 	And I click "Audit lock (unlock)" button
-	And I close all client application windows
+	* Clear the history this scenario produced - _2063AuditLock asserts the whole
+	* audit lock history table and there is no interface to delete register records
+		And I execute 1C:Enterprise script at server
+			| 'RS = InformationRegisters.AuditLockHistory.CreateRecordSet(); RS.Filter.Document.Set(Documents.PurchaseInvoice.FindByNumber("115")); RS.Write();' |	And I close all client application windows

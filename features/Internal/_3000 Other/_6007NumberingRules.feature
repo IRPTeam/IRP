@@ -38,6 +38,7 @@ Scenario: _607700 preparation (check numbering rules)
 		When Create catalog CancelReturnReasons objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Companies objects (own Second company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
@@ -66,6 +67,9 @@ Scenario: _607700 preparation (check numbering rules)
 	When Create document PurchaseInvoice objects
 	* Settings for numerator
 		* ConfigurationMetadata
+			// the catalog is auto filled (it lays the items out flat, so the list rows are
+			// reachable; the Refill metadata button nests them into groups instead)
+			When auto filling Configuration metadata catalog
 			Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
 			And I go to line in "List" table
 				| "Description"   |
@@ -123,6 +127,20 @@ Scenario: _607700 preparation (check numbering rules)
 			And I select "Date" from "Date attribute name" drop-down list by string in "Catalogs" table
 			And I finish line editing in "Catalogs" table
 			And I click "Save and close" button						
+		* Company numerator group (for documents)
+			Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5286"
+			And I move to "For documents" tab
+			And in the table "Documents" I click the button named "DocumentsAdd"
+			And I select "sales invoice" from "Document" drop-down list by string in "Documents" table
+			And I finish line editing in "Documents" table
+			And I click "Save and close" button
+		* Yearly numerator group (for documents)
+			Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5287"
+			And I move to "For documents" tab
+			And in the table "Documents" I click the button named "DocumentsAdd"
+			And I select "Purchase invoice" from "Document" drop-down list by string in "Documents" table
+			And I finish line editing in "Documents" table
+			And I click "Save and close" button
 	And I close all client application windows
 
 
@@ -220,6 +238,237 @@ Scenario: _607704 check uniqueness control for documents
 		Then there are lines in TestClient message log
 			|'Number [$SI1DocumentNumber$] is already used for [$SalesInvoice607704$]'|
 	And I close all client application windows
+
+
+Scenario: _607705 check numerator group is selected by company
+	And I close all client application windows
+	* Second company uses its own numerator group
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "00000001"
+		And I close current window
+	* Main company keeps the basic numerator group
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "726300*" template
+
+
+Scenario: _607706 check numbering period Year resets the counter
+	And I close all client application windows
+	* First PI of the previous year
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I input "15.06.2025" text in the field named "Date"
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "00000001"
+		And I close current window
+	* First PI of the current year starts the counter again
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I input "15.06.2026" text in the field named "Date"
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "00000001"
+		And I close current window
+	* Second PI of the same year continues the counter
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I input "16.06.2026" text in the field named "Date"
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "00000002"
+
+
+Scenario: _607707 check start number of the numerator
+	And I close all client application windows
+	* Set start number for the yearly numerator group
+		Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5287"
+		And I input "100" text in the field named "StartNumber"
+		And I click "Save and close" button
+	* The first document of a new period starts from the given number
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I input "15.06.2029" text in the field named "Date"
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "00000100"
+		And I close current window
+	* Restore the start number
+		Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5287"
+		And I input "1" text in the field named "StartNumber"
+		And I click "Save and close" button
+
+
+Scenario: _607708 check numerator validity period
+	And I close all client application windows
+	* Limit the company numerator group to the previous year
+		Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5286"
+		And I input "01.01.2025" text in the field named "BeginDate"
+		And I input "31.12.2025" text in the field named "EndDate"
+		And I click "Save and close" button
+	* Document out of the validity period falls back to the basic numerator group
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "26300001"
+		And I close current window
+	* Restore the validity period
+		Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5286"
+		And I input "01.01.0001" text in the field named "BeginDate"
+		And I input "01.01.0001" text in the field named "EndDate"
+		And I click "Save and close" button
+
+
+Scenario: _607709 check manual editing is allowed by the numerator
+	And I close all client application windows
+	* Numerator group allows manual editing, the entered number is kept
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "90000001" text in the field named "DocumentNumber"
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "90000001"
+
+
+Scenario: _607710 check numbering without leading zeros
+	And I close all client application windows
+	* Switch off leading zeros
+		Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5286"
+		And I set checkbox "Without leading zeros"
+		And I click "Save and close" button
+	* Number is created without leading zeros
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I click "Save" button
+		Then the form attribute named "DocumentNumber" became equal to "1"
+		And I close current window
+	* Restore leading zeros
+		Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5286"
+		And I remove checkbox "Without leading zeros"
+		And I click "Save and close" button
+
+
+Scenario: _607711 check Show numerator command on the document form
+	And I close all client application windows
+	* Open the numerator of the current document
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I click "Save" button
+		And I click the button named "InternalCommand_ShowNumerator"
+		Then the form attribute named "NumeratorRules" became equal to "Company numerator group"
+
+
+// COMMENTED OUT until the defect is fixed: the uniqueness check searches globally - the numerator group filter is commented out in the code
+//Scenario: _607712 check uniqueness control does not block another numerator group
+//	And I close all client application windows
+//	* Second company document takes its number from the company numerator group
+//		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+//		And I click "Create" button
+//		And I select from the drop-down list named "Company" by "Second Company" string
+//		And I click "Save" button
+//		And I save the value of the field named "DocumentNumber" as "SI607712Number"
+//		And I close current window
+//	* The same number is free for the basic numerator group of another company
+//		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+//		And I click "Create" button
+//		And I select from the drop-down list named "Company" by "Main Company" string
+//		And I input "$SI607712Number$" variable value in the field named "DocumentNumber"
+//		And I click "Save" button
+//		Then the form attribute named "DocumentNumber" became equal to "$SI607712Number$"
+
+
+// COMMENTED OUT until the defect is fixed: the uniqueness check ignores the numbering period boundaries
+//Scenario: _607713 check uniqueness control respects the numbering period
+//	And I close all client application windows
+//	* Switch on uniqueness control for the yearly numerator group
+//		Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5287"
+//		And I move to "Other" tab
+//		And I set checkbox "Uniqueness control"
+//		And I click "Save and close" button
+//	* The first document of a new period gets the start number again
+//		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+//		And I click "Create" button
+//		And I select from the drop-down list named "Company" by "Second Company" string
+//		And I input "15.06.2027" text in the field named "Date"
+//		And I click "Save" button
+//		Then the form attribute named "DocumentNumber" became equal to "00000001"
+
+
+// COMMENTED OUT until the defect is fixed: the number counter is rolled back with the rejected transaction
+//Scenario: _607714 check the number counter is not rolled back after rejection
+//	And I close all client application windows
+//	// documents the PR2965 defect: the counter is incremented before the uniqueness
+//	// check and the increment rolls back together with Cancel, so every retry produces
+//	// the same occupied number and the document can never be saved by retrying.
+//	// The collision is an honest same-numerator no-period duplicate (company group),
+//	// so the scenario survives the fixes of the global-search and period-boundaries
+//	// defects. The assertion is made on the counter register to keep the scenario free
+//	// of open modal windows on failure.
+//	// Company group counter before this scenario: 1 by _607705 + 1 by _607712 = 2
+//	* Switch on uniqueness control for the company numerator group
+//		Given I open hyperlink "e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5286"
+//		And I move to "Other" tab
+//		And I set checkbox "Uniqueness control"
+//		And I click "Save and close" button
+//	* Take the next number of the company group manually
+//		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+//		And I click "Create" button
+//		And I select from the drop-down list named "Company" by "Second Company" string
+//		And I input "00000003" text in the field named "DocumentNumber"
+//		And I click "Save" button
+//		And I close current window
+//	* An automatic attempt collides with the manually occupied number
+//		And I click "Create" button
+//		And I select from the drop-down list named "Company" by "Second Company" string
+//		And I click "Save" button
+//		Then "1C:Enterprise" window is opened
+//		And I click the button named "OK"
+//		And I close all client application windows
+//	* The counter must keep the incremented value after the rejection
+//		Given I open hyperlink "e1cib/list/InformationRegister.NumeratorCounters"
+//		And "List" table contains lines
+//			| 'Numerator rules'         | 'Counter' |
+//			| 'Company numerator group' | '3'       |
+//	And I close all client application windows
+
+Scenario: _607715 check uniqueness control for catalog Partner terms
+	And I close all client application windows
+	* Create the first partner term
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "test uniqueness" text in "ENG" field
+		And I select from "Multi currency movement type" drop-down list by "eu" string
+		And I expand "Agreement info" group
+		And I input "24.01.2026" text in the field named "Date"
+		And I change the radio button named "Type" value to "Customer"
+		And I click "Save" button
+		And I save the value of the field named "Number" as "Agreement607715Number"
+		And I save the window as "Agreement607715"
+		And I close current window
+	* The same number is rejected for the second partner term
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "test uniqueness 2" text in "ENG" field
+		And I select from "Multi currency movement type" drop-down list by "eu" string
+		And I expand "Agreement info" group
+		And I input "24.01.2026" text in the field named "Date"
+		And I change the radio button named "Type" value to "Customer"
+		And I input "$Agreement607715Number$" variable value in the field named "Number"
+		And I click "Save" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Number [$Agreement607715Number$] is already used for [test uniqueness]'|
 	
 				
 				

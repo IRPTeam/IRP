@@ -2911,3 +2911,44 @@ Scenario: 950465 check filter in the LockDataModificationReasons
 						
 				
 				
+
+
+Scenario: 950460 check the open period returned for a simple date lock rule
+	And I close all client application windows
+	// exercises LockDataModificationPrivileged.GetOpenPeriod added by the PR - the
+	// function is not called anywhere in the configuration yet, so it is checked at
+	// server. For a "Date <= X" rule the open period is X + 1 second (the code adds one
+	// second, not one day, so a day-granularity rule still reports the same calendar day)
+	* Switch the lock data modification option on
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I set checkbox "Use lock data modification"
+		And I click "Save" button
+		And I close current window
+	* Create a simple Date <= rule for Sales order for all users
+		Given I open hyperlink "e1cib/list/Catalog.LockDataModificationReasons"
+		And I mark "Catalogs.LockDataModificationReasons" objects for deletion
+		And I click the button named "FormCreate"
+		And I set checkbox "For all users"
+		And I input "open period simple date rule" text in "ENG" field
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Sales order" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I select "Date" exact value from the drop-down list named "RuleListAttribute" in "RuleList" table
+		And I move to the next attribute
+		And I select "<=" exact value from the drop-down list named "RuleListComparisonType" in "RuleList" table
+		And I move to the next attribute
+		And I activate field named "RuleListValue" in "RuleList" table
+		And I input "31.12.2024" text in the field named "RuleListValue" of "RuleList" table
+		And I finish line editing in "RuleList" table
+		And I click "Save and close" button
+	* GetOpenPeriod returns the rule date plus one second
+		And I execute 1C:Enterprise script at server
+			| 'Obj = Documents.SalesOrder.Select(); Obj.Next(); D = LockDataModificationPrivileged.GetOpenPeriod(Obj.GetObject()); If D <> Date(2024,12,31,0,0,1) Then Raise "GetOpenPeriod for a Date <= rule expected 31.12.2024 00:00:01 but got " + Format(D, "DF=dd.MM.yyyy HH:mm:ss") EndIf;' |
+	* Cleanup: remove the rule and switch the option off
+		Given I open hyperlink "e1cib/list/Catalog.LockDataModificationReasons"
+		And I mark "Catalogs.LockDataModificationReasons" objects for deletion
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I remove checkbox "Use lock data modification"
+		And I click "Save" button
+		And I close current window
+	And I close all client application windows

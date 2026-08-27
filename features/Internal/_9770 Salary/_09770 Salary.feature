@@ -83,7 +83,7 @@ Scenario: _097700 preparation (Сheck payroll)
 			And I select from "Sick leave" drop-down list by "sick leave" string
 			And I select from "Salary basic payroll" drop-down list by "salary" string
 			And I click "Save and close" button
-			And I wait "Main Company (Company) *" window closing in 20 seconds
+			And I wait "Main Company (Company)*" window closing in 20 seconds
 		* Second Company
 			Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4"
 			And I select from "Vacation" drop-down list by "vacation" string
@@ -92,7 +92,7 @@ Scenario: _097700 preparation (Сheck payroll)
 			And I input "3" text in "Maximum days (month)" field
 			And I select from "Salary basic payroll" drop-down list by "salary" string
 			And I click "Save and close" button
-			And I wait "Second Company (Company) *" window closing in 20 seconds
+			And I wait "Second Company (Company)*" window closing in 20 seconds
 
 
 	
@@ -534,7 +534,7 @@ Scenario: _097710 create T9530S_WorkDays
 			And I select current line in "List" table
 			And I input "6" text in "Count days/hours" field
 			And I click "Save and close" button
-			And I wait "T9530 Work days *" window closing in 20 seconds
+			And I wait "T9530 Work days*" window closing in 20 seconds
 			And I go to line in "List" table
 				| 'Date'       |
 				| '07.11.2023' |
@@ -542,7 +542,7 @@ Scenario: _097710 create T9530S_WorkDays
 			Then "T9530 Work days" window is opened
 			And I input "0" text in "Count days/hours" field
 			And I click "Save and close" button
-			And I wait "T9530 Work days *" window closing in 20 seconds
+			And I wait "T9530 Work days*" window closing in 20 seconds
 			And "List" table contains lines
 				| 'Date'       | 'Employee schedule'                   | 'Count days/hours' |
 				| '04.11.2023' | '5 working days / 2 days off (hours)' | '6'                |
@@ -1018,7 +1018,7 @@ Scenario: _097721 check of payroll calculation (position and salary change in th
 			| 'Employee 1 (change salary + vacation + truancy)' | '5 working days / 2 days off (day)' | '10.11.2023' | '30.11.2023' | 'Accountant' | 'Front office'       |
 		Then the number of "Workers" table lines is "равно" "2"
 		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
+		And I wait "Time sheet * dated **" window closing in 20 seconds
 	* Check Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"		
 		And I go to line in "List" table
@@ -1033,7 +1033,7 @@ Scenario: _097721 check of payroll calculation (position and salary change in th
 			| '3 181,82' | 'Employee 1 (change salary + vacation + truancy)' | 'Manager'    | 'Salary'       | 'Expense'      | 'Front office'       |
 		Then the number of "AccrualList" table lines is "равно" "2"
 		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
+		And I wait "Payroll * dated **" window closing in 20 seconds
 	And I close all client application windows				
 				
 				
@@ -1064,7 +1064,7 @@ Scenario: _097722 check of payroll calculation (work schedule change (days) + va
 			| 'Employee 2 (change shedule (days) + vacation + sick leave)' | '2 working day / 2 days off (day)'  | '10.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |	
 		Then the number of "Workers" table lines is "равно" "4"
 		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
+		And I wait "Time sheet * dated **" window closing in 20 seconds
 	* Check Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"		
 		And I go to line in "List" table
@@ -1079,7 +1079,7 @@ Scenario: _097722 check of payroll calculation (work schedule change (days) + va
 			| '6 912,50' | 'Employee 2 (change shedule (days) + vacation + sick leave)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |	
 		Then the number of "AccrualList" table lines is "равно" "3"
 		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
+		And I wait "Payroll * dated **" window closing in 20 seconds
 	And I close all client application windows
 
 
@@ -1114,7 +1114,7 @@ Scenario: _097723 check of payroll calculation (vacation + truancy)
 			And I input "0" text in "Actually days/hours" field
 			And I click "Ok" button
 		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
+		And I wait "Time sheet * dated **" window closing in 20 seconds
 	* Check Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"		
 		And I go to line in "List" table
@@ -1129,7 +1129,7 @@ Scenario: _097723 check of payroll calculation (vacation + truancy)
 			| '6 562,50' | 'Employee 3  (vacation + truancy)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |		
 		Then the number of "AccrualList" table lines is "равно" "4"
 		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
+		And I wait "Payroll * dated **" window closing in 20 seconds
 	And I close all client application windows				
 
 				
@@ -1159,7 +1159,7 @@ Scenario: _097724 check of payroll calculation (change of work schedule (from ho
 			| 'Employee 4 (change shedule (days - hours) + sick leave)'    | '2 working day / 2 days off (day)'    | '01.11.2023' | '09.11.2023' | 'Sales person' | 'Front office'       |	
 		Then the number of "Workers" table lines is "равно" "7"
 		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
+		And I wait "Time sheet * dated **" window closing in 20 seconds
 	* Check Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"		
 		And I go to line in "List" table
@@ -1174,7 +1174,7 @@ Scenario: _097724 check of payroll calculation (change of work schedule (from ho
 			| '9 262,97' | 'Employee 4 (change shedule (days - hours) + sick leave)'    | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |	
 		Then the number of "AccrualList" table lines is "равно" "5"
 		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
+		And I wait "Payroll * dated **" window closing in 20 seconds
 	And I close all client application windows	
 
 
@@ -1202,7 +1202,7 @@ Scenario: _097725 check of payroll calculation (several vacations)
 			| 'Employee 5 (several vacations)' | '3 working day / 3 days off (day)' | '01.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |
 		Then the number of "Workers" table lines is "равно" "8"
 		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
+		And I wait "Time sheet * dated **" window closing in 20 seconds
 	* Check Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"		
 		And I go to line in "List" table
@@ -1217,7 +1217,7 @@ Scenario: _097725 check of payroll calculation (several vacations)
 			| '6 533,33' | 'Employee 5 (several vacations)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |
 		Then the number of "AccrualList" table lines is "равно" "6"
 		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
+		And I wait "Payroll * dated **" window closing in 20 seconds
 	And I close all client application windows	
 
 Scenario: _097726 check of payroll calculation (hours shedule + truancy)
@@ -1252,7 +1252,7 @@ Scenario: _097726 check of payroll calculation (hours shedule + truancy)
 			And I input "4" text in "Actually days/hours" field
 			And I click "Ok" button
 		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
+		And I wait "Time sheet * dated **" window closing in 20 seconds
 	* Check Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"		
 		And I go to line in "List" table
@@ -1267,7 +1267,7 @@ Scenario: _097726 check of payroll calculation (hours shedule + truancy)
 			| '9 433,96' | 'Employee 6 (hours shedule + truancy)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |
 		Then the number of "AccrualList" table lines is "равно" "7"
 		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
+		And I wait "Payroll * dated **" window closing in 20 seconds
 	And I close all client application windows	
 
 
@@ -1297,7 +1297,7 @@ Scenario: _097727 check of payroll calculation (several work schedule changes)
 			| 'Employee 7 (several schedule changes)'                      | '2 working day / 2 days off (day)'    | '17.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |	
 		Then the number of "Workers" table lines is "равно" "12"
 		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
+		And I wait "Time sheet * dated **" window closing in 20 seconds
 	* Check Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"		
 		And I go to line in "List" table
@@ -1312,7 +1312,7 @@ Scenario: _097727 check of payroll calculation (several work schedule changes)
 			| '7 277,36' | 'Employee 7 (several schedule changes)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |
 		Then the number of "AccrualList" table lines is "равно" "8"
 		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
+		And I wait "Payroll * dated **" window closing in 20 seconds
 	And I close all client application windows
 
 Scenario: _097728 check of payroll calculation (several vacation and sick leaves)
@@ -1341,7 +1341,7 @@ Scenario: _097728 check of payroll calculation (several vacation and sick leaves
 			| 'Employee 8 (several vacation + several sick leave)'         | '2 working day / 2 days off (day)'    | '01.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |		
 		Then the number of "Workers" table lines is "равно" "13"
 		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
+		And I wait "Time sheet * dated **" window closing in 20 seconds
 	* Check Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"		
 		And I go to line in "List" table
@@ -1356,7 +1356,7 @@ Scenario: _097728 check of payroll calculation (several vacation and sick leaves
 			| '6 562,50' | 'Employee 8 (several vacation + several sick leave)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |
 		Then the number of "AccrualList" table lines is "равно" "9"
 		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
+		And I wait "Payroll * dated **" window closing in 20 seconds
 	And I close all client application windows
 
 Scenario: _097729 check of payroll calculation (hours shedule + several sick leave)
@@ -1381,7 +1381,7 @@ Scenario: _097729 check of payroll calculation (hours shedule + several sick lea
 			| 'Employee 9 (hours shedule + several sick leave)'         | '5 working days / 2 days off (hours)'    | '01.11.2023' | '30.11.2023' | 'Manager'      | 'Front office'       |		
 		Then the number of "Workers" table lines is "равно" "14"
 		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
+		And I wait "Time sheet * dated **" window closing in 20 seconds
 	* Check Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"		
 		And I go to line in "List" table
@@ -1396,7 +1396,7 @@ Scenario: _097729 check of payroll calculation (hours shedule + several sick lea
 			| '10 000,00' | 'Employee 9 (hours shedule + several sick leave)' | 'Manager'  | 'Salary'       | 'Expense'      | 'Front office'       |
 		Then the number of "AccrualList" table lines is "равно" "10"
 		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
+		And I wait "Payroll * dated **" window closing in 20 seconds
 	And I close all client application windows
 
 Scenario: _097750 Salary payment (Bank payment)
@@ -1612,4 +1612,259 @@ Scenario: _097753 Salary return (Cash receipt)
 
 // Scenario: _097754 Salary tax payment (Bank payment - Other partners)
 
-						
+
+Scenario: _097760 check Employee hiring reposting keeps salary history
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeTransfer.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Repost Employee hiring
+		Given I open hyperlink "e1cib/list/Document.EmployeeHiring"
+		And I go to line in "List" table
+			| 'Number' |
+			| '15'     |
+		And I select current line in "List" table
+		And I click the button named "FormPostAndClose"
+		And I close all client application windows
+	* Check salary history is kept
+		Given I open hyperlink "e1cib/list/InformationRegister.T9500S_AccrualAndDeductionValues"
+		And "List" table contains lines
+			| 'Period'     | 'Employee or position'        | 'Accual or deduction type' | 'Value'    | 'Not actual' |
+			| '10.01.2026' | 'Employee 10 (hiring repost)' | 'Salary'                   | '1 000,00' | 'Yes'        |
+			| '10.03.2026' | 'Employee 10 (hiring repost)' | 'Salary'                   | '2 000,00' | 'No'         |
+	And I close all client application windows
+
+
+Scenario: _097764 check backdated Employee transfer does not cancel later salary records
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeTransfer.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Post backdated Employee transfer
+		Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9'      |
+		And I select current line in "List" table
+		And I click the button named "FormPostAndClose"
+		And I close all client application windows
+	* Check later record stays actual and backdated record is not actual
+		Given I open hyperlink "e1cib/list/InformationRegister.T9500S_AccrualAndDeductionValues"
+		And "List" table contains lines
+			| 'Period'     | 'Employee or position'             | 'Accual or deduction type' | 'Value'    | 'Not actual' |
+			| '10.01.2026' | 'Employee 11 (backdated transfer)' | 'Salary'                   | '1 000,00' | 'Yes'        |
+			| '10.03.2026' | 'Employee 11 (backdated transfer)' | 'Salary'                   | '2 000,00' | 'Yes'        |
+			| '10.05.2026' | 'Employee 11 (backdated transfer)' | 'Salary'                   | '3 000,00' | 'No'         |
+	And I close all client application windows
+
+
+Scenario: _097763 check the second deserved vacations calculation with the same end date gives no days
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Create the first Calculation deserved vacations
+		Given I open hyperlink "e1cib/list/Document.CalculationDeservedVacations"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I input "01.07.2026 12:00:00" text in the field named "Date"
+		And I input "01.01.2026" text in "Begin date" field
+		And I input "30.06.2026" text in "End date" field
+		And I click "Save" button
+		And I save the value of "Number" field as "NumberDeservedVacationFirst"
+		And I click "Post and close" button
+	* Check the first document accrues vacation days
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$NumberDeservedVacationFirst$' |
+		And I click "Registrations report" button
+		And I select "R9541T Vacation usage" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines:
+			| '' | 'Receipt' | '30.06.2026 23:59:59' | '11' | 'Second Company' | 'Employee 10 (hiring repost)' |
+		And I close all client application windows
+	* Repost the first document - the movements must survive
+		Given I open hyperlink "e1cib/list/Document.CalculationDeservedVacations"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$NumberDeservedVacationFirst$' |
+		And I select current line in "List" table
+		And I click the button named "FormPostAndClose"
+		And I wait "Calculation deserved vacations * dated **" window closing in 20 seconds
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$NumberDeservedVacationFirst$' |
+		And I click "Registrations report" button
+		And I select "R9541T Vacation usage" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines:
+			| '' | 'Receipt' | '30.06.2026 23:59:59' | '11' | 'Second Company' | 'Employee 10 (hiring repost)' |
+		And I close all client application windows
+	* Create the second Calculation deserved vacations with the same end date
+		Given I open hyperlink "e1cib/list/Document.CalculationDeservedVacations"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I input "01.07.2026 13:00:00" text in the field named "Date"
+		And I input "01.01.2026" text in "Begin date" field
+		And I input "30.06.2026" text in "End date" field
+		And I click "Save" button
+		And I save the value of "Number" field as "NumberDeservedVacationSecond"
+		And I click "Post and close" button
+		And I execute 1C:Enterprise script at server
+			| 'Ref = Documents.CalculationDeservedVacations.FindByNumber("$NumberDeservedVacationSecond$"); If Not ValueIsFilled(Ref) Or Not Ref.Posted Then Raise "CalculationDeservedVacations $NumberDeservedVacationSecond$ is not posted" EndIf;' |
+	* Check the second document has no movements
+		And I go to line in "List" table
+			| 'Number'                         |
+			| '$NumberDeservedVacationSecond$' |
+		And I click "Registrations report" button
+		And I select "R9541T Vacation usage" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '*'                              |
+			| 'Document registrations records'                             |
+	And I close all client application windows
+
+
+Scenario: _097761 check payroll fill for the period before employee transfer
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeTransfer.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Create TimeSheet for Accountants office
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I move to the next attribute
+		And I click Choice button of the field named "Period"
+		And I input "01.11.2023" text in the field named "DateBegin"
+		And I input "30.11.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "Branch" by "Accountants office" string
+		And I move to "Time sheet" tab
+		And in the table "Workers" I click "Fill all" button
+		And "Workers" table became equal
+			| 'Employee'                              | 'Schedule'                          | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center' |
+			| 'Employee 12 (payroll before transfer)' | '5 working days / 2 days off (day)' | '01.11.2023' | '30.11.2023' | 'Sales person' | 'Accountants office' |
+		And I click "Post and close" button
+		And I close all client application windows
+	* Fill Payroll for the period before the transfer
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I select from the drop-down list named "Branch" by "Accountants office" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I select from "Payment period" drop-down list by "fourth" string
+		And I input "01.11.2023" text in "Begin date" field
+		And I input "30.11.2023" text in "End date" field
+		And in the table "AccrualList" I click the button named "FillAccrual"
+	* Check the employee is still paid by the salary valid for that period
+		And "AccrualList" table contains lines
+			| 'Amount'   | 'Employee'                              | 'Accrual type' |
+			| '7 000,00' | 'Employee 12 (payroll before transfer)' | 'Salary'       |
+		Then the number of "AccrualList" table lines is "равно" "1"
+	And I close all client application windows
+
+
+Scenario: _097766 Payroll - Calculation type is required in Cash advance deduction list
+	And I close all client application windows
+	* Create Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I click the button named "FormCreate"
+	* Add an empty Cash advance deduction row
+		And I move to "Cash advance deduction" tab
+		And in the table "CashAdvanceDeductionList" I click "Add" button
+		And I finish line editing in "CashAdvanceDeductionList" table
+	* Post is refused and Calculation type is reported as required
+		And I click the button named "FormPost"
+		Then there are lines in TestClient message log
+			| '"Calculation type" is required in row 1 of the "Cash advance deduction list" list.' |
+	And I close all client application windows
+
+
+Scenario: _097762 check sick leave limit is not bypassed by the payroll document date
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeSickLeave.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Create TimeSheet for Logistics department
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I move to the next attribute
+		And I click Choice button of the field named "Period"
+		And I input "01.11.2023" text in the field named "DateBegin"
+		And I input "30.11.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "Branch" by "Logistics department" string
+		And I move to "Time sheet" tab
+		And in the table "Workers" I click "Fill all" button
+		And "Workers" table became equal
+			| 'Employee'                       | 'Schedule'                          | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center'   |
+			| 'Employee 13 (sick leave limit)' | '5 working days / 2 days off (day)' | '01.11.2023' | '30.11.2023' | 'Sales person' | 'Logistics department' |
+		And I click "Post and close" button
+		And I close all client application windows
+	* First half of the month, payroll dated the next month
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I click the button named "FormCreate"
+		And I input "01.12.2023 12:00:00" text in the field named "Date"
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Branch" by "Logistics department" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I select from "Payment period" drop-down list by "fourth" string
+		And I input "01.11.2023" text in "Begin date" field
+		And I input "15.11.2023" text in "End date" field
+		And in the table "AccrualList" I click the button named "FillAccrual"
+		And I click "Save" button
+		And I save the value of "Number" field as "NumberPayrollFirstHalf"
+		And I click "Post and close" button
+		And I close all client application windows
+	* The movement is registered by the month of End date, not by the document date
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I go to line in "List" table
+			| 'Number'                   |
+			| '$NumberPayrollFirstHalf$' |
+		And I click "Registrations report" button
+		And I select "R9555 Paid sick leaves" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines:
+			| '' | '30.11.2023 23:59:59' | '3' | 'Second Company' | 'Employee 13 (sick leave limit)' |
+		And I close all client application windows
+	* Second half of the same month must not pay over the limit
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I click the button named "FormCreate"
+		And I input "01.12.2023 12:00:00" text in the field named "Date"
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Branch" by "Logistics department" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I select from "Payment period" drop-down list by "fourth" string
+		And I input "16.11.2023" text in "Begin date" field
+		And I input "30.11.2023" text in "End date" field
+		And in the table "AccrualList" I click the button named "FillAccrual"
+		And I click "Save" button
+		And I save the value of "Number" field as "NumberPayrollSecondHalf"
+		And I click "Post and close" button
+		And I execute 1C:Enterprise script at server
+			| 'Ref = Documents.Payroll.FindByNumber("$NumberPayrollSecondHalf$"); If Not ValueIsFilled(Ref) Or Not Ref.Posted Then Raise "Payroll $NumberPayrollSecondHalf$ is not posted" EndIf;' |
+		And I close all client application windows
+	* The limit is already spent, so the second payroll registers nothing
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I go to line in "List" table
+			| 'Number'                    |
+			| '$NumberPayrollSecondHalf$' |
+		And I click "Registrations report" button
+		And I select "R9555 Paid sick leaves" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '*'                              |
+			| 'Document registrations records' |
+	And I close all client application windows

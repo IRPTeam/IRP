@@ -840,7 +840,7 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 		| 'Configuration metadata'  | 'Plugins'        |
 		| 'Goods receipt'           | 'Test command'   |
 	* Check the command from the document list GoodsReceipt
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to the last line in "List" table
 		And I click "Test command" button
 		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
@@ -869,7 +869,7 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 	* Check that the command is displayed in the document
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click "Create" button
 		And I click "Test command" button
 		Then I wait that in user messages the "Success client" substring will appear in 10 seconds

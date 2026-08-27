@@ -208,29 +208,9 @@ Scenario: 950603 check select all and unselect all commands of the profile
 
 Scenario: 950606 remove the metadata restrictions (cleanup)
 	And I close all client application windows
-	And I connect "Этот клиент" profile of TestClient
-	// the access rights group runs on one shared base - the restrictions must not leak
-	// into the following features
-	* Uncheck the restrictions
-		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
-		And I go to line in "List" table
-			| "Description"   |
-			| "Sales invoice" |
-		And I select current line in "List" table
-		And I go to line in "AttributesTree" table
-			| 'Description' |
-			| 'Price'       |
-		And I remove checkbox named "AttributesTreeReadOnly" in "AttributesTree" table
-		And I finish line editing in "AttributesTree" table
-		And I go to line in "AttributesTree" table
-			| 'Description' |
-			| 'Quantity'    |
-		And I remove checkbox named "AttributesTreeHidden" in "AttributesTree" table
-		And I finish line editing in "AttributesTree" table
-		And I go to line in "AttributesTree" table
-			| 'Description' |
-			| 'Legal name'  |
-		And I remove checkbox named "AttributesTreeReadOnly" in "AttributesTree" table
-		And I finish line editing in "AttributesTree" table
-		And I click "Save and close" button
+	// cleared at server on purpose: this is a cleanup with nothing to assert, and by the
+	// time it runs the configuration metadata list is back in its hierarchical display,
+	// where the rows of the nested items cannot be reached
+	And I execute 1C:Enterprise script at server
+		| 'Q = New Query("SELECT Ref FROM Catalog.ConfigurationMetadata WHERE ObjectFullName = ""Document.SalesInvoice"""); S = Q.Execute().Select(); While S.Next() Do Obj = S.Ref.GetObject(); For Each R In Obj.ReadOnlyAttributes Do R.AttributeName = "" EndDo; Obj.ReadOnlyAttributes.Clear(); Obj.HiddenAttributes.Clear(); Obj.Write(); EndDo;' |
 	And I close all client application windows

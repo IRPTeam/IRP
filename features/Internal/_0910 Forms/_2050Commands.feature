@@ -840,7 +840,7 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 		| 'Configuration metadata'  | 'Plugins'        |
 		| 'Goods receipt'           | 'Test command'   |
 	* Check the command from the document list GoodsReceipt
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to the last line in "List" table
 		And I click "Test command" button
 		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
@@ -869,7 +869,7 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 	* Check that the command is displayed in the document
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click "Create" button
 		And I click "Test command" button
 		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
@@ -5469,11 +5469,11 @@ Scenario: _010055 add test command to the list of documents DebitCreditNote
 # The internal commands of the PR are built on the document object form.
 Scenario: _0205050 check internal commands are built on the document object form
 	And I close all client application windows
-	When Create document GoodsReceipt objects (check movements)
-	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	When Create document PurchaseInvoice objects (check movements)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
 		| 'Number' |
-		| '116'    |
+		| '117'    |
 	And I select current line in "List" table
 	And I click the button named "InternalCommand_ShowNumerator"
 	And I click the button named "InternalCommand_EditQuantity"
@@ -5486,11 +5486,11 @@ Scenario: _0205050 check internal commands are built on the document object form
 # rebuilt when the document is reread. The audit lock command is the probe - its
 # title switches between "set lock" and "unlock". The lock is set outside the open
 # form, so only a working refresh can pick it up.
-Scenario: _0205051 check internal commands are refreshed on reread (goods receipt)
+Scenario: _0205051 check internal commands are refreshed on reread (purchase invoice 115)
 	And I close all client application windows
-	When Create document GoodsReceipt objects (check movements)
+	When Create document PurchaseInvoice objects (check movements)
 	* The audit lock needs a posted document
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' |
 			| '115'    |
@@ -5501,36 +5501,41 @@ Scenario: _0205051 check internal commands are refreshed on reread (goods receip
 			| 'And I click "Audit lock (unlock)" button' |
 	* Set the lock outside this form and reread - the command state follows
 		And I execute 1C:Enterprise script at server
-			| 'AuditLockPrivileged.SetLock(Documents.GoodsReceipt.FindByNumber("115"));' |
+			| 'AuditLockPrivileged.SetLock(Documents.PurchaseInvoice.FindByNumber("115"));' |
 		And I click the button named "FormReread"
 		And I click "Audit lock (unlock)" button
 	* Clear the history this scenario produced
 		// _2063AuditLock asserts the whole audit lock history table and there is no
 		// interface to delete information register records
 		And I execute 1C:Enterprise script at server
-			| 'RS = InformationRegisters.AuditLockHistory.CreateRecordSet(); RS.Filter.Document.Set(Documents.GoodsReceipt.FindByNumber("115")); RS.Write();' |
+			| 'RS = InformationRegisters.AuditLockHistory.CreateRecordSet(); RS.Filter.Document.Set(Documents.PurchaseInvoice.FindByNumber("115")); RS.Write();' |
 	And I close all client application windows
 
-# The same refresh on a second of the six documents the PR touched.
-Scenario: _0205052 check internal commands are refreshed on reread (purchase invoice)
+
+# The same refresh on a second document. Both scenarios use a purchase invoice on
+# purpose: documents of other kinds created in this tag become the first document that
+// blocks a unit change, and _2061ItemUnitForm asserts which document is named there.
+Scenario: _0205052 check internal commands are refreshed on reread (purchase invoice 116)
 	And I close all client application windows
 	When Create document PurchaseInvoice objects (check movements)
 	* The audit lock needs a posted document
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' |
-			| '115'    |
+			| '116'    |
 		And in the table "List" I click "Post" button
 		And I select current line in "List" table
-	When I Check the steps for Exception
-		| 'And I click "Audit lock (unlock)" button' |
-	And I execute 1C:Enterprise script at server
-		| 'AuditLockPrivileged.SetLock(Documents.PurchaseInvoice.FindByNumber("115"));' |
-	And I click the button named "FormReread"
-	And I click "Audit lock (unlock)" button
+	* The open form shows the command in the set-lock state
+		When I Check the steps for Exception
+			| 'And I click "Audit lock (unlock)" button' |
+	* Set the lock outside this form and reread - the command state follows
+		And I execute 1C:Enterprise script at server
+			| 'AuditLockPrivileged.SetLock(Documents.PurchaseInvoice.FindByNumber("116"));' |
+		And I click the button named "FormReread"
+		And I click "Audit lock (unlock)" button
 	* Clear the history this scenario produced
 		// _2063AuditLock asserts the whole audit lock history table and there is no
 		// interface to delete information register records
 		And I execute 1C:Enterprise script at server
-			| 'RS = InformationRegisters.AuditLockHistory.CreateRecordSet(); RS.Filter.Document.Set(Documents.PurchaseInvoice.FindByNumber("115")); RS.Write();' |
+			| 'RS = InformationRegisters.AuditLockHistory.CreateRecordSet(); RS.Filter.Document.Set(Documents.PurchaseInvoice.FindByNumber("116")); RS.Write();' |
 	And I close all client application windows

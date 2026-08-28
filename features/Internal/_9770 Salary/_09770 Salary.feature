@@ -1868,3 +1868,111 @@ Scenario: _097762 check sick leave limit is not bypassed by the payroll document
 			| '*'                              |
 			| 'Document registrations records' |
 	And I close all client application windows
+
+
+Scenario: _097767 check additional accrual with one-time type keeps its own expense type in payroll
+	And I close all client application windows
+	* Create Additional accrual
+		Given I open hyperlink "e1cib/list/Document.AdditionalAccrual"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Branch" by "shop 01" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I input "20.11.2023 12:00:00" text in the field named "Date"
+	* Fill the row and check only one-time accrual types are offered
+		And in the table "AccrualList" I click the button named "AccrualListAdd"
+		And I click choice button of "Employee" attribute in "AccrualList" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'David Romanov' |
+		And I select current line in "List" table
+		And I activate "Accrual type" field in "AccrualList" table
+		And I click choice button of "Accrual type" attribute in "AccrualList" table
+		And "List" table became equal
+			| 'Description' |
+			| 'Bonus'       |
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bonus'       |
+		And I select current line in "List" table
+		And I activate field named "AccrualListAmount" in "AccrualList" table
+		And I input "333" text in the field named "AccrualListAmount" of "AccrualList" table
+		And I finish line editing in "AccrualList" table
+	* Check the expense type is filled from the accrual type
+		And "AccrualList" table contains lines
+			| 'Employee'      | 'Accrual type' | 'Expense type' | 'Amount' |
+			| 'David Romanov' | 'Bonus'        | 'Rent'         | '333,00' |
+		And I click the button named "FormPostAndClose"
+		And I close all client application windows
+	* Check the bonus stays a separate payroll row with its own expense type
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Branch" by "shop 01" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I select from "Payment period" drop-down list by "fourth" string
+		And I input "01.11.2023" text in "Begin date" field
+		And I input "30.11.2023" text in "End date" field
+		And in the table "AccrualList" I click the button named "FillAccrual"
+		And "AccrualList" table contains lines
+			| 'Employee'      | 'Accrual type' | 'Expense type' | 'Amount' |
+			| 'David Romanov' | 'Bonus'        | 'Rent'         | '333,00' |
+		And "AccrualList" table contains lines
+			| 'Employee'      | 'Accrual type' | 'Expense type' |
+			| 'David Romanov' | 'Salary'       | 'Expense'      |
+	And I close all client application windows
+
+
+Scenario: _097769 check additional deduction with one-time type keeps its own expense type in payroll
+	And I close all client application windows
+	* Create Additional deduction
+		Given I open hyperlink "e1cib/list/Document.AdditionalDeduction"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Branch" by "shop 01" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I input "21.11.2023 12:00:00" text in the field named "Date"
+	* Fill the row and check only one-time deduction types are offered
+		And in the table "DeductionList" I click the button named "DeductionListAdd"
+		And I click choice button of "Employee" attribute in "DeductionList" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'David Romanov' |
+		And I select current line in "List" table
+		And I activate "Deduction type" field in "DeductionList" table
+		And I click choice button of "Deduction type" attribute in "DeductionList" table
+		And "List" table became equal
+			| 'Description' |
+			| 'Penalty'     |
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Penalty'     |
+		And I select current line in "List" table
+		And I activate field named "DeductionListAmount" in "DeductionList" table
+		And I input "333" text in the field named "DeductionListAmount" of "DeductionList" table
+		And I finish line editing in "DeductionList" table
+	* Check the expense type is filled from the deduction type
+		And "DeductionList" table contains lines
+			| 'Employee'      | 'Deduction type' | 'Expense type' | 'Amount' |
+			| 'David Romanov' | 'Penalty'        | 'Fuel'         | '333,00' |
+		And I click the button named "FormPostAndClose"
+		And I close all client application windows
+	* Check the penalty comes into payroll as a separate row with its own expense type
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Branch" by "shop 01" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I select from "Payment period" drop-down list by "fourth" string
+		And I input "01.11.2023" text in "Begin date" field
+		And I input "30.11.2023" text in "End date" field
+		And I move to "Deduction" tab
+		And in the table "DeductionList" I click the button named "FillDeduction"
+		And "DeductionList" table contains lines
+			| 'Employee'      | 'Deduction type' | 'Expense type' | 'Amount' |
+			| 'David Romanov' | 'Penalty'        | 'Fuel'         | '333,00' |
+	And I close all client application windows

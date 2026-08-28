@@ -223,6 +223,12 @@
           <value>Enum.PayrollTypes.EnumValue.Deduction</value>
         </value>
       </choiceParameters>
+      <choiceParameters>
+        <name>Filter.Periodicity</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.AccrualAndDeductionPeriodicity.EnumValue.OneTime</value>
+        </value>
+      </choiceParameters>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

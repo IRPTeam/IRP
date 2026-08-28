@@ -534,7 +534,7 @@ Scenario: _097710 create T9530S_WorkDays
 			And I select current line in "List" table
 			And I input "6" text in "Count days/hours" field
 			And I click "Save and close" button
-			And I wait "T9530 Work days*" window closing in 20 seconds
+			And I wait "T9530 Work days **" window closing in 20 seconds
 			And I go to line in "List" table
 				| 'Date'       |
 				| '07.11.2023' |
@@ -542,7 +542,7 @@ Scenario: _097710 create T9530S_WorkDays
 			Then "T9530 Work days" window is opened
 			And I input "0" text in "Count days/hours" field
 			And I click "Save and close" button
-			And I wait "T9530 Work days*" window closing in 20 seconds
+			And I wait "T9530 Work days **" window closing in 20 seconds
 			And "List" table contains lines
 				| 'Date'       | 'Employee schedule'                   | 'Count days/hours' |
 				| '04.11.2023' | '5 working days / 2 days off (hours)' | '6'                |

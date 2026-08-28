@@ -4,6 +4,7 @@ Procedure Unit_OnCreateAtServerAfter(Cancel, StandardProcessing)
 	AddFormAttributes();
 EndProcedure
 
+&AtServer
 Procedure AddFormAttributes()
 	
 	NewItem = ThisObject.Items.Add("ShowTechnicalColumns", Тип("FormField"), ThisObject.Items.GroupFilters);

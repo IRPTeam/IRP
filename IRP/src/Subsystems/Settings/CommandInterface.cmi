@@ -14,5 +14,8 @@
     <subsystems>Subsystem.Settings.Subsystem.Saas</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.ContactInfo</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.ObjectAccess</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.SystemAttributes</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.ObjectTransformation</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.BusinessProcesses</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

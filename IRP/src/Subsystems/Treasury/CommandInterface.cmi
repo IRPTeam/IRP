@@ -48,5 +48,6 @@
     <subsystems>Subsystem.Treasury.Subsystem.SchedulingOfPaymentDeadlines</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.ChequeBond</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.Taxes</subsystems>
+    <subsystems>Subsystem.Treasury.Subsystem.Accruals</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

@@ -13,5 +13,6 @@
     <subsystems>Subsystem.MasterData</subsystems>
     <subsystems>Subsystem.Reports</subsystems>
     <subsystems>Subsystem.Settings</subsystems>
+    <subsystems>Subsystem.Incidents</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

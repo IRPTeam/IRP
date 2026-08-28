@@ -48,7 +48,6 @@ Procedure RunTestByRow(Row)
 		Row.Error = Result;
 	EndIf;
 	
-	
 EndProcedure
 
 &AtClient

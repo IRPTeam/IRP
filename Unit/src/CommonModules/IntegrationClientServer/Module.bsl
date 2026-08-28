@@ -65,7 +65,9 @@ EndFunction
 // * Description - String -
 // * ResourceAddress - String -
 // * RequestType - String -
-// * Headers - Map -
+// * Headers - Map of KeyAndValue - Headers:
+// ** Key - String -
+// ** Value - String -
 // * RequestBody - Undefined -
 // * ServerResponse - See IntegrationClientServer.ServerResponse
 // * StartTime - Date -

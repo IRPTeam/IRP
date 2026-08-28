@@ -133,6 +133,9 @@ EndFunction
 #Region Test
 
 // Part 1
+// 
+// Returns:
+//  String - Empty string
 Function ExpenseTypeCompany1() Export
 	PrepareDB();
 	Data = GetData();
@@ -170,6 +173,9 @@ Function ExpenseTypeCompany1ItemType() Export
 EndFunction
 
 // Part 2
+// 
+// Returns:
+//  String - Empty string
 Function ExpenseTypeCompany2() Export
 	PrepareDB();
 	Data = GetData();
@@ -207,6 +213,9 @@ Function ExpenseTypeCompany2ItemType() Export
 EndFunction
 
 // Part 3. Check that always return company filter result. Filter for other field is false
+// 
+// Returns:
+//  String - Empty string
 Function ExpenseTypeCompanyEqualsCompany1() Export
 	PrepareDB();
 	Data = GetData();
@@ -244,6 +253,9 @@ Function ExpenseTypeCompanyEqualsCompany1ItemType() Export
 EndFunction
 
 // Part4
+// 
+// Returns:
+//  String - Empty string
 Function ExpenseTypeDiffCompany() Export
 	PrepareDB();
 	Data = GetData();

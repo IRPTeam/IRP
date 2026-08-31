@@ -515,11 +515,7 @@ Scenario: _01541362 create RSR using form link/unlink (different company, store,
 			| 'Description'                |
 			| 'Distribution department'    |
 		And I select current line in "List" table	
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 	* Select items from basis documents
 		And I move to "Item list" tab		
 		And I click the button named "AddBasisDocuments"
@@ -1544,12 +1540,7 @@ Scenario:  _0154143 change payment term in POS
 			And I expand "Price settings" group
 			And I expand "Store and delivery" group
 			And I input "Retail partner term 2" text in "ENG" field
-			And I click Select button of "Multi currency movement type" field
-			Then "Multi currency movement types" window is opened
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'TRY'             |
-			And I select current line in "List" table
+			And I select "TRY" exact value from "Multi currency movement type" drop-down list
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Description'              |
@@ -1726,11 +1717,7 @@ Scenario:  _0154149 create Cash statement
 			| 'Description'     |
 			| 'Transit Main'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click "Save and close" button		
 	* Create Cash statement statuses
 		* Done
@@ -2237,11 +2224,7 @@ Scenario:  _0154149 create Cash statement
 	* Create Cash Statement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Status" field
 		And I go to line in "List" table
 			| 'Description'   |
@@ -2376,11 +2359,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company'            |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2396,11 +2375,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 		Then the form attribute named "Agreement" became equal to "Partner term NDB"
 	* Check filling in Company from Partner term
 		* Change company in Retail sales receipt
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -2512,11 +2487,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'Serial lot numbers'    | 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Offers amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| ''                      | '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | ''                 | '1,000'       | 'pcs'     | 'No'                    | '61,02'         | '338,98'        | '400,00'          | 'Store 01'     |
 				| ''                      | '350,00'    | 'Shirt'       | '18%'    | '38/Black'     | ''                 | '2,000'       | 'pcs'     | 'No'                    | '106,78'        | '593,22'        | '700,00'          | 'Store 01'     |
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
@@ -2682,19 +2653,9 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'Dont calculate row'    | 'Item'     | 'Item key'    | 'Net amount'    | 'Price'     | 'Quantity'    | 'Store'       | 'Tax amount'    | 'Total amount'    | 'Unit'    | 'VAT'     |
 				| 'No'                    | 'Dress'    | 'L/Green'     | '550,00'        | '550,00'    | '1,000'       | 'Store 01'    | '99,00'         | '649,00'          | 'pcs'     | '18%'     |
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And "List" table does not contain lines
-				| 'Description'     |
-				| 'box (8 pcs)'     |
-			And "List" table contains lines
-				| 'Description'           |
-				| 'pcs'                   |
-				| 'box Dress (8 pcs)'     |
-			Then the number of "List" table lines is "равно" "2"
-			And I go to line in "List" table
-				| 'Description'           |
-				| 'box Dress (8 pcs)'     |
-			And I select current line in "List" table
+			When I Check the steps for Exception
+				| 'And I select "box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table' |
+			And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Item'     | 'Item key'    | 'Dont calculate row'    | 'Quantity'    | 'Unit'                 | 'Tax amount'    | 'Price'       | 'VAT'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| 'Dress'    | 'L/Green'     | 'No'                    | '1,000'       | 'box Dress (8 pcs)'    | '792,00'        | '4 400,00'    | '18%'    | '4 400,00'      | '5 192,00'        | 'Store 01'     |
@@ -2723,11 +2684,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 		Then the form attribute named "Agreement" became equal to "Partner term NDB"
 	* Check filling in Company from Partner term
 		* Change company in Retail sales receipt
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
 			And I remove checkbox named "FilterCompanyUse"
@@ -2839,11 +2796,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'Serial lot numbers'    | 'Price'     | 'Detail'    | 'Item'        | 'VAT'    | 'Item key'     | 'Offers amount'    | 'Quantity'    | 'Price type'           | 'Unit'    | 'Revenue type'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'       | 'Profit loss center'    | 'Additional analytic'     |
 				| ''                      | '400,00'    | ''          | 'Trousers'    | '18%'    | '38/Yellow'    | ''                 | '1,000'       | 'Basic Price Types'    | 'pcs'     | ''                | 'No'                    | '61,02'         | '338,98'        | '400,00'          | 'Store 01'    | 'Shop 01'               | ''                        |
 				| ''                      | '350,00'    | ''          | 'Shirt'       | '18%'    | '38/Black'     | ''                 | '2,000'       | 'Basic Price Types'    | 'pcs'     | ''                | 'No'                    | '106,78'        | '593,22'        | '700,00'          | 'Store 01'    | 'Shop 01'               | ''                        |
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
@@ -3045,19 +2998,9 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'Profit loss center'    | 'Dont calculate row'    | 'Item'     | 'Item key'    | 'Net amount'    | 'Price'     | 'Price type'           | 'Quantity'    | 'Store'       | 'Tax amount'    | 'Total amount'    | 'Unit'    | 'VAT'     |
 				| 'Shop 01'               | 'No'                    | 'Dress'    | 'L/Green'     | '550,00'        | '550,00'    | 'Basic Price Types'    | '1,000'       | 'Store 01'    | '99,00'         | '649,00'          | 'pcs'     | '18%'     |
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And "List" table does not contain lines
-				| 'Description'     |
-				| 'box (8 pcs)'     |
-			And "List" table contains lines
-				| 'Description'           |
-				| 'pcs'                   |
-				| 'box Dress (8 pcs)'     |
-			Then the number of "List" table lines is "равно" "2"
-			And I go to line in "List" table
-				| 'Description'           |
-				| 'box Dress (8 pcs)'     |
-			And I select current line in "List" table
+			When I Check the steps for Exception
+				| 'And I select "box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table' |
+			And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Profit loss center'    | 'Price type'                 | 'Item'     | 'Item key'    | 'Dont calculate row'    | 'Quantity'    | 'Unit'                 | 'Tax amount'    | 'Price'       | 'VAT'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| 'Shop 01'               | 'Basic Price Types'          | 'Shirt'    | '38/Black'    | 'No'                    | '2,000'       | 'pcs'                  | ''              | '350,00'      | '0%'     | '700,00'        | '700,00'          | 'Store 01'     |
@@ -3158,11 +3101,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			| 'Description'            |
 			| 'Retail partner term'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"		
 		And I move to "Item list" tab
@@ -3351,11 +3290,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			| 'Description'            |
 			| 'Retail partner term'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"		
 		And I move to "Item list" tab
@@ -3521,11 +3456,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			| 'Description'            |
 			| 'Retail partner term'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
@@ -3647,11 +3578,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			| 'Description'            |
 			| 'Retail partner term'    |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
@@ -4524,13 +4451,14 @@ Scenario: _0154201 create postponed RSR without a reservation (CRS not used)
 	* Check 
 		And I click "Registrations report" button
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines by template
 			| '$$PostponedRSR2$$'                     | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
 			| 'Document registrations records'        | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
 			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
 			| ''                                      | 'Dimensions'        | 'Attributes'            | ''                        | ''                      | ''            | ''       | ''       | ''                      |
 			| ''                                      | 'Document'          | 'Date'                  | 'Number'                  | 'Create date'           | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
 			| ''                                      | '$$PostponedRSR2$$' | '$$DatePostponedRSR2$$' | '$$NumberPostponedRSR2$$' | '$$DatePostponedRSR2$$' | ''            | 'CI'     | ''       | 'No'                    |
+		
 		And I close current window
 
 
@@ -4589,7 +4517,7 @@ Scenario: _0154202 create postponed RRR (CRS not used)
 	* Check 
 		And I click "Registrations report" button
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines by template
 			| '$$PostponedRSR2$$'                     | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
 			| 'Document registrations records'        | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
 			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |

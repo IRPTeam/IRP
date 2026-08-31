@@ -210,7 +210,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
@@ -769,25 +773,57 @@ Function R4032B_GoodsInTransitOutgoing()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsReturnToVendor
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			then SerialLotNumbers.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end as SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			then SourceOfOrigins.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end as SourceOfOrigin,
+		|	sum(case
+		|		when SerialLotNumbers.SerialLotNumber.Ref is null
+		|			then ItemList.Quantity
+		|		else SerialLotNumbers.Quantity
+		|	end) as Quantity,
+		|	0 as PreliminaryQuantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|		left join SerialLotNumbers as SerialLotNumbers
+		|		on ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber,
+		|			VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsReturnToVendor
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			then SerialLotNumbers.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end,
+		|	case
+		|		when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			then SourceOfOrigins.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

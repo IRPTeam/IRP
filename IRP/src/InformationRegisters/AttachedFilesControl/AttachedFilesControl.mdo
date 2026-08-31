@@ -113,9 +113,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="43d053ec-e528-4f52-aa74-a675f7c6d532">

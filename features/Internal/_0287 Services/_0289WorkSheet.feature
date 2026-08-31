@@ -161,11 +161,7 @@ Scenario: _0293002 create Work sheet based on Work order without SO (link, unlin
 		And I delete "$$WorkSheet1$$" variable
 		And I save the value of "Number" field as "$$NumberWorkSheet1$$"
 		And I save the window as "$$WorkSheet1$$"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "FormPostAndClose"		
 				
 					
@@ -197,11 +193,7 @@ Scenario: _0293002 create Work sheet based on SO
 		And I delete "$$WorkSheet2$$" variable
 		And I save the value of "Number" field as "$$NumberWorkSheet2$$"
 		And I save the window as "$$WorkSheet2$$"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 		And I click the button named "FormPostAndClose"		
 						
 					
@@ -240,11 +232,7 @@ Scenario: _0293003 create Work sheet based on WO with SO
 			| '5'   | 'Include to work cost'   | 'Material 2'   | 'Material 2'   | 'Material 2'       | 'pcs'          | '2'                | 'Store 01'   | 'Material 2'   | 'pcs'    | '2'           |
 	
 		Then the form attribute named "Branch" became equal to "Front office"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table	
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberWorkSheet3$$" variable
@@ -265,11 +253,7 @@ Scenario: _0293004 create Work sheet without bases document
 			| 'Kalipso'        |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"		
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Filling works tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -331,11 +315,7 @@ Scenario: _0293004 create Work sheet without bases document
 			| 'Alexander Orlov'    |
 		And I select current line in "List" table
 		And I activate field named "WorkersUnit" in "Workers" table
-		And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'hour'           |
-		And I select current line in "List" table
+		And I select "hour" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 		And I activate field named "WorkersQuantity" in "Workers" table
 		And I input "2,000" text in the field named "WorkersQuantity" of "Workers" table
 		And I finish line editing in "Workers" table
@@ -347,11 +327,7 @@ Scenario: _0293004 create Work sheet without bases document
 			| 'David Romanov'    |
 		And I select current line in "List" table
 		And I activate field named "WorkersUnit" in "Workers" table
-		And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'hour'           |
-		And I select current line in "List" table
+		And I select "hour" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 		And I activate field named "WorkersQuantity" in "Workers" table
 		And I input "2,500" text in the field named "WorkersQuantity" of "Workers" table
 		And I finish line editing in "Workers" table
@@ -367,11 +343,7 @@ Scenario: _0293004 create Work sheet without bases document
 			| 'Description'    |
 			| 'Workshop 1'     |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from the drop-down list named "Currency"
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberWorkSheet4$$" variable

@@ -210,6 +210,16 @@ Procedure ProductionsUnitOnChange(Item)
 	DocProductionPlanningClient.ProductionsUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ProductionsUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.Productions.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);		
+EndProcedure
+
 #EndRegion
 
 #Region QUANTITY
@@ -341,7 +351,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

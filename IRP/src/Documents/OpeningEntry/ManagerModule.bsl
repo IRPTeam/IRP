@@ -182,6 +182,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2040B_TaxesIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R1040B_TaxesOutgoing.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
+	Tables.R5011B_CustomersAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5012B_VendorsAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -271,6 +274,10 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	
+	If Parameters.Property("ArrayOfPostingInfo") Then
+		Parameters.Delete("ArrayOfPostingInfo");
+	EndIf;
+	
 	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
@@ -309,7 +316,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,"Document.OpeningEntry.Inventory");
@@ -415,6 +426,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(B1040B_AgingKey());
 	QueryArray.Add(R8015T_ConsignorPrices());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(R9510B_SalaryPayment());
@@ -682,6 +694,7 @@ Function CustomersAging()
 		   |	OpeningEntryAccountReceivableByDocuments.Partner AS Partner,
 		   |	OpeningEntryAccountReceivableByDocuments.Agreement AS Agreement,
 		   |	OpeningEntryAccountReceivableByDocuments.Ref AS Invoice,
+		   |	OpeningEntryAccountReceivableByDocuments.Key,
 		   |	OpeningEntryCustomersPaymentTerms.Date AS PaymentDate,
 		   |	OpeningEntryAccountReceivableByDocuments.Currency AS Currency,
 		   |	OpeningEntryCustomersPaymentTerms.Amount AS Amount
@@ -704,6 +717,7 @@ Function VendorsAging()
 		   |	OpeningEntryAccountPayableByDocuments.Partner AS Partner,
 		   |	OpeningEntryAccountPayableByDocuments.Agreement AS Agreement,
 		   |	OpeningEntryAccountPayableByDocuments.Ref AS Invoice,
+		   |	OpeningEntryAccountPayableByDocuments.Key,
 		   |	OpeningEntryVendorsPaymentTerms.Date AS PaymentDate,
 		   |	OpeningEntryAccountPayableByDocuments.Currency AS Currency,
 		   |	OpeningEntryVendorsPaymentTerms.Amount AS Amount
@@ -1016,6 +1030,7 @@ Function R5012B_VendorsAging()
 		   |	VendorsAging.Partner,
 		   |	VendorsAging.Invoice,
 		   |	VendorsAging.PaymentDate,
+		   |	VendorsAging.Key,
 		   |	VendorsAging.Amount
 		   |INTO R5012B_VendorsAging
 		   |FROM
@@ -1081,6 +1096,7 @@ Function R5011B_CustomersAging()
 		   |	CustomersAging.Partner,
 		   |	CustomersAging.Invoice,
 		   |	CustomersAging.PaymentDate,
+		   |	CustomersAging.Key,
 		   |	CustomersAging.Amount
 		   |INTO R5011B_CustomersAging
 		   |FROM
@@ -1088,6 +1104,44 @@ Function R5011B_CustomersAging()
 		   |WHERE 
 		   |	TRUE";
 
+EndFunction
+
+Function B1040B_AgingKey()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CustomersAging.Period,
+		|	CustomersAging.Company,
+		|	CustomersAging.Branch,
+		|	CustomersAging.Currency,
+		|	CustomersAging.Agreement,
+		|	CustomersAging.Partner,
+		|	CustomersAging.Invoice,
+		|	CustomersAging.PaymentDate,
+		|	CustomersAging.Amount
+		|INTO B1040B_AgingKey
+		|FROM
+		|	CustomersAging AS CustomersAging
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VendorsAging.Period,
+		|	VendorsAging.Company,
+		|	VendorsAging.Branch,
+		|	VendorsAging.Currency,
+		|	VendorsAging.Agreement,
+		|	VendorsAging.Partner,
+		|	VendorsAging.Invoice,
+		|	VendorsAging.PaymentDate,
+		|	VendorsAging.Amount
+		|FROM
+		|	VendorsAging AS VendorsAging
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -1765,64 +1819,128 @@ Function T6020S_BatchKeysInfo()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.StoreTradeAgent,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity
-		   |FROM
-		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.StoreTradeAgent,
-		   |	ShipmentToTradeAgent.ItemKey
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.Store,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity
-		   |FROM
-		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.Store,
-		   |	ShipmentToTradeAgent.ItemKey";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when ItemList.SerialLotNumber.BatchBalanceDetail
+		|			then ItemList.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end as SerialLotNumber,
+		|	case
+		|		when ItemList.SourceOfOrigin.BatchBalanceDetail
+		|			then ItemList.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end as SourceOfOrigin,
+		|	SUM(ItemList.Quantity) AS Quantity,
+		|	0 AS PreliminaryQuantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when ItemList.SerialLotNumber.BatchBalanceDetail
+		|			then ItemList.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end,
+		|	case
+		|		when ItemList.SourceOfOrigin.BatchBalanceDetail
+		|			then ItemList.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ShipmentToTradeAgent.Period,
+		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.StoreTradeAgent,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	case
+		|		when ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			then ShipmentToTradeAgent.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end as SerialLotNumber,
+		|	case
+		|		when ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			then ShipmentToTradeAgent.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end as SourceOfOrigin,
+		|	SUM(ShipmentToTradeAgent.Quantity) AS Quantity,
+		|	0 AS PreliminaryQuantity
+		|FROM
+		|	ShipmentToTradeAgent AS ShipmentToTradeAgent
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ShipmentToTradeAgent.Period,
+		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.StoreTradeAgent,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	case
+		|		when ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			then ShipmentToTradeAgent.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end,
+		|	case
+		|		when ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			then ShipmentToTradeAgent.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ShipmentToTradeAgent.Period,
+		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Store,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	case
+		|		when ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			then ShipmentToTradeAgent.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end as SerialLotNumber,
+		|	case
+		|		when ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			then ShipmentToTradeAgent.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end as SourceOfOrigin,
+		|	SUM(ShipmentToTradeAgent.Quantity) AS Quantity,
+		|	0 AS PreliminaryQuantity
+		|FROM
+		|	ShipmentToTradeAgent AS ShipmentToTradeAgent
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ShipmentToTradeAgent.Period,
+		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Store,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	case
+		|		when ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			then ShipmentToTradeAgent.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end,
+		|	case
+		|		when ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			then ShipmentToTradeAgent.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end";
 EndFunction
 
 Function R8015T_ConsignorPrices()

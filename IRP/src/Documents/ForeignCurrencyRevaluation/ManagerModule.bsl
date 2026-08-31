@@ -60,6 +60,28 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
+	|// active
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.AmountBalance AS Amount
+	|INTO _R5011B_CustomersAging
+	|FROM
+	|	AccumulationRegister.R5011B_CustomersAging.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
+	|// passive
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.AmountBalance AS Amount
+	|INTO _R5012B_VendorsAging
+	|FROM
+	|	AccumulationRegister.R5012B_VendorsAging.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
 	|// passive
 	|SELECT
 	|	*,
@@ -258,7 +280,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
-	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Reg.TransactionCurrency AS CurrencyFrom,
@@ -456,6 +477,24 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Reg.Source AS Source
 	|FROM
 	|	_R2040B_TaxesIncoming AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Reg.TransactionCurrency AS CurrencyFrom,
+	|	Reg.Currency AS CurrencyTo,
+	|	Reg.Source AS Source
+	|FROM
+	|	_R5011B_CustomersAging AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Reg.TransactionCurrency AS CurrencyFrom,
+	|	Reg.Currency AS CurrencyTo,
+	|	Reg.Source AS Source
+	|FROM
+	|	_R5012B_VendorsAging AS Reg
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -496,6 +535,43 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("Company", Ref.Company);
 	Query.Execute();
 
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	UniqueCurrencyPairs.CurrencyFrom,
+	|	UniqueCurrencyPairs.CurrencyTo,
+	|	UniqueCurrencyPairs.Source,
+	|	CurrencyRatesSliceLast.Rate
+	|FROM
+	|	UniqueCurrencyPairs AS UniqueCurrencyPairs
+	|		LEFT JOIN InformationRegister.CurrencyRates.SliceLast(&PeriodSliceLast, (CurrencyFrom, CurrencyTo, Source) IN
+	|			(SELECT
+	|				UniqueCurrencyPairs.CurrencyFrom,
+	|				UniqueCurrencyPairs.CurrencyTo,
+	|				UniqueCurrencyPairs.Source
+	|			FROM
+	|				UniqueCurrencyPairs AS UniqueCurrencyPairs)) AS CurrencyRatesSliceLast
+	|		ON UniqueCurrencyPairs.CurrencyFrom = CurrencyRatesSliceLast.CurrencyFrom
+	|		AND UniqueCurrencyPairs.CurrencyTo = CurrencyRatesSliceLast.CurrencyTo
+	|		AND UniqueCurrencyPairs.Source = CurrencyRatesSliceLast.Source
+	|WHERE
+	|	CurrencyRatesSliceLast.Rate IS NULL
+	|	and UniqueCurrencyPairs.CurrencyFrom <> UniqueCurrencyPairs.CurrencyTo";
+	
+	Query.SetParameter("PeriodSliceLast", DocumentDate);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	While QuerySelection.Next() Do
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_200, 
+			QuerySelection.CurrencyFrom, QuerySelection.CurrencyTo, QuerySelection.Source));
+	EndDo;
+	If QuerySelection.Count() > 0 Then
+		Cancel = True;
+		Return New Structure();
+	EndIf;
+
 	CurrencyRates = Parameters.TempTablesManager.Tables.Find("CurrencyRates").GetData().Unload();
 
 	ArrayOfActives = New Array();
@@ -518,6 +594,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	ArrayOfOthers = New Array();
 	ArrayOfOthers.Add("R3016B_ChequeAndBonds");
+	ArrayOfOthers.Add("R5011B_CustomersAging");
+	ArrayOfOthers.Add("R5012B_VendorsAging");
 	ArrayOfOthers.Add("R6070T_OtherPeriodsExpenses");
 	ArrayOfOthers.Add("R6080T_OtherPeriodsRevenues");
 	ArrayOfOthers.Add("R5020B_PartnersBalance_CustomerTransaction");
@@ -525,7 +603,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	ArrayOfOthers.Add("R5020B_PartnersBalance_VendorTransaction");
 	ArrayOfOthers.Add("R5020B_PartnersBalance_VendorAdvance");
 	ArrayOfOthers.Add("R5020B_PartnersBalance_OtherTransaction");
-
+	
 	ExpenseRevenueParams = New Structure();
 	ExpenseRevenueParams.Insert("DocumentDate", DocumentDate);
 	
@@ -1879,18 +1957,10 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables(Parameters = Undefined)
 	QueryArray = New Array;
 	Return QueryArray;
 EndFunction
-
-#EndRegion
-
-#Region Posting_MainTables
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
@@ -1915,8 +1985,14 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(R2040B_TaxesIncoming());
+	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5011B_CustomersAging());
 	Return QueryArray;
 EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
 
 Function R5021T_Revenues()
 	Return "SELECT *
@@ -2102,6 +2178,28 @@ Function R2021B_CustomersTransactions()
 		   |	Revaluated_R2021B_CustomersTransactions
 		   |WHERE
 		   |	TRUE";
+EndFunction
+
+Function R5012B_VendorsAging()
+	Return
+		"SELECT
+		|	*
+		|INTO R5012B_VendorsAging
+		|FROM
+		|	Revaluated_R5012B_VendorsAging
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R5011B_CustomersAging()
+	Return
+		"SELECT
+		|	*
+		|INTO R5011B_CustomersAging
+		|FROM
+		|	Revaluated_R5011B_CustomersAging
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R3010B_CashOnHand()

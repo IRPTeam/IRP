@@ -126,6 +126,7 @@
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:LabelFieldExtInfo">
+    <width>6</width>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
    </extInfo>
@@ -167,19 +168,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>CashAccount</name>
-   <id>34</id>
+   <name>TransactionType</name>
+   <id>40</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.CashAccount</segments>
+    <segments>List.TransactionType</segments>
    </dataPath>
    <extendedTooltip>
-    <name>CashAccountExtendedTooltip</name>
-    <id>36</id>
+    <name>TransactionTypeExtendedTooltip</name>
+    <id>42</id>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -188,8 +189,8 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>CashAccountContextMenu</name>
-    <id>35</id>
+    <name>TransactionTypeContextMenu</name>
+    <id>41</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -287,19 +288,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>TransactionType</name>
-   <id>40</id>
+   <name>Comment</name>
+   <id>46</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.TransactionType</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>TransactionTypeExtendedTooltip</name>
-    <id>42</id>
+    <name>CommentExtendedTooltip</name>
+    <id>48</id>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -308,8 +309,48 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>TransactionTypeContextMenu</name>
-    <id>41</id>
+    <name>CommentContextMenu</name>
+    <id>47</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <maxWidth>20</maxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>Author</name>
+   <id>43</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.Author</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>AuthorExtendedTooltip</name>
+    <id>45</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>AuthorContextMenu</name>
+    <id>44</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -367,19 +408,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Author</name>
-   <id>43</id>
+   <name>CashAccount</name>
+   <id>34</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Author</segments>
+    <segments>List.CashAccount</segments>
    </dataPath>
    <extendedTooltip>
-    <name>AuthorExtendedTooltip</name>
-    <id>45</id>
+    <name>CashAccountExtendedTooltip</name>
+    <id>36</id>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -388,48 +429,8 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>AuthorContextMenu</name>
-    <id>44</id>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>InputField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <wrap>true</wrap>
-    <chooseType>true</chooseType>
-    <typeDomainEnabled>true</typeDomainEnabled>
-    <textEdit>true</textEdit>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
-   <name>Comment</name>
-   <id>46</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.Comment</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>CommentExtendedTooltip</name>
-    <id>48</id>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>CommentContextMenu</name>
-    <id>47</id>
+    <name>CashAccountContextMenu</name>
+    <id>35</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>

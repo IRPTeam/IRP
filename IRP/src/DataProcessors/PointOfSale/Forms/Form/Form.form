@@ -1307,7 +1307,6 @@
            <name>ItemListOnChange</name>
           </handlers>
           <searchStringAddition>
-           <enabled>false</enabled>
            <name>ItemListSearchString</name>
            <id>610</id>
            <extendedTooltip>
@@ -1331,7 +1330,6 @@
            </extInfo>
           </searchStringAddition>
           <viewStatusAddition>
-           <enabled>false</enabled>
            <name>ItemListViewStatus</name>
            <id>613</id>
            <extendedTooltip>
@@ -1357,7 +1355,6 @@
            </extInfo>
           </viewStatusAddition>
           <searchControlAddition>
-           <enabled>false</enabled>
            <name>ItemListSearchControl</name>
            <id>616</id>
            <extendedTooltip>
@@ -2975,7 +2972,6 @@
          <horizontalAlign>Left</horizontalAlign>
         </autoCommandBar>
         <searchStringAddition>
-         <enabled>false</enabled>
          <name>BasisPaymentsSearchString</name>
          <id>1186</id>
          <extendedTooltip>
@@ -2999,7 +2995,6 @@
          </extInfo>
         </searchStringAddition>
         <viewStatusAddition>
-         <enabled>false</enabled>
          <name>BasisPaymentsViewStatus</name>
          <id>1192</id>
          <extendedTooltip>
@@ -3024,7 +3019,6 @@
          </extInfo>
         </viewStatusAddition>
         <searchControlAddition>
-         <enabled>false</enabled>
          <name>BasisPaymentsSearchControl</name>
          <id>1189</id>
          <extendedTooltip>
@@ -3266,7 +3260,6 @@
          <name>ItemsPickupOnActivateRow</name>
         </handlers>
         <searchStringAddition>
-         <enabled>false</enabled>
          <name>ItemsPickupSearchString</name>
          <id>669</id>
          <extendedTooltip>
@@ -3297,7 +3290,6 @@
          </extInfo>
         </searchStringAddition>
         <viewStatusAddition>
-         <enabled>false</enabled>
          <name>ItemsPickupViewStatus</name>
          <id>672</id>
          <extendedTooltip>
@@ -3323,7 +3315,6 @@
          </extInfo>
         </viewStatusAddition>
         <searchControlAddition>
-         <enabled>false</enabled>
          <name>ItemsPickupSearchControl</name>
          <id>675</id>
          <extendedTooltip>
@@ -4121,7 +4112,6 @@
          <autoFill>true</autoFill>
         </autoCommandBar>
         <searchStringAddition>
-         <enabled>false</enabled>
          <name>SpecialOffersSearchString</name>
          <id>1281</id>
          <extendedTooltip>
@@ -4145,7 +4135,6 @@
          </extInfo>
         </searchStringAddition>
         <viewStatusAddition>
-         <enabled>false</enabled>
          <name>SpecialOffersViewStatus</name>
          <id>1287</id>
          <extendedTooltip>
@@ -4170,7 +4159,6 @@
          </extInfo>
         </viewStatusAddition>
         <searchControlAddition>
-         <enabled>false</enabled>
          <name>SpecialOffersSearchControl</name>
          <id>1284</id>
          <extendedTooltip>
@@ -5151,7 +5139,6 @@
      <name>CashInListSelection</name>
     </handlers>
     <searchStringAddition>
-     <enabled>false</enabled>
      <name>CashInListSearchString</name>
      <id>1095</id>
      <extendedTooltip>
@@ -5175,7 +5162,6 @@
      </extInfo>
     </searchStringAddition>
     <viewStatusAddition>
-     <enabled>false</enabled>
      <name>CashInListViewStatus</name>
      <id>1101</id>
      <extendedTooltip>
@@ -5200,7 +5186,6 @@
      </extInfo>
     </viewStatusAddition>
     <searchControlAddition>
-     <enabled>false</enabled>
      <name>CashInListSearchControl</name>
      <id>1098</id>
      <extendedTooltip>
@@ -6684,6 +6669,23 @@ End</presentationExpression>
   <valueType>
    <types>DocumentRef.RetailReturnReceipt</types>
    <types>DocumentRef.RetailSalesReceipt</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>DocumentPostingAfterPrinting</name>
+  <title>
+   <key>en</key>
+   <value>5357AEAA-C598-9F45-5CD2-2947B11F8568</value>
+  </title>
+  <id>216</id>
+  <valueType>
+   <types>Boolean</types>
   </valueType>
   <view>
    <common>true</common>

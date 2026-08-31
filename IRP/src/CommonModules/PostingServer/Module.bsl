@@ -52,7 +52,9 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		RegisteredRecordsArray.Add(Record.Value.RecordSet);
 	EndDo;
 	Parameters.Insert("RegisteredRecords", RegisteredRecordsArray);
-	Parameters.Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
+	If CommonFunctionsClientServer.GetFromAddInfo(DocObject.AdditionalProperties, "CheckAfterWrite", True) Then
+		Parameters.Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
+	EndIf;
 	// Accounting MD5
 	If Not Cancel And Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(TypeOf(Parameters.Object.Ref)) <> Undefined Then
 		AccountingServer.UpdateAccountingRelevance(DocObject.Ref);	
@@ -200,6 +202,7 @@ EndFunction
 Function RegisterRecords(Parameters)
 	
 	isManualRecordsHasDifference = False;
+	IsStorno = TypeOf(Parameters.Object.Ref) = Type("DocumentRef.Storno");
 	
 	RegisteredRecords = New Map();
 	For Each Row In Parameters.PostingDataTables Do
@@ -224,21 +227,27 @@ Function RegisterRecords(Parameters)
 			TableForLoad.FillValues(True, "Active");
 		EndIf;
 		
-		If Row.Value.Metadata = Metadata.AccumulationRegisters.R6020B_BatchBalance 
+		If (Row.Value.Metadata = Metadata.AccumulationRegisters.R6020B_BatchBalance 
 			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6060T_CostOfGoodsSold
-			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6025B_SimpleBatch Then
+			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6025B_SimpleBatch) 
+			And Not IsStorno Then
 				Continue; //Never rewrite
 		EndIf;
 		
-		ArrayOfRegisters = RegistersWithAdditionalDataFilling();
-		If ArrayOfRegisters.Find(Row.Value.Metadata) <> Undefined Then
+		RegistersWithAdditionalDataFilling = GetRegistersWithAdditionalDataFilling();
+		_RegisterType = RegistersWithAdditionalDataFilling.Get(Row.Value.Metadata); 
+		If _RegisterType <> Undefined Then
 			RegisterName = Row.Value.Metadata.Name;
-			AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+			If _RegisterType = Metadata.AccumulationRegisters Then
+				AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+			ElsIf _RegisterType = Metadata.InformationRegisters Then
+				InformationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+			EndIf;
 		EndIf;
 		
 		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 		
-		If Row.Value.Metadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo Then
+		If Row.Value.Metadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo And Not IsStorno Then
 			UpdateCosts(Parameters.Object, TableForLoad, RegisteredRecords);
 		EndIf;
 		
@@ -300,7 +309,7 @@ Function RecordSetIsEqual(RecordSet, TableForLoad)
 
 	RecordSet.Load(TableForLoad);
 	
-	Result = CommonFunctionsServer.TablesIsEqual(RecordSet.Unload(), TableOldRecords, "Recorder,LineNumber,PointInTime,UniqueID");
+	Result = CommonFunctionsServer.TablesIsEqual(RecordSet.Unload(), TableOldRecords, "Recorder,LineNumber,PointInTime,UniqueID", True);
 	
 	Return Result;
 EndFunction
@@ -1244,7 +1253,7 @@ EndFunction
 
 Function UseRegister(Name) Export
 	// Delete CashInTransit
-	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_";
+	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_"; 
 EndFunction
 
 Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export
@@ -1263,6 +1272,169 @@ Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export
 
 	Query.Text = StrConcat(QueryArray, Chars.LF + ";" + Chars.LF);
 	Query.Execute();
+	
+	ArrayOfQueryText = New Array();
+	TableR4010B_ActualStocks = Query.TempTablesManager.Tables.Find("R4010B_ActualStocks");
+	If TableR4010B_ActualStocks <> Undefined Then
+		TextR4010B_ActualStocks = 
+		"SELECT
+		|T.Period AS Period, 
+		|T.RecordType AS RecordType, 
+		|&Company AS Company, 
+		|T.Store AS Store, 
+		|T.ItemKey AS ItemKey, 
+		|undefined AS SerialLotNumber, 
+		|undefined AS SourceOfOrigin,
+		|undefined AS Basis,
+		|T.Quantity AS ActualQuantity,
+		|0 AS FreeQuantity,
+		|0 AS ReservationQuantity,
+		|0 AS TransitIncomingQuantity,
+		|0 AS TransitOutgoingQuantity,
+		|0 AS InventoryQuantity,
+		|0 AS PreliminaryQuantity
+		|%1
+		|FROM R4010B_ActualStocks AS T";
+		
+		If TableR4010B_ActualStocks.Columns.Find("SerialLotNumber") <> Undefined Then
+			TextR4010B_ActualStocks = StrReplace(TextR4010B_ActualStocks, 
+				"undefined AS SerialLotNumber", "T.SerialLotNumber AS SerialLotNumber");
+		EndIf;
+		
+		If TableR4010B_ActualStocks.Columns.Find("SourceOfOrigin") <> Undefined Then
+			TextR4010B_ActualStocks = StrReplace(TextR4010B_ActualStocks, 
+				"undefined AS SourceOfOrigin", "T.SourceOfOrigin AS SourceOfOrigin");
+		EndIf;
+		
+		ArrayOfQueryText.Add(TextR4010B_ActualStocks);
+	EndIf;
+	
+	If Query.TempTablesManager.Tables.Find("R4011B_FreeStocks") <> Undefined Then
+		ArrayOfQueryText.Add("SELECT
+		|T.Period AS Period, 
+		|T.RecordType AS RecordType, 
+		|&Company AS Company, 
+		|T.Store AS Store, 
+		|T.ItemKey AS ItemKey, 
+		|undefined AS SerialLotNumber, 
+		|undefined AS SourceOfOrigin, 
+		|undefined AS Basis,
+		|0 AS ActualQuantity,
+		|T.Quantity AS FreeQuantity,
+		|0 AS ReservationQuantity,
+		|0 AS TransitIncomingQuantity,
+		|0 AS TransitOutgoingQuantity,
+		|0 AS InventoryQuantity,
+		|0 AS PreliminaryQuantity
+		|%1
+		|FROM R4011B_FreeStocks AS T");
+	EndIf;
+	
+	If Query.TempTablesManager.Tables.Find("R4012B_StockReservation") <> Undefined Then
+		ArrayOfQueryText.Add("SELECT
+		|T.Period AS Period, 
+		|T.RecordType AS RecordType, 
+		|&Company AS Company, 
+		|T.Store AS Store, 
+		|T.ItemKey AS ItemKey, 
+		|undefined AS SerialLotNumber, 
+		|undefined AS SourceOfOrigin, 
+		|T.Order AS Basis,
+		|0 AS ActualQuantity,
+		|0 AS FreeQuantity,
+		|T.Quantity AS ReservationQuantity,
+		|0 AS TransitIncomingQuantity,
+		|0 AS TransitOutgoingQuantity,
+		|0 AS InventoryQuantity,
+		|0 AS PreliminaryQuantity
+		|%1
+		|FROM R4012B_StockReservation AS T");
+	EndIf;
+	
+	If Query.TempTablesManager.Tables.Find("R4031B_GoodsInTransitIncoming") <> Undefined Then
+		ArrayOfQueryText.Add("SELECT
+		|T.Period AS Period, 
+		|T.RecordType AS RecordType, 
+		|&Company AS Company, 
+		|T.Store AS Store, 
+		|T.ItemKey AS ItemKey, 
+		|undefined AS SerialLotNumber, 
+		|undefined AS SourceOfOrigin, 
+		|T.Basis AS Basis,
+		|0 AS ActualQuantity,
+		|0 AS FreeQuantity,
+		|0 AS ReservationQuantity,
+		|T.Quantity AS TransitIncomingQuantity,
+		|0 AS TransitOutgoingQuantity,
+		|0 AS InventoryQuantity,
+		|0 AS PreliminaryQuantity
+		|%1
+		|FROM R4031B_GoodsInTransitIncoming AS T");
+	EndIf;
+	
+	If Query.TempTablesManager.Tables.Find("R4032B_GoodsInTransitOutgoing") <> Undefined Then
+		ArrayOfQueryText.Add("SELECT
+		|T.Period AS Period, 
+		|T.RecordType AS RecordType, 
+		|&Company AS Company, 
+		|T.Store AS Store, 
+		|T.ItemKey AS ItemKey, 
+		|undefined AS SerialLotNumber, 
+		|undefined AS SourceOfOrigin, 
+		|T.Basis AS Basis,
+		|0 AS ActualQuantity,
+		|0 AS FreeQuantity,
+		|0 AS ReservationQuantity,
+		|0 AS TransitIncomingQuantity,
+		|T.Quantity AS TransitOutgoingQuantity,
+		|0 AS InventoryQuantity,
+		|0 AS PreliminaryQuantity
+		|%1
+		|FROM R4032B_GoodsInTransitOutgoing AS T");
+	EndIf;
+	
+	If Query.TempTablesManager.Tables.Find("R4050B_StockInventory") <> Undefined Then
+		ArrayOfQueryText.Add("SELECT
+		|T.Period AS Period, 
+		|T.RecordType AS RecordType, 
+		|T.Company AS Company, 
+		|T.Store AS Store, 
+		|T.ItemKey AS ItemKey, 
+		|undefined AS SerialLotNumber, 
+		|undefined AS SourceOfOrigin, 
+		|undefined AS Basis,
+		|0 AS ActualQuantity,
+		|0 AS FreeQuantity,
+		|0 AS ReservationQuantity,
+		|0 AS TransitIncomingQuantity,
+		|0 AS TransitOutgoingQuantity,
+		|T.Quantity AS InventoryQuantity,
+		|T.PreliminaryQuantity AS PreliminaryQuantity
+		|%1
+		|FROM R4050B_StockInventory AS T");
+	EndIf;
+	
+	ArrayOfQueryText2 = New Array();
+	FirstText = True;
+	For Each QueryText In ArrayOfQueryText Do
+		If FirstText Then
+			FirstText = False;
+			ArrayOfQueryText2.Add(StrTemplate(QueryText, "INTO R6510B_StockBalance "));
+		Else
+			ArrayOfQueryText2.Add(StrTemplate(QueryText, " "));
+		EndIf;
+	EndDo;
+	
+	If ArrayOfQueryText2.Count() > 0 Then
+		_Company = Catalogs.Companies.EmptyRef();
+		If CommonFunctionsClientServer.ObjectHasProperty(Ref, "Company") Then
+			_Company = Ref.Company;
+		Endif;
+		
+		Query.SetParameter("Company", _Company);
+		Query.Text = StrConcat(ArrayOfQueryText2," UNION ALL ");
+		Query.Execute();
+	EndIf;
 EndProcedure
 
 Function QueryTableIsExists(TableName, Parameters) Export
@@ -1284,6 +1456,12 @@ EndFunction
 Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
 	ExecuteQuery(Ref, QueryArray, Parameters);
 	For Each VT In Tables Do
+		If Upper(VT.Key) = Upper("T1040T_AccountingAmounts") Or Upper(VT.Key) = Upper("T1050T_AccountingQuantities") Then
+			If Not FOServer.IsUseAccounting() Then
+				Continue;
+			EndIf;
+		EndIf;
+		
 		QueryTable = GetQueryTableByName(VT.Key, Parameters);
 		If QueryTable.Count() Then
 			CommonFunctionsServer.MergeTables(Tables[VT.Key], QueryTable, "RecordType");
@@ -1299,11 +1477,17 @@ EndProcedure
 //  * Value - See PostingTableSettings
 //  Parameters - See GetPostingParameters
 //  UseOldRegisters - Boolean - Use old registers
-Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = False) Export
+Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = False, ExcludeRegisters = Undefined) Export
 	
 	RegisterRecords = GetRegisterRecords(Parameters);
 	
 	For Each Table In Parameters.DocumentDataTables Do
+		If ExcludeRegisters <> Undefined Then
+			If ExcludeRegisters.Find(Table.Key) <> Undefined Then
+				Continue;
+			EndIf;
+		EndIf;
+		
 		If UseOldRegisters Or UseRegister(Table.Key) Then
 			SetPostingDataTable(PostingDataTables, Parameters, Table.Key, Table.Value, RegisterRecords);
 		EndIf;
@@ -1445,10 +1629,18 @@ Function Exists_R6080T_OtherPeriodsRevenues() Export
 		|	R6080T_OtherPeriodsRevenues.Recorder = &Ref";
 EndFunction
 
-Function RegistersWithAdditionalDataFilling()
-	ArrayOfRegisters = New Array();
-	ArrayOfRegisters.Add(Metadata.AccumulationRegisters.R5020B_PartnersBalance);
-	Return ArrayOfRegisters;
+Function GetRegistersWithAdditionalDataFilling()
+	AccReg = Metadata.AccumulationRegisters;
+	InfoReg = Metadata.InformationRegisters;
+	
+	Map = New Map();
+	Map.Insert(AccReg.R5020B_PartnersBalance, AccReg);
+	Map.Insert(AccReg.B1040B_AgingKey       , AccReg);
+	
+	Map.Insert(InfoReg.T2015S_TransactionsInfo, InfoReg);
+	Map.Insert(InfoReg.T2014S_AdvancesInfo    , InfoReg);
+	
+	Return Map;
 EndFunction
 
 #Region BatchInfo
@@ -1562,6 +1754,12 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 	Count = 0; 
 	LastPercentLogged = 0;
 	StartDate = CurrentUniversalDateInMilliseconds();
+	
+	ExludeRegisters = New Array();
+	ExludeRegisters.Add(Metadata.AccumulationRegisters.R6020B_BatchBalance); 
+	ExludeRegisters.Add(Metadata.AccumulationRegisters.R6060T_CostOfGoodsSold);
+	ExludeRegisters.Add(Metadata.AccumulationRegisters.R6025B_SimpleBatch); 			
+	
 	For Each Doc In DocumentArray Do
 		BeginTransaction();
 		
@@ -1577,6 +1775,12 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		
 			RegisteredRecords = RegisterRecords(Parameters);
 			
+			For Each ExludeRegister In ExludeRegisters Do
+				If RegisteredRecords.Get(ExludeRegister) <> Undefined Then
+					RegisteredRecords.Delete(ExludeRegister);
+				EndIf;
+			EndDo;
+		
 			If RegisteredRecords.Count() > 0 Then
 				Result = New Structure;
 				Result.Insert("Ref", Doc);

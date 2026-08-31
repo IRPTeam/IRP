@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="085aad14-3d68-4871-b7e4-6bf0682e3dfb">
+ <name>FillingClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>3F35BD3C-43CE-4EB9-97F6-6695219D5803</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

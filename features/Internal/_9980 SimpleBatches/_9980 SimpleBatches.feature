@@ -132,10 +132,7 @@ When Create catalog SimpleBatch objects
 	When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 * Additional table control
 	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"	
-	And I go to line in "FunctionalOptions" table
-		| "Option"                                |
-		| "Use additional table control document" |
-	And I set "Use" checkbox in "FunctionalOptions" table
+	And I set checkbox "Use additional table control document"
 	And I click "Save" button
 When set False value to the constant DisableLinkedRowsIntegrity
 And I close all client application windows
@@ -179,6 +176,8 @@ Scenario: _998003 two write-offs at the same time
 			And I click the button named "FormCreate"
 			And I select from the drop-down list named "Partner" by "Customer 3" string
 			And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+			Then "Update item list info" window is opened
+			And I click "OK" button
 			And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -207,6 +206,8 @@ Scenario: _998003 two write-offs at the same time
 			And I click the button named "FormCreate"
 			And I select from the drop-down list named "Partner" by "Customer 3" string
 			And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+			Then "Update item list info" window is opened
+			And I click "OK" button
 			And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -279,6 +280,8 @@ Scenario: _998004 receipt and write-off at the same time
 		And I click the button named "FormCreate"
 		And I select from the drop-down list named "Partner" by "Customer 3" string
 		And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
 		And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -361,6 +364,8 @@ Scenario: _998005 cancel receipt posting – batch should show error
 		And I click the button named "FormCreate"
 		And I select from the drop-down list named "Partner" by "Customer 3" string
 		And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
 		And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -436,6 +441,8 @@ Scenario: _998006 change batch in document
 		And I click the button named "FormCreate"
 		And I select from the drop-down list named "Partner" by "Customer 3" string
 		And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
 		And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -516,6 +523,8 @@ Scenario: _998007 remove batch from receipt document (PI)
 		And I click the button named "FormCreate"
 		And I select from the drop-down list named "Partner" by "Customer 3" string
 		And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
 		And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -681,6 +690,8 @@ Scenario: _998009 repost document without cost impact – batch must not reset
 		And I click the button named "FormCreate"
 		And I select from the drop-down list named "Partner" by "Customer 3" string
 		And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
 		And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -795,6 +806,8 @@ Scenario: _998010 move write-off document (SI) between receipts dpcuments (PI) b
 		And I click the button named "FormCreate"
 		And I select from the drop-down list named "Partner" by "Customer 3" string
 		And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
 		And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -883,6 +896,8 @@ Scenario: _998011 receipt with zero amount
 		And I click the button named "FormCreate"
 		And I select from the drop-down list named "Partner" by "Customer 3" string
 		And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
 		And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -957,6 +972,8 @@ Scenario: _998012 partial write-Off with fractional cost
 			And I click the button named "FormCreate"
 			And I select from the drop-down list named "Partner" by "Customer 3" string
 			And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+			Then "Update item list info" window is opened
+			And I click "OK" button
 			And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -985,6 +1002,8 @@ Scenario: _998012 partial write-Off with fractional cost
 			And I click the button named "FormCreate"
 			And I select from the drop-down list named "Partner" by "Customer 3" string
 			And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
+			Then "Update item list info" window is opened
+			And I click "OK" button
 			And I select from the drop-down list named "Store" by "Store 2 (without balance control)" string
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I select "Item with item key" by string from the drop-down list named "ItemListItem" in "ItemList" table

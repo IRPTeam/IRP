@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9fc7d78f-09b2-4b87-831b-f2a9e1e27af2">
+ <name>OpenReport_R6060A_CostOfGoodsSold</name>
+ <synonym>
+  <key>en</key>
+  <value>C07232A6-89B8-25E3-3E92-2502933697F9</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

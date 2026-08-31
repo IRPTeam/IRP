@@ -17,6 +17,7 @@ Background:
 Scenario: _0050 Data base title
 	When set True value to the constant
 	When set True value to the constant Use job queue for external functions
+	When set False value to the constant Use Use dashboard
 	* Filling in title
 		Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
 		And I go to line in "List" table

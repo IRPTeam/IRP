@@ -186,10 +186,7 @@ Scenario: _170000 preparation (Bank receipt simple form)
 	When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 * Additional table control
 	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"	
-	And I go to line in "FunctionalOptions" table
-		| "Option"                                |
-		| "Use additional table control document" |
-	And I set "Use" checkbox in "FunctionalOptions" table
+	And I set checkbox "Use additional table control document"	
 	And I click "Save" button
 * Posting first documents
 	And I execute 1C:Enterprise script at server
@@ -591,7 +588,7 @@ Scenario: _170002 create Bank receipt based on Purchase return - Return from ven
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
 			| 'Number' |
-			| '3'      |
+			| '4'      |
 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -610,7 +607,7 @@ Scenario: _170002 create Bank receipt based on Purchase return - Return from ven
 			| 'DetailsByRow'                     | "Yes"                                         | '' |
 			| 'DetailsByRowNoSplits'             | "Yes"                                         | '' |
 			| 'PaymentListAgreementNoSplits'     | "№31-92"                                      | '' |
-			| 'PaymentListBasisDocumentNoSplits' | "Purchase return 3 dated 10.12.2023 12:00:00" | '' |
+			| 'PaymentListBasisDocumentNoSplits' | "Purchase return 4 dated 22.10.2025 15:07:22" | '' |
 			| 'PaymentListNetAmountNoSplits'     | "200"                                         | '' |
 			| 'PaymentListPartnerNoSplits'       | "Vendor 3 (1 partner term)"                   | '' |
 			| 'PaymentListLegalNameNoSplits'     | "Vendor 3"                                    | '' |
@@ -622,9 +619,9 @@ Scenario: _170002 create Bank receipt based on Purchase return - Return from ven
 		And I click Choice button of the field named "PaymentListBasisDocumentNoSplits"
 		And I go to line in "List" table
 			| "Amount" | "Document"                                  |
-			| "80,00"  | "Purchase return 3 dated 10.12.2023 12:00:00" |
+			| "80,00"  | "Purchase return 4 dated 22.10.2025 15:07:22" |
 		And I select current line in "List" table
-		Then the form attribute named "PaymentListBasisDocumentNoSplits" became equal to "Purchase return 3 dated 10.12.2023 12:00:00"	
+		Then the form attribute named "PaymentListBasisDocumentNoSplits" became equal to "Purchase return 4 dated 22.10.2025 15:07:22"	
 	* Change in payment amount
 		And I input "70,00" text in the field named "PaymentListTotalAmountNoSplits"
 		And I click Choice button of the field named "PaymentListProjectNoSplits"
@@ -815,61 +812,56 @@ Scenario: _1700013 create Bank receipt - Other partner (simple form)
 			| '$$NumberBankReceipt5$$' |
 		And I close all client application windows
 
-// Scenario: _170014 create Bank receipt based on Employee cash advance - Employee cash advance (simple form)
-// 		And I close all client application windows
-// 	* Preparation
-// 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '9'      |
-// 		And in the table "List" I click the button named "ListContextMenuUndoPosting"			
-// 	* Select Employee cash advance
-// 		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '2'      |
-// 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
-// 		And I click Select button of "Account" field
-// 		And I go to line in "List" table
-// 			| "Description" |
-// 			| "Bank account, TRY"   |
-// 		And I select current line in "List" table		
-// 	* Check filling CR
-// 		And I click Choice button of the field named "PaymentListAgreementNoSplits"
-// 		And I close "Partner terms" window
-// 		And I select "Business unit 1" exact value from the drop-down list named "PaymentListCashFlowCenterNoSplits"
-// 		And form attributes have values:
-// 			| 'Author'                            | "CI"                                                | '' |
-// 			| 'Branch'                            | "Business unit 1"                                   | '' |
-// 			| 'CashAccount'                       | "Cash, TRY"                                         | '' |
-// 			| 'Company'                           | "Own company 2"                                     | '' |
-// 			| 'Currency'                          | "TRY"                                               | '' |
-// 			| 'CurrencyTotalAmount'               | "TRY"                                               | '' |
-// 			| 'DetailsByRow'                      | "Yes"                                               | '' |
-// 			| 'DetailsByRowNoSplits'              | "Yes"                                               | '' |
-// 			| 'PaymentListBasisDocumentNoSplits'  | "Employee cash advance 2 dated 01.08.2023 12:00:00" | '' |
-// 			| 'PaymentListCashFlowCenterNoSplits' | "Business unit 1"                                   | '' |
-// 			| 'PaymentListPartnerNoSplits'        | "Employee 2"                                        | '' |
-// 			| 'TransactionType'                   | "Employee cash advance"                             | '' |
-// 		And the editing text of form attribute named "PaymentListTotalAmountNoSplits" became equal to "150,00"
-// 		And I input "100,00" text in the field named "PaymentListTotalAmountNoSplits"	
-// 	* Reselect basis document
-// 		And I input "" text in the field named "PaymentListBasisDocumentNoSplits"
-// 		And I click Choice button of the field named "PaymentListBasisDocumentNoSplits"
-// 		And I select current line in "List" table
-// 		Then the form attribute named "PaymentListBasisDocumentNoSplits" became equal to "Employee cash advance 2 dated 01.08.2023 12:00:00"
-// 	* Post document and check saving
-// 		And I click the button named "FormPost"
-// 		And I delete "$$NumberBankReceipt6$$" variable
-// 		And I delete "$$BankReceipt6$$" variable
-// 		And I save the value of "Number" field as "$$NumberBankReceipt6$$"
-// 		And I save the window as "$$BankReceipt6$$"
-// 		And I click the button named "FormPostAndClose"
-// 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-// 		And "List" table contains lines
-// 			| 'Number'                 |
-// 			| '$$NumberBankReceipt6$$' |
-// 		And I close all client application windows
+Scenario: _170014 create Bank receipt based on Employee cash advance - Employee cash advance (simple form)
+		And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9'      |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"			
+	* Select Employee cash advance
+		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| "Description" |
+			| "Bank account, TRY"   |
+		And I select current line in "List" table		
+	* Check filling CR
+		And I click Choice button of the field named "PaymentListAgreementNoSplits"
+		And I close "Partner terms" window
+		And I select "Business unit 1" exact value from the drop-down list named "PaymentListCashFlowCenterNoSplits"
+		And form attributes have values:
+			| 'Author'                            | "CI"                                                | '' |
+			| 'Branch'                            | "Business unit 1"                                   | '' |
+			| 'Account'                           | "Bank account, TRY"                                 | '' |
+			| 'Company'                           | "Own company 2"                                     | '' |
+			| 'Currency'                          | "TRY"                                               | '' |
+			| 'CurrencyTotalAmount'               | "TRY"                                               | '' |
+			| 'DetailsByRow'                      | "Yes"                                               | '' |
+			| 'DetailsByRowNoSplits'              | "Yes"                                               | '' |
+			| 'PaymentListBasisDocumentNoSplits'  | "Employee cash advance 2 dated 01.08.2023 12:00:00" | '' |
+			| 'PaymentListCashFlowCenterNoSplits' | "Business unit 1"                                   | '' |
+			| 'PaymentListPartnerNoSplits'        | "Employee 2"                                        | '' |
+			| 'TransactionType'                   | "Employee cash advance"                             | '' |
+		And the editing text of form attribute named "PaymentListTotalAmountNoSplits" became equal to "150,00"
+		And I input "100,00" text in the field named "PaymentListTotalAmountNoSplits"	
+	* Post document and check saving
+		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt6$$" variable
+		And I delete "$$BankReceipt6$$" variable
+		And I save the value of "Number" field as "$$NumberBankReceipt6$$"
+		And I save the window as "$$BankReceipt6$$"
+		And I click the button named "FormPostAndClose"
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$$NumberBankReceipt6$$' |
+		And I close all client application windows
 
 
 Scenario: _170025 Prevent negative refund transactions in Bank receipt (simple form)

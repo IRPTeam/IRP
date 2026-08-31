@@ -404,9 +404,6 @@
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
    <placementArea>UserCmds</placementArea>
-   <picture xsi:type="core:PictureRef">
-    <picture>StdPicture.GotoExternalURL</picture>
-   </picture>
    <representationInContextMenu>Auto</representationInContextMenu>
   </items>
   <horizontalAlign>Left</horizontalAlign>
@@ -574,6 +571,9 @@ FROM
   <use>
    <common>true</common>
   </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.GotoExternalURL</picture>
+  </picture>
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
     <name>LoadCountries</name>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="535cfe6a-14d7-4e4b-81a8-e61b46fd184a">
+ <name>Report_R2012A_SalesOrdersInvoiceClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>F1663C33-5DC3-7640-0568-8123E82A0E91___</value>
+ </synonym>
+</mdclass:Role>

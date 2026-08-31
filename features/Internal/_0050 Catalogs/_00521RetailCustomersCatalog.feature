@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -33,6 +33,8 @@ Scenario: _005049 filling in the "Retail customers" catalog
 		And I input "Name Retail customer" text in the field named "Name"
 		And I input "Surname Retail customer" text in the field named "Surname"
 		And I input "002" text in the field named "Code"
+		And I input "1234567890" text in "Tax ID" field
+		And I input "test@test.com" text in the field named "Email"		
 		And I set checkbox "Use partner transactions"
 		And I set checkbox "Use partner info"		
 		And I click Select button of "Partner" field
@@ -54,6 +56,6 @@ Scenario: _005049 filling in the "Retail customers" catalog
 		And Delay 2
 	* Check for created Retail customer
 		And "List" table contains lines
-		| 'Description'                                   | 'Code'  | 'Name'                  | 'Surname'                   |
-		| 'Name Retail customer Surname Retail customer'  | '002'   | 'Name Retail customer'  | 'Surname Retail customer'   |
+			| 'Description'                                  | 'Code' | 'Tax ID'     | 'Email'         |
+			| 'Name Retail customer Surname Retail customer' | '002'  | '1234567890' | 'test@test.com' |
 		And I close all client application windows

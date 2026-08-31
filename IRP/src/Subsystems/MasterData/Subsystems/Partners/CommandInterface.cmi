@@ -4,9 +4,12 @@
     <orderFragments>
       <group>NavigationPanelOrdinary</group>
       <commands>Catalog.Partners.StandardCommand.OpenList</commands>
+      <commands>CommonCommand.OpenLegalNames</commands>
       <commands>Catalog.Agreements.StandardCommand.OpenList</commands>
       <commands>Catalog.LegalNameContracts.StandardCommand.OpenList</commands>
       <commands>Catalog.PartnersBankAccounts.StandardCommand.OpenList</commands>
+      <commands>Catalog.PartnerSegments.StandardCommand.OpenList</commands>
+      <commands>Catalog.PaymentSchedules.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

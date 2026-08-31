@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="52daec5f-c56a-45db-8b80-66ca6fc1a872">
+ <name>Report_R4012A_StockReservation</name>
+ <synonym>
+  <key>en</key>
+  <value>8DF66580-822C-AFBC-C6DE-E091631303E7</value>
+ </synonym>
+</mdclass:Role>

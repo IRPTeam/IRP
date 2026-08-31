@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4a34fa10-d1ad-47f7-866f-374538c7dad6">
+ <name>Report_R6020_BatchBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>B0651954-B7E2-179B-B12E-E70258585C5D</value>
+ </synonym>
+</mdclass:Role>

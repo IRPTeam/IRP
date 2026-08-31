@@ -17,23 +17,16 @@ Scenario: _900105 check FO use store
 	And I close all client application windows
 	* Switch-off FO Use store
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'     |
-			| 'Use stores' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                       |
-			| 'Use shipment confirmation and goods receipts' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
+		And I remove checkbox "Use stores"
+		And I remove checkbox "Use shipment confirmation and goods receipts"
 		And I click "Save" button
 		And I close "Functional option settings" window
 	* Check
 		* Subsystem Inventory
 			When I Check the steps for Exception
-				| 'When in sections panel I select "Inventory"'     |
+				| 'And In the command interface I select "Inventory" "Stores"'     |			
 		* Attribute isAdditionalİtemCost in PI
+			And in functions panel I select "Items"		
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I click "Create" button	
 			And in the table "ItemList" I click "Add" button
@@ -78,10 +71,7 @@ Scenario: _900107 check FO use cheque bonds
 	And I close all client application windows
 	* Switch-off FO use cheque bonds
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           |
-			| 'Use cheque bonds' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "  -  Use cheque bonds"	
 		And I click "Save" button
 		And I close "Functional option settings" window	
 	* Check
@@ -104,10 +94,7 @@ Scenario: _900108 check FO use item key
 	And I close all client application windows
 	* Switch-off FO use item key
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'       |
-			| 'Use item key' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "Use item key"
 		And I click "Save" button
 		And I close "Functional option settings" window	
 	* Check
@@ -121,10 +108,7 @@ Scenario: _900109 check FO use Legal Name (check in SI,PI)
 	And I close all client application windows
 	* Switch-off FO use Legal Name
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'         | 'Use' |
-			| 'Use legal name' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "Use legal name"
 		And I click "Save" button
 		And I close "Functional option settings" window	
 	* Check

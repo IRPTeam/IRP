@@ -26,4 +26,11 @@
    <value>E2FFFFEE-8A5E-58DB-BCBD-D98B780AB532</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="e3549c72-c655-4dab-bec1-372ee4cd1694">
+  <name>ForSelectedRows</name>
+  <synonym>
+   <key>en</key>
+   <value>C1CB0A90-4241-4C1C-CE5D-DCA87C9939CD</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

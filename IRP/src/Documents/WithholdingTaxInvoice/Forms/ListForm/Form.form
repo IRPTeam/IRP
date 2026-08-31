@@ -178,6 +178,7 @@
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:LabelFieldExtInfo">
+    <width>6</width>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
    </extInfo>
@@ -379,19 +380,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Company</name>
-   <id>40</id>
+   <name>Comment</name>
+   <id>58</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Company</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>CompanyExtendedTooltip</name>
-    <id>42</id>
+    <name>CommentExtendedTooltip</name>
+    <id>60</id>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -400,8 +401,8 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>CompanyContextMenu</name>
-    <id>41</id>
+    <name>CommentContextMenu</name>
+    <id>59</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -410,7 +411,7 @@
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
+    <maxWidth>20</maxWidth>
     <autoMaxHeight>true</autoMaxHeight>
     <wrap>true</wrap>
     <chooseType>true</chooseType>
@@ -459,19 +460,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Comment</name>
-   <id>58</id>
+   <name>Company</name>
+   <id>40</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Comment</segments>
+    <segments>List.Company</segments>
    </dataPath>
    <extendedTooltip>
-    <name>CommentExtendedTooltip</name>
-    <id>60</id>
+    <name>CompanyExtendedTooltip</name>
+    <id>42</id>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -480,8 +481,8 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>CommentContextMenu</name>
-    <id>59</id>
+    <name>CompanyContextMenu</name>
+    <id>41</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>

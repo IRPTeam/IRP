@@ -37,6 +37,7 @@
  <registerRecords>AccumulationRegister.TM1030B_TransactionsKey</registerRecords>
  <registerRecords>InformationRegister.T2013S_OffsetOfAging</registerRecords>
  <registerRecords>InformationRegister.T2010S_OffsetOfAdvances</registerRecords>
+ <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
  <registerRecords>AccumulationRegister.TM1020B_AdvancesKey</registerRecords>
  <registerRecords>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</registerRecords>
  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
@@ -55,6 +56,21 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.NotActive</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <quickChoice>Use</quickChoice>
   <choiceParameters>
    <name>Filter.OurCompany</name>
    <value xsi:type="core:BooleanValue">

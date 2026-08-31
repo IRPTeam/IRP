@@ -63,11 +63,7 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		And I click the button named "FormCreate"
 		And I select "Return from customer" exact value from "Transaction type" drop-down list
 	* Filling in main info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -177,8 +173,8 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 				| 'Sales invoice'     |
 			And I select current line in "" table
 			And I go to line in "List" table
-				| 'Amount'    | 'Company'         | 'Currency'    | 'Date'                   | 'Legal name'         | 'Partner'     |
-				| '800,00'    | 'Main Company'    | 'TRY'         | '07.10.2020 01:19:02'    | 'Company Kalipso'    | 'Kalipso'     |
+				| 'Amount'    | 'Company'         | 'Currency'    | 'Date'          | 'Legal name'         | 'Partner'     |
+				| '800,00'    | 'Main Company'    | 'TRY'         | '07.10.2020'    | 'Company Kalipso'    | 'Kalipso'     |
 			And I select current line in "List" table			
 		And I click "Post" button
 		* Check Row ID tab
@@ -222,11 +218,7 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I click the button named "FormCreate"
 	* Filling in main info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |

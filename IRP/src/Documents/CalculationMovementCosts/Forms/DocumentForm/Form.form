@@ -91,6 +91,10 @@
   <dataPath xsi:type="form:DataPath">
    <segments>Object.Company</segments>
   </dataPath>
+  <handlers>
+   <event>OnChange</event>
+   <name>CompanyOnChange</name>
+  </handlers>
   <extendedTooltip>
    <name>CompanyExtendedTooltip</name>
    <id>9</id>
@@ -135,6 +139,10 @@
   <dataPath xsi:type="form:DataPath">
    <segments>Object.CalculationMode</segments>
   </dataPath>
+  <handlers>
+   <event>OnChange</event>
+   <name>CalculationModeOnChange</name>
+  </handlers>
   <extendedTooltip>
    <name>CalculationModeExtendedTooltip</name>
    <id>18</id>
@@ -316,6 +324,14 @@
   <commandBar/>
  </commandInterface>
  <extInfo xsi:type="form:DocumentFormExtInfo">
+  <handlers>
+   <event>AfterWriteAtServer</event>
+   <name>AfterWriteAtServer</name>
+  </handlers>
+  <handlers>
+   <event>OnReadAtServer</event>
+   <name>OnReadAtServer</name>
+  </handlers>
   <repostOnWrite>true</repostOnWrite>
  </extInfo>
 </form:Form>

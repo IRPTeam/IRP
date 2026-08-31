@@ -1,4 +1,10 @@
 
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If Not FOServer.IsUseBatchReallocate() Then
+		ThisObject.CalculationMode = Enums.CalculationMode.LandedCost;
+	EndIf;
+EndProcedure
+
 Procedure Posting(Cancel, PostingMode)
 	ClearSelfRecords(Cancel);
 		
@@ -30,10 +36,22 @@ Procedure ClearSelfRecords(Cancel)
 	AccumulationRegisters.R5021T_Revenues.Revenues_Clear(ThisObject.Ref, Cancel);	
 	AccumulationRegisters.R8510B_BookValueOfFixedAsset.BookValueOfFixedAsset_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R4050B_StockInventory.StockInventory_Clear(ThisObject.Ref, Cancel);
+	AccumulationRegisters.R6510B_StockBalance.StockBalance_Clear(ThisObject.Ref, Cancel);
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not ThisObject.CalculationMode = Enums.CalculationMode.LandedCostBatchReallocate Then
 		CheckedAttributes.Add("Company");
 	EndIf;
+	
+	ArrayOfErrors = PeriodClosingServer.GetOverlappingPeriods(ThisObject.Company, 
+		ThisObject.BeginDate, 
+		ThisObject.EndDate, 
+		"CalculationMovementCosts", "BeginDate", "EndDate", ThisObject.Ref);
+	For Each Error In ArrayOfErrors Do
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(Error.Msg, "BeginDate", ThisObject);
+	EndDo;	
 EndProcedure
+
+

@@ -200,11 +200,7 @@ Scenario: _1010 create document Production planning
 	* Production planning First month
 		And I click the button named "FormCreate"
 		* Filling in header info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Business unit" field
 			And I go to line in "List" table
 				| 'Description'               |
@@ -301,11 +297,7 @@ Scenario: _1010 create document Production planning
 	* Production planning Second month
 		And I click the button named "FormCreate"
 		* Filling in header info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Business unit" field
 			And I go to line in "List" table
 				| 'Description'               |
@@ -386,11 +378,7 @@ Scenario: _1010 create document Production planning
 	* Production planning Third month
 		And I click the button named "FormCreate"
 		* Filling in header info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Business unit" field
 			And I go to line in "List" table
 				| 'Description'               |
@@ -749,11 +737,7 @@ Scenario: _1035 create document Production
 		And In the command interface I select "Manufacturing" "Productions"
 		And I click the button named "FormCreate"
 		* Filling in header info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Business unit" field
 			And I go to line in "List" table
 				| 'Description'               |
@@ -869,11 +853,7 @@ Scenario: _1035 create document Production
 		Given I open hyperlink "e1cib/list/Document.Production"
 		And I click the button named "FormCreate"
 		* Filling in header info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Business unit" field
 			And I go to line in "List" table
 				| 'Description'               |
@@ -1391,11 +1371,7 @@ Scenario: _1040 refilling document Production when change specification
 	Given I open hyperlink "e1cib/list/Document.Production"
 	And I click the button named "FormCreate"
 	* Filling in header info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
 			| 'Description'              |
@@ -1609,11 +1585,7 @@ Scenario: _10341 create Production (Repacking)
 	And I click the button named "FormCreate"
 	And I select "Repacking" exact value from "Transaction type" drop-down list	
 	* Filling in header info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
 			| 'Description'              |
@@ -1704,13 +1676,13 @@ Scenario: _10342 check movements Production (Repacking)
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| '$$Production1041$$'                  | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                         |
-			| 'Document registrations records'      | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                         |
-			| 'Register  "R4050 Stock inventory"'   | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                         |
-			| ''                                    | 'Record type'   | 'Period'                   | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''                                 |'Attributes'                |
-			| ''                                    | ''              | ''                         | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'                         |'Calculation movement cost' |
-			| ''                                    | 'Receipt'       | '$$DateProduction1041$$'   | '2'           | ''                    | 'Main Company'   | 'Store 02'   | 'Стремянка номер 5 ступенчатая'    | ''                         |
-			| ''                                    | 'Expense'       | '$$DateProduction1041$$'   | '2'           | ''                    | 'Main Company'   | 'Store 03'   | 'Стремянка номер 8'                | ''                         |
+			| '$$Production1041$$'                  | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                  | ''                 | ''                         |
+			| 'Document registrations records'      | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                  | ''                 | ''                         |
+			| 'Register  "R4050 Stock inventory"'   | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                  | ''                 | ''                         |
+			| ''                                    | 'Record type'   | 'Period'                   | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''                                 | ''                  | ''                 |'Attributes'                |
+			| ''                                    | ''              | ''                         | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'                         | 'Serial lot number' | 'Source of origin' |'Calculation movement cost' |
+			| ''                                    | 'Receipt'       | '$$DateProduction1041$$'   | '2'           | ''                    | 'Main Company'   | 'Store 02'   | 'Стремянка номер 5 ступенчатая'    | ''                  | ''                 | ''                         |
+			| ''                                    | 'Expense'       | '$$DateProduction1041$$'   | '2'           | ''                    | 'Main Company'   | 'Store 03'   | 'Стремянка номер 8'                | ''                  | ''                 | ''                         |
 	* T6010 Batches info
 		And I select "T6010 Batches info" exact value from "Register" drop-down list
 		And I click "Generate report" button	
@@ -1760,11 +1732,7 @@ Scenario: _1043 verification of zero quantities by materials
 	Given I open hyperlink "e1cib/list/Document.Production"
 	And I click the button named "FormCreate"
 	* Filling in header info
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
 			| 'Description'              |

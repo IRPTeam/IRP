@@ -144,6 +144,7 @@
  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
@@ -171,6 +172,7 @@
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+ <registerRecords>InformationRegister.RowIDStamps</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -201,6 +203,21 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.NotActive</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <quickChoice>Use</quickChoice>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -645,6 +662,7 @@
     <changeMode>DontChange</changeMode>
     <field>Document.RetailReturnReceipt.TabularSection.ItemList.Attribute.Item</field>
    </choiceParameterLinks>
+   <quickChoice>Use</quickChoice>
    <createOnInput>DontUse</createOnInput>
   </attributes>
   <attributes uuid="a8d394a0-887c-4dcb-af58-f4965f271741">
@@ -898,6 +916,48 @@
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="c1d79181-1ea7-495f-95a8-8cded777a47b">
+   <name>ManualOfferAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>641AE6A2-E1AC-D2D9-92FB-BED4DE8886ED</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="bc1a8c7c-50c4-465a-a24e-3eaa767ad8e1">
+   <name>ManualOfferPercent</name>
+   <synonym>
+    <key>en</key>
+    <value>34D68A20-0281-9654-424C-C73E628ABD2D</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePercent</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6095efc4-bb13-4f32-adb3-d1dfe56c398b">
+   <name>ManualOfferType</name>
+   <synonym>
+    <key>en</key>
+    <value>109EB2E3-58E8-FB05-5F39-99FFCBE948C5</value>
+   </synonym>
+   <type>
+    <types>EnumRef.ManualOfferTypes</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -1606,6 +1666,20 @@
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="43bbadd7-fcaf-47d3-9dd3-93b9bdeea9e0">
+   <name>PaymentInFiscalPrinterMode</name>
+   <synonym>
+    <key>en</key>
+    <value>73766B2E-7D07-6A88-8E07-76BB3B030577</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

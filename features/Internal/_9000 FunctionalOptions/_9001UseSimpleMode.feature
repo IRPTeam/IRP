@@ -14,22 +14,12 @@ Background:
 Scenario: _900000 check open company catalog (dont use company)
 	#Temp
 	And In the command interface I select "Settings" "Functional option settings"
-	And I go to line in "FunctionalOptions" table
-		| "Option"       |
-		| "Use purchase" |
-	And I set "Use" checkbox in "FunctionalOptions" table
-	And I finish line editing in "FunctionalOptions" table
-	And I go to line in "FunctionalOptions" table
-		| "Option"    |
-		| "Use sales" |
-	And I set "Use" checkbox in "FunctionalOptions" table
-	And I finish line editing in "FunctionalOptions" table
-	And I go to line in "FunctionalOptions" table
-		| "Option"    |
-		| "Use finance" |
-	And I set "Use" checkbox in "FunctionalOptions" table
-	And I finish line editing in "FunctionalOptions" table
+	And I set checkbox "Use purchase"	
+	And I set checkbox "Use sales"
+	And I set checkbox "Use finance"
+	And I set checkbox "  -  Use cash transactions"
 	And I click "Save" button
+	And I click "Update defaults" button	
 	#EndTemp
 	* Check open Company catalog
 		And In the command interface I select "Master data" "Companies"
@@ -41,16 +31,12 @@ Scenario: _900000 check open company catalog (dont use company)
 
 Scenario: _900001 Check Company creation
 	When set True value to the constant UseSimpleMode
-	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-	And I click "Update defaults" button
-	And I click "Update all user settings" button
-	And I close "Functional option settings" window
 	* Check Company creation
 		And In the command interface I select "Master data" "Companies"
 		Then the form attribute named "Country" became equal to ""
 		Then the form attribute named "MainCompany" became equal to ""
 		Then the form attribute named "Partner" became equal to ""
-		Then the form attribute named "Type" became equal to "Company"
+		And I select "Company" exact value from the drop-down list named "Type"	
 		Then the form attribute named "OurCompany" became equal to "Yes"
 		Then the form attribute named "Code" became equal to "1"
 		Then the form attribute named "Description_en" became equal to "My Company"
@@ -173,9 +159,7 @@ Scenario: _900006 create Cash account
 		And I click the button named "FormCreate"
 		And I input "Cash 1" text in "ENG" field
 		And I change the radio button named "CurrencyType" value to "Fixed"
-		And I click Choice button of the field named "Currency"
-		And I activate field named "Code" in "List" table
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		And I click "Save and close" button
 	* Check creation
 		And "List" table became equal
@@ -697,9 +681,9 @@ Scenario: _900031 return money to customer based on Sales return
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table became equal
 			| '#'   | 'Partner'      | 'Total amount'    |
-			| '1'   | 'Customer 1'   | '300,00'          |
+			| '1'   | 'Customer 1'   | '200,00'          |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "300,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "200,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment03$$" variable
@@ -721,7 +705,6 @@ Scenario: _900032 return money to customer
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
 	* Filling CP
-		Then the form attribute named "Company" became equal to "My Company"
 		And I select from "Cash account" drop-down list by "Cash 1" string
 		Then the form attribute named "CashAccount" became equal to "Cash 1"
 		And I select "Return to customer" exact value from "Transaction type" drop-down list	
@@ -767,7 +750,6 @@ Scenario: _900035 return money from vendor
 		And I finish line editing in "PaymentList" table
 	* Check filling
 		And I select from "Cash account" drop-down list by "Cash 1" string
-		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "CashAccount" became equal to "Cash 1"
 		Then the form attribute named "TransactionType" became equal to "Return from vendor"
 		Then the form attribute named "Currency" became equal to "USD"
@@ -790,20 +772,8 @@ Scenario: _900035 return money from vendor
 			| '$$NumberCashReceipt03$$'    |
 		And I close all client application windows
 		
-				
-Scenario: _900090 change functional options use company and check users settings
-	* Change functional option
-		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use'    |
-			| 'Use companies'   | 'No'     |
-		And I activate "Use" field in "FunctionalOptions" table
-		And I change "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I click "Update all user settings" button
-		And I click "Save" button
-		And I close "Functional option settings" window
+
+
 
 
 		

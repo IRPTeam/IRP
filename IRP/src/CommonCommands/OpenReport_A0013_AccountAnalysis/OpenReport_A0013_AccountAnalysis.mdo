@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f6f5100f-c437-4f89-abad-6c56eac5703a">
+ <name>OpenReport_A0013_AccountAnalysis</name>
+ <synonym>
+  <key>en</key>
+  <value>78B57B24-5606-ECB4-490A-A4D2C82F1E6A</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

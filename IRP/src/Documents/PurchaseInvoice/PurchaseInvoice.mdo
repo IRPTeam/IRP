@@ -104,6 +104,7 @@
  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
  <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
@@ -112,6 +113,7 @@
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
+ <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
@@ -141,6 +143,7 @@
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
+ <registerRecords>InformationRegister.RowIDStamps</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -172,6 +175,21 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.NotActive</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <quickChoice>Use</quickChoice>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -223,9 +241,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -514,6 +530,7 @@
     <changeMode>DontChange</changeMode>
     <field>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.Item</field>
    </choiceParameterLinks>
+   <quickChoice>Use</quickChoice>
    <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="180dfcb8-b9dd-4e79-b302-fed397b1214e">
@@ -861,6 +878,48 @@
    </synonym>
    <type>
     <types>CatalogRef.SimpleBatch</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="3f35bd16-ac6a-4ed3-9f66-e2282ce8e413">
+   <name>ManualOfferAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>A5E180A8-EDBA-EBEE-E036-6D1211343EDE</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="831ad35c-4dbe-477c-a76e-4e3766f5e2cd">
+   <name>ManualOfferPercent</name>
+   <synonym>
+    <key>en</key>
+    <value>A6BF3F3A-9FDE-7725-505C-C471E1ACA80D</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePercent</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d1d1e510-3b8b-4bd6-8f2d-9ecd511cf09e">
+   <name>ManualOfferType</name>
+   <synonym>
+    <key>en</key>
+    <value>CF261040-E187-71D4-4E5F-F685EE56080C</value>
+   </synonym>
+   <type>
+    <types>EnumRef.ManualOfferTypes</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -1716,7 +1775,6 @@
    <value>178A6457-E94E-5EBD-DB58-80349C2B16E4</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
-  <commandParameterType/>
   <representation>Auto</representation>
  </commands>
 </mdclass:Document>

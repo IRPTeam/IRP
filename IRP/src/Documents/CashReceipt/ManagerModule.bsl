@@ -52,6 +52,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
+	Tables.R5012B_VendorsAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5011B_CustomersAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -97,7 +100,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 
@@ -159,6 +166,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(B1040B_AgingKey());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
@@ -250,7 +258,8 @@ Function PaymentList()
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.OtherPartner) AS IsOtherPartner,
 		|	PaymentList.CashFlowCenter,
 		|	PaymentList.Project,
-		|	FALSE AS IsPaymentFromCustomerByPOS
+		|	FALSE AS IsPaymentFromCustomerByPOS,
+		|	PaymentList.PaymentDate
 		|INTO PaymentList
 		|FROM
 		|	Document.CashReceipt.PaymentList AS PaymentList
@@ -527,7 +536,75 @@ Function R5011B_CustomersAging()
 EndFunction
 
 Function R5012B_VendorsAging()
-	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_Offset();
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Partner,
+		|	PaymentList.Agreement,
+		|	PaymentList.Currency,
+		|	PaymentList.TransactionDocument AS Invoice,
+		|	PaymentList.PaymentDate,
+		|	PaymentList.Key,
+		|	PaymentList.Amount,
+		|	Undefined AS AgingClosing
+		|INTO R5012B_VendorsAging
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsReturnFromVendor
+		|	AnD PaymentList.TransactionDocument.Ref REFS Document.PurchaseInvoice
+		|	AND PaymentList.PaymentDate <> DATETIME(1, 1, 1)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	CASE
+		|		WHEN OffsetOfAging.RecordType = VALUE(Enum.RecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
+		|	END,
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Key,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder
+		|FROM
+		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref
+		|	and OffsetOfAging.Recorder refs Document.VendorsAdvancesClosing";
+EndFunction
+
+Function B1040B_AgingKey()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Partner,
+		|	PaymentList.Agreement,
+		|	PaymentList.Currency,
+		|	PaymentList.TransactionDocument AS Invoice,
+		|	PaymentList.PaymentDate,
+		|	PaymentList.Amount,
+		|	Undefined AS AgingClosing
+		|INTO B1040B_AgingKey
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsReturnFromVendor
+		|	AnD PaymentList.TransactionDocument.Ref REFS Document.PurchaseInvoice
+		|	AND PaymentList.PaymentDate <> DATETIME(1, 1, 1)";
 EndFunction
 
 Function R3035T_CashPlanning()
@@ -864,6 +941,7 @@ Function GetAnalytics_PaymentFromCustomer(Parameters)
 
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
@@ -917,6 +995,7 @@ Function GetAnalytics_ReturnFromVendor(Parameters)
 
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
@@ -969,6 +1048,7 @@ Function GetAnalytics_CashTransferOrder(Parameters)
 	AccountingAnalytics.Debit = Debit.Account;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.RowData.SendingAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
@@ -979,6 +1059,7 @@ Function GetAnalytics_CashTransferOrder(Parameters)
 	AccountingAnalytics.Credit = Credit.AccountTransit;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
 	Return AccountingAnalytics;
@@ -997,6 +1078,7 @@ Function GetAnalytics_OtherPartner(Parameters)
 
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
@@ -1022,6 +1104,7 @@ Function GetAnalytics_SalaryPayment(Parameters)
 	AccountingAnalytics.Debit = Debit.Account;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit

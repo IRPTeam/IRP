@@ -248,6 +248,7 @@
     <dataPath xsi:type="form:DataPath">
      <segments>Object.UseGoodsReceipt</segments>
     </dataPath>
+    <titleLocation>Right</titleLocation>
     <handlers>
      <event>OnChange</event>
      <name>UseGoodsReceiptOnChange</name>
@@ -285,6 +286,7 @@
     <dataPath xsi:type="form:DataPath">
      <segments>Object.UseShipmentConfirmation</segments>
     </dataPath>
+    <titleLocation>Right</titleLocation>
     <handlers>
      <event>OnChange</event>
      <name>UseShipmentConfirmationOnChange</name>
@@ -312,6 +314,40 @@
     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
    </items>
    <items xsi:type="form:FormField">
+    <name>ForbidShipmentBeforeFinancialDocuments</name>
+    <id>40</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.ForbidShipmentBeforeFinancialDocuments</segments>
+    </dataPath>
+    <titleLocation>Right</titleLocation>
+    <extendedTooltip>
+     <name>ForbidShipmentBeforeFinancialDocumentsExtendedTooltip</name>
+     <id>42</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>ForbidShipmentBeforeFinancialDocumentsContextMenu</name>
+     <id>41</id>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+   </items>
+   <items xsi:type="form:FormField">
     <name>Transit</name>
     <id>11</id>
     <visible>true</visible>
@@ -322,6 +358,7 @@
     <dataPath xsi:type="form:DataPath">
      <segments>Object.Transit</segments>
     </dataPath>
+    <titleLocation>Right</titleLocation>
     <extendedTooltip>
      <name>TransitExtendedTooltip</name>
      <id>13</id>
@@ -355,6 +392,7 @@
     <dataPath xsi:type="form:DataPath">
      <segments>Object.NegativeStockControl</segments>
     </dataPath>
+    <titleLocation>Right</titleLocation>
     <extendedTooltip>
      <name>NegativeStockControlExtendedTooltip</name>
      <id>27</id>

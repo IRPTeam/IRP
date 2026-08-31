@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a80ab5aa-1822-469c-843a-e6c5b2df4aa0">
+ <name>OpenReport_R5020A_PartnersBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>4161F031-88A2-1D62-2C78-818FE42CE960</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

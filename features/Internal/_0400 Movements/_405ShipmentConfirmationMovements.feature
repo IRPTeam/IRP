@@ -133,8 +133,8 @@ Scenario: _040171 check Shipment confirmation movements by the Register  "R4010 
 	* Select Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
-			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| 'Number' | 'Date'       | 'Store'    | 'Partner'   |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 	* Check movements by the Register  "R4010 Actual stocks"
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
@@ -167,8 +167,8 @@ Scenario: _040173 check Shipment confirmation movements by the Register  "R2011 
 	* Select Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
-			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| 'Number' | 'Date'      | 'Store'    | 'Partner'   |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 	* Check movements by the Register  "R2011 Shipment of sales orders"
 		And I click "Registrations report" button
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
@@ -188,7 +188,7 @@ Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
 		And I click "Registrations report" button
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
@@ -209,7 +209,7 @@ Scenario: _040175 check Shipment confirmation movements by the Register  "R4012 
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 	* Check movements by the Register  "R4012 Stock Reservation"
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
@@ -267,7 +267,7 @@ Scenario: _040177 check Shipment confirmation movements by the Register  "R4034 
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 	* Check movements by the Register  "R4034 Scheduled goods shipments"
 		And I click "Registrations report" button
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
@@ -326,7 +326,7 @@ Scenario: _0401781 check Shipment confirmation movements by the Register  "R2031
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 	* Check movements by the Register  "R2031 Shipment invoicing"
 		And I click "Registrations report" button
 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
@@ -347,7 +347,7 @@ Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 	* Check movements by the Register  "R4011 Free stocks"
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
@@ -618,7 +618,7 @@ Scenario: _040199 Shipment confirmation clear posting/mark for deletion
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
@@ -632,7 +632,7 @@ Scenario: _040199 Shipment confirmation clear posting/mark for deletion
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
@@ -646,7 +646,7 @@ Scenario: _040199 Shipment confirmation clear posting/mark for deletion
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -661,7 +661,7 @@ Scenario: _040199 Shipment confirmation clear posting/mark for deletion
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                | 'Store'    | 'Partner'   |
-			| '1'      | '28.01.2021 18:42:17' | 'Store 02' | 'Ferron BP' |
+			| '1'      | '28.01.2021' | 'Store 02' | 'Ferron BP' |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				

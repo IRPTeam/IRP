@@ -122,6 +122,7 @@ Procedure GenerateReportAtServer(Result)
 	If TypeOf(ThisObject.Document) = Type("DocumentRef.ChequeBondTransaction") Then
 		GenerateReportForOneDocument(ThisObject.Document, Result, Template, MainTitleArea);
 		ArrayOfChequeBondTransactionItems = GetChequeBondTransactionItems(ThisObject.Document);
+		Template = Reports.D0013_DocumentRegistrationsReport.GetTemplate("Template");
 		MainTitleAreaLowSelection = Template.GetArea("MainTitleLowSelection");
 		For Each ItemOfChequeBondTransactionItems In ArrayOfChequeBondTransactionItems Do
 			GenerateReportForOneDocument(ItemOfChequeBondTransactionItems, Result, Template, MainTitleAreaLowSelection);
@@ -186,7 +187,15 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	NewMovementsArray = PostingServer.CheckDocumentArray(DocsArray);
 	DifferentMovementsArray = New Array;
 	If NewMovementsArray.Count() Then
-		DifferentMovementsArray = NewMovementsArray[0].RegInfo;
+		DifferentMovementsArray = New Array();
+		For Each RegInfo In NewMovementsArray[0].RegInfo Do
+			If RegInfo.RegName = "AccumulationRegister.R6060T_CostOfGoodsSold"
+				Or RegInfo.RegName = "AccumulationRegister.R6020B_BatchBalance" 
+				Or RegInfo.RegName = "AccumulationRegister.T1040T_RowIDSerialLotNumbers" Then
+				Continue;
+			EndIf;
+			DifferentMovementsArray.Add(RegInfo);
+		EndDo; 
 	EndIf;
 	
 	For Each ObjectProperty In ArrayOfDocumentRegisterRecords Do

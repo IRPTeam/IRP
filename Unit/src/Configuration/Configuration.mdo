@@ -33,7 +33,6 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.Unit_MainRole</defaultRoles>
   <defaultLanguage>Language.English</defaultLanguage>
-  <compatibilityMode>8.3.27</compatibilityMode>
   <languages uuid="a12cbfb0-6dc3-4d28-97a9-113587c1e0c5">
     <name>English</name>
     <objectBelonging>Adopted</objectBelonging>
@@ -69,6 +68,7 @@
   <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
   <commonModules>CommonModule.DocSalesInvoiceServer</commonModules>
   <commonModules>CommonModule.DocPurchaseInvoiceServer</commonModules>
+  <commonModules>CommonModule.Unit_RegistersCheckBalance</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -86,9 +86,9 @@
   <commonAttributes>CommonAttribute.Width</commonAttributes>
   <httpServices>HTTPService.MockService</httpServices>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
-  <definedTypes>DefinedType.typeAmount</definedTypes>
   <definedTypes>DefinedType.typeDescription</definedTypes>
   <definedTypes>DefinedType.typeFilesOwner</definedTypes>
+  <definedTypes>DefinedType.typeAmount</definedTypes>
   <commandGroups>CommandGroup.Service</commandGroups>
   <constants>Constant.SaasMode</constants>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -196,6 +196,7 @@
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
   <documents>Document.DebitCreditNote</documents>
+  <documents>Document.Storno</documents>
   <enums>Enum.CurrencyType</enums>
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.REP_ReportParametrTypes</enums>

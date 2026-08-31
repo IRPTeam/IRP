@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c18bb1c2-4418-4553-a121-e5c9b395e850">
+ <name>Report_R4011B_FreeStockMovements</name>
+ <synonym>
+  <key>en</key>
+  <value>EEB99CC9-5274-B4E7-7A45-5291A3B41439</value>
+ </synonym>
+</mdclass:Role>

@@ -124,6 +124,7 @@ _____________________________________________</value>
    <name>OK</name>
    <id>9</id>
    <visible>true</visible>
+   <enabled>false</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>

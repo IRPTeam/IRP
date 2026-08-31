@@ -168,7 +168,76 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
 
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Key AS Key,
+	|	RowIDInfo.Quantity AS Quantity
+	|INTO tmpRowID
+	|FROM
+	|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.PurchaseOrder AS Order,
+	|	ItemList.Ref.Currency AS Currency,
+	|	tmpRowID.RowID AS RowKey,
+	|	ItemList.ItemKey AS ItemKey,
+	|	tmpRowID.Quantity AS Quantity,
+	|	(ItemList.TotalAmount / ItemList.QuantityInBaseUnit) * tmpRowID.Quantity AS Amount,
+	|	(ItemList.NetAmount / ItemList.QuantityInBaseUnit) * tmpRowID.Quantity AS NetAmount
+//		|into R1012B_PurchaseOrdersInvoiceClosing
+	|FROM
+	|	tmpRowID AS tmpRowID
+	|		INNER JOIN Document.PurchaseInvoice.ItemList AS ItemList
+	|		ON ItemList.Key = tmpRowID.Key
+	|		AND NOT ItemList.PurchaseOrder.Ref IS NULL
+	|		AND ItemList.Ref = &Ref";
 
+	Query.SetParameter("Ref", Ref);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	QueryTable2 = QueryTable.CopyColumns();
+	For Each Row In QueryTable Do
+		OrderItemListRows = Row.Order.ItemList.FindRows(New Structure("Key", Row.RowKey));
+		If OrderItemListRows.Count() > 0 Then
+			OrderItemListRow = OrderItemListRows[0];
+			If OrderItemListRow.ItemKey <> Row.ItemKey Then
+				NewRow2 = QueryTable2.Add();
+				FillPropertyValues(NewRow2, Row);
+				NewRow2.RecordType = AccumulationRecordType.Expense;
+				NewRow2.ItemKey = OrderItemListRow.ItemKey;
+				NewRow3 = QueryTable2.Add();
+				FillPropertyValues(NewRow3, Row);
+				NewRow3.RecordType = AccumulationRecordType.Receipt;
+				NewRow3.ItemKey = Row.ItemKey;				
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	For Each Row In QueryTable2 Do
+		NewRow = QueryTable.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"Select * into tmpR1012B_PurchaseOrdersInvoiceClosing From &QueryTable as QueryTable";
+	Query.SetParameter("QueryTable", QueryTable);
+	Query.Execute();
+
+	
 	Return Tables;
 EndFunction
 
@@ -462,6 +531,10 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	
+	If Parameters.Property("ArrayOfPostingInfo") Then
+		Parameters.Delete("ArrayOfPostingInfo");
+	EndIf;
+	
 	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
@@ -527,7 +600,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	
@@ -656,6 +733,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(B1040B_AgingKey());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
@@ -806,6 +884,8 @@ Function ItemList()
 	|	undefined as TaxPartner,
 	|	undefined as TaxLegalName,
 	|	undefined as TaxAgreement,
+	|	undefined as PartnerUUID,
+	|	undefined as TaxUUID,
 	|	0 as WithholdingTaxAmount
 	|INTO ItemList
 	|FROM
@@ -1193,60 +1273,33 @@ EndFunction
 Function R1012B_PurchaseOrdersInvoiceClosing()
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.Period AS Period,
-		|	ItemList.Company AS Company,
-		|	ItemList.Branch AS Branch,
-		|	ItemList.PurchaseOrder AS Order,
-		|	ItemList.Currency AS Currency,
-		|	ItemList.OrderItemKey AS ItemKey,
-		|	ItemList.RowKey AS RowKey,
-		|	ItemList.Quantity AS Quantity,
-		|	ItemList.Amount AS Amount,
-		|	ItemList.NetAmount AS NetAmount
-		|INTO R1012B_PurchaseOrdersInvoiceClosing
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Key AS Key,
+		|	RowIDInfo.Quantity AS Quantity
+		|INTO tmpRowID
 		|FROM
-		|	OrderItemList AS ItemList
+		|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
 		|WHERE
-		|	ItemList.PurchaseOrderExists
+		|	RowIDInfo.Ref = &Ref
+		|;
 		|
-		|UNION ALL
-		|
+		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.PurchaseOrder,
-		|	ItemList.Currency,
-		|	ItemList.ItemKey,
-		|	ItemList.RowKey,
-		|	ItemList.Quantity,
-		|	ItemList.Amount,
-		|	ItemList.NetAmount
+		|	Table.RecordType AS RecordType,
+		|	Table.Period AS Period,
+		|	Table.Company AS Company,
+		|	Table.Branch AS Branch,
+		|	Table.Order AS Order,
+		|	Table.Currency AS Currency,
+		|	Table.RowKey AS RowKey,
+		|	Table.ItemKey AS ItemKey,
+		|	Table.Quantity AS Quantity,
+		|	Table.Amount AS Amount,
+		|	Table.NetAmount AS NetAmount
+		|	into R1012B_PurchaseOrdersInvoiceClosing
 		|FROM
-		|	OrderItemList AS ItemList
-		|WHERE
-		|	ItemList.PurchaseOrderExists
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.PurchaseOrder,
-		|	ItemList.Currency,
-		|	ItemList.ItemKey,
-		|	ItemList.RowKey,
-		|	ItemList.Quantity,
-		|	ItemList.Amount,
-		|	ItemList.NetAmount
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	ItemList.PurchaseOrderExists";
+		|	tmpR1012B_PurchaseOrdersInvoiceClosing as Table
+		|WHERE true";
 EndFunction
 
 Function R1020B_AdvancesToVendors()
@@ -1259,6 +1312,36 @@ EndFunction
 
 Function R5012B_VendorsAging()
 	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_PI();
+EndFunction
+
+Function B1040B_AgingKey()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentTerms.Ref.Date AS Period,
+		|	PaymentTerms.Ref.Company AS Company,
+		|	PaymentTerms.Ref.Branch AS Branch,
+		|	PaymentTerms.Ref.Currency AS Currency,
+		|	PaymentTerms.Ref.Agreement AS Agreement,
+		|	PaymentTerms.Ref.Partner AS Partner,
+		|	PaymentTerms.Ref AS Invoice,
+		|	PaymentTerms.Date AS PaymentDate,
+		|	SUM(PaymentTerms.Amount) AS Amount
+		|INTO B1040B_AgingKey
+		|FROM
+		|	Document.PurchaseInvoice.PaymentTerms AS PaymentTerms
+		|WHERE
+		|	PaymentTerms.Ref = &Ref
+		|GROUP BY
+		|	PaymentTerms.Date,
+		|	PaymentTerms.Ref,
+		|	PaymentTerms.Ref.Agreement,
+		|	PaymentTerms.Ref.Company,
+		|	PaymentTerms.Ref.Branch,
+		|	PaymentTerms.Ref.Currency,
+		|	PaymentTerms.Ref.Date,
+		|	PaymentTerms.Ref.Partner,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R1031B_ReceiptInvoicing()
@@ -1568,12 +1651,22 @@ Function R4050B_StockInventory()
 		|	ItemList.Company,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	SUM(ItemList.Quantity) AS Quantity,
+		|
+		|	case when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail then SerialLotNumbers.SerialLotNumber 
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef) end as SerialLotNumber,
+		|	case when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail then SourceOfOrigins.SourceOfOrigin 
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef) end as SourceOfOrigin,
+		|		
+		|	sum(case when SerialLotNumbers.SerialLotNumber.Ref is null then ItemList.Quantity else SerialLotNumbers.Quantity end) as Quantity,
+		|
 		|	0 AS PreliminaryQuantity,
 		|	Undefined as CalculationMovementCost
 		|INTO R4050B_StockInventory
 		|FROM
 		|	ItemList AS ItemList
+		|	left join SerialLotNumbers as SerialLotNumbers on ItemList.Key = SerialLotNumbers.Key
+		|	left join SourceOfOrigins AS SourceOfOrigins on ItemList.Key = SourceOfOrigins.Key
+		|	and ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND ItemList.IsPurchase
@@ -1582,7 +1675,12 @@ Function R4050B_StockInventory()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Store,
-		|	ItemList.ItemKey
+		|	ItemList.ItemKey,
+		|
+		|	case when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail then SerialLotNumbers.SerialLotNumber 
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef) end,
+		|	case when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail then SourceOfOrigins.SourceOfOrigin 
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef) end
 		|
 		|UNION ALL
 		|
@@ -1596,6 +1694,8 @@ Function R4050B_StockInventory()
 		|	T4050_StockInventoryInfo.Company,
 		|	T4050_StockInventoryInfo.Store,
 		|	T4050_StockInventoryInfo.ItemKey,
+		|	T4050_StockInventoryInfo.SerialLotNumber,
+		|	T4050_StockInventoryInfo.SourceOfOrigin,
 		|	SUM(T4050_StockInventoryInfo.Quantity),
 		|	SUM(T4050_StockInventoryInfo.PreliminaryQuantity),
 		|	T4050_StockInventoryInfo.Recorder
@@ -1613,6 +1713,8 @@ Function R4050B_StockInventory()
 		|	T4050_StockInventoryInfo.Company,
 		|	T4050_StockInventoryInfo.Store,
 		|	T4050_StockInventoryInfo.ItemKey,
+		|	T4050_StockInventoryInfo.SerialLotNumber,
+		|	T4050_StockInventoryInfo.SourceOfOrigin,
 		|	T4050_StockInventoryInfo.Recorder";
 EndFunction
 

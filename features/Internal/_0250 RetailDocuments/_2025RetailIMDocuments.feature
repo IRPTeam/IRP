@@ -360,11 +360,7 @@ Scenario: _0155267 create Retail SC (link form)
 		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"		
 		And I click the button named "FormCreate"
 	* Filling main details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Retail customer" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -538,11 +534,7 @@ Scenario: _0155270 create Retail GR	(link)
 		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"		
 		And I click the button named "FormCreate"
 	* Filling main details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Retail customer" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -658,11 +650,7 @@ Scenario: _0155272 create RSC - RGR - RSR transaction type (pickup), without ret
 		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"		
 		And I click the button named "FormCreate"
 		* Filling main details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Retail customer" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -727,11 +715,7 @@ Scenario: _0155272 create RSC - RGR - RSR transaction type (pickup), without ret
 		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"		
 		And I click the button named "FormCreate"
 		* Filling main details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Retail customer" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -929,8 +913,8 @@ Scenario: _0155274 select items from RSO in POS
 		And I click "OK" button	
 		And I click "Select basis document" button
 		And "SalesOrders" table does not contain lines
-			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' |
-			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       |
+			| 'Number' | 'Date'       | 'Amount'   | 'Retail customer' | 'Branch' |
+			| '318'    | '11.08.2023' | '1 188,00' | 'Daniel Smith'    | ''       |
 		And I close all client application windows
 		
 				

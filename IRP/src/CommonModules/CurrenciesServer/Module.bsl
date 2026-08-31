@@ -44,6 +44,127 @@ Function PutCurrencyTableToTempTablesManager(Parameters, CurrencyTable)
 EndFunction
 
 Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefined) Export
+
+	IsOffsetOfAdvances          = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
+	IsDebitCreditNoteDifference = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsDebitCreditNoteDifference", False);
+	
+	If IsOffsetOfAdvances Then
+		_PreparePostingDataTables(Parameters, CurrencyTable, IsOffsetOfAdvances, IsDebitCreditNoteDifference, AddInfo);
+	Else
+		ClosingRecords = New Array();
+		_PartnerBalanceTable = Undefined;
+		_PostingDataTables = New Map();
+		
+		ArrayOfPostingInfo = GetArrayOfPostingInfo(Parameters);
+		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
+			ItemOfPostingInfo = ItemOfPostingInfo.Value;
+			If ItemOfPostingInfo.PrepareTable.Count() = 0 Then
+				Continue; // register is empty
+			EndIf;
+			CheckClosingColumn(ItemOfPostingInfo, ClosingRecords, _PartnerBalanceTable, _PostingDataTables, "AgingClosing");
+			CheckClosingColumn(ItemOfPostingInfo, ClosingRecords, _PartnerBalanceTable, _PostingDataTables, "AdvancesClosing");
+			CheckClosingColumn(ItemOfPostingInfo, ClosingRecords, _PartnerBalanceTable, _PostingDataTables, "CustomersAdvancesClosing");
+			CheckClosingColumn(ItemOfPostingInfo, ClosingRecords, _PartnerBalanceTable, _PostingDataTables, "VendorsAdvancesClosing");
+		EndDo;
+		Parameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
+		_PreparePostingDataTables(Parameters, CurrencyTable, IsOffsetOfAdvances, IsDebitCreditNoteDifference, AddInfo);
+		
+		If ClosingRecords.Count() = 0 Then
+			Return;
+		EndIf;
+		
+		RefMetadata = Parameters.Metadata;
+		If Parameters.Metadata = Metadata.Documents.PurchaseOrderClosing Then
+			RefMetadata = Parameters.Object.PurchaseOrder.Metadata();
+		ElsIf Parameters.Metadata = Metadata.Documents.SalesOrderClosing Then
+			RefMetadata = Parameters.Object.SalesOrder.Metadata();
+		EndIf;
+		CurrencyTable_Agreement = GetEmptyCurrenciesTable(RefMetadata);
+		
+		_PartnerBalanceTableCopy = _PartnerBalanceTable.Copy();
+		If _PartnerBalanceTableCopy.Columns.Find("Key") = Undefined Then
+			_PartnerBalanceTableCopy.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+		EndIf;
+		_PartnerBalanceTableCopy.GroupBy("Key, Currency, Agreement, Company");
+		
+		For Each Row In _PartnerBalanceTableCopy Do
+			_CurrencyParameters = New Structure();
+			_CurrencyParameters.Insert("Ref"       , Parameters.Object.Ref);
+			_CurrencyParameters.Insert("RowKey"    , Row.Key);
+			_CurrencyParameters.Insert("Date"      , Parameters.Object.Date);
+			_CurrencyParameters.Insert("Currency"  , Row.Currency);
+			_CurrencyParameters.Insert("Agreement" , Row.Agreement);
+			_CurrencyParameters.Insert("Company"   , Row.Company);
+			_CurrencyParameters.Insert("DocumentAmount" , 0);
+			_CurrencyParameters.Insert("Currencies"     , CurrencyTable_Agreement);
+		
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(CurrencyTable_Agreement, Row.Key);
+			UpdateCurrencyTable(_CurrencyParameters, CurrencyTable_Agreement);
+		EndDo;	
+	
+		Parameters_Agreement = New Structure();
+		Parameters_Agreement.Insert("Object", Parameters.Object);
+		Parameters_Agreement.Insert("Metadata", Parameters.Object.Metadata());
+		Parameters_Agreement.Insert("ArrayOfPostingInfo", ClosingRecords);
+		Parameters_Agreement.Insert("IsOffsetOfAdvances", IsOffsetOfAdvances);
+		Parameters_Agreement.Insert("PostingDataTables", _PostingDataTables);
+		_PreparePostingDataTables(Parameters_Agreement, CurrencyTable_Agreement, IsOffsetOfAdvances, IsDebitCreditNoteDifference,  AddInfo);
+		
+		For Each MapItem In Parameters_Agreement.PostingDataTables Do
+			Table = Parameters.PostingDataTables.Get(MapItem.Key);
+			If Table <> Undefined Then
+				For Each Row In MapItem.Value.PrepareTable Do
+					FillPropertyValues(Table.PrepareTable.Add(), Row);
+				EndDo;
+			EndIf;
+		EndDo;
+	EndIf;
+EndProcedure
+
+Procedure CheckClosingColumn(ItemOfPostingInfo, ClosingRecords, _PartnerBalanceTable, _PostingDataTables, ColumnName)
+	If ItemOfPostingInfo.PrepareTable.Columns.Find(ColumnName) = Undefined Then
+		Return;
+	EndIf;
+	
+	If ItemOfPostingInfo.PrepareTable.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	NewClosingRecords = New	Structure("Value", New Structure("Metadata, PrepareTable", 
+		ItemOfPostingInfo.Metadata, ItemOfPostingInfo.PrepareTable.CopyColumns()));
+		
+	ArrayForDelete = New Array();
+	ClosingRecordsIsPresent = False;
+	For Each Row In	ItemOfPostingInfo.PrepareTable Do
+		If ValueIsFilled(Row[ColumnName]) Then
+			ClosingRecordsIsPresent = True;
+			ArrayForDelete.Add(Row);
+			FillPropertyValues(NewClosingRecords.Value.PrepareTable.Add(), Row);
+		EndIf;
+	EndDo;
+	
+	If ClosingRecordsIsPresent Then
+		ClosingRecords.Add(NewClosingRecords);
+		_PostingDataTables.Insert(NewClosingRecords.Value.Metadata, NewClosingRecords.Value);
+		If NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R5020B_PartnersBalance 
+			Or NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R5011B_CustomersAging
+			Or NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R5012B_VendorsAging 
+			Or NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors
+			Or NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers
+			Or NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R1021B_VendorsTransactions
+			Or NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R2021B_CustomersTransactions
+			Then
+			_PartnerBalanceTable = NewClosingRecords.Value.PrepareTable;
+		EndIf;
+	EndIf;
+	
+	For Each ItemForDelete In ArrayForDelete Do
+		ItemOfPostingInfo.PrepareTable.Delete(ItemForDelete);
+	EndDo;
+EndProcedure
+
+Procedure _PreparePostingDataTables(Parameters, CurrencyTable, IsOffsetOfAdvances, IsDebitCreditNoteDifference,  AddInfo)
+
 	ArrayOfPostingInfo = GetArrayOfPostingInfo(Parameters);
 		
 	If ArrayOfPostingInfo.Count() = 0 Then
@@ -71,14 +192,14 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			PartnerBalanceTables.Table_T2014S_AdvancesInfo = AdvanceInfo.PrepareTable;
 		EndIf;
 	EndIf;
-	
+		
 	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 		ItemOfPostingInfo = ItemOfPostingInfo.Value;
 		If ItemOfPostingInfo.PrepareTable.Count() = 0 Then
 			Continue; // register is empty
 		EndIf;
 		
-		UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
+		UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata) And Not IsOffsetOfAdvances;
 		UseLegalMovementType = IsUseLegalMovementType(ItemOfPostingInfo.Metadata);
 		UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
 		UseKey = ItemOfPostingInfo.PrepareTable.Columns.Find("Key") <> Undefined;
@@ -92,16 +213,78 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			EndIf;
 		EndIf;
 		
+		If ItemOfPostingInfo.Metadata = Metadata.InformationRegisters.T2015S_TransactionsInfo Then
+			IncludeDimensions = IncludeDimensions + ", IsDue, IsPaid";
+		EndIf;
+		
+		If ItemOfPostingInfo.Metadata = Metadata.InformationRegisters.T2014S_AdvancesInfo Then
+			IncludeDimensions = IncludeDimensions + ", IsPurchaseOrderClose, IsSalesOrderClose, RecordType";
+		EndIf;
+		
 		PrepareTable = ItemOfPostingInfo.PrepareTable;
 		If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
 			FullTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
 			GroupTableByAllDimensions(PrepareTable, ItemOfPostingInfo.Metadata, UseKey, "RowKey", IncludeDimensions);	
 			GroupedTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
 			
-			Table = AlignTables(FullTable, GroupedTable, ItemOfPostingInfo.Metadata, UseKey);
-					
+			If Parameters.Metadata = Metadata.Documents.WithholdingTaxInvoice and Parameters.Object.PriceIncludeTax = False Then
+					Op1 = Catalogs.AccountingOperations.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions;
+					Op2 = Catalogs.AccountingOperations.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions;
+					TrnCurrency = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
+					LocalCurrency = Parameters.Object.Company.LegalCurrencyMovementType;
+		
+				Table = AlignTables2("", Op1, Op2, TrnCurrency, LocalCurrency, FullTable, 
+						ItemOfPostingInfo, TempTablesManager, UseAgreementMovementType, UseCurrencyJoin, UseKey);			
+			Else
+				Table = AlignTables(FullTable, GroupedTable, ItemOfPostingInfo.Metadata, UseKey);
+			EndIf;		
 		Else
-			Table = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			
+			If (ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5022T_Expenses 
+				Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5021T_Revenues) 
+				and (TypeOf(Parameters.Object.Ref) = Type("DocumentRef.SalesInvoice") 
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.PurchaseInvoice")
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.RetailSalesReceipt")
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.WorkSheet")) Then
+					
+				PrepareTable_Own = PrepareTable.CopyColumns();
+				PrepareTable_CMC = PrepareTable.CopyColumns();
+				For Each Row In PrepareTable Do
+					If ValueIsFilled(Row.CalculationMovementCost) Then
+						FillPropertyValues(PrepareTable_CMC.Add(), Row);
+					Else
+						FillPropertyValues(PrepareTable_Own.Add(), Row);
+					EndIf;
+				EndDo;
+				Table_Own = ExpandTable(TempTablesManager, PrepareTable_Own, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+				
+				CurrenciesTableParams = New Structure();
+				CurrenciesTableParams.Insert("Ref"            , Parameters.Object.Ref);
+				CurrenciesTableParams.Insert("Date"           , Parameters.Object.Date);
+				CurrenciesTableParams.Insert("Company"        , Parameters.Object.Company);
+				CurrenciesTableParams.Insert("Currency"       , Parameters.Object.Company.LandedCostCurrencyMovementType.Currency);
+				CurrenciesTableParams.Insert("Agreement"      , Undefined);
+				CurrenciesTableParams.Insert("RowKey"         , "");
+				CurrenciesTableParams.Insert("DocumentAmount" , 0);
+				CurrenciesTableParams.Insert("Currencies"     , New Array());
+		
+				NewCurrencyTable = Parameters.Object.Currencies.UnloadColumns();
+				UpdateCurrencyTable(CurrenciesTableParams, NewCurrencyTable);
+				TempTablesManager_CMC = PutCurrencyTableToTempTablesManager(Parameters, NewCurrencyTable);				
+				Table_CMC = ExpandTable(TempTablesManager_CMC, PrepareTable_CMC, UseAgreementMovementType, UseCurrencyJoin,
+					?(TypeOf(Parameters.Object.Ref) = Type("DocumentRef.WorkSheet"), False, UseKey));
+				
+				Table = Table_Own.CopyColumns();
+				For Each Row In Table_Own Do
+					FillPropertyValues(Table.Add(), Row);
+				EndDo;
+				For Each Row In Table_CMC Do
+					FillPropertyValues(Table.Add(), Row);
+				EndDo;				
+			Else
+				Table = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			EndIf;
+			
 			GroupTableByAllDimensions(Table, ItemOfPostingInfo.Metadata, UseKey, "", IncludeDimensions);
 		EndIf;
 		ItemOfPostingInfo.PrepareTable = SetTransactionCurrency(Table, ItemOfPostingInfo.Metadata, 
@@ -112,10 +295,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		PutToPartnerBalanceTables(PartnerBalanceTables, ItemOfPostingInfo.Metadata, ItemOfPostingInfo.PrepareTable);
 							
 	EndDo;
-	
-	IsOffsetOfAdvances          = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
-	IsDebitCreditNoteDifference = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsDebitCreditNoteDifference", False);
-	
+		
 	// currencies rate difference on money transfer
 	ExchangeDifference(Parameters);
 	
@@ -131,12 +311,41 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 	If Parameters.Property("PostingDataTables") Then
 		SetAccountingCurrenciesAndAmounts(Parameters);
 	EndIf;
+	
+	If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.IncomingExchRateAdjustmentInvoice")
+		Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.OutgoingExchRateAdjustmentInvoice") Then
+		For Each Item In Parameters.ArrayOfPostingInfo Do
+			If Item.Key = Metadata.AccumulationRegisters.R5020B_PartnersBalance Then
+				DeleteTransactonCurrency(Item.Value.PrepareTable);
+			EndIf;
+			If Item.Key = Metadata.AccumulationRegisters.R2021B_CustomersTransactions Then
+				DeleteTransactonCurrency(Item.Value.PrepareTable);
+			EndIf;
+			If Item.Key = Metadata.AccumulationRegisters.R1021B_VendorsTransactions Then
+				DeleteTransactonCurrency(Item.Value.PrepareTable);
+			EndIf;
+		EndDo;
+	EndIf;
+EndProcedure
+
+Procedure DeleteTransactonCurrency(Table)
+	ArrayForDelete = New Array();
+	For Each Row In Table Do
+		If Row.CurrencyMovementType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each ItemForDelete In ArrayForDelete Do
+		Table.Delete(ItemForDelete);
+	EndDo;
 EndProcedure
 
 Function IsUseAgreementMovementType(RegMetadata)
 	// return true if use else (not use) return false	
 	
 	Reg = Metadata.AccumulationRegisters;
+	RegInfo = Metadata.InformationRegisters;
 	
 	Registers = New Array();
 	Registers.Add(Reg.R2020B_AdvancesFromCustomers);
@@ -150,6 +359,14 @@ Function IsUseAgreementMovementType(RegMetadata)
 	Registers.Add(Reg.R8015T_ConsignorPrices);
 	
 	Registers.Add(Reg.R3027B_EmployeeCashAdvance);
+	
+	Registers.Add(Reg.R5011B_CustomersAging);
+	Registers.Add(Reg.R5012B_VendorsAging);
+
+	Registers.Add(Reg.B1040B_AgingKey);
+	
+	Registers.Add(RegInfo.T2015S_TransactionsInfo);
+	Registers.Add(RegInfo.T2014S_AdvancesInfo);
 	
 	If Registers.Find(RegMetadata) = Undefined Then
 		Return False;
@@ -183,6 +400,8 @@ Function IsUseCurrencyJoin(Parameters, RecMetadata)
 	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R3015B_CashAdvance);
 	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R2021B_CustomersTransactions);
 	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R1021B_VendorsTransactions);
+	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R5011B_CustomersAging);
+	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R5012B_VendorsAging);
 
 	FilterByDocument = False;
 
@@ -196,6 +415,10 @@ Function IsUseCurrencyJoin(Parameters, RecMetadata)
 		FilterByDocument = True;
 	EndIf;
 
+	If TypeOf(Parameters.Object) = Type("DocumentObject.EmployeeCashAdvance") Or TypeOf(Parameters.Object) = Type("DocumentRef.EmployeeCashAdvance") Then
+		FilterByDocument = True;
+	EndIf;
+	
 	If FilterByDocument And ArrayOfRecMetadata.Find(RecMetadata) <> Undefined Then
 		UseCurrencyJoin = True;
 	EndIf;
@@ -470,13 +693,12 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	|FROM
 	|	RecordSet AS RecordSet
 	|		LEFT JOIN CurrencyTable AS CurrencyTable
-	|		ON CASE
-	|			WHEN &UseKey
-	|				THEN RecordSet.Key = CurrencyTable.Key
-	|			ELSE TRUE
-	|		END
-	|		AND 
-	|		CASE WHEN &UseCurrencyJoin THEN RecordSet.Currency = CurrencyTable.CurrencyFrom ELSE TRUE END
+	|
+	|		on
+	|		(not &UseKey Or RecordSet.Key = CurrencyTable.Key)
+	|		and 
+	|		(not &UseCurrencyJoin or RecordSet.Currency = CurrencyTable.CurrencyFrom)
+	|		
 	|WHERE
 	|	NOT CurrencyTable.MovementType IS NULL
 	|	AND CASE
@@ -530,6 +752,7 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|DROP RecordSet";
+
 	If Not UseKey And Table.Columns.Find("Key") = Undefined Then
 		Table.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	EndIf;
@@ -543,6 +766,87 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	QueryTable = QueryResults[1].Unload();
 		
 	Return QueryTable;
+EndFunction
+
+Function AlignTables2(_Key, Op1, Op2, TrnCurrency, LocalCurrency, FullTable, 
+		ItemOfPostingInfo, TempTablesManager, UseAgreementMovementType, UseCurrencyJoin, UseKey)
+	FilterTrn1 = New Structure();
+	FilterTrn1.Insert("Operation", Op1);
+	FilterTrn1.Insert("CurrencyMovementType", TrnCurrency);
+	If ValueIsFilled(_Key) Then
+		FilterTrn1.Insert("Key", _key);
+	EndIf;
+	TableTrn1 = FullTable.Copy(FilterTrn1);
+		
+	FilterTrn2 = New Structure();
+	FilterTrn2.Insert("Operation", Op2);
+	FilterTrn2.Insert("CurrencyMovementType", TrnCurrency);
+	If ValueIsFilled(_Key) Then
+		FilterTrn2.Insert("Key", _Key);
+	EndIf;
+	TableTrn2 = FullTable.Copy(FilterTrn2);
+			
+	TableTrn = FullTable.CopyColumns();
+	For Each R1 In TableTrn1 Do
+		FillPropertyValues(TableTrn.Add(), R1);
+	EndDo;
+	For Each R2 In TableTrn2 Do
+		FillPropertyValues(TableTrn.Add(), R2);
+	EndDo;
+			
+	GroupTableByAllDimensions(TableTrn, ItemOfPostingInfo.Metadata, UseKey, 
+		"RowKey, Operation, CrCurrency, DrCurrency", "");
+	
+	TableTrn = ExpandTable(TempTablesManager, TableTrn, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+	
+	FilterTrn3 = New Structure();
+	FilterTrn3.Insert("CurrencyMovementType", LocalCurrency);
+	
+	TableTrn = TableTrn.Copy(FilterTrn3);
+	
+	__Amount1 = 0;
+	For Each R3 In TableTrn Do
+		__Amount1 = __Amount1 + R3.Amount;
+	EndDo;
+	
+	FilterLoc1 = New Structure();
+	FilterLoc1.Insert("Operation", Op1);
+	FilterLoc1.Insert("CurrencyMovementType", LocalCurrency);
+	If ValueIsFilled(_Key) Then
+		FilterLoc1.Insert("Key", _Key);
+	EndIf;
+	TableLoc1 = FullTable.FindRows(FilterLoc1);
+	
+	FilterLoc2 = New Structure();
+	FilterLoc2.Insert("Operation", Op2);
+	FilterLoc2.Insert("CurrencyMovementType", LocalCurrency);
+	If ValueIsFilled(_Key) Then
+		FilterLoc2.Insert("Key", _Key);
+	EndIf;
+	TableLoc2 = FullTable.Copy(FilterLoc2);
+		
+	__Amount2 = 0;
+	__MaxRow = Undefined;
+	For Each R1 In TableLoc1 Do
+		If __MaxRow = Undefined Then
+			__MaxRow = R1;
+		Else
+			 If R1.Amount > __MaxRow.Amount Then
+			 	__MaxRow = R1;
+			 EndIf;
+		EndIf;
+		__Amount2 = __Amount2 + R1.Amount;
+	EndDo;
+	
+	For Each R2 In TableLoc2 Do
+		__Amount2 = __Amount2 + R2.Amount;
+	EndDo;
+	
+	__Diff = __Amount1 - __Amount2;
+	If __Diff > 0 And __MaxRow <> Undefined Then
+		__MaxRow.Amount = __MaxRow.Amount +__Diff;
+	EndIf;			
+	Return FullTable;		
 EndFunction
 
 Function AlignTables(FullTable, GroupedTable, RegMetadata, UseKey)
@@ -666,7 +970,7 @@ Procedure GroupTableByAllDimensions(Table, RegMetadata, UseKey, ExcludeDimension
 	SummColumn = New Array();
 	
 	For Each Field In RegMetadata.Resources Do
-		If Table.Columns.Find(Field.Name) <> Undefined Then
+		If Table.Columns.Find(Field.Name) <> Undefined And GroupColumns.Find(Lower(Field.Name)) = Undefined  Then
 			SummColumn.Add(Field.Name)
 		EndIf;				
 	EndDo;
@@ -798,7 +1102,7 @@ Procedure ReplaceTransactionCurrency(ExpandTable, TrnRows, OtherRows, ExcludeDim
 EndProcedure
 
 Function GetEmptyCurrenciesTable(RefMetadata)
-	Columns = RefMetadata.TabularSections.Currencies.Attributes;
+	Columns = Metadata.Documents.SalesInvoice.TabularSections.Currencies.Attributes;
 	EmptyCurrenciesTable = New ValueTable();
 	EmptyCurrenciesTable.Columns.Add("Key"             , Columns.Key.Type);
 	EmptyCurrenciesTable.Columns.Add("IsFixed"         , Columns.IsFixed.Type);
@@ -1077,7 +1381,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			PrepereTable = PartnerBalanceTables.R1021B_VendorsTransactions;
 			MainTableName = "R1021B_VendorsTransactions";
 		Else
-                        Raise R().UnknownTransactionTypeT2015;
+            Raise R().UnknownTransactionTypeT2015;
 		EndIf;
 		
 		If Not PrepereTable.Count() Then
@@ -1086,7 +1390,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 		
 		RegisterRows = PrepereTable.FindRows(Filter);	
 		If RegisterRows.Count() = 0 Then
-                        Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
+            Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
 		EndIf;
 		
 		RegMetadata = Metadata.AccumulationRegisters[MainTableName];  
@@ -1135,7 +1439,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			PrepereTable = PartnerBalanceTables.R1020B_AdvancesToVendors;
 			MainTableName = "R1020B_AdvancesToVendors";
 		Else
-                        Raise R().UnknownTransactionTypeTableT2014;
+            Raise R().UnknownTransactionTypeTableT2014;
 		EndIf;
 		
 		If Not PrepereTable.Count() Then
@@ -1143,8 +1447,8 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 		EndIf;
 		
 		RegisterRows = PrepereTable.FindRows(Filter);	
-                If RegisterRows.Count() = 0 Then
-                        Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
+        If RegisterRows.Count() = 0 Then
+        	Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
 		EndIf;
 		
 		RegMetadata = Metadata.AccumulationRegisters[MainTableName];
@@ -1460,6 +1764,12 @@ Procedure DebitCreditNoteDifference(Parameters)
 		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
 		TotalExpense  = Result.TotalAmount;
 	
+	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.EmployeeReceivable Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance].PrepareTable;
+		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Expense);
+		TotalExpense  = Result.TotalAmount;
+	
 	EndIf;
 				
 	// Receive (receipt)
@@ -1496,6 +1806,14 @@ Procedure DebitCreditNoteDifference(Parameters)
 		
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
 		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
+		BalanceType   = "active";
+		TotalReceipt  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
+		
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.EmployeeReceivable Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance].PrepareTable;
+		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Receipt);
 		BalanceType   = "active";
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
@@ -1625,7 +1943,7 @@ Function GetAmountByRecordType(Table, IgnoreColumnName, RecordType)
 	Result = New Structure("LegalCurrency, TotalAmount", Undefined, 0);
 	
 	For Each Row In Table Do
-		If ValueIsFilled(Row[IgnoreColumnName]) Then
+		If ValueIsFilled(IgnoreColumnName) And ValueIsFilled(Row[IgnoreColumnName]) Then
 			Continue;
 		EndIf;
 		
@@ -1991,7 +2309,7 @@ Procedure SetAccountingCurrenciesAndAmounts(Parameters)
 		EndIf;
 			
 		PartnerBalanceRows = RegPartnerBalance.PrepareTable.Copy(Filter); 
-				
+		
 		For Each OperationInfo In ArrayOfOperationInfo Do
 			FoundedRow = Undefined;
 			For Each PartnerBalanceRow In PartnerBalanceRows Do
@@ -2006,7 +2324,6 @@ Procedure SetAccountingCurrenciesAndAmounts(Parameters)
 			EndIf;
 			
 			Row[OperationInfo.AccountType + "Currency"] = FoundedRow.Currency;
-			Row[OperationInfo.AccountType + "CurrencyAmount"] = FoundedRow[OperationInfo.ResourceName];			
 		EndDo;
 	EndDo;
 EndProcedure

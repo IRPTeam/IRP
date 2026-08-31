@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9542499b-4462-4062-8510-bd63b0c674ff">
+ <name>Report_F0011_InventoryBook</name>
+ <synonym>
+  <key>en</key>
+  <value>0E86BA40-BCBF-65E5-5472-2C2ED3D73862</value>
+ </synonym>
+</mdclass:Role>

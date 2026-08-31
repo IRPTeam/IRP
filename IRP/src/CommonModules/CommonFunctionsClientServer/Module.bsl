@@ -58,11 +58,17 @@ Function ObjectHasProperty(Object, Property) Export
 	If TypeOf(Object) = Type("Structure") Then
 		Return Object.Property(Property);
 	EndIf;
-
-	NewUUID = New UUID();
-	Str = New Structure(Property, NewUUID);
-	FillPropertyValues(Str, Object);
-	Return Str[Property] <> NewUUID;
+	
+	Try 
+		i = Object[Property];
+	Except
+		Return false;
+	EndTry;
+	Return true;
+//	NewUUID = New UUID();
+//	Str = New Structure(Property, NewUUID);
+//	FillPropertyValues(Str, Object);
+//	Return Str[Property] <> NewUUID;
 EndFunction
 
 Procedure PutToAddInfo(AddInfo, Key, Value) Export
@@ -332,7 +338,7 @@ EndFunction
 // Get date from string.
 // 
 // Parameters:
-//  DateString - String - Date string
+//  DateString - String, Date - Date string
 // 
 // Returns:
 //  Date

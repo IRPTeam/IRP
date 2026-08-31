@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="96585f94-d5af-4bf2-90ce-b5b9e9a33943">
+ <name>OpenReport_R1010A_PurchaseOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>FA67BC60-C8B3-2A1A-AC95-5B5737945F5F</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

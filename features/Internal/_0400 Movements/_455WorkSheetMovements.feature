@@ -140,16 +140,16 @@ Scenario: _045505 check WorkSheet movements by the Register  "R4050 Stock invent
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''              | ''                         |
-			| 'Document registrations records'           | ''              | ''                      | ''            | ''                    | ''               | ''           | ''              | ''                         |
-			| 'Register  "R4050 Stock inventory"'        | ''              | ''                      | ''            | ''                    | ''               | ''           | ''              | ''                         |
-			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''              |'Attributes'                |
-			| ''                                         | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'      |'Calculation movement cost' |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | ''                    | 'Main Company'   | 'Store 01'   | 'Material 3'    | ''                         |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 1'    | ''                         |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 1'    | ''                         |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 2'    | ''                         |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 2'    | ''                         |
+			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''              | ''                  | ''                 | ''                         |
+			| 'Document registrations records'           | ''              | ''                      | ''            | ''                    | ''               | ''           | ''              | ''                  | ''                 | ''                         |
+			| 'Register  "R4050 Stock inventory"'        | ''              | ''                      | ''            | ''                    | ''               | ''           | ''              | ''                  | ''                 | ''                         |
+			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''              | ''                  | ''                 |'Attributes'                |
+			| ''                                         | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'      | 'Serial lot number' | 'Source of origin' |'Calculation movement cost' |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | ''                    | 'Main Company'   | 'Store 01'   | 'Material 3'    | ''                  | ''                 | ''                         |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 1'    | ''                  | ''                 | ''                         |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 1'    | ''                  | ''                 | ''                         |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 2'    | ''                  | ''                 | ''                         |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 2'    | ''                  | ''                 | ''                         |
 		And I close all client application windows
 
 Scenario: _045506 check WorkSheet movements by the Register  "T3010S Row ID info"

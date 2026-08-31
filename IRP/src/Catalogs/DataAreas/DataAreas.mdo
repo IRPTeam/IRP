@@ -168,9 +168,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -190,9 +188,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -211,9 +207,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -231,9 +225,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -283,7 +275,6 @@
    <value>09CA76AC-103A-2FE9-913C-C7EB617106DB</value>
   </synonym>
   <group>NavigationPanelOrdinary</group>
-  <commandParameterType/>
   <representation>Auto</representation>
  </commands>
  <commands uuid="f11e090e-06b6-40ca-bf8b-4266cf467009">
@@ -293,7 +284,6 @@
    <value>D9434D57-6262-50D6-66E7-744942B80612</value>
   </synonym>
   <group>ActionsPanelTools</group>
-  <commandParameterType/>
   <representation>PictureAndText</representation>
   <picture xsi:type="core:PictureRef">
    <picture>StdPicture.AppearanceFlagGreen</picture>

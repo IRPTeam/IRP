@@ -77,7 +77,6 @@ Function GetParameters_V15(Object, Row) Export
 	Return Parameters;
 EndFunction
 
-
 Function GetParameters_V7(Object, RowKey, Currency, Amount, Agreement = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("Ref"            , Object.Ref);
@@ -199,6 +198,19 @@ Function GetParameters_GR_Preliminary(Object, Row) Export
 	Return Parameters;
 EndFunction
 
+Function GetParameters_ExchDiffInvoce(Object, Row) Export
+	Parameters = New Structure();
+	Parameters.Insert("Ref"            , Object.Ref);
+	Parameters.Insert("Date"           , Object.Date);
+	Parameters.Insert("Company"        , Object.Company);
+	Parameters.Insert("Currency"       , Object.Currency);
+	Parameters.Insert("Agreement"      , Object.Agreement);
+	Parameters.Insert("RowKey"         , Row.Key);
+	Parameters.Insert("DocumentAmount" , Row.TotalAmount);
+	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, Row.Key));
+	Return Parameters;
+EndFunction
+
 Function GetCurrenciesTable(Currencies, RowKey = Undefined) Export
 	ArrayOfCurrenciesRows = New Array();
 	RowColumns = "Key, IsFixed, CurrencyFrom, Rate, ReverseRate,
@@ -253,19 +265,25 @@ EndProcedure
 
 Procedure CalculateAmount(CurrenciesTable, DocumentAmount) Export
 	For Each Row In CurrenciesTable Do
-		If Row.Multiplicity = 0 Or Row.Rate = 0 Then
-			Row.Amount = 0;
-			Continue;
-		EndIf;
 		CalculateAmountByRow(Row, DocumentAmount);
 	EndDo;
 EndProcedure
 
 Procedure CalculateAmountByRow(CurrenciesRow, DocumentAmount) Export
 	If CurrenciesRow.ShowReverseRate = True Then
-		CurrenciesRow.Amount = (DocumentAmount / CurrenciesRow.ReverseRate) / CurrenciesRow.Multiplicity;
+		If ValueIsFilled(CurrenciesRow.Multiplicity)
+			And ValueIsFilled(CurrenciesRow.ReverseRate) Then
+			CurrenciesRow.Amount = (DocumentAmount / CurrenciesRow.ReverseRate) / CurrenciesRow.Multiplicity;
+		Else
+			CurrenciesRow.Amount = 0 ;
+		EndIf;
 	Else
-		CurrenciesRow.Amount = (DocumentAmount * CurrenciesRow.Rate) / CurrenciesRow.Multiplicity;
+		If ValueIsFilled(CurrenciesRow.Multiplicity)
+			And ValueIsFilled(CurrenciesRow.Rate) Then	
+			CurrenciesRow.Amount = (DocumentAmount * CurrenciesRow.Rate) / CurrenciesRow.Multiplicity;
+		Else
+			CurrenciesRow.Amount = 0;
+		EndIf;				
 	EndIf;
 EndProcedure
 

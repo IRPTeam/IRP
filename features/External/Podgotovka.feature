@@ -426,11 +426,7 @@ Scenario: create PurchaseOrder017003
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I click the button named "FormCreate"
 		* Filling in the details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor information
 			And I click Select button of "Partner" field
@@ -721,11 +717,7 @@ Scenario: create InventoryTransferOrder020001
 				| 'Store 02'        |
 			And I select current line in "List" table
 			And I select "Approved" exact value from "Status" drop-down list
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in items table
 			And I move to "Item list" tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -740,8 +732,7 @@ Scenario: create InventoryTransferOrder020001
 				| 'Item key'     |
 				| 'M/White'      |
 			And I select current line in "List" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I click the button named "FormChoose"
+			And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 			And I move to the next attribute
 			And I input "50,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -758,8 +749,7 @@ Scenario: create InventoryTransferOrder020001
 				| 'S/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I click the button named "FormChoose"
+			And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 			And I move to the next attribute
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -786,11 +776,7 @@ Scenario: create InventoryTransferOrder020004
 			| 'Store 03'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in items table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -806,8 +792,7 @@ Scenario: create InventoryTransferOrder020004
 			| 'L/Green'     |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And I move to the next attribute
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -834,11 +819,7 @@ Scenario: create InventoryTransferOrder020007
 			| 'Store 01'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in items table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -854,8 +835,7 @@ Scenario: create InventoryTransferOrder020007
 			| 'L/Green'     |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And I move to the next attribute
 		And I input "17,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -882,11 +862,7 @@ Scenario: create InventoryTransferOrder020010
 			| 'Store 04'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in items table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -902,8 +878,7 @@ Scenario: create InventoryTransferOrder020010
 			| '36/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
+		And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 		And I move to the next attribute
 		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -1334,11 +1309,7 @@ Scenario: create InventoryTransfer021030
 		| Description   |
 		| Store 03      |
 	And I select current line in "List" table
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from "Company" drop-down list
 	And I move to "Items" tab
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
@@ -1353,8 +1324,7 @@ Scenario: create InventoryTransfer021030
 		| 'L/Green'    |
 	And I select current line in "List" table
 	And I activate "Unit" field in "ItemList" table
-	And I click choice button of "Unit" attribute in "ItemList" table
-	And I select current line in "List" table
+	And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 	And I activate "Quantity" field in "ItemList" table
 	And I input "3,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
@@ -1397,7 +1367,9 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 			| 'Description'                         |
 			| 'Basic Partner terms, without VAT'    |
 			And I select current line in "List" table
-		* Select store 
+			If "Update item list info" window is opened Then
+				And I click "OK" button
+		* Select store
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -1520,75 +1492,19 @@ Scenario: create PurchaseReturn300301
 Scenario: set True value to the constant
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		And I click "Check all" button
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                       | 'Use'    |
-			| 'Use lock data modification'   | 'Yes'    |
-		And I activate "Use" field in "FunctionalOptions" table
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                          | 'Use'    |
-			| 'Use consolidated retail sales'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                 | 'Use'    |
-			| 'Use job queue for external functions'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               | 'Use'    |
-			| 'Use all functional'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use'    |
-			| 'Use accounting'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                   | 'Use'    |
-			| 'Use commission trading'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'       | 'Use'    |
-			| 'Use salary'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		// And I go to line in "FunctionalOptions" table
-		// 	| 'Option'                                | 'Use' |
-		// 	| 'Use additional table control document' | 'Yes' |
-		// And I remove "Use" checkbox in "FunctionalOptions" table
-		// And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                | 'Use' |
-			| 'Use additional table control document' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use' |
-			| 'Use simple mode' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use fixed assets' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use object access' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                  | 'Use' |
-			| 'Use shipment and receipt planing orders' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use simple batch' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "Use lock data modification"
+		And I remove checkbox "  -  Use consolidated retail sales"		
+		And I remove checkbox "Use job queue for external functions"
+		And I remove checkbox "Use all functional"
+		And I remove checkbox "Use accounting"
+		And I remove checkbox "Use commission trading"
+		And I remove checkbox "Use salary"
+		And I remove checkbox "Use additional table control document"
+		And I remove checkbox "Use simple mode"
+		And I remove checkbox "Use fixed assets"
+		And I remove checkbox "Use object access"
+		And I remove checkbox "Use shipment and receipt planing orders"
+//		And I remove checkbox "Use simple batch"
 		And I click "Save" button
 		And I close current window
 	* Disable LinkedRowsIntegrity
@@ -1603,127 +1519,27 @@ Scenario: set True value to the constant
 Scenario: set True value to the constant (DemoDB)
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		And I click "Check all" button
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                       | 'Use'    |
-			| 'Use lock data modification'   | 'Yes'    |
-		And I activate "Use" field in "FunctionalOptions" table
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                          | 'Use'    |
-			| 'Use consolidated retail sales'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                 | 'Use'    |
-			| 'Use job queue for external functions'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               | 'Use'    |
-			| 'Use all functional'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use'    |
-			| 'Use accounting'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                   | 'Use'    |
-			| 'Use commission trading'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                | 'Use' |
-			| 'Use additional table control document' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use' |
-			| 'Use simple mode' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use object access' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                  | 'Use' |
-			| 'Use shipment and receipt planing orders' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use' |
-			| 'Use preliminary' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use' |
-			| 'Use work orders' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                  | 'Use' |
-			| 'Use price by properties' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                          | 'Use' |
-			| 'Use planned receipt reservation' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        | 'Use' |
-			| 'Use Incidents' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                 | 'Use' |
-			| 'Use accounting service' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use cheque bonds' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'      | 'Use' |
-			| 'Use eLedger' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use delivery date' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use manufacturing' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use fixed assets' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use simple batch' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use partner items' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'       | 'Use' |
-			| 'Use bundling' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
+		And I remove checkbox "Use lock data modification"
+		And I remove checkbox "  -  Use consolidated retail sales"
+		And I remove checkbox "Use job queue for external functions"
+		And I remove checkbox "Use all functional"
+		And I remove checkbox "Use accounting"
+		And I remove checkbox "Use commission trading"
+		And I remove checkbox "Use additional table control document"
+		And I remove checkbox "Use simple mode"
+		And I remove checkbox "Use object access"
+		And I remove checkbox "Use shipment and receipt planing orders"
+		And I remove checkbox "  -  Use preliminary stock"
+		And I remove checkbox "  -  Use work orders"
+		And I remove checkbox "Use price by properties"
+		And I remove checkbox "  -  Use planned receipt reservation"
+		And I remove checkbox "Use Incidents"
+		And I remove checkbox "  -  Use cheque bonds"
+		And I remove checkbox "  -  Use delivery date"
+		And I remove checkbox "Use manufacturing"
+		And I remove checkbox "Use fixed assets"
+		And I remove checkbox "Use partner items"
+		And I remove checkbox "Use bundling"
 		And I click "Save" button
 		And I close current window
 	* Disable LinkedRowsIntegrity
@@ -1739,52 +1555,40 @@ Scenario: set True value to the constant (DemoDB)
 Scenario: set True value to the constant Use salary
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use salary'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use salary"
 		And I click "Save" button
 		And I close current window	
 
 Scenario: set True value to the constant Use simple batch
+		And I execute 1C:Enterprise script at server
+				| "Constants.UseSimpleBatch.Set(True);"     |
+
+
+Scenario: set False value to the constant Use Use dashboard
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use simple batch'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use dashboard"
 		And I click "Save" button
 		And I close current window	
-
-
 
 Scenario: set True value to the constant Use shipment and receipt planing orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use shipment and receipt planing orders'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use shipment and receipt planing orders"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set False value to the constant Use shipment and receipt planing orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use fixed assets'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "Use fixed assets"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use fixed assets
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use fixed assets'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use fixed assets"
 		And I click "Save" button
 		And I close current window	
 
@@ -1792,10 +1596,7 @@ Scenario: set True value to the constant Use fixed assets
 Scenario: set True value to the constant Use additional table control document
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use additional table control document'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use additional table control document"
 		And I click "Save" button
 		And I close current window		
 				
@@ -1803,50 +1604,35 @@ Scenario: set True value to the constant Use additional table control document
 Scenario: set True value to the constant Use consolidated retail sales
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                           |
-			| 'Use consolidated retail sales'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "  -  Use consolidated retail sales"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use manufacturing
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            |
-			| 'Use manufacturing' |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use manufacturing"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use commission trading
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                    |
-			| 'Use commission trading'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use commission trading"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use object access
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                    |
-			| 'Use object access'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use object access"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use retail orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               |
-			| 'Use retail orders'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "  -  Use retail orders"
 		And I click "Save" button
 		And I close current window
 
@@ -1854,60 +1640,49 @@ Scenario: set True value to the constant Use retail orders
 Scenario: set False value to the constant Use retail orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               |
-			| 'Use retail orders'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "  -  Use retail orders"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set False value to the constant Use commission trading
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                    |
-			| 'Use commission trading'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "Use commission trading"
 		And I click "Save" button
 		And I close current window
 		
 Scenario: set True value to the constant Use accounting
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            |
-			| 'Use accounting'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use accounting"
 		And I click "Save" button
-		And I close current window				
+		And I close current window
+
+Scenario: set False value to the constant Use accounting
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I remove checkbox "Use accounting"
+		And I click "Save" button
+		And I close current window
 
 Scenario: set True value to the constant Use job queue for external functions
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                  |
-			| 'Use job queue for external functions'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use job queue for external functions"
 		And I click "Save" button
 		And I close current window	
 
 Scenario: set True value to the constant Use lock data modification
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                        |
-			| 'Use lock data modification'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use lock data modification"
 		And I click "Save" button
 		And I close current window	
 
 Scenario: set True value to the constant Use numbering rules
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                        |
-			| 'Use numbering rules'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use numbering rules"
 		And I click "Save" button
 		And I close current window
 
@@ -1926,6 +1701,67 @@ Scenario: set True value to the constant SaasMode
 Scenario: set True value to the constant UseSimpleMode
 		And I execute 1C:Enterprise script at server
 				| "Constants.UseSimpleMode.Set(True);"     |
+
+Scenario: set False value to the constant UseSimpleMode
+		And I execute 1C:Enterprise script at server
+				| "Constants.UseSimpleMode.Set(False);"     |
+
+Scenario: set True value to the constant Use batch relevance
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I set checkbox "Use batch relevance"
+		And I click "Save" button
+		And I close current window
+
+Scenario: set False value to the constant Use batch relevance
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I remove checkbox "Use batch relevance"
+		And I click "Save" button
+		And I close current window
+
+Scenario: set True value to the constant Use advance relevance
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I set checkbox "Use advance relevance"
+		And I click "Save" button
+		And I close current window
+
+Scenario: set False value to the constant Use advance relevance
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I remove checkbox "Use advance relevance"
+		And I click "Save" button
+		And I close current window
+
+Scenario: set True value to the constant Use batch reallocate
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I set checkbox "Use batch reallocate"
+		And I click "Save" button
+		And I close current window
+
+Scenario: set False value to the constant Use batch reallocate
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I remove checkbox "Use batch reallocate"
+		And I click "Save" button
+		And I close current window
+
+Scenario: set True value to the constant Use preliminary stock
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I set checkbox "Use shipment and receipt planing orders"
+		And I set checkbox "  -  Use preliminary stock"
+		And I click "Save" button
+		And I close current window
+
+Scenario: set False value to the constant Use preliminary stock
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I remove checkbox "  -  Use preliminary stock"
+		And I click "Save" button
+		And I close current window
 
 
 Scenario: add VAExtension
@@ -2217,11 +2053,7 @@ Scenario: settings for Main Company (commission trade)
 	* Main Company
 		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Description'       |
-			| 'TRY'        | 'Local currency'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
@@ -2240,11 +2072,7 @@ Scenario: settings for Company (commission trade)
 	* Main Company
 		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Description'       |
-			| 'TRY'        | 'Local currency'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
@@ -2265,11 +2093,7 @@ Scenario: settings for Company (commission trade)
 			| 'Second Company partner'    |
 		And I select current line in "List" table
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Description'       |
-			| 'TRY'        | 'Local currency'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
@@ -2278,7 +2102,7 @@ Scenario: settings for Company (commission trade)
 		And I select current line in "List" table
 		And I move to "Currencies" tab
 		And in the table "Currencies" I click the button named "CurrenciesAdd"
-		And I click choice button of "Movement type" attribute in "Currencies" table
+		Then "Multi currency movement types" window is opened
 		And I go to line in "List" table
 			| 'Description'       |
 			| 'Local currency'    |
@@ -2301,29 +2125,19 @@ Scenario: settings for Company (commission trade)
 
 Scenario: set False value to the constant Use source of origin	
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               |
-			| 'Use source of origin'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "  -  Use source of origin"
 		And I click "Save" button
 		And I close current window
 	
 Scenario: set True value to the constant Use source of origin	
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               |
-			| 'Use source of origin'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "  -  Use source of origin"
 		And I click "Save" button
 		And I close current window
 
 
 Scenario: check filter by transaction type in CR/BR 
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'      |
-			| 'Main Company'     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I select "Payment from customer" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
 		And I click the button named "PaymentListAdd"
@@ -2369,11 +2183,7 @@ Scenario: check filter by transaction type in CR/BR
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 
 Scenario: check filter by transaction type in CP/BP 
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'      |
-			| 'Main Company'     |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I select "Payment to the vendor" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
 		And I click the button named "PaymentListAdd"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="91ef2773-1f82-4567-b7a3-1888de4bfb5c">
+ <name>FixedAssets</name>
+ <synonym>
+  <key>en</key>
+  <value>2339F422-31D0-034C-C02E-EF5F1E456844</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>CommonCommand.OpenReport_F0010_FixedAssetsTransferCost</content>
+ <content>CommonCommand.OpenReport_F0011_InventoryBook</content>
+ <content>CommonCommand.OpenReport_F0012_DepreciationStatement</content>
+ <content>CommonCommand.OpenReport_R8510B_BookValueOfFixedAsset</content>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
+</mdclass:Subsystem>

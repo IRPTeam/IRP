@@ -67,12 +67,7 @@ Scenario: _3510001 check the clearing of values ​​when changing the type of 
 								| 'Description'            |
 								| 'Transit Second'         |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-								| 'Code'        | 'Description'             |
-								| 'USD'         | 'American dollar'         |
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
+		And I select "USD" exact value from the drop-down list named "Currency"
 		* Check filling in
 		Then the form attribute named "Type" became equal to "Bank"
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -94,12 +89,7 @@ Scenario: _3510001 check the clearing of values ​​when changing the type of 
 * Filling in the details for Cash account
 		And I change "Type" radio button value to "Cash"
 		And I change the radio button named "CurrencyType" value to "Fixed"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-								| 'Code'        | 'Description'         |
-								| 'EUR'         | 'Euro'                |
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
+		And I select "EUR" exact value from the drop-down list named "Currency"
 * Check reset when switching transit and back to Cash
 		And I change "Type" radio button value to "Transit"
 		And I change "Type" radio button value to "Cash"
@@ -116,11 +106,7 @@ Scenario: _3510002 check clearing values ​​when changing the Ap-ar posting /
 		And I expand "Store and delivery" group
 * Filling in the details of the document for partner term with AP/AR posting detail - By standard partner term
 		And I change "Kind" radio button value to "Regular"
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Description'         |
-			| 'EUR'                 |
-		And I select current line in "List" table
+		And I select "EUR" exact value from "Multi currency movement type" drop-down list
 		And I change "AP/AR posting detail" radio button value to "By standard partner term"
 		And I click Select button of "Standard Partner term" field
 		* Create standart agreement in EUR
@@ -159,7 +145,7 @@ Scenario: _3510003 check clearing the values ​​of Tax types and Multi curren
 		And I set checkbox "Our Company"
 		* Filling in Multi currency movement type
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
-				And I click choice button of "Movement type" attribute in "Currencies" table
+				Then "Multi currency movement types" window is opened
 				And I go to line in "List" table
 					| 'Currency'                        | 'Deferred calculation'                        | 'Description'                               | 'Source'                              | 'Type'                              |
 					| 'USD'                             | 'No'                                          | 'Reporting currency'                        | 'Forex Seling'                        | 'Reporting'                         |

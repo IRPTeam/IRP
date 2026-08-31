@@ -103,6 +103,7 @@
  <registerRecords>AccumulationRegister.R9610T_ShipmentPlaning</registerRecords>
  <registerRecords>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</registerRecords>
  <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
@@ -114,6 +115,7 @@
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+ <registerRecords>InformationRegister.RowIDStamps</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -163,6 +165,21 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.NotActive</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <quickChoice>Use</quickChoice>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -692,6 +709,7 @@
     <changeMode>DontChange</changeMode>
     <field>Document.SalesOrder.TabularSection.ItemList.Attribute.Item</field>
    </choiceParameterLinks>
+   <quickChoice>Use</quickChoice>
    <createOnInput>DontUse</createOnInput>
   </attributes>
   <attributes uuid="8650489f-d008-4667-a48d-29cf0653de40">
@@ -923,6 +941,48 @@
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ea629fcc-20b3-47c7-9ddd-84165eeb94d8">
+   <name>ManualOfferAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>10DB5BF4-C79F-2E53-3AF0-050032F862F7</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ef2b3ce5-4cfe-4251-8369-4880257d03f3">
+   <name>ManualOfferPercent</name>
+   <synonym>
+    <key>en</key>
+    <value>C69B1FEB-7926-4FF9-9536-688367F93160</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePercent</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a643708e-e245-4ec5-957f-20a1c56614b2">
+   <name>ManualOfferType</name>
+   <synonym>
+    <key>en</key>
+    <value>AE7C7C28-E632-E261-1460-08779AD5DBBF</value>
+   </synonym>
+   <type>
+    <types>EnumRef.ManualOfferTypes</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

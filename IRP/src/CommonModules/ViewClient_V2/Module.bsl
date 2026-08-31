@@ -251,6 +251,8 @@ Procedure OnChainComplete(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WithholdingTaxInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "IncomingExchRateAdjustmentInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingExchRateAdjustmentInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
@@ -454,7 +456,7 @@ Procedure __tmp_CommonDocuments_OnChainComplete(Parameters, IsRetail)
 	EndIf;
 	
 	Changes = IsChangedProperty(Parameters, "PaymentTerms");
-	If Changes.IsChanged Then // refill question PaymentTerms
+	If Changes.IsChanged Then
 		ChangedPoints.Insert("IsChangedPaymentTerms");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
 			"PaymentTerm", R().QuestionToUser_019));
@@ -1062,11 +1064,17 @@ Procedure OnOpenFormNotify(Parameters) Export
 		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "GoodsReceipts");
 	EndIf;
 	
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "EmployeeCashAdvance" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "EmployeeCashAdvance" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankPayment" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	 
@@ -1075,8 +1083,6 @@ Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.Form.IsCopyingInteractive Then
 		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
-	
-	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 EndProcedure
@@ -2732,6 +2738,66 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_MANUAL_OFFER_AMOUNT
+
+// ItemList.ManualOfferAmount
+Procedure ItemListManualOfferAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListManualOfferAmountOnChange(Parameters);
+EndProcedure
+
+// ItemList.ManualOfferAmount.Set
+Procedure SetItemListManualOfferAmount(Object, Form, Row, Value) Export
+	Row.ManualOfferAmount = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListManualOfferAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_OFFER_PERCENT
+
+// ItemList.ManualOfferPercent
+Procedure ItemListManualOfferPercentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListManualOfferPercentOnChange(Parameters);
+EndProcedure
+
+// ItemList.ManualOfferPercent.Set
+Procedure SetItemListManualOfferPercent(Object, Form, Row, Value) Export
+	Row.ManualOfferPercent = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListManualOfferPercentOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_OFFER_TYPE
+
+// ItemList.ManualOfferType
+Procedure ItemListManualOfferTypeOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListManualOfferTypeOnChange(Parameters);
+EndProcedure
+
+// ItemList.ManualOfferType.Set
+Procedure SetItemListManualOfferType(Object, Form, Row, Value) Export
+	Row.ManualOfferType = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListManualOfferTypeOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST_BRUTTO_AMOUNT
 
 // ItemList.BruttoAmount
@@ -2921,7 +2987,63 @@ Procedure SetItemListQuantity(Object, Form, Row, Value) Export
 EndProcedure
 
 Procedure OnSetItemListQuantityNotify(Parameters) Export
-	Return;
+	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+		SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Parameters.Object, Parameters.Form);
+	EndIf;
+	
+	// Update -> RowIDInfoQuantity
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReceiptCorrection"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" Then
+		
+		RowIDInfoClientServer.UpdateQuantity(Parameters.Object);
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentConfirmations") Then
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentPlaningOrders") Then
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentPlaningOrders");
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "GoodsReceipts") Then
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet" Then
+		VisibleRows = Parameters.Object.Materials.FindRows(New Structure("IsVisible", True));
+		If VisibleRows.Count() Then
+			Parameters.Form.Items.Materials.CurrentRow = VisibleRows[0].GetID();
+		EndIf;
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
+		If Not Parameters.isRowsAddByScan Then 
+			ControlCodeStringsClient.ClearAllByRow(Parameters.Object, Parameters.UpdatedRowsByScan);
+			ControlCodeStringsClient.UpdateState(Parameters.Object);
+		EndIf;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -3084,6 +3206,7 @@ EndProcedure
 
 Procedure OnSetPaymentListPartnerNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.Agreement
@@ -3109,6 +3232,7 @@ EndProcedure
 
 Procedure OnSetPaymentListLegalNameNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.FinancialMovementType
@@ -3121,6 +3245,7 @@ EndProcedure
 
 Procedure OnSetPaymentListFinancialMovementTypeNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.Account
@@ -3148,6 +3273,11 @@ Procedure SetPaymentListBasisDocument(Object, Form, Row, Value, FormAttributeUpd
 	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListBasisDocumentNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
 // PaymentList.PlanningTransactionBasis
 Procedure PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
@@ -3158,6 +3288,7 @@ EndProcedure
 
 Procedure OnSetPaymentListPlanningTransactionBasisNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.MoneyTransfer
@@ -3200,6 +3331,7 @@ EndProcedure
 
 Procedure OnSetPaymentListTaxAmountNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.NetAmount
@@ -3212,6 +3344,7 @@ EndProcedure
 
 Procedure OnSetPaymentListNetAmountNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.TotalAmount
@@ -3233,6 +3366,7 @@ EndProcedure
 
 Procedure OnSetPaymentListTotalAmountNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.Commission
@@ -3245,6 +3379,7 @@ EndProcedure
 
 Procedure OnSetPaymentListCommissionNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.PaymentType
@@ -3257,6 +3392,7 @@ EndProcedure
 
 Procedure OnSetPaymentListPaymentTypeNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.BankTerm
@@ -3269,6 +3405,7 @@ EndProcedure
 
 Procedure OnSetPaymentListBankTermNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.CommissionPercent
@@ -3281,6 +3418,7 @@ EndProcedure
 
 Procedure OnSetPaymentListCommissionPercentNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.VatRate
@@ -3293,6 +3431,7 @@ EndProcedure
 
 Procedure OnSetPaymentListVatRateNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 #EndRegion
@@ -4089,8 +4228,8 @@ Procedure DetailsByRowOnChange(Object, Form, TableNames) Export
 EndProcedure
 
 Procedure OnSetDetailsByRowNotify(Parameters) Export
-	Parameters.Form.FormSetVisibilityAvailability();
-	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");	
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();	
 EndProcedure
 
 #EndRegion
@@ -4263,6 +4402,8 @@ Procedure OnSetPartnerNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WithholdingTaxInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "IncomingExchRateAdjustmentInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingExchRateAdjustmentInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"

@@ -2114,6 +2114,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseSavedPrintForms</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.DELETE_ConsignorSerialLotNumbers.Resource.Tax</name>
 		<right>
 			<name>Edit</name>
@@ -2297,6 +2316,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseManualOffers</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.AddLinkedDocumentRows</name>
 		<right>
 			<name>View</name>
@@ -2368,6 +2406,17 @@
 		<name>Report.R5020_PartnersBalance</name>
 		<right>
 			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Storno</name>
+		<right>
+			<name>Read</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -2477,6 +2526,17 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseNotAuditAttributes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -3281,6 +3341,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseSalesOrders</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T2015S_TransactionsInfo.Dimension.Date</name>
 		<right>
 			<name>Edit</name>
@@ -3462,6 +3541,25 @@
 		<name>CommonAttribute.Weight</name>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseInventory</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -4969,17 +5067,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DocumentJournal.DocumentsForOutgoingPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Settings.Subsystem.LockDataModification</name>
 		<right>
 			<name>View</name>
@@ -5151,6 +5238,25 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UsePaymentOrders</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -5416,7 +5522,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Treasury.Subsystem.CashTransactions</name>
+		<name>Subsystem.Treasury.Subsystem.Transactions</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -7250,7 +7356,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.UseCashTransaction</name>
+		<name>Constant.UseCashTransactions</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -10431,6 +10537,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.IncomingExchRateAdjustmentInvoice</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T3010S_RowIDInfo.Resource.Unit</name>
 		<right>
 			<name>Edit</name>
@@ -10836,6 +10953,17 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.OutgoingExchRateAdjustmentInvoice</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -12372,17 +12500,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DocumentJournal.DocumentsForIncomingPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.T9012S_AccountsPartner.Resource.AccountAdvancesVendor</name>
 		<right>
 			<name>Edit</name>
@@ -13616,13 +13733,6 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.RetailWorkers.Command.RetailWorkers</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</name>
 		<right>
 			<name>Read</name>
@@ -14396,6 +14506,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T2018S_FixedOffsetOfAdvances</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.EmployeeFiring</name>
 		<right>
 			<name>Read</name>
@@ -14537,7 +14658,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.UseOrders</name>
+		<name>Constant.UsePurchaseOrders</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -16644,13 +16765,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Treasury.Subsystem.Retail</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>

@@ -35,9 +35,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="760abdcb-ee96-44a1-b1f5-85fa73cfcdb9">
    <name>Register</name>
@@ -53,9 +51,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="c02ff034-64f5-4c9d-857e-68ca1f346d34">
    <name>Recorder</name>
@@ -83,9 +79,7 @@
    <multiLine>true</multiLine>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="be055081-9a11-4c85-862b-8d458cc7327b">
    <name>Query</name>
@@ -100,9 +94,7 @@
    <multiLine>true</multiLine>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="ecdea8c4-d90a-4795-9d80-f557bae8d5ee">
    <name>Parameters</name>
@@ -117,9 +109,7 @@
    <multiLine>true</multiLine>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="ac02f4d2-8093-4b81-9e75-c32062b8b567">
    <name>Receipt</name>

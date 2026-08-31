@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c1f728cd-9bc8-4798-9c46-4505ad672757">
  <name>RelatedDocuments</name>
+ <synonym>
+  <key>en</key>
+  <value>93CC9785-D4CD-B956-6203-356AB7CE0576</value>
+ </synonym>
 </mdclass:Role>

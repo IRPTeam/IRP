@@ -311,7 +311,7 @@ Scenario: _25010 create Print form template
 		Then "Sales orders" window is opened
 		And I go to line in "List" table
 			| "Date"                | "Number" |
-			| "30.05.2021 12:24:18" | "112"    |
+			| "30.05.2021" | "112"    |
 		And I activate field named "Date" in "List" table
 		And I select current line in "List" table
 		And I click the button named "Test"

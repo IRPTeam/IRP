@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3188db3b-97ca-4541-a62e-31e228ed1dc0">
+ <name>OpenReport_R1100_CustomersAging</name>
+ <synonym>
+  <key>en</key>
+  <value>07934DAA-672E-029B-B485-562E12974774</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

@@ -1,6 +1,5 @@
 // @strict-types
 
-
 // Strings.
 // 
 // Parameters:
@@ -503,6 +502,8 @@
 // * InfoMessage_031 - String - 
 // * InfoMessage_032 - String - 
 // * InfoMessage_033 - String - 
+// * InfoMessage_StartJob - String - 
+// * InfoMessage_RunJobCode - String - 
 // * InfoMessage_034 - String - 
 // * InfoMessage_035 - String - 
 // * InfoMessage_036 - String - 
@@ -1018,6 +1019,16 @@ Function Strings(Lang) Export
 
 #Region SimpleBatch
 	Strings.Insert("SB_NotEnoughBatch", NStr("en='8D130C08-2706-8E28-8BA9-9CF74F1215E0_______________%1,%2,%3'", Lang));
+#EndRegion
+
+#Region FunctionalOptions
+	Strings.Insert("FO_Group_BaseSettings", NStr("en='1AE1B3D1-227C-25A5-5487-73B8BD8589B2'", Lang));
+	Strings.Insert("FO_Group_MasterData", NStr("en='DA323A19-261F-753D-D979-9B790C314E0A'", Lang));
+	Strings.Insert("FO_Group_Trading", NStr("en='E85840E3-3286-EA52-26A5-505901A3A84A'", Lang));
+	Strings.Insert("FO_Group_Inventory", NStr("en='D7038179-8BD7-8C2D-DE17-7104E08E0031'", Lang));
+	Strings.Insert("FO_Group_Money", NStr("en='DE59072A-1463-99AD-DB1F-F12C481F3DFF'", Lang));
+	Strings.Insert("FO_Group_Accounting", NStr("en='C6825F9C-23E8-0040-0A8A-A0CDF47246DB'", Lang));
+	Strings.Insert("FO_Group_Other", NStr("en='A1230F6F-CE39-F878-893B-B50DBBC8AD0C'", Lang));
 #EndRegion
 
 #Region GenericErrors
@@ -1767,6 +1778,20 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_187", NStr("en='356FEE66-FAAA-C061-1497-725D1ED51AF0%1'", Lang));
 	Strings.Insert("Error_188", NStr("en='4D06FE22-7053-F407-7CA3-3475367FFDC8_%1'", Lang));
 	Strings.Insert("Error_189", NStr("en='0F7D27FD-DB0C-C82F-FECD-D2D58CCA0911___'", Lang));
+	Strings.Insert("Error_190", NStr("en='7821CDE5-C4A7-7C2F-FDB8-8B42926E4149______________'", Lang));
+	Strings.Insert("Error_191", NStr("en='C54613D8-4415-1800-02DA-AD4D7A51C32B_%1,%2'", Lang));
+	Strings.Insert("Error_192",   NStr("en='B5741F7D-70FF-C395-5DAE-ECC04B0E526B________%1,%2'", Lang));
+	Strings.Insert("Error_193",   NStr("en='2F0DA734-9AC1-F9A3-3C34-4CD527DB31C4%1'", Lang));
+	
+	Strings.Insert("Error_194",   NStr("en='977C9FA3-4096-905D-D76F-F5AB04C3DC72%1,%2'", Lang));
+	Strings.Insert("Error_195",   NStr("en='984BBDAA-7556-FBEE-EF48-8F3A8DAF54EF_____'", Lang));
+	Strings.Insert("Error_196",   NStr("en='40528F3A-16D4-F45A-AC6D-DFB1B89C0143_________'", Lang));
+	Strings.Insert("Error_197",   NStr("en='C64AED11-CE0F-55E4-42A4-400C13899956_'", Lang));
+	Strings.Insert("Error_198",   NStr("en='EE25B878-1B77-4B34-425D-DF0F6426F3CD_________'", Lang));
+	Strings.Insert("Error_199",   NStr("en='B7E9AD2B-E0FB-0091-11F3-328D5E5C035B_'", Lang));
+	Strings.Insert("Error_200",   NStr("en='DCC0CB32-F9F6-86AA-A37F-F6F164ACF57D________________%1,%2,%3'", Lang));
+	
+	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='E76C9AA7-C27F-D236-698A-A1ACB6BB42B1%1'", Lang));
 	
@@ -1794,8 +1819,11 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_MaximumAccessKey", NStr("en='7B23D33B-76A6-DA86-6375-59FD3FEFA938_________________________________________________[ValueRef],[ObjectAccessKeys]'", Lang));
 #EndRegion
 
-#Region LandedCost
+#Region FixedAsset
+	Strings.Insert("Error_FixedAsset_01", NStr("en='824747C3-8E0B-5D8A-ADF7-7D4014A9E4BC___________%1'", Lang));
+#EndRegion
 
+#Region LandedCost
 	Strings.Insert("LC_Error_001", NStr("en='C78F2BE0-37C0-D7A8-8EB3-353BCFA061B5__________________________________%1,%2,%3'", Lang) + Chars.LF);
 	Strings.Insert("LC_Error_002", NStr("en='5042D1C9-C223-5581-1DF7-715CA5D55E7E__________________%1,%2,%3'", Lang) + Chars.LF);
 	Strings.Insert("LC_Error_003", NStr("en='265E354E-9790-DA0F-F3F8-8AA62D9BE09D__________________%1,%2,%3'", Lang) + Chars.LF);
@@ -1871,6 +1899,9 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_032", NStr("en='9EEA4625-3ACD-95E3-35E6-6A6853EF09F0'", Lang));
 	Strings.Insert("InfoMessage_033", NStr("en='8683584B-F5E0-0497-7192-25D7E7EC364D'", Lang));
 	
+	Strings.Insert("InfoMessage_StartJob", NStr("en='4D96218E-796C-2DA0-04C8-8ED75E5DAA8B'", Lang));
+	Strings.Insert("InfoMessage_RunJobCode", NStr("en='9B5780F6-B1A6-C0A1-19AB-BA4AB0A92414_______________________'", Lang));
+	
 	Strings.Insert("InfoMessage_034", NStr("en='545C9E2A-91C0-0073-32BA-AF97DF8C44F7'", Lang));
 	Strings.Insert("InfoMessage_035", NStr("en='384DA243-1523-D17D-DDD1-147614CEA196%1'", Lang));
 	Strings.Insert("InfoMessage_036", NStr("en='3428361F-AE28-E594-48D2-2BCD86BEF2DE%1,%2'", Lang));
@@ -1899,6 +1930,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_DataSaved", NStr("en='856BDF35-4BD7-A4A2-2570-0454B37F2431'", Lang));
 	Strings.Insert("InfoMessage_SettingsApplied", NStr("en='F464A6E0-3D5E-0B33-3168-8A1B24308C00'", Lang));
 	Strings.Insert("InfoMessage_ImportError", NStr("en='182157D2-8568-9AE7-7ABE-E3C490D89032__________________________'", Lang));
+	Strings.Insert("InfoMessage_PostingDocument", NStr("en='972BD2A2-FDEC-46D6-6054-4339B8934034'", Lang));
 	
 #EndRegion
 
@@ -1939,6 +1971,8 @@ Function Strings(Lang) Export
 		Lang));
 	Strings.Insert("QuestionToUser_032", NStr("en='3C6C9323-5660-EBBC-C22B-B3993DC80E9C_'", Lang));
 	Strings.Insert("QuestionToUser_033", NStr("en='9A5CFBA7-753B-ABC5-599C-C2E3569B5B15___'", Lang));
+	Strings.Insert("QuestionToUser_034", NStr("en='6A53336A-80B2-8686-6D2C-CD7260BB6835__________'", Lang));
+	Strings.Insert("QuestionToUser_035", NStr("en='26E17630-5D16-47BF-FBED-D19EE8C21DA2____'", Lang));
 		
 #EndRegion
 
@@ -2567,6 +2601,18 @@ Strings.Insert("FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_
 
 Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en='D2A4435B-6740-046A-A17C-C3E192AB541B________________________________________'", Lang));
+
+Strings.Insert("IncomingExchRateAdjustmentInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
+	NStr("en='75336E69-0462-D4E0-0B96-632BAB5E0322_______________________________________________________'", Lang));
+
+Strings.Insert("IncomingExchRateAdjustmentInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en='B4D0330C-3959-3014-46CA-A4EE1B7CFB90__________________________________________________'", Lang));
+
+Strings.Insert("OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
+	NStr("en='FEAEB1E5-0013-B4B1-15F9-9ED0BA034B3C_________________________________________________________'", Lang));
+
+Strings.Insert("OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
+	NStr("en='D47B4215-AF07-E21A-ABA1-1669029F6A53____________________________________________________'", Lang));
 	
 Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='1A8FBFCD-9091-5DC5-5D0A-A8FC64E1B626_________'", Lang));
 
@@ -2647,6 +2693,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='1A8FBFCD-9
 	Strings.Insert("AuditLock_004", NStr("en='22D666F3-E53D-AB3A-A816-62B3A4374F5D'", Lang));	
 	Strings.Insert("AuditLock_005", NStr("en='AE14ACC9-A2E4-0F04-4207-7485B6F396C0'", Lang));	
 	Strings.Insert("AuditLock_006", NStr("en='23979A11-1834-4F96-674B-B102358B7CB5_________'", Lang));	
+	Strings.Insert("AuditLock_007", NStr("en='35E481B2-089C-A265-51F3-307BF67F35FA%1'", Lang));	
 #EndRegion
 	
 #Region DocStatuses
@@ -2682,6 +2729,10 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='1A8FBFCD-9
 	Strings.Insert("PeriodClosing_Error4", NStr("en='9A4067E8-5B62-69F4-4CB6-6EF31209C29D'", Lang));
 	Strings.Insert("PeriodClosing_Error5", NStr("en='B853B031-95B4-B7A3-3630-0980827B91A6'", Lang));
 	Strings.Insert("PeriodClosing_Error6", NStr("en='0FC7BC32-DEB1-6146-66C5-54FEC1B56142%1,%2'", Lang));
+	
+	Strings.Insert("PeriodClosing_PeriodicityChoiceList_Everyday", NStr("en='5BE04C2E-4BC9-32AA-A4AC-C2FC9C35CC40'", Lang));
+	Strings.Insert("PeriodClosing_PeriodicityChoiceList_Monthly", NStr("en='7FAC24CF-3611-F8A6-6DA7-7CC3B1B622E1'", Lang));
+	Strings.Insert("PeriodClosing_PeriodicityChoiceList_ByPeriod", NStr("en='B161352C-8696-0B5C-C3A6-67A0DDF998DA'", Lang));	
 #EndRegion
 
 #Region CopyUserSettings
@@ -2800,6 +2851,9 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='1A8FBFCD-9
 	Strings.Insert("Error_UnknownRefType", NStr("en='9F414EE7-8E32-4BF3-3EE2-29E7ADF1B38C%1'", Lang));
 	Strings.Insert("Error_StepsEnablerNotDefined", NStr("en='887814AD-E107-B93F-FE20-09C100EA4459%1'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en='658C6242-D121-DF6D-D4CD-DFACEBFCED08________[SC],%1'", Lang));
+	Strings.Insert("Error_CreatingPDF", NStr("en='FD9AB00E-1A91-1F87-7CC0-014701DC3830'", Lang));
+	Strings.Insert("Error_ReadingPDF", NStr("en='E5958973-6EDD-3B59-9B61-1C4CCEADEF7E'", Lang));
+	Strings.Insert("Error_ChromiumNotFound", NStr("en='76F94251-BFD9-8349-9E23-318DE5A25B68'", Lang));
 #EndRegion
 
 #Region Tasks

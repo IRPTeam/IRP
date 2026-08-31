@@ -6,6 +6,5 @@
   <value>0CA7299A-BE0C-D9BC-CB30-0F51FDA5962F</value>
  </synonym>
  <group>NavigationPanelImportant</group>
- <commandParameterType/>
  <representation>Auto</representation>
 </mdclass:CommonCommand>

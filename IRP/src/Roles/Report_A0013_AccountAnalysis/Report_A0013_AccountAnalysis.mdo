@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="05f5b327-8742-441b-80cd-0a7cdf516c48">
+ <name>Report_A0013_AccountAnalysis</name>
+ <synonym>
+  <key>en</key>
+  <value>C34BD23E-DCE8-CCDD-D26A-A5B2C13BB9A0</value>
+ </synonym>
+</mdclass:Role>

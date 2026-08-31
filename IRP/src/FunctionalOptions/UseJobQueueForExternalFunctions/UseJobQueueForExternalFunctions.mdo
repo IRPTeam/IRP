@@ -26,4 +26,5 @@
  <content>InformationRegister.JobQueue.Resource.Parameters</content>
  <content>InformationRegister.JobQueue.Resource.Log</content>
  <content>InformationRegister.JobQueue.Dimension.Job</content>
+ <content>Catalog.ExternalFunctions.Command.StartJob</content>
 </mdclass:FunctionalOption>

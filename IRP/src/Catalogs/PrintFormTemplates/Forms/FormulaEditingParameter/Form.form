@@ -528,6 +528,24 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>ParameterName</name>
+  <title>
+   <key>en</key>
+   <value>FCB1AAF8-1A2B-1C0A-A2E1-1C425736C201</value>
+  </title>
+  <id>6</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>Save</name>
   <title>

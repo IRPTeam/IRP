@@ -89,11 +89,7 @@ Scenario: _001 test data
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
-			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Main Company (Company) *" window closing in 20 seconds
@@ -104,11 +100,7 @@ Scenario: _001 test data
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
-			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Second Company (Company) *" window closing in 20 seconds
@@ -276,11 +268,7 @@ Scenario: _002 creating Calculation movement costs
 	* Calculation movement costs for Main company (01/08-15/08)
 		Then "Calculations movement costs" window is opened
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I input "01.08.2021" text in "Begin date" field
 		And I input "17.08.2021" text in "End date" field
 		And I input "01.08.2021 01:00:00" text in "Date" field
@@ -293,11 +281,7 @@ Scenario: _002 creating Calculation movement costs
 		And Delay 10
 	* Calculation movement costs for Second company
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I input "01.08.2021" text in "Begin date" field
 		And I input "20.08.2021" text in "End date" field
 		And I input "01.08.2021 01:00:02" text in "Date" field
@@ -347,11 +331,7 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 				| 'Description'                  |
 				| 'DFC Vendor by agreements'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Second Company'     |
-			And I select current line in "List" table
+			And I select "Second Company" exact value from "Company" drop-down list
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -512,11 +492,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 				| 'Description'     |
 				| 'DFC'             |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description'                  |
@@ -601,11 +577,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Store 04'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second company'    |
-		And I select current line in "List" table
+		And I select "Second company" exact value from "Company" drop-down list
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -640,11 +612,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main company'    |
-		And I select current line in "List" table
+		And I select "Main company" exact value from "Company" drop-down list
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -817,11 +785,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		Then "Calculations movement costs" window is opened
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I input "18.08.2021" text in "Begin date" field
 		And I input "20.08.2021" text in "End date" field
 		And I input "18.08.2021 11:56:51" text in "Date" field
@@ -858,11 +822,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Store 04'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second company'    |
-		And I select current line in "List" table
+		And I select "Second company" exact value from "Company" drop-down list
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -901,11 +861,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main company'    |
-		And I select current line in "List" table
+		And I select "Main company" exact value from "Company" drop-down list
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    | 'Unit'    |
 			| 'Boots'   | 'Boots/S-8'   | 'pcs'     |
@@ -915,11 +871,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Item'    | 'Item key'    |
 			| 'Boots'   | '39/18SD'     |
 		And I select current line in "List" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Boots (12 pcs)'    |
-		And I select current line in "List" table		
+		And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
@@ -1036,8 +988,8 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing Quantity in the Inventory transfer 1 dated 05.08.2021 12:00:00	
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Date'                  | 'Number'    |
-			| '05.08.2021 12:00:00'   | '1'         |
+			| 'Date'         | 'Number'    |
+			| '05.08.2021'   | '1'         |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'    |
@@ -1076,8 +1028,8 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing Store Sender on Store 05 (no balance)
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Date'                  | 'Number'    |
-			| '05.08.2021 12:00:00'   | '1'         |
+			| 'Date'         | 'Number'    |
+			| '05.08.2021'   | '1'         |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store sender" field
@@ -1114,8 +1066,8 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing Store Sender on Store 01 and changing date
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Date'                  | 'Number'    |
-			| '05.08.2021 12:00:00'   | '1'         |
+			| 'Date'         | 'Number'    |
+			| '05.08.2021'   | '1'         |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store sender" field
@@ -1158,11 +1110,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Description'    |
 			| 'Store 06'       |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second company'    |
-		And I select current line in "List" table
+		And I select "Second company" exact value from "Company" drop-down list
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №3 and Сhecking the report (Shirt/36/Red)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -1195,11 +1143,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Description'    |
 			| 'Store 02'       |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main company'    |
-		And I select current line in "List" table
+		And I select "Main company" exact value from "Company" drop-down list
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
@@ -1244,11 +1188,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Description'    |
 			| 'Store 02'       |
 		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main company'    |
-		And I select current line in "List" table
+		And I select "Main company" exact value from "Company" drop-down list
 		And I go to line in "ItemList" table
 			| 'Item'     |
 			| 'Shirt'    |
@@ -1602,11 +1542,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Main Company'   | '3'        | 'Store 03'    |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from "Company" drop-down list
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -1679,11 +1615,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Second Company'   | '3'        | 'Store 03'    |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I select current line in "ItemList" table
 		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table	
@@ -1724,11 +1656,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Creating Bundle (Set)
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1740,8 +1668,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "5,000" text in the field named "Quantity"
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -1803,11 +1730,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Creating UnBundle (Set)
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1824,8 +1747,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Сhewing gum/Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And in the table "ItemList" I click "By bundle content" button
 		And "ItemList" table became equal
 			| 'Item'          | 'Quantity'   | 'Item key'      | 'Unit'    |
@@ -1862,11 +1784,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Creating one more Bundle (Set)
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1878,8 +1796,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "10,000" text in the field named "Quantity"
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -2003,11 +1920,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Creating Unbandling of purchased Bundle
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2024,8 +1937,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Skittles + Сhewing gum/Skittles + Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "12,000" text in the field named "Quantity"
-		And I click Choice button of the field named "Unit"
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "Unit"
 		And in the table "ItemList" I click "By specification" button		
 		And I go to line in "ItemList" table
 			| 'Item'          | 'Item key'      | 'Quantity'   | 'Unit'    |
@@ -2212,11 +2124,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 				| 'Description'             |
 				| 'Retail partner term'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -2352,11 +2260,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click the button named "FormCreate"
 		And I input "18.09.2022 00:00:00" text in the field named "Date"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Landed cost" exact value from "Calculation mode" drop-down list
 		And I input "18.09.2022" text in "Begin date" field
 		And I input "18.09.2022" text in "End date" field
@@ -2429,11 +2333,7 @@ Scenario: _028 check landed cost by materials
 	* Create CalculationMovementCosts
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
 		And I input "22.09.2022" text in "Begin date" field
 		And I input "26.09.2022" text in "End date" field
@@ -2579,3 +2479,769 @@ Scenario: _035 check landed cost stock correction (source of origin)
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_035_2" template lines by template
 		And I close all client application windows
+
+Scenario: _036 check batch shortage is registered when Raise on calculation error is disabled
+	And I close all client application windows
+	* Creating Sales invoice that expenses more than the calculated batches (Boots/S-8, Store 02)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I select from "Partner" drop-down list by "Ka" string
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Company Kalipso'     |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 10'        |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Boots'           |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'      |
+			| 'Boots'    | 'Boots/S-8'     |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "500,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "10.07.2023 10:00:00" text in "Date" field
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "9 200" text in "Number" field
+		And I click "Post and close" button
+		And Delay 10
+		And I close all client application windows
+	* Creating Calculation movement costs with the disabled flag Raise on calculation error
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I input "01.07.2023" text in "Begin date" field
+		And I input "31.07.2023" text in "End date" field
+		Then the form attribute named "RaiseOnCalculationError" became equal to "No"
+		And I click "Post and close" button
+		And Delay 15
+		And I close all client application windows
+	* Checking that the shortage of the sales invoice is registered by the register R6030 Batch shortage outgoing
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6030T_BatchShortageOutgoing"
+		And "List" table contains lines
+			| 'Period'                | 'Recorder'   | 'Line number'   | 'Company'        | 'Document'                                          | 'Batch key'              | 'Quantity'         |
+			| '10.07.2023 10:00:00'   | '*'          | '*'             | 'Main Company'   | 'Sales invoice 9 200 dated 10.07.2023 10:00:00'     | 'Boots/S-8 - Store 10'   | '500,000'    |
+		And I close all client application windows
+	* Checking that the calculation is posted and registered the outgoing shortage
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date'   | 'Company'        | 'End date'     |
+			| '01.07.2023'   | 'Main Company'   | '31.07.2023'   |
+		And I click "Registrations report info" button
+		And I select "R6030 Batch shortage outgoing" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines
+			| 'Register  "R6030 Batch shortage outgoing"' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' | '' |
+		And I close all client application windows
+	* Checking that the expense of the sales invoice did not create an incoming shortage
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date'   | 'Company'        | 'End date'     |
+			| '01.07.2023'   | 'Main Company'   | '31.07.2023'   |
+		And I click "Registrations report info" button
+		And I select "R6040 Batch shortage incoming" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R6040 Batch shortage incoming"' |
+	And I close all client application windows
+
+Scenario: _037 check calculation is interrupted and writes nothing when Raise on calculation error is enabled
+	And I close all client application windows
+	* Unposting the calculation and enabling the flag Raise on calculation error
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date'   | 'Company'        | 'End date'     |
+			| '01.07.2023'   | 'Main Company'   | '31.07.2023'   |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And Delay 5
+		And I select current line in "List" table
+		And I set checkbox "Raise on calculation error"
+	* Posting is interrupted by the error window instead of registering the shortage
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And Delay 5
+		And I close all client application windows
+	* Checking that the interrupted calculation has no records in the register R6030 Batch shortage outgoing
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date'   | 'Company'        | 'End date'     |
+			| '01.07.2023'   | 'Main Company'   | '31.07.2023'   |
+		And I click "Registrations report info" button
+		And I select "R6030 Batch shortage outgoing" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R6030 Batch shortage outgoing"' |
+		And I close all client application windows
+	* Checking that the interrupted posting did not save the flag and the calculation is posted again
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date'   | 'Company'        | 'End date'     |
+			| '01.07.2023'   | 'Main Company'   | '31.07.2023'   |
+		And I select current line in "List" table
+		Then the form attribute named "RaiseOnCalculationError" became equal to "No"
+		And I click "Post and close" button
+		And Delay 15
+		And I close all client application windows
+	* Checking that the shortage is registered again
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6030T_BatchShortageOutgoing"
+		And "List" table contains lines
+			| 'Period'                | 'Recorder'   | 'Line number'   | 'Company'        | 'Document'                                          | 'Batch key'              | 'Quantity'         |
+			| '10.07.2023 10:00:00'   | '*'          | '*'             | 'Main Company'   | 'Sales invoice 9 200 dated 10.07.2023 10:00:00'     | 'Boots/S-8 - Store 10'   | '500,000'    |
+	And I close all client application windows
+
+
+Scenario: _038 check the calculation scope depends on the functional option Use batch reallocate
+	And I close all client application windows
+	* The calculation mode is editable and the company is cleared and locked by the batch reallocate mode
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Main Company" exact value from "Company" drop-down list
+		Then the form attribute named "Company" became equal to "Main Company"
+		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
+		Then the form attribute named "CalculationMode" became equal to "Landed cost (batch reallocate)"
+		Then the form attribute named "Company" became equal to ""
+		When I Check the steps for Exception
+			| 'And I select "Main Company" exact value from "Company" drop-down list' |
+		And I close all client application windows
+	* The company is mandatory when the calculation is made for a single company
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I input "01.09.2023" text in "Begin date" field
+		And I input "30.09.2023" text in "End date" field
+		And I click the button named "FormPost"
+		And Delay 5
+		Then I wait that in user messages the "Company" substring will appear in 15 seconds
+		Then "Calculation movement costs (create)*" window is opened
+		And I close all client application windows
+	* The calculation for all companies is not allowed over the period of the company calculation
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
+		And I input "01.07.2023" text in "Begin date" field
+		And I input "31.07.2023" text in "End date" field
+		And I click the button named "FormPost"
+		And Delay 5
+		Then I wait that in user messages the "Overlapping period [01.07.2023 - 31.07.2023]" substring will appear in 20 seconds
+		Then "Calculation movement costs (create)*" window is opened
+	And I close all client application windows
+
+
+Scenario: _039 check preliminary stock is replaced by the purchase invoice and only the sold part affects the profit and loss
+	And I close all client application windows
+	* Enabling the functional option Use preliminary stock
+		When set True value to the constant Use preliminary stock
+	* Creating Goods receipt with a preliminary amount (10 pcs for 1 000, Boots/S-8, Store 07)
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+		And I select "Purchase" exact value from "Transaction type" drop-down list
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'DFC'             |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 07'        |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Boots'           |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'      |
+			| 'Boots'    | 'Boots/S-8'     |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
+		And I change "Is prelim." checkbox in "ItemList" table
+		And I activate "Currency" field in "ItemList" table
+		And I select "TRY" exact value from the drop-down list named "ItemListCurrency" in "ItemList" table
+		And I activate "Amount (prelim.)" field in "ItemList" table
+		And I input "1 000,00" text in "Amount (prelim.)" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "05.08.2023 10:00:00" text in "Date" field
+		And I click "Post and close" button
+		And I wait "Goods receipt (create)*" window closing in 30 seconds
+		And I close all client application windows
+	* Creating Sales invoice that sells 4 pcs before the purchase invoice arrives
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I select from "Partner" drop-down list by "Ka" string
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Company Kalipso'     |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 07'        |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Boots'           |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'      |
+			| 'Boots'    | 'Boots/S-8'     |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "4,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "08.08.2023 10:00:00" text in "Date" field
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "9 210" text in "Number" field
+		And I click "Post and close" button
+		And I wait "Sales invoice (create)*" window closing in 30 seconds
+		And I close all client application windows
+	* Creating Calculation movement costs for the period before the purchase invoice
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I input "01.08.2023" text in "Begin date" field
+		And I input "10.08.2023" text in "End date" field
+		And I click "Post and close" button
+		And I wait "Calculation movement costs (create)*" window closing in 60 seconds
+		And I close all client application windows
+	* Checking that the goods are received and expensed by the preliminary amount
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6020B_BatchBalance"
+		And "List" table contains lines
+			| 'Batch key'              | 'Quantity'   | 'Preliminary quantity'   | 'Invoice amount'   | 'Preliminary amount'   |
+			| 'Boots/S-8 - Store 07'   | ''           | '10,000'                 | ''                 | '1 000,00'             |
+		And "List" table contains lines
+			| 'Batch key'              | 'Quantity'   | 'Preliminary quantity'   | 'Invoice amount'   | 'Preliminary amount'   |
+			| 'Boots/S-8 - Store 07'   | ''           | '4,000'                  | ''                 | '400,00'               |
+		And I close all client application windows
+	* Creating Purchase invoice based on the goods receipt (10 pcs for 1 200)
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Date'           |
+			| '05.08.2023'     |
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And Delay 5
+		And I click "Ok" button
+		And Delay 5
+		And I move to "Other" tab
+		And I input "12.08.2023 10:00:00" text in "Date" field
+		And Delay 5
+		And I move to "Item list" tab
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'DFC'             |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'DFC Vendor by agreements'     |
+		And I select current line in "List" table
+		And Delay 10
+		If window with "Update item list info" header has appeared Then
+			And I click "OK" button
+		And Delay 5
+		And I go to line in "ItemList" table
+			| 'Item key'      |
+			| 'Boots/S-8'     |
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I input "120,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And Delay 5
+		And I click "Post and close" button
+		And I wait "Purchase invoice (create)*" window closing in 40 seconds
+		And I close all client application windows
+	* Creating Calculation movement costs for the period with the purchase invoice
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I input "11.08.2023" text in "Begin date" field
+		And I input "20.08.2023" text in "End date" field
+		And I click "Post and close" button
+		And I wait "Calculation movement costs (create)*" window closing in 60 seconds
+		And I close all client application windows
+	* Checking that the preliminary amount is replaced by the invoice amount
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6020B_BatchBalance"
+		And "List" table contains lines
+			| 'Batch key'              | 'Quantity'   | 'Preliminary quantity'   | 'Invoice amount'   | 'Preliminary amount'   |
+			| 'Boots/S-8 - Store 07'   | '10,000'     | ''                       | '1 200,00'         | ''                     |
+	* Checking that the preliminary amount of the whole receipt is written off
+		And "List" table contains lines
+			| 'Batch key'              | 'Quantity'   | 'Preliminary quantity'   | 'Invoice amount'   | 'Preliminary amount'   |
+			| 'Boots/S-8 - Store 07'   | ''           | '6,000'                  | ''                 | '600,00'               |
+	* Checking that only the part sold before the invoice is corrected (1 200 - 1 000) * 4 / 10
+		And "List" table contains lines
+			| 'Batch key'              | 'Quantity'   | 'Preliminary quantity'   | 'Invoice amount'   | 'Preliminary amount'   |
+			| 'Boots/S-8 - Store 07'   | ''           | ''                       | '80,00'            | ''                     |
+	* Checking that the cost of the sold goods is the preliminary amount plus the correction
+		And "List" table contains lines
+			| 'Batch key'              | 'Quantity'   | 'Preliminary quantity'   | 'Invoice amount'   | 'Preliminary amount'   |
+			| 'Boots/S-8 - Store 07'   | '4,000'      | ''                       | '480,00'           | ''                     |
+		And I close all client application windows
+	* Checking that the correction is registered in the profit and loss by the purchase invoice
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R5022T_Expenses"
+		And "List" table contains lines
+			| 'Item key'      | 'Currency'   | 'Amount'   |
+			| 'Boots/S-8'     | 'TRY'        | '80,00'    |
+		And I close all client application windows
+	* Restoring the functional option state for the following scenarios
+		When set False value to the constant Use preliminary stock
+	And I close all client application windows
+
+
+Scenario: _040 check the batch chosen for the expense is the same in every recalculation
+	And I close all client application windows
+	* Creating the first Purchase invoice (10 pcs for 100, High shoes 39/19SD, Store 07)
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And I input "05.09.2023 10:00:00" text in "Date" field
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "9 301" text in "Number" field
+		And I move to "Item list" tab
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'DFC'             |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'DFC'             |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'DFC Vendor by agreements'     |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 07'        |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'High shoes'      |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'          | 'Item key'     |
+			| 'High shoes'    | '39/19SD'      |
+		And I select current line in "List" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And Delay 5
+		If window with "Update item list info" header has appeared Then
+			And I click "OK" button
+		And I click "Post and close" button
+		And I wait "Purchase invoice (create)*" window closing in 40 seconds
+		And I close all client application windows
+	* Creating the second Purchase invoice of the same date (10 pcs for 200)
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And I input "05.09.2023 10:00:00" text in "Date" field
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "9 302" text in "Number" field
+		And I move to "Item list" tab
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'DFC'             |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'DFC'             |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'DFC Vendor by agreements'     |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 07'        |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'High shoes'      |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'          | 'Item key'     |
+			| 'High shoes'    | '39/19SD'      |
+		And I select current line in "List" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And Delay 5
+		If window with "Update item list info" header has appeared Then
+			And I click "OK" button
+		And I click "Post and close" button
+		And I wait "Purchase invoice (create)*" window closing in 40 seconds
+		And I close all client application windows
+	* Creating Sales invoice that expenses 5 pcs
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And I input "08.09.2023 10:00:00" text in "Date" field
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "9 220" text in "Number" field
+		And I move to "Item list" tab
+		And I select from "Partner" drop-down list by "Ka" string
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Company Kalipso'     |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 07'        |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'High shoes'      |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'          | 'Item key'     |
+			| 'High shoes'    | '39/19SD'      |
+		And I select current line in "List" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And Delay 5
+		And I click "Post and close" button
+		And I wait "Sales invoice (create)*" window closing in 40 seconds
+		And I close all client application windows
+	* Creating Calculation movement costs for september
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I input "01.09.2023" text in "Begin date" field
+		And I input "30.09.2023" text in "End date" field
+		And I click "Post and close" button
+		And I wait "Calculation movement costs (create)*" window closing in 60 seconds
+		And I close all client application windows
+	* Checking that both batches are received and the expense is taken from the first invoice
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6020B_BatchBalance"
+		And "List" table contains lines
+			| 'Batch'                                                | 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| 'Purchase invoice 9 301 dated 05.09.2023 10:00:00'     | '39/19SD - Store 07'   | '10,000'     | '1 000,00'         |
+		And "List" table contains lines
+			| 'Batch'                                                | 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| 'Purchase invoice 9 302 dated 05.09.2023 10:00:00'     | '39/19SD - Store 07'   | '10,000'     | '2 000,00'         |
+		And "List" table contains lines
+			| 'Batch'                                                | 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| 'Purchase invoice 9 301 dated 05.09.2023 10:00:00'     | '39/19SD - Store 07'   | '5,000'      | '500,00'           |
+		And I close all client application windows
+	* Recalculating the period the first time keeps the same batch
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date'   | 'Company'        | 'End date'     |
+			| '01.09.2023'   | 'Main Company'   | '30.09.2023'   |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And Delay 10
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay 25
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6020B_BatchBalance"
+		And "List" table contains lines
+			| 'Batch'                                                | 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| 'Purchase invoice 9 301 dated 05.09.2023 10:00:00'     | '39/19SD - Store 07'   | '5,000'      | '500,00'           |
+		And I close all client application windows
+	* Recalculating the period the second time keeps the same batch
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date'   | 'Company'        | 'End date'     |
+			| '01.09.2023'   | 'Main Company'   | '30.09.2023'   |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And Delay 10
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay 25
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6020B_BatchBalance"
+		And "List" table contains lines
+			| 'Batch'                                                | 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| 'Purchase invoice 9 301 dated 05.09.2023 10:00:00'     | '39/19SD - Store 07'   | '5,000'      | '500,00'           |
+	And I close all client application windows
+
+
+Scenario: _041 check the calculation of the following period is marked as not relevant when the previous period is recalculated
+	And I close all client application windows
+	* Creating Purchase invoice of october (10 pcs for 100, High shoes 39/19SD, Store 07)
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And I input "05.10.2023 10:00:00" text in "Date" field
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "9 304" text in "Number" field
+		And I move to "Item list" tab
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'DFC'             |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'DFC'             |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'DFC Vendor by agreements'     |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 07'        |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'High shoes'      |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'          | 'Item key'     |
+			| 'High shoes'    | '39/19SD'      |
+		And I select current line in "List" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And Delay 5
+		If window with "Update item list info" header has appeared Then
+			And I click "OK" button
+		And I click "Post and close" button
+		And I wait "Purchase invoice (create)*" window closing in 40 seconds
+		And I close all client application windows
+	* Creating Sales invoice of october (3 pcs)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And I input "08.10.2023 10:00:00" text in "Date" field
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "9 240" text in "Number" field
+		And I move to "Item list" tab
+		And I select from "Partner" drop-down list by "Ka" string
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Company Kalipso'     |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 07'        |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'High shoes'      |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'          | 'Item key'     |
+			| 'High shoes'    | '39/19SD'      |
+		And I select current line in "List" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And Delay 5
+		And I click "Post and close" button
+		And I wait "Sales invoice (create)*" window closing in 40 seconds
+		And I close all client application windows
+	* Creating Calculation movement costs of october
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I input "01.10.2023" text in "Begin date" field
+		And I input "31.10.2023" text in "End date" field
+		And I click "Post and close" button
+		And I wait "Calculation movement costs (create)*" window closing in 60 seconds
+		And I close all client application windows
+	* Creating Sales invoice of november (2 pcs)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And I input "05.11.2023 10:00:00" text in "Date" field
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "9 241" text in "Number" field
+		And I move to "Item list" tab
+		And I select from "Partner" drop-down list by "Ka" string
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Company Kalipso'     |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 07'        |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'High shoes'      |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'          | 'Item key'     |
+			| 'High shoes'    | '39/19SD'      |
+		And I select current line in "List" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And Delay 5
+		And I click "Post and close" button
+		And I wait "Sales invoice (create)*" window closing in 40 seconds
+		And I close all client application windows
+	* Creating Calculation movement costs of november
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I input "01.11.2023" text in "Begin date" field
+		And I input "30.11.2023" text in "End date" field
+		And I click "Post and close" button
+		And I wait "Calculation movement costs (create)*" window closing in 60 seconds
+		And I close all client application windows
+	* Checking that both periods are calculated and the batches are relevant
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6020B_BatchBalance"
+		And "List" table contains lines
+			| 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| '39/19SD - Store 07'   | '10,000'     | '1 000,00'         |
+		And "List" table contains lines
+			| 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| '39/19SD - Store 07'   | '3,000'      | '300,00'           |
+		And "List" table contains lines
+			| 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| '39/19SD - Store 07'   | '2,000'      | '200,00'           |
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/InformationRegister.T6030S_BatchRelevance"
+		And "List" table contains lines
+			| 'Date'                  | 'Company'        | 'Store'      | 'Item key'   | 'Document'   | 'Is relevance'   |
+			| '05.11.2023 10:00:00'   | 'Main Company'   | 'Store 07'   | '39/19SD'    | '*'          | 'Yes'            |
+		And I close all client application windows
+	* Changing the price of the october invoice from 100 to 200
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Date'           |
+			| '05.10.2023'     |
+		And I select current line in "List" table
+		And Delay 5
+		And I go to line in "ItemList" table
+			| 'Item key'      |
+			| '39/19SD'       |
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And Delay 5
+		If window with "Update item list info" header has appeared Then
+			And I click "OK" button
+		And I click the button named "FormPostAndClose"
+		And Delay 15
+		And I close all client application windows
+	* Checking that the changed document makes the batches not relevant
+		Given I open hyperlink "e1cib/list/InformationRegister.T6030S_BatchRelevance"
+		And "List" table contains lines
+			| 'Date'                  | 'Company'        | 'Store'      | 'Item key'   | 'Document'   | 'Is relevance'   |
+			| '05.10.2023 10:00:00'   | 'Main Company'   | 'Store 07'   | '39/19SD'    | '*'          | 'No'             |
+		And I close all client application windows
+	* Recalculating the october period only
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date'   | 'Company'        | 'End date'     |
+			| '01.10.2023'   | 'Main Company'   | '31.10.2023'   |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay 25
+		And I close all client application windows
+	* Expected after the fix: the october expense is recalculated by the new price
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6020B_BatchBalance"
+		And "List" table contains lines
+			| 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| '39/19SD - Store 07'   | '10,000'     | '2 000,00'         |
+		And "List" table contains lines
+			| 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| '39/19SD - Store 07'   | '3,000'      | '600,00'           |
+		And I close all client application windows
+	* Expected after the fix: the november calculation is reported as not relevant
+		Given I open hyperlink "e1cib/list/InformationRegister.T6030S_BatchRelevance"
+		And "List" table contains lines
+			| 'Date'                  | 'Company'        | 'Store'      | 'Item key'   | 'Document'   | 'Is relevance'   |
+			| '05.11.2023 10:00:00'   | 'Main Company'   | 'Store 07'   | '39/19SD'    | '*'          | 'No'             |
+		And I close all client application windows
+	* Expected after the fix: the november expense takes the cost of the recalculated batch
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R6020B_BatchBalance"
+		And "List" table contains lines
+			| 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
+			| '39/19SD - Store 07'   | '2,000'      | '400,00'           |
+	And I close all client application windows

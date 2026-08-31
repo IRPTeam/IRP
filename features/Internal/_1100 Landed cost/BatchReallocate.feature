@@ -81,11 +81,7 @@ Scenario: _0050 preparation
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
-			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Main Company (Company) *" window closing in 20 seconds
@@ -96,11 +92,7 @@ Scenario: _0050 preparation
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
-			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
-		And I select current line in "List" table
+		And I select "Local currency" exact value from "Currency movement type" drop-down list
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Second Company (Company) *" window closing in 20 seconds
@@ -140,11 +132,7 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 	* Create Calculation movement costs
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
 		And I input "30.05.2022" text in "Begin date" field
 		And I input "30.05.2022" text in "End date" field

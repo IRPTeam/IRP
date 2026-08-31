@@ -30,11 +30,7 @@ Scenario: _005028 filling in the "Price types" catalog
 		And I input "Basic Price Types TR" text in the field named "Description_tr"
 		And I input "Базовая цена" text in the field named "Description_ru"
 		And I click "Ok" button
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| Code    |
-			| TRY     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click the button named "FormWrite"
 		When TestClient log message contains '"Source" is a required field.' string
 		* Filling Source
@@ -103,11 +99,7 @@ Scenario: _005029 check hierarchical in the catalog PriceTypes
 			| "Description" |
 			| "Group 02"    |
 		And I click the button named "FormChoose"
-		And I click Select button of "Currency" field	
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 		And I click Select button of "Source" field	
 		And I go to line in "List" table
 				| 'Description'      |

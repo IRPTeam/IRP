@@ -1,0 +1,97 @@
+﻿Y	2023-02-01	2023-02-28
+H	Çalışan 1	2023-02-02	16		26633.19	26633.19	1
+1	1	5400	Diğer Cari Yükümlülükler	Maaş ve Ücretler Borçlu	5401	14460.46	D	2023-02-02	other			16	2023-02-02	banka		TRY
+2	1	32	Nakit ve Nakit Benzerleri	Bankadaki Nakit	3250	14460.46	C	2023-02-02	other			16	2023-02-02	banka		TRY
+3	1	5400	Diğer Cari Yükümlülükler	Maaş ve Ücretler Borçlu	5401	12172.73	D	2023-02-02	other			16	2023-02-02	banka		TRY
+4	1	32	Nakit ve Nakit Benzerleri	Bankadaki Nakit	3250	12172.73	C	2023-02-02	other			16	2023-02-02	banka		TRY
+H	Çalışan 1	2023-02-10	46		2023.14	2023.14	2
+5	2	32	Nakit ve Nakit Benzerleri	Transit hesap	3221	1000.00	D	2023-02-10	other			46	2023-02-10			TRY
+6	2	32	Nakit ve Nakit Benzerleri	Bankadaki Nakit	3250	1000.00	C	2023-02-10	other			46	2023-02-10			TRY
+7	2	32	Nakit ve Nakit Benzerleri	Bankadaki Nakit	3250	1011.57	D	2023-02-10	other			46	2023-02-10			TRY
+8	2	32	Nakit ve Nakit Benzerleri	Transit hesap	3221	1011.57	C	2023-02-10	other			46	2023-02-10			TRY
+9	2	32	Nakit ve Nakit Benzerleri	Transit hesap	3221	11.57	D	2023-02-10	other			46	2023-02-10			TRY
+10	2	9101	Diğer Faaliyet Gelirleri	Diğer Faaliyet Gelirleri	9101	11.57	C	2023-02-10	other			46	2023-02-10			TRY
+H	Çalışan 1	2023-02-24	1		13720.00	13720.00	3
+11	3	35	Stoklar	Satışa Sunulan Ürünler	3540	4583.33	D	2023-02-24	invoice			1	2023-02-24			TRY
+12	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	4583.33	C	2023-02-24	invoice			1	2023-02-24			TRY
+13	3	5300	Vergi Yükümlülükleri	KDV Borçlu	5301	916.67	D	2023-02-24	invoice			1	2023-02-24			TRY
+14	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	916.67	C	2023-02-24	invoice			1	2023-02-24			TRY
+15	3	35	Stoklar	Satışa Sunulan Ürünler	3540	2500.00	D	2023-02-24	invoice			1	2023-02-24			TRY
+16	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	2500.00	C	2023-02-24	invoice			1	2023-02-24			TRY
+17	3	5300	Vergi Yükümlülükleri	KDV Borçlu	5301	500.00	D	2023-02-24	invoice			1	2023-02-24			TRY
+18	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	500.00	C	2023-02-24	invoice			1	2023-02-24			TRY
+19	3	35	Stoklar	Satışa Sunulan Ürünler	3540	633.33	D	2023-02-24	invoice			1	2023-02-24			TRY
+20	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	633.33	C	2023-02-24	invoice			1	2023-02-24			TRY
+21	3	5300	Vergi Yükümlülükleri	KDV Borçlu	5301	126.67	D	2023-02-24	invoice			1	2023-02-24			TRY
+22	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	126.67	C	2023-02-24	invoice			1	2023-02-24			TRY
+23	3	35	Stoklar	Satışa Sunulan Ürünler	3540	1200.00	D	2023-02-24	invoice			1	2023-02-24			TRY
+24	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	1200.00	C	2023-02-24	invoice			1	2023-02-24			TRY
+25	3	5300	Vergi Yükümlülükleri	KDV Borçlu	5301	240.00	D	2023-02-24	invoice			1	2023-02-24			TRY
+26	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	240.00	C	2023-02-24	invoice			1	2023-02-24			TRY
+27	3	35	Stoklar	Satışa Sunulan Ürünler	3540	875.00	D	2023-02-24	invoice			1	2023-02-24			TRY
+28	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	875.00	C	2023-02-24	invoice			1	2023-02-24			TRY
+29	3	5300	Vergi Yükümlülükleri	KDV Borçlu	5301	175.00	D	2023-02-24	invoice			1	2023-02-24			TRY
+30	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	175.00	C	2023-02-24	invoice			1	2023-02-24			TRY
+31	3	35	Stoklar	Satışa Sunulan Ürünler	3540	1541.67	D	2023-02-24	invoice			1	2023-02-24			TRY
+32	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	1541.67	C	2023-02-24	invoice			1	2023-02-24			TRY
+33	3	5300	Vergi Yükümlülükleri	KDV Borçlu	5301	308.33	D	2023-02-24	invoice			1	2023-02-24			TRY
+34	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	308.33	C	2023-02-24	invoice			1	2023-02-24			TRY
+35	3	35	Stoklar	Satışa Sunulan Ürünler	3540	100.00	D	2023-02-24	invoice			1	2023-02-24			TRY
+36	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	100.00	C	2023-02-24	invoice			1	2023-02-24			TRY
+37	3	5300	Vergi Yükümlülükleri	KDV Borçlu	5301	20.00	D	2023-02-24	invoice			1	2023-02-24			TRY
+38	3	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	20.00	C	2023-02-24	invoice			1	2023-02-24			TRY
+H	Çalışan 1	2023-02-24	19		1460.00	1460.00	4
+39	4	40	Ticari Alacaklar	Müşteri Alacakları	4010	633.33	D	2023-02-24	invoice			19	2023-02-24			TRY
+40	4	9100	Diğer gelirler	Diğer gelirler	9100	633.33	C	2023-02-24	invoice			19	2023-02-24			TRY
+41	4	40	Ticari Alacaklar	Müşteri Alacakları	4010	126.67	D	2023-02-24	invoice			19	2023-02-24			TRY
+42	4	5300	Vergi Yükümlülükleri	Girdi KDV	5302	126.67	C	2023-02-24	invoice			19	2023-02-24			TRY
+43	4	42	Giderler	Satışa Maliyet - COGS	420.1	200.00	D	2023-02-24	invoice			19	2023-02-24			TRY
+44	4	35	Stoklar	Satışa Sunulan Ürünler	3540	200.00	C	2023-02-24	invoice			19	2023-02-24			TRY
+45	4	40	Ticari Alacaklar	Müşteri Alacakları	4010	375.00	D	2023-02-24	invoice			19	2023-02-24			TRY
+46	4	9100	Diğer gelirler	Diğer gelirler	9100	375.00	C	2023-02-24	invoice			19	2023-02-24			TRY
+47	4	40	Ticari Alacaklar	Müşteri Alacakları	4010	75.00	D	2023-02-24	invoice			19	2023-02-24			TRY
+48	4	5300	Vergi Yükümlülükleri	Girdi KDV	5302	75.00	C	2023-02-24	invoice			19	2023-02-24			TRY
+49	4	42	Giderler	Satışa Maliyet - COGS	420.1	50.00	D	2023-02-24	invoice			19	2023-02-24			TRY
+50	4	35	Stoklar	Satışa Sunulan Ürünler	3540	50.00	C	2023-02-24	invoice			19	2023-02-24			TRY
+H	Çalışan 1	2023-02-24	4		1000.00	1000.00	5
+51	5	32	Nakit ve Nakit Benzerleri	Bankadaki Nakit	3250	1000.00	D	2023-02-24	other			4	2023-02-24	banka		TRY
+52	5	40	Ticari Alacaklar	Müşteri Alacakları	4010	1000.00	C	2023-02-24	other			4	2023-02-24	banka		TRY
+H	Çalışan 1	2023-02-24	24		500.00	500.00	6
+53	6	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	500.00	D	2023-02-24	other			24	2023-02-24	nakit		TRY
+54	6	32	Nakit ve Nakit Benzerleri	Elindeki Naki	3240	500.00	C	2023-02-24	other			24	2023-02-24	nakit		TRY
+H	Çalışan 1	2023-02-24	5		700.00	700.00	7
+55	7	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	700.00	D	2023-02-24	other			5	2023-02-24	banka		TRY
+56	7	32	Nakit ve Nakit Benzerleri	Bankadaki Nakit	3250	700.00	C	2023-02-24	other			5	2023-02-24	banka		TRY
+H	Çalışan 1	2023-02-24	26		180.00	180.00	8
+57	8	42	Giderler	Yönetim Giderleri	420.2	180.00	D	2023-02-24	other			26	2023-02-24			TRY
+58	8	32	Nakit ve Nakit Benzerleri	Elindeki Naki	3240	180.00	C	2023-02-24	other			26	2023-02-24			TRY
+H	Çalışan 1	2023-02-24	27		12.00	12.00	9
+59	9	32	Nakit ve Nakit Benzerleri	Elindeki Naki	3240	12.00	D	2023-02-24	other			27	2023-02-24			TRY
+60	9	9100	Diğer gelirler	Diğer gelirler	9100	12.00	C	2023-02-24	other			27	2023-02-24			TRY
+H	Çalışan 1	2023-02-24	8		1100.00	1100.00	10
+61	10	32	Nakit ve Nakit Benzerleri	Transit hesap	3221	1100.00	D	2023-02-24	other			8	2023-02-24	banka		TRY
+62	10	32	Nakit ve Nakit Benzerleri	Bankadaki Nakit	3250	1100.00	C	2023-02-24	other			8	2023-02-24	banka		TRY
+H	Çalışan 1	2023-02-24	7		150.00	150.00	11
+63	11	32	Nakit ve Nakit Benzerleri	Bankadaki Nakit	3250	150.00	D	2023-02-24	other			7	2023-02-24	banka		TRY
+64	11	32	Nakit ve Nakit Benzerleri	Transit hesap	3221	150.00	C	2023-02-24	other			7	2023-02-24	banka		TRY
+H	Çalışan 1	2023-02-24	31		15.00	15.00	12
+65	12	42	Giderler	Yönetim Giderleri	420.2	15.00	D	2023-02-24	other			31	2023-02-24			TRY
+66	12	40	Ticari Alacaklar	Müşteri Alacakları	4010	15.00	C	2023-02-24	other			31	2023-02-24			TRY
+H	Çalışan 1	2023-02-24	28		25.00	25.00	13
+67	13	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	25.00	D	2023-02-24	other			28	2023-02-24			TRY
+68	13	9100	Diğer gelirler	Diğer gelirler	9100	25.00	C	2023-02-24	other			28	2023-02-24			TRY
+H	Çalışan 1	2023-02-24	22		220.00	220.00	14
+69	14	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	183.33	D	2023-02-24	other			22	2023-02-24			TRY
+70	14	35	Stoklar	Satışa Sunulan Ürünler	3540	183.33	C	2023-02-24	other			22	2023-02-24			TRY
+71	14	5200	Alacak Hesapları	Tedarikçilere Ticari Borçlar	5201	36.67	D	2023-02-24	other			22	2023-02-24			TRY
+72	14	5300	Vergi Yükümlülükleri	Girdi KDV (iade)	5303	36.67	C	2023-02-24	other			22	2023-02-24			TRY
+H	Çalışan 1	2023-02-25	9		1100.00	1100.00	15
+73	15	42	Giderler	Diğer İşletme Giderleri	420.5	17.97	D	2023-02-25	other			9	2023-02-25	banka		TRY
+74	15	32	Nakit ve Nakit Benzerleri	Transit hesap	3221	17.97	C	2023-02-25	other			9	2023-02-25	banka		TRY
+75	15	32	Nakit ve Nakit Benzerleri	Bankadaki Nakit	3250	1082.03	D	2023-02-25	other			9	2023-02-25	banka		TRY
+76	15	32	Nakit ve Nakit Benzerleri	Transit hesap	3221	1082.03	C	2023-02-25	other			9	2023-02-25	banka		TRY
+H	Çalışan 1	2023-02-25	34		150.00	150.00	16
+77	16	42	Giderler	Satışa Maliyet - COGS	420.1	100.00	D	2023-02-25	other			34	2023-02-25			TRY
+78	16	35	Stoklar	Satışa Sunulan Ürünler	3540	100.00	C	2023-02-25	other			34	2023-02-25			TRY
+79	16	42	Giderler	Satışa Maliyet - COGS	420.1	50.00	D	2023-02-25	other			34	2023-02-25			TRY
+80	16	35	Stoklar	Satışa Sunulan Ürünler	3540	50.00	C	2023-02-25	other			34	2023-02-25			TRY

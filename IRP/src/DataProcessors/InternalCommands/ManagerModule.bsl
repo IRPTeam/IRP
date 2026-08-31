@@ -144,6 +144,16 @@ Procedure OnCommandCreate(CommandName, CommandParameters, AddInfo = Undefined) E
 	
 EndProcedure
 
+// See InternalCommandsServer.OnCommandRefresh
+Procedure OnCommandRefresh(CommandName, CommandParameters, AddInfo = Undefined) Export
+	
+	If CommandName = "AuditLock" Then
+		AuditLock_OnCommandRefresh(CommandName, CommandParameters, AddInfo);
+		
+	EndIf;
+	
+EndProcedure
+
 #EndRegion
 
 #Region Internal
@@ -380,7 +390,7 @@ Procedure ShowNumerator_OnInitialization(CommandName, CommandParameters, Cancel,
 		RuleRef = CommandParameters.MainAttribute.NumeratorRules; // CatalogRef.NumeratorGroups
 		If Not ValueIsFilled(RuleRef) Then
 			RuleRef = NumberingRulesServer.GetNumeratorGroupForDocument(
-				CommandParameters.ObjectFullName, CommonFunctionsServer.GetCurrentSessionDate());
+				CommandParameters.ObjectFullName, CommandParameters.MainAttribute);
 		EndIf;
 		
 		NumeratorDescription = NumberingRulesServer.FillNumeratorDescription(RuleRef);
@@ -414,8 +424,10 @@ Function GroupEditingProperties_GetCommandDescription()
 	CommandDescription.Picture = "SpreadsheetReadOnly";
 	CommandDescription.Representation = "Picture";
 	
-	CommandDescription.LocationGroup = "CommandBar.Tools";
-	CommandDescription.LocationInCommandBar = "InCommandBarAndInAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+	CommandDescription.LocationGroup = "ContextMenu";
+	CommandDescription.ForTables = True;
+	CommandDescription.SpecificTables = "List";
+	
 	CommandDescription.ModifiesStoredData = True;
 	
 	CommandDescription.HasActionOnCommandCreate = True;
@@ -744,6 +756,7 @@ Function AuditLock_GetCommandDescription()
 	CommandDescription.HasActionInitialization = True;
 	CommandDescription.HasActionOnCommandCreate = True;
 	CommandDescription.HasActionAfterRunning = True;
+	CommandDescription.HasActionRefresh = True;
 	
 	CommandDescription.UsingListForm = True;
 	CommandDescription.UsingChoiceForm = False;
@@ -824,6 +837,31 @@ Procedure AuditLock_OnCommandCreate(CommandName, CommandParameters, AddInfo)
 		 
 EndProcedure
 
+// See InternalCommandsServer.OnCommandRefresh
+Procedure AuditLock_OnCommandRefresh(CommandName, CommandParameters, AddInfo)
+
+	If CommonFunctionsClientServer.ObjectHasProperty(CommandParameters, "MainAttribute") And
+		CommonFunctionsClientServer.ObjectHasProperty(CommandParameters.MainAttribute, "Ref") Then
+		//@skip-check property-return-type
+		CommandParameters.CommandButton.Check = AuditLockPrivileged.LockIsSet(CommandParameters.MainAttribute.Ref);
+	EndIf;
+	
+	If CommandParameters.CommandButton.Check Then
+		CommandParameters.CommandButton.Title = 
+			?(IsBlankString(CommandParameters.CommandDescription.TitleCheck), 
+				CommandParameters.CommandDescription.Title, 
+				CommandParameters.CommandDescription.TitleCheck);
+		If Not IsBlankString(CommandParameters.CommandDescription.PictureCheck) Then
+			CommandPicture = PictureLib[CommandParameters.CommandDescription.PictureCheck]; // Picture
+			CommandParameters.CommandButton.Picture = CommandPicture;
+		ElsIf Not IsBlankString(CommandParameters.CommandDescription.Picture) Then
+			CommandPicture = PictureLib[CommandParameters.CommandDescription.Picture]; // Picture
+			CommandParameters.CommandButton.Picture = CommandPicture;
+		EndIf;
+	EndIf;
+	
+EndProcedure
+
 #EndRegion
 
 #Region OpenVendorPrices
@@ -875,6 +913,7 @@ Function PrintTemplates_GetCommandNames()
 	Results = New Array; // Array of String
 	
 	Query = New Query;
+	Query.SetParameter("Groups", SessionParameters.CurrentUserAccessGroupList);
 	Query.Text =
 	"SELECT DISTINCT
 	|	PrintFormTemplates.Code AS Code
@@ -882,9 +921,19 @@ Function PrintTemplates_GetCommandNames()
 	|	Catalog.PrintFormTemplates AS PrintFormTemplates
 	|		INNER JOIN InformationRegister.ObjectsPrintTemplates AS ObjectsPrintTemplates
 	|		ON PrintFormTemplates.Ref = ObjectsPrintTemplates.PrintTemplate
+	|		LEFT JOIN (SELECT DISTINCT
+	|			PrintFormTemplatesAccessGroups.Ref AS Ref
+	|		FROM
+	|			Catalog.PrintFormTemplates.AccessGroups AS PrintFormTemplatesAccessGroups
+	|		WHERE
+	|			PrintFormTemplatesAccessGroups.Ref.LimitedAccess
+	|			AND PrintFormTemplatesAccessGroups.Group IN (&Groups)) AS AvailableItems
+	|		ON PrintFormTemplates.Ref = AvailableItems.Ref
 	|WHERE
 	|	NOT PrintFormTemplates.DeletionMark
 	|	AND NOT PrintFormTemplates.NotActive
+	|	AND (NOT PrintFormTemplates.LimitedAccess
+	|	OR NOT AvailableItems.Ref IS NULL)
 	|
 	|ORDER BY
 	|	Code";

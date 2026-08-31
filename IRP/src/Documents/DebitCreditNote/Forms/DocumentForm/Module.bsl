@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocDebitCreditNoteServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -42,6 +43,11 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -103,6 +109,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 		IsEnabled_ReceiveBasisDocument = False;
 	EndIf;	
 	Form.Items.ReceiveBasisDocument.Enabled = IsEnabled_ReceiveBasisDocument;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient
@@ -283,6 +294,26 @@ EndProcedure
 #EndRegion
 
 &AtClient
+Procedure ReceiveBasisDocumentStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocDebitCreditNoteClient.ReceiveBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SendBasisDocumentStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocDebitCreditNoteClient.SendBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ReceiveOrderStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocDebitCreditNoteClient.ReceiveOrderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SendOrderStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocDebitCreditNoteClient.SendOrderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure CurrencyOnChange(Item)
 	DocDebitCreditNoteClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -449,7 +480,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b743591e-8204-4cd1-90f5-139ee101f084">
+ <name>UseAdvanceRelevance</name>
+ <synonym>
+  <key>en</key>
+  <value>027D12D0-AC07-5BB5-5D1C-CD89DC389B2F</value>
+ </synonym>
+ <location>Constant.UseAdvanceRelevance</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>InformationRegister.T2016S_VendorsAdvancesRelevance</content>
+ <content>InformationRegister.T2017S_CustomersAdvancesRelevance</content>
+</mdclass:FunctionalOption>

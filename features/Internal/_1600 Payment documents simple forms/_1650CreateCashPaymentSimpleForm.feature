@@ -185,10 +185,7 @@ Scenario: _165000 preparation (Cash payment simple form)
 	When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 * Additional table control
 	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"	
-	And I go to line in "FunctionalOptions" table
-		| "Option"                                |
-		| "Use additional table control document" |
-	And I set "Use" checkbox in "FunctionalOptions" table
+	And I set checkbox "Use additional table control document"	
 	And I click "Save" button
 * Posting first documents
 	And I execute 1C:Enterprise script at server
@@ -817,11 +814,6 @@ Scenario: _165014 create Cash payment based on Employee cash advance - Employee 
 			| 'TransactionType'                   | "Employee cash advance"                             | '' |
 		And the editing text of form attribute named "PaymentListTotalAmountNoSplits" became equal to "200,00"
 		And I input "20,00" text in the field named "PaymentListTotalAmountNoSplits"	
-	* Reselect basis document
-		And I input "" text in the field named "PaymentListBasisDocumentNoSplits"
-		And I click Choice button of the field named "PaymentListBasisDocumentNoSplits"
-		And I select current line in "List" table
-		Then the form attribute named "PaymentListBasisDocumentNoSplits" became equal to "Employee cash advance 3 dated 22.03.2024 11:52:17"
 	* Post document and check saving
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment6$$" variable

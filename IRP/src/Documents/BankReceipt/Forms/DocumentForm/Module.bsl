@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocBankReceiptServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -37,6 +38,11 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -131,6 +137,7 @@ Function GetFormAttributeMapping() Export
 	Map.Insert("PaymentList.AdditionalAnalytic"               ,"PaymentListAdditionalAnalyticNoSplits");
 	Map.Insert("PaymentList.Branch"                           ,"PaymentListBranchNoSplits");
 	Map.Insert("PaymentList.ApArPostingDetail"                ,"PaymentListApArPostingDetailNoSplits");
+	Map.Insert("PaymentList.PaymentDate"                      ,"PaymentListPaymentDateNoSplits");
 	Return Map;
 EndFunction
 
@@ -167,6 +174,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.CommissionFinancialMovementType,
 	|PaymentList.Employee,
 	|PaymentList.PaymentPeriod,
+	|PaymentList.PaymentDate,
 	|PaymentList.CalculationType";
 	
 	ArrayOfAllAttributes = New Array();
@@ -242,6 +250,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		
 		If TransactionType = PaymentFromCustomer Or TransactionType = ReturnFromVendor Then
 			StrByType = StrByType + ", PaymentList.Project";
+		EndIf;
+		
+		If TransactionType = ReturnFromVendor Then
+			StrByType = StrByType + ", PaymentList.PaymentDate";
 		EndIf;
 		
 	ElsIf TransactionType = OtherPartner Then
@@ -375,6 +387,29 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.PaymentListBranch.Visible = IsSalaryReturn;
 	Form.Items.PaymentListBranchNoSplits.Visible = IsSalaryReturn;
+
+	If ValueIsFilled(Form.PaymentListAgreementNoSplits) Then
+		Form.Items.PaymentListBasisDocumentNoSplits.ReadOnly =
+			(CommonFunctionsServer.GetRefAttribute(Form.PaymentListAgreementNoSplits, "ApArPostingDetail")
+			<> PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	Else
+		Form.Items.PaymentListBasisDocumentNoSplits.ReadOnly = True;
+	EndIf;
+	
+	For Each Row In Object.PaymentList Do
+		Row.PaymentDateReadOnly = 
+			Not (ValueIsFilled(Row.BasisDocument) 
+				And TypeOf(Row.BasisDocument) = Type("DocumentRef.PurchaseInvoice"));
+	EndDo;
+	
+	Form.Items.PaymentListPaymentDateNoSplits.ReadOnly = 
+		Not (ValueIsFilled(Form.PaymentListBasisDocumentNoSplits)
+			And TypeOf(Form.PaymentListBasisDocumentNoSplits) = Type("DocumentRef.PurchaseInvoice"));
+			
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient
@@ -1234,6 +1269,24 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYMENT_DATE
+
+&AtClient
+Procedure PaymentListPaymentDateOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListPaymentDateNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region SERVICE
@@ -1437,7 +1490,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

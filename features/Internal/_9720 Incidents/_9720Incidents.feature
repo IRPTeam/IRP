@@ -49,19 +49,38 @@ Scenario: _972001 preparetion
 	When Create catalog Agreements objects (test data base)
 	When Create catalog Agreements objects (Incidents)
 	When Create catalog FileStorage and IntegrationSettings objects (Incidents)
-	* FileStorage
-		And In the command interface I select "Settings" "Edit constants"
-		And I click Choice button of the field named "DefaultFilesStorageVolume"
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description"     |
+				| "VAExtension"     |
+			When add VAExtension	
+	* Default files storage
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default files storage volume" |
+		And I select current line in "Table" table
+		And I click Select button of "Default files storage volume" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Documents'   |
-		And I click the button named "FormChoose"
-		And I click Choice button of the field named "DefaultPictureStorageVolume"
+		And I select current line in "List" table		
+		And I click "Save and close" button
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default picture storage volume" |
+		And I select current line in "Table" table
+		And I click Select button of "Default picture storage volume" field
 		And I go to line in "List" table
-			| "Description" |
-			| "Pictures"    |
-		And I click the button named "FormChoose"
-		And I click the button named "FormWriteAndClose"	
+			| 'Description' |
+			| 'Pictures'    |
+		And I select current line in "List" table		
+		And I click "Save and close" button
+		And Delay 3
 	When Create catalog Partners objects (test data base)
 	When Create catalog PartnersBankAccounts objects (test data base)
 	When Create catalog PaymentTerminals objects (test data base)
@@ -203,11 +222,7 @@ Scenario: _972004 create WorkOrder
 		| 'Description' |
 		| 'Vendor 6'    |
 	And I click the button named "FormChoose"
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| "Description"   |
-		| "Own company 1" |
-	And I click the button named "FormChoose"
+	And I select "Own company 1" exact value from the drop-down list named "Company"
 * Filling Worker
 	And I move to the tab named "GroupWorkers"
 	And in the table "Workers" I click the button named "WorkersAdd"
@@ -218,11 +233,7 @@ Scenario: _972004 create WorkOrder
 		| 'Description' |
 		| 'Employee 1'  |
 	And I click the button named "FormChoose"
-	And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-	And I go to line in "List" table
-		| "Description" |
-		| "hours"       |
-	And I click the button named "FormChoose"
+	And I select "hours" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 	And I activate field named "WorkersQuantity" in "Workers" table
 	And I input "5,000" text in the field named "WorkersQuantity" of "Workers" table
 	And I finish line editing in "Workers" table
@@ -256,11 +267,7 @@ Scenario: _972005 create WorkSheet
 		| "Vendor 6"    |
 	And I click the button named "FormChoose"
 	Then the form attribute named "LegalName" became equal to "Vendor 6"
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| "Description"   |
-		| "Own company 1" |
-	And I click the button named "FormChoose"
+	And I select "Own company 1" exact value from the drop-down list named "Company"
 * Filling work details
 	And I move to the tab named "GroupWorkers"
 	And in the table "Workers" I click the button named "WorkersAdd"
@@ -272,20 +279,12 @@ Scenario: _972005 create WorkSheet
 		| 'Employee 1'  |
 	And I click the button named "FormChoose"
 	And I activate field named "WorkersUnit" in "Workers" table
-	And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-	And I go to line in "List" table
-		| "Description" |
-		| "hours"       |
-	And I click the button named "FormChoose"
+	And I select "hours" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 	And I activate field named "WorkersQuantity" in "Workers" table
 	And I input "5,000" text in the field named "WorkersQuantity" of "Workers" table
 	And I finish line editing in "Workers" table
 	And I move to the tab named "GroupOther"
-	And I click Choice button of the field named "Currency"
-	And I go to line in "List" table
-		| 'Description' |
-		| 'TRY '        |
-	And I click the button named "FormChoose"
+	And I select "TRY" exact value from the drop-down list named "Currency"
 	And in the table "IssueList" I click the button named "IssueListAdd"
 	And I click choice button of the attribute named "IssueListIssue" in "IssueList" table
 	And I go to line in "List" table
@@ -413,11 +412,7 @@ Scenario: _972008 create WorkOrder within Project
 		| 'Description' |
 		| 'Vendor 6'    |
 	And I click the button named "FormChoose"
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| "Description"   |
-		| "Own company 1" |
-	And I click the button named "FormChoose"
+	And I select "Own company 1" exact value from the drop-down list named "Company"
 * Filling Worker
 	And I move to the tab named "GroupWorkers"
 	And in the table "Workers" I click the button named "WorkersAdd"
@@ -428,11 +423,7 @@ Scenario: _972008 create WorkOrder within Project
 		| 'Description' |
 		| 'Employee 1'  |
 	And I click the button named "FormChoose"
-	And I click choice button of the attribute named "WorkersUnit" in "Workers" table
-	And I go to line in "List" table
-		| "Description" |
-		| "hours"       |
-	And I click the button named "FormChoose"
+	And I select "hours" exact value from the drop-down list named "WorkersUnit" in "Workers" table
 	And I activate field named "WorkersQuantity" in "Workers" table
 	And I input "5,000" text in the field named "WorkersQuantity" of "Workers" table
 	And I finish line editing in "Workers" table

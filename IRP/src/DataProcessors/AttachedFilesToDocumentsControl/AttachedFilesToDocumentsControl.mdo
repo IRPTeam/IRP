@@ -104,9 +104,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="8768ad77-aa18-45de-a590-378e8abf8472">
    <name>ID</name>
@@ -135,9 +133,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="19edf0d7-efb2-4262-a9c6-3373e10ba124">
    <name>FileStorageVolume</name>
@@ -224,9 +220,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
  </tabularSections>
  <tabularSections uuid="2364009b-31ed-45ee-97fb-e871d63bdfa9">
@@ -251,9 +245,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="f030a9f7-788b-49e7-bf04-4be4b2e51a91">
    <name>Required</name>
@@ -293,9 +285,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="830900d5-894c-4738-91aa-d63affefd826">
    <name>IsRequired</name>
@@ -324,9 +314,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="2f02ef4a-c195-4360-a1a0-0c31de089553">
    <name>ID</name>
@@ -355,9 +343,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillValue xsi:type="core:StringValue">
-    <value/>
-   </fillValue>
+   <fillValue xsi:type="core:StringValue"/>
   </attributes>
   <attributes uuid="1f34019f-9b4e-4815-80e8-aa76f5391030">
    <name>MaximumFileSize</name>

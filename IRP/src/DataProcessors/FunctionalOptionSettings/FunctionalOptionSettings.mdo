@@ -10,12 +10,21 @@
   <value>1ECFA304-162E-0858-8944-41DBD28930D7</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
- <defaultForm>DataProcessor.FunctionalOptionSettings.Form.Form</defaultForm>
+ <defaultForm>DataProcessor.FunctionalOptionSettings.Form.NewForm</defaultForm>
  <forms uuid="fc0e81fc-90ec-415d-9d9d-eaa43b0de9f1">
   <name>Form</name>
   <synonym>
    <key>en</key>
    <value>3E1CE67B-0A51-E611-1A65-5CDD543869BD</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="1399db1b-976f-4672-9fe1-7242523997e3">
+  <name>NewForm</name>
+  <synonym>
+   <key>en</key>
+   <value>F712A8B3-F437-9C9B-B78E-E99D824B7C66</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

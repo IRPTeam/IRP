@@ -5,6 +5,7 @@
 Procedure OnReadAtServer(CurrentObject)
 	DocWorkOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	ThisObject.ClosingOrder = DocWorkOrderClosingServer.GetLastWorkOrderClosingByWorkOrder(Object.Ref);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);	
 EndProcedure
 
@@ -45,6 +46,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		EndIf;
 	EndIf;
 	
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
@@ -108,6 +114,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient
@@ -427,6 +438,16 @@ Procedure ItemListUnitOnChange(Item)
 	DocWorkOrderClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);	
+EndProcedure
+
 #EndRegion
 
 #Region QUANTITY
@@ -543,7 +564,15 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject, "SpecialOffersEditFinish_ForRow");
+	If Items.ItemList.SelectedRows.Count() > 1 Then 
+		ArrayOfRowKeys = New Array();
+		For Each ItemOfArray In Items.ItemList.SelectedRows Do  
+			ArrayOfRowKeys.Add(Object.ItemList.FindByID(ItemOfArray).Key);
+		EndDo;
+		OffersClient.OpenFormPickupSpecialOffers_ForSelectedRows(Object, ArrayOfRowKeys, ThisObject, "SpecialOffersEditFinish_ForSelectedRows");
+	Else	
+		OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject, "SpecialOffersEditFinish_ForRow");
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -558,6 +587,20 @@ EndProcedure
 &AtServer
 Procedure CalculateAndLoadOffers_ForRow(Result)
 	OffersServer.CalculateAndLoadOffers_ForRow(Object, Result.OffersAddress, Result.ItemListRowKey);
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForSelectedRows(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	CalculateAndLoadOffers_ForSelectedRows(Result);
+	OffersClient.SpecialOffersEditFinish_ForSelectedRows(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+&AtServer
+Procedure CalculateAndLoadOffers_ForSelectedRows(Result)
+	OffersServer.CalculateAndLoadOffers_ForSelectedRows(Object, Result.OffersAddress, Result.ArrayOfRowKeys);
 EndProcedure
 
 #EndRegion
@@ -766,7 +809,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

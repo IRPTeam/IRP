@@ -302,6 +302,7 @@
     <changeMode>DontChange</changeMode>
     <field>Document.PhysicalCountByLocation.TabularSection.ItemList.Attribute.Item</field>
    </choiceParameterLinks>
+   <quickChoice>Use</quickChoice>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

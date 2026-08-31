@@ -37,6 +37,57 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <resources uuid="b8841297-d7a8-4c73-be98-77f5bedbafe3">
+  <name>Device</name>
+  <synonym>
+   <key>en</key>
+   <value>AB378A8F-4637-6DF7-7F78-831F036A27E7</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Hardware</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="29538d99-67df-4149-a55e-76ea03fe15f3">
+  <name>DeviceNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>891AE238-18D7-0A93-3D63-3C321D12DAC2</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="badebfa3-0b35-4b94-84fd-afd47c241f8d">
+  <name>ShiftNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>5EB95B24-B2BB-B0D0-0913-3D538CC4B0C5</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
  <resources uuid="e246ca83-846a-43f2-8abf-1dc8b0b904e7">
   <name>CheckNumber</name>
   <synonym>
@@ -48,6 +99,22 @@
    <stringQualifiers>
     <length>50</length>
    </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="4b1bde1e-fa56-4a1f-b88d-8e9e5d1fe5fa">
+  <name>CheckDate</name>
+  <synonym>
+   <key>en</key>
+   <value>2A3BC278-D1B5-02FC-C2D6-6D24DCE03C97</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -123,4 +190,16 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <commands uuid="18f65952-1573-4bac-bbcf-010aa255e984">
+  <name>FiscalStatus</name>
+  <synonym>
+   <key>en</key>
+   <value>B257AC6B-D3A1-29F4-4883-38A4D278AFF4</value>
+  </synonym>
+  <group>FormNavigationPanelGoTo</group>
+  <commandParameterType>
+   <types>DocumentRef.RetailSalesReceipt</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:InformationRegister>

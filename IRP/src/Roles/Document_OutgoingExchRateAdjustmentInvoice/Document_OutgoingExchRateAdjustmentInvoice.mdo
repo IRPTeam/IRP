@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ec42155e-4b3a-4c8c-9fbf-f6beda611fe7">
+ <name>Document_OutgoingExchRateAdjustmentInvoice</name>
+ <synonym>
+  <key>en</key>
+  <value>0C4EC2EC-4052-A737-7019-98703D2F221F_____________</value>
+ </synonym>
+</mdclass:Role>

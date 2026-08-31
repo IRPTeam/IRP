@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2f89125e-13bc-48f8-bc2f-721d2246069c">
+ <name>UseManualOffers</name>
+ <synonym>
+  <key>en</key>
+  <value>08D2CCA2-FB49-41A7-71D9-9101A8A739D4</value>
+ </synonym>
+ <location>Constant.UseManualOffers</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferAmount</content>
+ <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferPercent</content>
+ <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferType</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferType</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferAmount</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferPercent</content>
+</mdclass:FunctionalOption>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b1e0fb9c-ee12-4ed3-b10c-2d58ec260a11">
+ <name>Report_D2001_Sales</name>
+ <synonym>
+  <key>en</key>
+  <value>FB173956-90AE-8D61-1F41-10F6E097DD4D</value>
+ </synonym>
+</mdclass:Role>

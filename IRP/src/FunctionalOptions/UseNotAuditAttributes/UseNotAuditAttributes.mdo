@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d3f7b5cb-a462-4ee1-b72a-2431f9b6de10">
+ <name>UseNotAuditAttributes</name>
+ <synonym>
+  <key>en</key>
+  <value>88A67149-BFDE-D210-0CD1-12590AAC608B</value>
+ </synonym>
+ <location>Constant.UseNotAuditAttributes</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.ConfigurationMetadata.TabularSection.NotAuditAttributes</content>
+</mdclass:FunctionalOption>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0f775325-b372-4a52-9175-b32cae98c723">
+ <name>OpenPointOfSale</name>
+ <synonym>
+  <key>en</key>
+  <value>EE5BA2A3-F540-DFBB-B00B-BD3C44DF9BEA</value>
+ </synonym>
+ <group>NavigationPanelImportant</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

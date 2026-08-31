@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -46,6 +47,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsUseManufacturing           = FOServer.IsUseManufacturing();
 	
 	Form.Items.UseConsolidatedRetailSales.Visible = IsUseConsolidatedRetailSales And Object.Retail;
+	Form.Items.UseConsolidatedRetailSalesStartDate.Visible = 
+		IsUseConsolidatedRetailSales And Object.UseConsolidatedRetailSales;
 	
 	Form.Items.MaterialStore.Visible    = (IsUseWorkOrders Or IsUseManufacturing) And Object.Workshop;
 	Form.Items.ReleaseStore.Visible     = IsUseManufacturing And Object.Workshop;
@@ -66,6 +69,11 @@ EndProcedure
 
 &AtClient
 Procedure RetailOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UseConsolidatedRetailSalesOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 

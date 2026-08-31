@@ -609,11 +609,7 @@ Scenario: _050015 create IT for (Consignor stocks)
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click the button named "FormCreate"
 	* Filling in the details
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -695,11 +691,7 @@ Scenario: _050020 commission items batches calculation
 	* Create calculation movement cost
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
 		And I input "01.10.2022" text in "Begin date" field
 		And I input current date in "End date" field

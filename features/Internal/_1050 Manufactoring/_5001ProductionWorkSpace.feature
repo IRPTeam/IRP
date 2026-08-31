@@ -156,11 +156,7 @@ Scenario: _5004 create IT from Production Workspace (product) and check filling 
 	* Check creation
 		* Set Use commission trading for inventory origin check 
 			Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-			And I go to line in "FunctionalOptions" table
-				| 'Option'                 |
-				| 'Use commission trading' |
-			And I set "Use" checkbox in "FunctionalOptions" table
-			And I finish line editing in "FunctionalOptions" table
+			And I set checkbox "Use commission trading"	
 			And I click "Save" button	
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"	
 		And I go to the last line in "List" table

@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPurchaseInvoiceServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -47,6 +48,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 
 	If Not Source = ThisObject Then
@@ -140,7 +146,48 @@ Procedure SetVisibilityAvailability(Object, Form)
 	ElsIf IsTransactionType_CurrencyRevaluationVendor Then
 		Form.Items.CurrencyRevaluationInvoice.TypeRestriction = New TypeDescription("DocumentRef.PurchaseInvoice");
 	EndIf;
+	
+	ExternalOffers = GetExternalOffers(Object);
+	For Each Row In Form.Object.SpecialOffers Do
+		Row.ExternalOffer = False;
+		For Each ExternalOfferKey In ExternalOffers Do
+			If Row.Key = ExternalOfferKey Then
+				Row.ExternalOffer = True;
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
+
+	ArrayOfClosingOrders = DocOrderClosingServer.GetArrayOfClosingOrders(Object.Ref);
+	Form.Items.Date.ReadOnly = (ArrayOfClosingOrders.Count() > 0);
+	Form.Items.EditDate.Visible = (ArrayOfClosingOrders.Count() > 0);
 EndProcedure
+
+&AtServerNoContext
+Function GetExternalOffers(val _Object)
+	ArrayOfKeys = New Array();
+	For Each Row_SpecialOffer In _Object.SpecialOffers Do               
+		Rows_RowIDInfo = _Object.RowIDInfo.FindRows(New Structure("Key", Row_SpecialOffer.Key));
+		For Each Row_RowIDInfo In Rows_RowIDInfo Do
+			If ValueIsFilled(Row_RowIDInfo.BasisKey)
+				And ValueIsFilled(Row_RowIDInfo.Basis)
+				And (TypeOf(Row_RowIDInfo.Basis) = Type("DocumentRef.SalesOrder") 
+					Or TypeOf(Row_RowIDInfo.Basis) = Type("DocumentRef.PurchaseOrder")) Then	
+				OrderRows = Row_RowIDInfo.Basis.SpecialOffers.FindRows(New Structure("Key", Row_RowIDInfo.BasisKey));
+				For Each OrderRow In OrderRows Do
+					If OrderRow.Offer = Row_SpecialOffer.Offer And ArrayOfKeys.Find(Row_SpecialOffer.Key) = Undefined Then
+						ArrayOfKeys.Add(Row_SpecialOffer.Key);
+					EndIf;
+				EndDo;  
+			EndIf;
+		EndDo;
+	EndDo;
+	Return ArrayOfKeys;
+EndFunction
 
 &AtClient
 Procedure _IdeHandler()
@@ -374,6 +421,16 @@ Procedure ItemListUnitOnChange(Item)
 	DocPurchaseInvoiceClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);		
+EndProcedure
+
 #EndRegion
 
 #Region QUANTITY
@@ -555,8 +612,15 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
-		"SpecialOffersEditFinish_ForRow");
+	If Items.ItemList.SelectedRows.Count() > 1 Then 
+		ArrayOfRowKeys = New Array();
+		For Each ItemOfArray In Items.ItemList.SelectedRows Do  
+			ArrayOfRowKeys.Add(Object.ItemList.FindByID(ItemOfArray).Key);
+		EndDo;
+		OffersClient.OpenFormPickupSpecialOffers_ForSelectedRows(Object, ArrayOfRowKeys, ThisObject, "SpecialOffersEditFinish_ForSelectedRows");
+	Else	
+		OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject, "SpecialOffersEditFinish_ForRow");
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -571,6 +635,20 @@ EndProcedure
 &AtServer
 Procedure CalculateAndLoadOffers_ForRow(Result)
 	OffersServer.CalculateAndLoadOffers_ForRow(Object, Result.OffersAddress, Result.ItemListRowKey);
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForSelectedRows(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	CalculateAndLoadOffers_ForSelectedRows(Result);
+	OffersClient.SpecialOffersEditFinish_ForSelectedRows(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+&AtServer
+Procedure CalculateAndLoadOffers_ForSelectedRows(Result)
+	OffersServer.CalculateAndLoadOffers_ForSelectedRows(Object, Result.OffersAddress, Result.ArrayOfRowKeys);
 EndProcedure
 
 #EndRegion
@@ -892,7 +970,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
@@ -912,6 +990,20 @@ EndProcedure
 &AtServer
 Procedure SplitRowAtServer()
 	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditDateClick(Item)
+	Callback = New CallbackDescription("EditDateClickEnd", ThisObject);
+	OpenForm("CommonForm.EditOrderClosingDate", New Structure("DocRef", Object.Ref), 
+		ThisObject,,,,Callback, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditDateClickEnd(Result, Params) Export
+	If Result <> Undefined And Result.Success Then
+		ThisObject.Read();
+	EndIf;	
 EndProcedure
 
 #EndRegion

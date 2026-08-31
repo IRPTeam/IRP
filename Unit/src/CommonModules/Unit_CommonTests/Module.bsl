@@ -8,6 +8,7 @@ Function Tests() Export
 	TestList.Add("GetItemInfo_GetPackageDimensions");
 	TestList.Add("CommonFunctionsClientServer_isBase64Value");
 	TestList.Add("SystemAttributesSets_CheckModules");
+	TestList.Add("FunctionsOptions_Checks");
 	Return TestList;
 EndFunction
 
@@ -69,6 +70,7 @@ Function CommonFunctionsServer_GetAttributesFromRef() Export
 	If ArrayOfErrors.Count() Then
 		Unit_Service.assertFalse("Errors in : CommonFunctionsServer.GetAttributesFromRef() - String" + Chars.LF +
 			StrConcat(ArrayOfErrors, Chars.LF));
+		ArrayOfErrors = New Array; // Array of String
 	EndIf;
 
 	Attributes = New Array; // Array of String
@@ -95,6 +97,7 @@ Function CommonFunctionsServer_GetAttributesFromRef() Export
 	If ArrayOfErrors.Count() Then
 		Unit_Service.assertFalse("Errors in : CommonFunctionsServer.GetAttributesFromRef() - Array" + Chars.LF +
 			StrConcat(ArrayOfErrors, Chars.LF));
+		ArrayOfErrors = New Array; // Array of String
 	EndIf;
 
 	Selection = Catalogs.Items.Select();
@@ -111,7 +114,42 @@ Function CommonFunctionsServer_GetAttributesFromRef() Export
 		If ArrayOfErrors.Count() Then
 			Unit_Service.assertFalse("Errors in : CommonFunctionsServer.GetAttributesFromRef() - Exist Ref" + Chars.LF +
 				StrConcat(ArrayOfErrors, Chars.LF));
+			ArrayOfErrors = New Array; // Array of String
 		EndIf;
+	EndIf;
+	
+	EmptyCRS = Documents.ConsolidatedRetailSales.EmptyRef();
+	Attributes = New Array; // Array of String
+	Attributes.Add("FiscalPrinter.Ref");
+	Attributes.Add("FiscalPrinter.DocumentPostingAfterPrinting");
+
+	Result = CommonFunctionsServer.GetAttributesFromRef(EmptyCRS, Attributes); // Structure
+
+	If Not TypeOf(Result) = Type("Structure") Then
+		ArrayOfErrors.Add("Unknown response type");
+	Else
+		If Not Result.Property("FiscalPrinter") Then
+			ArrayOfErrors.Add("Property ""FiscalPrinter"" not found");
+		ElsIf Not TypeOf(Result["FiscalPrinter"]) = Type("Structure") Then
+			ArrayOfErrors.Add("Property ""FiscalPrinter"" has unknown response type");
+		Else
+			FiscalPrinter = Result["FiscalPrinter"]; // Structure
+			If Not FiscalPrinter.Property("Ref") Then
+				ArrayOfErrors.Add("Property ""FiscalPrinter.Ref"" not found");
+			ElsIf Not FiscalPrinter["Ref"] = Catalogs.Hardware.EmptyRef() Then
+				ArrayOfErrors.Add("Property ""FiscalPrinter.Ref"" has an invalid value");
+			EndIf;
+			If Not FiscalPrinter.Property("DocumentPostingAfterPrinting") Then
+				ArrayOfErrors.Add("Property ""FiscalPrinter.DocumentPostingAfterPrinting"" not found");
+			ElsIf Not FiscalPrinter["DocumentPostingAfterPrinting"] = False Then
+				ArrayOfErrors.Add("Property ""FiscalPrinter.DocumentPostingAfterPrinting"" has an invalid value");
+			EndIf;
+		EndIf;
+	EndIf;
+
+	If ArrayOfErrors.Count() Then
+		Unit_Service.assertFalse("Errors in : CommonFunctionsServer.GetAttributesFromRef() - Values from Empty CRS Ref" + Chars.LF +
+			StrConcat(ArrayOfErrors, Chars.LF));
 	EndIf;
 
 	Return Undefined;
@@ -433,6 +471,37 @@ Function SystemAttributesSets_CheckModules() Export
 	If ArrayOfErrors.Count() Then
 		Unit_Service.assertFalse("Check System Attributes settings: " + Chars.LF +
 			StrConcat(ArrayOfErrors, Chars.LF));
+	EndIf;
+
+	Return Undefined;
+
+EndFunction
+
+Function FunctionsOptions_Checks() Export
+
+	ArrayOfErrors = New Array(); // Array of String
+	
+	FunctionalOptionsList = FOServer.GetFOList();
+	For Each FOItem In FunctionalOptionsList Do
+		MethodName = "Is" + FOItem;
+		Try
+			FOServer.GetFunctionalOptionValue(FOItem);
+		Except
+			ArrayOfErrors.Add("Not found method: " + MethodName);
+		EndTry;
+	EndDo;
+	
+	FOGroups = FOServer.GetFOGroups();
+	For Each GroupKeyValue In FOGroups Do
+		GroupName = GroupKeyValue.Key;
+		If FOServer.GetFOGroupSynonym(GroupName) = "" Then
+			ArrayOfErrors.Add("Not found Synonim for group: " + GroupName);
+		EndIf;
+	EndDo;
+	
+	If ArrayOfErrors.Count() Then
+		Unit_Service.assertFalse(
+			"Check FOServer methods: " + Chars.LF + StrConcat(ArrayOfErrors, Chars.LF));
 	EndIf;
 
 	Return Undefined;

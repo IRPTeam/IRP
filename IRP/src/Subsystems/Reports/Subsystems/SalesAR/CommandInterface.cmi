@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi"/>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>CommonCommand.OpenReport_R2001A_Sales</commands>
+      <commands>CommonCommand.OpenReport_R2010A_SalesOrders</commands>
+      <commands>CommonCommand.OpenReport_R2010A_SalesOrdersExecution</commands>
+      <commands>CommonCommand.OpenReport_R2011A_SalesOrdersShipment</commands>
+      <commands>CommonCommand.OpenReport_R2012A_SalesOrdersInvoiceClosing</commands>
+      <commands>CommonCommand.OpenReport_R401A_FreeStocks</commands>
+      <commands>CommonCommand.OpenReport_M1010A_PriceList</commands>
+      <commands>CommonCommand.OpenReport_R5020A_PartnersBalance</commands>
+    </orderFragments>
+  </commandsOrder>
+</cmi:CommandInterface>

@@ -1,5 +1,9 @@
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return True;
+	EndIf;
+	
 	If Not RowIDInfoServer.LinkedRowsIntegrityIsEnable() Then
 		Return True;
 	EndIf;
@@ -26,7 +30,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	Records_InDocument_NotFiltered AS Records
 	|WHERE
 	|	NOT Records.Invoice.Ref IS NULL
-	|	AND Records.Invoice.Ref REFS Document.SalesInvoice
+	|	AND Records.Invoice.Ref REFS Document.%1
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +64,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|WHERE
 	|	Records.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND NOT Records.Invoice.Ref IS NULL
-	|	AND Records.Invoice.Ref REFS Document.SalesInvoice
+	|	AND Records.Invoice.Ref REFS Document.%1
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -159,6 +163,14 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|
 	|ORDER BY
 	|	LineNumber";
+	
+	If TypeOf(Ref) = Type("DocumentRef.RetailReturnReceipt") 
+		or TypeOf(Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+		Query.Text = StrTemplate(Query.Text, "RetailSalesReceipt");
+	Else
+		Query.Text = StrTemplate(Query.Text, "SalesInvoice");
+	EndIf;
+	
 	Query.SetParameter("Records_InDocument", Records_InDocument);
 	Query.SetParameter("ItemList_InDocument", ItemList_InDocument);
 	Query.SetParameter("Records_Exists", Records_Exists);

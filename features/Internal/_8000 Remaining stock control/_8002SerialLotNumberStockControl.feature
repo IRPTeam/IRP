@@ -65,11 +65,11 @@ Scenario:_800020 preparation (remaining stock control)
 		| 'Bank term 01'   |
 			When create bank terms
 	* Workstation
-	Given I open hyperlink "e1cib/list/Catalog.Workstations"	
-	If "List" table does not contain lines Then
-			| 'Description'     |
-			| 'Workstation 01'    |
-			When create Workstation
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		If "List" table does not contain lines Then
+				| 'Description'     |
+				| 'Workstation 01'    |
+				When create Workstation
 	When Create catalog SerialLotNumbers objects (for Phone)
 	When Create Item with SerialLotNumbers (Phone)
 	When Create document Purchase invoice objects (with SerialLotNumber)
@@ -99,11 +99,7 @@ Scenario:_800021 check serial lot number control in the Sales invoice
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -188,11 +184,7 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
 				| 'Description'     |

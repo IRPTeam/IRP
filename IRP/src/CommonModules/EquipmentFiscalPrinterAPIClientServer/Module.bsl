@@ -151,6 +151,7 @@ EndFunction
 // ** Error - String - Error, if result false
 // ** Success - Boolean - Operation status
 // ** Document - DocumentRef.RetailSalesReceipt, DocumentRef.RetailReturnReceipt, DocumentRef.RetailReceiptCorrection - Basis document
+// ** BasisChecks - Array of See BasisCheckInfo - Basis checks
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** Electronically - Boolean - Formation of a check only in electronic form. The check is not printed.
@@ -166,6 +167,7 @@ Function GetProcessCheckSettings() Export
     Str.Info.Insert("Name", "ProcessCheck");
     Str.Info.Insert("Success", False);
     Str.Info.Insert("Document", Undefined);
+    Str.Info.Insert("BasisChecks", New Array);
 
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
@@ -325,6 +327,7 @@ EndFunction
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** CheckNumber - String - Fiscal check number
+// ** ShiftNumber - String - Shift number
 // * InOut - Structure -
 // * Out - Structure:
 Function GetPrintCheckCopySettings() Export
@@ -338,6 +341,7 @@ Function GetPrintCheckCopySettings() Export
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("CheckNumber", "");
+	Str.In.Insert("ShiftNumber", "");
 
     Str.Insert("InOut", New Structure);
 
@@ -806,6 +810,12 @@ EndFunction
 // Returns:
 //  Structure - Input parameters:
 // * Parameters - Structure:
+// ** PrintedDocUUID - String - UUID of printed document
+// ** PrintedDocNumber - String - Number of printed document
+// ** PrintedDocDate - Date - Date of printed document
+// ** OrderUUID - String - UUID of sale order
+// ** OrderNumber - String - Number of sale order
+// ** OrderDate - Date - Date of sale order
 // ** CashierName - String - Full name and position of the authorized person for the operation
 // ** CashierINN - String - Taxpayer Identification Number of the authorized person
 // ** OperationType - Number - Type of operation
@@ -814,7 +824,10 @@ EndFunction
 // *** Description - String - Description of the correction
 // *** Date - Date - Date of the corrected transaction
 // *** Number - String - Number of the tax authority's prescription
+// *** CRS - String - ConsolidatedRetailSales of the correction (UUID from ref)
+// *** FiscalResponse - String - Fiscal response
 // ** TaxationSystem - Number - Taxation system code
+// ** CurrentCRS - String - Current ConsolidatedRetailSales (UUID from ref)
 // ** CustomerDetail - Structure - Customer (client) details:
 // *** Info - String - Name of the organization or surname, name, patronymic (if available)
 // *** INN - String - INN of the organization or buyer (client)
@@ -859,21 +872,33 @@ EndFunction
 // ** PrePayment - Number - Amount of credited prepayment or advance
 // ** PostPayment - Number - Credit payment amount
 // ** Barter - Number - Payment amount by counter provision
+// ** PaymentsInFiscalPrinterMode - Array of Number - Array of payments for Fiscal Printer Mode
 Function CheckPackage() Export
     Str = New Structure;
 
     // Parameters section
     Str.Insert("Parameters", New Structure);
+    Str.Parameters.Insert("PrintedDocUUID", "");
+    Str.Parameters.Insert("PrintedDocNumber", "");
+    Str.Parameters.Insert("PrintedDocDate", Date(1, 1, 1));
+    
+    Str.Parameters.Insert("OrderUUID", "");
+    Str.Parameters.Insert("OrderNumber", "");
+    Str.Parameters.Insert("OrderDate", Date(1, 1, 1));
+    
     Str.Parameters.Insert("CashierName", "");
     Str.Parameters.Insert("CashierINN", "");
     Str.Parameters.Insert("OperationType", 0);
     Str.Parameters.Insert("TaxationSystem", 0);
+    Str.Parameters.Insert("CurrentCRS", "");
 
 	CorrectionData = New Structure;
     CorrectionData.Insert("Type", 0);
     CorrectionData.Insert("Description", "");
     CorrectionData.Insert("Date", Date(1, 1, 1));
     CorrectionData.Insert("Number", "");
+    CorrectionData.Insert("CRS", "");
+    CorrectionData.Insert("FiscalResponse", "");
     Str.Parameters.Insert("CorrectionData", CorrectionData);
 
     CustomerDetail = New Structure;
@@ -935,6 +960,7 @@ Function CheckPackage() Export
     Str.Payments.Insert("PrePayment", 0);
     Str.Payments.Insert("PostPayment", 0);
     Str.Payments.Insert("Barter", 0);
+	Str.Payments.Insert("PaymentsInFiscalPrinterMode", New Array);
     Return Str;
 EndFunction
 
@@ -943,7 +969,10 @@ EndFunction
 // Returns:
 //  Structure - Fiscal string:
 // * Name - String - Name of the product
+// * ShortName - String - Short name of the product
+// * Barcode - String - Barcode
 // * Quantity - Number - Quantity of the product
+// * Price - Number - Price per product unit
 // * PriceWithDiscount - Number - Price per product unit with discounts/surcharges
 // * AmountWithDiscount - Number - Final amount for the item with all discounts/surcharges
 // * DiscountAmount - Number - Amount of discounts and surcharges
@@ -981,11 +1010,16 @@ EndFunction
 // ** DocumentDate - String - Document date "DD.MM.YYYY"
 // ** DocumentNumber - String - Document number
 // ** AttributeValue - String - Attribute value
+// * BasisUUID - String - UUID of basis check for return or correction
 Function CheckPackage_FiscalString() Export
     Str = New Structure;
 
     Str.Insert("Name", "");
+    Str.Insert("ShortName", "");
+    Str.Insert("Barcode", "");
+    
     Str.Insert("Quantity", 0);
+    Str.Insert("Price", 0);
     Str.Insert("PriceWithDiscount", 0);
     Str.Insert("AmountWithDiscount", 0);
     Str.Insert("DiscountAmount", 0);
@@ -1026,6 +1060,8 @@ Function CheckPackage_FiscalString() Export
     Str.IndustryAttribute.Insert("DocumentDate", "");
     Str.IndustryAttribute.Insert("DocumentNumber", "");
     Str.IndustryAttribute.Insert("AttributeValue", "");
+    
+    Str.Insert("BasisUUID", "");
 
     Return Str;
 EndFunction
@@ -1124,14 +1160,16 @@ EndFunction
 //
 // Returns:
 //  Structure - Document Output Parameters:
-// * ShiftNumber - Number - Number of the open shift/Number of the closed shift
+// * DeviceNumber - String - Number of device (fiscal printer)
 // * CheckNumber - Number - Number of the fiscal document
+// * ShiftNumber - Number - Number of the shift
 // * ShiftClosingCheckNumber - Number - Check number for the shift
 // * AddressSiteInspections - String - Address of the inspection site
 // * FiscalSign - String - Fiscal sign
 // * DateTime - Date - Date and time of document creation
 Function DocumentOutputParameters() Export
     DocumentOutputParameters = New Structure;
+    DocumentOutputParameters.Insert("DeviceNumber", "");
     DocumentOutputParameters.Insert("ShiftNumber", 0);
     DocumentOutputParameters.Insert("CheckNumber", 0);
     DocumentOutputParameters.Insert("ShiftClosingCheckNumber", 0);
@@ -1139,6 +1177,37 @@ Function DocumentOutputParameters() Export
     DocumentOutputParameters.Insert("FiscalSign", "");
     DocumentOutputParameters.Insert("DateTime", Date(1, 1, 1));
     Return DocumentOutputParameters;
+EndFunction
+
+// Basis check info.
+// 
+// Returns:
+//  Structure - Basis check info:
+// * UUID - String - UUID of basis document
+// * Number - String - Number of basis document
+// * Date - Date - Date of basis document
+// * TotalAmount - Number - Total amount
+// * Device - CatalogRef.Workstations - Device (Fiscal printer)
+// * ShiftNumber - String - Shift number
+// * DeviceNumber - String - Device number
+// * CheckNumber - String - Number of printed check
+// * CheckDate - Date - Date of printed check
+Function BasisCheckInfo() Export
+	
+	BasisCheckInfo = New Structure;
+    BasisCheckInfo.Insert("UUID", "");
+    BasisCheckInfo.Insert("Number", "");
+    BasisCheckInfo.Insert("Date", Date(1, 1, 1));
+    BasisCheckInfo.Insert("TotalAmount", 0);
+    
+    BasisCheckInfo.Insert("Device", PredefinedValue("Catalog.Workstations.EmptyRef"));
+    BasisCheckInfo.Insert("DeviceNumber", "");
+    BasisCheckInfo.Insert("ShiftNumber", "");
+    BasisCheckInfo.Insert("CheckNumber", "");
+    BasisCheckInfo.Insert("CheckDate", Date(1, 1, 1));
+	
+	Return BasisCheckInfo;
+	
 EndFunction
 
 #EndRegion

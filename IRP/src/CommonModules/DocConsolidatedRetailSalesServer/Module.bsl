@@ -77,12 +77,17 @@ Function GetDocument(Company, Branch, Workstation) Export
 	If Not (ValueIsFilled(Workstation) And ValueIsFilled(Workstation.CashAccount)) Then
 		Return Documents.ConsolidatedRetailSales.EmptyRef();
 	EndIf;
+	
+	FiscalPrinters = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, Enums.EquipmentTypes.FiscalPrinter);
+	If FiscalPrinters.Count() = 0 Then
+		FiscalPrinters.Add(Catalogs.Hardware.EmptyRef());
+	EndIf;
 		
 	Query = New Query();
 	Query.Text = 
 	"SELECT TOP 1
-	|	ConsolidatedRetailSales.Ref,
-	|	ConsolidatedRetailSales.Status
+	|	ConsolidatedRetailSales.Ref AS Ref,
+	|	ConsolidatedRetailSales.Status AS Status
 	|FROM
 	|	Document.ConsolidatedRetailSales AS ConsolidatedRetailSales
 	|WHERE
@@ -90,6 +95,7 @@ Function GetDocument(Company, Branch, Workstation) Export
 	|	AND ConsolidatedRetailSales.Company = &Company
 	|	AND ConsolidatedRetailSales.Branch = &Branch
 	|	AND ConsolidatedRetailSales.CashAccount = &CashAccount
+	|	AND ConsolidatedRetailSales.FiscalPrinter IN (&FiscalPrinters)
 	|
 	|ORDER BY
 	|	ConsolidatedRetailSales.Date DESC";
@@ -97,12 +103,13 @@ Function GetDocument(Company, Branch, Workstation) Export
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("Branch", Branch);
 	Query.SetParameter("CashAccount", Workstation.CashAccount);
+	Query.SetParameter("FiscalPrinters", FiscalPrinters);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
 		If 	QuerySelection.Status = Enums.ConsolidatedRetailSalesStatuses.Open
 			OR QuerySelection.Status = Enums.ConsolidatedRetailSalesStatuses.New Then
-			Return QuerySelection.Ref
+			Return QuerySelection.Ref;
 		Else
 			Return Documents.ConsolidatedRetailSales.EmptyRef();
 		EndIf;
@@ -182,10 +189,15 @@ Function IsClosedRetailDocument(DocRef) Export
 			And DocRef.ConsolidatedRetailSales.Posted;
 EndFunction
 
-Function UseConsolidatedRetailSales(Branch, SalesReturnData = Undefined) Export
+Function UseConsolidatedRetailSales(Branch, SalesReturnData = Undefined, CurrentDate = Undefined) Export
 	Result = FOServer.IsUseConsolidatedRetailSales() 
 		And ValueIsFilled(Branch)
 		And Branch.UseConsolidatedRetailSales;
+	
+	If Result And CurrentDate <> Undefined Then
+		Result = Branch.UseConsolidatedRetailSalesStartDate = Date(1,1,1) 
+			OR Branch.UseConsolidatedRetailSalesStartDate <= CurrentDate;
+	EndIf;
 		
 	If SalesReturnData = Undefined Then
 		Return Result;

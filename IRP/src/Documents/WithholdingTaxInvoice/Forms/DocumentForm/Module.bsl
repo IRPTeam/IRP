@@ -363,6 +363,16 @@ Procedure ItemListUnitOnChange(Item)
 	DocWithholdingTaxInvoiceClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);		
+EndProcedure
+
 #EndRegion
 
 #Region QUANTITY
@@ -639,7 +649,8 @@ EndProcedure
 
 &AtClient
 Procedure EditCurrencies(Command)
-	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Object.PartnerUUID, Object.Currency, 
+		Object.ItemList.Total("TotalAmount"), Object.Agreement);	
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
@@ -688,7 +699,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

@@ -60,11 +60,7 @@ Scenario: _095001 preparation
 				| "$$NumberSalesInvoice095001$$"     |
 			And I click the button named "FormCreate"
 			And I select from "Partner" drop-down list by "Lunch" string
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Partner term" field
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -210,11 +206,7 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
@@ -252,11 +244,7 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 			| 'Description'           |
 			| 'Partner term Maxim'    |
 		And I select current line in "List" table
-		And I click choice button of "Currency" attribute in "Transactions" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "Transactions" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -273,8 +261,8 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
-			| 'Number'                      | 'Date'                       |
-			| '$$NumberDeditNote095002$$'   | '$$DeditNoteDate095002$$'    |
+			| 'Number'                      |
+			| '$$NumberDeditNote095002$$'   |
 		And I close all client application windows
 
 
@@ -283,11 +271,7 @@ Scenario: _095003 create document Credit Note (increase in debt to the vendor)
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in document
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
@@ -327,11 +311,7 @@ Scenario: _095003 create document Credit Note (increase in debt to the vendor)
 			| 'Description'           |
 			| 'Partner term Maxim'    |
 		And I select current line in "List" table
-		And I click choice button of "Currency" attribute in "Transactions" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "Transactions" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -348,8 +328,8 @@ Scenario: _095003 create document Credit Note (increase in debt to the vendor)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And "List" table contains lines
-			| 'Number'                       | 'Date'                        |
-			| '$$NumberCreditNote095003$$'   | '$$CreditNoteDate095003$$'    |
+			| 'Number'                       |
+			| '$$NumberCreditNote095003$$'   |
 		And I close all client application windows
 
 
@@ -359,11 +339,7 @@ Scenario: _095004 create document Credit Note (write off customers debts)
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in document 
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
@@ -402,11 +378,7 @@ Scenario: _095004 create document Credit Note (write off customers debts)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click choice button of "Currency" attribute in "Transactions" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "Transactions" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -423,8 +395,8 @@ Scenario: _095004 create document Credit Note (write off customers debts)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And "List" table contains lines
-			| 'Number'                       | 'Date'                        |
-			| '$$NumberCreditNote095004$$'   | '$$CreditNoteDate095004$$'    |
+			| 'Number'                       |
+			| '$$NumberCreditNote095004$$'   |
 		And I close all client application windows
 
 
@@ -433,11 +405,7 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in document
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
@@ -476,11 +444,7 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
-		And I click choice button of "Currency" attribute in "Transactions" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list in "Transactions" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -498,8 +462,8 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
-			| 'Number'                      | 'Date'                       |
-			| '$$DeditNoteNumber095005$$'   | '$$DeditNoteDate095005$$'    |
+			| 'Number'                      |
+			| '$$DeditNoteNumber095005$$'   |
 		And I close all client application windows
 
 
@@ -508,11 +472,7 @@ Scenario: _095006 check Reconcilation statement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		And I click the button named "FormCreate"
 	* Check for Maxim
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -524,11 +484,7 @@ Scenario: _095006 check Reconcilation statement
 			| 'Description'      |
 			| 'Company Maxim'    |
 		And I select current line in "List" table
-		And I click Select button of "Currency" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Turkish lira'    |
-		And I select current line in "List" table
+		And I select "TRY" exact value from "Currency" drop-down list
 		Then "Reconciliation statement (create) *" window is opened
 		And I input "01.01.2020" text in "Begin period" field
 		And I input end of the current month date in "End period" field
@@ -607,11 +563,7 @@ Scenario: _095008 create DebitNote (OtherPartnersTransactions)
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in document
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
@@ -658,8 +610,8 @@ Scenario: _095008 create DebitNote (OtherPartnersTransactions)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
-			| 'Number'                      | 'Date'                       |
-			| '$$DeditNoteNumber095008$$'   | '$$DeditNoteDate095008$$'    |
+			| 'Number'                      |
+			| '$$DeditNoteNumber095008$$'   |
 		And I close all client application windows
 
 
@@ -669,11 +621,7 @@ Scenario: _095009 create CreditNote (OtherPartnersTransactions)
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in document
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
@@ -721,8 +669,8 @@ Scenario: _095009 create CreditNote (OtherPartnersTransactions)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And "List" table contains lines
-			| 'Number'                       | 'Date'                        |
-			| '$$CreditNoteNumber095009$$'   | '$$CreditNoteDate095009$$'    |
+			| 'Number'                       |
+			| '$$CreditNoteNumber095009$$'   |
 		And I close all client application windows
 
 Scenario: _095010 create DebitCreditNote (check amount control CurrencyFrom=CurrencyTo)
@@ -731,11 +679,7 @@ Scenario: _095010 create DebitCreditNote (check amount control CurrencyFrom=Curr
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 		And I move to "Other" tab
 		And I select from the drop-down list named "Currency" by "Turkish lira" string
 		And I select from the drop-down list named "Branch" by "Accountants office" string

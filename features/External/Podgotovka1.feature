@@ -129,11 +129,7 @@ Scenario: creating a Purchase Order document
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in vendor's info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -608,7 +604,7 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 
 
 	Scenario: create purchase invoice without order (Vendor Ferron, TRY)
-	* Create Purchase Invoice without order	
+	* Create Purchase Invoice without order
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 	* Filling in vendor's info
@@ -628,6 +624,8 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 				| Description            |
 				| Vendor Ferron, TRY     |
 			And I select current line in "List" table
+			If "Update item list info" window is opened Then
+				And I click "OK" button
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -664,11 +662,7 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -734,11 +728,7 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 		* Create Goods receipt
 			And I click the button named "FormDocumentGoodsReceiptGenerate"
 			And I click "Ok" button
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-					| 'Description'       |
-					| 'Main Company'      |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click the button named "FormPostAndClose"
 			And I wait "Goods receipt (create)" window closing in 20 seconds
 			And I close all client application windows
@@ -768,19 +758,15 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 			And I input "234" text in "Number" field
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description      |
-				| Main company     |
+				| Description     |
+				| Main company    |
 			And I select current line in "List" table
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click Select button of "Multi currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Type'             |
-				| 'USD'         | 'Partner term'     |
-			And I select current line in "List" table
+			And I select "USD" exact value from "Multi currency movement type" drop-down list
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| Description     |
@@ -872,11 +858,7 @@ Scenario: create the first test PO for a test on the creation mechanism based on
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -967,11 +949,7 @@ Scenario: create the second test PO for a test on the creation mechanism based o
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -1024,11 +1002,7 @@ Scenario: create the first test SO for a test on the creation mechanism based on
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -1119,11 +1093,7 @@ Scenario: create the second test SO for a test on the creation mechanism based o
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I click the button named "FormCreate"
 		* Filling in details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -1233,11 +1203,7 @@ Scenario: create a Purchase Order document
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-		| Description    |
-		| Main Company   |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in vendor's info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -1521,11 +1487,7 @@ Scenario: checkbox Use serial lot number in the Item type Clothes
 Scenario: check filling revenue type (from Company)
 * Select Company
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Select Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -1549,11 +1511,7 @@ Scenario: check filling revenue type (from Company)
 			| 'Revenue type'   | 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'    |
 			| 'Rent'           | 'Dress'   | 'XS/Blue'    | '1,000'      | 'pcs'     |
 	* Reselect Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check filling in revenue type
 		And "ItemList" table became equal
 			| 'Revenue type'               | 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'    |
@@ -1563,11 +1521,7 @@ Scenario: check filling revenue type (from Company)
 Scenario: check	filling expense type (from Company)
 	* Select Company	
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Select Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -1591,11 +1545,7 @@ Scenario: check	filling expense type (from Company)
 			| 'Expense type'   | 'Item'      | 'Item key'   | 'Quantity'   | 'Unit'    |
 			| 'Rent'           | 'Service'   | 'Rent'       | '1,000'      | 'pcs'     |
 	* Reselect Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check filling in Expense type
 		And "ItemList" table became equal
 			| 'Expense type'               | 'Item'      | 'Item key'   | 'Quantity'   | 'Unit'    |
@@ -1605,11 +1555,7 @@ Scenario: check	filling expense type (from Company)
 Scenario: check filling revenue type (from item type)
 	* Select Company
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Select Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -1654,11 +1600,7 @@ Scenario: check filling revenue type (from item type)
 Scenario: check filling expense type (from item type)
 	* Select Company	
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Select Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -1703,11 +1645,7 @@ Scenario: check filling expense type (from item type)
 Scenario: check filling revenue type (item)
 	* Select Company
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Select Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -1752,11 +1690,7 @@ Scenario: check filling revenue type (item)
 Scenario: check filling expense type (from item)
 	* Select Company	
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Select Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -1801,11 +1735,7 @@ Scenario: check filling expense type (from item)
 Scenario: check filling revenue type (item key)
 	* Select Company
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Select Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -1865,11 +1795,7 @@ Scenario: check filling revenue type (item key)
 Scenario: check filling expense type (from item key)
 	* Select Company	
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 	* Select Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table

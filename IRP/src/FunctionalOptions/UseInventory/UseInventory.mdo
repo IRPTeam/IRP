@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="11786f11-fcdb-4efa-98ce-42ae6d44ead9">
+ <name>UseInventory</name>
+ <synonym>
+  <key>en</key>
+  <value>B12D9140-C952-D10C-CC41-1FE3C37784E8</value>
+ </synonym>
+ <location>Constant.UseInventory</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Subsystem.Inventory</content>
+ <content>Report.R4010A_StockBalance</content>
+ <content>Report.R4050A_InventoryBalance</content>
+ <content>Report.R405A_StockAdjustments</content>
+ <content>Report.R9101S_InventoryResults</content>
+ <content>Document.ItemStockAdjustment</content>
+ <content>Document.StockAdjustmentAsWriteOff</content>
+ <content>Document.StockAdjustmentAsSurplus</content>
+ <content>InformationRegister.RemainingItemsInfo</content>
+ <content>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</content>
+ <content>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</content>
+ <content>AccumulationRegister.R4010B_ActualStocks</content>
+ <content>AccumulationRegister.R4011B_FreeStocks</content>
+ <content>AccumulationRegister.R4050B_StockInventory</content>
+ <content>Report.D4010_ActualStocks.Command.D4010_ActualStocks</content>
+ <content>Report.D4010_ActualStocks</content>
+ <content>Document.StockCorrection</content>
+ <content>Document.PhysicalInventory</content>
+ <content>Document.PhysicalCountByLocation</content>
+ <content>CommonCommand.OpenReport_R4010A_StockBalance</content>
+ <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
+ <content>CommonCommand.OpenReport_R405A_StockAdjustments</content>
+ <content>CommonCommand.OpenReport_R9101S_InventoryResults</content>
+</mdclass:FunctionalOption>

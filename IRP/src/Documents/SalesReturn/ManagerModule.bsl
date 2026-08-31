@@ -398,6 +398,10 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	
+	If Parameters.Property("ArrayOfPostingInfo") Then
+		Parameters.Delete("ArrayOfPostingInfo");
+	EndIf;
+	
 	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
@@ -448,7 +452,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.SalesReturn.ItemList");
@@ -1098,46 +1106,108 @@ EndFunction
 
 Function R4050B_StockInventory()
 	Return 
-		   "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemLIst.Store,
-		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsOwnStocks
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemLIst.Store,
-		   |	ItemList.ItemKey
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemLIst.TradeAgentStore,
-		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsReturnFromTradeAgent
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemLIst.TradeAgentStore,
-		   |	ItemList.ItemKey";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			then SerialLotNumbers.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end as SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			then SourceOfOrigins.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end as SourceOfOrigin,
+		|	sum(case
+		|		when SerialLotNumbers.SerialLotNumber.Ref is null
+		|			then ItemList.Quantity
+		|		else SerialLotNumbers.Quantity
+		|	end) as Quantity,
+		|	0 as PreliminaryQuantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|		left join SerialLotNumbers as SerialLotNumbers
+		|		on ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber,
+		|			VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsOwnStocks
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			then SerialLotNumbers.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end,
+		|	case
+		|		when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			then SourceOfOrigins.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			then SerialLotNumbers.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end as SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			then SourceOfOrigins.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end as SourceOfOrigin,
+		|	sum(case
+		|		when SerialLotNumbers.SerialLotNumber.Ref is null
+		|			then ItemList.Quantity
+		|		else SerialLotNumbers.Quantity
+		|	end) as Quantity,
+		|	0 as PreliminaryQuantity
+		|FROM
+		|	ItemList AS ItemList
+		|		left join SerialLotNumbers as SerialLotNumbers
+		|		on ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber,
+		|			VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsReturnFromTradeAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			then SerialLotNumbers.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end,
+		|	case
+		|		when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			then SourceOfOrigins.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end";
 EndFunction
 
 #EndRegion

@@ -2035,7 +2035,6 @@
   <edit>
    <common>true</common>
   </edit>
-  <functionalOptions>FunctionalOption.UseAging</functionalOptions>
   <main>true</main>
   <savedData>true</savedData>
  </attributes>

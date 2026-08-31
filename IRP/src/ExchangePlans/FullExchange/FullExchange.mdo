@@ -268,6 +268,9 @@
   <mdObject>InformationRegister.T7051S_ProductionDurationDetails</mdObject>
  </content>
  <content>
+  <mdObject>Constant.UseInventory</mdObject>
+ </content>
+ <content>
   <mdObject>Document.BatchReallocateIncoming</mdObject>
  </content>
  <content>
@@ -523,7 +526,7 @@
   <mdObject>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</mdObject>
  </content>
  <content>
-  <mdObject>Constant.UseCashTransaction</mdObject>
+  <mdObject>Constant.UseCashTransactions</mdObject>
  </content>
  <content>
   <mdObject>Constant.UseWorkOrders</mdObject>
@@ -1012,7 +1015,7 @@
   <mdObject>AccumulationRegister.R6080T_OtherPeriodsRevenues</mdObject>
  </content>
  <content>
-  <mdObject>Constant.UseOrders</mdObject>
+  <mdObject>Constant.UsePurchaseOrders</mdObject>
  </content>
  <content>
   <mdObject>Constant.UseCompanies</mdObject>

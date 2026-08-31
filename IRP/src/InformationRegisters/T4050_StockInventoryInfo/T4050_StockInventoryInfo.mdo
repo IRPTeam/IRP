@@ -114,6 +114,34 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <dimensions uuid="72738800-50cf-470e-b2ab-a62a8b82cb50">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>7EA17A7A-0984-66AA-A6ED-D2AE6988A34E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="dcdcae76-7f0f-4a8d-b775-c4850f2da942">
+  <name>SourceOfOrigin</name>
+  <synonym>
+   <key>en</key>
+   <value>392B3F92-7FFD-369A-A652-2A7361B0C6D1</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SourceOfOrigins</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
  <dimensions uuid="9c11a9c0-7713-420f-9f02-065f96d23fc2">
   <name>Direction</name>
   <synonym>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fa54e6f7-76df-4130-a304-dfca8e1ba088">
+ <name>Report_T0001_FilesAnalyser</name>
+ <synonym>
+  <key>en</key>
+  <value>B37CFCCD-4F9F-9A19-99EA-A9FF36CB7CC3</value>
+ </synonym>
+</mdclass:Role>

@@ -282,7 +282,7 @@ Function GetDataFromDocument(DocumentRef)
 	|	R6070T_OtherPeriodsExpenses.Currency";	
 	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	If ValueIsFilled(Object.Ref) And Object.Posted Then
-		BalancePeriod = New Boundary(DocumentRef.PointInTime(), BoundaryType.Excluding);
+		BalancePeriod = New Boundary(Object.Ref.PointInTime(), BoundaryType.Excluding);
 	Else
 		BalancePeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	EndIf;
@@ -867,7 +867,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

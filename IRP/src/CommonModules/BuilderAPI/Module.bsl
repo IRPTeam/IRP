@@ -449,10 +449,11 @@ EndFunction
 //  TableName - String - Table name
 //  ReturnRowKey - Boolean -
 //  RowKey - String -
+//  LineNumber - Number -
 // 
 // Returns:
 //  ValueTableRow, String
-Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False, RowKey = "") Export
+Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False, RowKey = "", LineNumber = 0) Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;
 	EndIf;
@@ -465,6 +466,9 @@ Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False, RowKey = "
 		Else
 			NewRow.Key = RowKey;
 		EndIf;
+	EndIf;
+	If LineNumber > 0 Then
+		NewRow.LineNumber = LineNumber;
 	EndIf;
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
 	ServerParameters.TableName = TableName;

@@ -1,5 +1,254 @@
+// @strict-types
+
+// Get FO List.
+// 
+// Parameters:
+//  WithoutHiddenFO - Boolean - Without hidden FO
+// 
+// Returns:
+//  Array of String - Get FO List
+Function GetFOList(WithoutHiddenFO = False) Export
+
+	HiddenFOList = GetHiddenFOList();
+
+	FOList = New Array; // Array of String
+	
+	For Each FunctionalOption In Metadata.FunctionalOptions Do
+		If WithoutHiddenFO And HiddenFOList.Find(FunctionalOption.Name) <> Undefined Then
+			Continue;
+		EndIf;
+		NameParts = StrSplit(FunctionalOption.Name, "_");
+		If StrStartsWith(NameParts[NameParts.UBound()], "Use") Then
+			FOList.Add(FunctionalOption.Name);
+		EndIf;
+	EndDo;
+	
+	Return FOList;
+	
+EndFunction
+
+// Get hidden FOList.
+// 
+// Returns:
+//  Array - Get hidden FO list
+Function GetHiddenFOList() Export
+	
+	FOList = New Array; // Array of String
+	FOList.Add("UseSimpleBatch");
+	Return FOList;
+	
+EndFunction
+
+// Get FO Subordination.
+// 
+// Returns:
+//  Structure - Get FO Subordination
+Function GetFOSubordination() Export
+
+	Subordination = New Structure;
+	
+	UseLegalName = New Array; // Array of String
+	UseLegalName.Add("UseLegalNameContract");
+	Subordination.Insert("UseLegalName", UseLegalName);
+	
+	UseStores = New Array; // Array of String
+	UseStores.Add("UseVariableStore");
+	Subordination.Insert("UseStores", UseStores);
+	
+	UseItemKey = New Array; // Array of String
+	UseItemKey.Add("UseVariableItemKey");
+	Subordination.Insert("UseItemKey", UseItemKey);
+	
+	UsePurchase = New Array; // Array of String
+	UsePurchase.Add("UsePartnerTerms");
+	UsePurchase.Add("UsePurchaseOrders");
+	UsePurchase.Add("UsePlannedReceiptReservation");
+	UsePurchase.Add("UseLandedCost");
+	UsePurchase.Add("UsePreliminaryStock");
+	UsePurchase.Add("UseSourceOfOrigin");
+	Subordination.Insert("UsePurchase", UsePurchase);
+	
+	UseSales = New Array; // Array of String
+	UseSales.Add("UsePartnerTerms");
+	UseSales.Add("UseSalesOrders");
+	UseSales.Add("UseSpecialOffers");
+	UseSales.Add("UseManualOffers");
+	UseSales.Add("UseDeliveryDate");
+	UseSales.Add("UseWorkOrders");
+	UseSales.Add("UseManagersAndSalesPersons");
+	Subordination.Insert("UseSales", UseSales);
+	
+	UseRetail = New Array; // Array of String
+	UseRetail.Add("UseRetailOrders");
+	UseRetail.Add("UseConsolidatedRetailSales");
+	Subordination.Insert("UseRetail", UseRetail);
+	
+	UseFinance = New Array; // Array of String
+	UseFinance.Add("UseBankDocuments");
+	UseFinance.Add("UseCashTransactions");
+	UseFinance.Add("UsePaymentOrders");
+	UseFinance.Add("UseChequeBonds");
+	UseFinance.Add("UseAging");
+	Subordination.Insert("UseFinance", UseFinance);
+	
+	UseAccounting = New Array; // Array of String
+	UseAccounting.Add("UseAccountingService");
+	UseAccounting.Add("UseELedger");
+	Subordination.Insert("UseAccounting", UseAccounting);
+	
+	Return Subordination;
+	
+EndFunction
+
+// Get FO Groups.
+// 
+// Returns:
+//  Structure - Get FO Groups
+Function GetFOGroups() Export
+
+	FOGroups = New Structure;
+	
+	FOList = New Array; // Array of String
+	FOList.Add("UseAllFunctional");
+	FOList.Add("UseAdditionalSettings");
+	FOList.Add("UseAddAttributesAndProperties");
+	FOList.Add("UseNumberingRules");
+	FOList.Add("UseEquipments");
+	FOList.Add("UseObjectAccess");
+	FOList.Add("UseObjectTransformation");
+	FOList.Add("UseIncidents");
+	FOList.Add("UseIntegrations");
+	FOList.Add("UseJobQueueForExternalFunctions");
+	FOList.Add("UseSavedPrintForms");
+	FOList.Add("UseMobile");
+	FOList.Add("UseBusinessProcess");
+	FOList.Add("UseLockDataModification");
+	FOList.Add("UseNotAuditAttributes");
+	FOList.Add("UseManufacturing");
+	FOList.Add("UseMessaging");
+	FOList.Add("UseFixedAssets");
+	FOList.Add("UseSalary");
+	FOGroups.Insert("BaseSettings", FOList);
+	
+	FOList = New Array; // Array of String
+	FOList.Add("UseCompanies");
+	FOList.Add("UseLegalName");
+	FOList.Add("UsePartnersHierarchy");
+	FOList.Add("UsePartnerItems");
+	FOList.Add("UseContactInformation");
+	FOList.Add("UseItemKey");
+	FOList.Add("UseSerialLotNumbers");
+	FOList.Add("UseUnitsAndDimensions");
+	FOList.Add("UsePriceByProperties");
+	FOList.Add("UseProfitLossCenter");
+	FOList.Add("UseBusinessUnits");
+	FOList.Add("UseExpenseAndRevenueTypes");
+	FOGroups.Insert("MasterData", FOList);
+	
+	FOList = New Array; // Array of String
+	FOList.Add("UsePurchase");
+	FOList.Add("UseSales");
+	FOList.Add("UseRetail");
+	FOGroups.Insert("Trading", FOList);
+	
+	FOList = New Array; // Array of String
+	FOList.Add("UseInventory");
+	FOList.Add("UseStores");
+	FOList.Add("UseShipmentAndReceiptPlaningOrders");
+	FOList.Add("UseShipmentConfirmationAndGoodsReceipts");
+	FOList.Add("UseBundling");
+	FOList.Add("UseBatchRelevance");
+	FOList.Add("UseBatchReallocate");
+	FOGroups.Insert("Inventory", FOList);
+
+	FOList = New Array; // Array of String
+	FOList.Add("UseFinance");
+	FOGroups.Insert("Money", FOList);
+	
+	FOList = New Array; // Array of String
+	FOList.Add("UseAccounting");
+	FOGroups.Insert("Accounting", FOList);
+	
+	Return FOGroups;
+	
+EndFunction
+
+// Get FOGroup synonym.
+// 
+// Parameters:
+//  GroupName - String - Group name
+// 
+// Returns:
+//  String - Get FOGroup synonym
+Function GetFOGroupSynonym(GroupName) Export
+	
+	NameParts = StrSplit(GroupName, "_");
+	If NameParts.Count() = 1 Then
+		SynonymName = "FO_Group_" + GroupName;
+	Else
+		NamePostfix = NameParts[NameParts.UBound()];
+		NamePrefix = Mid(GroupName, 1, StrLen(GroupName) - StrLen(NamePostfix));
+		SynonymName = NamePrefix + "FO_Group_" + NamePostfix;
+	EndIf;
+	
+	GroupSynonym = Undefined;
+	If Not R().Property(SynonymName, GroupSynonym) Then
+		GroupSynonym = "";
+	EndIf;
+	
+	Return GroupSynonym;
+
+EndFunction
+
+// Get functional option value.
+// 
+// Parameters:
+//  Name - String - Name
+// 
+// Returns:
+//  Arbitrary - Get FOValue
+Function GetFunctionalOptionValue(Name) Export
+	MethodName = "Is" + Name + "()";
+	SetSafeMode(True);
+	Try
+		Result = Eval(MethodName);
+	Except
+		Result = IsUseFunctionalOptionByName(Name);
+	EndTry;
+	Return Result;
+EndFunction
+
+// Set functional option value.
+// 
+// Parameters:
+//  Name - String - Name
+//  Value - Boolean - Value
+Procedure SetFunctionalOptionValue(Name, Value) Export
+	
+	If Value = GetFunctionalOptionValue(Name) Then
+		Return;
+	EndIf;
+	
+	Constants[Name].Set(Value);
+	
+EndProcedure
 
 #Region FunctionalOptions
+
+// Is use functional option by name.
+// 
+// Parameters:
+//  FunctionalOptionName - String - Functional option name
+// 
+// Returns:
+//  Arbitrary - Is use functional option by name
+Function IsUseFunctionalOptionByName(FunctionalOptionName)
+	FunctionalOptionMetadata = Metadata.FunctionalOptions.Find(FunctionalOptionName);
+	If FunctionalOptionMetadata = Undefined Then
+		Raise StrTemplate(R().Exc_010, FunctionalOptionName)
+	EndIf;
+	Return GetFunctionalOption(FunctionalOptionName);
+EndFunction
 
 Function IsUseAccounting() Export
 	Return GetFunctionalOption("UseAccounting");
@@ -42,7 +291,7 @@ Function IsUseStores() Export
 EndFunction
 
 Function IsUseCashTransaction() Export
-	Return GetFunctionalOption("UseCashTransaction");
+	Return GetFunctionalOption("UseCashTransactions");
 EndFunction
 
 Function IsUseConsolidatedRetailSales() Export
@@ -118,366 +367,191 @@ Function IsUseSimpleBatch() Export
 EndFunction
 
 Function IsUsePreliminary() Export
-	Return GetFunctionalOption("UsePreliminary");
+	Return GetFunctionalOption("UsePreliminaryStock");
+EndFunction
+
+Function IsUseAddAttributesAndProperties() Export
+	Return GetFunctionalOption("UseAddAttributesAndProperties");
 EndFunction
 
 Function IsUseNumberingRules() Export
 	Return GetFunctionalOption("UseNumberingRules");
 EndFunction
 
+Function IsUseAdditionalSettings() Export
+	Return GetFunctionalOption("UseAdditionalSettings");
+EndFunction
+
+Function IsUseAging() Export
+	Return GetFunctionalOption("UseAging");
+EndFunction
+
+Function IsUseAllFunctional() Export
+	Return GetFunctionalOption("UseAllFunctional");
+EndFunction
+
+Function IsUseBundling() Export
+	Return GetFunctionalOption("UseBundling");
+EndFunction
+
+Function IsUseBusinessUnits() Export
+	Return GetFunctionalOption("UseBusinessUnits");
+EndFunction
+
+Function IsUseContactInformation() Export
+	Return GetFunctionalOption("UseContactInformation");
+EndFunction
+
+Function IsUseDeliveryDate() Export
+	Return GetFunctionalOption("UseDeliveryDate");
+EndFunction
+
+Function IsUseEquipments() Export
+	Return GetFunctionalOption("UseEquipments");
+EndFunction
+
+Function IsUseExpenseAndRevenueTypes() Export
+	Return GetFunctionalOption("UseExpenseAndRevenueTypes");
+EndFunction
+
+Function IsUseFinance() Export
+	Return GetFunctionalOption("UseFinance");
+EndFunction
+
+Function IsUseIncidents() Export
+	Return GetFunctionalOption("UseIncidents");
+EndFunction
+
+Function IsUseIntegrations() Export
+	Return GetFunctionalOption("UseIntegrations");
+EndFunction
+
+Function IsUseJobQueueForExternalFunctions() Export
+	Return GetFunctionalOption("UseJobQueueForExternalFunctions");
+EndFunction
+
+Function IsUseLandedCost() Export
+	Return GetFunctionalOption("UseLandedCost");
+EndFunction
+
+Function IsUseLegalNameContract() Export
+	Return GetFunctionalOption("UseLegalNameContract");
+EndFunction
+
+Function IsUseManagersAndSalesPersons() Export
+	Return GetFunctionalOption("UseManagersAndSalesPersons");
+EndFunction
+
+Function IsUseMessaging() Export
+	Return GetFunctionalOption("UseMessaging");
+EndFunction
+
+Function IsUseMobile() Export
+	Return GetFunctionalOption("UseMobile");
+EndFunction
+
+Function IsUseObjectAccess() Export
+	Return GetFunctionalOption("UseObjectAccess");
+EndFunction
+
+Function IsUseObjectTransformation() Export
+	Return GetFunctionalOption("UseObjectTransformation");
+EndFunction
+
+Function IsUsePurchaseOrders() Export
+	Return GetFunctionalOption("UsePurchaseOrders");
+EndFunction
+
+Function IsUsePartnerItems() Export
+	Return GetFunctionalOption("UsePartnerItems");
+EndFunction
+
+Function IsUsePlannedReceiptReservation() Export
+	Return GetFunctionalOption("UsePlannedReceiptReservation");
+EndFunction
+
+Function IsUseProfitLossCenter() Export
+	Return GetFunctionalOption("UseProfitLossCenter");
+EndFunction
+
+Function IsUsePurchase() Export
+	Return GetFunctionalOption("UsePurchase");
+EndFunction
+
+Function IsUseResponsiblePerson() Export
+	Return GetFunctionalOption("UseResponsiblePerson");
+EndFunction
+
+Function IsUseSales() Export
+	Return GetFunctionalOption("UseSales");
+EndFunction
+
+Function IsUseSerialLotNumbers() Export
+	Return GetFunctionalOption("UseSerialLotNumbers");
+EndFunction
+
+Function IsUseSourceOfOrigin() Export
+	Return GetFunctionalOption("UseSourceOfOrigin");
+EndFunction
+
+Function IsUseSpecialOffers() Export
+	Return GetFunctionalOption("UseSpecialOffers");
+EndFunction
+
+Function IsUseVariableItemKey() Export
+	Return GetFunctionalOption("UseVariableItemKey");
+EndFunction
+
+Function IsUseVariableStore() Export
+	Return GetFunctionalOption("UseVariableStore");
+EndFunction
+
+Function IsUseBusinessProcess() Export
+	Return GetFunctionalOption("UseBusinessProcess");
+EndFunction
+
+Function IsUseDashboard() Export
+	Return GetFunctionalOption("UseDashboard");
+EndFunction
+
+Function IsUseSalesOrders() Export
+	Return GetFunctionalOption("UseSalesOrders");
+EndFunction
+
+Function IsUseCashTransactions() Export
+	Return GetFunctionalOption("UseCashTransactions");
+EndFunction
+
+Function IsUsePaymentOrders() Export
+	Return GetFunctionalOption("UsePaymentOrders");
+EndFunction
+
+Function IsUsePreliminaryStock() Export
+	Return GetFunctionalOption("UsePreliminaryStock");
+EndFunction
+
+Function IsUseInventory() Export
+	Return GetFunctionalOption("UseInventory");
+EndFunction
+
+Function IsUseSavedPrintForms() Export
+	Return GetFunctionalOption("UseSavedPrintForms");
+EndFunction
+
+Function IsUseBatchRelevance() Export
+	Return GetFunctionalOption("UseBatchRelevance");
+EndFunction
+
+Function IsUseAdvanceRelevance() Export
+	Return GetFunctionalOption("UseAdvanceRelevance");
+EndFunction
+
+Function IsUseBatchReallocate() Export
+	Return GetFunctionalOption("UseBatchReallocate");
+EndFunction
+
+Function IsUseNotAuditAttributes() Export
+	Return GetFunctionalOption("UseNotAuditAttributes");
+EndFunction
+
 #EndRegion
-
-Procedure UpdateDefaults() Export
-	BeginTransaction();
-	ErrorDescription = Undefined;
-	Try
-		UpdateDefaultsAtTransaction();
-	Except
-		ErrorDescription = ErrorDescription();
-	EndTry;
-	
-	If ErrorDescription <> Undefined Then
-		RollbackTransaction();
-		Raise ErrorDescription;
-	Else
-		CommitTransaction();
-	EndIf;
-EndProcedure
-
-Procedure UpdateDefaultsAtTransaction() Export
-	Strings = GetStrings();
-	
-#Region Catalog_Units
-
-	ObjectUnit = Catalogs.Units.Default.GetObject();
-	FillPropertyValues(ObjectUnit, GetDescriptions("Default_001", Strings)); // pcs
-	ObjectUnit.Quantity = 1;
-	ObjectUnit.Write();
-	
-#EndRegion
-	
-#Region Catalog_PriceTypes
-
-	ObjectPriceTypeCustomer = Catalogs.PriceTypes.Default_Customer.GetObject();
-	FillPropertyValues(ObjectPriceTypeCustomer, GetDescriptions("Default_004", Strings)); // Customer price type
-	ObjectPriceTypeCustomer.Currency = GetDefault_Currency(Undefined, True);
-	ObjectPriceTypeCustomer.Assignment = Enums.PriceAssignment.Customer;
-	ObjectPriceTypeCustomer.Write();
-	
-	ObjectPriceTypeVendor = Catalogs.PriceTypes.Default_Vendor.GetObject();
-	FillPropertyValues(ObjectPriceTypeVendor, GetDescriptions("Default_005", Strings)); // Vendor price type
-	ObjectPriceTypeVendor.Currency = GetDefault_Currency(Undefined, True);
-	ObjectPriceTypeVendor.Assignment = Enums.PriceAssignment.Vendor;
-	ObjectPriceTypeVendor.Write();
-
-#EndRegion
-	
-#Region ChartsOfCharacteristicType_CurrencyMovementType
-
-	ObjectCurrencyMovementTypePartnerTerm = ChartsOfCharacteristicTypes.CurrencyMovementType.Default_PartnerTerm.GetObject();
-	FillPropertyValues(ObjectCurrencyMovementTypePartnerTerm, GetDescriptions("Default_006", Strings)); // Partner term currency type 
-	ObjectCurrencyMovementTypePartnerTerm.Currency = GetDefault_Currency(Undefined, True);
-	ObjectCurrencyMovementTypePartnerTerm.Type = Enums.CurrencyType.Agreement;
-	ObjectCurrencyMovementTypePartnerTerm.Write();
-	
-	ObjectCurrencyMovementTypeLegal = ChartsOfCharacteristicTypes.CurrencyMovementType.Default_Legal.GetObject();
-	FillPropertyValues(ObjectCurrencyMovementTypeLegal, GetDescriptions("Default_007", Strings)); // Legal currency type
-	ObjectCurrencyMovementTypeLegal.Currency = GetDefault_Currency(Undefined, True);
-	ObjectCurrencyMovementTypeLegal.Type = Enums.CurrencyType.Legal;
-	ObjectCurrencyMovementTypeLegal.Write();
-
-#EndRegion
-	
-#Region Catalog_Currencies
-	
-	ObjectCurrency = Catalogs.Currencies.Default.GetObject();
-	FillPropertyValues(ObjectCurrency, GetDescriptions("Default_008", Strings)); // American dollar
-	ObjectCurrency.Code = R().Default_009; // USD
-	ObjectCurrency.Symbol = R().Default_010; // $
-	ObjectCurrency.Write();
-	
-#EndRegion
-
-#Region Catalog_Companies
-
-	ObjectCompany = Catalogs.Companies.Default.GetObject();
-	FillPropertyValues(ObjectCompany, GetDescriptions("Default_011", Strings)); // My Company
-	ObjectCompany.Type = Enums.CompanyLegalType.Company;
-	ObjectCompany.OurCompany = True;
-	ObjectCompany.Currencies.Clear();
-	ObjectCompany.Currencies.Add().MovementType = GetDefault_CurrencyMovementType_Legal(Undefined, True);
-	ObjectCompany.Write();
-
-#EndRegion
-
-#Region Catalog_Stores
-
-	ObjectStore = Catalogs.Stores.Default.GetObject();
-	FillPropertyValues(ObjectStore, GetDescriptions("Default_012", Strings)); // My Store
-	ObjectStore.Write();
-
-#EndRegion
-
-EndProcedure
-
-Function GetDefault_Unit(Value = Undefined) Export
-	If IsUseUnitsAndDimensions() Then
-		Return Value;
-	EndIf;
-	Return Catalogs.Units.Default;	
-EndFunction
-
-Function GetDefault_PriceType_Vendor(Value = Undefined) Export
-	If IsUsePartnerTerms() Then
-		Return Value;
-	EndIf;
-	Return Catalogs.PriceTypes.Default_Vendor;
-EndFunction
-
-Function GetDefault_PriceType_Customer(Value = Undefined) Export
-	If IsUsePartnerTerms() Then
-		Return Value;
-	EndIf;
-	Return Catalogs.PriceTypes.Default_Customer;
-EndFunction
-
-Function GetDefault_CurrencyMovementType_PartnerTerm(Value = Undefined) Export
-	If IsUsePartnerTerms() Then
-		Return Value;
-	EndIf;
-	Return ChartsOfCharacteristicTypes.CurrencyMovementType.Default_PartnerTerm;
-EndFunction
-
-Function GetDefault_CurrencyMovementType_Legal(Value = Undefined, IsUpdateDefaults = False) Export
-	If IsUseCompanies() And Not IsUpdateDefaults Then
-		Return Value;
-	EndIf;
-	Return ChartsOfCharacteristicTypes.CurrencyMovementType.Default_Legal;
-EndFunction
-
-Function GetDefault_Currency(Value = Undefined, IsUpdateDefaults = False) Export
-	If IsUsePartnerTerms() And Not IsUpdateDefaults Then
-		Return Value;
-	EndIf;
-	Return Catalogs.Currencies.Default;
-EndFunction
-
-Function GetDefault_Company(Value = Undefined, IsUpdateDefaults = False) Export
-	If IsUseCompanies() And Not IsUpdateDefaults Then
-		Return Value;
-	EndIf;
-	Return Catalogs.Companies.Default;
-EndFunction
-
-Function GetDefault_Store(Value = Undefined, IsUpdateDefaults = False) Export
-	If IsUseStores() And Not IsUpdateDefaults Then
-		Return Value;
-	EndIf;
-	Return Catalogs.Stores.Default;
-EndFunction
-
-Function GetDefault_LegalName(Parameters, Value = Undefined) Export
-	If IsUseLegalName() Then
-		Return Value;
-	EndIf;
-	Query = New Query();
-	Query.Text = 
-	"SELECT TOP 2
-	|	Table.Ref,
-	|	Table.DeletionMark
-	|FROM 
-	|	Catalog.Companies AS Table
-	|WHERE
-	|	Table.Partner = &Partner";
-	Query.SetParameter("Partner", Parameters.Partner.Ref);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Next() Then
-		If QuerySelection.Count() > 1 Then
-			Raise StrTemplate(R().Error_FoundMoreThanOneCompany);
-		EndIf;
-		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
-	EndIf;
-	Return Undefined;
-EndFunction
-
-Function GetDefault_ItemKey(Parameters, Value = Undefined) Export
-	If IsUseItemKey() Then
-		Return Value;
-	EndIf;
-	Query = New Query();
-	Query.Text = 
-	"SELECT TOP 2
-	|	Table.Ref,
-	|	Table.DeletionMark
-	|FROM 
-	|	Catalog.ItemKeys AS Table
-	|WHERE
-	|	Table.Item = &Item";
-	Query.SetParameter("Item", Parameters.Item.Ref);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Next() Then 
-		If QuerySelection.Count() > 1 Then
-                        Raise StrTemplate(R().Error_FoundMoreThanOneItemKey);
-		EndIf;
-		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
-	EndIf;
-	Return Undefined;
-EndFunction
-
-Function GetDefault_Agreement(Parameters, Value) Export
-	If IsUsePartnerTerms() Then
-		Return Value;
-	EndIf;
-	Query = New Query();
-	Query.Text = 
-	"SELECT TOP 2
-	|	Table.Ref,
-	|	Table.DeletionMark
-	|FROM 
-	|	Catalog.Agreements AS Table
-	|WHERE
-	|	Table.Partner = &Partner
-	|	AND Table.Type = &AgreementType";
-	Query.SetParameter("Partner", Parameters.Partner.Ref);
-	Query.SetParameter("AgreementType", Parameters.AgreementType);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Next() Then
-		If QuerySelection.Count() > 1 Then
-			StrTemplate("Found more than 1 [%1] when option NOT [%2]", "Agreement", "IsUsePartnerTerms");
-		EndIf;
-		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
-	EndIf;
-	Return Undefined;
-EndFunction
-
-Function CreateDefault_Agreement(Parameters, Value = Undefined) Export
-	If Not Parameters.AgreementTypes.Count() Then
-		Return Value; // only for customer or vendor
-	EndIf;
-	If IsUsePartnerTerms() Then
-		Return Value;
-	EndIf;
-	
-	ArrayOfNewAgreements = New Array();
-	For Each AgreementType In Parameters.AgreementTypes Do
-		NewAgreement = CreateDefault_AgreementByType(Parameters.Partner, AgreementType, Value);
-		ArrayOfNewAgreements.Add(NewAgreement);
-	EndDo;
-	Return ArrayOfNewAgreements;
-EndFunction
-
-Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
-	Parameters = New Structure("Partner, AgreementType", Partner, AgreementType);
-	Exists = GetDefault_Agreement(Parameters, Value);
-	If Exists <> Undefined Then
-		Return UpdateDeletionMark(Exists, Parameters.Partner);
-	EndIf;
-	
-	// creating
-	DefaultDescriptionKey = "";
-	DefaultPriceType = Undefined;
-	
-	If Parameters.AgreementType = Enums.AgreementTypes.Customer Then
-		DefaultDescriptionKey = "Default_002";
-		DefaultPriceType = GetDefault_PriceType_Customer();
-	ElsIf Parameters.AgreementType = Enums.AgreementTypes.Vendor Then
-		DefaultDescriptionKey = "Default_003";
-		DefaultPriceType = GetDefault_PriceType_Vendor();
-	Else
-                Raise R().DefaultAgreementOnlyCustVendor;
-	EndIf;
-	
-	DefaultLegalNameData = GetDefault_LegalName(Parameters);
-	DefaultLegalNameRef = Undefined;
-	If DefaultLegalNameData <> Undefined Then
-		DefaultLegalNameRef = DefaultLegalNameData.Ref;
-	EndIf;
-	
-	NewObject = Catalogs.Agreements.CreateItem();
-	FillPropertyValues(NewObject, GetDescriptions(DefaultDescriptionKey));
-	NewObject.Partner              = Parameters.Partner.Ref;
-	NewObject.LegalName            = DefaultLegalNameRef;
-	NewObject.Company              = GetDefault_Company();
-	NewObject.Type                 = Parameters.AgreementType;
-	NewObject.Kind                 = Enums.AgreementKinds.Regular;
-	NewObject.ApArPostingDetail    = Enums.ApArPostingDetail.ByAgreements;
-	NewObject.PriceType            = DefaultPriceType;
-	NewObject.Store                = GetDefault_Store();
-	NewObject.CurrencyMovementType = GetDefault_CurrencyMovementType_PartnerTerm();
-	NewObject.Write();
-	Return NewObject.Ref;
-EndFunction	
-
-Function CreateDefault_LegalName(Parameters, Value = Undefined) Export
-	If IsUseLegalName() Then
-		Return Value;
-	EndIf;
-		
-	Exists = GetDefault_LegalName(Parameters, Value);
-	If Exists <> Undefined Then
-		Return UpdateDeletionMark(Exists, Parameters.Partner);
-	EndIf;
-	
-	// creating	
-	NewObject = Catalogs.Companies.CreateItem();
-	FillPropertyValues(NewObject, Parameters.Partner, , "Parent, Owner, Ref, Code");
-	NewObject.Partner = Parameters.Partner.Ref;
-	NewObject.Type    = Enums.CompanyLegalType.Company;
-	NewObject.Write();
-	Return NewObject.Ref;
-EndFunction
-
-Function CreateDefault_ItemKey(Parameters, Value = Undefined) Export
-	If IsUseItemKey() Then
-		Return Value;
-	EndIf;
-	Exists = GetDefault_ItemKey(Parameters, Value);
-	If Exists <> Undefined Then
-		Return UpdateDeletionMark(Exists, Parameters.Item);
-	EndIf;
-	
-	// creating
-	NewObject = Catalogs.ItemKeys.CreateItem();
-	FillPropertyValues(NewObject, Parameters.Item, , "Parent, Owner, Ref, Unit, Code");
-	NewObject.Item = Parameters.Item.Ref;
-	NewObject.Write();
-	Return NewObject.Ref;	
-EndFunction
-
-Function UpdateDeletionMark(Receiver, Source)
-	If Receiver.DeletionMark = Source.DeletionMark Then
-		Return Receiver.Ref;
-	EndIf;
-	ObjectReceiver = Receiver.Ref.GetObject();
-	ObjectReceiver.DeletionMark = Source.DeletionMark;
-	ObjectReceiver.Write();
-	Return ObjectReceiver.Ref;
-EndFunction
-
-Function GetStrings()
-	Strings = New Structure();
-	Strings.Insert("en", Localization.Strings("en"));
-	Strings.Insert("ru", Localization.Strings("ru"));
-	Strings.Insert("tr", Localization.Strings("tr"));
-	Return Strings;
-EndFunction
-
-Function GetDescriptions(DescriptionKey, Strings = Undefined)
-	If Strings = Undefined Then
-		Strings = GetStrings();
-	EndIf;
-	Descriptions = New Structure();
-	Descriptions.Insert("Description_en");
-	Descriptions.Insert("Description_ru");
-	Descriptions.Insert("Description_tr");
-	
-	For Each Desc In Descriptions Do
-		Lang = StrReplace(Desc.Key, "Description_", "");
-		Descriptions[Desc.Key] = Strings[Lang][DescriptionKey];
-	EndDo;
-	Return Descriptions;
-EndFunction
-

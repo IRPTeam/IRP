@@ -98,6 +98,7 @@
  <descriptionLength>150</descriptionLength>
  <codeAllowedLength>Variable</codeAllowedLength>
  <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
  <defaultPresentation>AsDescription</defaultPresentation>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
@@ -187,11 +188,19 @@
  </forms>
  <forms uuid="5e18ed85-e3b6-47e8-b8e4-e158ce995cea">
   <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>A81C2297-2A5F-3C11-10FD-D28D899879D3</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
  <forms uuid="1c5d3be7-7026-4be2-8f10-1824b9427d85">
   <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>92B9F91F-8D01-7E00-095A-AAD9CA7E96A8</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>

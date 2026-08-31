@@ -410,6 +410,10 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	
+	If Parameters.Property("ArrayOfPostingInfo") Then
+		Parameters.Delete("ArrayOfPostingInfo");
+	EndIf;
+	
 	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
@@ -461,7 +465,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.RetailReturnReceipt.ItemList");
@@ -490,6 +498,18 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	
 	If Not Cancel 
 		And Not AccReg.R3010B_CashOnHand.CheckBalance(Ref, Current_R3010B_CashOnHand, Exists_R3010B_CashOnHand, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	Current_R2001T_Sales = PostingServer.GetQueryTableByName("R2001T_Sales", Parameters);
+	Exists_R2001T_Sales = PostingServer.GetQueryTableByName("Exists_R2001T_Sales", Parameters);
+	
+	If Not Cancel
+		And Not AccReg.R2001T_Sales.CheckBalance(Ref, 
+			LineNumberAndItemKeyFromItemList,
+			Current_R2001T_Sales, 
+			Exists_R2001T_Sales, 
+			AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -530,6 +550,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	QueryArray.Add(PostingServer.Exists_R3010B_CashOnHand());
+	QueryArray.Add(PostingServer.Exists_R2001T_Sales());
 	Return QueryArray;
 EndFunction
 
@@ -1466,26 +1487,58 @@ Function R5020B_PartnersBalance()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemLIst.Store,
-		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsOwnStocks
-		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemLIst.Store,
-		   |	ItemList.ItemKey";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			then SerialLotNumbers.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end as SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			then SourceOfOrigins.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end as SourceOfOrigin,
+		|	sum(case
+		|		when SerialLotNumbers.SerialLotNumber.Ref is null
+		|			then ItemList.Quantity
+		|		else SerialLotNumbers.Quantity
+		|	end) as Quantity,
+		|0 as PreliminaryQuantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|		left join SerialLotNumbers as SerialLotNumbers
+		|		on ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber,
+		|			VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsOwnStocks
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			then SerialLotNumbers.SerialLotNumber
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	end,
+		|	case
+		|		when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			then SourceOfOrigins.SourceOfOrigin
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end";
 EndFunction
 
 #EndRegion

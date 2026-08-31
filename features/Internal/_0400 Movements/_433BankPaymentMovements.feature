@@ -17,6 +17,7 @@ Background:
 Scenario: _043300 preparation (Bank payment)
 	When set True value to the constant
 	When set True value to the constant Use salary
+	When set True value to the constant Use accounting
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -242,7 +243,7 @@ Scenario: _043302 check Bank payment movements by the Register "R5010 Reconcilia
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '1'        | '07.09.2020 19:16:43'    |
+			| '1'        | '07.09.2020'    |
 	* Check movements by the Register  "R5010 Reconciliation statement" 
 		And I click "Registrations report" button
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
@@ -290,7 +291,7 @@ Scenario: _043304 check Bank payment movements by the Register "R1021 Vendors tr
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '1'        | '07.09.2020 19:16:43'    |
+			| '1'        | '07.09.2020'    |
 		And I select current line in "List" table		
 	* Check movements by the Register  "R1021 Vendors transactions" 
 		And I click "Registrations report" button
@@ -313,7 +314,7 @@ Scenario: _043305 check absence Bank payment movements by the Register "R1021 Ve
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '10'       | '12.02.2021 11:24:13'    |
+			| '10'       | '12.02.2021'    |
 	* Check movements by the Register  "R1021 Vendors transactions" 
 		And I click "Registrations report" button
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
@@ -328,7 +329,7 @@ Scenario: _043306 check Bank payment movements by the Register "R1020 Advances t
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '10'       | '12.02.2021 11:24:13'    |
+			| '10'       | '12.02.2021'    |
 	* Check movements by the Register  "R1020 Advances to vendors" 
 		And I click "Registrations report info" button
 		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
@@ -348,7 +349,7 @@ Scenario: _043307 check absence Bank payment movements by the Register "R1020 Ad
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '1'        | '07.09.2020 19:16:43'    |
+			| '1'        | '07.09.2020'    |
 	* Check movements by the Register  "R1020 Advances to vendors" 
 		And I click "Registrations report" button
 		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
@@ -364,7 +365,7 @@ Scenario: _043315 check Bank payment movements by the Register "R3035 Cash plann
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '323'      | '03.06.2021 17:01:44'    |
+			| '323'      | '03.06.2021'    |
 	* Check movements by the Register  "R3035 Cash planning" 
 		And I click "Registrations report" button
 		And I select "R3035 Cash planning" exact value from "Register" drop-down list
@@ -436,7 +437,7 @@ Scenario: _043318 check absence Bank payment movements by the Register "R3035 Ca
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '1'        | '07.09.2020 19:16:43'    |
+			| '1'        | '07.09.2020'    |
 	* Check movements by the Register  "R3035 Cash planning" 
 		And I click "Registrations report" button
 		And I select "R3035 Cash planning" exact value from "Register" drop-down list
@@ -562,14 +563,14 @@ Scenario: _043325 check Bank payment movements by the Register "R2021 Customer t
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 1 329 dated 24.06.2022 18:06:56'   | ''              | ''                      | ''            | ''               | ''                          | ''                               | ''           | ''                       | ''                    | ''            | ''                           | ''                                             | ''        | ''        | ''                       | ''                              |
-			| 'Document registrations records'                 | ''              | ''                      | ''            | ''               | ''                          | ''                               | ''           | ''                       | ''                    | ''            | ''                           | ''                                             | ''        | ''        | ''                       | ''                              |
-			| 'Register  "R2021 Customer transactions"'        | ''              | ''                      | ''            | ''               | ''                          | ''                               | ''           | ''                       | ''                    | ''            | ''                           | ''                                             | ''        | ''        | ''                       | ''                              |
-			| ''                                               | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                               | ''           | ''                       | ''                    | ''            | ''                           | ''                                             | ''        | ''        | 'Attributes'             | ''                              |
-			| ''                                               | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'     | 'Agreement'                  | 'Basis'                                        | 'Order'   | 'Project' | 'Deferred calculation'   | 'Customers advances closing'    |
-			| ''                                               | 'Expense'       | '24.06.2022 18:06:56'   | '-50'         | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales return 103 dated 12.03.2021 08:59:52'   | ''        | ''        | 'No'                     | ''                              |
-			| ''                                               | 'Expense'       | '24.06.2022 18:06:56'   | '-50'         | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales return 103 dated 12.03.2021 08:59:52'   | ''        | ''        | 'No'                     | ''                              |
-			| ''                                               | 'Expense'       | '24.06.2022 18:06:56'   | '-8,56'       | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales return 103 dated 12.03.2021 08:59:52'   | ''        | ''        | 'No'                     | ''                              |
+			| 'Bank payment 1 329 dated 24.06.2022 18:06:56' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                                           | ''      | ''        | ''                     | ''                           |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                                           | ''      | ''        | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'      | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                                           | ''      | ''        | ''                     | ''                           |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                                           | ''      | ''        | 'Attributes'           | ''                           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                      | 'Order' | 'Project' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                             | 'Receipt'     | '24.06.2022 18:06:56' | '8,56'      | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 103 dated 12.03.2021 08:59:52' | ''      | ''        | 'No'                   | ''                           |
+			| ''                                             | 'Receipt'     | '24.06.2022 18:06:56' | '50'        | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 103 dated 12.03.2021 08:59:52' | ''      | ''        | 'No'                   | ''                           |
+			| ''                                             | 'Receipt'     | '24.06.2022 18:06:56' | '50'        | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 103 dated 12.03.2021 08:59:52' | ''      | ''        | 'No'                   | ''                           |
 		And I close all client application windows
 
 Scenario: _043327 check Bank payment movements by the Register "R2020 Advances from customer" (Return to customer by POS, without basis document)
@@ -1076,10 +1077,10 @@ Scenario: _0433309 check Bank payment movements by the Register  "T2015 Transact
 		And I select "T2015 Transactions info" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 1 dated 07.09.2020 19:16:43' | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                              | ''          | ''        | ''       | ''       | ''        |
-			| 'Register  "T2015 Transactions info"'      | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                              | ''          | ''        | ''       | ''       | ''        |
-			| ''                                         | 'Company'      | 'Branch' | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                             | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
-			| ''                                         | 'Main Company' | ''       | ''      | '07.09.2020 19:16:43' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | '*'         | ''        | '1 000'  | 'No'     | 'Yes'     |
+			| 'Bank payment 1 dated 07.09.2020 19:16:43' | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                              | ''          | ''        | ''                        | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'      | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                              | ''          | ''        | ''                        | ''                     | ''       | ''       | ''        |
+			| ''                                         | 'Company'      | 'Branch' | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                             | 'Unique ID' | 'Project' | 'Currency movement type'  | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                         | 'Main Company' | ''       | ''      | '07.09.2020 19:16:43' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | '*'         | ''        | 'en description is empty' | 'TRY'                  | '1 000'  | 'No'     | 'Yes'     |
 	And I close all client application windows
 
 Scenario: _0433310 check Bank payment movements by the Register  "T2014 Advances info" (Payment to the vendor, advance=true)
@@ -1094,10 +1095,10 @@ Scenario: _0433310 check Bank payment movements by the Register  "T2014 Advances
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 10 dated 12.02.2021 11:24:13' | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''       | ''                        | ''                     | ''            |
-			| 'Register  "T2014 Advances info"'           | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''       | ''                        | ''                     | ''            |
-			| ''                                          | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'  | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
-			| ''                                          | 'Main Company' | 'Front office' | '12.02.2021 11:24:13' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor Ferron, TRY' | ''        | '2 000'  | 'No'                      | 'No'                   | 'Receipt'     |
+			| 'Bank payment 10 dated 12.02.2021 11:24:13' | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''                        | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'           | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''                        | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                          | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'  | 'Project' | 'Currency movement type'  | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                          | 'Main Company' | 'Front office' | '12.02.2021 11:24:13' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor Ferron, TRY' | ''        | 'en description is empty' | 'TRY'                  | '2 000'  | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
 Scenario: _0433311 check absence Bank payment movements by the Register  "T2015 Transactions info" (Payment to the vendor, advance=true)
@@ -1140,10 +1141,10 @@ Scenario: _0433313 check Bank payment movements by the Register  "T2014 Advances
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 326 dated 02.09.2021 14:24:44' | ''             | ''                        | ''                    | ''    | ''         | ''        | ''                | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
-			| 'Register  "T2014 Advances info"'            | ''             | ''                        | ''                    | ''    | ''         | ''        | ''                | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
-			| ''                                           | 'Company'      | 'Branch'                  | 'Date'                | 'Key' | 'Currency' | 'Partner' | 'Legal name'      | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'        | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
-			| ''                                           | 'Main Company' | 'Distribution department' | '02.09.2021 14:24:44' | '*'   | 'TRY'      | 'Kalipso' | 'Company Kalipso' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | '-100'   | 'No'                      | 'No'                   | 'Receipt'     |
+			| 'Bank payment 326 dated 02.09.2021 14:24:44' | ''             | ''                        | ''                    | ''    | ''         | ''        | ''                | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''                        | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'            | ''             | ''                        | ''                    | ''    | ''         | ''        | ''                | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''                        | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                           | 'Company'      | 'Branch'                  | 'Date'                | 'Key' | 'Currency' | 'Partner' | 'Legal name'      | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'        | 'Project' | 'Currency movement type'  | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                           | 'Main Company' | 'Distribution department' | '02.09.2021 14:24:44' | '*'   | 'TRY'      | 'Kalipso' | 'Company Kalipso' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | 'en description is empty' | 'TRY'                  | '-100'   | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
 Scenario: _0433314 check absence Bank payment movements by the Register  "T2015 Transactions info" (Return to customer, without basis)
@@ -1173,10 +1174,10 @@ Scenario: _0433315 check Bank payment movements by the Register  "T2014 Advances
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 1 330 dated 24.06.2022 18:07:02' | ''             | ''                        | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
-			| 'Register  "T2014 Advances info"'              | ''             | ''                        | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
-			| ''                                             | 'Company'      | 'Branch'                  | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'        | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
-			| ''                                             | 'Main Company' | 'Distribution department' | '24.06.2022 18:07:02' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | '-50'    | 'No'                      | 'No'                   | 'Receipt'     |
+			| 'Bank payment 1 330 dated 24.06.2022 18:07:02' | ''             | ''                        | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''                        | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'              | ''             | ''                        | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''                        | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                             | 'Company'      | 'Branch'                  | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'        | 'Project' | 'Currency movement type'  | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                             | 'Main Company' | 'Distribution department' | '24.06.2022 18:07:02' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | 'en description is empty' | 'TRY'                  | '-50'    | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
 
@@ -1206,10 +1207,10 @@ Scenario: _0433317 check Bank payment movements by the Register  "T2015 Transact
 		And I select "T2015 Transactions info" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 1 329 dated 24.06.2022 18:06:56' | ''             | ''                        | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                           | ''          | ''        | ''       | ''       | ''        |
-			| 'Register  "T2015 Transactions info"'          | ''             | ''                        | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                           | ''          | ''        | ''       | ''       | ''        |
-			| ''                                             | 'Company'      | 'Branch'                  | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'                | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                          | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
-			| ''                                             | 'Main Company' | 'Distribution department' | ''      | '24.06.2022 18:06:56' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | 'Sales return 103 dated 12.03.2021 08:59:52' | '*'         | ''        | '-50'    | 'No'     | 'Yes'     |
+			| 'Bank payment 1 329 dated 24.06.2022 18:06:56' | ''             | ''                        | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                           | ''          | ''        | ''                        | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'          | ''             | ''                        | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                           | ''          | ''        | ''                        | ''                     | ''       | ''       | ''        |
+			| ''                                             | 'Company'      | 'Branch'                  | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'                | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                          | 'Unique ID' | 'Project' | 'Currency movement type'  | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                             | 'Main Company' | 'Distribution department' | ''      | '24.06.2022 18:06:56' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | 'Sales return 103 dated 12.03.2021 08:59:52' | '*'         | ''        | 'en description is empty' | 'TRY'                  | '-50'    | 'No'     | 'Yes'     |
 	And I close all client application windows
 
 Scenario: _0433319 check Bank payment movements by the Register  "R3010 Cash on hand" (Salary payment, Branch in lines)
@@ -1592,9 +1593,9 @@ Scenario: _0433337 check Bank payment movements by the Register "T1040 Accountin
 			| 'Bank payment 1 336 dated 05.05.2025 13:57:00' | ''                    | ''        | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
 			| 'Register  "T1040 Accounting amounts"'         | ''                    | ''        | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
 			| ''                                             | 'Period'              | 'Row key' | 'Operation'               | 'Multi currency movement type' | 'Currency' | 'Revaluated currency' | 'Dr currency' | 'Cr currency' | 'Amount' | 'Dr currency amount' | 'Cr currency amount' | 'Deferred calculation' | 'Advances closing' |
-			| ''                                             | '05.05.2025 13:57:00' | '*'       | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | 'TRY'         | ''            | '500'    | '500'                | ''                   | 'No'                   | ''                 |
-			| ''                                             | '05.05.2025 13:57:00' | '*'       | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | 'TRY'         | ''            | '85,6'   | '500'                | ''                   | 'No'                   | ''                 |
-			| ''                                             | '05.05.2025 13:57:00' | '*'       | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | 'TRY'         | ''            | '500'    | '500'                | ''                   | 'No'                   | ''                 |
+			| ''                                             | '05.05.2025 13:57:00' | '*'       | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | 'TRY'         | ''            | '500'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                             | '05.05.2025 13:57:00' | '*'       | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | 'TRY'         | ''            | '85,6'   | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                             | '05.05.2025 13:57:00' | '*'       | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | 'TRY'         | ''            | '500'    | ''                   | ''                   | 'No'                   | ''                 |
 	And I close all client application windows
 
 Scenario: _0433338 check Bank payment movements by the Register "T2015 Transactions info" (WithholdingTaxInvoice)
@@ -1608,8 +1609,8 @@ Scenario: _0433338 check Bank payment movements by the Register "T2015 Transacti
 		And I select "T2015 Transactions info" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 1 336 dated 05.05.2025 13:57:00' | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                                    | ''          | ''        | ''       | ''       | ''        |
-			| 'Register  "T2015 Transactions info"'          | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                                    | ''          | ''        | ''       | ''       | ''        |
-			| ''                                             | 'Company'      | 'Branch' | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                                   | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
-			| ''                                             | 'Main Company' | ''       | ''      | '05.05.2025 13:57:00' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Withholding tax invoice 4 dated 02.05.2025 15:12:12' | '*'         | ''        | '500'    | 'No'     | 'Yes'     |
+			| 'Bank payment 1 336 dated 05.05.2025 13:57:00' | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                                    | ''          | ''        | ''                        | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'          | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                                    | ''          | ''        | ''                        | ''                     | ''       | ''       | ''        |
+			| ''                                             | 'Company'      | 'Branch' | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                                   | 'Unique ID' | 'Project' | 'Currency movement type'  | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                             | 'Main Company' | ''       | ''      | '05.05.2025 13:57:00' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Withholding tax invoice 4 dated 02.05.2025 15:12:12' | '*'         | ''        | 'en description is empty' | 'TRY'                  | '500'    | 'No'     | 'Yes'     |
 	And I close all client application windows

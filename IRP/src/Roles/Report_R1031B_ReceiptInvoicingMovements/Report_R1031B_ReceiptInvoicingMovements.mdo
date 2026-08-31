@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6456167a-dc0c-43fa-9118-3177e372dfb4">
+ <name>Report_R1031B_ReceiptInvoicingMovements</name>
+ <synonym>
+  <key>en</key>
+  <value>538327B1-8C84-6A0A-A9E8-860DF8D64876___</value>
+ </synonym>
+</mdclass:Role>

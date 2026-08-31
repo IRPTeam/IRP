@@ -206,7 +206,19 @@ Procedure WriteSelfRecords(Ref)
 		RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
 		RecordSet.Filter.EmployeeOrPosition.Set(Ref.Employee);
 		RecordSet.Filter.AccualOrDeductionType.Set(Ref.AccrualType);
+		
+		RecordSet.Read();
+		IsNotActual = False;
+		For Each Record In RecordSet Do
+			If Record.Period >= Ref.Date Then
+				IsNotActual = True;
+				Break;
+			EndIf;
+		EndDo;
+		
 		NewRecord = RecordSet.Add();
+		
+		NewRecord.NotActual = IsNotActual;
 		
 		NewRecord.Period = Ref.Date;
 		NewRecord.EmployeeOrPosition = Ref.Employee;

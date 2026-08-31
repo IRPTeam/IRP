@@ -1,6 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
+  <name>GroupHeadStorno</name>
+  <id>595</id>
+  <items xsi:type="form:Decoration">
+   <name>DecorationDocStorno</name>
+   <id>597</id>
+   <title>
+    <key>en</key>
+    <value>FF9663BD-FFD1-FDEA-A06E-E07F4E021101</value>
+   </title>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>DecorationDocStornoExtendedTooltip</name>
+    <id>599</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>DecorationDocStornoContextMenu</name>
+    <id>598</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <font xsi:type="core:FontRef">
+    <font>System.DefaultGUIFont</font>
+    <bold>true</bold>
+    <italic>false</italic>
+    <underline>false</underline>
+    <strikeout>false</strikeout>
+   </font>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>DocStorno</name>
+   <id>600</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>DocStorno</segments>
+   </dataPath>
+   <titleLocation>None</titleLocation>
+   <extendedTooltip>
+    <name>DocStornoExtendedTooltip</name>
+    <id>602</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>DocStornoContextMenu</name>
+    <id>601</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>LabelField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:LabelFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <hyperlink>true</hyperlink>
+   </extInfo>
+  </items>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <title>
+   <key>en</key>
+   <value>2059181F-CEFA-48BD-D191-1D0F7315E00C</value>
+  </title>
+  <horizontalStretch>true</horizontalStretch>
+  <extendedTooltip>
+   <name>GroupHeadStornoExtendedTooltip</name>
+   <id>596</id>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>AlwaysHorizontal</group>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <backColor xsi:type="core:ColorRef">
+    <color>Web.Pink</color>
+   </backColor>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormGroup">
   <name>GroupTitle</name>
   <id>1</id>
   <items xsi:type="form:FormGroup">
@@ -1850,6 +1964,50 @@
         <contextMenu>
          <name>PaymentListAdditionalAnalyticNoSplitsContextMenu</name>
          <id>578</id>
+         <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <wrap>true</wrap>
+         <chooseType>true</chooseType>
+         <typeDomainEnabled>true</typeDomainEnabled>
+         <textEdit>true</textEdit>
+        </extInfo>
+       </items>
+       <items xsi:type="form:FormField">
+        <name>PaymentListPaymentDateNoSplits</name>
+        <id>589</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+         <segments>PaymentListPaymentDateNoSplits</segments>
+        </dataPath>
+        <handlers>
+         <event>OnChange</event>
+         <name>PaymentListPaymentDateNoSplitsOnChange</name>
+        </handlers>
+        <extendedTooltip>
+         <name>PaymentListPaymentDateNoSplitsExtendedTooltip</name>
+         <id>591</id>
+         <type>Label</type>
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+         </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+         <name>PaymentListPaymentDateNoSplitsContextMenu</name>
+         <id>590</id>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
@@ -3759,6 +3917,82 @@
        <textEdit>true</textEdit>
       </extInfo>
      </items>
+     <items xsi:type="form:FormField">
+      <name>PaymentListPaymentDateReadOnly</name>
+      <id>592</id>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Object.PaymentList.PaymentDateReadOnly</segments>
+      </dataPath>
+      <extendedTooltip>
+       <name>PaymentListPaymentDateReadOnlyExtendedTooltip</name>
+       <id>594</id>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>PaymentListPaymentDateReadOnlyContextMenu</name>
+       <id>593</id>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>CheckBoxField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+     </items>
+     <items xsi:type="form:FormField">
+      <name>PaymentListPaymentDate</name>
+      <id>586</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Object.PaymentList.PaymentDate</segments>
+      </dataPath>
+      <handlers>
+       <event>OnChange</event>
+       <name>PaymentListPaymentDateOnChange</name>
+      </handlers>
+      <extendedTooltip>
+       <name>PaymentListPaymentDateExtendedTooltip</name>
+       <id>588</id>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>PaymentListPaymentDateContextMenu</name>
+       <id>587</id>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <wrap>true</wrap>
+       <chooseType>true</chooseType>
+       <typeDomainEnabled>true</typeDomainEnabled>
+       <textEdit>true</textEdit>
+      </extInfo>
+     </items>
      <autoCommandBar>
       <name>PaymentListCommandBar</name>
       <id>59</id>
@@ -4798,6 +5032,23 @@
      <common>true</common>
     </edit>
    </columns>
+   <columns>
+    <name>PaymentDateReadOnly</name>
+    <title>
+     <key>en</key>
+     <value>CD1BFC23-045F-917E-EDD3-3E1208C47FC9</value>
+    </title>
+    <id>42</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
   </additionalColumns>
   <additionalColumns>
    <tablePath xsi:type="form:DataPath">
@@ -5324,7 +5575,7 @@
   <edit>
    <common>true</common>
   </edit>
-  <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCashTransactions</functionalOptions>
  </attributes>
  <attributes>
   <name>PaymentListOrderNoSplits</name>
@@ -5342,7 +5593,7 @@
   <edit>
    <common>true</common>
   </edit>
-  <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePurchaseOrders</functionalOptions>
  </attributes>
  <attributes>
   <name>PaymentListReceiptingAccountNoSplits</name>
@@ -5404,6 +5655,43 @@
   <id>40</id>
   <valueType>
    <types>CatalogRef.Taxes</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>PaymentListPaymentDateNoSplits</name>
+  <title>
+   <key>en</key>
+   <value>642A17BE-B771-13BD-DC01-1D10CAC7E668</value>
+  </title>
+  <id>41</id>
+  <valueType>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>DocStorno</name>
+  <title>
+   <key>en</key>
+   <value>FD615DA1-7A78-CD3E-E8CB-B65489792CEE</value>
+  </title>
+  <id>43</id>
+  <valueType>
+   <types>DocumentRef.Storno</types>
   </valueType>
   <view>
    <common>true</common>

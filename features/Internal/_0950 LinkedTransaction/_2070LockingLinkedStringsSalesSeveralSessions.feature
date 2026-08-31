@@ -90,11 +90,7 @@ Scenario: _2070002 check locking header in the SO with linked documents (several
 			| 'Store 03'       |
 		And I select current line in "List" table
 		And I click "OK" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 	* Check locking
 		And I click "Save" button
@@ -286,3 +282,64 @@ Scenario: _2070007 delete SO with linked strings (several sessions)
 			| 'Line No. [4] [Boots 37/18SD] RowID movements remaining: 24 . Required: 0 . Lacking: 24 .'    |
 	And I close all client application windows	
 	
+
+
+# Concurrent quota smoke: two Sales invoices generated from the SAME order in two
+# windows. The second one is posted first and takes the whole quota; posting the
+# first one afterwards must be blocked by the RowID quota control - the quota can
+# never be consumed twice.
+Scenario: _2070008 two invoices racing for the same order quota: the late post is blocked (concurrent smoke)
+	And I close all client application windows
+	* Create and post SO_LT2070_08 (Ferron BP, Dress XS/Blue, qty 5)
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Partner" by "Ferron BP" string
+		And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string
+		And I click the hyperlink named "Comment"
+		And I input "LT2070-08" text in the field named "Text"
+		And I click "OK" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I click choice button of the attribute named "ItemListStore" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		And I wait "Number" field will be filled in "30" seconds
+		And I delete "$$LT2070_08_SO$$" variable
+		And I save the window as "$$LT2070_08_SO$$"
+	* First Sales invoice: generated and left UNPOSTED (it holds no quota yet)
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And I delete "$$LT2070_08_SI1$$" variable
+		And I save the window as "$$LT2070_08_SI1$$"
+	* Second Sales invoice: generated from the same order and posted FIRST (takes the whole quota)
+		When in opened panel I select "$$LT2070_08_SO$$"
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And I click the button named "FormPost"
+		And I wait "Number" field will be filled in "30" seconds
+	* Posting the first invoice is blocked: its linked basis row is already fully
+	* consumed by the second invoice (the linked-rows integrity check refuses it)
+		When in opened panel I select "$$LT2070_08_SI1$$"
+		And I click the button named "FormPost"
+		Then there are lines in TestClient message log
+			| 'Wrong linked row [1] [Dress] [XS/Blue]' |
+		And I close all client application windows

@@ -227,11 +227,7 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I move to the next attribute
 	And I input "6000,00" text in "Price" field of "ItemList" table
 	And I select current line in "ItemList" table
-	And I click choice button of "Unit" attribute in "ItemList" table
-	And I go to line in "List" table
-		| 'Description'      |
-		| 'Boots (12 pcs)'   |
-	And I select current line in "List" table	
+	And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
@@ -251,11 +247,7 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I move to the next attribute
 	And I input "700,00" text in "Price" field of "ItemList" table
 	And I select current line in "ItemList" table
-	And I click choice button of "Unit" attribute in "ItemList" table
-	And I go to line in "List" table
-		| 'Description'   |
-		| 'pcs'           |
-	And I select current line in "List" table	
+	And I select "pcs" exact value from "Unit" drop-down list in "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
 	And I delete "$$PriceListBasicPriceByItems150002$$" variable
@@ -515,11 +507,7 @@ Scenario: _1500041 check price calculation in the documents (price by item, unit
 		* By box
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'        |
-				| 'Boots (12 pcs)'     |
-			And I select current line in "List" table
+			And I select "Boots (12 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'       | 'Item key'    | 'Price type'           | 'Quantity'    | 'Unit'               |
 				| 'Boots'    | '6 000,00'    | '36/18SD'     | 'Basic Price Types'    | '1,000'       | 'Boots (12 pcs)'     |
@@ -916,12 +904,9 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 			| 'Input price'   | 'Item'    | 'Input unit'   | 'Price'    |
 			| ''              | 'Dress'   | 'pcs'          | ''         |
 	* Check Price calculation when change input price
+		And I activate field named "ItemListInputUnit" in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListInputUnit" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from the drop-down list named "ItemListInputUnit" in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to the next attribute
 		And I activate field named "ItemListInputPrice" in "ItemList" table
@@ -943,21 +928,14 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 	* Check Price calculation when change Input unit
 		And I activate field named "ItemListInputUnit" in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListInputUnit" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs'            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "ItemListInputUnit" in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 			| '#'   | 'Input price'   | 'Item'    | 'Input unit'   | 'Price'     |
 			| '1'   | '600,00'        | 'Dress'   | 'pcs'          | '600,00'    |
 	* Change Item
-		And I click choice button of the attribute named "ItemListInputUnit" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I activate field named "ItemListInputUnit" in "ItemList" table
+		And I select "box Dress (8 pcs)" exact value from the drop-down list named "ItemListInputUnit" in "ItemList" table
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -1014,12 +992,9 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 			| 'Item'    | 'Input unit'   | 'Size'   | 'Color'   | 'Input price'   | 'Price'    |
 			| 'Dress'   | 'pcs'          | 'XS'     | 'Blue'    | ''              | ''         |
 	* Check Price calculation when change input price
+		And I activate field named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I select current line in "PriceKeyList" table
-		And I click choice button of the attribute named "PriceKeyListInputUnit" in "PriceKeyList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from the drop-down list named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I finish line editing in "PriceKeyList" table
 		And I move to the next attribute
 		And I activate field "Input price" in "PriceKeyList" table
@@ -1041,21 +1016,14 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 	* Check Price calculation when change Input unit
 		And I activate field named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I select current line in "PriceKeyList" table
-		And I click choice button of the attribute named "PriceKeyListInputUnit" in "PriceKeyList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'pcs'            |
-		And I select current line in "List" table
+		And I select "pcs" exact value from the drop-down list named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I finish line editing in "PriceKeyList" table
 		And "PriceKeyList" table contains lines
 			| 'Item'    | 'Input unit'   | 'Size'   | 'Color'   | 'Input price'   | 'Price'     |
 			| 'Dress'   | 'pcs'          | 'XS'     | 'Blue'    | '600,00'        | '600,00'    |
 	* Change Item
-		And I click choice button of the attribute named "PriceKeyListInputUnit" in "PriceKeyList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I activate field named "PriceKeyListInputUnit" in "PriceKeyList" table
+		And I select "box Dress (8 pcs)" exact value from the drop-down list named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I activate field named "PriceKeyListItem" in "PriceKeyList" table
 		And I click choice button of the attribute named "PriceKeyListItem" in "PriceKeyList" table
 		And I go to line in "List" table

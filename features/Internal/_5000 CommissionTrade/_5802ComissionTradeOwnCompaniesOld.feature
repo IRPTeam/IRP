@@ -123,11 +123,7 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			| 'Main Company partner'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -255,11 +251,7 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			| 'Second Company partner'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -391,11 +383,7 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			| 'Main Company partner'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -516,11 +504,7 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			| 'Second Company partner'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -652,11 +636,7 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -787,11 +767,7 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -868,11 +844,7 @@ Scenario: _05807 create sales report to consignor (Second Company partner) and s
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Second Company"
 		Then the form attribute named "Agreement" became equal to "Consignor Second Company"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		Then the form attribute named "TradeAgentFeeType" became equal to "Percent"		
 		And I input current date in "Start date" field
 		And I input current date in "End date" field
@@ -910,11 +882,7 @@ Scenario: _05807 create sales report to consignor (Second Company partner) and s
 			| 'Description'                 |
 			| 'Trade agent Main Company'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
-		And I select current line in "List" table
+		And I select "Second Company" exact value from the drop-down list named "Company"
 	* Check
 		Then the form attribute named "Partner" became equal to "Main Company partner"
 		Then the form attribute named "LegalName" became equal to "Main Company"
@@ -1261,11 +1229,7 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click the button named "FormCreate"
 	* Filling in the details
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Choice button of the field named "StoreSender"
 		And I go to line in "List" table
 			| 'Description'    |

@@ -8,6 +8,10 @@
   <userVisible>
    <common>true</common>
   </userVisible>
+  <title>
+   <key>en</key>
+   <value>C8A8431F-C6B2-B784-4D95-5CCFC1BBD64B</value>
+  </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
    <name>ListSettingsComposerUserSettingsExtendedTooltip</name>

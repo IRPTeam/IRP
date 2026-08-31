@@ -8,39 +8,37 @@
  <location>Constant.UsePurchase</location>
  <privilegedGetMode>true</privilegedGetMode>
  <content>Subsystem.PurchaseAP</content>
- <content>Catalog.Items</content>
- <content>Document.GoodsReceipt</content>
- <content>Document.PurchaseOrder</content>
  <content>Report.R1001_Purchases</content>
  <content>Catalog.PartnersBankAccounts</content>
  <content>Document.PriceList</content>
  <content>Document.PurchaseReturn</content>
- <content>CommonCommand.OpenVendorAgreements</content>
- <content>Catalog.PartnerItems</content>
- <content>Document.PurchaseReturnOrder</content>
  <content>Document.InternalSupplyRequest</content>
- <content>Catalog.Agreements</content>
  <content>Document.WithholdingTaxInvoice</content>
- <content>Document.PurchaseOrderClosing</content>
  <content>Document.VendorsAdvancesClosing</content>
  <content>Catalog.PriceTypes</content>
  <content>Report.D1001_Purchases</content>
  <content>InformationRegister.S1001L_VendorsPricesByItemKey</content>
  <content>CommonCommand.OpenPartnersVendor</content>
  <content>Report.S1001L_VendorsPrices</content>
- <content>Catalog.LegalNameContracts</content>
  <content>Document.PurchaseInvoice</content>
  <content>AccumulationRegister.R5012B_VendorsAging</content>
  <content>AccumulationRegister.R5020B_PartnersBalance</content>
- <content>AccumulationRegister.R1005T_PurchaseSpecialOffers</content>
  <content>AccumulationRegister.R1021B_VendorsTransactions</content>
  <content>AccumulationRegister.R1022B_VendorsPaymentPlanning</content>
- <content>AccumulationRegister.R1010T_PurchaseOrders</content>
  <content>AccumulationRegister.R1002T_PurchaseReturns</content>
- <content>AccumulationRegister.R1014T_CanceledPurchaseOrders</content>
- <content>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</content>
  <content>AccumulationRegister.R1001T_Purchases</content>
  <content>AccumulationRegister.R1020B_AdvancesToVendors</content>
- <content>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</content>
- <content>AccumulationRegister.R1011B_PurchaseOrdersReceipt</content>
+ <content>Report.M1010A_PriceList</content>
+ <content>Report.R1001A_Purchases</content>
+ <content>Report.R1031A_ReceiptInvoicingBalance</content>
+ <content>Report.R1031B_ReceiptInvoicingMovements</content>
+ <content>Report.R4050A_InventoryBalance</content>
+ <content>Report.R5020_PartnersBalance</content>
+ <content>Report.R5020A_PartnersBalance</content>
+ <content>CommonCommand.OpenReport_R1001A_Purchases</content>
+ <content>CommonCommand.OpenReport_R1031A_ReceiptInvoicingBalance</content>
+ <content>CommonCommand.OpenReport_R1031B_ReceiptInvoicingMovements</content>
+ <content>CommonCommand.OpenReport_R5020A_PartnersBalance</content>
+ <content>CommonCommand.OpenReport_M1010A_PriceList</content>
+ <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
 </mdclass:FunctionalOption>

@@ -105,9 +105,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </attributes>
  <dimensions uuid="72cf742b-9480-4cc3-9639-a8a877cf8539">
   <name>Barcode</name>

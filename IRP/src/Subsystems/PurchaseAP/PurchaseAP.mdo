@@ -22,7 +22,7 @@
  <content>Catalog.PartnerItems</content>
  <content>Report.R1001A_Purchases</content>
  <content>Report.R1010A_PurchaseOrders</content>
- <content>Report.R1011A_PuchaseOrdersShipment</content>
+ <content>Report.R1011A_PurchaseOrdersShipment</content>
  <content>Report.R1012A_PurchaseOrdersInvoiceClosing</content>
  <content>Report.R5020A_PartnersBalance</content>
  <content>Report.R1031A_ReceiptInvoicingBalance</content>

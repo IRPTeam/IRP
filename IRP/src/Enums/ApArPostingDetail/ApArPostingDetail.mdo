@@ -23,14 +23,14 @@
   <name>ByAgreements</name>
   <synonym>
    <key>en</key>
-   <value>80C291CA-2272-019B-B1A7-7F9929195311</value>
+   <value>B91D5D95-9213-6987-7D1D-DE3D510A20F2</value>
   </synonym>
  </enumValues>
  <enumValues uuid="00f7900f-7042-46d4-bf2d-5203c676461a">
   <name>ByStandardAgreement</name>
   <synonym>
    <key>en</key>
-   <value>1CFAAA65-34BB-04BF-FD20-03004AF575F0</value>
+   <value>4D58168D-2AF8-6371-1EA3-33EBD45F46CD</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

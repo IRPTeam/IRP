@@ -408,6 +408,7 @@
      <name>ItemListItemListCommandBack</name>
      <id>104</id>
      <visible>true</visible>
+     <enabled>false</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>

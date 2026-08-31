@@ -62,6 +62,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		RevenueAllocationObject = Parameters.Object;
 		Parameters.Object = Basis;
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+		If Parameters.Property("ArrayOfPostingInfo") Then
+			Parameters.Delete("ArrayOfPostingInfo");
+		EndIf;
 		Parameters.Object = RevenueAllocationObject;
 
 		For Each RowRecordSet In Parameters.PostingDataTables[R6080T_OtherPeriodsRevenues].PrepareTable Do
@@ -102,6 +105,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		CostAllocationObject = Parameters.Object;
 		Parameters.Object = Basis;
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+		If Parameters.Property("ArrayOfPostingInfo") Then
+			Parameters.Delete("ArrayOfPostingInfo");
+		EndIf;
 		Parameters.Object = CostAllocationObject;
 
 		For Each RowRecordSet In Parameters.PostingDataTables[T1040T_AccountingAmounts].PrepareTable Do
@@ -134,6 +140,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		RevenueAllocationObject = Parameters.Object;
 		Parameters.Object = Row.Basis;
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+		If Parameters.Property("ArrayOfPostingInfo") Then
+			Parameters.Delete("ArrayOfPostingInfo");
+		EndIf;
 		Parameters.Object = RevenueAllocationObject;
 
 		For Each RowRecordSet In Parameters.PostingDataTables[T6070S_BatchRevenueAllocationInfo].PrepareTable Do
@@ -200,7 +209,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	Parameters.Insert("RecordType", AccumulationRecordType.Receipt);
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;

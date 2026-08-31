@@ -35,7 +35,11 @@ Function RunUpdate_DBMigration_IRP680(MethodName) Export
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "No data for update: 0");
+		Msg.Log = "No data for update: 0";
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		UpdateManagerServer.ApplieDatabaseUpdate(MethodName);
+		Return Errors;
+		//Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "No data for update: 0");
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();
@@ -85,11 +89,12 @@ Function RunUpdate_ItemType_StockBalanceDetail_SerialLotNumber(MethodName) Expor
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	ItemTypes.Ref
+	|	ItemTypes.Ref AS Ref
 	|FROM
 	|	Catalog.ItemTypes AS ItemTypes
 	|WHERE
-	|	NOT ItemTypes.DeletionMark";
+	|	NOT ItemTypes.DeletionMark
+	|	AND NOT ItemTypes.IsFolder";
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
@@ -138,7 +143,7 @@ Function RunUpdate_ItemType_StockBalanceDetail_SerialLotNumber(MethodName) Expor
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-               Raise R().JobAborted;
+		Raise R().JobAborted;
 	EndIf;
 	
 	If Errors.Count() = 0 Then

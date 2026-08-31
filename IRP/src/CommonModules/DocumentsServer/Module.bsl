@@ -47,6 +47,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	SerialLotNumbersServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
 	
 	InternalCommandsServer.CreateCommands(Form, Object, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
+	CatConfigurationMetadataServer.ApplyCustomizedAttributesToForm(Form, ObjectMetdata.FullName());
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Author") Then
 		Form.Items.Author.ReadOnly = UserSettingsServer.AllDocuments_AdditionalSettings_DisableChangeAuthor();
@@ -59,6 +60,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
+	ObjectMetdata = Object.Ref.Metadata();
+	InternalCommandsServer.RefreshCommands(Form, Object, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
 	Return;
 EndProcedure
 
@@ -396,6 +399,7 @@ EndFunction
 #Region ListFormEvents
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	SetListFormAppearance(Form);
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
 	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ListForm);
@@ -407,6 +411,7 @@ EndProcedure
 #Region ChoiceFormEvents
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	SetListFormAppearance(Form);
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
 	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ChoiceForm);
@@ -579,6 +584,7 @@ Procedure RecalculateQuantityInRow(Row, UnitQuantityName = "QuantityUnit") Expor
 	UnitFactorFrom = Catalogs.Units.GetUnitFactor(Row[UnitQuantityName], ItemKeyUnit);
 	UnitFactorTo = Catalogs.Units.GetUnitFactor(Row.Unit, ItemKeyUnit);
 	Row.Quantity = ?(UnitFactorTo = 0, 0, Row.Quantity * UnitFactorFrom / UnitFactorTo);
+	Row.Quantity = Round(Row.Quantity, Metadata.DefinedTypes.typeQuantity.Type.NumberQualifiers.FractionDigits);
 EndProcedure
 
 #EndRegion
@@ -605,6 +611,9 @@ Procedure OnCopyDocumentProcessingOnCopy(Source, CopiedObject, AddInfo = Undefin
 		Source.NumeratorRules = Catalogs.NumeratorGroups.EmptyRef();
 	EndIf;
 	
+	If Not FOServer.IsUseBusinessUnits() Then
+		FillPropertyValues(Source, New Structure("Branch", Undefined));
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -1246,3 +1255,83 @@ Procedure SetDocumentState(Object, Form) Export
 	EndIf;
 	FormPostAndClose.Representation = ButtonRepresentation.PictureAndText;
 EndProcedure
+
+// Set list form appearance.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+Procedure SetListFormAppearance(Form)
+	If Form.Items.Find("Number") <> Undefined Then
+		Form.Items.Number.Width = 6;
+	EndIf;
+	
+	DateFormItem = Form.Items.Find("Date");
+	If DateFormItem <> Undefined Then
+		CurrentDate = BegOfDay(CurrentSessionDate());
+		DateFormItem.MaxWidth = 10;
+		
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("Format", "DLF=D;");
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.Less;
+		FilterItem.LeftValue = New DataCompositionField(DateFormItem.DataPath);
+		FilterItem.RightValue = CurrentDate;
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(DateFormItem.Name);
+		AppearanceField.Use = True;
+		
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("Format", "DLF=T;");
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.GreaterOrEqual;
+		FilterItem.LeftValue = New DataCompositionField(DateFormItem.DataPath);
+		FilterItem.RightValue = CurrentDate;
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(DateFormItem.Name);
+		AppearanceField.Use = True;
+	EndIf;
+EndProcedure
+
+Function IsDocument(Val Object) Export
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Ref")
+		And Metadata.Documents.Contains(Object.Ref.Metadata()) Then
+		Return True;
+	Else
+		Return False;
+	EndIf;		
+EndFunction
+	
+Procedure SetFilterForUnit(Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Items.Unit AS Unit
+	|FROM
+	|	Catalog.Items AS Items
+	|WHERE
+	|	Items.Ref = &Item
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Units.Ref AS Unit
+	|FROM
+	|	Catalog.Units AS Units
+	|WHERE
+	|	Units.Item = &Item
+	|	AND NOT Units.Item = VALUE(Catalog.Units.EmptyRef)";
+	
+	Query.SetParameter("Item", Item);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	ChoiceData = New ValueList();
+	While QuerySelection.Next() Do
+		ChoiceData.Add(QuerySelection.Unit);
+	EndDo;
+EndProcedure
+
+	
+	

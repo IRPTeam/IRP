@@ -1,3 +1,4 @@
+
 &AtClient
 Procedure ObjectAttributeTextEditEnd(Item)
 	FillFilterList();
@@ -16,7 +17,7 @@ Procedure CodeOnChange(Item)
 	If Not RetailCustomerByCode.isEmpty() Then
 		FillDataOnServer(RetailCustomerByCode);
 		Modified = False;
-		CurrentItem = Items.FormWriteAndClose;
+		CurrentItem = Items.Select;
 	Else
 		Modified = True;
 	EndIf;
@@ -90,4 +91,23 @@ EndFunction
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	Close(RetailCustomer.Ref);
+EndProcedure
+
+&AtClient
+Procedure Select(Command)
+	
+	If Modified Then
+		Write();
+	EndIf;		
+	
+	If Not ValueIsFilled(RetailCustomer.Ref) Then
+		Return;
+	EndIf;
+	
+	If ThisObject.IsOpen() Then
+		Close(RetailCustomer.Ref);
+	Else
+		NotifyChoice(RetailCustomer.Ref);
+	EndIf;
+	
 EndProcedure

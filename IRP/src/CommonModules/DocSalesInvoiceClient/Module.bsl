@@ -281,6 +281,30 @@ EndProcedure
 
 #EndRegion
 
+#Region MANUAL_OFFER_AMOUNT
+
+Procedure ItemListManualOfferAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListManualOfferAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region MANUAL_OFFER_PERCENT
+
+Procedure ItemListManualOfferPercentOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListManualOfferPercentOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region MANUAL_OFFER_TYPE
+
+Procedure ItemListManualOfferTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListManualOfferTypeOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #Region DONT_CALCULATE_ROW
 
 Procedure ItemListDontCalculateRowOnChange(Object, Form, Item, CurrentData = Undefined) Export

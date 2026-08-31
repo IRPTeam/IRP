@@ -69,11 +69,7 @@ Scenario: _150041 preparation
 			And I select current line in "List" table
 			And I select "Company" exact value from the drop-down list named "Type"
 			And I move to "Landed cost" tab
-			And I click Select button of "Currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Deferred calculation'    | 'Description'       | 'Source'          | 'Type'      |
-				| 'TRY'         | 'No'                      | 'Local currency'    | 'Forex Seling'    | 'Legal'     |
-			And I select current line in "List" table
+			And I select "Local currency" exact value from "Currency movement type" drop-down list
 			Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 			And I click "Save and close" button
 			And I wait "Main Company (Company) *" window closing in 20 seconds
@@ -84,11 +80,7 @@ Scenario: _150041 preparation
 			And I select current line in "List" table
 			And I select "Company" exact value from the drop-down list named "Type"
 			And I move to "Landed cost" tab
-			And I click Select button of "Currency movement type" field
-			And I go to line in "List" table
-				| 'Currency'    | 'Deferred calculation'    | 'Description'       | 'Source'          | 'Type'      |
-				| 'TRY'         | 'No'                      | 'Local currency'    | 'Forex Seling'    | 'Legal'     |
-			And I select current line in "List" table
+			And I select "Local currency" exact value from "Currency movement type" drop-down list
 			Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 			And I click "Save and close" button
 			And I wait "Second Company (Company) *" window closing in 20 seconds
@@ -163,11 +155,7 @@ Scenario: _150045 check filling source of origin in the Opening entry
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 	And I click "Create" button	
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| 'Description'    |
-		| 'Main Company'   |
-	And I select current line in "List" table
+	And I select "Main Company" exact value from the drop-down list named "Company"
 	* Filling inventory
 		* First item
 			And in the table "Inventory" I click the button named "InventoryAdd"
@@ -468,11 +456,7 @@ Scenario: _150049 check filling source of origin in the StockAdjustmentAsSurplus
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	* Create new
 		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
@@ -777,11 +761,7 @@ Scenario: _150053 check filling source of origin in the IT
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I click "Create" button
 	* Filling in main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1051,11 +1031,7 @@ Scenario: _150055 check filling source of origin in the Stock adjustment as writ
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	And I click "Create" button
 	* Filling in main info
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from the drop-down list named "Company"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1543,11 +1519,11 @@ Scenario: _150079 check filling source of origin in SC
 			| '$$NumberShipmentConfirmation01$$' |
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | '10 000,000' | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | '5 000,000'  | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | '100,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977895; 09987897977893' | 'Source of origin 4; Source 1' | '400,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | '10 000,000' | 'pcs'  | 'Store 05' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | '5 000,000'  | 'pcs'  | 'Store 05' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | '100,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977895; 09987897977893' | 'Source of origin 4; Source 1' | '400,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
 	And I close all client application windows	
 				
 Scenario: _150080 check filling source of origin in GR
@@ -1651,6 +1627,9 @@ Scenario: _150080 check filling source of origin in GR
 
 Scenario: _150081 check filling source of origin in SPO
 	And I close all client application windows
+	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+	And I set checkbox "Use shipment and receipt planing orders"	
+	And I click "Save" button
 	* Create SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentPlaningOrder"
 		And I click "Create" button

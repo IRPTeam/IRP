@@ -242,25 +242,51 @@ Procedure FixTypesForWrite(Data) Export
 	If TypeOf(Data) = Type("Structure") Then
 		If Data.Property("Info") Then
 			For Each Prop In Data.Info Do
-				If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
+				If Prop.Key = "BasisChecks" And TypeOf(Prop.Value) = Type("Array") Then
+					For Each BasisInfo In Data.Info.BasisChecks Do
+						For Each BasisInfoProp In BasisInfo Do
+							BasisInfo[BasisInfoProp.Key] = String(BasisInfoProp.Value);
+						EndDo;
+					EndDo;
+				ElsIf Prop.Key = "CRS" And TypeOf(Prop.Value) = Type("Structure") Then
+					For Each CRSProp In Data.Info.CRS Do
+						Data.Info.CRS[CRSProp.Key] = String(CRSProp.Value);
+					EndDo;
+				ElsIf Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
 					Data.Info[Prop.Key] = String(Prop.Value);
 				EndIf;
 			EndDo;
-			
-			If Data.Info.Property("CRS") And TypeOf(Data.Info.CRS) = Type("Structure") Then
-				For Each Prop In Data.Info.CRS Do
-					Data.Info.CRS[Prop.Key] = String(Prop.Value);
+//			If Data.Info.Property("CRS") And TypeOf(Data.Info.CRS) = Type("Structure") Then
+//				For Each Prop In Data.Info.CRS Do
+//					Data.Info.CRS[Prop.Key] = String(Prop.Value);
+//				EndDo;
+//			EndIf;
+		EndIf;
+		If Data.Property("In") And Data.In.Property("CheckPackage")  Then
+			If Data.In.CheckPackage.Property("Positions") Then
+				For Each Row In Data.In.CheckPackage.Positions.FiscalStrings Do
+					For Each Prop In Row Do
+						If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
+							Row[Prop.Key] = String(Prop.Value);
+						EndIf;
+					EndDo;
 				EndDo;
 			EndIf;
-		EndIf;
-		If Data.Property("In") And Data.In.Property("CheckPackage") And Data.In.CheckPackage.Property("Positions") Then
-			For Each Row In Data.In.CheckPackage.Positions.FiscalStrings Do
-				For Each Prop In Row Do
-					If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
-						Row[Prop.Key] = String(Prop.Value);
+			If Data.In.CheckPackage.Property("Parameters") Then
+				For Each ParameterKeyValue In Data.In.CheckPackage.Parameters Do
+					If TypeOf(ParameterKeyValue.Value) = Type("Structure") Then
+						For Each Prop In ParameterKeyValue.Value Do
+							If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
+								Data.In.CheckPackage.Parameters[ParameterKeyValue.Key][Prop.Key] = String(Prop.Value);
+							EndIf;
+						EndDo;
+					Else
+						If Not CommonFunctionsServer.IsPrimitiveValue(ParameterKeyValue.Value) Then
+							Data.In.CheckPackage.Parameters[ParameterKeyValue.Key] = String(ParameterKeyValue.Value);
+						EndIf;
 					EndIf;
 				EndDo;
-			EndDo;
+			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure
@@ -447,9 +473,9 @@ Function GetDriverObject(DriverInfo) Export
 	EndIf;
 	
 	If DriverInfo.UseIS Then
-If Not GetAPIModule(DriverInfo.Hardware).Device_Open(DriverInfo, Undefined, "") Then // Boolean
-Raise R().CannotConnectHardwareService;
-EndIf;
+		If Not GetAPIModule(DriverInfo.Hardware).Device_Open(DriverInfo, Undefined, "") Then // Boolean
+			Raise R().CannotConnectHardwareService;
+		EndIf;
 	Else
 		ObjectName = StrSplit(DriverInfo.AddInID, ".");
 		ObjectName.Add(ObjectName[1]);
@@ -458,12 +484,12 @@ EndIf;
 		Result = AttachAddIn(LinkOnDriver, ObjectName[1]);
 	
 		If Not Result Then
-Raise StrTemplate(R().CannotAttachAddIn, DriverInfo.Driver);
+			Raise StrTemplate(R().CannotAttachAddIn, DriverInfo.Driver);
 		EndIf;
 	
 		DriverObject = New (StrConcat(ObjectName, ".")); // Arbitrary
 		If DriverObject = Undefined Then
-                    Raise R().CannotConnectDriver;
+			Raise R().CannotConnectDriver;
 		EndIf;
 	EndIf;
 	
@@ -780,7 +806,8 @@ EndFunction
 // @skip-check dynamic-access-method-not-found
 Function Device_GetDescription_2000(Settings, DriverObject) Export
 	SettingsDescription = HardwareClientServer.GetParametersDriverDescription();
-	Result = DriverObject.GetDescription(SettingsDescription.Name, SettingsDescription.Description, SettingsDescription.EquipmentType, 
+	Result = DriverObject.GetDescription(
+		SettingsDescription.Name, SettingsDescription.Description, SettingsDescription.EquipmentType, 
 		SettingsDescription.InterfaceRevision, SettingsDescription.IntegrationComponent, 
 		SettingsDescription.MainDriverInstalled, SettingsDescription.DownloadURL); // Boolean
 		

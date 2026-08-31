@@ -1,4 +1,17 @@
 
+// Get settings.
+// 
+// Returns:
+//  Structure - Get settings:
+// * Filter_LedgerType - Boolean - 
+// * Filter_DocumentType - Boolean - 
+// * Filter_LockType - Boolean - 
+// * Filter_FilesType - Boolean - 
+// * Filter_TasksType - Boolean - 
+// * Panel_GroupReport - Boolean - 
+// * Panel_GroupFiles - Boolean - 
+// * Panel_GroupChat - Boolean - 
+// * Panel_GroupHistory - Boolean - 
 Function GetSettings() Export
 
 	Settings = New Structure;

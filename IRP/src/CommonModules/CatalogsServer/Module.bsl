@@ -49,6 +49,7 @@ Procedure OnCreateAtServerObject(Form, MainAttribute, Cancel, StandardProcessing
 	
 	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ObjectForm);
 	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ObjectForm);
+	CatConfigurationMetadataServer.ApplyCustomizedAttributesToForm(Form, CatalogFullName);
 	
 	If Form.Items.Find("Code") <> Undefined And Not ThisIsEditingException(CatalogFullName) Then
 		NumberEditingAvailable = SessionParametersServer.GetSessionParameter("NumberEditingAvailable"); // Boolean
@@ -72,6 +73,9 @@ Procedure OnCreateAtServerListForm(Form, MainAttribute, Cancel, StandardProcessi
 	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ListForm);
 	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ListForm);
 	
+	If Form.Items.Find("Code") <> Undefined Then
+		Form.Items.Code.Width = 5;
+	EndIf;
 EndProcedure
 
 // On create at server choice form.
@@ -89,6 +93,9 @@ Procedure OnCreateAtServerChoiceForm(Form, MainAttribute, Cancel, StandardProces
 	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ChoiceForm);
 	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ChoiceForm);
 	
+	If Form.Items.Find("Code") <> Undefined Then
+		Form.Items.Code.Width = 5;
+	EndIf;	
 EndProcedure
 
 #EndRegion

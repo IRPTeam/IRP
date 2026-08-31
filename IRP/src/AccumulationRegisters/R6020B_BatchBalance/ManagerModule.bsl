@@ -130,7 +130,8 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
-	|	R6010B_BatchWiseBalance.Document = &Document
+	|	R6010B_BatchWiseBalance.Document = &Document 
+	|	and not R6010B_BatchWiseBalance.Recorder refs Document.Storno
 	|
 	|UNION ALL
 	|
@@ -169,6 +170,7 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|	AccumulationRegister.R6030T_BatchShortageOutgoing AS R6030T_BatchShortageOutgoing
 	|WHERE
 	|	R6030T_BatchShortageOutgoing.Document = &Document
+	|	and not R6030T_BatchShortageOutgoing.Recorder refs Document.Storno
 	|
 	|UNION ALL
 	|
@@ -206,12 +208,13 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|FROM
 	|	AccumulationRegister.R6040T_BatchShortageIncoming AS R6040T_BatchShortageIncoming
 	|WHERE
-	|	R6040T_BatchShortageIncoming.Document = &Document";
+	|	R6040T_BatchShortageIncoming.Document = &Document
+	|	and not R6040T_BatchShortageIncoming.Recorder refs Document.Storno";
 	Query.SetParameter("Document", DocObject.Ref);
 	Return Query.Execute().Unload();
 EndFunction
 
-Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
+Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export 
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -351,6 +354,9 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|		INNER JOIN AllDocumetsGrouped AS AllDocumetsGrouped
 	|		ON R6010B_BatchWiseBalance.Document = AllDocumetsGrouped.Document
+	
+	|		and not R6010B_BatchWiseBalance.Recorder refs Document.Storno
+	
 	|
 	|UNION ALL
 	|

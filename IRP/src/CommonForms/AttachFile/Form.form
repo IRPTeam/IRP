@@ -573,11 +573,6 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:PDFDocumentFieldExtInfo">
       <viewStatusAddition>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <name>PDFPreviewViewStatus</name>
        <id>67</id>
        <extendedTooltip>
@@ -607,6 +602,8 @@
       <autoMaxHeight>true</autoMaxHeight>
       <horizontalStretch>true</horizontalStretch>
       <verticalStretch>true</verticalStretch>
+      <scale>100</scale>
+      <currentPageNumber>1</currentPageNumber>
      </extInfo>
     </items>
     <visible>true</visible>

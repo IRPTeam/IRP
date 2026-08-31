@@ -85,11 +85,7 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click the button named "FormCreate"
 		* Filling in company info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in the tabular part Inventory
 			* First item (without serial lot number)
 				And I move to "Inventory" tab
@@ -196,11 +192,7 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click the button named "FormCreate"
 		* Filling in company info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I move to "Shipment to trade agent" tab
 		* Filling in trade agent info 
 			And I move to "Shipment to trade agent" tab			
@@ -289,11 +281,7 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click the button named "FormCreate"
 		* Filling in company info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I move to "Shipment to trade agent" tab
 		* Filling in trade agent info 
 			And I click Select button of "Trade agent" field
@@ -413,11 +401,7 @@ Scenario: _410013 create Opening entry receipt from consignor
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click the button named "FormCreate"
 		* Filling in company info
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description      |
-				| Main Company     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 		* Filling in trade agent info 
 			And I move to "Receipt from consignor" tab			
 			And I click Select button of "Consignor" field
@@ -457,11 +441,7 @@ Scenario: _410013 create Opening entry receipt from consignor
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ReceiptFromConsignor" table
 			And I input "50,000" text in "Quantity" field of "ReceiptFromConsignor" table
-			And I click choice button of the attribute named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'     |
-				| 'TRY'     | 'Turkish lira'    |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
 			And I activate "Price" field in "ReceiptFromConsignor" table
 			And I input "50,00" text in "Quantity" field of "ReceiptFromConsignor" table	
 			And I input "50,000" text in "Price" field of "ReceiptFromConsignor" table
@@ -496,11 +476,7 @@ Scenario: _410013 create Opening entry receipt from consignor
 				| 'Owner'    | 'Serial number'     |
 				| 'PZU'      | '8908899877'        |
 			And I select current line in "List" table
-			And I click choice button of the attribute named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
-			And I go to line in "List" table
-				| 'Code'    | 'Description'     |
-				| 'TRY'     | 'Turkish lira'    |
-			And I select current line in "List" table
+			And I select "TRY" exact value from the drop-down list named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
 			And I activate "Price" field in "ReceiptFromConsignor" table
 			And I input "50,000" text in "Price" field of "ReceiptFromConsignor" table	
 			And I input "533,90" text in "Amount tax" field of "ReceiptFromConsignor" table		

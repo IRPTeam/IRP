@@ -111,6 +111,7 @@
  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
  <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
+ <registerRecords>InformationRegister.RowIDStamps</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -142,6 +143,21 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.NotActive</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <quickChoice>Use</quickChoice>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -404,6 +420,7 @@
     <changeMode>DontChange</changeMode>
     <field>Document.PurchaseOrder.TabularSection.ItemList.Attribute.Item</field>
    </choiceParameterLinks>
+   <quickChoice>Use</quickChoice>
    <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="0341b8b8-f56b-43a7-8020-adac32bfc7b7">
@@ -736,6 +753,48 @@
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="347cba93-1651-4232-85a1-f14747e6fa9c">
+   <name>ManualOfferAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>39E776F9-C835-9CB1-11E7-76877765A811</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d5ed5afb-2192-4b78-a5e1-ac4dedda4934">
+   <name>ManualOfferPercent</name>
+   <synonym>
+    <key>en</key>
+    <value>BA84BCBA-D082-AEBF-F13F-F499C79ED285</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePercent</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1bddbcf4-6000-4457-8ece-4fb0dc9dffda">
+   <name>ManualOfferType</name>
+   <synonym>
+    <key>en</key>
+    <value>95D92F57-EFF6-387B-B66D-DCE6E1685397</value>
+   </synonym>
+   <type>
+    <types>EnumRef.ManualOfferTypes</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

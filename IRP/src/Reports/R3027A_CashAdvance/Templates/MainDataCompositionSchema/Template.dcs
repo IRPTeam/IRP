@@ -279,6 +279,9 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Agreement</dataPath>
 			<field>Agreement</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
 		</field>
 		<field xsi:type="DataSetFieldFolder">
 			<dataPath>Amount</dataPath>
@@ -295,6 +298,7 @@
 	R3027B_EmployeeCashAdvanceBalanceAndTurnovers.Branch AS Branch,
 	R3027B_EmployeeCashAdvanceBalanceAndTurnovers.Currency AS Currency,
 	R3027B_EmployeeCashAdvanceBalanceAndTurnovers.Partner AS Partner,
+	R3027B_EmployeeCashAdvanceBalanceAndTurnovers.Agreement AS Agreement,
 	R3027B_EmployeeCashAdvanceBalanceAndTurnovers.AmountOpeningBalance AS AmountOpeningBalance,
 	R3027B_EmployeeCashAdvanceBalanceAndTurnovers.AmountClosingBalance AS AmountClosingBalance,
 	R3027B_EmployeeCashAdvanceBalanceAndTurnovers.AmountTurnover AS AmountTurnover,
@@ -303,7 +307,8 @@
 	R3027B_EmployeeCashAdvanceBalanceAndTurnovers.Recorder AS Recorder,
 	R3027B_EmployeeCashAdvanceBalanceAndTurnovers.SecondPeriod AS SecondPeriod
 FROM
-	AccumulationRegister.R3027B_EmployeeCashAdvance.BalanceAndTurnovers(, , Auto, , CurrencyMovementType.Type = VALUE(Enum.CurrencyType.EmptyRef)) AS R3027B_EmployeeCashAdvanceBalanceAndTurnovers</query>
+	AccumulationRegister.R3027B_EmployeeCashAdvance.BalanceAndTurnovers(,, Auto,,
+		CurrencyMovementType.Type = VALUE(Enum.CurrencyType.EmptyRef)) AS R3027B_EmployeeCashAdvanceBalanceAndTurnovers</query>
 	</dataSet>
 	<totalField>
 		<dataPath>Amount.OpeningBalance</dataPath>
@@ -452,6 +457,20 @@ FROM
 					<dcscor:parameter>AppearanceTemplate</dcscor:parameter>
 					<dcscor:value xsi:type="xs:string">Sea</dcscor:value>
 				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:use>false</dcscor:use>
+					<dcscor:parameter>HorizontalOverallPlacement</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">None</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:use>false</dcscor:use>
+					<dcscor:parameter>TotalsPlacement</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">Auto</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>VerticalOverallPlacement</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">None</dcscor:value>
+				</dcscor:item>
 			</dcsset:outputParameters>
 			<dcsset:item xsi:type="dcsset:StructureItemGroup">
 				<dcsset:groupItems>
@@ -518,25 +537,40 @@ FROM
 								<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 							</dcsset:selection>
 							<dcsset:item xsi:type="dcsset:StructureItemGroup">
-								<dcsset:use>false</dcsset:use>
-								<dcsset:filter>
-									<dcsset:item xsi:type="dcsset:FilterItemComparison">
-										<dcsset:left xsi:type="dcscor:Field">Recorder</dcsset:left>
-										<dcsset:comparisonType>Filled</dcsset:comparisonType>
+								<dcsset:groupItems>
+									<dcsset:item xsi:type="dcsset:GroupItemField">
+										<dcsset:field>Agreement</dcsset:field>
+										<dcsset:groupType>Items</dcsset:groupType>
+										<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
 									</dcsset:item>
-								</dcsset:filter>
+								</dcsset:groupItems>
 								<dcsset:order>
 									<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
 								</dcsset:order>
 								<dcsset:selection>
 									<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 								</dcsset:selection>
-								<dcsset:outputParameters>
-									<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-										<dcscor:parameter>FilterOutput</dcscor:parameter>
-										<dcscor:value xsi:type="dcsset:DataCompositionTextOutputType">DontOutput</dcscor:value>
-									</dcscor:item>
-								</dcsset:outputParameters>
+								<dcsset:item xsi:type="dcsset:StructureItemGroup">
+									<dcsset:use>false</dcsset:use>
+									<dcsset:filter>
+										<dcsset:item xsi:type="dcsset:FilterItemComparison">
+											<dcsset:left xsi:type="dcscor:Field">Recorder</dcsset:left>
+											<dcsset:comparisonType>Filled</dcsset:comparisonType>
+										</dcsset:item>
+									</dcsset:filter>
+									<dcsset:order>
+										<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+									</dcsset:order>
+									<dcsset:selection>
+										<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+									</dcsset:selection>
+									<dcsset:outputParameters>
+										<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+											<dcscor:parameter>FilterOutput</dcscor:parameter>
+											<dcscor:value xsi:type="dcsset:DataCompositionTextOutputType">DontOutput</dcscor:value>
+										</dcscor:item>
+									</dcsset:outputParameters>
+								</dcsset:item>
 							</dcsset:item>
 						</dcsset:item>
 					</dcsset:item>

@@ -65,9 +65,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </resources>
  <attributes uuid="0a634db2-c62e-4b3e-ba9c-f7f7667c97a5">
   <name>DataInStorage</name>

@@ -54,9 +54,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
  </dimensions>
  <dimensions uuid="5b8c160f-9d4e-48c2-9416-b9505abe413c">
   <name>Operation</name>

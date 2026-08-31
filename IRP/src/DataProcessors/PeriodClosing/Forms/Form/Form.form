@@ -2826,7 +2826,7 @@
       </extendedTooltip>
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
-       <group>HorizontalIfPossible</group>
+       <group>Vertical</group>
        <behavior>Auto</behavior>
        <showLeftMargin>true</showLeftMargin>
        <united>true</united>
@@ -3002,33 +3002,6 @@
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
          <radioButtonsType>Tumbler</radioButtonsType>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>E3F0BBA2-35FE-2638-8AE6-612BE461206D</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Everyday</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>C86DA692-7673-DA03-3947-7447E60532D7</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Monthly</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>E842D377-90B5-38F6-6960-0C8140387988</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>ByPeriod</value>
-          </value>
-         </choiceList>
         </extInfo>
        </items>
        <items xsi:type="form:FormField">
@@ -3102,6 +3075,7 @@
          <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
+        <readOnly>true</readOnly>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -3182,33 +3156,6 @@
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
          <radioButtonsType>Tumbler</radioButtonsType>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>ED47921C-3A0F-2600-04B5-590522017C53</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Everyday</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>CDB1A10A-C250-EB0E-E391-1733BEAA7784</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Monthly</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>7B22C108-6D9E-4C9C-C830-0A71105E3B84</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>ByPeriod</value>
-          </value>
-         </choiceList>
         </extInfo>
        </items>
        <items xsi:type="form:FormField">
@@ -3317,33 +3264,6 @@
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
          <radioButtonsType>Tumbler</radioButtonsType>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>2966567C-A573-703C-C85E-E0E99190125D</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Everyday</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>9F8EE115-38B8-3C02-2EE8-869726C89036</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Monthly</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>3B3B81B2-0E00-1AB5-5C59-921978E4580D</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>ByPeriod</value>
-          </value>
-         </choiceList>
         </extInfo>
        </items>
        <items xsi:type="form:FormField">
@@ -3452,33 +3372,6 @@
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
          <radioButtonsType>Tumbler</radioButtonsType>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>A4835650-0DAF-0497-700D-DBDA2E645359</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Everyday</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>671F79CB-B26D-BCE3-3BE9-992AE729F176</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Monthly</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>658F5549-7C94-CCC8-85D6-6A8D5519EEE2</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>ByPeriod</value>
-          </value>
-         </choiceList>
         </extInfo>
        </items>
        <items xsi:type="form:Table">
@@ -3711,33 +3604,6 @@
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
          <radioButtonsType>Tumbler</radioButtonsType>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>B9A0C3C8-88EE-7FDD-DC0F-FF0319339E78</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Everyday</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>73626209-113D-6A0B-B1DF-F074ADDDEA83</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>Monthly</value>
-          </value>
-         </choiceList>
-         <choiceList>
-          <presentation>
-           <key>en</key>
-           <value>2F3D65EA-3564-4242-21D1-12D52730A1FF</value>
-          </presentation>
-          <value xsi:type="core:StringValue">
-           <value>ByPeriod</value>
-          </value>
-         </choiceList>
         </extInfo>
        </items>
        <items xsi:type="form:FormGroup">
@@ -5451,9 +5317,6 @@
   <edit>
    <common>true</common>
   </edit>
-  <settingsSavedData xsi:type="form:DataPath">
-   <segments>Step_2_CalculationMode</segments>
-  </settingsSavedData>
  </attributes>
  <attributes>
   <name>Step_2_ForAllCompanies</name>
@@ -5471,9 +5334,6 @@
   <edit>
    <common>true</common>
   </edit>
-  <settingsSavedData xsi:type="form:DataPath">
-   <segments>Step_2_ForAllCompanies</segments>
-  </settingsSavedData>
  </attributes>
  <attributes>
   <name>Step_3_DontOffsetEmptyProjects</name>

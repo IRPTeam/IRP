@@ -116,6 +116,37 @@ Function CheckLockData(Source, Cancel = False, isNew = False, OnOpen = False) Ex
 	Return Cancel;
 EndFunction
 
+// Get open period.
+// 
+// Parameters:
+//  Source - DocumentObject - Source
+// 
+// Returns:
+//  Date - Get open period
+Function GetOpenPeriod(Source) Export
+	
+	Result = Date(1,1,1);
+	
+	SourceMetadata = Source.Metadata();
+	If Not Metadata.Documents.Contains(SourceMetadata) Then
+		Return Result;
+	EndIf;
+	
+	SourceParams = FillLockDataSettings();
+	SourceParams.Source = Source;
+	SourceParams.isNew = True;
+	SourceParams.OnOpen = False;
+	SourceParams.MetadataName = SourceMetadata.FullName();
+	
+	Rules = CalculateRuleByObject(SourceParams);
+	For Each RuleRecord In Rules Do
+		Result = Max(Result, GetOpenPeriodFromRule(RuleRecord, SourceParams.MetadataName));
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
 #EndRegion
 
 #Region Privat
@@ -593,5 +624,68 @@ Procedure SaveRuleSettings(RuleObject) Export
 	EndDo;
 	Reg.Write();
 EndProcedure
+
+// Get open period from rule.
+// 
+// Parameters:
+//  RuleRecord - ValueTableRow - Rule record:
+// * Attribute - String - 
+// * ComparisonType - String - 
+// * Value - Arbitrary - 
+// * LockDataModificationReasons - CatalogRef.LockDataModificationReasons - 
+// * SetValueAsCode - Boolean - 
+//  MetadataName - String - Metadata name
+// 
+// Returns:
+//  Date - Get open period from rule
+Function GetOpenPeriodFromRule(RuleRecord, MetadataName)
+	Result = Date(1,1,1);
+	
+	If Upper(RuleRecord.Attribute) = "DATE" Then
+		If RuleRecord.ComparisonType = "<=" Then
+			Return RuleRecord.Value + 1;
+		ElsIf RuleRecord.ComparisonType = "<" Then
+			Return RuleRecord.Value;
+		EndIf;
+	ElsIf Not IsBlankString(RuleRecord.Attribute) Then
+		Return Result;
+	EndIf;
+	
+	RuleRef = RuleRecord.LockDataModificationReasons;
+	If Not RuleRef.AdvancedMode Then
+		Return Result;
+	EndIf;
+	
+	QueryTest = RuleRef.QueryFilter;
+	DatePoint = StrFind(QueryTest, " DS.Date ");
+	If DatePoint = 0 Then
+		Return Result;
+	EndIf;
+	
+	QueryTest = Mid(QueryTest, DatePoint);
+	QueryTest = Left(QueryTest, StrFind(QueryTest, " THEN "));
+	QueryTest = StrReplace(QueryTest, Chars.CR, " ");
+	QueryTest = StrReplace(QueryTest, Chars.LF, " ");
+	QueryTest = StrReplace(QueryTest, "  ", " ");
+	QueryTest = TrimAll(QueryTest);
+	QueryParts = StrSplit(QueryTest, " ");
+	
+	DateComparisonType = QueryParts[1];
+	If DateComparisonType <> "<" And DateComparisonType <> "<=" Then
+		Return Result;
+	EndIf;
+	
+	DateKey = Mid(QueryParts[2], 2);
+	Params = SetQueryParameters(MetadataName, RuleRef);
+	DateValue = Params[DateKey]; // Date
+	
+	If DateComparisonType = "<=" Then
+		Result = DateValue + 1;
+	Else
+		Result = DateValue;
+	EndIf;
+	
+	Return Result;
+EndFunction
 
 #EndRegion

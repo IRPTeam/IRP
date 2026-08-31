@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0450e8b8-04c6-423d-8a88-82fc09935d98">
+ <name>Report_R403A_GoodsInTransit</name>
+ <synonym>
+  <key>en</key>
+  <value>533F8771-C211-3604-4C92-2827CC6664CC</value>
+ </synonym>
+</mdclass:Role>

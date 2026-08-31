@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="31b90057-e3d3-400c-9ce4-e5395f7c6cb6">
+ <name>DocOutgoingExchRateAdjustmentInvoiceClient</name>
+ <synonym>
+  <key>en</key>
+  <value>BD02D314-3F8E-B70D-D378-8B808C8D9667____________</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

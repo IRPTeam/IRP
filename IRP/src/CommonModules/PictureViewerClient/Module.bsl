@@ -218,9 +218,7 @@ Procedure SetPDFForView(FileRef, PDFViewer) Export
 	URI = GetPictureURL(PictureParameters); //String
 	BD = GetFromTempStorage(URI); // BinaryData
 	If Not BD = Undefined Then
-		BDB = GetBinaryDataBufferFromBinaryData(BD);
-		MemoryStream = New MemoryStream(BDB); 
-		PDFViewer.ReadAsync(MemoryStream);
+		PDFFunctionsClientServer.SetDataInPDFViewer(PDFViewer, BD, True);
 	Else
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_040);
 	EndIf;

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="21f29e1a-8c8c-4705-a454-e5e84474bfe0">
+ <name>Report_R3010A_CashOnHand</name>
+ <synonym>
+  <key>en</key>
+  <value>75C059D5-44EB-44E8-80DC-C0E42F1FDDF2</value>
+ </synonym>
+</mdclass:Role>

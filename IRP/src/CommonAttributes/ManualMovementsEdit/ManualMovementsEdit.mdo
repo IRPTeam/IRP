@@ -77,6 +77,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.Storno</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.CalculationDeservedVacations</metadata>
   <use>Use</use>
  </content>
@@ -229,7 +233,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.IncomingExchRateAdjustmentInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.Payroll</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.OutgoingExchRateAdjustmentInvoice</metadata>
   <use>Use</use>
  </content>
  <content>

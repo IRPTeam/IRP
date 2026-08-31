@@ -42,4 +42,11 @@
    <value>898C1146-F979-173D-DED8-86ED72E4B1DE</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="9cf73cd5-abca-433e-9dcf-3cccf8c552c3">
+  <name>FormattedText</name>
+  <synonym>
+   <key>en</key>
+   <value>AB8B2272-4DFA-8462-200B-B5B1BB03B3D5</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

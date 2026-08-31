@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b7f0b3ed-fe67-496b-9fd7-04375b60ae4f">
+ <name>OpenReport_R5010A_ReconciliationStatement</name>
+ <synonym>
+  <key>en</key>
+  <value>F93E84A5-B514-D2E0-0B03-3675E86189D8_________</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

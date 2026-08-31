@@ -18,7 +18,9 @@
  <content>AccumulationRegister.R9541T_VacationUsage</content>
  <content>Document.CalculationDeservedVacations</content>
  <content>Report.R9510A_Salary</content>
+ <content>Report.R3027A_CashAdvance</content>
  <subsystems>Settings</subsystems>
  <subsystems>Catalogs</subsystems>
  <subsystems>PersonnelRecords</subsystems>
+ <subsystems>Other</subsystems>
 </mdclass:Subsystem>

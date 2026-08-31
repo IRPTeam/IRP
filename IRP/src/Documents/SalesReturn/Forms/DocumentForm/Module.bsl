@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocSalesReturnServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -47,6 +48,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 
 	If Not Source = ThisObject Then
@@ -107,6 +113,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient
@@ -316,6 +327,16 @@ Procedure ItemListUnitOnChange(Item)
 	DocSalesReturnClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListUnitStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsServer.SetFilterForUnit(CurrentData.Item, ChoiceData, StandardProcessing);	
+EndProcedure
+
 #EndRegion
 
 #Region QUANTITY
@@ -368,6 +389,25 @@ EndProcedure
 &AtClient
 Procedure ItemListTaxAmountOnChange(Item)
 	DocSalesReturnClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region MANUAL_OFFER
+
+&AtClient
+Procedure ItemListManualOfferTypeOnChange(Item)
+	DocSalesReturnClient.ItemListManualOfferTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListManualOfferPercentOnChange(Item)
+	DocSalesReturnClient.ItemListManualOfferPercentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListManualOfferAmountOnChange(Item)
+	DocSalesReturnClient.ItemListManualOfferAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -483,8 +523,15 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
-		"SpecialOffersEditFinish_ForRow");
+	If Items.ItemList.SelectedRows.Count() > 1 Then 
+		ArrayOfRowKeys = New Array();
+		For Each ItemOfArray In Items.ItemList.SelectedRows Do  
+			ArrayOfRowKeys.Add(Object.ItemList.FindByID(ItemOfArray).Key);
+		EndDo;
+		OffersClient.OpenFormPickupSpecialOffers_ForSelectedRows(Object, ArrayOfRowKeys, ThisObject, "SpecialOffersEditFinish_ForSelectedRows");
+	Else	
+		OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject, "SpecialOffersEditFinish_ForRow");
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -499,6 +546,75 @@ EndProcedure
 &AtServer
 Procedure CalculateAndLoadOffers_ForRow(Result)
 	OffersServer.CalculateAndLoadOffers_ForRow(Object, Result.OffersAddress, Result.ItemListRowKey);
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForSelectedRows(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	CalculateAndLoadOffers_ForSelectedRows(Result);
+	OffersClient.SpecialOffersEditFinish_ForSelectedRows(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+&AtServer
+Procedure CalculateAndLoadOffers_ForSelectedRows(Result)
+	OffersServer.CalculateAndLoadOffers_ForSelectedRows(Object, Result.OffersAddress, Result.ArrayOfRowKeys);
+EndProcedure
+
+#EndRegion
+
+#Region MANUAL_OFFERS
+
+&AtClient
+Procedure SetManualOffers(Command)
+	
+	ArrayOfRows = New Array();
+	For Each ItemOfArray In Items.ItemList.SelectedRows Do
+		ItemListRow = Object.ItemList.FindByID(ItemOfArray);
+		ArrayOfRows.Add(New Structure("Key, Quantity, Price, ManualOfferAmount, ManualOfferPercent, ManualOfferType", 
+			ItemListRow.Key, 
+			ItemListRow.Quantity, 
+			ItemListRow.Price, 
+			ItemListRow.ManualOfferAmount, 
+			ItemListRow.ManualOfferPercent,
+			ItemListRow.ManualOfferType));
+	EndDo;
+	
+	If ArrayOfRows.Count() = 0 Then
+		Return;
+	EndIf;
+	FormParameters = New Structure();
+	FormParameters.Insert("ManualOfferAmount" , 0);
+	FormParameters.Insert("ManualOfferPercent", 0);
+	FormParameters.Insert("ManualOfferType"   , Undefined);
+	FormParameters.Insert("ItemList"          , ArrayOfRows);
+	
+	If ArrayOfRows.Count() = 1 Then
+		FormParameters.ManualOfferAmount = ArrayOfRows[0].ManualOfferAmount;
+		FormParameters.ManualOfferPercent = ArrayOfRows[0].ManualOfferPercent;
+		FormParameters.ManualOfferType = ArrayOfRows[0].ManualOfferType;
+	EndIf;
+		
+	Callback = New CallbackDescription("SetManualOffersFinish", ThisObject);
+	OpenForm("CommonForm.EditManualOffers", FormParameters, ThisObject,,,, Callback, FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+&AtClient
+Procedure SetManualOffersFinish(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	For Each Row In Result.ItemList Do
+		ItemListRow = Object.ItemList.FindRows(New Structure("Key", Row.Key))[0];
+		ViewClient_V2.SetItemListManualOfferType(Object, ThisObject, ItemListRow, Row.ManualOfferType);
+		If Row.ManualOfferType = PredefinedValue("Enum.ManualOfferTypes.Percent") Then
+			ViewClient_V2.SetItemListManualOfferPercent(Object, ThisObject, ItemListRow, Row.ManualOfferPercent);
+		Else
+			ViewClient_V2.SetItemListManualOfferAmount(Object, ThisObject, ItemListRow, Row.ManualOfferAmount);
+		EndIf;
+	EndDo;	
 EndProcedure
 
 #EndRegion
@@ -812,7 +928,7 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure

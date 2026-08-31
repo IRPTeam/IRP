@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6351b2d5-29bc-46b1-837b-2b05051c4320">
+ <name>Report_R5020_PartnersBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>03FF29B6-6007-9CA2-22AC-C36F97415E5D</value>
+ </synonym>
+</mdclass:Role>

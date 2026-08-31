@@ -1172,6 +1172,50 @@
     </code>
    </content>
   </items>
+  <items id="f73146a7-6ec4-4d27-90d3-76849b1fc5c9">
+   <name>Document_IncomingExchRateAdjustmentInvoice</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>172</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="2923171e-bd74-444d-9373-c6c5a986d214">
+    <name>IncomingExchRateAdjustmentInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>174</value>
+    </code>
+   </content>
+   <content id="780dc9af-d217-442a-9189-b40fa3d0c4be">
+    <name>IncomingExchRateAdjustmentInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>175</value>
+    </code>
+   </content>
+  </items>
+  <items id="def61031-75ce-499d-a025-a1a027cc4411">
+   <name>Document_OutgoingExchRateAdjustmentInvoice</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>173</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="3ec1bf99-45af-4e1e-93ff-dd8643c8f50c">
+    <name>OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>176</value>
+    </code>
+   </content>
+   <content id="bef111ae-9d3b-4832-a348-dec0ef78de16">
+    <name>OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>177</value>
+    </code>
+   </content>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

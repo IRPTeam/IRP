@@ -14,9 +14,7 @@
  <minValue xsi:type="core:UndefinedValue"/>
  <maxValue xsi:type="core:UndefinedValue"/>
  <dataHistory>Use</dataHistory>
- <fillValue xsi:type="core:StringValue">
-  <value/>
- </fillValue>
+ <fillValue xsi:type="core:StringValue"/>
  <content>
   <metadata>Document.StockCorrection</metadata>
   <use>Use</use>
@@ -91,6 +89,10 @@
  </content>
  <content>
   <metadata>Document.ChequeBondTransaction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Storno</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -250,7 +252,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.IncomingExchRateAdjustmentInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.Payroll</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.OutgoingExchRateAdjustmentInvoice</metadata>
   <use>Use</use>
  </content>
  <content>

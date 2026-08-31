@@ -64,7 +64,7 @@ Scenario: 963002 try post SO (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '81'     | '26.10.2023 17:19:50' |
+		| '81'     | '26.10.2023' |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -75,7 +75,7 @@ Scenario: 963003 try post SI (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '73'     |'26.10.2023 17:20:16'  |
+		| '73'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -86,7 +86,7 @@ Scenario: 963004 try post SC (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '73'     |'26.10.2023 17:20:46'  |
+		| '73'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -97,7 +97,7 @@ Scenario: 963005 try post PlannedReceiptReservation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                |
-		| '217'     |'26.10.2023 17:21:29'  |
+		| '217'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -108,7 +108,7 @@ Scenario: 963006 try post SalesReturnOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '73'     |'26.10.2023 17:21:56'  |
+		| '73'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -119,7 +119,7 @@ Scenario: 963007 try post SalesReturn(LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '73'     |'26.10.2023 17:22:43'  |
+		| '73'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -130,7 +130,7 @@ Scenario: 963008 try post PriceList (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PriceList"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '11'     |'26.10.2023 17:14:53'  |
+		| '11'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -141,7 +141,7 @@ Scenario: 963009 try post WorkOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.WorkOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '10'     |'26.10.2023 17:25:31'  |
+		| '10'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -152,7 +152,7 @@ Scenario: 963010 try post WorkSheet (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.WorkSheet"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '10'     |'26.10.2023 17:26:08'  |
+		| '10'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -163,7 +163,7 @@ Scenario: 963011 try post SalesReportFromTradeAgent (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '10'     |'26.10.2023 17:26:52'  |
+		| '10'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -174,7 +174,7 @@ Scenario: 963012 try post SalesReportToConsignor (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '10'     |'26.10.2023 17:27:31'  |
+		| '10'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -185,7 +185,7 @@ Scenario: 963013 try post SalesReportToConsignor (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '26.10.2023 17:27:31'  |
+		| '10'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -196,7 +196,7 @@ Scenario: 963014 try post SalesReportToConsignor (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '26.10.2023 17:27:31'  |
+		| '10'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -208,7 +208,7 @@ Scenario: 963015 try post PurchaseOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:11:07'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -219,7 +219,7 @@ Scenario: 963017 try post PurchaseInvoice (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:11:46'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -230,7 +230,7 @@ Scenario: 963018 try post GoodsReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:13:07'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -241,7 +241,7 @@ Scenario: 963018 try post PurchaseReturnOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:13:40'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -252,7 +252,7 @@ Scenario: 963018 try post PurchaseReturn (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:14:09'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -263,7 +263,7 @@ Scenario: 963019 try post InternalSupplyRequest (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '26.10.2023 17:15:29'  |
+		| '28'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -274,7 +274,7 @@ Scenario: 963020 try post Labeling (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Labeling"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '4'      | '26.10.2023 17:15:49'  |
+		| '4'      | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -285,7 +285,7 @@ Scenario: 963021 try post Cash statement (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashStatement"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '28'      | '30.10.2023 16:40:34'  |
+		| '28'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -296,7 +296,7 @@ Scenario: 963022 try post RetailGoodsReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '30.10.2023 16:41:52'  |
+		| '73'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -307,7 +307,7 @@ Scenario: 963023 try post RetailShipmentConfirmation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '30.10.2023 16:42:31'  |
+		| '73'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -318,7 +318,7 @@ Scenario: 963024 try post RetailSalesReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '30.10.2023 16:43:38'  |
+		| '73'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -329,7 +329,7 @@ Scenario: 963025 try post RetailReturnReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '30.10.2023 16:47:40'  |
+		| '73'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -340,7 +340,7 @@ Scenario: 963026 try post ConsolidatedRetailSales (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '28'      | '30.10.2023 16:47:25'  |
+		| '28'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -351,7 +351,7 @@ Scenario: 963027 try post AdditionalCostAllocation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '31.10.2023 09:50:59'  |
+		| '73'      | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -362,13 +362,13 @@ Scenario: 963028 try post AdditionalRevenueAllocation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '74'      | '30.10.2023 11:20:01'  |
+		| '74'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '31.10.2023 09:51:45'  |
+		| '73'      | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -379,7 +379,7 @@ Scenario: 963029 try post Bundling (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '28'      | '31.10.2023 09:52:46'  |
+		| '28'      | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -390,7 +390,7 @@ Scenario: 963030 try post CalculationMovementCosts (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '4'       | '31.10.2023 09:50:35'  |
+		| '4'       | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -401,7 +401,7 @@ Scenario: 963031 try post InventoryTransfer (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '244'     | '31.10.2023 09:36:46'  |
+		| '244'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -412,7 +412,7 @@ Scenario: 963032 try post InventoryTransferOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '82'     | '31.10.2023 09:37:17'  |
+		| '82'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -423,7 +423,7 @@ Scenario: 963033 try post ItemStockAdjustment (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:35:50'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -434,7 +434,7 @@ Scenario: 963034 try post PhysicalCountByLocation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 09:47:30'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Save and close" button
 	Then user message window does not contain messages
@@ -445,7 +445,7 @@ Scenario: 963035 try post PhysicalInventory (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 09:43:14'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -456,7 +456,7 @@ Scenario: 963036 try post StockAdjustmentAsSurplus (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:49:18'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -467,7 +467,7 @@ Scenario: 963037 try post StockAdjustmentAsWriteOff (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:50:02'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -478,7 +478,7 @@ Scenario: 963038 try post Unbundling (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:53:14'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -489,7 +489,7 @@ Scenario: 963039 try post Unbundling (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:53:14'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -500,7 +500,7 @@ Scenario: 963040 try post BankPayment (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '82'     | '31.10.2023 11:45:20'  |
+		| '82'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I activate "Partner term" field in "PaymentList" table
 	And I select current line in "PaymentList" table
@@ -514,7 +514,7 @@ Scenario: 963040 try post BankReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '82'     | '31.10.2023 11:46:28'  |
+		| '82'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I activate "Partner term" field in "PaymentList" table
 	And I select current line in "PaymentList" table
@@ -528,7 +528,7 @@ Scenario: 963041 try post CashExpense (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashExpense"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '82'     | '31.10.2023 11:48:21'  |
+		| '82'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -539,7 +539,7 @@ Scenario: 963042 try post CashPayment (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 11:46:55'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I activate "Partner term" field in "PaymentList" table
 	And I select current line in "PaymentList" table
@@ -553,7 +553,7 @@ Scenario: 963043 try post CashReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 11:47:16'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I activate "Partner term" field in "PaymentList" table
 	And I select current line in "PaymentList" table
@@ -567,7 +567,7 @@ Scenario: 963044 try post CashRevenue (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashRevenue"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 11:48:49'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -578,7 +578,7 @@ Scenario: 963045 try post CashTransferOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '244'     | '31.10.2023 11:54:02'  |
+		| '244'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -589,7 +589,7 @@ Scenario: 963046 try post CreditNote (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CreditNote"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:50:10'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -600,7 +600,7 @@ Scenario: 963047 try post CustomersAdvancesClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:50:26'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -611,7 +611,7 @@ Scenario: 963048 try post DebitNote (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:49:37'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -622,7 +622,7 @@ Scenario: 963049 try post EmployeeCashAdvance (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:51:24'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -633,7 +633,7 @@ Scenario: 963050 try post ForeignCurrencyRevaluation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
 	And I go to line in "List" table
 		| 'Number'| 'Date'                 |
-		| '4'     | '31.10.2023 11:51:47'  |
+		| '4'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -644,7 +644,7 @@ Scenario: 963051 try post IncomingPaymentOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:54:57'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -655,7 +655,7 @@ Scenario: 963052 try post MoneyTransfer (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '244'    | '31.10.2023 11:54:30'  |
+		| '244'    | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -666,7 +666,7 @@ Scenario: 963053 try post OutgoingPaymentOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 11:55:21'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -677,7 +677,7 @@ Scenario: 963054 try post ReconciliationStatement (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:47:36'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -688,7 +688,7 @@ Scenario: 963055 try post VendorsAdvancesClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:50:47'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -699,7 +699,7 @@ Scenario: 963056 try post Payroll (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Payroll"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 17:01:18'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -710,7 +710,7 @@ Scenario: 963057 try post TimeSheet (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.TimeSheet"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 17:02:09'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -721,7 +721,7 @@ Scenario: 963058 try post ProductionPlanning (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '02.11.2023 12:01:51'  |
+		| '10'     | '02.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -732,7 +732,7 @@ Scenario: 963059 try post Production (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Production"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '02.11.2023 12:02:30'  |
+		| '28'     | '02.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -743,7 +743,7 @@ Scenario: 963060 try post ProductionPlanningCorrection (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '02.11.2023 12:03:16'  |
+		| '10'     | '02.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -754,7 +754,7 @@ Scenario: 963061 try post ProductionPlanningClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '02.11.2023 12:03:24'  |
+		| '10'     | '02.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -765,7 +765,7 @@ Scenario: 963062 try post SalesOrderClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:35:53'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -776,7 +776,7 @@ Scenario: 963063 try post PurchaseOrderClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:36:20'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -787,7 +787,7 @@ Scenario: 963064 try post CommissioningOfFixedAsset (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:15:18'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -798,7 +798,7 @@ Scenario: 963065 try post DecommissioningOfFixedAsset (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:15:51'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -809,18 +809,56 @@ Scenario: 963066 try post DepreciationCalculation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '01.11.2023 13:16:01'  |
+		| '10'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
 	Then I wait "Depreciation calculation * dated * *" window closing in "5" seconds
 
+Scenario: 963069 post DepreciationCalculation when the month has a posted document of the inaccessible branch (LimitedAccess)
+	And I close all client application windows
+	* Create and post the document of the branch that is not accessible for LimitedAccess
+		And I close TestClient session
+		And I connect "Этот клиент" TestClient using "CI" login and "CI" password
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Company Read and Write Access" string
+		And I select from the drop-down list named "Branch" by "Branch access deny" string
+		And I click Choice button of the field named "Date"
+		And I input "15.12.2026 10:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I click the button named "FormPostAndClose"
+	* Create own document of the accessible branch in the same month
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Company Read and Write Access" string
+		And I select from the drop-down list named "Branch" by "Branch Read and Write Access" string
+		And I click Choice button of the field named "Date"
+		And I input "15.12.2026 11:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I click the button named "FormWrite"
+		And I delete "$$OwnDepreciationCalculation$$" variable
+		And I save the value of "Number" field as "$$OwnDepreciationCalculation$$"
+		And I close current window
+	* Post own document under the limited user
+		And I close TestClient session
+		And I connect "TestAdmin" TestClient using "LimitedAccess" login and "" password
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I go to line in "List" table
+			| 'Number'                         |
+			| '$$OwnDepreciationCalculation$$' |
+		And I select current line in "List" table
+		And I click the button named "FormPostAndClose"
+		If "1C:Enterprise" window is opened Then
+			And I click "OK" button
+		Then user message window does not contain messages
+		Then I wait "Depreciation calculation $$OwnDepreciationCalculation$$ dated **" window closing in "5" seconds
+	And I close all client application windows
 Scenario: 963067 try post ModernizationOfFixedAsset (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:35:12'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -831,7 +869,7 @@ Scenario: 963068 try post ChequeBondTransaction (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '01.11.2023 13:54:15'  |
+		| '10'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -848,7 +886,8 @@ Scenario: 964003 deletion mark AdditionalCostAllocation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
-		| "Doc = Documents.AdditionalCostAllocation.FindByNumber(26).GetObject();" |
+		| "УстановитьПривилегированныйРежим(False);"      |
+		| "Doc = Documents.AdditionalCostAllocation.FindByNumber(25).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
 		| "Except"                                                  |
@@ -866,13 +905,14 @@ Scenario: 964004 deletion mark AdditionalRevenueAllocation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
-		| "Doc = Documents.AdditionalRevenueAllocation.FindByNumber(26).GetObject();" |
+		| "УстановитьПривилегированныйРежим(False);"      |
+		| "Doc = Documents.AdditionalRevenueAllocation.FindByNumber(30).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
 		| "Except"                                                  |
 		| "EndTry"                                                  |
 	And 1C:Enterprise language expression "{!Documents.AdditionalRevenueAllocation.FindByNumber(2).DeletionMark=False}" is true
-	And 1C:Enterprise language expression "{!Documents.AdditionalRevenueAllocation.FindByNumber(26).DeletionMark=True}" is true
+	And 1C:Enterprise language expression "{!Documents.AdditionalRevenueAllocation.FindByNumber(27).DeletionMark=True}" is true
 
 Scenario: 964005 deletion mark BankPayment (LimitedAccess)
 	And I execute the built-in language code at server (Extension)
@@ -884,6 +924,7 @@ Scenario: 964005 deletion mark BankPayment (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.BankPayment.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -902,6 +943,7 @@ Scenario: 964006 deletion mark BankReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.BankReceipt.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -920,6 +962,7 @@ Scenario: 964007 deletion mark BatchReallocateIncoming (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.BatchReallocateIncoming.FindByNumber(10).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -938,6 +981,7 @@ Scenario: 964008 deletion mark BatchReallocateOutgoing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.BatchReallocateOutgoing.FindByNumber(10).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -956,6 +1000,7 @@ Scenario: 964009 deletion mark Bundling (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Bundling.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -974,6 +1019,7 @@ Scenario: 964010 deletion mark CalculationMovementCosts (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CalculationMovementCosts.FindByNumber(2).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -992,6 +1038,7 @@ Scenario: 964011 deletion mark CashExpense (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashExpense.FindByNumber(41).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1010,6 +1057,7 @@ Scenario: 964012 deletion mark CashPayment (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashPayment.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1028,6 +1076,7 @@ Scenario: 964013 deletion mark CashReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashReceipt.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1046,6 +1095,7 @@ Scenario: 964014 deletion mark CashRevenue (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashRevenue.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1064,6 +1114,7 @@ Scenario: 964015 deletion mark CashStatement (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashStatement.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1082,6 +1133,7 @@ Scenario: 964016 deletion mark CashTransferOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashTransferOrder.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1100,6 +1152,7 @@ Scenario: 964017 deletion mark ChequeBondTransaction (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ChequeBondTransaction.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1118,6 +1171,7 @@ Scenario: 964018 deletion mark ChequeBondTransactionItem (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ChequeBondTransactionItem.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1136,6 +1190,7 @@ Scenario: 964019 deletion mark ConsolidatedRetailSales (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ConsolidatedRetailSales.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1154,6 +1209,7 @@ Scenario: 964020 deletion mark CreditNote (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CreditNote.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1172,6 +1228,7 @@ Scenario: 964021 deletion mark CustomersAdvancesClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CustomersAdvancesClosing.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1190,6 +1247,7 @@ Scenario: 964022 deletion mark DebitNote (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.DebitNote.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1208,6 +1266,7 @@ Scenario: 964023 deletion mark EmployeeCashAdvance (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.EmployeeCashAdvance.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1226,6 +1285,7 @@ Scenario: 964024 deletion mark ForeignCurrencyRevaluation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ForeignCurrencyRevaluation.FindByNumber(2).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1244,6 +1304,7 @@ Scenario: 964025 deletion mark GoodsReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.GoodsReceipt.FindByNumber(11).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1262,6 +1323,7 @@ Scenario: 964026 deletion mark IncomingPaymentOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.IncomingPaymentOrder.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1280,6 +1342,7 @@ Scenario: 964027 deletion mark InternalSupplyRequest (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.InternalSupplyRequest.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1298,6 +1361,7 @@ Scenario: 964028 deletion mark InventoryTransfer (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.InventoryTransfer.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1316,6 +1380,7 @@ Scenario: 964029 deletion mark InventoryTransferOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.InventoryTransferOrder.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1334,6 +1399,7 @@ Scenario: 964030 deletion mark ItemStockAdjustment (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ItemStockAdjustment.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1353,6 +1419,7 @@ Scenario: 964032 deletion mark Labeling (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Labeling.FindByNumber(2).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1371,6 +1438,7 @@ Scenario: 964033 deletion mark ManualRegisterEntry (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ManualRegisterEntry.FindByNumber(2).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1389,6 +1457,7 @@ Scenario: 964034 deletion mark MoneyTransfer (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.MoneyTransfer.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1407,6 +1476,7 @@ Scenario: 964035 deletion mark OpeningEntry (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.OpeningEntry.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1425,6 +1495,7 @@ Scenario: 964036 deletion mark OutgoingPaymentOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.OutgoingPaymentOrder.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1444,6 +1515,7 @@ Scenario: 964037 deletion mark Payroll (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Payroll.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1462,6 +1534,7 @@ Scenario: 964038 deletion mark PhysicalCountByLocation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PhysicalCountByLocation.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1480,6 +1553,7 @@ Scenario: 964039 deletion mark PhysicalInventory (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PhysicalInventory.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1498,6 +1572,7 @@ Scenario: 964040 deletion mark PlannedReceiptReservation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PlannedReceiptReservation.FindByNumber(118).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1516,6 +1591,7 @@ Scenario: 964041 deletion mark PriceList (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PriceList.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1534,6 +1610,7 @@ Scenario: 964042 deletion mark Production (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Production.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1552,6 +1629,7 @@ Scenario: 964043 deletion mark ProductionCostsAllocation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ProductionCostsAllocation.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1570,6 +1648,7 @@ Scenario: 964044 deletion mark ProductionPlanning (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ProductionPlanning.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1588,6 +1667,7 @@ Scenario: 964045 deletion mark ProductionPlanningClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ProductionPlanningClosing.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1606,6 +1686,7 @@ Scenario: 964046 deletion mark ProductionPlanningCorrection (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ProductionPlanningCorrection.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1624,6 +1705,7 @@ Scenario: 964047 deletion mark PurchaseInvoice (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseInvoice.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1642,6 +1724,7 @@ Scenario: 964048 deletion mark PurchaseOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseOrder.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1660,6 +1743,7 @@ Scenario: 964049 deletion mark PurchaseOrderClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseOrderClosing.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1678,6 +1762,7 @@ Scenario: 964050 deletion mark PurchaseReturn (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseReturn.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1696,6 +1781,7 @@ Scenario: 964051 deletion mark PurchaseReturnOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseReturnOrder.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1714,6 +1800,7 @@ Scenario: 964052 deletion mark ReconciliationStatement (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ReconciliationStatement.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1732,6 +1819,7 @@ Scenario: 964053 deletion mark RetailGoodsReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.RetailGoodsReceipt.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1750,6 +1838,7 @@ Scenario: 964054 deletion mark RetailReturnReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.RetailReturnReceipt.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1768,6 +1857,7 @@ Scenario: 964055 deletion mark RetailSalesReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.RetailSalesReceipt.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1786,6 +1876,7 @@ Scenario: 964056 deletion mark RetailShipmentConfirmation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.RetailShipmentConfirmation.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1804,6 +1895,7 @@ Scenario: 964057 deletion mark SalesInvoice (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesInvoice.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1822,6 +1914,7 @@ Scenario: 964058 deletion mark SalesOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesOrder.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1840,6 +1933,7 @@ Scenario: 964059 deletion mark SalesOrderClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesOrderClosing.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1858,6 +1952,7 @@ Scenario: 964060 deletion mark SalesReportFromTradeAgent (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesReportFromTradeAgent.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1876,6 +1971,7 @@ Scenario: 964061 deletion mark SalesReportToConsignor (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesReportToConsignor.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1894,6 +1990,7 @@ Scenario: 964062 deletion mark SalesReturn (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesReturn.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1912,6 +2009,7 @@ Scenario: 964063 deletion mark SalesReturnOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesReturnOrder.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1930,6 +2028,7 @@ Scenario: 964064 deletion mark ShipmentConfirmation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ShipmentConfirmation.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1948,6 +2047,7 @@ Scenario: 964065 deletion mark StockAdjustmentAsSurplus (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.StockAdjustmentAsSurplus.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1966,6 +2066,7 @@ Scenario: 964066 deletion mark StockAdjustmentAsWriteOff (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.StockAdjustmentAsWriteOff.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1984,6 +2085,7 @@ Scenario: 964067 deletion mark TimeSheet (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.TimeSheet.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2002,6 +2104,7 @@ Scenario: 964068 deletion mark Unbundling (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Unbundling.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2020,6 +2123,7 @@ Scenario: 964069 deletion mark VendorsAdvancesClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.VendorsAdvancesClosing.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2038,6 +2142,7 @@ Scenario: 964070 deletion mark WorkOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.WorkOrder.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2056,6 +2161,7 @@ Scenario: 964071 deletion mark WorkOrderClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.WorkOrderClosing.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2074,6 +2180,7 @@ Scenario: 964072 deletion mark WorkSheet (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.WorkSheet.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2092,6 +2199,7 @@ Scenario: 964073 deletion mark CommissioningOfFixedAsset (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CommissioningOfFixedAsset.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2110,6 +2218,7 @@ Scenario: 964074 deletion mark DecommissioningOfFixedAsset (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.DecommissioningOfFixedAsset.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2128,6 +2237,7 @@ Scenario: 964075 deletion mark DepreciationCalculation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.DepreciationCalculation.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2146,6 +2256,7 @@ Scenario: 964076 deletion mark FixedAssetTransfer (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.FixedAssetTransfer.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2164,6 +2275,7 @@ Scenario: 964077 deletion mark ModernizationOfFixedAsset (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ModernizationOfFixedAsset.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |

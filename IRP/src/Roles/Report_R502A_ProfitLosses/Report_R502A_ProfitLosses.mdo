@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="598eb7d5-3f9f-4361-b4d6-2f32cd50df87">
+ <name>Report_R502A_ProfitLosses</name>
+ <synonym>
+  <key>en</key>
+  <value>7076C7D2-2D84-CB98-83D6-6990B7513AB3</value>
+ </synonym>
+</mdclass:Role>

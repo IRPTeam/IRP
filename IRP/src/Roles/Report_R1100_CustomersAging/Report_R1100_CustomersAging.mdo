@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4271f588-aed0-4691-82d5-449b26feb9db">
+ <name>Report_R1100_CustomersAging</name>
+ <synonym>
+  <key>en</key>
+  <value>2360FE7E-5151-406A-A63C-C7D4DC9FE57C</value>
+ </synonym>
+</mdclass:Role>

@@ -318,12 +318,14 @@ Procedure UpdateTargetObject(Source, Rule, Wrapper, IsUpdate)
 	// Process header attributes first
 	FillHeaderAttributes(Source, Rule, Wrapper);
 	
+	TableKeyMap = New Map; // (String, String)
+	
 	// Process tabular sections in priority order
 	TablePriority = TableFillingPriority();
-	FillPriorityTables(Source, Rule, Wrapper, TablePriority);
+	FillPriorityTables(Source, Rule, Wrapper, TablePriority, TableKeyMap);
 	
 	// Process remaining tables
-	FillRemainingTables(Source, Rule, Wrapper, TablePriority);
+	FillRemainingTables(Source, Rule, Wrapper, TablePriority, TableKeyMap);
 EndProcedure
 
 // Fills tabular sections in priority order.
@@ -333,7 +335,8 @@ EndProcedure
 //  Rule - CatalogRef.TransformationRules - Transformation rule
 //  Wrapper - See BuilderAPI.Init
 //  TablePriority - Array - Priority order for tables
-Procedure FillPriorityTables(Source, Rule, Wrapper, TablePriority)
+//  TableKeyMap - Map - Table Key Map
+Procedure FillPriorityTables(Source, Rule, Wrapper, TablePriority, TableKeyMap)
 	TargetTables = GetTargetTables(Rule);
 	TargetTableList = TargetTables.UnloadColumn("SortingIndex"); // Array Of String
 	
@@ -346,7 +349,7 @@ Procedure FillPriorityTables(Source, Rule, Wrapper, TablePriority)
 			Continue;
 		EndIf;
 		
-		FillTableRows(Source, Rule, Wrapper, TableName);
+		FillTableRows(Source, Rule, Wrapper, TableName, TableKeyMap);
 	EndDo;
 EndProcedure
 
@@ -357,7 +360,8 @@ EndProcedure
 //  Rule - CatalogRef.TransformationRules - Transformation rule
 //  Wrapper - See BuilderAPI.Init
 //  TablePriority - Array - Priority order for tables
-Procedure FillRemainingTables(Source, Rule, Wrapper, TablePriority)
+//  TableKeyMap - Map - Table Key Map
+Procedure FillRemainingTables(Source, Rule, Wrapper, TablePriority, TableKeyMap)
 	TargetTables = GetTargetTables(Rule);
 	TargetTableList = TargetTables.UnloadColumn("SortingIndex"); // Array Of String
 	
@@ -370,7 +374,7 @@ Procedure FillRemainingTables(Source, Rule, Wrapper, TablePriority)
 			Continue; // Already processed in priority order
 		EndIf;
 		
-		FillTableRows(Source, Rule, Wrapper, TableName);
+		FillTableRows(Source, Rule, Wrapper, TableName, TableKeyMap);
 	EndDo;
 EndProcedure
 
@@ -394,14 +398,27 @@ EndFunction
 //  Rule - CatalogRef.TransformationRules - Transformation rule
 //  Wrapper - See BuilderAPI.Init
 //  TableName - String - Name of the table to fill
-Procedure FillTableRows(Source, Rule, Wrapper, TableName)
+//  TableKeyMap - Map - Table Key Map
+Procedure FillTableRows(Source, Rule, Wrapper, TableName, TableKeyMap)
 	TableRules = Rule.Mapping.Unload(New Structure("SortingIndex", TableName));
 	
-	//@skip-check variable-value-type
+	//@skip-check variable-value-type, property-return-type
 	For Each SourceRow In Source[TableName] Do // ValueTableRow
 		TableHasKey = CommonFunctionsClientServer.ObjectHasProperty(SourceRow, "Key");
-		TargetRow = BuilderAPI.AddRow(Wrapper, TableName, False, ?(TableHasKey, SourceRow.Key, Undefined));
-		
+		If TableHasKey Then
+			If IsBlankString(SourceRow.Key) Then
+				NewKey = SourceRow.Key;
+			Else
+				NewKey = TableKeyMap.Get(SourceRow.Key);
+			EndIf;
+			If NewKey = Undefined Then
+				NewKey = String(New UUID());
+				TableKeyMap.Insert(SourceRow.Key, NewKey);
+			EndIf;
+			TargetRow = BuilderAPI.AddRow(Wrapper, TableName, False, NewKey, SourceRow.LineNumber); // ValueTableRow
+		Else
+			TargetRow = BuilderAPI.AddRow(Wrapper, TableName, False, Undefined, SourceRow.LineNumber); // ValueTableRow
+		EndIf;
 		FillTableRowAttributes(Source, SourceRow, Rule, Wrapper, TargetRow, TableName, TableRules);
 	EndDo;
 EndProcedure

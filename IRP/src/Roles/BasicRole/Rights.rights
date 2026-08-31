@@ -306,6 +306,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseSavedPrintForms</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.AppliedDatabaseUpdates</name>
 		<right>
 			<name>Read</name>
@@ -331,6 +338,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseManualOffers</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.AddLinkedDocumentRows</name>
 		<right>
 			<name>View</name>
@@ -339,6 +353,13 @@
 	</object>
 	<object>
 		<name>Constant.UseAdditionalTableControlDocument</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseNotAuditAttributes</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -525,6 +546,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseSalesOrders</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.Height</name>
 		<right>
 			<name>View</name>
@@ -605,6 +633,13 @@
 		</right>
 		<right>
 			<name>Edit</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseInventory</name>
+		<right>
+			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -879,6 +914,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UsePaymentOrders</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -1178,7 +1220,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.UseCashTransaction</name>
+		<name>Constant.UseCashTransactions</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -2080,7 +2122,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.UseOrders</name>
+		<name>Constant.UsePurchaseOrders</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

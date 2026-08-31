@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="23e4c3c6-fba6-4993-a1d0-6de86dc0a1d7">
+ <producedTypes>
+  <managerType typeId="1d407406-c0f6-4273-a166-d6a29e0bea29" valueTypeId="3e712e16-3f8d-45a6-b4d7-79d45acee6e5"/>
+  <valueManagerType typeId="6d2d95ff-a49b-4312-97f5-ec36760519df" valueTypeId="518e1a19-c43e-4ce0-9607-20390654e7f3"/>
+  <valueKeyType typeId="59fb15a7-474a-400e-bb8d-9e19b66ebd5c" valueTypeId="0bdb9191-b0a2-4e0e-82f1-4ae912adbb81"/>
+ </producedTypes>
+ <name>UseManualOffers</name>
+ <synonym>
+  <key>en</key>
+  <value>D08AFECF-DC36-3040-0058-86F0C7F98E8E</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

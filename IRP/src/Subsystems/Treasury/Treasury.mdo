@@ -24,11 +24,11 @@
  <content>Report.R5010A_ReconciliationStatement</content>
  <content>Report.R1100_CustomersAging</content>
  <content>Report.R1200_VendorsAging</content>
+ <content>Document.ReconciliationStatement</content>
  <subsystems>Bank</subsystems>
  <subsystems>Cash</subsystems>
  <subsystems>Transfer</subsystems>
- <subsystems>Retail</subsystems>
- <subsystems>CashTransactions</subsystems>
+ <subsystems>Transactions</subsystems>
  <subsystems>SchedulingOfPaymentDeadlines</subsystems>
  <subsystems>ChequeBond</subsystems>
  <subsystems>Accruals</subsystems>

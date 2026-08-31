@@ -32,6 +32,9 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
+	ExcludeRegisters = New Array();
+	ExcludeRegisters.Add("B1040B_AgingKey");
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters, False, ExcludeRegisters);
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction

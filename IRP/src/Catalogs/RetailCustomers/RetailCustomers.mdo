@@ -141,6 +141,8 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.RetailCustomers.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.RetailCustomers.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.RetailCustomers.Form.ChoiceForm</defaultChoiceForm>
  <attributes uuid="0efea20d-efa3-40ab-ab5e-7300844232ca">
   <name>Name</name>
   <synonym>
@@ -156,9 +158,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -195,9 +195,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -388,6 +386,24 @@
   <synonym>
    <key>en</key>
    <value>3C3F5E50-CCEA-2C78-8860-05F7537F25D7</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="1633580d-6268-48aa-b0b8-7408d8354b74">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>8FF84AB5-40F4-3DAA-A013-3E625AB7AE2B</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5fb9ac2b-5a30-4354-8fdb-b9bb8784939f">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>D554AD09-BB57-1906-6698-81647533161D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

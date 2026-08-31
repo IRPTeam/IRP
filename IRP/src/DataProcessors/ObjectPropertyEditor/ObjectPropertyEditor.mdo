@@ -72,7 +72,6 @@
    <value>F98D892E-2CD3-D42E-E6D3-316CDE2771FC</value>
   </synonym>
   <group>FormCommandBarImportant</group>
-  <commandParameterType/>
   <parameterUseMode>Multiple</parameterUseMode>
   <modifiesData>true</modifiesData>
   <representation>Picture</representation>

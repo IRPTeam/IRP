@@ -104,6 +104,7 @@
  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
@@ -131,6 +132,7 @@
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+ <registerRecords>InformationRegister.RowIDStamps</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -177,6 +179,21 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.NotActive</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <quickChoice>Use</quickChoice>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -621,6 +638,7 @@
     <changeMode>DontChange</changeMode>
     <field>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.Item</field>
    </choiceParameterLinks>
+   <quickChoice>Use</quickChoice>
    <createOnInput>DontUse</createOnInput>
   </attributes>
   <attributes uuid="ad22100c-333e-448a-9167-6e24b9081582">
@@ -867,6 +885,48 @@
     <field>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.VatRate</field>
    </choiceParameterLinks>
    <createOnInput>Use</createOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b94353b5-22bc-42be-9888-047c1988fa8a">
+   <name>ManualOfferAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>1D41CE31-96B2-D9B2-2613-31F37AEBAC18</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="02295538-2850-445f-9888-e8178ef7494e">
+   <name>ManualOfferPercent</name>
+   <synonym>
+    <key>en</key>
+    <value>4BE378C5-0833-BD9F-FF70-08BC1F1E1E34</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePercent</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="02c94ed4-d811-4436-aa35-301ea136265a">
+   <name>ManualOfferType</name>
+   <synonym>
+    <key>en</key>
+    <value>A3BCE1DE-774E-AD70-09EE-E3AA60C1C493</value>
+   </synonym>
+   <type>
+    <types>EnumRef.ManualOfferTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
@@ -1540,6 +1600,20 @@
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1e8125a5-8921-475b-815a-d92c569e197b">
+   <name>PaymentInFiscalPrinterMode</name>
+   <synonym>
+    <key>en</key>
+    <value>32F0D55F-4D7A-CD2F-F81B-B7DDEF13D13A</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

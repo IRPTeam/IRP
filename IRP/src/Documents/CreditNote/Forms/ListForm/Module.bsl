@@ -3,7 +3,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocCreditDebitNoteServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
-	SystemAttributesServer.OutputSystemAttributes(ThisObject, "Company");
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "Comment");
 	Items.IsHaveJE.Visible = FOServer.IsUseAccounting();
 EndProcedure
 

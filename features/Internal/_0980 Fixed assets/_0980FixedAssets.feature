@@ -435,11 +435,7 @@ Scenario: _9800030 create Fixed Assets Transfer
 	Given I open hyperlink "e1cib/list/Document.FixedAssetTransfer"
 	And I click the button named "FormCreate"
 * Filling main details
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
-	And I click the button named "FormChoose"
+	And I select "Main Company" exact value from the drop-down list named "Company"
 	And I click Choice button of the field named "FixedAsset"
 	And I go to line in "List" table
 		| 'Description'      |
@@ -493,11 +489,7 @@ Scenario: _9800031 create Modernization Of Fixed Asset
 	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
 	And I click the button named "FormCreate"
 * Filling main details
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
-	And I click the button named "FormChoose"
+	And I select "Main Company" exact value from the drop-down list named "Company"
 	And I click Choice button of the field named "FixedAsset"
 	And I go to line in "List" table
 		| 'Description'       |
@@ -553,11 +545,7 @@ Scenario: _9800032 create Decommissioning Of Fixed Asset
 	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
 	And I click the button named "FormCreate"
 * Filling main details
-	And I click Choice button of the field named "Company"
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
-	And I click the button named "FormChoose"
+	And I select "Main Company" exact value from the drop-down list named "Company"
 	And I click Choice button of the field named "FixedAsset"
 	And I go to line in "List" table
 		| 'Description'      |
@@ -803,7 +791,71 @@ Scenario: _9800037 check FixedAssetRevaluation (price dropped)
 		And in the table "Calculations" I click the button named "CalculationsFillCalculations"
 		And "Calculations" table became equal
 			| '#' | 'Fixed asset'                         | 'Profit loss center' | 'Ledger type'                                | 'Schedule'                      | 'Calculation method' | 'Currency' | 'Expense type' | 'Amount balance' | 'Amount' |
-			| '1' | 'Manufacturing Equipment (Forklift)'  | 'Front office'       | 'Machinery and Equipment (with deprecation)' | 'Straight line (48 months)'     | 'Straight line'      | 'TRY'      | 'Expense'      | '2 254,24'       | '46,96'  |
+			| '1' | 'Manufacturing Equipment (Forklift)'  | 'Front office'       | 'Machinery and Equipment (with deprecation)' | 'Straight line (48 months)'     | 'Straight line'      | 'TRY'      | 'Expense'      | '500,00'       | '10,42'  |
 			| '2' | 'Office Furniture (Table)'            | 'Accountants office' | 'Furniture and Fixtures (with deprecation)'  | 'Declining balance (60 months)' | 'Declining balance'  | 'TRY'      | 'Expense'      | '850,00'         | '141,67' |
 			| '3' | 'Manufacturing Equipment (Generator)' | 'Front office'       | 'Machinery and Equipment (with deprecation)' | 'Straight line (48 months)'     | 'Straight line'      | 'TRY'      | 'Expense'      | '850,00'         | '17,71'  |
 		And I click the button named "FormPostAndClose"	
+
+Scenario: _9800038 check control of two Depreciation calculations in one month
+	And I close all client application windows
+	* Create depreciation calculation for the month that already has a document
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I click "Create" button
+		And I click Choice button of the field named "Date"
+		And I input "01.04.2024 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Branch" by "Front office" string
+		And in the table "Calculations" I click "Fill calculations" button
+	* Try to post and check the control message
+		And I click "Post" button
+		Then I wait that in user messages the "Depreciation calculation is already exist" substring will appear in 20 seconds
+	* Close without saving
+		And I close current window
+		Then "1C:Enterprise" window is opened
+		And I click "No" button
+	And I close all client application windows
+
+Scenario: _9800039 check Depreciation calculation for another branch in the same month is posted without control message
+	And I close all client application windows
+	* Create depreciation calculation for another branch in the month that already has a document
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I click "Create" button
+		And I click Choice button of the field named "Date"
+		And I input "30.04.2024 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Branch" by "Distribution department" string
+		And in the table "Calculations" I click "Fill calculations" button
+	* Post and check
+		And I click "Post" button
+		Then user message window does not contain messages
+		And I delete "$$NumberDepreciationCalculation4$$" variable
+		And I save the value of "Number" field as "$$NumberDepreciationCalculation4$$"
+		And I click the button named "FormPostAndClose"
+		And "List" table contains lines
+			| 'Number'                             |
+			| '$$NumberDepreciationCalculation4$$' |
+	And I close all client application windows
+
+Scenario: _9800040 check Depreciation calculation for another month is posted without control message
+	And I close all client application windows
+	* Create depreciation calculation for the month without documents
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I click "Create" button
+		And I click Choice button of the field named "Date"
+		And I input "31.05.2024 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Branch" by "Front office" string
+		And in the table "Calculations" I click "Fill calculations" button
+	* Post and check
+		And I click "Post" button
+		Then user message window does not contain messages
+		And I delete "$$NumberDepreciationCalculation3$$" variable
+		And I save the value of "Number" field as "$$NumberDepreciationCalculation3$$"
+		And I click the button named "FormPostAndClose"
+		And "List" table contains lines
+			| 'Number'                             |
+			| '$$NumberDepreciationCalculation3$$' |
+	And I close all client application windows

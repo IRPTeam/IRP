@@ -225,16 +225,97 @@
 				</v8:item>
 			</title>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SourceOfOrigin</dataPath>
+			<field>SourceOfOrigin</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Preliminary.PreliminaryQuantityOpeningBalance</dataPath>
+			<field>PreliminaryQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>5CD60F36-06CF-A3D3-3D7B-B1288C979CA2</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>PreliminaryQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Preliminary.PreliminaryQuantityReceipt</dataPath>
+			<field>PreliminaryQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>E47FA7D8-249F-2A54-4C70-07BD65F7A971</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Preliminary.PreliminaryQuantityExpense</dataPath>
+			<field>PreliminaryQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>87FBF643-B33D-8F1A-A20F-FF4B0BDD659C</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Preliminary.PreliminaryQuantityClosingBalance</dataPath>
+			<field>PreliminaryQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>6DD14144-A1CC-0476-6BE8-86DA383D53A8</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>PreliminaryQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldFolder">
+			<dataPath>Preliminary</dataPath>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>B376DA0A-FDCB-E9E1-15C9-9B117FE9AAF8</v8:content>
+				</v8:item>
+			</title>
+		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT ALLOWED
 	R4050B_StockInventoryBalanceAndTurnovers.Company AS Company,
 	R4050B_StockInventoryBalanceAndTurnovers.Store AS Store,
 	R4050B_StockInventoryBalanceAndTurnovers.ItemKey.Item AS Item,
 	R4050B_StockInventoryBalanceAndTurnovers.ItemKey AS ItemKey,
+	R4050B_StockInventoryBalanceAndTurnovers.SerialLotNumber AS SerialLotNumber,
+	R4050B_StockInventoryBalanceAndTurnovers.SourceOfOrigin AS SourceOfOrigin,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityOpeningBalance AS QuantityOpeningBalance,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityReceipt AS QuantityReceipt,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityExpense AS QuantityExpense,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityClosingBalance AS QuantityClosingBalance,
+	
+	R4050B_StockInventoryBalanceAndTurnovers.PreliminaryQuantityOpeningBalance AS PreliminaryQuantityOpeningBalance,
+	R4050B_StockInventoryBalanceAndTurnovers.PreliminaryQuantityReceipt AS PreliminaryQuantityReceipt,
+	R4050B_StockInventoryBalanceAndTurnovers.PreliminaryQuantityExpense AS PreliminaryQuantityExpense,
+	R4050B_StockInventoryBalanceAndTurnovers.PreliminaryQuantityClosingBalance AS PreliminaryQuantityClosingBalance,
+	
 	R4050B_StockInventoryBalanceAndTurnovers.Recorder AS Recorder,
 	R4050B_StockInventoryBalanceAndTurnovers.SecondPeriod AS SecondPeriod
 FROM
@@ -255,6 +336,22 @@ FROM
 	<totalField>
 		<dataPath>Quantity.ClosingBalance</dataPath>
 		<expression>Sum(Quantity.ClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Preliminary.PreliminaryQuantityOpeningBalance</dataPath>
+		<expression>Sum(Preliminary.PreliminaryQuantityOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Preliminary.PreliminaryQuantityReceipt</dataPath>
+		<expression>Sum(Preliminary.PreliminaryQuantityReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Preliminary.PreliminaryQuantityExpense</dataPath>
+		<expression>Sum(Preliminary.PreliminaryQuantityExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Preliminary.PreliminaryQuantityClosingBalance</dataPath>
+		<expression>Sum(Preliminary.PreliminaryQuantityClosingBalance)</expression>
 	</totalField>
 	<parameter>
 		<name>ReportPeriod</name>

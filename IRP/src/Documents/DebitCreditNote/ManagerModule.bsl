@@ -36,6 +36,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
+	Tables.R5011B_CustomersAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5012B_VendorsAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -1267,54 +1270,64 @@ EndFunction
 
 #Region Accounting_Analytics
 
+Function GetAdditionalAnalytics(Parameters)
+	// Sender
+	Sender = New Structure();
+	Sender.Insert("Partner"       , Parameters.ObjectData.SendPartner);
+	Sender.Insert("LegalName"     , Parameters.ObjectData.SendLegalName);
+	Sender.Insert("Agreement"     , Parameters.ObjectData.SendAgreement);
+	Sender.Insert("Contract"      , Parameters.ObjectData.SendLegalNameContract);
+	Sender.Insert("Order"         , Parameters.ObjectData.SendOrder);
+	Sender.Insert("BasisDocument" , Parameters.ObjectData.SendBasisDocument);
+	Sender.Insert("Currency"      , Parameters.ObjectData.SendCurrency);
+	
+	// Receiver
+	Receiver = New Structure();
+	Receiver.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
+	Receiver.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
+	Receiver.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
+	Receiver.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
+	Receiver.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
+	Receiver.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
+	Receiver.Insert("Currency"      , Parameters.ObjectData.ReceiveCurrency);
+	
+	Return New Structure("Sender, Receiver", Sender, Receiver);
+EndFunction
+
+Function GetAccountVariantsMapping()
+	Mapping = New Map();
+	Mapping.Insert(Enums.DebtTypes.AdvanceVendor          , "AccountAdvancesVendor");
+	Mapping.Insert(Enums.DebtTypes.TransactionCustomer    , "AccountTransactionsCustomer");
+	Mapping.Insert(Enums.DebtTypes.OtherPartnerReceivable , "AccountTransactionsOther");
+	Mapping.Insert(Enums.DebtTypes.EmployeeReceivable     , "AccountCashAdvance");
+	Mapping.Insert(Enums.DebtTypes.TransactionVendor      , "AccountTransactionsVendor");
+	Mapping.Insert(Enums.DebtTypes.AdvanceCustomer        , "AccountAdvancesCustomer");
+	Mapping.Insert(Enums.DebtTypes.OtherPartnerPayable    , "AccountTransactionsOther");
+	Mapping.Insert(Enums.DebtTypes.EmployeePayable        , "AccountCashAdvance");
+	Return Mapping;
+EndFunction
+	
 Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-		
-	// Sender
-	AdditionalAnalytics_Sender = New Structure();
-	AdditionalAnalytics_Sender.Insert("Partner"       , Parameters.ObjectData.SendPartner);
-	AdditionalAnalytics_Sender.Insert("LegalName"     , Parameters.ObjectData.SendLegalName);
-	AdditionalAnalytics_Sender.Insert("Agreement"     , Parameters.ObjectData.SendAgreement);
-	AdditionalAnalytics_Sender.Insert("Contract"      , Parameters.ObjectData.SendLegalNameContract);
-	AdditionalAnalytics_Sender.Insert("Order"         , Parameters.ObjectData.SendOrder);
-	AdditionalAnalytics_Sender.Insert("BasisDocument" , Parameters.ObjectData.SendBasisDocument);
-	AdditionalAnalytics_Sender.Insert("Currency"      , Parameters.ObjectData.SendCurrency);
 	
-	// Receiver
-	AdditionalAnalytics_Receiver = New Structure();
-	AdditionalAnalytics_Receiver.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
-	AdditionalAnalytics_Receiver.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
-	AdditionalAnalytics_Receiver.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
-	AdditionalAnalytics_Receiver.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
-	AdditionalAnalytics_Receiver.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
-	AdditionalAnalytics_Receiver.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
-	AdditionalAnalytics_Receiver.Insert("Currency"      , Parameters.ObjectData.ReceiveCurrency);
-	
-	AccountVariantsMapping = New Map();
-	AccountVariantsMapping.Insert(Enums.DebtTypes.AdvanceVendor          , "AccountAdvancesVendor");
-	AccountVariantsMapping.Insert(Enums.DebtTypes.TransactionCustomer    , "AccountTransactionsCustomer");
-	AccountVariantsMapping.Insert(Enums.DebtTypes.OtherPartnerReceivable , "AccountTransactionsOther");
-	AccountVariantsMapping.Insert(Enums.DebtTypes.EmployeeReceivable     , "AccountCashAdvance");
-	AccountVariantsMapping.Insert(Enums.DebtTypes.TransactionVendor      , "AccountTransactionsVendor");
-	AccountVariantsMapping.Insert(Enums.DebtTypes.AdvanceCustomer        , "AccountAdvancesCustomer");
-	AccountVariantsMapping.Insert(Enums.DebtTypes.OtherPartnerPayable    , "AccountTransactionsOther");
-	AccountVariantsMapping.Insert(Enums.DebtTypes.EmployeePayable        , "AccountCashAdvance");
-		
+	AdditionalAnalytics = GetAdditionalAnalytics(Parameters);
+	AccountVariantsMapping = GetAccountVariantsMapping();
+			
 	QueryParams = GetAdditionalQueryParameters(Undefined);
 	
 	Debit_AccountKey = Undefined;
 	Credit_AccountKey = Undefined;
 	
 	If QueryParams.ArrayOfReceivable.Find(Parameters.ObjectData.SendDebtType) <> Undefined Then
-		Credit_Analytics  = AdditionalAnalytics_Sender;
+		Credit_Analytics  = AdditionalAnalytics.Sender;
 		Credit_AccountKey = AccountVariantsMapping.Get(Parameters.ObjectData.SendDebtType);
-		Debit_Analytics   = AdditionalAnalytics_Receiver;
+		Debit_Analytics   = AdditionalAnalytics.Receiver;
 		Debit_AccountKey  = AccountVariantsMapping.Get(Parameters.ObjectData.ReceiveDebtType);
 	ElsIf QueryParams.ArrayOfPayable.Find(Parameters.ObjectData.SendDebtType) <> Undefined Then		 
-		Debit_Analytics   = AdditionalAnalytics_Sender;
+		Debit_Analytics   = AdditionalAnalytics.Sender;
 		Debit_AccountKey  = AccountVariantsMapping.Get(Parameters.ObjectData.SendDebtType);
-		Credit_Analytics  = AdditionalAnalytics_Receiver;
+		Credit_Analytics  = AdditionalAnalytics.Receiver;
 		Credit_AccountKey = AccountVariantsMapping.Get(Parameters.ObjectData.ReceiveDebtType);		
 	Else
 		Raise StrTemplate("Unsupported send debt type[%1]", Parameters.ObjectData.SendDebtType);
@@ -1417,19 +1430,22 @@ Function GetAnalytics_DR_R5020B_PartnersBalance_CR_R5021_Revenues(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 	
-	AdditionalAnalytics_Partner = New Structure();
-	AdditionalAnalytics_Partner.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
-	AdditionalAnalytics_Partner.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
-	AdditionalAnalytics_Partner.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
-	AdditionalAnalytics_Partner.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
-	AdditionalAnalytics_Partner.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
-	AdditionalAnalytics_Partner.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
+	AdditionalAnalytics = GetAdditionalAnalytics(Parameters);
+	AccountVariantsMapping = GetAccountVariantsMapping();
 	
-	Accounts_Partner = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-	                                                      Parameters.ObjectData.ReceivePartner, 
-	                                                      Parameters.ObjectData.ReceiveAgreement,
-	                                                      Parameters.ObjectData.ReceiveCurrency);
+	Debit_Analytics   = AdditionalAnalytics.Receiver;
+	Debit_AccountKey  = AccountVariantsMapping.Get(Parameters.ObjectData.ReceiveDebtType);
 		
+	If Upper(Debit_AccountKey) = Upper("AccountCashAdvance") Then
+		Debit_AccountVariants = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, 
+			Debit_Analytics.Partner);
+	Else
+		Debit_AccountVariants = AccountingServer.GetT9012S_AccountsPartner(AccountParameters,
+			Debit_Analytics.Partner,
+			Debit_Analytics.Agreement,
+			Debit_Analytics.Currency);
+	EndIf;
+			
 	AdditionalAnalytics_Revenue = New Structure();
 	AdditionalAnalytics_Revenue.Insert("RevenueType"  , Parameters.ObjectData.RevenueType);
 	AdditionalAnalytics_Revenue.Insert("ProfitCenter" , Parameters.ObjectData.ProfitCenter);
@@ -1438,17 +1454,8 @@ Function GetAnalytics_DR_R5020B_PartnersBalance_CR_R5021_Revenues(Parameters)
 	                                                          Parameters.ObjectData.RevenueType,
 	                                                          Parameters.ObjectData.ProfitCenter);
 		
-	// Debit
-	If Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then                                                      
-		AccountingAnalytics.Debit = Accounts_Partner.AccountTransactionsCustomer;
-	ElsIf Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer Then
-		AccountingAnalytics.Debit = Accounts_Partner.AccountAdvancesCustomer;
-	ElsIf Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
-		AccountingAnalytics.Debit = Accounts_Partner.AccountTransactionsVendor;
-	ElsIf Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then
-		AccountingAnalytics.Debit = Accounts_Partner.AccountAdvancesVendor;
-	EndIf;
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics_Partner);
+	AccountingAnalytics.Debit = Debit_AccountVariants[Debit_AccountKey];
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Debit_Analytics);
 
 	// Credit
 	AccountingAnalytics.Credit = Accounts_Revenue.AccountRevenue;	
@@ -1461,18 +1468,20 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R5020B_PartnersBalance(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 	
-	AdditionalAnalytics_Partner = New Structure();
-	AdditionalAnalytics_Partner.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
-	AdditionalAnalytics_Partner.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
-	AdditionalAnalytics_Partner.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
-	AdditionalAnalytics_Partner.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
-	AdditionalAnalytics_Partner.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
-	AdditionalAnalytics_Partner.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
+	AdditionalAnalytics = GetAdditionalAnalytics(Parameters);
+	AccountVariantsMapping = GetAccountVariantsMapping();
 	
-	Accounts_Partner = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-	                                                      Parameters.ObjectData.ReceivePartner, 
-	                                                      Parameters.ObjectData.ReceiveAgreement,
-	                                                      Parameters.ObjectData.ReceiveCurrency);
+	Credit_Analytics   = AdditionalAnalytics.Receiver;
+	Credit_AccountKey  = AccountVariantsMapping.Get(Parameters.ObjectData.ReceiveDebtType);
+		
+	If Upper(Credit_AccountKey) = Upper("AccountCashAdvance") Then
+		Credit_AccountVariants = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Credit_Analytics.Partner);
+	Else
+		Credit_AccountVariants = AccountingServer.GetT9012S_AccountsPartner(AccountParameters,
+			Credit_Analytics.Partner,
+			Credit_Analytics.Agreement,
+			Credit_Analytics.Currency);
+	EndIf;
 	
 	AdditionalAnalytics_Expense = New Structure();
 	AdditionalAnalytics_Expense.Insert("ExpenseType" , Parameters.ObjectData.ExpenseType);
@@ -1487,16 +1496,8 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R5020B_PartnersBalance(Parameters)
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics_Expense);
 
 	// Credit
-	If Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then                                                      
-		AccountingAnalytics.Credit = Accounts_Partner.AccountTransactionsCustomer;
-	ElsIf Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer Then
-		AccountingAnalytics.Credit = Accounts_Partner.AccountAdvancesCustomer;
-	ElsIf Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
-		AccountingAnalytics.Credit = Accounts_Partner.AccountTransactionsVendor;
-	ElsIf Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then
-		AccountingAnalytics.Credit = Accounts_Partner.AccountAdvancesVendor;
-	EndIf;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics_Partner);	
+	AccountingAnalytics.Credit = Credit_AccountVariants[Credit_AccountKey];	
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Credit_Analytics);	
 	
 	Return AccountingAnalytics;
 EndFunction

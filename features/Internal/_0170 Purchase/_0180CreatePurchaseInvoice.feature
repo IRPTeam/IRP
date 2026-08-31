@@ -79,8 +79,8 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 	* Select PO
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'   | 'Partner'     | 'Date'                   |
-			| '217'      | 'Ferron BP'   | '12.02.2021 12:45:05'    |
+			| 'Number'   | 'Partner'     | 'Date'          |
+			| '217'      | 'Ferron BP'   | '12.02.2021'    |
 	* Create PI
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		Then "Add linked document rows" window is opened
@@ -375,11 +375,7 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I click the button named "FormCreate"
 		* Filling in the main details of the document
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
+			And I select "Main Company" exact value from "Company" drop-down list
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -523,11 +519,7 @@ Scenario: _018012 Purchase invoice creation without PO
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description     |
-			| Main Company    |
-		And I select current line in "List" table
+		And I select "Main Company" exact value from "Company" drop-down list
 	* Filling in vendor information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -710,11 +702,7 @@ Scenario: _018013 create PI using form link/unlink
 			| 'Dress'   | 'S/Yellow'   | '5,000'      | 'Store 02'    |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'box Dress (8 pcs)'    |
-		And I select current line in "List" table
+		And I select "box Dress (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And "RowIDInfo" table contains lines
 			| 'Basis'                                          | 'Next step'   | 'Quantity'   | 'Current step'    |
 			| 'Purchase order 217 dated 12.02.2021 12:45:05'   | ''            | '40,000'     | 'PI&GR'           |
@@ -1022,11 +1010,7 @@ Scenario: _018020 check Purchase price records
 		And I finish line editing in "ItemList" table
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'            |
-			| 'High shoes box (8 pcs)' |
-		And I select current line in "List" table
+		And I select "High shoes box (8 pcs)" exact value from "Unit" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table

@@ -64,6 +64,10 @@
  </resources>
  <dimensions uuid="8f3c13b3-4913-4de8-9ed7-ff5c93066cb1">
   <name>RecorderMetaName</name>
+  <synonym>
+   <key>en</key>
+   <value>5412D75D-8566-7453-3A26-6C85A4B6DD1B</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>

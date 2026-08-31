@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eb70a4f1-f725-4ef2-88ad-ec1779aa37be">
+ <name>OpenReport_R405A_StockAdjustments</name>
+ <synonym>
+  <key>en</key>
+  <value>22B2CCE4-F8BF-5002-2E98-8C0596C43708</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

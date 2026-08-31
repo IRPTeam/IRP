@@ -252,21 +252,100 @@
    <currentRowUse>Auto</currentRowUse>
   </extInfo>
  </items>
- <items xsi:type="form:FormField">
-  <name>UseConsolidatedRetailSales</name>
-  <id>6</id>
+ <items xsi:type="form:FormGroup">
+  <name>GroupUseConsolidatedRetailSales</name>
+  <id>47</id>
+  <items xsi:type="form:FormField">
+   <name>UseConsolidatedRetailSales</name>
+   <id>6</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Object.UseConsolidatedRetailSales</segments>
+   </dataPath>
+   <titleLocation>Left</titleLocation>
+   <handlers>
+    <event>OnChange</event>
+    <name>UseConsolidatedRetailSalesOnChange</name>
+   </handlers>
+   <extendedTooltip>
+    <name>UseConsolidatedRetailSalesExtendedTooltip</name>
+    <id>8</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>UseConsolidatedRetailSalesContextMenu</name>
+    <id>7</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>CheckBoxField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>UseConsolidatedRetailSalesStartDate</name>
+   <id>49</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Object.UseConsolidatedRetailSalesStartDate</segments>
+   </dataPath>
+   <titleLocation>None</titleLocation>
+   <extendedTooltip>
+    <name>UseConsolidatedRetailSalesStartDateExtendedTooltip</name>
+    <id>51</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>UseConsolidatedRetailSalesStartDateContextMenu</name>
+    <id>50</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
    <common>true</common>
   </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>Object.UseConsolidatedRetailSales</segments>
-  </dataPath>
-  <titleLocation>Left</titleLocation>
+  <title>
+   <key>en</key>
+   <value>ED35EAB3-58DE-A230-0565-59A0AF00BEDD</value>
+  </title>
   <extendedTooltip>
-   <name>UseConsolidatedRetailSalesExtendedTooltip</name>
-   <id>8</id>
+   <name>GroupUseConsolidatedRetailSalesExtendedTooltip</name>
+   <id>48</id>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -274,17 +353,15 @@
     <horizontalAlign>Left</horizontalAlign>
    </extInfo>
   </extendedTooltip>
-  <contextMenu>
-   <name>UseConsolidatedRetailSalesContextMenu</name>
-   <id>7</id>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>CheckBoxField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>AlwaysHorizontal</group>
+   <behavior>Auto</behavior>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
  </items>
  <items xsi:type="form:FormField">
   <name>MaterialStore</name>

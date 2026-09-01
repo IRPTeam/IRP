@@ -14304,17 +14304,28 @@ Procedure StepItemListCalculations_Withholding_Tax(Parameters, Chain, WhoIsChang
 		
 		Options.WhoIsChanged = WhoIsChanged;
 		
+		Options.ItemKey              = GetItemListItemKey(Parameters, Row.Key);
+		Options.Unit                 = GetItemListUnit(Parameters, Row.Key);
 		Options.VatRate              = GetItemListVatRate(Parameters, Row.Key);
 		Options.PriceIncludeTax      = GetPriceIncludeTax(Parameters);
 		Options.Price                = GetItemListPrice(Parameters, Row.Key);
 		Options.NetAmount            = GetItemListNetAmount(Parameters, Row.Key);
 		Options.VatAmount            = GetItemListTaxAmount(Parameters, Row.Key);
 		Options.TotalAmount          = GetItemListTotalAmount(Parameters, Row.Key);
+		Options.Quantity			 = GetItemListQuantity(Parameters, Row.Key);
 		Options.QuantityInBaseUnit   = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
 		Options.WithholdingTaxAmount = GetItemListWithholdingTaxAmount(Parameters, Row.Key);
 		Options.WithholdingTaxRate   = GetItemListWithholdingTaxRate(Parameters, Row.Key);
 		Options.BruttoAmount         = GetItemListBruttoAmount(Parameters, Row.Key);		
 		Options.DontCalculateRow     = GetItemListDontCalculateRow(Parameters, Row.Key);
+		
+		Options.CalculateQuantity = False;
+		Options.CalculateQuantityInBaseUnit = False;
+		If WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+			Options.CalculateQuantity = True;
+		ElsIf WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateQuantityInBaseUnit = True;
+		EndIf;		
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations_Withholding_Tax";

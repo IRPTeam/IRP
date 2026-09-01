@@ -2708,19 +2708,25 @@ Function CalculationsWithHoldingTaxOptions() Export
 	|WithholdingTaxRate,
 	|VatRate,
 	|PriceIncludeTax,
-	|QuantityInBaseUnit,
 	|Price,
 	|NetAmount,
 	|VatAmount,
 	|TotalAmount,
 	|WithholdingTaxAmount,
 	|BruttoAmount,
+	|Quantity,
+	|QuantityInBaseUnit,
+	|CalculateQuantity,
+	|CalculateQuantityInBaseUnit,
+	|ItemKey,
+	|Unit,
 	|DontCalculateRow");
 	Return Options; 
 EndFunction
 
 Function CalculationsWithHoldingTaxExecute(Options) Export
 	Result = New Structure();
+	Result.Insert("Quantity"   			 , Options.Quantity);
 	Result.Insert("QuantityInBaseUnit"   , Options.QuantityInBaseUnit);
 	Result.Insert("Price"                , Options.Price);
 	Result.Insert("NetAmount"            , Options.NetAmount);
@@ -2732,6 +2738,22 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 	
 	If Options.DontCalculateRow = True Then
 		Return Result;
+	EndIf;
+	
+	If Options.CalculateQuantity = True Then
+		If Not ValueIsFilled(Options.ItemKey) Then
+			UnitFactor = 1;
+		Else
+			UnitFactor = GetItemInfo.GetUnitFactor(Options.ItemKey, Options.Unit);
+		EndIf;
+		Result.Quantity = Options.QuantityInBaseUnit / UnitFactor;
+	ElsIf Options.CalculateQuantityInBaseUnit = True Then
+		If Not ValueIsFilled(Options.ItemKey) Then
+			UnitFactor = 1;
+		Else
+			UnitFactor = GetItemInfo.GetUnitFactor(Options.ItemKey, Options.Unit);
+		EndIf;
+		Result.QuantityInBaseUnit = Options.Quantity * UnitFactor;
 	EndIf;
 	
 	If Options.WhoIsChanged = "IsNetAmountChanged"  Then
@@ -2746,7 +2768,7 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 		Result.NetAmount = Result.BruttoAmount - Result.WithholdingTaxAmount;
 		Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
 		
-	ElsIf Options.WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+	ElsIf Options.WhoIsChanged = "IsQuantityChanged" Or Options.WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
 		
 		Result.NetAmount = Result.QuantityInBaseUnit * Result.Price;
 		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate);	

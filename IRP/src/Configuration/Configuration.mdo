@@ -962,6 +962,7 @@
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.DocStornoClient</commonModules>
   <commonModules>CommonModule.DocStornoServer</commonModules>
+  <commonModules>CommonModule.DataIntegrityCheckServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1773,6 +1774,7 @@
   <dataProcessors>DataProcessor.SimpleBatchSequence</dataProcessors>
   <dataProcessors>DataProcessor.Chat</dataProcessors>
   <dataProcessors>DataProcessor.ManagerDashboard</dataProcessors>
+  <dataProcessors>DataProcessor.DataIntegriryCheck</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

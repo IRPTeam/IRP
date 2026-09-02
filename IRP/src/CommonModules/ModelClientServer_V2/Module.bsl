@@ -2819,6 +2819,8 @@ Function CalculateWithholdingTaxAmount(Result, WithholdingTaxRate, UseBruttoAmou
 	If UseBruttoAmount Then
 		Amount = Result.BruttoAmount;
 		Return (Amount / 100) * Rate;
+	ElsIf Rate = 100 Then
+		Return Result.NetAmount;
 	Else
 		Amount = Result.NetAmount;
 		Return 100 * (Amount / (100 - Rate)) - Amount;

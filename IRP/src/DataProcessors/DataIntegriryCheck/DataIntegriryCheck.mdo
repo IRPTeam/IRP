@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6a6a5200-31a2-4c41-8dc1-f28caf346d9d">
+  <producedTypes>
+    <objectType typeId="31ada0a3-3e17-4663-b3d7-30b0f244c47a" valueTypeId="924cb58f-7285-4c01-8148-231cc14a6754"/>
+    <managerType typeId="3810aec8-edd5-47f5-bd39-5a85b2c28c91" valueTypeId="dc67c89d-b1ee-4d41-ab38-8f31fedb4784"/>
+  </producedTypes>
+  <name>DataIntegriryCheck</name>
+  <synonym>
+    <key>en</key>
+    <value>Data integriry check</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.DataIntegriryCheck.Form.Form</defaultForm>
+  <forms uuid="f085f924-37af-43ac-8fe5-51632e361740">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

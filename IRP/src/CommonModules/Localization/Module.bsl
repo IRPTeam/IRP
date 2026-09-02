@@ -2913,5 +2913,14 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 
 #EndRegion
 
+#Region DataIntegrityCheck
+	Strings.Insert("DataIntegrityCheck_01", NStr("en = 'Duplicate active FA commissioning records'", Lang));
+	Strings.Insert("DataIntegrityCheck_02", NStr("en = 'Negative actual depreciation amount'", Lang));
+	Strings.Insert("DataIntegrityCheck_03", NStr("en = 'Expired useful life with unwritten-off balance'", Lang));
+	Strings.Insert("DataIntegrityCheck_04", NStr("en = 'Missing depreciation period for active fixed asset'", Lang));
+	Strings.Insert("DataIntegrityCheck_05", NStr("en = 'Cost center mismatch with current asset location'", Lang));
+	Strings.Insert("DataIntegrityCheck_06", NStr("en = 'FA transaction or disposal date predates last transfer'", Lang));
+#EndRegion
+
 	Return Strings;
 EndFunction

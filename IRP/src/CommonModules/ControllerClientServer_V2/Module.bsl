@@ -12854,7 +12854,7 @@ Function BindItemListVatRate(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
-	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_Withholding_Tax");
+	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_IsVatRateChanged_Withholding_Tax");
 	Binding.Insert("IncomingExchRateAdjustmentInvoice"    , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("OutgoingExchRateAdjustmentInvoice"    , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("StockAdjustmentAsSurplus" , "StepItemListCalculations_IsVatRateChanged_StockDocuments");
@@ -14284,6 +14284,11 @@ Procedure StepItemListCalculations_IsNetAmountChanged_Withholding_Tax(Parameters
 	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsNetAmountChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsVatRateChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsVatRateChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsVatRateChanged");
+EndProcedure
+
 // ItemList.Calculations_Withholding_Tax.Set
 Procedure SetItemListCalculations_Withholding_Tax(Parameters, Results) Export
 	ViewNotify = "OnSetCalculationsNotify";
@@ -14333,9 +14338,9 @@ Procedure StepItemListCalculations_Withholding_Tax(Parameters, Chain, WhoIsChang
 		Options.CalculateQuantity = False;
 		Options.CalculateQuantityInBaseUnit = False;
 		If WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
-			Options.CalculateQuantity = Options.QuantityIsFixed;
+			Options.CalculateQuantity = Not Options.QuantityIsFixed;
 		ElsIf WhoIsChanged = "IsQuantityChanged" Then
-			Options.CalculateQuantityInBaseUnit = Options.QuantityIsFixed;
+			Options.CalculateQuantityInBaseUnit = Not Options.QuantityIsFixed;
 		ElsIf WhoIsChanged = "IsQuantityIsFixedChanged" Then
 			Options.CalculateQuantityInBaseUnit = Not Options.QuantityIsFixed;
 		EndIf;		

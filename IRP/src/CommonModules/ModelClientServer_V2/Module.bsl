@@ -2793,19 +2793,14 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 		
 		Result.BruttoAmount = Result.NetAmount + Result.WithholdingTaxAmount;
 		
+	ElsIf Options.WhoIsChanged = "IsVatRateChanged" Then
+		
+		// for this document, always Options.PriceIncludeTax = False
+		Result.VatAmount = CalculateVatAmount(Result.BruttoAmount, Options.VatRate, False);
+		
 	EndIf;
 	
-	If ValueIsFilled(Options.VatRate) Then
-		If Options.PriceIncludeTax Then
-			Result.TotalAmount = Result.NetAmount;				
-			Result.VatAmount = CalculateVatAmount(Result.TotalAmount, Options.VatRate, Options.PriceIncludeTax);				
-		Else
-			Result.VatAmount = CalculateVatAmount(Result.BruttoAmount, Options.VatRate, Options.PriceIncludeTax);
-			Result.TotalAmount = Result.NetAmount + Result.VatAmount;
-		EndIf;
-	Else
-		Result.TotalAmount = Result.NetAmount;
-	Endif;
+	Result.TotalAmount = Result.NetAmount + Result.VatAmount;
 	
 	Return Result;
 EndFunction

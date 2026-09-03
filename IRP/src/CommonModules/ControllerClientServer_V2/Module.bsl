@@ -5629,7 +5629,6 @@ Function GetBindingStructure_Agreement(Parameters)
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
-		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangeTaxVisible,
 		|StepChangeWithholdingTaxVisible,
 		|StepItemListChangeVatRate_AgreementInHeader");
@@ -13254,7 +13253,11 @@ EndFunction
 Function BindItemListQuantityIsFixed(Parameters)
 	DataPath = "ItemList.QuantityIsFixed";
 	Binding = New Structure();
-	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantityIsFixed");
+	If Parameters.ObjectMetadataInfo.MetadataName = "WithholdingTaxInvoice" Then
+		Return BindSteps("StepItemListCalculations_IsQuantityIsFixedChanged_Withholding_Tax", DataPath, Binding, Parameters, "BindItemListQuantityIsFixed");
+	Else
+		Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantityIsFixed");
+	EndIf;
 EndFunction
 
 #EndRegion
@@ -14251,6 +14254,11 @@ Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged_Withholding_Tax(P
 	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsQuantityInBaseUnitChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsQuantityIsFixedChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsQuantityIsFixedChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsQuantityIsFixedChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsPriceChanged_Withholding_Tax].Step
 Procedure StepItemListCalculations_IsPriceChanged_Withholding_Tax(Parameters, Chain) Export
 	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsPriceChanged");
@@ -14282,6 +14290,8 @@ Procedure SetItemListCalculations_Withholding_Tax(Parameters, Results) Export
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
 	
+	SetterObject(Undefined, "ItemList.Quantity"             , Parameters, Results, ViewNotify, "Quantity"             , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit"   , Parameters, Results, ViewNotify, "QuantityInBaseUnit"   , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"                , Parameters, Results, ViewNotify, "Price"                , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"            , Parameters, Results, ViewNotify, "NetAmount"            , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"            , Parameters, Results, ViewNotify, "VatAmount"            , NotifyAnyway);
@@ -14314,6 +14324,7 @@ Procedure StepItemListCalculations_Withholding_Tax(Parameters, Chain, WhoIsChang
 		Options.TotalAmount          = GetItemListTotalAmount(Parameters, Row.Key);
 		Options.Quantity			 = GetItemListQuantity(Parameters, Row.Key);
 		Options.QuantityInBaseUnit   = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityIsFixed      = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		Options.WithholdingTaxAmount = GetItemListWithholdingTaxAmount(Parameters, Row.Key);
 		Options.WithholdingTaxRate   = GetItemListWithholdingTaxRate(Parameters, Row.Key);
 		Options.BruttoAmount         = GetItemListBruttoAmount(Parameters, Row.Key);		
@@ -14322,9 +14333,11 @@ Procedure StepItemListCalculations_Withholding_Tax(Parameters, Chain, WhoIsChang
 		Options.CalculateQuantity = False;
 		Options.CalculateQuantityInBaseUnit = False;
 		If WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
-			Options.CalculateQuantity = True;
+			Options.CalculateQuantity = Options.QuantityIsFixed;
 		ElsIf WhoIsChanged = "IsQuantityChanged" Then
-			Options.CalculateQuantityInBaseUnit = True;
+			Options.CalculateQuantityInBaseUnit = Options.QuantityIsFixed;
+		ElsIf WhoIsChanged = "IsQuantityIsFixedChanged" Then
+			Options.CalculateQuantityInBaseUnit = Not Options.QuantityIsFixed;
 		EndIf;		
 		
 		Options.Key = Row.Key;

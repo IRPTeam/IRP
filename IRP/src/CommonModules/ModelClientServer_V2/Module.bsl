@@ -2716,6 +2716,7 @@ Function CalculationsWithHoldingTaxOptions() Export
 	|BruttoAmount,
 	|Quantity,
 	|QuantityInBaseUnit,
+	|QuantityIsFixed,
 	|CalculateQuantity,
 	|CalculateQuantityInBaseUnit,
 	|ItemKey,
@@ -2728,6 +2729,7 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("Quantity"   			 , Options.Quantity);
 	Result.Insert("QuantityInBaseUnit"   , Options.QuantityInBaseUnit);
+	Result.Insert("QuantityIsFixed"      , Options.QuantityIsFixed);
 	Result.Insert("Price"                , Options.Price);
 	Result.Insert("NetAmount"            , Options.NetAmount);
 	Result.Insert("VatAmount"            , Options.VatAmount);
@@ -2758,7 +2760,7 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 	
 	If Options.WhoIsChanged = "IsNetAmountChanged"  Then
 		
-		Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
+		Result.Price = CalculatePrice(Result.NetAmount, Result.Quantity);
 		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate);
 		Result.BruttoAmount =  Result.NetAmount + Result.WithholdingTaxAmount;
 		
@@ -2766,17 +2768,19 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 		
 		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, True);
 		Result.NetAmount = Result.BruttoAmount - Result.WithholdingTaxAmount;
-		Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
+		Result.Price = CalculatePrice(Result.NetAmount, Result.Quantity);
 		
-	ElsIf Options.WhoIsChanged = "IsQuantityChanged" Or Options.WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+	ElsIf Options.WhoIsChanged = "IsQuantityChanged" 
+			Or Options.WhoIsChanged = "IsQuantityInBaseUnitChanged"
+			Or Options.WhoIsChanged = "IsQuantityIsFixedChanged" Then
 		
-		Result.NetAmount = Result.QuantityInBaseUnit * Result.Price;
+		Result.NetAmount = Result.Quantity * Result.Price;
 		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate);	
 		Result.BruttoAmount = Result.NetAmount + Result.WithholdingTaxAmount; 
 	
 	ElsIf Options.WhoIsChanged = "IsPriceChanged" Then
 		
-		Result.NetAmount = Result.QuantityInBaseUnit * Result.Price;
+		Result.NetAmount = Result.Quantity * Result.Price;
 		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate);	
 		Result.BruttoAmount = Result.NetAmount + Result.WithholdingTaxAmount; 
 		

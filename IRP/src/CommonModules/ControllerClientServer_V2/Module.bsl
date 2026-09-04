@@ -12854,7 +12854,7 @@ Function BindItemListVatRate(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
-	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_IsVatRateChanged_Withholding_Tax");
+	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_Withholding_Tax");
 	Binding.Insert("IncomingExchRateAdjustmentInvoice"    , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("OutgoingExchRateAdjustmentInvoice"    , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("StockAdjustmentAsSurplus" , "StepItemListCalculations_IsVatRateChanged_StockDocuments");
@@ -13773,7 +13773,7 @@ Function BindItemListTaxAmount(Parameters)
 		"StepItemListCalculations_IsTaxAmountChanged");
 	
 	Binding.Insert("WithholdingTaxInvoice", 
-		"StepItemListCalculations_Withholding_Tax");
+		"StepItemListCalculations_IsVatAmountChanged_Withholding_Tax");
 	
 	Binding.Insert("IncomingExchRateAdjustmentInvoice", 
 		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers");
@@ -14284,9 +14284,9 @@ Procedure StepItemListCalculations_IsNetAmountChanged_Withholding_Tax(Parameters
 	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsNetAmountChanged");
 EndProcedure
 
-// ItemList.Calculations.[IsVatRateChanged_Withholding_Tax].Step
-Procedure StepItemListCalculations_IsVatRateChanged_Withholding_Tax(Parameters, Chain) Export
-	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsVatRateChanged");
+// ItemList.Calculations.[IsVatAmountChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsVatAmountChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsVatAmountChanged");
 EndProcedure
 
 // ItemList.Calculations_Withholding_Tax.Set

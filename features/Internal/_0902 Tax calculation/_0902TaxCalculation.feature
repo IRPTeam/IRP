@@ -45,7 +45,9 @@ Scenario: _0902000 preparation
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects (with transaction type)
-		When Create catalog Taxes objects (for debit and credit note)	
+		When Create catalog Taxes objects (for debit and credit note)
+		When Create catalog TaxRates objects (VAT 20 and 10 for WithholdingTaxInvoice)
+		When Create catalog Taxes objects (rates 20 and 10 for WithholdingTaxInvoice)
 		When Create information register TaxSettings records with transaction type
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
@@ -1319,7 +1321,9 @@ Scenario: _090230 fill tax exemption reason in the Credit note
 			| 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, TRY' | '0%'  | 'Tax exeption reason 1 (0%, All countries)' |	
 		And I close all client application windows
 
-Scenario: _090231 check Withholding Tax calculation
+# IRP-849: WTI works in "VAT on top" mode only; expected values match the GIB calculator
+# (https://dijital.gib.gov.tr/hesaplamalar/SmmMeslekMakbuzuHesaplama, Net Ucret KDV Haric 100, rates 20/20).
+Scenario: _090231 check Withholding Tax calculation with VAT 20 matches GIB calculator
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
 	And I click the button named "FormCreate"
@@ -1341,6 +1345,9 @@ Scenario: _090231 check Withholding Tax calculation
 		And I select "Service" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20%" exact value from "VAT" drop-down list in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -1352,14 +1359,548 @@ Scenario: _090231 check Withholding Tax calculation
 		And I select current line in "ItemList" table
 		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
 		And "ItemList" table became equal
-			| '#' | 'Item'    | 'Item key' | 'Quantity' | 'Unit' | 'Price type'              | 'Price'  | 'Dont calculate row' | 'Withholding tax rate' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' | 'Project' | 'Expense type' | 'Profit loss center' | 'Additional analytic' |
-			| '1' | 'Service' | 'Rent'     | '1,000'    | 'pcs'  | 'en description is empty' | '100,00' | 'No'                 | '20% WT'               | '25,00'                  | '125,00'        | '100,00'       | ''        | ''             | ''                   | ''                    |
+			| '#' | 'Item'    | 'Item key' | 'Quantity' | 'Unit' | 'Price type'              | 'Price'  | 'Dont calculate row' | 'Net amount' | 'VAT' | 'Tax amount' | 'Withholding tax rate' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' | 'Project' | 'Expense type' | 'Profit loss center' | 'Additional analytic' |
+			| '1' | 'Service' | 'Rent'     | '1,000'    | 'pcs'  | 'en description is empty' | '100,00' | 'No'                 | '100,00'     | '20%' | '25,00'      | '20% WT'               | '25,00'                  | '125,00'        | '125,00'       | ''        | ''             | ''                   | ''                    |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "100,00"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "25,00"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "125,00"
 		And I close all client application windows
-						
-				
-				
-				
-				
+
+
+# GIB check for rates 20/10: Net 100 -> brut 125, stopaj 25, KDV 12,50, payable 112,50.
+Scenario: _090232 check Withholding Tax calculation with VAT 10 matches GIB calculator
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "10%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+	* Check the row: VAT 12,50 is 10 percent of Brutto 125, payable 112,50
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Quantity' | 'Unit' | 'Price type'              | 'Price'  | 'Dont calculate row' | 'Net amount' | 'VAT' | 'Tax amount' | 'Withholding tax rate' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' | 'Project' | 'Expense type' | 'Profit loss center' | 'Additional analytic' |
+			| '1' | 'Service' | 'Rent'     | '1,000'    | 'pcs'  | 'en description is empty' | '100,00' | 'No'                 | '100,00'     | '10%' | '12,50'      | '20% WT'               | '25,00'                  | '125,00'        | '112,50'       | ''        | ''             | ''                   | ''                    |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "12,50"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "112,50"
+		And I close all client application windows
+
+
+Scenario: _090233 check Quantity change recalculates Withholding Tax row and next Price change uses new Quantity
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+	* Change Quantity to 2 - all amounts double
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Quantity' | 'Price'  | 'Net amount' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '2,000'    | '100,00' | '200,00'     | '50,00'      | '50,00'                  | '250,00'        | '250,00'       |
+	* Change Price to 50 - amounts are calculated from Quantity 2, not from the old quantity
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "50,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Quantity' | 'Price' | 'Net amount' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '2,000'    | '50,00' | '100,00'     | '25,00'      | '25,00'                  | '125,00'        | '125,00'       |
+		Then the number of "ItemList" table lines is "равно" "1"
+		And I close all client application windows
+
+
+# IRP-849 defect 1: entering Brutto must recalculate the withholding from the NEW brutto (150 * 20% = 30).
+Scenario: _090234 check Brutto amount input recalculates Withholding Tax from new brutto
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+	* Enter Brutto 150 - WT 30, Net 120, VAT 30 (GIB: Brut Ucret KDV Haric 150, rates 20/20)
+		And I activate "Brutto amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "150,00" text in "Brutto amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Price'  | 'Net amount' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '120,00' | '120,00'     | '30,00'      | '30,00'                  | '150,00'        | '150,00'       |
+		Then the number of "ItemList" table lines is "равно" "1"
+		And I close all client application windows
+
+
+# IRP-849 defect 2: entering Net amount must recalculate price, withholding, brutto and VAT.
+Scenario: _090235 check Net amount input recalculates price withholding brutto and VAT
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+	* Enter Net 80 - Price 80, WT 20, Brutto 100, VAT 20 (GIB: Net Ucret KDV Haric 80, rates 20/20)
+		And I activate "Net amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "80,00" text in "Net amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Price' | 'Net amount' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '80,00' | '80,00'      | '20,00'      | '20,00'                  | '100,00'        | '100,00'       |
+		Then the number of "ItemList" table lines is "равно" "1"
+		And I close all client application windows
+
+
+# Manual WT amount is accepted as is: Brutto = Net + WT, VAT follows the new brutto.
+# The rate cell keeping its value after a manual WT input is the accepted behaviour (IRP-849 discussion).
+Scenario: _090236 check manual Withholding Tax amount input recalculates brutto and VAT
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+	* Enter WT 30 manually - Brutto 130, VAT 26 (20 percent of 130), payable 126
+		And I activate "Withholding tax amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "30,00" text in "Withholding tax amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Price'  | 'Net amount' | 'Tax amount' | 'Withholding tax rate' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '100,00' | '100,00'     | '26,00'      | '20% WT'               | '30,00'                  | '130,00'        | '126,00'       |
+		Then the number of "ItemList" table lines is "равно" "1"
+		And I close all client application windows
+
+
+# IRP-849 defect 3 (accepted behaviour): a manually entered VAT amount is preserved,
+# only the total is recalculated; changing the VAT rate afterwards recalculates VAT by the rate.
+Scenario: _090237 check manual Tax amount is preserved and VAT rate change recalculates it
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+	* Enter Tax amount 10 manually - the value is preserved, payable becomes Net + 10
+		And I activate "Tax amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "10,00" text in "Tax amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Net amount' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '100,00'     | '10,00'      | '25,00'                  | '125,00'        | '110,00'       |
+	* Change the VAT rate to 10 percent - VAT is recalculated by the rate from Brutto
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "10%" exact value from "VAT" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Net amount' | 'VAT' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '100,00'     | '10%' | '12,50'      | '25,00'                  | '125,00'        | '112,50'       |
+		Then the number of "ItemList" table lines is "равно" "1"
+		And I close all client application windows
+
+
+# Rate 0 percent is a valid case: no withholding, brutto equals net, VAT is calculated from it.
+Scenario: _090238 check Withholding Tax rate change to zero clears withholding and keeps VAT
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+	* Change the withholding rate to 0 percent - WT 0, Brutto = Net, VAT 20 of 100, payable 120
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "0%" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Price'  | 'Net amount' | 'Tax amount' | 'Withholding tax rate' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '100,00' | '100,00'     | '20,00'      | '0%'                   | ''                       | '100,00'        | '120,00'       |
+		Then the number of "ItemList" table lines is "равно" "1"
+		And I close all client application windows
+
+
+# IRP-849: the "price includes tax" mode is not implemented for WTI. The checkbox is locked
+# and must NOT be filled from the agreement even when the agreement has Price include tax set
+# (the "Vendor Ferron, TRY" agreement has the flag set - other documents inherit it from there).
+Scenario: _090239 check Price includes tax cannot be enabled and is not inherited from agreement
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Fill the partner and the agreement that has Price include tax set
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* The flag is NOT inherited from the agreement
+		And I move to "Other" tab
+		Then the form attribute named "PriceIncludeTax" became equal to "No"
+	* The checkbox cannot be switched on (negative check: the set step must fail on the locked field)
+		When I Check the steps for Exception
+			| 'And I set checkbox "Price includes tax"' |
+		Then the form attribute named "PriceIncludeTax" became equal to "No"
+		And I close all client application windows
+
+
+# The recalculation must work the same way on a SAVED document reopened from the list,
+# not only on a fresh unsaved form: price, quantity and brutto edits recalculate the row,
+# and the recalculated values survive the save.
+Scenario: _090240 check edits in a saved document recalculate the row and survive the save
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Fill and save the document
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+		And I click the button named "FormWrite"
+		And I wait "Number" field will be filled in "30" seconds
+		And I delete "$$Num090240$$" variable
+		And I save the value of "Number" field as "$$Num090240$$"
+		And I close all client application windows
+	* Reopen the saved document from the list
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number'          |
+			| '$$Num090240$$'   |
+		And I select current line in "List" table
+	* Change Price to 80 - the whole row is recalculated
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "80,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Price' | 'Net amount' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '80,00' | '80,00'      | '20,00'      | '20,00'                  | '100,00'        | '100,00'       |
+	* Change Quantity to 2 - the whole row is recalculated
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Quantity' | 'Price' | 'Net amount' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '2,000'    | '80,00' | '160,00'     | '40,00'      | '40,00'                  | '200,00'        | '200,00'       |
+	* Change Brutto to 300 - withholding from the new brutto, price follows the net
+		And I activate "Brutto amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Brutto amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Quantity' | 'Price'  | 'Net amount' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '2,000'    | '120,00' | '240,00'     | '60,00'      | '60,00'                  | '300,00'        | '300,00'       |
+	* Save and reopen - the recalculated values are persisted
+		And I click the button named "FormWrite"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number'          |
+			| '$$Num090240$$'   |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Quantity' | 'Price'  | 'Net amount' | 'VAT' | 'Tax amount' | 'Withholding tax rate' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '2,000'    | '120,00' | '240,00'     | '20%' | '60,00'      | '20% WT'               | '60,00'                  | '300,00'        | '300,00'       |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "240,00"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "60,00"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "300,00"
+		And I close all client application windows
+
+
+# Several rows recalculate independently and the footer sums them; deleting a row updates the footer.
+Scenario: _090241 check two rows with different VAT rates and footer totals after row deletion
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* Row 1: Price 100, VAT 20, WT 20
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+	* Row 2: Price 200, VAT 10, WT 20
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "10%" exact value from "VAT" drop-down list in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+	* Both rows are calculated independently and the footer is the sum
+		And "ItemList" table contains lines
+			| 'Price'  | 'Net amount' | 'VAT' | 'Tax amount' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' |
+			| '100,00' | '100,00'     | '20%' | '25,00'      | '25,00'                  | '125,00'        | '125,00'       |
+			| '200,00' | '200,00'     | '10%' | '25,00'      | '50,00'                  | '250,00'        | '225,00'       |
+		Then the number of "ItemList" table lines is "равно" "2"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "300,00"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "50,00"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "350,00"
+	* Delete the second row - the footer is recalculated
+		And I go to line in "ItemList" table
+			| 'Price'  |
+			| '200,00' |
+		And in the table "ItemList" I click the button named "ItemListDelete"
+		Then the number of "ItemList" table lines is "равно" "1"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "100,00"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "25,00"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "125,00"
+		And I close all client application windows
 
 
 Scenario: _090225 check tax deactivation
@@ -1401,6 +1942,25 @@ Scenario: _090225 check tax deactivation
 			| 'Dress'   | 'L/Green'     |
 		And I select current line in "List" table
 		And the field named "ItemListTotalTaxAmount" does not exist on the form
+		And I close all client application windows
+	* Reactivate tax - the group base must NOT be left with VAT switched off
+	* (a deactivated VAT hides the Net amount / VAT / Tax amount columns on WithholdingTaxInvoice)
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I move to "Tax types" tab
+		And I change "Use" checkbox in "CompanyTaxes" table
+		And I finish line editing in "CompanyTaxes" table
+		And I click "Save and close" button
+	* Check the VAT columns are visible again on WithholdingTaxInvoice (fixture document 2)
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And I select current line in "List" table
+		And the field named "ItemListTotalTaxAmount" exists on the form
 		And I close all client application windows
 
 Scenario: _090226 check connection to WithholdingTaxInvoice report "Related documents"

@@ -30,7 +30,11 @@ Procedure ProceedSelectedRows()
 	For Each Row In Items.List.SelectedRows Do
 		NewRow = New Structure("Employee, PaymentPeriod, CalculationType, Amount");
 		FillPropertyValues(NewRow, Items.List.RowData(Row));
-		ArrayOfDataRows.Add(NewRow);
+		If NewRow.Amount > 0 Then
+			ArrayOfDataRows.Add(NewRow);
+		EndIf;
 	EndDo;
-	Close(New Structure("ArrayOfDataRows", ArrayOfDataRows));
+	If ArrayOfDataRows.Count() > 0 Then
+		Close(New Structure("ArrayOfDataRows", ArrayOfDataRows));
+	EndIf;
 EndProcedure

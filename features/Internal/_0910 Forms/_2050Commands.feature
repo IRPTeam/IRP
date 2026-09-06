@@ -5464,3 +5464,78 @@ Scenario: _010055 add test command to the list of documents DebitCreditNote
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
+
+
+# The internal commands of the PR are built on the document object form.
+Scenario: _0205050 check internal commands are built on the document object form
+	And I close all client application windows
+	When Create document PurchaseInvoice objects (check movements)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '117'    |
+	And I select current line in "List" table
+	And I click the button named "InternalCommand_ShowNumerator"
+	And I click the button named "InternalCommand_EditQuantity"
+	And I close current window
+	And I close all client application windows
+
+
+# Covers the change of this PR: DocumentsServer.OnReadAtServer now calls
+# InternalCommandsServer.RefreshCommands, so the state of an internal command is
+# rebuilt when the document is reread. The audit lock command is the probe - its
+# title switches between "set lock" and "unlock". The lock is set outside the open
+# form, so only a working refresh can pick it up.
+Scenario: _0205051 check internal commands are refreshed on reread (purchase invoice 115)
+	And I close all client application windows
+	When Create document PurchaseInvoice objects (check movements)
+	* The audit lock needs a posted document
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '115'    |
+		And in the table "List" I click "Post" button
+		And I select current line in "List" table
+	* The open form shows the command in the set-lock state
+		When I Check the steps for Exception
+			| 'And I click "Audit lock (unlock)" button' |
+	* Set the lock outside this form and reread - the command state follows
+		And I execute 1C:Enterprise script at server
+			| 'AuditLockPrivileged.SetLock(Documents.PurchaseInvoice.FindByNumber("115"));' |
+		And I click the button named "FormReread"
+		And I click "Audit lock (unlock)" button
+	* Clear the history this scenario produced
+		// _2063AuditLock asserts the whole audit lock history table and there is no
+		// interface to delete information register records
+		And I execute 1C:Enterprise script at server
+			| 'RS = InformationRegisters.AuditLockHistory.CreateRecordSet(); RS.Filter.Document.Set(Documents.PurchaseInvoice.FindByNumber("115")); RS.Write();' |
+	And I close all client application windows
+
+
+# The same refresh on a second document. Both scenarios use a purchase invoice on
+# purpose: documents of other kinds created in this tag become the first document that
+// blocks a unit change, and _2061ItemUnitForm asserts which document is named there.
+Scenario: _0205052 check internal commands are refreshed on reread (purchase invoice 116)
+	And I close all client application windows
+	When Create document PurchaseInvoice objects (check movements)
+	* The audit lock needs a posted document
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '116'    |
+		And in the table "List" I click "Post" button
+		And I select current line in "List" table
+	* The open form shows the command in the set-lock state
+		When I Check the steps for Exception
+			| 'And I click "Audit lock (unlock)" button' |
+	* Set the lock outside this form and reread - the command state follows
+		And I execute 1C:Enterprise script at server
+			| 'AuditLockPrivileged.SetLock(Documents.PurchaseInvoice.FindByNumber("116"));' |
+		And I click the button named "FormReread"
+		And I click "Audit lock (unlock)" button
+	* Clear the history this scenario produced
+		// _2063AuditLock asserts the whole audit lock history table and there is no
+		// interface to delete information register records
+		And I execute 1C:Enterprise script at server
+			| 'RS = InformationRegisters.AuditLockHistory.CreateRecordSet(); RS.Filter.Document.Set(Documents.PurchaseInvoice.FindByNumber("116")); RS.Write();' |
+	And I close all client application windows

@@ -34,3 +34,8 @@ Procedure InternalCommandActionWithServerContextAtServer(CommandName)
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure LoadCountries(Command)
+	OpenForm("Catalog.Countries.Form.LoadCountries");
+EndProcedure

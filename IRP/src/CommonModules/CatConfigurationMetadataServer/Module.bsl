@@ -520,44 +520,47 @@ EndProcedure
 
 Procedure ProcessRefill(MetadataObjectNames, Parent)
 	Query = New Query();
-	Query.Text = "SELECT
-				 |	MetadataObjectNames.ObjectName,
-				 |	MetadataObjectNames.ObjectFullName,
-				 |	MetadataObjectNames.ObjectFullSynonym
-				 |INTO MetadataObjectNames
-				 |FROM
-				 |	&MetadataObjectNames AS MetadataObjectNames
-				 |;
-				 |
-				 |////////////////////////////////////////////////////////////////////////////////
-				 |
-				 |//[1]
-				 |SELECT
-				 |	ConfigurationMetadata.Ref
-				 |FROM
-				 |	Catalog.ConfigurationMetadata AS ConfigurationMetadata
-				 |WHERE
-				 |	NOT ConfigurationMetadata.Unused
-				 |	AND NOT ConfigurationMetadata.ObjectFullName IN (&ObjectFullNames)
-				 |;
-				 |
-				 |////////////////////////////////////////////////////////////////////////////////
-				 |
-				 |//[2]
-				 |SELECT
-				 |	MetadataObjectNames.ObjectName,
-				 |	MetadataObjectNames.ObjectFullName,
-				 |	MetadataObjectNames.ObjectFullSynonym,
-				 |	IsNull(ConfigurationMetadata.Ref, Value(Catalog.ConfigurationMetadata.EmptyRef)) AS Ref
-				 |FROM
-				 |	MetadataObjectNames AS MetadataObjectNames
-				 |		Left JOIN Catalog.ConfigurationMetadata AS ConfigurationMetadata
-				 |		ON MetadataObjectNames.ObjectFullName = ConfigurationMetadata.ObjectFullName
-				 |WHERE
-				 |	ConfigurationMetadata.Ref IS Null
-				 |	OR IsNull(ConfigurationMetadata.Unused, FALSE)";
+	Query.Text = 
+	"SELECT
+	|	MetadataObjectNames.ObjectName AS ObjectName,
+	|	MetadataObjectNames.ObjectFullName AS ObjectFullName,
+	|	MetadataObjectNames.ObjectFullSynonym AS ObjectFullSynonym
+	|INTO MetadataObjectNames
+	|FROM
+	|	&MetadataObjectNames AS MetadataObjectNames
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ConfigurationMetadata.Ref AS Ref
+	|FROM
+	|	Catalog.ConfigurationMetadata AS ConfigurationMetadata
+	|		LEFT JOIN MetadataObjectNames AS MetadataObjectNames
+	|		ON ConfigurationMetadata.ObjectFullName = MetadataObjectNames.ObjectFullName
+	|WHERE
+	|	NOT ConfigurationMetadata.Unused
+	|	AND ConfigurationMetadata.Parent = &Parent
+	|	AND MetadataObjectNames.ObjectFullName IS NULL
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	MetadataObjectNames.ObjectName AS ObjectName,
+	|	MetadataObjectNames.ObjectFullName AS ObjectFullName,
+	|	MetadataObjectNames.ObjectFullSynonym AS ObjectFullSynonym,
+	|	ISNULL(ConfigurationMetadata.Ref, VALUE(Catalog.ConfigurationMetadata.EmptyRef)) AS Ref,
+	|	ISNULL(ConfigurationMetadata.Unused, FALSE) AS Unused
+	|FROM
+	|	MetadataObjectNames AS MetadataObjectNames
+	|		LEFT JOIN Catalog.ConfigurationMetadata AS ConfigurationMetadata
+	|		ON MetadataObjectNames.ObjectFullName = ConfigurationMetadata.ObjectFullName
+	|		AND ConfigurationMetadata.Parent = &Parent
+	|WHERE
+	|	ConfigurationMetadata.Ref IS NULL
+	|	OR ISNULL(ConfigurationMetadata.Unused, FALSE)";
+	
+	Query.SetParameter("Parent", Parent);
 	Query.SetParameter("MetadataObjectNames", MetadataObjectNames);
-	Query.SetParameter("ObjectFullNames", MetadataObjectNames.UnloadColumn("ObjectFullName"));
 	QueryResults = Query.ExecuteBatch();
 
 	ItemsForMarkingAsUnused = QueryResults[1].Unload();
@@ -571,15 +574,16 @@ Procedure ProcessRefill(MetadataObjectNames, Parent)
 	For Each Item In ItemsForCreate Do
 		If Item.Ref.IsEmpty() Then
 			ItemObject = Catalogs.ConfigurationMetadata.CreateItem();
+			ItemObject.Parent = Parent;
 			ItemObject.ObjectName = Item.ObjectName;
 			ItemObject.ObjectFullName = Item.ObjectFullName;
 			ItemObject.Description = Item.ObjectFullSynonym;
-			ItemObject.Parent = Parent;
-		Else
+			ItemObject.Write();
+		ElsIf Item.Unused = True Then
 			ItemObject = Item.Ref.GetObject();
 			ItemObject.Unused = False;
+			ItemObject.Write();
 		EndIf;
-		ItemObject.Write();
 	EndDo;
 EndProcedure
 

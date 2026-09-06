@@ -137,7 +137,6 @@
    <name>Filter.NotActive</name>
    <value xsi:type="core:BooleanValue"/>
   </choiceParameters>
-  <quickChoice>Use</quickChoice>
   <choiceParameters>
    <name>Filter.OurCompany</name>
    <value xsi:type="core:BooleanValue">
@@ -148,6 +147,7 @@
    <name>Filter.DeletionMark</name>
    <value xsi:type="core:BooleanValue"/>
   </choiceParameters>
+  <quickChoice>Use</quickChoice>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -1106,6 +1106,7 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

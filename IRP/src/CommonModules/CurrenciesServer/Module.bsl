@@ -239,7 +239,52 @@ Procedure _PreparePostingDataTables(Parameters, CurrencyTable, IsOffsetOfAdvance
 				Table = AlignTables(FullTable, GroupedTable, ItemOfPostingInfo.Metadata, UseKey);
 			EndIf;		
 		Else
-			Table = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			
+			If (ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5022T_Expenses 
+				Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5021T_Revenues) 
+				and (TypeOf(Parameters.Object.Ref) = Type("DocumentRef.SalesInvoice") 
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.PurchaseInvoice")
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.RetailSalesReceipt")
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.WorkSheet")) Then
+					
+				PrepareTable_Own = PrepareTable.CopyColumns();
+				PrepareTable_CMC = PrepareTable.CopyColumns();
+				For Each Row In PrepareTable Do
+					If ValueIsFilled(Row.CalculationMovementCost) Then
+						FillPropertyValues(PrepareTable_CMC.Add(), Row);
+					Else
+						FillPropertyValues(PrepareTable_Own.Add(), Row);
+					EndIf;
+				EndDo;
+				Table_Own = ExpandTable(TempTablesManager, PrepareTable_Own, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+				
+				CurrenciesTableParams = New Structure();
+				CurrenciesTableParams.Insert("Ref"            , Parameters.Object.Ref);
+				CurrenciesTableParams.Insert("Date"           , Parameters.Object.Date);
+				CurrenciesTableParams.Insert("Company"        , Parameters.Object.Company);
+				CurrenciesTableParams.Insert("Currency"       , Parameters.Object.Company.LandedCostCurrencyMovementType.Currency);
+				CurrenciesTableParams.Insert("Agreement"      , Undefined);
+				CurrenciesTableParams.Insert("RowKey"         , "");
+				CurrenciesTableParams.Insert("DocumentAmount" , 0);
+				CurrenciesTableParams.Insert("Currencies"     , New Array());
+		
+				NewCurrencyTable = Parameters.Object.Currencies.UnloadColumns();
+				UpdateCurrencyTable(CurrenciesTableParams, NewCurrencyTable);
+				TempTablesManager_CMC = PutCurrencyTableToTempTablesManager(Parameters, NewCurrencyTable);				
+				Table_CMC = ExpandTable(TempTablesManager_CMC, PrepareTable_CMC, UseAgreementMovementType, UseCurrencyJoin,
+					?(TypeOf(Parameters.Object.Ref) = Type("DocumentRef.WorkSheet"), False, UseKey));
+				
+				Table = Table_Own.CopyColumns();
+				For Each Row In Table_Own Do
+					FillPropertyValues(Table.Add(), Row);
+				EndDo;
+				For Each Row In Table_CMC Do
+					FillPropertyValues(Table.Add(), Row);
+				EndDo;				
+			Else
+				Table = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			EndIf;
+			
 			GroupTableByAllDimensions(Table, ItemOfPostingInfo.Metadata, UseKey, "", IncludeDimensions);
 		EndIf;
 		ItemOfPostingInfo.PrepareTable = SetTransactionCurrency(Table, ItemOfPostingInfo.Metadata, 

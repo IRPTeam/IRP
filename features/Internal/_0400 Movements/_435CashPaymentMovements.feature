@@ -16,6 +16,7 @@ Background:
 
 Scenario: _043500 preparation (Cash payment)
 	When set True value to the constant
+	When set True value to the constant Use accounting
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

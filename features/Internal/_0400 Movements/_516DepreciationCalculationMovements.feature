@@ -15,6 +15,7 @@ Background:
 Scenario: _051600 preparation (DepreciationCalculation movements)
 	When set True value to the constant
 	When set True value to the constant Use fixed assets
+	When set True value to the constant Use accounting
 	* Load info
 		When Create catalog Countries objects
 		When Create catalog Companies objects (second company Ferron BP)

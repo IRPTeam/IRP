@@ -168,7 +168,76 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
 
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Key AS Key,
+	|	RowIDInfo.Quantity AS Quantity
+	|INTO tmpRowID
+	|FROM
+	|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.PurchaseOrder AS Order,
+	|	ItemList.Ref.Currency AS Currency,
+	|	tmpRowID.RowID AS RowKey,
+	|	ItemList.ItemKey AS ItemKey,
+	|	tmpRowID.Quantity AS Quantity,
+	|	(ItemList.TotalAmount / ItemList.QuantityInBaseUnit) * tmpRowID.Quantity AS Amount,
+	|	(ItemList.NetAmount / ItemList.QuantityInBaseUnit) * tmpRowID.Quantity AS NetAmount
+//		|into R1012B_PurchaseOrdersInvoiceClosing
+	|FROM
+	|	tmpRowID AS tmpRowID
+	|		INNER JOIN Document.PurchaseInvoice.ItemList AS ItemList
+	|		ON ItemList.Key = tmpRowID.Key
+	|		AND NOT ItemList.PurchaseOrder.Ref IS NULL
+	|		AND ItemList.Ref = &Ref";
 
+	Query.SetParameter("Ref", Ref);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	QueryTable2 = QueryTable.CopyColumns();
+	For Each Row In QueryTable Do
+		OrderItemListRows = Row.Order.ItemList.FindRows(New Structure("Key", Row.RowKey));
+		If OrderItemListRows.Count() > 0 Then
+			OrderItemListRow = OrderItemListRows[0];
+			If OrderItemListRow.ItemKey <> Row.ItemKey Then
+				NewRow2 = QueryTable2.Add();
+				FillPropertyValues(NewRow2, Row);
+				NewRow2.RecordType = AccumulationRecordType.Expense;
+				NewRow2.ItemKey = OrderItemListRow.ItemKey;
+				NewRow3 = QueryTable2.Add();
+				FillPropertyValues(NewRow3, Row);
+				NewRow3.RecordType = AccumulationRecordType.Receipt;
+				NewRow3.ItemKey = Row.ItemKey;				
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	For Each Row In QueryTable2 Do
+		NewRow = QueryTable.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"Select * into tmpR1012B_PurchaseOrdersInvoiceClosing From &QueryTable as QueryTable";
+	Query.SetParameter("QueryTable", QueryTable);
+	Query.Execute();
+
+	
 	Return Tables;
 EndFunction
 
@@ -1204,60 +1273,33 @@ EndFunction
 Function R1012B_PurchaseOrdersInvoiceClosing()
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.Period AS Period,
-		|	ItemList.Company AS Company,
-		|	ItemList.Branch AS Branch,
-		|	ItemList.PurchaseOrder AS Order,
-		|	ItemList.Currency AS Currency,
-		|	ItemList.OrderItemKey AS ItemKey,
-		|	ItemList.RowKey AS RowKey,
-		|	ItemList.Quantity AS Quantity,
-		|	ItemList.Amount AS Amount,
-		|	ItemList.NetAmount AS NetAmount
-		|INTO R1012B_PurchaseOrdersInvoiceClosing
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Key AS Key,
+		|	RowIDInfo.Quantity AS Quantity
+		|INTO tmpRowID
 		|FROM
-		|	OrderItemList AS ItemList
+		|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
 		|WHERE
-		|	ItemList.PurchaseOrderExists
+		|	RowIDInfo.Ref = &Ref
+		|;
 		|
-		|UNION ALL
-		|
+		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.PurchaseOrder,
-		|	ItemList.Currency,
-		|	ItemList.ItemKey,
-		|	ItemList.RowKey,
-		|	ItemList.Quantity,
-		|	ItemList.Amount,
-		|	ItemList.NetAmount
+		|	Table.RecordType AS RecordType,
+		|	Table.Period AS Period,
+		|	Table.Company AS Company,
+		|	Table.Branch AS Branch,
+		|	Table.Order AS Order,
+		|	Table.Currency AS Currency,
+		|	Table.RowKey AS RowKey,
+		|	Table.ItemKey AS ItemKey,
+		|	Table.Quantity AS Quantity,
+		|	Table.Amount AS Amount,
+		|	Table.NetAmount AS NetAmount
+		|	into R1012B_PurchaseOrdersInvoiceClosing
 		|FROM
-		|	OrderItemList AS ItemList
-		|WHERE
-		|	ItemList.PurchaseOrderExists
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.PurchaseOrder,
-		|	ItemList.Currency,
-		|	ItemList.ItemKey,
-		|	ItemList.RowKey,
-		|	ItemList.Quantity,
-		|	ItemList.Amount,
-		|	ItemList.NetAmount
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	ItemList.PurchaseOrderExists";
+		|	tmpR1012B_PurchaseOrdersInvoiceClosing as Table
+		|WHERE true";
 EndFunction
 
 Function R1020B_AdvancesToVendors()

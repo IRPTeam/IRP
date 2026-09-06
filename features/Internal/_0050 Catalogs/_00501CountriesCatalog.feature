@@ -55,3 +55,54 @@ Scenario: _005010 filling in the "Countries" catalog
 	* Check
 		When in opened panel I select "Countries"
 		Then the number of "List" table lines is "равно" "250"
+
+
+Scenario: _005011 check that a country cannot be created manually from the choice form
+	And I close all client application windows
+	* Open the Countries choice form from the Company card
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Country"
+		Then "Countries" window is opened
+	* Manual creation commands are not available
+		If 'FormCreate' attribute is present on the form Then
+			Then I raise "Create command must not be available on the Countries choice form" exception
+		If 'FormCopy' attribute is present on the form Then
+			Then I raise "Copy command must not be available on the Countries choice form" exception
+	And I close all client application windows
+
+
+Scenario: _005012 check that a country can be loaded from the classifier out of the choice form
+	And I close all client application windows
+	* Open the Countries choice form from the Company card
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Country"
+		Then "Countries" window is opened
+	* Load a country from the classifier
+		And I click "Load countries" button
+		And I go to line in "CountryList" table
+			| "Code" | "Description" |
+			| "792"  | "Turkey"      |
+		And I click "Create selected" button
+		And I close current window
+	* The loaded country can be selected into the Company card
+		And I go to line in "List" table
+			| "Description" |
+			| "Turkey"      |
+		And I click the button named "FormChoose"
+		Then the form attribute named "Country" became equal to "Turkey"
+	And I close all client application windows
+
+
+Scenario: _005013 check that a country cannot be created manually from the list form
+	And I close all client application windows
+	* Open the Countries list form
+		Given I open hyperlink "e1cib/list/Catalog.Countries"
+		Then "Countries" window is opened
+	* Manual creation commands are not available
+		If 'FormCreate' attribute is present on the form Then
+			Then I raise "Create command must not be available on the Countries list form" exception
+		If 'FormCopy' attribute is present on the form Then
+			Then I raise "Copy command must not be available on the Countries list form" exception
+	And I close all client application windows

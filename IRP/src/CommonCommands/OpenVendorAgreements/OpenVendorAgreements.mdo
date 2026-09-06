@@ -3,11 +3,11 @@
  <name>OpenVendorAgreements</name>
  <synonym>
   <key>tr</key>
-  <value>Tedarikçi sözleşmesi</value>
+  <value>Tedarikçi sözleşmeleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Соглашения поставщика</value>
+  <value>Соглашения с поставщиками</value>
  </synonym>
  <synonym>
   <key>en</key>

@@ -89,7 +89,7 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams.Insert("Ref", Ref);
 	StrParams.Insert("Company", RefData.Company);
 	StrParams.Insert("Period", EndOfDay(RefData.EndDate));
-	StrParams.Insert("BeforEnd", New Boundary(EndOfDay(RefData.EndDate), BoundaryType.Excluding));
+	StrParams.Insert("BeforEnd", EndOfDay(RefData.EndDate));
 	Return StrParams;
 EndFunction
 

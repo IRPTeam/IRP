@@ -815,6 +815,44 @@ Scenario: 963066 try post DepreciationCalculation (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Depreciation calculation * dated * *" window closing in "5" seconds
 
+Scenario: 963069 post DepreciationCalculation when the month has a posted document of the inaccessible branch (LimitedAccess)
+	And I close all client application windows
+	* Create and post the document of the branch that is not accessible for LimitedAccess
+		And I close TestClient session
+		And I connect "Этот клиент" TestClient using "CI" login and "CI" password
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Company Read and Write Access" string
+		And I select from the drop-down list named "Branch" by "Branch access deny" string
+		And I click Choice button of the field named "Date"
+		And I input "15.12.2026 10:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I click the button named "FormPostAndClose"
+	* Create own document of the accessible branch in the same month
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Company Read and Write Access" string
+		And I select from the drop-down list named "Branch" by "Branch Read and Write Access" string
+		And I click Choice button of the field named "Date"
+		And I input "15.12.2026 11:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I click the button named "FormWrite"
+		And I delete "$$OwnDepreciationCalculation$$" variable
+		And I save the value of "Number" field as "$$OwnDepreciationCalculation$$"
+		And I close current window
+	* Post own document under the limited user
+		And I close TestClient session
+		And I connect "TestAdmin" TestClient using "LimitedAccess" login and "" password
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I go to line in "List" table
+			| 'Number'                         |
+			| '$$OwnDepreciationCalculation$$' |
+		And I select current line in "List" table
+		And I click the button named "FormPostAndClose"
+		If "1C:Enterprise" window is opened Then
+			And I click "OK" button
+		Then user message window does not contain messages
+		Then I wait "Depreciation calculation $$OwnDepreciationCalculation$$ dated **" window closing in "5" seconds
+	And I close all client application windows
 Scenario: 963067 try post ModernizationOfFixedAsset (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"

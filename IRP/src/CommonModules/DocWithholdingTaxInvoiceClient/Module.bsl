@@ -417,6 +417,14 @@ EndProcedure
 
 #EndRegion
 
+#Region NET_AMOUNT
+
+Procedure ItemListNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListNetAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #Region TOTAL_AMOUNT
 
 Procedure ItemListTotalAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export

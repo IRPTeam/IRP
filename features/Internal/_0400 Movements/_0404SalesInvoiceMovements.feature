@@ -18,6 +18,7 @@ Background:
 Scenario: _040130 preparation (Sales invoice)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
+	When set True value to the constant Use accounting
 	* Unpost SO closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		If "List" table contains lines Then

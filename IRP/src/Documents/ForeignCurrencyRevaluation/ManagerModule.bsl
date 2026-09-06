@@ -535,6 +535,43 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("Company", Ref.Company);
 	Query.Execute();
 
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	UniqueCurrencyPairs.CurrencyFrom,
+	|	UniqueCurrencyPairs.CurrencyTo,
+	|	UniqueCurrencyPairs.Source,
+	|	CurrencyRatesSliceLast.Rate
+	|FROM
+	|	UniqueCurrencyPairs AS UniqueCurrencyPairs
+	|		LEFT JOIN InformationRegister.CurrencyRates.SliceLast(&PeriodSliceLast, (CurrencyFrom, CurrencyTo, Source) IN
+	|			(SELECT
+	|				UniqueCurrencyPairs.CurrencyFrom,
+	|				UniqueCurrencyPairs.CurrencyTo,
+	|				UniqueCurrencyPairs.Source
+	|			FROM
+	|				UniqueCurrencyPairs AS UniqueCurrencyPairs)) AS CurrencyRatesSliceLast
+	|		ON UniqueCurrencyPairs.CurrencyFrom = CurrencyRatesSliceLast.CurrencyFrom
+	|		AND UniqueCurrencyPairs.CurrencyTo = CurrencyRatesSliceLast.CurrencyTo
+	|		AND UniqueCurrencyPairs.Source = CurrencyRatesSliceLast.Source
+	|WHERE
+	|	CurrencyRatesSliceLast.Rate IS NULL
+	|	and UniqueCurrencyPairs.CurrencyFrom <> UniqueCurrencyPairs.CurrencyTo";
+	
+	Query.SetParameter("PeriodSliceLast", DocumentDate);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	While QuerySelection.Next() Do
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_200, 
+			QuerySelection.CurrencyFrom, QuerySelection.CurrencyTo, QuerySelection.Source));
+	EndDo;
+	If QuerySelection.Count() > 0 Then
+		Cancel = True;
+		Return New Structure();
+	EndIf;
+
 	CurrencyRates = Parameters.TempTablesManager.Tables.Find("CurrencyRates").GetData().Unload();
 
 	ArrayOfActives = New Array();

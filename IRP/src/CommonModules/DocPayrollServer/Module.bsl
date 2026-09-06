@@ -522,9 +522,8 @@ Function GetAccrualValue(Parameters, EmployeeOrPosition, Date)
 	|	AccrualValues.Period
 	|FROM
 	|	InformationRegister.T9500S_AccrualAndDeductionValues.SliceLast(ENDOFPERIOD(&Date, DAY),
-	|		EmployeeOrPosition = &EmployeeOrPosition) AS AccrualValues
-	|WHERE
-	|	NOT AccrualValues.NotActual";
+	|		EmployeeOrPosition = &EmployeeOrPosition) AS AccrualValues";
+
 	Query.SetParameter("Date", Date);
 	Query.SetParameter("EmployeeOrPosition", EmployeeOrPosition);
 	QueryResult = Query.Execute();

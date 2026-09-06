@@ -136,7 +136,7 @@ Function GetIsClosedSalesOrderInItemList(ArrayOfOrder) Export
 	Return Result;
 EndFunction
 
-Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
+Function GetDataFromSalesOrder(SalesOrder, Object = Undefined) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -156,6 +156,20 @@ Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
+	|	RowIDInfo.Key AS Key,
+	|	RowIDInfo.RowID AS RowID,
+	|	SalesOrdersInvoiceClosing.QuantityBalance AS QuantityBalance
+	|INTO RowIDInfo
+	|FROM
+	|	Document.SalesOrder.RowIDInfo AS RowIDInfo
+	|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(&Boundary, Order = &SalesOrder) AS
+	|			SalesOrdersInvoiceClosing
+	|		ON RowIDInfo.RowID = SalesOrdersInvoiceClosing.RowKey
+	|		AND RowIDInfo.Ref = &SalesOrder and RowIDInfo.NextStep <> value(Catalog.MovementRules.PRR)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	ItemList.Ref AS Ref,
 	|	ItemList.Key AS SalesOrderKey,
 	|	ItemList.Item AS Item,
@@ -163,28 +177,26 @@ Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
 	|	ItemList.Store AS Store,
 	|	ItemList.ItemKey.Item.Unit AS Unit,
 	|	ItemList.DeliveryDate AS DeliveryDate,
-	|	ItemList.ProcurementMethod AS ProcurementMethod,
 	|	ItemList.CancelReason AS CancelReason,
-	|	SalesOrdersInvoiceClosing.QuantityBalance > 0 AS Cancel,
+	|	ItemList.SalesPerson AS SalesPerson,
+	|	ItemList.ProcurementMethod AS ProcurementMethod,
+	|	RowIDInfo.QuantityBalance > 0 AS Cancel,
 	|	CASE
-	|		WHEN SalesOrdersInvoiceClosing.QuantityBalance > 0
-	|			THEN SalesOrdersInvoiceClosing.QuantityBalance
-	|		ELSE -1 * SalesOrdersInvoiceClosing.QuantityBalance
+	|		WHEN RowIDInfo.QuantityBalance > 0
+	|			THEN RowIDInfo.QuantityBalance
+	|		ELSE -1 * RowIDInfo.QuantityBalance
 	|	END AS Quantity,
 	|	CASE
-	|		WHEN SalesOrdersInvoiceClosing.QuantityBalance > 0
-	|			THEN SalesOrdersInvoiceClosing.QuantityBalance
-	|		ELSE -1 * SalesOrdersInvoiceClosing.QuantityBalance
+	|		WHEN RowIDInfo.QuantityBalance > 0
+	|			THEN RowIDInfo.QuantityBalance
+	|		ELSE -1 * RowIDInfo.QuantityBalance
 	|	END AS QuantityInBaseUnit,
-	|	ItemList.SalesPerson,
-	|	ItemList.IsService
+	|	ItemList.IsService AS IsService
 	|FROM
 	|	Document.SalesOrder.ItemList AS ItemList
-	|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(&Boundary, Order = &SalesOrder) AS
-	|			SalesOrdersInvoiceClosing
-	|		ON ItemList.Key = SalesOrdersInvoiceClosing.RowKey
-	|WHERE
-	|	ItemList.Ref = &SalesOrder
+	|		INNER JOIN RowIDInfo AS RowIDInfo
+	|		ON ItemList.Key = RowIDInfo.Key
+	|		AND ItemList.Ref = &SalesOrder
 	|
 	|ORDER BY
 	|	ItemList.LineNumber";
@@ -200,7 +212,7 @@ Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
 	QueryResults = Query.ExecuteBatch();
 	
 	Header              = QueryResults[0].Unload()[0];
-	Table_ItemList      = QueryResults[1].Unload();
+	Table_ItemList      = QueryResults[2].Unload();
 	
 	// ItemList
 	ArrayOfColumns = New Array();
@@ -231,7 +243,7 @@ Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
 EndFunction
 
 Procedure RefreshSalesOrderClosing(Object) Export
-	FillingData = GetDataFormSalesOrder(Object.SalesOrder, Object);
+	FillingData = GetDataFromSalesOrder(Object.SalesOrder, Object);
 	RefreshClosing(Object, FillingData, "SalesOrderKey", 
 		"Agreement, Company, LegalName, Partner, SalesOrder, TransactionType");
 EndProcedure
@@ -336,6 +348,20 @@ Function GetDataFromPurchaseOrder(PurchaseOrder, Object = Undefined) Export
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
+	|	RowIDInfo.Key AS Key,
+	|	RowIDInfo.RowID AS RowID,
+	|	PurchaseOrdersInvoiceClosing.QuantityBalance AS QuantityBalance
+	|INTO RowIDInfo
+	|FROM
+	|	Document.PurchaseOrder.RowIDInfo AS RowIDInfo
+	|		INNER JOIN AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Balance(&Boundary, Order = &PurchaseOrder) AS
+	|			PurchaseOrdersInvoiceClosing
+	|		ON RowIDInfo.RowID = PurchaseOrdersInvoiceClosing.RowKey
+	|		AND RowIDInfo.Ref = &PurchaseOrder
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	ItemList.Ref AS Ref,
 	|	ItemList.Key AS PurchaseOrderKey,
 	|	ItemList.Item AS Item,
@@ -344,25 +370,23 @@ Function GetDataFromPurchaseOrder(PurchaseOrder, Object = Undefined) Export
 	|	ItemList.ItemKey.Item.Unit AS Unit,
 	|	ItemList.DeliveryDate AS DeliveryDate,
 	|	ItemList.CancelReason AS CancelReason,
-	|	PurchaseOrdersInvoiceClosing.QuantityBalance > 0 AS Cancel,
+	|	RowIDInfo.QuantityBalance > 0 AS Cancel,
 	|	CASE
-	|		WHEN PurchaseOrdersInvoiceClosing.QuantityBalance > 0
-	|			THEN PurchaseOrdersInvoiceClosing.QuantityBalance
-	|		ELSE -1 * PurchaseOrdersInvoiceClosing.QuantityBalance
+	|		WHEN RowIDInfo.QuantityBalance > 0
+	|			THEN RowIDInfo.QuantityBalance
+	|		ELSE -1 * RowIDInfo.QuantityBalance
 	|	END AS Quantity,
 	|	CASE
-	|		WHEN PurchaseOrdersInvoiceClosing.QuantityBalance > 0
-	|			THEN PurchaseOrdersInvoiceClosing.QuantityBalance
-	|		ELSE -1 * PurchaseOrdersInvoiceClosing.QuantityBalance
+	|		WHEN RowIDInfo.QuantityBalance > 0
+	|			THEN RowIDInfo.QuantityBalance
+	|		ELSE -1 * RowIDInfo.QuantityBalance
 	|	END AS QuantityInBaseUnit,
-	|	ItemList.IsService
+	|	ItemList.IsService AS IsService
 	|FROM
 	|	Document.PurchaseOrder.ItemList AS ItemList
-	|		INNER JOIN AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Balance(&Boundary, Order = &PurchaseOrder) AS
-	|			PurchaseOrdersInvoiceClosing
-	|		ON ItemList.Key = PurchaseOrdersInvoiceClosing.RowKey
-	|WHERE
-	|	ItemList.Ref = &PurchaseOrder
+	|		INNER JOIN RowIDInfo AS RowIDInfo
+	|		ON ItemList.Key = RowIDInfo.Key
+	|		AND ItemList.Ref = &PurchaseOrder
 	|
 	|ORDER BY
 	|	ItemList.LineNumber";
@@ -377,7 +401,7 @@ Function GetDataFromPurchaseOrder(PurchaseOrder, Object = Undefined) Export
 	QueryResults = Query.ExecuteBatch();
 	
 	Header              = QueryResults[0].Unload()[0];
-	Table_ItemList      = QueryResults[1].Unload();
+	Table_ItemList      = QueryResults[2].Unload();
 	
 	// ItemList
 	ArrayOfColumns = New Array();

@@ -2725,6 +2725,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_199",   NStr("en='From days and to days cannot be equal';
 		|ru='«Дней с» и «Дней по» не могут быть равны';
 		|tr='From days and to days cannot be equal'", Lang));
+	Strings.Insert("Error_200",   NStr("en='Not set currency rate: from [%1] to [%2] source [%3]';
+		|ru='Not set currency rate: from [%1] to [%2] source [%3]';
+		|tr='Not set currency rate: from [%1] to [%2] source [%3]'", Lang));
 	
 	
 	
@@ -2788,8 +2791,13 @@ Function Strings(Lang) Export
 		|tr='Erişim anahtarı oluşturulamıyor. Katalog [ObjectAccessKeys] içine yeni [ValueRef] özelliği ekleyin'", Lang));
 #EndRegion
 
-#Region LandedCost
+#Region FixedAsset
+	Strings.Insert("Error_FixedAsset_01", NStr("en='Depreciation calculation is already exists [%1]';
+		|ru='Depreciation calculation is already exists [%1]';
+		|tr='Depreciation calculation is already exists [%1]'", Lang));
+#EndRegion
 
+#Region LandedCost
 	Strings.Insert("LC_Error_001", NStr("en='Can not receipt Batch key by sales return: %1 , Quantity: %2 , Doc: %3';
 		|ru='Не получилось оприходовать ключ партии возврата: %1 , Количество: %2 , Документ: %3';
 		|tr='Satış iadenin envanter giriş hatası. İade: %1 , Miktar: %2 , Evrak: %3'", Lang) + Chars.LF);

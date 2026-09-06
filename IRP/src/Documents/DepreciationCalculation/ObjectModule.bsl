@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
@@ -38,4 +39,29 @@ EndProcedure
 
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
+EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	DepreciationCalculation.Ref
+	|FROM
+	|	Document.DepreciationCalculation AS DepreciationCalculation
+	|WHERE
+	|	DepreciationCalculation.Ref <> &Ref
+	|	AND DepreciationCalculation.Company = &Company
+	|	AND DepreciationCalculation.Date BETWEEN BEGINOFPERIOD(&Date, MONTH) AND ENDOFPERIOD(&Date, MONTH)
+	|	AND DepreciationCalculation.Posted
+	|	AND DepreciationCalculation.Branch = &Branch";
+	Query.SetParameter("Ref", ThisObject.Ref);
+	Query.SetParameter("Company", ThisObject.Company);
+	Query.SetParameter("Branch", ThisObject.Branch);
+	Query.SetParameter("Date", ThisObject.Date);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	While QuerySelection.Next() Do
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_FixedAsset_01, QuerySelection.Ref), "Date", ThisObject);
+		Cancel = True;
+	EndDo;	
 EndProcedure

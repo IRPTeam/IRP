@@ -1253,7 +1253,7 @@ EndFunction
 
 Function UseRegister(Name) Export
 	// Delete CashInTransit
-	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_";
+	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_"; 
 EndFunction
 
 Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export
@@ -1456,6 +1456,12 @@ EndFunction
 Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
 	ExecuteQuery(Ref, QueryArray, Parameters);
 	For Each VT In Tables Do
+		If Upper(VT.Key) = Upper("T1040T_AccountingAmounts") Or Upper(VT.Key) = Upper("T1050T_AccountingQuantities") Then
+			If Not FOServer.IsUseAccounting() Then
+				Continue;
+			EndIf;
+		EndIf;
+		
 		QueryTable = GetQueryTableByName(VT.Key, Parameters);
 		If QueryTable.Count() Then
 			CommonFunctionsServer.MergeTables(Tables[VT.Key], QueryTable, "RecordType");

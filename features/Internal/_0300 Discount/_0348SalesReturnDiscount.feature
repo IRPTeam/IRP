@@ -465,20 +465,20 @@ Scenario: _034806 check additional manual discount (SO-SI-SR)
 		And I finish line editing in "ItemList" table
 	* Check discount
 		And "ItemList" table became equal
-			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Manual offer amount' | 'Quantity' | 'Price'  | 'Manual offer type' | 'Offers amount' | 'VAT' | 'Manual offer percent' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Store'    | 'Use shipment confirmation' | 'Sales order' |
-			| 'Dress'    | 'M/White'   | 'No'                 | '2 440,68'   | 'pcs'  | '2 000,00'            | '100,000'  | '200,00' | 'Percent'           | '2 000,00'      | '18%' | '10,00'                | '13 559,32'  | '16 000,00'    | 'No'             | 'Store 01' | 'No'                        | '*'           |
-			| 'Dress'    | 'L/Green'   | 'No'                 | '5 613,56'   | 'pcs'  | '1 000,00'            | '200,000'  | '210,00' | 'Amount'            | '4 200,00'      | '18%' | ''                     | '31 186,44'  | '36 800,00'    | 'No'             | 'Store 01' | 'No'                        | '*'           |
-			| 'Trousers' | '36/Yellow' | 'No'                 | '10 296,61'  | 'pcs'  | '7 500,00'            | '300,000'  | '250,00' | 'Percent'           | ''              | '18%' | '10,00'                | '57 203,39'  | '67 500,00'    | 'No'             | 'Store 01' | 'No'                        | '*'           |
+			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Manual offer amount' | 'Quantity' | 'Price'  | 'Manual offer type' | 'Offers amount' | 'VAT' | 'Manual offer percent' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
+			| 'Dress'    | 'M/White'   | 'No'                 | '2 440,68'   | 'pcs'  | '2 000,00'            | '100,000'  | '200,00' | 'Percent'           | '2 000,00'      | '18%' | '10,00'                | '13 559,32'  | '16 000,00'    | 'Store 01' | '*'           |
+			| 'Dress'    | 'L/Green'   | 'No'                 | '5 613,56'   | 'pcs'  | '1 000,00'            | '200,000'  | '210,00' | 'Amount'            | '4 200,00'      | '18%' | ''                     | '31 186,44'  | '36 800,00'    | 'Store 01' | '*'           |
+			| 'Trousers' | '36/Yellow' | 'No'                 | '10 296,61'  | 'pcs'  | '7 500,00'            | '300,000'  | '250,00' | 'Percent'           | ''              | '18%' | '10,00'                | '57 203,39'  | '67 500,00'    | 'Store 01' | '*'           |
 		And I click "Post" button
 	* Create SR and check discount
 		And I click "Sales return" button
 		Then "Add linked document rows" window is opened
 		And I click "Ok" button
 		And "ItemList" table became equal
-			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Manual offer amount' | 'Quantity' | 'Price'  | 'Manual offer type' | 'Offers amount' | 'VAT' | 'Manual offer percent' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Store'    | 'Use shipment confirmation' | 'Sales invoice' |
-			| 'Dress'    | 'M/White'   | 'No'                 | '2 440,68'   | 'pcs'  | '2 000,00'            | '100,000'  | '200,00' | 'Percent'           | '2 000,00'      | '18%' | '10,00'                | '13 559,32'  | '16 000,00'    | 'No'             | 'Store 01' | 'No'                        | '*'             |
-			| 'Dress'    | 'L/Green'   | 'No'                 | '5 613,56'   | 'pcs'  | '1 000,00'            | '200,000'  | '210,00' | 'Amount'            | '4 200,00'      | '18%' | ''                     | '31 186,44'  | '36 800,00'    | 'No'             | 'Store 01' | 'No'                        | '*'             |
-			| 'Trousers' | '36/Yellow' | 'No'                 | '10 296,61'  | 'pcs'  | '7 500,00'            | '300,000'  | '250,00' | 'Percent'           | ''              | '18%' | '10,00'                | '57 203,39'  | '67 500,00'    | 'No'             | 'Store 01' | 'No'                        | '*'             |
+			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Manual offer amount' | 'Quantity' | 'Price'  | 'Manual offer type' | 'Offers amount' | 'VAT' | 'Manual offer percent' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales invoice' |
+			| 'Dress'    | 'M/White'   | 'No'                 | '2 440,68'   | 'pcs'  | '2 000,00'            | '100,000'  | '200,00' | 'Percent'           | '2 000,00'      | '18%' | '10,00'                | '13 559,32'  | '16 000,00'    | 'Store 01' | '*'             |
+			| 'Dress'    | 'L/Green'   | 'No'                 | '5 613,56'   | 'pcs'  | '1 000,00'            | '200,000'  | '210,00' | 'Amount'            | '4 200,00'      | '18%' | ''                     | '31 186,44'  | '36 800,00'    | 'Store 01' | '*'             |
+			| 'Trousers' | '36/Yellow' | 'No'                 | '10 296,61'  | 'pcs'  | '7 500,00'            | '300,000'  | '250,00' | 'Percent'           | ''              | '18%' | '10,00'                | '57 203,39'  | '67 500,00'    | 'Store 01' | '*'             |
 		And I close all client application windows
 		
 							

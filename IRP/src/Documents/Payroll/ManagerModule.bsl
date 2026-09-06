@@ -94,6 +94,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("EndOfPeriod", EndOfMonth(Ref.EndDate));
 	Return StrParams;
 EndFunction
 
@@ -399,7 +400,7 @@ EndFunction
 Function R9555T_PaidSickLeaves()
 	Return
 		"SELECT
-		|	AccrualList.Period,
+		|	&EndOfPeriod AS Period,
 		|	AccrualList.Company,
 		|	AccrualList.Employee,
 		|	AccrualList.PaidSickLeaveDays AS Paid

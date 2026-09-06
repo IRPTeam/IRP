@@ -167,6 +167,77 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.RetailSalesReceipt.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.SalesOrder AS SalesOrder,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.ItemKey AS ItemKey,
+	|	TableRowIDInfo.RowID AS RowKey,
+	|	ItemList.Quantity AS Quantity,
+	|	ItemList.TotalAmount AS Amount,
+	|	ItemList.NetAmount AS NetAmount
+	|FROM
+	|	Document.RetailSalesReceipt.ItemList AS ItemList
+	|		inner JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key and ItemList.Ref = &Ref
+	|WHERE
+	|	NOT ItemList.SalesOrder.Ref IS NULL
+	|	AND ItemList.Ref.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+	
+	Query.SetParameter("Ref", Ref);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	QueryTable2 = QueryTable.CopyColumns();
+	For Each Row In QueryTable Do
+		OrderItemListRows = Row.SalesOrder.ItemList.FindRows(New Structure("Key", Row.RowKey));
+		If OrderItemListRows.Count() > 0 Then
+			OrderItemListRow = OrderItemListRows[0];
+			If OrderItemListRow.ItemKey <> Row.ItemKey Then
+				NewRow2 = QueryTable2.Add();
+				FillPropertyValues(NewRow2, Row);
+				NewRow2.RecordType = AccumulationRecordType.Expense;
+				NewRow2.ItemKey = OrderItemListRow.ItemKey;
+				NewRow3 = QueryTable2.Add();
+				FillPropertyValues(NewRow3, Row);
+				NewRow3.RecordType = AccumulationRecordType.Receipt;
+				NewRow3.ItemKey = Row.ItemKey;				
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	For Each Row In QueryTable2 Do
+		NewRow = QueryTable.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"Select * into tmpR2012B_SalesOrdersInvoiceClosing From &QueryTable as QueryTable";
+	Query.SetParameter("QueryTable", QueryTable);
+	Query.Execute();
+	
 	Return Tables;
 EndFunction
 
@@ -1505,24 +1576,24 @@ Function R8014T_ConsignorSales()
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period AS Period,
-		   |	ItemList.Company AS Company,
-		   |	ItemList.Branch AS Branch,
-		   |	ItemList.SalesOrder AS Order,
-		   |	ItemList.Currency AS Currency,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.RowID AS RowKey,
-		   |	ItemList.Quantity AS Quantity,
-		   |	ItemList.TotalAmount AS Amount,
-		   |	ItemList.NetAmount AS NetAmount
-		   |INTO R2012B_SalesOrdersInvoiceClosing
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.SalesOrderExists
-		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+	Return 
+		"SELECT
+		|	Table.RecordType AS RecordType,
+		|	Table.Period AS Period,
+		|	Table.Company AS Company,
+		|	Table.Branch AS Branch,
+		|	Table.SalesOrder AS Order,
+		|	Table.Currency AS Currency,
+		|	Table.ItemKey AS ItemKey,
+		|	Table.RowKey AS RowKey,
+		|	Table.Quantity AS Quantity,
+		|	Table.Amount AS Amount,
+		|	Table.NetAmount AS NetAmount
+		|INTO R2012B_SalesOrdersInvoiceClosing
+		|FROM
+		|	tmpR2012B_SalesOrdersInvoiceClosing as Table
+		|WHERE
+		| true";
 EndFunction
 
 Function R5020B_PartnersBalance()

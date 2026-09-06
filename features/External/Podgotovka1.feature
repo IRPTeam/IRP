@@ -604,7 +604,7 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 
 
 	Scenario: create purchase invoice without order (Vendor Ferron, TRY)
-	* Create Purchase Invoice without order	
+	* Create Purchase Invoice without order
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 	* Filling in vendor's info
@@ -624,6 +624,8 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 				| Description            |
 				| Vendor Ferron, TRY     |
 			And I select current line in "List" table
+			If "Update item list info" window is opened Then
+				And I click "OK" button
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |

@@ -101,8 +101,6 @@ Function GetAdditionalQueryParameters(Ref)
 	ArrayOfPayable = New Array();
 	ArrayOfPayable.Add(Enums.DebtTypes.AdvanceCustomer);
 	ArrayOfPayable.Add(Enums.DebtTypes.TransactionVendor);
-	ArrayOfPayable.Add(Enums.DebtTypes.OtherPartnerPayable);
-	ArrayOfPayable.Add(Enums.DebtTypes.EmployeePayable);
 	StrParams.Insert("ArrayOfPayable", ArrayOfPayable);
 	
 	Return StrParams;
@@ -144,10 +142,8 @@ Function Header()
 		|	Doc.Ref AS Ref,
 		|	Doc.SendDebtType IN (&ArrayOfReceivable) AS SendIsReceivable,
 		|	Doc.SendDebtType IN (&ArrayOfPayable) AS SendIsPayable,
-		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.EmployeePayable), VALUE(Enum.DebtTypes.EmployeeReceivable)) AS
-		|		SendIsEmployee,
-		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.EmployeePayable), VALUE(Enum.DebtTypes.EmployeeReceivable)) AS
-		|		ReceiveIsEmployee
+		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable)) AS SendIsEmployee,
+		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable)) AS ReceiveIsEmployee
 		|INTO tmp
 		|FROM
 		|	Document.DebitCreditNote AS Doc
@@ -295,14 +291,14 @@ Function Header()
 		|		WHEN tmp.SendIsPayable
 		|			THEN VALUE(AccumulationRecordType.Expense)
 		|	END AS RecordsTypeReceive_R5020B_PartnersBalance,
-		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.OtherPartnerReceivable), VALUE(Enum.DebtTypes.OtherPartnerPayable)) AS
+		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.OtherPartnerReceivable)) AS
 		|		DoRecordsSend_R5015B_OtherPartnersTransactions,
 		|	CASE
-		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
-		|		OR Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerPayable)
+		|		WHEN 
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
 		|			THEN VALUE(AccumulationRecordType.Expense)
 		|	END AS RecordsTypeSend_R5015B_OtherPartnersTransactions,
-		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.OtherPartnerReceivable), VALUE(Enum.DebtTypes.OtherPartnerPayable)) AS
+		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.OtherPartnerReceivable)) AS
 		|		DoRecordsReceive_R5015B_OtherPartnersTransactions,
 		|	CASE
 		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
@@ -312,25 +308,16 @@ Function Header()
 		|				WHEN tmp.SendIsPayable
 		|					THEN VALUE(AccumulationRecordType.Expense)
 		|			END
-		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerPayable)
-		|			THEN CASE
-		|				WHEN tmp.SendIsReceivable
-		|					THEN VALUE(AccumulationRecordType.Expense)
-		|				WHEN tmp.SendIsPayable
-		|					THEN VALUE(AccumulationRecordType.Receipt)
-		|			END
 		|	END AS RecordsTypeReceive_R5015B_OtherPartnersTransactions,
 		|
-		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable), VALUE(Enum.DebtTypes.EmployeePayable)) AS
-		|		DoRecordsSend_R3027B_EmployeeCashAdvance,
+		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable)) AS DoRecordsSend_R3027B_EmployeeCashAdvance,
 		|
 		|	CASE
 		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable)
-		|		OR Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeePayable)
 		|			THEN VALUE(AccumulationRecordType.Expense)
 		|	END AS RecordsTypeSend_R3027B_EmployeeCashAdvance,
 		|
-		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable), VALUE(Enum.DebtTypes.EmployeePayable)) AS
+		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable)) AS
 		|		DoRecordsReceive_R3027B_EmployeeCashAdvance,
 		|
 		|	CASE
@@ -340,13 +327,6 @@ Function Header()
 		|					THEN VALUE(AccumulationRecordType.Receipt)
 		|				WHEN tmp.SendIsPayable
 		|					THEN VALUE(AccumulationRecordType.Expense)
-		|			END
-		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.EmployeePayable)
-		|			THEN CASE
-		|				WHEN tmp.SendIsReceivable
-		|					THEN VALUE(AccumulationRecordType.Expense)
-		|				WHEN tmp.SendIsPayable
-		|					THEN VALUE(AccumulationRecordType.Receipt)
 		|			END
 		|	END AS RecordsTypeReceive_R3027B_EmployeeCashAdvance,
 		|	Doc.Date AS Period,
@@ -394,8 +374,8 @@ Function Header()
 		|		ELSE 0
 		|	END AS SendVendorAdvance,
 		|	CASE
-		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerPayable)
-		|		OR Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
+		|		WHEN 
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
 		|			THEN Doc.SendAmount
 		|		ELSE 0
 		|	END AS SendOtherTransaction,
@@ -444,8 +424,8 @@ Function Header()
 		|		ELSE 0
 		|	END AS ReceiveVendorAdvance,
 		|	CASE
-		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerPayable)
-		|		OR Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
+		|		WHEN 
+		|		Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
 		|			THEN Doc.ReceiveAmount
 		|		ELSE 0
 		|	END AS ReceiveOtherTransaction,
@@ -1302,8 +1282,6 @@ Function GetAccountVariantsMapping()
 	Mapping.Insert(Enums.DebtTypes.EmployeeReceivable     , "AccountCashAdvance");
 	Mapping.Insert(Enums.DebtTypes.TransactionVendor      , "AccountTransactionsVendor");
 	Mapping.Insert(Enums.DebtTypes.AdvanceCustomer        , "AccountAdvancesCustomer");
-	Mapping.Insert(Enums.DebtTypes.OtherPartnerPayable    , "AccountTransactionsOther");
-	Mapping.Insert(Enums.DebtTypes.EmployeePayable        , "AccountCashAdvance");
 	Return Mapping;
 EndFunction
 	

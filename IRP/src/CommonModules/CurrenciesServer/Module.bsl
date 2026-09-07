@@ -1797,7 +1797,7 @@ Procedure DebitCreditNoteDifference(Parameters)
 	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
 		
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1021B_VendorsTransactions].PrepareTable;
-		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
+		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
 		BalanceType   = "passive";
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;

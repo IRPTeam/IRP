@@ -433,15 +433,55 @@ Function GetAgreementTypeByDebtType(DebtType) Export
 	ElsIf DebtType = Enums.DebtTypes.AdvanceVendor
 		Or DebtType = Enums.DebtTypes.TransactionVendor Then
 		Return Enums.AgreementTypes.Vendor;
-	ElsIf DebtType = Enums.DebtTypes.OtherPartnerPayable
-		Or DebtType = Enums.DebtTypes.OtherPartnerReceivable Then
+	ElsIf DebtType = Enums.DebtTypes.OtherPartnerReceivable Then
 		Return  Enums.AgreementTypes.Other;
-	ElsIf DebtType = Enums.DebtTypes.EmployeePayable
-		Or DebtType = Enums.DebtTypes.EmployeeReceivable Then
+	ElsIf DebtType = Enums.DebtTypes.EmployeeReceivable Then
 		Return  Enums.AgreementTypes.Other;
 	Else
-                Raise StrTemplate(R().UnknownAgreementTypeByDebtType, DebtType);
+        Raise StrTemplate(R().UnknownAgreementTypeByDebtType, DebtType);
 	EndIf;
+EndFunction	
+	
+Function GetPartnerByDebtType(CurrentPartner, DebtType) Export
+	If Not ValueIsFilled(CurrentPartner) Then
+		Return Undefined;
+	EndIf;
+		
+	If DebtType = Enums.DebtTypes.AdvanceCustomer Or DebtType = Enums.DebtTypes.TransactionCustomer Then
+		If CurrentPartner.Customer Then
+			Return CurrentPartner;
+		EndIf;
+	ElsIf DebtType = Enums.DebtTypes.AdvanceVendor Or DebtType = Enums.DebtTypes.TransactionVendor Then
+		If CurrentPartner.Vendor Then
+			Return CurrentPartner;
+		EndIf;	
+	ElsIf DebtType = Enums.DebtTypes.EmployeeReceivable Then
+		If CurrentPartner.Employee Then
+			Return CurrentPartner;
+		EndIf;
+	ElsIf DebtType = Enums.DebtTypes.OtherPartnerReceivable Then
+		If CurrentPartner.Other Then
+			Return CurrentPartner;
+		EndIf;
+	EndIf;
+	Return Undefined;
+EndFunction
+	
+Function GetPartnerAttributeFilterByDebtType(DebtType) Export
+	If Not ValueIsFilled(DebtType) Then
+		Return Undefined;
+	EndIf;
+		
+	If DebtType = Enums.DebtTypes.AdvanceCustomer Or DebtType = Enums.DebtTypes.TransactionCustomer Then
+		Return "Customer";
+	ElsIf DebtType = Enums.DebtTypes.AdvanceVendor Or DebtType = Enums.DebtTypes.TransactionVendor Then
+		Return "Vendor";
+	ElsIf DebtType = Enums.DebtTypes.EmployeeReceivable Then
+		Return "Employee";
+	ElsIf DebtType = Enums.DebtTypes.OtherPartnerReceivable Then
+		Return "Other";
+	EndIf;
+	Return Undefined;
 EndFunction	
 	
 Function GetBankTermsByPaymentType(PaymentType, Branch) Export

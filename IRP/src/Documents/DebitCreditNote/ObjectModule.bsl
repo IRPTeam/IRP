@@ -90,6 +90,14 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_148, "ReceiveAmount", ThisObject);
 		Cancel = True;
 	EndIf;
+	
+	If ThisObject.SendDebtType <> Enums.DebtTypes.EmployeeReceivable And FOServer.IsUseLegalName() Then
+		CheckedAttributes.Add("SendLegalName");
+	EndIf;
+	
+	If ThisObject.ReceiveDebtType <> Enums.DebtTypes.EmployeeReceivable And FOServer.IsUseLegalName() Then
+		CheckedAttributes.Add("ReceiveLegalName");
+	EndIf;
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)

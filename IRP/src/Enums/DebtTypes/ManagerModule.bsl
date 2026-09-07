@@ -6,7 +6,6 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	ChoiceData.Add(TransactionVendor);
 	ChoiceData.Add(AdvanceCustomer);
 	ChoiceData.Add(TransactionCustomer);
-	ChoiceData.Add(OtherPartnerPayable);
 	ChoiceData.Add(OtherPartnerReceivable);
 	ChoiceData.Add(EmployeeReceivable);
 EndProcedure

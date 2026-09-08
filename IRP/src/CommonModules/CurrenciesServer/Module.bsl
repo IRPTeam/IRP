@@ -245,7 +245,9 @@ Procedure _PreparePostingDataTables(Parameters, CurrencyTable, IsOffsetOfAdvance
 				and (TypeOf(Parameters.Object.Ref) = Type("DocumentRef.SalesInvoice") 
 				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.PurchaseInvoice")
 				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.RetailSalesReceipt")
-				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.WorkSheet")) Then
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.WorkSheet")
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.RetailReturnReceipt")
+				or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.SalesReturn")) Then
 					
 				PrepareTable_Own = PrepareTable.CopyColumns();
 				PrepareTable_CMC = PrepareTable.CopyColumns();

@@ -1296,6 +1296,28 @@ Procedure Calculate_ReturnBySalesInvoice(Document, BatchRow, Tables, Calculation
 			NewReceipt[Res] = ReceiptAmounts[Res]; 
 		EndDo;
 
+
+			// Returned batches
+		If TypeOf(Document) = Type("DocumentRef.SalesReturn")
+			Or TypeOf(Document) = Type("DocumentRef.RetailReturnReceipt") Then				
+			_new = Tables.DataForWriteOffBatches.Add();
+			FillPropertyValues(_new, NewReceipt);
+			For Each Res In AmountResources() Do
+				_new[Res] = -NewReceipt[Res]; 
+			EndDo;
+			
+			_new.Batch               = NewReceipt.Batch;
+			_new.BatchKey            = NewReceipt.BatchKey;
+			_new.ItemKey             = NewReceipt.BatchKey.ItemKey;
+			_new.Quantity            = NewReceipt.Quantity;
+			_new.PreliminaryQuantity = NewReceipt.PreliminaryQuantity;		
+			_new.ExpenseType      = BatchRow.Company.LandedCostExpenseType;
+			_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
+			_new.Branch           = BatchRow.Branch;
+			_new.Currency         = Document.Currency;
+			_new.RowID            = BatchRow.RowID;
+		EndIf;	
+
 	EndDo; // For Each Sales_Batch In Sales_BatchRows
 
 	If NeedReceipt <> 0 Then

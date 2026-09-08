@@ -1787,13 +1787,18 @@ Procedure DebitCreditNoteDifference(Parameters)
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
 	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer Then
-		
+		RecordType  = AccumulationRecordType.Receipt;    		
+		BalanceType = "passive";
+		If Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionCustomer
+			Or Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceVendor Then
+			 RecordType  = AccumulationRecordType.Expense;
+			 BalanceType = "active"; 
+		EndIf;
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers].PrepareTable;
-		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Receipt);
-		BalanceType   = "passive";
+		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", RecordType);
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
-		
+				
 	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
 		RecordType = AccumulationRecordType.Receipt;
 		BalanceType = "passive";
@@ -1809,11 +1814,17 @@ Procedure DebitCreditNoteDifference(Parameters)
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
 		
-	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then
-		
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then				
+		RecordType  = AccumulationRecordType.Receipt;    		
+		BalanceType = "active";
+		If Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionVendor
+			Or Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceCustomer Then
+			 RecordType  = AccumulationRecordType.Expense;
+			 BalanceType = "passive"; 
+		EndIf;
+
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
-		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
-		BalanceType   = "active";
+		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", RecordType);
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
 		

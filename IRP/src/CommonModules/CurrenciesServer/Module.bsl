@@ -1835,6 +1835,14 @@ Procedure DebitCreditNoteDifference(Parameters)
 		BalanceType   = "active";
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
+
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5015B_OtherPartnersTransactions].PrepareTable;
+		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Receipt);
+		BalanceType   = "active";
+		TotalReceipt  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
 		
 	EndIf;
 		

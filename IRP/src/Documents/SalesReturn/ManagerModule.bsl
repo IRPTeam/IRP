@@ -1285,7 +1285,7 @@ Function R5022T_Expenses()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.ProfitLossCenter,
-		|	ItemList.Company.LandedCostCurrencyMovementType,
+		|	ItemList.Company.LandedCostExpenseType,
 		|	ItemList.ItemKey,
 		|	ItemList.Currency,
 		|	ItemList.Key,

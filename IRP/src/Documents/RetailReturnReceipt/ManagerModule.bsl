@@ -1213,7 +1213,27 @@ Function R5022T_Expenses()
 		|FROM
 		|	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
 		|WHERE
-		|	WriteOffBatchesInfo.Document = &Ref";
+		|	WriteOffBatchesInfo.Document = &Ref
+		|
+		|union all
+		|
+		|SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.ProfitLossCenter,
+		|	ItemList.Company.LandedCostExpenseType,
+		|	ItemList.ItemKey,
+		|	ItemList.Currency,
+		|	ItemList.Key,
+		|	Undefined,
+		|	- ItemList.NetAmount,
+		|	- ItemList.Amount
+		|from
+		|	ItemList AS ItemList
+		|Where
+		|	ItemList.SalesDocument.Ref is null";
+
 EndFunction
 
 Function R2002T_SalesReturns()

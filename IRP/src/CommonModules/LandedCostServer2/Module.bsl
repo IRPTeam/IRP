@@ -1309,8 +1309,8 @@ Procedure Calculate_ReturnBySalesInvoice(Document, BatchRow, Tables, Calculation
 			_new.Batch               = NewReceipt.Batch;
 			_new.BatchKey            = NewReceipt.BatchKey;
 			_new.ItemKey             = NewReceipt.BatchKey.ItemKey;
-			_new.Quantity            = NewReceipt.Quantity;
-			_new.PreliminaryQuantity = NewReceipt.PreliminaryQuantity;		
+			_new.Quantity            = - NewReceipt.Quantity;
+			_new.PreliminaryQuantity = - NewReceipt.PreliminaryQuantity;		
 			_new.ExpenseType      = BatchRow.Company.LandedCostExpenseType;
 			_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
 			_new.Branch           = BatchRow.Branch;

@@ -1563,6 +1563,13 @@ Procedure LoadMetadata(FormCash)
 		TypeChoiceList.Add(TypeItem, ItemPreffics + TypeItem, , ItemPicture);
 	EndDo;
 	
+	For Each TypeItem In ChartsOfAccounts.AllRefsType().Types() Do
+		//@skip-warning
+		ItemPreffics = StrTemplate("(" + R().Str_ChartOfAccounts + ") ");
+		ItemPicture = PictureLib.ChartOfAccounts;
+		TypeChoiceList.Add(TypeItem, ItemPreffics + TypeItem, , ItemPicture);
+	EndDo;
+	
 	TypesWithProperties = GetTypesWithProperties();
 	HiddenTables = DocumentsClientServer.GetHiddenTables();
 	AddPropertyTables = GetAddPropertyTables();

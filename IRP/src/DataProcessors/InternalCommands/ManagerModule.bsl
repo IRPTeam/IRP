@@ -466,6 +466,7 @@ Function GroupEditingProperties_GetCommandDescription()
 			Targets.Add(ContentItem.FullName());
 		EndIf;
 	EndDo;
+	Targets.Add(Metadata.ChartsOfAccounts.Basic.FullName());
 	CommandDescription.Targets = New FixedArray(Targets);
 	
 	Return CommandDescription;

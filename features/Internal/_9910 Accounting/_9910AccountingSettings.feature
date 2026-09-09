@@ -2255,7 +2255,9 @@ Scenario: _0991071 check Bank payment accounting movements (Payment to the vendo
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'              | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Financial movement type' | 'Operation'                                                                                   |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'Payment to vendor'       | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '320'   | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '102'    | 'Bank account, TRY'         | 'Payment to vendor'       | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+			| '320'   | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '159'    | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2284,7 +2286,9 @@ Scenario: _0991072 check Bank payment accounting movements (Payment to the vendo
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'              | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Financial movement type' | 'Operation'                                                                                   |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'Payment to vendor'       | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '5201'  | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+			| '320'   | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '102'    | 'Bank account, TRY'         | 'Payment to vendor'       | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
+			| '320'   | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '159'    | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2310,8 +2314,9 @@ Scenario: _0991073 check Bank payment accounting movements (Cash transfer order)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' ' | 'Credit' | 'Operation'                                                                            |
-			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''  | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' '        | 'Credit' | 'Financial movement type' | 'Operation'                                                                            |
+			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''         | '3250'   | 'Transfer'                | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)' |
+			| '108'   | 'Bank account, TRY' | ''        | ''              | 'Transfer' | '102'    | 'Transfer'                | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2337,8 +2342,9 @@ Scenario: _0991074 check Bank receipt accounting movements (Cash transfer order)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Partner' | ' ' | 'Credit' | 'Operation'                                                                            |
-			| '3250'  | 'Bank account, TRY' | ''              | ''        | ''  | '3221'   | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Partner' | 'Financial movement type' | 'Credit' | ' '        | 'Operation'                                                                            |
+			| '3250'  | 'Bank account, TRY' | ''              | ''        | 'Transfer'                | '3221'   | ''         | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)' |
+			| '102'   | 'Bank account, TRY' | ''              | ''        | 'Transfer'                | '108'    | 'Transfer' | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2364,8 +2370,9 @@ Scenario: _0991075 check Bank payment accounting movements (Currency exchange)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' ' | 'Credit' | 'Operation'                                                                                |
-			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''  | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' '                             | 'Credit' | 'Financial movement type'       | 'Operation'                                                                                |
+			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''                              | '3250'   | 'Currency exchange (write-off)' | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)' |
+			| '102'   | 'Bank account, TRY' | ''        | ''              | 'Currency exchange (write-off)' | '102'    | 'Currency exchange (write-off)' | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2392,10 +2399,13 @@ Scenario: _0991076 check Bank receipt accounting movements (Currency exchange)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' ' | 'Credit' | 'Legal name'    | 'Operation'                                                                                |
-			| '3221'  | 'Transit, TRY'      | ''        | ''              | ''  | '9100'   | 'Own company 2' | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
-			| '420.5' | ''                  | ''        | 'Transit, TRY'  | ''  | '3221'   | ''              | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
-			| '3250'  | 'Bank account, TRY' | ''        | 'Transit, TRY'  | ''  | '3221'   | ''              | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' '                           | 'Credit' | 'Legal name'    | 'Operation'                                                                                |
+			| '3221'  | 'Transit, TRY'      | ''        | ''              | ''                            | '9100'   | 'Own company 2' | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
+			| '102'   | 'Transit, TRY'      | ''        | ''              | ''                            | '600'    | ''              | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
+			| '420.5' | ''                  | ''        | 'Transit, TRY'  | ''                            | '3221'   | ''              | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
+			| '659'   | ''                  | ''        | 'Transit, TRY'  | 'Currency exchange (receipt)' | '102'    | ''              | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
+			| '3250'  | 'Bank account, TRY' | ''        | 'Transit, TRY'  | ''                            | '3221'   | ''              | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |
+			| '102'   | 'Bank account, TRY' | ''        | 'Transit, TRY'  | 'Currency exchange (receipt)' | '102'    | ''              | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2426,7 +2436,9 @@ Scenario: _0991077 check Bank payment accounting movements (Return to customer)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                      | 'Business unit'                                           | 'Partner term'                                            | 'Credit' | 'Cash/Bank account'            | 'Financial movement type'          | 'Operation'                                                                                         |
 			| '4010'  | 'Customer 1 (3 partner terms)' | 'Business unit 1'                                         | 'Partner term with customer (by document + credit limit)' | '3250'   | 'Bank account, TRY'            | 'Receipt of payment from customer' | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)' |
-			| '4010'  | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Partner term with customer (by document + credit limit)' | '5202'   | 'Customer 1 (3 partner terms)' | 'Business unit 1'                  | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |		
+			| '120'   | 'Customer 1 (3 partner terms)' | 'Business unit 1'                                         | 'Partner term with customer (by document + credit limit)' | '102'    | 'Bank account, TRY'            | 'Receipt of payment from customer' | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)' |
+			| '4010'  | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Partner term with customer (by document + credit limit)' | '5202'   | 'Customer 1 (3 partner terms)' | 'Business unit 1'                  | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |
+			| '120'   | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Partner term with customer (by document + credit limit)' | '340'    | 'Customer 1 (3 partner terms)' | 'Business unit 1'                  | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2454,7 +2466,9 @@ Scenario: _0991078 check Bank receipt accounting movements (Return from vendor)
 		And "AccountingAnalytics" table became equal
 			| 'Debit'  | 'Cash/Bank account'   | 'Business unit' | 'Partner'             | 'Financial movement type' | 'Credit' | 'Partner term'                                           | 'Operation'                                                                                   |
 			| '3250'   | 'Bank account, TRY'   | ''              | 'Customer and vendor' | 'Refund from vendor'      | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
-			| '4020.2' | 'Customer and vendor' | ''              | 'Customer and vendor' | ''                        | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |		
+			| '102'    | 'Bank account, TRY'   | ''              | 'Customer and vendor' | 'Refund from vendor'      | '320'    | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
+			| '4020.2' | 'Customer and vendor' | ''              | 'Customer and vendor' | ''                        | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |
+			| '159'    | 'Customer and vendor' | ''              | 'Customer and vendor' | ''                        | '320'    | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2481,8 +2495,9 @@ Scenario: _0991079 check Bank receipt accounting movements (Other partner)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Financial movement type'              | 'Credit' | 'Partner'       | 'Legal name'    | 'Tax type' | 'Operation'                                                                |
-			| '3250'  | 'Bank account, TRY' | ''              | 'Other income from current operations' | '9200'   | 'Other partner' | 'Other partner' | ''         | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Partner'       | 'Financial movement type'              | 'Credit' | 'Legal name'         | 'Tax type' | 'Operation'                                                                |
+			| '3250'  | 'Bank account, TRY' | ''              | 'Other partner' | 'Other income from current operations' | '9200'   | 'Other partner'      | ''         | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |
+			| '102'   | 'Bank account, TRY' | ''              | 'Other partner' | 'Other income from current operations' | '136'    | 'Other partner term' | ''         | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2508,8 +2523,9 @@ Scenario: _0991081 check Bank receipt accounting movements (Other income)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Business unit'   | ' ' | 'Credit' | 'Legal name' | 'Operation'                                              |
-			| '3250'  | 'Bank account, TRY' | 'Business unit 3' | ''  | '9100'   | ''           | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Business unit'   | 'Financial movement type'              | 'Credit' | 'Legal name'      | ' '              | 'Operation'                                              |
+			| '3250'  | 'Bank account, TRY' | 'Business unit 3' | 'Other income from current operations' | '9100'   | ''                | ''               | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |
+			| '102'   | 'Bank account, TRY' | ''                | 'Other income from current operations' | '649'    | 'Business unit 3' | 'Other revenues' | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2536,9 +2552,11 @@ Scenario: _0991082 check Bank payment accounting movements (Other partners)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'       | 'Legal name'    | 'Tax type' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Financial movement type'                      | 'Operation'                                                                |
-			| '9200'  | 'Other partner' | 'Other partner' | ''         | '3250'   | 'Bank account, TRY' | ''              | 'Bank commission for cash settlement services' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
-			| '9200'  | 'Other partner' | 'Other partner' | ''         | '9100'   | ''                  | 'Other partner' | ''                                             | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |			
+			| 'Debit' | 'Partner'       | 'Business unit' | 'Legal name'         | 'Tax type' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'                      | 'Operation'                                                                |
+			| '9200'  | 'Other partner' | ''              | 'Other partner'      | ''         | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '136'   | 'Other partner' | ''              | 'Other partner term' | ''         | '102'    | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '9200'  | 'Other partner' | 'Other partner' | 'Other partner'      | ''         | '9100'   | ''                  | ''                                             | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |
+			| '136'   | 'Other partner' | ''              | 'Other partner term' | ''         | '600'    | ''                  | ''                                             | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2566,7 +2584,8 @@ Scenario: _0991083 check Bank payment accounting movements (Other expense)
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'                      | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |			
+			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
+			| '659'   | ''        | 'Business unit 3' | 'Other expence'            | '102'    | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2593,8 +2612,9 @@ Scenario: _0991084 check Bank payment accounting movements (Salary)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Operation'                                                    |
-			| '5401'  | ''  | '3250'   | 'Bank account, TRY' | ''              | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)' |
+			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Financial movement type' | 'Operation'                                                    |
+			| '5401'  | ''  | '3250'   | 'Bank account, TRY' | ''              | ''                        | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)' |
+			| '335'   | ''  | '102'    | 'Bank account, TRY' | ''              | ''                        | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2622,8 +2642,9 @@ Scenario: _0991085 check Bank payment accounting movements (Employee cash advanc
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit'  | 'Partner'    | 'Business unit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Operation'                                                          |
-			| '4020.1' | 'Employee 1' | ''              |''   | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)' |	
+			| 'Debit'  | 'Partner'    | 'Business unit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'      | 'Operation'                                                          |
+			| '4020.1' | 'Employee 1' | ''              | ''  | '3250'   | 'Bank account, TRY' | 'Cash issuance to accountable' | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)' |
+			| '196'    | 'Employee 1' | ''              | ''  | '102'    | 'Bank account, TRY' | 'Cash issuance to accountable' | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2650,8 +2671,9 @@ Scenario: _0991086 check Bank payment accounting movements (Other expense)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'                      | 'Operation'                                               |
+			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
+			| '659'   | ''        | 'Business unit 3' | 'Other expence'            | '102'    | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2678,8 +2700,9 @@ Scenario: _0991087 check Bank payment accounting movements (Salary)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'                      | 'Operation'                                               |
+			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
+			| '659'   | ''        | 'Business unit 3' | 'Other expence'            | '102'    | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2705,10 +2728,13 @@ Scenario: _0991080 check Purchase invoice accounting movements
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Partner term'               | 'Credit' | 'Operation'                                                                                                      |
-			| '5201'  | 'Vendor 1 (1 partner term)' | ''                | 'Partner term with vendor 1' | '4020.2' | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  |
-			| '3540'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     |
-			| '5301'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      |
+			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Partner term'               | 'Credit' | 'Operation'                                                                                  |
+			| '5201'  | 'Vendor 1 (1 partner term)' | ''                | 'Partner term with vendor 1' | '4020.2' | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'              |
+			| '320'   | 'Vendor 1 (1 partner term)' | ''                | 'Partner term with vendor 1' | '159'    | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'              |
+			| '3540'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' |
+			| '153'   | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '320'    | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' |
+			| '5301'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  |
+			| '391'   | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '320'    | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2748,12 +2774,16 @@ Scenario: _0991090 check Sales invoice accounting movements (product and service
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table contains lines
-			| 'Debit' | 'Partner'                      | 'Business unit'   | 'Partner term'                                            | 'Credit' | 'Operation'                                                                                            |
-			| '5202'  | 'Customer 1 (3 partner terms)' | ''                | 'Partner term with customer (by document + credit limit)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                     |
-			| '4010'  | 'Business unit 1'              | ''                | ''                                                        | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                  |
-			| '4010'  | 'VAT'                          | ''                | 'Business unit 1'                                         | '5302'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'                                          |
-			| '420.1' | 'Item with item key'           | 'Business unit 1' | 'S/Color 1'                                               | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                         |
-		Then the number of "AccountingAnalytics" table lines is "равно" "4"
+			| 'Debit' | 'Partner'                      | 'Business unit'                  | 'Partner term'                                            | 'Credit' | 'Operation'                                                                        |
+			| '5202'  | 'Customer 1 (3 partner terms)' | ''                               | 'Partner term with customer (by document + credit limit)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '340'   | 'Customer 1 (3 partner terms)' | ''                               | 'Partner term with customer (by document + credit limit)' | '120'    | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '4010'  | 'Business unit 1'              | ''                               | ''                                                        | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'              |
+			| '120'   | 'Item with item key'           | 'Sale of products'               | 'Business unit 1'                                         | '600'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'              |
+			| '4010'  | 'VAT'                          | ''                               | 'Business unit 1'                                         | '5302'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'         |
+			| '120'   | 'VAT'                          | ''                               | 'Business unit 1'                                         | '191'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'         |
+			| '420.1' | 'Item with item key'           | 'Business unit 1'                | 'S/Color 1'                                               | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                     |
+			| '621'   | 'Item with item key'           | 'Store 1 (with balance control)' | 'S/Color 1'                                               | '153'    | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                     |
+		Then the number of "AccountingAnalytics" table lines is "равно" "8"
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2784,11 +2814,15 @@ Scenario: _0991091 check Sales invoice accounting movements (product)
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                     | 'Business unit'   | 'Partner term'                                | 'Credit' | 'Operation'                                                                                            |
-			| '5202'  | 'Customer 2 (2 partner term)' | ''                | 'Individual partner term 1 (by partner term)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                     |
-			| '4010'  | 'Business unit 1'             | ''                | ''                                            | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                  |
-			| '4010'  | 'VAT'                         | ''                | 'Business unit 1'                             | '5302'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'                                          |
-			| '420.1' | 'Item with item key'          | 'Business unit 1' | 'S/Color 1'                                   | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                         |
+			| 'Debit' | 'Partner'                     | 'Business unit'                  | 'Partner term'                                | 'Credit' | 'Operation'                                                                        |
+			| '5202'  | 'Customer 2 (2 partner term)' | ''                               | 'Individual partner term 1 (by partner term)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '340'   | 'Customer 2 (2 partner term)' | ''                               | 'Individual partner term 1 (by partner term)' | '120'    | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '4010'  | 'Business unit 1'             | ''                               | ''                                            | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'              |
+			| '120'   | 'Item with item key'          | 'Sale of products'               | 'Business unit 1'                             | '600'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'              |
+			| '4010'  | 'VAT'                         | ''                               | 'Business unit 1'                             | '5302'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'         |
+			| '120'   | 'VAT'                         | ''                               | 'Business unit 1'                             | '191'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'         |
+			| '420.1' | 'Item with item key'          | 'Business unit 1'                | 'S/Color 1'                                   | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                     |
+			| '621'   | 'Item with item key'          | 'Store 1 (with balance control)' | 'S/Color 1'                                   | '153'    | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                     |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2916,9 +2950,11 @@ Scenario: _0991100 check Cash payment accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                    | 'Business unit'   | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | ' '               | 'Operation'                                                                                   |
-			| '5201'  | 'Vendor 1 (1 partner term)'  | 'Business unit 1' | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | ''                | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '5201'  | 'Partner term with vendor 1' | 'Business unit 1' | 'Partner term with vendor 1' | '4020.2' | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+			| 'Debit' | 'Partner'                    | 'Business unit'   | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | ' '                 | 'Operation'                                                                                   |
+			| '5201'  | 'Vendor 1 (1 partner term)'  | 'Business unit 1' | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | ''                  | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '320'   | 'Business unit 1'            | 'Business unit 1' | 'Partner term with vendor 1' | '102'    | 'Cash, TRY'                 | 'Payment to vendor' | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | 'Partner term with vendor 1' | 'Business unit 1' | 'Partner term with vendor 1' | '4020.2' | 'Vendor 1 (1 partner term)' | 'Business unit 1'   | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
+			| '320'   | 'Partner term with vendor 1' | 'Business unit 1' | 'Partner term with vendor 1' | '159'    | 'Vendor 1 (1 partner term)' | 'Business unit 1'   | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2944,9 +2980,11 @@ Scenario: _0991110 check Cash receipt accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account'            | 'Partner'                      | 'Business unit'   | ' '               | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
-			| '3240'  | 'Cash, TRY'                    | 'Customer 1 (3 partner terms)' | 'Business unit 1' | ''                | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
-			| '5202'  | 'Customer 1 (3 partner terms)' | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Business unit 1' | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |		
+			| 'Debit' | 'Cash/Bank account'            | 'Partner'                      | 'Business unit'   | ' '                                | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
+			| '3240'  | 'Cash, TRY'                    | 'Customer 1 (3 partner terms)' | 'Business unit 1' | ''                                 | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '102'   | 'Cash, TRY'                    | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Receipt of payment from customer' | '120'    | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '5202'  | 'Customer 1 (3 partner terms)' | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Business unit 1'                  | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |
+			| '340'   | 'Customer 1 (3 partner terms)' | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Business unit 1'                  | '120'    | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2973,8 +3011,9 @@ Scenario: _0991120 check Cash expense accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | ' ' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 1' | 'Other expence'            | '3240'   | 'Cash, TRY'         | ''  | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
+			| 'Debit' | 'Partner'         | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | ' ' | 'Operation'                                               |
+			| '420.2' | ''                | 'Business unit 1' | 'Other expence'            | '3240'   | 'Cash, TRY'         | ''  | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
+			| '659'   | 'Business unit 1' | 'Business unit 1' | 'Other expence'            | '102'    | 'Cash, TRY'         | ''  | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3000,8 +3039,9 @@ Scenario: _0991130 check Cash revenue accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit'   | ' ' | 'Credit' | 'Legal name'    | 'Operation'                                              |
-			| '3240'  | 'Cash, TRY'         | ''        | 'Business unit 1' | ''  | '9100'   | 'Own company 2' | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Partner'         | 'Business unit'   | ' '              | 'Credit' | 'Legal name'      | 'Operation'                                              |
+			| '3240'  | 'Cash, TRY'         | ''                | 'Business unit 1' | ''               | '9100'   | 'Own company 2'   | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |
+			| '102'   | 'Cash, TRY'         | 'Business unit 1' | ''                | 'Other revenues' | '649'    | 'Business unit 1' | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3029,7 +3069,9 @@ Scenario: _0991140 check Debit note accounting movements (Vendor)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'             | 'Partner term'               | 'Legal name'                 | 'Credit' | ' '               | 'Operation'                                                               |
 			| '5201'  | 'Vendor 1 (1 partner term)' | 'Business unit 1'           | 'Partner term with vendor 1' | 'Vendor 1'                   | '9100'   | ''                | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'           |
-			| '5201'  | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '4020.2' | 'Business unit 1' | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |		
+			| '320'   | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Business unit 1'            | '649'    | 'Other revenues'  | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'           |
+			| '5201'  | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '4020.2' | 'Business unit 1' | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '320'   | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '159'    | 'Business unit 1' | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3076,8 +3118,9 @@ Scenario: _0991142 check Debit note accounting movements (Other)
 	* Check accounting movements
 		And in the table "Transactions" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Business unit'   | 'Partner'         | 'Legal name'      | 'Credit' | ' ' | 'Operation'                                                           |
-			| '9200'  | 'Business unit 3' | 'Other partner 2' | 'Other partner 2' | '9100'   | ''  | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' |		
+			| 'Debit' | 'Partner'         | 'Business unit'   | 'Legal name'      | 'Tax type'        | 'Credit' | ' '              | 'Operation'                                                           |
+			| '9200'  | 'Other partner 2' | 'Business unit 3' | 'Other partner 2' | ''                | '9100'   | ''               | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' |
+			| '136'   | 'Other partner 2' | 'Other partner 2' | 'Business unit 3' | 'Business unit 3' | '649'    | 'Other revenues' | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3105,7 +3148,9 @@ Scenario: _0991145 check Credit note accounting movements (Customer)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                     | 'Business unit'   | 'Expense and revenue type' | 'Partner term'                                | 'Credit' | 'Operation'                                                                      |
 			| '420.2' | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Other expence'            | 'Individual partner term 1 (by partner term)' | '4010'   | 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'              |
-			| '5202'  | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Business unit 1'          | 'Individual partner term 1 (by partner term)' | '4010'   | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |		
+			| '659'   | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Other expence'            | 'Individual partner term 1 (by partner term)' | '120'    | 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'              |
+			| '5202'  | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Business unit 1'          | 'Individual partner term 1 (by partner term)' | '4010'   | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '340'   | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Business unit 1'          | 'Individual partner term 1 (by partner term)' | '120'    | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3133,7 +3178,9 @@ Scenario: _0991146 check Credit note accounting movements (Vendor)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'  | 'Business unit'   | 'Expense and revenue type' | 'Partner term'                                           | 'Credit' | 'Operation'                                                                |
 			| '420.2' | 'Vendor 5' | 'Business unit 1' | 'Other expence'            | 'Partner term with vendor (advance payment by document)' | '5201'   | 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
-			| '5201'  | 'Vendor 5' | 'Business unit 1' | 'Business unit 1'          | 'Partner term with vendor (advance payment by document)' | '4020.2' | 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |		
+			| '659'   | 'Vendor 5' | 'Business unit 1' | 'Other expence'            | 'Partner term with vendor (advance payment by document)' | '320'    | 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
+			| '5201'  | 'Vendor 5' | 'Business unit 1' | 'Business unit 1'          | 'Partner term with vendor (advance payment by document)' | '4020.2' | 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '320'   | 'Vendor 5' | 'Business unit 1' | 'Business unit 1'          | 'Partner term with vendor (advance payment by document)' | '159'    | 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3159,8 +3206,9 @@ Scenario: _0991147 check Credit note accounting movements (Other)
 	* Check accounting movements
 		And in the table "Transactions" I click "Edit accounting" button		
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'       | 'Business unit'   | 'Expense and revenue type' | 'Legal name'    | 'Credit' | 'Operation'                                                             |
-			| '420.2' | 'Other partner' | 'Business unit 1' | 'Other expence'            | 'Other partner' | '9200'   | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |		
+			| 'Debit' | 'Partner'       | 'Business unit'   | 'Expense and revenue type' | 'Legal name'         | 'Credit' | 'Tax type'        | 'Operation'                                                             |
+			| '420.2' | 'Other partner' | 'Business unit 1' | 'Other expence'            | 'Other partner'      | '9200'   | ''                | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |
+			| '659'   | 'Other partner' | 'Business unit 1' | 'Other expence'            | 'Other partner term' | '136'    | 'Business unit 1' | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3185,8 +3233,9 @@ Scenario: _0991150 check Retail sales receipt accounting movements
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Item'               | 'Business unit'   | 'Expense and revenue type'   | 'Credit' | 'Item key'   | 'Operation'                                                          |
-			| '420.1' | 'Item with item key' | 'Business unit 3' | 'Purchase of goods for sale' | '3540'   | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |		
+			| 'Debit' | 'Item'               | 'Business unit'                  | 'Expense and revenue type'   | 'Credit' | 'Item key'   | 'Operation'                                                          |
+			| '420.1' | 'Item with item key' | 'Business unit 3'                | 'Purchase of goods for sale' | '3540'   | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |
+			| '621'   | 'Item with item key' | 'Store 1 (with balance control)' | 'Purchase of goods for sale' | '153'    | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3213,8 +3262,9 @@ Scenario: _0991160 check Employee cash advance accounting movements (with PI and
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"    | "Business unit"   | "Partner term"             | "Credit" | " " | "Operation"                                                                           |
-			| "5201"  | "Employee 1" | "Business unit 1" | "Vendor 4 (partner term) " | "4020.1" | ""  | "EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)" |		
+			| 'Debit' | 'Partner'    | 'Business unit'   | 'Partner term'             | 'Credit' | ' ' | 'Operation'                                                                           |
+			| '5201'  | 'Employee 1' | 'Business unit 1' | 'Vendor 4 (partner term) ' | '4020.1' | ''  | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' |
+			| '320'   | 'Employee 1' | 'Business unit 1' | 'Vendor 4 (partner term) ' | '196'    | ''  | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -4429,10 +4479,6 @@ Scenario: _0991200 write empty JE with problems (without accounting settings)
 		And I click "Post" button
 	* Create JE
 		And I click "Journal entry" button
-		And I go to line in "JournalEntries" table
-			| 'Ledger type' |
-			| 'Basic LTV'   |
-		And I select current line in "JournalEntries" table
 		Then "Journal entry (create)" window is opened
 		And I click "Save" button
 		And "Errors" table contains rows by template:
@@ -4711,7 +4757,10 @@ Scenario: _0991230 check accountant automated workplace
 	* Check filter by company
 		And I select from the drop-down list named "Company" by "Own company 3" string
 		And I click "Find" button
-		Then the number of "DocumentList" table lines is "равно" 0
+		Then the number of "DocumentList" table lines is "равно" 1
+		And "DocumentList" table contains lines
+			| 'Company'       |
+			| 'Own company 3' |
 		And I select from the drop-down list named "Company" by "Own company 2" string
 		And I click "Find" button		
 		Then the number of "DocumentList" table lines is "больше" 0	

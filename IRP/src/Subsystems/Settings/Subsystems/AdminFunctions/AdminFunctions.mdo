@@ -21,5 +21,6 @@
   <content>DataProcessor.ObjectPropertyEditor</content>
   <content>DataProcessor.FixDocumentProblems</content>
   <content>CommonForm.AdditionalTableControlSettings</content>
+  <content>DataProcessor.DataIntegriryCheck</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

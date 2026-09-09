@@ -1071,13 +1071,13 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "P"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R2C8" cell
-			And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C11" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "130"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R2C13" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C15" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		* Assets account
@@ -1096,28 +1096,28 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C8" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R3C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C11" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "127"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R3C13" cell
-			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C14" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C15" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "128"
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C16" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I input text "128"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C17" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R3C20" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C18" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C21" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "127"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R3C21" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C22" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		* Liabilities account with owner
@@ -1139,28 +1139,28 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C8" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R4C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C11" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "127"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R4C13" cell
-			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C14" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C15" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "128"
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C16" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I input text "128"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C17" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R4C20" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C18" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C21" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "127"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R4C21" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C22" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And I click "Load" button
@@ -1271,28 +1271,28 @@ Scenario: _0991016 check load charts of accounts (incorrect data)
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C8" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C11" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "127"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C13" cell
-		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C15" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "128"
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C16" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I input text "128"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C17" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C20" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C18" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "127"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C22" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 	* Try load
@@ -1374,28 +1374,28 @@ Scenario: _0991017 retrying to upload the same account
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C8" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C11" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "127"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C13" cell
-		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C15" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "128"
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C16" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I input text "128"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C17" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C20" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C18" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "127"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C22" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And I click "Load" button					

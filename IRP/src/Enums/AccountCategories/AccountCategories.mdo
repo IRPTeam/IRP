@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f80edccc-e7af-406c-a38f-fcf0e13c65d5">
+  <producedTypes>
+    <refType typeId="816842f2-9cbb-47f7-9eb7-c1c2ebd3b53b" valueTypeId="9d18cb73-f7f0-4d79-aa56-addc840a579f"/>
+    <listType typeId="e89c47a7-0027-4355-a083-c117ac759b99" valueTypeId="6be6fead-498d-4d5c-9677-b2099a5ef871"/>
+    <managerType typeId="8afbeda2-cc07-4a17-b2c1-0ed45ed50814" valueTypeId="8715b669-c760-4cdc-9f0b-cdb79f32173c"/>
+  </producedTypes>
+  <name>AccountCategories</name>
+  <synonym>
+    <key>en</key>
+    <value>Account categories</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="a8f5d36e-bd0b-4cec-b86e-ac955bc88a48">
+    <name>BalanceSheet</name>
+    <synonym>
+      <key>en</key>
+      <value>Balance sheet</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="242cfe85-0af1-4b8d-8ace-43df437bf58c">
+    <name>ProfitOrLoss</name>
+    <synonym>
+      <key>en</key>
+      <value>Profit or Loss</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

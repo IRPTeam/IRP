@@ -1440,6 +1440,184 @@ Scenario: _0991017 retrying to upload the same account
 		Then the form attribute named "Description_en" became equal to "Test account (manager analytics)"
 		And I close all client application windows
 
+# IRP-886: account category (Balance sheet / Profit and loss) in the account card and list; off-balance account keeps no category.
+Scenario: _0991018 create Account charts (Basic) - account category
+	And I close all client application windows
+	* Open Account charts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
+	* Create account with Balance sheet category
+		And I click "Create" button
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And I input "7031811" text in the field named "Code"
+		And I input "Account with category" text in "ENG" field
+		And I select "Balance sheet" exact value from the drop-down list named "AccountCategory"
+		And I click "Save" button
+		Then the form attribute named "AccountCategory" became equal to "Balance sheet"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Code'      | 'Description'           | 'Account category' | 'Off-balance' |
+			| '703.18.11' | 'Account with category' | 'Balance sheet'    | 'No'          |
+	* Change category to Profit and loss
+		And I go to line in "List" table
+			| 'Code'      |
+			| '703.18.11' |
+		And I select current line in "List" table
+		Then the form attribute named "AccountCategory" became equal to "Balance sheet"
+		And I select "Profit and loss" exact value from the drop-down list named "AccountCategory"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Code'      | 'Description'           | 'Account category' | 'Off-balance' |
+			| '703.18.11' | 'Account with category' | 'Profit and loss'  | 'No'          |
+	* Off-balance account has no category
+		And I go to line in "List" table
+			| 'Code'      |
+			| '703.18.11' |
+		And I select current line in "List" table
+		And I set checkbox named "OffBalance"
+		Then the form attribute named "AccountCategory" became equal to ""
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Code'      | 'Description'           | 'Account category' | 'Off-balance' |
+			| '703.18.11' | 'Account with category' | ''                 | 'Yes'         |
+		And I close all client application windows
+
+# IRP-886: column AccountCategory (10th) of the load template: B -> Balance sheet, P -> Profit and loss, off-balance and empty -> no category.
+Scenario: _0991019 check load charts of accounts (account category column)
+	And I close all client application windows
+	* Open form load charts of accounts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I click "Load charts of accounts" button
+	* Select Description language
+		And I move to "Description" tab
+		And I go to line in "Languages" table
+			| 'Value' |
+			| 'EN'    |
+		And I set "Check" checkbox in "Languages" table
+		And I finish line editing in "Languages" table
+		And I move to "Description" tab
+	* Filling load data table
+		* Account with Balance sheet category
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "90879001"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "Category B from file"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "A"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "B"
+		* Account with Profit and loss category
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "90879002"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "Category P from file"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "P"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "P"
+		* Off-balance account with category in file
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "90879003"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "Category B off-balance from file"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "A"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C9" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "B"
+		* Account without category
+			And in "SpreadsheetDocument" spreadsheet document I move to "R5C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R5C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "90879004"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R5C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "No category from file"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R5C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "A"
+		And I click "Load" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		When in opened panel I select "Account charts (Basic)"
+		Then "Account charts (Basic)" window is opened
+		And I click "Refresh" button
+	* Check
+		And "List" table contains lines
+			| 'Code'     | 'Description'                      | 'Account category' | 'Off-balance' |
+			| '90879001' | 'Category B from file'             | 'Balance sheet'    | 'No'          |
+			| '90879002' | 'Category P from file'             | 'Profit and loss'  | 'No'          |
+			| '90879003' | 'Category B off-balance from file' | ''                 | 'Yes'         |
+			| '90879004' | 'No category from file'            | ''                 | 'No'          |
+		And I close all client application windows
+
+# IRP-886: mass markup - "Edit properties" (Object property editor) sets the category for several selected accounts at once.
+Scenario: _0991020 group editing of account category (Edit properties)
+	And I close all client application windows
+	* Open Account charts and select two accounts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
+		And I go to line in "List" table
+			| 'Code'     |
+			| '90878699' |
+		And I go to line in "List" table and invert selection:
+			| 'Code'     |
+			| '10878699' |
+		And in the table "List" I click the button named "InternalCommand_List_GroupEditingProperties"
+	* Set category for marked rows
+		Then "Object property editor" window is opened
+		And "PropertiesTable" table contains lines
+			| 'Marked' | 'Object'   | 'Account category' |
+			| 'Yes'    | '90878699' | ''                 |
+			| 'Yes'    | '10878699' | ''                 |
+		Then the number of "PropertiesTable" table lines is "равно" "2"
+		And I activate "Account category" field in "PropertiesTable" table
+		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueForMarkedRows"
+		Then "Input new value" window is opened
+		And I go to line in "List" table
+			| 'Reference'       |
+			| 'Profit and loss' |
+		And I select current line in "List" table
+		And "PropertiesTable" table contains lines
+			| 'Marked' | 'Is modified' | 'Object'   | 'Account category' |
+			| 'Yes'    | 'Yes'         | '90878699' | 'Profit and loss'  |
+			| 'Yes'    | 'Yes'         | '10878699' | 'Profit and loss'  |
+		And I click "Save" button
+		And I close "Object property editor" window
+	* Check
+		And I click "Refresh" button
+		And "List" table contains lines
+			| 'Code'     | 'Account category' |
+			| '90878699' | 'Profit and loss'  |
+			| '10878699' | 'Profit and loss'  |
+		And I close all client application windows
+
 Scenario: _0991021 accounts settings for Cash account (general for company)
 	And I close all client application windows
 	* Open list form

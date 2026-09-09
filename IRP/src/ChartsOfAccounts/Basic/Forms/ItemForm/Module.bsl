@@ -86,7 +86,7 @@ EndProcedure
 &AtClient
 Procedure OffBalanceOnChange(Item)
 	If Object.OffBalance Then
-		Object.AccountCategory = Undefined;
+		Object.AccountCategory = PredefinedValue("Enum.AccountCategories.EmptyRef");
 	EndIf;
 EndProcedure
 

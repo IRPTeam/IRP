@@ -718,8 +718,8 @@ FROM
         <field>NotUsedForRecords</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>FinancialStatementType</dataPath>
-        <field>FinancialStatementType</field>
+        <dataPath>AccountCategory</dataPath>
+        <field>AccountCategory</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>SearchCode</dataPath>

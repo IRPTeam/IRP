@@ -20,10 +20,10 @@
     </synonym>
   </enumValues>
   <enumValues uuid="242cfe85-0af1-4b8d-8ace-43df437bf58c">
-    <name>ProfitOrLoss</name>
+    <name>ProfitAndLoss</name>
     <synonym>
       <key>en</key>
-      <value>Profit or Loss</value>
+      <value>Profit and loss</value>
     </synonym>
   </enumValues>
 </mdclass:Enum>

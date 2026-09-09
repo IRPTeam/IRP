@@ -1140,7 +1140,6 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 						_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
 						_new.Branch           = BatchRow.Branch;
 						_new.Currency         = _Company.LandedCostCurrencyMovementType.Currency;
-//						_new.RowID            = BatchRow.RowID;
 					EndIf;
 					
 					If AmountTaxCorrection <> 0 Then
@@ -1164,7 +1163,6 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 						_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
 						_new.Branch           = BatchRow.Branch;
 						_new.Currency         = _Company.LandedCostCurrencyMovementType.Currency;
-//						_new.RowID            = BatchRow.RowID;
 					EndIf;
 					
 				EndIf;

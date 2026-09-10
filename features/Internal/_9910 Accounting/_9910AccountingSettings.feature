@@ -36,6 +36,7 @@ Scenario: _099100 preparation
 		When Create catalog Currencies objects (test data base)
 		When Create catalog DataBaseStatus objects (test data base)
 		When Create catalog ExpenseAndRevenueTypes objects (test data base)
+		When Create catalog SalaryCalculationType objects (test data base)
 		When Create catalog IntegrationSettings objects (test data base)
 		When Create catalog ItemKeys objects (test data base)
 		When Create catalog ItemTypes objects (test data base)
@@ -178,6 +179,18 @@ Scenario: _099100 preparation
 		When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 		When Create information register T9016S_AccountsEmployee records (test data base)
 		When Create information register T9015S_AccountsFixedAsset records (test data base)
+	* Load data for the Turkish chart of accounts (TDHP), a second ledger type
+		When Create ledger type TDHP objects (TDHP)
+		When Create catalog ExpenseAndRevenueTypes objects (TDHP)
+		When Create chart of accounts Basic objects with LedgerTypeVariants (TDHP LTV) (TDHP)
+		When Set ext dimension accounting flags on TDHP accounts (TDHP)
+		When Create information register T9010S_AccountsItemKey records (TDHP LTV) (TDHP)
+		When Create information register T9011S_AccountsCashAccount records (TDHP LTV) (TDHP)
+		When Create information register T9012S_AccountsPartner records (TDHP LTV) (TDHP)
+		When Create information register T9013S_AccountsTax records (TDHP LTV) (TDHP)
+		When Create information register T9014S_AccountsExpenseRevenue records (TDHP LTV) (TDHP)
+		When Create information register T9015S_AccountsFixedAsset records (TDHP LTV) (TDHP)
+		When Create information register T9016S_AccountsEmployee records (TDHP LTV) (TDHP)
 		When Create catalog PLSections objects
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
@@ -210,7 +223,7 @@ Scenario: _099100 preparation
 			| 'DEFAULT DOCUMENT STORAGE' |
 		And I select current line in "List" table		
 		And I click "Save and close" button
-		And Delay 3
+		And Delay "3"
 	* Posting first documents
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -1058,13 +1071,13 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "P"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R2C8" cell
-			And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C11" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "130"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R2C13" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C15" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		* Assets account
@@ -1083,28 +1096,28 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C8" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R3C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C11" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "127"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R3C13" cell
-			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C14" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C15" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "128"
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C16" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I input text "128"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C17" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R3C20" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C18" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C21" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "127"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R3C21" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C22" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		* Liabilities account with owner
@@ -1126,28 +1139,28 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C8" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R4C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C11" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "127"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R4C13" cell
-			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C14" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C15" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "128"
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C16" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I input text "128"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R4C17" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R4C20" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C18" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C21" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "127"
-			And in "SpreadsheetDocument" spreadsheet document I move to "R4C21" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C22" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "True"
 			And I click "Load" button
@@ -1258,28 +1271,28 @@ Scenario: _0991016 check load charts of accounts (incorrect data)
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C8" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C11" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "127"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C13" cell
-		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C15" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "128"
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C16" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I input text "128"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C17" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C20" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C18" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "127"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C22" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 	* Try load
@@ -1361,28 +1374,28 @@ Scenario: _0991017 retrying to upload the same account
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C8" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C11" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "127"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C13" cell
-		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C15" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "128"
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C16" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I input text "128"
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C17" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C20" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C18" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "127"
-		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C22" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 		And in "SpreadsheetDocument" spreadsheet document I input text "True"
 		And I click "Load" button					
@@ -1425,6 +1438,184 @@ Scenario: _0991017 retrying to upload the same account
 		And I click Open button of "ENG" field
 		Then the form attribute named "Description_ru" became equal to "Тестовый счет (manager analytics)"
 		Then the form attribute named "Description_en" became equal to "Test account (manager analytics)"
+		And I close all client application windows
+
+# IRP-886: account category (Balance sheet / Profit and loss) in the account card and list; off-balance account keeps no category.
+Scenario: _0991018 create Account charts (Basic) - account category
+	And I close all client application windows
+	* Open Account charts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
+	* Create account with Balance sheet category
+		And I click "Create" button
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And I input "7031811" text in the field named "Code"
+		And I input "Account with category" text in "ENG" field
+		And I select "Balance sheet" exact value from the drop-down list named "AccountCategory"
+		And I click "Save" button
+		Then the form attribute named "AccountCategory" became equal to "Balance sheet"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Code'      | 'Description'           | 'Account category' | 'Off-balance' |
+			| '703.18.11' | 'Account with category' | 'Balance sheet'    | 'No'          |
+	* Change category to Profit and loss
+		And I go to line in "List" table
+			| 'Code'      |
+			| '703.18.11' |
+		And I select current line in "List" table
+		Then the form attribute named "AccountCategory" became equal to "Balance sheet"
+		And I select "Profit and loss" exact value from the drop-down list named "AccountCategory"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Code'      | 'Description'           | 'Account category' | 'Off-balance' |
+			| '703.18.11' | 'Account with category' | 'Profit and loss'  | 'No'          |
+	* Off-balance account has no category
+		And I go to line in "List" table
+			| 'Code'      |
+			| '703.18.11' |
+		And I select current line in "List" table
+		And I set checkbox named "OffBalance"
+		Then the form attribute named "AccountCategory" became equal to ""
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Code'      | 'Description'           | 'Account category' | 'Off-balance' |
+			| '703.18.11' | 'Account with category' | ''                 | 'Yes'         |
+		And I close all client application windows
+
+# IRP-886: column AccountCategory (10th) of the load template: B -> Balance sheet, P -> Profit and loss, off-balance and empty -> no category.
+Scenario: _0991019 check load charts of accounts (account category column)
+	And I close all client application windows
+	* Open form load charts of accounts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I click "Load charts of accounts" button
+	* Select Description language
+		And I move to "Description" tab
+		And I go to line in "Languages" table
+			| 'Value' |
+			| 'EN'    |
+		And I set "Check" checkbox in "Languages" table
+		And I finish line editing in "Languages" table
+		And I move to "Description" tab
+	* Filling load data table
+		* Account with Balance sheet category
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "90879001"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "Category B from file"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "A"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "B"
+		* Account with Profit and loss category
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "90879002"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "Category P from file"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "P"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "P"
+		* Off-balance account with category in file
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "90879003"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "Category B off-balance from file"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "A"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C9" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "B"
+		* Account without category
+			And in "SpreadsheetDocument" spreadsheet document I move to "R5C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R5C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "90879004"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R5C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "No category from file"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R5C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "A"
+		And I click "Load" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		When in opened panel I select "Account charts (Basic)"
+		Then "Account charts (Basic)" window is opened
+		And I click "Refresh" button
+	* Check
+		And "List" table contains lines
+			| 'Code'     | 'Description'                      | 'Account category' | 'Off-balance' |
+			| '90879001' | 'Category B from file'             | 'Balance sheet'    | 'No'          |
+			| '90879002' | 'Category P from file'             | 'Profit and loss'  | 'No'          |
+			| '90879003' | 'Category B off-balance from file' | ''                 | 'Yes'         |
+			| '90879004' | 'No category from file'            | ''                 | 'No'          |
+		And I close all client application windows
+
+# IRP-886: mass markup - "Edit properties" (Object property editor) sets the category for several selected accounts at once.
+Scenario: _0991020 group editing of account category (Edit properties)
+	And I close all client application windows
+	* Open Account charts and select two accounts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
+		And I go to line in "List" table
+			| 'Code'     |
+			| '90878699' |
+		And I go to line in "List" table and invert selection:
+			| 'Code'     |
+			| '10878699' |
+		And in the table "List" I click the button named "InternalCommand_List_GroupEditingProperties"
+	* Set category for marked rows
+		Then "Object property editor" window is opened
+		And "PropertiesTable" table contains lines
+			| 'Marked' | 'Object'   | 'Account category' |
+			| 'Yes'    | '90878699' | ''                 |
+			| 'Yes'    | '10878699' | ''                 |
+		Then the number of "PropertiesTable" table lines is "равно" "2"
+		And I activate "Account category" field in "PropertiesTable" table
+		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueForMarkedRows"
+		Then "Input new value" window is opened
+		And I go to line in "List" table
+			| 'Reference'       |
+			| 'Profit and loss' |
+		And I select current line in "List" table
+		And "PropertiesTable" table contains lines
+			| 'Marked' | 'Is modified' | 'Object'   | 'Account category' |
+			| 'Yes'    | 'Yes'         | '90878699' | 'Profit and loss'  |
+			| 'Yes'    | 'Yes'         | '10878699' | 'Profit and loss'  |
+		And I click "Save" button
+		And I close "Object property editor" window
+	* Check
+		And I click "Refresh" button
+		And "List" table contains lines
+			| 'Code'     | 'Account category' |
+			| '90878699' | 'Profit and loss'  |
+			| '10878699' | 'Profit and loss'  |
 		And I close all client application windows
 
 Scenario: _0991021 accounts settings for Cash account (general for company)
@@ -1921,7 +2112,6 @@ Scenario: _0991037 accounts settings for partner (partner term)
 		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		Then the form attribute named "Agreement" became equal to "Partner term with customer (by document + credit limit)"
-		Then the form attribute named "RecordType" became equal to "Agreement"
 		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
 		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
 		And I click "Save and close" button
@@ -2103,10 +2293,13 @@ Scenario: _0991041 check account priority for service (ExpenseType, CostRevenueC
 		And I click "Post" button
 		And in the table "ItemList" I click "Edit accounting" button			
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                     | "Business unit" | "Partner term"                                | "Credit" | "Operation"                                                                        |
-			| "5202"  | "Customer 2 (2 partner term)" | ""              | "Individual partner term 1 (by partner term)" | "4010"   | "SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)" |
-			| "4010"  | "Business unit 3"             | ""              | ""                                            | "9101"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)"              |
-			| "4010"  | "VAT"                         | ""              | "Business unit 3"                             | "5302"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |		
+			| "Debit" | "Partner"                     | "Business unit"         | "Partner term"                                | "Credit" | "Operation"                                                                        |
+			| "5202"  | "Customer 2 (2 partner term)" | ""                      | "Individual partner term 1 (by partner term)" | "4010"   | "SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)" |
+			| "340"   | "Customer 2 (2 partner term)" | ""                      | "Individual partner term 1 (by partner term)" | "120"    | "SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)" |
+			| "4010"  | "Business unit 3"             | ""                      | ""                                            | "9101"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)"              |
+			| "120"   | "Service"                     | "Expence and revenue 1" | "Business unit 3"                             | "600"    | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)"              |
+			| "4010"  | "VAT"                         | ""                      | "Business unit 3"                             | "5302"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |
+			| "120"   | "VAT"                         | ""                      | "Business unit 3"                             | "191"    | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |
 		And I close current window
 	* Check account (CostRevenueCenter filled, RevenueType empty)
 		And I select "Business unit 2" from "Profit loss center" drop-down list by string in "ItemList" table
@@ -2129,6 +2322,10 @@ Scenario: _0991058 create journal entry for one PI
 			| 'Amount'    | 'Company'       | 'Partner'                   |
 			| '13 720,05' | 'Own company 2' | 'Vendor 1 (1 partner term)' |		
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 	* Check journal entry
 		Then the form attribute named "Author" became equal to "CI"
@@ -2182,7 +2379,7 @@ Scenario: _0991059 create journal entry for two PI
 		And I click "Ok" button	
 		Then " [Jobs: 1]: Background multi job" window is opened
 		And I click "Update statuses" button
-		And Delay 3
+		And Delay "3"
 	* Check journal entry
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And "List" table contains lines
@@ -2205,10 +2402,16 @@ Scenario: _0991070 check Bank receipt accounting movements (Payment from custome
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account'           | 'Business unit'   | 'Partner'                     | 'Financial movement type'          | 'Credit' | 'Partner term'                                | 'Operation'                                                                                         |
 			| '3250'  | 'Bank account, TRY'           | 'Business unit 1' | 'Customer 2 (2 partner term)' | 'Receipt of payment from customer' | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
-			| '5202'  | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Customer 2 (2 partner term)' | 'Business unit 1'                  | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |		
+			| '102'   | 'Bank account, TRY'           | 'Business unit 1' | 'Customer 2 (2 partner term)' | 'Receipt of payment from customer' | '120'    | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '5202'  | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Customer 2 (2 partner term)' | 'Business unit 1'                  | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |
+			| '340'   | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Customer 2 (2 partner term)' | 'Business unit 1'                  | '120'    | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'              | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Extra dimension2 Cr'                         | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                                         |
@@ -2229,10 +2432,16 @@ Scenario: _0991071 check Bank payment accounting movements (Payment to the vendo
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'              | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Financial movement type' | 'Operation'                                                                                   |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'Payment to vendor'       | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '320'   | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '102'    | 'Bank account, TRY'         | 'Payment to vendor'       | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+			| '320'   | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '159'    | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'           | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
@@ -2254,10 +2463,16 @@ Scenario: _0991072 check Bank payment accounting movements (Payment to the vendo
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'              | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Financial movement type' | 'Operation'                                                                                   |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'Payment to vendor'       | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '5201'  | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+			| '320'   | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '102'    | 'Bank account, TRY'         | 'Payment to vendor'       | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
+			| '320'   | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '159'    | 'Vendor 2 (1 partner term)' | 'Business unit 1'         | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'           | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
@@ -2276,11 +2491,16 @@ Scenario: _0991073 check Bank payment accounting movements (Cash transfer order)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' ' | 'Credit' | 'Operation'                                                                            |
-			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''  | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' '        | 'Credit' | 'Financial movement type' | 'Operation'                                                                            |
+			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''         | '3250'   | 'Transfer'                | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)' |
+			| '108'   | 'Bank account, TRY' | ''        | ''              | 'Transfer' | '102'    | 'Transfer'                | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                                            | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -2299,11 +2519,16 @@ Scenario: _0991074 check Bank receipt accounting movements (Cash transfer order)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Partner' | ' ' | 'Credit' | 'Operation'                                                                            |
-			| '3250'  | 'Bank account, TRY' | ''              | ''        | ''  | '3221'   | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Partner' | 'Financial movement type' | 'Credit' | ' '        | 'Operation'                                                                            |
+			| '3250'  | 'Bank account, TRY' | ''              | ''        | 'Transfer'                | '3221'   | ''         | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)' |
+			| '102'   | 'Bank account, TRY' | ''              | ''        | 'Transfer'                | '108'    | 'Transfer' | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                                            | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -2322,11 +2547,16 @@ Scenario: _0991075 check Bank payment accounting movements (Currency exchange)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' ' | 'Credit' | 'Operation'                                                                                |
-			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''  | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' '                             | 'Credit' | 'Financial movement type'       | 'Operation'                                                                                |
+			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''                              | '3250'   | 'Currency exchange (write-off)' | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)' |
+			| '102'   | 'Bank account, TRY' | ''        | ''              | 'Currency exchange (write-off)' | '102'    | 'Currency exchange (write-off)' | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr'           |
@@ -2346,13 +2576,20 @@ Scenario: _0991076 check Bank receipt accounting movements (Currency exchange)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' ' | 'Credit' | 'Legal name'    | 'Operation'                                                                                |
-			| '3221'  | 'Transit, TRY'      | ''        | ''              | ''  | '9100'   | 'Own company 2' | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
-			| '420.5' | ''                  | ''        | 'Transit, TRY'  | ''  | '3221'   | ''              | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
-			| '3250'  | 'Bank account, TRY' | ''        | 'Transit, TRY'  | ''  | '3221'   | ''              | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' '                           | 'Credit' | 'Legal name'    | 'Operation'                                                                                |
+			| '3221'  | 'Transit, TRY'      | ''        | ''              | ''                            | '9100'   | 'Own company 2' | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
+			| '102'   | 'Transit, TRY'      | ''        | ''              | ''                            | '600'    | ''              | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
+			| '420.5' | ''                  | ''        | 'Transit, TRY'  | ''                            | '3221'   | ''              | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
+			| '659'   | ''                  | ''        | 'Transit, TRY'  | 'Currency exchange (receipt)' | '102'    | ''              | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
+			| '3250'  | 'Bank account, TRY' | ''        | 'Transit, TRY'  | ''                            | '3221'   | ''              | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |
+			| '102'   | 'Bank account, TRY' | ''        | 'Transit, TRY'  | 'Currency exchange (receipt)' | '102'    | ''              | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'         | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                                |
@@ -2376,10 +2613,16 @@ Scenario: _0991077 check Bank payment accounting movements (Return to customer)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                      | 'Business unit'                                           | 'Partner term'                                            | 'Credit' | 'Cash/Bank account'            | 'Financial movement type'          | 'Operation'                                                                                         |
 			| '4010'  | 'Customer 1 (3 partner terms)' | 'Business unit 1'                                         | 'Partner term with customer (by document + credit limit)' | '3250'   | 'Bank account, TRY'            | 'Receipt of payment from customer' | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)' |
-			| '4010'  | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Partner term with customer (by document + credit limit)' | '5202'   | 'Customer 1 (3 partner terms)' | 'Business unit 1'                  | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |		
+			| '120'   | 'Customer 1 (3 partner terms)' | 'Business unit 1'                                         | 'Partner term with customer (by document + credit limit)' | '102'    | 'Bank account, TRY'            | 'Receipt of payment from customer' | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)' |
+			| '4010'  | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Partner term with customer (by document + credit limit)' | '5202'   | 'Customer 1 (3 partner terms)' | 'Business unit 1'                  | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |
+			| '120'   | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Partner term with customer (by document + credit limit)' | '340'    | 'Customer 1 (3 partner terms)' | 'Business unit 1'                  | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'              | 'Extra dimension2 Dr'                                     | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'              | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                         |
@@ -2400,10 +2643,16 @@ Scenario: _0991078 check Bank receipt accounting movements (Return from vendor)
 		And "AccountingAnalytics" table became equal
 			| 'Debit'  | 'Cash/Bank account'   | 'Business unit' | 'Partner'             | 'Financial movement type' | 'Credit' | 'Partner term'                                           | 'Operation'                                                                                   |
 			| '3250'   | 'Bank account, TRY'   | ''              | 'Customer and vendor' | 'Refund from vendor'      | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
-			| '4020.2' | 'Customer and vendor' | ''              | 'Customer and vendor' | ''                        | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |		
+			| '102'    | 'Bank account, TRY'   | ''              | 'Customer and vendor' | 'Refund from vendor'      | '320'    | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
+			| '4020.2' | 'Customer and vendor' | ''              | 'Customer and vendor' | ''                        | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |
+			| '159'    | 'Customer and vendor' | ''              | 'Customer and vendor' | ''                        | '320'    | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'    | 'Extra dimension2 Cr'                                    | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
@@ -2423,11 +2672,16 @@ Scenario: _0991079 check Bank receipt accounting movements (Other partner)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Financial movement type'              | 'Credit' | 'Partner'       | 'Legal name'    | 'Tax type' | 'Operation'                                                                |
-			| '3250'  | 'Bank account, TRY' | ''              | 'Other income from current operations' | '9200'   | 'Other partner' | 'Other partner' | ''         | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Partner'       | 'Financial movement type'              | 'Credit' | 'Legal name'         | 'Tax type' | 'Operation'                                                                |
+			| '3250'  | 'Bank account, TRY' | ''              | 'Other partner' | 'Other income from current operations' | '9200'   | 'Other partner'      | ''         | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |
+			| '102'   | 'Bank account, TRY' | ''              | 'Other partner' | 'Other income from current operations' | '136'    | 'Other partner term' | ''         | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'                  | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                |
@@ -2446,11 +2700,16 @@ Scenario: _0991081 check Bank receipt accounting movements (Other income)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Business unit'   | ' ' | 'Credit' | 'Legal name' | 'Operation'                                              |
-			| '3250'  | 'Bank account, TRY' | 'Business unit 3' | ''  | '9100'   | ''           | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Business unit'   | 'Financial movement type'              | 'Credit' | 'Legal name'      | ' '              | 'Operation'                                              |
+			| '3250'  | 'Bank account, TRY' | 'Business unit 3' | 'Other income from current operations' | '9100'   | ''                | ''               | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |
+			| '102'   | 'Bank account, TRY' | ''                | 'Other income from current operations' | '649'    | 'Business unit 3' | 'Other revenues' | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'                  | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                              |
@@ -2470,12 +2729,18 @@ Scenario: _0991082 check Bank payment accounting movements (Other partners)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'       | 'Legal name'    | 'Tax type' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Financial movement type'                      | 'Operation'                                                                |
-			| '9200'  | 'Other partner' | 'Other partner' | ''         | '3250'   | 'Bank account, TRY' | ''              | 'Bank commission for cash settlement services' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
-			| '9200'  | 'Other partner' | 'Other partner' | ''         | '9100'   | ''                  | 'Other partner' | ''                                             | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |			
+			| 'Debit' | 'Partner'       | 'Business unit' | 'Legal name'         | 'Tax type' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'                      | 'Operation'                                                                |
+			| '9200'  | 'Other partner' | ''              | 'Other partner'      | ''         | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '136'   | 'Other partner' | ''              | 'Other partner term' | ''         | '102'    | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '9200'  | 'Other partner' | 'Other partner' | 'Other partner'      | ''         | '9100'   | ''                  | ''                                             | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |
+			| '136'   | 'Other partner' | ''              | 'Other partner term' | ''         | '600'    | ''                  | ''                                             | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'                          | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                |
@@ -2496,10 +2761,15 @@ Scenario: _0991083 check Bank payment accounting movements (Other expense)
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'                      | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |			
+			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
+			| '659'   | ''        | 'Business unit 3' | 'Other expence'            | '102'    | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'                          | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                               |
@@ -2519,11 +2789,16 @@ Scenario: _0991084 check Bank payment accounting movements (Salary)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Operation'                                                    |
-			| '5401'  | ''  | '3250'   | 'Bank account, TRY' | ''              | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)' |
+			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Financial movement type' | 'Operation'                                                    |
+			| '5401'  | ''  | '3250'   | 'Bank account, TRY' | ''              | ''                        | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)' |
+			| '335'   | ''  | '102'    | 'Bank account, TRY' | ''              | ''                        | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                    | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -2544,11 +2819,16 @@ Scenario: _0991085 check Bank payment accounting movements (Employee cash advanc
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit'  | 'Partner'    | 'Business unit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Operation'                                                          |
-			| '4020.1' | 'Employee 1' | ''              |''   | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)' |	
+			| 'Debit'  | 'Partner'    | 'Business unit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'      | 'Operation'                                                          |
+			| '4020.1' | 'Employee 1' | ''              | ''  | '3250'   | 'Bank account, TRY' | 'Cash issuance to accountable' | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)' |
+			| '196'    | 'Employee 1' | ''              | ''  | '102'    | 'Bank account, TRY' | 'Cash issuance to accountable' | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                          | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr'          |
@@ -2568,11 +2848,16 @@ Scenario: _0991086 check Bank payment accounting movements (Other expense)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'                      | 'Operation'                                               |
+			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
+			| '659'   | ''        | 'Business unit 3' | 'Other expence'            | '102'    | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'                          | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                               |
@@ -2592,11 +2877,16 @@ Scenario: _0991087 check Bank payment accounting movements (Salary)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Financial movement type'                      | 'Operation'                                               |
+			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
+			| '659'   | ''        | 'Business unit 3' | 'Other expence'            | '102'    | 'Bank account, TRY' | 'Bank commission for cash settlement services' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'                          | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                               |
@@ -2615,13 +2905,20 @@ Scenario: _0991080 check Purchase invoice accounting movements
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Partner term'               | 'Credit' | 'Operation'                                                                                                      |
-			| '5201'  | 'Vendor 1 (1 partner term)' | ''                | 'Partner term with vendor 1' | '4020.2' | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  |
-			| '3540'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     |
-			| '5301'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      |
+			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Partner term'               | 'Credit' | 'Operation'                                                                                  |
+			| '5201'  | 'Vendor 1 (1 partner term)' | ''                | 'Partner term with vendor 1' | '4020.2' | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'              |
+			| '320'   | 'Vendor 1 (1 partner term)' | ''                | 'Partner term with vendor 1' | '159'    | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'              |
+			| '3540'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' |
+			| '153'   | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '320'    | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' |
+			| '5301'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  |
+			| '391'   | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '320'    | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table contains lines
 			| 'Account Dr' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'                                   | 'Debit amount' | 'Extra dimension2 Dr'   | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'          | 'Operation'                                                                                  | 'Extra dimension2 Cr'        | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -2654,15 +2951,23 @@ Scenario: _0991090 check Sales invoice accounting movements (product and service
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table contains lines
-			| 'Debit' | 'Partner'                      | 'Business unit'   | 'Partner term'                                            | 'Credit' | 'Operation'                                                                                            |
-			| '5202'  | 'Customer 1 (3 partner terms)' | ''                | 'Partner term with customer (by document + credit limit)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                     |
-			| '4010'  | 'Business unit 1'              | ''                | ''                                                        | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                  |
-			| '4010'  | 'VAT'                          | ''                | 'Business unit 1'                                         | '5302'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'                                          |
-			| '420.1' | 'Item with item key'           | 'Business unit 1' | 'S/Color 1'                                               | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                         |
-		Then the number of "AccountingAnalytics" table lines is "равно" "4"
+			| 'Debit' | 'Partner'                      | 'Business unit'                  | 'Partner term'                                            | 'Credit' | 'Operation'                                                                        |
+			| '5202'  | 'Customer 1 (3 partner terms)' | ''                               | 'Partner term with customer (by document + credit limit)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '340'   | 'Customer 1 (3 partner terms)' | ''                               | 'Partner term with customer (by document + credit limit)' | '120'    | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '4010'  | 'Business unit 1'              | ''                               | ''                                                        | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'              |
+			| '120'   | 'Item with item key'           | 'Sale of products'               | 'Business unit 1'                                         | '600'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'              |
+			| '4010'  | 'VAT'                          | ''                               | 'Business unit 1'                                         | '5302'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'         |
+			| '120'   | 'VAT'                          | ''                               | 'Business unit 1'                                         | '191'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'         |
+			| '420.1' | 'Item with item key'           | 'Business unit 1'                | 'S/Color 1'                                               | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                     |
+			| '621'   | 'Item with item key'           | 'Store 1 (with balance control)' | 'S/Color 1'                                               | '153'    | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                     |
+		Then the number of "AccountingAnalytics" table lines is "равно" "8"
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button	
 		And "RegisterRecords" table contains lines
 			| "Account Dr" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"              | "Debit amount" | "Extra dimension2 Dr"                                     | "Credit quantity" | "Extra dimension3 Dr"        | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"   | "Operation"                                                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
@@ -2686,14 +2991,22 @@ Scenario: _0991091 check Sales invoice accounting movements (product)
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                     | 'Business unit'   | 'Partner term'                                | 'Credit' | 'Operation'                                                                                            |
-			| '5202'  | 'Customer 2 (2 partner term)' | ''                | 'Individual partner term 1 (by partner term)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                     |
-			| '4010'  | 'Business unit 1'             | ''                | ''                                            | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                  |
-			| '4010'  | 'VAT'                         | ''                | 'Business unit 1'                             | '5302'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'                                          |
-			| '420.1' | 'Item with item key'          | 'Business unit 1' | 'S/Color 1'                                   | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                         |
+			| 'Debit' | 'Partner'                     | 'Business unit'                  | 'Partner term'                                | 'Credit' | 'Operation'                                                                        |
+			| '5202'  | 'Customer 2 (2 partner term)' | ''                               | 'Individual partner term 1 (by partner term)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '340'   | 'Customer 2 (2 partner term)' | ''                               | 'Individual partner term 1 (by partner term)' | '120'    | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '4010'  | 'Business unit 1'             | ''                               | ''                                            | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'              |
+			| '120'   | 'Item with item key'          | 'Sale of products'               | 'Business unit 1'                             | '600'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'              |
+			| '4010'  | 'VAT'                         | ''                               | 'Business unit 1'                             | '5302'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'         |
+			| '120'   | 'VAT'                         | ''                               | 'Business unit 1'                             | '191'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'         |
+			| '420.1' | 'Item with item key'          | 'Business unit 1'                | 'S/Color 1'                                   | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                     |
+			| '621'   | 'Item with item key'          | 'Store 1 (with balance control)' | 'S/Color 1'                                   | '153'    | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                     |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button	
 		And "RegisterRecords" table contains lines
 			| "Account Dr" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"             | "Debit amount" | "Extra dimension2 Dr"                         | "Credit quantity" | "Extra dimension3 Dr"        | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"            | "Operation"                                                                | "Extra dimension2 Cr"   | "Credit amount" | "Extra dimension3 Cr" |
@@ -2718,6 +3031,10 @@ Scenario: _0991093 check Sales return accounting movements (product)
 		And I select current line in "List" table
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button	
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'    | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'        | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Extra dimension2 Cr'                         | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                               |
@@ -2738,6 +3055,10 @@ Scenario: _0991094 check Sales return accounting movements (service)
 		And I select current line in "List" table
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button	
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit" | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"            | "Operation"                                                               | "Extra dimension2 Cr"                         | "Credit amount" | "Extra dimension3 Cr" |
@@ -2757,6 +3078,10 @@ Scenario: _0991095 check Purchase return accounting movements (product)
 		And I select current line in "List" table
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button	
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"           | "Debit amount" | "Extra dimension2 Dr"        | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"   | "Operation"                                                                 | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
@@ -2776,6 +3101,10 @@ Scenario: _0991096 check Purchase return accounting movements (service and produ
 		And I select current line in "List" table
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button	
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr'                                    | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'   | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'   | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                 |
@@ -2798,12 +3127,18 @@ Scenario: _0991100 check Cash payment accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                    | 'Business unit'   | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | ' '               | 'Operation'                                                                                   |
-			| '5201'  | 'Vendor 1 (1 partner term)'  | 'Business unit 1' | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | ''                | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '5201'  | 'Partner term with vendor 1' | 'Business unit 1' | 'Partner term with vendor 1' | '4020.2' | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+			| 'Debit' | 'Partner'                    | 'Business unit'   | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | ' '                 | 'Operation'                                                                                   |
+			| '5201'  | 'Vendor 1 (1 partner term)'  | 'Business unit 1' | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | ''                  | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '320'   | 'Business unit 1'            | 'Business unit 1' | 'Partner term with vendor 1' | '102'    | 'Cash, TRY'                 | 'Payment to vendor' | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | 'Partner term with vendor 1' | 'Business unit 1' | 'Partner term with vendor 1' | '4020.2' | 'Vendor 1 (1 partner term)' | 'Business unit 1'   | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
+			| '320'   | 'Partner term with vendor 1' | 'Business unit 1' | 'Partner term with vendor 1' | '159'    | 'Vendor 1 (1 partner term)' | 'Business unit 1'   | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'           | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr'       | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
@@ -2822,12 +3157,18 @@ Scenario: _0991110 check Cash receipt accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account'            | 'Partner'                      | 'Business unit'   | ' '               | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
-			| '3240'  | 'Cash, TRY'                    | 'Customer 1 (3 partner terms)' | 'Business unit 1' | ''                | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
-			| '5202'  | 'Customer 1 (3 partner terms)' | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Business unit 1' | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |		
+			| 'Debit' | 'Cash/Bank account'            | 'Partner'                      | 'Business unit'   | ' '                                | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
+			| '3240'  | 'Cash, TRY'                    | 'Customer 1 (3 partner terms)' | 'Business unit 1' | ''                                 | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '102'   | 'Cash, TRY'                    | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Receipt of payment from customer' | '120'    | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '5202'  | 'Customer 1 (3 partner terms)' | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Business unit 1'                  | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |
+			| '340'   | 'Customer 1 (3 partner terms)' | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Business unit 1'                  | '120'    | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr'          | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'             | 'Extra dimension2 Cr'                                     | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                         |
@@ -2847,11 +3188,16 @@ Scenario: _0991120 check Cash expense accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | ' ' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 1' | 'Other expence'            | '3240'   | 'Cash, TRY'         | ''  | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
+			| 'Debit' | 'Partner'         | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | ' ' | 'Operation'                                               |
+			| '420.2' | ''                | 'Business unit 1' | 'Other expence'            | '3240'   | 'Cash, TRY'         | ''  | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
+			| '659'   | 'Business unit 1' | 'Business unit 1' | 'Other expence'            | '102'    | 'Cash, TRY'         | ''  | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                               |
@@ -2870,11 +3216,16 @@ Scenario: _0991130 check Cash revenue accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit'   | ' ' | 'Credit' | 'Legal name'    | 'Operation'                                              |
-			| '3240'  | 'Cash, TRY'         | ''        | 'Business unit 1' | ''  | '9100'   | 'Own company 2' | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Partner'         | 'Business unit'   | ' '              | 'Credit' | 'Legal name'      | 'Operation'                                              |
+			| '3240'  | 'Cash, TRY'         | ''                | 'Business unit 1' | ''               | '9100'   | 'Own company 2'   | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |
+			| '102'   | 'Cash, TRY'         | 'Business unit 1' | ''                | 'Other revenues' | '649'    | 'Business unit 1' | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                              |
@@ -2895,10 +3246,16 @@ Scenario: _0991140 check Debit note accounting movements (Vendor)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'             | 'Partner term'               | 'Legal name'                 | 'Credit' | ' '               | 'Operation'                                                               |
 			| '5201'  | 'Vendor 1 (1 partner term)' | 'Business unit 1'           | 'Partner term with vendor 1' | 'Vendor 1'                   | '9100'   | ''                | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'           |
-			| '5201'  | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '4020.2' | 'Business unit 1' | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |		
+			| '320'   | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Business unit 1'            | '649'    | 'Other revenues'  | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'           |
+			| '5201'  | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '4020.2' | 'Business unit 1' | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '320'   | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '159'    | 'Business unit 1' | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'           | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                     |
@@ -2916,6 +3273,10 @@ Scenario: _0991141 check Debit note accounting movements (Customer)
 		And I select current line in "List" table
 	* Check accounting movements
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'              | 'Debit amount' | 'Extra dimension2 Dr'                                     | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                       | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -2934,11 +3295,16 @@ Scenario: _0991142 check Debit note accounting movements (Other)
 	* Check accounting movements
 		And in the table "Transactions" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Business unit'   | 'Partner'         | 'Legal name'      | 'Credit' | ' ' | 'Operation'                                                           |
-			| '9200'  | 'Business unit 3' | 'Other partner 2' | 'Other partner 2' | '9100'   | ''  | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' |		
+			| 'Debit' | 'Partner'         | 'Business unit'   | 'Legal name'      | 'Tax type'        | 'Credit' | ' '              | 'Operation'                                                           |
+			| '9200'  | 'Other partner 2' | 'Business unit 3' | 'Other partner 2' | ''                | '9100'   | ''               | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' |
+			| '136'   | 'Other partner 2' | 'Other partner 2' | 'Business unit 3' | 'Business unit 3' | '649'    | 'Other revenues' | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                           | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -2959,10 +3325,16 @@ Scenario: _0991145 check Credit note accounting movements (Customer)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                     | 'Business unit'   | 'Expense and revenue type' | 'Partner term'                                | 'Credit' | 'Operation'                                                                      |
 			| '420.2' | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Other expence'            | 'Individual partner term 1 (by partner term)' | '4010'   | 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'              |
-			| '5202'  | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Business unit 1'          | 'Individual partner term 1 (by partner term)' | '4010'   | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |		
+			| '659'   | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Other expence'            | 'Individual partner term 1 (by partner term)' | '120'    | 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'              |
+			| '5202'  | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Business unit 1'          | 'Individual partner term 1 (by partner term)' | '4010'   | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+			| '340'   | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Business unit 1'          | 'Individual partner term 1 (by partner term)' | '120'    | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'             | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                         | 'Extra dimension2 Cr'                         | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -2983,10 +3355,16 @@ Scenario: _0991146 check Credit note accounting movements (Vendor)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'  | 'Business unit'   | 'Expense and revenue type' | 'Partner term'                                           | 'Credit' | 'Operation'                                                                |
 			| '420.2' | 'Vendor 5' | 'Business unit 1' | 'Other expence'            | 'Partner term with vendor (advance payment by document)' | '5201'   | 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
-			| '5201'  | 'Vendor 5' | 'Business unit 1' | 'Business unit 1'          | 'Partner term with vendor (advance payment by document)' | '4020.2' | 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |		
+			| '659'   | 'Vendor 5' | 'Business unit 1' | 'Other expence'            | 'Partner term with vendor (advance payment by document)' | '320'    | 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
+			| '5201'  | 'Vendor 5' | 'Business unit 1' | 'Business unit 1'          | 'Partner term with vendor (advance payment by document)' | '4020.2' | 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '320'   | 'Vendor 5' | 'Business unit 1' | 'Business unit 1'          | 'Partner term with vendor (advance payment by document)' | '159'    | 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                       | 'Extra dimension2 Cr'                                    | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3005,11 +3383,16 @@ Scenario: _0991147 check Credit note accounting movements (Other)
 	* Check accounting movements
 		And in the table "Transactions" I click "Edit accounting" button		
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'       | 'Business unit'   | 'Expense and revenue type' | 'Legal name'    | 'Credit' | 'Operation'                                                             |
-			| '420.2' | 'Other partner' | 'Business unit 1' | 'Other expence'            | 'Other partner' | '9200'   | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |		
+			| 'Debit' | 'Partner'       | 'Business unit'   | 'Expense and revenue type' | 'Legal name'         | 'Credit' | 'Tax type'        | 'Operation'                                                             |
+			| '420.2' | 'Other partner' | 'Business unit 1' | 'Other expence'            | 'Other partner'      | '9200'   | ''                | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |
+			| '659'   | 'Other partner' | 'Business unit 1' | 'Other expence'            | 'Other partner term' | '136'    | 'Business unit 1' | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                             |
@@ -3027,11 +3410,16 @@ Scenario: _0991150 check Retail sales receipt accounting movements
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Item'               | 'Business unit'   | 'Expense and revenue type'   | 'Credit' | 'Item key'   | 'Operation'                                                          |
-			| '420.1' | 'Item with item key' | 'Business unit 3' | 'Purchase of goods for sale' | '3540'   | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |		
+			| 'Debit' | 'Item'               | 'Business unit'                  | 'Expense and revenue type'   | 'Credit' | 'Item key'   | 'Operation'                                                          |
+			| '420.1' | 'Item with item key' | 'Business unit 3'                | 'Purchase of goods for sale' | '3540'   | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |
+			| '621'   | 'Item with item key' | 'Store 1 (with balance control)' | 'Purchase of goods for sale' | '153'    | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'    | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr'        | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'   | 'Operation'                                                          | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3051,11 +3439,16 @@ Scenario: _0991160 check Employee cash advance accounting movements (with PI and
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"    | "Business unit"   | "Partner term"             | "Credit" | " " | "Operation"                                                                           |
-			| "5201"  | "Employee 1" | "Business unit 1" | "Vendor 4 (partner term) " | "4020.1" | ""  | "EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)" |		
+			| 'Debit' | 'Partner'    | 'Business unit'   | 'Partner term'             | 'Credit' | ' ' | 'Operation'                                                                           |
+			| '5201'  | 'Employee 1' | 'Business unit 1' | 'Vendor 4 (partner term) ' | '4020.1' | ''  | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' |
+			| '320'   | 'Employee 1' | 'Business unit 1' | 'Vendor 4 (partner term) ' | '196'    | ''  | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'      | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                           | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3076,10 +3469,16 @@ Scenario: _0991161 check Employee cash advance accounting movements (without PI,
 		And "AccountingAnalytics" table became equal
 			| "Debit" | "Partner"    | "Business unit"   | "Expense and revenue type" | "Credit" | " " | "Operation"                                                                     |
 			| "420.2" | "Employee 1" | "Business unit 1" | "Other expence"            | "4020.1" | ""  | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)"      |
-			| "5301"  | "Employee 1" | "Business unit 1" | ""                         | "4020.1" | ""  | "EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)" |		
+			| "659"   | "Employee 1" | "Business unit 1" | "Other expence"            | "196"    | ""  | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)"      |
+			| "5301"  | "Employee 1" | "Business unit 1" | ""                         | "4020.1" | ""  | "EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)" |
+			| "391"   | "Employee 1" | "Business unit 1" | ""                         | "196"    | ""  | "EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)" |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit" | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit" | "Operation"                                                                     | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
@@ -3101,10 +3500,16 @@ Scenario: _0991162 check Employee cash advance accounting movements (without PI 
 		And "AccountingAnalytics" table became equal
 			| "Debit" | "Partner"    | "Business unit"   | "Expense and revenue type" | "Credit" | " " | "Operation"                                                                     |
 			| "420.2" | "Employee 2" | "Business unit 1" | "Other expence"            | "4020.1" | ""  | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)"      |
-			| "5301"  | "Employee 2" | "Business unit 1" | ""                         | "4020.1" | ""  | "EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)" |		
+			| "659"   | "Employee 2" | "Business unit 1" | "Other expence"            | "196"    | ""  | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)"      |
+			| "5301"  | "Employee 2" | "Business unit 1" | ""                         | "4020.1" | ""  | "EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)" |
+			| "391"   | "Employee 2" | "Business unit 1" | ""                         | "196"    | ""  | "EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)" |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit" | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit" | "Operation"                                                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
@@ -3124,11 +3529,16 @@ Scenario: _0991170 check Expense accruals accounting movements (without basis)
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                             |
-			| '420.5' | ''        | 'Business unit 1' | 'Rent'                     | '970.1'  | ''  | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' '    | 'Operation'                                                             |
+			| '420.5' | ''        | 'Business unit 1' | 'Rent'                     | '970.1'  | ''     | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |
+			| '632'   | ''        | 'Business unit 1' | 'Rent'                     | '180'    | 'Rent' | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3147,11 +3557,16 @@ Scenario: _0991171 check Expense accruals accounting movements (basis - Expense 
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                             |
-			| '420.5' | ''        | 'Business unit 1' | 'Rent'                     | '970.1'  | ''  | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |		
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' '    | 'Operation'                                                             |
+			| '420.5' | ''        | 'Business unit 1' | 'Rent'                     | '970.1'  | ''     | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |
+			| '632'   | ''        | 'Business unit 1' | 'Rent'                     | '180'    | 'Rent' | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'     | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3170,11 +3585,16 @@ Scenario: _0991172 check Expense accruals accounting movements (basis - Expense 
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Operation'                                                             |
-			| '970.1' | ''  | '420.5'  | ''        | 'Business unit 1' | 'Rent'                     | 'ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)' |		
+			| 'Debit' | ' '    | 'Credit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Operation'                                                             |
+			| '970.1' | ''     | '420.5'  | ''        | 'Business unit 1' | 'Rent'                     | 'ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)' |
+			| '180'   | 'Rent' | '632'    | ''        | 'Business unit 1' | 'Rent'                     | 'ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3196,11 +3616,16 @@ Scenario: _0991173 check Expense accruals accounting movements (basis - Purchase
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                             |
-			| '420.5' | ''        | 'Business unit 1' | 'Rent'                     | '970.1'  | ''  | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |	
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' '    | 'Operation'                                                             |
+			| '420.5' | ''        | 'Business unit 1' | 'Rent'                     | '970.1'  | ''     | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |
+			| '632'   | ''        | 'Business unit 1' | 'Rent'                     | '180'    | 'Rent' | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3221,11 +3646,16 @@ Scenario: _0991174 check Revenue accruals accounting movements (without basis)
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Business unit'   | 'Legal name'    | 'Operation'                                                             |
-			| '980.1' | ''  | '9100'   | 'Business unit 1' | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |		
+			| 'Debit' | ' '              | 'Credit' | 'Business unit'   | 'Legal name'      | 'Operation'                                                             |
+			| '980.1' | ''               | '9100'   | 'Business unit 1' | 'Own company 2'   | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |
+			| '380'   | 'Other revenues' | '649'    | ''                | 'Business unit 1' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3244,11 +3674,16 @@ Scenario: _0991175 check Revenue accruals accounting movements (basis - Revenue 
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Business unit'   | 'Legal name'    | ' ' | 'Credit' | 'Operation'                                                             |
-			| '9100'  | 'Business unit 1' | 'Own company 2' | ''  | '980.1'  | 'RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)' |		
+			| 'Debit' | 'Business unit'   | 'Legal name'      | ' '              | 'Credit' | 'Operation'                                                             |
+			| '9100'  | 'Business unit 1' | 'Own company 2'   | ''               | '980.1'  | 'RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)' |
+			| '649'   | ''                | 'Business unit 1' | 'Other revenues' | '380'    | 'RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3267,11 +3702,16 @@ Scenario: _0991176 check Revenue accruals accounting movements (basis - Revenue 
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Business unit'   | 'Legal name'    | 'Operation'                                                             |
-			| '980.1' | ''  | '9100'   | 'Business unit 1' | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |		
+			| 'Debit' | ' '              | 'Credit' | 'Business unit'   | 'Legal name'      | 'Operation'                                                             |
+			| '980.1' | ''               | '9100'   | 'Business unit 1' | 'Own company 2'   | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |
+			| '380'   | 'Other revenues' | '649'    | ''                | 'Business unit 1' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3293,11 +3733,16 @@ Scenario: _0991177 check Revenue accruals accounting movements (basis - Sales in
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Business unit' | 'Legal name'    | 'Operation'                                                             |
-			| '980.1' | ''  | '9100'   | ''              | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |		
+			| 'Debit' | ' '              | 'Credit' | 'Business unit' | 'Legal name'    | 'Operation'                                                             |
+			| '980.1' | ''               | '9100'   | ''              | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |
+			| '380'   | 'Other revenues' | '649'    | ''              | ''              | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3323,10 +3768,19 @@ Scenario: _0991190 check Money transfer accounting movements (Currency exchange)
 			| '3221'  | 'Bank account, TRY' | 'Business unit 3' | 'Receipt of payment from customer' | '3250'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
 			| '3250'  | 'Transit, TRY'      | ''                | ''                                 | '3221'   | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
 			| '3221'  | 'Business unit 3'   | 'Own company 2'   | ''                                 | '9101'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'   |
-			| '420.5' | 'Transit, TRY'      | ''                | ''                                 | '3221'   | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |			
+			| '420.5' | 'Transit, TRY'      | ''                | ''                                 | '3221'   | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |
+			| '102'   | 'Bank account, TRY' | 'Business unit 3' | 'Receipt of payment from customer' | '102'    | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'    |
+			| '102'   | 'Bank account, TRY' | 'Business unit 3' | 'Receipt of payment from customer' | '102'    | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
+			| '102'   | 'Transit, TRY'      | 'Business unit 3' | 'Receipt of payment from customer' | '102'    | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
+			| '102'   | ''                  | 'Business unit 3' | 'Foreign exchange income'          | '646'    | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'   |
+			| '656'   | 'Transit, TRY'      | 'Business unit 3' | 'Receipt of payment from customer' | '102'    | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'              | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'              | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                      |
@@ -3347,6 +3801,10 @@ Scenario: _0991195 check Payroll accounting movements (acruals, deductions, taxe
 		And I click "Post" button		
 	* Check accounting movements
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#'  | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'                  | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'    | 'Operation'                                                                         |
@@ -3379,9 +3837,14 @@ Scenario: _0991196 check Payroll accounting movements (cash advance deduction)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | ' ' | 'Credit' | 'Partner'    | 'Business unit' | 'Operation'                                                         |
 			| '5401'  | ''  | '4020.1' | 'Employee 1' | ''              | 'Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)' |
+			| '335'   | ''  | '196'    | 'Employee 1' | ''              | 'Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#'  | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'                  | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'    | 'Operation'                                                                         |
@@ -3417,11 +3880,16 @@ Scenario: _0991197 check CommissioningOfFixedAsset movements
 	* Check accounting movements (cash advance deduction)
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Fixed asset'             | 'Business unit'   | ' ' | 'Item'          | 'Credit' | 'Item key'      | 'Operation'                                                                              |
-			| '2020'  | 'Manufacturing Equipment' | 'Business unit 2' | ''  | 'Fixed asset 1' | '3540'   | 'Fixed asset 1' | 'CommissioningOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)' |			
+			| 'Debit' | 'Fixed asset'             | 'Business unit'                  | ' ' | 'Item'          | 'Credit' | 'Item key'      | 'Operation'                                                                              |
+			| '2020'  | 'Manufacturing Equipment' | 'Business unit 2'                | ''  | 'Fixed asset 1' | '3540'   | 'Fixed asset 1' | 'CommissioningOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)' |
+			| '253'   | 'Manufacturing Equipment' | 'Store 1 (with balance control)' | ''  | 'Fixed asset 1' | '153'    | 'Fixed asset 1' | 'CommissioningOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'         | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                              | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3436,7 +3904,7 @@ Scenario: _0991198 check DepreciationCalculation movements
 			| 'Number'  |
 			| '14'      |	
 		And in the table "List" I click the button named "ListContextMenuPost"
-		And Delay 5
+		And Delay "5"
 	* Select DepreciationCalculation
 		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
 		And I go to line in "List" table
@@ -3448,10 +3916,15 @@ Scenario: _0991198 check DepreciationCalculation movements
 		And in the table "Calculations" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                                |
-			| '420.3' | ''        | 'Business unit 2' | 'Expence and revenue 1'    | '7501'   | ''  | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)' |	
+			| '420.3' | ''        | 'Business unit 2' | 'Expence and revenue 1'    | '7501'   | ''  | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)' |
+			| '631'   | ''        | 'Business unit 2' | 'Expence and revenue 1'    | '257'    | ''  | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
@@ -3474,10 +3947,18 @@ Scenario: _0991212 check DebitCreditNote movements (CT-VA, by documents, same pa
 			| '4020.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY'     | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
 			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
+			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '159'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY'     | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '159'    | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Extra dimension2 Dr'   | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                       |
@@ -3501,10 +3982,18 @@ Scenario: _0991213 check DebitCreditNote movements (CA-CT, by documents, same pa
 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '4010'  | 'Business unit 2'                    | ''                | 'Own company 2'     | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
+			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '120'   | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'   | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                   | "Operation"                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
@@ -3527,10 +4016,18 @@ Scenario: _0991214 check DebitCreditNote movements (CA-CA, by documents, same pa
 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '5202'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '5202'  | 'Business unit 2'                    | ''                | 'Own company 2'     | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '5202'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
+			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '5202'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '340'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '340'   | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'   | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '340'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                        |
@@ -3554,10 +4051,18 @@ Scenario: _0991215 check DebitCreditNote movements (VA-VA, by documents, same pa
 			| '4020.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)'   | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
 			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'           | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
+			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '159'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)'   | '159'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '159'    | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'         | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                    | "Debit amount" | "Extra dimension2 Dr"     | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                   | "Operation"                                | "Extra dimension2 Cr"   | "Credit amount" | "Extra dimension3 Cr" |
@@ -3580,10 +4085,18 @@ Scenario: _0991216 check DebitCreditNote movements (CT-CT, by partner terms, sam
 			| '4010'  | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
 			| '5202'  | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '4010'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
+			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '120'   | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '120'   | 'Customer (Transactions, by partner terms)' | 'Other revenues'  | 'Business unit 2'                           | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'   | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                           | "Debit amount" | "Extra dimension2 Dr"                       | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                          | "Operation"                                | "Extra dimension2 Cr"                       | "Credit amount" | "Extra dimension3 Cr" |
@@ -3606,10 +4119,18 @@ Scenario: _0991217 check DebitCreditNote movements (VT-VT, by partner terms, sam
 			| '5201'  | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '5201'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
 			| '5201'  | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '5201'  | 'Business unit 2'                        | ''                | 'Own company 2'                       | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2' | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
+			| '420.2' | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '320'   | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '320'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'   | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '320'   | 'Vendor (Transactions, by partner term)' | 'Other revenues'  | 'Business unit 2'                     | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'   | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '320'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                        | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                       | "Operation"                                | "Extra dimension2 Cr"                 | "Credit amount" | "Extra dimension3 Cr" |
@@ -3632,10 +4153,18 @@ Scenario: _0991218 check DebitCreditNote movements (VA-VT, by documents, differe
 			| '5201'  | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)'      | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
 			| '5201'  | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '5201'  | 'Business unit 2'                     | ''                | 'Own company 2'                       | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2' | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
+			| '420.2' | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '320'   | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)'      | '159'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'   | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '320'   | 'Vendor (Advance, by documents)'      | 'Other revenues'  | 'Business unit 2'                     | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'   | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '320'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                     | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"               | "Operation"                                | "Extra dimension2 Cr"            | "Credit amount" | "Extra dimension3 Cr" |
@@ -3654,14 +4183,22 @@ Scenario: _0991219 check DebitCreditNote movements (VT-CA, by documents, differe
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                          | 'Business unit'   | 'Partner term'               | 'Credit' | 'Operation'                                                                                    |
-			| '5201'  | 'Customer (Advance, by documents)' | 'Business unit 2' | 'Advance, by documents, EUR' | '5202'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
-			| '5202'  | 'Customer (Advance, by documents)' | 'Business unit 2' | 'Advance, by documents, EUR' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
-			| '5202'  | 'Business unit 2'                  | ''                | 'Own company 2'              | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Customer (Advance, by documents)' | 'Business unit 2' | 'Advance, by documents, EUR' | '5202'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
+			| 'Debit' | 'Partner'                             | 'Business unit'   | 'Partner term'               | 'Credit' | 'Operation'                                                                                    |
+			| '5201'  | 'Customer (Advance, by documents)'    | 'Business unit 2' | 'Advance, by documents, EUR' | '5202'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Customer (Advance, by documents)'    | 'Business unit 2' | 'Advance, by documents, EUR' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '5202'  | 'Business unit 2'                     | ''                | 'Own company 2'              | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Customer (Advance, by documents)'    | 'Business unit 2' | 'Advance, by documents, EUR' | '5202'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '320'   | 'Customer (Advance, by documents)'    | 'Business unit 2' | 'Advance, by documents, EUR' | '340'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Customer (Advance, by documents)'    | 'Business unit 2' | 'Advance, by documents, EUR' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '340'   | 'Vendor (Transactions, by documents)' | 'Other revenues'  | 'Business unit 2'            | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'   | 'Customer (Advance, by documents)'    | 'Business unit 2' | 'Advance, by documents, EUR' | '340'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                     | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                 | 'Extra dimension2 Cr'        | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                        |
@@ -3685,10 +4222,18 @@ Scenario: _0991220 check DebitCreditNote movements (VT-CT, by documents, differe
 			| '5201'  | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
 			| '5202'  | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '4010'  | 'Business unit 2'                       | ''                | 'Own company 2'                         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
+			| '420.2' | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '320'   | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '120'   | 'Vendor (Transactions, by documents)'   | 'Other revenues'  | 'Business unit 2'                       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'   | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                     | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                      | "Operation"                                | "Extra dimension2 Cr"                   | "Credit amount" | "Extra dimension3 Cr" |
@@ -3711,10 +4256,18 @@ Scenario: _0991221 check DebitCreditNote movements (CT-VA, by documents, differe
 			| '4020.2' | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
 			| '5201'   | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '4020.2' | 'Business unit 2'                       | ''                | 'Own company 2'                         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2'  | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
+			| '420.2'  | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '159'    | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'    | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '159'    | 'Customer (Transactions, by documents)' | 'Other revenues'  | 'Business unit 2'                       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'    | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                | "Debit amount" | "Extra dimension2 Dr"            | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                      | "Operation"                                | "Extra dimension2 Cr"                   | "Credit amount" | "Extra dimension3 Cr" |
@@ -3733,14 +4286,22 @@ Scenario: _0991222 check DebitCreditNote movements (CT-VA, by documents, differe
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| 'Debit'  | 'Partner'                        | 'Business unit'   | 'Partner term'                   | 'Credit' | 'Operation'                                                                              |
-			| '5202'   | 'Vendor (Advance, by documents)' | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '5201'   | 'Vendor (Advance, by documents)' | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '4020.2' | 'Business unit 2'                | ''                | 'Own company 2'                  | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2'  | 'Vendor (Advance, by documents)' | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
+			| 'Debit'  | 'Partner'                          | 'Business unit'   | 'Partner term'                   | 'Credit' | 'Operation'                                                                              |
+			| '5202'   | 'Vendor (Advance, by documents)'   | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'   | 'Vendor (Advance, by documents)'   | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '4020.2' | 'Business unit 2'                  | ''                | 'Own company 2'                  | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2'  | 'Vendor (Advance, by documents)'   | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '340'    | 'Vendor (Advance, by documents)'   | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'    | 'Vendor (Advance, by documents)'   | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '159'    | 'Customer (Advance, by documents)' | 'Other revenues'  | 'Business unit 2'                | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'    | 'Vendor (Advance, by documents)'   | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                  | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'               | 'Extra dimension2 Cr'            | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                        |
@@ -3764,10 +4325,18 @@ Scenario: _0991223 check DebitCreditNote movements (CT-VT, by partner terms, dif
 			| '5201'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
 			| '5201'  | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '5201'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2' | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
+			| '420.2' | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '320'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'   | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '320'   | 'Customer (Transactions, by partner terms)' | 'Other revenues'  | 'Business unit 2'                           | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'   | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '320'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                        | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                          | "Operation"                                | "Extra dimension2 Cr"                       | "Credit amount" | "Extra dimension3 Cr" |
@@ -3790,10 +4359,18 @@ Scenario: _0991224 check DebitCreditNote movements (VA-VA, by documents, differe
 			| '4020.2' | 'Vendor (Advance, by documents)'     | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
 			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'                  | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
+			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '159'    | 'Vendor (Advance, by documents)'     | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '159'    | 'Vendor (Advance, by documents)'     | 'Other revenues'  | 'Business unit 2'                | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                    | "Debit amount" | "Extra dimension2 Dr"     | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"               | "Operation"                                | "Extra dimension2 Cr"            | "Credit amount" | "Extra dimension3 Cr" |
@@ -3816,10 +4393,18 @@ Scenario: _0991225 check DebitCreditNote movements (СA-СA, by documents, diffe
 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '5202'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '5202'  | 'Business unit 2'                    | ''                | 'Own company 2'     | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '5202'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
+			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '5202'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '340'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '340'   | 'Customer (Advance, by documents)'   | 'Other revenues'  | 'Business unit 2'   | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '340'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                  | "Debit amount" | "Extra dimension2 Dr"        | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                   | "Operation"                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
@@ -3842,10 +4427,18 @@ Scenario: _0991226 check DebitCreditNote movements (СT-СT, by documents and pa
 			| '4010'  | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)'     | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
 			| '5202'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '4010'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
+			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '120'   | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)'     | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '120'   | 'Customer (Transactions, by documents)'     | 'Other revenues'  | 'Business unit 2'                           | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                           | 'Extra dimension2 Dr'                       | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                      | 'Extra dimension2 Cr'                   | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                       |
@@ -3865,14 +4458,22 @@ Scenario: _0991227 check DebitCreditNote movements (VT-VT, by partner terms, dif
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                             | 'Business unit'   | 'Partner term'                        | 'Credit' | 'Operation'                                                                              |
-			| '5201'  | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '5201'  | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '5201'  | 'Business unit 2'                     | ''                | 'Own company 2'                       | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2' | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
+			| 'Debit' | 'Partner'                                | 'Business unit'   | 'Partner term'                        | 'Credit' | 'Operation'                                                                              |
+			| '5201'  | 'Vendor (Transactions, by documents)'    | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'  | 'Vendor (Transactions, by documents)'    | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '5201'  | 'Business unit 2'                        | ''                | 'Own company 2'                       | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2' | 'Vendor (Transactions, by documents)'    | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '320'   | 'Vendor (Transactions, by documents)'    | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '320'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'   | 'Vendor (Transactions, by documents)'    | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '320'   | 'Vendor (Transactions, by partner term)' | 'Other revenues'  | 'Business unit 2'                     | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'   | 'Vendor (Transactions, by documents)'    | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '320'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                        | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                    | 'Extra dimension2 Cr'                 | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                       |
@@ -3893,12 +4494,18 @@ Scenario: _0991228 check Bank payment accounting movements (Other partner, tax w
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Operation'                                                                |
-			| '5301'  | ''  | '3250'   | 'Bank account, TRY' | ''              | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
-			| '5301'  | ''  | '9100'   | ''                  | 'Tax authority' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |		
+			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Financial movement type' | 'Operation'                                                                |
+			| '5301'  | ''  | '3250'   | 'Bank account, TRY' | ''              | ''                        | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '391'   | ''  | '102'    | 'Bank account, TRY' | ''              | ''                        | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '5301'  | ''  | '9100'   | ''                  | 'Tax authority' | ''                        | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |
+			| '391'   | ''  | '649'    | 'Tax authority'     | ''              | 'Other revenues'          | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                |
@@ -3922,12 +4529,20 @@ Scenario: _0991229 check Withholding tax invoice accounting movements (Other par
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'       | 'Business unit'   | 'Partner term'                                           | 'Credit' | 'Operation'                                                                           |
 			| '5201'  | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '4020.2' | 'WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '320'   | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '159'    | 'WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
 			| '420.5' | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '5201'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
+			| '659'   | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '320'    | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
 			| '5301'  | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '5201'   | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'     |
-			| '420.5' | 'Tax authority' | 'Withholding tax' | 'Vendor 5'                                               | '9200'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |	
+			| '391'   | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '320'    | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'     |
+			| '420.5' | 'Tax authority' | 'Withholding tax' | 'Vendor 5'                                               | '9200'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |
+			| '659'   | 'Tax authority' | ''                | 'Tax authority'                                          | '136'    | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr'                                    | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                        |
@@ -3951,12 +4566,20 @@ Scenario: _0991231 check Withholding tax invoice accounting movements (Other par
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'       | 'Business unit'   | 'Partner term'                                           | 'Credit' | 'Operation'                                                                           |
 			| '5201'  | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '4020.2' | 'WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '320'   | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '159'    | 'WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
 			| '420.5' | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '5201'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
+			| '659'   | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '320'    | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
 			| '5301'  | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '5201'   | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'     |
-			| '420.5' | 'Tax authority' | 'Withholding tax' | 'Vendor 5'                                               | '9200'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |	
+			| '391'   | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '320'    | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'     |
+			| '420.5' | 'Tax authority' | 'Withholding tax' | 'Vendor 5'                                               | '9200'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |
+			| '659'   | 'Tax authority' | ''                | 'Tax authority'                                          | '136'    | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr'                                    | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                        |
@@ -3980,12 +4603,20 @@ Scenario: _0991232 check Withholding tax invoice accounting movements (Other par
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                            | 'Business unit'   | 'Partner term'                       | 'Credit' | 'Operation'                                                                           |
 			| '5201'  | 'Vendor and Customer (by documents)' | ''                | 'Vendor (by documents)'              | '4020.2' | 'WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '320'   | 'Vendor and Customer (by documents)' | ''                | 'Vendor (by documents)'              | '159'    | 'WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
 			| '420.5' | 'Vendor and Customer (by documents)' | ''                | 'Vendor (by documents)'              | '5201'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
+			| '659'   | 'Vendor and Customer (by documents)' | ''                | 'Vendor (by documents)'              | '320'    | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
 			| '5301'  | 'Vendor and Customer (by documents)' | ''                | 'Vendor (by documents)'              | '5201'   | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'     |
-			| '420.5' | 'Tax authority'                      | 'Withholding tax' | 'Vendor and Customer (by documents)' | '9200'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |		
+			| '391'   | 'Vendor and Customer (by documents)' | ''                | 'Vendor (by documents)'              | '320'    | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'     |
+			| '420.5' | 'Tax authority'                      | 'Withholding tax' | 'Vendor and Customer (by documents)' | '9200'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |
+			| '659'   | 'Tax authority'                      | ''                | 'Tax authority'                      | '136'    | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Extra dimension2 Cr'                | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                        |
@@ -4016,7 +4647,7 @@ Scenario: _0991200 write empty JE with problems (without accounting settings)
 			| 'Number' |
 			| '1'      |	
 		And in the table "List" I click the button named "ListContextMenuCopy"
-		And Delay 5
+		And Delay "5"
 		Then "Update item list info" window is opened
 		And I click "Uncheck all" button
 		And I click "OK" button
@@ -4029,8 +4660,8 @@ Scenario: _0991200 write empty JE with problems (without accounting settings)
 		And I click "Save" button
 		And "Errors" table contains rows by template:
 			| "#" | "Error"                                                                                                                              |
-			| "1" | "Debit is empty [SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)] *" |
-			| "2" | "Debit is empty [SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)] *" |		
+			| "1" | "Debit is empty [SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)]*" |
+			| "2" | "Debit is empty [SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)]*" |		
 		And I save the value of "Number" field as "NumberEmptyJE"
 		And I click the button named "FormWriteAndClose"
 	* Check creation
@@ -4050,6 +4681,10 @@ Scenario: _0991210 edit accounting manualy (document with tabular part)
 		And I select current line in "List" table	
 	* Create JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"          | "Operation"                                                                                  | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
@@ -4117,6 +4752,10 @@ Scenario: _0991211 edit accounting manualy (document without tabular part)
 		And I select current line in "List" table	
 	* Create JE
 		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'              | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr'              | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                      |
@@ -4295,7 +4934,10 @@ Scenario: _0991230 check accountant automated workplace
 	* Check filter by company
 		And I select from the drop-down list named "Company" by "Own company 3" string
 		And I click "Find" button
-		Then the number of "DocumentList" table lines is "равно" 0
+		Then the number of "DocumentList" table lines is "равно" 1
+		And "DocumentList" table contains lines
+			| 'Company'       |
+			| 'Own company 3' |
 		And I select from the drop-down list named "Company" by "Own company 2" string
 		And I click "Find" button		
 		Then the number of "DocumentList" table lines is "больше" 0	
@@ -4385,8 +5027,14 @@ Scenario: _0991230 check accountant automated workplace
 		Then "JE Sales invoice * dated*" window is opened
 		And I close current window
 	* Check files
-		And I move to "Test pdf 1 page.pdf" tab
-		And I move to "16466.png" tab
+		And I set checkbox named "ShowFilePreview"
+		And "FileTable" table contains lines
+			| 'Name'                |
+			| 'Test pdf 1 page.pdf' |
+			| '16466.png'           |
+		And I go to line in "FileTable" table
+			| 'Name'                |
+			| 'Test pdf 1 page.pdf' |
 	And I close all client application windows
 	
 				

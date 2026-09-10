@@ -210,6 +210,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="7c57eb4f-292b-4c53-afa1-91ea6f089b05">
+    <name>AccountCategory</name>
+    <synonym>
+      <key>en</key>
+      <value>Account category</value>
+    </synonym>
+    <type>
+      <types>EnumRef.AccountCategories</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <accountingFlags uuid="5920e61e-e449-47c2-be3c-28c212cec148">
     <name>Quantity</name>
     <synonym>

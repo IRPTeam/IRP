@@ -363,6 +363,12 @@ Scenario: _0263104 create postponed RRR without a reservation and without bases 
 			| ''                                      | 'Dimensions'        | 'Attributes'            | ''       | ''            | ''            | ''       | ''       | ''                      |
 			| ''                                      | 'Document'          | 'Date'                  | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
 			| ''                                      | '$$PostponedRRR1$$' | '$$DatePostponedRRR1$$' | '*'      | '*'           | ''            | 'CI'     | ''       | 'No'                    |
+	* Check the postponed receipt does not reverse expenses in register R5022 Expenses (IRP-908)
+		# EXPECTED FAILURE until IRP-908 is fixed: a postponed or cancelled receipt writes no revenue and must write no expenses either
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R5022 Expenses"' |
 		And I close current window
 
 

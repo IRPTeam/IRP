@@ -156,6 +156,9 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 			| "Documents.RetailReturnReceipt.FindByNumber(2209).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Cancelled copy of the retail return receipt 2209 without the retail sales receipt (IRP-908, checked in _042545)
+		And I execute 1C:Enterprise script at server
+			| 'Src = Documents.RetailReturnReceipt.FindByNumber(2209); Obj = Src.Copy(); Obj.Date = Src.Date + 60; Obj.StatusType = Enums.RetailReceiptStatusTypes.Canceled; For Each Row In Obj.ItemList Do Row.RetailSalesReceipt = Documents.RetailSalesReceipt.EmptyRef(); Row.LandedCost = 10; EndDo; Obj.Comment = "IRP-908 cancelled retail return receipt without RSR"; Obj.Write(DocumentWriteMode.Posting);' |
 	And I close all client application windows
 
 Scenario: _0425001 check preparation
@@ -1126,3 +1129,50 @@ Scenario: _042543 check Retail return receipt movements by the Register  "R6060 
 			| ''                                                      | '15.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Scarf + Dress' | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '-10'      | '-240,86'        | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-240,86'      | '-240,86'          | ''                 | ''                     | ''                   | ''                       | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
 			| ''                                                      | '15.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Scarf + Dress' | 'en description is empty' | 'TRY'      | ''                  | ''                 | '-10'      | '-1 406,88'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-1 406,88'    | '-1 406,88'        | ''                 | ''                     | ''                   | ''                       | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
 	And I close all client application windows		
+
+# IRP-908: Retail return receipt must reverse the cost of goods in register R5022 Expenses; a cancelled receipt must not write expenses at all.
+# _042545 is an EXPECTED FAILURE until IRP-908 is fixed - do NOT wrap in XFAIL, it is regression evidence.
+
+Scenario: _042544 check Retail return receipt movements by the Register  "R5022 Expenses" (based on RSR, after cost calculation)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '2 209'  |
+	* Check movements by the Register "R5022 Expenses" (mirror of the cost written off by Retail sales receipt 1 317, see R6060 in _042543)
+		And I click "Registrations report" button
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 2 209 dated 15.04.2025 00:00:00' | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''              | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                                                       |
+			| 'Document registrations records'                        | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''              | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                                                       |
+			| 'Register  "R5022 Expenses"'                            | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''              | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                                                       |
+			| ''                                                      | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''              | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                                             |
+			| ''                                                      | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key'      | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost'                              |
+			| ''                                                      | '15.04.2025 00:00:00' | '-1 406,88' | '-1 406,88'         | ''            | 'Main Company' | ''       | ''                   | ''             | 'Scarf + Dress' | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                      | '15.04.2025 00:00:00' | '-1 406,88' | '-1 406,88'         | ''            | 'Main Company' | ''       | ''                   | ''             | 'Scarf + Dress' | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                      | '15.04.2025 00:00:00' | '-240,86'   | '-240,86'           | ''            | 'Main Company' | ''       | ''                   | ''             | 'Scarf + Dress' | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+	And I close all client application windows
+
+Scenario: _042545 check Retail return receipt movements absence by the Registers  "R5021 Revenues" and "R5022 Expenses" (Status type Canceled, without RSR)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	And "List" table contains lines
+		| 'Comment'                                             | 'Status type' |
+		| 'IRP-908 cancelled retail return receipt without RSR' | 'Canceled'    |
+	And I go to line in "List" table
+		| 'Comment'                                             |
+		| 'IRP-908 cancelled retail return receipt without RSR' |
+	* A cancelled receipt writes no revenue and must write no expenses either (created in preparation as a copy of 2 209 without RSR, Landed cost 10,00)
+		And I click "Registrations report" button
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R5021 Revenues"' |
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R5022 Expenses"' |
+	And I close all client application windows

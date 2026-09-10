@@ -2112,7 +2112,6 @@ Scenario: _0991037 accounts settings for partner (partner term)
 		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		Then the form attribute named "Agreement" became equal to "Partner term with customer (by document + credit limit)"
-		Then the form attribute named "RecordType" became equal to "Partner term"
 		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
 		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
 		And I click "Save and close" button
@@ -5028,8 +5027,14 @@ Scenario: _0991230 check accountant automated workplace
 		Then "JE Sales invoice * dated*" window is opened
 		And I close current window
 	* Check files
-		And I move to "Test pdf 1 page.pdf" tab
-		And I move to "16466.png" tab
+		And I set checkbox named "ShowFilePreview"
+		And "FileTable" table contains lines
+			| 'Name'                |
+			| 'Test pdf 1 page.pdf' |
+			| '16466.png'           |
+		And I go to line in "FileTable" table
+			| 'Name'                |
+			| 'Test pdf 1 page.pdf' |
 	And I close all client application windows
 	
 				

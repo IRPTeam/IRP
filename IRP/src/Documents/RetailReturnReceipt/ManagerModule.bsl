@@ -534,6 +534,7 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	StrParams.Insert("Period", Ref.Date);
+	StrParams.Insert("IsCompleted", Ref.StatusType = Enums.RetailReceiptStatusTypes.Completed);	
 	Return StrParams;
 EndFunction
 
@@ -1213,7 +1214,7 @@ Function R5022T_Expenses()
 		|FROM
 		|	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
 		|WHERE
-		|	WriteOffBatchesInfo.Document = &Ref
+		|	WriteOffBatchesInfo.Document = &Ref and &IsCompleted
 		|
 		|union all
 		|
@@ -1232,7 +1233,7 @@ Function R5022T_Expenses()
 		|from
 		|	ItemList AS ItemList
 		|Where
-		|	ItemList.SalesDocument.Ref is null";
+		|	ItemList.SalesDocument.Ref is null and not ItemList.IsService and &IsCompleted";
 
 EndFunction
 

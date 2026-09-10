@@ -1290,12 +1290,13 @@ Function R5022T_Expenses()
 		|	ItemList.Currency,
 		|	ItemList.Key,
 		|	Undefined,
-		|	- ItemList.NetAmount,
-		|	- ItemList.Amount
+		|	-ItemList.NetAmount,
+		|	-ItemList.Amount
 		|from
 		|	ItemList AS ItemList
 		|Where
-		|	ItemList.SalesDocument.Ref is null";
+		|	ItemList.SalesDocument.Ref is null
+		|	and not ItemList.IsService";
 EndFunction
 
 Function T3010S_RowIDInfo()

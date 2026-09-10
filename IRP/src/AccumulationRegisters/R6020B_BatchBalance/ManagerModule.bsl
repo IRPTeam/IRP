@@ -130,7 +130,7 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
-	|	R6010B_BatchWiseBalance.Document = &Document 
+	|	R6010B_BatchWiseBalance.Document = &Document and &IsCompleted
 	|	and not R6010B_BatchWiseBalance.Recorder refs Document.Storno
 	|
 	|UNION ALL
@@ -170,7 +170,7 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|	AccumulationRegister.R6030T_BatchShortageOutgoing AS R6030T_BatchShortageOutgoing
 	|WHERE
 	|	R6030T_BatchShortageOutgoing.Document = &Document
-	|	and not R6030T_BatchShortageOutgoing.Recorder refs Document.Storno
+	|	and not R6030T_BatchShortageOutgoing.Recorder refs Document.Storno and &IsCompleted
 	|
 	|UNION ALL
 	|
@@ -209,7 +209,16 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|	AccumulationRegister.R6040T_BatchShortageIncoming AS R6040T_BatchShortageIncoming
 	|WHERE
 	|	R6040T_BatchShortageIncoming.Document = &Document
-	|	and not R6040T_BatchShortageIncoming.Recorder refs Document.Storno";
+	|	and not R6040T_BatchShortageIncoming.Recorder refs Document.Storno and &IsCompleted";
+	
+	IsCompleted = True;
+	If TypeOf(DocObject.Ref) = Type("DocumentRef.RetailReturnReceipt") Then
+		If DocObject.StatusType <> Enums.RetailReceiptStatusTypes.Completed Then
+			IsCompleted = False;
+		EndIf;
+	EndIf;
+	
+	Query.SetParameter("IsCompleted", IsCompleted);
 	Query.SetParameter("Document", DocObject.Ref);
 	Return Query.Execute().Unload();
 EndFunction

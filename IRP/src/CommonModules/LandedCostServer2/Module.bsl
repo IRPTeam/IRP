@@ -1312,7 +1312,7 @@ Procedure Calculate_ReturnBySalesInvoice(Document, BatchRow, Tables, Calculation
 			_new.ExpenseType      = BatchRow.Company.LandedCostExpenseType;
 			_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
 			_new.Branch           = BatchRow.Branch;
-			_new.Currency         = Document.Currency;
+			_new.Currency         = BatchRow.Company.LandedCostCurrencyMovementType.Currency;
 			_new.RowID            = BatchRow.RowID;
 		EndIf;	
 

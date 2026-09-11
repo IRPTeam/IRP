@@ -51,7 +51,7 @@
     <name>OtherPartnerReceivable</name>
     <synonym>
       <key>en</key>
-      <value>Other partner (receivable)</value>
+      <value>Other partner</value>
     </synonym>
   </enumValues>
   <enumValues uuid="7483a393-cca8-4409-9298-2106c6645c19">
@@ -65,7 +65,7 @@
     <name>EmployeeReceivable</name>
     <synonym>
       <key>en</key>
-      <value>Employee (receivable)</value>
+      <value>Employee</value>
     </synonym>
   </enumValues>
 </mdclass:Enum>

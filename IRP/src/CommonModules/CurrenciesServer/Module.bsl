@@ -1734,119 +1734,219 @@ Procedure DebitCreditNoteDifference(Parameters)
 		Return;
 	EndIf;
 	
-	TotalReceipt = 0;
-	TotalExpense = 0;
+	TotalDebit = 0;
+	TotalCredit = 0;
+//	TotalReceipt = 0;
+//	TotalExpense = 0;
 	LegalCurrency = Undefined;
-	BalanceType   = Undefined;
+//	BalanceType   = Undefined;
 	
-	// Send (expenses)
-	If Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionCustomer Then
+	
+	
+	
+	
+	If Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceVendor Then
 		
-		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2021B_CustomersTransactions].PrepareTable;
-		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Expense);
-		TotalExpense  = Result.TotalAmount;
-	
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
+		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
+		TotalDebit  = Result.TotalAmount;
+		
+		// advance customer expense
 	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceCustomer Then
-		
+	
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers].PrepareTable;
 		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Expense);
-		TotalExpense  = Result.TotalAmount;
+		TotalDebit  = Result.TotalAmount;
 		
 	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionVendor Then
-		
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1021B_VendorsTransactions].PrepareTable;
 		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
-		TotalExpense  = Result.TotalAmount;
+		TotalDebit  = Result.TotalAmount;
 		
-	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceVendor Then
-		
-		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
-		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
-		TotalExpense  = Result.TotalAmount;
-	
-	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.EmployeeReceivable Then
-		
-		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance].PrepareTable;
-		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Expense);
-		TotalExpense  = Result.TotalAmount;
-	
-	EndIf;
-				
-	// Receive (receipt)
-	If Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
-		RecordType  = AccumulationRecordType.Receipt;    		
-		BalanceType = "active";
-		If Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceCustomer
-			Or Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionVendor Then
-			 RecordType  = AccumulationRecordType.Expense;
-			 BalanceType = "passive"; 
-		EndIf;
+	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionCustomer Then
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2021B_CustomersTransactions].PrepareTable;
-		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", RecordType);
+		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Receipt);
+		TotalDebit  = Result.TotalAmount;
 		
-		TotalReceipt  = Result.TotalAmount;
-		LegalCurrency = Result.LegalCurrency;
-	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer Then
-		RecordType  = AccumulationRecordType.Receipt;    		
-		BalanceType = "passive";
-		If Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionCustomer
-			Or Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceVendor Then
-			 RecordType  = AccumulationRecordType.Expense;
-			 BalanceType = "active"; 
-		EndIf;
-		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers].PrepareTable;
-		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", RecordType);
-		TotalReceipt  = Result.TotalAmount;
-		LegalCurrency = Result.LegalCurrency;
-				
-	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
-		RecordType = AccumulationRecordType.Receipt;
-		BalanceType = "passive";
-		If Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceVendor
-			Or Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionCustomer Then
-				BalanceType = "active";
-				RecordType = AccumulationRecordType.Expense;
-		EndIf;
-		
-		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1021B_VendorsTransactions].PrepareTable;
-		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", RecordType);
-		
-		TotalReceipt  = Result.TotalAmount;
-		LegalCurrency = Result.LegalCurrency;
-		
-	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then				
-		RecordType  = AccumulationRecordType.Receipt;    		
-		BalanceType = "active";
-		If Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionVendor
-			Or Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceCustomer Then
-			 RecordType  = AccumulationRecordType.Expense;
-			 BalanceType = "passive"; 
-		EndIf;
+	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.EmployeeReceivable Then	
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance].PrepareTable;
+		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Receipt);
+		TotalDebit  = Result.TotalAmount;
 
+	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.OtherPartnerReceivable Then	
+
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5015B_OtherPartnersTransactions].PrepareTable;
+		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Receipt);
+		TotalDebit  = Result.TotalAmount;
+
+		
+	EndIf;
+	
+	IsPassiveReceive = False;
+	
+	If Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then
+		
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
-		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", RecordType);
-		TotalReceipt  = Result.TotalAmount;
+		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
+		TotalCredit  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
+		
+		// advance customer receipt
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer Then
+		IsPassiveReceive = True;	
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers].PrepareTable;
+		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Receipt);
+		TotalCredit  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
+		
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
+		IsPassiveReceive = True;
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1021B_VendorsTransactions].PrepareTable;
+		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
+		TotalCredit  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
+		
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2021B_CustomersTransactions].PrepareTable;
+		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Expense);
+		TotalCredit  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
 		
 	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.EmployeeReceivable Then
-		
+	
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance].PrepareTable;
-		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Receipt);
-		BalanceType   = "active";
-		TotalReceipt  = Result.TotalAmount;
+		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Expense);
+		TotalCredit  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
-
+		
 	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable Then
-		
+	
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5015B_OtherPartnersTransactions].PrepareTable;
-		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Receipt);
-		BalanceType   = "active";
-		TotalReceipt  = Result.TotalAmount;
+		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Expense);
+		TotalCredit  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
-		
+	
 	EndIf;
+	
+	
+	
+//	//-----------------------------------------------------
+//	// Send
+//	If Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionCustomer Then
+//		
+//		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2021B_CustomersTransactions].PrepareTable;
+//		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Expense);
+//		TotalExpense  = Result.TotalAmount;
+//	
+//	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceCustomer Then
+//		
+//		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers].PrepareTable;
+//		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Expense);
+//		TotalExpense  = Result.TotalAmount;
+//		
+//	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionVendor Then
+//		
+//		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1021B_VendorsTransactions].PrepareTable;
+//		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
+//		TotalExpense  = Result.TotalAmount;
+//		
+//	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceVendor Then
+//		
+////		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
+////		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
+////		TotalExpense  = Result.TotalAmount;
+//	
+//	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.EmployeeReceivable Then
+//		
+//		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance].PrepareTable;
+//		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Expense);
+//		TotalExpense  = Result.TotalAmount;
+//	
+//	EndIf;
+//				
+//	// Receive (receipt)
+//	If Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
+//		RecordType  = AccumulationRecordType.Receipt;    		
+//		BalanceType = "active";
+//		If Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceCustomer
+//			Or Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionVendor Then
+//			 RecordType  = AccumulationRecordType.Expense;
+//			 BalanceType = "passive"; 
+//		EndIf;
+//		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2021B_CustomersTransactions].PrepareTable;
+//		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", RecordType);
+//		
+//		TotalReceipt  = Result.TotalAmount;
+//		LegalCurrency = Result.LegalCurrency;
+//	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer Then
+//		RecordType  = AccumulationRecordType.Receipt;    		
+//		BalanceType = "passive";
+//		If Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionCustomer
+//			Or Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceVendor Then
+//			 RecordType  = AccumulationRecordType.Expense;
+//			 BalanceType = "active"; 
+//		EndIf;
+//		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers].PrepareTable;
+//		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", RecordType);
+//		TotalReceipt  = Result.TotalAmount;
+//		LegalCurrency = Result.LegalCurrency;
+//				
+//	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
+//		RecordType = AccumulationRecordType.Receipt;
+//		BalanceType = "passive";
+//		If Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceVendor
+//			Or Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionCustomer Then
+//				BalanceType = "active";
+//				RecordType = AccumulationRecordType.Expense;
+//		EndIf;
+//		
+//		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1021B_VendorsTransactions].PrepareTable;
+//		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", RecordType);
+//		
+//		TotalReceipt  = Result.TotalAmount;
+//		LegalCurrency = Result.LegalCurrency;
+//		
+//	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then				
+////		RecordType  = AccumulationRecordType.Receipt;    		
+////		BalanceType = "active";
+////		If Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionVendor
+////			Or Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceCustomer Then
+////			 RecordType  = AccumulationRecordType.Expense;
+////			 BalanceType = "passive"; 
+////		EndIf;
+////
+////		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
+////		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", RecordType);
+////		TotalReceipt  = Result.TotalAmount;
+////		LegalCurrency = Result.LegalCurrency;
+//		
+//	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.EmployeeReceivable Then
+//		
+//		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance].PrepareTable;
+//		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Receipt);
+//		BalanceType   = "active";
+//		TotalReceipt  = Result.TotalAmount;
+//		LegalCurrency = Result.LegalCurrency;
+//
+//	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable Then
+//		
+//		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5015B_OtherPartnersTransactions].PrepareTable;
+//		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Receipt);
+//		BalanceType   = "active";
+//		TotalReceipt  = Result.TotalAmount;
+//		LegalCurrency = Result.LegalCurrency;
+//		
+//	EndIf;
 		
-	If TotalExpense = TotalReceipt Then
+	//test
+//	TotalExpense = 0;
+//	TotalReceipt = 0;	
+//		
+//	If TotalExpense = TotalReceipt Then
+//		Return;
+//	EndIf;
+
+	If TotalDebit = TotalCredit Then
 		Return;
 	EndIf;
 	
@@ -1876,46 +1976,138 @@ Procedure DebitCreditNoteDifference(Parameters)
 	
 	Expenses_ClearCopy = Expenses.CopyColumns("Period, Company, Branch, ProfitLossCenter, ExpenseType, Currency, Project, Amount");
 	Expenses_ClearCopy.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-				
-	If BalanceType = "active" Then
-		// is revenue
-		If TotalExpense < TotalReceipt Then
-			
-			Revenue_Amount = TotalReceipt - TotalExpense;
-			
-			AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Revenue_Amount);
-			AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Revenue_Amount);
-					
-		// is Expense
-		ElsIf TotalExpense > TotalReceipt Then
-			
-			Expense_Amount = TotalExpense - TotalReceipt;
-			
-			AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, Expense_Amount);
-			AddRecord_Expense(DataInfo, Expenses_ClearCopy, Expense_Amount);
-			
-		EndIf;
-	EndIf;
 	
-	If BalanceType = "passive" Then
-		// is Expense
-		If TotalExpense < TotalReceipt Then
-			
-			Expense_Amount = TotalReceipt - TotalExpense;
-			
+//-----------------------------------------------------------------------------------------------------------	
+//	
+//Delta = TotalDebit - TotalCredit;
+//If Delta > 0 Then
+//	AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Delta);
+//	AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Delta);
+//ElsIf Delta < 0 Then
+//	AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, -Delta);
+//	AddRecord_Expense(DataInfo, Expenses_ClearCopy, -Delta);
+//EndIf;
+	
+	
+//Delta = TotalDebit - TotalCredit;
+//
+//If Delta > 0 Then
+//    If Not IsPassiveReceive Then
+//        AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Delta);
+//        AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Delta);
+//    Else
+//        AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, Delta);
+//        AddRecord_Expense(DataInfo, Expenses_ClearCopy, Delta);
+//    EndIf;
+//
+//ElsIf Delta < 0 Then
+//    AbsDelta = -Delta;
+//    
+//    If Not IsPassiveReceive Then
+//        AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, AbsDelta);
+//        AddRecord_Expense(DataInfo, Expenses_ClearCopy, AbsDelta);
+//    Else
+//        AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, AbsDelta);
+//        AddRecord_Revenue(DataInfo, Revenues_ClearCopy, AbsDelta);
+//    EndIf;
+//
+//EndIf;	
+	
+				
+//-----------------------------------------------------------------------------------------------------------
+
+//If ResultType = "Revenue" Then
+//	
+	If Not IsPassiveReceive Then
+//	If BalanceType = "active" Then
+//		// is revenue
+		If TotalDebit < TotalCredit Then
+//		If TotalExpense < TotalReceipt Then
+//			
+//			Revenue_Amount = TotalReceipt - TotalExpense;
+			Revenue_Amount = TotalCredit - TotalDebit;
+			AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Revenue_Amount);
+			AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Revenue_Amount);
+//					
+//		// is Expense
+//		ElsIf TotalExpense > TotalReceipt Then
+		ElsIf TotalDebit > TotalCredit Then	
+//			Expense_Amount = TotalExpense - TotalReceipt;
+			Expense_Amount = TotalDebit - TotalCredit;
 			AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, Expense_Amount);
 			AddRecord_Expense(DataInfo, Expenses_ClearCopy, Expense_Amount);
-					
-		// is Revenue
-		ElsIf TotalExpense > TotalReceipt Then
-			
-			Revenue_Amount = TotalExpense - TotalReceipt;
+//			
+		EndIf;
+	EndIf;
+//	
+	If IsPassiveReceive Then
+//	If BalanceType = "passive" Then
+//		// is Expense
+		If TotalDebit < TotalCredit Then
+//		If TotalExpense < TotalReceipt Then
+//			
+//			Expense_Amount = TotalReceipt - TotalExpense;
+			Expense_Amount = TotalCredit - TotalDebit;
+//			
+			AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, Expense_Amount);
+			AddRecord_Expense(DataInfo, Expenses_ClearCopy, Expense_Amount);
+//					
+//		// is Revenue
+		ElsIf TotalDebit > TotalCredit Then
+//		ElsIf TotalExpense > TotalReceipt Then
+//			
+//			Revenue_Amount = TotalExpense - TotalReceipt;
+			Revenue_Amount = TotalDebit - TotalCredit;
 			
 			AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Revenue_Amount);
 			AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Revenue_Amount);
-			
+//			
 		EndIf;
 	EndIf;
+
+
+				
+//	If BalanceType = "active" Then
+//		// is revenue
+//		If TotalExpense < TotalReceipt Then
+//			
+//			Revenue_Amount = TotalReceipt - TotalExpense;
+//			
+//			AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Revenue_Amount);
+//			AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Revenue_Amount);
+//					
+//		// is Expense
+//		ElsIf TotalExpense > TotalReceipt Then
+//			
+//			Expense_Amount = TotalExpense - TotalReceipt;
+//			
+//			AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, Expense_Amount);
+//			AddRecord_Expense(DataInfo, Expenses_ClearCopy, Expense_Amount);
+//			
+//		EndIf;
+//	EndIf;
+//	
+//	If BalanceType = "passive" Then
+//		// is Expense
+//		If TotalExpense < TotalReceipt Then
+//			
+//			Expense_Amount = TotalReceipt - TotalExpense;
+//			
+//			AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, Expense_Amount);
+//			AddRecord_Expense(DataInfo, Expenses_ClearCopy, Expense_Amount);
+//					
+//		// is Revenue
+//		ElsIf TotalExpense > TotalReceipt Then
+//			
+//			Revenue_Amount = TotalExpense - TotalReceipt;
+//			
+//			AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Revenue_Amount);
+//			AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Revenue_Amount);
+//			
+//		EndIf;
+//	EndIf;
+	
+//---------------------------------------------------------------------------------------------------------------------	
 	
 	PostingDataTables = New Map();
 	

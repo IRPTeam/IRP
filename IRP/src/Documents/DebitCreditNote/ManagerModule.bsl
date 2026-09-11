@@ -138,6 +138,21 @@ Function GetAdditionalQueryParameters(Ref)
 //	ArrayOfPayable.Add(Enums.DebtTypes.TransactionVendor);
 //	StrParams.Insert("ArrayOfPayable", ArrayOfPayable);
 	
+	
+	StrParams.Insert("IsAdvanceVendor_Send", 	   Ref.SendDebtType = Enums.DebtTypes.AdvanceVendor); 
+	StrParams.Insert("IsAdvanceCustomer_Send",     Ref.SendDebtType = Enums.DebtTypes.AdvanceCustomer); 
+	StrParams.Insert("IsTransactionVendor_Send",   Ref.SendDebtType = Enums.DebtTypes.TransactionVendor); 
+	StrParams.Insert("IsTransactionCustomer_Send", Ref.SendDebtType = Enums.DebtTypes.TransactionCustomer); 
+	StrParams.Insert("IsEmployee_Send", 	       Ref.SendDebtType = Enums.DebtTypes.EmployeeReceivable); 
+	StrParams.Insert("IsOther_Send", 	           Ref.SendDebtType = Enums.DebtTypes.OtherPartnerReceivable);
+	
+	StrParams.Insert("IsAdvanceVendor_Receive", 	  Ref.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor); 
+	StrParams.Insert("IsAdvanceCustomer_Receive", 	  Ref.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer); 
+	StrParams.Insert("IsTransactionVendor_Receive",   Ref.ReceiveDebtType = Enums.DebtTypes.TransactionVendor); 
+	StrParams.Insert("IsTransactionCustomer_Receive", Ref.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer); 
+	StrParams.Insert("IsEmployee_Receive", 	          Ref.ReceiveDebtType = Enums.DebtTypes.EmployeeReceivable); 
+	StrParams.Insert("IsOther_Receive", 	          Ref.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable); 
+	
 	Return StrParams;
 EndFunction
 
@@ -178,12 +193,12 @@ Function Header()
 		|Doc.Company AS Company,
 		|
 		|
-		|Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsAdvanceVendor_Send
-		|Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsAdvanceCustomer_Send
-		|Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsTransactionVendor_Send
-		|Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsTransactionCustomer_Send
-		|Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable) AS IsEmployee_Send
-		|Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable) AS IsOther_Send
+		|Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsAdvanceVendor_Send,
+		|Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsAdvanceCustomer_Send,
+		|Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsTransactionVendor_Send,
+		|Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsTransactionCustomer_Send,
+		|Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable) AS IsEmployee_Send,
+		|Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable) AS IsOther_Send,
 		|
 		|Doc.Branch AS SendBranch,
 		|Doc.SendPartner,
@@ -199,12 +214,12 @@ Function Header()
 		|
 		|
 		|
-		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsAdvanceVendor_Receive
-		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsAdvanceCustomer_Receive
-		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsTransactionVendor_Receive
-		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsTransactionCustomer_Receive
-		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable) AS IsEmployee_Receive
-		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable) AS IsOther_Receive
+		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsAdvanceVendor_Receive,
+		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsAdvanceCustomer_Receive,
+		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsTransactionVendor_Receive,
+		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsTransactionCustomer_Receive,
+		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable) AS IsEmployee_Receive,
+		|Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable) AS IsOther_Receive,
 		|
 		|Doc.ReceiveBranch,
 		|Doc.ReceivePartner,
@@ -608,7 +623,7 @@ Function R5015B_OtherPartnersTransactions()
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsOther_Receipt";
+		|	Doc.IsOther_Receive";
 EndFunction
 
 //+
@@ -645,7 +660,7 @@ Function R3027B_EmployeeCashAdvance()
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsEmployee_Receipt";
+		|	Doc.IsEmployee_Receive";
 EndFunction
 
 // advance to vendor
@@ -780,12 +795,12 @@ Function R2020B_AdvancesFromCustomers()
 		|	Doc.SendProject AS Project,
 		|	Doc.SendAmount AS Amount,
 		|	Doc.SendUUID AS Key,
-		|	Doc.CustomersAdvancesClosing AS CustomersAdvancesClosing
+		|	undefined AS CustomersAdvancesClosing
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsCustomerAdvance_Send
+		|	Doc.IsAdvanceCustomer_Send
 		|
 		|UNION ALL
 		|
@@ -801,11 +816,11 @@ Function R2020B_AdvancesFromCustomers()
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveAmount,
 		|	Doc.ReceiveUUID,
-		|	Doc.CustomersAdvancesClosing
+		|	undefined
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsCustomerAdvance_Receive
+		|	Doc.IsAdvanceCustomer_Receive
 		|
 		|UNION ALL
 		|
@@ -857,7 +872,7 @@ Function T2015S_TransactionsInfo()
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsVendorTransaction_Send
+		|	Doc.IsTransactionVendor_Send
 		|
 		|UNION ALL
 		|
@@ -881,7 +896,7 @@ Function T2015S_TransactionsInfo()
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.DocIsVendorTransaction_Receive";
+		|	Doc.IsTransactionVendor_Receive";
 EndFunction
 
 //+
@@ -901,12 +916,12 @@ Function R1021B_VendorsTransactions()
 		|	Doc.SendOrder AS Order,
 		|	Doc.SendAmount AS Amount,
 		|	Doc.SendUUID AS Key,
-		|	Doc.VendorsAdvancesClosing AS VendorsAdvancesClosing
+		|	undefined AS VendorsAdvancesClosing
 		|INTO R1021B_VendorsTransactions
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsVendorTransaction_Send
+		|	Doc.IsTransactionVendor_Send
 		|
 		|UNION ALL
 		|
@@ -924,11 +939,11 @@ Function R1021B_VendorsTransactions()
 		|	Doc.ReceiveOrder,
 		|	Doc.ReceiveAmount,
 		|	Doc.ReceiveUUID,
-		|	Doc.VendorsAdvancesClosing
+		|	undefined
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsVendorTransaction_Receive
+		|	Doc.IsTransactionVendor_Receive
 		|
 		|UNION ALL
 		|
@@ -1044,7 +1059,7 @@ Function R2021B_CustomersTransactions()
 		|	Doc.SendOrder AS Order,
 		|	Doc.SendAmount AS Amount,
 		|	Doc.SendUUID AS Key,
-		|	Doc.CustomersAdvancesClosing AS CustomersAdvancesClosing
+		|	undefined
 		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	Doc AS Doc
@@ -1067,7 +1082,7 @@ Function R2021B_CustomersTransactions()
 		|	Doc.ReceiveOrder,
 		|	Doc.ReceiveAmount,
 		|	Doc.ReceiveUUID,
-		|	Doc.CustomersAdvancesClosing
+		|	undefined
 		|FROM
 		|	Doc AS Doc
 		|WHERE
@@ -1138,7 +1153,7 @@ Function R5020B_PartnersBalance()
 		|from Doc AS Doc
 		|where Doc.IsAdvanceVendor_Send or Doc.IsAdvanceCustomer_Send
 		|      or Doc.IsTransactionVendor_Send or Doc.IsTransactionCustomer_Send
-		|		or or Doc.IsOther_Send
+		|		or Doc.IsOther_Send
 		|union all
 		|
 		|select 
@@ -1157,7 +1172,7 @@ Function R5020B_PartnersBalance()
 		|	case when Doc.IsAdvanceCustomer_Receive then Doc.ReceiveAmount else 0 end AS CustomerAdvance,
 		|	case when Doc.IsTransactionVendor_Receive then Doc.SendAmount else 0 end AS VendorTransaction,
 		|	case when Doc.IsAdvanceVendor_Receive then Doc.ReceiveAmount else 0 end AS VendorAdvance,
-		|	case when Doc.IsOther_Receive then Doc.ReceiveAmount else 0 AS OtherTransaction,
+		|	case when Doc.IsOther_Receive then Doc.ReceiveAmount else 0 end AS OtherTransaction,
 		|	UNDEFINED AS AdvancesClosing
 		|
 		|from Doc AS Doc
@@ -1165,7 +1180,77 @@ Function R5020B_PartnersBalance()
 		|	   or Doc.IsTransactionVendor_Receive or Doc.IsTransactionCustomer_Receive
 		|		or Doc.IsOther_Receive
 		
+		|union all
+		|SELECT
+		|	CASE
+		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
+		|	END,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Agreement,
+		|	UNDEFINED,
+		|	OffsetOfAdvances.Currency,
 		|
+		|	0,
+		|	0 AS CustomerTransaction,
+		|	0 as CustomerAdvance,
+		|	case when &IsTransactionVendor_Send or &IsTransactionVendor_Receive then OffsetOfAdvances.Amount else 0 end AS VendorTransaction,
+		|	case when &IsAdvanceVendor_Send or &IsAdvanceVendor_Receive then OffsetOfAdvances.Amount else 0 end AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
+		|
+		|union all
+		|
+		|SELECT
+		|	CASE
+		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
+		|	END,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Agreement,
+		|	UNDEFINED,
+		|	OffsetOfAdvances.Currency,
+		|
+		|	0,
+		|	case when &IsTransactionCustomer_Send or &IsTransactionCustomer_Receive then OffsetOfAdvances.Amount else 0 end AS CustomerTransaction,
+		|	case when &IsAdvanceCustomer_Send or &IsAdvanceCustomer_Receive then OffsetOfAdvances.Amount else 0 end AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
+		|
+		
+		|
+		|
+//		|	AND (CAST(OffsetOfAdvances.Document AS
+//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
+//		|	OR CAST(OffsetOfAdvances.Document AS
+//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor))
+		
 		|
 		|
 		|";
@@ -1383,7 +1468,7 @@ EndFunction
 Function T1040T_AccountingAmounts()
 	Return 
 		"SELECT
-		|	Doc.Date AS Period,
+		|	Doc.Period AS Period,
 		|	UNDEFINED AS RowKey,
 		|	Doc.SendUUID AS Key,
 		|	Doc.SendCurrency AS Currency,
@@ -1584,18 +1669,18 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	Debit_Analytics = AdditionalAnalytics.Sender;
 	Credit_Analytics = AdditionalAnalytics.Receiver;
 			
-	QueryParams = GetAdditionalQueryParameters(Undefined);
-	Ref = QueryParams.Ref;
+	//QueryParams = GetAdditionalQueryParameters(Undefined);
+	//Ref = QueryParams.Ref;
 		
 	AccountVariantsMapping = GetAccountVariantsMapping();
-	Debit_AccountKey = AccountVariantsMapping.Get(Ref.SendDebtType);
-	Credit_AccountKey = AccountVariantsMapping.Get(Ref.ReceiveDebtType);
+	Debit_AccountKey = AccountVariantsMapping.Get(Parameters.ObjectData.SendDebtType);
+	Credit_AccountKey = AccountVariantsMapping.Get(Parameters.ObjectData.ReceiveDebtType);
 
-	If Ref.SendDebtType = Enums.DebtTypes.AdvanceVendor Then
+	If Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceVendor Then
 		Debit_AccountKey = "AccountAdvancesVendor";
 	EndIf;
 	
-	If Ref.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then 
+	If Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then 
 		Credit_AccountKey = "AccountAdvancesVendor";
 	EndIf;
 		

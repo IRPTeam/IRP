@@ -1432,3 +1432,53 @@ Scenario: _041358 check Sales return movements by the Register  "TM1010T Row ID 
 			| ''                                          | 'Period'              | 'Row ref'                              | 'Row ID'                               | 'Step'   | 'Basis' | 'Basis key'                            | 'Quantity' |
 			| ''                                          | '04.06.2025 14:29:56' | '836c5b0d-1493-4299-8850-5258b504860f' | '836c5b0d-1493-4299-8850-5258b504860f' | 'SRO&SR' | ''      | '836c5b0d-1493-4299-8850-5258b504860f' | '-5'       |
 	And I close all client application windows
+
+# IRP-908: Sales return must reverse the cost of goods in register R5022 Expenses (services must not).
+# A return without a sales invoice reverses expenses by the return amount (agreed behaviour, _041360).
+
+Scenario: _041359 check Sales return movements by the Register  "R5022 Expenses" (based on SI, after cost calculation)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 114'  |
+	* Check movements by the Register "R5022 Expenses" (mirror of the cost written off by Sales invoice 1 114, see R6060 in _041342)
+		And I click "Registrations report" button
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 1 114 dated 12.05.2025 00:00:00' | ''                    | ''           | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                                                       |
+			| 'Document registrations records'               | ''                    | ''           | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                                                       |
+			| 'Register  "R5022 Expenses"'                   | ''                    | ''           | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                                                       |
+			| ''                                             | 'Period'              | 'Resources'  | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                                             |
+			| ''                                             | ''                    | 'Amount'     | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost'                              |
+			| ''                                             | '12.05.2025 00:00:00' | '-14 830,51' | '-14 830,51'        | ''            | 'Main Company' | ''       | ''                   | ''             | 'M/Brown'  | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                             | '12.05.2025 00:00:00' | '-14 830,51' | '-14 830,51'        | ''            | 'Main Company' | ''       | ''                   | ''             | 'M/Brown'  | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                             | '12.05.2025 00:00:00' | '-9 661,02'  | '-9 661,02'         | ''            | 'Main Company' | ''       | ''                   | ''             | 'M/White'  | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                             | '12.05.2025 00:00:00' | '-9 661,02'  | '-9 661,02'         | ''            | 'Main Company' | ''       | ''                   | ''             | 'M/White'  | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                             | '12.05.2025 00:00:00' | '-2 538,98'  | '-2 538,98'         | ''            | 'Main Company' | ''       | ''                   | ''             | 'M/Brown'  | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                             | '12.05.2025 00:00:00' | '-1 653,97'  | '-1 653,97'         | ''            | 'Main Company' | ''       | ''                   | ''             | 'M/White'  | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+	And I close all client application windows
+
+Scenario: _041360 check Sales return movements by the Register  "R5022 Expenses" (without SI - reversal by the return amount, no expenses for the service)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '102'    |
+	* Check movements by the Register "R5022 Expenses" (net / total amount of the product lines; the service line Internet must not reverse expenses)
+		And I click "Registrations report" button
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '' | '12.03.2021 08:50:27' | '-563,56' | '-665'    | '' | 'Main Company' | 'Logistics department' | 'Distribution department' | '' | '36/Red'  | '' | '' | 'TRY' | '' | 'Local currency'          | '' | '' |
+			| '' | '12.03.2021 08:50:27' | '-563,56' | '-665'    | '' | 'Main Company' | 'Logistics department' | 'Distribution department' | '' | '36/Red'  | '' | '' | 'TRY' | '' | 'en description is empty' | '' | '' |
+			| '' | '12.03.2021 08:50:27' | '-96,48'  | '-113,85' | '' | 'Main Company' | 'Logistics department' | 'Distribution department' | '' | '36/Red'  | '' | '' | 'USD' | '' | 'Reporting currency'      | '' | '' |
+			| '' | '12.03.2021 08:50:27' | '-418,64' | '-494'    | '' | 'Main Company' | 'Logistics department' | 'Distribution department' | '' | 'XS/Blue' | '' | '' | 'TRY' | '' | 'Local currency'          | '' | '' |
+			| '' | '12.03.2021 08:50:27' | '-418,64' | '-494'    | '' | 'Main Company' | 'Logistics department' | 'Distribution department' | '' | 'XS/Blue' | '' | '' | 'TRY' | '' | 'en description is empty' | '' | '' |
+			| '' | '12.03.2021 08:50:27' | '-71,67'  | '-84,57'  | '' | 'Main Company' | 'Logistics department' | 'Distribution department' | '' | 'XS/Blue' | '' | '' | 'USD' | '' | 'Reporting currency'      | '' | '' |
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Internet' |
+	And I close all client application windows

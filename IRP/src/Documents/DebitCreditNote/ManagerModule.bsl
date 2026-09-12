@@ -1059,7 +1059,7 @@ Function R2021B_CustomersTransactions()
 		|	Doc.SendOrder AS Order,
 		|	Doc.SendAmount AS Amount,
 		|	Doc.SendUUID AS Key,
-		|	undefined
+		|	undefined as CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	Doc AS Doc
@@ -1152,7 +1152,7 @@ Function R5020B_PartnersBalance()
 		|into R5020B_PartnersBalance
 		|from Doc AS Doc
 		|where Doc.IsAdvanceVendor_Send or Doc.IsAdvanceCustomer_Send
-		|      or Doc.IsTransactionVendor_Send or Doc.IsTransactionCustomer_Send
+		|     or Doc.IsTransactionVendor_Send or Doc.IsTransactionCustomer_Send
 		|		or Doc.IsOther_Send
 		|union all
 		|
@@ -1179,8 +1179,10 @@ Function R5020B_PartnersBalance()
 		|where Doc.IsAdvanceVendor_Receive or Doc.IsAdvanceCustomer_Receive 
 		|	   or Doc.IsTransactionVendor_Receive or Doc.IsTransactionCustomer_Receive
 		|		or Doc.IsOther_Receive
-		
 		|union all
+		|
+		// vendor advance
+		|
 		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
@@ -1200,7 +1202,7 @@ Function R5020B_PartnersBalance()
 		|	0,
 		|	0 AS CustomerTransaction,
 		|	0 as CustomerAdvance,
-		|	case when &IsTransactionVendor_Send or &IsTransactionVendor_Receive then OffsetOfAdvances.Amount else 0 end AS VendorTransaction,
+		|	0 AS VendorTransaction,
 		|	case when &IsAdvanceVendor_Send or &IsAdvanceVendor_Receive then OffsetOfAdvances.Amount else 0 end AS VendorAdvance,
 		|	0 AS OtherTransaction,
 		|
@@ -1212,6 +1214,77 @@ Function R5020B_PartnersBalance()
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
 		|
 		|union all
+		|
+		// vendor transaction
+		|
+		|SELECT
+		|	CASE
+		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|	END,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Currency,
+		|
+		|	0,
+		|	0 AS CustomerTransaction,
+		|	0 as CustomerAdvance,
+		|	case when &IsTransactionVendor_Send or &IsTransactionVendor_Receive then OffsetOfAdvances.Amount else 0 end AS VendorTransaction,
+		|	0 VendorAdvance,
+		|	0 AS OtherTransaction,
+		|
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
+		|
+		|
+		|union all
+		|
+		//customer advance
+		|
+		|SELECT
+		|	CASE
+		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|	END,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Agreement,
+		|	UNDEFINED,
+		|	OffsetOfAdvances.Currency,
+		|
+		|	0,
+		|	0 AS CustomerTransaction,
+		|	case when &IsAdvanceCustomer_Send or &IsAdvanceCustomer_Receive then OffsetOfAdvances.Amount else 0 end AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
+		|
+		|union all
+		|
+		// customer transaction
 		|
 		|SELECT
 		|	CASE
@@ -1226,12 +1299,12 @@ Function R5020B_PartnersBalance()
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Agreement,
-		|	UNDEFINED,
+		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.Currency,
 		|
 		|	0,
 		|	case when &IsTransactionCustomer_Send or &IsTransactionCustomer_Receive then OffsetOfAdvances.Amount else 0 end AS CustomerTransaction,
-		|	case when &IsAdvanceCustomer_Send or &IsAdvanceCustomer_Receive then OffsetOfAdvances.Amount else 0 end AS CustomerAdvance,
+		|	0 AS CustomerAdvance,
 		|	0 AS VendorTransaction,
 		|	0 AS VendorAdvance,
 		|	0 AS OtherTransaction,
@@ -1242,202 +1315,7 @@ Function R5020B_PartnersBalance()
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
-		|
-		
-		|
-		|
-//		|	AND (CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-//		|	OR CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor))
-		
-		|
-		|
 		|";
-//		"SELECT
-//		|	Doc.RecordsTypeSend_R5020B_PartnersBalance AS RecordType,
-//		|	Doc.Period AS Period,
-//		|	Doc.SendUUID AS Key,
-//		|	Doc.Company AS Company,
-//		|	Doc.SendBranch AS Branch,
-//		|	Doc.SendPartner AS Partner,
-//		|	Doc.SendLegalName AS LegalName,
-//		|	Doc.SendAgreement AS Agreement,
-//		|	Doc.SendPartnerBalanceDocument AS Document,
-//		|	Doc.SendCurrency AS Currency,
-//		|	0 AS Amount,
-//		|	Doc.SendCustomerTransaction AS CustomerTransaction,
-//		|	Doc.SendCustomerAdvance AS CustomerAdvance,
-//		|	Doc.SendVendorTransaction AS VendorTransaction,
-//		|	Doc.SendVendorAdvance AS VendorAdvance,
-//		|	Doc.SendOtherTransaction AS OtherTransaction,
-//		|	UNDEFINED AS AdvancesClosing
-//		|INTO R5020B_PartnersBalance
-//		|FROM
-//		|	Doc AS Doc
-//		|WHERE
-//		|	Doc.DoRecordsSend_R5020B_PartnersBalance
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	Doc.RecordsTypeReceive_R5020B_PartnersBalance,
-//		|	Doc.Period,
-//		|	Doc.ReceiveUUID,
-//		|	Doc.Company,
-//		|	Doc.ReceiveBranch,
-//		|	Doc.ReceivePartner,
-//		|	Doc.ReceiveLegalName,
-//		|	Doc.ReceiveAgreement,
-//		|	Doc.ReceivePartnerBalanceDocument,
-//		|	Doc.ReceiveCurrency,
-//		|	0,
-//		|	Doc.ReceiveCustomerTransaction,
-//		|	Doc.ReceiveCustomerAdvance,
-//		|	Doc.ReceiveVendorTransaction,
-//		|	Doc.ReceiveVendorAdvance,
-//		|	Doc.ReceiveOtherTransaction,
-//		|	UNDEFINED
-//		|FROM
-//		|	Doc AS Doc
-//		|WHERE
-//		|	Doc.DoRecordsReceive_R5020B_PartnersBalance
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	CASE
-//		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-//		|			THEN VALUE(AccumulationRecordType.Receipt)
-//		|		ELSE VALUE(AccumulationRecordType.Expense)
-//		|	END,
-//		|	OffsetOfAdvances.Period,
-//		|	OffsetOfAdvances.Key,
-//		|	OffsetOfAdvances.Company,
-//		|	OffsetOfAdvances.Branch,
-//		|	OffsetOfAdvances.Partner,
-//		|	OffsetOfAdvances.LegalName,
-//		|	OffsetOfAdvances.Agreement,
-//		|	UNDEFINED,
-//		|	OffsetOfAdvances.Currency,
-//		|	0,
-//		|	0,
-//		|	0,
-//		|	0,
-//		|	OffsetOfAdvances.Amount,
-//		|	0,
-//		|	OffsetOfAdvances.Recorder
-//		|FROM
-//		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-//		|WHERE
-//		|	OffsetOfAdvances.Document = &Ref
-//		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
-//		|	AND (CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-//		|	OR CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor))
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	CASE
-//		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|		ELSE VALUE(AccumulationRecordType.Receipt)
-//		|	END,
-//		|	OffsetOfAdvances.Period,
-//		|	OffsetOfAdvances.Key,
-//		|	OffsetOfAdvances.Company,
-//		|	OffsetOfAdvances.Branch,
-//		|	OffsetOfAdvances.Partner,
-//		|	OffsetOfAdvances.LegalName,
-//		|	OffsetOfAdvances.Agreement,
-//		|	UNDEFINED,
-//		|	OffsetOfAdvances.Currency,
-//		|	0,
-//		|	0,
-//		|	OffsetOfAdvances.Amount,
-//		|	0,
-//		|	0,
-//		|	0,
-//		|	OffsetOfAdvances.Recorder
-//		|FROM
-//		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-//		|WHERE
-//		|	OffsetOfAdvances.Document = &Ref
-//		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
-//		|	AND (CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
-//		|	OR CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer))
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	CASE
-//		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|		ELSE VALUE(AccumulationRecordType.Receipt)
-//		|	END,
-//		|	OffsetOfAdvances.Period,
-//		|	OffsetOfAdvances.Key,
-//		|	OffsetOfAdvances.Company,
-//		|	OffsetOfAdvances.Branch,
-//		|	OffsetOfAdvances.Partner,
-//		|	OffsetOfAdvances.LegalName,
-//		|	OffsetOfAdvances.Agreement,
-//		|	OffsetOfAdvances.TransactionDocument,
-//		|	OffsetOfAdvances.Currency,
-//		|	0,
-//		|	0,
-//		|	0,
-//		|	OffsetOfAdvances.Amount,
-//		|	0,
-//		|	0,
-//		|	OffsetOfAdvances.Recorder
-//		|FROM
-//		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-//		|WHERE
-//		|	OffsetOfAdvances.Document = &Ref
-//		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
-//		|	AND (CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-//		|	OR CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor))
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	CASE
-//		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-//		|			THEN VALUE(AccumulationRecordType.Receipt)
-//		|		ELSE VALUE(AccumulationRecordType.Expense)
-//		|	END,
-//		|	OffsetOfAdvances.Period,
-//		|	OffsetOfAdvances.Key,
-//		|	OffsetOfAdvances.Company,
-//		|	OffsetOfAdvances.Branch,
-//		|	OffsetOfAdvances.Partner,
-//		|	OffsetOfAdvances.LegalName,
-//		|	OffsetOfAdvances.Agreement,
-//		|	OffsetOfAdvances.TransactionDocument,
-//		|	OffsetOfAdvances.Currency,
-//		|	0,
-//		|	OffsetOfAdvances.Amount,
-//		|	0,
-//		|	0,
-//		|	0,
-//		|	0,
-//		|	OffsetOfAdvances.Recorder
-//		|FROM
-//		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-//		|WHERE
-//		|	OffsetOfAdvances.Document = &Ref
-//		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
-//		|	AND (CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
-//		|	OR CAST(OffsetOfAdvances.Document AS
-//		|		Document.DebitCreditNote).ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer))";
 EndFunction
 
 #EndRegion

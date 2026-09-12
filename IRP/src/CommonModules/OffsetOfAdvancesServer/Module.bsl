@@ -437,7 +437,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 	|	tmp2.*
 	|FROM
 	|	tmp2 AS tmp2
-	|
+	|	where tmp2.TransactionAmount > 0
 	|ORDER BY
 	|	tmp2.Priority, tmp2.TransactionBasis.PointInTime";
 

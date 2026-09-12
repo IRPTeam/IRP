@@ -41,7 +41,7 @@
     </synonym>
   </enumValues>
   <enumValues uuid="1b82ec7b-9667-4f44-84c1-04e4614e7ded">
-    <name>OtherPartnerPayable</name>
+    <name>DELETE_OtherPartnerPayable</name>
     <synonym>
       <key>en</key>
       <value>Other partner (payable)</value>
@@ -51,11 +51,11 @@
     <name>OtherPartnerReceivable</name>
     <synonym>
       <key>en</key>
-      <value>Other partner (receivable)</value>
+      <value>Other partner</value>
     </synonym>
   </enumValues>
   <enumValues uuid="7483a393-cca8-4409-9298-2106c6645c19">
-    <name>EmployeePayable</name>
+    <name>DELETE_EmployeePayable</name>
     <synonym>
       <key>en</key>
       <value>Employee (payable)</value>
@@ -65,7 +65,7 @@
     <name>EmployeeReceivable</name>
     <synonym>
       <key>en</key>
-      <value>Employee (receivable)</value>
+      <value>Employee</value>
     </synonym>
   </enumValues>
 </mdclass:Enum>

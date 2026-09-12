@@ -68,23 +68,39 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)		
-	IsSendEmployee = (Object.SendDebtType = PredefinedValue("Enum.DebtTypes.EmployeePayable")
-		Or Object.SendDebtType = PredefinedValue("Enum.DebtTypes.EmployeeReceivable"));
-	
-	IsReceiveEmployee = (Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.EmployeePayable")
-		Or Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.EmployeeReceivable"));
+	IsSendEmployee = (Object.SendDebtType = PredefinedValue("Enum.DebtTypes.EmployeeReceivable"));
 		
-	Form.Items.SendLegalName.Enabled    = ValueIsFilled(Object.SendPartner) And Not IsSendEmployee;
+	Form.Items.SendLegalName.Enabled = ValueIsFilled(Object.SendPartner) And Not IsSendEmployee;
+	If Not Form.Items.SendLegalName.Enabled Then
+		Object.SendLegalName = Undefined;
+	EndIf;
+	
+	Form.Items.SendLegalNameContract.Enabled = Not IsSendEmployee;
+	If Not Form.Items.SendLegalNameContract.Enabled Then
+		Object.SendLegalNameContract = Undefined;
+	EndIf; 
+	
+	Form.Items.SendOrder.Enabled = Not IsSendEmployee;
+	If Not Form.Items.SendOrder.Enabled Then
+		Object.SendOrder = Undefined;
+	EndIf;
+	
+	IsReceiveEmployee = (Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.EmployeeReceivable"));
+	
 	Form.Items.ReceiveLegalName.Enabled = ValueIsFilled(Object.ReceivePartner) And Not IsReceiveEmployee;
+	If Not Form.Items.ReceiveLegalName.Enabled Then
+		Object.ReceiveLegalName = Undefined;
+	EndIf;
 	
-	Form.Items.SendLegalNameContract.Enabled     = Not IsSendEmployee;
-	Form.Items.SendOrder.Enabled                 = Not IsSendEmployee;
-	Form.Items.ReceiveLegalNameContract.Enabled  = Not IsReceiveEmployee;
-	Form.Items.ReceiveOrder.Enabled              = Not IsReceiveEmployee;
+	Form.Items.ReceiveLegalNameContract.Enabled = Not IsReceiveEmployee;
+	If Not Form.Items.ReceiveLegalNameContract.Enabled Then
+		Object.ReceiveLegalNameContract = Undefined;
+	EndIf;
 	
-	Form.Items.EditCurrenciesSender.Enabled = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesReceiver.Enabled = Not Form.ReadOnly;
-	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
+	Form.Items.ReceiveOrder.Enabled = Not IsReceiveEmployee;
+	If Not Form.Items.ReceiveOrder.Enabled Then
+		Object.ReceiveOrder = Undefined;
+	EndIf;
 	
 	IsEnabled_SendBasisDocument = True;
 	If Object.SendDebtType = PredefinedValue("Enum.DebtTypes.AdvanceCustomer")
@@ -97,6 +113,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 		IsEnabled_SendBasisDocument = False;
 	EndIf;	
 	Form.Items.SendBasisDocument.Enabled = IsEnabled_SendBasisDocument;
+	If Not Form.Items.SendBasisDocument.Enabled Then
+		Object.SendBasisDocument = Undefined;
+	EndIf; 
 	
 	IsEnabled_ReceiveBasisDocument = True;
 	If Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.AdvanceCustomer")
@@ -109,6 +128,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 		IsEnabled_ReceiveBasisDocument = False;
 	EndIf;	
 	Form.Items.ReceiveBasisDocument.Enabled = IsEnabled_ReceiveBasisDocument;
+	If Not Form.Items.ReceiveBasisDocument.Enabled Then
+		Object.ReceiveBasisDocument = Undefined;
+	EndIf;
+	
+	Form.Items.EditCurrenciesSender.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesReceiver.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 	
 	If Not Form.ReadOnly Then
 		Form.ReadOnly = ValueIsFilled(Form.DocStorno);

@@ -1861,17 +1861,9 @@ Procedure DebitCreditNoteDifference(Parameters)
 	Expenses_ClearCopy.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	If CreditType = "active" Then
-    	If DebitType = "active" Then
-        	Diff = TotalDebit - TotalCredit;
-    	ElsIf DebitType = "passive" Then
-        	Diff = TotalCredit - TotalDebit;
-		EndIf;
-	ElsIf CreditType = "passive" Then
-    	If DebitType = "active" Then
-        	Diff = TotalDebit - TotalCredit;
-    	ElsIf DebitType = "passive" Then
-        	Diff = TotalDebit - TotalCredit;
-    	EndIf;
+        Diff = TotalDebit - TotalCredit;
+ 	ElsIf CreditType = "passive" Then
+    	Diff = TotalCredit - TotalDebit;
 	EndIf;
 
 	If Diff > 0 Then

@@ -567,6 +567,7 @@ Function R5010B_ReconciliationStatement()
 		|WHERE
 		|	Doc.IsAdvanceVendor_Send or Doc.IsAdvanceCustomer_Send
 		|	or Doc.IsTransactionVendor_Send or Doc.IsTransactionCustomer_Send
+		|	or Doc.IsOther_Send
 		|
 		|UNION ALL
 		|
@@ -583,7 +584,8 @@ Function R5010B_ReconciliationStatement()
 		|	Doc AS Doc
 		|WHERE
 		|	Doc.IsAdvanceVendor_Receive or Doc.IsAdvanceCustomer_Receive
-		|	or Doc.IsTransactionVendor_Receive or Doc.IsTransactionCustomer_Receive";
+		|	or Doc.IsTransactionVendor_Receive or Doc.IsTransactionCustomer_Receive
+		|	or Doc.IsOther_Send";
 EndFunction
 
 Function R5015B_OtherPartnersTransactions()
@@ -609,7 +611,7 @@ Function R5015B_OtherPartnersTransactions()
 		|UNION ALL
 		|
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	VALUE(AccumulationRecordType.Expense),
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.ReceiveBranch,

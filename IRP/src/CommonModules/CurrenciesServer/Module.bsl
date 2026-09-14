@@ -1860,11 +1860,11 @@ Procedure DebitCreditNoteDifference(Parameters)
 	Expenses_ClearCopy = Expenses.CopyColumns("Period, Company, Branch, ProfitLossCenter, ExpenseType, Currency, Project, Amount");
 	Expenses_ClearCopy.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
-	If CreditType = "active" Then
+//	If CreditType = "active" Then
         Diff = TotalDebit - TotalCredit;
- 	ElsIf CreditType = "passive" Then
-    	Diff = TotalCredit - TotalDebit;
-	EndIf;
+// 	ElsIf CreditType = "passive" Then
+//    	Diff = TotalCredit - TotalDebit;
+//	EndIf;
 
 	If Diff > 0 Then
 		AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Diff);

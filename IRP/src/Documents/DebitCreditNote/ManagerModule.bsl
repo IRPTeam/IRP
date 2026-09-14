@@ -874,7 +874,7 @@ Function T2015S_TransactionsInfo()
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsTransactionVendor_Send
+		|	Doc.IsTransactionVendor_Send or Doc.IsTransactionCustomer_Send
 		|
 		|UNION ALL
 		|
@@ -898,7 +898,7 @@ Function T2015S_TransactionsInfo()
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsTransactionVendor_Receive";
+		|	Doc.IsTransactionVendor_Receive or Doc.IsTransactionCustomer_Receive";
 EndFunction
 
 //+

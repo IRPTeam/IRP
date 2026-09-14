@@ -49,7 +49,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
 		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
 					
-		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TransitUUID, ThisObject.Currency, ThisObject.SendAmount);
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TransitUUID, ThisObject.Company.LegalCurrencyMovementType.Currency, ThisObject.SendAmount);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.TransitUUID);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 			

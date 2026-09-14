@@ -1172,7 +1172,7 @@ Function R5020B_PartnersBalance()
 		|	0 AS Amount,
 		|	case when Doc.IsTransactionCustomer_Receive then Doc.ReceiveAmount else 0 end AS CustomerTransaction,
 		|	case when Doc.IsAdvanceCustomer_Receive then Doc.ReceiveAmount else 0 end AS CustomerAdvance,
-		|	case when Doc.IsTransactionVendor_Receive then Doc.SendAmount else 0 end AS VendorTransaction,
+		|	case when Doc.IsTransactionVendor_Receive then Doc.ReceiveAmount else 0 end AS VendorTransaction,
 		|	case when Doc.IsAdvanceVendor_Receive then Doc.ReceiveAmount else 0 end AS VendorAdvance,
 		|	case when Doc.IsOther_Receive then Doc.ReceiveAmount else 0 end AS OtherTransaction,
 		|	UNDEFINED AS AdvancesClosing

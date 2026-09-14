@@ -4,6 +4,10 @@ Procedure BeforeWrite(Cancel)
 		Return;
 	EndIf;
 	
+	If ThisObject.OffBalance Then
+		ThisObject.AccountCategory = Enums.AccountCategories.EmptyRef();
+	EndIf;
+	
 	Result = GetSearchCodeAndOrder(ThisObject.Code);
 	ThisObject.SearchCode = Result.SearchCode;
 	If Not ValueIsFilled(ThisObject.Order) Then

@@ -204,6 +204,18 @@ When Create document ConsolidatedRetailSales objects (test data base)
 	When Create information register T9010S_AccountsItemKey records (Basic LTV) (test data base)
 	When Create information register T9012S_AccountsPartner records (Basic LTV) (test data base)
 	When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
+* Load data for the Turkish chart of accounts (TDHP), a second ledger type
+	When Create ledger type TDHP objects (TDHP)
+	When Create catalog ExpenseAndRevenueTypes objects (TDHP)
+	When Create chart of accounts Basic objects with LedgerTypeVariants (TDHP LTV) (TDHP)
+	When Set ext dimension accounting flags on TDHP accounts (TDHP)
+	When Create information register T9010S_AccountsItemKey records (TDHP LTV) (TDHP)
+	When Create information register T9011S_AccountsCashAccount records (TDHP LTV) (TDHP)
+	When Create information register T9012S_AccountsPartner records (TDHP LTV) (TDHP)
+	When Create information register T9013S_AccountsTax records (TDHP LTV) (TDHP)
+	When Create information register T9014S_AccountsExpenseRevenue records (TDHP LTV) (TDHP)
+	When Create information register T9015S_AccountsFixedAsset records (TDHP LTV) (TDHP)
+	When Create information register T9016S_AccountsEmployee records (TDHP LTV) (TDHP)
 * Hardware
 	* Instal fiscal driver
 		Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"

@@ -3245,3 +3245,115 @@ Scenario: _041 check the calculation of the following period is marked as not re
 			| 'Batch key'            | 'Quantity'   | 'Invoice amount'   |
 			| '39/19SD - Store 07'   | '2,000'      | '400,00'           |
 	And I close all client application windows
+
+# IRP-908: Sales return / Retail return receipt must reverse the cost of goods in register R5022 Expenses.
+# Scenarios _042.._045 use the documents created above in this file (SR 10 by _008, RRR 5 by _012) and the loaded LC fixtures (SR 3, SR 5).
+# EXPECTED FAILURE until IRP-908 is fixed in _042 (settlement row currency) - do NOT wrap in XFAIL, it is regression evidence.
+# A return without a base document reverses expenses by the return amount (net / total) - agreed behaviour, checked in _043 and _044.
+
+Scenario: _042 check Sales return by Sales invoice reverses the sold cost in register R5022 Expenses
+	And I close all client application windows
+	* Select Sales return 10 (return of 7 pcs 38/Yellow sold by Sales invoice 4)
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '10'        |
+		And I click "Registrations report" button
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+	* Check the return reverses exactly the written-off cost (700,00 + tax 14,00 TRY); the settlement row must carry the landed cost currency TRY
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 18.08.2021 21:05:01' | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''          | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Document registrations records'            | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''          | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Register  "R5022 Expenses"'                | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''          | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| ''                                          | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''          | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                |
+			| ''                                          | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key'  | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
+			| ''                                          | '18.08.2021 21:05:01' | '-700'      | '-714'              | ''            | 'Main Company' | ''       | ''                   | ''             | '38/Yellow' | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '*'                         |
+			| ''                                          | '18.08.2021 21:05:01' | '-700'      | '-714'              | ''            | 'Main Company' | ''       | ''                   | ''             | '38/Yellow' | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | '*'                         |
+			| ''                                          | '18.08.2021 21:05:01' | '-119,84'   | '-122,24'           | ''            | 'Main Company' | ''       | ''                   | ''             | '38/Yellow' | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '*'                         |
+		And I close all client application windows
+	* Check the mirrored write-off of Sales invoice 4 (7 pcs 38/Yellow, 700,00 + tax 14,00 TRY)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'   | 'Partner'      |
+			| '4'        | 'Ferron BP'    |
+		And I click "Registrations report" button
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| ''                                          | '16.08.2021 11:12:17' | '700'       | '714'               | ''            | 'Main Company' | ''       | ''                   | ''             | '38/Yellow' | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '*'                         |
+			| ''                                          | '16.08.2021 11:12:17' | '700'       | '714'               | ''            | 'Main Company' | ''       | ''                   | ''             | '38/Yellow' | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | '*'                         |
+			| ''                                          | '16.08.2021 11:12:17' | '119,84'    | '122,24'            | ''            | 'Main Company' | ''       | ''                   | ''             | '38/Yellow' | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '*'                         |
+		And I close all client application windows
+
+Scenario: _043 check Sales return without base invoice reverses expenses by the return amount in register R5022 Expenses
+	And I close all client application windows
+	* Select Sales return 3 (no Sales invoice; Landed cost 6 000 + tax 1 000, 8 000 + tax 1 000, 15 000 USD)
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '3'         |
+		And I click "Registrations report" button
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+	* Check the reversal equals the net / total amount of the returned lines (own rows, no cost calculation involved)
+		And "ResultTable" spreadsheet document contains lines:
+			| ''                                         | '16.08.2021 11:15:02' | '-33 515,15' | '-39 547,9'         | ''            | 'Main Company' | ''       | ''                   | ''             | 'XS/Blue'  | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                         | '16.08.2021 11:15:02' | '-5 932,2'  | '-7 000'            | ''            | 'Main Company' | ''       | ''                   | ''             | 'XS/Blue'  | ''            | ''            | 'USD'      | ''                    | 'en description is empty'      | ''        | ''                          |
+			| ''                                         | '16.08.2021 11:15:02' | '-5 932,2'  | '-7 000'            | ''            | 'Main Company' | ''       | ''                   | ''             | 'XS/Blue'  | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+			| ''                                         | '16.08.2021 11:15:02' | '-57 454,57' | '-67 796,4'         | ''            | 'Main Company' | ''       | ''                   | ''             | '36/18SD'  | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                         | '16.08.2021 11:15:02' | '-10 169,49' | '-12 000'          | ''            | 'Main Company' | ''       | ''                   | ''             | '36/18SD'  | ''            | ''            | 'USD'      | ''                    | 'en description is empty'      | ''        | ''                          |
+			| ''                                         | '16.08.2021 11:15:02' | '-10 169,49' | '-12 000'          | ''            | 'Main Company' | ''       | ''                   | ''             | '36/18SD'  | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+			| ''                                         | '16.08.2021 11:15:02' | '-86 181,88' | '-101 694,6'         | ''            | 'Main Company' | ''       | ''                   | ''             | '37/18SD'  | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                         | '16.08.2021 11:15:02' | '-15 254,24' | '-18 000'          | ''            | 'Main Company' | ''       | ''                   | ''             | '37/18SD'  | ''            | ''            | 'USD'      | ''                    | 'en description is empty'      | ''        | ''                          |
+			| ''                                         | '16.08.2021 11:15:02' | '-15 254,24' | '-18 000'          | ''            | 'Main Company' | ''       | ''                   | ''             | '37/18SD'  | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+		And I close all client application windows
+
+Scenario: _044 check Retail return receipt without base receipt reverses expenses by the return amount in register R5022 Expenses
+	And I close all client application windows
+	* Select Retail return receipt 5 (no Retail sales receipt; 2 pcs M/Brown, Landed cost 20,00 TRY)
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '5'         |
+		And I click "Registrations report" button
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+	* Check the reversal equals the return amount (net 2 000,00 / total 2 360,00 TRY), own rows without cost calculation
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 5 dated 15.08.2021 19:32:00' | ''                    | ''          | ''                  | ''            | ''             | ''        | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Document registrations records'                    | ''                    | ''          | ''                  | ''            | ''             | ''        | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Register  "R5022 Expenses"'                        | ''                    | ''          | ''                  | ''            | ''             | ''        | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| ''                                                  | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''        | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                |
+			| ''                                                  | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'  | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
+			| ''                                                  | '15.08.2021 19:32:00' | '-2 000'    | '-2 360'            | ''            | 'Main Company' | 'Shop 01' | ''                   | ''             | 'M/Brown'  | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                                  | '15.08.2021 19:32:00' | '-2 000'    | '-2 360'            | ''            | 'Main Company' | 'Shop 01' | ''                   | ''             | 'M/Brown'  | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
+			| ''                                                  | '15.08.2021 19:32:00' | '-342,4'    | '-404,03'           | ''            | 'Main Company' | 'Shop 01' | ''                   | ''             | 'M/Brown'  | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+		And I close all client application windows
+
+Scenario: _045 check Sales return at zero price reverses the cost without revenue (return gives profit)
+	And I close all client application windows
+	* Select Sales return 5 (return of Sales invoice 8 at zero price, 21 pcs 37/18SD)
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '5'         |
+		And I click "Registrations report" button
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+	* Check the cost of the returned goods is reversed
+		And "ResultTable" spreadsheet document contains lines:
+			| ''                                         | '17.08.2021 13:06:48' | '-3 203,39' | '-3 780'            | ''            | 'Main Company' | ''       | ''                   | ''             | '37/18SD'  | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '*'                         |
+			| ''                                         | '17.08.2021 13:06:48' | '-548,42'   | '-647,14'           | ''            | 'Main Company' | ''       | ''                   | ''             | '37/18SD'  | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '*'                         |
+	* Check no revenue is reversed (the return was at zero price)
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| ''                                         | '17.08.2021 13:06:48' | ''          | ''                  | 'Main Company' | '*'      | '*'                  | '*'            | '37/18SD'  | 'TRY'      | ''                    | 'Local currency'               | '*'       | ''                          |
+			| ''                                         | '17.08.2021 13:06:48' | ''          | ''                  | 'Main Company' | '*'      | '*'                  | '*'            | '37/18SD'  | 'USD'      | ''                    | 'Reporting currency'           | '*'       | ''                          |
+		And I close all client application windows

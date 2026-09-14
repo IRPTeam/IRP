@@ -2133,6 +2133,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Str_InformationRegisters", NStr("en = 'Information registers'", Lang));
 	Strings.Insert("Str_AccumulationRegister", NStr("en = 'Accumulation register'", Lang));
 	Strings.Insert("Str_AccumulationRegisters", NStr("en = 'Accumulation registers'", Lang));
+	Strings.Insert("Str_ChartOfAccounts", NStr("en = 'Chart of accounts'", Lang));
+	Strings.Insert("Str_ChartsOfAccounts", NStr("en = 'Charts of accounts'", Lang));
 #EndRegion
 
 #Region AdditionalSettings

@@ -690,6 +690,8 @@ Function GetIgnored_Fields()
 	
 	Array.Add("IncomingExchRateAdjustmentInvoice.R5022T_Expenses.*");
 	Array.Add("*.R6510B_StockBalance.*");
+	Array.Add("*.R5022T_Expenses.*");
+	Array.Add("*.R5021T_Revenues.*");
 	
 	Map = New Map();
 	

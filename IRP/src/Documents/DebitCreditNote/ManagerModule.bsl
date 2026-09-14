@@ -671,7 +671,8 @@ EndFunction
 Function T2014S_AdvancesInfo()
 	Return 
 		"SELECT
-		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
+		|	case when Doc.IsAdvanceVendor_Send then VALUE(Enum.RecordType.Receipt)
+		|	else VALUE(Enum.RecordType.Expense) end AS RecordType,
 		|	Doc.Period AS Date,
 		|	Doc.Company AS Company,
 		|	Doc.SendBranch AS Branch,
@@ -694,7 +695,8 @@ Function T2014S_AdvancesInfo()
 		|UNION ALL
 		|
 		|SELECT
-		|	VALUE(Enum.RecordType.Expense),
+		|	case when Doc.IsAdvanceVendor_Receive then VALUE(Enum.RecordType.Expense)
+		|	else VALUE(Enum.RecordType.Receipt) end,
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.ReceiveBranch,

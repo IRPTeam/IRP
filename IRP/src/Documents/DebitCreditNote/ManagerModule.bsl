@@ -585,7 +585,7 @@ Function R5010B_ReconciliationStatement()
 		|WHERE
 		|	Doc.IsAdvanceVendor_Receive or Doc.IsAdvanceCustomer_Receive
 		|	or Doc.IsTransactionVendor_Receive or Doc.IsTransactionCustomer_Receive
-		|	or Doc.IsOther_Send";
+		|	or Doc.IsOther_Receive";
 EndFunction
 
 Function R5015B_OtherPartnersTransactions()

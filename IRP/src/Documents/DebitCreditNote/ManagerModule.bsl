@@ -682,7 +682,7 @@ Function T2014S_AdvancesInfo()
 		|	Doc.SendAgreement AS AdvanceAgreement,
 		|	Doc.SendProject AS Project,
 		|	Doc.SendOrder AS Order,
-		|	Doc.IsAdvanceCustomer_Receive AS IsCustomerAdvance,
+		|	Doc.IsAdvanceCustomer_Send AS IsCustomerAdvance,
 		|	Doc.IsAdvanceVendor_Send AS IsVendorAdvance,
 		|	Doc.SendAmount AS Amount,
 		|	Doc.SendUUID AS Key
@@ -690,7 +690,7 @@ Function T2014S_AdvancesInfo()
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsAdvanceVendor_Send or Doc.IsAdvanceCustomer_Receive
+		|	Doc.IsAdvanceVendor_Send or Doc.IsAdvanceCustomer_Send
 		|
 		|UNION ALL
 		|
@@ -706,14 +706,14 @@ Function T2014S_AdvancesInfo()
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveOrder,
-		|	Doc.IsAdvanceCustomer_Send,
+		|	Doc.IsAdvanceCustomer_Receive,
 		|	Doc.IsAdvanceVendor_Receive,
 		|	Doc.ReceiveAmount,
 		|	Doc.ReceiveUUID
 		|FROM
 		|	Doc AS Doc
 		|WHERE
-		|	Doc.IsAdvanceVendor_Receive or Doc.IsAdvanceCustomer_Send";
+		|	Doc.IsAdvanceVendor_Receive or Doc.IsAdvanceCustomer_Receive";
 EndFunction
 
 //+

@@ -689,9 +689,27 @@ Scenario: _095010 create DebitCreditNote (check amount control CurrencyFrom=Curr
 		And I select from "Profit center" drop-down list by "Front office" string
 	* Filling FROM-TO
 		And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
-		And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
-		And I select "Lunch" exact value from "Partner (send)" drop-down list
-		And I select "Maxim" exact value from "Partner (receive)" drop-down list
+		And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
+		And I click Select button of "Partner (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Lunch' |
+		And I select current line in "List" table
+		And I click Select button of "Partner (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Maxim' |
+		And I select current line in "List" table
 		And I select from "Partner term (send)" drop-down list by "Basic Partner terms, TRY" string
 		And I select from "Partner term (receive)" drop-down list by "Basic Partner terms, without VAT" string
 		And I input "50,00" text in "Amount (send)" field
@@ -705,6 +723,198 @@ Scenario: _095010 create DebitCreditNote (check amount control CurrencyFrom=Curr
 		Then user message window does not contain messages
 	And I close all client application windows
 	
+
+# Rule of 17.09.2026 (product owner, IRP-901): a Transaction debt type with a by-documents partner term requires the Basis document,
+# on the left side as well as on the right one. The last step is an EXPECTED FAILURE until the rule is implemented in DebitCreditNote -
+# do NOT wrap it in XFAIL, this is the acceptance test of the rule (posting currently succeeds without a basis).
+Scenario: _095012 DebitCreditNote: Transaction (Customer) on the left with a by-documents partner term requires Basis (send)
+	And I close all client application windows
+	* Control: the same note WITH the basis (invoice of the preparation chosen in the basis choice form) posts without messages
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I move to "Other" tab
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I select from the drop-down list named "Branch" by "Accountants office" string
+		And I select from "Expense type" drop-down list by "Expense" string
+		And I select from "Loss center" drop-down list by "Front office" string
+		And I select from "Revenue type" drop-down list by "Revenue" string
+		And I select from "Profit center" drop-down list by "Front office" string
+		And I move to "Debit/Credit note" tab
+		And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
+		And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
+		And I click Select button of "Partner (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Lunch' |
+		And I select current line in "List" table
+		And I click Select button of "Partner (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Lunch' |
+		And I select current line in "List" table
+		And I select from "Partner term (send)" drop-down list by "Basic Partner terms, TRY" string
+		And I select from "Partner term (receive)" drop-down list by "Basic Partner terms, TRY" string
+		And I input "50,00" text in "Amount (send)" field
+		And I input "50,00" text in "Amount (receive)" field
+		And I click Select button of "Basis (send)" field
+		And I go to line in "List" table
+			| 'Document' |
+			| 'Sales invoice $$NumberSalesInvoice095001$$ dated 01.01.2020 10:00:00' |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then user message window does not contain messages
+		And I close all client application windows
+	* The note WITHOUT the basis on the debit side must be rejected with a message about the basis
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I move to "Other" tab
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I select from the drop-down list named "Branch" by "Accountants office" string
+		And I select from "Expense type" drop-down list by "Expense" string
+		And I select from "Loss center" drop-down list by "Front office" string
+		And I select from "Revenue type" drop-down list by "Revenue" string
+		And I select from "Profit center" drop-down list by "Front office" string
+		And I move to "Debit/Credit note" tab
+		And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
+		And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
+		And I click Select button of "Partner (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Lunch' |
+		And I select current line in "List" table
+		And I click Select button of "Partner (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Lunch' |
+		And I select current line in "List" table
+		And I select from "Partner term (send)" drop-down list by "Basic Partner terms, TRY" string
+		And I select from "Partner term (receive)" drop-down list by "Basic Partner terms, TRY" string
+		And I input "50,00" text in "Amount (send)" field
+		And I input "50,00" text in "Amount (receive)" field
+		And I click "Post" button
+		Then I wait that in user messages the "Basis" substring will appear in 10 seconds
+	And I close all client application windows
+
+# Rule of 17.09.2026 (product owner, IRP-901): the same rule for the right side. The last step is an EXPECTED FAILURE until the rule is implemented.
+Scenario: _095013 DebitCreditNote: Transaction (Vendor) on the right with a by-documents partner term requires Basis (receive)
+	And I close all client application windows
+	* Control: the same note WITH the basis (invoice of the preparation chosen in the basis choice form) posts without messages
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I move to "Other" tab
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I select from the drop-down list named "Branch" by "Accountants office" string
+		And I select from "Expense type" drop-down list by "Expense" string
+		And I select from "Loss center" drop-down list by "Front office" string
+		And I select from "Revenue type" drop-down list by "Revenue" string
+		And I select from "Profit center" drop-down list by "Front office" string
+		And I move to "Debit/Credit note" tab
+		And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
+		And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
+		And I click Select button of "Partner (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Maxim' |
+		And I select current line in "List" table
+		And I click Select button of "Partner (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Maxim' |
+		And I select current line in "List" table
+		And I select from "Partner term (send)" drop-down list by "Partner term Maxim" string
+		And I select from "Partner term (receive)" drop-down list by "Partner term Maxim" string
+		And I input "50,00" text in "Amount (send)" field
+		And I input "50,00" text in "Amount (receive)" field
+		And I click Select button of "Basis (receive)" field
+		And I go to line in "List" table
+			| 'Document' |
+			| 'Purchase invoice $$NumberPurchaseInvoice095001$$ dated 01.01.2020 10:00:00' |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then user message window does not contain messages
+		And I close all client application windows
+	* The note WITHOUT the basis on the credit side must be rejected with a message about the basis
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I select "Main Company" exact value from "Company" drop-down list
+		And I move to "Other" tab
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And I select from the drop-down list named "Branch" by "Accountants office" string
+		And I select from "Expense type" drop-down list by "Expense" string
+		And I select from "Loss center" drop-down list by "Front office" string
+		And I select from "Revenue type" drop-down list by "Revenue" string
+		And I select from "Profit center" drop-down list by "Front office" string
+		And I move to "Debit/Credit note" tab
+		And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
+		And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
+		And I click Select button of "Partner (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (send)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Maxim' |
+		And I select current line in "List" table
+		And I click Select button of "Partner (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name (receive)" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Maxim' |
+		And I select current line in "List" table
+		And I select from "Partner term (send)" drop-down list by "Partner term Maxim" string
+		And I select from "Partner term (receive)" drop-down list by "Partner term Maxim" string
+		And I input "50,00" text in "Amount (send)" field
+		And I input "50,00" text in "Amount (receive)" field
+		And I click "Post" button
+		Then I wait that in user messages the "Basis" substring will appear in 10 seconds
+	And I close all client application windows
 
 # Scenario: _095011 check possible and impossible operations for DebitCreditNote (Parter/LegalNameSend=Parter/LegalNameReceive)
 # 	And I close all client application windows

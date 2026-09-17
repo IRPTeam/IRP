@@ -3931,29 +3931,29 @@ Scenario: _0991198 check DepreciationCalculation movements
 			| '420.3'      | '1' | '4,17'   | ''              | 'Yes'      | 'TRY'             | ''                | '4,17'         | 'Business unit 2'     | ''                | 'Expence and revenue 1' | 'TRY'            | '7501'       | ''                 | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)' | ''                    | '4,17'          | ''                    |
 		And I close all client application windows	
 
-Scenario: _0991212 check DebitCreditNote movements (CT-VA, by documents, same partner)
+Scenario: _0991401 check DebitCreditNote accounting (Dr AV / Cr TC, by documents, same partner)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Select DebitCreditNote and post it
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |	
+			| '1' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit'  | 'Partner'                            | 'Business unit'   | 'Partner term'          | 'Credit' | 'Operation'                                                                              |
-			| '4020.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY'     | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-			| '159'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY'     | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '320'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '159'    | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '659'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-		And I close current window
-	* Check JE
+			| 'Debit'  | 'Partner'                            | 'Business unit'   | 'Partner term'      | 'Credit' | 'Operation'                                                                                    |
+			| '4020.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'   | 'Business unit 2'                    | ''                | 'Own company 2'     | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '159'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '120'    | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'   | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -3961,56 +3961,297 @@ Scenario: _0991212 check DebitCreditNote movements (CT-VA, by documents, same pa
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Extra dimension2 Dr'   | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                       |
-			| '1' | 'Yes'      | '4020.2'     | 'Vendor and Customer (by documents)' | 'Vendor (by documents)' | 'Business unit 2'     | 'EUR'            | '1'            | ''              | '4010'       | 'Vendor and Customer (by documents)' | 'Partner term, TRY'   | 'Business unit 2'     | 'TRY'             | '20'            | ''                | '20,00'  | 'DebitCreditNote (R5020B_PartnersBalance)'                        |
-			| '2' | 'Yes'      | '4020.2'     | 'Vendor and Customer (by documents)' | 'Vendor (by documents)' | 'Business unit 2'     | 'EUR'            | ''             | ''              | '9100'       | 'Business unit 2'                    | 'Own company 2'       | ''                    | 'TRY'             | ''              | ''                | '12,70'  | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' |
-		And I close all client application windows	
-
-Scenario: _0991213 check DebitCreditNote movements (CA-CT, by documents, same partner, Agreement currency - EURO, invoice and payment TRY)
-	And I close all client application windows
-	* Select DebitCreditNote
-		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-		And I go to line in "List" table
-			| 'Number' |
-			| '2'      |	
-		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
-		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                            | 'Business unit'   | 'Partner term'      | 'Credit' | 'Operation'                                                                                    |
-			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
-			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
-			| '4010'  | 'Business unit 2'                    | ''                | 'Own company 2'     | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
-			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
-			| '120'   | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'   | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '659'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-		And I close current window
-	* Check JE
-		And I click "Journal entry" button
-		And I go to line in "JournalEntries" table
-			| 'Ledger type' |
-			| 'Basic LTV'   |
-		And I select current line in "JournalEntries" table
-		And I click "Save" button
-		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                   | "Operation"                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-			| "5202"       | "1" | "1 000,00" | ""              | "Yes"      | "EUR"             | "Vendor and Customer (by documents)" | "30,57"        | "Partner term, EUR"   | ""                | "Business unit 2"     | "EUR"            | "4010"       | "Vendor and Customer (by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Partner term, EUR"   | "30,57"         | "Business unit 2"     |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Debit amount' | 'Extra dimension2 Dr'   | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Operation'                                                       | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '32,70'  | ''              | 'Yes'      | 'TRY'             | '4020.2'     | 'Vendor and Customer (by documents)' | '1'            | 'Vendor (by documents)' | 'Business unit 2'     | 'EUR'            | ''                | '4010'       | 'Vendor and Customer (by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)'                        | 'Partner term, TRY'   | '20'            | 'Business unit 2'     |
+			| '2' | '12,70'  | ''              | 'Yes'      | 'TRY'             | '4010'       | 'Vendor and Customer (by documents)' | ''             | 'Partner term, TRY'     | 'Business unit 2'     | 'TRY'            | ''                | '9100'       | 'Business unit 2'                    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' | 'Own company 2'       | ''              | ''                    |
 		And I close all client application windows
 
-Scenario: _0991214 check DebitCreditNote movements (CA-CA, by documents, same partner)
+Scenario: _0991402 check DebitCreditNote registers (Dr AV / Cr TC, by documents, same partner)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '3'      |	
+			| '1' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00' | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                            | 'Legal name'                         | 'Agreement'             | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                              | '23.02.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '32,7'   | ''                     | ''                 | ''                   | '32,7'           | ''                  | ''                 |
+			| ''                                              | '23.02.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '1'      | ''                     | ''                 | ''                   | '1'              | ''                  | ''                 |
+			| ''                                              | '23.02.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '23.02.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents)' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '1'      | ''                     | ''                 | ''                   | '1'              | ''                  | ''                 |
+			| ''                                              | '23.02.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY'     | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '20'     | '20'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '23.02.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY'     | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '20'     | '20'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '23.02.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY'     | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '0,61'   | '0,61'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '23.02.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY'     | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1020 Advances to vendors"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1' |
+		And I click "Registrations report info" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                      | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'         | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                      | ''        | ''       | ''                     | ''                         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                         | 'Partner'                            | 'Order' | 'Agreement'             | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                              | '23.02.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)' | ''        | '1'      | 'No'                   | ''                         |
+			| ''                                              | '23.02.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)' | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                              | '23.02.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)' | ''        | '32,7'   | 'No'                   | ''                         |
+			| ''                                              | '23.02.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)' | ''        | '1'      | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "R2021 Customer transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1' |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''                  | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'       | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''                  | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                         | 'Partner'                            | 'Agreement'         | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                              | '23.02.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY' | ''      | ''      | ''        | '0,61'   | 'No'                   | ''                           |
+			| ''                                              | '23.02.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                              | '23.02.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY' | ''      | ''      | ''        | '20'     | 'No'                   | ''                           |
+			| ''                                              | '23.02.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY' | ''      | ''      | ''        | '20'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "R5021 Revenues"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1' |
+		And I click "Registrations report info" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00' | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| 'Register  "R5021 Revenues"'                    | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| ''                                              | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Revenue type'   | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Calculation movement cost' |
+			| ''                                              | '23.02.2024 12:00:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '12,7'   | ''                  | ''                          |
+			| ''                                              | '23.02.2024 12:00:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '12,7'   | ''                  | ''                          |
+			| ''                                              | '23.02.2024 12:00:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '0,39'   | ''                  | ''                          |
+			| ''                                              | '23.02.2024 12:00:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''                          |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00' | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                      | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'               | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                      | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                              | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'     | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | '23.02.2024 12:00:00' | '*'   | 'EUR'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (by documents)' | ''        | 'Settlement currency'    | 'EUR'                  | '1'      | 'No'                      | 'No'                   | 'Receipt'     |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                   | ''                                   | ''                  | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'           | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                   | ''                                   | ''                  | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                              | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Agreement'         | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | ''      | '23.02.2024 12:00:00' | '*'   | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '20'     | 'No'     | 'Yes'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00' | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                         | 'Legal name contract' | 'Amount' |
+			| ''                                              | '23.02.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor and Customer (by documents)' | ''                    | '1'      |
+			| ''                                              | '23.02.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor and Customer (by documents)' | ''                    | '20'     |
+		And I close all client application windows
+
+# Commented out on 15.09.2026 by decision of the product owner - re-enable when defect 6 (exchange difference lost when both sides are in the same currency) is fixed.
+# EXPECTED FAILURE until defect 6 is fixed: same currency on both sides but 1 000,00 vs 999,79 in accounting currency -> revenue 0,21 must be booked.
+# Scenario: _0991403 check DebitCreditNote accounting (Dr AC / Cr TC, by documents, same partner, Agreement currency - EURO, invoice and payment TRY)
+# 	And I close all client application windows
+# 	* Select DebitCreditNote and post it
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '2' |
+# 		And I select current line in "List" table
+# 		And I click "Post" button
+# 	* Check accounting operations and analytics
+# 		And I click "Edit accounting" button
+# 		And "AccountingAnalytics" table became equal
+# 			| 'Debit' | 'Partner'                            | 'Business unit'   | 'Partner term'      | 'Credit' | 'Operation'                                                                                    |
+# 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+# 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+# 			| '4010'  | 'Business unit 2'                    | ''                | 'Own company 2'     | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+# 			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+# 			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+# 			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+# 			| '120'   | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'   | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+# 			| '659'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+# 		And I close "Edit accounting" window
+# 	* Check journal entry
+# 		And I click "Journal entry" button
+# 		And I go to line in "JournalEntries" table
+# 			| 'Ledger type' |
+# 			| 'Basic LTV'   |
+# 		And I select current line in "JournalEntries" table
+# 		And I click "Save" button
+# 		And "RegisterRecords" table became equal
+# 			| '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Debit amount' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Operation'                                                       | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+# 			| '1' | '1 000,00' | ''              | 'Yes'      | 'EUR'             | '5202'       | 'Vendor and Customer (by documents)' | '30,57'        | 'Partner term, EUR'   | 'Business unit 2'     | 'EUR'            | ''                | '4010'       | 'Vendor and Customer (by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)'                        | 'Partner term, EUR'   | '30,57'         | 'Business unit 2'     |
+# 			| '2' | '0,21'     | ''              | 'Yes'      | 'TRY'             | '4010'       | 'Vendor and Customer (by documents)' | ''             | 'Partner term, EUR'   | 'Business unit 2'     | 'EUR'            | ''                | '9100'       | 'Business unit 2'                    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' | 'Own company 2'       | ''              | ''                    |
+# 		And I close all client application windows
+
+# Commented out on 15.09.2026 by decision of the product owner - re-enable when defect 6 (exchange difference lost when both sides are in the same currency) is fixed.
+# EXPECTED FAILURE until defect 6 is fixed: same currency on both sides but 1 000,00 vs 999,79 in accounting currency -> revenue 0,21 must be booked.
+# Scenario: _0991404 check DebitCreditNote registers (Dr AC / Cr TC, by documents, same partner, Agreement currency - EURO, invoice and payment TRY)
+# 	And I close all client application windows
+# 	* Check movements by the Register  "R5020 Partners balance"
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '2' |
+# 		And I click "Registrations report info" button
+# 		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                  | ''                                            | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+# 			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                  | ''                                            | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+# 			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                            | 'Legal name'                         | 'Agreement'         | 'Document'                                    | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | ''                                            | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '1 000'  | ''                     | '1 000'            | ''                   | ''               | ''                  | ''                 |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | ''                                            | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '30,57'  | ''                     | '30,57'            | ''                   | ''               | ''                  | ''                 |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | ''                                            | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | ''                                            | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '30,57'  | ''                     | '30,57'            | ''                   | ''               | ''                  | ''                 |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '999,79' | '999,79'               | ''                 | ''                   | ''               | ''                  | ''                 |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '30,57'  | '30,57'                | ''                 | ''                   | ''               | ''                  | ''                 |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '30,57'  | '30,57'                | ''                 | ''                   | ''               | ''                  | ''                 |
+# 		And I close all client application windows
+# 	* Check movements by the Register  "R2020 Advances from customer"
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '2' |
+# 		And I click "Registrations report info" button
+# 		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                  | ''        | ''       | ''                     | ''                           |
+# 			| 'Register  "R2020 Advances from customer"'      | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                  | ''        | ''       | ''                     | ''                           |
+# 			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                         | 'Partner'                            | 'Order' | 'Agreement'         | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR' | ''        | '30,57'  | 'No'                   | ''                           |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR' | ''        | ''       | 'Yes'                  | ''                           |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR' | ''        | '1 000'  | 'No'                   | ''                           |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR' | ''        | '30,57'  | 'No'                   | ''                           |
+# 		And I close all client application windows
+# 	* Check movements by the Register  "R2021 Customer transactions"
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '2' |
+# 		And I click "Registrations report info" button
+# 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''                  | ''                                            | ''      | ''        | ''       | ''                     | ''                           |
+# 			| 'Register  "R2021 Customer transactions"'       | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''                  | ''                                            | ''      | ''        | ''       | ''                     | ''                           |
+# 			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                         | 'Partner'                            | 'Agreement'         | 'Basis'                                       | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | ''      | ''        | '30,57'  | 'No'                   | ''                           |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | ''      | ''        | ''       | 'Yes'                  | ''                           |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | ''      | ''        | '999,79' | 'No'                   | ''                           |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | ''      | ''        | '30,57'  | 'No'                   | ''                           |
+# 		And I close all client application windows
+# 	* Check movements by the Register  "R5021 Revenues"
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '2' |
+# 		And I click "Registrations report info" button
+# 		And I select "R5021 Revenues" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+# 			| 'Register  "R5021 Revenues"'                    | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+# 			| ''                                              | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Revenue type'   | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Calculation movement cost' |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '0,21'   | ''                  | ''                          |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '0,21'   | ''                  | ''                          |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '0,01'   | ''                  | ''                          |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''                          |
+# 		And I close all client application windows
+# 	* Check movements by the Register  "T2014 Advances info"
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '2' |
+# 		And I click "Registrations report info" button
+# 		And I select "T2014 Advances info" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                  | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+# 			| 'Register  "T2014 Advances info"'               | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                  | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+# 			| ''                                              | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+# 			| ''                                              | 'Own company 2' | 'Business unit 2' | '20.02.2024 13:27:56' | '*'   | 'EUR'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Partner term, EUR' | ''        | 'Settlement currency'    | 'EUR'                  | '30,57'  | 'No'                      | 'No'                   | 'Receipt'     |
+# 		And I close all client application windows
+# 	* Check movements by the Register  "T2015 Transactions info"
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '2' |
+# 		And I click "Registrations report info" button
+# 		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                   | ''                                   | ''                  | ''                      | ''                        | ''                                            | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+# 			| 'Register  "T2015 Transactions info"'           | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                   | ''                                   | ''                  | ''                      | ''                        | ''                                            | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+# 			| ''                                              | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Agreement'         | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                           | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+# 			| ''                                              | 'Own company 2' | 'Business unit 2' | ''      | '20.02.2024 13:27:56' | '*'   | 'EUR'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | 'No'                    | 'Yes'                     | 'Sales invoice 116 dated 19.02.2024 19:49:32' | '*'         | ''        | 'Settlement currency'    | 'EUR'                  | '30,57'  | 'No'     | 'Yes'     |
+# 		And I close all client application windows
+# 	* Check movements by the Register  "R5010 Reconciliation statement"
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '2' |
+# 		And I click "Registrations report info" button
+# 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+# 			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+# 			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                         | 'Legal name contract' | 'Amount' |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor and Customer (by documents)' | ''                    | '30,57'  |
+# 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor and Customer (by documents)' | ''                    | '30,57'  |
+# 		And I close all client application windows
+
+Scenario: _0991405 check DebitCreditNote accounting (Dr AC / Cr AC, by documents, same partner)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                            | 'Business unit'   | 'Partner term'      | 'Credit' | 'Operation'                                                                                    |
 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '5202'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
@@ -4021,8 +4262,8 @@ Scenario: _0991214 check DebitCreditNote movements (CA-CA, by documents, same pa
 			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '340'   | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'   | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
 			| '659'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '340'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-		And I close current window
-	* Check JE
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4030,68 +4271,235 @@ Scenario: _0991214 check DebitCreditNote movements (CA-CA, by documents, same pa
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                        |
-			| '1' | 'Yes'      | '5202'       | 'Vendor and Customer (by documents)' | 'Partner term, EUR'   | 'Business unit 2'     | 'EUR'            | '10'           | ''              | '5202'       | 'Vendor and Customer (by documents)' | 'Partner term, TRY'   | 'Business unit 2'     | 'TRY'             | '380'           | ''                | '327,05' | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
-			| '2' | 'Yes'      | '420.2'      | 'Vendor and Customer (by documents)' | 'Business unit 2'     | 'Other expence'       | 'TRY'            | ''             | ''              | '5202'       | 'Vendor and Customer (by documents)' | 'Partner term, TRY'   | 'Business unit 2'     | 'TRY'             | ''              | ''                | '52,95'  | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
-		And I close all client application windows	
-
-Scenario: _0991215 check DebitCreditNote movements (VA-VA, by documents, same partner)
-	And I close all client application windows
-	* Select DebitCreditNote
-		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-		And I go to line in "List" table
-			| 'Number' |
-			| '4'      |	
-		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
-		And "AccountingAnalytics" table became equal
-			| 'Debit'  | 'Partner'                            | 'Business unit'   | 'Partner term'            | 'Credit' | 'Operation'                                                                              |
-			| '4020.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)'   | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'           | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-			| '159'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)'   | '159'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '320'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '159'    | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'         | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '659'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-		And I close current window
-	* Check JE
-		And I click "Journal entry" button
-		And I go to line in "JournalEntries" table
-			| 'Ledger type' |
-			| 'Basic LTV'   |
-		And I select current line in "JournalEntries" table
-		And I click "Save" button
-		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                    | "Debit amount" | "Extra dimension2 Dr"     | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                   | "Operation"                                | "Extra dimension2 Cr"   | "Credit amount" | "Extra dimension3 Cr" |
-			| "4020.2"     | "1" | "2 616,39" | ""              | "Yes"      | "EUR"             | "Vendor and Customer (by documents)" | "80"           | "Vendor (by documents) 2" | ""                | "Business unit 2"     | "EUR"            | "4020.2"     | "Vendor and Customer (by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Vendor (by documents)" | "80"            | "Business unit 2"     |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Debit amount' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Operation'                                                        | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '327,05' | ''              | 'Yes'      | 'TRY'             | '5202'       | 'Vendor and Customer (by documents)' | '10'           | 'Partner term, EUR'   | 'Business unit 2'     | 'EUR'            | ''                | '5202'       | 'Vendor and Customer (by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)'                         | 'Partner term, TRY'   | '380'           | 'Business unit 2'     |
+			| '2' | '52,95'  | ''              | 'Yes'      | 'TRY'             | '420.2'      | 'Vendor and Customer (by documents)' | ''             | 'Business unit 2'     | 'Other expence'       | 'TRY'            | ''                | '5202'       | 'Vendor and Customer (by documents)' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' | 'Partner term, TRY'   | ''              | 'Business unit 2'     |
 		And I close all client application windows
 
-Scenario: _0991216 check DebitCreditNote movements (CT-CT, by partner terms, same partner, different branches)
+Scenario: _0991406 check DebitCreditNote registers (Dr AC / Cr AC, by documents, same partner)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '5'      |	
+			| '3' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 3 dated 30.03.2024 11:34:17' | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                  | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                  | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                            | 'Legal name'                         | 'Agreement'         | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                              | '30.03.2024 11:34:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '327,05' | ''                     | '327,05'           | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '30.03.2024 11:34:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '10'     | ''                     | '10'               | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '30.03.2024 11:34:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '30.03.2024 11:34:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '10'     | ''                     | '10'               | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '380'    | ''                     | '380'              | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '380'    | ''                     | '380'              | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '11,62'  | ''                     | '11,62'            | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, TRY' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R2020 Advances from customer"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3' |
+		And I click "Registrations report info" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 3 dated 30.03.2024 11:34:17' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                  | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"'      | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                  | ''        | ''       | ''                     | ''                           |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                         | 'Partner'                            | 'Order' | 'Agreement'         | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                              | '30.03.2024 11:34:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, TRY' | ''        | '11,62'  | 'No'                   | ''                           |
+			| ''                                              | '30.03.2024 11:34:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, TRY' | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                              | '30.03.2024 11:34:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, TRY' | ''        | '380'    | 'No'                   | ''                           |
+			| ''                                              | '30.03.2024 11:34:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, TRY' | ''        | '380'    | 'No'                   | ''                           |
+			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR' | ''        | '10'     | 'No'                   | ''                           |
+			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR' | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR' | ''        | '327,05' | 'No'                   | ''                           |
+			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR' | ''        | '10'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "R5022 Expenses"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3' |
+		And I click "Registrations report info" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 3 dated 30.03.2024 11:34:17' | ''                    | ''              | ''                | ''                   | ''              | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+			| 'Register  "R5022 Expenses"'                    | ''                    | ''              | ''                | ''                   | ''              | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+			| ''                                              | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Expense type'  | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Amount cost' | 'Calculation movement cost' |
+			| ''                                              | '30.03.2024 11:34:17' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '52,95'  | ''                  | ''            | ''                          |
+			| ''                                              | '30.03.2024 11:34:17' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '52,95'  | ''                  | ''            | ''                          |
+			| ''                                              | '30.03.2024 11:34:17' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '1,62'   | ''                  | ''            | ''                          |
+			| ''                                              | '30.03.2024 11:34:17' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''            | ''                          |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 3 dated 30.03.2024 11:34:17' | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                  | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'               | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                  | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                              | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | '30.03.2024 11:34:17' | '*'   | 'EUR'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Partner term, EUR' | ''        | 'Settlement currency'    | 'EUR'                  | '10'     | 'No'                      | 'No'                   | 'Expense'     |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | '30.03.2024 11:34:17' | '*'   | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Partner term, TRY' | ''        | 'Settlement currency'    | 'TRY'                  | '380'    | 'No'                      | 'No'                   | 'Receipt'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 3 dated 30.03.2024 11:34:17' | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                         | 'Legal name contract' | 'Amount' |
+			| ''                                              | '30.03.2024 11:34:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor and Customer (by documents)' | ''                    | '10'     |
+			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor and Customer (by documents)' | ''                    | '380'    |
+		And I close all client application windows
+
+Scenario: _0991407 check DebitCreditNote accounting (Dr AV / Cr AV, by documents, same partner)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit'  | 'Partner'                            | 'Business unit'   | 'Partner term'          | 'Credit' | 'Operation'                                                                              |
+			| '4020.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '159'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '159'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '159'    | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+		And I close "Edit accounting" window
+	* Check journal entry
+		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Debit amount' | 'Extra dimension2 Dr'     | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Operation'                                | 'Extra dimension2 Cr'   | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '2 616,39' | ''              | 'Yes'      | 'EUR'             | '4020.2'     | 'Vendor and Customer (by documents)' | '80'           | 'Vendor (by documents) 2' | 'Business unit 2'     | 'EUR'            | ''                | '4020.2'     | 'Vendor and Customer (by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Vendor (by documents)' | '80'            | 'Business unit 2'     |
+		And I close all client application windows
+
+Scenario: _0991408 check DebitCreditNote registers (Dr AV / Cr AV, by documents, same partner)
+	And I close all client application windows
+	* Check movements by the Register  "R5020 Partners balance"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 4 dated 01.04.2024 11:48:58' | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                        | ''         | ''         | ''                             | ''                     | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                        | ''         | ''         | ''                             | ''                     | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                            | 'Legal name'                         | 'Agreement'               | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount'   | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                              | '01.04.2024 11:48:58' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents) 2' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '2 616,39' | ''                     | ''                 | ''                   | '2 616,39'       | ''                  | ''                 |
+			| ''                                              | '01.04.2024 11:48:58' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents) 2' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '80'       | ''                     | ''                 | ''                   | '80'             | ''                  | ''                 |
+			| ''                                              | '01.04.2024 11:48:58' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents) 2' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '01.04.2024 11:48:58' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents) 2' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '80'       | ''                     | ''                 | ''                   | '80'             | ''                  | ''                 |
+			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents)'   | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '2 616,39' | ''                     | ''                 | ''                   | '2 616,39'       | ''                  | ''                 |
+			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents)'   | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '80'       | ''                     | ''                 | ''                   | '80'             | ''                  | ''                 |
+			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents)'   | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents)'   | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '80'       | ''                     | ''                 | ''                   | '80'             | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1020 Advances to vendors"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4' |
+		And I click "Registrations report info" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 4 dated 01.04.2024 11:48:58' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                        | ''        | ''         | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'         | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                        | ''        | ''         | ''                     | ''                         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                         | 'Partner'                            | 'Order' | 'Agreement'               | 'Project' | 'Amount'   | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                              | '01.04.2024 11:48:58' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents) 2' | ''        | '80'       | 'No'                   | ''                         |
+			| ''                                              | '01.04.2024 11:48:58' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents) 2' | ''        | ''         | 'Yes'                  | ''                         |
+			| ''                                              | '01.04.2024 11:48:58' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents) 2' | ''        | '2 616,39' | 'No'                   | ''                         |
+			| ''                                              | '01.04.2024 11:48:58' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents) 2' | ''        | '80'       | 'No'                   | ''                         |
+			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)'   | ''        | '80'       | 'No'                   | ''                         |
+			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)'   | ''        | ''         | 'Yes'                  | ''                         |
+			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)'   | ''        | '2 616,39' | 'No'                   | ''                         |
+			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)'   | ''        | '80'       | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 4 dated 01.04.2024 11:48:58' | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                        | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'               | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                        | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                              | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'       | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | '01.04.2024 11:48:58' | '*'   | 'EUR'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (by documents)'   | ''        | 'Settlement currency'    | 'EUR'                  | '80'     | 'No'                      | 'No'                   | 'Expense'     |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | '01.04.2024 11:48:58' | '*'   | 'EUR'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (by documents) 2' | ''        | 'Settlement currency'    | 'EUR'                  | '80'     | 'No'                      | 'No'                   | 'Receipt'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 4 dated 01.04.2024 11:48:58' | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                         | 'Legal name contract' | 'Amount' |
+			| ''                                              | '01.04.2024 11:48:58' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor and Customer (by documents)' | ''                    | '80'     |
+			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor and Customer (by documents)' | ''                    | '80'     |
+		And I close all client application windows
+
+Scenario: _0991409 check DebitCreditNote accounting (Dr TC / Cr TC, by partner terms, same partner, different branches)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '5' |
+		And I select current line in "List" table
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                                   | 'Business unit'   | 'Partner term'                              | 'Credit' | 'Operation'                                                                                    |
-			| '4010'  | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
-			| '5202'  | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '4010'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-			| '120'   | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
-			| '340'   | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '120'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '120'   | 'Customer (Transactions, by partner terms)' | 'Other revenues'  | 'Business unit 2'                           | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '659'   | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-		And I close current window
-	* Check JE
+			| '659'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4099,21 +4507,96 @@ Scenario: _0991216 check DebitCreditNote movements (CT-CT, by partner terms, sam
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                           | "Debit amount" | "Extra dimension2 Dr"                       | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                          | "Operation"                                | "Extra dimension2 Cr"                       | "Credit amount" | "Extra dimension3 Cr" |
-			| "4010"       | "1" | "65,41"  | ""              | "Yes"      | "EUR"             | "Customer (Transactions, by partner terms)" | "2"            | "Customer (Transacrions, by partner terms)" | ""                | "Business unit 3"     | "EUR"            | "4010"       | "Customer (Transactions, by partner terms)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Customer (Transacrions, by partner terms)" | "2"             | "Business unit 3"     |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                           | 'Debit amount' | 'Extra dimension2 Dr'                       | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                          | 'Operation'                                | 'Extra dimension2 Cr'                       | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '65,41'  | ''              | 'Yes'      | 'EUR'             | '4010'       | 'Customer (Transactions, by partner terms)' | '2'            | 'Customer (Transacrions, by partner terms)' | 'Business unit 2'     | 'EUR'            | ''                | '4010'       | 'Customer (Transactions, by partner terms)' | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Customer (Transacrions, by partner terms)' | '2'             | 'Business unit 2'     |
 		And I close all client application windows
 
-Scenario: _0991217 check DebitCreditNote movements (VT-VT, by partner terms, same partner, different branches)
+Scenario: _0991410 check DebitCreditNote registers (Dr TC / Cr TC, by partner terms, same partner, different branches)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '6'      |	
+			| '5' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 5 dated 02.04.2024 13:06:46' | ''                    | ''           | ''              | ''                | ''                                          | ''                                          | ''                                          | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''              | ''                | ''                                          | ''                                          | ''                                          | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                                   | 'Legal name'                                | 'Agreement'                                 | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '65,41'  | '65,41'                | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '2'      | '2'                    | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '2'      | '2'                    | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '65,41'  | '65,41'                | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '2'      | '2'                    | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '2'      | '2'                    | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R2021 Customer transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '5' |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 5 dated 02.04.2024 13:06:46' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                          | ''                                          | ''                                          | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'       | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                          | ''                                          | ''                                          | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                                | 'Partner'                                   | 'Agreement'                                 | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '2'      | 'No'                   | ''                           |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '65,41'  | 'No'                   | ''                           |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '2'      | 'No'                   | ''                           |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '2'      | 'No'                   | ''                           |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '65,41'  | 'No'                   | ''                           |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '2'      | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '5' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 5 dated 02.04.2024 13:06:46' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                          | ''                                          | ''                                          | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'           | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                          | ''                                          | ''                                          | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                              | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                                   | 'Legal name'                                | 'Agreement'                                 | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | ''      | '02.04.2024 13:06:46' | '*'   | 'EUR'      | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'Settlement currency'    | 'EUR'                  | '2'      | 'No'     | 'Yes'     |
+			| ''                                              | 'Own company 2' | 'Business unit 3' | ''      | '02.04.2024 13:06:46' | '*'   | 'EUR'      | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'Settlement currency'    | 'EUR'                  | '2'      | 'Yes'    | 'No'      |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '5' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 5 dated 02.04.2024 13:06:46' | ''                    | ''           | ''              | ''                | ''         | ''                                          | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''              | ''                | ''         | ''                                          | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                                | 'Legal name contract' | 'Amount' |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'EUR'      | 'Customer (Transacrions, by partner terms)' | ''                    | '2'      |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Customer (Transacrions, by partner terms)' | ''                    | '2'      |
+		And I close all client application windows
+
+Scenario: _0991411 check DebitCreditNote accounting (Dr TV / Cr TV, by partner terms, same partner, different branches)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                                | 'Business unit'   | 'Partner term'                        | 'Credit' | 'Operation'                                                                              |
 			| '5201'  | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '5201'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
@@ -4124,8 +4607,8 @@ Scenario: _0991217 check DebitCreditNote movements (VT-VT, by partner terms, sam
 			| '320'   | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '320'   | 'Vendor (Transactions, by partner term)' | 'Other revenues'  | 'Business unit 2'                     | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
 			| '659'   | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '320'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-		And I close current window
-	* Check JE
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4133,33 +4616,108 @@ Scenario: _0991217 check DebitCreditNote movements (VT-VT, by partner terms, sam
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                        | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                       | "Operation"                                | "Extra dimension2 Cr"                 | "Credit amount" | "Extra dimension3 Cr" |
-			| "5201"       | "1" | "3 564,83" | ""              | "Yes"      | "EUR"             | "Vendor (Transactions, by partner term)" | "109"          | "Vendor, transaction by partner term" | ""                | "Business unit 3"     | "EUR"            | "5201"       | "Vendor (Transactions, by partner term)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Vendor, transaction by partner term" | "109"           | "Business unit 3"     |
+			| '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                        | 'Debit amount' | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                       | 'Operation'                                | 'Extra dimension2 Cr'                 | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '3 564,83' | ''              | 'Yes'      | 'EUR'             | '5201'       | 'Vendor (Transactions, by partner term)' | '109'          | 'Vendor, transaction by partner term' | 'Business unit 3'     | 'EUR'            | ''                | '5201'       | 'Vendor (Transactions, by partner term)' | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Vendor, transaction by partner term' | '109'           | 'Business unit 3'     |
 		And I close all client application windows
 
-Scenario: _0991218 check DebitCreditNote movements (VA-VT, by documents, different partners)
+Scenario: _0991412 check DebitCreditNote registers (Dr TV / Cr TV, by partner terms, same partner, different branches)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '7'      |	
+			| '6' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 6 dated 26.04.2024 13:20:20' | ''                    | ''           | ''              | ''                | ''                                       | ''                                       | ''                                    | ''         | ''         | ''                             | ''                     | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''              | ''                | ''                                       | ''                                       | ''                                    | ''         | ''         | ''                             | ''                     | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                                | 'Legal name'                             | 'Agreement'                           | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount'   | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                              | '26.04.2024 13:20:20' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '3 564,83' | ''                     | ''                 | '3 564,83'           | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:20:20' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '109'      | ''                     | ''                 | '109'                | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:20:20' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:20:20' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '109'      | ''                     | ''                 | '109'                | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Own company 2' | 'Business unit 3' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '3 564,83' | ''                     | ''                 | '3 564,83'           | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Own company 2' | 'Business unit 3' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '109'      | ''                     | ''                 | '109'                | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Own company 2' | 'Business unit 3' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Own company 2' | 'Business unit 3' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '109'      | ''                     | ''                 | '109'                | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1021 Vendors transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6' |
+		And I click "Registrations report info" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 6 dated 26.04.2024 13:20:20' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                       | ''                                       | ''                                    | ''      | ''      | ''        | ''         | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                       | ''                                       | ''                                    | ''      | ''      | ''        | ''         | ''                     | ''                         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                             | 'Partner'                                | 'Agreement'                           | 'Basis' | 'Order' | 'Project' | 'Amount'   | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                              | '26.04.2024 13:20:20' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '109'      | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 13:20:20' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | ''         | 'Yes'                  | ''                         |
+			| ''                                              | '26.04.2024 13:20:20' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '3 564,83' | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 13:20:20' | 'Receipt'    | 'Own company 2' | 'Business unit 3' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '109'      | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '109'      | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | ''         | 'Yes'                  | ''                         |
+			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '3 564,83' | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '109'      | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 6 dated 26.04.2024 13:20:20' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                       | ''                                       | ''                                    | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'           | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                       | ''                                       | ''                                    | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                              | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                                | 'Legal name'                             | 'Agreement'                           | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | ''      | '26.04.2024 13:20:20' | '*'   | 'EUR'      | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'Settlement currency'    | 'EUR'                  | '109'    | 'No'     | 'Yes'     |
+			| ''                                              | 'Own company 2' | 'Business unit 3' | ''      | '26.04.2024 13:20:20' | '*'   | 'EUR'      | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'Settlement currency'    | 'EUR'                  | '109'    | 'Yes'    | 'No'      |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 6 dated 26.04.2024 13:20:20' | ''                    | ''           | ''              | ''                | ''         | ''                                       | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''              | ''                | ''         | ''                                       | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                             | 'Legal name contract' | 'Amount' |
+			| ''                                              | '26.04.2024 13:20:20' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor (Transactions, by partner term)' | ''                    | '109'    |
+			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Own company 2' | 'Business unit 3' | 'EUR'      | 'Vendor (Transactions, by partner term)' | ''                    | '109'    |
+		And I close all client application windows
+
+Scenario: _0991413 check DebitCreditNote accounting (Dr TV / Cr AV, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '7' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                             | 'Business unit'   | 'Partner term'                        | 'Credit' | 'Operation'                                                                              |
-			| '5201'  | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)'      | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '5201'  | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '5201'  | 'Business unit 2'                     | ''                | 'Own company 2'                       | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2' | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-			| '320'   | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)'      | '159'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '320'   | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '320'   | 'Vendor (Advance, by documents)'      | 'Other revenues'  | 'Business unit 2'                     | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '659'   | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '320'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-		And I close current window
-	* Check JE
+			| 'Debit'  | 'Partner'                             | 'Business unit'   | 'Partner term'                   | 'Credit' | 'Operation'                                                                              |
+			| '5201'   | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'   | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '4020.2' | 'Business unit 2'                     | ''                | 'Own company 2'                  | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2'  | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '320'    | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '320'    | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '159'    | 'Vendor (Transactions, by documents)' | 'Other revenues'  | 'Business unit 2'                | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'    | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4167,20 +4725,121 @@ Scenario: _0991218 check DebitCreditNote movements (VA-VT, by documents, differe
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                     | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"               | "Operation"                                | "Extra dimension2 Cr"            | "Credit amount" | "Extra dimension3 Cr" |
-			| "5201"       | "1" | "21,00"  | ""              | "Yes"      | "TRY"             | "Vendor (Transactions, by documents)" | "21"           | "Vendor (Transactions, by documents)" | ""                | "Business unit 2"     | "TRY"            | "4020.2"     | "Vendor (Advance, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Vendor (Advance, by documents)" | "21"            | "Business unit 2"     |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                     | 'Debit amount' | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'               | 'Operation'                                | 'Extra dimension2 Cr'            | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '21,00'  | ''              | 'Yes'      | 'TRY'             | '5201'       | 'Vendor (Transactions, by documents)' | '21'           | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | ''                | '4020.2'     | 'Vendor (Advance, by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Vendor (Advance, by documents)' | '21'            | 'Business unit 2'     |
 		And I close all client application windows
 
-Scenario: _0991219 check DebitCreditNote movements (VT-CA, by documents, different partners)
+Scenario: _0991414 check DebitCreditNote registers (Dr TV / Cr AV, by documents, different partners)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '8'      |	
+			| '7' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 7 dated 26.04.2024 13:31:41' | ''                    | ''           | ''              | ''                | ''                                    | ''                                    | ''                                    | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''              | ''                | ''                                    | ''                                    | ''                                    | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                             | 'Legal name'                          | 'Agreement'                           | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                              | '26.04.2024 13:31:41' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '21'     | ''                     | ''                 | '21'                 | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:31:41' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '21'     | ''                     | ''                 | '21'                 | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:31:41' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '0,64'   | ''                     | ''                 | '0,64'               | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:31:41' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '21'     | ''                     | ''                 | ''                   | '21'             | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '21'     | ''                     | ''                 | ''                   | '21'             | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '0,64'   | ''                     | ''                 | ''                   | '0,64'           | ''                  | ''                 |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1021 Vendors transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '7' |
+		And I click "Registrations report info" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 7 dated 26.04.2024 13:31:41' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                    | ''                                    | ''                                    | ''      | ''      | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                    | ''                                    | ''                                    | ''      | ''      | ''        | ''       | ''                     | ''                         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                          | 'Partner'                             | 'Agreement'                           | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '0,64'   | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '21'     | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '21'     | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "R1020 Advances to vendors"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '7' |
+		And I click "Registrations report info" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 7 dated 26.04.2024 13:31:41' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                               | ''                               | ''      | ''                               | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'         | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                               | ''                               | ''      | ''                               | ''        | ''       | ''                     | ''                         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                     | 'Partner'                        | 'Order' | 'Agreement'                      | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '0,64'   | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '21'     | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '21'     | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '7' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 7 dated 26.04.2024 13:31:41' | ''              | ''                | ''                    | ''    | ''         | ''                               | ''                               | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'               | ''              | ''                | ''                    | ''    | ''         | ''                               | ''                               | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                              | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                        | 'Legal name'                     | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'              | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | '26.04.2024 13:31:41' | '*'   | 'TRY'      | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | 'Settlement currency'    | 'TRY'                  | '21'     | 'No'                      | 'No'                   | 'Expense'     |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '7' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 7 dated 26.04.2024 13:31:41' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                    | ''                                    | ''                                    | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'           | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                    | ''                                    | ''                                    | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                              | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                             | 'Legal name'                          | 'Agreement'                           | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | ''      | '26.04.2024 13:31:41' | '*'   | 'TRY'      | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '21'     | 'No'     | 'Yes'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '7' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 7 dated 26.04.2024 13:31:41' | ''                    | ''           | ''              | ''                | ''         | ''                                    | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''              | ''                | ''         | ''                                    | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                          | 'Legal name contract' | 'Amount' |
+			| ''                                              | '26.04.2024 13:31:41' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor (Transactions, by documents)' | ''                    | '21'     |
+			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor (Advance, by documents)'      | ''                    | '21'     |
+		And I close all client application windows
+
+Scenario: _0991415 check DebitCreditNote accounting (Dr TV / Cr AC, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
+		And I click "Post" button
+	* Check accounting operations and analytics
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                             | 'Business unit'   | 'Partner term'               | 'Credit' | 'Operation'                                                                                    |
@@ -4192,8 +4851,8 @@ Scenario: _0991219 check DebitCreditNote movements (VT-CA, by documents, differe
 			| '340'   | 'Customer (Advance, by documents)'    | 'Business unit 2' | 'Advance, by documents, EUR' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '340'   | 'Vendor (Transactions, by documents)' | 'Other revenues'  | 'Business unit 2'            | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
 			| '659'   | 'Customer (Advance, by documents)'    | 'Business unit 2' | 'Advance, by documents, EUR' | '340'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-		And I close current window
-	* Check JE
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4201,22 +4860,140 @@ Scenario: _0991219 check DebitCreditNote movements (VT-CA, by documents, differe
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                     | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                 | 'Extra dimension2 Cr'        | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                        |
-			| '1' | 'Yes'      | '5201'       | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | '60'           | ''              | '5202'       | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR' | 'Business unit 2'     | 'EUR'             | '2'             | ''                | '60,00'  | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
-			| '2' | 'Yes'      | '420.2'      | 'Vendor (Transactions, by documents)' | 'Business unit 2'                     | 'Other expence'       | 'TRY'            | ''             | ''              | '5202'       | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR' | 'Business unit 2'     | 'EUR'             | ''              | ''                | '5,41'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                     | 'Debit amount' | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                 | 'Operation'                                                        | 'Extra dimension2 Cr'        | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '60,00'  | ''              | 'Yes'      | 'EUR'             | '5201'       | 'Vendor (Transactions, by documents)' | '60'           | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | ''                | '5202'       | 'Customer (Advance, by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)'                         | 'Advance, by documents, EUR' | '2'             | 'Business unit 2'     |
+			| '2' | '5,41'   | ''              | 'Yes'      | 'EUR'             | '420.2'      | 'Vendor (Transactions, by documents)' | ''             | 'Business unit 2'                     | 'Other expence'       | 'TRY'            | ''                | '5202'       | 'Customer (Advance, by documents)' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' | 'Advance, by documents, EUR' | ''              | 'Business unit 2'     |
 		And I close all client application windows
 
-Scenario: _0991220 check DebitCreditNote movements (VT-CT, by documents, different partners)
+Scenario: _0991416 check DebitCreditNote registers (Dr TV / Cr AC, by documents, different partners)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '9'      |	
+			| '8' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 8 dated 03.04.2024 14:19:17' | ''                    | ''           | ''              | ''                | ''                                    | ''                                    | ''                                    | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''              | ''                | ''                                    | ''                                    | ''                                    | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                             | 'Legal name'                          | 'Agreement'                           | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '60'     | ''                     | ''                 | '60'                 | ''               | ''                  | ''                 |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '60'     | ''                     | ''                 | '60'                 | ''               | ''                  | ''                 |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '1,83'   | ''                     | ''                 | '1,83'               | ''               | ''                  | ''                 |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)'    | 'Customer (Advance, by documents)'    | 'Advance, by documents, EUR'          | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '65,41'  | ''                     | '65,41'            | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)'    | 'Customer (Advance, by documents)'    | 'Advance, by documents, EUR'          | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '2'      | ''                     | '2'                | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)'    | 'Customer (Advance, by documents)'    | 'Advance, by documents, EUR'          | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)'    | 'Customer (Advance, by documents)'    | 'Advance, by documents, EUR'          | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '2'      | ''                     | '2'                | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1021 Vendors transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8' |
+		And I click "Registrations report info" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 8 dated 03.04.2024 14:19:17' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                    | ''                                    | ''                                    | ''      | ''      | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                    | ''                                    | ''                                    | ''      | ''      | ''        | ''       | ''                     | ''                         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                          | 'Partner'                             | 'Agreement'                           | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '1,83'   | 'No'                   | ''                         |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '60'     | 'No'                   | ''                         |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '60'     | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "R2020 Advances from customer"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8' |
+		And I click "Registrations report info" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 8 dated 03.04.2024 14:19:17' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                 | ''                                 | ''      | ''                           | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"'      | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                 | ''                                 | ''      | ''                           | ''        | ''       | ''                     | ''                           |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                       | 'Partner'                          | 'Order' | 'Agreement'                  | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Advance, by documents, EUR' | ''        | '2'      | 'No'                   | ''                           |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Advance, by documents, EUR' | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Advance, by documents, EUR' | ''        | '65,41'  | 'No'                   | ''                           |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Advance, by documents, EUR' | ''        | '2'      | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "R5022 Expenses"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8' |
+		And I click "Registrations report info" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 8 dated 03.04.2024 14:19:17' | ''                    | ''              | ''                | ''                   | ''              | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+			| 'Register  "R5022 Expenses"'                    | ''                    | ''              | ''                | ''                   | ''              | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+			| ''                                              | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Expense type'  | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Amount cost' | 'Calculation movement cost' |
+			| ''                                              | '03.04.2024 14:19:17' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '5,41'   | ''                  | ''            | ''                          |
+			| ''                                              | '03.04.2024 14:19:17' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '5,41'   | ''                  | ''            | ''                          |
+			| ''                                              | '03.04.2024 14:19:17' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '0,17'   | ''                  | ''            | ''                          |
+			| ''                                              | '03.04.2024 14:19:17' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''            | ''                          |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 8 dated 03.04.2024 14:19:17' | ''              | ''                | ''                    | ''    | ''         | ''                                 | ''                                 | ''      | ''                  | ''                    | ''          | ''                           | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'               | ''              | ''                | ''                    | ''    | ''         | ''                                 | ''                                 | ''      | ''                  | ''                    | ''          | ''                           | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                              | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                          | 'Legal name'                       | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'          | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | '03.04.2024 14:19:17' | '*'   | 'EUR'      | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Advance, by documents, EUR' | ''        | 'Settlement currency'    | 'EUR'                  | '2'      | 'No'                      | 'No'                   | 'Receipt'     |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 8 dated 03.04.2024 14:19:17' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                    | ''                                    | ''                                    | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'           | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                    | ''                                    | ''                                    | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                              | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                             | 'Legal name'                          | 'Agreement'                           | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | ''      | '03.04.2024 14:19:17' | '*'   | 'TRY'      | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '60'     | 'No'     | 'Yes'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 8 dated 03.04.2024 14:19:17' | ''                    | ''           | ''              | ''                | ''         | ''                                    | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''              | ''                | ''         | ''                                    | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                          | 'Legal name contract' | 'Amount' |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor (Transactions, by documents)' | ''                    | '60'     |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Customer (Advance, by documents)'    | ''                    | '2'      |
+		And I close all client application windows
+
+Scenario: _0991417 check DebitCreditNote accounting (Dr TV / Cr TC, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                               | 'Business unit'   | 'Partner term'                          | 'Credit' | 'Operation'                                                                                    |
 			| '5201'  | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
@@ -4227,8 +5004,8 @@ Scenario: _0991220 check DebitCreditNote movements (VT-CT, by documents, differe
 			| '340'   | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '120'   | 'Vendor (Transactions, by documents)'   | 'Other revenues'  | 'Business unit 2'                       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
 			| '659'   | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-		And I close current window
-	* Check JE
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4236,33 +5013,121 @@ Scenario: _0991220 check DebitCreditNote movements (VT-CT, by documents, differe
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                     | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                      | "Operation"                                | "Extra dimension2 Cr"                   | "Credit amount" | "Extra dimension3 Cr" |
-			| "5201"       | "1" | "51,00"  | ""              | "Yes"      | "TRY"             | "Vendor (Transactions, by documents)" | "51"           | "Vendor (Transactions, by documents)" | ""                | "Business unit 2"     | "TRY"            | "4010"       | "Customer (Transactions, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Customer (Transactions, by documents)" | "51"            | "Business unit 2"     |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                     | 'Debit amount' | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                      | 'Operation'                                | 'Extra dimension2 Cr'                   | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '51,00'  | ''              | 'Yes'      | 'TRY'             | '5201'       | 'Vendor (Transactions, by documents)' | '51'           | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | ''                | '4010'       | 'Customer (Transactions, by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Customer (Transactions, by documents)' | '51'            | 'Business unit 2'     |
 		And I close all client application windows
 
-Scenario: _0991221 check DebitCreditNote movements (CT-VA, by documents, different partners)
+Scenario: _0991418 check DebitCreditNote registers (Dr TV / Cr TC, by documents, different partners)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '10'     |	
+			| '9' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 9 dated 26.04.2024 16:15:09' | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                              | '26.04.2024 16:15:09' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '51'     | ''                     | ''                 | '51'                 | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 16:15:09' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '51'     | ''                     | ''                 | '51'                 | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 16:15:09' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '1,56'   | ''                     | ''                 | '1,56'               | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 16:15:09' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '51'     | '51'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '51'     | '51'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '1,56'   | '1,56'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1021 Vendors transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9' |
+		And I click "Registrations report info" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 9 dated 26.04.2024 16:15:09' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                    | ''                                    | ''                                    | ''      | ''      | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                    | ''                                    | ''                                    | ''      | ''      | ''        | ''       | ''                     | ''                         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                          | 'Partner'                             | 'Agreement'                           | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '1,56'   | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '51'     | 'No'                   | ''                         |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '51'     | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "R2021 Customer transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9' |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 9 dated 26.04.2024 16:15:09' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'       | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                            | 'Partner'                               | 'Agreement'                             | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '1,56'   | 'No'                   | ''                           |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '51'     | 'No'                   | ''                           |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '51'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 9 dated 26.04.2024 16:15:09' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'           | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                              | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | ''      | '26.04.2024 16:15:09' | '*'   | 'TRY'      | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '51'     | 'No'     | 'Yes'     |
+			| ''                                              | 'Own company 2' | 'Business unit 2' | ''      | '26.04.2024 16:15:09' | '*'   | 'TRY'      | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '51'     | 'No'     | 'Yes'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 9 dated 26.04.2024 16:15:09' | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                            | 'Legal name contract' | 'Amount' |
+			| ''                                              | '26.04.2024 16:15:09' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor (Transactions, by documents)'   | ''                    | '51'     |
+			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Customer (Transactions, by documents)' | ''                    | '51'     |
+		And I close all client application windows
+
+Scenario: _0991419 check DebitCreditNote accounting (Dr AV / Cr TC, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '10' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit'  | 'Partner'                               | 'Business unit'   | 'Partner term'                          | 'Credit' | 'Operation'                                                                              |
-			| '4020.2' | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '5201'   | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '4020.2' | 'Business unit 2'                       | ''                | 'Own company 2'                         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2'  | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-			| '159'    | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '320'    | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '159'    | 'Customer (Transactions, by documents)' | 'Other revenues'  | 'Business unit 2'                       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '659'    | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-		And I close current window
-	* Check JE
+			| 'Debit'  | 'Partner'                               | 'Business unit'   | 'Partner term'                          | 'Credit' | 'Operation'                                                                                    |
+			| '4020.2' | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'   | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'   | 'Business unit 2'                       | ''                | 'Own company 2'                         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2'  | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '159'    | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'    | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '120'    | 'Vendor (Advance, by documents)'        | 'Other revenues'  | 'Business unit 2'                       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'    | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4270,21 +5135,122 @@ Scenario: _0991221 check DebitCreditNote movements (CT-VA, by documents, differe
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                | "Debit amount" | "Extra dimension2 Dr"            | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                      | "Operation"                                | "Extra dimension2 Cr"                   | "Credit amount" | "Extra dimension3 Cr" |
-			| "4020.2"     | "1" | "74,00"  | ""              | "Yes"      | "TRY"             | "Vendor (Advance, by documents)" | "74"           | "Vendor (Advance, by documents)" | ""                | "Business unit 2"     | "TRY"            | "4010"       | "Customer (Transactions, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Customer (Transactions, by documents)" | "74"            | "Business unit 2"     |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                | 'Debit amount' | 'Extra dimension2 Dr'            | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                      | 'Operation'                                | 'Extra dimension2 Cr'                   | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '74,00'  | ''              | 'Yes'      | 'TRY'             | '4020.2'     | 'Vendor (Advance, by documents)' | '74'           | 'Vendor (Advance, by documents)' | 'Business unit 2'     | 'TRY'            | ''                | '4010'       | 'Customer (Transactions, by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Customer (Transactions, by documents)' | '74'            | 'Business unit 2'     |
 		And I close all client application windows
 
-Scenario: _0991222 check DebitCreditNote movements (CT-VA, by documents, different partners)
+Scenario: _0991420 check DebitCreditNote registers (Dr AV / Cr TC, by documents, different partners)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '11'     |	
+			| '10' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 10 dated 26.04.2024 17:51:11' | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'        | 'Vendor (Advance, by documents)'        | 'Vendor (Advance, by documents)'        | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '74'     | ''                     | ''                 | ''                   | '74'             | ''                  | ''                 |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'        | 'Vendor (Advance, by documents)'        | 'Vendor (Advance, by documents)'        | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '74'     | ''                     | ''                 | ''                   | '74'             | ''                  | ''                 |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'        | 'Vendor (Advance, by documents)'        | 'Vendor (Advance, by documents)'        | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '2,26'   | ''                     | ''                 | ''                   | '2,26'           | ''                  | ''                 |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'        | 'Vendor (Advance, by documents)'        | 'Vendor (Advance, by documents)'        | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '74'     | '74'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '74'     | '74'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '2,26'   | '2,26'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1020 Advances to vendors"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '10' |
+		And I click "Registrations report info" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 10 dated 26.04.2024 17:51:11' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                               | ''                               | ''      | ''                               | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'          | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                               | ''                               | ''      | ''                               | ''        | ''       | ''                     | ''                         |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                     | 'Partner'                        | 'Order' | 'Agreement'                      | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '2,26'   | 'No'                   | ''                         |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '74'     | 'No'                   | ''                         |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '74'     | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "R2021 Customer transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '10' |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 10 dated 26.04.2024 17:51:11' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                            | 'Partner'                               | 'Agreement'                             | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '2,26'   | 'No'                   | ''                           |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '74'     | 'No'                   | ''                           |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '74'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '10' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 10 dated 26.04.2024 17:51:11' | ''              | ''                | ''                    | ''    | ''         | ''                               | ''                               | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'                | ''              | ''                | ''                    | ''    | ''         | ''                               | ''                               | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                               | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                        | 'Legal name'                     | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'              | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | '26.04.2024 17:51:11' | '*'   | 'TRY'      | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | 'Settlement currency'    | 'TRY'                  | '74'     | 'No'                      | 'No'                   | 'Receipt'     |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '10' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 10 dated 26.04.2024 17:51:11' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'            | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                               | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '26.04.2024 17:51:11' | '*'   | 'TRY'      | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '74'     | 'No'     | 'Yes'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '10' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 10 dated 26.04.2024 17:51:11' | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                            | 'Legal name contract' | 'Amount' |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor (Advance, by documents)'        | ''                    | '74'     |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Customer (Transactions, by documents)' | ''                    | '74'     |
+		And I close all client application windows
+
+Scenario: _0991421 check DebitCreditNote accounting (Dr AC / Cr AV, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '11' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit'  | 'Partner'                          | 'Business unit'   | 'Partner term'                   | 'Credit' | 'Operation'                                                                              |
 			| '5202'   | 'Vendor (Advance, by documents)'   | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
@@ -4295,8 +5261,8 @@ Scenario: _0991222 check DebitCreditNote movements (CT-VA, by documents, differe
 			| '320'    | 'Vendor (Advance, by documents)'   | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '159'    | 'Customer (Advance, by documents)' | 'Other revenues'  | 'Business unit 2'                | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
 			| '659'    | 'Vendor (Advance, by documents)'   | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-		And I close current window
-	* Check JE
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4304,34 +5270,139 @@ Scenario: _0991222 check DebitCreditNote movements (CT-VA, by documents, differe
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                  | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'               | 'Extra dimension2 Cr'            | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                        |
-			| '1' | 'Yes'      | '5202'       | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR' | 'Business unit 2'     | 'EUR'            | '10'           | ''              | '4020.2'     | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | 'Business unit 2'     | 'TRY'             | '320'           | ''                | '327,05' | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
-			| '2' | 'Yes'      | '420.2'      | 'Customer (Advance, by documents)' | 'Business unit 2'            | 'Other expence'       | 'TRY'            | ''             | ''              | '4020.2'     | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | 'Business unit 2'     | 'TRY'             | ''              | ''                | '327,05' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                  | 'Debit amount' | 'Extra dimension2 Dr'            | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'               | 'Operation'                                                       | 'Extra dimension2 Cr'            | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '327,05' | ''              | 'Yes'      | 'TRY'             | '5202'       | 'Customer (Advance, by documents)' | '10'           | 'Advance, by documents, EUR'     | 'Business unit 2'     | 'EUR'            | ''                | '4020.2'     | 'Vendor (Advance, by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)'                        | 'Vendor (Advance, by documents)' | '320'           | 'Business unit 2'     |
+			| '2' | '7,05'   | ''              | 'Yes'      | 'TRY'             | '4020.2'     | 'Vendor (Advance, by documents)'   | ''             | 'Vendor (Advance, by documents)' | 'Business unit 2'     | 'TRY'            | ''                | '9100'       | 'Business unit 2'                | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' | 'Own company 2'                  | ''              | ''                    |
 		And I close all client application windows
 
-Scenario: _0991223 check DebitCreditNote movements (CT-VT, by partner terms, different partners)
+Scenario: _0991422 check DebitCreditNote registers (Dr AC / Cr AV, by documents, different partners)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '12'     |	
+			| '11' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 11 dated 29.04.2024 10:25:38' | ''                    | ''           | ''              | ''                | ''                                 | ''                                 | ''                               | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                 | ''                                 | ''                               | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                          | 'Legal name'                       | 'Agreement'                      | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '29.04.2024 10:25:38' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR'     | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '327,05' | ''                     | '327,05'           | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR'     | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '10'     | ''                     | '10'               | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR'     | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR'     | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '10'     | ''                     | '10'               | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '320'    | ''                     | ''                 | ''                   | '320'            | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '320'    | ''                     | ''                 | ''                   | '320'            | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '9,78'   | ''                     | ''                 | ''                   | '9,78'           | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R2020 Advances from customer"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '11' |
+		And I click "Registrations report info" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 11 dated 29.04.2024 10:25:38' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                 | ''                                 | ''      | ''                           | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"'       | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                 | ''                                 | ''      | ''                           | ''        | ''       | ''                     | ''                           |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                       | 'Partner'                          | 'Order' | 'Agreement'                  | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Advance, by documents, EUR' | ''        | '10'     | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Advance, by documents, EUR' | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Advance, by documents, EUR' | ''        | '327,05' | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Advance, by documents, EUR' | ''        | '10'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "R1020 Advances to vendors"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '11' |
+		And I click "Registrations report info" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 11 dated 29.04.2024 10:25:38' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                               | ''                               | ''      | ''                               | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'          | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                               | ''                               | ''      | ''                               | ''        | ''       | ''                     | ''                         |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                     | 'Partner'                        | 'Order' | 'Agreement'                      | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '9,78'   | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '320'    | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '320'    | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "R5021 Revenues"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '11' |
+		And I click "Registrations report info" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 11 dated 29.04.2024 10:25:38' | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| 'Register  "R5021 Revenues"'                     | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| ''                                               | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Revenue type'   | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Calculation movement cost' |
+			| ''                                               | '29.04.2024 10:25:38' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '7,05'   | ''                  | ''                          |
+			| ''                                               | '29.04.2024 10:25:38' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '7,05'   | ''                  | ''                          |
+			| ''                                               | '29.04.2024 10:25:38' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '0,22'   | ''                  | ''                          |
+			| ''                                               | '29.04.2024 10:25:38' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''                          |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '11' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Debit/Credit note 11 dated 29.04.2024 10:25:38' | ''              | ''                | ''                    | ''    | ''         | ''                                 | ''                                 | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'                | ''              | ''                | ''                    | ''    | ''         | ''                                 | ''                                 | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                               | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                          | 'Legal name'                       | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'              | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | '29.04.2024 10:25:38' | '*'   | 'EUR'      | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Advance, by documents, EUR'     | ''        | 'Settlement currency'    | 'EUR'                  | '10'     | 'No'                      | 'No'                   | 'Expense'     |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | '29.04.2024 10:25:38' | '*'   | 'TRY'      | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | 'Settlement currency'    | 'TRY'                  | '320'    | 'No'                      | 'No'                   | 'Expense'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '11' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 11 dated 29.04.2024 10:25:38' | ''                    | ''           | ''              | ''                | ''         | ''                                 | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                 | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                       | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 10:25:38' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Customer (Advance, by documents)' | ''                    | '10'     |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor (Advance, by documents)'   | ''                    | '320'    |
+		And I close all client application windows
+
+Scenario: _0991423 check DebitCreditNote accounting (Dr TV / Cr TC, by partner term, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                                   | 'Business unit'   | 'Partner term'                              | 'Credit' | 'Operation'                                                                              |
-			| '5201'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '5201'  | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '5201'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2' | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-			| '320'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '320'   | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '320'   | 'Customer (Transactions, by partner terms)' | 'Other revenues'  | 'Business unit 2'                           | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '659'   | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '320'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-		And I close current window
-	* Check JE
+			| 'Debit' | 'Partner'                                   | 'Business unit'   | 'Partner term'                              | 'Credit' | 'Operation'                                                                                    |
+			| '5201'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '320'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '120'   | 'Vendor (Transactions, by partner term)'    | 'Other revenues'  | 'Business unit 2'                           | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4339,33 +5410,121 @@ Scenario: _0991223 check DebitCreditNote movements (CT-VT, by partner terms, dif
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                        | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                          | "Operation"                                | "Extra dimension2 Cr"                       | "Credit amount" | "Extra dimension3 Cr" |
-			| "5201"       | "1" | "1 400,00" | ""              | "Yes"      | "EUR"             | "Vendor (Transactions, by partner term)" | "42,8"         | "Vendor, transaction by partner term" | ""                | "Business unit 2"     | "EUR"            | "4010"       | "Customer (Transactions, by partner terms)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Customer (Transacrions, by partner terms)" | "42,8"          | "Business unit 2"     |
+			| '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                        | 'Debit amount' | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                          | 'Operation'                                | 'Extra dimension2 Cr'                       | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '1 400,00' | ''              | 'Yes'      | 'EUR'             | '5201'       | 'Vendor (Transactions, by partner term)' | '42,8'         | 'Vendor, transaction by partner term' | 'Business unit 2'     | 'EUR'            | ''                | '4010'       | 'Customer (Transactions, by partner terms)' | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Customer (Transacrions, by partner terms)' | '42,8'          | 'Business unit 2'     |
 		And I close all client application windows
 
-Scenario: _0991224 check DebitCreditNote movements (VA-VA, by documents, different partners)
+Scenario: _0991424 check DebitCreditNote registers (Dr TV / Cr TC, by partner term, different partners)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '13'     |	
+			| '12' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 12 dated 29.04.2024 10:42:01' | ''                    | ''           | ''              | ''                | ''                                          | ''                                          | ''                                          | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                          | ''                                          | ''                                          | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                                   | 'Legal name'                                | 'Agreement'                                 | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '29.04.2024 10:42:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)'    | 'Vendor (Transactions, by partner term)'    | 'Vendor, transaction by partner term'       | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '1 400'  | ''                     | ''                 | '1 400'              | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:42:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)'    | 'Vendor (Transactions, by partner term)'    | 'Vendor, transaction by partner term'       | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '42,8'   | ''                     | ''                 | '42,8'               | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:42:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)'    | 'Vendor (Transactions, by partner term)'    | 'Vendor, transaction by partner term'       | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:42:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)'    | 'Vendor (Transactions, by partner term)'    | 'Vendor, transaction by partner term'       | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '42,8'   | ''                     | ''                 | '42,8'               | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '1 400'  | '1 400'                | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '42,8'   | '42,8'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '42,8'   | '42,8'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1021 Vendors transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12' |
+		And I click "Registrations report info" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 12 dated 29.04.2024 10:42:01' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                       | ''                                       | ''                                    | ''      | ''      | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'         | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                       | ''                                       | ''                                    | ''      | ''      | ''        | ''       | ''                     | ''                         |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                             | 'Partner'                                | 'Agreement'                           | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '42,8'   | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '1 400'  | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '42,8'   | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "R2021 Customer transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12' |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 12 dated 29.04.2024 10:42:01' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                          | ''                                          | ''                                          | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                          | ''                                          | ''                                          | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                                | 'Partner'                                   | 'Agreement'                                 | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '42,8'   | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '1 400'  | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '42,8'   | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 12 dated 29.04.2024 10:42:01' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                          | ''                                          | ''                                          | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'            | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                          | ''                                          | ''                                          | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                               | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                                   | 'Legal name'                                | 'Agreement'                                 | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '29.04.2024 10:42:01' | '*'   | 'EUR'      | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'Settlement currency'    | 'EUR'                  | '42,8'   | 'No'     | 'Yes'     |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '29.04.2024 10:42:01' | '*'   | 'EUR'      | 'Vendor (Transactions, by partner term)'    | 'Vendor (Transactions, by partner term)'    | 'Vendor, transaction by partner term'       | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'Settlement currency'    | 'EUR'                  | '42,8'   | 'No'     | 'Yes'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 12 dated 29.04.2024 10:42:01' | ''                    | ''           | ''              | ''                | ''         | ''                                          | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                          | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                                | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 10:42:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor (Transactions, by partner term)'    | ''                    | '42,8'   |
+			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Customer (Transacrions, by partner terms)' | ''                    | '42,8'   |
+		And I close all client application windows
+
+Scenario: _0991425 check DebitCreditNote accounting (Dr AV / Cr AV, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '13' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit'  | 'Partner'                            | 'Business unit'   | 'Partner term'                   | 'Credit' | 'Operation'                                                                              |
 			| '4020.2' | 'Vendor (Advance, by documents)'     | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '5201'   | 'Vendor (Advance, by documents)'     | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'                  | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+			| '420.2'  | 'Vendor (Advance, by documents)'     | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
 			| '159'    | 'Vendor (Advance, by documents)'     | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
-			| '320'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
-			| '159'    | 'Vendor (Advance, by documents)'     | 'Other revenues'  | 'Business unit 2'                | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
-			| '659'    | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-		And I close current window
-	* Check JE
+			| '320'    | 'Vendor (Advance, by documents)'     | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '159'    | 'Vendor and Customer (by documents)' | 'Other revenues'  | 'Business unit 2'                | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '659'    | 'Vendor (Advance, by documents)'     | 'Business unit 2' | 'Vendor (Advance, by documents)' | '159'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4373,21 +5532,96 @@ Scenario: _0991224 check DebitCreditNote movements (VA-VA, by documents, differe
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                    | "Debit amount" | "Extra dimension2 Dr"     | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"               | "Operation"                                | "Extra dimension2 Cr"            | "Credit amount" | "Extra dimension3 Cr" |
-			| "4020.2"     | "1" | "20,00"  | ""              | "Yes"      | "TRY"             | "Vendor and Customer (by documents)" | "20"           | "Vendor (by documents) 2" | ""                | "Business unit 2"     | "TRY"            | "4020.2"     | "Vendor (Advance, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Vendor (Advance, by documents)" | "20"            | "Business unit 2"     |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Debit amount' | 'Extra dimension2 Dr'     | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'               | 'Operation'                                | 'Extra dimension2 Cr'            | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '20,00'  | ''              | 'Yes'      | 'TRY'             | '4020.2'     | 'Vendor and Customer (by documents)' | '20'           | 'Vendor (by documents) 2' | 'Business unit 2'     | 'TRY'            | ''                | '4020.2'     | 'Vendor (Advance, by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Vendor (Advance, by documents)' | '20'            | 'Business unit 2'     |
 		And I close all client application windows
 
-Scenario: _0991225 check DebitCreditNote movements (СA-СA, by documents, different partners)
+Scenario: _0991426 check DebitCreditNote registers (Dr AV / Cr AV, by documents, different partners)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '14'     |	
+			| '13' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 13 dated 29.04.2024 11:06:59' | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                               | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                               | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                            | 'Legal name'                         | 'Agreement'                      | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents) 2'        | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '20'     | ''                     | ''                 | ''                   | '20'             | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents) 2'        | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '0,61'   | ''                     | ''                 | ''                   | '0,61'           | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents) 2'        | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Vendor (by documents) 2'        | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '0,61'   | ''                     | ''                 | ''                   | '0,61'           | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '20'     | ''                     | ''                 | ''                   | '20'             | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '20'     | ''                     | ''                 | ''                   | '20'             | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '0,61'   | ''                     | ''                 | ''                   | '0,61'           | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1020 Advances to vendors"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '13' |
+		And I click "Registrations report info" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 13 dated 29.04.2024 11:06:59' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                               | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'          | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                               | ''        | ''       | ''                     | ''                         |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                         | 'Partner'                            | 'Order' | 'Agreement'                      | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents) 2'        | ''        | '0,61'   | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents) 2'        | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents) 2'        | ''        | '20'     | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents) 2'        | ''        | '0,61'   | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | ''      | 'Vendor (Advance, by documents)' | ''        | '0,61'   | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | ''      | 'Vendor (Advance, by documents)' | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | ''      | 'Vendor (Advance, by documents)' | ''        | '20'     | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | ''      | 'Vendor (Advance, by documents)' | ''        | '20'     | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '13' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 13 dated 29.04.2024 11:06:59' | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'                | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                               | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'              | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | '29.04.2024 11:06:59' | '*'   | 'EUR'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (by documents) 2'        | ''        | 'Settlement currency'    | 'EUR'                  | '0,61'   | 'No'                      | 'No'                   | 'Receipt'     |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | '29.04.2024 11:06:59' | '*'   | 'TRY'      | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | 'Settlement currency'    | 'TRY'                  | '20'     | 'No'                      | 'No'                   | 'Expense'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '13' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 13 dated 29.04.2024 11:06:59' | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                         | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor and Customer (by documents)' | ''                    | '20'     |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor (Advance, by documents)'     | ''                    | '20'     |
+		And I close all client application windows
+
+Scenario: _0991427 check DebitCreditNote accounting (Dr AC / Cr AC, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '14' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                            | 'Business unit'   | 'Partner term'      | 'Credit' | 'Operation'                                                                                    |
 			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '5202'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
@@ -4398,8 +5632,8 @@ Scenario: _0991225 check DebitCreditNote movements (СA-СA, by documents, diffe
 			| '340'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
 			| '340'   | 'Customer (Advance, by documents)'   | 'Other revenues'  | 'Business unit 2'   | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
 			| '659'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '340'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-		And I close current window
-	* Check JE
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4407,33 +5641,108 @@ Scenario: _0991225 check DebitCreditNote movements (СA-СA, by documents, diffe
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                  | "Debit amount" | "Extra dimension2 Dr"        | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                   | "Operation"                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-			| "5202"       | "1" | "654,10" | ""              | "Yes"      | "EUR"             | "Customer (Advance, by documents)" | "20"           | "Advance, by documents, EUR" | ""                | "Business unit 2"     | "EUR"            | "5202"       | "Vendor and Customer (by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Partner term, EUR"   | "20"            | "Business unit 2"     |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                  | 'Debit amount' | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Operation'                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '654,10' | ''              | 'Yes'      | 'EUR'             | '5202'       | 'Customer (Advance, by documents)' | '20'           | 'Advance, by documents, EUR' | 'Business unit 2'     | 'EUR'            | ''                | '5202'       | 'Vendor and Customer (by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Partner term, EUR'   | '20'            | 'Business unit 2'     |
 		And I close all client application windows
 
-Scenario: _0991226 check DebitCreditNote movements (СT-СT, by documents and partner terms, different partners)
+Scenario: _0991428 check DebitCreditNote registers (Dr AC / Cr AC, by documents, different partners)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '15'     |	
+			| '14' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 14 dated 29.04.2024 11:15:01' | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                           | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                   | ''                                   | ''                           | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                            | 'Legal name'                         | 'Agreement'                  | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | 'Advance, by documents, EUR' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '654,1'  | ''                     | '654,1'            | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | 'Advance, by documents, EUR' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '20'     | ''                     | '20'               | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | 'Advance, by documents, EUR' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | 'Advance, by documents, EUR' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '20'     | ''                     | '20'               | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR'          | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '654,1'  | ''                     | '654,1'            | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR'          | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '20'     | ''                     | '20'               | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR'          | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Partner term, EUR'          | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '20'     | ''                     | '20'               | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R2020 Advances from customer"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '14' |
+		And I click "Registrations report info" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 14 dated 29.04.2024 11:15:01' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                           | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"'       | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                           | ''        | ''       | ''                     | ''                           |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                         | 'Partner'                            | 'Order' | 'Agreement'                  | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR'          | ''        | '20'     | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR'          | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR'          | ''        | '654,1'  | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Partner term, EUR'          | ''        | '20'     | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | ''      | 'Advance, by documents, EUR' | ''        | '20'     | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | ''      | 'Advance, by documents, EUR' | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | ''      | 'Advance, by documents, EUR' | ''        | '654,1'  | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | ''      | 'Advance, by documents, EUR' | ''        | '20'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '14' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 14 dated 29.04.2024 11:15:01' | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                           | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'                | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                           | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                               | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'          | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | '29.04.2024 11:15:01' | '*'   | 'EUR'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Partner term, EUR'          | ''        | 'Settlement currency'    | 'EUR'                  | '20'     | 'No'                      | 'No'                   | 'Receipt'     |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | '29.04.2024 11:15:01' | '*'   | 'EUR'      | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | ''      | 'No'                | 'Yes'                 | '*'         | 'Advance, by documents, EUR' | ''        | 'Settlement currency'    | 'EUR'                  | '20'     | 'No'                      | 'No'                   | 'Expense'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '14' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 14 dated 29.04.2024 11:15:01' | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                   | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                         | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Customer (Advance, by documents)'   | ''                    | '20'     |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor and Customer (by documents)' | ''                    | '20'     |
+		And I close all client application windows
+
+Scenario: _0991429 check DebitCreditNote accounting (Dr TC / Cr TC, by documents and partner term, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '15' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                                   | 'Business unit'   | 'Partner term'                              | 'Credit' | 'Operation'                                                                                    |
-			| '4010'  | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)'     | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
-			| '5202'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
-			| '4010'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-			| '120'   | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)'     | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
-			| '340'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
-			| '120'   | 'Customer (Transactions, by documents)'     | 'Other revenues'  | 'Business unit 2'                           | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
-			| '659'   | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
-		And I close current window
-	* Check JE
+			| 'Debit' | 'Partner'                                   | 'Business unit'   | 'Partner term'                          | 'Credit' | 'Operation'                                                                                    |
+			| '4010'  | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'  | 'Business unit 2'                           | ''                | 'Own company 2'                         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '120'   | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'   | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '120'   | 'Customer (Transactions, by partner terms)' | 'Other revenues'  | 'Business unit 2'                       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'   | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4441,22 +5750,114 @@ Scenario: _0991226 check DebitCreditNote movements (СT-СT, by documents and pa
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                           | 'Extra dimension2 Dr'                       | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                      | 'Extra dimension2 Cr'                   | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                       |
-			| '1' | 'Yes'      | '4010'       | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Business unit 2'     | 'EUR'            | '2'            | ''              | '4010'       | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Business unit 2'     | 'TRY'             | '60'            | ''                | '60,00'  | 'DebitCreditNote (R5020B_PartnersBalance)'                        |
-			| '2' | 'Yes'      | '4010'       | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Business unit 2'     | 'EUR'            | ''             | ''              | '9100'       | 'Business unit 2'                       | 'Own company 2'                         | ''                    | 'TRY'             | ''              | ''                | '5,41'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' |
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                           | 'Debit amount' | 'Extra dimension2 Dr'                       | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                      | 'Operation'                                                       | 'Extra dimension2 Cr'                   | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '65,41'  | ''              | 'Yes'      | 'TRY'             | '4010'       | 'Customer (Transactions, by partner terms)' | '2'            | 'Customer (Transacrions, by partner terms)' | 'Business unit 2'     | 'EUR'            | ''                | '4010'       | 'Customer (Transactions, by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)'                        | 'Customer (Transactions, by documents)' | '60'            | 'Business unit 2'     |
+			| '2' | '5,41'   | ''              | 'Yes'      | 'TRY'             | '4010'       | 'Customer (Transactions, by documents)'     | ''             | 'Customer (Transactions, by documents)'     | 'Business unit 2'     | 'TRY'            | ''                | '9100'       | 'Business unit 2'                       | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' | 'Own company 2'                         | ''              | ''                    |
 		And I close all client application windows
 
-Scenario: _0991227 check DebitCreditNote movements (VT-VT, by partner terms, different partners)
+Scenario: _0991430 check DebitCreditNote registers (Dr TC / Cr TC, by documents and partner term, different partners)
 	And I close all client application windows
-	* Select DebitCreditNote
+	* Check movements by the Register  "R5020 Partners balance"
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 		And I go to line in "List" table
 			| 'Number' |
-			| '16'     |	
+			| '15' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 15 dated 29.04.2024 11:21:10' | ''                    | ''           | ''              | ''                | ''                                          | ''                                          | ''                                          | ''                                            | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                          | ''                                          | ''                                          | ''                                            | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                                   | 'Legal name'                                | 'Agreement'                                 | 'Document'                                    | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '65,41'  | '65,41'                | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '2'      | '2'                    | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '2'      | '2'                    | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '60'     | '60'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '60'     | '60'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '1,83'   | '1,83'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R2021 Customer transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '15' |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 15 dated 29.04.2024 11:21:10' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                          | ''                                          | ''                                          | ''                                            | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                          | ''                                          | ''                                          | ''                                            | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                                | 'Partner'                                   | 'Agreement'                                 | 'Basis'                                       | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | ''      | ''        | '2'      | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | ''      | ''        | '65,41'  | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | ''      | ''        | '2'      | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | ''      | ''        | '1,83'   | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | ''      | ''        | '60'     | 'No'                   | ''                           |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | ''      | ''        | '60'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "R5021 Revenues"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '15' |
+		And I click "Registrations report info" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 15 dated 29.04.2024 11:21:10' | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| 'Register  "R5021 Revenues"'                     | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| ''                                               | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Revenue type'   | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Calculation movement cost' |
+			| ''                                               | '29.04.2024 11:21:10' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '5,41'   | ''                  | ''                          |
+			| ''                                               | '29.04.2024 11:21:10' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '5,41'   | ''                  | ''                          |
+			| ''                                               | '29.04.2024 11:21:10' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '0,17'   | ''                  | ''                          |
+			| ''                                               | '29.04.2024 11:21:10' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''                          |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '15' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 15 dated 29.04.2024 11:21:10' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                          | ''                                          | ''                                          | ''                      | ''                        | ''                                            | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'            | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                          | ''                                          | ''                                          | ''                      | ''                        | ''                                            | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                               | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                                   | 'Legal name'                                | 'Agreement'                                 | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                           | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '29.04.2024 11:21:10' | '*'   | 'TRY'      | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'No'                    | 'Yes'                     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '60'     | 'No'     | 'Yes'     |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '29.04.2024 11:21:10' | '*'   | 'EUR'      | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'No'                    | 'Yes'                     | ''                                            | '*'         | ''        | 'Settlement currency'    | 'EUR'                  | '2'      | 'Yes'    | 'No'      |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '15' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 15 dated 29.04.2024 11:21:10' | ''                    | ''           | ''              | ''                | ''         | ''                                          | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                          | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                                | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Customer (Transacrions, by partner terms)' | ''                    | '2'      |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Customer (Transactions, by documents)'     | ''                    | '60'     |
+		And I close all client application windows
+
+Scenario: _0991431 check DebitCreditNote accounting (Dr TV / Cr TV, by partner terms, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '16' |
 		And I select current line in "List" table
-		And I click "Post" button		
-	* Check accounting movements
-		And I click "Edit accounting" button	
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                                | 'Business unit'   | 'Partner term'                        | 'Credit' | 'Operation'                                                                              |
 			| '5201'  | 'Vendor (Transactions, by documents)'    | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
@@ -4467,8 +5868,8 @@ Scenario: _0991227 check DebitCreditNote movements (VT-VT, by partner terms, dif
 			| '320'   | 'Vendor (Transactions, by documents)'    | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '159'    | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
 			| '320'   | 'Vendor (Transactions, by partner term)' | 'Other revenues'  | 'Business unit 2'                     | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
 			| '659'   | 'Vendor (Transactions, by documents)'    | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '320'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |
-		And I close current window
-	* Check JE
+		And I close "Edit accounting" window
+	* Check journal entry
 		And I click "Journal entry" button
 		And I go to line in "JournalEntries" table
 			| 'Ledger type' |
@@ -4476,9 +5877,866 @@ Scenario: _0991227 check DebitCreditNote movements (VT-VT, by partner terms, dif
 		And I select current line in "JournalEntries" table
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                        | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                    | 'Extra dimension2 Cr'                 | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                       |
-			| '1' | 'Yes'      | '5201'       | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | 'Business unit 2'     | 'EUR'            | '50'           | ''              | '5201'       | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'             | '1 500'         | ''                | '1 635,25' | 'DebitCreditNote (R5020B_PartnersBalance)'                        |
-			| '2' | 'Yes'      | '5201'       | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | ''             | ''              | '9100'       | 'Business unit 2'                     | 'Own company 2'                       | ''                    | 'TRY'             | ''              | ''                | '135,25'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' |
+			| '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                        | 'Debit amount' | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                    | 'Operation'                                                       | 'Extra dimension2 Cr'                 | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '1 635,25' | ''              | 'Yes'      | 'TRY'             | '5201'       | 'Vendor (Transactions, by partner term)' | '50'           | 'Vendor, transaction by partner term' | 'Business unit 2'     | 'EUR'            | ''                | '5201'       | 'Vendor (Transactions, by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)'                        | 'Vendor (Transactions, by documents)' | '1 500'         | 'Business unit 2'     |
+			| '2' | '135,25'   | ''              | 'Yes'      | 'TRY'             | '5201'       | 'Vendor (Transactions, by documents)'    | ''             | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | ''                | '9100'       | 'Business unit 2'                     | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' | 'Own company 2'                       | ''              | ''                    |
+		And I close all client application windows
+
+Scenario: _0991432 check DebitCreditNote registers (Dr TV / Cr TV, by partner terms, different partners)
+	And I close all client application windows
+	* Check movements by the Register  "R5020 Partners balance"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '16' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 16 dated 29.04.2024 12:14:25' | ''                    | ''           | ''              | ''                | ''                                       | ''                                       | ''                                    | ''         | ''         | ''                             | ''                     | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                       | ''                                       | ''                                    | ''         | ''         | ''                             | ''                     | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                                | 'Legal name'                             | 'Agreement'                           | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount'   | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '1 635,25' | ''                     | ''                 | '1 635,25'           | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '50'       | ''                     | ''                 | '50'                 | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '50'       | ''                     | ''                 | '50'                 | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '1 500'    | ''                     | ''                 | '1 500'              | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '1 500'    | ''                     | ''                 | '1 500'              | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '45,86'    | ''                     | ''                 | '45,86'              | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''         | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1021 Vendors transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '16' |
+		And I click "Registrations report info" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 16 dated 29.04.2024 12:14:25' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                       | ''                                       | ''                                    | ''      | ''      | ''        | ''         | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'         | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                       | ''                                       | ''                                    | ''      | ''      | ''        | ''         | ''                     | ''                         |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                             | 'Partner'                                | 'Agreement'                           | 'Basis' | 'Order' | 'Project' | 'Amount'   | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '45,86'    | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | ''         | 'Yes'                  | ''                         |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '1 500'    | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '1 500'    | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '50'       | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | ''         | 'Yes'                  | ''                         |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '1 635,25' | 'No'                   | ''                         |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | ''      | ''      | ''        | '50'       | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "R5021 Revenues"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '16' |
+		And I click "Registrations report info" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 16 dated 29.04.2024 12:14:25' | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| 'Register  "R5021 Revenues"'                     | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| ''                                               | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Revenue type'   | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Calculation movement cost' |
+			| ''                                               | '29.04.2024 12:14:25' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '135,25' | ''                  | ''                          |
+			| ''                                               | '29.04.2024 12:14:25' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '135,25' | ''                  | ''                          |
+			| ''                                               | '29.04.2024 12:14:25' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '4,14'   | ''                  | ''                          |
+			| ''                                               | '29.04.2024 12:14:25' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''                          |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '16' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 16 dated 29.04.2024 12:14:25' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                       | ''                                       | ''                                    | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'            | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                       | ''                                       | ''                                    | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                               | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                                | 'Legal name'                             | 'Agreement'                           | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '29.04.2024 12:14:25' | '*'   | 'EUR'      | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'Settlement currency'    | 'EUR'                  | '50'     | 'No'     | 'Yes'     |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '29.04.2024 12:14:25' | '*'   | 'TRY'      | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '1 500'  | 'Yes'    | 'No'      |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '16' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 16 dated 29.04.2024 12:14:25' | ''                    | ''           | ''              | ''                | ''         | ''                                       | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                       | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                             | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor (Transactions, by partner term)' | ''                    | '50'     |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Vendor (Transactions, by documents)'    | ''                    | '1 500'  |
+		And I close all client application windows
+
+Scenario: _0991433 check DebitCreditNote accounting (Dr OR / Cr OR, other partners, same currency)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '17' |
+		And I select current line in "List" table
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'         | 'Legal name'           | 'Tax type'        | 'Credit' | 'Operation'                                                        |
+			| '9200'  | 'Other partner 2' | 'Other partner 2'      | ''                | '9200'   | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '9200'  | 'Business unit 2' | 'Own company 2'        | ''                | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'  |
+			| '420.2' | 'Other partner 2' | 'Other partner 2'      | ''                | '9200'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+			| '136'   | 'Other partner 2' | 'Other partner term 2' | 'Business unit 2' | '136'    | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '136'   | 'Other partner'   | 'Business unit 2'      | 'Other revenues'  | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'  |
+			| '659'   | 'Other partner 2' | 'Other partner term 2' | 'Business unit 2' | '136'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+		And I close "Edit accounting" window
+	* Check journal entry
+		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '51,00'  | ''              | 'Yes'      | 'TRY'             | '9200'       | 'Other partner'   | '51'           | 'Other partner'       | ''                    | 'TRY'            | ''                | '9200'       | 'Other partner 2'  | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Other partner 2'     | '51'            | ''                    |
+		And I close all client application windows
+
+Scenario: _0991434 check DebitCreditNote registers (Dr OR / Cr OR, other partners, same currency)
+	And I close all client application windows
+	* Check movements by the Register  "R5020 Partners balance"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '17' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 17 dated 15.05.2024 12:00:00' | ''                    | ''           | ''              | ''                | ''                | ''                | ''                     | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                | ''                | ''                     | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'         | 'Legal name'      | 'Agreement'            | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '15.05.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Other partner'   | 'Other partner'   | 'Other partner term'   | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '51'     | ''                     | ''                 | ''                   | ''               | '51'                | ''                 |
+			| ''                                               | '15.05.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Other partner'   | 'Other partner'   | 'Other partner term'   | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '51'     | ''                     | ''                 | ''                   | ''               | '51'                | ''                 |
+			| ''                                               | '15.05.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Other partner'   | 'Other partner'   | 'Other partner term'   | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '1,56'   | ''                     | ''                 | ''                   | ''               | '1,56'              | ''                 |
+			| ''                                               | '15.05.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Other partner'   | 'Other partner'   | 'Other partner term'   | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Other partner 2' | 'Other partner 2' | 'Other partner term 2' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '51'     | ''                     | ''                 | ''                   | ''               | '51'                | ''                 |
+			| ''                                               | '15.05.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Other partner 2' | 'Other partner 2' | 'Other partner term 2' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '51'     | ''                     | ''                 | ''                   | ''               | '51'                | ''                 |
+			| ''                                               | '15.05.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Other partner 2' | 'Other partner 2' | 'Other partner term 2' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '1,56'   | ''                     | ''                 | ''                   | ''               | '1,56'              | ''                 |
+			| ''                                               | '15.05.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Other partner 2' | 'Other partner 2' | 'Other partner term 2' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R5015 Other partners transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '17' |
+		And I click "Registrations report info" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 17 dated 15.05.2024 12:00:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                | ''                | ''                     | ''      | ''       | ''                     |
+			| 'Register  "R5015 Other partners transactions"'  | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                | ''                | ''                     | ''      | ''       | ''                     |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'            | 'Basis' | 'Amount' | 'Deferred calculation' |
+			| ''                                               | '15.05.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Other partner'   | 'Other partner'   | 'Other partner term'   | ''      | '1,56'   | 'No'                   |
+			| ''                                               | '15.05.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Other partner'   | 'Other partner'   | 'Other partner term'   | ''      | ''       | 'Yes'                  |
+			| ''                                               | '15.05.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Other partner'   | 'Other partner'   | 'Other partner term'   | ''      | '51'     | 'No'                   |
+			| ''                                               | '15.05.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Other partner'   | 'Other partner'   | 'Other partner term'   | ''      | '51'     | 'No'                   |
+			| ''                                               | '15.05.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner term 2' | ''      | '1,56'   | 'No'                   |
+			| ''                                               | '15.05.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner term 2' | ''      | ''       | 'Yes'                  |
+			| ''                                               | '15.05.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner term 2' | ''      | '51'     | 'No'                   |
+			| ''                                               | '15.05.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner term 2' | ''      | '51'     | 'No'                   |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '17' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 17 dated 15.05.2024 12:00:00' | ''                    | ''           | ''              | ''                | ''         | ''                | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'      | 'Legal name contract' | 'Amount' |
+			| ''                                               | '15.05.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Other partner'   | ''                    | '51'     |
+			| ''                                               | '15.05.2024 12:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Other partner 2' | ''                    | '51'     |
+		And I close all client application windows
+
+Scenario: _0991435 check DebitCreditNote accounting (Dr TC / Cr OR, different currencies)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '18' |
+		And I select current line in "List" table
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                               | 'Business unit'   | 'Partner term'                          | 'Legal name'         | 'Credit' | 'Tax type'        | 'Operation'                                                        |
+			| '4010'  | 'Other partner'                         | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Other partner'      | '9200'   | ''                | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '9200'  | 'Business unit 2'                       | ''                | 'Other partner'                         | 'Own company 2'      | '9100'   | ''                | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'  |
+			| '420.2' | 'Other partner'                         | 'Other expence'   | 'Business unit 2'                       | 'Other partner'      | '9200'   | ''                | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+			| '120'   | 'Other partner'                         | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Other partner term' | '136'    | 'Business unit 2' | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '136'   | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Other partner term'                    | 'Business unit 2'    | '649'    | 'Other revenues'  | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'  |
+			| '659'   | 'Other partner'                         | 'Other expence'   | 'Business unit 2'                       | 'Other partner term' | '136'    | 'Business unit 2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+		And I close "Edit accounting" window
+	* Check journal entry
+		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                       | 'Debit amount' | 'Extra dimension2 Dr'                   | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                        | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '20,00'  | ''              | 'Yes'      | 'EUR'             | '4010'       | 'Customer (Transactions, by documents)' | '20'           | 'Customer (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | ''                | '9200'       | 'Other partner'    | 'DebitCreditNote (R5020B_PartnersBalance)'                         | 'Other partner'       | '1'             | ''                    |
+			| '2' | '12,70'  | ''              | 'Yes'      | 'EUR'             | '420.2'      | 'Customer (Transactions, by documents)' | ''             | 'Business unit 2'                       | 'Other expence'       | 'TRY'            | ''                | '9200'       | 'Other partner'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' | 'Other partner'       | ''              | ''                    |
+		And I close all client application windows
+
+Scenario: _0991436 check DebitCreditNote registers (Dr TC / Cr OR, different currencies)
+	And I close all client application windows
+	* Check movements by the Register  "R5020 Partners balance"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '18' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 18 dated 15.05.2024 12:10:00' | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '15.05.2024 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '20'     | '20'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '20'     | '20'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '0,61'   | '0,61'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Other partner'                         | 'Other partner'                         | 'Other partner term'                    | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '32,7'   | ''                     | ''                 | ''                   | ''               | '32,7'              | ''                 |
+			| ''                                               | '15.05.2024 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Other partner'                         | 'Other partner'                         | 'Other partner term'                    | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '32,7'   | ''                     | ''                 | ''                   | ''               | '32,7'              | ''                 |
+			| ''                                               | '15.05.2024 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Other partner'                         | 'Other partner'                         | 'Other partner term'                    | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '1'      | ''                     | ''                 | ''                   | ''               | '1'                 | ''                 |
+			| ''                                               | '15.05.2024 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Other partner'                         | 'Other partner'                         | 'Other partner term'                    | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R2021 Customer transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '18' |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 18 dated 15.05.2024 12:10:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                            | 'Partner'                               | 'Agreement'                             | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                               | '15.05.2024 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '0,61'   | 'No'                   | ''                           |
+			| ''                                               | '15.05.2024 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '15.05.2024 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '20'     | 'No'                   | ''                           |
+			| ''                                               | '15.05.2024 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '20'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "R5015 Other partners transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '18' |
+		And I click "Registrations report info" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 18 dated 15.05.2024 12:10:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''              | ''              | ''                   | ''      | ''       | ''                     |
+			| 'Register  "R5015 Other partners transactions"'  | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''              | ''              | ''                   | ''      | ''       | ''                     |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'    | 'Partner'       | 'Agreement'          | 'Basis' | 'Amount' | 'Deferred calculation' |
+			| ''                                               | '15.05.2024 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Other partner' | 'Other partner' | 'Other partner term' | ''      | '1'      | 'No'                   |
+			| ''                                               | '15.05.2024 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Other partner' | 'Other partner' | 'Other partner term' | ''      | ''       | 'Yes'                  |
+			| ''                                               | '15.05.2024 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Other partner' | 'Other partner' | 'Other partner term' | ''      | '32,7'   | 'No'                   |
+			| ''                                               | '15.05.2024 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Other partner' | 'Other partner' | 'Other partner term' | ''      | '32,7'   | 'No'                   |
+		And I close all client application windows
+	* Check movements by the Register  "R5022 Expenses"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '18' |
+		And I click "Registrations report info" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 18 dated 15.05.2024 12:10:00' | ''                    | ''              | ''                | ''                   | ''              | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+			| 'Register  "R5022 Expenses"'                     | ''                    | ''              | ''                | ''                   | ''              | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+			| ''                                               | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Expense type'  | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Amount cost' | 'Calculation movement cost' |
+			| ''                                               | '15.05.2024 12:10:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '12,7'   | ''                  | ''            | ''                          |
+			| ''                                               | '15.05.2024 12:10:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '12,7'   | ''                  | ''            | ''                          |
+			| ''                                               | '15.05.2024 12:10:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '0,39'   | ''                  | ''            | ''                          |
+			| ''                                               | '15.05.2024 12:10:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''            | ''                          |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '18' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 18 dated 15.05.2024 12:10:00' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'            | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                               | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '15.05.2024 12:10:00' | '*'   | 'TRY'      | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '20'     | 'Yes'    | 'No'      |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '18' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 18 dated 15.05.2024 12:10:00' | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                            | 'Legal name contract' | 'Amount' |
+			| ''                                               | '15.05.2024 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Customer (Transactions, by documents)' | ''                    | '20'     |
+			| ''                                               | '15.05.2024 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Other partner'                         | ''                    | '1'      |
+		And I close all client application windows
+
+Scenario: _0991437 check DebitCreditNote accounting (Dr ER / Cr ER, employees, same currency)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '19' |
+		And I select current line in "List" table
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit'  | 'Partner'         | 'Business unit'   | ' '              | 'Credit' | 'Operation'                                                        |
+			| '4020.1' | 'Employee 2'      | 'Business unit 2' | ''               | '4020.1' | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '4020.1' | 'Business unit 2' | 'Own company 2'   | ''               | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'  |
+			| '420.2'  | 'Employee 2'      | 'Business unit 2' | ''               | '4020.1' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+			| '196'    | 'Employee 2'      | 'Business unit 2' | ''               | '196'    | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '196'    | 'Employee 1'      | 'Business unit 2' | 'Other revenues' | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'  |
+			| '659'    | 'Employee 2'      | 'Business unit 2' | ''               | '196'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+		And I close "Edit accounting" window
+	* Check journal entry
+		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '51,00'  | ''              | 'Yes'      | 'TRY'             | '4020.1'     | 'Employee 1'      | '51'           | 'Business unit 2'     | ''                    | 'TRY'            | ''                | '4020.1'     | 'Employee 2'       | 'DebitCreditNote (R5020B_PartnersBalance)' | 'Business unit 2'     | '51'            | ''                    |
+		And I close all client application windows
+
+Scenario: _0991438 check DebitCreditNote registers (Dr ER / Cr ER, employees, same currency)
+	And I close all client application windows
+	* Check movements by the Register  "R3027 Employee cash advance"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '19' |
+		And I click "Registrations report info" button
+		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 19 dated 15.05.2024 12:20:00' | ''                    | ''           | ''              | ''                | ''           | ''                             | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3027 Employee cash advance"'        | ''                    | ''           | ''              | ''                | ''           | ''                             | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'    | 'Agreement'                    | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                               | '15.05.2024 12:20:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Employee 1' | 'Employee 1 cash advance, TRY' | 'TRY'      | 'TRY'                  | 'Legal currency, TRY'          | '51'     | 'No'                   |
+			| ''                                               | '15.05.2024 12:20:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Employee 1' | 'Employee 1 cash advance, TRY' | 'TRY'      | 'TRY'                  | 'Settlement currency'          | '51'     | 'No'                   |
+			| ''                                               | '15.05.2024 12:20:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Employee 1' | 'Employee 1 cash advance, TRY' | 'EUR'      | 'TRY'                  | 'Reporting currency, EUR'      | '1,56'   | 'No'                   |
+			| ''                                               | '15.05.2024 12:20:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Employee 1' | 'Employee 1 cash advance, TRY' | 'EUR'      | 'TRY'                  | 'Budgeting currency, EUR'      | ''       | 'Yes'                  |
+			| ''                                               | '15.05.2024 12:20:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Employee 2' | 'Employee 2 cash advance, TRY' | 'TRY'      | 'TRY'                  | 'Legal currency, TRY'          | '51'     | 'No'                   |
+			| ''                                               | '15.05.2024 12:20:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Employee 2' | 'Employee 2 cash advance, TRY' | 'TRY'      | 'TRY'                  | 'Settlement currency'          | '51'     | 'No'                   |
+			| ''                                               | '15.05.2024 12:20:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Employee 2' | 'Employee 2 cash advance, TRY' | 'EUR'      | 'TRY'                  | 'Reporting currency, EUR'      | '1,56'   | 'No'                   |
+			| ''                                               | '15.05.2024 12:20:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Employee 2' | 'Employee 2 cash advance, TRY' | 'EUR'      | 'TRY'                  | 'Budgeting currency, EUR'      | ''       | 'Yes'                  |
+		And I close all client application windows
+
+Scenario: _0991439 check DebitCreditNote accounting (Dr TC / Cr ER, different currencies)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '20' |
+		And I select current line in "List" table
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit'  | 'Partner'                               | 'Business unit'   | 'Partner term'                          | 'Credit' | ' '              | 'Operation'                                                        |
+			| '4010'   | 'Employee 1'                            | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4020.1' | ''               | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '4020.1' | 'Business unit 2'                       | 'Own company 2'   | 'Business unit 2'                       | '9100'   | ''               | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'  |
+			| '420.2'  | 'Employee 1'                            | 'Business unit 2' | 'Business unit 2'                       | '4020.1' | ''               | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+			| '120'    | 'Employee 1'                            | 'Business unit 2' | 'Customer (Transactions, by documents)' | '196'    | ''               | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '196'    | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Business unit 2'                       | '649'    | 'Other revenues' | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'  |
+			| '659'    | 'Employee 1'                            | 'Business unit 2' | 'Business unit 2'                       | '196'    | ''               | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |
+		And I close "Edit accounting" window
+	* Check journal entry
+		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                       | 'Debit amount' | 'Extra dimension2 Dr'                   | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                        | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '20,00'  | ''              | 'Yes'      | 'EUR'             | '4010'       | 'Customer (Transactions, by documents)' | '20'           | 'Customer (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | ''                | '4020.1'     | 'Employee 1'       | 'DebitCreditNote (R5020B_PartnersBalance)'                         | 'Business unit 2'     | '1'             | ''                    |
+			| '2' | '12,70'  | ''              | 'Yes'      | 'EUR'             | '420.2'      | 'Customer (Transactions, by documents)' | ''             | 'Business unit 2'                       | 'Other expence'       | 'TRY'            | ''                | '4020.1'     | 'Employee 1'       | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' | 'Business unit 2'     | ''              | ''                    |
+		And I close all client application windows
+
+Scenario: _0991440 check DebitCreditNote registers (Dr TC / Cr ER, different currencies)
+	And I close all client application windows
+	* Check movements by the Register  "R5020 Partners balance"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '20' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 20 dated 15.05.2024 12:30:00' | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '15.05.2024 12:30:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '20'     | '20'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:30:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '20'     | '20'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:30:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '0,61'   | '0,61'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:30:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R2021 Customer transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '20' |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 20 dated 15.05.2024 12:30:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                            | 'Partner'                               | 'Agreement'                             | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                               | '15.05.2024 12:30:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '0,61'   | 'No'                   | ''                           |
+			| ''                                               | '15.05.2024 12:30:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '15.05.2024 12:30:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '20'     | 'No'                   | ''                           |
+			| ''                                               | '15.05.2024 12:30:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '20'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "R3027 Employee cash advance"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '20' |
+		And I click "Registrations report info" button
+		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 20 dated 15.05.2024 12:30:00' | ''                    | ''           | ''              | ''                | ''           | ''                             | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3027 Employee cash advance"'        | ''                    | ''           | ''              | ''                | ''           | ''                             | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'    | 'Agreement'                    | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                               | '15.05.2024 12:30:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Employee 1' | 'Employee 1 cash advance, TRY' | 'TRY'      | 'TRY'                  | 'Legal currency, TRY'          | '32,7'   | 'No'                   |
+			| ''                                               | '15.05.2024 12:30:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Employee 1' | 'Employee 1 cash advance, TRY' | 'TRY'      | 'TRY'                  | 'Settlement currency'          | '32,7'   | 'No'                   |
+			| ''                                               | '15.05.2024 12:30:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Employee 1' | 'Employee 1 cash advance, TRY' | 'EUR'      | 'TRY'                  | 'Reporting currency, EUR'      | '1'      | 'No'                   |
+			| ''                                               | '15.05.2024 12:30:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Employee 1' | 'Employee 1 cash advance, TRY' | 'EUR'      | 'TRY'                  | 'Budgeting currency, EUR'      | ''       | 'Yes'                  |
+		And I close all client application windows
+	* Check movements by the Register  "R5022 Expenses"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '20' |
+		And I click "Registrations report info" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 20 dated 15.05.2024 12:30:00' | ''                    | ''              | ''                | ''                   | ''              | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+			| 'Register  "R5022 Expenses"'                     | ''                    | ''              | ''                | ''                   | ''              | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+			| ''                                               | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Expense type'  | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Amount cost' | 'Calculation movement cost' |
+			| ''                                               | '15.05.2024 12:30:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '12,7'   | ''                  | ''            | ''                          |
+			| ''                                               | '15.05.2024 12:30:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '12,7'   | ''                  | ''            | ''                          |
+			| ''                                               | '15.05.2024 12:30:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '0,39'   | ''                  | ''            | ''                          |
+			| ''                                               | '15.05.2024 12:30:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other expence' | ''         | ''            | ''            | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''            | ''                          |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '20' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 20 dated 15.05.2024 12:30:00' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'            | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                               | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '15.05.2024 12:30:00' | '*'   | 'TRY'      | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '20'     | 'Yes'    | 'No'      |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '20' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 20 dated 15.05.2024 12:30:00' | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                            | 'Legal name contract' | 'Amount' |
+			| ''                                               | '15.05.2024 12:30:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Customer (Transactions, by documents)' | ''                    | '20'     |
+		And I close all client application windows
+
+Scenario: _0991441 check DebitCreditNote accounting (Dr AV / Cr TC, header currency EUR)
+	And I close all client application windows
+	* Select DebitCreditNote and post it
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '21' |
+		And I select current line in "List" table
+		And I click "Post" button
+	* Check accounting operations and analytics
+		And I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit'  | 'Partner'                               | 'Business unit'   | 'Partner term'                          | 'Credit' | 'Operation'                                                                                    |
+			| '4020.2' | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'   | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'   | 'Business unit 2'                       | ''                | 'Own company 2'                         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2'  | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+			| '159'    | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '340'    | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '120'    | 'Vendor and Customer (by documents)'    | 'Other revenues'  | 'Business unit 2'                       | '649'    | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '659'    | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '120'    | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |
+		And I close "Edit accounting" window
+	* Check journal entry
+		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Account Dr' | 'Ext. Dim. Debit'                       | 'Debit amount' | 'Extra dimension2 Dr'                   | 'Extra dimension3 Dr' | 'Debit currency' | 'Credit quantity' | 'Account Cr' | 'Ext. Dim. Credit'                      | 'Operation'                                                       | 'Extra dimension2 Cr'                   | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '1' | '32,70'  | ''              | 'Yes'      | 'TRY'             | '4020.2'     | 'Vendor and Customer (by documents)'    | '1'            | 'Vendor (by documents)'                 | 'Business unit 2'     | 'EUR'            | ''                | '4010'       | 'Customer (Transactions, by documents)' | 'DebitCreditNote (R5020B_PartnersBalance)'                        | 'Customer (Transactions, by documents)' | '20'            | 'Business unit 2'     |
+			| '2' | '12,70'  | ''              | 'Yes'      | 'TRY'             | '4010'       | 'Customer (Transactions, by documents)' | ''             | 'Customer (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | ''                | '9100'       | 'Business unit 2'                       | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' | 'Own company 2'                         | ''              | ''                    |
+		And I close all client application windows
+
+Scenario: _0991442 check DebitCreditNote registers (Dr AV / Cr TC, header currency EUR)
+	And I close all client application windows
+	* Check movements by the Register  "R5020 Partners balance"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '21' |
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 21 dated 15.05.2024 12:40:00' | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''              | ''                | ''                                      | ''                                      | ''                                      | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '15.05.2024 12:40:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)'    | 'Vendor and Customer (by documents)'    | 'Vendor (by documents)'                 | ''         | 'TRY'      | 'Legal currency, TRY'          | 'EUR'                  | '32,7'   | ''                     | ''                 | ''                   | '32,7'           | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:40:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)'    | 'Vendor and Customer (by documents)'    | 'Vendor (by documents)'                 | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'EUR'                  | '1'      | ''                     | ''                 | ''                   | '1'              | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:40:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)'    | 'Vendor and Customer (by documents)'    | 'Vendor (by documents)'                 | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'EUR'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:40:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Vendor and Customer (by documents)'    | 'Vendor and Customer (by documents)'    | 'Vendor (by documents)'                 | ''         | 'EUR'      | 'Settlement currency'          | 'EUR'                  | '1'      | ''                     | ''                 | ''                   | '1'              | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:40:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '20'     | '20'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:40:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'TRY'      | 'Settlement currency'          | 'TRY'                  | '20'     | '20'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:40:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '0,61'   | '0,61'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '15.05.2024 12:40:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		And I close all client application windows
+	* Check movements by the Register  "R1020 Advances to vendors"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '21' |
+		And I click "Registrations report info" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 21 dated 15.05.2024 12:40:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                      | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'          | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                   | ''                                   | ''      | ''                      | ''        | ''       | ''                     | ''                         |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                         | 'Partner'                            | 'Order' | 'Agreement'             | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                               | '15.05.2024 12:40:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)' | ''        | '1'      | 'No'                   | ''                         |
+			| ''                                               | '15.05.2024 12:40:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)' | ''        | ''       | 'Yes'                  | ''                         |
+			| ''                                               | '15.05.2024 12:40:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)' | ''        | '32,7'   | 'No'                   | ''                         |
+			| ''                                               | '15.05.2024 12:40:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'EUR'      | 'EUR'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)' | ''        | '1'      | 'No'                   | ''                         |
+		And I close all client application windows
+	* Check movements by the Register  "R2021 Customer transactions"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '21' |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 21 dated 15.05.2024 12:40:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''                                      | ''                                      | ''                                      | ''      | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'                            | 'Partner'                               | 'Agreement'                             | 'Basis' | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                               | '15.05.2024 12:40:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Reporting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '0,61'   | 'No'                   | ''                           |
+			| ''                                               | '15.05.2024 12:40:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Budgeting currency, EUR'      | 'EUR'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | ''       | 'Yes'                  | ''                           |
+			| ''                                               | '15.05.2024 12:40:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '20'     | 'No'                   | ''                           |
+			| ''                                               | '15.05.2024 12:40:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'Settlement currency'          | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | ''      | ''      | ''        | '20'     | 'No'                   | ''                           |
+		And I close all client application windows
+	* Check movements by the Register  "R5021 Revenues"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '21' |
+		And I click "Registrations report info" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 21 dated 15.05.2024 12:40:00' | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| 'Register  "R5021 Revenues"'                     | ''                    | ''              | ''                | ''                   | ''               | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                          |
+			| ''                                               | 'Period'              | 'Company'       | 'Branch'          | 'Profit loss center' | 'Revenue type'   | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Calculation movement cost' |
+			| ''                                               | '15.05.2024 12:40:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Legal currency, TRY'          | ''        | '12,7'   | ''                  | ''                          |
+			| ''                                               | '15.05.2024 12:40:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'TRY'      | ''                    | 'Settlement currency'          | ''        | '12,7'   | ''                  | ''                          |
+			| ''                                               | '15.05.2024 12:40:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Reporting currency, EUR'      | ''        | '0,39'   | ''                  | ''                          |
+			| ''                                               | '15.05.2024 12:40:00' | 'Own company 2' | 'Business unit 2' | 'Business unit 2'    | 'Other revenues' | ''         | 'EUR'      | ''                    | 'Budgeting currency, EUR'      | ''        | ''       | ''                  | ''                          |
+		And I close all client application windows
+	* Check movements by the Register  "T2014 Advances info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '21' |
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 21 dated 15.05.2024 12:40:00' | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                      | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'                | ''              | ''                | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                      | ''        | ''                       | ''                     | ''       | ''                        | ''                     | ''            |
+			| ''                                               | 'Company'       | 'Branch'          | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'     | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | '15.05.2024 12:40:00' | '*'   | 'EUR'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (by documents)' | ''        | 'Settlement currency'    | 'EUR'                  | '1'      | 'No'                      | 'No'                   | 'Receipt'     |
+		And I close all client application windows
+	* Check movements by the Register  "T2015 Transactions info"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '21' |
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 21 dated 15.05.2024 12:40:00' | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'            | ''              | ''                | ''      | ''                    | ''    | ''         | ''                                      | ''                                      | ''                                      | ''                      | ''                        | ''                  | ''          | ''        | ''                       | ''                     | ''       | ''       | ''        |
+			| ''                                               | 'Company'       | 'Branch'          | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                               | 'Legal name'                            | 'Agreement'                             | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Currency movement type' | 'Transaction currency' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                               | 'Own company 2' | 'Business unit 2' | ''      | '15.05.2024 12:40:00' | '*'   | 'TRY'      | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'Settlement currency'    | 'TRY'                  | '20'     | 'No'     | 'Yes'     |
+		And I close all client application windows
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '21' |
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 21 dated 15.05.2024 12:40:00' | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''              | ''                | ''         | ''                                      | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Currency' | 'Legal name'                            | 'Legal name contract' | 'Amount' |
+			| ''                                               | '15.05.2024 12:40:00' | 'Receipt'    | 'Own company 2' | 'Business unit 2' | 'EUR'      | 'Vendor and Customer (by documents)'    | ''                    | '1'      |
+			| ''                                               | '15.05.2024 12:40:00' | 'Expense'    | 'Own company 2' | 'Business unit 2' | 'TRY'      | 'Customer (Transactions, by documents)' | ''                    | '20'     |
+		And I close all client application windows
+
+# EXPECTED FAILURE until defect 13 is fixed - do NOT wrap in XFAIL, it is regression evidence.
+# Vendor advance is created by the DEBIT side of the note (Customer and vendor, Partner term with vendor (advance payment by document), 10 TRY, 15.12.2023).
+# Re-posting "Vendors advances closing 12" offsets it against Purchase invoice 5 (T2010S row for the note). The management registers record the offset,
+# the journal entry must contain the offset entry Dt 5201 / Kt 4020.2 = 10 too. On the current build AccountingServer.IsNotUsedOperation_DebitCreditNote
+# skips the offset operation because the vendor debt type is on the debit side (old-model assumption "offsets happen on the receive side only").
+Scenario: _0991445 check DebitCreditNote advance created on the debit side is offset by Vendors advances closing (Dr AV / Cr TC, December 2023)
+	And I close all client application windows
+	* Post the note (vendor advance 10 TRY appears on the debit side)
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '23'     |
+		And I select current line in "List" table
+		And I click "Post" button
+		And I close all client application windows
+	* Re-post the December 2023 vendors advances closing - it offsets the new advance against Purchase invoice 5
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		Then system warning window does not appear
+		And I close all client application windows
+	* Re-post the note so that the offset rows are written into its registers
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '23'     |
+		And I select current line in "List" table
+		And I click "Post" button
+	* Check journal entry - main entry plus the offset entry
+		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
+		And I click "Save" button
+		And "RegisterRecords" table contains lines
+			| 'Account Dr' | 'Ext. Dim. Debit'     | 'Extra dimension2 Dr'                                     | 'Account Cr' | 'Ext. Dim. Credit'                      | 'Extra dimension2 Cr'                                     | 'Amount' | 'Operation'                                                                              |
+			| '4020.2'     | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | '4010'       | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)'                   | '10,00'  | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'       | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | '4020.2'     | 'Customer and vendor'                   | 'Partner term with vendor (advance payment by document)' | '10,00'  | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+		Then the number of "RegisterRecords" table lines is "equal" "2"
+		And I close all client application windows
+	* Check the offset in the management registers - the advance is spent against Purchase invoice 5
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '23'     |
+		And I click "Registrations report info" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '' | '15.12.2023 12:00:00' | 'Receipt' | 'Own company 2' | 'Business unit 1' | 'Legal currency, TRY' | 'TRY' | 'TRY' | 'Client and vendor' | 'Customer and vendor' | '' | 'Partner term with vendor (advance payment by document)' | '' | '10' | 'No' | ''                                                        |
+			| '' | '15.12.2023 12:00:00' | 'Expense' | 'Own company 2' | 'Business unit 1' | 'Legal currency, TRY' | 'TRY' | 'TRY' | 'Client and vendor' | 'Customer and vendor' | '' | 'Partner term with vendor (advance payment by document)' | '' | '10' | 'No' | 'Vendors advances closing 12 dated 31.12.2023 12:00:00' |
+		And I close all client application windows
+
+# Key scenario, customer side: the note creates a customer advance (credit side), Customers advances closing 12 offsets it against
+# Sales invoice 15 dated 03.12.2023 (earlier than the note); the offset entry Dr 5202 / Cr 4010 must be inside the note. Passes on 0a01bf1a07.
+Scenario: _0991446 check DebitCreditNote customer advance created on the credit side is offset by Customers advances closing against an earlier invoice (Dr TV / Cr AC, December 2023)
+	And I close all client application windows
+	* Post the note (customer advance 10 TRY appears on the credit side)
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '24'     |
+		And I select current line in "List" table
+		And I click "Post" button
+		And I close all client application windows
+	* Re-post the December 2023 customers advances closing - it offsets the new advance against Sales invoice 15
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		Then system warning window does not appear
+		And I close all client application windows
+	* Re-post the note so that the offset rows are written into its registers
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '24'     |
+		And I select current line in "List" table
+		And I click "Post" button
+		And I close all client application windows
+	* Check journal entry - main entry plus the offset entry
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '24'     |
+		And I select current line in "List" table
+		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
+		And I click "Save" button
+		And "RegisterRecords" table contains lines
+			| 'Account Dr' | 'Ext. Dim. Debit'     | 'Extra dimension2 Dr'                                     | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr'                                     | 'Amount' | 'Operation'                                                                                    |
+			| '5201'       | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)'  | '5202'       | 'Customer 5'       | 'Partner term with customer (by document + credit limit)' | '10,00'  | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'       | 'Customer 5'          | 'Partner term with customer (by document + credit limit)' | '4010'       | 'Customer 5'       | 'Partner term with customer (by document + credit limit)' | '10,00'  | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+		Then the number of "RegisterRecords" table lines is "equal" "2"
+		And I close all client application windows
+	* Check the offset in the management registers
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '24'     |
+		And I click "Registrations report info" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Debit/Credit note 24 dated 15.12.2023 12:10:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''           | ''           | ''      | ''                                                        | ''        | ''       | ''                     | ''                                                       |
+			| 'Register  "R2020 Advances from customer"'       | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''           | ''           | ''      | ''                                                        | ''        | ''       | ''                     | ''                                                       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name' | 'Partner'    | 'Order' | 'Agreement'                                               | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing'                             |
+			| ''                                               | '15.12.2023 12:10:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Customer 5' | 'Customer 5' | ''      | 'Partner term with customer (by document + credit limit)' | ''        | '10'     | 'No'                   | ''                                                       |
+			| ''                                               | '15.12.2023 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Customer 5' | 'Customer 5' | ''      | 'Partner term with customer (by document + credit limit)' | ''        | '10'     | 'No'                   | 'Customers advance closing 12 dated 31.12.2023 12:00:00' |
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '24'     |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Debit/Credit note 24 dated 15.12.2023 12:10:00' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''           | ''           | ''                                                        | ''                                           | ''      | ''        | ''       | ''                     | ''                                                       |
+			| 'Register  "R2021 Customer transactions"'        | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''           | ''           | ''                                                        | ''                                           | ''      | ''        | ''       | ''                     | ''                                                       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name' | 'Partner'    | 'Agreement'                                               | 'Basis'                                      | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing'                             |
+			| ''                                               | '15.12.2023 12:10:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Customer 5' | 'Customer 5' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 15 dated 03.12.2023 17:00:00' | ''      | ''        | '10'     | 'No'                   | 'Customers advance closing 12 dated 31.12.2023 12:00:00' |
+		And I close all client application windows
+
+# EXPECTED FAILURE until defect 13 (customer mirror) is fixed - do NOT wrap in XFAIL, it is regression evidence.
+# The note creates a customer receivable on the DEBIT side (Customer 1, agreement Partner term (advance payment by document));
+# Customers advances closing 12 offsets it with the advance of Bank receipt 4 (01.05.2023). As for Sales invoice + Bank receipt, the advance
+# document must carry the offset: R2021B expense with the note as basis and the entry Dr 5202 / Cr 4010 = 10 in the journal entry of Bank receipt 4.
+# On 0a01bf1a07 the closing writes the whole offset under the note (R2020B expense of an advance the note never created, T1040T offset row doubled),
+# Bank receipt 4 gets nothing and no journal entry carries the offset (the note offers only the vendor offset operation - chosen by its credit side).
+Scenario: _0991447 check DebitCreditNote customer receivable created on the debit side is offset by Customers advances closing with an existing advance (Dr TC / Cr TV, December 2023)
+	And I close all client application windows
+	* Post the note (customer receivable 10 TRY appears on the debit side)
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '25'     |
+		And I select current line in "List" table
+		And I click "Post" button
+		And I close all client application windows
+	* Re-post the December 2023 customers advances closing - it offsets the receivable with the advance of Bank receipt 4
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		Then system warning window does not appear
+		And I close all client application windows
+	* Re-post the advance document so that the offset rows are written into its registers
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'     |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		Then system warning window does not appear
+		And I close all client application windows
+	* The advance document carries the offset in the management registers
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'     |
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Bank receipt 4 dated 01.05.2023 14:02:21' | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''           | ''                             | ''                                           | ''                                               | ''      | ''        | ''       | ''                     | ''                                                       |
+			| 'Register  "R2021 Customer transactions"'  | ''                    | ''           | ''              | ''                | ''                             | ''         | ''                     | ''           | ''                             | ''                                           | ''                                               | ''      | ''        | ''       | ''                     | ''                                                       |
+			| ''                                         | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name' | 'Partner'                      | 'Agreement'                                  | 'Basis'                                          | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing'                             |
+			| ''                                         | '01.05.2023 14:02:21' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Legal currency, TRY'          | 'TRY'      | 'TRY'                  | 'Client 1'   | 'Customer 1 (3 partner terms)' | 'Partner term (advance payment by document)' | 'Debit/Credit note 25 dated 15.12.2023 12:20:00' | ''      | ''        | '10'     | 'No'                   | 'Customers advance closing 12 dated 31.12.2023 12:00:00' |
+		And I close all client application windows
+	* ... and in its journal entry
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'     |
+		And I select current line in "List" table
+		And I click "Journal entry" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' |
+			| 'Basic LTV'   |
+		And I select current line in "JournalEntries" table
+		And I click "Save" button
+		And "RegisterRecords" table contains lines
+			| 'Account Dr' | 'Ext. Dim. Debit'              | 'Extra dimension2 Dr'                        | 'Account Cr' | 'Ext. Dim. Credit'             | 'Extra dimension2 Cr'                        | 'Amount' | 'Operation'                                                                       |
+			| '5202'       | 'Customer 1 (3 partner terms)' | 'Partner term (advance payment by document)' | '4010'       | 'Customer 1 (3 partner terms)' | 'Partner term (advance payment by document)' | '10,00'  | 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |
+		Then the number of "RegisterRecords" table lines is "equal" "4"
 		And I close all client application windows
 
 

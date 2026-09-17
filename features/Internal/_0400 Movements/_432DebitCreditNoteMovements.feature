@@ -81,41 +81,69 @@ Scenario: _043200 preparation (DebitCreditNote)
 			And I execute 1C:Enterprise script at server
 				| "Documents.BankPayment.FindByNumber(1334).GetObject().Write(DocumentWriteMode.Posting);"      |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(1).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
 				| "DocObj = Documents.DebitCreditNote.FindByNumber(2).GetObject();"    |
 				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
 				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(3).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(4).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(5).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(6).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(7).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(8).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
 				| "DocObj = Documents.DebitCreditNote.FindByNumber(9).GetObject();"    |
 				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
 				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(10).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(11).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(12).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(13).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(14).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(15).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(16).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -130,7 +158,7 @@ Scenario: _0432001 check preparation
 	When check preparation
 
 
-Scenario: _0432002 check DebitCreditNote movements by the register "R2020 Advances from customer" (CA-CT, by documents, same partner)
+Scenario: _0432002 check DebitCreditNote movements by the register "R2020 Advances from customer" (Dr AC / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -150,7 +178,7 @@ Scenario: _0432002 check DebitCreditNote movements by the register "R2020 Advanc
 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Basic Partner terms, TRY' | ''        | '500'    | 'No'                   | ''                           |		
 	And I close all client application windows
 	
-Scenario: _0432003 check DebitCreditNote movements by the register "R2021 Customer transactions" (CA-CT, by documents, same partner)
+Scenario: _0432003 check DebitCreditNote movements by the register "R2021 Customer transactions" (Dr AC / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -170,7 +198,7 @@ Scenario: _0432003 check DebitCreditNote movements by the register "R2021 Custom
 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Basic Partner terms, TRY' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | ''      | ''        | '500'    | 'No'                   | ''                           |	
 	And I close all client application windows					
 
-Scenario: _0432004 check DebitCreditNote movements by the register "T2014 Advances info" (CA-CT, by documents, same partner)
+Scenario: _0432004 check DebitCreditNote movements by the register "T2014 Advances info" (Dr AC / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -188,7 +216,7 @@ Scenario: _0432004 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                              | 'Main Company' | 'Front office' | '20.02.2024 13:27:56' | '*'   | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | 'en description is empty' | 'TRY'                  | '500'    | 'No'                      | 'No'                   | 'Expense'     |
 	And I close all client application windows
 
-Scenario: _0432005 check DebitCreditNote movements by the register  "T2015 Transactions info" (CA-CT, by documents, same partner)
+Scenario: _0432005 check DebitCreditNote movements by the register  "T2015 Transactions info" (Dr AC / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -206,7 +234,7 @@ Scenario: _0432005 check DebitCreditNote movements by the register  "T2015 Trans
 			| ''                                              | 'Main Company' | 'Front office' | ''      | '20.02.2024 13:27:56' | '*'   | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | 'Sales invoice 116 dated 19.02.2024 19:49:32' | '*'         | ''        | 'en description is empty' | 'TRY'                  | '500'    | 'No'     | 'Yes'     |
 	And I close all client application windows
 
-Scenario: _0432006 check DebitCreditNote movements by the register  "R5020 Partners balance" (CA-CT, by documents, same partner)
+Scenario: _0432006 check DebitCreditNote movements by the register  "R5020 Partners balance" (Dr AC / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -249,7 +277,7 @@ Scenario: _0432007 check DebitCreditNote movements by the register  "R5010 Recon
 	And I close all client application windows
 
 #
-Scenario: _0432008 check DebitCreditNote movements by the register "R2021 Customer transactions" (CT-VA, by documents, same partner)
+Scenario: _0432008 check DebitCreditNote movements by the register "R2021 Customer transactions" (Dr AV / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -269,7 +297,7 @@ Scenario: _0432008 check DebitCreditNote movements by the register "R2021 Custom
 			| ''                                              | '20.02.2024 10:01:09' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Basic Partner terms, TRY' | ''      | ''      | ''        | '121'    | 'No'                   | ''                           |	
 	And I close all client application windows
 	
-Scenario: _0432009 check DebitCreditNote movements by the register "R1020 Advances to vendors" (CT-VA, by documents, same partner)
+Scenario: _0432009 check DebitCreditNote movements by the register "R1020 Advances to vendors" (Dr AV / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -289,7 +317,7 @@ Scenario: _0432009 check DebitCreditNote movements by the register "R1020 Advanc
 			| ''                                              | '20.02.2024 10:01:09' | 'Receipt'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)' | ''        | '121'    | 'No'                   | ''                         |	
 	And I close all client application windows					
 
-Scenario: _0432010 check DebitCreditNote movements by the register "T2014 Advances info" (CT-VA, by documents, same partner)
+Scenario: _0432010 check DebitCreditNote movements by the register "T2014 Advances info" (Dr AV / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -307,7 +335,7 @@ Scenario: _0432010 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                              | 'Main Company' | 'Front office' | '20.02.2024 10:01:09' | '*'   | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (by documents)' | ''        | 'en description is empty' | 'TRY'                  | '121'    | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
-Scenario: _0432011 check DebitCreditNote movements by the register  "T2015 Transactions info" (CT-VA, by documents, same partner)
+Scenario: _0432011 check DebitCreditNote movements by the register  "T2015 Transactions info" (Dr AV / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -325,7 +353,7 @@ Scenario: _0432011 check DebitCreditNote movements by the register  "T2015 Trans
 			| ''                                              | 'Main Company' | 'Front office' | ''      | '20.02.2024 10:01:09' | '*'                                    | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'en description is empty' | 'TRY'                  | '121'    | 'No'     | 'Yes'     |
 	And I close all client application windows
 
-Scenario: _0432012 check DebitCreditNote movements by the register  "R5020 Partners balance" (CT-VA, by documents, same partner)
+Scenario: _0432012 check DebitCreditNote movements by the register  "R5020 Partners balance" (Dr AV / Cr TC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -349,7 +377,7 @@ Scenario: _0432012 check DebitCreditNote movements by the register  "R5020 Partn
 	And I close all client application windows
 
 #
-Scenario: _0432013 check DebitCreditNote movements by the register "R2020 Advances from customer" (CA-CA, by documents, same partner)
+Scenario: _0432013 check DebitCreditNote movements by the register "R2020 Advances from customer" (Dr AC / Cr AC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -372,7 +400,7 @@ Scenario: _0432013 check DebitCreditNote movements by the register "R2020 Advanc
 			| ''                                              | '30.03.2024 11:34:17' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Basic Partner terms, TRY'         | ''        | '128'    | 'No'                   | ''                           |		
 	And I close all client application windows
 					
-Scenario: _0432014 check DebitCreditNote movements by the register "T2014 Advances info" (CA-CA, by documents, same partner)
+Scenario: _0432014 check DebitCreditNote movements by the register "T2014 Advances info" (Dr AC / Cr AC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -391,7 +419,7 @@ Scenario: _0432014 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                              | 'Main Company' | 'Front office' | '30.03.2024 11:34:17' | '*'   | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY'         | ''        | 'en description is empty' | 'TRY'                  | '128'    | 'No'                      | 'No'                   | 'Expense'     |
 	And I close all client application windows
 
-Scenario: _0432015 check DebitCreditNote movements by the register  "R5020 Partners balance" (CA-CA, by documents, same partner)
+Scenario: _0432015 check DebitCreditNote movements by the register  "R5020 Partners balance" (Dr AC / Cr AC, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -415,7 +443,7 @@ Scenario: _0432015 check DebitCreditNote movements by the register  "R5020 Partn
 	And I close all client application windows
 
 #
-Scenario: _0432016 check DebitCreditNote movements by the register "R1020 Advances to vendors" (VA-VA, by documents, same partner)
+Scenario: _0432016 check DebitCreditNote movements by the register "R1020 Advances to vendors" (Dr AV / Cr AV, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -438,7 +466,7 @@ Scenario: _0432016 check DebitCreditNote movements by the register "R1020 Advanc
 			| ''                                              | '01.04.2024 11:48:58' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Vendor (by documents)'   | ''        | '127'    | 'No'                   | ''                         |		
 	And I close all client application windows
 					
-Scenario: _0432017 check DebitCreditNote movements by the register "T2014 Advances info" (VA-VA, by documents, same partner)
+Scenario: _0432017 check DebitCreditNote movements by the register "T2014 Advances info" (Dr AV / Cr AV, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -457,7 +485,7 @@ Scenario: _0432017 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                              | 'Main Company' | 'Front office' | '01.04.2024 11:48:58' | '*'   | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (by documents) 2' | ''        | 'en description is empty' | 'TRY'                  | '127'    | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
-Scenario: _0432018 check DebitCreditNote movements by the register  "R5020 Partners balance" (VA-VA, by documents, same partner)
+Scenario: _0432018 check DebitCreditNote movements by the register  "R5020 Partners balance" (Dr AV / Cr AV, by documents, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -481,7 +509,7 @@ Scenario: _0432018 check DebitCreditNote movements by the register  "R5020 Partn
 	And I close all client application windows
 
 #
-Scenario: _0432019 check DebitCreditNote movements by the register "R2021 Customer transactions" (CT-CT, by partner terms, same partner)
+Scenario: _0432019 check DebitCreditNote movements by the register "R2021 Customer transactions" (Dr TC / Cr TC, by partner terms, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -504,7 +532,7 @@ Scenario: _0432019 check DebitCreditNote movements by the register "R2021 Custom
 			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Main Company' | 'Front office'            | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '111'    | 'No'                   | ''                           |		
 	And I close all client application windows
 					
-Scenario: _0432020 check DebitCreditNote movements by the register "T2015 Transactions info" (CT-CT, by partner terms, same partner)
+Scenario: _0432020 check DebitCreditNote movements by the register "T2015 Transactions info" (Dr TC / Cr TC, by partner terms, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -523,7 +551,7 @@ Scenario: _0432020 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                              | 'Main Company' | 'Distribution department' | ''      | '02.04.2024 13:06:46' | '*'   | 'TRY'      | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'en description is empty' | 'TRY'                  | '111'    | 'Yes'    | 'No'      |
 	And I close all client application windows
 
-Scenario: _0432059 check DebitCreditNote movements by the register "R5020 Partners balance" (CT-CT, by partner terms, same partner)
+Scenario: _0432059 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr TC / Cr TC, by partner terms, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -547,7 +575,7 @@ Scenario: _0432059 check DebitCreditNote movements by the register "R5020 Partne
 	And I close all client application windows
 
 #
-Scenario: _0432021 check DebitCreditNote movements by the register "R1021 Vendors transactions" (CT-CT, by partner terms, same partner)
+Scenario: _0432021 check DebitCreditNote movements by the register "R1021 Vendors transactions" (Dr TV / Cr TV, by partner terms, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -570,7 +598,7 @@ Scenario: _0432021 check DebitCreditNote movements by the register "R1021 Vendor
 			| ''                                              | '26.04.2024 13:20:20' | 'Expense'    | 'Main Company' | 'Front office'            | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, TRY' | ''      | ''      | ''        | '109'    | 'No'                   | ''                         |				
 	And I close all client application windows
 					
-Scenario: _0432022 check DebitCreditNote movements by the register "T2015 Transactions info" (VT-VT, by partner terms, same partner)
+Scenario: _0432022 check DebitCreditNote movements by the register "T2015 Transactions info" (Dr TV / Cr TV, by partner terms, same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -590,7 +618,7 @@ Scenario: _0432022 check DebitCreditNote movements by the register "T2015 Transa
 	And I close all client application windows
 
 #
-Scenario: _0432023 check DebitCreditNote movements by the register "R1021 Vendors transactions" (VA-VT, by documents, different partners)
+Scenario: _0432023 check DebitCreditNote movements by the register "R1021 Vendors transactions" (Dr TV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -610,7 +638,7 @@ Scenario: _0432023 check DebitCreditNote movements by the register "R1021 Vendor
 			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '21'     | 'No'                   | ''                         |		
 	And I close all client application windows
 					
-Scenario: _0432024 check DebitCreditNote movements by the register "R1020 Advances to vendors" (VA-VT, by documents, different partners)
+Scenario: _0432024 check DebitCreditNote movements by the register "R1020 Advances to vendors" (Dr TV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -630,7 +658,7 @@ Scenario: _0432024 check DebitCreditNote movements by the register "R1020 Advanc
 			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '21'     | 'No'                   | ''                         |	
 	And I close all client application windows
 
-Scenario: _0432025 check DebitCreditNote movements by the register "R5020 Partners balance" (VA-VT, by documents, different partners)
+Scenario: _0432025 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr TV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -653,7 +681,7 @@ Scenario: _0432025 check DebitCreditNote movements by the register "R5020 Partne
 			| ''                                              | '26.04.2024 13:31:41' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | 'Vendor (Advance, by documents)'      | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '3,6'    | ''                     | ''                 | ''                   | '3,6'            | ''                  | ''                 |		
 	And I close all client application windows
 
-Scenario: _0432026 check DebitCreditNote movements by the register "T2014 Advances info" (VA-VT, by documents, different partners)
+Scenario: _0432026 check DebitCreditNote movements by the register "T2014 Advances info" (Dr TV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -671,7 +699,7 @@ Scenario: _0432026 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                              | 'Main Company' | 'Front office' | '26.04.2024 13:31:41' | '*'   | 'TRY'      | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | 'en description is empty' | 'TRY'                  | '21'     | 'No'                      | 'No'                   | 'Expense'     |
 	And I close all client application windows
 
-Scenario: _0432027 check DebitCreditNote movements by the register "T2015 Transactions info" (VA-VT, by documents, different partners)
+Scenario: _0432027 check DebitCreditNote movements by the register "T2015 Transactions info" (Dr TV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -689,7 +717,7 @@ Scenario: _0432027 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                              | 'Main Company' | 'Front office' | ''      | '26.04.2024 13:31:41' | '*'   | 'TRY'      | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'en description is empty' | 'TRY'                  | '21'     | 'No'     | 'Yes'     |
 	And I close all client application windows
 
-Scenario: _0432060 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (VA-VT, by documents, different partners)
+Scenario: _0432060 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr TV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -709,7 +737,7 @@ Scenario: _0432060 check DebitCreditNote movements by the register "R5010 Reconc
 	And I close all client application windows
 
 #
-Scenario: _0432028 check DebitCreditNote movements by the register "R1021 Vendors transactions" (VT-CA, by documents, different partners)
+Scenario: _0432028 check DebitCreditNote movements by the register "R1021 Vendors transactions" (Dr TV / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -729,7 +757,7 @@ Scenario: _0432028 check DebitCreditNote movements by the register "R1021 Vendor
 			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '41'     | 'No'                   | ''                         |		
 	And I close all client application windows
 					
-Scenario: _0432029 check DebitCreditNote movements by the register "R2020 Advances from customer" (VT-CA, by documents, different partners)
+Scenario: _0432029 check DebitCreditNote movements by the register "R2020 Advances from customer" (Dr TV / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -749,7 +777,7 @@ Scenario: _0432029 check DebitCreditNote movements by the register "R2020 Advanc
 			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Basic Partner terms, TRY' | ''        | '41'     | 'No'                   | ''                           |		
 	And I close all client application windows
 
-Scenario: _0432030 check DebitCreditNote movements by the register "R5020 Partners balance" (VT-CA, by documents, different partners)
+Scenario: _0432030 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr TV / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -772,7 +800,7 @@ Scenario: _0432030 check DebitCreditNote movements by the register "R5020 Partne
 			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Main Company' | 'Front office' | 'Customer (Advance, by documents)'    | 'Customer (Advance, by documents)'    | 'Basic Partner terms, TRY'            | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '7,02'   | ''                     | '7,02'             | ''                   | ''               | ''                  | ''                 |		
 	And I close all client application windows
 
-Scenario: _0432031 check DebitCreditNote movements by the register "T2014 Advances info" (VT-CA, by documents, different partners)
+Scenario: _0432031 check DebitCreditNote movements by the register "T2014 Advances info" (Dr TV / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -790,7 +818,7 @@ Scenario: _0432031 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                              | 'Main Company' | 'Front office' | '03.04.2024 14:19:17' | '*'   | 'TRY'      | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | 'en description is empty' | 'TRY'                  | '41'     | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
-Scenario: _0432032 check DebitCreditNote movements by the register "T2015 Transactions info" (VT-CA, by documents, different partners)
+Scenario: _0432032 check DebitCreditNote movements by the register "T2015 Transactions info" (Dr TV / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -808,7 +836,7 @@ Scenario: _0432032 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                              | 'Main Company' | 'Front office' | ''      | '03.04.2024 14:19:17' | '*'   | 'TRY'      | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'en description is empty' | 'TRY'                  | '41'     | 'No'     | 'Yes'     |
 	And I close all client application windows
 
-Scenario: _0432065 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (VT-CA, by documents, different partners)
+Scenario: _0432065 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr TV / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -828,7 +856,7 @@ Scenario: _0432065 check DebitCreditNote movements by the register "R5010 Reconc
 	And I close all client application windows
 
 #
-Scenario: _0432033 check DebitCreditNote movements by the register "R1021 Vendors transactions" (VT-CT, by documents, different partners)
+Scenario: _0432033 check DebitCreditNote movements by the register "R1021 Vendors transactions" (Dr TV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -848,7 +876,7 @@ Scenario: _0432033 check DebitCreditNote movements by the register "R1021 Vendor
 			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | ''      | ''      | ''        | '51'     | 'No'                   | ''                         |			
 	And I close all client application windows
 					
-Scenario: _0432034 check DebitCreditNote movements by the register "R2021 Customer transactions" (VT-CT, by documents, different partners)
+Scenario: _0432034 check DebitCreditNote movements by the register "R2021 Customer transactions" (Dr TV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -868,7 +896,7 @@ Scenario: _0432034 check DebitCreditNote movements by the register "R2021 Custom
 			| ''                                              | '26.04.2024 16:15:09' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Basic Partner terms, TRY' | ''      | ''      | ''        | '51'     | 'No'                   | ''                           |		
 	And I close all client application windows
 
-Scenario: _0432035 check DebitCreditNote movements by the register "R5020 Partners balance" (VT-CT, by documents, different partners)
+Scenario: _0432035 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr TV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -892,7 +920,7 @@ Scenario: _0432035 check DebitCreditNote movements by the register "R5020 Partne
 	And I close all client application windows
 
 
-Scenario: _0432036 check DebitCreditNote movements by the register "T2015 Transactions info" (VT-CT, by documents, different partners)
+Scenario: _0432036 check DebitCreditNote movements by the register "T2015 Transactions info" (Dr TV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -911,7 +939,7 @@ Scenario: _0432036 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                              | 'Main Company' | 'Front office' | ''      | '26.04.2024 16:15:09' | '*'   | 'TRY'      | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Basic Partner terms, TRY'            | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'en description is empty' | 'TRY'                  | '51'     | 'No'     | 'Yes'     |
 	And I close all client application windows
 
-Scenario: _0432066 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (VT-CT, by documents, different partners)
+Scenario: _0432066 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr TV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -931,7 +959,7 @@ Scenario: _0432066 check DebitCreditNote movements by the register "R5010 Reconc
 	And I close all client application windows
 
 #
-Scenario: _0432037 check DebitCreditNote movements by the register "R1020 Advances to vendors" (CT-VA, by documents, different partners)
+Scenario: _0432037 check DebitCreditNote movements by the register "R1020 Advances to vendors" (Dr AV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -951,7 +979,7 @@ Scenario: _0432037 check DebitCreditNote movements by the register "R1020 Advanc
 			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '74'     | 'No'                   | ''                         |				
 	And I close all client application windows
 					
-Scenario: _0432038 check DebitCreditNote movements by the register "R2021 Customer transactions" (CT-VA, by documents, different partners)
+Scenario: _0432038 check DebitCreditNote movements by the register "R2021 Customer transactions" (Dr AV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -971,7 +999,7 @@ Scenario: _0432038 check DebitCreditNote movements by the register "R2021 Custom
 			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Basic Partner terms, TRY' | ''      | ''      | ''        | '74'     | 'No'                   | ''                           |		
 	And I close all client application windows
 
-Scenario: _0432039 check DebitCreditNote movements by the register "R5020 Partners balance" (CT-VA, by documents, different partners)
+Scenario: _0432039 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr AV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -995,7 +1023,7 @@ Scenario: _0432039 check DebitCreditNote movements by the register "R5020 Partne
 	And I close all client application windows
 
 
-Scenario: _0432040 check DebitCreditNote movements by the register "T2015 Transactions info" (CT-VA, by documents, different partners)
+Scenario: _0432040 check DebitCreditNote movements by the register "T2015 Transactions info" (Dr AV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1013,7 +1041,7 @@ Scenario: _0432040 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                               | 'Main Company' | 'Front office' | ''      | '26.04.2024 17:51:11' | '*'   | 'TRY'      | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | 'en description is empty' | 'TRY'                  | '74'     | 'No'     | 'Yes'     |
 	And I close all client application windows
 
-Scenario: _0432041 check DebitCreditNote movements by the register "T2014 Advances info" (CT-VA, by documents, different partners)
+Scenario: _0432041 check DebitCreditNote movements by the register "T2014 Advances info" (Dr AV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1031,7 +1059,7 @@ Scenario: _0432041 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                               | 'Main Company' | 'Front office' | '26.04.2024 17:51:11' | '*'   | 'TRY'      | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | 'en description is empty' | 'TRY'                  | '74'     | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
-Scenario: _0432067 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (CT-VA, by documents, different partners)
+Scenario: _0432067 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr AV / Cr TC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1051,7 +1079,7 @@ Scenario: _0432067 check DebitCreditNote movements by the register "R5010 Reconc
 	And I close all client application windows
 
 #
-Scenario: _0432042 check DebitCreditNote movements by the register "R1020 Advances to vendors" (CA-VA, by documents, different partners)
+Scenario: _0432042 check DebitCreditNote movements by the register "R1020 Advances to vendors" (Dr AC / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1071,7 +1099,7 @@ Scenario: _0432042 check DebitCreditNote movements by the register "R1020 Advanc
 			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Vendor (Advance, by documents)' | ''        | '48'     | 'No'                   | ''                         |		
 	And I close all client application windows
 					
-Scenario: _0432043 check DebitCreditNote movements by the register "R2020 Advances from customer" (CA-VA, by documents, different partners)
+Scenario: _0432043 check DebitCreditNote movements by the register "R2020 Advances from customer" (Dr AC / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1091,7 +1119,7 @@ Scenario: _0432043 check DebitCreditNote movements by the register "R2020 Advanc
 			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | ''      | 'Basic Partner terms, TRY' | ''        | '48'     | 'No'                   | ''                           |	
 	And I close all client application windows
 
-Scenario: _0432044 check DebitCreditNote movements by the register "T2014 Advances info" (CA-VA, by documents, different partners)
+Scenario: _0432044 check DebitCreditNote movements by the register "T2014 Advances info" (Dr AC / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1110,7 +1138,7 @@ Scenario: _0432044 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                               | 'Main Company' | 'Front office' | '29.04.2024 10:25:38' | '*'   | 'TRY'      | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | 'en description is empty' | 'TRY'                  | '48'     | 'No'                      | 'No'                   | 'Expense'     |
 	And I close all client application windows
 
-Scenario: _0432061 check DebitCreditNote movements by the register "R5020 Partners balance" (CA-VA, by documents, different partners)
+Scenario: _0432061 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr AC / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1133,7 +1161,7 @@ Scenario: _0432061 check DebitCreditNote movements by the register "R5020 Partne
 			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '8,22'   | ''                     | ''                 | ''                   | '8,22'           | ''                  | ''                 |		
 	And I close all client application windows
 
-Scenario: _0432068 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (CA-VA, by documents, different partners)
+Scenario: _0432068 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr AC / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1152,7 +1180,7 @@ Scenario: _0432068 check DebitCreditNote movements by the register "R5010 Reconc
 			| ''                                                        | '29.04.2024 10:25:38' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Advance, by documents)'   | ''                    | '48'     |		
 	And I close all client application windows
 #
-Scenario: _0432045 check DebitCreditNote movements by the register "R1021 Vendors transactions" (CT-VT, by partner term, different partners)
+Scenario: _0432045 check DebitCreditNote movements by the register "R1021 Vendors transactions" (Dr TV / Cr TC, by partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1172,7 +1200,7 @@ Scenario: _0432045 check DebitCreditNote movements by the register "R1021 Vendor
 			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, TRY' | ''      | ''      | ''        | '43'     | 'No'                   | ''                         |	
 	And I close all client application windows
 					
-Scenario: _0432046 check DebitCreditNote movements by the register "R2021 Customer transactions" (CT-VT, by partner term, different partners)
+Scenario: _0432046 check DebitCreditNote movements by the register "R2021 Customer transactions" (Dr TV / Cr TC, by partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1192,7 +1220,7 @@ Scenario: _0432046 check DebitCreditNote movements by the register "R2021 Custom
 			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Customer (Transacrions, by partner terms)' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''      | ''      | ''        | '43'     | 'No'                   | ''                           |	
 	And I close all client application windows
 
-Scenario: _0432047 check DebitCreditNote movements by the register "R5020 Partners balance" (CT-VT, by partner term, different partners)
+Scenario: _0432047 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr TV / Cr TC, by partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1215,7 +1243,7 @@ Scenario: _0432047 check DebitCreditNote movements by the register "R5020 Partne
 			| ''                                               | '29.04.2024 10:42:01' | 'Expense'    | 'Main Company' | 'Front office' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '7,36'   | '7,36'                 | ''                 | ''                   | ''               | ''                  | ''                 |		
 	And I close all client application windows
 
-Scenario: _0432048 check DebitCreditNote movements by the register "T2015 Transactions info" (CT-VT, by partner term, different partners)
+Scenario: _0432048 check DebitCreditNote movements by the register "T2015 Transactions info" (Dr TV / Cr TC, by partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1234,7 +1262,7 @@ Scenario: _0432048 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                               | 'Main Company' | 'Front office' | ''      | '29.04.2024 10:42:01' | '*'   | 'TRY'      | 'Vendor (Transactions, by partner term)'    | 'Vendor (Transactions, by partner term)'    | 'Vendor, TRY'                               | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | 'en description is empty' | 'TRY'                  | '43'     | 'No'     | 'Yes'     |
 	And I close all client application windows
 
-Scenario: _0432069 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (CT-VT, by partner term, different partners)
+Scenario: _0432069 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr TV / Cr TC, by partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1254,7 +1282,7 @@ Scenario: _0432069 check DebitCreditNote movements by the register "R5010 Reconc
 	And I close all client application windows
 
 #
-Scenario: _0432049 check DebitCreditNote movements by the register "R1020 Advances to vendors" (VA-VA, by documents, different partners)
+Scenario: _0432049 check DebitCreditNote movements by the register "R1020 Advances to vendors" (Dr AV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1278,7 +1306,7 @@ Scenario: _0432049 check DebitCreditNote movements by the register "R1020 Advanc
 	And I close all client application windows
 					
 
-Scenario: _0432050 check DebitCreditNote movements by the register "R5020 Partners balance" (VA-VA, by documents, different partners)
+Scenario: _0432050 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr AV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1301,7 +1329,7 @@ Scenario: _0432050 check DebitCreditNote movements by the register "R5020 Partne
 			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '8,05'   | ''                     | ''                 | ''                   | '8,05'           | ''                  | ''                 |		
 	And I close all client application windows
 
-Scenario: _0432051 check DebitCreditNote movements by the register "T2014 Advances info" (VA-VA, by documents, different partners)
+Scenario: _0432051 check DebitCreditNote movements by the register "T2014 Advances info" (Dr AV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1320,7 +1348,7 @@ Scenario: _0432051 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                               | 'Main Company' | 'Front office' | '29.04.2024 11:06:59' | '*'   | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (by documents) 2'        | ''        | 'en description is empty' | 'TRY'                  | '47'     | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
-Scenario: _0432070 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (VA-VA, by documents, different partners)
+Scenario: _0432070 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr AV / Cr AV, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1340,7 +1368,7 @@ Scenario: _0432070 check DebitCreditNote movements by the register "R5010 Reconc
 	And I close all client application windows
 
 #
-Scenario: _0432052 check DebitCreditNote movements by the register "R2020 Advances from customer" (СA-СA, by documents, different partners)
+Scenario: _0432052 check DebitCreditNote movements by the register "R2020 Advances from customer" (Dr AC / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1364,7 +1392,7 @@ Scenario: _0432052 check DebitCreditNote movements by the register "R2020 Advanc
 	And I close all client application windows
 					
 
-Scenario: _0432053 check DebitCreditNote movements by the register "R5020 Partners balance" (СA-СA, by documents, different partners)
+Scenario: _0432053 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr AC / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1387,7 +1415,7 @@ Scenario: _0432053 check DebitCreditNote movements by the register "R5020 Partne
 			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Basic Partner terms, TRY' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '8,39'   | ''                     | '8,39'             | ''                   | ''               | ''                  | ''                 |		
 	And I close all client application windows
 
-Scenario: _0432054 check DebitCreditNote movements by the register "T2014 Advances info" (СA-СA, by documents, different partners)
+Scenario: _0432054 check DebitCreditNote movements by the register "T2014 Advances info" (Dr AC / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1406,7 +1434,7 @@ Scenario: _0432054 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                               | 'Main Company' | 'Front office' | '29.04.2024 11:15:01' | '*'   | 'TRY'      | 'Customer (Advance, by documents)'   | 'Customer (Advance, by documents)'   | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | 'en description is empty' | 'TRY'                  | '49'     | 'No'                      | 'No'                   | 'Expense'     |
 	And I close all client application windows
 
-Scenario: _0432071 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (СA-СA, by documents, different partners)
+Scenario: _0432071 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr AC / Cr AC, by documents, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1426,7 +1454,7 @@ Scenario: _0432071 check DebitCreditNote movements by the register "R5010 Reconc
 	And I close all client application windows
 
 #
-Scenario: _0432055 check DebitCreditNote movements by the register "R2021 Customer transactions" (СT-СT, by documents and partner term, different partners)
+Scenario: _0432055 check DebitCreditNote movements by the register "R2021 Customer transactions" (Dr TC / Cr TC, by documents and partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1450,7 +1478,7 @@ Scenario: _0432055 check DebitCreditNote movements by the register "R2021 Custom
 	And I close all client application windows
 					
 
-Scenario: _0432056 check DebitCreditNote movements by the register "T2015 Transactions info" (СT-СT, by documents and partner term, different partners)
+Scenario: _0432056 check DebitCreditNote movements by the register "T2015 Transactions info" (Dr TC / Cr TC, by documents and partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1469,7 +1497,7 @@ Scenario: _0432056 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                               | 'Main Company' | 'Front office' | ''      | '29.04.2024 11:21:10' | '*'   | 'TRY'      | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Basic Partner terms, TRY'                  | 'No'                    | 'Yes'                     | 'Sales invoice 114 dated 17.02.2024 12:00:00' | '*'         | ''        | 'en description is empty' | 'TRY'                  | '53'     | 'No'     | 'Yes'     |
 	And I close all client application windows
 
-Scenario: _0432064 check DebitCreditNote movements by the register "R5020 Partners balance" (СT-СT, by documents and partner term, different partners)
+Scenario: _0432064 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr TC / Cr TC, by documents and partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1492,7 +1520,7 @@ Scenario: _0432064 check DebitCreditNote movements by the register "R5020 Partne
 			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Main Company' | 'Front office' | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Basic Partner terms, TRY'                  | 'Sales invoice 114 dated 17.02.2024 12:00:00' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '9,07'   | '9,07'                 | ''                 | ''                   | ''               | ''                  | ''                 |		
 	And I close all client application windows
 
-Scenario: _0432072 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (СT-СT, by documents and partner term, different partners)
+Scenario: _0432072 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr TC / Cr TC, by documents and partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1512,7 +1540,7 @@ Scenario: _0432072 check DebitCreditNote movements by the register "R5010 Reconc
 	And I close all client application windows
 
 ##
-Scenario: _0432057 check DebitCreditNote movements by the register "R1021 Vendors transactions" (СT-СT, by documents and partner term, different partners)
+Scenario: _0432057 check DebitCreditNote movements by the register "R1021 Vendors transactions" (Dr TV / Cr TV, by documents and partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1536,7 +1564,7 @@ Scenario: _0432057 check DebitCreditNote movements by the register "R1021 Vendor
 	And I close all client application windows
 					
 
-Scenario: _0432058 check DebitCreditNote movements by the register "T2015 Transactions info" (СT-СT, by documents and partner term, different partners)
+Scenario: _0432058 check DebitCreditNote movements by the register "T2015 Transactions info" (Dr TV / Cr TV, by documents and partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1555,7 +1583,7 @@ Scenario: _0432058 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                               | 'Main Company' | 'Front office' | ''      | '29.04.2024 12:14:25' | '*'   | 'TRY'      | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | 'Purchase invoice 325 dated 18.02.2024 19:37:36' | '*'         | ''        | 'en description is empty' | 'TRY'                  | '54'     | 'Yes'    | 'No'      |
 	And I close all client application windows
 
-Scenario: _0432063 check DebitCreditNote movements by the register "R5020 Partners balance" (СT-СT, by documents and partner term, different partners)
+Scenario: _0432063 check DebitCreditNote movements by the register "R5020 Partners balance" (Dr TV / Cr TV, by documents and partner term, different partners)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -1578,7 +1606,7 @@ Scenario: _0432063 check DebitCreditNote movements by the register "R5020 Partne
 			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | 'Purchase invoice 325 dated 18.02.2024 19:37:36' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '9,24'   | ''                     | ''                 | '9,24'               | ''               | ''                  | ''                 |		
 	And I close all client application windows
 
-Scenario: _0432073 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (СT-СT, by documents and partner term, different partner)
+Scenario: _0432073 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (Dr TV / Cr TV, by documents and partner term, different partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"

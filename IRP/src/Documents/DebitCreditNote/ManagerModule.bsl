@@ -36,6 +36,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
+	Tables.B1040B_AgingKey.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	Tables.R5011B_CustomersAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5012B_VendorsAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
@@ -177,6 +179,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(B1040B_AgingKey());
 	QueryArray.Add(PostingServer.Exists_R1020B_AdvancesToVendors());
 	QueryArray.Add(PostingServer.Exists_R2020B_AdvancesFromCustomers());
 	Return QueryArray;
@@ -235,319 +238,79 @@ Function Header()
 		|
 		|into Doc
 		|from Document.DebitCreditNote AS Doc where Doc.Ref = &Ref";
-	
-	
-	
-//		"SELECT
-//		|	Doc.Ref AS Ref,
-//		|	Doc.SendDebtType IN (&ArrayOfReceivable) AS SendIsReceivable,
-//		|	Doc.SendDebtType IN (&ArrayOfPayable) AS SendIsPayable,
-//		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable)) AS SendIsEmployee,
-//		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable)) AS ReceiveIsEmployee
-//		|INTO tmp
-//		|FROM
-//		|	Document.DebitCreditNote AS Doc
-//		|WHERE
-//		|	Doc.Ref = &Ref
-//		|;
-//		|
-//		|////////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS DoRecordsSend_R1020B_AdvancesToVendors,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|	END AS RecordsTypeSend_R1020B_AdvancesToVendors,
-//		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS DoRecordsReceive_R1020B_AdvancesToVendors,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(AccumulationRecordType.Receipt)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(AccumulationRecordType.Expense)
-//		|			END
-//		|	END AS RecordsTypeReceive_R1020B_AdvancesToVendors,
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS DoRecordsSend_R2020B_AdvancesFromCustomers,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|	END AS RecordsTypeSend_R2020B_AdvancesFromCustomers,
-//		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS DoRecordsReceive_R2020B_AdvancesFromCustomers,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(AccumulationRecordType.Expense)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(AccumulationRecordType.Receipt)
-//		|			END
-//		|	END AS RecordsTypeReceive_R2020B_AdvancesFromCustomers,
-//		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.AdvanceVendor), VALUE(Enum.DebtTypes.AdvanceCustomer)) AS
-//		|		DoRecordsSend_T2014S_AdvancesInfo,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-//		|		OR Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
-//		|			THEN VALUE(Enum.RecordType.Expense)
-//		|	END AS RecordsTypeSend_T2014S_AdvancesInfo,
-//		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.AdvanceVendor), VALUE(Enum.DebtTypes.AdvanceCustomer)) AS
-//		|		DoRecordsReceive_T2014S_AdvancesInfo,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(Enum.RecordType.Receipt)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(Enum.RecordType.Expense)
-//		|			END
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(Enum.RecordType.Expense)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(Enum.RecordType.Receipt)
-//		|			END
-//		|	END AS RecordsTypeReceive_T2014S_AdvancesInfo,
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS DoRecordsSend_R1021B_VendorsTransactions,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|	END AS RecordsTypeSend_R1021B_VendorsTransactions,
-//		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS DoRecordsReceive_R1021B_VendorsTransactions,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(AccumulationRecordType.Expense)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(AccumulationRecordType.Receipt)
-//		|			END
-//		|	END AS RecordsTypeReceive_R1021B_VendorsTransactions,
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS DoRecordsSend_R2021B_CustomersTransactions,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|	END AS RecordsTypeSend_R2021B_CustomersTransactions,
-//		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS DoRecordsReceive_R2021B_CustomersTransactions,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(AccumulationRecordType.Receipt)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(AccumulationRecordType.Expense)
-//		|			END
-//		|	END AS RecordsTypeReceive_R2021B_CustomersTransactions,
-//		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.TransactionVendor), VALUE(Enum.DebtTypes.TransactionCustomer)) AS
-//		|		DoRecordsSend_T2015S_TransactionsInfo,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
-//		|		OR Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
-//		|			THEN VALUE(Enum.RecordType.Expense)
-//		|	END AS RecordsTypeSend_T2015S_TransactionsInfo,
-//		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.TransactionVendor), VALUE(Enum.DebtTypes.TransactionCustomer)) AS
-//		|		DoRecordsReceive_T2015S_TransactionsInfo,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(Enum.RecordType.Expense)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(Enum.RecordType.Receipt)
-//		|			END
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(Enum.RecordType.Receipt)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(Enum.RecordType.Expense)
-//		|			END
-//		|	END AS RecordsTypeReceive_T2015S_TransactionsInfo,
-//		|	NOT tmp.SendIsEmployee AS DoRecordsSend_R5010B_ReconciliationStatement,
-//		|	CASE
-//		|		WHEN tmp.SendIsReceivable
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|		WHEN tmp.SendIsPayable
-//		|			THEN VALUE(AccumulationRecordType.Receipt)
-//		|	END AS RecordsTypeSend_R5010B_ReconciliationStatement,
-//		|	NOT tmp.ReceiveIsEmployee AS DoRecordsReceive_R5010B_ReconciliationStatement,
-//		|	CASE
-//		|		WHEN tmp.SendIsReceivable
-//		|			THEN VALUE(AccumulationRecordType.Receipt)
-//		|		WHEN tmp.SendIsPayable
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|	END AS RecordsTypeReceive_R5010B_ReconciliationStatement,
-//		|	NOT tmp.SendIsEmployee AS DoRecordsSend_R5020B_PartnersBalance,
-//		|	CASE
-//		|		WHEN tmp.SendIsReceivable
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|		WHEN tmp.SendIsPayable
-//		|			THEN VALUE(AccumulationRecordType.Receipt)
-//		|	END AS RecordsTypeSend_R5020B_PartnersBalance,
-//		|	NOT tmp.ReceiveIsEmployee AS DoRecordsReceive_R5020B_PartnersBalance,
-//		|	CASE
-//		|		WHEN tmp.SendIsReceivable
-//		|			THEN VALUE(AccumulationRecordType.Receipt)
-//		|		WHEN tmp.SendIsPayable
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|	END AS RecordsTypeReceive_R5020B_PartnersBalance,
-//		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.OtherPartnerReceivable)) AS
-//		|		DoRecordsSend_R5015B_OtherPartnersTransactions,
-//		|	CASE
-//		|		WHEN 
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|	END AS RecordsTypeSend_R5015B_OtherPartnersTransactions,
-//		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.OtherPartnerReceivable)) AS
-//		|		DoRecordsReceive_R5015B_OtherPartnersTransactions,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(AccumulationRecordType.Receipt)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(AccumulationRecordType.Expense)
-//		|			END
-//		|	END AS RecordsTypeReceive_R5015B_OtherPartnersTransactions,
-//		|
-//		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable)) AS DoRecordsSend_R3027B_EmployeeCashAdvance,
-//		|
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable)
-//		|			THEN VALUE(AccumulationRecordType.Expense)
-//		|	END AS RecordsTypeSend_R3027B_EmployeeCashAdvance,
-//		|
-//		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable)) AS
-//		|		DoRecordsReceive_R3027B_EmployeeCashAdvance,
-//		|
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable)
-//		|			THEN CASE
-//		|				WHEN tmp.SendIsReceivable
-//		|					THEN VALUE(AccumulationRecordType.Receipt)
-//		|				WHEN tmp.SendIsPayable
-//		|					THEN VALUE(AccumulationRecordType.Expense)
-//		|			END
-//		|	END AS RecordsTypeReceive_R3027B_EmployeeCashAdvance,
-//		|	Doc.Date AS Period,
-//		|	Doc.Company AS Company,
-//		|	UNDEFINED AS VendorsAdvancesClosing,
-//		|	UNDEFINED AS CustomersAdvancesClosing,
-//		|	Doc.Branch AS SendBranch,
-//		|	Doc.SendPartner AS SendPartner,
-//		|	Doc.SendLegalName AS SendLegalName,
-//		|	Doc.SendCurrency AS SendCurrency,
-//		|	Doc.SendAgreement AS SendAgreement,
-//		|	Doc.SendProject AS SendProject,
-//		|	Doc.SendAmount AS SendAmount,
-//		|	Doc.SendUUID AS SendUUID,
-//		|	Doc.SendLegalNameContract AS SendLegalNameContract,
-//		|	CASE
-//		|		WHEN Doc.SendAgreement.UseOrdersForSettlements
-//		|			THEN Doc.SendOrder
-//		|		ELSE UNDEFINED
-//		|	END AS SendOrderSettlements,
-//		|	Doc.SendBasisDocument AS SendBasisDocument,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
-//		|		OR Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
-//		|			THEN Doc.SendBasisDocument
-//		|	END AS SendPartnerBalanceDocument,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
-//		|			THEN Doc.SendAmount
-//		|		ELSE 0
-//		|	END AS SendCustomerTransaction,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
-//		|			THEN Doc.SendAmount
-//		|		ELSE 0
-//		|	END AS SendCustomerAdvance,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
-//		|			THEN Doc.SendAmount
-//		|		ELSE 0
-//		|	END AS SendVendorTransaction,
-//		|	CASE
-//		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-//		|			THEN Doc.SendAmount
-//		|		ELSE 0
-//		|	END AS SendVendorAdvance,
-//		|	CASE
-//		|		WHEN 
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
-//		|			THEN Doc.SendAmount
-//		|		ELSE 0
-//		|	END AS SendOtherTransaction,
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS SendIsCustomerAdvance,
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS SendIsVendorAdvance,
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS SendIsVendorTransaction,
-//		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS SendIsCustomerTransaction,
-//		|	Doc.ReceiveBranch AS ReceiveBranch,
-//		|	Doc.ReceivePartner AS ReceivePartner,
-//		|	Doc.ReceiveLegalName AS ReceiveLegalName,
-//		|	Doc.ReceiveCurrency AS ReceiveCurrency,
-//		|	Doc.ReceiveAgreement AS ReceiveAgreement,
-//		|	Doc.ReceiveProject AS ReceiveProject,
-//		|	Doc.ReceiveAmount AS ReceiveAmount,
-//		|	Doc.ReceiveUUID AS ReceiveUUID,
-//		|	Doc.ReceiveLegalNameContract AS ReceiveLegalNameContract,
-//		|	CASE
-//		|		WHEN Doc.ReceiveAgreement.UseOrdersForSettlements
-//		|			THEN Doc.ReceiveOrder
-//		|		ELSE UNDEFINED
-//		|	END AS ReceiveOrderSettlements,
-//		|	Doc.ReceiveBasisDocument AS ReceiveBasisDocument,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
-//		|		OR Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
-//		|			THEN Doc.ReceiveBasisDocument
-//		|	END AS ReceivePartnerBalanceDocument,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
-//		|			THEN Doc.ReceiveAmount
-//		|		ELSE 0
-//		|	END AS ReceiveCustomerTransaction,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
-//		|			THEN Doc.ReceiveAmount
-//		|		ELSE 0
-//		|	END AS ReceiveCustomerAdvance,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
-//		|			THEN Doc.ReceiveAmount
-//		|		ELSE 0
-//		|	END AS ReceiveVendorTransaction,
-//		|	CASE
-//		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-//		|			THEN Doc.ReceiveAmount
-//		|		ELSE 0
-//		|	END AS ReceiveVendorAdvance,
-//		|	CASE
-//		|		WHEN 
-//		|		Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable)
-//		|			THEN Doc.ReceiveAmount
-//		|		ELSE 0
-//		|	END AS ReceiveOtherTransaction,
-//		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS ReceiveIsCustomerAdvance,
-//		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS ReceiveIsVendorAdvance,
-//		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS ReceiveIsVendorTransaction,
-//		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS ReceiveIsCustomerTransaction
-//		|INTO Doc
-//		|FROM
-//		|	Document.DebitCreditNote AS Doc
-//		|		INNER JOIN tmp AS tmp
-//		|		ON Doc.Ref = tmp.Ref";
 EndFunction
 
 #EndRegion
 
 #Region Posting_MainTables
 
-// advance to vendor
-// advance from customer
-// transaction vendor
-// transaction customer
+Function B1040B_AgingKey()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	DebitCreditNote.Date AS Period,
+		|	DebitCreditNote.Company AS Company,
+		|	DebitCreditNote.Branch AS Branch,
+		|	DebitCreditNote.SendAgreement.CurrencyMovementType.Currency AS Currency,
+		|	DebitCreditNote.SendAgreement AS Agreement,
+		|	DebitCreditNote.SendPartner AS Partner,
+		|	SalesInvoicePaymentTerms.Ref AS Invoice,
+		|	MAX(SalesInvoicePaymentTerms.Date) AS PaymentDate,
+		|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency) AS CurrencyMovementType,
+		|	DebitCreditNote.SendAgreement.CurrencyMovementType.Currency AS TransactionCurrency,
+		|	DebitCreditNote.SendAmount AS Amount
+		|INTO B1040B_AgingKey
+		|FROM
+		|	Document.SalesInvoice.PaymentTerms AS SalesInvoicePaymentTerms
+		|		INNER JOIN Document.DebitCreditNote AS DebitCreditNote
+		|		ON DebitCreditNote.Ref = &Ref
+		|		AND DebitCreditNote.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
+		|		AND SalesInvoicePaymentTerms.Ref = DebitCreditNote.SendBasisDocument
+		|GROUP BY
+		|	DebitCreditNote.SendAmount,
+		|	DebitCreditNote.Company,
+		|	DebitCreditNote.Branch,
+		|	DebitCreditNote.SendAgreement.CurrencyMovementType.Currency,
+		|	DebitCreditNote.SendAgreement,
+		|	DebitCreditNote.SendPartner,
+		|	SalesInvoicePaymentTerms.Ref,
+		|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency),
+		|	DebitCreditNote.Date,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	DebitCreditNote.Date AS Period,
+		|	DebitCreditNote.Company AS Company,
+		|	DebitCreditNote.ReceiveBranch AS Branch,
+		|	DebitCreditNote.ReceiveAgreement.CurrencyMovementType.Currency AS Currency,
+		|	DebitCreditNote.ReceiveAgreement AS Agreement,
+		|	DebitCreditNote.ReceivePartner AS Partner,
+		|	PurchaseInvoicePaymentTerms.Ref AS Invoice,
+		|	MAX(PurchaseInvoicePaymentTerms.Date) AS PaymentDate,
+		|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency) AS CurrencyMovementType,
+		|	DebitCreditNote.ReceiveAgreement.CurrencyMovementType.Currency AS TransactionCurrency,
+		|	DebitCreditNote.ReceiveAmount AS Amount
+		|FROM
+		|	Document.PurchaseInvoice.PaymentTerms AS PurchaseInvoicePaymentTerms
+		|		INNER JOIN Document.DebitCreditNote AS DebitCreditNote
+		|		ON DebitCreditNote.Ref = &Ref
+		|		AND DebitCreditNote.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
+		|		AND PurchaseInvoicePaymentTerms.Ref = DebitCreditNote.ReceiveBasisDocument
+		|GROUP BY
+		|	DebitCreditNote.ReceiveAmount,
+		|	DebitCreditNote.Company,
+		|	DebitCreditNote.ReceiveBranch,
+		|	DebitCreditNote.ReceiveAgreement.CurrencyMovementType.Currency,
+		|	DebitCreditNote.ReceiveAgreement,
+		|	DebitCreditNote.ReceivePartner,
+		|	PurchaseInvoicePaymentTerms.Ref,
+		|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency),
+		|	DebitCreditNote.Date,
+		|	VALUE(AccumulationRecordType.Receipt)";	
+EndFunction
 
 Function R5010B_ReconciliationStatement()
 	Return
@@ -628,7 +391,6 @@ Function R5015B_OtherPartnersTransactions()
 		|	Doc.IsOther_Receive";
 EndFunction
 
-//+
 Function R3027B_EmployeeCashAdvance()
 	Return
 		"SELECT
@@ -665,9 +427,6 @@ Function R3027B_EmployeeCashAdvance()
 		|	Doc.IsEmployee_Receive";
 EndFunction
 
-// advance to vendor
-// advance from customer
-//+
 Function T2014S_AdvancesInfo()
 	Return 
 		"SELECT
@@ -716,7 +475,6 @@ Function T2014S_AdvancesInfo()
 		|	Doc.IsAdvanceVendor_Receive or Doc.IsAdvanceCustomer_Receive";
 EndFunction
 
-//+
 Function R1020B_AdvancesToVendors()
 	Return
 		"SELECT
@@ -784,7 +542,6 @@ Function R1020B_AdvancesToVendors()
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
-//+
 Function R2020B_AdvancesFromCustomers()
 	Return
 		"SELECT
@@ -852,7 +609,6 @@ Function R2020B_AdvancesFromCustomers()
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
 EndFunction
 
-//+
 Function T2015S_TransactionsInfo()
 	Return 
 		"SELECT
@@ -903,7 +659,6 @@ Function T2015S_TransactionsInfo()
 		|	Doc.IsTransactionVendor_Receive or Doc.IsTransactionCustomer_Receive";
 EndFunction
 
-//+
 Function R1021B_VendorsTransactions()
 	Return
 		"SELECT
@@ -975,78 +730,8 @@ Function R1021B_VendorsTransactions()
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
-//		"SELECT
-//		|	Doc.RecordsTypeSend_R1021B_VendorsTransactions AS RecordType,
-//		|	Doc.Period AS Period,
-//		|	Doc.Company AS Company,
-//		|	Doc.SendBranch AS Branch,
-//		|	Doc.SendCurrency AS Currency,
-//		|	Doc.SendLegalName AS LegalName,
-//		|	Doc.SendPartner AS Partner,
-//		|	Doc.SendAgreement AS Agreement,
-//		|	Doc.SendProject AS Project,
-//		|	Doc.SendBasisDocument AS Basis,
-//		|	Doc.SendOrderSettlements AS Order,
-//		|	Doc.SendAmount AS Amount,
-//		|	Doc.SendUUID AS Key,
-//		|	Doc.VendorsAdvancesClosing AS VendorsAdvancesClosing
-//		|INTO R1021B_VendorsTransactions
-//		|FROM
-//		|	Doc AS Doc
-//		|WHERE
-//		|	Doc.DoRecordsSend_R1021B_VendorsTransactions
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	Doc.RecordsTypeReceive_R1021B_VendorsTransactions,
-//		|	Doc.Period,
-//		|	Doc.Company,
-//		|	Doc.ReceiveBranch,
-//		|	Doc.ReceiveCurrency,
-//		|	Doc.ReceiveLegalName,
-//		|	Doc.ReceivePartner,
-//		|	Doc.ReceiveAgreement,
-//		|	Doc.ReceiveProject,
-//		|	Doc.ReceiveBasisDocument,
-//		|	Doc.ReceiveOrderSettlements,
-//		|	Doc.ReceiveAmount,
-//		|	Doc.ReceiveUUID,
-//		|	Doc.VendorsAdvancesClosing
-//		|FROM
-//		|	Doc AS Doc
-//		|WHERE
-//		|	Doc.DoRecordsReceive_R1021B_VendorsTransactions
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	CASE
-//		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-//		|			THEN VALUE(AccumulationRecordType.Receipt)
-//		|		ELSE VALUE(AccumulationRecordType.Expense)
-//		|	END,
-//		|	OffsetOfAdvances.Period,
-//		|	OffsetOfAdvances.Company,
-//		|	OffsetOfAdvances.Branch,
-//		|	OffsetOfAdvances.Currency,
-//		|	OffsetOfAdvances.LegalName,
-//		|	OffsetOfAdvances.Partner,
-//		|	OffsetOfAdvances.Agreement,
-//		|	OffsetOfAdvances.TransactionProject,
-//		|	OffsetOfAdvances.TransactionDocument,
-//		|	OffsetOfAdvances.TransactionOrder,
-//		|	OffsetOfAdvances.Amount,
-//		|	OffsetOfAdvances.Key,
-//		|	OffsetOfAdvances.Recorder
-//		|FROM
-//		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-//		|WHERE
-//		|	OffsetOfAdvances.Document = &Ref
-//		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
-//+
 Function R2021B_CustomersTransactions()
 	Return
 		"SELECT
@@ -1128,9 +813,6 @@ EndFunction
 Function R5012B_VendorsAging()
 	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_Offset();
 EndFunction
-
-// advance to vendor
-// advance from customer
 
 Function R5020B_PartnersBalance()
 	Return
@@ -1415,83 +1097,6 @@ Function T1040T_AccountingAmounts()
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
-	
-	
-	
-//		"SELECT
-//		|	Doc.Date AS Period,
-//		|	UNDEFINED AS RowKey,
-//		|	Doc.SendUUID AS Key,
-//		|	Doc.SendCurrency AS Currency,
-//		|	Doc.SendAmount AS Amount,
-//		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_R5020B_PartnersBalance) AS Operation,
-//		|
-//		|	case 
-//		|	when Doc.SendDebtType in (&ArrayOfReceivable) then  Doc.ReceiveCurrency
-//		|	when Doc.SendDebtType in (&ArrayOfPayable) then     Doc.SendCurrency
-//		|	end as DrCurrency,
-//		|
-//		|	case 
-//		|	when Doc.SendDebtType in (&ArrayOfReceivable) then Doc.ReceiveAmount
-//		|	when Doc.SendDebtType in (&ArrayOfPayable) then    Doc.SendAmount
-//		|	end as DrCurrencyAmount,
-//		|
-//		|	case 
-//		|	when Doc.SendDebtType in (&ArrayOfReceivable) then Doc.SendCurrency
-//		|	when Doc.SendDebtType in (&ArrayOfPayable) then    Doc.ReceiveCurrency
-//		|	end as CrCurrency,
-//		|
-//		|	case 
-//		|	when Doc.SendDebtType in (&ArrayOfReceivable) then Doc.SendAmount
-//		|	when Doc.SendDebtType in (&ArrayOfPayable) then    Doc.ReceiveAmount
-//		|	end as CrCurrencyAmount,
-//		|		
-//		|	UNDEFINED AS AdvancesClosing
-//		|INTO T1040T_AccountingAmounts
-//		|FROM
-//		|	Document.DebitCreditNote AS Doc
-//		|WHERE
-//		|	Doc.Ref = &Ref
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	OffsetOfAdvances.Period,
-//		|	OffsetOfAdvances.Key,
-//		|	OffsetOfAdvances.Key,
-//		|	OffsetOfAdvances.Currency,
-//		|	OffsetOfAdvances.Amount,
-//		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset),
-//		|	UNDEFINED,
-//		|	0,
-//		|	UNDEFINED,
-//		|	0,
-//		|	OffsetOfAdvances.Recorder
-//		|FROM
-//		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-//		|WHERE
-//		|	OffsetOfAdvances.Document = &Ref
-//		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	OffsetOfAdvances.Period,
-//		|	OffsetOfAdvances.Key,
-//		|	OffsetOfAdvances.Key,
-//		|	OffsetOfAdvances.Currency,
-//		|	OffsetOfAdvances.Amount,
-//		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset),
-//		|	UNDEFINED,
-//		|	0,
-//		|	UNDEFINED,
-//		|	0,
-//		|	OffsetOfAdvances.Recorder
-//		|FROM
-//		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-//		|WHERE
-//		|	OffsetOfAdvances.Document = &Ref
-//		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
@@ -1556,9 +1161,6 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	AdditionalAnalytics = GetAdditionalAnalytics(Parameters);	
 	Debit_Analytics = AdditionalAnalytics.Sender;
 	Credit_Analytics = AdditionalAnalytics.Receiver;
-			
-	//QueryParams = GetAdditionalQueryParameters(Undefined);
-	//Ref = QueryParams.Ref;
 		
 	AccountVariantsMapping = GetAccountVariantsMapping();
 	Debit_AccountKey = AccountVariantsMapping.Get(Parameters.ObjectData.SendDebtType);
@@ -1572,20 +1174,6 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		Credit_AccountKey = "AccountAdvancesVendor";
 	EndIf;
 		
-//	If QueryParams.ArrayOfReceivable.Find(Parameters.ObjectData.SendDebtType) <> Undefined Then
-//		Credit_Analytics  = AdditionalAnalytics.Sender;
-//		Credit_AccountKey = AccountVariantsMapping.Get(Parameters.ObjectData.SendDebtType);
-//		Debit_Analytics   = AdditionalAnalytics.Receiver;
-//		Debit_AccountKey  = AccountVariantsMapping.Get(Parameters.ObjectData.ReceiveDebtType);
-//	ElsIf QueryParams.ArrayOfPayable.Find(Parameters.ObjectData.SendDebtType) <> Undefined Then		 
-//		Debit_Analytics   = AdditionalAnalytics.Sender;
-//		Debit_AccountKey  = AccountVariantsMapping.Get(Parameters.ObjectData.SendDebtType);
-//		Credit_Analytics  = AdditionalAnalytics.Receiver;
-//		Credit_AccountKey = AccountVariantsMapping.Get(Parameters.ObjectData.ReceiveDebtType);		
-//	Else
-//		Raise StrTemplate("Unsupported send debt type[%1]", Parameters.ObjectData.SendDebtType);
-//	EndIf; 
-
 	If Debit_AccountKey = Undefined Then
 		Raise "Error determine Debit account key";
 	EndIf;
@@ -1621,68 +1209,6 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Credit_Analytics);
 	
 	Return AccountingAnalytics;
-
-
-//	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-//	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-//	
-//	AdditionalAnalytics = GetAdditionalAnalytics(Parameters);
-//	AccountVariantsMapping = GetAccountVariantsMapping();
-//			
-//	QueryParams = GetAdditionalQueryParameters(Undefined);
-//	
-//	Debit_AccountKey = Undefined;
-//	Credit_AccountKey = Undefined;
-//	
-//	If QueryParams.ArrayOfReceivable.Find(Parameters.ObjectData.SendDebtType) <> Undefined Then
-//		Credit_Analytics  = AdditionalAnalytics.Sender;
-//		Credit_AccountKey = AccountVariantsMapping.Get(Parameters.ObjectData.SendDebtType);
-//		Debit_Analytics   = AdditionalAnalytics.Receiver;
-//		Debit_AccountKey  = AccountVariantsMapping.Get(Parameters.ObjectData.ReceiveDebtType);
-//	ElsIf QueryParams.ArrayOfPayable.Find(Parameters.ObjectData.SendDebtType) <> Undefined Then		 
-//		Debit_Analytics   = AdditionalAnalytics.Sender;
-//		Debit_AccountKey  = AccountVariantsMapping.Get(Parameters.ObjectData.SendDebtType);
-//		Credit_Analytics  = AdditionalAnalytics.Receiver;
-//		Credit_AccountKey = AccountVariantsMapping.Get(Parameters.ObjectData.ReceiveDebtType);		
-//	Else
-//		Raise StrTemplate("Unsupported send debt type[%1]", Parameters.ObjectData.SendDebtType);
-//	EndIf; 
-//
-//	If Debit_AccountKey = Undefined Then
-//		Raise "Error determine Debit account key";
-//	EndIf;
-//	
-//	If Credit_AccountKey = Undefined Then
-//		Raise "Error determine Credit account key";
-//	EndIf;
-//	
-//	If Upper(Debit_AccountKey) = Upper("AccountCashAdvance") Then
-//		Debit_AccountVariants = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, 
-//			Debit_Analytics.Partner);
-//	Else
-//		Debit_AccountVariants = AccountingServer.GetT9012S_AccountsPartner(AccountParameters,
-//			Debit_Analytics.Partner,
-//			Debit_Analytics.Agreement,
-//			Debit_Analytics.Currency);
-//	EndIf;
-//	
-//	If Upper(Credit_AccountKey) = Upper("AccountCashAdvance") Then
-//		Credit_AccountVariants = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, 
-//			Credit_Analytics.Partner);
-//	Else
-//		Credit_AccountVariants = AccountingServer.GetT9012S_AccountsPartner(AccountParameters,
-//			Credit_Analytics.Partner,
-//			Credit_Analytics.Agreement,
-//			Credit_Analytics.Currency);
-//	EndIf;
-//	
-//	AccountingAnalytics.Debit = Debit_AccountVariants[Debit_AccountKey];
-//	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Debit_Analytics);
-//	
-//	AccountingAnalytics.Credit = Credit_AccountVariants[Credit_AccountKey];
-//	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Credit_Analytics);
-//	
-//	Return AccountingAnalytics;
 EndFunction
 
 // Vendors transactions - Advances to vendors (offset)

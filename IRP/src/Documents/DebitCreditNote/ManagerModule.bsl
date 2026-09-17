@@ -1240,7 +1240,10 @@ Function R5020B_PartnersBalance()
 		|	0,
 		|	0 AS CustomerTransaction,
 		|	0 as CustomerAdvance,
-		|	case when &IsTransactionVendor_Send or &IsTransactionVendor_Receive then OffsetOfAdvances.Amount else 0 end AS VendorTransaction,
+		|	case when 
+		|	(&IsTransactionVendor_Send or &IsTransactionVendor_Receive)
+		|	or (not &IsTransactionVendor_Send and not &IsTransactionVendor_Receive and &IsAdvanceVendor_Send)
+		|	 then OffsetOfAdvances.Amount else 0 end AS VendorTransaction,
 		|	0 VendorAdvance,
 		|	0 AS OtherTransaction,
 		|
@@ -1307,7 +1310,10 @@ Function R5020B_PartnersBalance()
 		|	OffsetOfAdvances.Currency,
 		|
 		|	0,
-		|	case when &IsTransactionCustomer_Send or &IsTransactionCustomer_Receive then OffsetOfAdvances.Amount else 0 end AS CustomerTransaction,
+		|	case when 
+		|	(&IsTransactionCustomer_Send or &IsTransactionCustomer_Receive)
+		|	or (not &IsTransactionCustomer_Send and not &IsTransactionCustomer_Receive and &IsAdvanceCustomer_Receive)
+		|	 then OffsetOfAdvances.Amount else 0 end AS CustomerTransaction,
 		|	0 AS CustomerAdvance,
 		|	0 AS VendorTransaction,
 		|	0 AS VendorAdvance,
@@ -1685,17 +1691,17 @@ Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	AdditionalAnalytics = New Structure();
-	AdditionalAnalytics.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
-	AdditionalAnalytics.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
-	AdditionalAnalytics.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
-	AdditionalAnalytics.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
-	AdditionalAnalytics.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
-	AdditionalAnalytics.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
+	AdditionalAnalytics.Insert("Partner"       , Parameters.ObjectData.SendPartner);
+	AdditionalAnalytics.Insert("LegalName"     , Parameters.ObjectData.SendLegalName);
+	AdditionalAnalytics.Insert("Agreement"     , Parameters.ObjectData.SendAgreement);
+	AdditionalAnalytics.Insert("Contract"      , Parameters.ObjectData.SendLegalNameContract);
+	AdditionalAnalytics.Insert("Order"         , Parameters.ObjectData.SendOrder);
+	AdditionalAnalytics.Insert("BasisDocument" , Parameters.ObjectData.SendBasisDocument);
 	
 	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-	                                                      Parameters.ObjectData.ReceivePartner, 
-	                                                      Parameters.ObjectData.ReceiveAgreement,
-	                                                      Parameters.ObjectData.ReceiveCurrency);
+	                                                      Parameters.ObjectData.SendPartner, 
+	                                                      Parameters.ObjectData.SendAgreement,
+	                                                      Parameters.ObjectData.SendCurrency);
 	// Debit                                                      
 	AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);

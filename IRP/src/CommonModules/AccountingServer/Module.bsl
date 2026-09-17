@@ -3181,21 +3181,21 @@ Function IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData)
 EndFunction
 
 Function IsNotUsedOperation_DebitCreditNote(Operation, ObjectData, RowData)
-	AO = Catalogs.AccountingOperations;
-	
-	If Operation = AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset Then
-		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer 
-			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
-			Return False;
-		EndIf;
-		Return True;
-	ElsIf Operation = AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset Then
-		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor
-			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
-			Return False;
-		EndIf;
-		Return True;	
-	EndIf;
+//	AO = Catalogs.AccountingOperations;
+//	
+//	If Operation = AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset Then
+//		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer 
+//			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
+//			Return False;
+//		EndIf;
+//		Return True;
+//	ElsIf Operation = AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset Then
+//		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor
+//			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
+//			Return False;
+//		EndIf;
+//		Return True;	
+//	EndIf;
 	
 	Return False;
 EndFunction

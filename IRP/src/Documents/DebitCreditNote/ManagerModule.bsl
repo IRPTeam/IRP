@@ -91,56 +91,6 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	
-	// advance vendor - debit - SEND
-//	Register  "R1020 Advances to vendors" - RECEIPT
-//	Register  "R5010 Reconciliation statement" - RECEIPT
-//	Register  "R5020 Partners balance" - RECEIPT
-//	Register  "T2014 Advances info" - RECEIPT
-
-	// advance customer - credit - RECEIVE
-//  Register  "R2020 Advances from customer" - RECEIPT
-//  Register  "R5010 Reconciliation statement" - EXPENSE
-//  Register  "R5020 Partners balance" - EXPENSE
-//  Register  "T2014 Advances info" - RECEIPT
-	
-	// transaction vendor - credit - RECEIVE
-//  Register  "R1021 Vendors transactions" - RECEIPT
-//  Register  "R5010 Reconciliation statement" - EXPENSE
-//  Register  "R5020 Partners balance" - EXPENSE
-//  Register  "T2015 Transactions info" - is due
-	
-	// transaction customer - debit - SEND
-	//Register  "R2021 Customer transactions" - RECEIPT
-	//Register  "R5010 Reconciliation statement" - RECEIPT
-	//Register  "R5020 Partners balance" - RECEIPT
-	//Register  "T2015 Transactions info" - is due
-	
-	// employee - debit - SEND
-//	Register  "R3027 Employee cash advance" - RECEIPT
-	
-	// other partner - debit - SEND
-	//Register  "R5010 Reconciliation statement" - RECEIPT
-	//Register  "R5015 Other partners transactions" - RECEIPT
-	//Register  "R5020 Partners balance" - RECEIPT
-	
-//
-//		
-//	
-	// Receivable
-//	ArrayOfReceivable = New Array();
-//	ArrayOfReceivable.Add(Enums.DebtTypes.AdvanceVendor);
-//	ArrayOfReceivable.Add(Enums.DebtTypes.TransactionCustomer);
-//	ArrayOfReceivable.Add(Enums.DebtTypes.OtherPartnerReceivable);
-//	ArrayOfReceivable.Add(Enums.DebtTypes.EmployeeReceivable);
-//	StrParams.Insert("ArrayOfReceivable", ArrayOfReceivable);
-	
-	// Payable
-//	ArrayOfPayable = New Array();
-//	ArrayOfPayable.Add(Enums.DebtTypes.AdvanceCustomer);
-//	ArrayOfPayable.Add(Enums.DebtTypes.TransactionVendor);
-//	StrParams.Insert("ArrayOfPayable", ArrayOfPayable);
-	
-	
 	StrParams.Insert("IsAdvanceVendor_Send", 	   Ref.SendDebtType = Enums.DebtTypes.AdvanceVendor); 
 	StrParams.Insert("IsAdvanceCustomer_Send",     Ref.SendDebtType = Enums.DebtTypes.AdvanceCustomer); 
 	StrParams.Insert("IsTransactionVendor_Send",   Ref.SendDebtType = Enums.DebtTypes.TransactionVendor); 
@@ -1055,8 +1005,6 @@ Function T1040T_AccountingAmounts()
 		|INTO T1040T_AccountingAmounts
 		|FROM
 		|	Doc AS Doc
-//		|WHERE
-//		|	Doc.Ref = &Ref
 		|
 		|UNION ALL
 		|

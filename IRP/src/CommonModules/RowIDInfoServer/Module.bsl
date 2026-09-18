@@ -9326,12 +9326,12 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	|			AND CASE
 	|				WHEN &Filter_PartnerSales
 	|					THEN RowRef.PartnerSales = &PartnerSales
-	|				ELSE FALSE
+	|				ELSE TRUE
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_LegalNameSales
 	|					THEN RowRef.LegalNameSales = &LegalNameSales
-	|				ELSE FALSE
+	|				ELSE TRUE
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_TransactionType

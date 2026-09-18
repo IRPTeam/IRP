@@ -156,6 +156,8 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_SI(ThisObject);
+		LinkedFilter.Delete("PartnerSales");
+		LinkedFilter.Delete("LegalNameSales");
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
 		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);

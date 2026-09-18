@@ -35,7 +35,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	ExcludeRegisters = New Array();
 	ExcludeRegisters.Add("B1040B_AgingKey");
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters, False, ExcludeRegisters);
-	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
 

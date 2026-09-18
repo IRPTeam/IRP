@@ -64,12 +64,24 @@ Procedure SendPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcess
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	
+	FilterByType = ModelServer_V2.GetPartnerAttributeFilterByDebtType(Object.SendDebtType);
+	If ValueIsFilled(FilterByType) Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterByType, True, DataCompositionComparisonType.Equal));
+	EndIf;
+	
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure SendPartnerEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	
+	FilterByType = ModelServer_V2.GetPartnerAttributeFilterByDebtType(Object.SendDebtType);
+	If ValueIsFilled(FilterByType) Then
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterByType, True, ComparisonType.Equal));
+	EndIf;
+	
 	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
@@ -173,12 +185,24 @@ Procedure ReceivePartnerStartChoice(Object, Form, Item, ChoiceData, StandardProc
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	
+	FilterByType = ModelServer_V2.GetPartnerAttributeFilterByDebtType(Object.ReceiveDebtType);
+	If ValueIsFilled(FilterByType) Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterByType, True, DataCompositionComparisonType.Equal));
+	EndIf;
+	
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure ReceivePartnerEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	
+	FilterByType = ModelServer_V2.GetPartnerAttributeFilterByDebtType(Object.ReceiveDebtType);
+	If ValueIsFilled(FilterByType) Then
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterByType, True, ComparisonType.Equal));
+	EndIf;
+	
 	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 

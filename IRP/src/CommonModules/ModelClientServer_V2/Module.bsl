@@ -452,6 +452,7 @@ Function GetChain()
 	
 	Chain.Insert("ChangePreliminaryDataByBasis"  , GetChainLink("ChangePreliminaryDataByBasisExecute"));
 	Chain.Insert("ChangePaymentDateByBasisDocument"  , GetChainLink("ChangePaymentDateByBasisDocumentExecute"));
+	Chain.Insert("ChangePartnerByDebtType"  , GetChainLink("ChangePartnerByDebtTypeExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -4893,6 +4894,21 @@ Function ChangePaymentDateByBasisDocumentExecute(Options) Export
 				
 	EndIf;
 	
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_BY_DEBT_TYPE
+
+Function ChangePartnerByDebtTypeOptions() Export
+	Return GetChainLinkOptions("Partner, DebtType");
+EndFunction
+
+Function ChangePartnerByDebtTypeExecute(Options) Export
+	If ValueIsFilled(Options.DebtType) Then
+		Return ModelServer_V2.GetPartnerByDebtType(Options.Partner, Options.DebtType);
+	EndIf;
 	Return Undefined;
 EndFunction
 

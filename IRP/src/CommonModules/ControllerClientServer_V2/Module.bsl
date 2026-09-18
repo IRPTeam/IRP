@@ -3802,6 +3802,20 @@ Function BindSendPartner(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendPartner");
 EndFunction
 
+// SendPartner.ChangeSendPartnerBySendDebtType.Step
+Procedure StepChangeSendPartnerBySendDebtType(Parameters, Chain) Export
+	Chain.ChangePartnerByDebtType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePartnerByDebtType.Setter = "SetSendPartner";
+	Options = ModelClientServer_V2.ChangePartnerByDebtTypeOptions();
+	Options.Partner       = GetSendPartner(Parameters);
+	Options.DebtType      = GetSendDebtType(Parameters);
+	Options.StepName = "StepChangeSendPartnerBySendDebtType";
+	Chain.ChangePartnerByDebtType.Options.Add(Options);
+EndProcedure
+
 #EndRegion
 
 #Region RECEIVE_PARTNER
@@ -3836,6 +3850,20 @@ Function BindReceivePartner(Parameters)
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceivePartner");
 EndFunction
+
+// SendPartner.ChangeReceivePartnerByReceiveDebtType.Step
+Procedure StepChangeReceivePartnerByReceiveDebtType(Parameters, Chain) Export
+	Chain.ChangePartnerByDebtType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePartnerByDebtType.Setter = "SetReceivePartner";
+	Options = ModelClientServer_V2.ChangePartnerByDebtTypeOptions();
+	Options.Partner       = GetReceivePartner(Parameters);
+	Options.DebtType      = GetReceiveDebtType(Parameters);
+	Options.StepName = "StepChangeReceivePartnerByReceiveDebtType";
+	Chain.ChangePartnerByDebtType.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -17420,7 +17448,8 @@ Function BindSendDebtType(Parameters)
 	Binding = New Structure();
 	
 	Binding.Insert("DebitCreditNote",
-		"StepChangeSendAgreementBySendPartner,
+		"StepChangeSendPartnerBySendDebtType,
+		|StepChangeSendAgreementBySendPartner,
 		|StepChangeSendBasisDocumentBySendAgreement");
 
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendDebtType");
@@ -17454,7 +17483,8 @@ Function BindReceiveDebtType(Parameters)
 	Binding = New Structure();
 	
 	Binding.Insert("DebitCreditNote",
-		"StepChangeReceiveAgreementByReceivePartner,
+		"StepChangeReceivePartnerByReceiveDebtType,
+		|StepChangeReceiveAgreementByReceivePartner,
 		|StepChangeReceiveBasisDocumentByReceiveAgreement");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveDebtType");

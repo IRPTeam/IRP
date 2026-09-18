@@ -778,6 +778,7 @@
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+              <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
@@ -830,6 +831,7 @@
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+              <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
@@ -1407,6 +1409,7 @@
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+              <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
@@ -1459,6 +1462,7 @@
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+              <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
             </extInfo>
           </items>
           <items xsi:type="form:FormField">

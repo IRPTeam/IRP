@@ -49,7 +49,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
 		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
 					
-		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TransitUUID, ThisObject.Currency, ThisObject.SendAmount);
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TransitUUID, ThisObject.Company.LegalCurrencyMovementType.Currency, ThisObject.SendAmount);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.TransitUUID);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 			
@@ -89,6 +89,14 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_148, "SendAmount", ThisObject);
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_148, "ReceiveAmount", ThisObject);
 		Cancel = True;
+	EndIf;
+	
+	If ThisObject.SendDebtType <> Enums.DebtTypes.EmployeeReceivable And FOServer.IsUseLegalName() Then
+		CheckedAttributes.Add("SendLegalName");
+	EndIf;
+	
+	If ThisObject.ReceiveDebtType <> Enums.DebtTypes.EmployeeReceivable And FOServer.IsUseLegalName() Then
+		CheckedAttributes.Add("ReceiveLegalName");
 	EndIf;
 EndProcedure
 

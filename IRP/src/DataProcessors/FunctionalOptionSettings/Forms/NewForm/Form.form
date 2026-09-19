@@ -2,7 +2,7 @@
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
   <key>tr</key>
-  <value>İşlevsel seçenekler ayarları</value>
+  <value>İşlevsel seçenek ayarları</value>
  </title>
  <title>
   <key>ru</key>

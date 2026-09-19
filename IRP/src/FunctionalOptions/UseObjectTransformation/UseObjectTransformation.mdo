@@ -3,11 +3,11 @@
  <name>UseObjectTransformation</name>
  <synonym>
   <key>tr</key>
-  <value>Nesne dönüşümünü kullan</value>
+  <value>Evrakları al/sat sync mekanizmasını kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Использовать преобразования объектов</value>
+  <value>Использовать преобраз. объектов</value>
  </synonym>
  <synonym>
   <key>en</key>

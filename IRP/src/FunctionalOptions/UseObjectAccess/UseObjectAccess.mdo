@@ -3,11 +3,11 @@
  <name>UseObjectAccess</name>
  <synonym>
   <key>tr</key>
-  <value>Nesne erişimini kullan</value>
+  <value>Nesne yetkilendirme mekanizmasını kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Использовать - Права доступа к объектам</value>
+  <value>Использовать права доступа к объектам</value>
  </synonym>
  <synonym>
   <key>en</key>

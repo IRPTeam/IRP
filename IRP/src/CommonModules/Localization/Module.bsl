@@ -1453,13 +1453,13 @@ Function Strings(Lang) Export
 		|tr='Satır: %1. Miktar, birim miktarı 1 olduğunda temel birimdeki miktarla eşit değil'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en='Row: %1. Not filled quantity in source of origins';
 		|ru='Строка: %1. Не заполнено количество в источниках происхождения';
-		|tr='Satır: %1. Kaynak kökenlerinde miktar doldurulmadı'", Lang));
+		|tr='Satır: %1. Envanter menşeilerinde miktar doldurulmadı'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en='Row: %1. Quantity in source of origins diff quantity in serial lot number';
 		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в серийных номерах';
-		|tr='Satır: %1. Köken kaynağındaki miktar seri lot numarasındaki miktarla farklı'", Lang));
+		|tr='Satır: %1. Envanter menşeindeki miktar seri lot numarasındaki miktarla farklı'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en='Row: %1. Quantity in source of origins diff quantity in item list';
 		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в товарах';
-		|tr='Satır: %1. Köken kaynaklarının miktarı, öğe listesindeki miktarla farklı'", Lang));
+		|tr='Satır: %1. Envanter menşei miktarı, öğe listesindeki miktarla farklı'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en='Row: %1. Not filled Unit';
 		|ru='Строка: %1. Не заполненна единица измерений';
 		|tr='Satır: %1. Birim doldurulmamış'", Lang));

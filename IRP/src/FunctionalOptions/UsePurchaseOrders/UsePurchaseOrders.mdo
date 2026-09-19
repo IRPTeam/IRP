@@ -3,11 +3,11 @@
  <name>UsePurchaseOrders</name>
  <synonym>
   <key>tr</key>
-  <value>Satın alma siparişlerini kullanın</value>
+  <value>Satın alma siparişleri kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Использовать заказы на покупку</value>
+  <value>Использовать заказы поставщикам</value>
  </synonym>
  <synonym>
   <key>en</key>

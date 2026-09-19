@@ -223,11 +223,11 @@
   <name>AccessToEditAttributes</name>
   <synonym>
    <key>tr</key>
-   <value>Access to edit attributes</value>
+   <value>Alanları düzeltme yetkisi</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Access to edit attributes</value>
+   <value>Доступ к редактированию реквизитов</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -245,11 +245,11 @@
    <name>MetadataRef</name>
    <synonym>
     <key>tr</key>
-    <value>Metadata ref</value>
+    <value>Anaveri ref</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Metadata ref</value>
+    <value>Ссылка на метаданные</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -267,11 +267,11 @@
    <name>TabularName</name>
    <synonym>
     <key>tr</key>
-    <value>Tabular name</value>
+    <value>Tablo ismi</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tabular name</value>
+    <value>Наименование табличной части</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -322,11 +322,11 @@
   <name>AccessToViewAttributes</name>
   <synonym>
    <key>tr</key>
-   <value>Access to view attributes</value>
+   <value>Alanlar görüntüleme yetkisi</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Access to view attributes</value>
+   <value>Доступ к просмотру реквизитов</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -344,11 +344,11 @@
    <name>MetadataRef</name>
    <synonym>
     <key>tr</key>
-    <value>Metadata ref</value>
+    <value>Anaveri ref</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Metadata ref</value>
+    <value>Ссылка на метаданные</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -366,11 +366,11 @@
    <name>TabularName</name>
    <synonym>
     <key>tr</key>
-    <value>Tabular name</value>
+    <value>Tablo ismi</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tabular name</value>
+    <value>Наименование табличной части</value>
    </synonym>
    <synonym>
     <key>en</key>

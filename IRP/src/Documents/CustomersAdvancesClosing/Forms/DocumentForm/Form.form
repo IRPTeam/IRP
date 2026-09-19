@@ -300,7 +300,7 @@
    <titleLocation>None</titleLocation>
    <toolTip>
     <key>tr</key>
-    <value>Set automatically for rows edited manually. Only checked rows are stored as a fixed offset by "Save fixed offset"; unchecked rows are recalculated automatically.</value>
+    <value>Manuel düzeltilmiş satırlar için otomatik olarak belirlenmiştir. Sadece işeretlenmiş satırlar "Düzeltilmiş kapamaları kaydet" olarak kaydedilecektir, işaretlenmemiş satırlar otomatik olarak hesaplanacaktır.</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
@@ -1000,7 +1000,7 @@
   <name>FixedOffsetOfAdvances</name>
   <title>
    <key>tr</key>
-   <value>Fixed offset of advances</value>
+   <value>Düzeltilmiş avans kapaması</value>
   </title>
   <title>
    <key>ru</key>
@@ -1334,7 +1334,7 @@
   <name>SaveFixedOffset</name>
   <title>
    <key>tr</key>
-   <value>Save fixed offset</value>
+   <value>Düzeltilmiş kapamaları kaydet</value>
   </title>
   <title>
    <key>ru</key>

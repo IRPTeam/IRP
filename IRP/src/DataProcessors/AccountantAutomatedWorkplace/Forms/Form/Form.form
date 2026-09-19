@@ -2027,7 +2027,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>File preview pages</value>
+       <value>Страницы предпросмотра файлов</value>
       </title>
       <title>
        <key>en</key>
@@ -4266,7 +4266,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Visible settings</value>
+   <value>Настройки видимости</value>
   </title>
   <title>
    <key>en</key>
@@ -4289,7 +4289,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Show file preview</value>
+   <value>Показать предпросмотрт файлов</value>
   </title>
   <title>
    <key>en</key>

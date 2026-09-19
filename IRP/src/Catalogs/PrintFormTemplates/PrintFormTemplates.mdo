@@ -216,11 +216,11 @@
   <name>UsePrintInformations</name>
   <synonym>
    <key>tr</key>
-   <value>Use print informations</value>
+   <value>Yazdırma bilgilerini kullan</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Use print informations</value>
+   <value>Использовать информация для печати</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -239,11 +239,11 @@
   <name>PrintInfoPath</name>
   <synonym>
    <key>tr</key>
-   <value>Print info path</value>
+   <value>Yazdırma bilgisi adresi</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Print info path</value>
+   <value>Путь информации для печати</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -263,11 +263,11 @@
   <name>LimitedAccess</name>
   <synonym>
    <key>tr</key>
-   <value>Limited access</value>
+   <value>Kısıtlanmış erişim</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Limited access</value>
+   <value>Ограниченный доступ</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -542,11 +542,11 @@
    <name>HideEmpty</name>
    <synonym>
     <key>tr</key>
-    <value>Hide empty</value>
+    <value>Boş olanları gizle</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Hide empty</value>
+    <value>Скрыть пустые</value>
    </synonym>
    <synonym>
     <key>en</key>

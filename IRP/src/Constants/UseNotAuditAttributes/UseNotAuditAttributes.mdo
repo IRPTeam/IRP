@@ -8,11 +8,11 @@
  <name>UseNotAuditAttributes</name>
  <synonym>
   <key>tr</key>
-  <value>Use not audit attributes</value>
+  <value>Audit dışı alanları kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Use not audit attributes</value>
+  <value>Использовать не аудитные реквизиты</value>
  </synonym>
  <synonym>
   <key>en</key>

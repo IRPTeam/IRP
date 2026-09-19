@@ -8,7 +8,7 @@
    <id>479</id>
    <title>
     <key>tr</key>
-    <value>This document has a Storno:</value>
+    <value>Bu evrak kayıt iptal evrakına sahiptir</value>
    </title>
    <title>
     <key>ru</key>
@@ -97,7 +97,7 @@
   </userVisible>
   <title>
    <key>tr</key>
-   <value>Group head storno</value>
+   <value>Grup başlık kayıt iptal</value>
   </title>
   <title>
    <key>ru</key>
@@ -5130,7 +5130,7 @@
   <name>DocStorno</name>
   <title>
    <key>tr</key>
-   <value>Doc storno</value>
+   <value>Evrak kayıt iptal</value>
   </title>
   <title>
    <key>ru</key>

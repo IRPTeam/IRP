@@ -684,11 +684,11 @@
        </userVisible>
        <title>
         <key>tr</key>
-        <value>Group command template MXL</value>
+        <value>Grup komut MXL şablon</value>
        </title>
        <title>
         <key>ru</key>
-        <value>Group command template MXL</value>
+        <value>Группа команд шаблона MXL</value>
        </title>
        <title>
         <key>en</key>
@@ -718,11 +718,11 @@
       </userVisible>
       <title>
        <key>tr</key>
-       <value>Commands MXL</value>
+       <value>MXL komutlar</value>
       </title>
       <title>
        <key>ru</key>
-       <value>Commands MXL</value>
+       <value>MXL команды</value>
       </title>
       <title>
        <key>en</key>
@@ -946,11 +946,11 @@
        </userVisible>
        <title>
         <key>tr</key>
-        <value>Group command FT</value>
+        <value>Grup komut FT</value>
        </title>
        <title>
         <key>ru</key>
-        <value>Group command FT</value>
+        <value>Группа команд FT</value>
        </title>
        <title>
         <key>en</key>
@@ -981,11 +981,11 @@
        </userVisible>
        <title>
         <key>tr</key>
-        <value>Group command template FT</value>
+        <value>Grup komut FT şablon</value>
        </title>
        <title>
         <key>ru</key>
-        <value>Group command template FT</value>
+        <value>Группа команд шаблона FT</value>
        </title>
        <title>
         <key>en</key>
@@ -1014,11 +1014,11 @@
       </userVisible>
       <title>
        <key>tr</key>
-       <value>Commands FT</value>
+       <value>FT komutlar</value>
       </title>
       <title>
        <key>ru</key>
-       <value>Commands FT</value>
+       <value>FT команды</value>
       </title>
       <title>
        <key>en</key>
@@ -1097,7 +1097,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Formatted text</value>
+      <value>Форматированный текст</value>
      </title>
      <title>
       <key>en</key>
@@ -1299,11 +1299,11 @@
     </userVisible>
     <title>
      <key>tr</key>
-     <value>Group print info</value>
+     <value>Grup yazdırma bilgisi</value>
     </title>
     <title>
      <key>ru</key>
-     <value>Group print info</value>
+     <value>Группа печатной информации</value>
     </title>
     <title>
      <key>en</key>
@@ -3189,11 +3189,11 @@
   <name>TemplateFormattedText</name>
   <title>
    <key>tr</key>
-   <value>Template formatted text</value>
+   <value>Formatlanmış metin şablonu</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Template formatted text</value>
+   <value>Шаблон форматированного текста</value>
   </title>
   <title>
    <key>en</key>
@@ -3214,11 +3214,11 @@
   <name>ParametersListForInsert</name>
   <title>
    <key>tr</key>
-   <value>Parameters list for insert</value>
+   <value>Yapıştırmak için parametre listesi</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Parameters list for insert</value>
+   <value>Список параметров для вставки</value>
   </title>
   <title>
    <key>en</key>
@@ -3559,11 +3559,11 @@
   <name>OpenPrintInfoPath</name>
   <title>
    <key>tr</key>
-   <value>Path to Print Info</value>
+   <value>Yazdırma bilgisi adresi</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Path to Print Info</value>
+   <value>Путь к информации для печати</value>
   </title>
   <title>
    <key>en</key>
@@ -3600,11 +3600,11 @@
   <name>AddParameters</name>
   <title>
    <key>tr</key>
-   <value>Add parameters</value>
+   <value>Parametreleri ekle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Add parameters</value>
+   <value>Добавить параметры</value>
   </title>
   <title>
    <key>en</key>

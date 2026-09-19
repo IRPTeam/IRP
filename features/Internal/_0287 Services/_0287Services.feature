@@ -754,4 +754,18 @@ Scenario: _029150 create Retail return receipt for service and product
 			And "List" table contains lines
 				| 'Number'                                  |
 				| '$$NumberRetailReturnReceipt029150$$'     |
+			* Check the return without base receipt reverses expenses by the return amount, the service line writes no expenses (IRP-908)
+				# The product line reverses its net / total amount (169,49 / 200,00 TRY); the service line must not appear in R5022 Expenses
+				And I go to line in "List" table
+					| 'Number'                                  |
+					| '$$NumberRetailReturnReceipt029150$$'     |
+				And I click "Registrations report" button
+				And in "ResultTable" spreadsheet document I move to "R1C1" cell
+				And I select "R5022 Expenses" exact value from "Register" drop-down list
+				And I click "Generate report" button
+				And "ResultTable" spreadsheet document contains lines:
+					| '' | '*' | '-169,49' | '-200' | '' | 'Main Company' | '*' | '*' | '' | 'Table' | '' | '' | 'TRY' | '' | 'Local currency' | '' | '' |
+					| '' | '*' | '-169,49' | '-200' | '' | 'Main Company' | '*' | '*' | '' | 'Table' | '' | '' | 'TRY' | '' | 'en description is empty' | '' | '' |
+				And "ResultTable" spreadsheet document does not contain values
+					| 'Internet' |
 			And I close all client application windows

@@ -11,31 +11,31 @@
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
-			<description/>
+			<description>Turkish</description>
 		</languageInfo>
 		<languageInfo>
 			<id>ru</id>
 			<code>Russian</code>
-			<description/>
+			<description>Russian</description>
 		</languageInfo>
 		<languageInfo>
 			<id>fr</id>
 			<code>French</code>
-			<description/>
+			<description>French</description>
 		</languageInfo>
 		<languageInfo>
 			<id>de</id>
 			<code>German</code>
-			<description/>
+			<description>German</description>
 		</languageInfo>
 		<languageInfo>
 			<id>ha</id>
 			<code>HASH</code>
-			<description/>
+			<description>HASH</description>
 		</languageInfo>
 	</languageSettings>
 	<columns>
-		<size>24</size>
+		<size>25</size>
 		<columnsItem>
 			<index>0</index>
 			<column>
@@ -85,79 +85,19 @@
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>8</index>
+			<index>24</index>
 			<column>
 				<formatIndex>9</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>9</index>
+			<index>23</index>
 			<column>
 				<formatIndex>10</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>10</index>
-			<column>
-				<formatIndex>11</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>11</index>
-			<column>
-				<formatIndex>12</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>12</index>
-			<column>
-				<formatIndex>13</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>13</index>
-			<column>
-				<formatIndex>14</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>14</index>
-			<column>
-				<formatIndex>15</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>15</index>
-			<column>
-				<formatIndex>11</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>16</index>
-			<column>
-				<formatIndex>12</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>17</index>
-			<column>
-				<formatIndex>13</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>18</index>
-			<column>
-				<formatIndex>14</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>19</index>
-			<column>
-				<formatIndex>16</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>20</index>
+			<index>22</index>
 			<column>
 				<formatIndex>11</formatIndex>
 			</column>
@@ -169,15 +109,81 @@
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>22</index>
+			<index>20</index>
 			<column>
 				<formatIndex>13</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>23</index>
+			<index>19</index>
+			<column>
+				<formatIndex>9</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>18</index>
+			<column>
+				<formatIndex>10</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>17</index>
+			<column>
+				<formatIndex>11</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>16</index>
+			<column>
+				<formatIndex>12</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>15</index>
 			<column>
 				<formatIndex>14</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>14</index>
+			<column>
+				<formatIndex>9</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>13</index>
+			<column>
+				<formatIndex>10</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>12</index>
+			<column>
+				<formatIndex>11</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>11</index>
+			<column>
+				<formatIndex>12</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>10</index>
+			<column>
+				<formatIndex>15</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>9</index>
+			<column>
+				<formatIndex>16</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>8</index>
+			<column>
+				<formatIndex>17</formatIndex>
 			</column>
 		</columnsItem>
 	</columns>
@@ -186,7 +192,7 @@
 		<row>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -205,7 +211,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -224,7 +230,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -243,7 +249,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -262,7 +268,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -281,7 +287,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -300,7 +306,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -319,7 +325,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -338,7 +344,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -357,7 +363,26 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
+					<tl>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Hesap kategorisi</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Категория счета</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>AccountCategory</v8:content>
+						</v8:item>
+					</tl>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -376,7 +401,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -395,7 +420,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -414,7 +439,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -433,7 +458,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -452,7 +477,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -471,7 +496,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -490,7 +515,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -509,7 +534,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -528,7 +553,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -547,7 +572,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -566,7 +591,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -585,7 +610,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -604,7 +629,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -623,7 +648,7 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>18</f>
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -673,28 +698,31 @@
 		<width>70</width>
 	</format>
 	<format>
-		<width>86</width>
-	</format>
-	<format>
-		<width>115</width>
-	</format>
-	<format>
-		<width>103</width>
-	</format>
-	<format>
-		<width>104</width>
+		<width>99</width>
 	</format>
 	<format>
 		<width>107</width>
 	</format>
 	<format>
-		<width>99</width>
+		<width>104</width>
+	</format>
+	<format>
+		<width>103</width>
+	</format>
+	<format>
+		<width>80</width>
 	</format>
 	<format>
 		<width>122</width>
 	</format>
 	<format>
-		<width>80</width>
+		<width>115</width>
+	</format>
+	<format>
+		<width>86</width>
+	</format>
+	<format>
+		<width>91</width>
 	</format>
 	<format>
 		<border>0</border>

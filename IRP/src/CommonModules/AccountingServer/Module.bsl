@@ -2807,6 +2807,36 @@ EndFunction
 
 // Form
 
+// On create at server list form.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  MainAttribute - FormAttribute -
+//  Cancel - Boolean - Cancel
+//  StandardProcessing - Boolean - Standard processing
+Procedure OnCreateAtServerListForm(Form, MainAttribute, Cancel, StandardProcessing) Export
+	FormNamesArray = StrSplit(Form.FormName, ".");
+	FullName = FormNamesArray[0] + "." + FormNamesArray[1];
+	
+	ExternalCommandsServer.CreateCommands(Form, FullName, Enums.FormTypes.ListForm);
+	InternalCommandsServer.CreateCommands(Form, MainAttribute, FullName, Enums.FormTypes.ListForm);
+EndProcedure
+
+// On create at server choice form.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  MainAttribute - FormAttribute -
+//  Cancel - Boolean - Cancel
+//  StandardProcessing - Boolean - Standard processing
+Procedure OnCreateAtServerChoiceForm(Form, MainAttribute, Cancel, StandardProcessing) Export
+	FormNamesArray = StrSplit(Form.FormName, ".");
+	FullName = FormNamesArray[0] + "." + FormNamesArray[1];
+	
+	ExternalCommandsServer.CreateCommands(Form, FullName, Enums.FormTypes.ChoiceForm);
+	InternalCommandsServer.CreateCommands(Form, MainAttribute, FullName, Enums.FormTypes.ChoiceForm);
+EndProcedure
+
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	UpdateFormTables(Object, Form);
 EndProcedure

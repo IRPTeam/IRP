@@ -307,7 +307,7 @@
      </presentation>
      <presentation>
       <key>ru</key>
-      <value>From document</value>
+      <value>Из документа</value>
      </presentation>
      <presentation>
       <key>en</key>
@@ -324,7 +324,7 @@
      </presentation>
      <presentation>
       <key>ru</key>
-      <value>From history</value>
+      <value>Из истории</value>
      </presentation>
      <presentation>
       <key>en</key>
@@ -2322,7 +2322,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Is saved print form</value>
+    <value>Это сохраненная печатная форма</value>
    </title>
    <title>
     <key>en</key>
@@ -2454,7 +2454,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Print source</value>
+   <value>Источник печати</value>
   </title>
   <title>
    <key>en</key>
@@ -2481,7 +2481,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Use saved print forms</value>
+   <value>Использовать сохраненные печатные формы</value>
   </title>
   <title>
    <key>en</key>

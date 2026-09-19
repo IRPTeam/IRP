@@ -327,6 +327,13 @@ Procedure CreateUpdateAccounts(QueryTable, ValueTable)
 		NewChart.Currency = Row.Currency;
 		NewChart.Quantity = Row.Quantity;
 		NewChart.OffBalance = Row.OffBalance;
+		
+		AccountCategory = Upper(Left(TrimL(Row.AccountCategory), 1));
+		If AccountCategory = "B" Or AccountCategory = "S" Then
+			NewChart.AccountCategory = Enums.AccountCategories.BalanceSheet;
+		ElsIf AccountCategory = "P" Or AccountCategory = "L" Then 
+			NewChart.AccountCategory = Enums.AccountCategories.ProfitAndLoss;
+		EndIf;
 	
 		If Upper(Row.A_P) = "P" Then
 			NewChart.Type = AccountType.Passive;
@@ -405,6 +412,7 @@ ThisObject.Columns =
 		|A_P,
 		|Quantity,
 		|OffBalance,
+		|AccountCategory,
 		|Sub1Type,
 		|Sub1Turnover,
 		|Sub1Quantity,

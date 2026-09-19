@@ -2699,35 +2699,35 @@ Function Strings(Lang) Export
 		|tr='Fatura olmadan ürün sevki yasaklandı'", Lang));
 	Strings.Insert("Error_191", NStr("en='[%1] already exists for document [%2]';
 		|ru='[%1] уже существует для документа [%2]';
-		|tr='[%1] already exists for document [%2]'", Lang));
+		|tr='[%1] şu evrak için mevcuttur [%2]'", Lang));
 	Strings.Insert("Error_192",   NStr("en='Document date [%1] less than Basis date [%2]';
 		|ru='Дата документа [%1] меньше даты основания [%2]';
-		|tr='Document date [%1] less than Basis date [%2]'", Lang));
+		|tr=' [%1] evrak tarihi, [%2] kaynak evrakı tarihinden daha küçüktür'", Lang));
 	Strings.Insert("Error_193",   NStr("en='Basis document [%1] not posted';
 		|ru='Документ-основание [%1] не проведён';
-		|tr='Basis document [%1] not posted'", Lang));
+		|tr='[%1] kaynak evrakı kaydedilmemiş'", Lang));
 	
 	Strings.Insert("Error_194",   NStr("en='From days [%1] more than to days[%2]';
 		|ru='«Дней с» [%1] больше, чем «Дней по» [%2]';
-		|tr='From days [%1] more than to days[%2]'", Lang));
+		|tr='[%1] başlangıç gün sayısı [%2] bitiş gün sayısından büyüktür'", Lang));
 	Strings.Insert("Error_195",   NStr("en='Gap with the previous period was detected';
 		|ru='Обнаружен временной разрыв с предыдущим периодом';
-		|tr='Gap with the previous period was detected'", Lang));
+		|tr='Önceki dönemlerde boşluk bulunmuştu'", Lang));
 	Strings.Insert("Error_196",   NStr("en='Overlap with the previous period was detected';
 		|ru='Обнаружено пересечение с предыдущим периодом';
-		|tr='Overlap with the previous period was detected'", Lang));
+		|tr='Önceki periodlarda çakışma bulunmuştu'", Lang));
 	Strings.Insert("Error_197",   NStr("en='Last line should contain 0 in to days';
 		|ru='В последней строке «Дней по» должно быть равно 0';
-		|tr='Last line should contain 0 in to days'", Lang));
+		|tr='Son satır bitiş gün sayısı 0 olmalıdır'", Lang));
 	Strings.Insert("Error_198",   NStr("en='From days and to days cannot be equal to zero';
 		|ru='«Дней с» и «Дней по» не могут быть равны нулю';
-		|tr='From days and to days cannot be equal to zero'", Lang));
+		|tr='Başlangıç ve bitiş gün sayıları sıfır olamaz'", Lang));
 	Strings.Insert("Error_199",   NStr("en='From days and to days cannot be equal';
 		|ru='«Дней с» и «Дней по» не могут быть равны';
-		|tr='From days and to days cannot be equal'", Lang));
+		|tr='Başlangıç ve bitiş gün sayıları eşit olamaz'", Lang));
 	Strings.Insert("Error_200",   NStr("en='Not set currency rate: from [%1] to [%2] source [%3]';
-		|ru='Not set currency rate: from [%1] to [%2] source [%3]';
-		|tr='Not set currency rate: from [%1] to [%2] source [%3]'", Lang));
+		|ru='Не установлен курс для валюты: из [%1] в [%2] по источнику [%3]';
+		|tr='Döviz kuru girilmemişti: kaynak döviz [%1], hedef döviz [%2], döviz kaynağı [%3]'", Lang));
 	
 	
 	
@@ -2793,8 +2793,8 @@ Function Strings(Lang) Export
 
 #Region FixedAsset
 	Strings.Insert("Error_FixedAsset_01", NStr("en='Depreciation calculation is already exists [%1]';
-		|ru='Depreciation calculation is already exists [%1]';
-		|tr='Depreciation calculation is already exists [%1]'", Lang));
+		|ru='Расчет амортизации уже есть [%1]';
+		|tr='Sabit kıymet amortisman hesaplaması mevcuttur [%1]'", Lang));
 #EndRegion
 
 #Region LandedCost
@@ -2949,10 +2949,10 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("InfoMessage_StartJob", NStr("en='Do you want to start job?';
 		|ru=' Запустить задание?';
-		|tr='Do you want to start job?'", Lang));
+		|tr='Görevi başlatmak istediğinizden emin misiniz?'", Lang));
 	Strings.Insert("InfoMessage_RunJobCode", NStr("en='Do you want to execute code when there is a scheduled task?';
 		|ru='Выполнить код при наличии регламентного задания?';
-		|tr='Do you want to execute code when there is a scheduled task?'", Lang));
+		|tr='Zamanlanmış görev varken kodu çalıştırmak istediğinizden emin misiniz?'", Lang));
 	
 	Strings.Insert("InfoMessage_034", NStr("en='Time zone not changed';
 		|ru='Часовой пояс не изменен';
@@ -3036,7 +3036,7 @@ Function Strings(Lang) Export
 		|tr='Ürün veritabanına veri aktarımı kilitlendi. Ayarlar sayfasına gidin'", Lang));
 	Strings.Insert("InfoMessage_PostingDocument", NStr("en='Posting document, before continue';
 		|ru='Проведите документ, прежде чем продолжить';
-		|tr='Posting document, before continue'", Lang));
+		|tr='Devam etmeden önce evrakı kaydedin'", Lang));
 	
 #EndRegion
 
@@ -3143,9 +3143,9 @@ Function Strings(Lang) Export
 		|tr='Yeni sözleşme oluşturulsun mu?'", Lang));
 	Strings.Insert("QuestionToUser_034", NStr("en='Storno already exists. Open existing document?';
 		|ru='Сторно уже существует. Открыть существующий документ?';
-		|tr='Storno already exists. Open existing document?'", Lang));
+		|tr='Kayıt iptal evrakı mevcuttur. Var olanı açılsın mı?'", Lang));
 	Strings.Insert("QuestionToUser_035", NStr("en='Do you want to delete the saved version?';
-		|ru='Do you want to delete the saved version?';
+		|ru='Вы хотите удалить сохраненную версию?';
 		|tr='Kaydedilen sürümü silmek istiyor musunuz?'", Lang));
 		
 #EndRegion
@@ -3438,6 +3438,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Str_AccumulationRegisters", NStr("en='Accumulation registers';
 		|ru='Регистры накопления';
 		|tr='Birikim kayıtları'", Lang));
+	Strings.Insert("Str_ChartOfAccounts", NStr("en='Chart of accounts';
+		|ru='План счетов';
+		|tr='Hesap planı'", Lang));
+	Strings.Insert("Str_ChartsOfAccounts", NStr("en='Charts of accounts';
+		|ru='План счетов';
+		|tr='Hesap planları         '", Lang));
 #EndRegion
 
 #Region AdditionalSettings
@@ -4542,7 +4548,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 		|ru='Документ помеченный на удаление не может быть заблокирован';
 		|tr='Silmek için işaretlenen evrak kilitlenemez'", Lang));	
 	Strings.Insert("AuditLock_007", NStr("en='Changed blocked attributes: %1';
-		|ru='Changed blocked attributes: %1';
+		|ru='Измененные заблокированные реквизиты: %1';
 		|tr='Değiştirilmiş bloke edilen özellikler: %1'", Lang));	
 #EndRegion
 	

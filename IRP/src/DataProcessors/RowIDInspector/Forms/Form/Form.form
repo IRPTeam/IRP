@@ -368,7 +368,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group basis</value>
+    <value>Группа основание</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -749,7 +749,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Dependent</value>
+    <value>Связанный</value>
    </title>
    <title>
     <key>en</key>
@@ -761,7 +761,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group dependent</value>
+    <value>Группа связанные</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -1213,7 +1213,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Dependent</value>
+   <value>Связанный</value>
   </title>
   <title>
    <key>en</key>
@@ -1239,7 +1239,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Basis item list</value>
+   <value>Основание списка товаров</value>
   </title>
   <title>
    <key>en</key>
@@ -1367,7 +1367,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Dependent item list</value>
+   <value>Связагнный список товаров</value>
   </title>
   <title>
    <key>en</key>
@@ -1545,7 +1545,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Basis value</value>
+    <value>Значение основания</value>
    </title>
    <title>
     <key>en</key>
@@ -1579,7 +1579,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Dependent value</value>
+    <value>Связанное значение</value>
    </title>
    <title>
     <key>en</key>
@@ -1613,7 +1613,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Is match</value>
+    <value>Есть совпадение</value>
    </title>
    <title>
     <key>en</key>
@@ -1639,7 +1639,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Inspect</value>
+   <value>Инспектировать</value>
   </title>
   <title>
    <key>en</key>
@@ -1652,7 +1652,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Inspect</value>
+   <value>Инспектировать</value>
   </toolTip>
   <toolTip>
    <key>en</key>

@@ -693,11 +693,11 @@
      </userVisible>
      <title>
       <key>tr</key>
-      <value>Access to edit</value>
+      <value>Düzeltme yetkisi</value>
      </title>
      <title>
       <key>ru</key>
-      <value>Access to edit</value>
+      <value>Доступ к редактированию</value>
      </title>
      <title>
       <key>en</key>
@@ -982,11 +982,11 @@
      </userVisible>
      <title>
       <key>tr</key>
-      <value>Access to view</value>
+      <value>Görüntüleme yetkisi</value>
      </title>
      <title>
       <key>ru</key>
-      <value>Access to view</value>
+      <value>Доступ к просмотру</value>
      </title>
      <title>
       <key>en</key>
@@ -1015,11 +1015,11 @@
     </userVisible>
     <title>
      <key>tr</key>
-     <value>Attributes access pages</value>
+     <value>Alanlar yetkileri sayfaları</value>
     </title>
     <title>
      <key>ru</key>
-     <value>Attributes access pages</value>
+     <value>Страницы доступа к реквизитам</value>
     </title>
     <title>
      <key>en</key>
@@ -1318,11 +1318,11 @@
   <name>AccessToEditAttributesTree</name>
   <title>
    <key>tr</key>
-   <value>Access to edit attributes tree</value>
+   <value>Alanlar ağacı düzeltme yetkisi</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Access to edit attributes tree</value>
+   <value>Доступ к редактированию дерева реквизитов</value>
   </title>
   <title>
    <key>en</key>
@@ -1368,11 +1368,11 @@
    <name>TabularName</name>
    <title>
     <key>tr</key>
-    <value>Tabular name</value>
+    <value>Tablo ismi</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Tabular name</value>
+    <value>Наименование табличной части</value>
    </title>
    <title>
     <key>en</key>
@@ -1428,7 +1428,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Mark</value>
+    <value>Признак</value>
    </title>
    <title>
     <key>en</key>
@@ -1449,11 +1449,11 @@
    <name>MetadataRef</name>
    <title>
     <key>tr</key>
-    <value>Metadata ref</value>
+    <value>Anaveri ref</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Metadata ref</value>
+    <value>Ссылка на метаданные</value>
    </title>
    <title>
     <key>en</key>
@@ -1475,11 +1475,11 @@
   <name>AccessToViewAttributesTree</name>
   <title>
    <key>tr</key>
-   <value>Access to view attributes tree</value>
+   <value>Alanlar ağacı görüntüleme yetkisi</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Access to view attributes tree</value>
+   <value>Доступ к просмотру дерева реквизитов</value>
   </title>
   <title>
    <key>en</key>
@@ -1525,11 +1525,11 @@
    <name>TabularName</name>
    <title>
     <key>tr</key>
-    <value>Tabular name</value>
+    <value>Tablo ismi</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Tabular name</value>
+    <value>Наименование табличной части</value>
    </title>
    <title>
     <key>en</key>
@@ -1585,7 +1585,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Mark</value>
+    <value>Признак</value>
    </title>
    <title>
     <key>en</key>
@@ -1606,11 +1606,11 @@
    <name>MetadataRef</name>
    <title>
     <key>tr</key>
-    <value>Metadata ref</value>
+    <value>Anaveri ref</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Metadata ref</value>
+    <value>Ссылка на метаданные</value>
    </title>
    <title>
     <key>en</key>
@@ -1661,11 +1661,11 @@
   <name>SelectAllToEdit</name>
   <title>
    <key>tr</key>
-   <value>Select all to edit</value>
+   <value>Düzeltmek için tümü seç</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Select all to edit</value>
+   <value>Выбрать все для редактирования</value>
   </title>
   <title>
    <key>en</key>
@@ -1689,11 +1689,11 @@
   <name>SelectAllToView</name>
   <title>
    <key>tr</key>
-   <value>Select all to view</value>
+   <value>Görüntülemek için tümü seç</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Select all to view</value>
+   <value>Выбрать все для просмотра</value>
   </title>
   <title>
    <key>en</key>
@@ -1717,11 +1717,11 @@
   <name>UnselectAllToEdit</name>
   <title>
    <key>tr</key>
-   <value>Unselect all to edit</value>
+   <value>Düzeltmek için tümü kaldır</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Unselect all to edit</value>
+   <value>Отменить выбор всего для редактирования</value>
   </title>
   <title>
    <key>en</key>
@@ -1745,11 +1745,11 @@
   <name>UnselectAllToView</name>
   <title>
    <key>tr</key>
-   <value>Unselect all to view</value>
+   <value>Görüntülemek için tümü kaldır</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Unselect all to view</value>
+   <value>Отменить выбор всего для просмотра</value>
   </title>
   <title>
    <key>en</key>

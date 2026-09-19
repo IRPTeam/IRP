@@ -381,7 +381,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Important attributes</value>
+   <value>Важные реквизиты</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -399,11 +399,11 @@
    <name>TabularName</name>
    <synonym>
     <key>tr</key>
-    <value>Tabular name</value>
+    <value>Tablo ismi</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tabular name</value>
+    <value>Наименование табличной части</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -454,11 +454,11 @@
   <name>NotAuditAttributes</name>
   <synonym>
    <key>tr</key>
-   <value>Not audit attributes</value>
+   <value>Audit dışı alanlar</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Not audit attributes</value>
+   <value>Не аудиторские реквизиты</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -476,11 +476,11 @@
    <name>TabularName</name>
    <synonym>
     <key>tr</key>
-    <value>Tabular name</value>
+    <value>Tablo ismi</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tabular name</value>
+    <value>Наименование табличной части</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -531,11 +531,11 @@
   <name>ReadOnlyAttributes</name>
   <synonym>
    <key>tr</key>
-   <value>Read only attributes</value>
+   <value>Salt okunur alanlar</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Read only attributes</value>
+   <value>Реквизиты только для чтения</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -553,11 +553,11 @@
    <name>TabularName</name>
    <synonym>
     <key>tr</key>
-    <value>Tabular name</value>
+    <value>Tablo ismi</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tabular name</value>
+    <value>Наименование табличной части</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -608,11 +608,11 @@
   <name>HiddenAttributes</name>
   <synonym>
    <key>tr</key>
-   <value>Hidden attributes</value>
+   <value>Gizli allanlar</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Hidden attributes</value>
+   <value>Скрытые реквизиты</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -630,11 +630,11 @@
    <name>TabularName</name>
    <synonym>
     <key>tr</key>
-    <value>Tabular name</value>
+    <value>Tablo ismi</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tabular name</value>
+    <value>Наименование табличной части</value>
    </synonym>
    <synonym>
     <key>en</key>

@@ -1105,11 +1105,11 @@
    <name>TabularName</name>
    <title>
     <key>tr</key>
-    <value>Tabular name</value>
+    <value>Tablo ismi</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Tabular name</value>
+    <value>Наименование табличной части</value>
    </title>
    <title>
     <key>en</key>
@@ -1165,7 +1165,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Important</value>
+    <value>Важно</value>
    </title>
    <title>
     <key>en</key>
@@ -1186,11 +1186,11 @@
    <name>NotAudit</name>
    <title>
     <key>tr</key>
-    <value>Not audit</value>
+    <value>Audit dışı</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Not audit</value>
+    <value>Не аудит</value>
    </title>
    <title>
     <key>en</key>

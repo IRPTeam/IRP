@@ -519,7 +519,7 @@
       </userVisible>
       <title>
        <key>tr</key>
-       <value>Belgeleri doldur</value>
+       <value>Evrakları doldur</value>
       </title>
       <title>
        <key>ru</key>
@@ -691,7 +691,7 @@
       </userVisible>
       <title>
        <key>tr</key>
-       <value>Doğrulamalar</value>
+       <value>Kontrol seçenekleri</value>
       </title>
       <title>
        <key>ru</key>
@@ -4619,7 +4619,7 @@
   <name>OnlyPosted</name>
   <title>
    <key>tr</key>
-   <value>Sadece gönderilen</value>
+   <value>Sadece kayedilmiş</value>
   </title>
   <title>
    <key>ru</key>
@@ -5406,7 +5406,7 @@
   <name>FillDocuments</name>
   <title>
    <key>tr</key>
-   <value>Belgeleri doldur</value>
+   <value>Evrakları doldur</value>
   </title>
   <title>
    <key>ru</key>
@@ -5539,7 +5539,7 @@
   <name>CheckPosting</name>
   <title>
    <key>tr</key>
-   <value>Gönderimi kontrol et</value>
+   <value>Kayıt hareketleri kontrol et</value>
   </title>
   <title>
    <key>ru</key>
@@ -5564,7 +5564,7 @@
   <name>ShowPostingDiff</name>
   <title>
    <key>tr</key>
-   <value>Fark gönderimini göster</value>
+   <value>Kayıt hareket farkı olanları göster</value>
   </title>
   <title>
    <key>ru</key>
@@ -5649,7 +5649,7 @@
   <name>PostingInfoPostSelectedDocument</name>
   <title>
    <key>tr</key>
-   <value>Seçili dokümanı gönder</value>
+   <value>Seçili dokümanı kaydet</value>
   </title>
   <title>
    <key>ru</key>
@@ -5678,7 +5678,7 @@
   <name>PostingInfoWriteRecordSet</name>
   <title>
    <key>tr</key>
-   <value>Seçilen Kayıtları Yaz</value>
+   <value>Seçilen kayıt tabloları kaydet</value>
   </title>
   <title>
    <key>ru</key>
@@ -5871,7 +5871,7 @@
   <name>CheckAccountingAnalytics</name>
   <title>
    <key>tr</key>
-   <value>Check accounting analytics</value>
+   <value>Muhasebe analitikleri kontrol et</value>
   </title>
   <title>
    <key>ru</key>
@@ -6039,7 +6039,7 @@
   <name>CheckAccountingTranslations</name>
   <title>
    <key>tr</key>
-   <value>Check accounting translations</value>
+   <value>Mahsup fişleri kontrol et</value>
   </title>
   <title>
    <key>ru</key>
